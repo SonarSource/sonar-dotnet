@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
+using System.Xml.Serialization;
 
 namespace Tests.Diagnostics
 {
@@ -209,6 +210,73 @@ namespace Tests.Diagnostics
             "http://domain.com?q=example.com",             // Noncompliant
             "http://domain.com#example.com",               // Noncompliant
         };
+    }
+
+    [XmlRoot(ElementName = "SonarProjectConfig", Namespace = "http://www.sonarsource.com/msbuild/analyzer/2021/1")]
+    public class NamespaceLikeAssignment
+    {
+        private string NamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+        private string NamespaceLikeProperty { get; set; }
+
+        private string FooNamespace = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+        private string FOO_NAMESPACE { get; set; }
+
+        public void Foo(string namespaceLikeArgument)
+        {
+            var namespaceLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            namespaceLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            NamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            NamespaceLikeProperty = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            FooNamespace = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            FOO_NAMESPACE = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+        }
+
+        public void Bar(string NamespaceLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/123") { }
+    }
+
+    [MyAttribute("http://www.sonarsource.com/msbuild/analyzer/2021/123")]  // Noncompliant
+    [XmlRoot(ElementName = "SonarProjectConfig", Namespace = "ftp://a:a@foo.com/")]  // Noncompliant
+    public class NamespaceLikeAssignment2
+    {
+        private string NamespaceLikeField = "ftp://a:a@foo.com/";  // Noncompliant
+        private string NamespaceLikeProperty { get; set; }
+
+
+        private string NamefooLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+        private string NamefooLikeProperty { get; set; }
+
+        public void Foo(string namefooLikeArgument, string namespaceLikeArgument = "ftp://a:a@foo.com/")  // Noncompliant
+        {
+            var namespaceLikeVar = "ftp://a:a@foo.com/";  // Noncompliant
+            namespaceLikeArgument = "ftp://a:a@foo.com/";  // Noncompliant
+            NamespaceLikeField = "ftp://a:a@foo.com/";  // Noncompliant
+            NamespaceLikeProperty = "ftp://a:a@foo.com/";  // Noncompliant
+
+            string[] namespaceArray = new string[1];
+            namespaceArray[0] = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+
+            var namefooLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            namefooLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            NamefooLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            NamefooLikeProperty = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+        }
+    }
+
+    public class MyAttribute : Attribute
+    {
+        public MyAttribute(string str) {
+        }
+    }
+
+    [XmlRoot(Namespace=XML_NAMESPACE)]
+    public class NamespaceInConstant {
+        public const string XML_NAMESPACE = "http://x";
+        public const string XML_FOOSPACE = "http://x";  // Noncompliant
+    }
+
+    public static class Constants {
+        public const String NAMESPACE1 = "http://x";
+        public const String FOOSPACE1 = "http://x";  // Noncompliant
     }
 }
 

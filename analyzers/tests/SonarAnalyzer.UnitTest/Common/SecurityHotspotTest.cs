@@ -106,6 +106,7 @@ namespace SonarAnalyzer.UnitTest.Common
         private static IEnumerable<MetadataReference> GetAdditionalReferences(string analyzerName) =>
             analyzerName switch
             {
+                nameof(ClearTextProtocolsAreSensitive) => ClearTextProtocolsAreSensitiveTest.AdditionalReferences,
                 nameof(CookieShouldBeHttpOnly) => CookieShouldBeHttpOnlyTest.AdditionalReferences,
                 nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
                 nameof(ConfiguringLoggers) => ConfiguringLoggersTest.Log4NetReferences,
