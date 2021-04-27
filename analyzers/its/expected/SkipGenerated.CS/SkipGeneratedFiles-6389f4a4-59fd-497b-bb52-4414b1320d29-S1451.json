@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\GeneratedCode\generated_region.cs",
+"uri":  "sources\GeneratedCode.CS\generated_region.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\GeneratedCode\generated_region_2.cs",
+"uri":  "sources\GeneratedCode.CS\generated_region_2.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\GeneratedCode\handwritten.cs",
+"uri":  "sources\GeneratedCode.CS\handwritten.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

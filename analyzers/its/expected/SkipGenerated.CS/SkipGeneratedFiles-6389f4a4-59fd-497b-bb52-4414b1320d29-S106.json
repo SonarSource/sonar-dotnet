@@ -4,7 +4,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\GeneratedCode\generated_region.cs",
+"uri":  "sources\GeneratedCode.CS\generated_region.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\GeneratedCode\generated_region_2.cs",
+"uri":  "sources\GeneratedCode.CS\generated_region_2.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\GeneratedCode\handwritten.cs",
+"uri":  "sources\GeneratedCode.CS\handwritten.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  13,

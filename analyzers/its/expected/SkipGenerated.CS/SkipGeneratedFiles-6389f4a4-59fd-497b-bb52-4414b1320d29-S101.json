@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename class 'Class_14' to match pascal case naming rules, consider using 'Class14'.",
 "location":  {
-"uri":  "sources\GeneratedCode\generated_region.cs",
+"uri":  "sources\GeneratedCode.CS\generated_region.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  11,
@@ -17,7 +17,7 @@
 "id":  "S101",
 "message":  "Rename class 'Class_15' to match pascal case naming rules, consider using 'Class15'.",
 "location":  {
-"uri":  "sources\GeneratedCode\generated_region_2.cs",
+"uri":  "sources\GeneratedCode.CS\generated_region_2.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  11,

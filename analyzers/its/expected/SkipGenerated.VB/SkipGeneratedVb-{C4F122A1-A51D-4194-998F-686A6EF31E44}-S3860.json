@@ -4,7 +4,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\GeneratedCodeVb\NotIgnored.vb",
+"uri":  "sources\GeneratedCode.VB\NotIgnored.vb",
 "region":  {
 "startLine":  6,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\GeneratedCodeVb\Region.vb",
+"uri":  "sources\GeneratedCode.VB\Region.vb",
 "region":  {
 "startLine":  4,
 "startColumn":  31,

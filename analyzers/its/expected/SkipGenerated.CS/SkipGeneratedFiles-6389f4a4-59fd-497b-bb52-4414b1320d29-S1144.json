@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Method'.",
 "location":  {
-"uri":  "sources\GeneratedCode\generated_region.cs",
+"uri":  "sources\GeneratedCode.CS\generated_region.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Method'.",
 "location":  {
-"uri":  "sources\GeneratedCode\generated_region_2.cs",
+"uri":  "sources\GeneratedCode.CS\generated_region_2.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Method'.",
 "location":  {
-"uri":  "sources\GeneratedCode\handwritten.cs",
+"uri":  "sources\GeneratedCode.CS\handwritten.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Foo'.",
 "location":  {
-"uri":  "sources\GeneratedCode\handwritten.cs",
+"uri":  "sources\GeneratedCode.CS\handwritten.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  9,

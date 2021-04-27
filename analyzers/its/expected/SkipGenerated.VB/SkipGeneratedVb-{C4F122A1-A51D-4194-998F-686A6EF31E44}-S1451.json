@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\GeneratedCodeVb\NotIgnored.vb",
+"uri":  "sources\GeneratedCode.VB\NotIgnored.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\GeneratedCodeVb\Region.vb",
+"uri":  "sources\GeneratedCode.VB\Region.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
