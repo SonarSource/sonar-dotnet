@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkipGeneratedFiles", "SkipGeneratedFiles.csproj", "{6389F4A4-59FD-497B-BB52-4414B1320D29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkipGenerated.CS", "SkipGenerated.CS.csproj", "{6389F4A4-59FD-497B-BB52-4414B1320D29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
