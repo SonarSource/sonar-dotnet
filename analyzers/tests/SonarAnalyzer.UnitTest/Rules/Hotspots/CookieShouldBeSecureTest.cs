@@ -19,6 +19,9 @@
  */
 
 using System.Collections.Generic;
+#if NETFRAMEWORK
+using System.IO;
+#endif
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -42,6 +45,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NETFRAMEWORK // HttpCookie is not available on .Net Core
 
+        private const string WebConfig = "Web.config";
+
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
@@ -49,6 +54,35 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
                                     new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemWeb);
+
+        [DataTestMethod]
+        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\SecureCookieConfig")]
+        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\Formatting")]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void CookiesShouldBeSecure_WithWebConfigValueSetToTrue(string root)
+        {
+            var webConfigPath = Path.Combine(root, WebConfig);
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_WithWebConfig.cs",
+                                    new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                                    MetadataReferenceFacade.SystemWeb,
+                                    TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+        }
+
+        [DataTestMethod]
+        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\NonSecureCookieConfig")]
+        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\UnrelatedConfig")]
+        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\ConfigWithoutAttribute")]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void CookiesShouldBeSecure_WithWebConfigValueSetToFalse(string root)
+        {
+            var webConfigPath = Path.Combine(root, WebConfig);
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
+                                    new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                                    MetadataReferenceFacade.SystemWeb,
+                                    TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+        }
 
 #else
 

@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
+using System.Linq;
+using System.Xml.XPath;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -79,6 +82,21 @@ namespace SonarAnalyzer.Rules
                         },
                         SyntaxKind.SimpleAssignmentExpression);
                 });
+        }
+
+        protected static bool IsWebConfigCookieSet(SonarAnalysisContext context, AnalyzerOptions options, string attribute)
+        {
+            foreach (var fullPath in context.ProjectConfiguration(options).FilesToAnalyze.FindFiles("web.config"))
+            {
+                var webConfig = File.ReadAllText(fullPath);
+                if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc
+                    && doc.XPathSelectElements("configuration/system.web/httpCookies").Any(x => x.GetAttributeIfBoolValueIs(attribute, true) != null))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

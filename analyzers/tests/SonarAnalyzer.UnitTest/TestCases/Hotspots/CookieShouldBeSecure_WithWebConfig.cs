@@ -5,11 +5,10 @@ namespace Tests.Diagnostics
 {
     class Program
     {
-        HttpCookie field1 = new HttpCookie("c"); // Noncompliant
+        HttpCookie field1 = new HttpCookie("c"); // Compliant, Web.Config overrides the default behaviour.
         HttpCookie field2;
-        HttpCookie field3 = new HttpCookie("c") { Secure = "false" }; // Noncompliant // Error [CS0029]
 
-        HttpCookie Property1 { get; set; } = new HttpCookie("c"); // Noncompliant
+        HttpCookie Property1 { get; set; } = new HttpCookie("c"); // Compliant
         HttpCookie Property2 { get; set; }
 
         private bool trueField = true;
@@ -17,12 +16,7 @@ namespace Tests.Diagnostics
 
         void CtorSetsAllowedValue()
         {
-            // none
-        }
-
-        void CtorSetsNotAllowedValue()
-        {
-            new HttpCookie("c"); // Noncompliant {{Make sure creating this cookie without setting the 'Secure' property is safe here.}}
+            new HttpCookie("c"); // Compliant
         }
 
         void InitializerSetsAllowedValue()
@@ -36,8 +30,8 @@ namespace Tests.Diagnostics
             new HttpCookie("c") { Secure = false };         // Noncompliant
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             new HttpCookie("c") { Secure = falseField };    // Noncompliant
-            new HttpCookie("c") { };                        // Noncompliant
-            new HttpCookie("c") { HttpOnly = true };        // Noncompliant
+            new HttpCookie("c") { };                        // Compliant
+            new HttpCookie("c") { HttpOnly = true };        // Compliant
         }
 
         void PropertySetsNotAllowedValue()
@@ -70,13 +64,13 @@ namespace Tests.Diagnostics
             this.Property2 = new HttpCookie("c"); // Compliant, Secure is set below
             this.Property2.Secure = true;
 
-            var c2 = new HttpCookie("c"); // Noncompliant, Secure is set conditionally
+            var c2 = new HttpCookie("c"); // Compliant
             if (foo)
             {
                 c2.Secure = true;
             }
 
-            var c3 = new HttpCookie("c"); // Compliant, Secure is set after the if
+            var c3 = new HttpCookie("c"); // Compliant
             if (foo)
             {
                 // do something
@@ -86,7 +80,7 @@ namespace Tests.Diagnostics
             HttpCookie c4 = null;
             if (foo)
             {
-                c4 = new HttpCookie("c"); // Noncompliant, Secure is not set in the same scope
+                c4 = new HttpCookie("c"); // Compliant
             }
             c4.Secure = true;
         }
