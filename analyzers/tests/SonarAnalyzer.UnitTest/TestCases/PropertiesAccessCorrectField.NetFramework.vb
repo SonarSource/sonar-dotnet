@@ -7,9 +7,11 @@ Public Class Repro3442
 
     Public Shared ReadOnly BackgroundColorProperty As DependencyProperty = DependencyProperty.Register("BackgroundColor", GetType(Color), GetType(Color), New PropertyMetadata(""))
     Public Shared ReadOnly ForegroundColorProperty As DependencyProperty = DependencyProperty.Register("ForegroundColor", GetType(Color), GetType(Color), New PropertyMetadata(""))
+    Public Shared ReadOnly OldColorProperty As DependencyProperty = DependencyProperty.Register("OldColor", GetType(Color), GetType(Color), New PropertyMetadata(""))
 
     Private backgroundColor_ As Color
     Private foregroundColor_ As Color
+    Private oldColor_ As Color
 
     Public Property BackgroundColor As Color
         Get
@@ -28,6 +30,16 @@ Public Class Repro3442
 
         Set
             SetValue(ForegroundColorProperty, value)
+        End Set
+    End Property
+
+    Public Property OldColor As Color
+        Get
+            Return GETVALUE(OldColorProperty)
+        End Get
+
+        Set
+            SETVALUE(OldColorProperty, value)
         End Set
     End Property
 
