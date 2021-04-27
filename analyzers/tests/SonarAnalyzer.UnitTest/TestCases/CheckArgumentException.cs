@@ -171,7 +171,7 @@ namespace Tests.Diagnostics
         void Bar2(int a)
         {
             // See https://github.com/SonarSource/sonar-dotnet/issues/1867
-            throw new ArgumentNullException(null, string.Empty); // Noncompliant
+            throw new ArgumentNullException(null, string.Empty); // rare FN introduced by fixing https://github.com/SonarSource/sonar-dotnet/issues/4180
         }
     }
 
@@ -202,7 +202,7 @@ namespace Tests.Diagnostics
         public void Method(MissingType argument) // Error [CS0246]
         {
             var str = "xxx";
-            throw new ArgumentNullException(nameof(argument)); // Noncompliant {{The parameter name '' is not declared in the argument list.}} FP with wrong message
+            throw new ArgumentNullException(nameof(argument)); // compliant
             throw new ArgumentNullException(nameof(argument.argument)); // Compliant
             throw new ArgumentNullException(nameof(str.argument)); // Error [CS1061] Compliant, argument is missing member without a symbol
         }

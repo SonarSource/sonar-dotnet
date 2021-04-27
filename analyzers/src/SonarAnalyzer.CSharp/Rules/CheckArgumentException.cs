@@ -101,7 +101,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var methodArgumentNames = GetMethodArgumentNames(objectCreationSyntax);
-            if (methodArgumentNames.Contains(TakeOnlyBeforeDot(parameterNameValue)))
+            var parameterName = TakeOnlyBeforeDot(parameterNameValue);
+            if (string.IsNullOrWhiteSpace(parameterName))
+            {
+                // possibly nameof() - see https://github.com/SonarSource/sonar-dotnet/issues/4320
+                return;
+            }
+            if (methodArgumentNames.Contains(parameterName))
             {
                 // paramName exists
                 return;
