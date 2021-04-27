@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                     if (!methodDeclaration.Modifiers.Any(SyntaxKind.AsyncKeyword)
-                        || c.SemanticModel.GetTypeInfo(methodDeclaration.ReturnType).Type.SpecialType == SpecialType.System_Void)
+                        || methodDeclaration.ReturnType.ToString() == "void")
                     {
                         return;
                     }
