@@ -2,14 +2,14 @@
 "issues":  [
 {
 "id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'Select'.",
+"message":  "Refactor the code to eliminate this nested 'Select Case'.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
 "region":  {
 "startLine":  134,
 "startColumn":  8,
 "endLine":  134,
-"endColumn":  14
+"endColumn":  25
 }
 }
 }
