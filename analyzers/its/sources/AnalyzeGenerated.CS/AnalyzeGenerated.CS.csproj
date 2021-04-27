@@ -32,7 +32,7 @@
     <Reference Include="System"/>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\GeneratedCode\*.cs" />
+    <Compile Include="..\GeneratedCode.CS\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="SonarLint.xml" />
