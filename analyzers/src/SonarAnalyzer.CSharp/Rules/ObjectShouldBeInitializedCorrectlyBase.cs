@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules
                 });
         }
 
-        protected static bool IsWebConfigAttributeSet(SonarAnalysisContext context, AnalyzerOptions options, string attribute)
+        protected static bool IsWebConfigCookieSet(SonarAnalysisContext context, AnalyzerOptions options, string attribute)
         {
             foreach (var fullPath in context.ProjectConfiguration(options).FilesToAnalyze.FindFiles("web.config"))
             {
