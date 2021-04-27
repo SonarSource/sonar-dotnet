@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules.Common
     public abstract class PublicMethodWithMultidimensionalArrayBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S2368";
-        protected const string MessageFormat = "Make this method private or simplify its parameters to not use multidimensional arrays.";
+        protected const string MessageFormat = "Make this method private or simplify its parameters to not use multidimensional/jagged arrays.";
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
     }
