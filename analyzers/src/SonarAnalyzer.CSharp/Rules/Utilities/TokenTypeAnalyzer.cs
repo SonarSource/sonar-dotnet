@@ -32,13 +32,17 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
             CSharpGeneratedCodeRecognizer.Instance;
 
+        public TokenTypeAnalyzer() : base((int)SyntaxKind.IdentifierToken)
+        {
+        }
+
         protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel) =>
-            new TokenClassifier(token, semanticModel);
+            new TokenClassifier(token, semanticModel, SkipIdentifierTokens);
 
         private class TokenClassifier : TokenClassifierBase
         {
-            public TokenClassifier(SyntaxToken token, SemanticModel semanticModel)
-                : base(token, semanticModel)
+            public TokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers)
+                : base(token, semanticModel, skipIdentifiers)
             {
             }
 

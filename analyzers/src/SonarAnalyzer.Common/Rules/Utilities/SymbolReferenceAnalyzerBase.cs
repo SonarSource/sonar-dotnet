@@ -30,9 +30,10 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class SymbolReferenceAnalyzerBase : UtilityAnalyzerBase<SymbolReferenceInfo>
     {
-        protected const string DiagnosticId = "S9999-symbolRef";
+        private const string DiagnosticId = "S9999-symbolRef";
         private const string Title = "Symbol reference calculator";
         private const string SymbolReferenceFileName = "symrefs.pb";
+        private const int TokenCountThreshold = 40_000;
 
         private static readonly ISet<SymbolKind> DeclarationKinds = new HashSet<SymbolKind>
         {
@@ -53,8 +54,6 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsIdentifier(SyntaxToken token);
 
         protected sealed override string FileName => SymbolReferenceFileName;
-
-        protected override bool SkipAnalysisForLargeFiles => true;
 
         protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
@@ -80,12 +79,14 @@ namespace SonarAnalyzer.Rules
             return symbolReferenceInfo;
         }
 
+        protected override bool ShouldGenerateMetrics(SyntaxTree tree) =>
+            base.ShouldGenerateMetrics(tree)
+            && !HasTooManyTokens(tree);
+
         protected virtual SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol) => null;
 
         protected static bool IsValuePropertyParameter(ISymbol symbol) =>
-            symbol is IParameterSymbol parameterSymbol
-            && parameterSymbol.IsImplicitlyDeclared
-            && parameterSymbol.Name == "value";
+            symbol is IParameterSymbol {IsImplicitlyDeclared: true, Name: "value"};
 
         private SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(SymRefInfo[] allReference, SyntaxTree tree)
         {
@@ -150,7 +151,10 @@ namespace SonarAnalyzer.Rules
             return null;
         }
 
-        public class SymRefInfo
+        private static bool HasTooManyTokens(SyntaxTree syntaxTree) =>
+            syntaxTree.GetRoot().DescendantTokens().Count() > TokenCountThreshold;
+
+        private class SymRefInfo
         {
             public SyntaxToken IdentifierToken { get; }
             public ISymbol Symbol { get; }

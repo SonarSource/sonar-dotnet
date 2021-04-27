@@ -30,16 +30,23 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class TokenTypeAnalyzerBase : UtilityAnalyzerBase<TokenTypeInfo>
     {
-        protected const string DiagnosticId = "S9999-token-type";
+        protected bool SkipIdentifierTokens;
+
+        private const string DiagnosticId = "S9999-token-type";
         private const string Title = "Token type calculator";
         private const string TokenTypeFileName = "token-type.pb";
+        private const int IdentifierTokenCountThreshold = 1_000;
+        private readonly int identifierTokenKind;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel);
+        protected TokenTypeAnalyzerBase(int identifierTokenKind)
+        {
+            this.identifierTokenKind = identifierTokenKind;
+        }
 
-        protected override bool SkipAnalysisForLargeFiles => true;
+        protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel);
 
         protected sealed override string FileName => TokenTypeFileName;
 
@@ -60,10 +67,17 @@ namespace SonarAnalyzer.Rules
             return tokenTypeInfo;
         }
 
+        protected override void Initialize(SyntaxTree tree) =>
+            SkipIdentifierTokens = HasTooManyIdentifierTokens(tree, identifierTokenKind);
+
+        private static bool HasTooManyIdentifierTokens(SyntaxTree syntaxTree, int tokenKind) =>
+            syntaxTree.GetRoot().DescendantTokens().Count(token => token.RawKind == tokenKind) > IdentifierTokenCountThreshold;
+
         protected abstract class TokenClassifierBase
         {
             private readonly SyntaxToken token;
             private readonly SemanticModel semanticModel;
+            private readonly bool skipIdentifiers;
             private readonly List<TokenTypeInfo.Types.TokenInfo> spans = new List<TokenTypeInfo.Types.TokenInfo>();
             private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
             {
@@ -87,10 +101,11 @@ namespace SonarAnalyzer.Rules
             protected abstract bool IsNumericLiteral(SyntaxToken token);
             protected abstract bool IsStringLiteral(SyntaxToken token);
 
-            protected TokenClassifierBase(SyntaxToken token, SemanticModel semanticModel)
+            protected TokenClassifierBase(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers)
             {
                 this.token = token;
                 this.semanticModel = semanticModel;
+                this.skipIdentifiers = skipIdentifiers;
             }
 
             public IEnumerable<TokenTypeInfo.Types.TokenInfo> Spans
@@ -142,7 +157,7 @@ namespace SonarAnalyzer.Rules
                 {
                     CollectClassified(TokenType.NumericLiteral, token.Span);
                 }
-                else if (IsIdentifier(token))
+                else if (IsIdentifier(token) && !skipIdentifiers)
                 {
                     ClassifyIdentifier();
                 }

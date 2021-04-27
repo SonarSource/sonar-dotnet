@@ -76,11 +76,9 @@ namespace SonarAnalyzer.Rules
     public abstract class UtilityAnalyzerBase<TMessage> : UtilityAnalyzerBase
         where TMessage : IMessage, new()
     {
-        private const int TokenCountThreshold = 10_000;
         private static readonly object FileWriteLock = new TMessage();
 
         protected virtual bool SkipAnalysisForTestProject => false;
-        protected virtual bool SkipAnalysisForLargeFiles => false;
         protected abstract string FileName { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
@@ -120,18 +118,16 @@ namespace SonarAnalyzer.Rules
                     }
                 });
 
-        private bool ShouldGenerateMetrics(SyntaxTree tree) =>
+        protected virtual void Initialize(SyntaxTree tree) { }
+
+        protected virtual bool ShouldGenerateMetrics(SyntaxTree tree) =>
             FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
-             && (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree))
-             && (!SkipAnalysisForLargeFiles || !HasTooManyTokens(tree));
+             && (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree));
 
         private FileStream EnsureDirectoryExistsAndCreateFile()
         {
             Directory.CreateDirectory(OutPath);
             return File.Create(Path.Combine(OutPath, FileName));
         }
-
-        private static bool HasTooManyTokens(SyntaxTree syntaxTree) =>
-            syntaxTree.GetRoot().DescendantTokens().Count() > TokenCountThreshold;
     }
 }
