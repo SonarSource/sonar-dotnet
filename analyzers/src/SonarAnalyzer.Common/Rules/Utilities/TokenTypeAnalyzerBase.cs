@@ -40,10 +40,7 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected TokenTypeAnalyzerBase(int identifierTokenKind)
-        {
-            this.identifierTokenKind = identifierTokenKind;
-        }
+        protected TokenTypeAnalyzerBase(int identifierTokenKind) => this.identifierTokenKind = identifierTokenKind;
 
         protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens);
 
