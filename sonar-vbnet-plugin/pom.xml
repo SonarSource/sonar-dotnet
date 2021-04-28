@@ -41,7 +41,7 @@
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
     <documentationDirectory>${project.basedir}/src/main/resources</documentationDirectory>
-    <sonar.analyzer.commons>1.14.0.681</sonar.analyzer.commons>
+    <sonar.analyzer.commons>1.14.1.690</sonar.analyzer.commons>
   </properties>
 
   <dependencies>
