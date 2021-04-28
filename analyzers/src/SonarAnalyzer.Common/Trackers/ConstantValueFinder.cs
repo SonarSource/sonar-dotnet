@@ -52,12 +52,9 @@ namespace SonarAnalyzer.Helpers
             {
                 return null;
             }
-            var nodeSemanticModel = node.EnsureCorrectSemanticModelOrDefault(semanticModel);
-            if (nodeSemanticModel == null)
-            {
-                return null;
-            }
-            return nodeSemanticModel.GetConstantValue(node).Value ?? FindAssignedConstant(node, visitedVariables);
+            return node.EnsureCorrectSemanticModelOrDefault(semanticModel) is { } nodeSemanticModel
+                ? nodeSemanticModel.GetConstantValue(node).Value ?? FindAssignedConstant(node, visitedVariables)
+                : null;
         }
 
         private object FindAssignedConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables)

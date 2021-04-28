@@ -235,8 +235,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsMethodUsedAsEventHandlerFunctionOrActionInExpression(IMethodSymbol methodSymbol, ExpressionSyntax expression, SemanticModel semanticModel) =>
             !expression.IsKind(SyntaxKind.InvocationExpression)
+            && semanticModel != null
             && IsStandaloneExpression(expression)
-            && methodSymbol.Equals(semanticModel?.GetSymbolInfo(expression).Symbol?.OriginalDefinition);
+            && methodSymbol.Equals(semanticModel.GetSymbolInfo(expression).Symbol?.OriginalDefinition);
 
         private static bool IsStandaloneExpression(ExpressionSyntax expression)
         {
