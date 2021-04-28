@@ -76,6 +76,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.Keyword);
             });
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void Verify_IdentifierTokenThreshold() =>
+            Verify("IdentifierTokenThreshold.cs", ProjectType.Product, tokenInfo =>
+            {
+                // IdentifierTokenThreshold.cs has 4001 identifiers which exceeds current threshold of 4000. Due to this, the identifiers are not classified
+                tokenInfo.Where(token => token.TokenType == TokenType.TypeName).Should().BeEmpty();
+            });
+
         private void Verify(string fileName, ProjectType projectType, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
