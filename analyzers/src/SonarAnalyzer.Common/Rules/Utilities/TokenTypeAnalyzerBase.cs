@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
         private const string DiagnosticId = "S9999-token-type";
         private const string Title = "Token type calculator";
         private const string TokenTypeFileName = "token-type.pb";
-        private const int IdentifierTokenCountThreshold = 1_000;
+        private const int IdentifierTokenCountThreshold = 4_000;
         private readonly int identifierTokenKind;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
