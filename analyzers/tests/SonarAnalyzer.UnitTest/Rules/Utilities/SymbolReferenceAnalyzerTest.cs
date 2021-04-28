@@ -142,8 +142,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void Verify_TokenThreshold() =>
-            // In TokenThreshold.cs there are 4009 tokens which is more than the current limit of 40000
-            Verify("TokenThreshold.cs", ProjectType.Product, _ => { }, 0);
+            // In TokenThreshold.cs there are 40009 tokens which is more than the current limit of 40000
+            Verify("TokenThreshold.cs", ProjectType.Product, _ => { }, false);
 
         private void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
             Verify(fileName, projectType, references =>
@@ -156,7 +156,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private void Verify(string fileName,
                             ProjectType projectType,
                             Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference,
-                            int expectedMessageCount = 1)
+                            bool isMessageExpected = true)
         {
             var testRoot = Root + TestContext.TestName;
             UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")
@@ -170,10 +170,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 TestHelper.CreateSonarProjectConfig(testRoot, projectType),
                 messages =>
                 {
-                    messages.Should().HaveCount(expectedMessageCount);
-                    var info = messages.FirstOrDefault();
-                    if (info != null)
+                    messages.Should().HaveCount(isMessageExpected ? 1 : 0);
+
+                    if (isMessageExpected)
                     {
+                        var info = messages.Single();
                         info.FilePath.Should().Be(fileName);
                         verifyReference(info.Reference);
                     }
