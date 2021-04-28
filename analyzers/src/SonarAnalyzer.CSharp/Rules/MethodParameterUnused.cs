@@ -226,7 +226,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsUsedAsEventHandlerFunctionOrAction(MethodContext declaration) =>
             declaration.Symbol.ContainingType.DeclaringSyntaxReferences
             .Select(r => r.GetSyntax())
-            .Any(n => IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(declaration.Symbol, n, n.EnsureCorrectSemanticModel(declaration.Context.SemanticModel)));
+            .Any(n => IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(declaration.Symbol, n, n.EnsureCorrectSemanticModelOrDefault(declaration.Context.SemanticModel)));
 
         private static bool IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(IMethodSymbol methodSymbol, SyntaxNode typeDeclaration, SemanticModel semanticModel) =>
             typeDeclaration.DescendantNodes()
@@ -236,7 +236,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsMethodUsedAsEventHandlerFunctionOrActionInExpression(IMethodSymbol methodSymbol, ExpressionSyntax expression, SemanticModel semanticModel) =>
             !expression.IsKind(SyntaxKind.InvocationExpression)
             && IsStandaloneExpression(expression)
-            && methodSymbol.Equals(semanticModel.GetSymbolInfo(expression).Symbol?.OriginalDefinition);
+            && methodSymbol.Equals(semanticModel?.GetSymbolInfo(expression).Symbol?.OriginalDefinition);
 
         private static bool IsStandaloneExpression(ExpressionSyntax expression)
         {

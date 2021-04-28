@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     SyntaxNode = ctor.SyntaxNode,
                     Symbol = ctor.Symbol,
-                    SemanticModel = ctor.SyntaxNode.EnsureCorrectSemanticModel(context.SemanticModel)
+                    SemanticModel = ctor.SyntaxNode.EnsureCorrectSemanticModelOrDefault(context.SemanticModel)
                 })
                 .Where(ctor => ctor.SemanticModel != null)
                 .ToList();
