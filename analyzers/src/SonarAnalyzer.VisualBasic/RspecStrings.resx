@@ -4627,7 +4627,7 @@
     <value>BUG</value>
   </data>
   <data name="S4423_Category" xml:space="preserve">
-    <value>Major Vulnerability</value>
+    <value>Critical Vulnerability</value>
   </data>
   <data name="S4423_Description" xml:space="preserve">
     <value>Older versions of SSL/TLS protocol like "SSLv3" have been proven to be insecure.</value>
@@ -4645,7 +4645,7 @@
     <value>Main</value>
   </data>
   <data name="S4423_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Critical</value>
   </data>
   <data name="S4423_Status" xml:space="preserve">
     <value>ready</value>
@@ -5128,10 +5128,10 @@
     <value>VULNERABILITY</value>
   </data>
   <data name="S5542_Category" xml:space="preserve">
-    <value>Blocker Vulnerability</value>
+    <value>Critical Vulnerability</value>
   </data>
   <data name="S5542_Description" xml:space="preserve">
-    <value>To perform secure cryptography, operation modes and padding scheme are essentials and should be used correctly according to the encryption algorithm:</value>
+    <value>Encryption operation mode and the padding scheme should be chosen appropriately to guarantee data confidentiality, integrity and authenticity:</value>
   </data>
   <data name="S5542_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5140,7 +5140,7 @@
     <value>Main</value>
   </data>
   <data name="S5542_Severity" xml:space="preserve">
-    <value>Blocker</value>
+    <value>Critical</value>
   </data>
   <data name="S5542_Status" xml:space="preserve">
     <value>ready</value>

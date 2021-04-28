@@ -7,14 +7,6 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password="); // Noncompliant
 }
 </pre>
-<p>In <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">appsettings.json</a></p>
-<pre>
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password="
-  }
-}
-</pre>
 <p>In <a href="https://docs.microsoft.com/en-us/troubleshoot/aspnet/create-web-config">Web.config</a></p>
 <pre>
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -29,14 +21,6 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
   optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=True");
-}
-</pre>
-<p>In <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">appsettings.json</a></p>
-<pre>
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=myServerAddress;Database=myDataBase;Integrated Security=True"
-  }
 }
 </pre>
 <p>In <a href="https://docs.microsoft.com/en-us/troubleshoot/aspnet/create-web-config">Web.config</a></p>
