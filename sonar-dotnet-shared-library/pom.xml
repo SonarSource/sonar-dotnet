@@ -24,29 +24,42 @@
   </properties>
 
   <dependencies>
+    <!-- provided at runtime -->
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-plugin-api</artifactId>
       <version>${sonar.version}</version>
       <scope>provided</scope>
     </dependency>
-
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
       <version>3.0.2</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- Compile dependencies -->
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.7</version>
     </dependency>
-
     <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
       <version>${protobuf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.analyzer-commons</groupId>
+      <artifactId>sonar-analyzer-commons</artifactId>
+      <version>${sonar.analyzer.commons}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.analyzer-commons</groupId>
+      <artifactId>sonar-xml-parsing</artifactId>
+      <version>${sonar.analyzer.commons}</version>
+      <scope>compile</scope>
     </dependency>
 
     <!-- unit tests -->
@@ -79,18 +92,6 @@
       <artifactId>mockito-core</artifactId>
       <version>2.21.0</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.sonarsource.analyzer-commons</groupId>
-      <artifactId>sonar-analyzer-commons</artifactId>
-      <version>${sonar.analyzer.commons}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.sonarsource.analyzer-commons</groupId>
-      <artifactId>sonar-xml-parsing</artifactId>
-      <version>${sonar.analyzer.commons}</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
