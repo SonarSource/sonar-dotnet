@@ -92,17 +92,6 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    if (IsTestProject && SkipAnalysisForTestProject)
-                    {
-                        // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
-                        lock (FileWriteLock)
-                        {
-                            EnsureDirectoryExistsAndCreateFile().Dispose();
-                        }
-
-                        return;
-                    }
-
                     var messages = c.Compilation.SyntaxTrees
                         .Where(ShouldGenerateMetrics)
                         .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)))
@@ -110,7 +99,9 @@ namespace SonarAnalyzer.Rules
 
                     lock (FileWriteLock)
                     {
-                        using var metricsStream = EnsureDirectoryExistsAndCreateFile();
+                        Directory.CreateDirectory(OutPath);
+
+                        using var metricsStream = File.Create(Path.Combine(OutPath, FileName));
                         foreach (var message in messages)
                         {
                             message.WriteDelimitedTo(metricsStream);
@@ -118,16 +109,10 @@ namespace SonarAnalyzer.Rules
                     }
                 });
 
-        protected virtual void Initialize(SyntaxTree tree) { }
-
         protected virtual bool ShouldGenerateMetrics(SyntaxTree tree) =>
-            FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
-             && (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree));
-
-        private FileStream EnsureDirectoryExistsAndCreateFile()
-        {
-            Directory.CreateDirectory(OutPath);
-            return File.Create(Path.Combine(OutPath, FileName));
-        }
+            // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
+            !(IsTestProject && SkipAnalysisForTestProject)
+            && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
+            && (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree));
     }
 }

@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
         }
 
-        protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel) =>
-            new TokenClassifier(token, semanticModel, SkipIdentifierTokens);
+        protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens) =>
+            new TokenClassifier(token, semanticModel, skipIdentifierTokens);
 
         private class TokenClassifier : TokenClassifierBase
         {

@@ -30,8 +30,6 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class TokenTypeAnalyzerBase : UtilityAnalyzerBase<TokenTypeInfo>
     {
-        protected bool SkipIdentifierTokens;
-
         private const string DiagnosticId = "S9999-token-type";
         private const string Title = "Token type calculator";
         private const string TokenTypeFileName = "token-type.pb";
@@ -39,6 +37,7 @@ namespace SonarAnalyzer.Rules
         private readonly int identifierTokenKind;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected TokenTypeAnalyzerBase(int identifierTokenKind)
@@ -46,32 +45,30 @@ namespace SonarAnalyzer.Rules
             this.identifierTokenKind = identifierTokenKind;
         }
 
-        protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel);
+        protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens);
 
         protected sealed override string FileName => TokenTypeFileName;
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var tokens = syntaxTree.GetRoot().DescendantTokens();
+            var skipIdentifierTokens = tokens.Count(token => token.RawKind == identifierTokenKind) > IdentifierTokenCountThreshold;
+
             var spans = new List<TokenTypeInfo.Types.TokenInfo>();
+            // The second iteration of the tokens is intended since there is no processing done and we want to avoid copying all the tokens to a second collection.
             foreach (var token in tokens)
             {
-                spans.AddRange(GetTokenClassifier(token, semanticModel).Spans);
+                spans.AddRange(GetTokenClassifier(token, semanticModel, skipIdentifierTokens).Spans);
             }
 
             var tokenTypeInfo = new TokenTypeInfo
             {
                 FilePath = syntaxTree.FilePath
             };
+
             tokenTypeInfo.TokenInfo.AddRange(spans.OrderBy(s => s.TextRange.StartLine).ThenBy(s => s.TextRange.StartOffset));
             return tokenTypeInfo;
         }
-
-        protected override void Initialize(SyntaxTree tree) =>
-            SkipIdentifierTokens = HasTooManyIdentifierTokens(tree, identifierTokenKind);
-
-        private static bool HasTooManyIdentifierTokens(SyntaxTree syntaxTree, int tokenKind) =>
-            syntaxTree.GetRoot().DescendantTokens().Count(token => token.RawKind == tokenKind) > IdentifierTokenCountThreshold;
 
         protected abstract class TokenClassifierBase
         {
@@ -85,6 +82,7 @@ namespace SonarAnalyzer.Rules
                 MethodKind.StaticConstructor,
                 MethodKind.SharedConstructor
             };
+
             private static readonly ISet<SymbolKind> VarSymbolKinds = new HashSet<SymbolKind>
             {
                 SymbolKind.NamedType,
