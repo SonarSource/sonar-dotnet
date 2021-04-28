@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
 
         private static bool HiddenByEditorBrowsableAttribute(IMethodSymbol methodSymbol) =>
             methodSymbol.GetAttributes(KnownType.System_ComponentModel_EditorBrowsableAttribute)
-                .Any(x => x.ConstructorArguments.Any(a => 1.CompareTo(a.Value) == 0));
+                .Any(x => x.ConstructorArguments.Any(a => (int)a.Value == 1));
 
         private IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
         {
