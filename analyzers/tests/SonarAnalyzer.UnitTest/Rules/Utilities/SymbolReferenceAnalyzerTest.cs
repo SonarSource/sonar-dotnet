@@ -139,6 +139,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             // This path is unreachable for VB code
             new TestSymbolReferenceAnalyzer_VB(null, isTestProject).TestGetSetKeyword(null).Should().BeNull();
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void Verify_TokenThreshold() =>
+            // In TokenThreshold.cs there are 4009 tokens which is more than the current limit of 40000
+            Verify("TokenThreshold.cs", ProjectType.Product, _ => { }, 0);
+
         private void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
             Verify(fileName, projectType, references =>
                 {
@@ -147,7 +153,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                     declarationReferences.Select(x => x.StartLine).Should().BeEquivalentTo(assertedDeclarationLineReferences);
                 });
 
-        private void Verify(string fileName, ProjectType projectType, Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference)
+        private void Verify(string fileName,
+                            ProjectType projectType,
+                            Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference,
+                            int expectedMessageCount = 1)
         {
             var testRoot = Root + TestContext.TestName;
             UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")
@@ -161,10 +170,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 TestHelper.CreateSonarProjectConfig(testRoot, projectType),
                 messages =>
                 {
-                    messages.Should().HaveCount(1);
-                    var info = messages.Single();
-                    info.FilePath.Should().Be(fileName);
-                    verifyReference(info.Reference);
+                    messages.Should().HaveCount(expectedMessageCount);
+                    var info = messages.FirstOrDefault();
+                    if (info != null)
+                    {
+                        info.FilePath.Should().Be(fileName);
+                        verifyReference(info.Reference);
+                    }
                 });
         }
 
