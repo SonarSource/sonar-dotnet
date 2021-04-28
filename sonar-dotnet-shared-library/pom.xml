@@ -20,7 +20,7 @@
     <!-- used for deployment to SonarSource Artifactory -->
     <gitRepositoryName>sonar-dotnet-shared-library</gitRepositoryName>
     <sonar.exclusions>target/generated-sources/protobuf/**</sonar.exclusions>
-    <sonar.analyzer.commons>1.10.2.456</sonar.analyzer.commons>
+    <sonar.analyzer.commons>1.14.0.681</sonar.analyzer.commons>
   </properties>
 
   <dependencies>
