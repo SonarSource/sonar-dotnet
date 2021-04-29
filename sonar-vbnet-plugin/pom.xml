@@ -88,7 +88,7 @@
       <version>3.16.1</version>
       <scope>test</scope>
     </dependency>
-     <dependency>
+    <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
       <version>2.6</version>
@@ -167,7 +167,7 @@
           <sonarQubeMinVersion>${sonarLTS.version}</sonarQubeMinVersion> <!-- runtime minimal API version -->
         </configuration>
       </plugin>
-       <plugin>
+      <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <executions>
           <execution>

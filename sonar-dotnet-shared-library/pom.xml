@@ -51,13 +51,11 @@
       <groupId>org.sonarsource.analyzer-commons</groupId>
       <artifactId>sonar-analyzer-commons</artifactId>
       <version>${sonar.analyzer.commons}</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.analyzer-commons</groupId>
       <artifactId>sonar-xml-parsing</artifactId>
       <version>${sonar.analyzer.commons}</version>
-      <scope>compile</scope>
     </dependency>
 
     <!-- unit tests -->
