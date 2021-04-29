@@ -125,13 +125,13 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     // but we should always have a symbolic value for it.
                     && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - SaltParameterIndex).FirstOrDefault() is {} symbolicValue)
                 {
-                    if (programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
-                    {
-                        context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeThisSaltLongerMessage));
-                    }
-                    else if (programState.HasConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Constant))
+                    if (programState.HasConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Constant))
                     {
                         context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeSaltUnpredictableMessage));
+                    }
+                    else if (programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
+                    {
+                        context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeThisSaltLongerMessage));
                     }
                 }
 

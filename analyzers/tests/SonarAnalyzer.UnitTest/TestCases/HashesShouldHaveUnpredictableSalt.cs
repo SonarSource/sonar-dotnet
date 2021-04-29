@@ -13,16 +13,16 @@ namespace Tests.Diagnostics
         public void ShortSaltIsNotCompliant()
         {
             var shortSalt = new byte[15];
-            var pdb1 = new PasswordDeriveBytes(passwordBytes, shortSalt); // Noncompliant {{Make this salt longer.}}
+            var pdb1 = new PasswordDeriveBytes(passwordBytes, shortSalt); // Noncompliant {{Make this salt unpredictable.}}
 //                                                            ^^^^^^^^^
-            var pdb2 = new PasswordDeriveBytes(passwordString, shortSalt); // Noncompliant {{Make this salt longer.}}
-            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt, cspParams); // Noncompliant {{Make this salt longer.}}
-            var pdb4 = new PasswordDeriveBytes(passwordString, shortSalt, cspParams); // Noncompliant {{Make this salt longer.}}
-            var pdb5 = new PasswordDeriveBytes(passwordBytes, shortSalt, HashAlgorithmName.SHA512.Name, 1000); // Noncompliant {{Make this salt longer.}}
+            var pdb2 = new PasswordDeriveBytes(passwordString, shortSalt); // Noncompliant {{Make this salt unpredictable.}}
+            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt, cspParams); // Noncompliant {{Make this salt unpredictable.}}
+            var pdb4 = new PasswordDeriveBytes(passwordString, shortSalt, cspParams); // Noncompliant {{Make this salt unpredictable.}}
+            var pdb5 = new PasswordDeriveBytes(passwordBytes, shortSalt, HashAlgorithmName.SHA512.Name, 1000); // Noncompliant {{Make this salt unpredictable.}}
 //                                                            ^^^^^^^^^
-            var pdb6 = new PasswordDeriveBytes(passwordString, shortSalt, HashAlgorithmName.SHA512.Name, 1000); // Noncompliant {{Make this salt longer.}}
-            var pdb7 = new PasswordDeriveBytes(passwordBytes, shortSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams); // Noncompliant {{Make this salt longer.}}
-            var pdb8 = new PasswordDeriveBytes(passwordString, shortSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams); // Noncompliant {{Make this salt longer.}}
+        var pdb6 = new PasswordDeriveBytes(passwordString, shortSalt, HashAlgorithmName.SHA512.Name, 1000); // Noncompliant {{Make this salt unpredictable.}}
+            var pdb7 = new PasswordDeriveBytes(passwordBytes, shortSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams); // Noncompliant {{Make this salt unpredictable.}}
+            var pdb8 = new PasswordDeriveBytes(passwordString, shortSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams); // Noncompliant {{Make this salt unpredictable.}}
 
             var pbkdf2a = new Rfc2898DeriveBytes(passwordString, shortSalt); // Noncompliant
             var pbkdf2b = new Rfc2898DeriveBytes(passwordString, shortSalt, 1000); // Noncompliant
@@ -84,7 +84,7 @@ namespace Tests.Diagnostics
 
             var shortSalt = new byte[15];
             rng.GetBytes(shortSalt);
-            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt); // Noncompliant
+            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt); // Noncompliant {{Make this salt longer.}}
             var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortSalt); // Noncompliant
         }
 
