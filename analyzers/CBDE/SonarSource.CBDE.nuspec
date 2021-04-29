@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>SonarSource.CBDE</id>
-    <version>1.0.0.14843</version>
+    <version>1.0.0.31145</version>
     <title>Common Bug Detection Engine</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Common Bug Detection Engine</description>
     <language>en-US</language>
-    <copyright>Copyright © 2015-2020 SonarSource SA</copyright>
+    <copyright>Copyright © 2015-2021 SonarSource SA</copyright>
   </metadata>
 
   <files>
