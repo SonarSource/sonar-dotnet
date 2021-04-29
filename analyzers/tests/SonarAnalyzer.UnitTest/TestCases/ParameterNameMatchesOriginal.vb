@@ -61,7 +61,6 @@ Public Class IgnoreCaseChange
 
 End Class
 
-
 Public Interface IGenericInterface(Of A)
     Sub DoSomething(ByVal value As A)
     Sub DoSomething(ByVal value As A, ByVal intValue As Integer)
