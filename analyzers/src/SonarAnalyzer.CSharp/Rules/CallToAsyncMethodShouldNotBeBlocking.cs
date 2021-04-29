@@ -119,8 +119,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (simpleMemberAccess.FirstAncestorOrSelf<StatementSyntax>() is { } currentStatement
                     && context.SemanticModel.GetSymbolInfo(simpleMemberAccess.Expression).Symbol is { } accessedSymbol
-                    && currentStatement.GetPreviousStatements().Any(x =>
-                        x.DescendantNodes()
+                    && currentStatement.GetPreviousStatements().Any(statement =>
+                        statement.DescendantNodes()
                             .OfType<InvocationExpressionSyntax>()
                             .Where(x =>
                                 x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression)
