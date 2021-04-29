@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>58.0.22</version>
+    <version>59.0.29</version>
   </parent>
 
   <groupId>org.sonarsource.dotnet</groupId>
@@ -54,6 +54,8 @@
     <artifactsToDownload>${project.groupId}:SonarAnalyzer.CSharp:nupkg,${project.groupId}:SonarAnalyzer.VisualBasic:nupkg</artifactsToDownload>
     <!-- We are ignoring java doc warnings - this is because we are using JDK 11. Ideally we should not do that. -->
     <doclint>none</doclint>
+    <sonar.analyzer.commons>1.14.1.690</sonar.analyzer.commons>
+    <sonar.version>7.9</sonar.version>
   </properties>
 
   <profiles>

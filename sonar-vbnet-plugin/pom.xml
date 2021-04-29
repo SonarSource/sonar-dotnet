@@ -36,7 +36,6 @@
   </scm>
 
   <properties>
-    <sonar.version>7.9</sonar.version>
     <sonarLTS.version>7.9</sonarLTS.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
@@ -44,10 +43,12 @@
   </properties>
 
   <dependencies>
+    <!-- provided at runtime -->
     <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>sonar-dotnet-shared-library</artifactId>
-      <version>${project.version}</version>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <version>${sonar.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
@@ -55,16 +56,17 @@
       <version>3.0.2</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- compiled -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>sonar-dotnet-shared-library</artifactId>
+      <version>${project.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.sonarsource.analyzer-commons</groupId>
       <artifactId>sonar-analyzer-commons</artifactId>
-      <version>1.7.0.243</version>
-    </dependency>
-    <dependency>
-      <groupId>org.sonarsource.sonarqube</groupId>
-      <artifactId>sonar-plugin-api</artifactId>
-      <version>${sonar.version}</version>
-      <scope>provided</scope>
+      <version>${sonar.analyzer.commons}</version>
     </dependency>
 
     <!-- test dependencies -->
@@ -86,7 +88,7 @@
       <version>3.16.1</version>
       <scope>test</scope>
     </dependency>
-     <dependency>
+    <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
       <version>2.6</version>
@@ -165,7 +167,7 @@
           <sonarQubeMinVersion>${sonarLTS.version}</sonarQubeMinVersion> <!-- runtime minimal API version -->
         </configuration>
       </plugin>
-       <plugin>
+      <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <executions>
           <execution>
