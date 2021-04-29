@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private sealed class SaltCheck : ExplodedGraphCheck
         {
-            private const int MinimumSafeLength = 32;
+            private const int MinimumSafeLength = 16;
             private const int SaltParameterIndex = 2;
 
             private static readonly ImmutableArray<KnownType> VulnerableTypes =
