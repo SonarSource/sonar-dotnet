@@ -14,13 +14,11 @@
   <description>Share code between C# and VB.NET plugins</description>
 
   <properties>
-    <sonar.version>7.9</sonar.version>
     <protobuf.version>3.8.0</protobuf.version>
     <protobuf.compiler>${settings.localRepository}/com/google/protobuf/protoc/${protobuf.version}/protoc-${protobuf.version}-${os.detected.classifier}.exe</protobuf.compiler>
     <!-- used for deployment to SonarSource Artifactory -->
     <gitRepositoryName>sonar-dotnet-shared-library</gitRepositoryName>
     <sonar.exclusions>target/generated-sources/protobuf/**</sonar.exclusions>
-    <sonar.analyzer.commons>1.14.1.690</sonar.analyzer.commons>
   </properties>
 
   <dependencies>
