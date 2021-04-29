@@ -13,7 +13,7 @@
        For instance, System.ValueTuple is not available in 4.6.1 and must be added to the final packaging if we add it here -->
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="1.3.2" />
-    <PackageReference Include="SonarSource.CBDE" Version="1.0.0.14843">
+    <PackageReference Include="SonarSource.CBDE" Version="1.0.0.31145">
       <!-- Development dependency, these assets will be consumed but won't flow to the parent project -->
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
