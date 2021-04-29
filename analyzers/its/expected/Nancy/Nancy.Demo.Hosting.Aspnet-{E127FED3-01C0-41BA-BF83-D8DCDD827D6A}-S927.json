@@ -12,19 +12,6 @@
 "endColumn":  97
 }
 }
-},
-{
-"id":  "S927",
-"message":  "Rename parameter 'existingContainer' to 'container' to match the base class declaration.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  76,
-"endLine":  50,
-"endColumn":  93
-}
-}
 }
 ]
 }

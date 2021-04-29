@@ -2,58 +2,6 @@
 "issues":  [
 {
 "id":  "S927",
-"message":  "Rename parameter 'expected' to 'x' to match the interface declaration.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertEqualityComparer.cs",
-"region":  {
-"startLine":  13,
-"startColumn":  30,
-"endLine":  13,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S927",
-"message":  "Rename parameter 'actual' to 'y' to match the interface declaration.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertEqualityComparer.cs",
-"region":  {
-"startLine":  13,
-"startColumn":  42,
-"endLine":  13,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S927",
-"message":  "Rename parameter 'actual' to 'obj' to match the interface declaration.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertEqualityComparer.cs",
-"region":  {
-"startLine":  53,
-"startColumn":  34,
-"endLine":  53,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S927",
-"message":  "Rename parameter 'container' to 'existingContainer' to match the base class declaration.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  370,
-"startColumn":  80,
-"endLine":  370,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S927",
 "message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn' to match the base class declaration.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",

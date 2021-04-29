@@ -28,19 +28,6 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'container' to 'existingContainer' to match the base class declaration.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
-"region":  {
-"startLine":  56,
-"startColumn":  80,
-"endLine":  56,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S927",
 "message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn' to match the base class declaration.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
@@ -49,19 +36,6 @@
 "startColumn":  132,
 "endLine":  131,
 "endColumn":  159
-}
-}
-},
-{
-"id":  "S927",
-"message":  "Rename parameter 'compareValue' to 'other' to match the interface declaration.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  155,
-"startColumn":  51,
-"endLine":  155,
-"endColumn":  63
 }
 }
 },

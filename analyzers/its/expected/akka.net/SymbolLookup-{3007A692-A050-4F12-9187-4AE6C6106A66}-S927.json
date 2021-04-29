@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S927",
-"message":  "Rename parameter 'sd' to 'message' to match the interface declaration.",
-"location":  {
-"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
-"region":  {
-"startLine":  45,
-"startColumn":  42,
-"endLine":  45,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S927",
 "message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",

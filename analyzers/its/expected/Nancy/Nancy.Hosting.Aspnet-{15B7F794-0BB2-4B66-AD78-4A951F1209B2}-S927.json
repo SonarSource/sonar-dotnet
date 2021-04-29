@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S927",
-"message":  "Rename parameter 'container' to 'existingContainer' to match the base class declaration.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
-"region":  {
-"startLine":  107,
-"startColumn":  80,
-"endLine":  107,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S927",
 "message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn' to match the base class declaration.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
