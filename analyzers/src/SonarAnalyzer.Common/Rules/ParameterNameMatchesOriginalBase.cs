@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -61,11 +60,11 @@ namespace SonarAnalyzer.Rules
                         }
                         else if (methodSymbol.OverriddenMethod != null)
                         {
-                            VerifyParameters(c, methodSyntax, methodSymbol.OverriddenMethod.Parameters, "base class");
+                            VerifyGenericParameters(c, methodSyntax, methodSymbol.OverriddenMethod.OriginalDefinition.Parameters, "base class");
                         }
                         else if (methodSymbol.GetInterfaceMember() is { } interfaceMember)
                         {
-                            VerifyInterfaceMemberParameters(c, methodSymbol, methodSyntax, interfaceMember, "interface");
+                            VerifyGenericParameters(c, methodSyntax, interfaceMember.OriginalDefinition.Parameters, "interface");
                         }
                     }
                 },
@@ -81,38 +80,16 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void VerifyInterfaceMemberParameters(SyntaxNodeAnalysisContext context, IMethodSymbol methodSymbol, TMethodDeclarationSyntax methodSyntax, IMethodSymbol interfaceMember,
-            string expectedLocation)
-        {
-            if (interfaceMember.ContainingType.TypeArguments.IsEmpty)
-            {
-                VerifyParameters(context, methodSyntax, interfaceMember.Parameters, "interface");
-            }
-            else
-            {
-                VerifyGenericInterfaceMemberParameters(context, methodSymbol, methodSyntax, interfaceMember, expectedLocation);
-            }
-        }
-
-        private void VerifyGenericInterfaceMemberParameters(SyntaxNodeAnalysisContext context, IMethodSymbol methodSymbol, TMethodDeclarationSyntax methodSyntax, IMethodSymbol interfaceMember,
-            string expectedLocation)
+        private void VerifyGenericParameters(SyntaxNodeAnalysisContext context, TMethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> expectedParameters, string expectedLocation)
         {
             var parameters = ParameterIdentifiers(methodSyntax).ToList();
-            var interfaceMethodParameters = interfaceMember.Parameters.ToList();
-            var genericInterfaceTypeArguments = interfaceMember.ContainingType.TypeArguments;
-
             for (var i = 0; i < parameters.Count; i++)
             {
                 var parameter = parameters[i];
-                var parameterType = methodSymbol.Parameters[i].Type;
-                var interfaceMethodParameter = interfaceMethodParameters[i];
-                if (!parameter.ValueText.Equals(interfaceMethodParameter.Name, Language.NameComparison))
+                var expectedParameter = expectedParameters[i];
+                if (!parameter.ValueText.Equals(expectedParameter.Name, Language.NameComparison) && expectedParameter.Type.Kind != SymbolKind.TypeParameter)
                 {
-                    var matchingGenericInterfaceArg = genericInterfaceTypeArguments.FirstOrDefault(x => parameterType.DerivesOrImplements(x));
-                    if (matchingGenericInterfaceArg == null || matchingGenericInterfaceArg.Name.IndexOf(parameter.ValueText, StringComparison.OrdinalIgnoreCase) != 0)
-                    {
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(), parameter.ValueText, interfaceMethodParameter.Name, expectedLocation));
-                    }
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(), parameter.ValueText, expectedParameter.Name, expectedLocation));
                 }
             }
         }
