@@ -126,7 +126,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression)
                                 && IsTaskWhenAllCall((MemberAccessExpressionSyntax)x.Expression, context.SemanticModel))
                             .SelectMany(x => x.ArgumentList.Arguments)
-                            .Any(x => context.SemanticModel.GetSymbolInfo(x.Expression).Symbol == accessedSymbol)))
+                            .Any(x => accessedSymbol.Equals(context.SemanticModel.GetSymbolInfo(x.Expression).Symbol))))
                 {
                     return;  // No need to report an issue on a waited object
                 }
