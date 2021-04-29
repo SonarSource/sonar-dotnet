@@ -78,5 +78,30 @@
         <maven.compiler.release>8</maven.compiler.release>
       </properties>
     </profile>
+    <profile>
+      <id>sign</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.simplify4u.plugins</groupId>
+            <artifactId>sign-maven-plugin</artifactId>
+            <version>${version.gpg.plugin}</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <configuration>
+                  <keyPass>${env.PGP_PASSPHRASE}</keyPass>
+                  <keyFile>${env.SIGNKEY_PATH}</keyFile>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>

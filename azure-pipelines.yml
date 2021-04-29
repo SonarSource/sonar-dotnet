@@ -271,6 +271,12 @@ stages:
         inputs:
           secureFile: 'maven-settings.xml'
 
+      - task: DownloadSecureFile@1
+        displayName: 'Download the sign key'
+        name: signKey
+        inputs:
+          secureFile: 'sign-key.asc'
+
       - template: update-maven-version-steps.yml
         parameters:
           mavenSettingsFilePath: $(mavenSettings.secureFilePath)
@@ -280,10 +286,11 @@ stages:
         env:
           ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
           ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+          PGP_PASSPHRASE: $(PGP_PASSPHRASE)
           GITHUB_BRANCH: $(Build.SourceBranchName)
           GIT_SHA1: $(Build.SourceVersion)
         inputs:
-          goals: 'deploy -P release'
+          goals: 'deploy -P release,sign'
           options: >-
             $(commonMavenArguments)
             --settings $(mavenSettings.secureFilePath)
