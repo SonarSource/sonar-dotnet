@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -115,10 +116,35 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     return; // Main methods are not subject to deadlock issue so no need to report an issue
                 }
+
+                if (simpleMemberAccess.FirstAncestorOrSelf<StatementSyntax>() is { } currentStatement
+                    && context.SemanticModel.GetSymbolInfo(simpleMemberAccess.Expression).Symbol is { } accessedSymbol
+                    && currentStatement.GetPreviousStatements().Any(x =>
+                        x.DescendantNodes()
+                            .OfType<InvocationExpressionSyntax>()
+                            .Where(x =>
+                                x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                                && IsTaskWhenAllCall((MemberAccessExpressionSyntax)x.Expression, context.SemanticModel))
+                            .SelectMany(x => x.ArgumentList.Arguments)
+                            .Any(x => context.SemanticModel.GetSymbolInfo(x.Expression).Symbol == accessedSymbol)))
+                {
+                    return;  // No need to report an issue on a waited object
+                }
             }
 
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, simpleMemberAccess.GetLocation(),
                 messageArgs: MemberNameToMessageArguments[memberAccessNameName]));
+        }
+
+        private static bool IsTaskWhenAllCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel)
+        {
+            if (memberAccess?.Name == null || memberAccess.Name.Identifier.ValueText != "WhenAll")
+            {
+                return false;
+            }
+
+            var memberAccessSymbol = semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom;
+            return memberAccessSymbol.Is(KnownType.System_Threading_Tasks_Task);
         }
 
         private static bool IsResultInContinueWithCall(string memberAccessName, MemberAccessExpressionSyntax memberAccess) =>

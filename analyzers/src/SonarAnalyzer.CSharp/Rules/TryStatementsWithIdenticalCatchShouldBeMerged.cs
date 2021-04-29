@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var tryStatement = (TryStatementSyntax)c.Node;
 
-                var mergeableTry = GetPreviousStatements(tryStatement)
+                var mergeableTry = tryStatement.GetPreviousStatementsCurrentBlock()
                     .OfType<TryStatementSyntax>()
                     .FirstOrDefault(t => SameCatches(t.Catches) && SameFinally(t));
 
@@ -67,14 +68,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             },
             SyntaxKind.TryStatement);
-        }
-
-        private static IEnumerable<StatementSyntax> GetPreviousStatements(SyntaxNode expression)
-        {
-            var statement = expression.FirstAncestorOrSelf<StatementSyntax>();
-            return statement == null
-                ? Enumerable.Empty<StatementSyntax>()
-                : statement.Parent.ChildNodes().OfType<StatementSyntax>().TakeWhile(x => x != statement).Reverse();
         }
     }
 }

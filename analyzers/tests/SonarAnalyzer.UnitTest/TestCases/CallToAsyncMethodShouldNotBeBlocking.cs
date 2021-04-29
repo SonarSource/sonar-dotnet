@@ -161,14 +161,66 @@ namespace Tests.Diagnostics
             return nameof(Task<object>.Result); // Compliant, nameof() does not execute async code.
         }
 
-        // See https://github.com/SonarSource/sonar-dotnet/issues/3452
-        public async Task Repro3452()
+        static async Task AccessAwaited(string[] args)
         {
-            var task = Task.FromResult(1);
+            var getValue1Task = Task.FromResult(1);
+            var getValue2Task = Task.FromResult(2);
 
-            await Task.WhenAll(task).ConfigureAwait(false);
+            await Task.WhenAll(getValue1Task, getValue2Task).ConfigureAwait(false);
 
-            var result1 = task.Result; // Noncompliant, FP: at this point the task is completed and Result can be read
+            var result1 = getValue1Task.Result;  // Compliant, task is already completed at this point.
+            var result2 = getValue2Task.Result;  // Compliant, task is already completed at this point.
+        }
+
+        static async Task AccessNotAwaited(string[] args)
+        {
+            var getValue1Task = Task.FromResult(1);
+            var getValue2Task = Task.FromResult(2);
+
+            await Task.WhenAll(getValue1Task).ConfigureAwait(false);
+
+            var result1 = getValue1Task.Result;  // Compliant, task is already completed at this point.
+            var result2 = getValue2Task.Result;  // Noncompliant {{Replace this use of 'Task.Result' with 'await'.}}
+//                        ^^^^^^^^^^^^^^^^^^^^
+        }
+
+        static async Task NotAnAwait(string[] args)
+        {
+            var getValue1Task = Task.FromResult(1);
+            var getValue2Task = Task.FromResult(2);
+            await TaskLike.WhenAll(getValue1Task, getValue2Task);
+            var result1 = getValue1Task.Result;  // Noncompliant
+//                        ^^^^^^^^^^^^^^^^^^^^
+            var result2 = getValue2Task.Result;  // Noncompliant
+//                        ^^^^^^^^^^^^^^^^^^^^
+        }
+
+        static async Task NoAwaitAtAll(string[] args)
+        {
+            var getValue1Task = Task.FromResult(1);
+            var getValue2Task = Task.FromResult(2);
+            Console.Write("");
+            var result1 = getValue1Task.Result;  // Noncompliant
+//                        ^^^^^^^^^^^^^^^^^^^^
+            var result2 = getValue2Task.Result;  // Noncompliant
+//                        ^^^^^^^^^^^^^^^^^^^^
+        }
+
+        static async Task AwaitAfterAccess(string[] args)
+        {
+            var getValue1Task = Task.FromResult(1);
+            var getValue2Task = Task.FromResult(2);
+            var result1 = getValue1Task.Result;  // Noncompliant
+//                        ^^^^^^^^^^^^^^^^^^^^
+            var result2 = getValue2Task.Result;  // Noncompliant
+//                        ^^^^^^^^^^^^^^^^^^^^
+
+            await Task.WhenAll(getValue1Task, getValue2Task).ConfigureAwait(false);
+        }
+
+        public class TaskLike
+        {
+            public static Task WhenAll(params Task[] tasks) { return null; }
         }
     }
 }

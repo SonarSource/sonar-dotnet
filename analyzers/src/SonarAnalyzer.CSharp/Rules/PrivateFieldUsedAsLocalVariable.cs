@@ -162,7 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (readStatementOrArrowExpression is StatementSyntax readStatement)
                         {
-                            foreach (var statement in GetPreviousStatements(readStatement))
+                            foreach (var statement in readStatement.GetPreviousStatements())
                             {
                                 // When the readStatement is preceded with a write statement (that is also not a read statement)
                                 // we want to report this field.
@@ -191,22 +191,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         this.invocations.TryGetValue(statement, out var invocationsInStatement) &&
                         invocationsInStatement.Any(writesByEnclosingSymbol.ContainsKey);
                 }
-            }
-
-            /// <summary>
-            /// Returns all statements before the specified statement within the containing method.
-            /// This method recursively traverses all parent blocks of the provided statement.
-            /// </summary>
-            private static IEnumerable<StatementSyntax> GetPreviousStatements(StatementSyntax statement)
-            {
-                var previousStatements = statement.Parent.ChildNodes()
-                    .OfType<StatementSyntax>()
-                    .TakeWhile(x => x != statement)
-                    .Reverse();
-
-                return statement.Parent is StatementSyntax parentStatement
-                    ? previousStatements.Union(GetPreviousStatements(parentStatement))
-                    : previousStatements;
             }
 
             public override void VisitIdentifierName(IdentifierNameSyntax node)
