@@ -6,7 +6,7 @@ with a non-random, reused or too short salt value. It does not raise an issue on
 as they should not be used to hash passwords.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
-  <li> Use hashing functions generating their own secure salt or generate a secure random value of at least 16 bytes. </li>
+  <li> Use hashing functions generating their own secure salt or generate a secure random value of at least 32 bytes. </li>
   <li> The salt should be unique by user password. </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
@@ -28,7 +28,7 @@ public void Hash(string password)
 <pre>
 public DeriveBytes Hash(string password)
 {
-    return new Rfc2898DeriveBytes(password, 64);
+    return new Rfc2898DeriveBytes(password, 32);
 }
 </pre>
 <h2>See</h2>
