@@ -19,9 +19,6 @@ param
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
-$project = "ManuallyAddedNoncompliantIssues"
-$ruleId = "S2857"
-#$ruleId = "S3904"
 
 . .\create-issue-reports.ps1
 
@@ -269,11 +266,6 @@ function LoadExpectedIssues($file, $regex){
         throw "Please specify the rule id in the following file: $($file.FullName)"
     }
 
-    # if the ruleId parameter is provided, it should be used to filter the expected issues
-    if ($ruleId -ne "" -and $id -ne $ruleId) {
-        return @()
-    }
-
     if ($id -is [system.array]){
         throw "Only one rule can be verified per file. Multiple rule identifiers are defined ($id) in $($file.FullName)"
     }
@@ -293,7 +285,7 @@ function LoadExpectedIssuesByProjectType($project, $regex, $extension){
         $issues = $issues + $fileIssues
     }
 
-    return $issues
+    return ,$issues # "," to avoid reducing empty array to $null
 }
 
 function LoadExpectedIssuesForInternalProject($project){
@@ -315,7 +307,7 @@ function IssuesAreEqual($actual, $expected){
 function VerifyUnexpectedIssues($actualIssues, $expectedIssues){
     $unexpectedIssues = @()
 
-    foreach ($actualIssue in $actualIssues){
+    foreach ($actualIssue in $actualIssues | Where-Object { $ruleId -eq "" -or $_.IssueId -eq $ruleId }){
         $found = $false
 
         foreach($expectedIssue in $expectedIssues){
@@ -352,7 +344,7 @@ function VerifyUnexpectedIssues($actualIssues, $expectedIssues){
 function VerifyExpectedIssues ($actualIssues, $expectedIssues){
     $expectedButNotRaisedIssues = @()
 
-    foreach ($expectedIssue in $expectedIssues){
+    foreach ($expectedIssue in $expectedIssues | Where-Object { $ruleId -eq "" -or $_.IssueId -eq $ruleId }){
         $found = $false
         foreach($actualIssue in $actualIssues){
             if (IssuesAreEqual $actualIssue $expectedIssue){
@@ -383,7 +375,6 @@ function CompareIssues($actualIssues, $expectedIssues){
 
 function LoadActualIssues($project){
     $analysisResults = Get-ChildItem output/$project -filter *.json -recurse
-
     $issues = @()
 
     foreach($fileName in $analysisResults){
@@ -405,9 +396,7 @@ function LoadActualIssues($project){
 
 function CheckDiffsForInternalProject($project){
     $actualIssues = LoadActualIssues $project
-
     $expectedIssues = LoadExpectedIssuesForInternalProject $project
-
     $result = CompareIssues $actualIssues $expectedIssues
 
     if ($result -eq $false){
