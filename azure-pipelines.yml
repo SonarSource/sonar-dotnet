@@ -1,6 +1,6 @@
 schedules:
-# Run every day at 5:30 UTC (https://docs.microsoft.com/en-us/azure/devops/pipelines/process/scheduled-triggers?view=azure-devops&tabs=yaml#cron-syntax)
-- cron: "30 5 * * *"
+# Run from Monday to Friday at 5:30 UTC (https://docs.microsoft.com/en-us/azure/devops/pipelines/process/scheduled-triggers?view=azure-devops&tabs=yaml#cron-syntax)
+- cron: "30 5 * * 1-5"
   displayName: Daily midnight build
   branches:
     include:
