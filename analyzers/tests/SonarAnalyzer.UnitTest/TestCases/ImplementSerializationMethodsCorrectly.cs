@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.ComponentModel;
 
 namespace Tests.Diagnostics
 {
@@ -42,6 +43,22 @@ namespace Tests.Diagnostics
         [OnSerializing]
         public static void OnSerializingPublicStatic(StreamingContext context) { } // Noncompliant {{Make this method non-public and non-static.}}
 
+        [OnDeserialized]
+        [EditorBrowsable]
+        public static void OnDeserialized(StreamingContext context) { }      // Noncompliant {{Make this method non-public and non-static.}}
+
+        [OnDeserializing]
+        [EditorBrowsable]
+        public static void OnDeserializing(StreamingContext context) { }     // Noncompliant {{Make this method non-public and non-static.}}
+
+        [OnDeserialized]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public static void OnDeserialized1(StreamingContext context) { }     // Noncompliant {{Make this method non-public and non-static.}}
+
+        [OnDeserializing]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public static void OnDeserializing1(StreamingContext context) { }    // Noncompliant {{Make this method non-public and non-static.}}
+
         [OnSerializing()]
         internal void OnSerializingMethod(StreamingContext context) { }     // Compliant, method is not public and gets invoked
 
@@ -56,5 +73,21 @@ namespace Tests.Diagnostics
 
         [OnDeserialized()]
         private void OnDeserializedMethod(StreamingContext context) { }     // Compliant
+
+        [OnDeserialized]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void OnDeserialized3(StreamingContext context) { }           // Compliant
+
+        [OnDeserializing]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void OnDeserializing3(StreamingContext context) { }          // Compliant
+
+        [OnSerializing]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void OnSerializing3(StreamingContext context) { }            // Compliant
+
+        [OnSerialized]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        int OnSerialized3(StreamingContext context) { return 1; }           // Compliant
     }
 }

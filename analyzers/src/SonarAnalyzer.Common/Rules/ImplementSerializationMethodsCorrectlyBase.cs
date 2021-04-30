@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var methodSymbol = (IMethodSymbol)c.Symbol;
-                    if (!methodSymbol.GetAttributes(SerializationAttributes).Any())
+                    if (!methodSymbol.GetAttributes(SerializationAttributes).Any() || HiddenByEditorBrowsableAttribute(methodSymbol))
                     {
                         return;
                     }
@@ -70,6 +70,10 @@ namespace SonarAnalyzer.Rules
                     }
                 },
                 SymbolKind.Method);
+
+        private static bool HiddenByEditorBrowsableAttribute(IMethodSymbol methodSymbol) =>
+            methodSymbol.GetAttributes(KnownType.System_ComponentModel_EditorBrowsableAttribute)
+                .Any(x => x.ConstructorArguments.Any(a => (int)a.Value == 1));
 
         private IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
         {
