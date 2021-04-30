@@ -19,6 +19,9 @@ param
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
+$project = "ManuallyAddedNoncompliantIssues"
+$ruleId = "S2857"
+#$ruleId = "S3904"
 
 . .\create-issue-reports.ps1
 
@@ -478,28 +481,31 @@ try {
 
     Write-Header "Processing analyzer results"
 
-    CheckInternalProjectsDifferences
-
-    Write-Host "Normalizing the SARIF reports"
-    $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
-
-    # Normalize & overwrite all *.json SARIF files found under the "actual" folder
-    Get-ChildItem output -filter *.json -recurse | where { $_.FullName -notmatch 'ManuallyAddedNoncompliantIssues' } | Foreach-Object { New-IssueReports $_.FullName }
-
-    $sarifTimerElapsed = $sarifTimer.Elapsed.TotalSeconds
-    Write-Debug "Normalized the SARIF reports in '${sarifTimerElapsed}'"
-
     Write-Host "Computing analyzer performance"
     $measurePerfTimer = [system.diagnostics.stopwatch]::StartNew()
     Measure-AnalyzerPerformance
     $measurePerfTimerElapsed = $measurePerfTimer.Elapsed.TotalSeconds
     Write-Debug "Computed analyzer performance in '${measurePerfTimerElapsed}'"
 
-    Write-Host "Checking for differences..."
-    $diffTimer = [system.diagnostics.stopwatch]::StartNew()
-    Show-DiffResults
-    $diffTimerElapsed = $diffTimer.Elapsed.TotalSeconds
-    Write-Debug "Checked for differences in '${diffTimerElapsed}'"
+    CheckInternalProjectsDifferences
+
+    # Not needed when $project is internal
+    if ($project -eq "" -or -not $InternalProjects.Contains($project)) {
+        Write-Host "Normalizing the SARIF reports"
+        $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
+
+        # Normalize & overwrite all *.json SARIF files found under the "actual" folder
+        Get-ChildItem output -filter *.json -recurse | where { $_.FullName -notmatch 'ManuallyAddedNoncompliantIssues' } | Foreach-Object { New-IssueReports $_.FullName }
+
+        $sarifTimerElapsed = $sarifTimer.Elapsed.TotalSeconds
+        Write-Debug "Normalized the SARIF reports in '${sarifTimerElapsed}'"
+
+        Write-Host "Checking for differences..."
+        $diffTimer = [system.diagnostics.stopwatch]::StartNew()
+        Show-DiffResults
+        $diffTimerElapsed = $diffTimer.Elapsed.TotalSeconds
+        Write-Debug "Checked for differences in '${diffTimerElapsed}'"
+    }
 
     Write-Host -ForegroundColor Green "SUCCESS: ITs were successful! No differences were found!"
     exit 0
