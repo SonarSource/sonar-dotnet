@@ -80,8 +80,8 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void VerifyGenericParameters(SyntaxNodeAnalysisContext context, TMethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> actualParameters, IList<IParameterSymbol> expectedParameters,
-            string expectedLocation)
+        private void VerifyGenericParameters(SyntaxNodeAnalysisContext context, TMethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> actualParameters,
+            IList<IParameterSymbol> expectedParameters, string expectedLocation)
         {
             var parameters = ParameterIdentifiers(methodSyntax).ToList();
             for (var i = 0; i < parameters.Count; i++)
