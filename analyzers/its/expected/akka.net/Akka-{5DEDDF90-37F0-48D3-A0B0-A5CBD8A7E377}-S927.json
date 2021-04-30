@@ -181,6 +181,201 @@
 "endColumn":  83
 }
 }
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  30,
+"endLine":  32,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  30,
+"endLine":  45,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  30,
+"endLine":  59,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  30,
+"endLine":  75,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  30,
+"endLine":  93,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  30,
+"endLine":  113,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  30,
+"endLine":  135,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  30,
+"endLine":  159,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  30,
+"endLine":  185,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  30,
+"endLine":  213,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  30,
+"endLine":  243,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  30,
+"endLine":  275,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  30,
+"endLine":  309,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  30,
+"endLine":  345,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  383,
+"startColumn":  30,
+"endLine":  383,
+"endColumn":  35
+}
+}
 }
 ]
 }
