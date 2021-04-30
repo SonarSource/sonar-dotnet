@@ -30,30 +30,39 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class TokenTypeAnalyzerBase : UtilityAnalyzerBase<TokenTypeInfo>
     {
-        protected const string DiagnosticId = "S9999-token-type";
+        private const string DiagnosticId = "S9999-token-type";
         private const string Title = "Token type calculator";
         private const string TokenTypeFileName = "token-type.pb";
+        private const int IdentifierTokenCountThreshold = 4_000;
+        private readonly int identifierTokenKind;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel);
+        protected TokenTypeAnalyzerBase(int identifierTokenKind) => this.identifierTokenKind = identifierTokenKind;
+
+        protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens);
 
         protected sealed override string FileName => TokenTypeFileName;
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var tokens = syntaxTree.GetRoot().DescendantTokens();
+            var skipIdentifierTokens = tokens.Count(token => token.RawKind == identifierTokenKind) > IdentifierTokenCountThreshold;
+
             var spans = new List<TokenTypeInfo.Types.TokenInfo>();
+            // The second iteration of the tokens is intended since there is no processing done and we want to avoid copying all the tokens to a second collection.
             foreach (var token in tokens)
             {
-                spans.AddRange(GetTokenClassifier(token, semanticModel).Spans);
+                spans.AddRange(GetTokenClassifier(token, semanticModel, skipIdentifierTokens).Spans);
             }
 
             var tokenTypeInfo = new TokenTypeInfo
             {
                 FilePath = syntaxTree.FilePath
             };
+
             tokenTypeInfo.TokenInfo.AddRange(spans.OrderBy(s => s.TextRange.StartLine).ThenBy(s => s.TextRange.StartOffset));
             return tokenTypeInfo;
         }
@@ -62,6 +71,7 @@ namespace SonarAnalyzer.Rules
         {
             private readonly SyntaxToken token;
             private readonly SemanticModel semanticModel;
+            private readonly bool skipIdentifiers;
             private readonly List<TokenTypeInfo.Types.TokenInfo> spans = new List<TokenTypeInfo.Types.TokenInfo>();
             private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
             {
@@ -69,6 +79,7 @@ namespace SonarAnalyzer.Rules
                 MethodKind.StaticConstructor,
                 MethodKind.SharedConstructor
             };
+
             private static readonly ISet<SymbolKind> VarSymbolKinds = new HashSet<SymbolKind>
             {
                 SymbolKind.NamedType,
@@ -85,10 +96,11 @@ namespace SonarAnalyzer.Rules
             protected abstract bool IsNumericLiteral(SyntaxToken token);
             protected abstract bool IsStringLiteral(SyntaxToken token);
 
-            protected TokenClassifierBase(SyntaxToken token, SemanticModel semanticModel)
+            protected TokenClassifierBase(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers)
             {
                 this.token = token;
                 this.semanticModel = semanticModel;
+                this.skipIdentifiers = skipIdentifiers;
             }
 
             public IEnumerable<TokenTypeInfo.Types.TokenInfo> Spans
@@ -140,7 +152,7 @@ namespace SonarAnalyzer.Rules
                 {
                     CollectClassified(TokenType.NumericLiteral, token.Span);
                 }
-                else if (IsIdentifier(token))
+                else if (IsIdentifier(token) && !skipIdentifiers)
                 {
                     ClassifyIdentifier();
                 }
@@ -148,7 +160,7 @@ namespace SonarAnalyzer.Rules
 
             private void ClassifyIdentifier()
             {
-                if (semanticModel.GetDeclaredSymbol(token.Parent) is { }  declaration)
+                if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaration)
                 {
                     ClassifyIdentifier(declaration);
                 }

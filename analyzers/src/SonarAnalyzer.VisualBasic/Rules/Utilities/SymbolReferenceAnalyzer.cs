@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
-        internal override SyntaxNode GetBindableParent(SyntaxToken token) =>
+        protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
             token.GetBindableParent();
 
         protected override bool IsIdentifier(SyntaxToken token) => token.IsKind(SyntaxKind.IdentifierToken);

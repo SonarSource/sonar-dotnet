@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
-        internal override SyntaxNode GetBindableParent(SyntaxToken token) =>
+        protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
             token.GetBindableParent();
 
         protected override bool IsIdentifier(SyntaxToken token) =>
