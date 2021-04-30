@@ -261,6 +261,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_IDisposable = new KnownType(SpecialType.System_IDisposable, "System.IDisposable");
         internal static readonly KnownType System_IEquatable_T = new KnownType("System.IEquatable<T>");
         internal static readonly KnownType System_IFormatProvider = new KnownType("System.IFormatProvider");
+        internal static readonly KnownType System_Index = new KnownType("System.Index");
         internal static readonly KnownType System_IndexOutOfRangeException = new KnownType("System.IndexOutOfRangeException");
         internal static readonly KnownType System_Int16 = new KnownType(SpecialType.System_Int16, "short");
         internal static readonly KnownType System_Int32 = new KnownType(SpecialType.System_Int32, "int");
@@ -301,6 +302,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_ObsoleteAttribute = new KnownType("System.ObsoleteAttribute");
         internal static readonly KnownType System_OutOfMemoryException = new KnownType("System.OutOfMemoryException");
         internal static readonly KnownType System_Random = new KnownType("System.Random");
+        internal static readonly KnownType System_Range = new KnownType("System.Range");
         internal static readonly KnownType System_Reflection_Assembly = new KnownType("System.Reflection.Assembly");
         internal static readonly KnownType System_Reflection_BindingFlags = new KnownType("System.Reflection.BindingFlags");
         internal static readonly KnownType System_Reflection_AssemblyVersionAttribute = new KnownType("System.Reflection.AssemblyVersionAttribute");

@@ -34,10 +34,10 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class StringOrIntegralTypesForIndexers : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3876";
-        private const string MessageFormat = "Use string or an integral type here, or refactor this indexer into a method.";
+        private const string MessageFormat = "Use string, integral, index or a range type here, or refactor this indexer into a method.";
 
         private static readonly ImmutableArray<KnownType> allowedIndexerTypes =
-            new[] { KnownType.System_Object, KnownType.System_String }
+            new[] { KnownType.System_Object, KnownType.System_String, KnownType.System_Index, KnownType.System_Range }
             .Concat(KnownType.IntegralNumbers)
             .ToImmutableArray();
 
