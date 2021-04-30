@@ -93,32 +93,6 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'channel' to 'classifier' to match the base class declaration.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventStream.cs",
-"region":  {
-"startLine":  53,
-"startColumn":  67,
-"endLine":  53,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S927",
-"message":  "Rename parameter 'channel' to 'classifier' to match the base class declaration.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventStream.cs",
-"region":  {
-"startLine":  73,
-"startColumn":  69,
-"endLine":  73,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S927",
 "message":  "Rename parameter 'm' to 'message' to match the base class declaration.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\IO\TcpManager.cs",

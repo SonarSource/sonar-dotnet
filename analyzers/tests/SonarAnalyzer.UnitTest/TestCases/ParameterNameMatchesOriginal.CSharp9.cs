@@ -19,3 +19,15 @@ public partial record Record
     public partial void M6(int someParam, int y) { } //Noncompliant {{Rename parameter 'someParam' to 'x' to match the partial class declaration.}}
     public partial bool M7(string someParam, out string y) { y = string.Empty; return true; } //Noncompliant {{Rename parameter 'someParam' to 'x' to match the partial class declaration.}}
 }
+
+public abstract record BaseRecord<T>
+{
+    public abstract void SomeMethod(T someParameter);
+    public abstract void SomeMethod(T someParameter, int anotherParameter);
+}
+
+public record RecordOne : BaseRecord<int>
+{
+    public override void SomeMethod(int renamedParam) { }
+    public override void SomeMethod(int renamedParam, int wrongName) { } //Noncompliant {{Rename parameter 'wrongName' to 'anotherParameter' to match the base class declaration.}}
+}

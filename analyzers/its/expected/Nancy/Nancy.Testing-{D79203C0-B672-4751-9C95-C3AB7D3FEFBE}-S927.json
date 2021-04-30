@@ -41,19 +41,6 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'container' to 'existingContainer' to match the base class declaration.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  370,
-"startColumn":  80,
-"endLine":  370,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S927",
 "message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn' to match the base class declaration.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",

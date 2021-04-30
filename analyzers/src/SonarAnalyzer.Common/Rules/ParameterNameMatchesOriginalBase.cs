@@ -60,11 +60,11 @@ namespace SonarAnalyzer.Rules
                         }
                         else if (methodSymbol.OverriddenMethod != null)
                         {
-                            VerifyParameters(c, methodSyntax, methodSymbol.OverriddenMethod.Parameters, "base class");
+                            VerifyGenericParameters(c, methodSyntax, methodSymbol.Parameters, methodSymbol.OverriddenMethod.OriginalDefinition.Parameters, "base class");
                         }
                         else if (methodSymbol.GetInterfaceMember() is { } interfaceMember)
                         {
-                            VerifyParameters(c, methodSyntax, interfaceMember.Parameters, "interface");
+                            VerifyGenericParameters(c, methodSyntax, methodSymbol.Parameters, interfaceMember.OriginalDefinition.Parameters, "interface");
                         }
                     }
                 },
@@ -77,6 +77,22 @@ namespace SonarAnalyzer.Rules
                                     .Where(x => !x.actual.ValueText.Equals(x.expected.Name, Language.NameComparison)))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.actual.GetLocation(), item.actual.ValueText, item.expected.Name, expectedLocation));
+            }
+        }
+
+        private void VerifyGenericParameters(SyntaxNodeAnalysisContext context, TMethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> actualParameters,
+            IList<IParameterSymbol> expectedParameters, string expectedLocation)
+        {
+            var parameters = ParameterIdentifiers(methodSyntax).ToList();
+            for (var i = 0; i < parameters.Count; i++)
+            {
+                var parameter = parameters[i];
+                var expectedParameter = expectedParameters[i];
+                if (!parameter.ValueText.Equals(expectedParameter.Name, Language.NameComparison)
+                    && (expectedParameter.Type.Kind != SymbolKind.TypeParameter || actualParameters[i].Type.Kind == SymbolKind.TypeParameter))
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(), parameter.ValueText, expectedParameter.Name, expectedLocation));
+                }
             }
         }
     }

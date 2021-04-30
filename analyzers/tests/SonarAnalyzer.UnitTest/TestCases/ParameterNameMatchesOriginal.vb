@@ -60,3 +60,162 @@ Public Class IgnoreCaseChange
     End Sub
 
 End Class
+
+Public Interface IGenericInterface(Of A)
+
+    Sub DoSomething()
+    Sub DoSomething(Value As A)
+    Sub DoSomething(Value As A, IntValue As Integer)
+    Sub DoSomethingElse(Value As A)
+    Sub DoSomethingElse(Value As A, ParameterClassValue As ParameterClass)
+    Sub TryOneMoreTime(Value As AnotherParameterClass)
+    Sub DoSomethingCaseSensitive(Value As A, IntValue As Integer)
+
+End Interface
+
+Public Class ParameterClass
+End Class
+
+Public Class AnotherParameterClass
+End Class
+
+Public Class Implementation
+    Implements IGenericInterface(Of ParameterClass)
+
+    Public Sub DoSomething() Implements IGenericInterface(Of ParameterClass).DoSomething
+    End Sub
+
+    Public Sub DoSomething(Parameter As ParameterClass) Implements IGenericInterface(Of ParameterClass).DoSomething
+    End Sub
+
+    Public Sub DoSomething(RandomName As AnotherParameterClass)
+    End Sub
+
+    Public Sub DoSomethingElse(CompletelyAnotherName As ParameterClass) Implements IGenericInterface(Of ParameterClass).DoSomethingElse
+    End Sub
+
+    Public Sub DoSomething(Value As ParameterClass, MyValue As Integer) Implements IGenericInterface(Of ParameterClass).DoSomething                             ' Noncompliant
+        '                                           ^^^^^^^
+    End Sub
+
+    Public Sub DoSomethingElse(Value As ParameterClass, Val As ParameterClass) Implements IGenericInterface(Of ParameterClass).DoSomethingElse                  ' Noncompliant
+        '                                               ^^^
+    End Sub
+
+    Public Sub TryOneMoreTime(AnotherParameter As AnotherParameterClass) Implements IGenericInterface(Of ParameterClass).TryOneMoreTime                               ' Noncompliant
+        '                     ^^^^^^^^^^^^^^^^
+    End Sub
+
+    Public Sub DoSomethingCaseSensitive(VALUE As ParameterClass, INTVALUE As Integer) Implements IGenericInterface(Of ParameterClass).DoSomethingCaseSensitive
+    End Sub
+
+End Class
+
+Public Structure StructImplementation
+    Implements IGenericInterface(Of ParameterClass)
+
+    Public Sub DoSomething() Implements IGenericInterface(Of ParameterClass).DoSomething
+    End Sub
+
+    Public Sub DoSomething(Parameter As ParameterClass) Implements IGenericInterface(Of ParameterClass).DoSomething
+    End Sub
+
+    Public Sub DoSomething(RandomName As AnotherParameterClass)
+    End Sub
+
+    Public Sub DoSomethingElse(CompletelyAnotherName As ParameterClass) Implements IGenericInterface(Of ParameterClass).DoSomethingElse
+    End Sub
+
+    Public Sub DoSomething(Value As ParameterClass, MyValue As Integer) Implements IGenericInterface(Of ParameterClass).DoSomething                             ' Noncompliant
+        '                                           ^^^^^^^
+    End Sub
+
+    Public Sub DoSomethingElse(Value As ParameterClass, Val As ParameterClass) Implements IGenericInterface(Of ParameterClass).DoSomethingElse                  ' Noncompliant
+        '                                               ^^^
+    End Sub
+
+    Public Sub TryOneMoreTime(AnotherParameter As AnotherParameterClass) Implements IGenericInterface(Of ParameterClass).TryOneMoreTime                               ' Noncompliant
+        '                     ^^^^^^^^^^^^^^^^
+    End Sub
+
+    Public Sub DoSomethingCaseSensitive(VALUE As ParameterClass, INTVALUE As Integer) Implements IGenericInterface(Of ParameterClass).DoSomethingCaseSensitive
+    End Sub
+
+End Structure
+
+Public MustInherit Class BaseClass(Of T)
+
+    Public MustOverride Sub SomeMethod(SomeParameter As T)
+    Public MustOverride Sub SomeMethod(SomeParameter As T, IntParam As Integer)
+
+End Class
+
+Public Class ClassOne
+    Inherits BaseClass(Of Integer)
+
+    Public Overrides Overloads Sub SomeMethod(RenamedParam As Integer)
+    End Sub
+
+    Public Overrides Overloads Sub SomeMethod(SomeParameter As Integer, RenamedParam As Integer)  ' Noncompliant
+        '                                                               ^^^^^^^^^^^^
+    End Sub
+
+End Class
+
+Public MustInherit Class AbstractClassWithGenericMethod
+
+    MustOverride Public Sub Foo(Of T)(Val As T)
+    MustOverride Public Sub Bar(Of T)(Val As T)
+
+End Class
+
+Public Class InheritedClassWithDefinition
+    Inherits AbstractClassWithGenericMethod
+
+    Public Overrides Sub Foo(Of T)(MyNewName As T)  ' Noncompliant
+        '                          ^^^^^^^^^
+    End Sub
+
+    Public Overrides Sub Bar(Of T)(Val As T)
+    End Sub
+
+End Class
+
+Public Interface IAnotherGenericInterface(Of A)
+
+    Sub DoSomething(Value As A)
+    Sub DoSomething(Value As A, IntValue As Integer)
+
+End Interface
+
+Public Interface IAnotherInterface
+    Inherits IAnotherGenericInterface(Of ParameterClass)
+
+    Sub DoSomethingElse(Value As ParameterClass)
+
+End Interface
+
+Public MustInherit Class AnotherAbstractClass
+    Implements IAnotherInterface
+    Public MustOverride Sub DoSomething(AbstractValue As ParameterClass) Implements IAnotherGenericInterface(Of ParameterClass).DoSomething
+    Public MustOverride Sub DoSomething(Value As ParameterClass, IntValue As Integer) Implements IAnotherGenericInterface(Of ParameterClass).DoSomething
+    Public MustOverride Sub DoSomethingElse(Value As ParameterClass) Implements IAnotherInterface.DoSomethingElse
+
+End Class
+
+Public Class AnotherImplementation
+    Inherits AnotherAbstractClass
+
+    Public Overrides Overloads Sub DoSomething(Value As ParameterClass)  'Noncompliant {{Rename parameter 'Value' to 'AbstractValue' to match the base class declaration.}}
+        '                                      ^^^^^
+    End Sub
+
+    Public Overrides Overloads Sub DoSomething(AbstractValue As ParameterClass, IntValue As Integer)  'Noncompliant {{Rename parameter 'AbstractValue' to 'Value' to match the base class declaration.}}
+        '                                      ^^^^^^^^^^^^^
+    End Sub
+
+    Public Overrides Sub DoSomethingElse(Value As ParameterClass)
+    End Sub
+
+End Class
+
