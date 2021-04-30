@@ -140,7 +140,6 @@ namespace Tests.Diagnostics
         }
     }
 
-#if NET5_0 || NETSTANDARD
     class Test18
     {
         readonly int[] bar = new int[] { 1, 2, 3, 4, 5 };
@@ -152,5 +151,4 @@ namespace Tests.Diagnostics
         readonly int[] bar = new int[] { 1, 2, 3, 4, 5 };
         public int this[Index index] => bar[index];
     }
-#endif
 }

@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 
@@ -30,7 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StringOrIntegralTypesForIndexers() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringOrIntegralTypesForIndexers.cs", new CS.StringOrIntegralTypesForIndexers());
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\StringOrIntegralTypesForIndexers.cs" }, new CS.StringOrIntegralTypesForIndexers(),
+#if NETFRAMEWORK
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+#endif
+                options: ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
