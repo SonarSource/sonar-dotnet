@@ -19,7 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+#if NETFRAMEWORK
 using SonarAnalyzer.UnitTest.MetadataReferences;
+#endif
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 
