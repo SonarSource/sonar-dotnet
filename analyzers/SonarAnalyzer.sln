@@ -54,6 +54,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBDEArguments", "tests\CBDE
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SonarAnalyzer.Shared", "src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.shproj", "{892CF3FA-3BE2-42E8-A7E6-76AE72864DEC}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GitHub", "..\.github\GitHub.shproj", "{532AC70E-90CB-48AD-86F4-16767C22314D}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{7cfa8fa5-8842-4e89-bb90-39d5c0f20ba8}*SharedItemsImports = 5
@@ -129,6 +131,7 @@ Global
 		{4452FCC0-56D0-40A4-91CA-5B29401FD146} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{9448EC04-0F0F-4901-8AB7-DF252744FF63} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{037E7106-8196-4D7C-A532-72730C304CB7} = {B7233F78-E142-4882-B084-7C83BE472109}
+		{532AC70E-90CB-48AD-86F4-16767C22314D} = {0C3E0519-DB5C-47C0-ABB3-9D1FB23DFBAF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4259CA71-C565-42DD-8D58-F59819A11065}
