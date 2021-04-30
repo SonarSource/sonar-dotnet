@@ -84,7 +84,7 @@ namespace Tests.Diagnostics
 
             var shortSalt = new byte[15];
             rng.GetBytes(shortSalt);
-            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt); // Noncompliant {{Make this salt longer.}}
+            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt); // Noncompliant {{Make this salt at least 16 bytes.}}
             var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortSalt); // Noncompliant
         }
 

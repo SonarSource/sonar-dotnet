@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         internal const string DiagnosticId = "S2053";
         private const string MessageFormat = "{0}";
         private const string MakeSaltUnpredictableMessage = "Make this salt unpredictable.";
-        private const string MakeThisSaltLongerMessage = "Make this salt longer.";
+        private const string MakeThisSaltLongerMessage = "Make this salt at least 16 bytes.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
