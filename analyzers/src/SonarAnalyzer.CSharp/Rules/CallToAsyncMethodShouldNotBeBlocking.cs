@@ -193,7 +193,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsNamedSymbolOfExpectedType(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel, Dictionary<string, KnownType> expectedTypes) =>
             expectedTypes.Keys.Any(memberAccess.NameIs)
-                 && semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom is { } memberAccessSymbol
-                 && memberAccessSymbol.Is(expectedTypes[memberAccess.Name.Identifier.ValueText]);
+            && semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom is { } memberAccessSymbol
+            && memberAccessSymbol.Is(expectedTypes[memberAccess.Name.Identifier.ValueText]);
     }
 }
