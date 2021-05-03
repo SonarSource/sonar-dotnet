@@ -19,19 +19,6 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
-"startLine":  173,
-"startColumn":  32,
-"endLine":  173,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
-"region":  {
 "startLine":  294,
 "startColumn":  47,
 "endLine":  294,

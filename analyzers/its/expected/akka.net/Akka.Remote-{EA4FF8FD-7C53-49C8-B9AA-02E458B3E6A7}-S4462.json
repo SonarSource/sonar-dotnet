@@ -15,19 +15,6 @@
 },
 {
 "id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
-"region":  {
-"startLine":  152,
-"startColumn":  50,
-"endLine":  152,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
@@ -49,19 +36,6 @@
 "startColumn":  17,
 "endLine":  637,
 "endColumn":  28
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
-"region":  {
-"startLine":  638,
-"startColumn":  24,
-"endLine":  638,
-"endColumn":  37
 }
 }
 }
