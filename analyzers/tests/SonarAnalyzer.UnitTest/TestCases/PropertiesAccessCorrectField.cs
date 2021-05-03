@@ -726,4 +726,76 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // See: https://github.com/SonarSource/sonar-dotnet/issues/4339
+    public class TestCases
+    {
+        bool pause;
+        public bool Pause
+        {
+            get => pause;
+            set => pause |= value; // Noncompliant - FP
+        }
+
+        private int textBufferUndoHistory;
+        public int TextBufferUndoHistory
+        {
+            get // Noncompliant - FP
+            {
+                return textBufferUndoHistory = GetValue();
+            }
+        }
+        private static int GetValue() => 1;
+
+        private int[] attributes;
+        public int[] Attributes
+        {
+            set { value.CopyTo(attributes, 0); } // Noncompliant - FP
+        }
+
+        private const string PREFIX = "pre";
+        private string m_prefix;
+        public string Prefix
+        {
+            get { return m_prefix; } // Noncompliant - FP
+            set { m_prefix = value; } // Noncompliant - FP
+        }
+    }
+
+    public class ContainsConstraint
+    {
+        private bool _ignoreCase;
+
+        public ContainsConstraint IgnoreCase
+        {
+            // Refactor this getter so that it actually refers to the field '_ignoreCase'.
+            // _ignoreCase has a different type than the property return type
+            get // Noncompliant - FP
+            {
+                _ignoreCase = true;
+                return this;
+            }
+        }
+    }
+
+    public class Base
+    {
+        protected long writeLockTimeout;
+    }
+
+    public class SubClass : Base
+    {
+        public static long WRITE_LOCK_TIMEOUT = 1000;
+        public long WriteLockTimeout
+        {
+            get
+            {
+                return writeLockTimeout; // Noncompliant - FP
+            }
+            set
+            {
+                this.writeLockTimeout = value; // Noncompliant - FP
+            }
+        }
+    }
 }
