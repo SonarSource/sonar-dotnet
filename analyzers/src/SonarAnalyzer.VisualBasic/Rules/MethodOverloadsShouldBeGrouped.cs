@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -30,9 +31,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<StatementSyntax>
+    public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<SyntaxKind, StatementSyntax>
     {
-        public MethodOverloadsShouldBeGrouped() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+        protected override SyntaxKind[] SyntaxKinds { get; } = new[]
+        {
+            SyntaxKind.ClassBlock,
+            SyntaxKind.InterfaceBlock,
+            SyntaxKind.StructureBlock
+        };
 
         protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, StatementSyntax member)
         {
@@ -42,7 +50,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
             else if (member is MethodBlockSyntax methodBlock)
             {
-                return new MemberInfo(c, member, methodBlock.SubOrFunctionStatement.Identifier, IsStaticStatement(methodBlock.SubOrFunctionStatement), IsAbstractStatement(methodBlock.SubOrFunctionStatement), false);
+                return new MemberInfo(c,
+                                      member,
+                                      methodBlock.SubOrFunctionStatement.Identifier,
+                                      IsStaticStatement(methodBlock.SubOrFunctionStatement),
+                                      IsAbstractStatement(methodBlock.SubOrFunctionStatement),
+                                      false);
             }
             else if (member is MethodStatementSyntax methodStatement)
             {
@@ -51,21 +64,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return null;
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var typeDeclaration = (TypeBlockSyntax)c.Node;
-                CheckMembers(c, typeDeclaration.Members);
-            },
-            SyntaxKind.ClassBlock,
-            SyntaxKind.InterfaceBlock,
-            SyntaxKind.StructureBlock);
-        }
+        protected override IEnumerable<StatementSyntax> GetMemberDeclarations(SyntaxNode node) =>
+            ((TypeBlockSyntax)node).Members;
 
-        private static bool IsStaticStatement(MethodBaseSyntax statement) => statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
+        private static bool IsStaticStatement(MethodBaseSyntax statement) =>
+            statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
 
-        private static bool IsAbstractStatement(MethodBaseSyntax statement) => statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.MustOverrideKeyword);
-
+        private static bool IsAbstractStatement(MethodBaseSyntax statement) =>
+            statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.MustOverrideKeyword);
     }
 }

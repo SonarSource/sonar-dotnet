@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -31,9 +32,17 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<MemberDeclarationSyntax>
+    public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<SyntaxKind, MemberDeclarationSyntax>
     {
-        public MethodOverloadsShouldBeGrouped() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+        protected override SyntaxKind[] SyntaxKinds { get; } = new[]
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordDeclaration
+        };
 
         protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, MemberDeclarationSyntax member)
         {
@@ -52,29 +61,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var typeDeclaration = (TypeDeclarationSyntax)c.Node;
-                CheckMembers(c, typeDeclaration.Members);
-            },
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordDeclaration);
-        }
+        protected override IEnumerable<MemberDeclarationSyntax> GetMemberDeclarations(SyntaxNode node) =>
+            ((TypeDeclarationSyntax)node).Members;
 
-        private static bool IsValidMemberForOverload(MemberDeclarationSyntax member)
-        {
-            if (member is MethodDeclarationSyntax methodDeclaration)
-            {
-                return methodDeclaration.ExplicitInterfaceSpecifier == null;
-            }
-            return true;
-        }
+        private static bool IsValidMemberForOverload(MemberDeclarationSyntax member) =>
+            member is MethodDeclarationSyntax methodDeclaration ? methodDeclaration.ExplicitInterfaceSpecifier == null : true;
 
-        private static bool IsStatic(BaseMethodDeclarationSyntax declaration) => declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
-
+        private static bool IsStatic(BaseMethodDeclarationSyntax declaration) =>
+            declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
     }
 }
