@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -31,32 +30,24 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class GenericInheritanceShouldNotBeRecursive : GenericInheritanceShouldNotBeRecursiveBase
+    public sealed class GenericInheritanceShouldNotBeRecursive : GenericInheritanceShouldNotBeRecursiveBase<SyntaxKind, TypeDeclarationSyntax>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override SyntaxKind[] SyntaxKinds { get; } = new[]
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var typeDeclaration = (TypeDeclarationSyntax)c.Node;
-                    var typeSymbol = c.SemanticModel.GetDeclaredSymbol(typeDeclaration);
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKindEx.RecordDeclaration,
+        };
 
-                    if (IsRecursiveInheritance(typeSymbol))
-                    {
-                        c.ReportDiagnosticWhenActive(
-                            Diagnostic.Create(rule, typeDeclaration.Identifier.GetLocation(), typeDeclaration.Keyword));
-                    }
-                },
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordDeclaration);
-        }
+        protected override SyntaxToken GetKeyword(TypeDeclarationSyntax declaration) =>
+            declaration.Keyword;
 
+        protected override Location GetLocation(TypeDeclarationSyntax declaration) =>
+            declaration.Identifier.GetLocation();
+
+        protected override INamedTypeSymbol GetNamedTypeSymbol(TypeDeclarationSyntax declaration, SemanticModel semanticModel) =>
+            semanticModel.GetDeclaredSymbol(declaration);
     }
 }

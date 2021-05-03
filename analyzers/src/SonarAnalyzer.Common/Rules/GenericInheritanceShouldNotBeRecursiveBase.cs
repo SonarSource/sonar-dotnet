@@ -19,16 +19,47 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class GenericInheritanceShouldNotBeRecursiveBase : SonarDiagnosticAnalyzer
+    public abstract class GenericInheritanceShouldNotBeRecursiveBase<TSyntaxKind, TDeclaration> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
+        where TDeclaration : SyntaxNode
     {
         protected const string DiagnosticId = "S3464";
-        protected const string MessageFormat = "Refactor this {0} so that the generic inheritance chain is not recursive.";
+        private const string MessageFormat = "Refactor this {0} so that the generic inheritance chain is not recursive.";
+
+        private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract TSyntaxKind[] SyntaxKinds { get; }
+
+        protected abstract INamedTypeSymbol GetNamedTypeSymbol(TDeclaration declaration, SemanticModel semanticModel);
+        protected abstract Location GetLocation(TDeclaration declaration);
+        protected abstract SyntaxToken GetKeyword(TDeclaration declaration);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected GenericInheritanceShouldNotBeRecursiveBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
+                c =>
+                {
+                    var declaration = (TDeclaration)c.Node;
+
+                    if (IsRecursiveInheritance(GetNamedTypeSymbol(declaration, c.SemanticModel)))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(declaration), GetKeyword(declaration)));
+                    }
+                },
+                SyntaxKinds);
+
         protected static IEnumerable<INamedTypeSymbol> GetBaseTypes(INamedTypeSymbol typeSymbol)
         {
             var interfaces = typeSymbol.Interfaces.Where(IsGenericType);
@@ -55,7 +86,7 @@ namespace SonarAnalyzer.Rules
         protected static bool HasSubstitutedTypeArguments(INamedTypeSymbol type) =>
             type.TypeArguments.OfType<INamedTypeSymbol>().Any();
 
-        protected bool IsRecursiveInheritance(INamedTypeSymbol typeSymbol)
+        protected static bool IsRecursiveInheritance(INamedTypeSymbol typeSymbol)
         {
             if (!IsGenericType(typeSymbol))
             {
