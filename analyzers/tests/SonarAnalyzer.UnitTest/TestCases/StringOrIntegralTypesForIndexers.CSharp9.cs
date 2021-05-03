@@ -1,7 +1,7 @@
 ﻿record Foo
 {
     public int this[Class index] { get { return 0; } }
-//                  ^^^^^ Noncompliant {{Use string, integral, index or a range type here, or refactor this indexer into a method.}}
+//                  ^^^^^ Noncompliant {{Use string, integral, index or range type here, or refactor this indexer into a method.}}
 
     public int this[Record index] { get { return 0; } } // Compliant - FN
 
