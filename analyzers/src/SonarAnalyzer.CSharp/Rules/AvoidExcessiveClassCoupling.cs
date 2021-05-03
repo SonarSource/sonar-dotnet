@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -116,7 +117,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
-                SyntaxKind.InterfaceDeclaration);
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKindEx.RecordDeclaration);
         }
 
         private static bool IsTrackedType(INamedTypeSymbol namedType) =>

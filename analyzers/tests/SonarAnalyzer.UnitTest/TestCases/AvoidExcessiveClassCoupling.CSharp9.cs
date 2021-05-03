@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
     public struct MyStruct { }
 
     public record FirstRecord { }
-    public record SecondRecord // FN, should mention 6 dependencies
+    public record SecondRecord // Noncompliant {{Split this record into smaller and more specialized ones to reduce its dependencies on other classes from 6 to the maximum authorized 1 or less.}}
     {
         private FirstRecord field1; // +1
         private MyStruct field2; // +1

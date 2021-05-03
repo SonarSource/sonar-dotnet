@@ -438,7 +438,7 @@ public record Pointers // Compliant, enums are not counted
 using System;
 using System.Runtime.Serialization;
 public record Base {}
-public record Self // FN
+public record Self // Noncompliant
     : Base, ISerializable
 {
     public void GetObjectData(SerializationInfo info, StreamingContext context)
