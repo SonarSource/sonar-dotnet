@@ -5,7 +5,7 @@ namespace Tests.Diagnostics
     class Test1
     {
         public int this[Test1 index]
-//                      ^^^^^ Noncompliant {{Use string or an integral type here, or refactor this indexer into a method.}}
+//                      ^^^^^ Noncompliant {{Use string, integral, index or range type here, or refactor this indexer into a method.}}
         {
             get { return 0; }
         }
@@ -14,7 +14,7 @@ namespace Tests.Diagnostics
     class Test2
     {
         public int this[DateTime index]
-//                      ^^^^^^^^ {{Use string or an integral type here, or refactor this indexer into a method.}}
+//                      ^^^^^^^^ {{Use string, integral, index or range type here, or refactor this indexer into a method.}}
         {
             get { return 0; }
         }
@@ -138,5 +138,17 @@ namespace Tests.Diagnostics
         {
             get { return 0; }
         }
+    }
+
+    class Test18
+    {
+        readonly int[] bar = new int[] { 1, 2, 3, 4, 5 };
+        public int[] this[Range range] => bar[range];
+    }
+
+    class Test19
+    {
+        readonly int[] bar = new int[] { 1, 2, 3, 4, 5 };
+        public int this[Index index] => bar[index];
     }
 }
