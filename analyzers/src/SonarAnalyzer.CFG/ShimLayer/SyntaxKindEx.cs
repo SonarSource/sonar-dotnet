@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
 
-namespace SonarAnalyzer.ShimLayer.CSharp
+namespace StyleCop.Analyzers.Lightup
 {
     using Microsoft.CodeAnalysis.CSharp;
 
@@ -9,6 +9,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
     {
         public const SyntaxKind DotDotToken = (SyntaxKind)8222;
         public const SyntaxKind QuestionQuestionEqualsToken = (SyntaxKind)8284;
+        public const SyntaxKind ManagedKeyword = (SyntaxKind)8445;
+        public const SyntaxKind UnmanagedKeyword = (SyntaxKind)8446;
         public const SyntaxKind NullableKeyword = (SyntaxKind)8486;
         public const SyntaxKind EnableKeyword = (SyntaxKind)8487;
         public const SyntaxKind WarningsKeyword = (SyntaxKind)8488;
@@ -18,6 +20,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         public const SyntaxKind ConflictMarkerTrivia = (SyntaxKind)8564;
         public const SyntaxKind IsPatternExpression = (SyntaxKind)8657;
         public const SyntaxKind RangeExpression = (SyntaxKind)8658;
+        public const SyntaxKind ImplicitObjectCreationExpression = (SyntaxKind)8659;
         public const SyntaxKind CoalesceAssignmentExpression = (SyntaxKind)8725;
         public const SyntaxKind IndexExpression = (SyntaxKind)8741;
         public const SyntaxKind DefaultLiteralExpression = (SyntaxKind)8755;
@@ -41,6 +44,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         public const SyntaxKind SwitchExpression = (SyntaxKind)9025;
         public const SyntaxKind SwitchExpressionArm = (SyntaxKind)9026;
         public const SyntaxKind VarPattern = (SyntaxKind)9027;
+        public const SyntaxKind ParenthesizedPattern = (SyntaxKind)9028;
         public const SyntaxKind DeclarationExpression = (SyntaxKind)9040;
         public const SyntaxKind RefExpression = (SyntaxKind)9050;
         public const SyntaxKind RefType = (SyntaxKind)9051;
@@ -48,5 +52,11 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         public const SyntaxKind ImplicitStackAllocArrayCreationExpression = (SyntaxKind)9053;
         public const SyntaxKind SuppressNullableWarningExpression = (SyntaxKind)9054;
         public const SyntaxKind NullableDirectiveTrivia = (SyntaxKind)9055;
+        public const SyntaxKind FunctionPointerType = (SyntaxKind)9056;
+        public const SyntaxKind FunctionPointerParameter = (SyntaxKind)9057;
+        public const SyntaxKind WithExpression = (SyntaxKind)9061;
+        public const SyntaxKind WithInitializerExpression = (SyntaxKind)9062;
+        public const SyntaxKind RecordDeclaration = (SyntaxKind)9063;
+        public const SyntaxKind FunctionPointerUnmanagedCallingConventionList = (SyntaxKind)9066;
     }
 }

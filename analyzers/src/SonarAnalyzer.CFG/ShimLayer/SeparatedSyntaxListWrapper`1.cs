@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
 
-namespace SonarAnalyzer.ShimLayer.CSharp
+namespace StyleCop.Analyzers.Lightup
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.Immutable;
     using System.ComponentModel;
     using System.Linq;
     using Microsoft.CodeAnalysis;
@@ -225,7 +226,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
             }
         }
 
-        public sealed class AutoWrapSeparatedSyntaxList<TSyntax> : SeparatedSyntaxListWrapper<TNode>
+        internal sealed class AutoWrapSeparatedSyntaxList<TSyntax> : SeparatedSyntaxListWrapper<TNode>
             where TSyntax : SyntaxNode
         {
             private readonly SeparatedSyntaxList<TSyntax> syntaxList;

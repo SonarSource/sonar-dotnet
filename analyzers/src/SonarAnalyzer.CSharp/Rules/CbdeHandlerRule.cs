@@ -20,15 +20,11 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer;
 using SonarAnalyzer.CBDE;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-
-[assembly: InternalsVisibleTo("SonarAnalyzer.UnitTest" + Signing.InternalsVisibleToPublicKey)]
 
 namespace SonarAnalyzer.Rules.CSharp
 {
