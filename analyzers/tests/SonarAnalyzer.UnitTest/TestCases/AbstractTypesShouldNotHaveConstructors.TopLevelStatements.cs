@@ -13,7 +13,7 @@ abstract record AbstractRecordOne
 {
     public string X { get; }
 
-    public AbstractRecordOne(string x) => (X) = (x); // FN
+    public AbstractRecordOne(string x) => (X) = (x); // Noncompliant
 }
 
 record RecordOne : AbstractRecordOne
