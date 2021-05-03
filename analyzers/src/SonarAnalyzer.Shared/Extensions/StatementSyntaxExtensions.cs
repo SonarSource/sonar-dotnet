@@ -29,7 +29,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Extensions
 {
-    internal static class StatementSyntaxEstensions
+    internal static class StatementSyntaxExtensions
     {
         /// <summary>
         /// Returns all statements before the specified statement within the containing method.

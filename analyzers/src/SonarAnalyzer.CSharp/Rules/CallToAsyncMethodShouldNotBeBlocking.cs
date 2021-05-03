@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -75,6 +76,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 ["Run"] = KnownType.System_Threading_Tasks_Task,
             };
 
+        private static readonly HashSet<string> WaitForMultipleTasksExecutionCalls =
+            new HashSet<string> {"WhenAll", "WaitAll"};
+
+        private static readonly HashSet<string> WaitForSingleExecutionCalls =
+            new HashSet<string> {"Wait", "RunSynchronously"};
+
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(ReportOnViolation, SyntaxKind.SimpleMemberAccessExpression);
 
@@ -117,16 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return; // Main methods are not subject to deadlock issue so no need to report an issue
                 }
 
-                if (simpleMemberAccess.FirstAncestorOrSelf<StatementSyntax>() is { } currentStatement
-                    && context.SemanticModel.GetSymbolInfo(simpleMemberAccess.Expression).Symbol is { } accessedSymbol
-                    && currentStatement.GetPreviousStatements().Any(statement =>
-                        statement.DescendantNodes()
-                            .OfType<InvocationExpressionSyntax>()
-                            .Where(x =>
-                                x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                                && IsTaskWhenAllCall((MemberAccessExpressionSyntax)x.Expression, context.SemanticModel))
-                            .SelectMany(x => x.ArgumentList.Arguments)
-                            .Any(x => accessedSymbol.Equals(context.SemanticModel.GetSymbolInfo(x.Expression).Symbol))))
+                if (memberAccessNameName == ResultName && IsAwaited(context, simpleMemberAccess))
                 {
                     return;  // No need to report an issue on a waited object
                 }
@@ -136,15 +134,47 @@ namespace SonarAnalyzer.Rules.CSharp
                 messageArgs: MemberNameToMessageArguments[memberAccessNameName]));
         }
 
-        private static bool IsTaskWhenAllCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel)
+        private static bool IsAwaited(SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax simpleMemberAccess)
         {
-            if (memberAccess?.Name == null || memberAccess.Name.Identifier.ValueText != "WhenAll")
+            var accessedSymbol = new Lazy<ISymbol>(() => context.SemanticModel.GetSymbolInfo(simpleMemberAccess.Expression).Symbol);
+
+            return simpleMemberAccess.FirstAncestorOrSelf<StatementSyntax>() is { } currentStatement
+                   && currentStatement.GetPreviousStatements().Any(statement =>
+                       statement.DescendantNodes()
+                            .OfType<InvocationExpressionSyntax>()
+                            .Where(x => x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                            .Any(IsTaskAwaited));
+
+            bool IsTaskAwaited(InvocationExpressionSyntax invocation) =>
+                IsAwaitForMultipleTasksExecutionCall(invocation, context.SemanticModel, accessedSymbol)
+                || IsAwaitForSingleTaskExecutionCall(invocation, context.SemanticModel, accessedSymbol);
+        }
+
+        private static bool IsAwaitForMultipleTasksExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Lazy<ISymbol> accessedSymbol)
+        {
+            var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+            if (!WaitForMultipleTasksExecutionCalls.Contains(memberAccess?.Name?.Identifier.ValueText))
             {
                 return false;
             }
 
             var memberAccessSymbol = semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom;
-            return memberAccessSymbol.Is(KnownType.System_Threading_Tasks_Task);
+            return memberAccessSymbol.Is(KnownType.System_Threading_Tasks_Task)
+                && invocation.ArgumentList.Arguments
+                .Any(x => accessedSymbol.Value.Equals(semanticModel.GetSymbolInfo(x.Expression).Symbol));
+        }
+
+        private static bool IsAwaitForSingleTaskExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Lazy<ISymbol> accessedSymbol)
+        {
+            var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+            if (!WaitForSingleExecutionCalls.Contains(memberAccess?.Name?.Identifier.ValueText))
+            {
+                return false;
+            }
+
+            var memberAccessSymbol = semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom;
+            return memberAccessSymbol.Is(KnownType.System_Threading_Tasks_Task)
+                && accessedSymbol.Value.Equals(semanticModel.GetSymbolInfo(memberAccess?.Expression).Symbol);
         }
 
         private static bool IsResultInContinueWithCall(string memberAccessName, MemberAccessExpressionSyntax memberAccess) =>
