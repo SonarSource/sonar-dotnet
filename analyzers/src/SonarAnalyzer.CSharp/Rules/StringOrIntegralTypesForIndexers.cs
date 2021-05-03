@@ -36,17 +36,16 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3876";
         private const string MessageFormat = "Use string, integral, index or a range type here, or refactor this indexer into a method.";
 
-        private static readonly ImmutableArray<KnownType> allowedIndexerTypes =
+        private static readonly ImmutableArray<KnownType> AllowedIndexerTypes =
             new[] { KnownType.System_Object, KnownType.System_String, KnownType.System_Index, KnownType.System_Range }
             .Concat(KnownType.IntegralNumbers)
             .ToImmutableArray();
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var indexerDeclaration = (IndexerDeclarationSyntax)c.Node;
@@ -58,23 +57,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 var parameter = indexerDeclaration.ParameterList.Parameters.First();
 
                 var parameterSymbol = c.SemanticModel.GetDeclaredSymbol(parameter);
-                if (parameterSymbol.Type == null ||
-                    parameterSymbol.Type.TypeKind == TypeKind.Dynamic ||
-                    parameterSymbol.Type.IsAny(allowedIndexerTypes) ||
-                    parameterSymbol.IsParams ||
-                    IsGenericTypeParameter(parameterSymbol))
+                if (parameterSymbol.Type == null
+                    || parameterSymbol.Type.TypeKind == TypeKind.Dynamic
+                    || parameterSymbol.Type.IsAny(AllowedIndexerTypes)
+                    || parameterSymbol.IsParams
+                    || IsGenericTypeParameter(parameterSymbol))
                 {
                     return;
                 }
 
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.Type.GetLocation()));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, parameter.Type.GetLocation()));
             },
             SyntaxKind.IndexerDeclaration);
-        }
 
-        private static bool IsGenericTypeParameter(IParameterSymbol parameterSymbol)
-        {
-            return parameterSymbol.ContainingType.ConstructedFrom.TypeParameters.Any(parameterSymbol.Type.Equals);
-        }
+        private static bool IsGenericTypeParameter(IParameterSymbol parameterSymbol) =>
+            parameterSymbol.ContainingType.ConstructedFrom.TypeParameters.Any(parameterSymbol.Type.Equals);
     }
 }
