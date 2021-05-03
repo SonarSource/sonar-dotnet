@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'Person' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\ShouldRichGoToTheDoctor\Program.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  15,
+"endLine":  21,
+"endColumn":  21
+}
+}
+}
+]
+}

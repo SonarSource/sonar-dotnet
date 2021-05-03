@@ -15,6 +15,58 @@
 },
 {
 "id":  "S3903",
+"message":  "Move 'Person' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  15,
+"endLine":  109,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'OpenCaseFile' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  15,
+"endLine":  111,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'Mycroft' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  15,
+"endLine":  113,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'Content' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  15,
+"endLine":  118,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3903",
 "message":  "Move 'AccessType' into a named namespace.",
 "location":  {
 "uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",

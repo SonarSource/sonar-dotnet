@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'WeightMeasurement' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordWithStaticHelper\Program.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  15,
+"endLine":  11,
+"endColumn":  32
+}
+}
+}
+]
+}
