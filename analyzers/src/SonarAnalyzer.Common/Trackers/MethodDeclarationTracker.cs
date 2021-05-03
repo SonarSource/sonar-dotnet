@@ -59,28 +59,28 @@ namespace SonarAnalyzer.Helpers.Trackers
             bool IsTrackedMethod(IMethodSymbol methodSymbol, Compilation compilation)
             {
                 var conditionContext = new MethodDeclarationContext(methodSymbol, compilation);
-                return conditions.All(c => c(conditionContext));
+                return conditions.All(c => c.Invoke(conditionContext));
             }
         }
 
         public Condition MatchMethodName(params string[] methodNames) =>
-            context => methodNames.Contains(context.MethodSymbol.Name);
+            new Condition(context => methodNames.Contains(context.MethodSymbol.Name));
 
         public Condition IsOrdinaryMethod() =>
-            context => context.MethodSymbol.MethodKind == MethodKind.Ordinary;
+            new Condition(context => context.MethodSymbol.MethodKind == MethodKind.Ordinary);
 
         public Condition IsMainMethod() =>
-            context => context.MethodSymbol.IsMainMethod();
+            new Condition(context => context.MethodSymbol.IsMainMethod());
 
         internal Condition AnyParameterIsOfType(params KnownType[] types)
         {
             var typesArray = types.ToImmutableArray();
-            return context =>
+            return new Condition(context =>
                 context.MethodSymbol.Parameters.Length > 0
-                && context.MethodSymbol.Parameters.Any(parameter => parameter.Type.DerivesOrImplementsAny(typesArray));
+                && context.MethodSymbol.Parameters.Any(parameter => parameter.Type.DerivesOrImplementsAny(typesArray)));
         }
 
         internal Condition DecoratedWithAnyAttribute(params KnownType[] attributeTypes) =>
-            context => context.MethodSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(attributeTypes));
+            new Condition(context => context.MethodSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(attributeTypes)));
     }
 }

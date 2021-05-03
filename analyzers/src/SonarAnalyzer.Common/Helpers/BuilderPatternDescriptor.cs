@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         public bool IsMatch(InvocationContext context) =>
-            invocationConditions.All(x => x(context));
+            invocationConditions.All(x => x.Invoke(context));
 
         public bool IsValid(TInvocationSyntax invocation) =>
             isValid(invocation);

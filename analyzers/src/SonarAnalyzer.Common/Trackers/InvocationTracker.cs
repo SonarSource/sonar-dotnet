@@ -33,48 +33,45 @@ namespace SonarAnalyzer.Helpers.Trackers
         protected abstract SyntaxToken? ExpectedExpressionIdentifier(SyntaxNode expression);
 
         public Condition MatchMethod(params MemberDescriptor[] methods) =>
-           context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, Language.NameComparison, methods);
+           new Condition(context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, Language.NameComparison, methods));
 
         public Condition MethodNameIs(string methodName) =>
-            context => context.MethodName == methodName;
+            new Condition(context => context.MethodName == methodName);
 
         public Condition MethodIsStatic() =>
-            context => context.MethodSymbol.Value != null
-                       && context.MethodSymbol.Value.IsStatic;
+            new Condition(context => context.MethodSymbol.Value != null
+                       && context.MethodSymbol.Value.IsStatic);
 
         public Condition MethodIsExtension() =>
-            context => context.MethodSymbol.Value != null
-                       && context.MethodSymbol.Value.IsExtensionMethod;
+            new Condition(context => context.MethodSymbol.Value != null
+                       && context.MethodSymbol.Value.IsExtensionMethod);
 
         public Condition MethodHasParameters(int count) =>
-            context => context.MethodSymbol.Value != null
-                       && context.MethodSymbol.Value.Parameters.Length == count;
+            new Condition(context => context.MethodSymbol.Value != null
+                       && context.MethodSymbol.Value.Parameters.Length == count);
 
         public Condition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TSyntaxKind, TInvocationSyntax> condition) where TInvocationSyntax : SyntaxNode =>
-            condition.IsInvalidBuilderInitialization;
+            new Condition(condition.IsInvalidBuilderInitialization);
 
-        public Condition ExceptWhen(Condition condition) =>
-            value => !condition(value);
+        public Condition ExceptWhen(Condition condition) => !condition;
 
-        public Condition And(Condition condition1, Condition condition2) =>
-            value => condition1(value) && condition2(value);
+        public Condition And(Condition condition1, Condition condition2) => condition1 & condition2;
 
-        public Condition Or(Condition condition1, Condition condition2) =>
-            value => condition1(value) || condition2(value);
+        public Condition Or(Condition condition1, Condition condition2) => condition1 | condition2;
 
         public Condition Or(Condition condition1, Condition condition2, Condition condition3) =>
-            value => condition1(value) || condition2(value) || condition3(value);
+            condition1 | condition2 | condition3;
 
         internal Condition MethodReturnTypeIs(KnownType returnType) =>
-            context => context.MethodSymbol.Value != null
-                       && context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
+            new Condition(context => context.MethodSymbol.Value != null
+                       && context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType));
 
         internal Condition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
-            context => ConstArgumentForParameter(context, parameterName) is bool boolValue
-                       && boolValue == expectedValue;
+            new Condition(context => ConstArgumentForParameter(context, parameterName) is bool boolValue
+                       && boolValue == expectedValue);
 
         internal Condition IsIHeadersDictionary() =>
-            context =>
+           new Condition(context =>
             {
                 const int argumentsNumber = 2;
 
@@ -83,7 +80,7 @@ namespace SonarAnalyzer.Helpers.Trackers
                 return containingType.TypeArguments.Length == argumentsNumber
                        && containingType.TypeArguments[0].Is(KnownType.System_String)
                        && containingType.TypeArguments[1].Is(KnownType.Microsoft_Extensions_Primitives_StringValues);
-            };
+            });
 
         protected override InvocationContext CreateContext(SyntaxNodeAnalysisContext context) =>
             Language.Syntax.NodeExpression(context.Node) is { } expression

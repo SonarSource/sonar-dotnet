@@ -31,13 +31,13 @@ namespace SonarAnalyzer.Helpers.Trackers
         public abstract Condition MatchProperty(MemberDescriptor member);
 
         internal Condition ArgumentAtIndexIs(int index, params KnownType[] types) =>
-            context => context.InvokedPropertySymbol.Value != null
+            new Condition(context => context.InvokedPropertySymbol.Value != null
                        && context.InvokedPropertySymbol.Value.Parameters.Length > index
-                       && context.InvokedPropertySymbol.Value.Parameters[0].Type.DerivesOrImplements(types[index]);
+                       && context.InvokedPropertySymbol.Value.Parameters[0].Type.DerivesOrImplements(types[index]));
 
         internal Condition MatchIndexerIn(params KnownType[] types) =>
-            context => context.InvokedPropertySymbol.Value != null
-                       && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
+            new Condition(context => context.InvokedPropertySymbol.Value != null
+                       && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray()));
 
         protected override ElementAccessContext CreateContext(SyntaxNodeAnalysisContext context) =>
             new ElementAccessContext(context);

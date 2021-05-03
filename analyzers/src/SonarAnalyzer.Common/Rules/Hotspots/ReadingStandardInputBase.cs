@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
             inv.Track(input, inv.MatchMethod(new MemberDescriptor(KnownType.System_Console, nameof(Console.OpenStandardInput))));
 
             inv.Track(input,
-                WhenResultIsNotIgnored, // This is syntax-only check and we can execute it first
+                new Condition(c => WhenResultIsNotIgnored(c)), // This is syntax-only check and we can execute it first
                 inv.MatchMethod(
                     new MemberDescriptor(KnownType.System_Console, nameof(Console.Read)),
                     new MemberDescriptor(KnownType.System_Console, nameof(Console.ReadKey)),

@@ -18,13 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+
 namespace SonarAnalyzer.Helpers
 {
     public abstract class TrackerBase<TSyntaxKind, TContext>
         where TSyntaxKind : struct
         where TContext : BaseContext
     {
-        public delegate bool Condition(TContext trackingContext);
+        public readonly struct Condition
+        {
+            private Func<TContext, bool> Function { get; }
+
+            public Condition(Func<TContext, bool> func) => Function = func;
+
+            public bool Invoke(TContext context) => !(Function is null) && Function(context);
+
+            public static Condition operator |(Condition l, Condition r) => new Condition((c) => l.Function(c) || r.Function(c));
+            public static Condition operator &(Condition l, Condition r) => new Condition((c) => l.Function(c) && r.Function(c));
+            public static Condition operator !(Condition condition) => new Condition((c) => !condition.Function(c));
+        }
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
     }

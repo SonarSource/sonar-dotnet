@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
 
         public Condition MatchField(params MemberDescriptor[] fields) =>
-            context => MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, Language.NameComparison, fields);
+            new Condition(context => MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, Language.NameComparison, fields));
 
         protected override FieldAccessContext CreateContext(SyntaxNodeAnalysisContext context)
         {

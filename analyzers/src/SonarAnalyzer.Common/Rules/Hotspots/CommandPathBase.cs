@@ -41,18 +41,18 @@ namespace SonarAnalyzer.Rules
             var inv = Language.Tracker.Invocation;
             inv.Track(input,
                 inv.MatchMethod(new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),
-                c => IsInvalid(FirstArgument(c)));
+                new Condition(c => IsInvalid(FirstArgument(c))));
 
             var pa = Language.Tracker.PropertyAccess;
             pa.Track(input,
                 pa.MatchProperty(new MemberDescriptor(KnownType.System_Diagnostics_ProcessStartInfo, "FileName")),
                 pa.MatchSetter(),
-                c => IsInvalid((string)pa.AssignedValue(c)));
+                new Condition(c => IsInvalid((string)pa.AssignedValue(c))));
 
             var oc = Language.Tracker.ObjectCreation;
             oc.Track(input,
                 oc.MatchConstructor(KnownType.System_Diagnostics_ProcessStartInfo),
-                c => oc.ConstArgumentForParameter(c, "fileName") is string value && IsInvalid(value));
+                new Condition(c => oc.ConstArgumentForParameter(c, "fileName") is string value && IsInvalid(value)));
         }
 
         private bool IsInvalid(string path) =>

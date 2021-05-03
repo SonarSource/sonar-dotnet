@@ -33,19 +33,18 @@ namespace SonarAnalyzer.Helpers.Trackers
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
 
         public Condition MatchProperty(params MemberDescriptor[] properties) =>
-            context => MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, Language.NameComparison, properties);
+            new Condition(context => MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, Language.NameComparison, properties));
 
-        public Condition ExceptWhen(Condition condition) =>
-            value => !condition(value);
+        public Condition ExceptWhen(Condition condition) => !condition;
 
         public Condition And(Condition condition1, Condition condition2) =>
-            value => condition1(value) && condition2(value);
+            condition1 & condition2;
 
         public Condition Or(Condition condition1, Condition condition2) =>
-            value => condition1(value) || condition2(value);
+            condition1 | condition2;
 
         public Condition Or(Condition condition1, Condition condition2, Condition condition3) =>
-            value => condition1(value) || condition2(value) || condition3(value);
+            condition1 | condition2 | condition3;
 
         protected override PropertyAccessContext CreateContext(SyntaxNodeAnalysisContext context)
         {

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         internal Condition MatchSubclassesOf(params KnownType[] types)
         {
             var immutableTypes = types.ToImmutableArray();
-            return context =>
+            return new Condition(context =>
             {
                 foreach (var baseTypeNode in context.AllBaseTypeNodes)
                 {
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Helpers.Trackers
                 }
 
                 return false;
-            };
+            });
         }
 
         protected override BaseTypeContext CreateContext(SyntaxNodeAnalysisContext context) =>

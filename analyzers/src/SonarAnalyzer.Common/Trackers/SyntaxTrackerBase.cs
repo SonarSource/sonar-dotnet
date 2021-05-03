@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Helpers
             void TrackAndReportIfNecessary(SyntaxNodeAnalysisContext c)
             {
                 if (CreateContext(c) is { } trackingContext
-                    && conditions.All(c => c(trackingContext))
+                    && conditions.All(c => c.Invoke(trackingContext))
                     && trackingContext.PrimaryLocation != null
                     && trackingContext.PrimaryLocation != Location.None)
                 {

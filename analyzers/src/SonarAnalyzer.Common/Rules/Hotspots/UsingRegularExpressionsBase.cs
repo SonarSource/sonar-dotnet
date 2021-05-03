@@ -60,10 +60,10 @@ namespace SonarAnalyzer.Rules
         }
 
         private TrackerBase<TSyntaxKind, InvocationContext>.Condition SecondArgumentIsHardcodedRegex() =>
-            context => GetStringLiteralAtIndex(context, 1) is string hardcodedString && IsComplexRegex(hardcodedString);
+            new Condition(context => GetStringLiteralAtIndex(context, 1) is string hardcodedString && IsComplexRegex(hardcodedString));
 
         private TrackerBase<TSyntaxKind, ObjectCreationContext>.Condition FirstArgumentIsHardcodedRegex() =>
-            context => GetStringLiteralAtIndex(context, 0) is string hardcodedString && IsComplexRegex(hardcodedString);
+            new Condition(context => GetStringLiteralAtIndex(context, 0) is string hardcodedString && IsComplexRegex(hardcodedString));
 
         private bool IsComplexRegex(string s) =>
             s != null

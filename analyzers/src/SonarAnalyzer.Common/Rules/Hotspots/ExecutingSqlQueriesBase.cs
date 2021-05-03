@@ -126,7 +126,7 @@ namespace SonarAnalyzer.Rules
             pa.Track(input,
                 pa.MatchProperty(properties),
                 pa.MatchSetter(),
-                c => IsTracked(GetSetValue(c), c),
+                new Condition(c => IsTracked(GetSetValue(c), c)),
                 pa.ExceptWhen(pa.AssignedValueIsConstant()));
 
             TrackObjectCreation(input, constructorsForFirstArgument, FirstArgumentIndex);
@@ -161,7 +161,7 @@ namespace SonarAnalyzer.Rules
             t.Track(input,
                 t.MatchConstructor(objectCreationTypes),
                 t.ArgumentAtIndexIs(argumentIndex, KnownType.System_String),
-                    c => IsTracked(GetArgumentAtIndex(c, argumentIndex), c),
+                    new Condition(c => IsTracked(GetArgumentAtIndex(c, argumentIndex), c)),
                 t.ExceptWhen(t.ArgumentAtIndexIsConst(argumentIndex)));
         }
 
@@ -175,7 +175,7 @@ namespace SonarAnalyzer.Rules
         }
 
         private TrackerBase<TSyntaxKind, InvocationContext>.Condition MethodHasRawSqlQueryParameter() =>
-            context =>
+            new Condition(context =>
             {
                 return Language.Syntax.NodeExpression(context.Node) is { } invocationExpression
                        && context.SemanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol methodSymbol
@@ -183,9 +183,9 @@ namespace SonarAnalyzer.Rules
 
                 static bool ParameterIsRawString(IMethodSymbol method, int index) =>
                     method.Parameters.Length > index && method.Parameters[index].IsType(KnownType.Microsoft_EntityFrameworkCore_RawSqlString);
-            };
+            });
 
         private TrackerBase<TSyntaxKind, InvocationContext>.Condition ArgumentAtIndexIsTracked(int index) =>
-            context => IsTracked(GetArgumentAtIndex(context, index), context);
+            new Condition(context => IsTracked(GetArgumentAtIndex(context, index), context));
     }
 }

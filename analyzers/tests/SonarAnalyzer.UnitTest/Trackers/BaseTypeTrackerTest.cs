@@ -50,14 +50,14 @@ End Class";
             var tracker = new CSharpBaseTypeTracker();
 
             var context = CreateContext<CSharpSyntax.BaseListSyntax>(TestInputCS, AnalyzerLanguage.CSharp, x => Enumerable.Empty<SyntaxNode>());
-            tracker.MatchSubclassesOf(KnownType.System_Exception)(context).Should().BeFalse();
+            tracker.MatchSubclassesOf(KnownType.System_Exception).Invoke(context).Should().BeFalse();
 
             context = CreateContext<CSharpSyntax.BaseListSyntax>(TestInputCS, AnalyzerLanguage.CSharp, x => null);
-            tracker.MatchSubclassesOf(KnownType.System_Exception)(context).Should().BeFalse();
+            tracker.MatchSubclassesOf(KnownType.System_Exception).Invoke(context).Should().BeFalse();
 
             context = CreateContext<CSharpSyntax.BaseListSyntax>(TestInputCS, AnalyzerLanguage.CSharp, x => x.Types.Select(x => x.Type));
-            tracker.MatchSubclassesOf(KnownType.System_Exception)(context).Should().BeTrue();
-            tracker.MatchSubclassesOf(KnownType.System_Attribute)(context).Should().BeFalse();
+            tracker.MatchSubclassesOf(KnownType.System_Exception).Invoke(context).Should().BeTrue();
+            tracker.MatchSubclassesOf(KnownType.System_Attribute).Invoke(context).Should().BeFalse();
         }
 
         [TestMethod]
@@ -65,14 +65,14 @@ End Class";
         {
             var tracker = new VisualBasicBaseTypeTracker();
             var context = CreateContext<VBSyntax.InheritsStatementSyntax>(TestInputVB, AnalyzerLanguage.VisualBasic, x => Enumerable.Empty<SyntaxNode>());
-            tracker.MatchSubclassesOf(KnownType.System_Exception)(context).Should().BeFalse();
+            tracker.MatchSubclassesOf(KnownType.System_Exception).Invoke(context).Should().BeFalse();
 
             context = CreateContext<VBSyntax.InheritsStatementSyntax>(TestInputVB, AnalyzerLanguage.VisualBasic, x => null);
-            tracker.MatchSubclassesOf(KnownType.System_Exception)(context).Should().BeFalse();
+            tracker.MatchSubclassesOf(KnownType.System_Exception).Invoke(context).Should().BeFalse();
 
             context = CreateContext<VBSyntax.InheritsStatementSyntax>(TestInputVB, AnalyzerLanguage.VisualBasic, x => x.Types);
-            tracker.MatchSubclassesOf(KnownType.System_Exception)(context).Should().BeTrue();
-            tracker.MatchSubclassesOf(KnownType.System_Attribute)(context).Should().BeFalse();
+            tracker.MatchSubclassesOf(KnownType.System_Exception).Invoke(context).Should().BeTrue();
+            tracker.MatchSubclassesOf(KnownType.System_Attribute).Invoke(context).Should().BeFalse();
         }
 
         private static BaseTypeContext CreateContext<TSyntaxNodeType>(string testInput, AnalyzerLanguage language, Func<TSyntaxNodeType, IEnumerable<SyntaxNode>> baseTypeNodes)
