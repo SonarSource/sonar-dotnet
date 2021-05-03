@@ -28,8 +28,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
-using StyleCop.Analyzers.Lightup;
 using SonarAnalyzer.UnitTest.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
