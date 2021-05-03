@@ -266,11 +266,6 @@ function LoadExpectedIssues($file, $regex){
         throw "Please specify the rule id in the following file: $($file.FullName)"
     }
 
-    # if the ruleId parameter is provided, it should be used to filter the expected issues
-    if ($ruleId -ne "" -and $id -ne $ruleId) {
-        return @()
-    }
-
     if ($id -is [system.array]){
         throw "Only one rule can be verified per file. Multiple rule identifiers are defined ($id) in $($file.FullName)"
     }
@@ -290,7 +285,7 @@ function LoadExpectedIssuesByProjectType($project, $regex, $extension){
         $issues = $issues + $fileIssues
     }
 
-    return $issues
+    return ,$issues # "," to avoid reducing empty array to $null
 }
 
 function LoadExpectedIssuesForInternalProject($project){
@@ -312,7 +307,7 @@ function IssuesAreEqual($actual, $expected){
 function VerifyUnexpectedIssues($actualIssues, $expectedIssues){
     $unexpectedIssues = @()
 
-    foreach ($actualIssue in $actualIssues){
+    foreach ($actualIssue in $actualIssues | Where-Object { $ruleId -eq "" -or $_.IssueId -eq $ruleId }){
         $found = $false
 
         foreach($expectedIssue in $expectedIssues){
@@ -349,7 +344,7 @@ function VerifyUnexpectedIssues($actualIssues, $expectedIssues){
 function VerifyExpectedIssues ($actualIssues, $expectedIssues){
     $expectedButNotRaisedIssues = @()
 
-    foreach ($expectedIssue in $expectedIssues){
+    foreach ($expectedIssue in $expectedIssues | Where-Object { $ruleId -eq "" -or $_.IssueId -eq $ruleId }){
         $found = $false
         foreach($actualIssue in $actualIssues){
             if (IssuesAreEqual $actualIssue $expectedIssue){
@@ -380,7 +375,6 @@ function CompareIssues($actualIssues, $expectedIssues){
 
 function LoadActualIssues($project){
     $analysisResults = Get-ChildItem output/$project -filter *.json -recurse
-
     $issues = @()
 
     foreach($fileName in $analysisResults){
@@ -402,9 +396,7 @@ function LoadActualIssues($project){
 
 function CheckDiffsForInternalProject($project){
     $actualIssues = LoadActualIssues $project
-
     $expectedIssues = LoadExpectedIssuesForInternalProject $project
-
     $result = CompareIssues $actualIssues $expectedIssues
 
     if ($result -eq $false){
@@ -478,28 +470,31 @@ try {
 
     Write-Header "Processing analyzer results"
 
-    CheckInternalProjectsDifferences
-
-    Write-Host "Normalizing the SARIF reports"
-    $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
-
-    # Normalize & overwrite all *.json SARIF files found under the "actual" folder
-    Get-ChildItem output -filter *.json -recurse | where { $_.FullName -notmatch 'ManuallyAddedNoncompliantIssues' } | Foreach-Object { New-IssueReports $_.FullName }
-
-    $sarifTimerElapsed = $sarifTimer.Elapsed.TotalSeconds
-    Write-Debug "Normalized the SARIF reports in '${sarifTimerElapsed}'"
-
     Write-Host "Computing analyzer performance"
     $measurePerfTimer = [system.diagnostics.stopwatch]::StartNew()
     Measure-AnalyzerPerformance
     $measurePerfTimerElapsed = $measurePerfTimer.Elapsed.TotalSeconds
     Write-Debug "Computed analyzer performance in '${measurePerfTimerElapsed}'"
 
-    Write-Host "Checking for differences..."
-    $diffTimer = [system.diagnostics.stopwatch]::StartNew()
-    Show-DiffResults
-    $diffTimerElapsed = $diffTimer.Elapsed.TotalSeconds
-    Write-Debug "Checked for differences in '${diffTimerElapsed}'"
+    CheckInternalProjectsDifferences
+
+    # Not needed when $project is internal
+    if ($project -eq "" -or -not $InternalProjects.Contains($project)) {
+        Write-Host "Normalizing the SARIF reports"
+        $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
+
+        # Normalize & overwrite all *.json SARIF files found under the "actual" folder
+        Get-ChildItem output -filter *.json -recurse | where { $_.FullName -notmatch 'ManuallyAddedNoncompliantIssues' } | Foreach-Object { New-IssueReports $_.FullName }
+
+        $sarifTimerElapsed = $sarifTimer.Elapsed.TotalSeconds
+        Write-Debug "Normalized the SARIF reports in '${sarifTimerElapsed}'"
+
+        Write-Host "Checking for differences..."
+        $diffTimer = [system.diagnostics.stopwatch]::StartNew()
+        Show-DiffResults
+        $diffTimerElapsed = $diffTimer.Elapsed.TotalSeconds
+        Write-Debug "Checked for differences in '${diffTimerElapsed}'"
+    }
 
     Write-Host -ForegroundColor Green "SUCCESS: ITs were successful! No differences were found!"
     exit 0
