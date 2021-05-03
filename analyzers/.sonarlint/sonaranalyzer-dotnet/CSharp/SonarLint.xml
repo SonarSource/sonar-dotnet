@@ -159,7 +159,7 @@
       <Parameters>
         <Parameter>
           <Key>max</Key>
-          <Value>2</Value>
+          <Value>3</Value>
         </Parameter>
         <Parameter>
           <Key>maxMethod</Key>
