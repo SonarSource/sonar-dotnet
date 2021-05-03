@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -30,13 +29,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class DeclareTypesInNamespaces : DeclareTypesInNamespacesBase
+    public sealed class DeclareTypesInNamespaces : DeclareTypesInNamespacesBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
+        protected override SyntaxKind[] SyntaxKinds { get; } =
+        {
+            SyntaxKind.ClassStatement,
+            SyntaxKind.StructureStatement,
+            SyntaxKind.EnumStatement,
+            SyntaxKind.InterfaceStatement
+        };
 
         protected override SyntaxToken GetTypeIdentifier(SyntaxNode declaration)
         {
@@ -49,7 +52,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 case SyntaxKind.StructureStatement:
                     return ((TypeStatementSyntax)declaration).Identifier;
                 default:
-                    return default(SyntaxToken);
+                    return default;
             }
         }
 
@@ -62,21 +65,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 case SyntaxKind.StructureBlock:
                 case SyntaxKind.NamespaceBlock:
                     return true;
+                default:
+                    // If declaration is an outer type that is not within a namespace block,
+                    // make sure there is no Root Namespace set in the project
+                    var typeSymbol = (INamedTypeSymbol)semanticModel.GetDeclaredSymbol(declaration);
+                    return typeSymbol == null ||
+                        !typeSymbol.ContainingNamespace.IsGlobalNamespace;
             }
-
-            // If declaration is an outer type that is not within a namespace block,
-            // make sure there is no Root Namespace set in the project
-            var typeSymbol = (INamedTypeSymbol)semanticModel.GetDeclaredSymbol(declaration);
-            return typeSymbol == null ||
-                !typeSymbol.ContainingNamespace.IsGlobalNamespace;
         }
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                GetAnalysisAction(rule),
-                SyntaxKind.ClassStatement,
-                SyntaxKind.StructureStatement,
-                SyntaxKind.EnumStatement,
-                SyntaxKind.InterfaceStatement);
     }
 }

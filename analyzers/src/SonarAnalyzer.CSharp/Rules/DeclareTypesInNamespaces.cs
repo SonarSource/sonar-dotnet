@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -31,13 +30,18 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DeclareTypesInNamespaces : DeclareTypesInNamespacesBase
+    public sealed class DeclareTypesInNamespaces : DeclareTypesInNamespacesBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
+        protected override SyntaxKind[] SyntaxKinds { get; } =
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKind.EnumDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKindEx.RecordDeclaration,
+        };
 
         protected override SyntaxToken GetTypeIdentifier(SyntaxNode declaration) =>
             ((BaseTypeDeclarationSyntax)declaration).Identifier;
@@ -56,14 +60,5 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
             }
         }
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                GetAnalysisAction(rule),
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKind.EnumDeclaration,
-                SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordDeclaration);
     }
 }
