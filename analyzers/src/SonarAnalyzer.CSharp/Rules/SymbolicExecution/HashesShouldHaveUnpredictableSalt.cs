@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         internal const string DiagnosticId = "S2053";
         private const string MessageFormat = "{0}";
         private const string MakeSaltUnpredictableMessage = "Make this salt unpredictable.";
-        private const string MakeThisSaltLongerMessage = "Make this salt longer.";
+        private const string MakeThisSaltLongerMessage = "Make this salt at least 16 bytes.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private sealed class SaltCheck : ExplodedGraphCheck
         {
-            private const int MinimumSafeLength = 32;
+            private const int MinimumSafeLength = 16;
             private const int SaltParameterIndex = 2;
 
             private static readonly ImmutableArray<KnownType> VulnerableTypes =
@@ -125,13 +125,13 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     // but we should always have a symbolic value for it.
                     && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - SaltParameterIndex).FirstOrDefault() is {} symbolicValue)
                 {
-                    if (programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
-                    {
-                        context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeThisSaltLongerMessage));
-                    }
-                    else if (programState.HasConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Constant))
+                    if (programState.HasConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Constant))
                     {
                         context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeSaltUnpredictableMessage));
+                    }
+                    else if (programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
+                    {
+                        context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeThisSaltLongerMessage));
                     }
                 }
 
