@@ -52,7 +52,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (args.Symbol is IParameterSymbol
                 && !semanticModel.IsExtensionMethod(args.Identifier.Parent)
-                && !args.Symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
+                && !args.Symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState)
+                && !args.Symbol.GetAttributes(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute).Any())
             {
                 identifiers.Add(args.Identifier);
             }

@@ -101,10 +101,16 @@ namespace UsingAttributes
 {
     using Microsoft.AspNetCore.Mvc;
 
-    public class Repro4122
+    public class UsingFromServicesAttribute
     {
         public int GetProduct([FromServices] IService service) =>
-             service.GetValue(); // Noncompliant, see https://github.com/SonarSource/sonar-dotnet/issues/4122
+             service.GetValue(); // Compliant, it's attributed with FromServices attribute
+
+        public int GetProductMultipleAttr([FromServices] [FromRoute] IService service) =>
+            service.GetValue(); // Compliant, it's attributed with FromServices attribute
+
+        public int GetPrice(IService service) =>
+            service.GetValue();  // Noncompliant
 
         public interface IService
         {
