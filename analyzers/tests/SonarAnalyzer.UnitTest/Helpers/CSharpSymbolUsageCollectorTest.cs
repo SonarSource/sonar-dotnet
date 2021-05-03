@@ -36,8 +36,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void VerifyUsagesBeingCollectedOnMatchingSyntaxNodes()
         {
-            const string code1 = @"
-public partial class Sample
+            const string firstSnippet = @"
+public class FooEntry
 {
     private int Field = 42;
 
@@ -47,37 +47,37 @@ public partial class Sample
         return Field;
     }
 }";
-            const string code2 = @"
-public partial class Sample
+            const string secondSnippet = @"
+public class BarEntry
 {
     public int Bar()
     {
         return Field;
     }
 }";
-            var compilation1 = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(code1)
+            var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+                .AddSnippet(firstSnippet)
                 .GetCompilation();
-            var compilation2 = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(code2)
+            var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+                .AddSnippet(secondSnippet)
                 .GetCompilation();
 
-            var tree1 = compilation1.SyntaxTrees.Single(x => x.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Any());
-            var fooMethodDecl = tree1.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var firstTree = firstCompilation.SyntaxTrees.Single();
+            var fooMethodDecl = firstTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
             var returnExpression = fooMethodDecl.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
-            var semanticModel = compilation1.GetSemanticModel(tree1);
+            var semanticModel = firstCompilation.GetSemanticModel(firstTree);
 
             var fieldSymbol = semanticModel.GetSymbolInfo(returnExpression).Symbol;
             var knownSymbols = new List<ISymbol> { fieldSymbol };
 
             // compilation matches semantic model and syntax node
-            var usageCollector = new CSharpSymbolUsageCollector(compilation1, knownSymbols);
+            var usageCollector = new CSharpSymbolUsageCollector(firstCompilation, knownSymbols);
             usageCollector.Visit(fooMethodDecl);
             usageCollector.UsedSymbols.Should().NotBeEmpty();
             var originallyUsedSymbols = usageCollector.UsedSymbols;
 
-            var tree2 = compilation2.SyntaxTrees.Single(x => x.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Any());
-            var barMethodDecl = tree2.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var secondTree = secondCompilation.SyntaxTrees.Single();
+            var barMethodDecl = secondTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
             // compilation doesn't match syntax node, since it belongs to another compilation
             usageCollector.Visit(barMethodDecl);
             usageCollector.UsedSymbols.Should().BeEquivalentTo(originallyUsedSymbols);

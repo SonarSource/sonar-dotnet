@@ -61,30 +61,29 @@ public partial class Sample
         [TestMethod]
         public void WrongCompilationBeingUsed()
         {
-            const string code1 = @"
-public partial class Sample
+            const string firstSnippet = @"
+public class Foo
 {
     private static int Original = 42;
     private int Field = Original;
 }";
-            const string code2 = @"
-public partial class Sample
+            const string secondSnippet = @"
+public class Bar
 {
     public int Method()
     {
         return Field;
     }
 }";
-            var compilation1 = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(code1)
+            var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+                .AddSnippet(firstSnippet)
                 .GetCompilation();
-            var compilation2 = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(code2)
+            var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+                .AddSnippet(secondSnippet)
                 .GetCompilation();
-            var tree = compilation2.SyntaxTrees.Single(x => x.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Any());
-            var returnExpression = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
-            var finder = new CSharpConstantValueFinder(compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()));
-            finder.FindConstant(returnExpression).Should().BeNull();
+            var secondCompilationReturnExpression = secondCompilation.SyntaxTrees.Single().GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
+            var finder = new CSharpConstantValueFinder(firstCompilation.GetSemanticModel(firstCompilation.SyntaxTrees.Single()));
+            finder.FindConstant(secondCompilationReturnExpression).Should().BeNull();
         }
     }
 }
