@@ -42,9 +42,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string ContinueWithName = "ContinueWith";
         private const string SleepName = "Sleep";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly Dictionary<string, ImmutableArray<KnownType>> InvalidMemberAccess =
             new Dictionary<string, ImmutableArray<KnownType>>
@@ -76,11 +76,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 ["Run"] = KnownType.System_Threading_Tasks_Task,
             };
 
-        private static readonly HashSet<string> WaitForMultipleTasksExecutionCalls =
-            new HashSet<string> {"WhenAll", "WaitAll"};
+        private static readonly Dictionary<string, KnownType> WaitForMultipleTasksExecutionCalls =
+            new Dictionary<string, KnownType>
+            {
+                ["WhenAll"] = KnownType.System_Threading_Tasks_Task,
+                ["WaitAll"] = KnownType.System_Threading_Tasks_Task,
+            };
 
-        private static readonly HashSet<string> WaitForSingleExecutionCalls =
-            new HashSet<string> {"Wait", "RunSynchronously"};
+        private static readonly Dictionary<string, KnownType> WaitForSingleExecutionCalls =
+            new Dictionary<string, KnownType>
+            {
+                ["Wait"] = KnownType.System_Threading_Tasks_Task,
+                ["RunSynchronously"] = KnownType.System_Threading_Tasks_Task,
+            };
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(ReportOnViolation, SyntaxKind.SimpleMemberAccessExpression);
@@ -130,7 +138,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, simpleMemberAccess.GetLocation(),
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, simpleMemberAccess.GetLocation(),
                 messageArgs: MemberNameToMessageArguments[memberAccessNameName]));
         }
 
@@ -150,32 +158,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 || IsAwaitForSingleTaskExecutionCall(invocation, context.SemanticModel, accessedSymbol);
         }
 
-        private static bool IsAwaitForMultipleTasksExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Lazy<ISymbol> accessedSymbol)
-        {
-            var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
-            if (!WaitForMultipleTasksExecutionCalls.Contains(memberAccess?.Name?.Identifier.ValueText))
-            {
-                return false;
-            }
+        private static bool IsAwaitForMultipleTasksExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Lazy<ISymbol> accessedSymbol) =>
+            IsNamedSymbolOfExpectedType((MemberAccessExpressionSyntax)invocation.Expression, semanticModel, WaitForMultipleTasksExecutionCalls)
+            && invocation.ArgumentList.Arguments.Any(x => accessedSymbol.Value.Equals(semanticModel.GetSymbolInfo(x.Expression).Symbol));
 
-            var memberAccessSymbol = semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom;
-            return memberAccessSymbol.Is(KnownType.System_Threading_Tasks_Task)
-                && invocation.ArgumentList.Arguments
-                .Any(x => accessedSymbol.Value.Equals(semanticModel.GetSymbolInfo(x.Expression).Symbol));
-        }
 
-        private static bool IsAwaitForSingleTaskExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Lazy<ISymbol> accessedSymbol)
-        {
-            var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
-            if (!WaitForSingleExecutionCalls.Contains(memberAccess?.Name?.Identifier.ValueText))
-            {
-                return false;
-            }
-
-            var memberAccessSymbol = semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom;
-            return memberAccessSymbol.Is(KnownType.System_Threading_Tasks_Task)
-                && accessedSymbol.Value.Equals(semanticModel.GetSymbolInfo(memberAccess?.Expression).Symbol);
-        }
+        private static bool IsAwaitForSingleTaskExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Lazy<ISymbol> accessedSymbol) =>
+            IsNamedSymbolOfExpectedType((MemberAccessExpressionSyntax)invocation.Expression, semanticModel, WaitForSingleExecutionCalls)
+            && accessedSymbol.Value.Equals(semanticModel.GetSymbolInfo(((MemberAccessExpressionSyntax)invocation.Expression).Expression).Symbol);
 
         private static bool IsResultInContinueWithCall(string memberAccessName, MemberAccessExpressionSyntax memberAccess) =>
             memberAccessName == ResultName &&
@@ -199,18 +189,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsChainedAfterThreadPoolCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
             memberAccess.Expression.DescendantNodes()
                 .OfType<MemberAccessExpressionSyntax>()
-                .Any(subMemberAccess => IsThreadPoolCall(subMemberAccess, semanticModel));
+                .Any(subMemberAccess => IsNamedSymbolOfExpectedType(subMemberAccess, semanticModel, TaskThreadPoolCalls));
 
-        private static bool IsThreadPoolCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel)
-        {
-            if (memberAccess?.Name == null ||
-                !TaskThreadPoolCalls.ContainsKey(memberAccess.Name.Identifier.ValueText))
-            {
-                return false;
-            }
-
-            var memberAccessSymbol = semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom;
-            return memberAccessSymbol.Is(TaskThreadPoolCalls[memberAccess.Name.Identifier.ValueText]);
-        }
+        private static bool IsNamedSymbolOfExpectedType(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel, Dictionary<string, KnownType> expectedTypes) =>
+            expectedTypes.Keys.Any(memberAccess.NameIs)
+                 && semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom is { } memberAccessSymbol
+                 && memberAccessSymbol.Is(expectedTypes[memberAccess.Name.Identifier.ValueText]);
     }
 }
