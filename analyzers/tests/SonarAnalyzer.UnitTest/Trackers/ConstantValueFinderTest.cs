@@ -57,5 +57,34 @@ public partial class Sample
             var finder = new CSharpConstantValueFinder(compilation.GetSemanticModel(tree));
             finder.FindConstant(returnExpression).Should().Be(42);
         }
+
+        [TestMethod]
+        public void WrongCompilationBeingUsed()
+        {
+            const string code1 = @"
+public partial class Sample
+{
+    private static int Original = 42;
+    private int Field = Original;
+}";
+            const string code2 = @"
+public partial class Sample
+{
+    public int Method()
+    {
+        return Field;
+    }
+}";
+            var compilation1 = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+                .AddSnippet(code1)
+                .GetCompilation();
+            var compilation2 = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+                .AddSnippet(code2)
+                .GetCompilation();
+            var tree = compilation2.SyntaxTrees.Single(x => x.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Any());
+            var returnExpression = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
+            var finder = new CSharpConstantValueFinder(compilation1.GetSemanticModel(compilation1.SyntaxTrees.First()));
+            finder.FindConstant(returnExpression).Should().BeNull();
+        }
     }
 }
