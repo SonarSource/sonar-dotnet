@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -29,48 +31,26 @@ using SonarAnalyzer.UnitTest.TestFramework;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class ConstantValueFinderTest
+    public class CSharpSymbolUsageCollectorTest
     {
         [TestMethod]
-        public void FieldDeclaredInAnotherSyntaxTree()
+        public void VerifyUsagesBeingCollectedOnMatchingSyntaxNodes()
         {
             const string code1 = @"
 public partial class Sample
 {
-    private static int Original = 42;
-    private int Field = Original;
-}";
-            const string code2 = @"
-public partial class Sample
-{
-    public int Method()
+    private int Field = 42;
+
+    public int Foo(int arg)
     {
+        Field += arg;
         return Field;
     }
 }";
-            var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(code1)
-                .AddSnippet(code2)
-                .GetCompilation();
-            var tree = compilation.SyntaxTrees.Single(x => x.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Any());
-            var returnExpression = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
-            var finder = new CSharpConstantValueFinder(compilation.GetSemanticModel(tree));
-            finder.FindConstant(returnExpression).Should().Be(42);
-        }
-
-        [TestMethod]
-        public void WrongCompilationBeingUsed()
-        {
-            const string code1 = @"
-public partial class Sample
-{
-    private static int Original = 42;
-    private int Field = Original;
-}";
             const string code2 = @"
 public partial class Sample
 {
-    public int Method()
+    public int Bar()
     {
         return Field;
     }
@@ -81,10 +61,26 @@ public partial class Sample
             var compilation2 = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
                 .AddSnippet(code2)
                 .GetCompilation();
-            var tree = compilation2.SyntaxTrees.Single(x => x.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Any());
-            var returnExpression = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
-            var finder = new CSharpConstantValueFinder(compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()));
-            finder.FindConstant(returnExpression).Should().BeNull();
+
+            var tree1 = compilation1.SyntaxTrees.Single(x => x.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Any());
+            var fooMethodDecl = tree1.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var returnExpression = fooMethodDecl.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
+            var semanticModel = compilation1.GetSemanticModel(tree1);
+
+            var fieldSymbol = semanticModel.GetSymbolInfo(returnExpression).Symbol;
+            var knownSymbols = new List<ISymbol> { fieldSymbol };
+
+            // compilation matches semantic model and syntax node
+            var usageCollector = new CSharpSymbolUsageCollector(compilation1, knownSymbols);
+            usageCollector.Visit(fooMethodDecl);
+            usageCollector.UsedSymbols.Should().NotBeEmpty();
+            var originallyUsedSymbols = usageCollector.UsedSymbols;
+
+            var tree2 = compilation2.SyntaxTrees.Single(x => x.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Any());
+            var barMethodDecl = tree2.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            // compilation doesn't match syntax node, since it belongs to another compilation
+            usageCollector.Visit(barMethodDecl);
+            usageCollector.UsedSymbols.Should().BeEquivalentTo(originallyUsedSymbols);
         }
     }
 }
