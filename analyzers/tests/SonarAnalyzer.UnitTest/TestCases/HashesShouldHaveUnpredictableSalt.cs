@@ -182,7 +182,7 @@ namespace Tests.Diagnostics
             new PasswordDeriveBytes(passwordBytes, a5); // Compliant
         }
 
-        private byte[] GetSalt() => new byte[1];
+        private byte[] GetSalt() => null;
     }
 
     public class Foo
