@@ -39,18 +39,16 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S1200";
         private const string MessageFormat = "Split this {0} into smaller and more specialized ones to reduce its " +
             "dependencies on other classes from {1} to the maximum authorized {2} or less.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         private const int ThresholdDefaultValue = 30;
-        [RuleParameter("max", PropertyType.Integer,
-            "Maximum number of classes a single class is allowed to depend upon", ThresholdDefaultValue)]
+
+        private static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        [RuleParameter("max", PropertyType.Integer, "Maximum number of classes a single class is allowed to depend upon", ThresholdDefaultValue)]
         public int Threshold { get; set; } = ThresholdDefaultValue;
 
-        private static readonly ImmutableArray<KnownType> ignoredTypes =
+        private static readonly ImmutableArray<KnownType> IgnoredTypes =
             ImmutableArray.Create(
                 KnownType.Void,
                 KnownType.System_Boolean,
@@ -82,8 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Func_T1_T2_TResult,
                 KnownType.System_Func_T1_T2_T3_TResult,
                 KnownType.System_Func_T1_T2_T3_T4_TResult,
-                KnownType.System_Lazy
-            );
+                KnownType.System_Lazy);
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
@@ -106,12 +103,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         .SelectMany(ExpandGenericTypes)
                         .Distinct()
                         .Where(IsTrackedType)
-                        .Where(t => t != type)
+                        .Where(t => !t.Equals(type))
                         .ToList();
 
                     if (dependentTypes.Count > Threshold)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, typeDeclaration.Identifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(),
                             typeDeclaration.Keyword.ValueText, dependentTypes.Count, Threshold));
                     }
                 },
@@ -122,8 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsTrackedType(INamedTypeSymbol namedType) =>
-            namedType.TypeKind != TypeKind.Enum &&
-            !namedType.IsAny(ignoredTypes);
+            namedType.TypeKind != TypeKind.Enum && !namedType.IsAny(IgnoredTypes);
 
         /// <summary>
         /// Returns all type symbols that are linked to the provided type symbol - generic constraints,
@@ -166,7 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (typeSyntax != null)
                 {
-                    AddDependentType(this.model.GetSymbolInfo(typeSyntax).Symbol as INamedTypeSymbol);
+                    AddDependentType(model.GetSymbolInfo(typeSyntax).Symbol as INamedTypeSymbol);
                 }
             }
 
@@ -185,7 +181,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitClassDeclaration(ClassDeclarationSyntax node)
             {
                 // don't drill down in child classes, but walk the original
-                if (node == this.originalTypeDeclaration)
+                if (node == originalTypeDeclaration)
                 {
                     base.VisitClassDeclaration(node);
                 }
@@ -194,7 +190,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitStructDeclaration(StructDeclarationSyntax node)
             {
                 // don't drill down in child structs, but walk the original
-                if (node == this.originalTypeDeclaration)
+                if (node == originalTypeDeclaration)
                 {
                     base.VisitStructDeclaration(node);
                 }
@@ -210,7 +206,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (node.Initializer != null)
                 {
-                    AddDependentType(this.model.GetTypeInfo(node.Initializer.Value));
+                    AddDependentType(model.GetTypeInfo(node.Initializer.Value));
                 }
                 else
                 {
@@ -251,7 +247,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
             {
-                AddDependentType(this.model.GetTypeInfo(node));
+                AddDependentType(model.GetTypeInfo(node));
                 base.VisitObjectCreationExpression(node);
             }
 
