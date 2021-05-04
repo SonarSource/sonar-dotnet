@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class AbstractTypesShouldNotHaveConstructors : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3442";
+        private const string DiagnosticId = "S3442";
         private const string MessageFormat = "Change the visibility of this constructor to 'protected'.";
 
         private static readonly DiagnosticDescriptor rule =
@@ -41,25 +42,30 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var ctorDeclaration = (ConstructorDeclarationSyntax)c.Node;
-
-                    var isAbstractClass = c.Node.Parent is ClassDeclarationSyntax classDeclaration &&
-                        classDeclaration.Modifiers.Any(SyntaxKind.AbstractKeyword);
-
-                    var invalidAccessModifier = ctorDeclaration.Modifiers.FirstOrDefault(
-                            m => m.IsKind(SyntaxKind.PublicKeyword) ||
-                                 m.IsKind(SyntaxKind.InternalKeyword));
-
-                    if (isAbstractClass && !invalidAccessModifier.IsKind(SyntaxKind.None))
+                    if (GetModifiers(c.Node.Parent).Any(SyntaxKind.AbstractKeyword))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invalidAccessModifier.GetLocation()));
+                        var invalidAccessModifier = GetModifiers(c.Node).FirstOrDefault(IsPublicOrInternal);
+                        if (invalidAccessModifier != default)
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invalidAccessModifier.GetLocation()));
+                        }
                     }
                 }, SyntaxKind.ConstructorDeclaration);
-        }
+
+        private static SyntaxTokenList GetModifiers(SyntaxNode node) =>
+            node switch
+            {
+                ClassDeclarationSyntax classDeclaration => classDeclaration.Modifiers,
+                ConstructorDeclarationSyntax ctorDeclaration => ctorDeclaration.Modifiers,
+                {} syntaxNode when RecordDeclarationSyntaxWrapper.IsInstance(syntaxNode) => ((RecordDeclarationSyntaxWrapper)syntaxNode).Modifiers,
+                _ => new SyntaxTokenList()
+            };
+
+        private static bool IsPublicOrInternal(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.PublicKeyword) || token.IsKind(SyntaxKind.InternalKeyword);
     }
 }
