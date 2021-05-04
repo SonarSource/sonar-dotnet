@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -55,13 +56,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 CheckTypeDeclarationForRedundantPartial,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKind.StructDeclaration);
+                SyntaxKind.StructDeclaration,
+                SyntaxKindEx.RecordDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckForUnnecessaryUnsafeBlocks,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
-                SyntaxKind.InterfaceDeclaration);
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKindEx.RecordDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -255,17 +258,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckTypeDeclarationForRedundantPartial(SyntaxNodeAnalysisContext context)
         {
-            var classDeclaration = (TypeDeclarationSyntax)context.Node;
-            var classSymbol = context.SemanticModel.GetDeclaredSymbol(classDeclaration);
+            var typeDeclaration = (TypeDeclarationSyntax)context.Node;
+            var classSymbol = context.SemanticModel.GetDeclaredSymbol(typeDeclaration);
 
             if (classSymbol == null ||
-                !classDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword) ||
+                !typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword) ||
                 classSymbol.DeclaringSyntaxReferences.Length > 1)
             {
                 return;
             }
 
-            var keyword = classDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
+            var keyword = typeDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, keyword.GetLocation(), "partial", "gratuitous"));
         }
 
