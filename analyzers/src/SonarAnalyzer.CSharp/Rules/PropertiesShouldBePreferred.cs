@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,15 +34,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class PropertiesShouldBePreferred : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4049";
+        private const string DiagnosticId = "S4049";
         private const string MessageFormat = "Consider making method '{0}' a property.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -61,14 +61,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     foreach (var candidate in propertyCandidates)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(
-                            rule,
+                            Rule,
                             candidate.Locations.FirstOrDefault(),
                             messageArgs: candidate.Name));
                     }
                 },
                 SyntaxKind.ClassDeclaration,
-                SyntaxKind.InterfaceDeclaration);
-        }
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKindEx.RecordDeclaration);
 
         private static bool HasCandidateSignature(IMethodSymbol method) =>
             method.IsPubliclyAccessible()

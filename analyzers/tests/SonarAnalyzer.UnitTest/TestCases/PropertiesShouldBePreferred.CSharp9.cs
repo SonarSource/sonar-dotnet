@@ -1,24 +1,26 @@
 ﻿public record RecordBase
 {
-    public virtual string GetFooMethod() => ""; // Compliant - FN
+    public virtual string GetFooMethod() => ""; // Noncompliant
 }
 
 public record Record : RecordBase
 {
     private string name;
 
-    public string GetName() // Compliant - FN
+    public string GetName() // Noncompliant
     {
         return name;
     }
 
     public override string GetFooMethod() => ""; // Compliant
 
-    public object GetName2() => null; // Compliant - FN
+    public object GetName2() => null; // Noncompliant
 
-    protected string GetName3() => null; // Compliant - FN
+    protected string GetName3() => null; // Noncompliant
 
-    private string GetName4() => null;
+    protected internal string GetName4() => null; // Noncompliant
+
+    private string GetName5() => null;
 
     public string Property { get; set; }
 }
