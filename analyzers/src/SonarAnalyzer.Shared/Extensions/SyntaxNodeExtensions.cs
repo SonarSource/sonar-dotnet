@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
@@ -42,6 +43,14 @@ namespace SonarAnalyzer.Extensions
                    .OfType<InvocationExpressionSyntax>()
                    .Where(invocation => invocation.Expression.NameIs("GetValue") || invocation.Expression.NameIs("SetValue"))
                    .Any(invocation => semanticModel.GetSymbolInfo(invocation).Symbol.ContainingType.DerivesFrom(KnownType.System_Windows_DependencyObject));
+        }
+
+        public static IEnumerable<StatementSyntax> GetPreviousStatementsCurrentBlock(this SyntaxNode expression)
+        {
+            var statement = expression.FirstAncestorOrSelf<StatementSyntax>();
+            return statement == null
+                ? Enumerable.Empty<StatementSyntax>()
+                : statement.Parent.ChildNodes().OfType<StatementSyntax>().TakeWhile(x => x != statement).Reverse();
         }
     }
 }

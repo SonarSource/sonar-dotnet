@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -161,14 +162,157 @@ namespace Tests.Diagnostics
             return nameof(Task<object>.Result); // Compliant, nameof() does not execute async code.
         }
 
-        // See https://github.com/SonarSource/sonar-dotnet/issues/3452
-        public async Task Repro3452()
+        static async Task AccessAwaited(string[] args)
         {
-            var task = Task.FromResult(1);
+            var getValue1Task = GetValueTask(1);
+            var getValue2Task = GetValueTask(2);
+            var getValue3Task = GetValueTask(3);
+            var getValue4Task = GetValueTask(4);
 
-            await Task.WhenAll(task).ConfigureAwait(false);
+            await Task.WhenAll(getValue1Task).ConfigureAwait(false);
+            TimeSpan ts = TimeSpan.FromMilliseconds(150);
+            getValue2Task.Wait(ts);             // Noncompliant
+            Task.WaitAll(getValue3Task);        // Noncompliant
+            getValue4Task.RunSynchronously();   // Compliant FN
 
-            var result1 = task.Result; // Noncompliant, FP: at this point the task is completed and Result can be read
+            var result1 = getValue1Task.Result;  // Compliant, task is already completed at this point.
+            var result2 = getValue2Task.Result;  // Compliant, task is already completed at this point.
+            var result3 = getValue3Task.Result;  // Compliant, task is already completed at this point.
+            var result4 = getValue4Task.Result;  // Compliant, task is already completed at this point.
+        }
+
+        static async Task SubsequentChecksAreNotDisabledByAwait(string[] args)
+        {
+            var getValue1Task = GetValueTask(1);
+
+            await Task.WhenAll(getValue1Task).ConfigureAwait(false);
+            TimeSpan ts = TimeSpan.FromMilliseconds(150);
+            getValue1Task.Wait(ts);             // Noncompliant
+            Task.WaitAll(getValue1Task);        // Noncompliant
+
+            var result1 = getValue1Task.Result;  // Compliant, task is already completed at this point.
+        }
+
+        static async Task AccessAwaitedWaitAllFP(string[] args)
+        {
+            var getValue1Task = GetValueTask(1);
+            var getValue2Task = GetValueTask(2);
+            var getValue3Task = GetValueTask(3);
+            var getValue4Task = GetValueTask(4);
+
+            var tasks = new List<Task<int>>();
+            tasks.Add(getValue1Task);
+            tasks.Add(getValue2Task);
+
+            Task.WaitAll(tasks.ToArray());                             // Noncompliant
+            Task.WaitAll(new[] { getValue3Task, getValue4Task });      // Noncompliant
+
+            var result1 = getValue1Task.Result;                        // Noncompliant FP, task is already completed at this point.
+            var result2 = getValue2Task.Result;                        // Noncompliant FP, task is already completed at this point.
+            var result3 = getValue3Task.Result;                        // Noncompliant FP, task is already completed at this point.
+            var result4 = getValue4Task.Result;                        // Noncompliant FP, task is already completed at this point.
+        }
+
+        static async Task AccessNotAwaited(string[] args)
+        {
+            var getValue1Task = GetValueTask(1);
+            var getValue2Task = GetValueTask(2);
+            var getValue3Task = GetValueTask(3);
+            var getValue4Task = GetValueTask(4);
+            var getValue5Task = GetValueTask(5);
+            var getValue6Task = GetValueTask(6);
+            var getValue7Task = GetValueTask(7);
+            var getValue8Task = GetValueTask(8);
+
+            await Task.WhenAll(getValue1Task).ConfigureAwait(false);
+            // getValue2Task skipped
+
+            TimeSpan ts = TimeSpan.FromMilliseconds(150);
+            getValue3Task.Wait(ts);              // Noncompliant
+            // getValue4Task skipped
+
+            Task.WaitAll(getValue5Task);         // Noncompliant
+            // getValue6Task skipped
+
+            getValue7Task.RunSynchronously();
+            // getValue8Task skipped
+
+            var result1 = getValue1Task.Result;  // Compliant, task is already completed at this point.
+            var result2 = getValue2Task.Result;  // Noncompliant {{Replace this use of 'Task.Result' with 'await'.}}
+//                        ^^^^^^^^^^^^^^^^^^^^
+            var result3 = getValue3Task.Result;  // Compliant, task is already completed at this point.
+            var result4 = getValue4Task.Result;  // Noncompliant {{Replace this use of 'Task.Result' with 'await'.}}
+//                        ^^^^^^^^^^^^^^^^^^^^
+            var result5 = getValue5Task.Result;  // Compliant, task is already completed at this point.
+            var result6 = getValue6Task.Result;  // Noncompliant {{Replace this use of 'Task.Result' with 'await'.}}
+//                        ^^^^^^^^^^^^^^^^^^^^
+            var result7 = getValue7Task.Result;  // Compliant, task is already completed at this point.
+            var result8 = getValue8Task.Result;  // Noncompliant {{Replace this use of 'Task.Result' with 'await'.}}
+//                        ^^^^^^^^^^^^^^^^^^^^
+        }
+
+        static async Task NotAnAwait(string[] args)
+        {
+            var getValue1Task = GetValueTask(1);
+            var getValue2Task = GetValueTask(2);
+            await TaskLike.WhenAll(getValue1Task, getValue2Task);
+            await TaskLike.When(getValue1Task, getValue2Task);
+            var result1 = getValue1Task.Result;  // Noncompliant
+//                        ^^^^^^^^^^^^^^^^^^^^
+            var result2 = getValue2Task.Result;  // Noncompliant
+//                        ^^^^^^^^^^^^^^^^^^^^
+        }
+
+        static async Task NoAwaitAtAll(string[] args)
+        {
+            var getValue1Task = GetValueTask(1);
+            var getValue2Task = GetValueTask(2);
+            Console.Write("");
+            var result1 = getValue1Task.Result;  // Noncompliant
+//                        ^^^^^^^^^^^^^^^^^^^^
+            var result2 = getValue2Task.Result;  // Noncompliant
+//                        ^^^^^^^^^^^^^^^^^^^^
+        }
+
+        static async Task BranchingWhenAll(string[] args, int intValue)
+        {
+            var getValue1Task = GetValueTask(1);
+            var getValue2Task = GetValueTask(2);
+
+            if (intValue == 41)
+            {
+                await TaskLike.WhenAll(getValue1Task, getValue2Task);
+            }
+            else
+            {
+                var result1 = getValue1Task.Result;  // Noncompliant
+//                            ^^^^^^^^^^^^^^^^^^^^
+                var result2 = getValue2Task.Result;  // Noncompliant
+//                            ^^^^^^^^^^^^^^^^^^^^
+            }
+        }
+
+        static async Task TaskFromResultFP(string[] args)
+        {
+            var getValue1Task = Task.FromResult(1);
+            var getValue2Task = Task.FromResult(2);
+            var result1 = getValue1Task.Result;  // Noncompliant FP, since Task.FromResult results completed task
+//                        ^^^^^^^^^^^^^^^^^^^^
+            var result2 = getValue2Task.Result;  // Noncompliant FP, since Task.FromResult results completed task
+//                        ^^^^^^^^^^^^^^^^^^^^
+
+            await Task.WhenAll(getValue1Task, getValue2Task).ConfigureAwait(false);
+        }
+
+        public static Task<int> GetValueTask(int num)
+        {
+            return Task.Run(() => num);
+        }
+
+        public class TaskLike
+        {
+            public static Task WhenAll(params Task[] tasks) { return null; }
+            public static Task When(params Task[] tasks) { return null; }
         }
     }
 }
