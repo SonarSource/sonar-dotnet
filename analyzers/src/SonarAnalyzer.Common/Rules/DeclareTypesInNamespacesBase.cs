@@ -48,7 +48,8 @@ namespace SonarAnalyzer.Rules
               c =>
               {
                   var declaration = c.Node;
-                  if (IsInnerTypeOrWithinNamespace(declaration, c.SemanticModel))
+
+                  if (IsInnerTypeOrWithinNamespace(declaration, c.SemanticModel) || c.ContainingSymbol.Kind != SymbolKind.NamedType)
                   {
                       return;
                   }
