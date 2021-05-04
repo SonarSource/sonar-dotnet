@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3464",
+"message":  "Refactor this record so that the generic inheritance chain is not recursive.",
+"location":  {
+"uri":  "sources\Net5\Net5\Records.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  19,
+"endLine":  130,
+"endColumn":  20
+}
+}
+}
+]
+}
