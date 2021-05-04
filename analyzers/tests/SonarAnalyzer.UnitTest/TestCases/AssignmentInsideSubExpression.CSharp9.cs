@@ -12,15 +12,30 @@ void Method(int arg)
 void WithRecordClone()
 {
     var zero = new Record() { Value = 0 };
-    var answer = zero with { Value = 42 };  // Noncompliant FP
+    var answer = zero with { Value = 42 };
+    var badAnswer = zero with { Value = topLevel = 42 };  // Noncompliant
+
+    var one = new PositionalRecord(1) { Value = 1 };
+    var clone = one with { Value = 2 };
+    var badClone = one with { Value = topLevel = 2 };     // Noncompliant
 }
 
 void TargetTypedNew()
 {
     Record r;
-    Method(r = new());              // Noncompliant
+    Method1(r = new());                // Noncompliant
+    PositionalRecord p;
+    Method2(p = new(42));              // Noncompliant
 
-    void Method(Record arg) { }
+    void Method1(Record arg) { }
+    void Method2(PositionalRecord arg) { }
+}
+
+void WithPositionalRecord()
+{
+    var x = 42;
+    new PositionalRecord(x);
+    new PositionalRecord(x = 42); // Noncompliant
 }
 
 async void IsNotNull(StreamReader reader)
@@ -38,4 +53,15 @@ async void IsNotNull(StreamReader reader)
 record Record
 {
     public int Value { get; init; }
+}
+
+record PositionalRecord(int Input)
+{
+    public int Value { get; init; } = Input;
+
+    private void Method(int arg = 42)
+    {
+        var i = 0;
+        Method(i = 42); // Noncompliant
+    }
 }

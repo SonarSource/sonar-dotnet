@@ -38,10 +38,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S1121";
         private const string MessageFormat = "Extract the assignment of '{0}' from this expression.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsNonCompliantSubExpression(assignment, topParenthesizedExpression)
                         || IsDirectlyInStatementCondition(assignment, topParenthesizedExpression))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.OperatorToken.GetLocation(), assignment.Left.ToString()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.OperatorToken.GetLocation(), assignment.Left.ToString()));
                     }
                 },
                 SyntaxKind.SimpleAssignmentExpression,
@@ -72,10 +72,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsNonCompliantSubExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression) =>
             IsInsideExpression(topParenthesizedExpression)
+            && !IsInWithInitializerExpression(topParenthesizedExpression)
             && !IsCompliantAssignmentInsideExpression(assignment, topParenthesizedExpression);
 
         private static bool IsInsideExpression(ExpressionSyntax expression) =>
             expression.Parent.FirstAncestorOrSelf<ExpressionSyntax>() != null;
+
+        private static bool IsInWithInitializerExpression(ExpressionSyntax expression) =>
+            expression.Parent.IsKind(SyntaxKindEx.WithInitializerExpression);
 
         private static bool IsCompliantAssignmentInsideExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression)
         {
@@ -97,7 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            return AllowedParentExpressionKinds.Contains(expressionParent.Kind());
+            return !IsInWithInitializerExpression(expressionParent)
+                   && AllowedParentExpressionKinds.Contains(expressionParent.Kind());
         }
 
         private static bool IsCompliantCoalesceExpression(ExpressionSyntax parentExpression, AssignmentExpressionSyntax assignment) =>
