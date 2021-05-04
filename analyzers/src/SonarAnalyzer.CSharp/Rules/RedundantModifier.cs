@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckForUnnecessaryUnsafeBlocks(SyntaxNodeAnalysisContext context)
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
-            if (typeDeclaration.Parent is TypeDeclarationSyntax)
+            if (typeDeclaration.Parent is TypeDeclarationSyntax || context.ContainingSymbol.Kind != SymbolKind.NamedType)
             {
                 // only process top level type declarations
                 return;
