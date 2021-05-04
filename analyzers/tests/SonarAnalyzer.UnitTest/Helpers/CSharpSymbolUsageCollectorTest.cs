@@ -37,20 +37,20 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void VerifyUsagesBeingCollectedOnMatchingSyntaxNodes()
         {
             const string firstSnippet = @"
-public class FooEntry
+public class Foo
 {
     private int Field = 42;
 
-    public int Foo(int arg)
+    public int FooMethod(int arg)
     {
         Field += arg;
         return Field;
     }
 }";
             const string secondSnippet = @"
-public class BarEntry
+public class Bar
 {
-    public int Bar()
+    public int BarMethod()
     {
         return Field;
     }
@@ -64,23 +64,22 @@ public class BarEntry
 
             var firstTree = firstCompilation.SyntaxTrees.Single();
             var fooMethodDecl = firstTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
-            var returnExpression = fooMethodDecl.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
             var semanticModel = firstCompilation.GetSemanticModel(firstTree);
 
-            var fieldSymbol = semanticModel.GetSymbolInfo(returnExpression).Symbol;
-            var knownSymbols = new List<ISymbol> { fieldSymbol };
+            var fieldSymbol = semanticModel.GetSymbolInfo(fooMethodDecl.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression).Symbol;
+            var knownSymbolsFirstCompilation = new List<ISymbol> { fieldSymbol };
 
             // compilation matches semantic model and syntax node
-            var usageCollector = new CSharpSymbolUsageCollector(firstCompilation, knownSymbols);
-            usageCollector.Visit(fooMethodDecl);
-            usageCollector.UsedSymbols.Should().NotBeEmpty();
-            var originallyUsedSymbols = usageCollector.UsedSymbols;
+            var usageCollectorFirstCompilation = new CSharpSymbolUsageCollector(firstCompilation, knownSymbolsFirstCompilation);
+            usageCollectorFirstCompilation.Visit(fooMethodDecl);
+            usageCollectorFirstCompilation.UsedSymbols.Should().NotBeEmpty();
+            var originallyUsedSymbols = usageCollectorFirstCompilation.UsedSymbols;
 
             var secondTree = secondCompilation.SyntaxTrees.Single();
             var barMethodDecl = secondTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
             // compilation doesn't match syntax node, since it belongs to another compilation
-            usageCollector.Visit(barMethodDecl);
-            usageCollector.UsedSymbols.Should().BeEquivalentTo(originallyUsedSymbols);
+            usageCollectorFirstCompilation.Visit(barMethodDecl);
+            usageCollectorFirstCompilation.UsedSymbols.Should().BeEquivalentTo(originallyUsedSymbols);
         }
     }
 }

@@ -82,8 +82,8 @@ public class Bar
                 .AddSnippet(secondSnippet)
                 .GetCompilation();
             var secondCompilationReturnExpression = secondCompilation.SyntaxTrees.Single().GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
-            var finder = new CSharpConstantValueFinder(firstCompilation.GetSemanticModel(firstCompilation.SyntaxTrees.Single()));
-            finder.FindConstant(secondCompilationReturnExpression).Should().BeNull();
+            var firstCompilationFinder = new CSharpConstantValueFinder(firstCompilation.GetSemanticModel(firstCompilation.SyntaxTrees.Single()));
+            firstCompilationFinder.FindConstant(secondCompilationReturnExpression).Should().BeNull();
         }
     }
 }
