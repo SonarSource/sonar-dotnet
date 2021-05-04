@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ((TypeDeclarationSyntax)node).Members;
 
         private static bool IsValidMemberForOverload(MemberDeclarationSyntax member) =>
-            member is MethodDeclarationSyntax methodDeclaration ? methodDeclaration.ExplicitInterfaceSpecifier == null : true;
+            !(member is MethodDeclarationSyntax methodDeclaration) || methodDeclaration.ExplicitInterfaceSpecifier == null;
 
         private static bool IsStatic(BaseMethodDeclarationSyntax declaration) =>
             declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
