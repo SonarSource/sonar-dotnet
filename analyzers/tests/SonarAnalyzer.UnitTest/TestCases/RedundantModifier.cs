@@ -209,6 +209,18 @@ partial interface PartialInterface //Noncompliant
                 var x = 10;
                 x += int.MaxValue;
             }
+
+            checked
+            {
+                var x = 10;
+                x = -int.MaxValue;
+            }
+
+            checked
+            {
+                var x = 10;
+                x = -5;
+            }
         }
     }
 
@@ -248,6 +260,16 @@ partial interface PartialInterface //Noncompliant
         public unsafe void Method()
         {
             Unsafe u = (a) => { };
+        }
+    }
+
+    public class UnsafeCtor
+    {
+        public UnsafeCtor()
+        {
+            unsafe // Noncompliant
+            {
+            }
         }
     }
 }

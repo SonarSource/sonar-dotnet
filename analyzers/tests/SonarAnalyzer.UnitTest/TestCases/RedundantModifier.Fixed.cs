@@ -194,6 +194,18 @@ interface PartialInterface //Fixed
                 var x = 10;
                 x += int.MaxValue;
             }
+
+            checked
+            {
+                var x = 10;
+                x = -int.MaxValue;
+            }
+
+            checked
+            {
+                var x = 10;
+                x = -5;
+            }
         }
     }
 
@@ -233,6 +245,13 @@ interface PartialInterface //Fixed
         public unsafe void Method()
         {
             Unsafe u = (a) => { };
+        }
+    }
+
+    public class UnsafeCtor
+    {
+        public UnsafeCtor()
+        {
         }
     }
 }
