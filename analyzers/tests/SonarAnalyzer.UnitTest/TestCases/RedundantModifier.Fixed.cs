@@ -206,6 +206,16 @@ interface PartialInterface //Fixed
                 var x = 10;
                 x = -5;
             }
+
+            {
+                var x = 10;
+                x = +5;
+            }
+
+            {
+                var x = 10;
+                var y = 5 % x;
+            }
         }
     }
 

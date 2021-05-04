@@ -221,6 +221,18 @@ partial interface PartialInterface //Noncompliant
                 var x = 10;
                 x = -5;
             }
+
+            checked // Noncompliant
+            {
+                var x = 10;
+                x = +5;
+            }
+
+            checked  // Noncompliant
+            {
+                var x = 10;
+                var y = 5 % x;
+            }
         }
     }
 
