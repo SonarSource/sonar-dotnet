@@ -53,11 +53,11 @@ namespace SonarAnalyzer.Helpers
                 return null;
             }
             return node.EnsureCorrectSemanticModelOrDefault(semanticModel) is { } nodeSemanticModel
-                ? nodeSemanticModel.GetConstantValue(node).Value ?? FindAssignedConstant(node, visitedVariables, nodeSemanticModel)
+                ? nodeSemanticModel.GetConstantValue(node).Value ?? FindAssignedConstant(node, nodeSemanticModel, visitedVariables)
                 : null;
         }
 
-        private object FindAssignedConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables, SemanticModel nodeSemanticModel)
+        private object FindAssignedConstant(SyntaxNode node, SemanticModel nodeSemanticModel, HashSet<SyntaxNode> visitedVariables)
         {
             return node is TIdentifierNameSyntax identifier
                 ? FindConstant(assignmentFinder.FindLinearPrecedingAssignmentExpression(IdentifierName(identifier), node, FindFieldInitializer), visitedVariables)

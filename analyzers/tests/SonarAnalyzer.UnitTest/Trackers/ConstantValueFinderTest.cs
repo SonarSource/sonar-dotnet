@@ -70,6 +70,7 @@ public class Foo
             const string secondSnippet = @"
 public class Bar
 {
+    private int Field = 42;
     public int Method()
     {
         return Field;
@@ -84,6 +85,8 @@ public class Bar
             var secondCompilationReturnExpression = secondCompilation.SyntaxTrees.Single().GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
             var firstCompilationFinder = new CSharpConstantValueFinder(firstCompilation.GetSemanticModel(firstCompilation.SyntaxTrees.Single()));
             firstCompilationFinder.FindConstant(secondCompilationReturnExpression).Should().BeNull();
+            var secondCompilationFinder = new CSharpConstantValueFinder(secondCompilation.GetSemanticModel(secondCompilation.SyntaxTrees.Single()));
+            secondCompilationFinder.FindConstant(secondCompilationReturnExpression).Should().NotBeNull();
         }
     }
 }
