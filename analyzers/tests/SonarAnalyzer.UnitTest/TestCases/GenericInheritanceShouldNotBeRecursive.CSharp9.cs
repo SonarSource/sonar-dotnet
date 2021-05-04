@@ -9,3 +9,4 @@ record C4<T> : CA<C4<CA<T>>> { } // Noncompliant
 record C5<T> : CC<C5<CA<T>>, CB<T>> { } // Noncompliant
 record C6<T> : CC<C5<CA<T>>, CB<T>> { } // Compliant
 record C7<T> : CA<CA<CA<CA<CA<CA<CA<CA<CA<CA<CA<CA<C7<CB<T>>>>>>>>>>>>>> { } // Noncompliant
+record C8<T>(string parameter) : CA<CA<CA<CA<CA<CA<CA<CA<CA<CA<CA<CA<C8<CB<T>>>>>>>>>>>>>> { } // Noncompliant

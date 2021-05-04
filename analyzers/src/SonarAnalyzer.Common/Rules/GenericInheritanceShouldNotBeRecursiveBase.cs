@@ -53,7 +53,8 @@ namespace SonarAnalyzer.Rules
                 {
                     var declaration = (TDeclaration)c.Node;
 
-                    if (IsRecursiveInheritance(GetNamedTypeSymbol(declaration, c.SemanticModel)))
+                    if (c.ContainingSymbol.Kind == SymbolKind.NamedType
+                        && IsRecursiveInheritance(GetNamedTypeSymbol(declaration, c.SemanticModel)))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(declaration), GetKeyword(declaration)));
                     }
