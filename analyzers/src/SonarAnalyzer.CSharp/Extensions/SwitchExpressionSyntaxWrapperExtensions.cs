@@ -19,11 +19,11 @@
  */
 
 using System.Linq;
-using SonarAnalyzer.ShimLayer.CSharp;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
-    public static class SwitchExpressionSyntaxWrapperExtensions
+    internal static class SwitchExpressionSyntaxWrapperExtensions
     {
         public static bool HasDiscardPattern(this SwitchExpressionSyntaxWrapper switchExpression) =>
             switchExpression.Arms.Any(arm => DiscardPatternSyntaxWrapper.IsInstance(arm.Pattern.SyntaxNode));

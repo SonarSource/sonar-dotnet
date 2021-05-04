@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -196,7 +197,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (context.IsCoalesceAssignmentSupported)
             {
-                return SyntaxFactory.AssignmentExpression(ShimLayer.CSharp.SyntaxKindEx.CoalesceAssignmentExpression, left, right).WithAdditionalAnnotations(context.Annotation);
+                return SyntaxFactory.AssignmentExpression(SyntaxKindEx.CoalesceAssignmentExpression, left, right).WithAdditionalAnnotations(context.Annotation);
             }
             return SyntaxFactory.AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, left, CoalesceExpression(left, right, context.Annotation));
         }

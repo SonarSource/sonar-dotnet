@@ -18,11 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.ShimLayer.CSharp
-{
-    using System;
-    using Microsoft.CodeAnalysis;
+using System;
+using Microsoft.CodeAnalysis;
+using StyleCop.Analyzers.Lightup;
 
+namespace SonarAnalyzer.Extensions
+{
     public static class ILocalSymbolExtensions
     {
         private static readonly Func<ILocalSymbol, RefKind> RefKindAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ILocalSymbol, RefKind>(typeof(ILocalSymbol), nameof(RefKind));

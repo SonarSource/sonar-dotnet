@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
 
-namespace SonarAnalyzer.ShimLayer.CSharp
+namespace StyleCop.Analyzers.Lightup
 {
     using System;
     using System.Linq;
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         static SyntaxFactoryEx()
         {
             var positionalPatternClauseMethods = typeof(SyntaxFactory).GetTypeInfo().GetDeclaredMethods(nameof(PositionalPatternClause));
-            var positionalPatternClauseMethod = positionalPatternClauseMethods.FirstOrDefault(method => method.GetParameters().Length == 1 && method.GetParameters()[0].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(WrapperHelper.GetWrappedType(typeof(SubpatternSyntaxWrapper))));
+            var positionalPatternClauseMethod = positionalPatternClauseMethods.FirstOrDefault(method => method.GetParameters().Length == 1 && method.GetParameters()[0].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(SyntaxWrapperHelper.GetWrappedType(typeof(SubpatternSyntaxWrapper))));
             if (positionalPatternClauseMethod is object)
             {
                 var subpatternsParameter = Expression.Parameter(typeof(SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>), "subpatterns");
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
             positionalPatternClauseMethod = positionalPatternClauseMethods.FirstOrDefault(method => method.GetParameters().Length == 3
                 && method.GetParameters()[0].ParameterType == typeof(SyntaxToken)
-                && method.GetParameters()[1].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(WrapperHelper.GetWrappedType(typeof(SubpatternSyntaxWrapper)))
+                && method.GetParameters()[1].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(SyntaxWrapperHelper.GetWrappedType(typeof(SubpatternSyntaxWrapper)))
                 && method.GetParameters()[2].ParameterType == typeof(SyntaxToken));
             if (positionalPatternClauseMethod is object)
             {
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
             }
 
             var propertyPatternClauseMethods = typeof(SyntaxFactory).GetTypeInfo().GetDeclaredMethods(nameof(PropertyPatternClause));
-            var propertyPatternClauseMethod = propertyPatternClauseMethods.FirstOrDefault(method => method.GetParameters().Length == 1 && method.GetParameters()[0].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(WrapperHelper.GetWrappedType(typeof(SubpatternSyntaxWrapper))));
+            var propertyPatternClauseMethod = propertyPatternClauseMethods.FirstOrDefault(method => method.GetParameters().Length == 1 && method.GetParameters()[0].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(SyntaxWrapperHelper.GetWrappedType(typeof(SubpatternSyntaxWrapper))));
             if (propertyPatternClauseMethod is object)
             {
                 var subpatternsParameter = Expression.Parameter(typeof(SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>), "subpatterns");
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
             propertyPatternClauseMethod = propertyPatternClauseMethods.FirstOrDefault(method => method.GetParameters().Length == 3
                 && method.GetParameters()[0].ParameterType == typeof(SyntaxToken)
-                && method.GetParameters()[1].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(WrapperHelper.GetWrappedType(typeof(SubpatternSyntaxWrapper)))
+                && method.GetParameters()[1].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(SyntaxWrapperHelper.GetWrappedType(typeof(SubpatternSyntaxWrapper)))
                 && method.GetParameters()[2].ParameterType == typeof(SyntaxToken));
             if (propertyPatternClauseMethod is object)
             {
@@ -202,7 +202,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
             }
 
             var tupleTypeMethods = typeof(SyntaxFactory).GetTypeInfo().GetDeclaredMethods(nameof(TupleType));
-            var tupleTypeMethod = tupleTypeMethods.FirstOrDefault(method => method.GetParameters().Length == 1 && method.GetParameters()[0].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(WrapperHelper.GetWrappedType(typeof(TupleElementSyntaxWrapper))));
+            var tupleTypeMethod = tupleTypeMethods.FirstOrDefault(method => method.GetParameters().Length == 1 && method.GetParameters()[0].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(SyntaxWrapperHelper.GetWrappedType(typeof(TupleElementSyntaxWrapper))));
             if (tupleTypeMethod is object)
             {
                 var elementsParameter = Expression.Parameter(typeof(SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>), "elements");
@@ -224,7 +224,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
             tupleTypeMethod = tupleTypeMethods.FirstOrDefault(method => method.GetParameters().Length == 3
                 && method.GetParameters()[0].ParameterType == typeof(SyntaxToken)
-                && method.GetParameters()[1].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(WrapperHelper.GetWrappedType(typeof(TupleElementSyntaxWrapper)))
+                && method.GetParameters()[1].ParameterType == typeof(SeparatedSyntaxList<>).MakeGenericType(SyntaxWrapperHelper.GetWrappedType(typeof(TupleElementSyntaxWrapper)))
                 && method.GetParameters()[2].ParameterType == typeof(SyntaxToken));
             if (tupleTypeMethod is object)
             {

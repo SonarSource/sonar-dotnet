@@ -30,9 +30,9 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.SymbolicExecution;
 using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.ShimLayer.CSharp;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution
 {

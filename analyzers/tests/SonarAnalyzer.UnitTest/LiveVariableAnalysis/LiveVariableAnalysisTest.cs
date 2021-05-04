@@ -27,8 +27,8 @@ using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using SonarAnalyzer.ShimLayer.CSharp;
 using SonarAnalyzer.UnitTest.ControlFlowGraph;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
 {

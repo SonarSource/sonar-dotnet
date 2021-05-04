@@ -56,6 +56,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SonarAnalyzer.Shared", "src
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GitHub", "..\.github\GitHub.shproj", "{532AC70E-90CB-48AD-86F4-16767C22314D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.ShimLayer.CodeGeneration", "src\SonarAnalyzer.ShimLayer.CodeGeneration\SonarAnalyzer.ShimLayer.CodeGeneration.csproj", "{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{7cfa8fa5-8842-4e89-bb90-39d5c0f20ba8}*SharedItemsImports = 5
@@ -119,6 +121,10 @@ Global
 		{037E7106-8196-4D7C-A532-72730C304CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{037E7106-8196-4D7C-A532-72730C304CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{037E7106-8196-4D7C-A532-72730C304CB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
