@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -60,5 +61,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveInheritance_CustomValues.Records.cs",
                 new CS.AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubRecord" });
 #endif
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FilteredClasses_ByDefault_ShouldBeEmpty() =>
+            new CS.AvoidExcessiveInheritance().FilteredClasses.Should().BeEmpty();
     }
 }
