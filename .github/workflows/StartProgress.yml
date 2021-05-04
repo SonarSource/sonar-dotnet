@@ -13,7 +13,7 @@ jobs:
         && github.event.project_card.content_url != null
     steps:
       # https://github.com/actions/github-script
-      - uses: actions/github-script@v3
+      - uses: actions/github-script@v4.0.2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
