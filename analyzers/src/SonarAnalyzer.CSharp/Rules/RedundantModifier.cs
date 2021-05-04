@@ -40,10 +40,20 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2333";
         private const string MessageFormat = "'{0}' is {1} in this context.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly ISet<SyntaxKind> UnsafeConstructKinds = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.AddressOfExpression,
+            SyntaxKind.PointerIndirectionExpression,
+            SyntaxKind.SizeOfExpression,
+            SyntaxKind.PointerType,
+            SyntaxKind.FixedStatement,
+            SyntaxKind.StackAllocArrayCreationExpression
+        };
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -134,50 +144,38 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool HasUnsafeConstructInside(SyntaxNode container, SemanticModel semanticModel)
-        {
-            return ContainsUnsafeConstruct(container) ||
-                ContainsFixedDeclaration(container) ||
-                ContainsUnsafeTypedIdentifier(container, semanticModel) ||
-                ContainsUnsafeInvocationReturnValue(container, semanticModel) ||
-                ContainsUnsafeParameter(container, semanticModel);
-        }
+        private static bool HasUnsafeConstructInside(SyntaxNode container, SemanticModel semanticModel) =>
+            ContainsUnsafeConstruct(container)
+                || ContainsFixedDeclaration(container)
+                || ContainsUnsafeTypedIdentifier(container, semanticModel)
+                || ContainsUnsafeInvocationReturnValue(container, semanticModel)
+                || ContainsUnsafeParameter(container, semanticModel);
 
-        private static bool ContainsUnsafeParameter(SyntaxNode container, SemanticModel semanticModel)
-        {
-            return container.DescendantNodes()
+        private static bool ContainsUnsafeParameter(SyntaxNode container, SemanticModel semanticModel) =>
+            container.DescendantNodes()
                 .OfType<ParameterSyntax>()
                 .Select(p => semanticModel.GetDeclaredSymbol(p))
                 .Any(p => IsUnsafe(p?.Type));
-        }
 
-        private static bool ContainsUnsafeInvocationReturnValue(SyntaxNode container, SemanticModel semanticModel)
-        {
-            return container.DescendantNodes()
+        private static bool ContainsUnsafeInvocationReturnValue(SyntaxNode container, SemanticModel semanticModel) =>
+            container.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .Select(i => semanticModel.GetSymbolInfo(i).Symbol as IMethodSymbol)
                 .Any(m => IsUnsafe(m?.ReturnType));
-        }
 
-        private static bool ContainsUnsafeTypedIdentifier(SyntaxNode container, SemanticModel semanticModel)
-        {
-            return container.DescendantNodes()
+        private static bool ContainsUnsafeTypedIdentifier(SyntaxNode container, SemanticModel semanticModel) =>
+            container.DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Select(i => semanticModel.GetTypeInfo(i).Type)
                 .Any(t => IsUnsafe(t));
-        }
 
-        private static bool ContainsFixedDeclaration(SyntaxNode container)
-        {
-            return container.DescendantNodes()
+        private static bool ContainsFixedDeclaration(SyntaxNode container) =>
+            container.DescendantNodes()
                 .OfType<FieldDeclarationSyntax>()
                 .Any(fd => fd.Modifiers.Any(SyntaxKind.FixedKeyword));
-        }
 
-        private static bool ContainsUnsafeConstruct(SyntaxNode container)
-        {
-            return container.DescendantNodes().Any(node => UnsafeConstructKinds.Contains(node.Kind()));
-        }
+        private static bool ContainsUnsafeConstruct(SyntaxNode container) =>
+            container.DescendantNodes().Any(node => UnsafeConstructKinds.Contains(node.Kind()));
 
         private static bool IsUnsafe(ITypeSymbol type)
         {
@@ -195,16 +193,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsUnsafe(((IArrayTypeSymbol)type).ElementType);
         }
 
-        private static readonly ISet<SyntaxKind> UnsafeConstructKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.AddressOfExpression,
-            SyntaxKind.PointerIndirectionExpression,
-            SyntaxKind.SizeOfExpression,
-            SyntaxKind.PointerType,
-            SyntaxKind.FixedStatement,
-            SyntaxKind.StackAllocArrayCreationExpression
-        };
-
         private static void MarkAllUnsafeBlockInside(SyntaxNode container, SyntaxNodeAnalysisContext context)
         {
             foreach (var @unsafe in container.DescendantNodes()
@@ -215,44 +203,42 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ReportOnUnsafeBlock(SyntaxNodeAnalysisContext context, Location issueLocation)
-        {
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, issueLocation, "unsafe", "redundant"));
-        }
+        private static void ReportOnUnsafeBlock(SyntaxNodeAnalysisContext context, Location issueLocation) =>
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, issueLocation, "unsafe", "redundant"));
 
         private static bool TryGetUnsafeKeyword(MemberDeclarationSyntax memberDeclaration, out SyntaxToken unsafeKeyword)
         {
             if (memberDeclaration is DelegateDeclarationSyntax delegateDeclaration)
             {
                 unsafeKeyword = delegateDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
-                return unsafeKeyword != default(SyntaxToken);
+                return unsafeKeyword != default;
             }
 
             if (memberDeclaration is BasePropertyDeclarationSyntax propertyDeclaration)
             {
                 unsafeKeyword = propertyDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
-                return unsafeKeyword != default(SyntaxToken);
+                return unsafeKeyword != default;
             }
 
             if (memberDeclaration is BaseMethodDeclarationSyntax methodDeclaration)
             {
                 unsafeKeyword = methodDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
-                return unsafeKeyword != default(SyntaxToken);
+                return unsafeKeyword != default;
             }
 
             if (memberDeclaration is BaseFieldDeclarationSyntax fieldDeclaration)
             {
                 unsafeKeyword = fieldDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
-                return unsafeKeyword != default(SyntaxToken);
+                return unsafeKeyword != default;
             }
 
             if (memberDeclaration is BaseTypeDeclarationSyntax typeDeclaration)
             {
                 unsafeKeyword = typeDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
-                return unsafeKeyword != default(SyntaxToken);
+                return unsafeKeyword != default;
             }
 
-            unsafeKeyword = default(SyntaxToken);
+            unsafeKeyword = default;
             return false;
         }
 
@@ -261,15 +247,15 @@ namespace SonarAnalyzer.Rules.CSharp
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
             var classSymbol = context.SemanticModel.GetDeclaredSymbol(typeDeclaration);
 
-            if (classSymbol == null ||
-                !typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword) ||
-                classSymbol.DeclaringSyntaxReferences.Length > 1)
+            if (classSymbol == null
+                || !typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
+                || classSymbol.DeclaringSyntaxReferences.Length > 1)
             {
                 return;
             }
 
             var keyword = typeDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, keyword.GetLocation(), "partial", "gratuitous"));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, keyword.GetLocation(), "partial", "gratuitous"));
         }
 
         private static SyntaxTokenList GetModifiers(MemberDeclarationSyntax memberDeclaration)
@@ -280,7 +266,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var property = memberDeclaration as PropertyDeclarationSyntax;
-            return property?.Modifiers ?? default(SyntaxTokenList);
+            return property?.Modifiers ?? default;
         }
 
         private static void CheckSealedMemberInSealedClass(SyntaxNodeAnalysisContext context)
@@ -292,8 +278,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!memberSymbol.IsSealed ||
-                !memberSymbol.ContainingType.IsSealed)
+            if (!memberSymbol.IsSealed
+                || !memberSymbol.ContainingType.IsSealed)
             {
                 return;
             }
@@ -302,14 +288,38 @@ namespace SonarAnalyzer.Rules.CSharp
             if (modifiers.Any(SyntaxKind.SealedKeyword))
             {
                 var keyword = modifiers.First(m => m.IsKind(SyntaxKind.SealedKeyword));
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, keyword.GetLocation(), "sealed", "redundant"));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, keyword.GetLocation(), "sealed", "redundant"));
             }
         }
-
 
         private class CheckedWalker : CSharpSyntaxWalker
         {
             private readonly SyntaxNodeAnalysisContext context;
+
+            private static readonly ISet<SyntaxKind> BinaryOperationsForChecked = new HashSet<SyntaxKind>
+            {
+                SyntaxKind.AddExpression,
+                SyntaxKind.SubtractExpression,
+                SyntaxKind.MultiplyExpression,
+                SyntaxKind.DivideExpression
+            };
+
+            private static readonly ISet<SyntaxKind> AssignmentsForChecked = new HashSet<SyntaxKind>
+            {
+                SyntaxKind.AddAssignmentExpression,
+                SyntaxKind.SubtractAssignmentExpression,
+                SyntaxKind.MultiplyAssignmentExpression,
+                SyntaxKind.DivideAssignmentExpression
+            };
+
+            private static readonly ISet<SyntaxKind> UnaryOperationsForChecked = new HashSet<SyntaxKind>
+            {
+                SyntaxKind.UnaryMinusExpression,
+                SyntaxKind.PostDecrementExpression,
+                SyntaxKind.PostIncrementExpression,
+                SyntaxKind.PreDecrementExpression,
+                SyntaxKind.PreIncrementExpression
+            };
 
             private bool isCurrentContextChecked;
             private bool currentContextHasIntegralOperation;
@@ -320,28 +330,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (context.Node is CheckedStatementSyntax statement)
                 {
-                    this.isCurrentContextChecked = statement.IsKind(SyntaxKind.CheckedStatement);
+                    isCurrentContextChecked = statement.IsKind(SyntaxKind.CheckedStatement);
                     return;
                 }
 
                 if (context.Node is CheckedExpressionSyntax expression)
                 {
-                    this.isCurrentContextChecked = expression.IsKind(SyntaxKind.CheckedExpression);
+                    isCurrentContextChecked = expression.IsKind(SyntaxKind.CheckedExpression);
                     return;
                 }
 
                 throw new NotSupportedException("Only checked expressions and statements are supported");
             }
 
-            public override void VisitCheckedExpression(CheckedExpressionSyntax node)
-            {
+            public override void VisitCheckedExpression(CheckedExpressionSyntax node) =>
                 VisitChecked(node, SyntaxKind.CheckedExpression, node.Keyword, base.VisitCheckedExpression);
-            }
 
-            public override void VisitCheckedStatement(CheckedStatementSyntax node)
-            {
+            public override void VisitCheckedStatement(CheckedStatementSyntax node) =>
                 VisitChecked(node, SyntaxKind.CheckedStatement, node.Keyword, base.VisitCheckedStatement);
-            }
 
             public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
             {
@@ -380,81 +386,48 @@ namespace SonarAnalyzer.Rules.CSharp
                 SetHasIntegralOperation(node);
             }
 
+            public static bool IsTopLevel(SyntaxNode node) =>
+                !node.Ancestors().Any(x => x is CheckedStatementSyntax || x is CheckedExpressionSyntax);
+
             private void VisitChecked<T>(T node, SyntaxKind checkedKind, SyntaxToken tokenToReport, Action<T> baseCall)
-                where T: SyntaxNode
+                where T : SyntaxNode
             {
                 var isThisNodeChecked = node.IsKind(checkedKind);
 
-                var originalIsCurrentContextChecked = this.isCurrentContextChecked;
-                var originalContextHasIntegralOperation = this.currentContextHasIntegralOperation;
+                var originalIsCurrentContextChecked = isCurrentContextChecked;
+                var originalContextHasIntegralOperation = currentContextHasIntegralOperation;
 
-                this.isCurrentContextChecked = isThisNodeChecked;
-                this.currentContextHasIntegralOperation = false;
+                isCurrentContextChecked = isThisNodeChecked;
+                currentContextHasIntegralOperation = false;
 
                 baseCall(node);
 
                 var isSimplyRendundant = IsCurrentNodeEmbeddedInsideSameChecked(node, isThisNodeChecked, originalIsCurrentContextChecked);
 
-                if (isSimplyRendundant || !this.currentContextHasIntegralOperation)
+                if (isSimplyRendundant || !currentContextHasIntegralOperation)
                 {
                     var keywordToReport = isThisNodeChecked ? "checked" : "unchecked";
-                    this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, tokenToReport.GetLocation(), keywordToReport, "redundant"));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, tokenToReport.GetLocation(), keywordToReport, "redundant"));
                 }
 
-                this.isCurrentContextChecked = originalIsCurrentContextChecked;
-                this.currentContextHasIntegralOperation = originalContextHasIntegralOperation ||
-                    this.currentContextHasIntegralOperation && isSimplyRendundant;
+                isCurrentContextChecked = originalIsCurrentContextChecked;
+                currentContextHasIntegralOperation = originalContextHasIntegralOperation || (currentContextHasIntegralOperation && isSimplyRendundant);
             }
 
-            private bool IsCurrentNodeEmbeddedInsideSameChecked(SyntaxNode node, bool isThisNodeChecked, bool isCurrentContextChecked)
-            {
-                return node != this.context.Node &&
-                    isThisNodeChecked == isCurrentContextChecked;
-            }
+            private bool IsCurrentNodeEmbeddedInsideSameChecked(SyntaxNode node, bool isThisNodeChecked, bool isCurrentContextChecked) =>
+                node != context.Node && isThisNodeChecked == isCurrentContextChecked;
 
             private void SetHasIntegralOperation(CastExpressionSyntax node)
             {
-                var expressionType = this.context.SemanticModel.GetTypeInfo(node.Expression).Type;
-                var castedToType = this.context.SemanticModel.GetTypeInfo(node.Type).Type;
-                this.currentContextHasIntegralOperation |= castedToType != null && expressionType != null && castedToType.IsAny(KnownType.IntegralNumbers);
+                var expressionType = context.SemanticModel.GetTypeInfo(node.Expression).Type;
+                var castedToType = context.SemanticModel.GetTypeInfo(node.Type).Type;
+                currentContextHasIntegralOperation |= castedToType != null && expressionType != null && castedToType.IsAny(KnownType.IntegralNumbers);
             }
 
             private void SetHasIntegralOperation(ExpressionSyntax node)
             {
-                var methodSymbol = this.context.SemanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
-                this.currentContextHasIntegralOperation |= methodSymbol != null && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers);
-            }
-
-            private static readonly ISet<SyntaxKind> BinaryOperationsForChecked = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.AddExpression,
-                SyntaxKind.SubtractExpression,
-                SyntaxKind.MultiplyExpression,
-                SyntaxKind.DivideExpression
-            };
-
-            private static readonly ISet<SyntaxKind> AssignmentsForChecked = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.AddAssignmentExpression,
-                SyntaxKind.SubtractAssignmentExpression,
-                SyntaxKind.MultiplyAssignmentExpression,
-                SyntaxKind.DivideAssignmentExpression
-            };
-
-            private static readonly ISet<SyntaxKind> UnaryOperationsForChecked = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.UnaryMinusExpression,
-                SyntaxKind.PostDecrementExpression,
-                SyntaxKind.PostIncrementExpression,
-                SyntaxKind.PreDecrementExpression,
-                SyntaxKind.PreIncrementExpression
-            };
-
-            public static bool IsTopLevel(SyntaxNode node)
-            {
-                return !node.Ancestors().Any(a =>
-                    a is CheckedStatementSyntax ||
-                    a is CheckedExpressionSyntax);
+                var methodSymbol = context.SemanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
+                currentContextHasIntegralOperation |= methodSymbol != null && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers);
             }
         }
     }
