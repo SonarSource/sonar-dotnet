@@ -38,10 +38,23 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S1121";
         private const string MessageFormat = "Extract the assignment of '{0}' from this expression.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly ISet<SyntaxKind> AllowedParentExpressionKinds = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.SimpleAssignmentExpression,
+            SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.SimpleLambdaExpression,
+            SyntaxKind.AnonymousMethodExpression,
+        };
+        private static readonly ISet<SyntaxKind> RelationalExpressionKinds = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression,
+            SyntaxKind.LessThanExpression, SyntaxKind.LessThanOrEqualExpression,
+            SyntaxKind.GreaterThanExpression, SyntaxKind.GreaterThanOrEqualExpression
+        };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -54,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsNonCompliantSubExpression(assignment, topParenthesizedExpression)
                         || IsDirectlyInStatementCondition(assignment, topParenthesizedExpression))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.OperatorToken.GetLocation(), assignment.Left.ToString()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.OperatorToken.GetLocation(), assignment.Left.ToString()));
                     }
                 },
                 SyntaxKind.SimpleAssignmentExpression,
@@ -72,10 +85,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsNonCompliantSubExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression) =>
             IsInsideExpression(topParenthesizedExpression)
+            && !IsInInitializerExpression(topParenthesizedExpression)
             && !IsCompliantAssignmentInsideExpression(assignment, topParenthesizedExpression);
 
         private static bool IsInsideExpression(ExpressionSyntax expression) =>
             expression.Parent.FirstAncestorOrSelf<ExpressionSyntax>() != null;
+
+        private static bool IsInInitializerExpression(ExpressionSyntax expression) =>
+            expression.Parent.IsAnyKind(SyntaxKindEx.WithInitializerExpression, SyntaxKind.ObjectInitializerExpression);
 
         private static bool IsCompliantAssignmentInsideExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression)
         {
@@ -97,7 +114,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            return AllowedParentExpressionKinds.Contains(expressionParent.Kind());
+            return !IsInInitializerExpression(expressionParent)
+                   && AllowedParentExpressionKinds.Contains(expressionParent.Kind());
         }
 
         private static bool IsCompliantCoalesceExpression(ExpressionSyntax parentExpression, AssignmentExpressionSyntax assignment) =>
@@ -159,21 +177,5 @@ namespace SonarAnalyzer.Rules.CSharp
             return condition != null
                    && condition.Contains(originalExpression);
         }
-
-        private static readonly ISet<SyntaxKind> AllowedParentExpressionKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.SimpleAssignmentExpression,
-            SyntaxKind.ParenthesizedLambdaExpression,
-            SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.ObjectInitializerExpression
-        };
-
-        private static readonly ISet<SyntaxKind> RelationalExpressionKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression,
-            SyntaxKind.LessThanExpression, SyntaxKind.LessThanOrEqualExpression,
-            SyntaxKind.GreaterThanExpression, SyntaxKind.GreaterThanOrEqualExpression
-        };
     }
 }

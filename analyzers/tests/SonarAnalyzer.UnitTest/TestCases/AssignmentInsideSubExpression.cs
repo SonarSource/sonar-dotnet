@@ -101,6 +101,8 @@ namespace Tests.Diagnostics
             var v6 = new MyClass { MyField = 42 };
             var v7 = new MyClass() { MyField = 42 };
             var v8 = foo(xx => { xx = 42; return 0; });
+            var v9 = new MyClass { MyField = i = 42 }; // Noncompliant
+            var v10 = new MyClass() { MyField = i = 42 }; // Noncompliant
 
             var index = 0;
             new int[] { 0, 1, 2 }[index = 2] = 10; // Noncompliant
