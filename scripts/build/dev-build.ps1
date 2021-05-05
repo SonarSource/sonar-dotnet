@@ -68,6 +68,12 @@ try {
         nuget restore .\packages.SonarAnalyzer.Vsix.config -PackagesDirectory "../../packages"
         Pop-Location
 
+        # Cleanup first to avoid surprises with old files #3006
+        Get-ChildItem src\*\bin\Debug | Remove-Item -Recurse
+        Get-ChildItem src\*\bin\Release | Remove-Item -Recurse
+        Get-ChildItem tests\*\bin\Debug | Remove-Item -Recurse
+        Get-ChildItem tests\*\bin\Release | Remove-Item -Recurse
+
         Invoke-MSBuild $msbuildVersion $solutionName /t:"Restore,Rebuild" `
             /consoleloggerparameters:Summary `
             /m `
