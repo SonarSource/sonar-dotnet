@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -30,27 +29,23 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class GenericInheritanceShouldNotBeRecursive : GenericInheritanceShouldNotBeRecursiveBase
+    public sealed class GenericInheritanceShouldNotBeRecursive : GenericInheritanceShouldNotBeRecursiveBase<SyntaxKind, TypeBlockSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+        protected override SyntaxKind[] SyntaxKinds { get; } =
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var typeDeclaration = (TypeBlockSyntax)c.Node;
-                    var typeSymbol = c.SemanticModel.GetDeclaredSymbol(typeDeclaration);
-                    if (IsRecursiveInheritance(typeSymbol))
-                    {
-                        c.ReportDiagnosticWhenActive(
-                            Diagnostic.Create(rule, typeDeclaration.BlockStatement.Identifier.GetLocation(),
-                                typeDeclaration.BlockStatement.DeclarationKeyword));
-                    }
-                },
-                SyntaxKind.ClassBlock,
-                SyntaxKind.InterfaceBlock);
-        }
+            SyntaxKind.ClassBlock,
+            SyntaxKind.InterfaceBlock,
+        };
+
+        protected override SyntaxToken GetKeyword(TypeBlockSyntax declaration) =>
+            declaration.BlockStatement.DeclarationKeyword;
+
+        protected override Location GetLocation(TypeBlockSyntax declaration) =>
+            declaration.BlockStatement.Identifier.GetLocation();
+
+        protected override INamedTypeSymbol GetNamedTypeSymbol(TypeBlockSyntax declaration, SemanticModel semanticModel) =>
+            semanticModel.GetDeclaredSymbol(declaration);
     }
 }
