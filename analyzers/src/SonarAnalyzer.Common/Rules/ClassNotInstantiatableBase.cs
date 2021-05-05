@@ -18,59 +18,34 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
     public abstract class ClassNotInstantiatableBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S3453";
-        protected const string MessageFormat = "This class can't be instantiated; make {0} 'public'.";
+        protected const string MessageFormat = "This {0} can't be instantiated; make {1} 'public'.";
 
-        protected static bool HasNonPrivateConstructor(IEnumerable<IMethodSymbol> constructors)
-        {
-            return constructors.Any(method => method.DeclaredAccessibility != Accessibility.Private);
-        }
+        protected abstract bool IsAnyNestedTypeExtendingCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel);
 
-        protected static bool IsAnyConstructorCalled
-            <TBaseTypeSyntax, TObjectCreationSyntax, TClassDeclarationSyntax>
+        protected bool IsAnyConstructorCalled
+            <TBaseTypeSyntax, TObjectCreationSyntax>
             (INamedTypeSymbol namedType, IEnumerable<SyntaxNodeAndSemanticModel<TBaseTypeSyntax>> typeDeclarations)
             where TBaseTypeSyntax : SyntaxNode
-            where TObjectCreationSyntax : SyntaxNode
-            where TClassDeclarationSyntax : SyntaxNode
-        {
-            return typeDeclarations
-                .Select(classDeclaration => new
+            where TObjectCreationSyntax : SyntaxNode =>
+            typeDeclarations
+                .Select(typeDeclaration => new
                 {
-                    classDeclaration.SemanticModel,
-                    DescendantNodes = classDeclaration.SyntaxNode.DescendantNodes().ToList()
+                    typeDeclaration.SemanticModel,
+                    DescendantNodes = typeDeclaration.SyntaxNode.DescendantNodes().ToList()
                 })
                 .Any(descendants =>
                     IsAnyConstructorToCurrentType<TObjectCreationSyntax>(descendants.DescendantNodes, namedType, descendants.SemanticModel) ||
-                    IsAnyNestedTypeExtendingCurrentType<TClassDeclarationSyntax>(descendants.DescendantNodes, namedType, descendants.SemanticModel));
-        }
-
-        protected static bool IsAnyNestedTypeExtendingCurrentType<TClassDeclarationSyntax>(
-            IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel)
-            where TClassDeclarationSyntax : SyntaxNode
-        {
-            return descendantNodes
-                .OfType<TClassDeclarationSyntax>()
-                .Select(c => (semanticModel.GetDeclaredSymbol(c) as ITypeSymbol)?.BaseType)
-                .Any(baseType => baseType != null && baseType.OriginalDefinition.DerivesFrom(namedType));
-        }
-
-        protected static bool IsAnyConstructorToCurrentType<TObjectCreationSyntax>(
-            IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel)
-            where TObjectCreationSyntax : SyntaxNode =>
-            descendantNodes
-                .OfType<TObjectCreationSyntax>()
-                .Select(ctor => semanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol)
-                .WhereNotNull()
-                .Any(ctor => Equals(ctor.ContainingType?.OriginalDefinition, namedType));
+                    IsAnyNestedTypeExtendingCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel));
 
         protected static IEnumerable<IMethodSymbol> GetConstructors(IEnumerable<ISymbol> members) =>
             members
@@ -91,9 +66,19 @@ namespace SonarAnalyzer.Rules
             && !HasNonPrivateConstructor(constructors)
             && constructors.All(c => !c.GetAttributes().Any());
 
-        protected static bool DerivesFromSafeHandle(ITypeSymbol typeSymbol)
-        {
-            return typeSymbol.DerivesFrom(KnownType.System_Runtime_InteropServices_SafeHandle);
-        }
+        protected static bool DerivesFromSafeHandle(ITypeSymbol typeSymbol) =>
+            typeSymbol.DerivesFrom(KnownType.System_Runtime_InteropServices_SafeHandle);
+
+        private static bool HasNonPrivateConstructor(IEnumerable<IMethodSymbol> constructors) =>
+            constructors.Any(method => method.DeclaredAccessibility != Accessibility.Private);
+
+        private static bool IsAnyConstructorToCurrentType<TObjectCreationSyntax>(
+            IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel)
+            where TObjectCreationSyntax : SyntaxNode =>
+            descendantNodes
+                .OfType<TObjectCreationSyntax>()
+                .Select(ctor => semanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol)
+                .WhereNotNull()
+                .Any(ctor => Equals(ctor.ContainingType?.OriginalDefinition, namedType));
     }
 }
