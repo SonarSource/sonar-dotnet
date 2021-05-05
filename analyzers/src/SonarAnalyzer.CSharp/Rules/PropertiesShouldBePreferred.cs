@@ -26,7 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.ShimLayer.CSharp;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -45,7 +45,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (!(c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol typeSymbol))
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType
+                        || !(c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol typeSymbol))
                     {
                         return;
                     }
