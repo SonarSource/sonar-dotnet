@@ -20,7 +20,7 @@ public record Record : RecordBase
 
     protected internal string GetName4() => null; // Noncompliant
 
-    private string GetName5() => null;
+    private string GetName5() => null; // Compliant
 
     public string Property { get; set; }
 }
@@ -42,7 +42,7 @@ public record PositionalRecord(string Parameter) : RecordBase
 
     protected internal string GetName4() => null; // Noncompliant
 
-    private string GetName5() => null;
+    private string GetName5() => null; // Compliant
 
     public string Property { get; set; }
 }

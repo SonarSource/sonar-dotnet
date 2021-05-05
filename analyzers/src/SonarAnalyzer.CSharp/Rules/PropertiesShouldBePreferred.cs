@@ -91,11 +91,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return false;
             }
-            else
-            {
-                var nameParts = method.Name.SplitCamelCaseToWords().ToList();
-                return nameParts.Count > 1 && nameParts[0] == "GET";
-            }
+            var nameParts = method.Name.SplitCamelCaseToWords().ToList();
+            return nameParts.Count > 1 && nameParts[0] == "GET";
         }
 
         private static bool UsageAttributesAllowProperties(IMethodSymbol method) =>
