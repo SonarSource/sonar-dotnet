@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class AsyncVoidMethod : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3168";
+        private const string DiagnosticId = "S3168";
         private const string MessageFormat = "Return 'Task' instead.";
         private const string MsTestV1AssemblyName = "Microsoft.VisualStudio.QualityTools.UnitTestFramework";
 
@@ -47,8 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassCleanupAttribute,
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassInitializeAttribute,
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute,
-                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute
-            );
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -65,9 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
 
         private static bool IsViolatingRule(IMethodSymbol methodSymbol) =>
-            methodSymbol != null
-            && methodSymbol.IsAsync
-            && methodSymbol.ReturnsVoid
+            methodSymbol is {IsAsync: true, ReturnsVoid: true}
             && methodSymbol.IsChangeable();
 
         private static bool IsExceptionToTheRule(MethodDeclarationSyntax methodDeclaration, IMethodSymbol methodSymbol) =>
@@ -77,13 +75,13 @@ namespace SonarAnalyzer.Rules.CSharp
             || HasAnyMsTestV1AllowedAttribute(methodSymbol);
 
         private static bool IsUsedAsEventHandler(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>() is ClassDeclarationSyntax parentClass
-            && parentClass.DescendantNodes()
+            methodDeclaration.FirstAncestorOrSelf((SyntaxNode x) => x.IsKind(SyntaxKind.ClassDeclaration) || x.IsKind(SyntaxKindEx.RecordDeclaration)) is { } parentDeclaration
+            && parentDeclaration.DescendantNodes()
                 .OfType<AssignmentExpressionSyntax>()
-                .Where(aes => aes.IsKind(SyntaxKind.AddAssignmentExpression))
-                .Select(aes => aes.Right)
+                .Where(x => x.IsKind(SyntaxKind.AddAssignmentExpression))
+                .Select(x => x.Right)
                 .OfType<IdentifierNameSyntax>()
-                .Any(ins => ins.Identifier.ValueText == methodDeclaration.Identifier.ValueText);
+                .Any(x => x.Identifier.ValueText == methodDeclaration.Identifier.ValueText);
 
         private static bool IsNamedAsEventHandler(ISymbol symbol) =>
             symbol.Name.Length > 2
@@ -91,8 +89,8 @@ namespace SonarAnalyzer.Rules.CSharp
             && char.IsUpper(symbol.Name[2]);
 
         private static bool HasAnyMsTestV1AllowedAttribute(IMethodSymbol methodSymbol) =>
-            methodSymbol.GetAttributes().Any(a =>
-                a.AttributeClass.ContainingAssembly.Name == MsTestV1AssemblyName
-                && a.AttributeClass.IsAny(AllowedAsyncVoidMsTestAttributes));
+            methodSymbol.GetAttributes().Any(x =>
+                x.AttributeClass.ContainingAssembly.Name == MsTestV1AssemblyName
+                && x.AttributeClass.IsAny(AllowedAsyncVoidMsTestAttributes));
     }
 }

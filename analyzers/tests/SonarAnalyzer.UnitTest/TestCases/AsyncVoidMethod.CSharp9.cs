@@ -35,7 +35,13 @@ namespace Tests.Diagnostics
             MyEvent += EventHandlerCases_MyEvent;
         }
 
-        private async void EventHandlerCases_MyEvent(object sender, bool e) // Noncompliant FP
+        private async void EventHandlerCases_MyEvent(object sender, bool e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        private async void NotAHandler(object sender) // Noncompliant
+//                    ^^^^
         {
             await Task.Run(() => Console.WriteLine("test"));
         }
