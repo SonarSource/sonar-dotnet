@@ -93,7 +93,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ContainsAssertion(MethodDeclarationSyntax methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
         {
-            var currentSemanticModel = methodDeclaration.EnsureCorrectSemanticModel(previousSemanticModel);
+            var currentSemanticModel = methodDeclaration.EnsureCorrectSemanticModelOrDefault(previousSemanticModel);
+            if (currentSemanticModel == null)
+            {
+                return false;
+            }
             var descendantNodes = methodDeclaration.DescendantNodes();
             var invocations = descendantNodes.OfType<InvocationExpressionSyntax>().ToArray();
             if (invocations.Any(x => IsAssertion(x))

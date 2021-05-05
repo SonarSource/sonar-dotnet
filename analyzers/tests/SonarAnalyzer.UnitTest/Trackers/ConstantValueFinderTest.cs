@@ -57,5 +57,36 @@ public partial class Sample
             var finder = new CSharpConstantValueFinder(compilation.GetSemanticModel(tree));
             finder.FindConstant(returnExpression).Should().Be(42);
         }
+
+        [TestMethod]
+        public void WrongCompilationBeingUsed()
+        {
+            const string firstSnippet = @"
+public class Foo
+{
+    private static int Original = 42;
+    private int Field = Original;
+}";
+            const string secondSnippet = @"
+public class Bar
+{
+    private int Field = 42;
+    public int Method()
+    {
+        return Field;
+    }
+}";
+            var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+                .AddSnippet(firstSnippet)
+                .GetCompilation();
+            var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+                .AddSnippet(secondSnippet)
+                .GetCompilation();
+            var secondCompilationReturnExpression = secondCompilation.SyntaxTrees.Single().GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
+            var firstCompilationFinder = new CSharpConstantValueFinder(firstCompilation.GetSemanticModel(firstCompilation.SyntaxTrees.Single()));
+            firstCompilationFinder.FindConstant(secondCompilationReturnExpression).Should().BeNull();
+            var secondCompilationFinder = new CSharpConstantValueFinder(secondCompilation.GetSemanticModel(secondCompilation.SyntaxTrees.Single()));
+            secondCompilationFinder.FindConstant(secondCompilationReturnExpression).Should().NotBeNull();
+        }
     }
 }

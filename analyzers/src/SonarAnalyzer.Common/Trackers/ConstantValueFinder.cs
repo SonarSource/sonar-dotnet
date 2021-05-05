@@ -46,12 +46,18 @@ namespace SonarAnalyzer.Helpers
         public object FindConstant(SyntaxNode node) =>
             FindConstant(node, null);
 
-        private object FindConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables) =>
-            node == null || node.RawKind == nullLiteralExpressionSyntaxKind  // Performance shortcut
-            ? null
-            : node.EnsureCorrectSemanticModel(semanticModel).GetConstantValue(node).Value ?? FindAssignedConstant(node, visitedVariables);
+        private object FindConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables)
+        {
+            if (node == null || node.RawKind == nullLiteralExpressionSyntaxKind) // Performance shortcut
+            {
+                return null;
+            }
+            return node.EnsureCorrectSemanticModelOrDefault(semanticModel) is { } nodeSemanticModel
+                ? nodeSemanticModel.GetConstantValue(node).Value ?? FindAssignedConstant(node, nodeSemanticModel, visitedVariables)
+                : null;
+        }
 
-        private object FindAssignedConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables)
+        private object FindAssignedConstant(SyntaxNode node, SemanticModel nodeSemanticModel, HashSet<SyntaxNode> visitedVariables)
         {
             return node is TIdentifierNameSyntax identifier
                 ? FindConstant(assignmentFinder.FindLinearPrecedingAssignmentExpression(IdentifierName(identifier), node, FindFieldInitializer), visitedVariables)
@@ -59,7 +65,7 @@ namespace SonarAnalyzer.Helpers
 
             SyntaxNode FindFieldInitializer()
             {
-                if (identifier.EnsureCorrectSemanticModel(semanticModel).GetSymbolInfo(identifier).Symbol is IFieldSymbol fieldSymbol
+                if (nodeSemanticModel.GetSymbolInfo(identifier).Symbol is IFieldSymbol fieldSymbol
                     && VariableDeclarator(fieldSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()) is { } variable
                     && (visitedVariables == null || !visitedVariables.Contains(variable)))
                 {

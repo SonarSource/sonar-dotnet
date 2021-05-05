@@ -64,8 +64,11 @@ namespace SonarAnalyzer.Helpers
 
         public override void Visit(SyntaxNode node)
         {
-            semanticModel = node.EnsureCorrectSemanticModel(semanticModel ?? compilation.GetSemanticModel(node.SyntaxTree));
-            base.Visit(node);
+            semanticModel = node.EnsureCorrectSemanticModelOrDefault(semanticModel ?? compilation.GetSemanticModel(node.SyntaxTree));
+            if (semanticModel != null)
+            {
+                base.Visit(node);
+            }
         }
 
         // TupleExpression "(a, b) = qix"

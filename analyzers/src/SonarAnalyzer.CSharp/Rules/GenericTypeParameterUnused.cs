@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IdentifierNameSyntax>()
                 .Where(identifier => !(identifier.Parent is TypeParameterConstraintClauseSyntax))
                 .Where(identifier => typeParameterNames.Contains(identifier.Identifier.ValueText))
-                .Select(identifier => identifier.EnsureCorrectSemanticModel(context.SemanticModel)?.GetSymbolInfo(identifier).Symbol)
+                .Select(identifier => identifier.EnsureCorrectSemanticModelOrDefault(context.SemanticModel)?.GetSymbolInfo(identifier).Symbol)
                 .Where(symbol => symbol != null && symbol.Kind == SymbolKind.TypeParameter)
                 .Select(symbol => symbol.Name)
                 .ToList();
