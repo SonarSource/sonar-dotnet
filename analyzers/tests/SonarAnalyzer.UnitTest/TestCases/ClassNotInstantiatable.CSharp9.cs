@@ -7,14 +7,14 @@ public record Person(string FirstName, string LastName); // Compliant
 
 public record EmptyRecord { } // Compliant
 
-public record Person1 // Noncompliant
+public record Person1 // Noncompliant {{This record can't be instantiated; make its constructor 'public'.}}
 {
     public string FirstName { get; }
 
     private Person1() { }
 }
 
-public record Person2 // Noncompliant
+public record Person2 // Noncompliant {{This record can't be instantiated; make at least one of its constructors 'public'.}}
 {
     public string FirstName { get; }
 
