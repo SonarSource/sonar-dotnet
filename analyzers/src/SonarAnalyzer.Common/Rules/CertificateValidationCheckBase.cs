@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules
         where TMemberAccessSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4830";
-        protected const string MessageFormat = "Enable server certificate validation on this SSL/TLS connection";
+        private const string MessageFormat = "Enable server certificate validation on this SSL/TLS connection";
         private readonly DiagnosticDescriptor rule;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -62,7 +62,6 @@ namespace SonarAnalyzer.Rules
         protected abstract Location ExpressionLocation(SyntaxNode expression);
         protected abstract void SplitAssignment(TAssignmentExpressionSyntax assignment, out TIdentifierNameSyntax leftIdentifier, out TExpressionSyntax right);
         protected abstract IEqualityComparer<TExpressionSyntax> CreateNodeEqualityComparer();
-        protected abstract SyntaxNode FindRootClassOrModule(SyntaxNode node);
         protected abstract TExpressionSyntax[] FindReturnAndThrowExpressions(InspectionContext c, SyntaxNode block);
         protected abstract bool IsTrueLiteral(TExpressionSyntax expression);
         protected abstract TExpressionSyntax VariableInitializer(TVariableSyntax variable);
@@ -70,6 +69,7 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxNode LocalVariableScope(TVariableSyntax variable);
         protected abstract SyntaxNode ExtractArgumentExpressionNode(SyntaxNode expression);
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
+        protected abstract bool IsClassOrRecordDeclaration(SyntaxNode expression);
         private protected abstract KnownType GenericDelegateType();
 
         protected CertificateValidationCheckBase() =>
@@ -112,10 +112,10 @@ namespace SonarAnalyzer.Rules
                 c.VisitedMethods.Add(containingMethodDeclaration);
                 var containingMethod = c.Context.SemanticModel.GetDeclaredSymbol(containingMethodDeclaration) as IMethodSymbol;
                 var identText = Language.Syntax.NodeIdentifier(param)?.ValueText;
-                var paramSymbol = containingMethod.Parameters.Single(x => x.Name == identText);
-                if (!paramSymbol.IsParams)  // Validation for TryGetNonParamsSyntax, ParamArray/params and therefore array arguments are not inspected
+                var paramSymbol = containingMethod?.Parameters.Single(x => x.Name == identText);
+                if (paramSymbol is {IsParams: false})  // Validation for TryGetNonParamsSyntax, ParamArray/params and therefore array arguments are not inspected
                 {
-                    foreach (var invocation in FindInvocationList(c.Context, FindRootClassOrModule(param), containingMethod))
+                    foreach (var invocation in FindInvocationList(c.Context, FindRootClassOrRecordOrModule(param), containingMethod))
                     {
                         var methodParamLookup = CreateParameterLookup(invocation, containingMethod);
                         if (methodParamLookup.TryGetNonParamsSyntax(paramSymbol, out var expression))
@@ -135,7 +135,7 @@ namespace SonarAnalyzer.Rules
             {
                 var returnExpressions = FindReturnAndThrowExpressions(c, block);
                 // There must be at least one return, that does not return true to be compliant. There can be NULL from standalone Throw statement.
-                if (returnExpressions.All(x => IsTrueLiteral(x)))
+                if (returnExpressions.All(IsTrueLiteral))
                 {
                     ret.AddRange(returnExpressions.Select(x => x.GetLocation()));
                 }
@@ -143,13 +143,24 @@ namespace SonarAnalyzer.Rules
             return ret.ToImmutable();
         }
 
+        protected virtual SyntaxNode FindRootClassOrRecordOrModule(SyntaxNode node)
+        {
+            SyntaxNode candidate;
+            var current = node.FirstAncestorOrSelf<SyntaxNode>(IsClassOrRecordDeclaration);
+            while (current != null && (candidate = current.Parent?.FirstAncestorOrSelf<SyntaxNode>(IsClassOrRecordDeclaration)) != null)  // Search for parent of nested class/record
+            {
+                current = candidate;
+            }
+            return current;
+        }
+
         private void TryReportLocations(InspectionContext c, Location primaryLocation, SyntaxNode expression)
         {
             var locations = ArgumentLocations(c, expression);
             if (!locations.IsEmpty)
             {
-                // Report both, assignemnt as well as all implementation occurances
-                c.Context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, primaryLocation, additionalLocations: locations));
+                // Report both, assignment as well as all implementation occurrences
+                c.Context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, primaryLocation, locations));
             }
         }
 
@@ -159,7 +170,7 @@ namespace SonarAnalyzer.Rules
             {
                 return true;
             }
-            else if (type is INamedTypeSymbol namedSymbol && type.OriginalDefinition.Is(GenericDelegateType()))
+            if (type is INamedTypeSymbol namedSymbol && type.OriginalDefinition.Is(GenericDelegateType()))
             {
                 // HttpClientHandler.ServerCertificateCustomValidationCallback uses Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool>
                 // We're actually looking for Func<Any Sender, X509Certificate2, X509Chain, SslPolicyErrors, bool>
@@ -171,10 +182,7 @@ namespace SonarAnalyzer.Rules
                     && parameters[3].Type.Is(KnownType.System_Net_Security_SslPolicyErrors)
                     && namedSymbol.DelegateInvokeMethod.ReturnType.Is(KnownType.System_Boolean);
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         private ImmutableArray<Location> ArgumentLocations(InspectionContext c, SyntaxNode expression)
@@ -182,7 +190,7 @@ namespace SonarAnalyzer.Rules
             switch (ExtractArgumentExpressionNode(expression))
             {
                 case TIdentifierNameSyntax identifier:
-                    if (c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol is { }  identSymbol && identSymbol.DeclaringSyntaxReferences.Length == 1)
+                    if (c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol is {DeclaringSyntaxReferences: {Length: 1}} identSymbol)
                     {
                         return IdentifierLocations(c, SyntaxFromReference(identSymbol.DeclaringSyntaxReferences.Single()));
                     }
@@ -190,8 +198,7 @@ namespace SonarAnalyzer.Rules
                 case TLambdaSyntax lambda:
                     return LambdaLocations(c, lambda);
                 case TInvocationExpressionSyntax invocation:
-                    if (c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol is { } invSymbol
-                        && invSymbol.DeclaringSyntaxReferences.Length == 1
+                    if (c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol is {DeclaringSyntaxReferences: {Length: 1}} invSymbol
                         && SyntaxFromReference(invSymbol.DeclaringSyntaxReferences.Single()) is TMethodSyntax syntax)
                     {
                         c.VisitedMethods.Add(syntax);
@@ -255,8 +262,8 @@ namespace SonarAnalyzer.Rules
             if (expression is TInvocationExpressionSyntax invocation)
             {
                 var symbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-                return symbol != null && !symbol.DeclaringSyntaxReferences.IsEmpty
-                    && symbol.DeclaringSyntaxReferences.Select(x => SyntaxFromReference(x)).Any(x => x != null && c.VisitedMethods.Contains(x));
+                return symbol is {DeclaringSyntaxReferences: {IsEmpty: false}}
+                       && symbol.DeclaringSyntaxReferences.Select(SyntaxFromReference).Any(x => x != null && c.VisitedMethods.Contains(x));
             }
             return false;
         }
@@ -266,7 +273,7 @@ namespace SonarAnalyzer.Rules
             var exprSublocationsList = expressions.Distinct(CreateNodeEqualityComparer())
                 .Select(x => CallStackSublocations(c, x))
                 .ToArray();
-            // If there's at leat one concurrent expression, that returns compliant delegate, then there's some logic and this scope is compliant
+            // If there's at least one concurrent expression, that returns compliant delegate, then there's some logic and this scope is compliant
             if (exprSublocationsList.Any(x => x.IsEmpty))
             {
                 return ImmutableArray<Location>.Empty;
@@ -282,7 +289,7 @@ namespace SonarAnalyzer.Rules
                 var loc = expression.GetLocation();
                 if (!lst.Any(x => x.SourceSpan.IntersectsWith(loc.SourceSpan)))
                 {
-                    // Add 2nd, 3rd, 4th etc //Secondary marker. If it is not marked already from direct Delegate name or direct Lambda occurance
+                    // Add 2nd, 3rd, 4th etc //Secondary marker. If it is not marked already from direct Delegate name or direct Lambda occurrence
                     return lst.Concat(new[] { loc }).ToImmutableArray();
                 }
             }
@@ -298,7 +305,7 @@ namespace SonarAnalyzer.Rules
             var ret = ImmutableArray.CreateBuilder<TInvocationExpressionSyntax>();
             foreach (var invocation in root.DescendantNodesAndSelf().OfType<TInvocationExpressionSyntax>())
             {
-                if (c.SemanticModel.GetSymbolInfo(invocation).Symbol == method)
+                if (c.SemanticModel.GetSymbolInfo(invocation).Symbol.Equals(method))
                 {
                     ret.Add(invocation);
                 }

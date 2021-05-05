@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -59,18 +60,18 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             // Handling of += syntax
-            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckAssignmentSyntax(c), SyntaxKind.AddAssignmentExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckAssignmentSyntax, SyntaxKind.AddAssignmentExpression);
 
             // Handling of = syntax
-            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckAssignmentSyntax(c), SyntaxKind.SimpleAssignmentExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckAssignmentSyntax, SyntaxKind.SimpleAssignmentExpression);
 
             // Handling of constructor parameter syntax (SslStream)
-            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckConstructorParameterSyntax(c), SyntaxKind.ObjectCreationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression);
         }
 
         protected override Location ExpressionLocation(SyntaxNode expression) =>
             // For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
-            ((expression is ParenthesizedLambdaExpressionSyntax lambda) ? (SyntaxNode)lambda.ParameterList : expression).GetLocation();
+            ((expression is ParenthesizedLambdaExpressionSyntax lambda) ? lambda.ParameterList : expression).GetLocation();
 
         protected override void SplitAssignment(AssignmentExpressionSyntax assignment, out IdentifierNameSyntax leftIdentifier, out ExpressionSyntax right)
         {
@@ -80,17 +81,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEqualityComparer<ExpressionSyntax> CreateNodeEqualityComparer() =>
             new CSharpSyntaxNodeEqualityComparer<ExpressionSyntax>();
-
-        protected override SyntaxNode FindRootClassOrModule(SyntaxNode node)
-        {
-            ClassDeclarationSyntax candidate;
-            var current = node.FirstAncestorOrSelf<ClassDeclarationSyntax>();
-            while (current != null && (candidate = current.Parent?.FirstAncestorOrSelf<ClassDeclarationSyntax>()) != null)  // Search for parent of nested class
-            {
-                current = candidate;
-            }
-            return current;
-        }
 
         protected override ExpressionSyntax[] FindReturnAndThrowExpressions(InspectionContext c, SyntaxNode block) =>
             block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression)
@@ -110,14 +100,11 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return BlockLocations(c, block);
             }
-            else if (lambda.Body is ExpressionSyntax expr && IsTrueLiteral(expr))   // LiteralExpressionSyntax or ParenthesizedExpressionSyntax like (((true)))
+            if (lambda.Body is ExpressionSyntax expr && IsTrueLiteral(expr))   // LiteralExpressionSyntax or ParenthesizedExpressionSyntax like (((true)))
             {
                 return new[] { lambda.Body.GetLocation() }.ToImmutableArray();      // Code was found guilty for lambda (...) => true
             }
-            else
-            {
-                return ImmutableArray<Location>.Empty;
-            }
+            return ImmutableArray<Location>.Empty;
         }
 
         protected override SyntaxNode LocalVariableScope(VariableDeclaratorSyntax variable) =>
@@ -128,6 +115,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxNode SyntaxFromReference(SyntaxReference reference) =>
             reference.GetSyntax();   // VB.NET has more complicated logic
+
+        protected override bool IsClassOrRecordDeclaration(SyntaxNode expression) =>
+            expression.IsKind(SyntaxKind.ClassDeclaration) || expression.IsKind(SyntaxKindEx.RecordDeclaration);
 
         private protected override KnownType GenericDelegateType() => KnownType.System_Func_T1_T2_T3_T4_TResult;
     }

@@ -28,7 +28,7 @@ namespace Tests.Diagnostics
 
             public void InitAsArgument(RemoteCertificateValidationCallback callback)
             {
-                CreateRQ().ServerCertificateValidationCallback += callback; // FN
+                CreateRQ().ServerCertificateValidationCallback += callback;  //Noncompliant
             }
 
         }
@@ -38,7 +38,7 @@ namespace Tests.Diagnostics
             public void Init(RemoteCertificateValidationCallback callback)
             {
                 //Assignment from sibling class in nested tree
-                new InnerAssignmentRecord().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // FN
+                new InnerAssignmentRecord().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
             }
         }
 
