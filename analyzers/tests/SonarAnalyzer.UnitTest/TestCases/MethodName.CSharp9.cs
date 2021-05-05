@@ -9,6 +9,8 @@
 
     public record FooRecord : IMyInterface
     {
+        void a() { } // Noncompliant
+        void A() { } // Сompliant
         void foo() { } // Noncompliant
         void IMyInterface.foo() { } // Compliant, we can't change it
         void Foo() { }
@@ -29,6 +31,14 @@
             get => 41;
             init => foo();
         }
+    }
+
+    public record PositionalRecord(string Value)
+    {
+        void a() { } // Noncompliant
+        void A() { } // Сompliant
+        void foo() { } // Noncompliant
+        void Foo() { } // Сompliant
     }
 
     public record Base

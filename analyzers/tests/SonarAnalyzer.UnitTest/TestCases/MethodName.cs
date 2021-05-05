@@ -9,6 +9,8 @@
 
     public class FooClass : IMyInterface
     {
+        void a() { } // Noncompliant
+        void A() { } // Compliant
         void foo() { } // Noncompliant
         void IMyInterface.foo() { } // Compliant, we can't change it
         void Foo() { }
