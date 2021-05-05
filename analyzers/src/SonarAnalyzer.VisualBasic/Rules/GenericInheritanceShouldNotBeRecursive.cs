@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } = new[]
+        protected override SyntaxKind[] SyntaxKinds { get; } =
         {
             SyntaxKind.ClassBlock,
             SyntaxKind.InterfaceBlock,

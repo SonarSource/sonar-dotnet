@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } = new[]
+        protected override SyntaxKind[] SyntaxKinds { get; } =
         {
             SyntaxKind.ClassDeclaration,
             SyntaxKind.InterfaceDeclaration,

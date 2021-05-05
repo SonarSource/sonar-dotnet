@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
                 },
                 SyntaxKinds);
 
-        protected static IEnumerable<INamedTypeSymbol> GetBaseTypes(INamedTypeSymbol typeSymbol)
+        private static IEnumerable<INamedTypeSymbol> GetBaseTypes(INamedTypeSymbol typeSymbol)
         {
             var interfaces = typeSymbol.Interfaces.Where(IsGenericType);
             return typeSymbol.IsClass()
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules
                 : interfaces;
         }
 
-        protected static bool HasRecursiveGenericSubstitution(INamedTypeSymbol typeSymbol, INamedTypeSymbol declaredType)
+        private static bool HasRecursiveGenericSubstitution(INamedTypeSymbol typeSymbol, INamedTypeSymbol declaredType)
         {
             bool IsSameAsDeclaredType(INamedTypeSymbol type) =>
                 type.OriginalDefinition.Equals(declaredType) && HasSubstitutedTypeArguments(type);
@@ -81,13 +81,13 @@ namespace SonarAnalyzer.Rules
             return ContainsRecursiveGenericSubstitution(typeSymbol.TypeArguments);
         }
 
-        protected static bool IsGenericType(INamedTypeSymbol type) =>
+        private static bool IsGenericType(INamedTypeSymbol type) =>
             type != null && type.IsGenericType;
 
-        protected static bool HasSubstitutedTypeArguments(INamedTypeSymbol type) =>
+        private static bool HasSubstitutedTypeArguments(INamedTypeSymbol type) =>
             type.TypeArguments.OfType<INamedTypeSymbol>().Any();
 
-        protected static bool IsRecursiveInheritance(INamedTypeSymbol typeSymbol)
+        private static bool IsRecursiveInheritance(INamedTypeSymbol typeSymbol)
         {
             if (!IsGenericType(typeSymbol))
             {
