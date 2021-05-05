@@ -219,3 +219,17 @@ Public Class AnotherImplementation
 
 End Class
 
+' See https://github.com/SonarSource/sonar-dotnet/issues/4370
+Public Interface SomeInterface(Of A)
+End Interface
+
+Public Interface BaseInterface(Of A)
+    Sub Apply(ByVal param As SomeInterface(Of A))
+End Interface
+
+Public Class BasicImplementation
+    Implements BaseInterface(Of Integer)
+
+    Public Sub Apply(ByVal intValueParam As SomeInterface(Of Integer)) Implements BaseInterface(Of Integer).Apply  'Noncompliant FN
+    End Sub
+End Class
