@@ -57,8 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
 
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType ||
-                        typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword))
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType
+                        || typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword))
                     {
                         return;
                     }
