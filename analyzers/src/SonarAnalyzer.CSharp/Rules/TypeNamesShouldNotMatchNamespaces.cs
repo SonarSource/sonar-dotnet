@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -59,7 +60,8 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                if (IsDeclaredPublic(c.Node, c.SemanticModel))
+                if (c.ContainingSymbol.Kind == SymbolKind.NamedType
+                    && IsDeclaredPublic(c.Node, c.SemanticModel))
                 {
                     ReportIfNameClashesWithFrameworkNamespace(GetIdentifier(c.Node), c);
                 }
@@ -68,7 +70,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.StructDeclaration,
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.EnumDeclaration,
-            SyntaxKind.DelegateDeclaration);
+            SyntaxKind.DelegateDeclaration,
+            SyntaxKindEx.RecordDeclaration);
 
         private static SyntaxToken? GetIdentifier(SyntaxNode declaration)
         {
