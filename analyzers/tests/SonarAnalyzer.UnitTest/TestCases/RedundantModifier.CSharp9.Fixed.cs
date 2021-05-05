@@ -8,6 +8,11 @@ internal record PartialRecordDeclaredOnlyOnce // Fixed
     void Method() { }
 }
 
+internal record PartialPositionalRecordDeclaredOnlyOnce(string parameter) // Fixed
+{
+    void Method() { }
+}
+
 internal partial record PartialDeclaredMultipleTimes
 {
 }

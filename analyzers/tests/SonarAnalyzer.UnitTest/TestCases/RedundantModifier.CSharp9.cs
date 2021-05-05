@@ -8,6 +8,11 @@ internal partial record PartialRecordDeclaredOnlyOnce // Noncompliant
     void Method() { }
 }
 
+internal partial record PartialPositionalRecordDeclaredOnlyOnce(string parameter) // Noncompliant
+{
+    void Method() { }
+}
+
 internal partial record PartialDeclaredMultipleTimes
 {
 }
