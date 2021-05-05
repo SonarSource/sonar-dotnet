@@ -18,34 +18,46 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DeclareTypesInNamespacesBase : SonarDiagnosticAnalyzer
+    public abstract class DeclareTypesInNamespacesBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S3903";
-        protected const string MessageFormat = "Move '{0}' into a named namespace.";
+        private const string MessageFormat = "Move '{0}' into a named namespace.";
+
+        private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract TSyntaxKind[] SyntaxKinds { get; }
 
         protected abstract bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel);
-
         protected abstract SyntaxToken GetTypeIdentifier(SyntaxNode declaration);
 
-        protected Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
-            c =>
-            {
-                var declaration = c.Node;
-                if (IsInnerTypeOrWithinNamespace(declaration, c.SemanticModel))
-                {
-                    return;
-                }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-                var identifier = GetTypeIdentifier(declaration);
+        protected DeclareTypesInNamespacesBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation(), identifier.ValueText));
-            };
+        protected override void Initialize(SonarAnalysisContext context) =>
+          context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
+              c =>
+              {
+                  var declaration = c.Node;
+
+                  if (c.ContainingSymbol.Kind != SymbolKind.NamedType
+                      || IsInnerTypeOrWithinNamespace(declaration, c.SemanticModel))
+                  {
+                      return;
+                  }
+
+                  var identifier = GetTypeIdentifier(declaration);
+                  c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation(), identifier.ValueText));
+              },
+              SyntaxKinds);
     }
 }

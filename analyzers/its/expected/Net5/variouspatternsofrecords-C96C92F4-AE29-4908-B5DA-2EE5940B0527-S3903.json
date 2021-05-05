@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'One' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  15,
+"endLine":  27,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'OneEquivalent' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  15,
+"endLine":  29,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'Two' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  15,
+"endLine":  41,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'Three' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  15,
+"endLine":  46,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'Four' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  15,
+"endLine":  58,
+"endColumn":  19
+}
+}
+}
+]
+}

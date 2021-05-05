@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'Battery' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsUsingWith\Program.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  15,
+"endLine":  15,
+"endColumn":  22
+}
+}
+}
+]
+}
