@@ -63,22 +63,21 @@ public class Bar
                 .GetCompilation();
 
             var firstTree = firstCompilation.SyntaxTrees.Single();
-            var fooMethodDecl = firstTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var fooMethod = firstTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
             var firstCompilationSemanticModel = firstCompilation.GetSemanticModel(firstTree);
-
-            var firstCompilationFieldSymbol = firstCompilationSemanticModel.GetSymbolInfo(fooMethodDecl.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression).Symbol;
+            var firstCompilationFieldSymbol = firstCompilationSemanticModel.GetSymbolInfo(fooMethod.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression).Symbol;
             var firstCompilationKnownSymbols = new List<ISymbol> { firstCompilationFieldSymbol };
 
             // compilation matches semantic model and syntax node
             var firstCompilationUsageCollector = new CSharpSymbolUsageCollector(firstCompilation, firstCompilationKnownSymbols);
-            firstCompilationUsageCollector.Visit(fooMethodDecl);
+            firstCompilationUsageCollector.Visit(fooMethod);
             firstCompilationUsageCollector.UsedSymbols.Should().NotBeEmpty();
             var firstCompilationUsedSymbols = firstCompilationUsageCollector.UsedSymbols;
 
-            var secondTree = secondCompilation.SyntaxTrees.Single();
-            var barMethodDecl = secondTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
             // compilation doesn't match syntax node, since it belongs to another compilation
-            firstCompilationUsageCollector.Visit(barMethodDecl);
+            var secondTree = secondCompilation.SyntaxTrees.Single();
+            var barMethod = secondTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            firstCompilationUsageCollector.Visit(barMethod);
             firstCompilationUsageCollector.UsedSymbols.Should().BeEquivalentTo(firstCompilationUsedSymbols);
         }
     }
