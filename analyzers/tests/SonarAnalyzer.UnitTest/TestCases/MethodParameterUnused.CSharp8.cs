@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests.TestCases
 {
@@ -48,6 +49,15 @@ namespace Tests.TestCases
             }
 
             return LocalFunction(a, 42) + BadIncA(a, 42) + BadIncB(a, 42) + BadIncRecursive(a, 42);
+        }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/4377
+        private static bool Foo(IEnumerable<int> a, int b) // Noncompliant FP
+        {
+            bool InsideFoo(int x) => x.Equals(b);
+            bool CallInsideFoo(IEnumerable<int> numbers) => numbers.Any(x => false | InsideFoo(x));
+
+            return CallInsideFoo(a);
         }
 
         public void Method()
