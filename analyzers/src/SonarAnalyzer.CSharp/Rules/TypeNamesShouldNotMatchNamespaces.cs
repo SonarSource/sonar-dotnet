@@ -34,15 +34,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class TypeNamesShouldNotMatchNamespaces : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4041";
+        private const string DiagnosticId = "S4041";
         private const string MessageFormat = "Change the name of type '{0}' to be different from an existing framework namespace.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         // Based on https://msdn.microsoft.com/en-us/library/gg145045%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396
-        private static readonly ISet<string> frameworkNamespaces =
+        private static readonly ISet<string> FrameworkNamespaces =
             new HashSet<string>
             {
                 "accessibility", "activities", "addin", "build", "codedom", "collections",
@@ -95,17 +94,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var isNameClash = typeName != null &&
                  typeNameLocation != null &&
-                 frameworkNamespaces.Contains(typeName.ToLowerInvariant());
+                 FrameworkNamespaces.Contains(typeName.ToLowerInvariant());
 
             if (isNameClash)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, typeNameLocation, typeName));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeNameLocation, typeName));
             }
         }
 
-        private static bool IsDeclaredPublic(SyntaxNode declaration, SemanticModel semanticModel)
-        {
-            return semanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility == Accessibility.Public;
-        }
+        private static bool IsDeclaredPublic(SyntaxNode declaration, SemanticModel semanticModel) =>
+            semanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility == Accessibility.Public;
     }
 }
