@@ -37,4 +37,10 @@
         get { return fieldInPropertyWithInitCompliant; }
         init { fieldInPropertyWithInitCompliant = value; }
     }
+
+    public record PositionalRecord(string Input)
+    {
+        private string inputField = Input; // Noncompliant
+        public string Output { get { inputField = "2021"; return inputField + " year"; } }
+    }
 }

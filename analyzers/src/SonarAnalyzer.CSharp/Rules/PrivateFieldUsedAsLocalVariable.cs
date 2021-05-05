@@ -28,7 +28,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.ShimLayer.CSharp;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -57,7 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
 
-                    if (typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword))
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType ||
+                        typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword))
                     {
                         return;
                     }
@@ -218,23 +219,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            /// <summary>
-            /// Returns all statements before the specified statement within the containing method.
-            /// This method recursively traverses all parent blocks of the provided statement.
-            /// </summary>
-            private static IEnumerable<StatementSyntax> GetPreviousStatements(StatementSyntax statement)
-            {
-                var previousStatements = statement.Parent.ChildNodes()
-                    .OfType<StatementSyntax>()
-                    .TakeWhile(x => x != statement)
-                    .Reverse();
-
-                return statement.Parent is StatementSyntax parentStatement
-                    ? previousStatements.Union(GetPreviousStatements(parentStatement))
-                    : previousStatements;
-            }
-
-            // A PseudoStatement is a Statement or an ArrowExpressionClauseSyntax (which denotes an expression-bodied member)
+            // A PseudoStatement is a Statement or an ArrowExpressionClauseSyntax (which denotes an expression-bodied member).
             private static SyntaxNode GetParentPseudoStatement(SyntaxNodeWithSymbol<SyntaxNode, ISymbol> memberReference) =>
                 memberReference.Syntax.Ancestors().FirstOrDefault(a => a is StatementSyntax || a is ArrowExpressionClauseSyntax);
 
