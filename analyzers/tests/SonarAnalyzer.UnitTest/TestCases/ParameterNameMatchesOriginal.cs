@@ -192,4 +192,17 @@ namespace Tests.Diagnostics
 //                                                      ^^^^^^^^^^^^^
         public override void DoSomethingElse(ParameterClass Value) { }
     }
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/4370
+    public interface SomeInterface<A> { }
+
+    public interface BaseInterface<A>
+    {
+        void Apply(SomeInterface<A> param);
+    }
+
+    public class BasicImplementation : BaseInterface<int>
+    {
+        public void Apply(SomeInterface<int> intValueParam) { }   //Noncompliant FN
+    }
 }
