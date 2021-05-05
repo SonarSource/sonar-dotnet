@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
             reference.GetSyntax();   // VB.NET has more complicated logic
 
         protected override bool IsClassOrRecordDeclaration(SyntaxNode expression) =>
-            expression.IsKind(SyntaxKind.ClassDeclaration) || expression.IsKind(SyntaxKindEx.RecordDeclaration);
+            expression.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
 
         private protected override KnownType GenericDelegateType() => KnownType.System_Func_T1_T2_T3_T4_TResult;
     }
