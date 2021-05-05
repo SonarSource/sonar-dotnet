@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RecordName_InTestProject_CS() =>
-            Verifier.VerifyNoIssueReportedFromCSharp9InTest(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
+            Verifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
 #endif
 
         [DataTestMethod]
