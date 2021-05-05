@@ -1,6 +1,6 @@
 ﻿namespace t1
 {
-    record FSM // Noncompliant
+    record FSM // Noncompliant {{Rename record 'FSM' to match pascal case naming rules, consider using 'Fsm'.}}
     {
     }
     record FSM2(string Param); // Noncompliant
@@ -26,7 +26,7 @@ namespace t4
 
 namespace TestSuffixes
 {
-    record IEnumerableExtensionsTest { }              // Noncompliant
+    record IEnumerableExtensionsTest { }              // Noncompliant  {{Rename record 'IEnumerableExtensionsTest' to match pascal case naming rules, consider using 'EnumerableExtensionsTest'.}}
     record IEnumerableExtensionsTests { }             // Noncompliant
 
     record IEnumerableExtensionsTest2(string Param);  // Noncompliant
