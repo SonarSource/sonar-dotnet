@@ -45,6 +45,11 @@ namespace Tests.Diagnostics
             add { }
             remove { }
         }
+
+        public enum SomeEnumeration
+        {
+
+        }
     }
 
     sealed class SealedClass : Partial2Part
@@ -265,6 +270,18 @@ namespace Tests.Diagnostics
             {
                 var x = 10;
                 var y = 5 % x;
+            }
+
+            checked
+            {
+                var x = (uint)null; // Error [CS0037]
+                var y = (int)x;
+            }
+
+            checked
+            {
+                var x = (SomeClass)5; // Error [CS0246]
+                var y = (int)x;
             }
         }
     }
