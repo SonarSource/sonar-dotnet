@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -28,6 +29,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -36,89 +38,106 @@ namespace SonarAnalyzer.Rules.CSharp
     public class AvoidExcessiveInheritance : ParameterLoadingDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S110";
-        private const string MessageFormat = "This class has {0} parents which is greater than {1} authorized.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
+        private const string MessageFormat = "This {0} has {1} parents which is greater than {2} authorized.";
+        private const string FilteredClassesDefaultValue = "";
         private const int MaximumDepthDefaultValue = 5;
-        [RuleParameter(
-            key: "max",
-            type: PropertyType.Integer,
-            description: "Maximum depth of the inheritance tree. (Number)",
-            defaultValue: MaximumDepthDefaultValue)]
+        private string filteredClasses = FilteredClassesDefaultValue;
+        private ICollection<Regex> filters = new List<Regex>();
+
+        private static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, false);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        [RuleParameter("max", PropertyType.Integer, "Maximum depth of the inheritance tree. (Number)", MaximumDepthDefaultValue)]
         public int MaximumDepth { get; set; } = MaximumDepthDefaultValue;
 
-        private ICollection<Regex> filteredClassesRegex = new List<Regex>();
-
-        private const string FilteredClassesDefaultValue = "";
-        private string filteredClasses = FilteredClassesDefaultValue;
         [RuleParameter(
-            key: "filteredClasses",
-            type: PropertyType.String,
-            description: "Comma-separated list of classes to be filtered out of the count of inheritance. Depth " +
-            "counting will stop when a filtered class is reached. For example: System.Windows.Controls.UserControl, " +
+            "filteredClasses",
+            PropertyType.String,
+            "Comma-separated list of classes or records to be filtered out of the count of inheritance. Depth " +
+            "counting will stop when a filtered class or record is reached. For example: System.Windows.Controls.UserControl, " +
             "System.Windows.*. (String)",
-            defaultValue: FilteredClassesDefaultValue)]
+            FilteredClassesDefaultValue)]
         public string FilteredClasses
         {
-            get => this.filteredClasses;
+            get => filteredClasses;
             set
             {
-                this.filteredClasses = value;
-                this.filteredClassesRegex = this.filteredClasses.Split(',')
-                    .Select(WilcardPatternToRegularExpression)
+                filteredClasses = value;
+                filters = filteredClasses.Split(',')
+                    .Select(WildcardPatternToRegularExpression)
                     .ToList();
             }
         }
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
-        {
+        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var declaration = (ClassDeclarationSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-                    if (symbol == null)
+                    var objectTypeInfo = new ObjectTypeInfo(c.Node, c.SemanticModel);
+                    // For records we are triggered twice and we need to differentiate between the calls by checking the containing symbol kind
+                    // See: https://github.com/dotnet/roslyn/issues/50989
+                    if (objectTypeInfo.Symbol == null || c.ContainingSymbol.Kind != SymbolKind.NamedType)
                     {
                         return;
                     }
 
-                    var thisTypeRootNamespace = GetRootNamespace(symbol);
+                    var thisTypeRootNamespace = GetRootNamespace(objectTypeInfo.Symbol);
 
-                    var baseTypesCount = symbol.GetSelfAndBaseTypes()
-                        .Skip(1) // remove the class itself
+                    var baseTypesCount = objectTypeInfo.Symbol.BaseType.GetSelfAndBaseTypes()
                         .TakeWhile(s => GetRootNamespace(s) == thisTypeRootNamespace)
                         .Select(nts => nts.OriginalDefinition.ToDisplayString())
-                        .TakeWhile(className => this.filteredClassesRegex.All(regex => !regex.IsMatch(className)))
+                        .TakeWhile(className => filters.All(regex => !regex.IsMatch(className)))
                         .Count();
 
                     if (baseTypesCount > MaximumDepth)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
-                            baseTypesCount, MaximumDepth));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectTypeInfo.Identifier.GetLocation(), objectTypeInfo.Name, baseTypesCount, MaximumDepth));
                     }
-
-                }, SyntaxKind.ClassDeclaration);
-        }
+                },
+                SyntaxKind.ClassDeclaration,
+                SyntaxKindEx.RecordDeclaration);
 
         private static string GetRootNamespace(ISymbol symbol)
         {
-            var namespaceString
-                = symbol.ContainingNamespace.ToDisplayString();
+            var namespaceString = symbol.ContainingNamespace.ToDisplayString();
 
-            var lastDotIndex = namespaceString.IndexOf(".");
+            var lastDotIndex = namespaceString.IndexOf(".", StringComparison.Ordinal);
             return lastDotIndex == -1
                 ? namespaceString
                 : namespaceString.Substring(0, lastDotIndex);
         }
 
-        private static Regex WilcardPatternToRegularExpression(string pattern)
+        private static Regex WildcardPatternToRegularExpression(string pattern)
         {
             var regexPattern = string.Concat("^", Regex.Escape(pattern).Replace("\\*", ".*"), "$");
             return new Regex(regexPattern, RegexOptions.Compiled);
+        }
+
+        private class ObjectTypeInfo
+        {
+            public SyntaxToken Identifier { get; }
+
+            public INamedTypeSymbol Symbol { get; }
+
+            public string Name { get; }
+
+            public ObjectTypeInfo(SyntaxNode node, SemanticModel model)
+            {
+                if (node is ClassDeclarationSyntax classDeclaration)
+                {
+                    Identifier = classDeclaration.Identifier;
+                    Symbol = model.GetDeclaredSymbol(classDeclaration);
+                    Name = "class";
+                }
+                else
+                {
+                    var wrapper = (RecordDeclarationSyntaxWrapper)node;
+                    Identifier = wrapper.Identifier;
+                    Symbol = model.GetDeclaredSymbol(wrapper);
+                    Name = "record";
+                }
+            }
         }
     }
 }
