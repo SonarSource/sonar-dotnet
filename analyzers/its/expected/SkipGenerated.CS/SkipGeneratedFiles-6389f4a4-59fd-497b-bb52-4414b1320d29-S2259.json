@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'obj' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\GeneratedCode.CS\generated_region.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  31,
+"endLine":  10,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'obj' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\GeneratedCode.CS\generated_region_2.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  31,
+"endLine":  10,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'obj' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\GeneratedCode.CS\handwritten.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  31,
+"endLine":  11,
+"endColumn":  34
+}
+}
+}
+]
+}

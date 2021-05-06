@@ -12,7 +12,7 @@ param
     $ruleId,
 
     [Parameter(HelpMessage = "The name of single project to build. If ommited, all projects will be build.")]
-    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "NetCore31WithConfigurableRules" , "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "SkipGenerated", "SkipGeneratedVb", "WebConfig")]
+    [ValidateSet("AnalyzeGenerated.CS", "AnalyzeGenerated.VB", "akka.net", "Automapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "NetCore31WithConfigurableRules" , "ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB", "SkipGenerated.CS", "SkipGenerated.VB", "WebConfig")]
     [string]
     $project
 )
@@ -22,7 +22,7 @@ $ErrorActionPreference = "Stop"
 
 . .\create-issue-reports.ps1
 
-$InternalProjects = @("ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB")
+$InternalProjects = @("ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB")
 
 if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
@@ -452,16 +452,16 @@ try {
     # redirects the outputs of the different configurations in separate folders.
 
     # Do not forget to update ValidateSet of -project parameter when new project is added.
-    Build-Project-MSBuild "AnalyzeGenerated" "AnalyzeGeneratedFiles.sln"
-    Build-Project-MSBuild "AnalyzeGeneratedVb" "AnalyzeGeneratedVb.sln"
+    Build-Project-MSBuild "AnalyzeGenerated.CS" "AnalyzeGenerated.CS.sln"
+    Build-Project-MSBuild "AnalyzeGenerated.VB" "AnalyzeGenerated.VB.sln"
     Build-Project-MSBuild "akka.net" "src\Akka.sln"
     Build-Project-MSBuild "Automapper" "Automapper.sln" -CpuCount 1
     Build-Project-MSBuild "Ember-MM" "Ember Media Manager.sln"
-    Build-Project-MSBuild "ManuallyAddedNoncompliantIssues" "ManuallyAddedNoncompliantIssues.sln"
-    Build-Project-MSBuild "ManuallyAddedNoncompliantIssuesVB" "ManuallyAddedNoncompliantIssuesVB.sln"
+    Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.CS" "ManuallyAddedNoncompliantIssues.CS.sln"
+    Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.VB" "ManuallyAddedNoncompliantIssues.VB.sln"
     Build-Project-MSBuild "Nancy" "src\Nancy.sln"
-    Build-Project-MSBuild "SkipGenerated" "SkipGeneratedFiles.sln"
-    Build-Project-MSBuild "SkipGeneratedVb" "SkipGeneratedVb.sln"
+    Build-Project-MSBuild "SkipGenerated.CS" "SkipGenerated.CS.sln"
+    Build-Project-MSBuild "SkipGenerated.VB" "SkipGenerated.VB.sln"
     Build-Project-MSBuild "WebConfig" "WebConfig.sln"
 
     Build-Project-DotnetTool "NetCore31" "NetCore31.sln"
@@ -508,22 +508,18 @@ catch {
 finally {
     Pop-Location
     Write-Debug "Removing the import before target file from '${msBuildImportBefore14}'"
-    Remove-Item -Force (Join-Path $msBuildImportBefore14 "\SonarAnalyzer.Testing.ImportBefore.targets") `
-        -ErrorAction Ignore
+    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBefore14 "\SonarAnalyzer.Testing.ImportBefore.targets") `
 
     Write-Debug "Removing the import before target file from '${msBuildImportBefore15}'"
-    Remove-Item -Force (Join-Path $msBuildImportBefore15 "\SonarAnalyzer.Testing.ImportBefore.targets") `
-        -ErrorAction Ignore
+    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBefore15 "\SonarAnalyzer.Testing.ImportBefore.targets") `
 
     Write-Debug "Removing the import before target file from '${msBuildImportBefore16}'"
-    Remove-Item -Force (Join-Path $msBuildImportBefore16 "\SonarAnalyzer.Testing.ImportBefore.targets") `
-        -ErrorAction Ignore
+    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBefore16 "\SonarAnalyzer.Testing.ImportBefore.targets") `
 
     Write-Debug "Removing the import before target file from '${msBuildImportBeforeCurrent}'"
-    Remove-Item -Force (Join-Path $msBuildImportBeforeCurrent "\SonarAnalyzer.Testing.ImportBefore.targets") `
-        -ErrorAction Ignore
+    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBeforeCurrent "\SonarAnalyzer.Testing.ImportBefore.targets") `
 
-    Remove-Item -Force global.json -ErrorAction Ignore
+    Remove-Item -ErrorAction Ignore -Force global.json
 
     $scriptTimer.Stop()
     $totalTimeInSeconds = [int]$scriptTimer.Elapsed.TotalSeconds
