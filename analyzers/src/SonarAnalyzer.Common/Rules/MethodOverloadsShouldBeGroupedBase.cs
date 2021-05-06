@@ -52,6 +52,11 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
             {
+                if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                {
+                    return;
+                }
+
                 foreach (var misplacedOverload in GetMisplacedOverloads(c, GetMemberDeclarations(c.Node)))
                 {
                     var firstName = misplacedOverload.First().NameSyntax;
