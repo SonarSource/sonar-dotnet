@@ -12,7 +12,7 @@ namespace Tests.Diagnostics
         public void Y() { }
     }
 
-    public abstract class Empty //Noncompliant {{Convert this 'abstract' class to a concrete class with a protected constructor.}}
+    public abstract class Empty // Noncompliant {{Convert this 'abstract' class to a concrete implementation with a protected constructor.}}
 //                        ^^^^^
     {
 
@@ -34,7 +34,7 @@ namespace Tests.Diagnostics
 
     }
 
-    public abstract class Color //Noncompliant {{Convert this 'abstract' class to a concrete class with a protected constructor.}}
+    public abstract class Color //Noncompliant {{Convert this 'abstract' class to a concrete implementation with a protected constructor.}}
     {
         private int red = 0;
         private int green = 0;
@@ -86,19 +86,19 @@ namespace Tests.Diagnostics
         }
     }
 
-    public abstract class View //Noncompliant, should be an interface
+    public abstract class View // Noncompliant, should be an interface
     {
         public abstract string Content { get; }
     }
 
-    public abstract class View2 //Compliant, has abstract and non abstract members
+    public abstract class View2 // Compliant, has abstract and non abstract members
     {
         public abstract string Content { get; }
         public abstract string Content1 { get; }
         public string Content2 { get; }
     }
 
-    public abstract class View2Derived : View2 //Compliant, still has abstract parts
+    public abstract class View2Derived : View2 // Compliant, still has abstract parts
     {
         public string Content3 { get; }
         public override string Content1 { get { return ""; } }

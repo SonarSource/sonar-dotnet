@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
-    public abstract record Empty { } // FN
+    public abstract record Empty { } // Noncompliant {{Convert this 'abstract' record to a concrete implementation with a protected constructor.}}
 
-    public abstract record Animal // FN
+    public abstract record Animal // Noncompliant {{Convert this 'abstract' record to an interface.}}
     {
         protected abstract void move();
         protected abstract void feed();
@@ -13,13 +13,13 @@ namespace Tests.Diagnostics
 
     public record SomeBaseRecord { }
 
-    public abstract record Animal2 : SomeBaseRecord //Compliant
+    public abstract record Animal2 : SomeBaseRecord // Compliant
     {
         protected abstract void move();
         protected abstract void feed();
     }
 
-    public abstract record Color // FN
+    public abstract record Color // Noncompliant {{Convert this 'abstract' record to a concrete implementation with a protected constructor.}}
     {
         private int red = 0;
         public int getRed() => red;
@@ -58,17 +58,22 @@ namespace Tests.Diagnostics
         }
     }
 
-    public abstract record View // FN
+    public abstract record View // Noncompliant {{Convert this 'abstract' record to an interface.}}
     {
         public abstract string Content { get; }
     }
 
-    public abstract record View2 // Compliant, has abstract and non abstract members
+    public abstract record View2() // Compliant, has abstract and non abstract members
     {
         public abstract string Content { get; }
         public abstract string Content1 { get; }
         public string Content2 { get; }
     }
 
-    public abstract record Record(string X);
+    public abstract record Record(string X); // Noncompliant {{Convert this 'abstract' record to a concrete implementation with a protected constructor.}}
+
+    public abstract record Record2(string X) // Compliant, this record has a propery X which is concrete
+    {
+        public abstract string Content { get; }
+    }
 }
