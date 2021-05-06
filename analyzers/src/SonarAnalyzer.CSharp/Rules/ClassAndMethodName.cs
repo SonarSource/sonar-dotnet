@@ -119,17 +119,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeAction(c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
                     {
                         return;
                     }
-                    if (DiagnosticAnalyzerContextHelper.ShouldAnalyze(context, CSharpGeneratedCodeRecognizer.Instance, c.GetSyntaxTree(), c.Compilation, c.Options))
-                    {
-                        var isTestProject = context.IsTestProject(c.Compilation, c.Options);
-                        CheckTypeName(c, isTestProject);
-                    }
+                    var isTestProject = context.IsTestProject(c.Compilation, c.Options);
+                    CheckTypeName(c, isTestProject);
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
