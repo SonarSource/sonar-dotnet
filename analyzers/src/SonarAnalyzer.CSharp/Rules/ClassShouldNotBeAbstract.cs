@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S1694";
         private const string MessageFormat = "Convert this 'abstract' {0} to {1}.";
         private const string MessageToInterface = "an interface";
-        private const string MessageToConcreteImplementation = "a concrete implementation with a protected constructor";
+        private const string MessageToConcreteImplementation = "a concrete type with a protected constructor";
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
