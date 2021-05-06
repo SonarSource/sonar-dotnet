@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-public record Foo : IDisposable // FN
+public record Foo : IDisposable // Noncompliant {{Implement a finalizer that calls your 'Dispose' method.}}
 {
     private IntPtr myResource;
     private bool disposed = false;
@@ -31,4 +31,3 @@ public record Bar : IDisposable // Compliant
         Dispose(false);
     }
 }
-

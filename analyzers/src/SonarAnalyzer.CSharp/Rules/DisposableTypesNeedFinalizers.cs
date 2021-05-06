@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -49,24 +50,26 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+                var declaration = (TypeDeclarationSyntax)c.Node;
+                var classSymbol = c.SemanticModel.GetDeclaredSymbol(declaration);
 
                 if (classSymbol.Implements(KnownType.System_IDisposable)
-                    && HasNativeHandleFields(classDeclaration, c.SemanticModel)
-                    && !HasFinalizer(classDeclaration))
+                    && HasNativeHandleFields(declaration, c.SemanticModel)
+                    && !HasFinalizer(declaration))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, declaration.Identifier.GetLocation()));
                 }
             },
-            SyntaxKind.ClassDeclaration);
+            SyntaxKind.ClassDeclaration,
+            SyntaxKindEx.RecordDeclaration);
 
-        private static bool HasNativeHandleFields(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel) =>
+        private static bool HasNativeHandleFields(TypeDeclarationSyntax classDeclaration, SemanticModel semanticModel) =>
             classDeclaration.Members
                             .OfType<FieldDeclarationSyntax>()
                             .Select(m => semanticModel.GetDeclaredSymbol(m.Declaration.Variables.FirstOrDefault())?.GetSymbolType())
                             .Any(si => si.IsAny(NativeHandles));
 
-        private static bool HasFinalizer(ClassDeclarationSyntax classDeclaration) => classDeclaration.Members.OfType<DestructorDeclarationSyntax>().Any();
+        private static bool HasFinalizer(TypeDeclarationSyntax classDeclaration) =>
+            classDeclaration.Members.OfType<DestructorDeclarationSyntax>().Any();
     }
 }
