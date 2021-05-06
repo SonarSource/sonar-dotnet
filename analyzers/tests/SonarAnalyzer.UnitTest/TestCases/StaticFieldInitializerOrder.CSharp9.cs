@@ -19,7 +19,7 @@ public record StaticFieldsOrderRecord
     public static int M(int i) { return i; }
 }
 
-public record StaticFieldsOrderPositionalRecord
+public record StaticFieldsOrderPositionalRecord(String Parameter)
 {
     public static string s1 = new string('x', Const); // Compliant - const
     public static string s2 = new string('x', Y); // Noncompliant

@@ -112,9 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return new IdentifierFieldMapping
                     {
                         Field = field,
-                        IsRelevant = field != null
-                                     && !field.IsConst
-                                     && field.IsStatic
+                        IsRelevant = field is { IsConst: false, IsStatic: true }
                                      && containingType.Equals(field.ContainingType)
                                      && semanticModel.GetEnclosingSymbol(identifier.SpanStart) is IFieldSymbol enclosingSymbol
                                      && enclosingSymbol.ContainingType.Equals(field.ContainingType)
