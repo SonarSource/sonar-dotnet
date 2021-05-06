@@ -42,21 +42,21 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string FilteredClassesDefaultValue = "";
         private const int MaximumDepthDefaultValue = 5;
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         [RuleParameter("max", PropertyType.Integer, "Maximum depth of the inheritance tree. (Number)", MaximumDepthDefaultValue)]
         public int MaximumDepth { get; set; } = MaximumDepthDefaultValue;
 
-        private ICollection<Regex> filteredClassesRegex = new List<Regex>();
+        private ICollection<Regex> filters = new List<Regex>();
 
         private string filteredClasses = FilteredClassesDefaultValue;
         [RuleParameter(
             "filteredClasses",
             PropertyType.String,
-            "Comma-separated list of classes to be filtered out of the count of inheritance. Depth " +
-            "counting will stop when a filtered class is reached. For example: System.Windows.Controls.UserControl, " +
+            "Comma-separated list of classes or records to be filtered out of the count of inheritance. Depth " +
+            "counting will stop when a filtered class or record is reached. For example: System.Windows.Controls.UserControl, " +
             "System.Windows.*. (String)",
             FilteredClassesDefaultValue)]
         public string FilteredClasses
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
             set
             {
                 filteredClasses = value;
-                filteredClassesRegex = filteredClasses.Split(',')
+                filters = filteredClasses.Split(',')
                     .Select(WildcardPatternToRegularExpression)
                     .ToList();
             }
@@ -85,16 +85,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var thisTypeRootNamespace = GetRootNamespace(objectTypeInfo.Symbol);
 
-                    var baseTypesCount = objectTypeInfo.Symbol.GetSelfAndBaseTypes()
-                        .Skip(1) // remove the class itself
+                    var baseTypesCount = objectTypeInfo.Symbol.BaseType.GetSelfAndBaseTypes()
                         .TakeWhile(s => GetRootNamespace(s) == thisTypeRootNamespace)
                         .Select(nts => nts.OriginalDefinition.ToDisplayString())
-                        .TakeWhile(className => filteredClassesRegex.All(regex => !regex.IsMatch(className)))
+                        .TakeWhile(className => filters.All(regex => !regex.IsMatch(className)))
                         .Count();
 
                     if (baseTypesCount > MaximumDepth)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectTypeInfo.Identifier.GetLocation(), objectTypeInfo.Name, baseTypesCount, MaximumDepth));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectTypeInfo.Identifier.GetLocation(), objectTypeInfo.Name, baseTypesCount, MaximumDepth));
                     }
                 },
                 SyntaxKind.ClassDeclaration,
@@ -104,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var namespaceString = symbol.ContainingNamespace.ToDisplayString();
 
-            var lastDotIndex = namespaceString.IndexOf(".", StringComparison.InvariantCulture);
+            var lastDotIndex = namespaceString.IndexOf(".", StringComparison.Ordinal);
             return lastDotIndex == -1
                 ? namespaceString
                 : namespaceString.Substring(0, lastDotIndex);
@@ -132,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     Symbol = model.GetDeclaredSymbol(classDeclaration);
                     Name = "class";
                 }
-                else if (RecordDeclarationSyntaxWrapper.IsInstance(node))
+                else
                 {
                     var wrapper = (RecordDeclarationSyntaxWrapper)node;
                     Identifier = wrapper.Identifier;
