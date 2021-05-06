@@ -508,22 +508,18 @@ catch {
 finally {
     Pop-Location
     Write-Debug "Removing the import before target file from '${msBuildImportBefore14}'"
-    Remove-Item -Force (Join-Path $msBuildImportBefore14 "\SonarAnalyzer.Testing.ImportBefore.targets") `
-        -ErrorAction Ignore
+    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBefore14 "\SonarAnalyzer.Testing.ImportBefore.targets") `
 
     Write-Debug "Removing the import before target file from '${msBuildImportBefore15}'"
-    Remove-Item -Force (Join-Path $msBuildImportBefore15 "\SonarAnalyzer.Testing.ImportBefore.targets") `
-        -ErrorAction Ignore
+    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBefore15 "\SonarAnalyzer.Testing.ImportBefore.targets") `
 
     Write-Debug "Removing the import before target file from '${msBuildImportBefore16}'"
-    Remove-Item -Force (Join-Path $msBuildImportBefore16 "\SonarAnalyzer.Testing.ImportBefore.targets") `
-        -ErrorAction Ignore
+    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBefore16 "\SonarAnalyzer.Testing.ImportBefore.targets") `
 
     Write-Debug "Removing the import before target file from '${msBuildImportBeforeCurrent}'"
-    Remove-Item -Force (Join-Path $msBuildImportBeforeCurrent "\SonarAnalyzer.Testing.ImportBefore.targets") `
-        -ErrorAction Ignore
+    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBeforeCurrent "\SonarAnalyzer.Testing.ImportBefore.targets") `
 
-    Remove-Item -Force global.json -ErrorAction Ignore
+    Remove-Item  -ErrorAction Ignore-Force global.json
 
     $scriptTimer.Stop()
     $totalTimeInSeconds = [int]$scriptTimer.Elapsed.TotalSeconds
