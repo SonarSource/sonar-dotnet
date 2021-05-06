@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,16 +35,15 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class StaticFieldInitializerOrder : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3263";
+        private const string DiagnosticId = "S3263";
         private const string MessageFormat = "Move this field's initializer into a static constructor.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var containingType = c.SemanticModel.GetDeclaredSymbol(variables[0]).ContainingType;
 
                     var typeDeclaration = fieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(
-                        sn => sn.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration));
+                        sn => sn.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordDeclaration));
 
                     foreach (var variable in variables)
                     {
@@ -79,19 +79,16 @@ namespace SonarAnalyzer.Rules.CSharp
                             .Where(mapping => mapping.Identifier.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart);
                         var isAnyAfterInSameType = sameTypeIdentifiersAfterThis.Any();
 
-                        if (isAnyInDifferentType ||
-                            isAnyAfterInSameType)
+                        if (isAnyInDifferentType || isAnyAfterInSameType)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, variable.Initializer.GetLocation()));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, variable.Initializer.GetLocation()));
                         }
                     }
                 },
                 SyntaxKind.FieldDeclaration);
-        }
 
-        private static List<IdentifierTypeDeclarationMapping> GetIdentifierTypeMappings(IEnumerable<IdentifierFieldMapping> identifierFieldMappings)
-        {
-            return identifierFieldMappings
+        private static List<IdentifierTypeDeclarationMapping> GetIdentifierTypeMappings(IEnumerable<IdentifierFieldMapping> identifierFieldMappings) =>
+            identifierFieldMappings
                 .Select(i => new IdentifierTypeDeclarationMapping
                 {
                     Identifier = i,
@@ -99,12 +96,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 })
                 .Where(mapping => mapping.TypeDeclaration != null)
                 .ToList();
-        }
 
-        private static IEnumerable<IdentifierFieldMapping> GetIdentifierFieldMappings(VariableDeclaratorSyntax variable,
-            INamedTypeSymbol containingType, SemanticModel semanticModel)
-        {
-            return variable.Initializer.DescendantNodes()
+        private static IEnumerable<IdentifierFieldMapping> GetIdentifierFieldMappings(VariableDeclaratorSyntax variable, INamedTypeSymbol containingType, SemanticModel semanticModel) =>
+            variable.Initializer.DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Select(identifier =>
                 {
@@ -118,16 +112,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     return new IdentifierFieldMapping
                     {
                         Field = field,
-                        IsRelevant = field != null &&
-                            !field.IsConst &&
-                            field.IsStatic &&
-                            containingType.Equals(field.ContainingType) &&
-                            semanticModel.GetEnclosingSymbol(identifier.SpanStart) is IFieldSymbol enclosingSymbol &&
-                            enclosingSymbol.ContainingType.Equals(field.ContainingType)
+                        IsRelevant = field is { IsConst: false, IsStatic: true }
+                                     && containingType.Equals(field.ContainingType)
+                                     && semanticModel.GetEnclosingSymbol(identifier.SpanStart) is IFieldSymbol enclosingSymbol
+                                     && enclosingSymbol.ContainingType.Equals(field.ContainingType)
                     };
                 })
                 .Where(identifier => identifier.IsRelevant);
-        }
 
         private static TypeDeclarationSyntax GetTypeDeclaration(IFieldSymbol field)
         {
