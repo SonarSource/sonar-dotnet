@@ -33,25 +33,24 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ClassShouldNotBeAbstract : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1694";
+        private const string DiagnosticId = "S1694";
         private const string MessageFormat = "Convert this 'abstract' class to {0}.";
-        internal const string MessageToInterface = "an interface";
-        internal const string MessageToConcreteClass = "a concrete class with a protected constructor";
+        private const string MessageToInterface = "an interface";
+        private const string MessageToConcreteClass = "a concrete class with a protected constructor";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
                     var symbol = c.Symbol as INamedTypeSymbol;
-                    if (!symbol.IsClass() ||
-                        !symbol.IsAbstract ||
-                        ClassHasInheritedAbstractMembers(symbol))
+                    if (!symbol.IsClass()
+                        || !symbol.IsAbstract
+                        || ClassHasInheritedAbstractMembers(symbol))
                     {
                         return;
                     }
@@ -68,28 +67,24 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SymbolKind.NamedType);
-        }
 
         private static bool ClassHasInheritedAbstractMembers(INamedTypeSymbol classSymbol)
         {
             var baseTypes = classSymbol.BaseType.GetSelfAndBaseTypes().ToList();
-            var abstractMethods = baseTypes.SelectMany(baseType => GetAllAbstractMethods(baseType));
+            var abstractMethods = baseTypes.SelectMany(GetAllAbstractMethods);
             var baseTypesAndSelf = baseTypes.Concat(new[] { classSymbol }).ToList();
-            var overrideMethods = baseTypesAndSelf.SelectMany(baseType => GetAllOverrideMethods(baseType));
+            var overrideMethods = baseTypesAndSelf.SelectMany(GetAllOverrideMethods);
             var overriddenMethods = overrideMethods.Select(m => m.OverriddenMethod);
             var stillAbstractMethods = abstractMethods.Except(overriddenMethods);
 
             return stillAbstractMethods.Any();
         }
 
-        private static IEnumerable<IMethodSymbol> GetAllAbstractMethods(INamedTypeSymbol classSymbol)
-        {
-            return GetAllMethods(classSymbol).Where(m => m.IsAbstract);
-        }
-        private static IEnumerable<IMethodSymbol> GetAllOverrideMethods(INamedTypeSymbol classSymbol)
-        {
-            return GetAllMethods(classSymbol).Where(m => m.IsOverride);
-        }
+        private static IEnumerable<IMethodSymbol> GetAllAbstractMethods(INamedTypeSymbol classSymbol) =>
+            GetAllMethods(classSymbol).Where(m => m.IsAbstract);
+
+        private static IEnumerable<IMethodSymbol> GetAllOverrideMethods(INamedTypeSymbol classSymbol) =>
+            GetAllMethods(classSymbol).Where(m => m.IsOverride);
 
         private static void ReportClass(INamedTypeSymbol symbol, string message, SymbolAnalysisContext context)
         {
@@ -97,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (declaringSyntaxReference.GetSyntax() is ClassDeclarationSyntax classDeclaration)
                 {
-                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(), message));
+                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), message));
                 }
             }
         }
@@ -105,25 +100,23 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool AbstractClassShouldBeInterface(INamedTypeSymbol classSymbol)
         {
             var methods = GetAllMethods(classSymbol);
-            return classSymbol.BaseType.Is(KnownType.System_Object) &&
-                   methods.Any() &&
-                   methods.All(method => method.IsAbstract);
+            return classSymbol.BaseType.Is(KnownType.System_Object)
+                   && methods.Any()
+                   && methods.All(method => method.IsAbstract);
         }
 
         private static bool AbstractClassShouldBeConcreteClass(INamedTypeSymbol classSymbol)
         {
             var methods = GetAllMethods(classSymbol);
-            return !methods.Any() ||
-                   methods.All(method => !method.IsAbstract);
+            return !methods.Any()
+                   || methods.All(method => !method.IsAbstract);
         }
 
-        private static IList<IMethodSymbol> GetAllMethods(INamedTypeSymbol classSymbol)
-        {
-            return classSymbol.GetMembers()
-                .OfType<IMethodSymbol>()
-                .Where(method => !method.IsImplicitlyDeclared || !ConstructorKinds.Contains(method.MethodKind))
-                .ToList();
-        }
+        private static IList<IMethodSymbol> GetAllMethods(INamedTypeSymbol classSymbol) =>
+            classSymbol.GetMembers()
+                       .OfType<IMethodSymbol>()
+                       .Where(method => !method.IsImplicitlyDeclared || !ConstructorKinds.Contains(method.MethodKind))
+                       .ToList();
 
         private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
         {
