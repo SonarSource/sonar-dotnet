@@ -22,7 +22,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -60,9 +59,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 if (c.ContainingSymbol.Kind == SymbolKind.NamedType
-                    && IsDeclaredPublic(c.Node, c.SemanticModel))
+                    && IsDeclaredPublic(c.Node, c.SemanticModel)
+                    && CSharpFacade.Instance.Syntax.NodeIdentifier(c.Node) is { } identifier
+                    && FrameworkNamespaces.Contains(identifier.ValueText.ToLowerInvariant()))
                 {
-                    ReportIfNameClashesWithFrameworkNamespace(GetIdentifier(c.Node), c);
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
                 }
             },
             SyntaxKind.ClassDeclaration,
@@ -71,36 +72,6 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.EnumDeclaration,
             SyntaxKind.DelegateDeclaration,
             SyntaxKindEx.RecordDeclaration);
-
-        private static SyntaxToken? GetIdentifier(SyntaxNode declaration)
-        {
-            if (declaration is BaseTypeDeclarationSyntax baseTypeDeclaration)
-            {
-                return baseTypeDeclaration.Identifier;
-            }
-
-            if (declaration is DelegateDeclarationSyntax delegateDeclaration)
-            {
-                return delegateDeclaration.Identifier;
-            }
-
-            return null;
-        }
-
-        private static void ReportIfNameClashesWithFrameworkNamespace(SyntaxToken? identifier, SyntaxNodeAnalysisContext context)
-        {
-            var typeName = identifier?.ValueText;
-            var typeNameLocation = identifier?.GetLocation();
-
-            var isNameClash = typeName != null &&
-                 typeNameLocation != null &&
-                 FrameworkNamespaces.Contains(typeName.ToLowerInvariant());
-
-            if (isNameClash)
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeNameLocation, typeName));
-            }
-        }
 
         private static bool IsDeclaredPublic(SyntaxNode declaration, SemanticModel semanticModel) =>
             semanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility == Accessibility.Public;
