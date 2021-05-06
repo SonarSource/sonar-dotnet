@@ -1,4 +1,6 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+
+namespace Tests.Diagnostics
 {
     public class C1
     {
@@ -11,7 +13,7 @@
     struct PartialStruct //Fixed
     {
     }
-interface PartialInterface //Fixed
+    interface PartialInterface //Fixed
     {
     }
 
@@ -19,19 +21,67 @@ interface PartialInterface //Fixed
     {
     }
 
-    internal partial class Partial2Part
+    internal abstract partial class Partial2Part
     {
         public virtual void MyOverriddenMethod() { }
         public virtual int Prop { get; set; }
+        public abstract int this[int counter] { get; }
+        protected abstract event EventHandler<EventArgs> MyEvent;
+        protected abstract event EventHandler<EventArgs> MyEvent2;
     }
+
     internal class Override : Partial2Part
     {
         public override void MyOverriddenMethod() { }
+
+        public override int this[int counter]
+        {
+            get { return 0; }
+        }
+
+        protected override event EventHandler<EventArgs> MyEvent;
+        protected override event EventHandler<EventArgs> MyEvent2
+        {
+            add { }
+            remove { }
+        }
     }
+
     sealed class SealedClass : Partial2Part
     {
-        public override void MyOverriddenMethod() { } //Fixed
-        public override int Prop { get; set; } //Fixed
+        public override void MyOverriddenMethod() { } // Fixed
+        public override int Prop { get; set; } // Fixed
+
+        public override int this[int counter] // Fixed
+        {
+            get { return 0; }
+        }
+
+        protected override event EventHandler<EventArgs> MyEvent; // Fixed
+        protected override event EventHandler<EventArgs> MyEvent2 // Fixed
+        {
+            add { }
+            remove { }
+        }
+    }
+
+    sealed class SealedClassWithoutRedundantKeywordOnMembers : Partial2Part
+    {
+        public override void MyOverriddenMethod() { }
+
+        public override int Prop { get; set; }
+
+        public override int this[int counter]
+        {
+            get { return 0; }
+        }
+
+        protected override event EventHandler<EventArgs> MyEvent;
+        protected override event EventHandler<EventArgs> MyEvent2
+        {
+            add { }
+            remove { }
+        }
     }
 
     internal class BaseClass<T>

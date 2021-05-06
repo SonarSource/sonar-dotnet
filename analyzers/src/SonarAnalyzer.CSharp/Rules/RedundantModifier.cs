@@ -60,7 +60,10 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckSealedMemberInSealedClass,
                 SyntaxKind.MethodDeclaration,
-                SyntaxKind.PropertyDeclaration);
+                SyntaxKind.PropertyDeclaration,
+                SyntaxKind.IndexerDeclaration,
+                SyntaxKind.EventDeclaration,
+                SyntaxKind.EventFieldDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckTypeDeclarationForRedundantPartial,
@@ -213,33 +216,31 @@ namespace SonarAnalyzer.Rules.CSharp
                 unsafeKeyword = delegateDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
                 return unsafeKeyword != default;
             }
-
-            if (memberDeclaration is BasePropertyDeclarationSyntax propertyDeclaration)
+            else if (memberDeclaration is BasePropertyDeclarationSyntax propertyDeclaration)
             {
                 unsafeKeyword = propertyDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
                 return unsafeKeyword != default;
             }
-
-            if (memberDeclaration is BaseMethodDeclarationSyntax methodDeclaration)
+            else if (memberDeclaration is BaseMethodDeclarationSyntax methodDeclaration)
             {
                 unsafeKeyword = methodDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
                 return unsafeKeyword != default;
             }
-
-            if (memberDeclaration is BaseFieldDeclarationSyntax fieldDeclaration)
+            else if (memberDeclaration is BaseFieldDeclarationSyntax fieldDeclaration)
             {
                 unsafeKeyword = fieldDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
                 return unsafeKeyword != default;
             }
-
-            if (memberDeclaration is BaseTypeDeclarationSyntax typeDeclaration)
+            else if (memberDeclaration is TypeDeclarationSyntax typeDeclaration)
             {
                 unsafeKeyword = typeDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
                 return unsafeKeyword != default;
             }
-
-            unsafeKeyword = default;
-            return false;
+            else
+            {
+                unsafeKeyword = default;
+                return false;
+            }
         }
 
         private static void CheckTypeDeclarationForRedundantPartial(SyntaxNodeAnalysisContext context)
@@ -261,32 +262,39 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxTokenList GetModifiers(MemberDeclarationSyntax memberDeclaration)
         {
-            if (memberDeclaration is MethodDeclarationSyntax method)
+            if (memberDeclaration is MethodDeclarationSyntax methodDeclaration)
             {
-                return method.Modifiers;
+                return methodDeclaration.Modifiers;
             }
-
-            var property = memberDeclaration as PropertyDeclarationSyntax;
-            return property?.Modifiers ?? default;
+            else if (memberDeclaration is PropertyDeclarationSyntax propertyDeclaration)
+            {
+                return propertyDeclaration.Modifiers;
+            }
+            else if (memberDeclaration is IndexerDeclarationSyntax indexerDeclaration)
+            {
+                return indexerDeclaration.Modifiers;
+            }
+            else if (memberDeclaration is EventDeclarationSyntax eventDeclaration)
+            {
+                return eventDeclaration.Modifiers;
+            }
+            else if (memberDeclaration is EventFieldDeclarationSyntax eventFieldDeclaration)
+            {
+                return eventFieldDeclaration.Modifiers;
+            }
+            else
+            {
+                return default;
+            }
         }
 
         private static void CheckSealedMemberInSealedClass(SyntaxNodeAnalysisContext context)
         {
             var memberDeclaration = (MemberDeclarationSyntax)context.Node;
-            var memberSymbol = context.SemanticModel.GetDeclaredSymbol(memberDeclaration);
-            if (memberSymbol == null)
-            {
-                return;
-            }
-
-            if (!memberSymbol.IsSealed
-                || !memberSymbol.ContainingType.IsSealed)
-            {
-                return;
-            }
-
-            var modifiers = GetModifiers(memberDeclaration);
-            if (modifiers.Any(SyntaxKind.SealedKeyword))
+            if (GetModifiers(memberDeclaration) is { } modifiers
+                && modifiers.Any(SyntaxKind.SealedKeyword)
+                && context.ContainingSymbol != null
+                && context.ContainingSymbol.IsSealed)
             {
                 var keyword = modifiers.First(m => m.IsKind(SyntaxKind.SealedKeyword));
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, keyword.GetLocation(), "sealed", "redundant"));

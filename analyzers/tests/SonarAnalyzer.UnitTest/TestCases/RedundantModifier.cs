@@ -1,4 +1,6 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+
+namespace Tests.Diagnostics
 {
     public class C1
     {
@@ -12,7 +14,7 @@
     partial struct PartialStruct //Noncompliant {{'partial' is gratuitous in this context.}}
     {
     }
-partial interface PartialInterface //Noncompliant
+    partial interface PartialInterface //Noncompliant
     {
     }
 
@@ -20,20 +22,68 @@ partial interface PartialInterface //Noncompliant
     {
     }
 
-    internal partial class Partial2Part
+    internal abstract partial class Partial2Part
     {
         public virtual void MyOverriddenMethod() { }
         public virtual int Prop { get; set; }
+        public abstract int this[int counter] { get; }
+        protected abstract event EventHandler<EventArgs> MyEvent;
+        protected abstract event EventHandler<EventArgs> MyEvent2;
     }
+
     internal class Override : Partial2Part
     {
         public override void MyOverriddenMethod() { }
+
+        public override int this[int counter]
+        {
+            get { return 0; }
+        }
+
+        protected override event EventHandler<EventArgs> MyEvent;
+        protected override event EventHandler<EventArgs> MyEvent2
+        {
+            add { }
+            remove { }
+        }
     }
+
     sealed class SealedClass : Partial2Part
     {
-        public override sealed void MyOverriddenMethod() { } //Noncompliant {{'sealed' is redundant in this context.}}
+        public override sealed void MyOverriddenMethod() { } // Noncompliant {{'sealed' is redundant in this context.}}
 //                      ^^^^^^
-        public override sealed int Prop { get; set; } //Noncompliant
+        public override sealed int Prop { get; set; } // Noncompliant
+
+        public override sealed int this[int counter] // Noncompliant
+        {
+            get { return 0; }
+        }
+
+        protected override sealed event EventHandler<EventArgs> MyEvent; // Noncompliant
+        protected override sealed event EventHandler<EventArgs> MyEvent2 // Noncompliant
+        {
+            add { }
+            remove { }
+        }
+    }
+
+    sealed class SealedClassWithoutRedundantKeywordOnMembers : Partial2Part
+    {
+        public override void MyOverriddenMethod() { }
+
+        public override int Prop { get; set; }
+
+        public override int this[int counter]
+        {
+            get { return 0; }
+        }
+
+        protected override event EventHandler<EventArgs> MyEvent;
+        protected override event EventHandler<EventArgs> MyEvent2
+        {
+            add { }
+            remove { }
+        }
     }
 
     internal class BaseClass<T>
