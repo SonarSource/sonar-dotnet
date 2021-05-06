@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
@@ -41,18 +42,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         // Based on https://msdn.microsoft.com/en-us/library/gg145045%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396
         private static readonly ISet<string> FrameworkNamespaces =
-            new HashSet<string>
+            new SortedSet<string>(StringComparer.InvariantCultureIgnoreCase)
             {
-                "accessibility", "activities", "addin", "build", "codedom", "collections",
-                "componentmodel", "configuration", "csharp", "custommarshalers", "data",
-                "dataflow", "deployment", "device", "diagnostics", "directoryservices",
-                "drawing", "dynamic", "enterpriseservices", "globalization", "identitymodel",
-                "interopservices", "io", "jscript", "linq", "location", "management", "media",
-                "messaging", "microsoft", "net", "numerics", "printing", "reflection", "resources",
-                "runtime", "security", "server", "servicemodel", "serviceprocess", "speech",
-                "sqlserver", "system", "tasks", "text", "threading", "timers", "transactions",
-                "uiautomationclientsideproviders", "visualbasic", "visualc", "web", "win32",
-                "windows", "workflow", "xaml", "xamlgeneratednamespace", "xml"
+                "Accessibility", "Activities", "AddIn", "Build", "CodeDom", "Collections",
+                "Componentmodel", "Configuration", "CSharp", "CustomMarshalers", "Data",
+                "Dataflow", "Deployment", "Device", "Diagnostics", "DirectoryServices",
+                "Drawing", "Dynamic", "EnterpriseServices", "Globalization", "IdentityModel",
+                "InteropServices", "IO", "JScript", "Linq", "Location", "Management", "Media",
+                "Messaging", "Microsoft", "Net", "Numerics", "Printing", "Reflection", "Resources",
+                "Runtime", "security", "server", "servicemodel", "serviceprocess", "speech",
+                "SqlServer", "System", "Tasks", "Text", "Threading", "Timers", "Transactions",
+                "UIAutomationClientsideProviders", "VisualBasic", "VisualC", "Web", "Win32",
+                "Windows", "Workflow", "Xaml", "XamlGeneratedNamespace", "Xml"
             };
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -61,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (c.ContainingSymbol.Kind == SymbolKind.NamedType
                     && IsDeclaredPublic(c.Node, c.SemanticModel)
                     && CSharpFacade.Instance.Syntax.NodeIdentifier(c.Node) is { } identifier
-                    && FrameworkNamespaces.Contains(identifier.ValueText.ToLowerInvariant()))
+                    && FrameworkNamespaces.Contains(identifier.ValueText))
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
                 }
