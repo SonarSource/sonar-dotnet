@@ -22,7 +22,7 @@ $ErrorActionPreference = "Stop"
 
 . .\create-issue-reports.ps1
 
-$InternalProjects = @("ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB")
+$InternalProjects = @("ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB")
 
 if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
