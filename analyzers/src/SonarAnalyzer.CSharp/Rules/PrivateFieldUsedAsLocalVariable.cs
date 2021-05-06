@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,13 +36,13 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1450";
+        private const string DiagnosticId = "S1450";
         private const string MessageFormat = "Remove the field '{0}' and declare it as a local variable in the relevant methods.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ISet<SyntaxKind> NonPrivateModifiers = new HashSet<SyntaxKind>
         {
@@ -50,14 +51,14 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.InternalKeyword,
         };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
 
-                    if (typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword))
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType
+                        || typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword))
                     {
                         return;
                     }
@@ -79,11 +80,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         .ForEach(d => c.ReportDiagnosticWhenActive(d));
 
                     Diagnostic CreateDiagnostic(IFieldSymbol fieldSymbol) =>
-                        Diagnostic.Create(rule, privateFields[fieldSymbol].GetLocation(), fieldSymbol.Name);
+                        Diagnostic.Create(Rule, privateFields[fieldSymbol].GetLocation(), fieldSymbol.Name);
                 },
                 SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration);
-        }
+                SyntaxKind.StructDeclaration,
+                SyntaxKindEx.RecordDeclaration);
 
         private static IDictionary<IFieldSymbol, VariableDeclaratorSyntax> GetPrivateFields(SemanticModel semanticModel,
             TypeDeclarationSyntax typeDeclaration)
@@ -123,8 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly SemanticModel semanticModel;
             private readonly IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields;
 
-            public FieldAccessCollector(SemanticModel semanticModel,
-                IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields)
+            public FieldAccessCollector(SemanticModel semanticModel, IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields)
             {
                 this.semanticModel = semanticModel;
                 this.privateFields = privateFields;
@@ -132,8 +132,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public bool IsRemovableField(IFieldSymbol fieldSymbol)
             {
-                var writesByEnclosingSymbol = this.writesByField.GetValueOrDefault(fieldSymbol);
-                var readsByEnclosingSymbol = this.readsByField.GetValueOrDefault(fieldSymbol);
+                var writesByEnclosingSymbol = writesByField.GetValueOrDefault(fieldSymbol);
+                var readsByEnclosingSymbol = readsByField.GetValueOrDefault(fieldSymbol);
 
                 // No methods overwrite the field value
                 if (writesByEnclosingSymbol == null)
@@ -184,12 +184,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     bool IsOverwritingValue(StatementSyntax statement) =>
-                        writeStatements.Contains(statement) &&
-                        !readStatements.Contains(statement);
+                        writeStatements.Contains(statement)
+                        && !readStatements.Contains(statement);
 
                     bool IsInvocationWithSideEffects(StatementSyntax statement) =>
-                        this.invocations.TryGetValue(statement, out var invocationsInStatement) &&
-                        invocationsInStatement.Any(writesByEnclosingSymbol.ContainsKey);
+                        invocations.TryGetValue(statement, out var invocationsInStatement)
+                        && invocationsInStatement.Any(writesByEnclosingSymbol.ContainsKey);
                 }
             }
 
@@ -201,10 +201,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var enclosingSymbol = this.semanticModel.GetEnclosingSymbol(memberReference.Syntax.SpanStart);
+                var enclosingSymbol = semanticModel.GetEnclosingSymbol(memberReference.Syntax.SpanStart);
 
-                if (memberReference.Symbol is IFieldSymbol fieldSymbol &&
-                    this.privateFields.ContainsKey(fieldSymbol))
+                if (memberReference.Symbol is IFieldSymbol fieldSymbol
+                    && privateFields.ContainsKey(fieldSymbol))
                 {
                     ClassifyFieldReference(enclosingSymbol, memberReference);
                 }
@@ -213,18 +213,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     var pseudoStatement = GetParentPseudoStatement(memberReference);
                     if (pseudoStatement != null)
                     {
-                        var invocationsInPseudoStatement = this.invocations.GetOrAdd(pseudoStatement, x => new HashSet<ISymbol>());
+                        var invocationsInPseudoStatement = invocations.GetOrAdd(pseudoStatement, x => new HashSet<ISymbol>());
                         invocationsInPseudoStatement.Add(memberReference.Symbol);
                     }
                 }
             }
 
-            // A PseudoStatement is a Statement or an ArrowExpressionClauseSyntax (which denotes an expression-bodied member)
-            private static SyntaxNode GetParentPseudoStatement(SyntaxNodeWithSymbol<SyntaxNode, ISymbol> memberReference)
-            {
-                return memberReference.Syntax.Ancestors().FirstOrDefault(
-                    a => a is StatementSyntax || a is ArrowExpressionClauseSyntax);
-            }
+            // A PseudoStatement is a Statement or an ArrowExpressionClauseSyntax (which denotes an expression-bodied member).
+            private static SyntaxNode GetParentPseudoStatement(SyntaxNodeWithSymbol<SyntaxNode, ISymbol> memberReference) =>
+                memberReference.Syntax.Ancestors().FirstOrDefault(a => a is StatementSyntax || a is ArrowExpressionClauseSyntax);
 
             /// <summary>
             /// Stores the statement that contains the provided field reference in one of the "reads" or "writes" collections,
@@ -235,7 +232,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // It is important to create the field access HashSet regardless of the statement (see the local var below)
                 // being null or not, because the rule will not be able to detect field reads from inline property
                 // or field initializers.
-                var fieldAccessInMethod = (IsWrite(fieldReference) ? this.writesByField : this.readsByField)
+                var fieldAccessInMethod = (IsWrite(fieldReference) ? writesByField : readsByField)
                     .GetOrAdd((IFieldSymbol)fieldReference.Symbol, x => new Lookup<ISymbol, SyntaxNode>())
                     .GetOrAdd(enclosingSymbol, x => new HashSet<SyntaxNode>());
 
@@ -250,8 +247,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // If the field is not static and is not from the current instance we
                 // consider the reference as read.
-                if (!fieldReference.Symbol.IsStatic &&
-                    !(fieldReference.Syntax as ExpressionSyntax).RemoveParentheses().IsOnThis())
+                if (!fieldReference.Symbol.IsStatic
+                    && !(fieldReference.Syntax as ExpressionSyntax).RemoveParentheses().IsOnThis())
                 {
                     return false;
                 }
@@ -260,13 +257,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     || IsOutArgument(fieldReference.Syntax);
 
                 bool IsOutArgument(SyntaxNode syntaxNode) =>
-                    syntaxNode.Parent is ArgumentSyntax argument &&
-                    argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
+                    syntaxNode.Parent is ArgumentSyntax argument
+                    && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
 
                 bool IsLeftSideOfAssignment(SyntaxNode syntaxNode) =>
-                    syntaxNode.Parent.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
-                    syntaxNode.Parent is AssignmentExpressionSyntax assignmentExpression &&
-                    assignmentExpression.Left == syntaxNode;
+                    syntaxNode.Parent.IsKind(SyntaxKind.SimpleAssignmentExpression)
+                    && syntaxNode.Parent is AssignmentExpressionSyntax assignmentExpression
+                    && assignmentExpression.Left == syntaxNode;
             }
 
             private SyntaxNodeWithSymbol<SyntaxNode, ISymbol> GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
@@ -278,17 +275,17 @@ namespace SonarAnalyzer.Rules.CSharp
                         // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
                         return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
                             memberAccess.GetSelfOrTopParenthesizedExpression(),
-                            this.semanticModel.GetSymbolInfo(memberAccess).Symbol);
+                            semanticModel.GetSymbolInfo(memberAccess).Symbol);
                     case MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier:
                         // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
                         return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
                             memberBinding.Parent.GetSelfOrTopParenthesizedExpression(),
-                            this.semanticModel.GetSymbolInfo(memberBinding).Symbol);
+                            semanticModel.GetSymbolInfo(memberBinding).Symbol);
                     default:
                         // identifier or ((identifier))
                         return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
                             identifier.GetSelfOrTopParenthesizedExpression(),
-                            this.semanticModel.GetSymbolInfo(identifier).Symbol);
+                            semanticModel.GetSymbolInfo(identifier).Symbol);
                 }
             }
         }
