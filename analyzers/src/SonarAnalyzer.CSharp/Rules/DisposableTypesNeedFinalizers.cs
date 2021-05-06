@@ -33,49 +33,40 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DisposableTypesNeedFinalizers : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4002";
+        private const string DiagnosticId = "S4002";
         private const string MessageFormat = "Implement a finalizer that calls your 'Dispose' method.";
 
-        private static readonly DiagnosticDescriptor rule
+        private static readonly DiagnosticDescriptor Rule
             = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ImmutableArray<KnownType> nativeHandles =
-            ImmutableArray.Create(
-                KnownType.System_IntPtr,
-                KnownType.System_UIntPtr,
-                KnownType.System_Runtime_InteropServices_HandleRef
-            );
+        private static readonly ImmutableArray<KnownType> NativeHandles =
+            ImmutableArray.Create(KnownType.System_IntPtr,
+                                  KnownType.System_UIntPtr,
+                                  KnownType.System_Runtime_InteropServices_HandleRef);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var classDeclaration = (ClassDeclarationSyntax)c.Node;
                 var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-                if (classSymbol.Implements(KnownType.System_IDisposable) &&
-                    HasNativeHandleFields(classDeclaration, c.SemanticModel) &&
-                    !HasFinalizer(classDeclaration))
+                if (classSymbol.Implements(KnownType.System_IDisposable)
+                    && HasNativeHandleFields(classDeclaration, c.SemanticModel)
+                    && !HasFinalizer(classDeclaration))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation()));
                 }
             },
             SyntaxKind.ClassDeclaration);
-        }
 
-        private static bool HasNativeHandleFields(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
-        {
-            return classDeclaration.Members
-                        .OfType<FieldDeclarationSyntax>()
-                        .Select(m => semanticModel.GetDeclaredSymbol(m.Declaration.Variables.FirstOrDefault())?.GetSymbolType())
-                        .Any(si => si.IsAny(nativeHandles));
-        }
+        private static bool HasNativeHandleFields(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel) =>
+            classDeclaration.Members
+                            .OfType<FieldDeclarationSyntax>()
+                            .Select(m => semanticModel.GetDeclaredSymbol(m.Declaration.Variables.FirstOrDefault())?.GetSymbolType())
+                            .Any(si => si.IsAny(NativeHandles));
 
-        private static bool HasFinalizer(ClassDeclarationSyntax classDeclaration)
-        {
-            return classDeclaration.Members.OfType<DestructorDeclarationSyntax>().Any();
-        }
+        private static bool HasFinalizer(ClassDeclarationSyntax classDeclaration) => classDeclaration.Members.OfType<DestructorDeclarationSyntax>().Any();
     }
 }
