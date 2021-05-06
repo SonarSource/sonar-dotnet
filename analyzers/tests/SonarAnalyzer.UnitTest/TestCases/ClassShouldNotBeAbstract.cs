@@ -12,7 +12,7 @@ namespace Tests.Diagnostics
         public void Y() { }
     }
 
-    public abstract class Empty // Noncompliant {{Convert this 'abstract' class to a concrete implementation with a protected constructor.}}
+    public abstract class Empty // Noncompliant {{Convert this 'abstract' class to a concrete type with a protected constructor.}}
 //                        ^^^^^
     {
 
@@ -34,7 +34,7 @@ namespace Tests.Diagnostics
 
     }
 
-    public abstract class Color //Noncompliant {{Convert this 'abstract' class to a concrete implementation with a protected constructor.}}
+    public abstract class Color //Noncompliant {{Convert this 'abstract' class to a concrete type with a protected constructor.}}
     {
         private int red = 0;
         private int green = 0;
