@@ -227,6 +227,11 @@ namespace Tests.Diagnostics
                 var y = 5.5 + 4; // Fixed
             }
 
+            {
+                var f = 5.5;
+                var x = 5 + "somestring";
+            }
+
             unchecked
             {
                 var f = 5.5;
@@ -260,6 +265,11 @@ namespace Tests.Diagnostics
             {
                 var x = 10;
                 x = -5;
+            }
+
+            {
+                var x = 10;
+                x = -"1"; // Error [CS0023]
             }
 
             {

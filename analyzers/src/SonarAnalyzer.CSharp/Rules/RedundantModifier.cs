@@ -348,8 +348,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     isCurrentContextChecked = expression.IsKind(SyntaxKind.CheckedExpression);
                     return;
                 }
-
-                throw new NotSupportedException("Only checked expressions and statements are supported");
             }
 
             public override void VisitCheckedExpression(CheckedExpressionSyntax node) =>

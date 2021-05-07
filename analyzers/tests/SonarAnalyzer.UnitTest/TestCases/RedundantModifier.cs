@@ -241,6 +241,12 @@ namespace Tests.Diagnostics
                 var y = unchecked(5.5 + 4); // Noncompliant
             }
 
+            checked // Noncompliant
+            {
+                var f = 5.5;
+                var x = 5 + "somestring";
+            }
+
             unchecked
             {
                 var f = 5.5;
@@ -275,6 +281,12 @@ namespace Tests.Diagnostics
             {
                 var x = 10;
                 x = -5;
+            }
+
+            checked // Noncompliant
+            {
+                var x = 10;
+                x = -"1"; // Error [CS0023]
             }
 
             checked // Noncompliant
