@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
     public struct MyStruct { }
 
     public record FirstRecord { }
-    public record SecondRecord // Noncompliant {{Split this record into smaller and more specialized ones to reduce its dependencies on other classes from 6 to the maximum authorized 1 or less.}}
+    public record SecondRecord // Noncompliant {{Split this record into smaller and more specialized ones to reduce its dependencies on other types from 6 to the maximum authorized 1 or less.}}
     {
         private FirstRecord field1; // +1
         private MyStruct field2; // +1
@@ -25,7 +25,7 @@ namespace Tests.Diagnostics
         public void BarMethod(Stream s) { } // +1
     }
 
-    public record PositionalRecord(int Parameter) // Noncompliant {{Split this record into smaller and more specialized ones to reduce its dependencies on other classes from 6 to the maximum authorized 1 or less.}}
+    public record PositionalRecord(int Parameter) // Noncompliant {{Split this record into smaller and more specialized ones to reduce its dependencies on other types from 6 to the maximum authorized 1 or less.}}
     {
         private FirstRecord field1; // +1
         private MyStruct field2; // +1

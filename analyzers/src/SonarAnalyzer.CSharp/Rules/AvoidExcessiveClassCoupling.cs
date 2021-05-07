@@ -36,16 +36,16 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class AvoidExcessiveClassCoupling : ParameterLoadingDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1200";
+        private const string DiagnosticId = "S1200";
         private const string MessageFormat = "Split this {0} into smaller and more specialized ones to reduce its " +
-            "dependencies on other classes from {1} to the maximum authorized {2} or less.";
+            "dependencies on other types from {1} to the maximum authorized {2} or less.";
         private const int ThresholdDefaultValue = 30;
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        [RuleParameter("max", PropertyType.Integer, "Maximum number of classes a single class is allowed to depend upon", ThresholdDefaultValue)]
+        [RuleParameter("max", PropertyType.Integer, "Maximum number of types a single type is allowed to depend upon", ThresholdDefaultValue)]
         public int Threshold { get; set; } = ThresholdDefaultValue;
 
         private static readonly ImmutableArray<KnownType> IgnoredTypes =
@@ -82,8 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Func_T1_T2_T3_T4_TResult,
                 KnownType.System_Lazy);
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
-        {
+        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -116,7 +115,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration,
                 SyntaxKindEx.RecordDeclaration);
-        }
 
         private static bool IsTrackedType(INamedTypeSymbol namedType) =>
             namedType.TypeKind != TypeKind.Enum && !namedType.IsAny(IgnoredTypes);

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
-public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 1 to the maximum authorized 0 or less.}}
+public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
 {
     public void Foo<T, V>(IDictionary<T, V> dictionary) { } // +1 for dictionary
 }
@@ -51,7 +51,7 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
-public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 4 to the maximum authorized 0 or less.}}
+public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 4 to the maximum authorized 0 or less.}}
 {
     public void Foo1<T, V>(IDictionary<T, V> dictionary)  // +1 for IDictionary
         where T : IEnumerable<IDisposable> // +1 for IEnumerable, +1 for IDisposable
@@ -68,7 +68,7 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
-public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 3 to the maximum authorized 0 or less.}}
+public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 3 to the maximum authorized 0 or less.}}
 {
     public void Foo(IDictionary<IDisposable, ICloneable> dictionary)  // +1 for IDictionary, +1 for IDisposable, +1 for ICloneable
     {
@@ -83,7 +83,7 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
-public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 6 to the maximum authorized 0 or less.}}
+public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 6 to the maximum authorized 0 or less.}}
 {
     public void Foo(IList<ICollection<IEnumerable<IComparer<Stack<Queue<int>>>>>> dictionary)
     // +1 for IList, +1 for ICollection, +1 for IEnumerable, +1 for IComparer, +1 for Stack, +1 for Queue
@@ -159,7 +159,7 @@ public class Pointers // Compliant, enums are not counted
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
-public class Lazyness // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 1 to the maximum authorized 0 or less.}}
+public class Lazyness // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
 {
     public void Foo(Lazy<IEnumerable<int>> lazy) { } // +1 IEnumerable
 }
@@ -171,7 +171,7 @@ public class Lazyness // Noncompliant {{Split this class into smaller and more s
         public void AvoidExcessiveClassCoupling_Fields_Are_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Collections.Generic;
-public class Fields // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 5 to the maximum authorized 0 or less.}}
+public class Fields // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 5 to the maximum authorized 0 or less.}}
 {
     // accessibility
     private IList<int> c1;
@@ -189,7 +189,7 @@ public class Fields // Noncompliant {{Split this class into smaller and more spe
         public void AvoidExcessiveClassCoupling_Properties_Are_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Collections.Generic;
-public class Properties // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 9 to the maximum authorized 0 or less.}}
+public class Properties // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 9 to the maximum authorized 0 or less.}}
 {
     // accessibility
     private IList<int> C1 { get; set; }
@@ -222,7 +222,7 @@ public class Properties // Noncompliant {{Split this class into smaller and more
         public void AvoidExcessiveClassCoupling_Indexers_Are_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Collections.Generic;
-public class Indexers // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 6 to the maximum authorized 0 or less.}}
+public class Indexers // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 6 to the maximum authorized 0 or less.}}
 {
     // accessibility
     public IList<int> this[int i] { get { return null; } } // +1 IList
@@ -241,7 +241,7 @@ public class Indexers // Noncompliant {{Split this class into smaller and more s
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
-public class Events // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 9 to the maximum authorized 0 or less.}}
+public class Events // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 9 to the maximum authorized 0 or less.}}
 {
     // accessibility
     private event EventHandler<IList<int>> e1; // +1 EventHandler, +1 IList
@@ -273,7 +273,7 @@ public class Events // Noncompliant {{Split this class into smaller and more spe
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-public class Methods // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 10 to the maximum authorized 0 or less.}}
+public class Methods // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 10 to the maximum authorized 0 or less.}}
 {
     // accessibility
     private void M1(IList<int> l1) { } // +1 IList
@@ -303,20 +303,20 @@ public class Methods // Noncompliant {{Split this class into smaller and more sp
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
-public class OuterClass // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 1 to the maximum authorized 0 or less.}}
+public class OuterClass // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
 {
     private void M1(IList<int> l1) { } // +1 IList
 
-    public class InnerClass // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 1 to the maximum authorized 0 or less.}}
+    public class InnerClass // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
     {
         private void M1(ICollection<int> l1) { } // +1 ICollection
     }
 }
-public struct OuterStruct // Noncompliant {{Split this struct into smaller and more specialized ones to reduce its dependencies on other classes from 1 to the maximum authorized 0 or less.}}
+public struct OuterStruct // Noncompliant {{Split this struct into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
 {
     private void M1(IList<int> l1) { } // +1 IList
 
-    public struct InnerStruct // Noncompliant {{Split this struct into smaller and more specialized ones to reduce its dependencies on other classes from 1 to the maximum authorized 0 or less.}}
+    public struct InnerStruct // Noncompliant {{Split this struct into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
     {
         private void M1(ICollection<int> l1) { } // +1 ICollection
     }
@@ -330,7 +330,7 @@ public struct OuterStruct // Noncompliant {{Split this struct into smaller and m
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
-public interface I // Noncompliant {{Split this interface into smaller and more specialized ones to reduce its dependencies on other classes from 1 to the maximum authorized 0 or less.}}
+public interface I // Noncompliant {{Split this interface into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
 {
     void M1(IList<int> l1); // +1 IList
     // interfaces cannot contain other types
@@ -358,7 +358,7 @@ public class Self // Compliant, self references are not counted
 using System;
 using System.Collections.Generic;
 public class Base {}
-public class Self // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 2 to the maximum authorized 0 or less.}}
+public class Self // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 2 to the maximum authorized 0 or less.}}
     : Base, ICloneable
 {
     public object Clone() { return null; }
@@ -372,7 +372,7 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
-public class Self // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 2 to the maximum authorized 0 or less.}}
+public class Self // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 2 to the maximum authorized 0 or less.}}
 {
     void M1()
     {
