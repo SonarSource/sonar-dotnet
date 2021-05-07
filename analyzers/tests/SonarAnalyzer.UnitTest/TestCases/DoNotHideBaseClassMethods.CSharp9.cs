@@ -9,6 +9,8 @@ namespace MyLibrary
 
         protected void SomeProtectedMethod(string s1, string s2) { }
 
+        protected void SomeProtectedMethod(string s1, int s2) { }
+
         private void SomePrivateMethod(string s1, string s2) { }
 
         public void GenericMethod<T>(T s1, string s2) { }
