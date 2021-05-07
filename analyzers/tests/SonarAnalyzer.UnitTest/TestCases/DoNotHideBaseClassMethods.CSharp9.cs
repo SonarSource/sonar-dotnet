@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MyLibrary
 {
@@ -52,6 +51,16 @@ namespace MyLibrary
     record MultipleOverloadsDerived : MultipleOverloadsBase
     {
         public bool Method1(object obj) => true;
+    }
+
+    record Base(string X)
+    {
+        public void Method(string s1) { }
+    }
+
+    record Derived(string X) : Base(X)
+    {
+        public void Method(object s1) { } // Noncompliant {{Remove or rename that method because it hides 'MyLibrary.Base.Method(string)'.}}
     }
 }
 
