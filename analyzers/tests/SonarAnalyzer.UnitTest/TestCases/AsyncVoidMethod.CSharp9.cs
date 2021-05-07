@@ -77,7 +77,7 @@ namespace Tests.Diagnostics
 
     public interface EventHandlerCasesInInterface
     {
-        async void MyMethod() // Compliant FP , see https://github.com/SonarSource/sonar-dotnet/issues/4396
+        async void MyMethod() // Compliant FN , see https://github.com/SonarSource/sonar-dotnet/issues/4396
         {
             await Task.Run(() => Console.WriteLine("test"));
         }
