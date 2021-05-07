@@ -23,6 +23,8 @@ namespace Tests.Diagnostics
     namespace Accessibility { }  // Compliant (namespace are not checked)
 
     interface { } // Error [CS1001]
+
+    public class dIrEcToRySeRvIcEs { } // Noncompliant {{Change the name of type 'dIrEcToRySeRvIcEs' to be different from an existing framework namespace.}}
 }
 
 namespace All_Variants
