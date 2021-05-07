@@ -57,6 +57,15 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public sealed class Class7 // Noncompliant
+    {
+        private Class7() { }
+
+        public void M() { }
+        public static Class0 instance => new Class0();
+    }
+
     public class MyClassGeneric<T>
     {
         private MyClassGeneric()
