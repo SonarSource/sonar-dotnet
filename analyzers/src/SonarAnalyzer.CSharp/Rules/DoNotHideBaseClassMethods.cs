@@ -34,15 +34,13 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotHideBaseClassMethods : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4019";
+        private const string DiagnosticId = "S4019";
         private const string MessageFormat = "Remove or rename that method because it hides '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
@@ -63,7 +61,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         .ForEach(d => c.ReportDiagnosticWhenActive(d));
                 },
                 SyntaxKind.ClassDeclaration);
-        }
 
         private class IssueFinder
         {
@@ -72,46 +69,42 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly IList<IMethodSymbol> allBaseClassMethods;
             private readonly SemanticModel semanticModel;
 
-            public IssueFinder(INamedTypeSymbol classSymbol, SemanticModel semanticModel)
+            public IssueFinder(ITypeSymbol typeSymbol, SemanticModel semanticModel)
             {
                 this.semanticModel = semanticModel;
-                this.allBaseClassMethods = GetAllBaseMethods(classSymbol);
-            }
-
-            private static List<IMethodSymbol> GetAllBaseMethods(INamedTypeSymbol classSymbol)
-            {
-                return classSymbol.BaseType
-                         .GetSelfAndBaseTypes()
-                         .SelectMany(t => t.GetMembers())
-                         .OfType<IMethodSymbol>()
-                         .Where(m => IsSymbolVisibleFromNamespace(m, classSymbol.ContainingNamespace))
-                         .Where(m => m.Parameters.Length > 0)
-                         .Where(m => !string.IsNullOrEmpty(m.Name))
-                         .ToList();
-            }
-
-            private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns)
-            {
-                return symbol.DeclaredAccessibility != Accessibility.Private &&
-                       (symbol.DeclaredAccessibility != Accessibility.Internal || ns.Equals(symbol.ContainingNamespace));
+                allBaseClassMethods = GetAllBaseMethods(typeSymbol);
             }
 
             public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
             {
                 var issueLocation = (memberDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
 
-                if (!(this.semanticModel.GetDeclaredSymbol(memberDeclaration) is IMethodSymbol methodSymbol) || issueLocation == null)
+                if (!(semanticModel.GetDeclaredSymbol(memberDeclaration) is IMethodSymbol methodSymbol) || issueLocation == null)
                 {
                     return null;
                 }
 
                 var baseMethodHidden = FindBaseMethodHiddenByMethod(methodSymbol);
-                return baseMethodHidden != null ? Diagnostic.Create(rule, issueLocation, baseMethodHidden) : null;
+                return baseMethodHidden != null ? Diagnostic.Create(Rule, issueLocation, baseMethodHidden) : null;
             }
+
+            private static List<IMethodSymbol> GetAllBaseMethods(ITypeSymbol typeSymbol) =>
+                typeSymbol.BaseType
+                           .GetSelfAndBaseTypes()
+                           .SelectMany(t => t.GetMembers())
+                           .OfType<IMethodSymbol>()
+                           .Where(m => IsSymbolVisibleFromNamespace(m, typeSymbol.ContainingNamespace))
+                           .Where(m => m.Parameters.Length > 0)
+                           .Where(m => !string.IsNullOrEmpty(m.Name))
+                           .ToList();
+
+            private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns) =>
+                symbol.DeclaredAccessibility != Accessibility.Private
+                && (symbol.DeclaredAccessibility != Accessibility.Internal || ns.Equals(symbol.ContainingNamespace));
 
             private IMethodSymbol FindBaseMethodHiddenByMethod(IMethodSymbol methodSymbol)
             {
-                var baseMemberCandidates = this.allBaseClassMethods.Where(m => m.Name == methodSymbol.Name);
+                var baseMemberCandidates = allBaseClassMethods.Where(m => m.Name == methodSymbol.Name);
 
                 IMethodSymbol hiddenBaseMethodCandidate = null;
 
@@ -120,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var result = ComputeSignatureMatch(baseMember, methodSymbol);
                         if (result == Match.WeaklyDerived)
                         {
-                            hiddenBaseMethodCandidate = hiddenBaseMethodCandidate ?? baseMember;
+                            hiddenBaseMethodCandidate ??= baseMember;
                         }
 
                         return result == Match.Identical;
@@ -129,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return hasBaseMethodWithSameSignature ? null : hiddenBaseMethodCandidate;
             }
 
-            private Match ComputeSignatureMatch(IMethodSymbol baseMethodSymbol, IMethodSymbol methodSymbol)
+            private static Match ComputeSignatureMatch(IMethodSymbol baseMethodSymbol, IMethodSymbol methodSymbol)
             {
                 var baseMethodParams = baseMethodSymbol.Parameters;
                 var methodParams = methodSymbol.Parameters;
@@ -158,7 +151,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return signatureMatch;
             }
 
-            private Match ComputeParameterMatch(IParameterSymbol baseParam, IParameterSymbol methodParam)
+            private static Match ComputeParameterMatch(IParameterSymbol baseParam, IParameterSymbol methodParam)
             {
                 if (baseParam.Type.Is(TypeKind.TypeParameter))
                 {
