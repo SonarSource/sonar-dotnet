@@ -28,7 +28,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.ShimLayer.CSharp;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
 
-                    if (typeDeclaration.Identifier.IsMissing)
+                    if (typeDeclaration.Identifier.IsMissing || c.ContainingSymbol.Kind != SymbolKind.NamedType)
                     {
                         return;
                     }
