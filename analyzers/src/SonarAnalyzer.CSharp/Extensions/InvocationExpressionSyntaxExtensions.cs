@@ -40,5 +40,8 @@ namespace SonarAnalyzer.Extensions
         internal static bool IsGetTypeCall(this InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             invocation != null
             && (semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && methodSymbol.IsGetTypeCall());
+
+        internal static bool IsOnBase(this InvocationExpressionSyntax invocation) =>
+            (invocation.Expression as MemberAccessExpressionSyntax)?.Expression is BaseExpressionSyntax;
     }
 }

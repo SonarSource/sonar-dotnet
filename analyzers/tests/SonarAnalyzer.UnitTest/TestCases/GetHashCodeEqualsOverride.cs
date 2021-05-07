@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
-
     class GetHashCodeEqualsOverride
     {
         private readonly int x;
@@ -220,5 +220,15 @@ namespace Tests.Diagnostics
         }
 
         private void Method() { }
+    }
+
+    public class GetHashCodeInsideExpressions
+    {
+        private readonly IDictionary<string, dynamic> dictionary = new Dictionary<string, dynamic>();
+
+        public override int GetHashCode()
+        {
+            return dictionary != null ? dictionary.GetHashCode() : 0; // Compliant
+        }
     }
 }

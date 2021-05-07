@@ -71,15 +71,9 @@ namespace SonarAnalyzer.Rules.CSharp
             IMethodSymbol methodSymbol)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethod) ||
-                invokedMethod.Name != methodSymbol.Name)
-            {
-                return;
-            }
-
-            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-
-            if (!(memberAccess?.Expression is BaseExpressionSyntax baseCall))
+            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethod)
+                || invokedMethod.Name != methodSymbol.Name
+                || !invocation.IsOnBase())
             {
                 return;
             }

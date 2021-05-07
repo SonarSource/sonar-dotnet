@@ -90,22 +90,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         });
                 });
 
-        internal static bool IsEqualsCallInGuardCondition(InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod)
-        {
-            if (invokedMethod.Name != EqualsName)
-            {
-                return false;
-            }
-
-            if (!(invocation.Parent is IfStatementSyntax ifStatement)
-                || ifStatement.Condition != invocation
-                || !invocation.HasExactlyNArguments(1))
-            {
-                return false;
-            }
-
-            return IfStatementWithSingleReturnTrue(ifStatement);
-        }
+        internal static bool IsEqualsCallInGuardCondition(InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod) =>
+            invokedMethod.Name == EqualsName
+            && invocation.Parent is IfStatementSyntax ifStatement
+            && ifStatement.Condition == invocation
+            && IfStatementWithSingleReturnTrue(ifStatement);
 
         internal static bool MethodIsRelevant(IMethodSymbol methodSymbol, ISet<string> methodNames) =>
             methodNames.Contains(methodSymbol.Name) && methodSymbol.IsOverride;
@@ -115,13 +104,8 @@ namespace SonarAnalyzer.Rules.CSharp
             location = null;
             var invocation = (InvocationExpressionSyntax)context.Node;
             if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethod)
-                || invokedMethod.Name != symbol.Name)
-            {
-                return false;
-            }
-
-            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-            if (!(memberAccess?.Expression is BaseExpressionSyntax))
+                || invokedMethod.Name != symbol.Name
+                || !invocation.IsOnBase())
             {
                 return false;
             }
