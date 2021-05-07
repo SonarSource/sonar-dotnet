@@ -46,13 +46,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var declarationSyntax = (TypeDeclarationSyntax)c.Node;
                     if (declarationSyntax.Identifier.IsMissing
-                        || c.ContainingSymbol.Kind != SymbolKind.NamedType)
-                    {
-                        return;
-                    }
-
-                    var declaredSymbol = c.SemanticModel.GetDeclaredSymbol(declarationSyntax);
-                    if (declaredSymbol == null)
+                        || c.ContainingSymbol.Kind != SymbolKind.NamedType
+                        || !(c.SemanticModel.GetDeclaredSymbol(declarationSyntax) is {} declaredSymbol))
                     {
                         return;
                     }
