@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S3453";
         protected const string MessageFormat = "This {0} can't be instantiated; make {1} 'public'.";
 
-        protected abstract bool IsAnyNestedTypeExtendingCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel);
+        protected abstract bool IsTypeDeclaration(SyntaxNode node);
 
         protected bool IsAnyConstructorCalled
             <TBaseTypeSyntax, TObjectCreationSyntax>
@@ -46,6 +46,12 @@ namespace SonarAnalyzer.Rules
                 .Any(descendants =>
                     IsAnyConstructorToCurrentType<TObjectCreationSyntax>(descendants.DescendantNodes, namedType, descendants.SemanticModel) ||
                     IsAnyNestedTypeExtendingCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel));
+
+        private bool IsAnyNestedTypeExtendingCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel) =>
+            descendantNodes
+                .Where(IsTypeDeclaration)
+                .Select(x => (semanticModel.GetDeclaredSymbol(x) as ITypeSymbol)?.BaseType)
+                .Any(baseType => baseType != null && baseType.OriginalDefinition.DerivesFrom(namedType));
 
         protected static IEnumerable<IMethodSymbol> GetConstructors(IEnumerable<ISymbol> members) =>
             members
@@ -72,8 +78,7 @@ namespace SonarAnalyzer.Rules
         private static bool HasNonPrivateConstructor(IEnumerable<IMethodSymbol> constructors) =>
             constructors.Any(method => method.DeclaredAccessibility != Accessibility.Private);
 
-        private static bool IsAnyConstructorToCurrentType<TObjectCreationSyntax>(
-            IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel)
+        private static bool IsAnyConstructorToCurrentType<TObjectCreationSyntax>(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel)
             where TObjectCreationSyntax : SyntaxNode =>
             descendantNodes
                 .OfType<TObjectCreationSyntax>()

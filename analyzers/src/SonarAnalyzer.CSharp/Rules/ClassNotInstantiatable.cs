@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -43,11 +42,8 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
 
-        protected override bool IsAnyNestedTypeExtendingCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel) =>
-            descendantNodes
-                .Where(x => x.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration))
-                .Select(x => (semanticModel.GetDeclaredSymbol(x) as ITypeSymbol)?.BaseType)
-                .Any(baseType => baseType != null && baseType.OriginalDefinition.DerivesFrom(namedType));
+        protected override bool IsTypeDeclaration(SyntaxNode node) =>
+            node.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
 
         private void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
         {
@@ -58,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var members = namedType.GetMembers();
-            var constructors = GetConstructors(members).Where(x => x.IsImplicitlyDeclared == false).ToList();
+            var constructors = GetConstructors(members).Where(x => !x.IsImplicitlyDeclared).ToList();
 
             if (!HasOnlyCandidateConstructors(constructors) || HasOnlyStaticMembers(members.Except(constructors).ToList()))
             {

@@ -18,11 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -40,11 +40,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
 
-        protected override bool IsAnyNestedTypeExtendingCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel) =>
-            descendantNodes
-                .OfType<ClassBlockSyntax>()
-                .Select(c => (semanticModel.GetDeclaredSymbol(c) as ITypeSymbol)?.BaseType)
-                .Any(baseType => baseType != null && baseType.OriginalDefinition.DerivesFrom(namedType));
+        protected override bool IsTypeDeclaration(SyntaxNode node) =>
+            node.IsAnyKind(SyntaxKind.ClassBlock);
 
         private void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
         {
