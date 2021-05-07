@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MyLibrary
 {
@@ -8,6 +7,8 @@ namespace MyLibrary
         public void SomePublicMethod(string s1, string s2) { }
 
         protected void SomeProtectedMethod(string s1, string s2) { }
+
+        protected void SomeProtectedMethod(string s1, int s2) { }
 
         private void SomePrivateMethod(string s1, string s2) { }
 
@@ -18,16 +19,16 @@ namespace MyLibrary
 
     record Bar : Foo
     {
-        public void SomePublicMethod(string s1, object s2) { } // FN {{Remove or rename that method because it hides 'MyLibrary.Foo.SomePublicMethod(string, string)'.}}
-        protected void SomeProtectedMethod(string s1, object o2) { } // FN
+        public void SomePublicMethod(string s1, object s2) { } // Noncompliant {{Remove or rename that method because it hides 'MyLibrary.Foo.SomePublicMethod(string, string)'.}}
+        protected void SomeProtectedMethod(string s1, object o2) { } // Noncompliant
 
         private void SomePrivateMethod(string s1, object o2) { }
 
         public void SomePublicMethod(string s1, string s2) { }
 
-        public void GenericMethod<TType>(TType s1, object s2) { } // FN
+        public void GenericMethod<TType>(TType s1, object s2) { } // Noncompliant
 
-        public void GenericMethod2<T>(IEnumerable<T> s1, object s2) { } // FN
+        public void GenericMethod2<T>(IEnumerable<T> s1, object s2) { } // Noncompliant
     }
 
     record Bar2 : Foo
@@ -36,7 +37,7 @@ namespace MyLibrary
 
     record Bar3 : Bar2
     {
-        public void SomePublicMethod(string s1, object o2) { } // FN
+        public void SomePublicMethod(string s1, object o2) { } // Noncompliant
     }
 
 
@@ -51,6 +52,16 @@ namespace MyLibrary
     {
         public bool Method1(object obj) => true;
     }
+
+    record Base(string X)
+    {
+        public void Method(string s1) { }
+    }
+
+    record Derived(string X) : Base(X)
+    {
+        public void Method(object s1) { } // Noncompliant {{Remove or rename that method because it hides 'MyLibrary.Base.Method(string)'.}}
+    }
 }
 
 namespace OtherNamespace
@@ -62,7 +73,7 @@ namespace OtherNamespace
 
     record Class2 : Class1
     {
-        void SomeMethod(object s) { } // FN
+        void SomeMethod(object s) { } // Noncompliant
     }
 }
 
