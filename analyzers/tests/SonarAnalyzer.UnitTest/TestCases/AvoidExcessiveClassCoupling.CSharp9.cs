@@ -40,4 +40,14 @@ namespace Tests.Diagnostics
         public FirstRecord FooMethod() => field1; // already in field1
         public void BarMethod(Stream s) { } // +1
     }
+
+    public record OutterRecord
+    {
+        InnerRecord whatever = new InnerRecord();
+
+        public record InnerRecord // Noncompliant
+        {
+            public Stream stream = new FileStream("", FileMode.Open);
+        }
+    }
 }

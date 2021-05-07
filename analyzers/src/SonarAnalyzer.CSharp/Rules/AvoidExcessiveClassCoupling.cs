@@ -178,6 +178,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.originalTypeDeclaration = originalTypeDeclaration;
             }
 
+            // This override is needed because VisitRecordDeclaration is not available due to the Roslyn version.
+            public override void Visit(SyntaxNode node)
+            {
+                if (node.IsKind(SyntaxKindEx.RecordDeclaration))
+                {
+                    if (node == originalTypeDeclaration)
+                    {
+                        base.Visit(node);
+                    }
+                }
+                else
+                {
+                    base.Visit(node);
+                }
+            }
+
             public override void VisitClassDeclaration(ClassDeclarationSyntax node)
             {
                 // don't drill down in child classes, but walk the original
