@@ -72,6 +72,24 @@ namespace Tests.Diagnostics
         }
     }
 
+    abstract class AbstractClass : Partial2Part
+    {
+        public override sealed void MyOverriddenMethod() { }
+        public override sealed int Prop { get; set; }
+
+        public override sealed int this[int counter]
+        {
+            get { return 0; }
+        }
+
+        protected override sealed event EventHandler<EventArgs> MyEvent;
+        protected override sealed event EventHandler<EventArgs> MyEvent2
+        {
+            add { }
+            remove { }
+        }
+    }
+
     sealed class SealedClassWithoutRedundantKeywordOnMembers : Partial2Part
     {
         public override void MyOverriddenMethod() { }
