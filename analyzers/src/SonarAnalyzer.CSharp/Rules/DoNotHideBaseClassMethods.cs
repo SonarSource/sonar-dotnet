@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -43,36 +44,37 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+                    var declarationSyntax = (TypeDeclarationSyntax)c.Node;
+                    var declaredSymbol = c.SemanticModel.GetDeclaredSymbol(declarationSyntax);
 
-                    if (classSymbol == null || classDeclaration.Identifier.IsMissing)
+                    if (declaredSymbol == null || declarationSyntax.Identifier.IsMissing)
                     {
                         return;
                     }
 
-                    var issueFinder = new IssueFinder(classSymbol, c.SemanticModel);
+                    var issueFinder = new IssueFinder(declaredSymbol, c.SemanticModel);
 
-                    classDeclaration
+                    declarationSyntax
                         .Members
                         .Select(issueFinder.FindIssue)
                         .WhereNotNull()
                         .ToList()
                         .ForEach(d => c.ReportDiagnosticWhenActive(d));
                 },
-                SyntaxKind.ClassDeclaration);
+                SyntaxKind.ClassDeclaration,
+                SyntaxKindEx.RecordDeclaration);
 
         private class IssueFinder
         {
             private enum Match { Different, Identical, WeaklyDerived }
 
-            private readonly IList<IMethodSymbol> allBaseClassMethods;
+            private readonly IList<IMethodSymbol> allBaseTypeMethods;
             private readonly SemanticModel semanticModel;
 
             public IssueFinder(ITypeSymbol typeSymbol, SemanticModel semanticModel)
             {
                 this.semanticModel = semanticModel;
-                allBaseClassMethods = GetAllBaseMethods(typeSymbol);
+                allBaseTypeMethods = GetAllBaseMethods(typeSymbol);
             }
 
             public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
@@ -104,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private IMethodSymbol FindBaseMethodHiddenByMethod(IMethodSymbol methodSymbol)
             {
-                var baseMemberCandidates = allBaseClassMethods.Where(m => m.Name == methodSymbol.Name);
+                var baseMemberCandidates = allBaseTypeMethods.Where(m => m.Name == methodSymbol.Name);
 
                 IMethodSymbol hiddenBaseMethodCandidate = null;
 
