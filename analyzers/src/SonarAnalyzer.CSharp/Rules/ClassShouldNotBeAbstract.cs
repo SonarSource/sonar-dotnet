@@ -49,8 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var symbol = (INamedTypeSymbol)c.Symbol;
-                    if (symbol.Kind != SymbolKind.NamedType
-                        || !symbol.IsClass()
+                    if (!symbol.IsClass()
                         || !symbol.IsAbstract
                         || HasInheritedAbstractMembers(symbol))
                     {
