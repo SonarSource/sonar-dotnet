@@ -27,6 +27,11 @@ namespace Tests.Diagnostics
 
         void MyMethod4(object sender, EventArgs args) { }
 
+        async Task<int> MyMethod5()
+        {
+            return 5;
+        }
+
         public event EventHandler<bool> MyEvent;
 
         public EventHandlerCases()
