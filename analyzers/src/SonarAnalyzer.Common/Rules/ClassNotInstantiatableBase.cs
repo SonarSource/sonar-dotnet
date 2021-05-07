@@ -51,7 +51,8 @@ namespace SonarAnalyzer.Rules
             descendantNodes
                 .Where(IsTypeDeclaration)
                 .Select(x => (semanticModel.GetDeclaredSymbol(x) as ITypeSymbol)?.BaseType)
-                .Any(baseType => baseType != null && baseType.OriginalDefinition.DerivesFrom(namedType));
+                .WhereNotNull()
+                .Any(baseType => baseType.OriginalDefinition.DerivesFrom(namedType));
 
         protected static IEnumerable<IMethodSymbol> GetConstructors(IEnumerable<ISymbol> members) =>
             members
