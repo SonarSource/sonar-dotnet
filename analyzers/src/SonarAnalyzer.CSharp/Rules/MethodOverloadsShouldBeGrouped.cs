@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -36,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } = new[]
+        protected override SyntaxKind[] SyntaxKinds { get; } =
         {
             SyntaxKind.ClassDeclaration,
             SyntaxKind.InterfaceDeclaration,
@@ -52,11 +53,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             if (member is ConstructorDeclarationSyntax constructor)
             {
-                return new MemberInfo(c, member, constructor.Identifier, IsStatic(constructor), false, true);
+                return new MemberInfo(c, member, constructor.Identifier, constructor.IsStatic(), false, true);
             }
             else if (member is MethodDeclarationSyntax method)
             {
-                return new MemberInfo(c, member, method.Identifier, IsStatic(method), method.Modifiers.Any(x => x.Kind() == SyntaxKind.AbstractKeyword), true);
+                return new MemberInfo(c, member, method.Identifier, method.IsStatic(), method.Modifiers.Any(SyntaxKind.AbstractKeyword), true);
             }
             return null;
         }
@@ -65,9 +66,6 @@ namespace SonarAnalyzer.Rules.CSharp
             ((TypeDeclarationSyntax)node).Members;
 
         private static bool IsValidMemberForOverload(MemberDeclarationSyntax member) =>
-            !(member is MethodDeclarationSyntax methodDeclaration) || methodDeclaration.ExplicitInterfaceSpecifier == null;
-
-        private static bool IsStatic(BaseMethodDeclarationSyntax declaration) =>
-            declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
+            (member as MethodDeclarationSyntax)?.ExplicitInterfaceSpecifier == null;
     }
 }
