@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
         {
-            var namedType = context.Symbol as INamedTypeSymbol;
+            var namedType = (INamedTypeSymbol)context.Symbol;
             if (!IsNonStaticClassWithNoAttributes(namedType) || DerivesFromSafeHandle(namedType))
             {
                 return;
