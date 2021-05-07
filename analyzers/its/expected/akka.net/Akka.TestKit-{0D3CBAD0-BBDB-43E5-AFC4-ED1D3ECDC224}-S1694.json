@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
 "region":  {

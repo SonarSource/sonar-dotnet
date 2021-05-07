@@ -12,6 +12,19 @@
 "endColumn":  33
 }
 }
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' record to an interface.",
+"location":  {
+"uri":  "sources\Net5\Net5\Records.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  28,
+"endLine":  35,
+"endColumn":  42
+}
+}
 }
 ]
 }

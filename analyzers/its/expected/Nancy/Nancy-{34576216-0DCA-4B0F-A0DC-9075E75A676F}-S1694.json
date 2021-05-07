@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\ContainerRegistration.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticModule.cs",
 "region":  {
@@ -36,6 +36,19 @@
 "startColumn":  27,
 "endLine":  3,
 "endColumn":  43
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to an interface.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptConverter.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  27,
+"endLine":  34,
+"endColumn":  46
 }
 }
 },
@@ -54,7 +67,20 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to an interface.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptTypeResolver.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  27,
+"endLine":  33,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
 "region":  {
@@ -67,7 +93,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NancyModule.cs",
 "region":  {
