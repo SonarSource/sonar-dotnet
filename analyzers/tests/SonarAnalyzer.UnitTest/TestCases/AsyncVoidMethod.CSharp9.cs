@@ -102,4 +102,19 @@ namespace Tests.Diagnostics
             await Task.Run(() => Console.WriteLine("test"));
         }
     }
+
+    public interface ISomeInterface
+    {
+        event EventHandler<bool> MyEvent;
+
+        public void SomeMethod()
+        {
+            MyEvent += EventHandlerCases_MyEvent;
+        }
+
+        private async void EventHandlerCases_MyEvent(object sender, bool e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+    }
 }
