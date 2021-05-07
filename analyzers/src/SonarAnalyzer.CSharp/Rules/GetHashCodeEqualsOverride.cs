@@ -35,19 +35,17 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class GetHashCodeEqualsOverride : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3249";
+        internal const string EqualsName = "Equals";
+
+        private const string DiagnosticId = "S3249";
         private const string MessageFormat = "Remove this 'base' call to 'object.{0}', which is directly based on the object reference.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        internal const string EqualsName = "Equals";
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         private static readonly ISet<string> MethodNames = new HashSet<string> { "GetHashCode", EqualsName };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
                 cb =>
                 {
@@ -56,9 +54,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (methodDeclaration.AttributeLists.Any() ||
-                        !(cb.OwningSymbol is IMethodSymbol methodSymbol) ||
-                        !MethodIsRelevant(methodSymbol, MethodNames))
+                    if (methodDeclaration.AttributeLists.Any()
+                        || !(cb.OwningSymbol is IMethodSymbol methodSymbol)
+                        || !MethodIsRelevant(methodSymbol, MethodNames))
                     {
                         return;
                     }
@@ -85,37 +83,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             var firstPosition = locations.Select(loc => loc.SourceSpan.Start).Min();
                             var location = locations.First(loc => loc.SourceSpan.Start == firstPosition);
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, methodSymbol.Name));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, methodSymbol.Name));
                         });
                 });
-        }
-
-        private static bool TryGetLocationFromInvocationInsideMethod(SyntaxNodeAnalysisContext context,
-            IMethodSymbol methodSymbol, out Location location)
-        {
-            location = null;
-            var invocation = (InvocationExpressionSyntax)context.Node;
-            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethod) ||
-                invokedMethod.Name != methodSymbol.Name)
-            {
-                return false;
-            }
-
-            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-            if (!(memberAccess?.Expression is BaseExpressionSyntax baseCall))
-            {
-                return false;
-            }
-
-            if (invokedMethod.IsInType(KnownType.System_Object) &&
-                !IsEqualsCallInGuardCondition(invocation, invokedMethod))
-            {
-                location = invocation.GetLocation();
-                return true;
-            }
-
-            return false;
-        }
 
         internal static bool IsEqualsCallInGuardCondition(InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod)
         {
@@ -124,14 +94,43 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            if (!(invocation.Parent is IfStatementSyntax ifStatement) ||
-                ifStatement.Condition != invocation ||
-                !invocation.HasExactlyNArguments(1))
+            if (!(invocation.Parent is IfStatementSyntax ifStatement)
+                || ifStatement.Condition != invocation
+                || !invocation.HasExactlyNArguments(1))
             {
                 return false;
             }
 
             return IfStatementWithSingleReturnTrue(ifStatement);
+        }
+
+        internal static bool MethodIsRelevant(IMethodSymbol methodSymbol, ISet<string> methodNames) =>
+            methodNames.Contains(methodSymbol.Name) && methodSymbol.IsOverride;
+
+        private static bool TryGetLocationFromInvocationInsideMethod(SyntaxNodeAnalysisContext context, ISymbol symbol, out Location location)
+        {
+            location = null;
+            var invocation = (InvocationExpressionSyntax)context.Node;
+            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethod)
+                || invokedMethod.Name != symbol.Name)
+            {
+                return false;
+            }
+
+            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
+            if (!(memberAccess?.Expression is BaseExpressionSyntax))
+            {
+                return false;
+            }
+
+            if (invokedMethod.IsInType(KnownType.System_Object)
+                && !IsEqualsCallInGuardCondition(invocation, invokedMethod))
+            {
+                location = invocation.GetLocation();
+                return true;
+            }
+
+            return false;
         }
 
         private static bool IfStatementWithSingleReturnTrue(IfStatementSyntax ifStatement)
@@ -153,11 +152,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            return returnStatement.Expression != null &&
-                CSharpEquivalenceChecker.AreEquivalent(returnStatement.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
+            return returnStatement.Expression != null
+                   && CSharpEquivalenceChecker.AreEquivalent(returnStatement.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
         }
-
-        internal static bool MethodIsRelevant(IMethodSymbol methodSymbol, ISet<string> methodNames) =>
-            methodNames.Contains(methodSymbol.Name) && methodSymbol.IsOverride;
     }
 }

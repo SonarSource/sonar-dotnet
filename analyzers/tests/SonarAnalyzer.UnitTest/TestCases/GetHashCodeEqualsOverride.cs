@@ -188,4 +188,37 @@ namespace Tests.Diagnostics
     }
 
     public class MyAttribute : Attribute { }
+
+    // Testing different corner cases
+    class EqualsEmptyReturnBase
+    {
+        protected bool Equals(object first, object second) { return true; }
+    }
+
+    class EqualsEmptyReturn : EqualsEmptyReturnBase
+    {
+        public override bool Equals(Object obj)
+        {
+            Method();
+
+            Equals(obj);
+
+            if (base.Equals(obj, obj))
+            {
+            }
+
+            if (base.Equals(obj, obj) == false)
+            {
+            }
+
+            if (base.Equals(obj)) // Noncompliant
+            {
+                return; // Error [CS0126]
+            }
+
+            return; // Error [CS0126]
+        }
+
+        private void Method() { }
+    }
 }
