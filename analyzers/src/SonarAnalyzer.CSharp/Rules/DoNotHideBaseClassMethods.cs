@@ -44,15 +44,15 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                    var declarationSyntax = (TypeDeclarationSyntax)c.Node;
+                    if (declarationSyntax.Identifier.IsMissing
+                        || c.ContainingSymbol.Kind != SymbolKind.NamedType)
                     {
                         return;
                     }
 
-                    var declarationSyntax = (TypeDeclarationSyntax)c.Node;
                     var declaredSymbol = c.SemanticModel.GetDeclaredSymbol(declarationSyntax);
-
-                    if (declaredSymbol == null || declarationSyntax.Identifier.IsMissing)
+                    if (declaredSymbol == null)
                     {
                         return;
                     }
