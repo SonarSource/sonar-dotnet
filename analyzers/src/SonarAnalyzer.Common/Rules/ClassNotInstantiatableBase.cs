@@ -47,13 +47,6 @@ namespace SonarAnalyzer.Rules
                     IsAnyConstructorToCurrentType<TObjectCreationSyntax>(descendants.DescendantNodes, namedType, descendants.SemanticModel) ||
                     IsAnyNestedTypeExtendingCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel));
 
-        private bool IsAnyNestedTypeExtendingCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel) =>
-            descendantNodes
-                .Where(IsTypeDeclaration)
-                .Select(x => (semanticModel.GetDeclaredSymbol(x) as ITypeSymbol)?.BaseType)
-                .WhereNotNull()
-                .Any(baseType => baseType.OriginalDefinition.DerivesFrom(namedType));
-
         protected static IEnumerable<IMethodSymbol> GetConstructors(IEnumerable<ISymbol> members) =>
             members
                 .OfType<IMethodSymbol>()
@@ -75,6 +68,13 @@ namespace SonarAnalyzer.Rules
 
         protected static bool DerivesFromSafeHandle(ITypeSymbol typeSymbol) =>
             typeSymbol.DerivesFrom(KnownType.System_Runtime_InteropServices_SafeHandle);
+
+        private bool IsAnyNestedTypeExtendingCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel) =>
+            descendantNodes
+                .Where(IsTypeDeclaration)
+                .Select(x => (semanticModel.GetDeclaredSymbol(x) as ITypeSymbol)?.BaseType)
+                .WhereNotNull()
+                .Any(baseType => baseType.OriginalDefinition.DerivesFrom(namedType));
 
         private static bool HasNonPrivateConstructor(IEnumerable<IMethodSymbol> constructors) =>
             constructors.Any(method => method.DeclaredAccessibility != Accessibility.Private);
