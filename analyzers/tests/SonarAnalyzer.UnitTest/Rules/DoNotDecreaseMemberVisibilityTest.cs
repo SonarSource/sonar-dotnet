@@ -32,20 +32,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotDecreaseMemberVisibility() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotDecreaseMemberVisibility.cs",
-                new CS.DoNotDecreaseMemberVisibility(),
+                                    new CS.DoNotDecreaseMemberVisibility(),
 #if NETFRAMEWORK
-                ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
+                                    ParseOptionsHelper.FromCSharp8,
+                                    NuGetMetadataReference.NETStandardV2_1_0);
 #else
-                ParseOptionsHelper.FromCSharp8);
+                                        ParseOptionsHelper.FromCSharp8);
 #endif
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotDecreaseMemberVisibility_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotDecreaseMemberVisibility.CSharp9.cs",
-                new CS.DoNotDecreaseMemberVisibility());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotDecreaseMemberVisibility.CSharp9.cs", new CS.DoNotDecreaseMemberVisibility());
 #endif
     }
 }

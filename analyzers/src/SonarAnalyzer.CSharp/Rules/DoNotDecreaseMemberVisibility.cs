@@ -34,23 +34,21 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotDecreaseMemberVisibility : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4015";
+        private const string DiagnosticId = "S4015";
         private const string MessageFormat = "This member hides '{0}'. Make it non-private or seal the class.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-                    if (classSymbol == null ||
-                        classDeclaration.Identifier.IsMissing ||
-                        classSymbol.IsSealed)
+                    if (classSymbol == null
+                        || classDeclaration.Identifier.IsMissing
+                        || classSymbol.IsSealed)
                     {
                         return;
                     }
@@ -65,7 +63,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         .ForEach(d => c.ReportDiagnosticWhenActive(d));
                 },
                 SyntaxKind.ClassDeclaration);
-        }
 
         private class IssueFinder
         {
@@ -73,28 +70,22 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly IList<IPropertySymbol> allBaseClassProperties;
             private readonly SemanticModel semanticModel;
 
-            public IssueFinder(INamedTypeSymbol classSymbol, SemanticModel semanticModel)
+            public IssueFinder(ITypeSymbol classSymbol, SemanticModel semanticModel)
             {
                 this.semanticModel = semanticModel;
                 var allBaseClassMembers = classSymbol.BaseType
                         .GetSelfAndBaseTypes()
                         .SelectMany(t => t.GetMembers())
-                        .Where(m => IsSymbolVisibleFromNamespace(m, classSymbol.ContainingNamespace))
+                        .Where(symbol => IsSymbolVisibleFromNamespace(symbol, classSymbol.ContainingNamespace))
                         .ToList();
 
-                this.allBaseClassMethods = allBaseClassMembers.OfType<IMethodSymbol>().ToList();
-                this.allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>().ToList();
-            }
-
-            private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns)
-            {
-                return symbol.DeclaredAccessibility != Accessibility.Private &&
-                       (symbol.DeclaredAccessibility != Accessibility.Internal || ns.Equals(symbol.ContainingNamespace));
+                allBaseClassMethods = allBaseClassMembers.OfType<IMethodSymbol>().ToList();
+                allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>().ToList();
             }
 
             public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
             {
-                var memberSymbol = this.semanticModel.GetDeclaredSymbol(memberDeclaration);
+                var memberSymbol = semanticModel.GetDeclaredSymbol(memberDeclaration);
 
                 if (memberSymbol is IMethodSymbol methodSymbol)
                 {
@@ -111,22 +102,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private Diagnostic FindMethodIssue(MemberDeclarationSyntax memberDeclaration, IMethodSymbol methodSymbol)
             {
-                if (!(memberDeclaration is MethodDeclarationSyntax methodDeclaration) ||
-                    methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
+                if (!(memberDeclaration is MethodDeclarationSyntax methodDeclaration)
+                    || methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
                 {
                     return null;
                 }
 
-                var hidingMethod = this.allBaseClassMethods.FirstOrDefault(
-                m => IsDecreasingAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false) &&
-                     IsMatchingSignature(m, methodSymbol));
+                var hidingMethod = allBaseClassMethods.FirstOrDefault(m => IsDecreasingAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false)
+                                                                           && IsMatchingSignature(m, methodSymbol));
 
                 if (hidingMethod != null)
                 {
-                    var location = (memberDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
+                    var location = methodDeclaration.Identifier.GetLocation();
                     if (location != null)
                     {
-                        return Diagnostic.Create(rule, location, hidingMethod);
+                        return Diagnostic.Create(Rule, location, hidingMethod);
                     }
                 }
 
@@ -135,28 +125,30 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private Diagnostic FindPropertyIssue(MemberDeclarationSyntax memberDeclaration, IPropertySymbol propertySymbol)
             {
-                if (!(memberDeclaration is PropertyDeclarationSyntax propertyDeclaration) ||
-                    propertyDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
+                if (!(memberDeclaration is PropertyDeclarationSyntax propertyDeclaration)
+                    || propertyDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
                 {
                     return null;
                 }
 
-                var hidingProperty = this.allBaseClassProperties.FirstOrDefault(
-                    p => IsDecreasingPropertyAccess(p, propertySymbol, propertySymbol.IsOverride));
+                var hidingProperty = allBaseClassProperties.FirstOrDefault(p => IsDecreasingPropertyAccess(p, propertySymbol, propertySymbol.IsOverride));
                 if (hidingProperty != null)
                 {
-                    var location = (memberDeclaration as PropertyDeclarationSyntax)?.Identifier.GetLocation();
-                    return Diagnostic.Create(rule, location, hidingProperty);
+                    var location = propertyDeclaration.Identifier.GetLocation();
+                    return Diagnostic.Create(Rule, location, hidingProperty);
                 }
 
                 return null;
             }
 
-            private static bool IsDecreasingPropertyAccess(IPropertySymbol baseProperty, IPropertySymbol propertySymbol,
-                bool isOverride)
+            private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns) =>
+                symbol.DeclaredAccessibility != Accessibility.Private
+                && (symbol.DeclaredAccessibility != Accessibility.Internal || ns.Equals(symbol.ContainingNamespace));
+
+            private static bool IsDecreasingPropertyAccess(IPropertySymbol baseProperty, IPropertySymbol propertySymbol, bool isOverride)
             {
-                if (baseProperty.Name != propertySymbol.Name ||
-                    !AreParameterTypesEqual(baseProperty.Parameters, propertySymbol.Parameters))
+                if (baseProperty.Name != propertySymbol.Name
+                    || !AreParameterTypesEqual(baseProperty.Parameters, propertySymbol.Parameters))
                 {
                     return false;
                 }
@@ -167,40 +159,40 @@ namespace SonarAnalyzer.Rules.CSharp
                 var propertyGetAccess = GetEffectiveDeclaredAccess(propertySymbol.GetMethod, baseProperty.DeclaredAccessibility);
                 var propertySetAccess = GetEffectiveDeclaredAccess(propertySymbol.SetMethod, baseProperty.DeclaredAccessibility);
 
-                return IsDecreasingAccess(baseGetAccess, propertyGetAccess, isOverride) ||
-                       IsDecreasingAccess(baseSetAccess, propertySetAccess, isOverride);
+                return IsDecreasingAccess(baseGetAccess, propertyGetAccess, isOverride)
+                       || IsDecreasingAccess(baseSetAccess, propertySetAccess, isOverride);
             }
 
-            private static Accessibility GetEffectiveDeclaredAccess(IMethodSymbol method, Accessibility propertyDefaultAccess)
+            private static Accessibility GetEffectiveDeclaredAccess(ISymbol symbol, Accessibility defaultAccessibility)
             {
-                if (method == null)
+                if (symbol == null)
                 {
                     return Accessibility.NotApplicable;
                 }
 
-                return method.DeclaredAccessibility != Accessibility.NotApplicable ? method.DeclaredAccessibility : propertyDefaultAccess;
+                return symbol.DeclaredAccessibility == Accessibility.NotApplicable
+                    ? defaultAccessibility
+                    : symbol.DeclaredAccessibility;
             }
 
-            private static bool IsMatchingSignature(IMethodSymbol baseMethod, IMethodSymbol methodSymbol)
-            {
-                return baseMethod.Name == methodSymbol.Name &&
-                    baseMethod.TypeParameters.Length == methodSymbol.TypeParameters.Length &&
-                    AreParameterTypesEqual(baseMethod.Parameters, methodSymbol.Parameters);
-            }
+            private static bool IsMatchingSignature(IMethodSymbol baseMethod, IMethodSymbol methodSymbol) =>
+                baseMethod.Name == methodSymbol.Name
+                && baseMethod.TypeParameters.Length == methodSymbol.TypeParameters.Length
+                && AreParameterTypesEqual(baseMethod.Parameters, methodSymbol.Parameters);
 
-            private static bool AreParameterTypesEqual(IEnumerable<IParameterSymbol> parameters1, IEnumerable<IParameterSymbol> parameters2) =>
-                EnumerableExtensions.Equals(parameters1, parameters2, AreParameterTypesEqual);
+            private static bool AreParameterTypesEqual(IEnumerable<IParameterSymbol> first, IEnumerable<IParameterSymbol> second) =>
+                first.Equals(second, AreParameterTypesEqual);
 
-            private static bool AreParameterTypesEqual(IParameterSymbol p1, IParameterSymbol p2)
+            private static bool AreParameterTypesEqual(IParameterSymbol first, IParameterSymbol second)
             {
-                if (p1.RefKind != p2.RefKind)
+                if (first.RefKind != second.RefKind)
                 {
                     return false;
                 }
 
-                return p1.Type.TypeKind == TypeKind.TypeParameter ?
-                         p2.Type.TypeKind == TypeKind.TypeParameter
-                         : Equals(p1.Type.OriginalDefinition, p2.Type.OriginalDefinition);
+                return first.Type.TypeKind == TypeKind.TypeParameter
+                    ? second.Type.TypeKind == TypeKind.TypeParameter
+                    : Equals(first.Type.OriginalDefinition, second.Type.OriginalDefinition);
             }
 
             private static bool IsDecreasingAccess(Accessibility baseAccess, Accessibility memberAccess, bool isOverride)
@@ -210,8 +202,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
                 }
 
-                return (baseAccess != Accessibility.NotApplicable && memberAccess == Accessibility.Private) ||
-                       (baseAccess == Accessibility.Public && memberAccess != Accessibility.Public);
+                return (baseAccess != Accessibility.NotApplicable && memberAccess == Accessibility.Private)
+                       || (baseAccess == Accessibility.Public && memberAccess != Accessibility.Public);
             }
         }
     }
