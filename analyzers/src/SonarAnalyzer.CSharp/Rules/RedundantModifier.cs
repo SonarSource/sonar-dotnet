@@ -347,7 +347,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (context.Node is CheckedExpressionSyntax expression)
                 {
                     isCurrentContextChecked = expression.IsKind(SyntaxKind.CheckedExpression);
-                    return;
                 }
             }
 
