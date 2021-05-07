@@ -50,6 +50,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
+                if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                {
+                    return;
+                }
+
                 var declaration = (TypeDeclarationSyntax)c.Node;
                 var classSymbol = c.SemanticModel.GetDeclaredSymbol(declaration);
 
