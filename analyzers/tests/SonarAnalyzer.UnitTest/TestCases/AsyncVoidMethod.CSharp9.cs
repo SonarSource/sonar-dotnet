@@ -46,4 +46,60 @@ namespace Tests.Diagnostics
             await Task.Run(() => Console.WriteLine("test"));
         }
     }
+
+    public record EventHandlerCasesInPositionalRecord(string Param)
+    {
+        async void MyMethod() // Noncompliant
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod(object sender, EventArgs args)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod1(object o, EventArgs e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod2(object o, Foo e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        private async void NotAHandler(object sender) // Noncompliant
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+    }
+
+    public interface EventHandlerCasesInInterface
+    {
+        async void MyMethod() // Compliant FP , see https://github.com/SonarSource/sonar-dotnet/issues/4396
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod(object sender, EventArgs args)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod1(object o, EventArgs e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod2(object o, Foo e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        private async void NotAHandler(object sender) // Noncompliant
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+    }
 }

@@ -75,7 +75,8 @@ namespace SonarAnalyzer.Rules.CSharp
             || HasAnyMsTestV1AllowedAttribute(methodSymbol);
 
         private static bool IsUsedAsEventHandler(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.FirstAncestorOrSelf((SyntaxNode x) => x.IsKind(SyntaxKind.ClassDeclaration) || x.IsKind(SyntaxKindEx.RecordDeclaration)) is { } parentDeclaration
+            methodDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(x =>
+                x.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration, SyntaxKind.InterfaceDeclaration)) is { } parentDeclaration
             && parentDeclaration.DescendantNodes()
                 .OfType<AssignmentExpressionSyntax>()
                 .Where(x => x.IsKind(SyntaxKind.AddAssignmentExpression))

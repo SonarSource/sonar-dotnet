@@ -23,6 +23,10 @@ namespace Tests.Diagnostics
             await Task.Run(() => Console.WriteLine("test"));
         }
 
+        void MyMethod3() { }
+
+        void MyMethod4(object sender, EventArgs args) { }
+
         public event EventHandler<bool> MyEvent;
 
         public EventHandlerCases()
@@ -69,6 +73,36 @@ namespace Tests.Diagnostics
         public class BindableObject { }
         public class TreeView { }
         public class TreeViewItemInvokedEventArgs { }   // Type doesn't inherit from event args
+    }
+
+    public struct EventHandlerCasesInStruct
+    {
+        async void MyMethod() // Noncompliant {{Return 'Task' instead.}}
+//            ^^^^
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod(object sender, EventArgs args)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod1(object o, EventArgs e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod2(object o, Foo e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        private async void NotAHandler(object sender) // Noncompliant
+//                    ^^^^
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
     }
 
     public class UwpCases
