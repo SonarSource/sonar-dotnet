@@ -146,4 +146,22 @@ namespace Tests.Diagnostics
         #endregion helpers
 
      }
+
+    record AssignmentPositionalRecord(string Value)
+    {
+        HttpWebRequest CreateRQ()
+        {
+            return (HttpWebRequest)System.Net.HttpWebRequest.Create(Value);
+        }
+
+        public void InitAsArgument(RemoteCertificateValidationCallback callback)
+        {
+            CreateRQ().ServerCertificateValidationCallback += callback;  //Noncompliant
+        }
+
+        static void Execute()
+        {
+            new AssignmentPositionalRecord("http://localhost").InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
+        }
+    }
 }

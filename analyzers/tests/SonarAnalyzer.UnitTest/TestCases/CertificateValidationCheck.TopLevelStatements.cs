@@ -11,3 +11,8 @@ static HttpWebRequest CreateRQ() // static local function
 {
     return (HttpWebRequest)System.Net.HttpWebRequest.Create("http://localhost");
 }
+
+void InitAsArgument(RemoteCertificateValidationCallback callback)
+{
+    CreateRQ().ServerCertificateValidationCallback += callback; // FN, should be Non-compliant
+}

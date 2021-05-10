@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules
         {
             var ret = ImmutableArray.CreateBuilder<Location>();
             var containingMethodDeclaration = param.FirstAncestorOrSelf<TMethodSyntax>();
-            if (!c.VisitedMethods.Contains(containingMethodDeclaration))
+            if (containingMethodDeclaration != null && !c.VisitedMethods.Contains(containingMethodDeclaration))
             {
                 c.VisitedMethods.Add(containingMethodDeclaration);
                 var containingMethod = c.Context.SemanticModel.GetDeclaredSymbol(containingMethodDeclaration) as IMethodSymbol;
@@ -147,7 +147,7 @@ namespace SonarAnalyzer.Rules
         {
             SyntaxNode candidate;
             var current = node.FirstAncestorOrSelf<SyntaxNode>(IsClassOrRecordDeclaration);
-            while (current != null && (candidate = current.Parent?.FirstAncestorOrSelf<SyntaxNode>(IsClassOrRecordDeclaration)) != null)  // Search for parent of nested class/record
+            while (current != null && (candidate = current.Parent.FirstAncestorOrSelf<SyntaxNode>(IsClassOrRecordDeclaration)) != null)  // Search for parent of nested class/record
             {
                 current = candidate;
             }
