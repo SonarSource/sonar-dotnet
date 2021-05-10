@@ -16,7 +16,7 @@ namespace Tests.Diagnostics
 
     public record SimpleDisposablePositional(string Value) : IDisposable // Noncompliant {{Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
     {
-        public void Dispose() => Dispose(true); // Secondary {{'SimpleDisposable.Dispose()' should also call 'GC.SuppressFinalize(this)'.}}
+        public void Dispose() => Dispose(true); // Secondary {{'SimpleDisposablePositional.Dispose()' should also call 'GC.SuppressFinalize(this)'.}}
 
         protected virtual void Dispose(bool disposing) { }
     }
