@@ -21,10 +21,12 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -32,46 +34,48 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ClassNotInstantiatable : ClassNotInstantiatableBase
     {
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
-        }
 
-        private static void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
+        protected override bool IsTypeDeclaration(SyntaxNode node) =>
+            node.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
+
+        private void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
         {
-            var namedType = context.Symbol as INamedTypeSymbol;
+            var namedType = (INamedTypeSymbol)context.Symbol;
             if (!IsNonStaticClassWithNoAttributes(namedType) || DerivesFromSafeHandle(namedType))
             {
                 return;
             }
 
             var members = namedType.GetMembers();
-            var constructors = GetConstructors(members).ToList();
+            var constructors = GetConstructors(members).Where(x => !x.IsImplicitlyDeclared).ToList();
 
-            if (!HasOnlyCandidateConstructors(constructors) ||
-                HasOnlyStaticMembers(members.Except(constructors).ToList()))
+            if (!HasOnlyCandidateConstructors(constructors) || HasOnlyStaticMembers(members.Except(constructors).ToList()))
             {
                 return;
             }
 
             var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, context.Compilation).TypeDeclarations;
 
-            if (!IsAnyConstructorCalled<BaseTypeDeclarationSyntax, ObjectCreationExpressionSyntax, ClassDeclarationSyntax>
-                (namedType, typeDeclarations))
+            if (!IsAnyConstructorCalled<BaseTypeDeclarationSyntax, ObjectCreationExpressionSyntax>(namedType, typeDeclarations))
             {
                 var message = constructors.Count > 1
                     ? "at least one of its constructors"
                     : "its constructor";
 
-                foreach (var classDeclaration in typeDeclarations)
+                foreach (var typeDeclaration in typeDeclarations)
                 {
+                    var declarationKind = typeDeclaration.SyntaxNode.IsKind(SyntaxKind.ClassDeclaration)
+                        ? "class"
+                        : "record";
                     context.ReportDiagnosticIfNonGenerated(
-                        Diagnostic.Create(rule, classDeclaration.SyntaxNode.Identifier.GetLocation(), message));
+                        Diagnostic.Create(Rule, typeDeclaration.SyntaxNode.Identifier.GetLocation(), declarationKind, message));
                 }
             }
         }

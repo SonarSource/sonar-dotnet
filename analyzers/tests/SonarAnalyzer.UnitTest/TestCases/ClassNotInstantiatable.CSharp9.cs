@@ -7,14 +7,14 @@ public record Person(string FirstName, string LastName); // Compliant
 
 public record EmptyRecord { } // Compliant
 
-public record Person1 // FN
+public record Person1 // Noncompliant {{This record can't be instantiated; make its constructor 'public'.}}
 {
     public string FirstName { get; }
 
     private Person1() { }
 }
 
-public record Person2 // FN
+public record Person2 // Noncompliant {{This record can't be instantiated; make at least one of its constructors 'public'.}}
 {
     public string FirstName { get; }
 
@@ -30,7 +30,17 @@ public sealed record Person3 // Compliant
     public static Person3 Instance => new Person3();
 }
 
-public record StaticUsage // FN, should use a utility class instead
+public record Person4(string FirstName) // Compliant
+{
+    private Person4() : this("") { }
+}
+
+public record Person5(string FirstName) // Compliant
+{
+    public Person5() : this("") { }
+}
+
+public record StaticUsage // Noncompliant
 {
     private StaticUsage() { }
     public static void M() { }
@@ -42,7 +52,7 @@ public record OuterRecord // Compliant
 
     public record Intermediate
     {
-        public record Nested : OuterRecord // FN
+        public record Nested : OuterRecord // Noncompliant
         {
             private Nested() { }
         }

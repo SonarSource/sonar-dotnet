@@ -22,6 +22,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -32,16 +33,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ClassNotInstantiatable : ClassNotInstantiatableBase
     {
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
-        }
 
-        private static void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
+        protected override bool IsTypeDeclaration(SyntaxNode node) =>
+            node.IsAnyKind(SyntaxKind.ClassBlock);
+
+        private void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
         {
             var namedType = context.Symbol as INamedTypeSymbol;
             if (!IsNonStaticClassWithNoAttributes(namedType) || DerivesFromSafeHandle(namedType))
@@ -52,16 +54,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var members = namedType.GetMembers();
             var constructors = GetConstructors(members).ToList();
 
-            if (!HasOnlyCandidateConstructors(constructors) ||
-                HasOnlyStaticMembers(members.Except(constructors).ToList()))
+            if (!HasOnlyCandidateConstructors(constructors) || HasOnlyStaticMembers(members.Except(constructors).ToList()))
             {
                 return;
             }
 
             var typeDeclarations = new VisualBasicRemovableDeclarationCollector(namedType, context.Compilation).TypeDeclarations;
 
-            if (!IsAnyConstructorCalled<TypeBlockSyntax, ObjectCreationExpressionSyntax, ClassBlockSyntax>
-                (namedType, typeDeclarations))
+            if (!IsAnyConstructorCalled<TypeBlockSyntax, ObjectCreationExpressionSyntax>(namedType, typeDeclarations))
             {
                 var message = constructors.Count > 1
                     ? "at least one of its constructors"
@@ -69,8 +69,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                 foreach (var classDeclaration in typeDeclarations)
                 {
-                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, classDeclaration.SyntaxNode.BlockStatement.Identifier.GetLocation(),
-                        message));
+                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, classDeclaration.SyntaxNode.BlockStatement.Identifier.GetLocation(), "class", message));
                 }
             }
         }
