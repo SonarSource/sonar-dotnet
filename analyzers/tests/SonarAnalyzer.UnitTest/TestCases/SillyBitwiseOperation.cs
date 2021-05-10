@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -61,4 +62,28 @@ namespace Tests.Diagnostics
 
         private static void MyMethod(UInt64 u) { }
     }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/4399
+public class Repro_4399
+{
+    public void BuildMask(IEnumerable<DayOfWeek> daysOfWeek)
+    {
+        var value = 0;
+        foreach (var dow in daysOfWeek)
+        {
+            value = value | (1 << (int)dow); // Noncompliant FP - root cause is in ConstantValueFinder.
+        }
+    }
+
+    public void Repro(object[] args)
+    {
+        var fail = false;
+        foreach (var arg in args)
+        {
+            fail = fail | !CheckArg(arg);   // Noncompliant FP, using || would change the logic.
+        }
+    }
+
+    private bool CheckArg(object arg) => false;
 }
