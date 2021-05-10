@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     ParseOptionsHelper.FromCSharp8,
                                     NuGetMetadataReference.NETStandardV2_1_0);
 #else
-                                        ParseOptionsHelper.FromCSharp8);
+                                    ParseOptionsHelper.FromCSharp8);
 #endif
 
 #if NET

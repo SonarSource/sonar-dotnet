@@ -137,6 +137,19 @@ namespace MyLibrary
     }
 }
 
+namespace PositionalRecords
+{
+    record FooBase(string X)
+    {
+        public void Method(int count) { }
+    }
+
+    record Foo(string X) : FooBase(X)
+    {
+        private void Method(int count) { } // Noncompliant {{This member hides 'PositionalRecords.FooBase.Method(int)'. Make it non-private or seal the class.}}
+    }
+}
+
 namespace OtherNamespace
 {
     public record Class1
