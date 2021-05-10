@@ -177,6 +177,7 @@ namespace Tests.Diagnostics
     {
     }
 
+    // See https://github.com/SonarSource/sonar-dotnet/issues/4402
     public partial record PartialCompliant : IDisposable // Noncompliant FP, should be Compliant
                                                          // Secondary@-1 FP
     {
