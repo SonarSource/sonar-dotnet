@@ -85,6 +85,6 @@ namespace SonarAnalyzer.Rules
                 .OfType<TObjectCreationSyntax>()
                 .Select(ctor => semanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol)
                 .WhereNotNull()
-                .Any(ctor => Equals(ctor.ContainingType?.OriginalDefinition, namedType));
+                .Any(ctor => Equals(ctor.ContainingType.OriginalDefinition, namedType));
     }
 }
