@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 43 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 43 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 68 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 68 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 32 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 32 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 86 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 86 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 51 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 51 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 38 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 38 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 42 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 42 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 34 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 34 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 49 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 49 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 35 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 35 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTransport.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 32 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 32 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 34 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 34 to the maximum authorized 30 or less.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
