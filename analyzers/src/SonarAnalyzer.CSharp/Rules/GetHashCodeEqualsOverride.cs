@@ -96,8 +96,8 @@ namespace SonarAnalyzer.Rules.CSharp
             && ifStatement.Condition == invocation
             && IfStatementWithSingleReturnTrue(ifStatement);
 
-        internal static bool MethodIsRelevant(IMethodSymbol methodSymbol, ISet<string> methodNames) =>
-            methodNames.Contains(methodSymbol.Name) && methodSymbol.IsOverride;
+        internal static bool MethodIsRelevant(ISymbol symbol, ISet<string> methodNames) =>
+            methodNames.Contains(symbol.Name) && symbol.IsOverride;
 
         private static bool TryGetLocationFromInvocationInsideMethod(SyntaxNodeAnalysisContext context, ISymbol symbol, out Location location)
         {

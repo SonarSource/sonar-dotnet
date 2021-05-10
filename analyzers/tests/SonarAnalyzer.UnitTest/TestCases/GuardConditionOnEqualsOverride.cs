@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
     class Base
     {
@@ -16,6 +13,7 @@ namespace Tests.Diagnostics
             return false;
         }
     }
+
     class Derived : Base
     {
         public override bool Equals(object other)
@@ -29,5 +27,27 @@ namespace Tests.Diagnostics
             // do some checks here
             return false;
         }
+    }
+
+    class CornerCases
+    {
+        public int Foo
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            Method();
+
+            obj.Equals(obj);
+
+            return true;
+        }
+
+        private void Method() { }
     }
 }
