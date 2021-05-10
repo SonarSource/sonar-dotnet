@@ -526,6 +526,7 @@ namespace Tests.Diagnostics
 
     }
 
+    // See https://github.com/SonarSource/sonar-dotnet/issues/4404
     struct AssignmentStruct
     {
         HttpWebRequest CreateRQ()
