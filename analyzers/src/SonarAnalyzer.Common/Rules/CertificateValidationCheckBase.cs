@@ -262,8 +262,7 @@ namespace SonarAnalyzer.Rules
             if (expression is TInvocationExpressionSyntax invocation)
             {
                 var symbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-                return symbol is {DeclaringSyntaxReferences: {IsEmpty: false}}
-                       && symbol.DeclaringSyntaxReferences.Select(SyntaxFromReference).Any(x => x != null && c.VisitedMethods.Contains(x));
+                return symbol.DeclaringSyntaxReferences.Select(SyntaxFromReference).Any(x => c.VisitedMethods.Contains(x));
             }
             return false;
         }
