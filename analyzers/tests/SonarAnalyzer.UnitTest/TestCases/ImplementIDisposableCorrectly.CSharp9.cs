@@ -14,6 +14,13 @@ namespace Tests.Diagnostics
         protected virtual void Dispose(bool disposing) { }
     }
 
+    public record SimpleDisposablePositional(string Value) : IDisposable // Noncompliant {{Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
+    {
+        public void Dispose() => Dispose(true); // Secondary {{'SimpleDisposable.Dispose()' should also call 'GC.SuppressFinalize(this)'.}}
+
+        protected virtual void Dispose(bool disposing) { }
+    }
+
     public record SimpleDisposableWithSuppressFinalize : IDisposable
     {
         public void Dispose()
@@ -169,7 +176,7 @@ namespace Tests.Diagnostics
 
     public record DerivedWithInterface1 : NoVirtualDispose, IDisposable
 //                ^^^^^^^^^^^^^^^^^^^^^ Noncompliant
-//                                                          ^^^^^^^^^^^ Secondary@-1 {{Remove 'IDisposable' from the list of interfaces implemented by 'DerivedWithInterface1' and override the base class 'Dispose' implementation instead.}}
+//                                                          ^^^^^^^^^^^ Secondary@-1 {{Remove 'IDisposable' from the list of interfaces implemented by 'DerivedWithInterface1' and override the base record 'Dispose' implementation instead.}}
     {
     }
 

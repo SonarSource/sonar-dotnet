@@ -64,13 +64,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var classDeclaration = (ClassDeclarationSyntax)c.Node;
                         declarationIdentifier = classDeclaration.Identifier;
-                        checker = new DisposableChecker(classDeclaration.BaseList, declarationIdentifier, c.SemanticModel.GetDeclaredSymbol(classDeclaration), c.SemanticModel);
+                        checker = new DisposableChecker(classDeclaration.BaseList, declarationIdentifier, c.SemanticModel.GetDeclaredSymbol(classDeclaration), "class", c.SemanticModel);
                     }
                     else
                     {
                         var recordDeclaration = (RecordDeclarationSyntaxWrapper)c.Node;
                         declarationIdentifier = recordDeclaration.Identifier;
-                        checker = new DisposableChecker(recordDeclaration.BaseList, declarationIdentifier, c.SemanticModel.GetDeclaredSymbol(recordDeclaration), c.SemanticModel);
+                        checker = new DisposableChecker(recordDeclaration.BaseList, declarationIdentifier, c.SemanticModel.GetDeclaredSymbol(recordDeclaration), "record", c.SemanticModel);
                     }
 
                     var locations = checker.GetIssueLocations();
@@ -91,12 +91,14 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly BaseListSyntax baseTypes;
             private readonly SyntaxToken typeIdentifier;
             private readonly INamedTypeSymbol typeSymbol;
+            private readonly string nodeType;
 
-            public DisposableChecker(BaseListSyntax baseTypes, SyntaxToken typeIdentifier, INamedTypeSymbol typeSymbol, SemanticModel semanticModel)
+            public DisposableChecker(BaseListSyntax baseTypes, SyntaxToken typeIdentifier, INamedTypeSymbol typeSymbol, string nodeType, SemanticModel semanticModel)
             {
                 this.baseTypes = baseTypes;
                 this.typeIdentifier = typeIdentifier;
                 this.typeSymbol = typeSymbol;
+                this.nodeType = nodeType;
                 this.semanticModel = semanticModel;
             }
 
@@ -115,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         AddSecondaryLocation(iDisposableInterfaceSyntax.GetLocation(),
                             $"Remove 'IDisposable' from the list of interfaces implemented by '{typeSymbol.Name}'"
-                                + " and override the base class 'Dispose' implementation instead.");
+                                + $" and override the base {nodeType} 'Dispose' implementation instead.");
                     }
 
                     if (HasVirtualDisposeBool(typeSymbol.BaseType))
@@ -277,8 +279,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private bool IsOrImplementsIDisposable(BaseTypeSyntax baseType) =>
-                baseType?.Type != null
-                && (semanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol).Is(KnownType.System_IDisposable);
+                (semanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol).Is(KnownType.System_IDisposable);
 
             private bool CallsSuppressFinalize(BaseMethodDeclarationSyntax methodDeclaration) =>
                 methodDeclaration.ContainsMethodInvocation(semanticModel, method => HasArgumentValues(method, "this"), KnownMethods.IsGcSuppressFinalize);
