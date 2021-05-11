@@ -57,30 +57,30 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(VisitClassDeclaration, SyntaxKind.ClassDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(VisitDeclaration, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
 
-        private void VisitClassDeclaration(SyntaxNodeAnalysisContext context)
+        private void VisitDeclaration(SyntaxNodeAnalysisContext context)
         {
-            if (!IsEnabled(context.Options))
+            if (!IsEnabled(context.Options) || context.ContainingSymbol.Kind != SymbolKind.NamedType)
             {
                 return;
             }
 
-            var classDeclaration = (ClassDeclarationSyntax)context.Node;
-            if (!HasConstructorsWithParameters(classDeclaration))
+            var declaration = (TypeDeclarationSyntax)context.Node;
+            if (!HasConstructorsWithParameters(declaration))
             {
                 // If there are no constructors, or if these don't have parameters, there is no validation done
-                // and the class is considered safe.
+                // and the type is considered safe.
                 return;
             }
 
-            var typeSymbol = context.SemanticModel.GetDeclaredSymbol(classDeclaration);
+            var typeSymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
             if (!HasSerializableAttribute(typeSymbol))
             {
                 return;
             }
 
-            ReportDiagnostics(classDeclaration, typeSymbol, context);
+            ReportDiagnostics(declaration, typeSymbol, context);
         }
 
         private static void ReportDiagnostics(TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol, SyntaxNodeAnalysisContext context)
@@ -185,12 +185,28 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (visitedFirstLevel)
                 {
-                    // Skip nested class visits. The rule will be triggered for them also.
+                    // Skip nested visits. The rule will be triggered for them also.
                     return;
                 }
 
                 visitedFirstLevel = true;
                 base.VisitClassDeclaration(node);
+            }
+
+            public override void Visit(SyntaxNode node)
+            {
+                if (node.Kind() == SyntaxKindEx.RecordDeclaration)
+                {
+                    if (visitedFirstLevel)
+                    {
+                        // Skip nested visits. The rule will be triggered for them also.
+                        return;
+                    }
+
+                    visitedFirstLevel = true;
+                }
+
+                base.Visit(node);
             }
 
             private bool HasParametersUsedInConditionalConstructs(BaseMethodDeclarationSyntax declaration)

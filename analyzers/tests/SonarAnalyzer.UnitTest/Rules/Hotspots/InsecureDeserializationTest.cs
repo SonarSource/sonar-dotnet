@@ -33,8 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void InsecureDeserialization() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\InsecureDeserialization.cs",
-                new CS.InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromCSharp8);
+                                    new CS.InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
+                                    ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
