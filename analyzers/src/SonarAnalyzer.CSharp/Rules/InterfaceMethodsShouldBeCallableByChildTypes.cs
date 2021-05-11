@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var symbol = semanticModel.GetDeclaredSymbol(declaration);
 
-            return symbol is {IsSealed: false, IsStatic: false}
+            return symbol is {IsSealed: false}
                    && symbol.IsPubliclyAccessible();
         }
 
