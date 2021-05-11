@@ -58,20 +58,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    DisposableChecker checker;
-                    SyntaxToken declarationIdentifier;
-                    if (c.Node.IsKind(SyntaxKind.ClassDeclaration))
-                    {
-                        var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                        declarationIdentifier = classDeclaration.Identifier;
-                        checker = new DisposableChecker(classDeclaration.BaseList, declarationIdentifier, c.SemanticModel.GetDeclaredSymbol(classDeclaration), "class", c.SemanticModel);
-                    }
-                    else
-                    {
-                        var recordDeclaration = (RecordDeclarationSyntaxWrapper)c.Node;
-                        declarationIdentifier = recordDeclaration.Identifier;
-                        checker = new DisposableChecker(recordDeclaration.BaseList, declarationIdentifier, c.SemanticModel.GetDeclaredSymbol(recordDeclaration), "record", c.SemanticModel);
-                    }
+                    var typeDeclarationSyntax = (TypeDeclarationSyntax)c.Node;
+                    var declarationIdentifier = typeDeclarationSyntax.Identifier;
+                    var checker = new DisposableChecker(typeDeclarationSyntax.BaseList,
+                        declarationIdentifier,
+                        c.SemanticModel.GetDeclaredSymbol(typeDeclarationSyntax),
+                        c.Node.IsKind(SyntaxKind.ClassDeclaration) ? "class" : "record",
+                        c.SemanticModel);
 
                     var locations = checker.GetIssueLocations();
                     if (locations.Any())
@@ -102,11 +95,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.semanticModel = semanticModel;
             }
 
-            public IEnumerable<SecondaryLocation> GetIssueLocations()
+            public List<SecondaryLocation> GetIssueLocations()
             {
                 if (typeSymbol == null || typeSymbol.IsSealed)
                 {
-                    return Enumerable.Empty<SecondaryLocation>();
+                    return new List<SecondaryLocation>();
                 }
 
                 if (typeSymbol.BaseType.Implements(KnownType.System_IDisposable))
@@ -154,37 +147,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return secondaryLocations;
             }
-
-            private static bool IsDisposeBool(IMethodSymbol method) =>
-                method.Name == nameof(IDisposable.Dispose)
-                && (method.IsVirtual || method.IsAbstract || method.IsOverride)
-                && method.DeclaredAccessibility == Accessibility.Protected
-                && method.Parameters.Length == 1
-                && method.Parameters.Any(p => p.Type.Is(KnownType.System_Boolean));
-
-            private static bool HasArgumentValues(InvocationExpressionSyntax invocation, params string[] arguments) =>
-                invocation.HasExactlyNArguments(arguments.Length)
-                && invocation.ArgumentList.Arguments
-                    .Select((a, index) => a.Expression.ToString() == arguments[index])
-                    .All(matching => matching);
-
-            private static bool HasStatementsCount(BaseMethodDeclarationSyntax methodDeclaration, int expectedStatementsCount) =>
-                methodDeclaration.Body?.Statements.Count == expectedStatementsCount
-                || (methodDeclaration.ExpressionBody() != null && expectedStatementsCount == 1); // Expression body has only one statement
-
-            private static IEnumerable<SyntaxNode> FindMethodDeclarations(INamedTypeSymbol typeSymbol, Func<IMethodSymbol, bool> predicate) =>
-                typeSymbol.GetMembers()
-                    .OfType<IMethodSymbol>()
-                    .Where(predicate)
-                    .SelectMany(m => m.DeclaringSyntaxReferences)
-                    .Select(r => r.GetSyntax());
-
-            private static bool HasVirtualDisposeBool(INamedTypeSymbol symbol) =>
-                symbol.GetSelfAndBaseTypes()
-                    .SelectMany(t => t.GetMembers())
-                    .OfType<IMethodSymbol>()
-                    .Where(IsDisposeBool)
-                    .Any(methodSym => !methodSym.IsAbstract);
 
             private void AddSecondaryLocation(Location location, string message) =>
                 secondaryLocations.Add(new SecondaryLocation(location, message));
@@ -286,6 +248,37 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool CallsVirtualDispose(BaseMethodDeclarationSyntax methodDeclaration, string argumentValue) =>
                 methodDeclaration.ContainsMethodInvocation(semanticModel, method => HasArgumentValues(method, argumentValue), IsDisposeBool);
+
+            private static bool IsDisposeBool(IMethodSymbol method) =>
+                method.Name == nameof(IDisposable.Dispose)
+                && (method.IsVirtual || method.IsAbstract || method.IsOverride)
+                && method.DeclaredAccessibility == Accessibility.Protected
+                && method.Parameters.Length == 1
+                && method.Parameters.Any(p => p.Type.Is(KnownType.System_Boolean));
+
+            private static bool HasArgumentValues(InvocationExpressionSyntax invocation, params string[] arguments) =>
+                invocation.HasExactlyNArguments(arguments.Length)
+                && invocation.ArgumentList.Arguments
+                    .Select((a, index) => a.Expression.ToString() == arguments[index])
+                    .All(matching => matching);
+
+            private static bool HasStatementsCount(BaseMethodDeclarationSyntax methodDeclaration, int expectedStatementsCount) =>
+                methodDeclaration.Body?.Statements.Count == expectedStatementsCount
+                || (methodDeclaration.ExpressionBody() != null && expectedStatementsCount == 1); // Expression body has only one statement
+
+            private static IEnumerable<SyntaxNode> FindMethodDeclarations(INamedTypeSymbol typeSymbol, Func<IMethodSymbol, bool> predicate) =>
+                typeSymbol.GetMembers()
+                    .OfType<IMethodSymbol>()
+                    .Where(predicate)
+                    .SelectMany(m => m.DeclaringSyntaxReferences)
+                    .Select(r => r.GetSyntax());
+
+            private static bool HasVirtualDisposeBool(INamedTypeSymbol symbol) =>
+                symbol.GetSelfAndBaseTypes()
+                    .SelectMany(t => t.GetMembers())
+                    .OfType<IMethodSymbol>()
+                    .Where(IsDisposeBool)
+                    .Any(methodSym => !methodSym.IsAbstract);
         }
     }
 }
