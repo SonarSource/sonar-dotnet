@@ -98,42 +98,31 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ParametersInfo CreateParametersInfo(SyntaxNode node, SemanticModel semanticModel) =>
             node switch
             {
-                ClassDeclarationSyntax classDeclaration
-                    => new ParametersInfo
-                        {
-                            Parameters = classDeclaration.TypeParameterList,
-                            ContainerName = "class"
-                        },
+                ClassDeclarationSyntax classDeclaration => new ParametersInfo(classDeclaration.TypeParameterList, "class"),
 
                 MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, semanticModel)
-                    => new ParametersInfo
-                        {
-                            Parameters = methodDeclaration.TypeParameterList,
-                            ContainerName = "method"
-                        },
+                    => new ParametersInfo(methodDeclaration.TypeParameterList, "method"),
 
                 var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper)
-                    => new ParametersInfo
-                        {
-                            Parameters = ((LocalFunctionStatementSyntaxWrapper)node).TypeParameterList,
-                            ContainerName = "local function"
-                        },
+                    => new ParametersInfo(((LocalFunctionStatementSyntaxWrapper)node).TypeParameterList, "local function"),
 
                 var wrapper when RecordDeclarationSyntaxWrapper.IsInstance(wrapper)
-                    => new ParametersInfo
-                        {
-                            Parameters = ((RecordDeclarationSyntaxWrapper)node).TypeParameterList,
-                            ContainerName = "record"
-                        },
+                    => new ParametersInfo(((RecordDeclarationSyntaxWrapper)node).TypeParameterList, "record"),
 
                 _ => default
             };
 
-        private struct ParametersInfo
+        private readonly struct ParametersInfo
         {
-            public TypeParameterListSyntax Parameters { get; set; }
+            public TypeParameterListSyntax Parameters { get; }
 
-            public string ContainerName { get; set; }
+            public string ContainerName { get; }
+
+            public ParametersInfo(TypeParameterListSyntax parameters, string name)
+            {
+                Parameters = parameters;
+                ContainerName = name;
+            }
         }
 
         private static bool IsMethodCandidate(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel)
