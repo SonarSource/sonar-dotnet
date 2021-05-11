@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'T' is not used in the record.",
+"location":  {
+"uri":  "sources\Net5\Net5\Records.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  21,
+"endLine":  109,
+"endColumn":  22
+}
+}
+}
+]
+}

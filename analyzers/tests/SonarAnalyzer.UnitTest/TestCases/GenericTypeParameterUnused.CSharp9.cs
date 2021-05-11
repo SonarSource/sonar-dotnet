@@ -24,6 +24,14 @@ public record R : Interface
     }
 }
 
-public record R<T> // FN
+public record R<T> // Noncompliant
+{
+}
+
+public record R2<T>(T X) // Compliant
+{
+}
+
+public record R3<T>(int X) // Noncompliant
 {
 }
