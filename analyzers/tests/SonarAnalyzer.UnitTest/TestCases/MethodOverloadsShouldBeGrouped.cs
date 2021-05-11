@@ -169,6 +169,24 @@ namespace Tests.Diagnostics
 
     }
 
+    public class L
+    {
+        public void MethodA() { }
+
+        public void MethodB() { }
+
+        public static void MethodA(int i) { } // Compliant as one is static the other is not
+    }
+
+    public abstract class M
+    {
+        public abstract void MethodA();
+
+        public void MethodB() { }
+
+        public void MethodA(int i) { } // Compliant as one is abstract and the other is not
+    }
+
     // https://github.com/SonarSource/sonar-dotnet/issues/2776
     public class StaticMethodsTogether
     {
@@ -373,5 +391,4 @@ namespace Tests.Diagnostics
 
         public void Cancel() { } // Secondary, implements ICancel and ISecond
     }
-
 }

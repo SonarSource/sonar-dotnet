@@ -46,5 +46,3 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.vb", new VB.MethodOverloadsShouldBeGrouped());
     }
 }
-
-

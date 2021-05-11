@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using StyleCop.Analyzers.Lightup;
 
@@ -32,5 +33,8 @@ namespace SonarAnalyzer.Extensions
             (method ?? throw new ArgumentNullException(nameof(method))).Body == null
                 ? method.ExpressionBody().DescendantNodes()
                 : method.Body.DescendantNodes();
+
+        public static bool IsStatic(this BaseMethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword);
     }
 }

@@ -18,21 +18,31 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<MemberDeclarationSyntax>
+    public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<SyntaxKind, MemberDeclarationSyntax>
     {
-        public MethodOverloadsShouldBeGrouped() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+        protected override SyntaxKind[] SyntaxKinds { get; } =
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordDeclaration
+        };
 
         protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, MemberDeclarationSyntax member)
         {
@@ -42,37 +52,19 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             if (member is ConstructorDeclarationSyntax constructor)
             {
-                return new MemberInfo(c, member, constructor.Identifier, IsStatic(constructor), false, true);
+                return new MemberInfo(c, member, constructor.Identifier, constructor.IsStatic(), false, true);
             }
             else if (member is MethodDeclarationSyntax method)
             {
-                return new MemberInfo(c, member, method.Identifier, IsStatic(method), method.Modifiers.Any(x => x.Kind() == SyntaxKind.AbstractKeyword), true);
+                return new MemberInfo(c, member, method.Identifier, method.IsStatic(), method.Modifiers.Any(SyntaxKind.AbstractKeyword), true);
             }
             return null;
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var typeDeclaration = (TypeDeclarationSyntax)c.Node;
-                CheckMembers(c, typeDeclaration.Members);
-            },
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.StructDeclaration);
-        }
+        protected override IEnumerable<MemberDeclarationSyntax> GetMemberDeclarations(SyntaxNode node) =>
+            ((TypeDeclarationSyntax)node).Members;
 
-        private static bool IsValidMemberForOverload(MemberDeclarationSyntax member)
-        {
-            if (member is MethodDeclarationSyntax methodDeclaration)
-            {
-                return methodDeclaration.ExplicitInterfaceSpecifier == null;
-            }
-            return true;
-        }
-
-        private static bool IsStatic(BaseMethodDeclarationSyntax declaration) => declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
-
+        private static bool IsValidMemberForOverload(MemberDeclarationSyntax member) =>
+            (member as MethodDeclarationSyntax)?.ExplicitInterfaceSpecifier == null;
     }
 }
