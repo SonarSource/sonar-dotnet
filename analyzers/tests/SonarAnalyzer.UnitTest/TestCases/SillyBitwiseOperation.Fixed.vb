@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Collections.Generic
 
 Public Enum Types
     [Class] = 0
@@ -54,5 +55,27 @@ Class SillyBitwiseOperation
 
     Private Shared Sub MyMethod(U As UInt64)
     End Sub
+
+End Class
+
+' https//github.com/SonarSource/sonar-dotnet/issues/4399
+Public Class Repro_4399
+
+    Public Sub BuildMask(DaysOfWeek As IEnumerable(Of DayOfWeek))
+        Dim Value As Integer = 0
+        For Each dow As DayOfWeek In DaysOfWeek
+            Value = (1 << CInt(dow))   ' Fixed
+        Next
+    End Sub
+
+    Public Sub Repro(Args() As Object)
+        Dim Fail As Boolean = False
+        For Each Arg As Object In Args
+            Fail = Not CheckArg(Arg)    ' Fixed
+        Next
+    End Sub
+
+    Private Function CheckArg(Arg As Object) As Boolean
+    End Function
 
 End Class

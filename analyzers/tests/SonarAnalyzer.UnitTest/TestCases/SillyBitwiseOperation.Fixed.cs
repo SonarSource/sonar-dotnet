@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -56,4 +57,28 @@ namespace Tests.Diagnostics
 
         private static void MyMethod(UInt64 u) { }
     }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/4399
+public class Repro_4399
+{
+    public void BuildMask(IEnumerable<DayOfWeek> daysOfWeek)
+    {
+        var value = 0;
+        foreach (var dow in daysOfWeek)
+        {
+            value = (1 << (int)dow); // Fixed
+        }
+    }
+
+    public void Repro(object[] args)
+    {
+        var fail = false;
+        foreach (var arg in args)
+        {
+            fail = !CheckArg(arg);   // Fixed
+        }
+    }
+
+    private bool CheckArg(object arg) => false;
 }
