@@ -57,30 +57,30 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(VisitClassDeclaration, SyntaxKind.ClassDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(VisitDeclaration, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
 
-        private void VisitClassDeclaration(SyntaxNodeAnalysisContext context)
+        private void VisitDeclaration(SyntaxNodeAnalysisContext context)
         {
-            if (!IsEnabled(context.Options))
+            if (!IsEnabled(context.Options) || context.ContainingSymbol.Kind != SymbolKind.NamedType)
             {
                 return;
             }
 
-            var classDeclaration = (ClassDeclarationSyntax)context.Node;
-            if (!HasConstructorsWithParameters(classDeclaration))
+            var declaration = (TypeDeclarationSyntax)context.Node;
+            if (!HasConstructorsWithParameters(declaration))
             {
                 // If there are no constructors, or if these don't have parameters, there is no validation done
-                // and the class is considered safe.
+                // and the type is considered safe.
                 return;
             }
 
-            var typeSymbol = context.SemanticModel.GetDeclaredSymbol(classDeclaration);
+            var typeSymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
             if (!HasSerializableAttribute(typeSymbol))
             {
                 return;
             }
 
-            ReportDiagnostics(classDeclaration, typeSymbol, context);
+            ReportDiagnostics(declaration, typeSymbol, context);
         }
 
         private static void ReportDiagnostics(TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol, SyntaxNodeAnalysisContext context)
@@ -91,8 +91,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var walker = new ConstructorDeclarationWalker(context.SemanticModel);
             walker.SafeVisit(declaration);
 
-            if (!implementsISerializable &&
-                !implementsIDeserializationCallback)
+            if (!implementsISerializable
+                && !implementsIDeserializationCallback)
             {
                 foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
                 {
@@ -100,8 +100,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            if (implementsISerializable &&
-                !walker.HasDeserializationCtorWithConditionalStatements())
+            if (implementsISerializable
+                && !walker.HasDeserializationCtorWithConditionalStatements())
             {
                 foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => !info.IsDeserializationConstructor && info.HasConditionalConstructs))
                 {
@@ -109,8 +109,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            if (implementsIDeserializationCallback &&
-                !OnDeserializationHasConditions(declaration, context.SemanticModel))
+            if (implementsIDeserializationCallback
+                && !OnDeserializationHasConditions(declaration, context.SemanticModel))
             {
                 foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
                 {
@@ -127,9 +127,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ContainsConditionalConstructs();
 
         private static bool IsOnDeserialization(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel) =>
-            methodDeclaration.Identifier.Text == "OnDeserialization" &&
-            methodDeclaration.ParameterList.Parameters.Count == 1 &&
-            methodDeclaration.ParameterList.Parameters[0].IsDeclarationKnownType(KnownType.System_Object, semanticModel);
+            methodDeclaration.Identifier.Text == "OnDeserialization"
+            && methodDeclaration.ParameterList.Parameters.Count == 1
+            && methodDeclaration.ParameterList.Parameters[0].IsDeclarationKnownType(KnownType.System_Object, semanticModel);
 
         private static bool HasConstructorsWithParameters(TypeDeclarationSyntax typeDeclaration) =>
             typeDeclaration
@@ -165,8 +165,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public ImmutableArray<ConstructorInfo> GetConstructorsInfo() => constructorsInfo.ToImmutableArray();
 
             public bool HasDeserializationCtorWithConditionalStatements() =>
-                GetDeserializationConstructor() is {} ctor &&
-                ctor.HasConditionalConstructs;
+                GetDeserializationConstructor() is {HasConditionalConstructs: true};
 
             public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
             {
@@ -185,12 +184,28 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (visitedFirstLevel)
                 {
-                    // Skip nested class visits. The rule will be triggered for them also.
+                    // Skip nested visits. The rule will be triggered for them also.
                     return;
                 }
 
                 visitedFirstLevel = true;
                 base.VisitClassDeclaration(node);
+            }
+
+            public override void Visit(SyntaxNode node)
+            {
+                if (node.Kind() == SyntaxKindEx.RecordDeclaration)
+                {
+                    if (visitedFirstLevel)
+                    {
+                        // Skip nested visits. The rule will be triggered for them also.
+                        return;
+                    }
+
+                    visitedFirstLevel = true;
+                }
+
+                base.Visit(node);
             }
 
             private bool HasParametersUsedInConditionalConstructs(BaseMethodDeclarationSyntax declaration)
@@ -209,9 +224,9 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool IsDeserializationConstructor(BaseMethodDeclarationSyntax declaration) =>
                 // A deserialization ctor has the following parameters: (SerializationInfo information, StreamingContext context)
                 // See https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable?view=netcore-3.1#remarks
-                declaration.ParameterList.Parameters.Count == 2 &&
-                declaration.ParameterList.Parameters[0].IsDeclarationKnownType(KnownType.System_Runtime_Serialization_SerializationInfo, semanticModel) &&
-                declaration.ParameterList.Parameters[1].IsDeclarationKnownType(KnownType.System_Runtime_Serialization_StreamingContext, semanticModel);
+                declaration.ParameterList.Parameters.Count == 2
+                && declaration.ParameterList.Parameters[0].IsDeclarationKnownType(KnownType.System_Runtime_Serialization_SerializationInfo, semanticModel)
+                && declaration.ParameterList.Parameters[1].IsDeclarationKnownType(KnownType.System_Runtime_Serialization_StreamingContext, semanticModel);
 
             private static ImmutableArray<ISymbol> GetConstructorParameterSymbols(BaseMethodDeclarationSyntax node, SemanticModel semanticModel) =>
                 node.ParameterList.Parameters
