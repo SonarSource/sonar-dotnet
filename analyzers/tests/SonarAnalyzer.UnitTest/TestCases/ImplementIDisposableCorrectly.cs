@@ -176,6 +176,14 @@ namespace Tests.Diagnostics
     public class DerivedWithInterface2 : NoVirtualDispose, IMyDisposable // Compliant, we are not in charge of the interface
     {
     }
+
+    public class SimpleDisposableCompilationError : IDisposable  // Noncompliant {{Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
+    {
+        public void Dispose() => Dispose(true, false);           // Error [CS1501]
+                                                                 // Secondary@-1 {{'SimpleDisposableCompilationError.Dispose()' should call 'Dispose(true)' and 'GC.SuppressFinalize(this)'.}}
+
+        protected virtual void Dispose(bool disposing) { }
+    }
 }
 
 namespace Rspec_Compliant_Samples
