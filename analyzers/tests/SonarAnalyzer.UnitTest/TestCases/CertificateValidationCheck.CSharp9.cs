@@ -171,7 +171,7 @@ namespace Tests.Diagnostics
     {
         public static partial RemoteCertificateValidationCallback FindInvalid()
         {
-            return (sender, certificate, chain, SslPolicyErrors) => true;  // Secondary FN
+            return (sender, certificate, chain, SslPolicyErrors) => true;  // should be secondary location for FN below
         }
     }
 
