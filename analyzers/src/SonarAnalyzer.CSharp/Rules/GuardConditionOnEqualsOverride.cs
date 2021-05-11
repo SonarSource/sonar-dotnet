@@ -33,28 +33,22 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class GuardConditionOnEqualsOverride : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3397";
+        private const string DiagnosticId = "S3397";
         private const string MessageFormat = "Change this guard condition to call 'object.ReferenceEquals'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ISet<string> MethodNames = new HashSet<string> { GetHashCodeEqualsOverride.EqualsName };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
                 cb =>
                 {
-                    if (!(cb.CodeBlock is MethodDeclarationSyntax methodDeclaration))
-                    {
-                        return;
-                    }
-
-                    if (!(cb.OwningSymbol is IMethodSymbol methodSymbol) ||
-                        !GetHashCodeEqualsOverride.MethodIsRelevant(methodSymbol, MethodNames))
+                    if (!(cb.OwningSymbol is IMethodSymbol methodSymbol)
+                        || !(cb.CodeBlock is MethodDeclarationSyntax)
+                        || !GetHashCodeEqualsOverride.MethodIsRelevant(methodSymbol, MethodNames))
                     {
                         return;
                     }
@@ -66,30 +60,21 @@ namespace SonarAnalyzer.Rules.CSharp
                         },
                         SyntaxKind.InvocationExpression);
                 });
-        }
-        private static void CheckInvocationInsideMethod(SyntaxNodeAnalysisContext context,
-            IMethodSymbol methodSymbol)
+
+        private static void CheckInvocationInsideMethod(SyntaxNodeAnalysisContext context, ISymbol symbol)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethod) ||
-                invokedMethod.Name != methodSymbol.Name)
+            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethod)
+                || invokedMethod.Name != symbol.Name
+                || !invocation.IsOnBase())
             {
                 return;
             }
 
-            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-
-            if (!(memberAccess?.Expression is BaseExpressionSyntax baseCall))
+            if (!invokedMethod.ContainingType.Is(KnownType.System_Object)
+                && GetHashCodeEqualsOverride.IsEqualsCallInGuardCondition(invocation, invokedMethod))
             {
-                return;
-            }
-
-            var objectType = invokedMethod.ContainingType;
-            if (objectType != null &&
-                !objectType.Is(KnownType.System_Object) &&
-                GetHashCodeEqualsOverride.IsEqualsCallInGuardCondition(invocation, invokedMethod))
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation()));
             }
         }
     }
