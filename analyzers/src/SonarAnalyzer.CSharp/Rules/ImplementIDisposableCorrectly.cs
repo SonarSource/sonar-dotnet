@@ -61,17 +61,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     var typeDeclarationSyntax = (TypeDeclarationSyntax)c.Node;
                     var declarationIdentifier = typeDeclarationSyntax.Identifier;
                     var checker = new DisposableChecker(typeDeclarationSyntax.BaseList,
-                        declarationIdentifier,
-                        c.SemanticModel.GetDeclaredSymbol(typeDeclarationSyntax),
-                        c.Node.IsKind(SyntaxKind.ClassDeclaration) ? "class" : "record",
-                        c.SemanticModel);
+                                                        declarationIdentifier,
+                                                        c.SemanticModel.GetDeclaredSymbol(typeDeclarationSyntax),
+                                                        c.Node.IsKind(SyntaxKind.ClassDeclaration) ? "class" : "record",
+                                                        c.SemanticModel);
 
                     var locations = checker.GetIssueLocations();
                     if (locations.Any())
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, declarationIdentifier.GetLocation(),
-                            locations.ToAdditionalLocations(),
-                            locations.ToProperties()));
+                                                                       locations.ToAdditionalLocations(),
+                                                                       locations.ToProperties()));
                     }
                 },
                 SyntaxKind.ClassDeclaration,
@@ -109,15 +109,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (iDisposableInterfaceSyntax != null)
                     {
                         AddSecondaryLocation(iDisposableInterfaceSyntax.GetLocation(),
-                            $"Remove 'IDisposable' from the list of interfaces implemented by '{typeSymbol.Name}'"
-                                + $" and override the base {nodeType} 'Dispose' implementation instead.");
+                                             $"Remove 'IDisposable' from the list of interfaces implemented by '{typeSymbol.Name}'"
+                                             + $" and override the base {nodeType} 'Dispose' implementation instead.");
                     }
 
                     if (HasVirtualDisposeBool(typeSymbol.BaseType))
                     {
                         VerifyDisposeOverrideCallsBase(FindMethodDeclarations(typeSymbol, IsDisposeBool)
-                            .OfType<MethodDeclarationSyntax>()
-                            .FirstOrDefault());
+                                                       .OfType<MethodDeclarationSyntax>()
+                                                       .FirstOrDefault());
                     }
 
                     return secondaryLocations;
@@ -128,19 +128,19 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (!FindMethodDeclarations(typeSymbol, IsDisposeBool).Any())
                     {
                         AddSecondaryLocation(typeIdentifier.GetLocation(),
-                            $"Provide 'protected' overridable implementation of 'Dispose(bool)' on "
-                                + $"'{typeSymbol.Name}' or mark the type as 'sealed'.");
+                                             $"Provide 'protected' overridable implementation of 'Dispose(bool)' on "
+                                             + $"'{typeSymbol.Name}' or mark the type as 'sealed'.");
                     }
 
                     var destructor = FindMethodDeclarations(typeSymbol, SymbolHelper.IsDestructor)
-                        .OfType<DestructorDeclarationSyntax>()
-                        .FirstOrDefault();
+                                     .OfType<DestructorDeclarationSyntax>()
+                                     .FirstOrDefault();
 
                     VerifyDestructor(destructor);
 
                     var disposeMethod = FindMethodDeclarations(typeSymbol, KnownMethods.IsIDisposableDispose)
-                        .OfType<MethodDeclarationSyntax>()
-                        .FirstOrDefault();
+                                        .OfType<MethodDeclarationSyntax>()
+                                        .FirstOrDefault();
 
                     VerifyDispose(disposeMethod, typeSymbol.IsSealed);
                 }
@@ -161,8 +161,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (!HasStatementsCount(destructorSyntax, 1) || !CallsVirtualDispose(destructorSyntax, argumentValue: "false"))
                 {
                     AddSecondaryLocation(destructorSyntax.Identifier.GetLocation(),
-                        $"Modify '{typeSymbol.Name}.~{typeSymbol.Name}()' so that it calls 'Dispose(false)' and "
-                        + "then returns.");
+                                         $"Modify '{typeSymbol.Name}.~{typeSymbol.Name}()' so that it calls 'Dispose(false)' and "
+                                         + "then returns.");
                 }
             }
 
@@ -177,8 +177,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (!CallsVirtualDispose(disposeMethod, argumentValue: parameterName))
                 {
-                    AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
-                        $"Modify 'Dispose({parameterName})' so that it calls 'base.Dispose({parameterName})'.");
+                    AddSecondaryLocation(disposeMethod.Identifier.GetLocation(), $"Modify 'Dispose({parameterName})' so that it calls 'base.Dispose({parameterName})'.");
                 }
             }
 
@@ -229,7 +228,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (disposeMethodSymbol.IsAbstract || disposeMethodSymbol.IsVirtual)
                 {
                     var modifier = disposeMethod.Modifiers
-                        .FirstOrDefault(m => m.IsAnyKind(NotAllowedDisposeModifiers));
+                                                .FirstOrDefault(m => m.IsAnyKind(NotAllowedDisposeModifiers));
 
                     AddSecondaryLocation(modifier.GetLocation(), $"'{typeSymbol.Name}.Dispose()' should not be 'virtual' or 'abstract'.");
                 }
@@ -259,8 +258,8 @@ namespace SonarAnalyzer.Rules.CSharp
             private static bool HasArgumentValues(InvocationExpressionSyntax invocation, params string[] arguments) =>
                 invocation.HasExactlyNArguments(arguments.Length)
                 && invocation.ArgumentList.Arguments
-                    .Select((a, index) => a.Expression.ToString() == arguments[index])
-                    .All(matching => matching);
+                             .Select((a, index) => a.Expression.ToString() == arguments[index])
+                             .All(matching => matching);
 
             private static bool HasStatementsCount(BaseMethodDeclarationSyntax methodDeclaration, int expectedStatementsCount) =>
                 methodDeclaration.Body?.Statements.Count == expectedStatementsCount
@@ -268,17 +267,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static IEnumerable<SyntaxNode> FindMethodDeclarations(INamedTypeSymbol typeSymbol, Func<IMethodSymbol, bool> predicate) =>
                 typeSymbol.GetMembers()
-                    .OfType<IMethodSymbol>()
-                    .Where(predicate)
-                    .SelectMany(m => m.DeclaringSyntaxReferences)
-                    .Select(r => r.GetSyntax());
+                          .OfType<IMethodSymbol>()
+                          .Where(predicate)
+                          .SelectMany(m => m.DeclaringSyntaxReferences)
+                          .Select(r => r.GetSyntax());
 
             private static bool HasVirtualDisposeBool(INamedTypeSymbol symbol) =>
                 symbol.GetSelfAndBaseTypes()
-                    .SelectMany(t => t.GetMembers())
-                    .OfType<IMethodSymbol>()
-                    .Where(IsDisposeBool)
-                    .Any(methodSym => !methodSym.IsAbstract);
+                      .SelectMany(t => t.GetMembers())
+                      .OfType<IMethodSymbol>()
+                      .Where(IsDisposeBool)
+                      .Any(methodSym => !methodSym.IsAbstract);
         }
     }
 }
