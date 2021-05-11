@@ -45,40 +45,55 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(analysisContext =>
             {
-                analysisContext.RegisterSyntaxNodeAction(
-                    c =>
-                    {
-                        var declarationSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node);
-                        if (declarationSymbol == null)
-                        {
-                            return;
-                        }
+                analysisContext.RegisterSyntaxNodeAction(c =>
+                     {
+                         var declarationSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node);
+                         if (declarationSymbol == null)
+                         {
+                             return;
+                         }
 
-                        var helper = CreateParametersInfo(c.Node, c.SemanticModel);
-                        if (helper.Parameters == null || helper.Parameters.Parameters.Count == 0)
-                        {
-                            return;
-                        }
+                         CheckGenericTypeParameters(declarationSymbol, c);
+                     },
+                     SyntaxKind.MethodDeclaration,
+                     SyntaxKindEx.LocalFunctionStatement);
 
-                        var declarations = declarationSymbol.DeclaringSyntaxReferences
-                                                            .Select(reference => reference.GetSyntax());
+                analysisContext.RegisterSyntaxNodeAction(c =>
+                     {
+                         if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                         {
+                             return;
+                         }
 
-                        var typeParameterNames = helper.Parameters.Parameters.Select(typeParameter => typeParameter.Identifier.Text).ToArray();
-
-                        var usedTypeParameters = GetUsedTypeParameters(declarations, typeParameterNames, c);
-
-                        foreach (var typeParameter in typeParameterNames.Where(typeParameter => !usedTypeParameters.Contains(typeParameter)))
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
-                                                                           helper.Parameters.Parameters.First(tp => tp.Identifier.Text == typeParameter).GetLocation(),
-                                                                           typeParameter,
-                                                                           helper.ContainerName));
-                        }
-                    },
-                    SyntaxKind.MethodDeclaration,
-                    SyntaxKind.ClassDeclaration,
-                    SyntaxKindEx.LocalFunctionStatement);
+                         CheckGenericTypeParameters(c.ContainingSymbol, c);
+                     },
+                     SyntaxKind.ClassDeclaration,
+                     SyntaxKindEx.RecordDeclaration);
             });
+
+        private static void CheckGenericTypeParameters(ISymbol symbol, SyntaxNodeAnalysisContext c)
+        {
+            var helper = CreateParametersInfo(c.Node, c.SemanticModel);
+            if (helper.Parameters == null || helper.Parameters.Parameters.Count == 0)
+            {
+                return;
+            }
+
+            var declarations = symbol.DeclaringSyntaxReferences
+                                     .Select(reference => reference.GetSyntax());
+
+            var typeParameterNames = helper.Parameters.Parameters.Select(typeParameter => typeParameter.Identifier.Text).ToArray();
+
+            var usedTypeParameters = GetUsedTypeParameters(declarations, typeParameterNames, c);
+
+            foreach (var typeParameter in typeParameterNames.Where(typeParameter => !usedTypeParameters.Contains(typeParameter)))
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                                                               helper.Parameters.Parameters.First(tp => tp.Identifier.Text == typeParameter).GetLocation(),
+                                                               typeParameter,
+                                                               helper.ContainerName));
+            }
+        }
 
         private static ParametersInfo CreateParametersInfo(SyntaxNode node, SemanticModel semanticModel) =>
             node switch
@@ -102,6 +117,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             Parameters = ((LocalFunctionStatementSyntaxWrapper)node).TypeParameterList,
                             ContainerName = "local function"
+                        },
+
+                var wrapper when RecordDeclarationSyntaxWrapper.IsInstance(wrapper)
+                    => new ParametersInfo
+                        {
+                            Parameters = ((RecordDeclarationSyntaxWrapper)node).TypeParameterList,
+                            ContainerName = "record"
                         },
 
                 _ => default
