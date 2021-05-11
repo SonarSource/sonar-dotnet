@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -33,18 +32,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class PropertyWriteOnly : PropertyWriteOnlyBase<SyntaxKind, PropertyStatementSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+        protected override SyntaxKind SyntaxKind => SyntaxKind.PropertyStatement;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.PropertyStatement);
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
-
-        protected override SyntaxToken GetIdentifier(PropertyStatementSyntax prop) => prop.Identifier;
-
-        protected override bool IsWriteOnlyProperty(PropertyStatementSyntax prop) => prop.Modifiers.Any(SyntaxKind.WriteOnlyKeyword);
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override bool IsWriteOnlyProperty(PropertyStatementSyntax prop) =>
+            prop.Modifiers.Any(SyntaxKind.WriteOnlyKeyword);
     }
 }
