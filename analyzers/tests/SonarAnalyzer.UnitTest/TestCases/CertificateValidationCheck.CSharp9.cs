@@ -164,4 +164,34 @@ namespace Tests.Diagnostics
             new AssignmentPositionalRecord("http://localhost").InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
         }
     }
+
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/4415
+    public partial class PartialClass
+    {
+        public static partial RemoteCertificateValidationCallback FindInvalid()
+        {
+            return (sender, certificate, chain, SslPolicyErrors) => true;  // Secondary FN
+        }
+    }
+
+    public partial class PartialClass
+    {
+        public static partial RemoteCertificateValidationCallback FindInvalid();
+
+        HttpWebRequest CreateRQ()
+        {
+            return (HttpWebRequest)System.Net.HttpWebRequest.Create("http://localhost");
+        }
+
+        public void Init()
+        {
+            CreateRQ().ServerCertificateValidationCallback += FindInvalid();  // Non-compliant FN
+        }
+
+        static void Execute()
+        {
+            new PartialClass().Init();
+        }
+    }
 }
