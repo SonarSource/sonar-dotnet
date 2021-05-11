@@ -134,12 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 returnStatement = block.Statements.First() as ReturnStatementSyntax;
             }
 
-            if (returnStatement == null)
-            {
-                return false;
-            }
-
-            return returnStatement.Expression != null
+            return returnStatement?.Expression != null
                    && CSharpEquivalenceChecker.AreEquivalent(returnStatement.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
         }
     }
