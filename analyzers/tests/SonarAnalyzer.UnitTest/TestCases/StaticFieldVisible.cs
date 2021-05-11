@@ -1,4 +1,6 @@
-﻿namespace Tests.TestCases
+﻿using System;
+
+namespace Tests.TestCases
 {
     public class StaticFieldVisible
     {
@@ -6,6 +8,9 @@
 //                           ^^
         public const double Pi2 = 3.14;
         public double Pi3 = 3.14;
+
+        [ThreadStatic]
+        public static int value; // Noncompliant, FP - thread static field values are not shared between threads. See https://github.com/SonarSource/sonar-dotnet/issues/4407
     }
 
     public class Shape
