@@ -71,34 +71,34 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var classDeclaration = memberDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>();
-            if (classDeclaration == null
-                || classDeclaration.Identifier.IsMissing
-                || !IsClassTracked(classDeclaration, analysisContext.SemanticModel))
+            var declaration = (TypeDeclarationSyntax)memberDeclaration.FirstAncestorOrSelf<SyntaxNode>(node => node is TypeDeclarationSyntax);
+            if (declaration == null
+                || declaration.Identifier.IsMissing
+                || !IsDeclarationTracked(declaration, analysisContext.SemanticModel))
             {
                 return;
             }
 
-            var hasPublicEquivalentMethod = classDeclaration.Members
-                                                            .OfType<TMemberSyntax>()
-                                                            .Any(member => areMembersEquivalent(member, memberDeclaration));
+            var hasPublicEquivalentMethod = declaration.Members
+                                                       .OfType<TMemberSyntax>()
+                                                       .Any(member => areMembersEquivalent(member, memberDeclaration));
             if (!hasPublicEquivalentMethod)
             {
                 var identifierName = getIdentifierName(memberDeclaration);
 
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
                                                                              identifierName.GetLocation(),
-                                                                             classDeclaration.Identifier.ValueText,
+                                                                             declaration.Identifier.ValueText,
                                                                              string.Concat(explicitInterfaceSpecifier.Name, ".", identifierName.ValueText)));
             }
         }
 
-        private static bool IsClassTracked(BaseTypeDeclarationSyntax classDeclaration, SemanticModel semanticModel)
+        private static bool IsDeclarationTracked(BaseTypeDeclarationSyntax declaration, SemanticModel semanticModel)
         {
-            var classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
+            var symbol = semanticModel.GetDeclaredSymbol(declaration);
 
-            return classSymbol is {IsSealed: false, IsStatic: false}
-                   && classSymbol.IsPubliclyAccessible();
+            return symbol is {IsSealed: false, IsStatic: false}
+                   && symbol.IsPubliclyAccessible();
         }
 
         private static bool AreMethodsEquivalent(MethodDeclarationSyntax currentMethod, MethodDeclarationSyntax targetedMethod) =>
