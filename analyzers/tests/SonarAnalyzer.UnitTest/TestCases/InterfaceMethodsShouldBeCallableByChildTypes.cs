@@ -157,4 +157,13 @@ namespace Tests.Diagnostics
 
         public void Close() { }
     }
+
+    public class MyClass4 : IDisposable
+    {
+        void IDisposable.Dispose() // Noncompliant
+        {
+        }
+
+        protected void Bar() { }
+    }
 }
