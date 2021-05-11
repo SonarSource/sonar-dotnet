@@ -3,12 +3,12 @@
     public virtual void MyNotOverriddenMethod() { }
 }
 
-internal partial record PartialRecordDeclaredOnlyOnce // Noncompliant
+internal record PartialRecordDeclaredOnlyOnce // Fixed
 {
     void Method() { }
 }
 
-internal partial record PartialPositionalRecordDeclaredOnlyOnce(string parameter) // Noncompliant
+internal record PartialPositionalRecordDeclaredOnlyOnce(string parameter) // Fixed
 {
     void Method() { }
 }
@@ -30,9 +30,9 @@ abstract record BaseRecord
 
 sealed record SealedRecord : BaseRecord
 {
-    public sealed override void MyOverriddenMethod() { } // Noncompliant
+    public override void MyOverriddenMethod() { } // Fixed
 
-    public sealed override int Prop { get; set; } // Noncompliant
+    public override int Prop { get; set; } // Fixed
 }
 
 internal record BaseRecord<T>
@@ -48,47 +48,43 @@ internal record SubRecord : BaseRecord<string>
     public override string Process(string input) => "Test";
 }
 
-internal unsafe record UnsafeRecord // Noncompliant
+internal record UnsafeRecord // Fixed
 {
     int num;
 
-    private unsafe delegate void MyDelegate2(int i); // Noncompliant
+    private delegate void MyDelegate2(int i); // Fixed
 
-    unsafe void M() // Noncompliant
+    void M() // Fixed
     {
     }
 
-    unsafe ~UnsafeRecord() // Noncompliant
+    ~UnsafeRecord() // Fixed
     {
     }
 }
 
 public record Foo
 {
-    public unsafe record Bar // Noncompliant
+    public record Bar // Fixed
     {
     }
 
     unsafe interface MyInterface
     {
-        unsafe int* Method(); // Noncompliant
+        int* Method(); // Fixed
     }
 
     public static void M()
     {
         checked
         {
-            checked // Noncompliant
-//          ^^^^^^^
             {
                 var z = 1 + 4;
                 var y = unchecked(1 +
-                    unchecked(4)); // Noncompliant
-//                  ^^^^^^^^^
+                    4); // Fixed
             }
         }
 
-        checked // Noncompliant {{'checked' is redundant in this context.}}
         {
             var f = 5.5;
             var y = unchecked(5 + 4);
@@ -105,13 +101,13 @@ public record Foo
         {
             var f = 5.5;
             var x = 5 + 4;
-            var y = unchecked(5.5 + 4); // Noncompliant
+            var y = 5.5 + 4; // Fixed
         }
 
         unchecked
         {
             var f = 5.5;
-            var y = unchecked(5 + 4); // Noncompliant
+            var y = 5 + 4; // Fixed
         }
 
         checked
@@ -120,7 +116,6 @@ public record Foo
             var y = (int)x;
         }
 
-        checked // Noncompliant
         {
             var x = 10;
             var y = (double)x;
@@ -134,7 +129,7 @@ public record Foo
     }
 }
 
-public unsafe record RecordNewSyntax(string Input) // Noncompliant For the class
+public record RecordNewSyntax(string Input) // Fixed
 {
     private string inputField = Input;
 }

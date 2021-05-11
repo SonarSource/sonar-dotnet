@@ -1,4 +1,6 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+
+namespace Tests.Diagnostics
 {
     public class C1
     {
@@ -12,7 +14,7 @@
     partial struct PartialStruct //Noncompliant {{'partial' is gratuitous in this context.}}
     {
     }
-partial interface PartialInterface //Noncompliant
+    partial interface PartialInterface //Noncompliant
     {
     }
 
@@ -20,20 +22,91 @@ partial interface PartialInterface //Noncompliant
     {
     }
 
-    internal partial class Partial2Part
+    internal abstract partial class Partial2Part
     {
         public virtual void MyOverriddenMethod() { }
         public virtual int Prop { get; set; }
+        public abstract int this[int counter] { get; }
+        protected abstract event EventHandler<EventArgs> MyEvent;
+        protected abstract event EventHandler<EventArgs> MyEvent2;
     }
+
     internal class Override : Partial2Part
     {
         public override void MyOverriddenMethod() { }
+
+        public override int this[int counter]
+        {
+            get { return 0; }
+        }
+
+        protected override event EventHandler<EventArgs> MyEvent;
+        protected override event EventHandler<EventArgs> MyEvent2
+        {
+            add { }
+            remove { }
+        }
+
+        public enum SomeEnumeration
+        {
+
+        }
     }
+
     sealed class SealedClass : Partial2Part
     {
-        public override sealed void MyOverriddenMethod() { } //Noncompliant {{'sealed' is redundant in this context.}}
+        public override sealed void MyOverriddenMethod() { } // Noncompliant {{'sealed' is redundant in this context.}}
 //                      ^^^^^^
-        public override sealed int Prop { get; set; } //Noncompliant
+        public override sealed int Prop { get; set; } // Noncompliant
+
+        public override sealed int this[int counter] // Noncompliant
+        {
+            get { return 0; }
+        }
+
+        protected override sealed event EventHandler<EventArgs> MyEvent; // Noncompliant
+        protected override sealed event EventHandler<EventArgs> MyEvent2 // Noncompliant
+        {
+            add { }
+            remove { }
+        }
+    }
+
+    abstract class AbstractClass : Partial2Part
+    {
+        public override sealed void MyOverriddenMethod() { }
+        public override sealed int Prop { get; set; }
+
+        public override sealed int this[int counter]
+        {
+            get { return 0; }
+        }
+
+        protected override sealed event EventHandler<EventArgs> MyEvent;
+        protected override sealed event EventHandler<EventArgs> MyEvent2
+        {
+            add { }
+            remove { }
+        }
+    }
+
+    sealed class SealedClassWithoutRedundantKeywordOnMembers : Partial2Part
+    {
+        public override void MyOverriddenMethod() { }
+
+        public override int Prop { get; set; }
+
+        public override int this[int counter]
+        {
+            get { return 0; }
+        }
+
+        protected override event EventHandler<EventArgs> MyEvent;
+        protected override event EventHandler<EventArgs> MyEvent2
+        {
+            add { }
+            remove { }
+        }
     }
 
     internal class BaseClass<T>
@@ -186,6 +259,12 @@ partial interface PartialInterface //Noncompliant
                 var y = unchecked(5.5 + 4); // Noncompliant
             }
 
+            checked // Noncompliant
+            {
+                var f = 5.5;
+                var x = 5 + "somestring";
+            }
+
             unchecked
             {
                 var f = 5.5;
@@ -208,6 +287,48 @@ partial interface PartialInterface //Noncompliant
             {
                 var x = 10;
                 x += int.MaxValue;
+            }
+
+            checked
+            {
+                var x = 10;
+                x = -int.MaxValue;
+            }
+
+            checked
+            {
+                var x = 10;
+                x = -5;
+            }
+
+            checked // Noncompliant
+            {
+                var x = 10;
+                x = -"1"; // Error [CS0023]
+            }
+
+            checked // Noncompliant
+            {
+                var x = 10;
+                x = +5;
+            }
+
+            checked  // Noncompliant
+            {
+                var x = 10;
+                var y = 5 % x;
+            }
+
+            checked
+            {
+                var x = (uint)null; // Error [CS0037]
+                var y = (int)x;
+            }
+
+            checked
+            {
+                var x = (SomeClass)5; // Error [CS0246]
+                var y = (int)x;
             }
         }
     }
@@ -248,6 +369,16 @@ partial interface PartialInterface //Noncompliant
         public unsafe void Method()
         {
             Unsafe u = (a) => { };
+        }
+    }
+
+    public class UnsafeCtor
+    {
+        public UnsafeCtor()
+        {
+            unsafe // Noncompliant
+            {
+            }
         }
     }
 }

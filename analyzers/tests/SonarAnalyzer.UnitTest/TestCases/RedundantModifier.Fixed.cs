@@ -1,4 +1,6 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+
+namespace Tests.Diagnostics
 {
     public class C1
     {
@@ -11,7 +13,7 @@
     struct PartialStruct //Fixed
     {
     }
-interface PartialInterface //Fixed
+    interface PartialInterface //Fixed
     {
     }
 
@@ -19,19 +21,90 @@ interface PartialInterface //Fixed
     {
     }
 
-    internal partial class Partial2Part
+    internal abstract partial class Partial2Part
     {
         public virtual void MyOverriddenMethod() { }
         public virtual int Prop { get; set; }
+        public abstract int this[int counter] { get; }
+        protected abstract event EventHandler<EventArgs> MyEvent;
+        protected abstract event EventHandler<EventArgs> MyEvent2;
     }
+
     internal class Override : Partial2Part
     {
         public override void MyOverriddenMethod() { }
+
+        public override int this[int counter]
+        {
+            get { return 0; }
+        }
+
+        protected override event EventHandler<EventArgs> MyEvent;
+        protected override event EventHandler<EventArgs> MyEvent2
+        {
+            add { }
+            remove { }
+        }
+
+        public enum SomeEnumeration
+        {
+
+        }
     }
+
     sealed class SealedClass : Partial2Part
     {
-        public override void MyOverriddenMethod() { } //Fixed
-        public override int Prop { get; set; } //Fixed
+        public override void MyOverriddenMethod() { } // Fixed
+        public override int Prop { get; set; } // Fixed
+
+        public override int this[int counter] // Fixed
+        {
+            get { return 0; }
+        }
+
+        protected override event EventHandler<EventArgs> MyEvent; // Fixed
+        protected override event EventHandler<EventArgs> MyEvent2 // Fixed
+        {
+            add { }
+            remove { }
+        }
+    }
+
+    abstract class AbstractClass : Partial2Part
+    {
+        public override sealed void MyOverriddenMethod() { }
+        public override sealed int Prop { get; set; }
+
+        public override sealed int this[int counter]
+        {
+            get { return 0; }
+        }
+
+        protected override sealed event EventHandler<EventArgs> MyEvent;
+        protected override sealed event EventHandler<EventArgs> MyEvent2
+        {
+            add { }
+            remove { }
+        }
+    }
+
+    sealed class SealedClassWithoutRedundantKeywordOnMembers : Partial2Part
+    {
+        public override void MyOverriddenMethod() { }
+
+        public override int Prop { get; set; }
+
+        public override int this[int counter]
+        {
+            get { return 0; }
+        }
+
+        protected override event EventHandler<EventArgs> MyEvent;
+        protected override event EventHandler<EventArgs> MyEvent2
+        {
+            add { }
+            remove { }
+        }
     }
 
     internal class BaseClass<T>
@@ -172,6 +245,11 @@ interface PartialInterface //Fixed
                 var y = 5.5 + 4; // Fixed
             }
 
+            {
+                var f = 5.5;
+                var x = 5 + "somestring";
+            }
+
             unchecked
             {
                 var f = 5.5;
@@ -193,6 +271,45 @@ interface PartialInterface //Fixed
             {
                 var x = 10;
                 x += int.MaxValue;
+            }
+
+            checked
+            {
+                var x = 10;
+                x = -int.MaxValue;
+            }
+
+            checked
+            {
+                var x = 10;
+                x = -5;
+            }
+
+            {
+                var x = 10;
+                x = -"1"; // Error [CS0023]
+            }
+
+            {
+                var x = 10;
+                x = +5;
+            }
+
+            {
+                var x = 10;
+                var y = 5 % x;
+            }
+
+            checked
+            {
+                var x = (uint)null; // Error [CS0037]
+                var y = (int)x;
+            }
+
+            checked
+            {
+                var x = (SomeClass)5; // Error [CS0246]
+                var y = (int)x;
             }
         }
     }
@@ -233,6 +350,13 @@ interface PartialInterface //Fixed
         public unsafe void Method()
         {
             Unsafe u = (a) => { };
+        }
+    }
+
+    public class UnsafeCtor
+    {
+        public UnsafeCtor()
+        {
         }
     }
 }
