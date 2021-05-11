@@ -10,7 +10,7 @@
     public int Foo3 { get { return 1; } set { } }
 }
 
-record PropertyWriteOnlyInPositionalRecord()
+record PropertyWriteOnlyInPositionalRecord(int Parameter)
 {
     public int Foo1  // Compliant - FN
     {
