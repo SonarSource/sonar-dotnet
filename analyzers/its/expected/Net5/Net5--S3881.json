@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\Records.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  19,
+"endLine":  101,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Net5\Net5\Records.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  19,
+"endLine":  101,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Net5\Net5\Records.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  21,
+"endLine":  103,
+"endColumn":  28
+}
+}
+]
+}
+]
+}
