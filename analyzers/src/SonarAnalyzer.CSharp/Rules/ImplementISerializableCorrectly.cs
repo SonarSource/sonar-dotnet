@@ -53,23 +53,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    SyntaxToken typeKeyword;
-                    SyntaxToken typeIdentifier;
-                    INamedTypeSymbol typeSymbol;
-                    if (c.Node.IsKind(SyntaxKind.ClassDeclaration))
-                    {
-                        var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                        typeKeyword = classDeclaration.Keyword;
-                        typeIdentifier = classDeclaration.Identifier;
-                        typeSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
-                    }
-                    else
-                    {
-                        var recordDeclaration = (RecordDeclarationSyntaxWrapper)c.Node;
-                        typeKeyword = recordDeclaration.Keyword;
-                        typeIdentifier = recordDeclaration.Identifier;
-                        typeSymbol = c.SemanticModel.GetDeclaredSymbol(recordDeclaration);
-                    }
+                    var typeDeclarationSyntax = (TypeDeclarationSyntax)c.Node;
+                    var typeKeyword = typeDeclarationSyntax.Keyword;
+                    var typeIdentifier = typeDeclarationSyntax.Identifier;
+                    var typeSymbol = c.SemanticModel.GetDeclaredSymbol(typeDeclarationSyntax);
 
                     if (!ImplementsISerializable(typeSymbol))
                     {
