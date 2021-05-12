@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,21 +36,26 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public class ImplementISerializableCorrectly : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3925";
-        internal const string MessageFormat = "Update this implementation of 'ISerializable' to conform to the " +
-            "recommended serialization pattern.";
+        private const string DiagnosticId = "S3925";
+        private const string MessageFormat = "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    var typeSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                    {
+                        return;
+                    }
+
+                    var typeDeclarationSyntax = (TypeDeclarationSyntax)c.Node;
+                    var typeKeyword = typeDeclarationSyntax.Keyword;
+                    var typeIdentifier = typeDeclarationSyntax.Identifier;
+                    var typeSymbol = (INamedTypeSymbol)c.ContainingSymbol;
 
                     if (!ImplementsISerializable(typeSymbol))
                     {
@@ -62,45 +68,36 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var implementationErrors = new List<SecondaryLocation>();
 
-                    implementationErrors.AddRange(CheckSerializableAttribute(classDeclaration, typeSymbol));
-                    implementationErrors.AddRange(CheckConstructor(classDeclaration, typeSymbol));
+                    implementationErrors.AddRange(CheckSerializableAttribute(typeKeyword, typeSymbol)); // Keyword
+                    implementationErrors.AddRange(CheckConstructor(typeKeyword, typeSymbol)); // Keyword
                     implementationErrors.AddRange(CheckGetObjectDataAccessibility(typeSymbol, getObjectData));
-                    implementationErrors.AddRange(CheckGetObjectData(typeSymbol, getObjectData, classDeclaration));
+                    implementationErrors.AddRange(CheckGetObjectData(typeKeyword, typeSymbol, getObjectData)); // Keyword
 
                     if (implementationErrors.Count > 0)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeIdentifier.GetLocation(),
                             additionalLocations: implementationErrors.ToAdditionalLocations(),
                             properties: implementationErrors.ToProperties()));
                     }
                 },
-                SyntaxKind.ClassDeclaration);
-        }
+                SyntaxKind.ClassDeclaration,
+                SyntaxKindEx.RecordDeclaration);
 
-        private static IEnumerable<SecondaryLocation> CheckSerializableAttribute(
-            ClassDeclarationSyntax classDeclaration, INamedTypeSymbol typeSymbol)
+        private static IEnumerable<SecondaryLocation> CheckSerializableAttribute(SyntaxToken typeKeyword, INamedTypeSymbol typeSymbol)
         {
             if (!HasSerializableAttribute(typeSymbol) &&
                 !typeSymbol.IsAbstract)
             {
-                yield return new SecondaryLocation(classDeclaration.Keyword.GetLocation(),
+                yield return new SecondaryLocation(typeKeyword.GetLocation(),
                     $"Add 'System.SerializableAttribute' attribute on '{typeSymbol.Name}' because it " +
                     "implements 'ISerializable'.");
             }
         }
 
-        private static IEnumerable<TSyntax> GetDeclarations<TSyntax>(ISymbol symbol)
-        {
-            if (symbol == null)
-            {
-                return Enumerable.Empty<TSyntax>();
-            }
+        private static IEnumerable<TSyntax> GetDeclarations<TSyntax>(ISymbol symbol) =>
+            symbol == null ? Enumerable.Empty<TSyntax>() : symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax()).Cast<TSyntax>();
 
-            return symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax()).Cast<TSyntax>();
-        }
-
-        private static IEnumerable<SecondaryLocation> CheckGetObjectData(INamedTypeSymbol typeSymbol,
-            IMethodSymbol getObjectData, ClassDeclarationSyntax classDeclaration)
+        private static IEnumerable<SecondaryLocation> CheckGetObjectData(SyntaxToken typeKeyword, INamedTypeSymbol typeSymbol, IMethodSymbol getObjectData)
         {
             if (!ImplementsISerializable(typeSymbol.BaseType))
             {
@@ -112,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var serializableFields = GetSerializableFieldNames(typeSymbol).ToList();
                 if (serializableFields.Count > 0)
                 {
-                    yield return new SecondaryLocation(classDeclaration.Keyword.GetLocation(),
+                    yield return new SecondaryLocation(typeKeyword.GetLocation(),
                         "Override 'GetObjectData(SerializationInfo, StreamingContext)' and serialize " +
                         $"'{string.Join(", ", serializableFields)}'.");
                 }
@@ -131,17 +128,16 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static IEnumerable<SecondaryLocation> CheckGetObjectDataAccessibility(INamedTypeSymbol typeSymbol,
-            IMethodSymbol getObjectData)
+        private static IEnumerable<SecondaryLocation> CheckGetObjectDataAccessibility(INamedTypeSymbol typeSymbol, IMethodSymbol getObjectData)
         {
             if (getObjectData == null)
             {
                 yield break;
             }
 
-            if (typeSymbol.IsSealed ||
-                IsPublicVirtual(getObjectData) ||
-                IsExplicitImplementation(getObjectData))
+            if (typeSymbol.IsSealed
+                || IsPublicVirtual(getObjectData)
+                || IsExplicitImplementation(getObjectData))
             {
                 yield break;
             }
@@ -160,8 +156,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(f => ImplementsISerializable(f.Type))
                 .Select(f => f.Name);
 
-        private static IEnumerable<SecondaryLocation> CheckConstructor(ClassDeclarationSyntax classDeclaration,
-            INamedTypeSymbol typeSymbol)
+        private static IEnumerable<SecondaryLocation> CheckConstructor(SyntaxToken typeKeyword, INamedTypeSymbol typeSymbol)
         {
             var serializationConstructor = typeSymbol.Constructors.FirstOrDefault(KnownMethods.IsSerializationConstructor);
 
@@ -169,22 +164,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (serializationConstructor == null)
             {
-                yield return new SecondaryLocation(classDeclaration.Keyword.GetLocation(),
+                yield return new SecondaryLocation(typeKeyword.GetLocation(),
                     $"Add a '{accessibility}' constructor '{typeSymbol.Name}(SerializationInfo, StreamingContext)'.");
                 yield break;
             }
 
             var constructorSyntax = GetDeclarations<ConstructorDeclarationSyntax>(serializationConstructor).First();
 
-            if (typeSymbol.IsSealed && serializationConstructor.DeclaredAccessibility != Accessibility.Private ||
-                !typeSymbol.IsSealed && serializationConstructor.DeclaredAccessibility != Accessibility.Protected)
+            if ((typeSymbol.IsSealed && serializationConstructor.DeclaredAccessibility != Accessibility.Private)
+                || (!typeSymbol.IsSealed && serializationConstructor.DeclaredAccessibility != Accessibility.Protected))
             {
                 yield return new SecondaryLocation(constructorSyntax.Identifier.GetLocation(),
                     $"Make this constructor '{accessibility}'.");
             }
 
-            if (ImplementsISerializable(typeSymbol.BaseType) &&
-                !IsCallingBaseConstructor(serializationConstructor))
+            if (ImplementsISerializable(typeSymbol.BaseType) && !IsCallingBaseConstructor(serializationConstructor))
             {
                 yield return new SecondaryLocation(constructorSyntax.Identifier.GetLocation(),
                     $"Call constructor 'base(SerializationInfo, StreamingContext)'.");
@@ -222,7 +216,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var baseKeyword = constructorDeclaration?.Initializer?.ThisOrBaseKeyword;
+            var baseKeyword = constructorDeclaration.Initializer?.ThisOrBaseKeyword;
             return baseKeyword.HasValue && baseKeyword.Value.IsKind(SyntaxKind.BaseKeyword);
         }
 
