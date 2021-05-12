@@ -4671,6 +4671,39 @@
   <data name="S4507_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>
   </data>
+  <data name="S4581_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S4581_Description" xml:space="preserve">
+    <value>When the syntax new Guid() (i.e. parameterless instantiation) is used, it must be that one of three things is wanted:</value>
+  </data>
+  <data name="S4581_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4581_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4581_RemediationCost" xml:space="preserve">
+    <value>5 min</value>
+  </data>
+  <data name="S4581_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S4581_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4581_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S4581_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4581_Title" xml:space="preserve">
+    <value>"new Guid()" should not be used</value>
+  </data>
+  <data name="S4581_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4583_Category" xml:space="preserve">
     <value>Critical Bug</value>
   </data>

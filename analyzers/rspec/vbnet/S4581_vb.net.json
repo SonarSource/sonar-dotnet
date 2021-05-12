@@ -1,0 +1,16 @@
+{
+  "title": "\"new Guid()\" should not be used",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-4581",
+  "sqKey": "S4581",
+  "scope": "All"
+}

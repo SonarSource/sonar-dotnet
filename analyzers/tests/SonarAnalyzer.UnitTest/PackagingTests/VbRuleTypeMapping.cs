@@ -4578,7 +4578,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4578"],
             //["4579"],
             //["4580"],
-            //["4581"],
+            ["4581"] = "CODE_SMELL",
             //["4582"],
             ["4583"] = "BUG",
             //["4584"],
