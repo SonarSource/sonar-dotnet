@@ -19,47 +19,40 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.Common
 {
-    public abstract class PropertyWriteOnlyBase : SonarDiagnosticAnalyzer
-    {
-        protected const string DiagnosticId = "S2376";
-        protected const string MessageFormat = "Provide a getter for '{0}' or replace the property with a 'Set{0}' method.";
-
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-    }
-
-    public abstract class PropertyWriteOnlyBase<TLanguageKindEnum, TPropertyDeclaration> : PropertyWriteOnlyBase
-        where TLanguageKindEnum : struct
+    public abstract class PropertyWriteOnlyBase<TSyntaxKind, TPropertyDeclaration> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
         where TPropertyDeclaration : SyntaxNode
     {
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
-                c =>
-                {
-                    var prop = (TPropertyDeclaration)c.Node;
-                    if (!IsWriteOnlyProperty(prop))
-                    {
-                        return;
-                    }
+        protected const string DiagnosticId = "S2376";
+        private const string MessageFormat = "Provide a getter for '{0}' or replace the property with a 'Set{0}' method.";
+        private readonly DiagnosticDescriptor rule;
 
-                    var identifier = GetIdentifier(prop);
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(),
-                        identifier.ValueText));
-                },
-                SyntaxKindsOfInterest.ToArray());
-        }
-
-        protected abstract SyntaxToken GetIdentifier(TPropertyDeclaration prop);
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract TSyntaxKind SyntaxKind { get; }
 
         protected abstract bool IsWriteOnlyProperty(TPropertyDeclaration prop);
 
-        public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected PropertyWriteOnlyBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                Language.GeneratedCodeRecognizer,
+                c =>
+                {
+                    var prop = (TPropertyDeclaration)c.Node;
+                    if (IsWriteOnlyProperty(prop) && Language.Syntax.NodeIdentifier(prop) is { }  identifier)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(), identifier.ValueText));
+                    }
+                },
+                SyntaxKind);
     }
 }

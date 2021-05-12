@@ -62,6 +62,7 @@ namespace SonarAnalyzer.Helpers.Facade
                 MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier,
                 MemberBindingExpressionSyntax memberBinding => memberBinding.Name.Identifier,
                 ParameterSyntax parameter => parameter.Identifier,
+                PropertyDeclarationSyntax property => property.Identifier,
                 VariableDeclaratorSyntax variable => variable.Identifier,
                 null => null,
                 _ => throw Unexpected(node)

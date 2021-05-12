@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -33,29 +32,15 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class PropertyWriteOnly : PropertyWriteOnlyBase<SyntaxKind, PropertyDeclarationSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.PropertyDeclaration);
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
-
-        protected override SyntaxToken GetIdentifier(PropertyDeclarationSyntax prop) => prop.Identifier;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override SyntaxKind SyntaxKind => SyntaxKind.PropertyDeclaration;
 
         protected override bool IsWriteOnlyProperty(PropertyDeclarationSyntax prop)
         {
             var accessors = prop.AccessorList;
-            if (accessors == null ||
-                accessors.Accessors.Count != 1)
-            {
-                return false;
-            }
-
-            return accessors.Accessors.First().IsKind(SyntaxKind.SetAccessorDeclaration)
-                // the get may be in the base class
-                && !prop.Modifiers.Any(SyntaxKind.OverrideKeyword);
+            return accessors is {Accessors: {Count: 1}}
+                   && accessors.Accessors.First().IsKind(SyntaxKind.SetAccessorDeclaration)
+                   && !prop.Modifiers.Any(SyntaxKind.OverrideKeyword); // the get may be in the base class
         }
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
     }
 }
