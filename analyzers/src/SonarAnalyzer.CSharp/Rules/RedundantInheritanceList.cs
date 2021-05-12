@@ -30,6 +30,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -53,19 +54,20 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(CheckEnum, SyntaxKind.EnumDeclaration);
             context.RegisterSyntaxNodeActionInNonGenerated(CheckInterface, SyntaxKind.InterfaceDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckClass, SyntaxKind.ClassDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckClassAndRecord, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
         }
 
-        private static void CheckClass(SyntaxNodeAnalysisContext context)
+        private static void CheckClassAndRecord(SyntaxNodeAnalysisContext context)
         {
-            var classDeclaration = (ClassDeclarationSyntax)context.Node;
-            if (classDeclaration.BaseList == null ||
-                !classDeclaration.BaseList.Types.Any())
+            var typeDeclaration = (TypeDeclarationSyntax)context.Node;
+            if (context.ContainingSymbol.Kind != SymbolKind.NamedType
+                || typeDeclaration.BaseList == null
+                || !typeDeclaration.BaseList.Types.Any())
             {
                 return;
             }
 
-            var baseTypeSyntax = classDeclaration.BaseList.Types.First().Type;
+            var baseTypeSyntax = typeDeclaration.BaseList.Types.First().Type;
             if (!(context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is ITypeSymbol baseTypeSymbol))
             {
                 return;
@@ -73,13 +75,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (baseTypeSymbol.Is(KnownType.System_Object))
             {
-                var location = GetLocationWithToken(baseTypeSyntax, classDeclaration.BaseList.Types);
+                var location = GetLocationWithToken(baseTypeSyntax, typeDeclaration.BaseList.Types);
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
                     ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, "0"),
                     MessageObjectBase));
             }
 
-            ReportRedundantInterfaces(context, classDeclaration);
+            ReportRedundantInterfaces(context, typeDeclaration);
         }
 
         private static void CheckInterface(SyntaxNodeAnalysisContext context)

@@ -1,12 +1,12 @@
 ﻿using System;
 
-record Record : Object { } // Compliant - FN
+record Record : Object { } // Noncompliant
 
-record OtherRecord : Object, IContract { } // Compliant - FN
+record OtherRecord : Object, IContract { } // Noncompliant
 
 record SubRecord : OtherRecord { } // Compliant
 
-record RedunantInterfaceImpl : IContract, IBaseContract { } // Compliant - FN
+record RedunantInterfaceImpl : IContract, IBaseContract { } // Noncompliant
 
 interface IContract : IBaseContract { }
 
