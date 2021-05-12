@@ -37,8 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class ImplementISerializableCorrectly : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3925";
-        private const string MessageFormat = "Update this implementation of 'ISerializable' to conform to the " +
-                                             "recommended serialization pattern.";
+        private const string MessageFormat = "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -56,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var typeDeclarationSyntax = (TypeDeclarationSyntax)c.Node;
                     var typeKeyword = typeDeclarationSyntax.Keyword;
                     var typeIdentifier = typeDeclarationSyntax.Identifier;
-                    var typeSymbol = c.SemanticModel.GetDeclaredSymbol(typeDeclarationSyntax);
+                    var typeSymbol = (INamedTypeSymbol)c.ContainingSymbol;
 
                     if (!ImplementsISerializable(typeSymbol))
                     {
