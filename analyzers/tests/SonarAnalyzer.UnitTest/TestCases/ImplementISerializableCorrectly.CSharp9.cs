@@ -109,7 +109,6 @@ namespace Tests.Diagnostics
         public Serializable_Sealed() { }
 
         protected Serializable_Sealed(SerializationInfo info, StreamingContext context) { }
-
 //                ^^^^^^^^^^^^^^^^^^^ Secondary {{Make this constructor 'private'.}}
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
