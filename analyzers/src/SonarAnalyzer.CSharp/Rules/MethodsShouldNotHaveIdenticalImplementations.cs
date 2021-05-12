@@ -29,31 +29,35 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class MethodsShouldNotHaveIdenticalImplementations
-        : MethodsShouldNotHaveIdenticalImplementationsBase<IMethodDeclaration, SyntaxKind>
+    public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShouldNotHaveIdenticalImplementationsBase<IMethodDeclaration, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        protected override SyntaxKind[] SyntaxKinds { get; } =
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKindEx.RecordDeclaration,
+        };
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxKind ClassDeclarationSyntaxKind => SyntaxKind.ClassDeclaration;
-
-        protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node)
-            => ((ClassDeclarationSyntax)node).GetMethodDeclarations();
+        protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node) =>
+            ((TypeDeclarationSyntax)node).GetMethodDeclarations();
 
         protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod)
         {
-            return firstMethod.Body != null &&
-                secondMethod.Body != null &&
-                firstMethod.Body.Statements.Count >= 2 &&
-                firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText &&
-                HaveSameParameters(firstMethod.ParameterList?.Parameters, secondMethod.ParameterList?.Parameters) &&
-                firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
+            return firstMethod.Body != null
+                   && secondMethod.Body != null
+                   && firstMethod.Body.Statements.Count >= 2
+                   && firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText
+                   && HaveSameParameters(firstMethod.ParameterList?.Parameters, secondMethod.ParameterList?.Parameters)
+                   && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
 
             static bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
             {
@@ -62,9 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return true;
                 }
 
-                if (leftParameters == null ||
-                    rightParameters == null ||
-                    leftParameters.Value.Count != rightParameters.Value.Count)
+                if (leftParameters == null || rightParameters == null || leftParameters.Value.Count != rightParameters.Value.Count)
                 {
                     return false;
                 }

@@ -32,14 +32,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class MethodsShouldNotHaveIdenticalImplementations
-        : MethodsShouldNotHaveIdenticalImplementationsBase<MethodBlockSyntax, SyntaxKind>
+    public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShouldNotHaveIdenticalImplementationsBase<MethodBlockSyntax, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-        protected override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override SyntaxKind ClassDeclarationSyntaxKind => SyntaxKind.ClassBlock;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        protected override SyntaxKind[] SyntaxKinds { get; } = {SyntaxKind.ClassBlock};
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node)
         {
@@ -49,10 +48,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool AreDuplicates(MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod)
         {
-            return firstMethod.Statements.Count >= 2 &&
-                   firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText() &&
-                   HaveSameParameters(firstMethod.GetParameters(), secondMethod.GetParameters()) &&
-                   VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
+            return firstMethod.Statements.Count >= 2
+                   && firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText()
+                   && HaveSameParameters(firstMethod.GetParameters(), secondMethod.GetParameters())
+                   && VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
 
             bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
             {
@@ -61,15 +60,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     return true;
                 }
 
-                if ((leftParameters == null && rightParameters != null) ||
-                    (leftParameters != null && rightParameters == null) ||
-                    leftParameters.Value.Count != rightParameters.Value.Count)
+                if (leftParameters == null || rightParameters == null || leftParameters.Value.Count != rightParameters.Value.Count)
                 {
                     return false;
                 }
 
                 return leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 })
-                    .All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
+                                     .All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
             }
         }
 

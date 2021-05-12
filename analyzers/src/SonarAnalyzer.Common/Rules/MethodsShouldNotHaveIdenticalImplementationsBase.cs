@@ -32,14 +32,18 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4144";
         protected const string MessageFormat = "Update this method so that its implementation is not identical to '{0}'.";
 
-        protected abstract TLanguageKindEnum ClassDeclarationSyntaxKind { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
                 c =>
                 {
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                    {
+                        return;
+                    }
+
                     var methods = GetMethodDeclarations(c.Node).ToList();
 
                     var alreadyHandledMethods = new HashSet<TMethodDeclarationSyntax>();
@@ -54,8 +58,8 @@ namespace SonarAnalyzer.Rules
                         alreadyHandledMethods.Add(method);
 
                         var duplicates = methods.Except(alreadyHandledMethods)
-                            .Where(m => AreDuplicates(method, m))
-                            .ToList();
+                                                .Where(m => AreDuplicates(method, m))
+                                                .ToList();
 
                         alreadyHandledMethods.UnionWith(duplicates);
 
@@ -66,8 +70,7 @@ namespace SonarAnalyzer.Rules
                                 messageArgs: GetMethodIdentifier(method).ValueText));
                         }
                     }
-                }, ClassDeclarationSyntaxKind);
-        }
+                }, SyntaxKinds);
 
         protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
 
