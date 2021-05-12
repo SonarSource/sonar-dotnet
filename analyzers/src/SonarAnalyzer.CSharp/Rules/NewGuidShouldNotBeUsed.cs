@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -23,61 +23,37 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Wrappers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class NewGuidShouldNotBeUsed : SonarDiagnosticAnalyzer
+    [Rule(DiagnosticId)]
+    public sealed class NewGuidShouldNotBeUsed : NewGuidShouldNotBeUsedBase<SyntaxKind>
     {
-        private const string DiagnosticId = "S4581";
-        private const string MessageFormat = "Use 'Guid.NewGuid()', 'Guid.Empty' or the constructor with arguments.";
+        internal const string DiagnosticId = "S4581";
+        private const string MessageFormat = "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this Guid instantiation.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        private static readonly DiagnosticDescriptor rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            DetectIssueInConstructors(context);
-            DetectIssueInDefaultExpressions(context);
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var objectCreationSyntax = (ObjectCreationExpressionSyntax)c.Node;
+
+                    if (objectCreationSyntax.ArgumentList?.Arguments.Count == 0 &&
+                        c.SemanticModel.GetSymbolInfo(objectCreationSyntax).Symbol is IMethodSymbol methodSymbol &&
+                        methodSymbol.ContainingType.Is(KnownType.System_Guid))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreationSyntax.GetLocation()));
+                    }
+                },
+                SyntaxKind.ObjectCreationExpression);
         }
-
-        private static void DetectIssueInConstructors(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var objectCreationSyntax = ObjectCreationFactory.Create(c.Node);
-                if (objectCreationSyntax.ArgumentList?.Arguments.Count == 0
-                    && objectCreationSyntax.MethodSymbol(c.SemanticModel) is { } methodSymbol
-                    && methodSymbol.ContainingType.Is(KnownType.System_Guid))
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, objectCreationSyntax.Expression.GetLocation()));
-                }
-            },
-            SyntaxKind.ObjectCreationExpression,
-            SyntaxKindEx.ImplicitObjectCreationExpression);
-
-        private static void DetectIssueInDefaultExpressions(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var expressionSyntax = (ExpressionSyntax)c.Node;
-                if (expressionSyntax.IsKind(SyntaxKindEx.DefaultLiteralExpression)
-                    && c.SemanticModel.GetTypeInfo(expressionSyntax).ConvertedType.Is(KnownType.System_Guid))
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, expressionSyntax.GetLocation()));
-                }
-                else if (expressionSyntax.IsKind(SyntaxKind.DefaultExpression)
-                         && DefaultExpressionIdentifierIsGuid((DefaultExpressionSyntax)expressionSyntax))
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, expressionSyntax.GetLocation()));
-                }
-            },
-            SyntaxKind.DefaultExpression,
-            SyntaxKindEx.DefaultLiteralExpression);
-
-        private static bool DefaultExpressionIdentifierIsGuid(DefaultExpressionSyntax defaultExpression) =>
-            defaultExpression.Type.ToString() is var typeName
-            && (typeName == "Guid" || typeName == "System.Guid");
     }
 }

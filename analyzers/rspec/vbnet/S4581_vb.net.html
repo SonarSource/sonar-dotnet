@@ -1,0 +1,23 @@
+<p>When the syntax <code>new Guid()</code> (i.e. parameterless instantiation) is used, it must be that one of three things is wanted:</p>
+<ol>
+  <li> An empty GUID, in which case <code>Guid.Empty</code> is clearer. </li>
+  <li> A randomly-generated GUID, in which case <code>Guid.NewGuid()</code> should be used. </li>
+  <li> A new GUID with a specific initialization, in which case the initialization parameter is missing. </li>
+</ol>
+<p>This rule raises an issue when a parameterless instantiation of the <code>Guid</code> struct is found.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Sub Foo()
+    Dim G As New Guid   ' Noncompliant - what's the intent?
+End Sub
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void Foo(byte[] bytes)
+Public Sub Foo(Bytes As Byte())
+    Dim G1 As Guid = Guid.Empty
+    Dim G2 As Guid = Guid.NewGuid()
+    Dim G3 As Guid = New Guid(Bytes)
+End Sub
+</pre>
+
