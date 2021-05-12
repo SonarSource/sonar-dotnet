@@ -38,8 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool IsWriteOnlyProperty(PropertyDeclarationSyntax prop)
         {
             var accessors = prop.AccessorList;
-            return accessors != null
-                   && accessors.Accessors.Count == 1
+            return accessors is {Accessors: {Count: 1}}
                    && accessors.Accessors.First().IsKind(SyntaxKind.SetAccessorDeclaration)
                    && !prop.Modifiers.Any(SyntaxKind.OverrideKeyword); // the get may be in the base class
         }
