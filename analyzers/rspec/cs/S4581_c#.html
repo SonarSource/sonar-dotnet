@@ -10,6 +10,8 @@
 public void Foo()
 {
     var g = new Guid(); // Noncompliant - what's the intent?
+    var guid = default(Guid);
+    Guid other = default;
 }
 </pre>
 <h2>Compliant Solution</h2>
