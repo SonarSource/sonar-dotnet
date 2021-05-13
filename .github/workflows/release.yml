@@ -42,11 +42,11 @@ jobs:
 
       #slack notifications
       - name: Notify success on Slack
-        uses: Ilshidur/action-slack@2.0.0
+        uses: Ilshidur/action-slack@2.1.0
         with:
           args: "Release successful for {{ GITHUB_REPOSITORY }} by {{ GITHUB_ACTOR }}"
       - name: Notify failures on Slack
-        uses: Ilshidur/action-slack@2.0.0
+        uses: Ilshidur/action-slack@2.1.0
         if: failure()
         with:
           args: "Release failed, see the logs at https://github.com/{{ GITHUB_REPOSITORY }}/actions by {{ GITHUB_ACTOR }}"
