@@ -60,10 +60,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+                var classSymbol = (INamedTypeSymbol)c.ContainingSymbol;
 
-                if (classSymbol == null
-                    || classDeclaration.Identifier.IsMissing
+                if (classDeclaration.Identifier.IsMissing
                     || !classSymbol.IsPubliclyAccessible())
                 {
                     return;

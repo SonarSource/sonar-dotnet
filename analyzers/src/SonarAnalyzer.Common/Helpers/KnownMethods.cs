@@ -177,16 +177,10 @@ namespace SonarAnalyzer.Helpers
             methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Modulus", Parameters: { Length: NumberOfParamsForBinaryOperator } };
 
         public static bool IsOperatorEquals(this IMethodSymbol methodSymbol) =>
-            methodSymbol != null
-            && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
-            && methodSymbol.Name == "op_Equality"
-            && methodSymbol.Parameters.Length == 2;
+            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Equality", Parameters: { Length: NumberOfParamsForBinaryOperator } };
 
         public static bool IsOperatorNotEquals(this IMethodSymbol methodSymbol) =>
-            methodSymbol != null
-            && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
-            && methodSymbol.Name == "op_Inequality"
-            && methodSymbol.Parameters.Length == 2;
+            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Inequality", Parameters: { Length: NumberOfParamsForBinaryOperator } };
 
         public static bool IsConsoleWriteLine(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
