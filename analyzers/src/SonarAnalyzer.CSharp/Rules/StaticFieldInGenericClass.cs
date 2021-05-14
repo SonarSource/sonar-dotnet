@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class StaticFieldInGenericClass : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2743";
+        private const string DiagnosticId = "S2743";
         private const string MessageFormat = "A static field in a generic type is not shared among instances of different close constructed types.";
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -44,18 +45,19 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
+                    var typeDeclaration = (TypeDeclarationSyntax)c.Node;
 
-                    if (classDeclaration.TypeParameterList == null
-                        || classDeclaration.TypeParameterList.Parameters.Count < 1)
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType
+                        || typeDeclaration.TypeParameterList == null
+                        || typeDeclaration.TypeParameterList.Parameters.Count < 1)
                     {
                         return;
                     }
 
                     var typeParameterNames =
-                        classDeclaration.TypeParameterList.Parameters.Select(p => p.Identifier.ToString()).ToList();
+                        typeDeclaration.TypeParameterList.Parameters.Select(p => p.Identifier.ToString()).ToList();
 
-                    var fields = classDeclaration.Members
+                    var fields = typeDeclaration.Members
                         .OfType<FieldDeclarationSyntax>()
                         .Where(f => f.Modifiers.Any(SyntaxKind.StaticKeyword));
 
@@ -64,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         field.Declaration.Variables.ToList().ForEach(variable => CheckMember(variable, variable.Identifier.GetLocation(), typeParameterNames, c));
                     }
 
-                    var properties = classDeclaration.Members
+                    var properties = typeDeclaration.Members
                         .OfType<PropertyDeclarationSyntax>()
                         .Where(p => p.Modifiers.Any(SyntaxKind.StaticKeyword))
                         .ToList();
@@ -72,7 +74,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     properties.ForEach(property => CheckMember(property, property.Identifier.GetLocation(), typeParameterNames, c));
 
                 },
-                SyntaxKind.ClassDeclaration);
+                SyntaxKind.ClassDeclaration,
+                SyntaxKindEx.RecordDeclaration);
 
         private static void CheckMember(SyntaxNode root, Location location, IEnumerable<string> typeParameterNames,
             SyntaxNodeAnalysisContext context)
