@@ -23,12 +23,30 @@ namespace MyLibrary
         {
             return new Foo(a.left - b.left, a.right - b.right);
         }
+
+        public static Foo operator *(Foo a, Foo b)
+        {
+            return new Foo(a.left * b.left, a.right * b.right);
+        }
+
+        public static Foo operator /(Foo a, Foo b)
+        {
+            return new Foo(a.left / b.left, a.right / b.right);
+        }
+
+        public static Foo operator %(Foo a, Foo b)
+        {
+            return new Foo(a.left % b.left, a.right % b.right);
+        }
     }
 
     public class Foo2
     {
         public static object operator +(Foo2 a, Foo2 b) => new object();
         public static object operator -(Foo2 a, Foo2 b) => new object();
+        public static object operator *(Foo2 a, Foo2 b) => new object();
+        public static object operator /(Foo2 a, Foo2 b) => new object();
+        public static object operator %(Foo2 a, Foo2 b) => new object();
         public static object operator ==(Foo2 a, Foo2 b) => new object();
         public static object operator !=(Foo2 a, Foo2 b) => new object();
 
@@ -37,7 +55,6 @@ namespace MyLibrary
     }
 
     public class Foo3
-//               ^^^^ Noncompliant {{Provide an implementation for: 'operator+'.}}
     {
         public static object operator -(Foo3 a, Foo3 b) => new object();
         public static object operator ==(Foo3 a, Foo3 b) => new object();
@@ -70,5 +87,36 @@ namespace MyLibrary
 //               ^^^^ Noncompliant {{Provide an implementation for: 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.}}
     {
         public static object operator ==(Foo6 a, Foo6 b) => new object(); // Error [CS0216] - requires != operator
+    }
+
+    public class Foo8 // Noncompliant
+    {
+        public static Foo8 operator +(Foo8 a, Foo8 b) => new Foo8();
+    }
+
+    public class Foo9 // Noncompliant
+    {
+        public static Foo9 operator -(Foo9 a, Foo9 b) => new Foo9();
+    }
+
+    public class Foo10 // Noncompliant
+    {
+        public static Foo10 operator *(Foo10 a, Foo10 b) => new Foo10();
+    }
+
+    public class Foo11 // Noncompliant
+    {
+        public static Foo11 operator /(Foo11 a, Foo11 b) => new Foo11();
+    }
+
+    public class Foo12 // Noncompliant
+    {
+        public static Foo12 operator %(Foo12 a, Foo12 b) => new Foo12();
+    }
+
+    public class Foo13 // Compliant as the unary operators are overriden
+    {
+        public static Foo13 operator +(Foo13 a) => new Foo13();
+        public static Foo13 operator -(Foo13 a) => new Foo13();
     }
 }

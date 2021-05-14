@@ -27,6 +27,8 @@ namespace SonarAnalyzer.Helpers
 {
     public static class KnownMethods
     {
+        private const int NumberOfParamsForBinaryOperator = 2;
+
         public static bool IsMainMethod(this IMethodSymbol methodSymbol)
         {
             // Based on Microsoft definition: https://msdn.microsoft.com/en-us/library/1y814bzs.aspx
@@ -160,16 +162,19 @@ namespace SonarAnalyzer.Helpers
             methodSymbol != null && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
 
         public static bool IsOperatorBinaryPlus(this IMethodSymbol methodSymbol) =>
-            methodSymbol != null
-            && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
-            && methodSymbol.Name == "op_Addition"
-            && methodSymbol.Parameters.Length == 2;
+            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Addition", Parameters: { Length: NumberOfParamsForBinaryOperator } };
 
         public static bool IsOperatorBinaryMinus(this IMethodSymbol methodSymbol) =>
-            methodSymbol != null
-            && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
-            && methodSymbol.Name == "op_Subtraction"
-            && methodSymbol.Parameters.Length == 2;
+            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Subtraction", Parameters: { Length: NumberOfParamsForBinaryOperator } };
+
+        public static bool IsOperatorBinaryMultiply(this IMethodSymbol methodSymbol) =>
+            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Multiply", Parameters: { Length: NumberOfParamsForBinaryOperator } };
+
+        public static bool IsOperatorBinaryDivide(this IMethodSymbol methodSymbol) =>
+            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Division", Parameters: { Length: NumberOfParamsForBinaryOperator } };
+
+        public static bool IsOperatorBinaryModulus(this IMethodSymbol methodSymbol) =>
+            methodSymbol is { MethodKind: MethodKind.UserDefinedOperator, Name: "op_Modulus", Parameters: { Length: NumberOfParamsForBinaryOperator } };
 
         public static bool IsOperatorEquals(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
@@ -192,12 +197,6 @@ namespace SonarAnalyzer.Helpers
             methodSymbol != null
             && methodSymbol.Name == nameof(Console.Write)
             && methodSymbol.IsInType(KnownType.System_Console);
-
-        private static bool IsEnumerableMethod(this IMethodSymbol methodSymbol, string methodName, params int[] parametersCount) =>
-            methodSymbol != null
-            && methodSymbol.Name == methodName
-            && parametersCount.Any(count => methodSymbol.HasExactlyNParameters(count))
-            && methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
 
         public static bool IsEnumerableConcat(this IMethodSymbol methodSymbol) =>
             methodSymbol.IsEnumerableMethod(nameof(Enumerable.Concat), 2);
@@ -240,6 +239,12 @@ namespace SonarAnalyzer.Helpers
                     methodSymbol.Parameters[1].Type.ToString().EndsWith("EventArgs", StringComparison.Ordinal) ||
                     methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs)
                 );
+
+        private static bool IsEnumerableMethod(this IMethodSymbol methodSymbol, string methodName, params int[] parametersCount) =>
+            methodSymbol != null
+            && methodSymbol.Name == methodName
+            && parametersCount.Any(count => methodSymbol.HasExactlyNParameters(count))
+            && methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
 
         private static bool HasExactlyNParameters(this IMethodSymbol methodSymbol, int parametersCount) =>
             (methodSymbol.MethodKind == MethodKind.Ordinary && methodSymbol.Parameters.Length == parametersCount)

@@ -37,14 +37,17 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S4050";
         private const string MessageFormat = "Provide an implementation for: {0}.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static class MethodName
         {
             public const string OperatorPlus = "operator+";
             public const string OperatorMinus = "operator-";
+            public const string OperatorMultiply = "operator*";
+            public const string OperatorDevide = "operator/";
+            public const string OperatorReminder = "operator%";
             public const string OperatorEquals = "operator==";
             public const string OperatorNotEquals = "operator!=";
 
@@ -59,9 +62,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 var classDeclaration = (ClassDeclarationSyntax)c.Node;
                 var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-                if (classSymbol == null ||
-                    classDeclaration.Identifier.IsMissing ||
-                    !classSymbol.IsPubliclyAccessible())
+                if (classSymbol == null
+                    || classDeclaration.Identifier.IsMissing
+                    || !classSymbol.IsPubliclyAccessible())
                 {
                     return;
                 }
@@ -69,10 +72,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 var missingMethods = FindMissingMethods(classSymbol).ToList();
                 if (missingMethods.Count > 0)
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(),
                         missingMethods.ToSentence(quoteWords: true)));
                 }
             },
+            // This rule is not applicable for records, as for records it is not possible to override the == operator.
             SyntaxKind.ClassDeclaration);
         }
 
@@ -81,18 +85,12 @@ namespace SonarAnalyzer.Rules.CSharp
             var implementedMethods = GetImplementedMethods(classSymbol).ToHashSet();
             var requiredMethods = new HashSet<string>();
 
-            if (implementedMethods.Contains(MethodName.OperatorPlus))
+            if (implementedMethods.Contains(MethodName.OperatorPlus)
+                || implementedMethods.Contains(MethodName.OperatorMinus)
+                || implementedMethods.Contains(MethodName.OperatorMultiply)
+                || implementedMethods.Contains(MethodName.OperatorDevide)
+                || implementedMethods.Contains(MethodName.OperatorReminder))
             {
-                requiredMethods.Add(MethodName.OperatorMinus);
-                requiredMethods.Add(MethodName.OperatorEquals);
-                requiredMethods.Add(MethodName.OperatorNotEquals);
-                requiredMethods.Add(MethodName.ObjectEquals);
-                requiredMethods.Add(MethodName.ObjectGetHashCode);
-            }
-
-            if (implementedMethods.Contains(MethodName.OperatorMinus))
-            {
-                requiredMethods.Add(MethodName.OperatorPlus);
                 requiredMethods.Add(MethodName.OperatorEquals);
                 requiredMethods.Add(MethodName.OperatorNotEquals);
                 requiredMethods.Add(MethodName.ObjectEquals);
@@ -132,6 +130,21 @@ namespace SonarAnalyzer.Rules.CSharp
             if (classMethods.Any(KnownMethods.IsOperatorBinaryMinus))
             {
                 yield return MethodName.OperatorMinus;
+            }
+
+            if (classMethods.Any(KnownMethods.IsOperatorBinaryMultiply))
+            {
+                yield return MethodName.OperatorMultiply;
+            }
+
+            if (classMethods.Any(KnownMethods.IsOperatorBinaryDivide))
+            {
+                yield return MethodName.OperatorDevide;
+            }
+
+            if (classMethods.Any(KnownMethods.IsOperatorBinaryModulus))
+            {
+                yield return MethodName.OperatorReminder;
             }
 
             if (classMethods.Any(KnownMethods.IsOperatorEquals))
