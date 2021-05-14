@@ -33,20 +33,19 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class StaticFieldVisible : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2223";
+        private const string DiagnosticId = "S2223";
         private const string MessageFormat = "Change the visibility of '{0}' or make it 'const' or 'readonly'.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var fieldDeclaration = (FieldDeclarationSyntax) c.Node;
+                    var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
                     foreach (var field in fieldDeclaration.Declaration.Variables
                         .Select(variableDeclaratorSyntax => new
                         {
@@ -55,21 +54,17 @@ namespace SonarAnalyzer.Rules.CSharp
                         })
                         .Where(f => FieldIsRelevant(f.Symbol)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, field.Syntax.Identifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, field.Syntax.Identifier.GetLocation(),
                             field.Syntax.Identifier.ValueText));
                     }
-
                 },
                 SyntaxKind.FieldDeclaration);
-        }
 
-        private static bool FieldIsRelevant(IFieldSymbol fieldSymbol)
-        {
-            return fieldSymbol != null &&
-                   fieldSymbol.IsStatic &&
-                   !fieldSymbol.IsConst &&
-                   !fieldSymbol.IsReadOnly &&
-                   fieldSymbol.DeclaredAccessibility != Accessibility.Private;
-        }
+        private static bool FieldIsRelevant(IFieldSymbol fieldSymbol) =>
+            fieldSymbol != null
+            && fieldSymbol.IsStatic
+            && !fieldSymbol.IsConst
+            && !fieldSymbol.IsReadOnly
+            && fieldSymbol.DeclaredAccessibility != Accessibility.Private;
     }
 }
