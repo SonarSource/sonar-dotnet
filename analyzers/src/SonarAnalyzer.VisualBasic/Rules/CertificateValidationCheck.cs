@@ -63,15 +63,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
             // Only assignment and object creation are valid cases for VB.NET
 
             // Handling of = syntax
-            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckAssignmentSyntax(c), SyntaxKind.SimpleAssignmentStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckAssignmentSyntax, SyntaxKind.SimpleAssignmentStatement);
 
             // Handling of constructor parameter syntax (SslStream)
-            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckConstructorParameterSyntax(c), SyntaxKind.ObjectCreationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression);
         }
 
         protected override Location ExpressionLocation(SyntaxNode expression) =>
             // For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
-            ((expression is LambdaExpressionSyntax lambda) ? (SyntaxNode)lambda.SubOrFunctionHeader.ParameterList : expression).GetLocation();
+            ((expression is LambdaExpressionSyntax lambda) ? lambda.SubOrFunctionHeader.ParameterList : expression).GetLocation();
 
         protected override void SplitAssignment(AssignmentStatementSyntax assignment, out IdentifierNameSyntax leftIdentifier, out ExpressionSyntax right)
         {
@@ -82,19 +82,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override IEqualityComparer<ExpressionSyntax> CreateNodeEqualityComparer() =>
             new VisualBasicSyntaxNodeEqualityComparer<ExpressionSyntax>();
 
-        protected override SyntaxNode FindRootClassOrModule(SyntaxNode node)
+        protected override SyntaxNode FindRootClassOrRecordOrModule(SyntaxNode node)
         {
             if (node.FirstAncestorOrSelf<ModuleBlockSyntax>() is { } module)
             {
                 return module; // Modules can't be nested. If there's one, it's the Root
             }
-            ClassBlockSyntax candidate;
-            var current = node.FirstAncestorOrSelf<ClassBlockSyntax>();
-            while (current != null && (candidate = current.Parent?.FirstAncestorOrSelf<ClassBlockSyntax>()) != null)  // Search for parent of nested class
-            {
-                current = candidate;
-            }
-            return current;
+            return base.FindRootClassOrRecordOrModule(node);
         }
 
         protected override ExpressionSyntax[] FindReturnAndThrowExpressions(InspectionContext c, SyntaxNode block)
@@ -102,7 +96,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             // Return value set by assignment to function variable/value
             var assignments = block.DescendantNodes()
                 .OfType<AssignmentStatementSyntax>()
-                .Where(x => c.Context.SemanticModel.GetSymbolInfo(x.Left).Symbol is ILocalSymbol local && local.IsFunctionValue);
+                .Where(x => c.Context.SemanticModel.GetSymbolInfo(x.Left).Symbol is ILocalSymbol {IsFunctionValue: true});
             // And normal Return statements and throws
             return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression)
                 // Throw statements #2825. x.Expression can be NULL for standalone Throw and we need that one as well.
@@ -143,6 +137,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var syntax = reference.GetSyntax();
             return syntax is MethodStatementSyntax ? syntax.Parent : syntax;
         }
+
+        protected override bool IsClassOrRecordDeclaration(SyntaxNode expression) =>
+            expression.IsKind(SyntaxKind.ClassBlock);
 
         private protected override KnownType GenericDelegateType() => KnownType.System_Func_T1_T2_T3_T4_TResult_VB;
     }

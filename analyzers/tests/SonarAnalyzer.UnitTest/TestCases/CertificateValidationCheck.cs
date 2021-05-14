@@ -506,6 +506,11 @@ namespace Tests.Diagnostics
             {
                 CertificateValidationChecks.CreateRQ().ServerCertificateValidationCallback += callback; //Noncompliant
             }
+
+            public void InitAsParamsArgument(params RemoteCertificateValidationCallback[] callbacks)
+            {
+                CertificateValidationChecks.CreateRQ().ServerCertificateValidationCallback += callbacks;  //Error [CS0029]
+            }
         }
 
         class NeighbourAssignmentClass
@@ -519,5 +524,24 @@ namespace Tests.Diagnostics
 
         #endregion
 
+    }
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/4404
+    struct AssignmentStruct
+    {
+        HttpWebRequest CreateRQ()
+        {
+            return (HttpWebRequest)System.Net.HttpWebRequest.Create("http://localhost");
+        }
+
+        public void InitAsArgument(RemoteCertificateValidationCallback callback)
+        {
+            CreateRQ().ServerCertificateValidationCallback += callback;  //FN, should be Non-compliant
+        }
+
+        static void Execute()
+        {
+            new AssignmentStruct().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //should be a secondary location
+        }
     }
 }

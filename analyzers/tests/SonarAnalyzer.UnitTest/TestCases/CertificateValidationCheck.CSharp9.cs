@@ -28,7 +28,7 @@ namespace Tests.Diagnostics
 
             public void InitAsArgument(RemoteCertificateValidationCallback callback)
             {
-                CreateRQ().ServerCertificateValidationCallback += callback; // FN
+                CreateRQ().ServerCertificateValidationCallback += callback;  //Noncompliant
             }
 
         }
@@ -38,7 +38,7 @@ namespace Tests.Diagnostics
             public void Init(RemoteCertificateValidationCallback callback)
             {
                 //Assignment from sibling class in nested tree
-                new InnerAssignmentRecord().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // FN
+                new InnerAssignmentRecord().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
             }
         }
 
@@ -146,4 +146,52 @@ namespace Tests.Diagnostics
         #endregion helpers
 
      }
+
+    record AssignmentPositionalRecord(string Value)
+    {
+        HttpWebRequest CreateRQ()
+        {
+            return (HttpWebRequest)System.Net.HttpWebRequest.Create(Value);
+        }
+
+        public void InitAsArgument(RemoteCertificateValidationCallback callback)
+        {
+            CreateRQ().ServerCertificateValidationCallback += callback;  //Noncompliant
+        }
+
+        static void Execute()
+        {
+            new AssignmentPositionalRecord("http://localhost").InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
+        }
+    }
+
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/4415
+    public partial class PartialClass
+    {
+        public static partial RemoteCertificateValidationCallback FindInvalid()
+        {
+            return (sender, certificate, chain, SslPolicyErrors) => true;  // should be secondary location for FN below
+        }
+    }
+
+    public partial class PartialClass
+    {
+        public static partial RemoteCertificateValidationCallback FindInvalid();
+
+        HttpWebRequest CreateRQ()
+        {
+            return (HttpWebRequest)System.Net.HttpWebRequest.Create("http://localhost");
+        }
+
+        public void Init()
+        {
+            CreateRQ().ServerCertificateValidationCallback += FindInvalid();  // Non-compliant FN
+        }
+
+        static void Execute()
+        {
+            new PartialClass().Init();
+        }
+    }
 }
