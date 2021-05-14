@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,23 +34,19 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public class TooManyGenericParameters : ParameterLoadingDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2436";
-        internal const string MessageFormat = "Reduce the number of generic parameters in the '{0}' {1} to no more than the {2} authorized.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
+        private const string DiagnosticId = "S2436";
+        private const string MessageFormat = "Reduce the number of generic parameters in the '{0}' {1} to no more than the {2} authorized.";
         private const int DefaultMaxNumberOfGenericParametersInClass = 2;
-        [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of generic parameters.",
-            DefaultMaxNumberOfGenericParametersInClass)]
+        private const int DefaultMaxNumberOfGenericParametersInMethod = 3;
+
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of generic parameters.", DefaultMaxNumberOfGenericParametersInClass)]
         public int MaxNumberOfGenericParametersInClass { get; set; } = DefaultMaxNumberOfGenericParametersInClass;
 
-        private const int DefaultMaxNumberOfGenericParametersInMethod = 3;
-        [RuleParameter("maxMethod", PropertyType.Integer, "Maximum authorized number of generic parameters for methods.",
-            DefaultMaxNumberOfGenericParametersInMethod)]
+        [RuleParameter("maxMethod", PropertyType.Integer, "Maximum authorized number of generic parameters for methods.", DefaultMaxNumberOfGenericParametersInMethod)]
         public int MaxNumberOfGenericParametersInMethod { get; set; } = DefaultMaxNumberOfGenericParametersInMethod;
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
@@ -59,31 +56,33 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
 
-                    if (typeDeclaration.TypeParameterList == null ||
-                        typeDeclaration.TypeParameterList.Parameters.Count <= MaxNumberOfGenericParametersInClass)
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType
+                        || typeDeclaration.TypeParameterList == null
+                        || typeDeclaration.TypeParameterList.Parameters.Count <= MaxNumberOfGenericParametersInClass)
                     {
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, typeDeclaration.Identifier.GetLocation(),
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(),
                         typeDeclaration.Identifier.ValueText, GetTypeKeyword(typeDeclaration), MaxNumberOfGenericParametersInClass));
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
-                SyntaxKind.InterfaceDeclaration);
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKindEx.RecordDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
-                    if (methodDeclaration.TypeParameterList == null ||
-                        methodDeclaration.TypeParameterList.Parameters.Count <= MaxNumberOfGenericParametersInMethod)
+                    if (methodDeclaration.TypeParameterList == null
+                        || methodDeclaration.TypeParameterList.Parameters.Count <= MaxNumberOfGenericParametersInMethod)
                     {
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(),
                         $"{GetEnclosingTypeName(methodDeclaration)}.{methodDeclaration.Identifier.ValueText}", "method",
                         MaxNumberOfGenericParametersInMethod));
                 },
@@ -96,6 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration => "class",
                 SyntaxKind.StructDeclaration => "struct",
                 SyntaxKind.InterfaceDeclaration => "interface",
+                SyntaxKindEx.RecordDeclaration => "record",
                 _ => GetUnknownType(typeDeclaration)
             };
 
@@ -122,12 +122,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     case SyntaxKind.InterfaceDeclaration:
                         return ((InterfaceDeclarationSyntax)parent).Identifier.ValueText;
 
+                    case SyntaxKindEx.RecordDeclaration:
+                        return ((RecordDeclarationSyntaxWrapper)parent).Identifier.ValueText;
+
                     default:
                         parent = parent.Parent;
                         break;
                 }
             }
-
             return null;
         }
     }
