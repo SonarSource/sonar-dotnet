@@ -32,14 +32,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class TypesShouldNotExtendOutdatedBaseTypes : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4052";
+        private const string DiagnosticId = "S4052";
         private const string MessageFormat = "Refactor this type not to derive from an outdated type '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ImmutableArray<KnownType> outdatedTypes =
+        private static readonly ImmutableArray<KnownType> OutdatedTypes =
             ImmutableArray.Create(
                 KnownType.System_ApplicationException,
                 KnownType.System_Xml_XmlDocument,
@@ -57,14 +57,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 var classDeclaration = (ClassDeclarationSyntax)c.Node;
                 var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-                if (classSymbol != null &&
-                    !classDeclaration.Identifier.IsMissing &&
-                    classSymbol.BaseType.IsAny(outdatedTypes))
+                if (classSymbol != null
+                    && !classDeclaration.Identifier.IsMissing
+                    && classSymbol.BaseType.IsAny(OutdatedTypes))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(),
                         messageArgs: classSymbol.BaseType.ToDisplayString()));
                 }
             },
+            // The rule is not applicable for records as at the current moment all the outdated types are classes and records cannot inherit classes.
             SyntaxKind.ClassDeclaration);
     }
 }
