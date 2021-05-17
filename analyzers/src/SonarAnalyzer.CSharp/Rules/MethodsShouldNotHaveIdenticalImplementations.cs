@@ -40,11 +40,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
         protected override SyntaxKind[] SyntaxKinds { get; } =
         {
             SyntaxKind.ClassDeclaration,
             SyntaxKindEx.RecordDeclaration,
         };
+
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
         protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node) =>
@@ -53,8 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod)
         {
             return firstMethod.Body != null
-                   && secondMethod.Body != null
-                   && firstMethod.Body.Statements.Count >= 2
+                   && firstMethod.Body.Statements.Count > 1
                    && firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText
                    && HaveSameParameters(firstMethod.ParameterList?.Parameters, secondMethod.ParameterList?.Parameters)
                    && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);

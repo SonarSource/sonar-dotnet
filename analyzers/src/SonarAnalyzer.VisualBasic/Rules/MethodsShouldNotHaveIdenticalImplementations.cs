@@ -37,7 +37,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-        protected override SyntaxKind[] SyntaxKinds { get; } = {SyntaxKind.ClassBlock};
+
+        protected override SyntaxKind[] SyntaxKinds { get; } = { SyntaxKind.ClassBlock };
+
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node)
@@ -48,12 +50,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool AreDuplicates(MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod)
         {
-            return firstMethod.Statements.Count >= 2
+            return firstMethod.Statements.Count > 1
                    && firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText()
                    && HaveSameParameters(firstMethod.GetParameters(), secondMethod.GetParameters())
                    && VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
 
-            bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
+            static bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
             {
                 if (leftParameters == null && rightParameters == null)
                 {
