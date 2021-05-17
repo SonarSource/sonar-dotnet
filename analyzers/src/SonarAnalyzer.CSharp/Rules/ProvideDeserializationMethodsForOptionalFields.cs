@@ -38,12 +38,6 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override Location GetNamedTypeIdentifierLocation(SyntaxNode node) =>
-            node.Kind() switch
-            {
-                SyntaxKind.ClassDeclaration => ((ClassDeclarationSyntax)node).Identifier.GetLocation(),
-                SyntaxKind.StructDeclaration => ((StructDeclarationSyntax)node).Identifier.GetLocation(),
-                SyntaxKindEx.RecordDeclaration => ((RecordDeclarationSyntaxWrapper)node).Identifier.GetLocation(),
-                _ => null
-            };
+            ((TypeDeclarationSyntax)node).Identifier.GetLocation();
     }
 }
