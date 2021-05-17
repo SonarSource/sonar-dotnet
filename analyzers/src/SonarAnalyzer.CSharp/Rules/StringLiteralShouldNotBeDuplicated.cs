@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase<SyntaxKind, LiteralExpressionSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override SyntaxKind[] SyntaxKinds { get; } =
         {
@@ -42,8 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.StructDeclaration,
             SyntaxKindEx.RecordDeclaration
         };
-
-        public StringLiteralShouldNotBeDuplicated() : base(RspecStrings.ResourceManager) { }
 
         protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
             literalExpression.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>()

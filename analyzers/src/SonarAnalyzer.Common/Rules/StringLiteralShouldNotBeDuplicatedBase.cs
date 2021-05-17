@@ -37,9 +37,10 @@ namespace SonarAnalyzer.Rules
         private const int MinimumStringLength = 5;
         private const int ThresholdDefaultValue = 3;
 
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+
         private readonly DiagnosticDescriptor rule;
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
 
         protected abstract bool IsMatchingMethodParameterName(TLiteralExpressionSyntax literalExpression);
@@ -52,18 +53,18 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected StringLiteralShouldNotBeDuplicatedBase(System.Resources.ResourceManager resourceManager) =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, resourceManager, isEnabledByDefault: false);
+        protected StringLiteralShouldNotBeDuplicatedBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources, false);
 
         protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             // Ideally we would like to report at assembly/project level for the primary and all string instances for secondary
             // locations. The problem is that this scenario is not yet supported on SonarQube side.
             // Hence the decision to do like other languages, at class-level
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, ReportOnViolation, SyntaxKinds);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, ReportOnViolation, SyntaxKinds);
 
         private void ReportOnViolation(SyntaxNodeAnalysisContext context)
         {
-            if (IsInnerInstance(context))
+            if (context.ContainingSymbol.Kind != SymbolKind.NamedType || IsInnerInstance(context))
             {
                 // Don't report on inner instances
                 return;

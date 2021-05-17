@@ -52,4 +52,10 @@ record Record
             }
         }
     }
+
+    record PositionalRecord(string Name)
+    {
+        private string name = "foobar";
+//                            ^^^^^^^^ Secondary
+    }
 }

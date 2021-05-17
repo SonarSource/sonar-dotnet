@@ -34,15 +34,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase<SyntaxKind, LiteralExpressionSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override SyntaxKind[] SyntaxKinds { get; } =
         {
             SyntaxKind.ClassBlock,
             SyntaxKind.StructureBlock
         };
-
-        public StringLiteralShouldNotBeDuplicated() : base(RspecStrings.ResourceManager) { }
 
         protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
             literalExpression.FirstAncestorOrSelf<MethodBlockBaseSyntax>()
