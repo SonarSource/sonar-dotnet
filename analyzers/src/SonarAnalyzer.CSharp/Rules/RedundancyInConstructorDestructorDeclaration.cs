@@ -67,8 +67,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var initializer = constructorDeclaration.Initializer;
-            if (initializer != null &&
-                IsInitializerRedundant(initializer))
+            if (initializer != null
+                && IsInitializerRedundant(initializer))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, initializer.GetLocation(), "'base()' call"));
             }
@@ -106,7 +106,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var symbol = semanticModel.GetDeclaredSymbol(constructorDeclaration);
             return symbol != null
-                   && symbol.ContainingType.GetMembers().OfType<IMethodSymbol>().Count(m => m.MethodKind == MethodKind.Constructor) == 1;
+                   && symbol.ContainingType
+                            .GetMembers()
+                            .OfType<IMethodSymbol>()
+                            .Count(m => m.MethodKind == MethodKind.Constructor && !m.IsImplicitlyDeclared) == 1;
         }
 
         private static bool IsBodyEmpty(BlockSyntax block) =>
