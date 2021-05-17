@@ -43,8 +43,7 @@ namespace SonarAnalyzer.Rules.Common
                 c =>
                 {
                     var symbol = (INamedTypeSymbol)c.Symbol;
-                    if (symbol.TypeKind != TypeKind.Class
-                        && symbol.TypeKind != TypeKind.Struct)
+                    if (!symbol.IsClassOrStruct())
                     {
                         return;
                     }
@@ -76,8 +75,7 @@ namespace SonarAnalyzer.Rules.Common
             var hasOnDeserializedAttribute = attributes.Any(attribute =>
                 attribute.AttributeClass.Is(KnownType.System_Runtime_Serialization_OnDeserializedAttribute));
 
-            if (!hasOptionalFieldAttribute ||
-                (hasOnDeserializingAttribute && hasOnDeserializedAttribute))
+            if (!hasOptionalFieldAttribute || (hasOnDeserializingAttribute && hasOnDeserializedAttribute))
             {
                 return null;
             }
