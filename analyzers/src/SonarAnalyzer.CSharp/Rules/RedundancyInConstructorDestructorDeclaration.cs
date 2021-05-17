@@ -97,8 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            return initializer.ArgumentList != null
-                   && !initializer.ArgumentList.Arguments.Any()
+            return initializer.ArgumentList.Arguments.Count == 0
                    && initializer.ThisOrBaseKeyword.IsKind(SyntaxKind.BaseKeyword);
         }
 
@@ -116,7 +115,6 @@ namespace SonarAnalyzer.Rules.CSharp
             block != null && !block.Statements.Any();
 
         private static bool IsConstructorParameterless(BaseMethodDeclarationSyntax constructorDeclaration) =>
-            constructorDeclaration.ParameterList != null
-            && !constructorDeclaration.ParameterList.Parameters.Any();
+            constructorDeclaration.ParameterList.Parameters.Count == 0;
     }
 }
