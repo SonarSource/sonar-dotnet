@@ -48,8 +48,14 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
+                    // When using top level statements, we are called twice for the same compilation unit. The second call has the containing symbol kind equal to `Method`.
+                    if (c.ContainingSymbol.Kind == SymbolKind.Method)
+                    {
+                        return;
+                    }
+
                     var compilationUnit = (CompilationUnitSyntax)c.Node;
-                    var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias == null);
+                    var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias == null).ToList();
                     var globalUsingDirectives = simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)).ToImmutableHashSet();
 
                     var visitor = new CSharpRemovableUsingWalker(c, globalUsingDirectives, null);
@@ -107,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
             {
-                var simpleNamespaces = node.Usings.Where(usingDirective => usingDirective.Alias == null);
+                var simpleNamespaces = node.Usings.Where(usingDirective => usingDirective.Alias == null).ToList();
                 var newUsingDirectives = new HashSet<EquivalentNameSyntax>();
                 newUsingDirectives.UnionWith(usingDirectivesFromParent);
                 newUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
