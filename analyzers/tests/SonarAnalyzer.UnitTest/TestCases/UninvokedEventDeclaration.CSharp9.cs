@@ -8,7 +8,7 @@ public record EventInvocations
     public event EventHandler MyEvent4;
     public event EventHandler MyEvent5;
     public event EventHandler MyEvent6;
-    public event EventHandler MyEvent7; // Compliant - FN
+    public event EventHandler MyEvent7; // Noncompliant
 
     public event Action<object, EventArgs> MyAction1;
     public event Action<object, EventArgs> MyAction2;
@@ -16,7 +16,7 @@ public record EventInvocations
     public event Action<object, EventArgs> MyAction4;
     public event Action<object, EventArgs> MyAction5;
     public event Action<object, EventArgs> MyAction6;
-    public event Action<object, EventArgs> MyAction7;  // Compliant - FN
+    public event Action<object, EventArgs> MyAction7;  // Noncompliant
 
     public void InvokeAll()
     {

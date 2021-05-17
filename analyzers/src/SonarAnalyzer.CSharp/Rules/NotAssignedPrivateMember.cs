@@ -42,25 +42,32 @@ namespace SonarAnalyzer.Rules.CSharp
          the issue only shows up at build time and not during editing.
         */
 
-        internal const string DiagnosticId = "S3459";
+        private const string DiagnosticId = "S3459";
         private const string MessageFormat = "Remove unassigned {0} '{1}', or set its value.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly Accessibility MaxAccessibility = Accessibility.Private;
 
-        private static readonly Accessibility maxAccessibility = Accessibility.Private;
-
-        protected override void Initialize(SonarAnalysisContext context)
+        private static readonly ISet<SyntaxKind> PreOrPostfixOpSyntaxKinds = new HashSet<SyntaxKind>
         {
+            SyntaxKind.PostDecrementExpression,
+            SyntaxKind.PostIncrementExpression,
+            SyntaxKind.PreDecrementExpression,
+            SyntaxKind.PreIncrementExpression,
+        };
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
                     var namedType = (INamedTypeSymbol)c.Symbol;
-                    if (!namedType.IsClassOrStruct() ||
-                        HasStructLayoutAttribute(namedType) ||
-                        namedType.ContainingType != null)
+                    if (!namedType.IsClassOrStruct()
+                        || HasStructLayoutAttribute(namedType)
+                        || namedType.ContainingType != null)
                     {
                         return;
                     }
@@ -68,12 +75,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     var removableDeclarationCollector = new CSharpRemovableDeclarationCollector(namedType, c.Compilation);
 
                     var candidateFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(
-                        new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, maxAccessibility)
+                        new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, MaxAccessibility)
                         .Where(tuple => !IsInitializedOrFixed((VariableDeclaratorSyntax)tuple.SyntaxNode) &&
                                         !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
 
                     var candidateProperties = removableDeclarationCollector.GetRemovableDeclarations(
-                        new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, maxAccessibility)
+                        new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, MaxAccessibility)
                         .Where(tuple => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)tuple.SyntaxNode) &&
                                         !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
 
@@ -107,20 +114,19 @@ namespace SonarAnalyzer.Rules.CSharp
                                 ? field.Identifier.GetLocation()
                                 : property.Identifier.GetLocation();
 
-                            c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, location, memberType, candidateMember.Symbol.Name));
+                            c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType, candidateMember.Symbol.Name));
                         }
                     }
                 },
                 SymbolKind.NamedType);
-        }
 
         private static bool HasStructLayoutAttribute(ISymbol namedTypeSymbol) =>
             namedTypeSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute);
 
         private static bool IsInitializedOrFixed(VariableDeclaratorSyntax declarator)
         {
-            if (declarator.Parent.Parent is BaseFieldDeclarationSyntax fieldDeclaration &&
-                fieldDeclaration.Modifiers.Any(SyntaxKind.FixedKeyword))
+            if (declarator.Parent.Parent is BaseFieldDeclarationSyntax fieldDeclaration
+                && fieldDeclaration.Modifiers.Any(SyntaxKind.FixedKeyword))
             {
                 return true;
             }
@@ -128,15 +134,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return declarator.Initializer != null;
         }
 
-        private static bool IsAutoPropertyWithNoInitializer(PropertyDeclarationSyntax declaration)
-        {
-            return declaration.Initializer == null &&
-                declaration.AccessorList != null &&
-                declaration.AccessorList.Accessors.All(acc => acc.Body == null);
-        }
+        private static bool IsAutoPropertyWithNoInitializer(PropertyDeclarationSyntax declaration) =>
+            declaration.Initializer == null
+            && declaration.AccessorList != null
+            && declaration.AccessorList.Accessors.All(acc => acc.Body == null);
 
         private static IList<MemberUsage> GetMemberUsages(CSharpRemovableDeclarationCollector removableDeclarationCollector,
-            HashSet<ISymbol> declaredPrivateSymbols)
+                                                          HashSet<ISymbol> declaredPrivateSymbols)
         {
             var symbolNames = declaredPrivateSymbols.Select(s => s.Name).ToHashSet();
 
@@ -181,8 +185,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var memberSymbol = memberUsage.Symbol;
 
                 // Handle "expr.FieldName"
-                if (node.Parent is MemberAccessExpressionSyntax simpleMemberAccess &&
-                    simpleMemberAccess.Name == node)
+                if (node.Parent is MemberAccessExpressionSyntax simpleMemberAccess
+                    && simpleMemberAccess.Name == node)
                 {
                     node = simpleMemberAccess;
                 }
@@ -221,8 +225,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                if (parentNode is ArgumentSyntax argument &&
-                    (!argument.RefOrOutKeyword.IsKind(SyntaxKind.None) || TupleExpressionSyntaxWrapper.IsInstance(argument.Parent)))
+                if (parentNode is ArgumentSyntax argument
+                    && (!argument.RefOrOutKeyword.IsKind(SyntaxKind.None) || TupleExpressionSyntaxWrapper.IsInstance(argument.Parent)))
                 {
                     assignedMembers.Add(memberSymbol);
                 }
@@ -231,33 +235,16 @@ namespace SonarAnalyzer.Rules.CSharp
             return assignedMembers;
         }
 
-        private static bool IsParentMemberAccess(MemberAccessExpressionSyntax parent, ExpressionSyntax node)
-        {
-            return parent != null &&
-                parent.Expression == node;
-        }
+        private static bool IsParentMemberAccess(MemberAccessExpressionSyntax parent, ExpressionSyntax node) =>
+            parent != null
+            && parent.Expression == node;
 
-        private static bool IsValueType(ISymbol symbol)
-        {
-            if (symbol is IFieldSymbol field)
+        private static bool IsValueType(ISymbol symbol) =>
+            symbol switch
             {
-                return field.Type.IsValueType;
-            }
-
-            if (symbol is IPropertySymbol property)
-            {
-                return property.Type.IsValueType;
-            }
-
-            return false;
-        }
-
-        private static readonly ISet<SyntaxKind> PreOrPostfixOpSyntaxKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.PostDecrementExpression,
-            SyntaxKind.PostIncrementExpression,
-            SyntaxKind.PreDecrementExpression,
-            SyntaxKind.PreIncrementExpression
-        };
+                IFieldSymbol field => field.Type.IsValueType,
+                IPropertySymbol property => property.Type.IsValueType,
+                _ => false
+            };
     }
 }

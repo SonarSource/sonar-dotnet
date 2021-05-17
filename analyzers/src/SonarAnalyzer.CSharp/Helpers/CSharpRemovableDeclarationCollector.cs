@@ -23,6 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -36,11 +37,11 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        public static bool IsNodeStructOrClassDeclaration(SyntaxNode node) =>
-            node.IsKind(SyntaxKind.ClassDeclaration) || node.IsKind(SyntaxKind.StructDeclaration);
+        public static bool IsNodeStructOrClassOrRecordDeclaration(SyntaxNode node) =>
+            node.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordDeclaration);
 
         public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
-            IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceDeclaration);
+            IsNodeStructOrClassOrRecordDeclaration(node) || node.IsKind(SyntaxKind.InterfaceDeclaration);
 
         protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(
             SyntaxNodeAndSemanticModel<BaseTypeDeclarationSyntax> container, ISet<SyntaxKind> kinds) =>
