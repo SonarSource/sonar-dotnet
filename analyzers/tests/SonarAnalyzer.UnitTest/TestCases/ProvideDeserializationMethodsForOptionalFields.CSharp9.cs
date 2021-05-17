@@ -53,3 +53,9 @@ public record Record // Noncompliant, attributes are added on local methods
         }
     }
 }
+
+public record NoEventHandlerMethodsWithParams(string Name) // Noncompliant
+{
+    [OptionalField]
+    int optionalField = 5;
+}
