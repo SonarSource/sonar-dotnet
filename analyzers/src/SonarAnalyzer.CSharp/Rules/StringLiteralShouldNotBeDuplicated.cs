@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,15 +34,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase<SyntaxKind, LiteralExpressionSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override SyntaxKind[] SyntaxKinds { get; } =
         {
             SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordDeclaration
         };
-
-        public StringLiteralShouldNotBeDuplicated() : base(RspecStrings.ResourceManager) { }
 
         protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
             literalExpression.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>()
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ?? false;
 
         protected override bool IsInnerInstance(SyntaxNodeAnalysisContext context) =>
-            context.Node.Ancestors().Any(x => x is ClassDeclarationSyntax || x is StructDeclarationSyntax);
+            context.Node.Ancestors().Any(x => x.IsAnyKind(SyntaxKinds));
 
         protected override IEnumerable<LiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node) =>
             node.DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
