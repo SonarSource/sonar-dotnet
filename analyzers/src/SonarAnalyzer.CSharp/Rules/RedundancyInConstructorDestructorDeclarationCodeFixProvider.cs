@@ -38,13 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string TitleRemoveConstructor = "Remove constructor";
         internal const string TitleRemoveDestructor = "Remove destructor";
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(RedundancyInConstructorDestructorDeclaration.DiagnosticId);
-            }
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundancyInConstructorDestructorDeclaration.DiagnosticId);
         public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
@@ -74,58 +68,44 @@ namespace SonarAnalyzer.Rules.CSharp
             return TaskHelper.CompletedTask;
         }
 
-        private static void RegisterActionForDestructor(CodeFixContext context, SyntaxNode root, BaseMethodDeclarationSyntax method)
-        {
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    TitleRemoveDestructor,
-                    c =>
-                    {
-                        var newRoot = root.RemoveNode(
-                            method,
-                            SyntaxRemoveOptions.KeepNoTrivia);
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    },
-                    TitleRemoveDestructor),
-                context.Diagnostics);
-        }
+        private static void RegisterActionForDestructor(CodeFixContext context, SyntaxNode root, SyntaxNode method) =>
+            context.RegisterCodeFix(CodeAction.Create(TitleRemoveDestructor,
+                                                      c =>
+                                                      {
+                                                          var newRoot = root.RemoveNode(method, SyntaxRemoveOptions.KeepNoTrivia);
+                                                          return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                                                      },
+                                                      TitleRemoveDestructor),
+                                    context.Diagnostics);
 
-        private static void RegisterActionForConstructor(CodeFixContext context, SyntaxNode root, BaseMethodDeclarationSyntax method)
-        {
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    TitleRemoveConstructor,
-                    c =>
-                    {
-                        var newRoot = root.RemoveNode(
-                            method,
-                            SyntaxRemoveOptions.KeepNoTrivia);
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    },
-                    TitleRemoveConstructor),
-                context.Diagnostics);
-        }
+        private static void RegisterActionForConstructor(CodeFixContext context, SyntaxNode root, SyntaxNode method) =>
+            context.RegisterCodeFix(CodeAction.Create(TitleRemoveConstructor,
+                                                      c =>
+                                                      {
+                                                          var newRoot = root.RemoveNode(method, SyntaxRemoveOptions.KeepNoTrivia);
+                                                          return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                                                      },
+                                                      TitleRemoveConstructor),
+                                    context.Diagnostics);
 
-        private static void RegisterActionForBaseCall(CodeFixContext context, SyntaxNode root, ConstructorInitializerSyntax initializer)
+        private static void RegisterActionForBaseCall(CodeFixContext context, SyntaxNode root, SyntaxNode initializer)
         {
             if (!(initializer.Parent is ConstructorDeclarationSyntax constructor))
             {
                 return;
             }
 
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    TitleRemoveBaseCall,
-                    c =>
-                    {
-                        var newRoot = RemoveInitializer(root, constructor);
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    },
-                    TitleRemoveBaseCall),
-                context.Diagnostics);
+            context.RegisterCodeFix(CodeAction.Create(TitleRemoveBaseCall,
+                                                      c =>
+                                                      {
+                                                          var newRoot = RemoveInitializer(root, constructor);
+                                                          return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                                                      },
+                                                      TitleRemoveBaseCall),
+                                    context.Diagnostics);
         }
 
-        public static SyntaxNode RemoveInitializer(SyntaxNode root, ConstructorDeclarationSyntax constructor)
+        private static SyntaxNode RemoveInitializer(SyntaxNode root, ConstructorDeclarationSyntax constructor)
         {
             var annotation = new SyntaxAnnotation();
             var ctor = constructor;
@@ -139,8 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 newRoot = newRoot.RemoveNode(initializer, SyntaxRemoveOptions.KeepNoTrivia);
                 ctor = GetConstructor(newRoot, annotation);
 
-                if (ctor.Body != null &&
-                    ctor.Body.HasLeadingTrivia)
+                if (ctor.Body is {HasLeadingTrivia: true})
                 {
                     var lastTrivia = ctor.Body.GetLeadingTrivia().Last();
                     var newBody = lastTrivia.IsKind(SyntaxKind.EndOfLineTrivia)
@@ -160,13 +139,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 newRoot = newRoot.RemoveNode(initializer, SyntaxRemoveOptions.KeepNoTrivia);
                 ctor = GetConstructor(newRoot, annotation);
 
-                if (ctor.Body != null &&
-                    ctor.Body.HasLeadingTrivia)
+                if (ctor.Body is {HasLeadingTrivia: true})
                 {
                     var lastTrivia = ctor.Body.GetLeadingTrivia().Last();
-                    newRoot = newRoot.ReplaceNode(
-                        ctor.Body,
-                        ctor.Body.WithLeadingTrivia(trailingTrivia.Add(lastTrivia)));
+                    newRoot = newRoot.ReplaceNode(ctor.Body, ctor.Body.WithLeadingTrivia(trailingTrivia.Add(lastTrivia)));
                 }
                 else
                 {
@@ -181,10 +157,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return newRoot.ReplaceNode(ctor, ctor.WithoutAnnotations(annotation));
         }
 
-        private static ConstructorDeclarationSyntax GetConstructor(SyntaxNode newRoot, SyntaxAnnotation annotation)
-        {
-            return (ConstructorDeclarationSyntax)newRoot.GetAnnotatedNodes(annotation).First();
-        }
+        private static ConstructorDeclarationSyntax GetConstructor(SyntaxNode newRoot, SyntaxAnnotation annotation) =>
+            (ConstructorDeclarationSyntax)newRoot.GetAnnotatedNodes(annotation).First();
     }
 }
-
