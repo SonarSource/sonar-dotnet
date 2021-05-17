@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.Common;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,23 +34,16 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ProvideDeserializationMethodsForOptionalFields : ProvideDeserializationMethodsForOptionalFieldsBase
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override Location GetNamedTypeIdentifierLocation(SyntaxNode node)
-        {
-            switch (node.Kind())
+        protected override Location GetNamedTypeIdentifierLocation(SyntaxNode node) =>
+            node.Kind() switch
             {
-                case SyntaxKind.ClassDeclaration:
-                    return ((ClassDeclarationSyntax)node).Identifier.GetLocation();
-
-                case SyntaxKind.StructDeclaration:
-                    return ((StructDeclarationSyntax)node).Identifier.GetLocation();
-
-                default:
-                    return null;
-            }
-        }
+                SyntaxKind.ClassDeclaration => ((ClassDeclarationSyntax)node).Identifier.GetLocation(),
+                SyntaxKind.StructDeclaration => ((StructDeclarationSyntax)node).Identifier.GetLocation(),
+                SyntaxKindEx.RecordDeclaration => ((RecordDeclarationSyntaxWrapper)node).Identifier.GetLocation(),
+                _ => null
+            };
     }
 }

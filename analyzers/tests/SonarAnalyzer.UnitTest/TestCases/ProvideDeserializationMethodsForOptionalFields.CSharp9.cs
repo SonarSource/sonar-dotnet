@@ -1,12 +1,8 @@
 ﻿using System;
-// Noncompliant@-1 // FP, the location is wrong for records
-// Noncompliant@-2
-// Noncompliant@-3
-
 using System.Runtime.Serialization;
 
 [Serializable]
-public record Compliant 
+public record Compliant
 {
     [OptionalField]
     int optionalField = 5;
@@ -24,13 +20,13 @@ public record Compliant
     }
 }
 
-public record NoEventHandlerMethods // Compliant - FN
+public record NoEventHandlerMethods // Noncompliant
 {
     [OptionalField]
     int optionalField = 5;
 }
 
-public record OnlyOnDeserializingEventHandlerMethod // Compliant - FN
+public record OnlyOnDeserializingEventHandlerMethod // Noncompliant
 {
     [OptionalField]
     int optionalField = 5;
@@ -40,7 +36,7 @@ public record OnlyOnDeserializingEventHandlerMethod // Compliant - FN
 }
 
 [Serializable]
-public record Record // Compliant - FN, attributes are added on local methods
+public record Record // Noncompliant, attributes are added on local methods
 {
     [OptionalField]
     int optionalField = 5;
