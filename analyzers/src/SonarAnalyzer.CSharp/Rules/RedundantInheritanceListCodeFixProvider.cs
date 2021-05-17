@@ -34,18 +34,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class RedundantInheritanceListCodeFixProvider : SonarCodeFixProvider
     {
-        internal const string Title = "Remove redundant declaration";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(RedundantInheritanceList.DiagnosticId);
-            }
-        }
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return WellKnownFixAllProviders.BatchFixer;
-        }
+        private const string Title = "Remove redundant declaration";
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantInheritanceList.DiagnosticId);
+        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
@@ -67,12 +58,18 @@ namespace SonarAnalyzer.Rules.CSharp
             return TaskHelper.CompletedTask;
         }
 
-        private static SyntaxNode RemoveDeclaration(SyntaxNode root, BaseListSyntax baseList,
-            int redundantIndex)
+        internal static bool HasLineEnding(SyntaxNode node) =>
+            node.HasTrailingTrivia
+            && node.GetTrailingTrivia().Last().IsKind(SyntaxKind.EndOfLineTrivia);
+
+        private static bool HasLineEnding(SyntaxToken token) =>
+            token.HasTrailingTrivia
+            && token.TrailingTrivia.Last().IsKind(SyntaxKind.EndOfLineTrivia);
+
+        private static SyntaxNode RemoveDeclaration(SyntaxNode root, BaseListSyntax baseList, int redundantIndex)
         {
-            var newBaseList = baseList
-                .RemoveNode(baseList.Types[redundantIndex], SyntaxRemoveOptions.KeepNoTrivia)
-                .WithAdditionalAnnotations(Formatter.Annotation);
+            var newBaseList = baseList.RemoveNode(baseList.Types[redundantIndex], SyntaxRemoveOptions.KeepNoTrivia)
+                                      .WithAdditionalAnnotations(Formatter.Annotation);
 
             if (newBaseList.Types.Count != 0)
             {
@@ -84,16 +81,13 @@ namespace SonarAnalyzer.Rules.CSharp
             var typeNameHadLineEnding = HasLineEnding(((BaseTypeDeclarationSyntax)baseList.Parent).Identifier);
 
             var annotation = new SyntaxAnnotation();
-            var newRoot = root.ReplaceNode(
-                baseList.Parent,
-                baseList.Parent.WithAdditionalAnnotations(annotation));
+            var newRoot = root.ReplaceNode(baseList.Parent, baseList.Parent.WithAdditionalAnnotations(annotation));
             var declaration = (BaseTypeDeclarationSyntax)newRoot.GetAnnotatedNodes(annotation).First();
 
             newRoot = newRoot.RemoveNode(declaration.BaseList, SyntaxRemoveOptions.KeepNoTrivia);
             declaration = (BaseTypeDeclarationSyntax)newRoot.GetAnnotatedNodes(annotation).First();
 
-            var needsNewLine = !typeNameHadLineEnding &&
-                (colonHadLineEnding || baseTypeHadLineEnding);
+            var needsNewLine = !typeNameHadLineEnding && (colonHadLineEnding || baseTypeHadLineEnding);
 
             if (needsNewLine)
             {
@@ -107,28 +101,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? trivia.Add(baseList.ColonToken.TrailingTrivia.Last())
                     : trivia.AddRange(baseList.Types[redundantIndex].GetTrailingTrivia());
 
-                newRoot = newRoot.ReplaceToken(
-                        declaration.Identifier,
-                        declaration.Identifier
-                            .WithTrailingTrivia(trivia));
+                newRoot = newRoot.ReplaceToken(declaration.Identifier, declaration.Identifier.WithTrailingTrivia(trivia));
             }
 
             declaration = (BaseTypeDeclarationSyntax)newRoot.GetAnnotatedNodes(annotation).First();
-            return newRoot.ReplaceNode(
-                declaration,
-                declaration.WithoutAnnotations(annotation));
-        }
-
-        internal static bool HasLineEnding(SyntaxNode node)
-        {
-            return node.HasTrailingTrivia &&
-                node.GetTrailingTrivia().Last().IsKind(SyntaxKind.EndOfLineTrivia);
-        }
-        private static bool HasLineEnding(SyntaxToken token)
-        {
-            return token.HasTrailingTrivia &&
-                token.TrailingTrivia.Last().IsKind(SyntaxKind.EndOfLineTrivia);
+            return newRoot.ReplaceNode(declaration, declaration.WithoutAnnotations(annotation));
         }
     }
 }
-
