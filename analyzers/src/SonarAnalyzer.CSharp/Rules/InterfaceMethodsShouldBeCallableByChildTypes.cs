@@ -34,36 +34,33 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class InterfaceMethodsShouldBeCallableByChildTypes : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4039";
+        private const string DiagnosticId = "S4039";
         private const string MessageFormat = "Make '{0}' sealed, change to a non-explicit declaration or provide a " +
             "new method exposing the functionality of '{1}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ReportOnIssue<MethodDeclarationSyntax>(c, m => m.ExplicitInterfaceSpecifier, m => m.Identifier,
-                    AreMethodsEquivalent),
+                c => ReportOnIssue<MethodDeclarationSyntax>(c, m => m.ExplicitInterfaceSpecifier, m => m.Identifier, AreMethodsEquivalent),
                 SyntaxKind.MethodDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ReportOnIssue<PropertyDeclarationSyntax>(c, m => m.ExplicitInterfaceSpecifier, m => m.Identifier,
-                    ArePropertiesEquivalent),
+                c => ReportOnIssue<PropertyDeclarationSyntax>(c, m => m.ExplicitInterfaceSpecifier, m => m.Identifier, ArePropertiesEquivalent),
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ReportOnIssue<EventDeclarationSyntax>(c, m => m.ExplicitInterfaceSpecifier, m => m.Identifier,
-                    AreEventsEquivalent),
+                c => ReportOnIssue<EventDeclarationSyntax>(c, m => m.ExplicitInterfaceSpecifier, m => m.Identifier, AreEventsEquivalent),
                 SyntaxKind.EventDeclaration);
         }
 
         private static void ReportOnIssue<TMemberSyntax>(SyntaxNodeAnalysisContext analysisContext,
-            Func<TMemberSyntax, ExplicitInterfaceSpecifierSyntax> getExplicitInterfaceSpecifier,
-            Func<TMemberSyntax, SyntaxToken> getIdentifierName,
-            Func<TMemberSyntax, TMemberSyntax, bool> areMembersEquivalent)
+                                                         Func<TMemberSyntax, ExplicitInterfaceSpecifierSyntax> getExplicitInterfaceSpecifier,
+                                                         Func<TMemberSyntax, SyntaxToken> getIdentifierName,
+                                                         Func<TMemberSyntax, TMemberSyntax, bool> areMembersEquivalent)
             where TMemberSyntax : MemberDeclarationSyntax
         {
             var memberDeclaration = (TMemberSyntax)analysisContext.Node;
@@ -74,65 +71,54 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var classDeclaration = memberDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>();
-            if (classDeclaration == null ||
-                classDeclaration.Identifier.IsMissing ||
-                !IsClassTracked(classDeclaration, analysisContext.SemanticModel))
+            var declaration = (TypeDeclarationSyntax)memberDeclaration.FirstAncestorOrSelf<SyntaxNode>(node => node is TypeDeclarationSyntax);
+            if (declaration == null
+                || declaration.Identifier.IsMissing
+                || !IsDeclarationTracked(declaration, analysisContext.SemanticModel))
             {
                 return;
             }
 
-            var hasPublicEquivalentMethod = classDeclaration.Members
-                .OfType<TMemberSyntax>()
-                .Any(member => areMembersEquivalent(member, memberDeclaration));
+            var hasPublicEquivalentMethod = declaration.Members
+                                                       .OfType<TMemberSyntax>()
+                                                       .Any(member => areMembersEquivalent(member, memberDeclaration));
             if (!hasPublicEquivalentMethod)
             {
                 var identifierName = getIdentifierName(memberDeclaration);
 
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifierName.GetLocation(),
-                    classDeclaration.Identifier.ValueText,
-                    string.Concat(explicitInterfaceSpecifier.Name, ".", identifierName.ValueText)));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                                                                             identifierName.GetLocation(),
+                                                                             declaration.Identifier.ValueText,
+                                                                             string.Concat(explicitInterfaceSpecifier.Name, ".", identifierName.ValueText)));
             }
         }
 
-        private static bool IsClassTracked(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
+        private static bool IsDeclarationTracked(BaseTypeDeclarationSyntax declaration, SemanticModel semanticModel)
         {
-            var classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
+            var symbol = semanticModel.GetDeclaredSymbol(declaration);
 
-            return classSymbol != null &&
-                !classSymbol.IsSealed &&
-                !classSymbol.IsStatic &&
-                classSymbol.IsPubliclyAccessible();
+            return symbol is {IsSealed: false}
+                   && symbol.IsPubliclyAccessible();
         }
 
-        private static bool AreMethodsEquivalent(MethodDeclarationSyntax currentMethod,
-            MethodDeclarationSyntax targetedMethod)
-        {
-            return currentMethod != targetedMethod &&
-                currentMethod.Modifiers.Any(modifier => IsPublicOrProtected(modifier)) &&
-                (currentMethod.Identifier.ValueText == targetedMethod.Identifier.ValueText ||
-                    (targetedMethod.Identifier.ValueText == nameof(IDisposable.Dispose) &&
-                    currentMethod.Identifier.ValueText == "Close")); // Allows to replace IDisposable.Dispose() with Close()
-        }
+        private static bool AreMethodsEquivalent(MethodDeclarationSyntax currentMethod, MethodDeclarationSyntax targetedMethod) =>
+            currentMethod != targetedMethod
+            && currentMethod.Modifiers.Any(IsPublicOrProtected)
+            && (currentMethod.Identifier.ValueText == targetedMethod.Identifier.ValueText
+                || (targetedMethod.Identifier.ValueText == nameof(IDisposable.Dispose) && currentMethod.Identifier.ValueText == "Close")); // Allows to replace IDisposable.Dispose() with Close()
 
-        private static bool ArePropertiesEquivalent(PropertyDeclarationSyntax currentProperty,
-            PropertyDeclarationSyntax targetedProperty)
-        {
-            return currentProperty != targetedProperty &&
-                currentProperty.Identifier.ValueText == targetedProperty.Identifier.ValueText &&
-                currentProperty.Modifiers.Any(modifier => IsPublicOrProtected(modifier));
-        }
+        private static bool ArePropertiesEquivalent(PropertyDeclarationSyntax currentProperty, PropertyDeclarationSyntax targetedProperty) =>
+            currentProperty != targetedProperty
+            && currentProperty.Identifier.ValueText == targetedProperty.Identifier.ValueText
+            && currentProperty.Modifiers.Any(IsPublicOrProtected);
 
-        private static bool AreEventsEquivalent(EventDeclarationSyntax currentEvent,
-            EventDeclarationSyntax targetedEvent)
-        {
-            return currentEvent != targetedEvent &&
-                currentEvent.Identifier.ValueText == targetedEvent.Identifier.ValueText &&
-                currentEvent.Modifiers.Any(modifier => IsPublicOrProtected(modifier));
-        }
+        private static bool AreEventsEquivalent(EventDeclarationSyntax currentEvent, EventDeclarationSyntax targetedEvent) =>
+            currentEvent != targetedEvent
+            && currentEvent.Identifier.ValueText == targetedEvent.Identifier.ValueText
+            && currentEvent.Modifiers.Any(IsPublicOrProtected);
 
         private static bool IsPublicOrProtected(SyntaxToken modifier) =>
-            modifier.IsKind(SyntaxKind.PublicKeyword) ||
-            modifier.IsKind(SyntaxKind.ProtectedKeyword);
+            modifier.IsKind(SyntaxKind.PublicKeyword)
+            || modifier.IsKind(SyntaxKind.ProtectedKeyword);
     }
 }
