@@ -89,27 +89,27 @@ namespace MyLibrary
         public static object operator ==(Foo6 a, Foo6 b) => new object(); // Error [CS0216] - requires != operator
     }
 
-    public class Foo8 // Noncompliant
+    public class Foo8 // Noncompliant {{Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.}}
     {
         public static Foo8 operator +(Foo8 a, Foo8 b) => new Foo8();
     }
 
-    public class Foo9 // Noncompliant
+    public class Foo9 // Noncompliant {{Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.}}
     {
         public static Foo9 operator -(Foo9 a, Foo9 b) => new Foo9();
     }
 
-    public class Foo10 // Noncompliant
+    public class Foo10 // Noncompliant {{Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.}}
     {
         public static Foo10 operator *(Foo10 a, Foo10 b) => new Foo10();
     }
 
-    public class Foo11 // Noncompliant
+    public class Foo11 // Noncompliant {{Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.}}
     {
         public static Foo11 operator /(Foo11 a, Foo11 b) => new Foo11();
     }
 
-    public class Foo12 // Noncompliant
+    public class Foo12 // Noncompliant {{Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.}}
     {
         public static Foo12 operator %(Foo12 a, Foo12 b) => new Foo12();
     }

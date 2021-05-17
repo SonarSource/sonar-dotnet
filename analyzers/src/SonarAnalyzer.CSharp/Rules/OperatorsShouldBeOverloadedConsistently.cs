@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class OperatorsShouldBeOverloadedConsistently : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4050";
+        private const string DiagnosticId = "S4050";
         private const string MessageFormat = "Provide an implementation for: {0}.";
 
         private static readonly DiagnosticDescriptor Rule =
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public const string OperatorPlus = "operator+";
             public const string OperatorMinus = "operator-";
             public const string OperatorMultiply = "operator*";
-            public const string OperatorDevide = "operator/";
+            public const string OperatorDivide = "operator/";
             public const string OperatorReminder = "operator%";
             public const string OperatorEquals = "operator==";
             public const string OperatorNotEquals = "operator!=";
@@ -55,8 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public const string ObjectGetHashCode = "Object.GetHashCode";
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var classDeclaration = (ClassDeclarationSyntax)c.Node;
@@ -77,7 +76,6 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             // This rule is not applicable for records, as for records it is not possible to override the == operator.
             SyntaxKind.ClassDeclaration);
-        }
 
         private static IEnumerable<string> FindMissingMethods(INamedTypeSymbol classSymbol)
         {
@@ -87,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (implementedMethods.Contains(MethodName.OperatorPlus)
                 || implementedMethods.Contains(MethodName.OperatorMinus)
                 || implementedMethods.Contains(MethodName.OperatorMultiply)
-                || implementedMethods.Contains(MethodName.OperatorDevide)
+                || implementedMethods.Contains(MethodName.OperatorDivide)
                 || implementedMethods.Contains(MethodName.OperatorReminder))
             {
                 requiredMethods.Add(MethodName.OperatorEquals);
@@ -138,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (classMethods.Any(KnownMethods.IsOperatorBinaryDivide))
             {
-                yield return MethodName.OperatorDevide;
+                yield return MethodName.OperatorDivide;
             }
 
             if (classMethods.Any(KnownMethods.IsOperatorBinaryModulus))
