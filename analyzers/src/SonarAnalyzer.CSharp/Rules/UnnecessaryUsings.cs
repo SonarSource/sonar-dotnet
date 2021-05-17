@@ -40,16 +40,22 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S1128";
         private const string MessageFormat = "Remove this unnecessary 'using'.";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
+                    // When using top level statements, we are called twice for the same compilation unit. The second call has the containing symbol kind equal to `Method`.
+                    if (c.ContainingSymbol.Kind == SymbolKind.Method)
+                    {
+                        return;
+                    }
+
                     var compilationUnit = (CompilationUnitSyntax)c.Node;
-                    var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias == null);
+                    var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias == null).ToList();
                     var globalUsingDirectives = simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)).ToImmutableHashSet();
 
                     var visitor = new CSharpRemovableUsingWalker(c, globalUsingDirectives, null);
@@ -59,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         visitor.SafeVisit(attribute);
                     }
 
-                    CheckUnnecessaryUsings(c, simpleNamespaces, visitor.necessaryNamespaces);
+                    CheckUnnecessaryUsings(c, simpleNamespaces, visitor.NecessaryNamespaces);
                 },
                 SyntaxKind.CompilationUnit);
 
@@ -84,14 +90,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
                     && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, usingDirective.GetLocation()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, usingDirective.GetLocation()));
                 }
             }
         }
 
         private class CSharpRemovableUsingWalker : CSharpSyntaxWalker
         {
-            public readonly HashSet<INamespaceSymbol> necessaryNamespaces = new HashSet<INamespaceSymbol>();
+            public readonly HashSet<INamespaceSymbol> NecessaryNamespaces = new HashSet<INamespaceSymbol>();
 
             private readonly SyntaxNodeAnalysisContext context;
             private readonly IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent;
@@ -107,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
             {
-                var simpleNamespaces = node.Usings.Where(usingDirective => usingDirective.Alias == null);
+                var simpleNamespaces = node.Usings.Where(usingDirective => usingDirective.Alias == null).ToList();
                 var newUsingDirectives = new HashSet<EquivalentNameSyntax>();
                 newUsingDirectives.UnionWith(usingDirectivesFromParent);
                 newUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
@@ -117,9 +123,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
 
                 VisitContent(visitor, node.Members, node.DescendantTrivia());
-                CheckUnnecessaryUsings(context, simpleNamespaces, visitor.necessaryNamespaces);
+                CheckUnnecessaryUsings(context, simpleNamespaces, visitor.NecessaryNamespaces);
 
-                necessaryNamespaces.UnionWith(visitor.necessaryNamespaces);
+                NecessaryNamespaces.UnionWith(visitor.NecessaryNamespaces);
             }
 
             public override void VisitInitializerExpression(InitializerExpressionSyntax node)
@@ -157,7 +163,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (!linqQueryVisited && TryGetSystemLinkNamespace(out var systemLinqNamespaceSymbol))
                 {
-                    necessaryNamespaces.Add(systemLinqNamespaceSymbol);
+                    NecessaryNamespaces.Add(systemLinqNamespaceSymbol);
                 }
                 linqQueryVisited = true;
                 base.VisitQueryExpression(node);
@@ -167,7 +173,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (node.IsKind(SyntaxKindEx.ParenthesizedVariableDesignation)) // Tuple deconstruction declaration
                 {
-                    necessaryNamespaces.Add(context.Compilation.GetSpecialType(SpecialType.System_Object).ContainingNamespace);
+                    NecessaryNamespaces.Add(context.Compilation.GetSpecialType(SpecialType.System_Object).ContainingNamespace);
                 }
                 base.Visit(node);
             }
@@ -201,7 +207,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && symbol.ContainingNamespace is INamespaceSymbol namespaceSymbol
                     && (currentNamespace == null || !namespaceSymbol.IsSameOrAncestorOf(currentNamespace)))
                 {
-                    necessaryNamespaces.Add(namespaceSymbol);
+                    NecessaryNamespaces.Add(namespaceSymbol);
                 }
             }
         }
