@@ -29,7 +29,7 @@ record StaticCtor
 
 record Foo
 {
-    public Foo() { } // Compliant - FN
+    public Foo() { } // Noncompliant
 
     ~Foo() { } // Noncompliant {{Remove this redundant destructor.}}
 }
@@ -40,4 +40,11 @@ record Bar
     {
         Console.WriteLine("Hi!");
     }
+}
+
+record FooWithParams(string name)
+{
+    public FooWithParams() : this("a") { } // Compliant - has initializer with arguments
+
+    ~FooWithParams() { } // Noncompliant {{Remove this redundant destructor.}}
 }
