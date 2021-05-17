@@ -54,8 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var typeParameterNames =
-                        typeDeclaration.TypeParameterList.Parameters.Select(p => p.Identifier.ToString()).ToList();
+                    var typeParameterNames = typeDeclaration.TypeParameterList.Parameters.Select(p => p.Identifier.ToString()).ToList();
 
                     var fields = typeDeclaration.Members
                         .OfType<FieldDeclarationSyntax>()
@@ -72,13 +71,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         .ToList();
 
                     properties.ForEach(property => CheckMember(property, property.Identifier.GetLocation(), typeParameterNames, c));
-
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordDeclaration);
 
-        private static void CheckMember(SyntaxNode root, Location location, IEnumerable<string> typeParameterNames,
-            SyntaxNodeAnalysisContext context)
+        private static void CheckMember(SyntaxNode root, Location location, IEnumerable<string> typeParameterNames, SyntaxNodeAnalysisContext context)
         {
             if (HasGenericType(root, typeParameterNames, context))
             {
@@ -88,15 +85,14 @@ namespace SonarAnalyzer.Rules.CSharp
             context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
         }
 
-        private static bool HasGenericType(SyntaxNode root, IEnumerable<string> typeParameterNames,
-            SyntaxNodeAnalysisContext context)
+        private static bool HasGenericType(SyntaxNode root, IEnumerable<string> typeParameterNames, SyntaxNodeAnalysisContext context)
         {
             var typeParameters = root.DescendantNodes()
-                .OfType<IdentifierNameSyntax>()
-                .Select(identifier => context.SemanticModel.GetSymbolInfo(identifier).Symbol)
-                .Where(symbol => symbol != null && symbol.Kind == SymbolKind.TypeParameter)
-                .Select(symbol => symbol.Name)
-                .ToList();
+                                     .OfType<IdentifierNameSyntax>()
+                                     .Select(identifier => context.SemanticModel.GetSymbolInfo(identifier).Symbol)
+                                     .Where(symbol => symbol != null && symbol.Kind == SymbolKind.TypeParameter)
+                                     .Select(symbol => symbol.Name)
+                                     .ToList();
 
             return typeParameters.Intersect(typeParameterNames).Any();
         }
