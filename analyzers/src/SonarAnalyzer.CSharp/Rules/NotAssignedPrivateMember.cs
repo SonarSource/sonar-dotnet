@@ -65,26 +65,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var namedType = (INamedTypeSymbol)c.Symbol;
-                    if (!namedType.IsClassOrStruct()
-                        || HasStructLayoutAttribute(namedType)
-                        || namedType.ContainingType != null)
+                    if (TypeDefinitionShouldBeSkipped(namedType))
                     {
                         return;
                     }
 
                     var removableDeclarationCollector = new CSharpRemovableDeclarationCollector(namedType, c.Compilation);
 
-                    var candidateFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(
-                        new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, MaxAccessibility)
-                        .Where(tuple => !IsInitializedOrFixed((VariableDeclaratorSyntax)tuple.SyntaxNode) &&
-                                        !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
-
-                    var candidateProperties = removableDeclarationCollector.GetRemovableDeclarations(
-                        new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, MaxAccessibility)
-                        .Where(tuple => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)tuple.SyntaxNode) &&
-                                        !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
-
-                    var allCandidateMembers = candidateFields.Concat(candidateProperties).ToList();
+                    var allCandidateMembers = RetrieveFielAndPropertyDeclarations(removableDeclarationCollector);
                     if (!allCandidateMembers.Any())
                     {
                         return;
@@ -94,31 +82,43 @@ namespace SonarAnalyzer.Rules.CSharp
                     var usedMemberSymbols = new HashSet<ISymbol>(usedMembers.Select(tuple => tuple.Symbol));
 
                     var assignedMemberSymbols = GetAssignedMemberSymbols(usedMembers);
+                    var unassignedUsedMemberSymbols = allCandidateMembers.Where(x => usedMemberSymbols.Contains(x.Symbol) && !assignedMemberSymbols.Contains(x.Symbol));
 
-                    foreach (var candidateMember in allCandidateMembers)
+                    foreach (var candidateMember in unassignedUsedMemberSymbols)
                     {
-                        if (!usedMemberSymbols.Contains(candidateMember.Symbol))
-                        {
-                            /// reported by <see cref="UnusedPrivateMember"/>
-                            continue;
-                        }
+                        var field = candidateMember.SyntaxNode as VariableDeclaratorSyntax;
+                        var property = candidateMember.SyntaxNode as PropertyDeclarationSyntax;
 
-                        if (!assignedMemberSymbols.Contains(candidateMember.Symbol))
-                        {
-                            var field = candidateMember.SyntaxNode as VariableDeclaratorSyntax;
-                            var property = candidateMember.SyntaxNode as PropertyDeclarationSyntax;
+                        var memberType = field != null ? "field" : "auto-property";
 
-                            var memberType = field != null ? "field" : "auto-property";
+                        var location = field != null
+                            ? field.Identifier.GetLocation()
+                            : property.Identifier.GetLocation();
 
-                            var location = field != null
-                                ? field.Identifier.GetLocation()
-                                : property.Identifier.GetLocation();
-
-                            c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType, candidateMember.Symbol.Name));
-                        }
+                        c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType, candidateMember.Symbol.Name));
                     }
                 },
                 SymbolKind.NamedType);
+
+        private static List<SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol>> RetrieveFielAndPropertyDeclarations(CSharpRemovableDeclarationCollector removableDeclarationCollector)
+        {
+            var candidateFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(
+                        new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, MaxAccessibility)
+                        .Where(tuple => !IsInitializedOrFixed((VariableDeclaratorSyntax)tuple.SyntaxNode) &&
+                                        !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
+
+            var candidateProperties = removableDeclarationCollector.GetRemovableDeclarations(
+                        new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, MaxAccessibility)
+                        .Where(tuple => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)tuple.SyntaxNode) &&
+                                        !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
+
+            return candidateFields.Concat(candidateProperties).ToList();
+        }
+
+        private static bool TypeDefinitionShouldBeSkipped(INamedTypeSymbol namedType) =>
+            !namedType.IsClassOrStruct()
+            || HasStructLayoutAttribute(namedType)
+            || namedType.ContainingType != null;
 
         private static bool HasStructLayoutAttribute(ISymbol namedTypeSymbol) =>
             namedTypeSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute);
