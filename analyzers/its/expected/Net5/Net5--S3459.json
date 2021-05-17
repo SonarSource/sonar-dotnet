@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3459",
+"message":  "Remove unassigned field 'y', or set its value.",
+"location":  {
+"uri":  "sources\Net5\Net5\Records.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  21,
+"endLine":  90,
+"endColumn":  22
+}
+}
+}
+]
+}
