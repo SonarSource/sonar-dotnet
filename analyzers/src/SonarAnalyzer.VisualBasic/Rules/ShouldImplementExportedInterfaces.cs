@@ -31,22 +31,19 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ShouldImplementExportedInterfaces :
-        ShouldImplementExportedInterfacesBase<ArgumentSyntax, ExpressionSyntax, ClassStatementSyntax>
+    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<ArgumentSyntax, ExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var attributeSyntax = (AttributeSyntax)c.Node;
 
-                    if (!(c.SemanticModel.GetSymbolInfo(attributeSyntax.Name).Symbol is IMethodSymbol   attributeCtorSymbol) ||
-                        !attributeCtorSymbol.ContainingType.IsAny(ExportAttributes))
+                    if (!(c.SemanticModel.GetSymbolInfo(attributeSyntax.Name).Symbol is IMethodSymbol attributeCtorSymbol) || !attributeCtorSymbol.ContainingType.IsAny(ExportAttributes))
                     {
                         return;
                     }
@@ -54,26 +51,28 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var exportedType = GetExportedTypeSymbol(attributeSyntax.ArgumentList?.Arguments, c.SemanticModel);
                     var attributeTargetType = GetAttributeTargetSymbol(attributeSyntax, c.SemanticModel);
 
-                    if (exportedType != null &&
-                        attributeTargetType != null &&
-                        !IsOfExportType(attributeTargetType, exportedType))
+                    if (exportedType != null && attributeTargetType != null && !IsOfExportType(attributeTargetType, exportedType))
                     {
                         var action = exportedType.IsInterface()
                             ? ActionForInterface
                             : ActionForClass;
 
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeSyntax.GetLocation(), action,
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, attributeSyntax.GetLocation(), action,
                             exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
                             attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)));
                     }
                 },
                 SyntaxKind.Attribute);
-        }
+
+        protected override bool IsClassOrRecordSyntax(SyntaxNode syntaxNode) =>
+            syntaxNode.IsKind(SyntaxKind.ClassStatement);
 
         protected override string GetIdentifier(ArgumentSyntax argumentSyntax) =>
             (argumentSyntax as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier.ValueText;
+
         protected override ExpressionSyntax GetExpression(ArgumentSyntax argumentSyntax) =>
             argumentSyntax?.GetExpression();
+
         protected override SyntaxNode GetTypeOfOrGetTypeExpression(ExpressionSyntax expressionSyntax) =>
             (expressionSyntax as GetTypeExpressionSyntax)?.Type;
     }

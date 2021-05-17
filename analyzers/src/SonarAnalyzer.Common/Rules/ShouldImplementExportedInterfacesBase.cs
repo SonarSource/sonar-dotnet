@@ -37,23 +37,20 @@ namespace SonarAnalyzer.Rules.Common
         internal static readonly ImmutableArray<KnownType> ExportAttributes =
             ImmutableArray.Create(
                 KnownType.System_ComponentModel_Composition_ExportAttribute,
-                KnownType.System_ComponentModel_Composition_InheritedExportAttribute
-            );
+                KnownType.System_ComponentModel_Composition_InheritedExportAttribute);
     }
 
-    public abstract class ShouldImplementExportedInterfacesBase<TArgumentSyntax, TExpressionSyntax, TClassSyntax>
+    public abstract class ShouldImplementExportedInterfacesBase<TArgumentSyntax, TExpressionSyntax>
         : ShouldImplementExportedInterfacesBase
         where TArgumentSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
-        where TClassSyntax : SyntaxNode
     {
         protected static bool IsOfExportType(ITypeSymbol type, INamedTypeSymbol exportedType) =>
             type.GetSelfAndBaseTypes()
                 .Union(type.AllInterfaces)
                 .Any(currentType => currentType.Equals(exportedType));
 
-        protected INamedTypeSymbol GetExportedTypeSymbol(SeparatedSyntaxList<TArgumentSyntax>? attributeArguments,
-            SemanticModel semanticModel)
+        protected INamedTypeSymbol GetExportedTypeSymbol(SeparatedSyntaxList<TArgumentSyntax>? attributeArguments, SemanticModel semanticModel)
         {
             if (!attributeArguments.HasValue)
             {
@@ -61,43 +58,39 @@ namespace SonarAnalyzer.Rules.Common
             }
 
             var arguments = attributeArguments.Value;
-            if (arguments.Count == 0 ||
-                arguments.Count > 2)
+            if (arguments.Count == 0 || arguments.Count > 2)
             {
                 return null;
             }
 
-            var argumentSyntax = GetArgumentFromNamedArgument(arguments) ??
-                GetArgumentFromSingleArgumentAttribute(arguments) ??
-                GetArgumentFromDoubleArgumentAttribute(arguments, semanticModel);
+            var argumentSyntax = GetArgumentFromNamedArgument(arguments)
+                                 ?? GetArgumentFromSingleArgumentAttribute(arguments)
+                                 ?? GetArgumentFromDoubleArgumentAttribute(arguments, semanticModel);
+
             var typeOfOrGetTypeExpression = GetExpression(argumentSyntax);
 
             var exportedTypeSyntax = GetTypeOfOrGetTypeExpression(typeOfOrGetTypeExpression);
-            if (exportedTypeSyntax == null)
-            {
-                return null;
-            }
-
-            return semanticModel.GetSymbolInfo(exportedTypeSyntax).Symbol as INamedTypeSymbol;
+            return exportedTypeSyntax == null ? null : semanticModel.GetSymbolInfo(exportedTypeSyntax).Symbol as INamedTypeSymbol;
         }
+
+        protected ITypeSymbol GetAttributeTargetSymbol(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
+            // Parent is AttributeListSyntax, we handle only class attributes
+            !IsClassOrRecordSyntax(syntaxNode.Parent?.Parent) ? null : semanticModel.GetDeclaredSymbol(syntaxNode.Parent.Parent) as ITypeSymbol;
+
+        protected abstract bool IsClassOrRecordSyntax(SyntaxNode syntaxNode);
+
+        protected abstract string GetIdentifier(TArgumentSyntax argumentSyntax);
+
+        protected abstract TExpressionSyntax GetExpression(TArgumentSyntax argumentSyntax);
+
+        // Retrieve the expression inside of the typeof()/GetType() (e.g. typeof(Foo) => Foo)
+        protected abstract SyntaxNode GetTypeOfOrGetTypeExpression(TExpressionSyntax expressionSyntax);
 
         private TArgumentSyntax GetArgumentFromNamedArgument(IEnumerable<TArgumentSyntax> arguments) =>
             // it's ok to use case insensitive even for C# because if that casing is incorrect the code won't compile
             arguments.FirstOrDefault(x => "contractType".Equals(GetIdentifier(x), StringComparison.OrdinalIgnoreCase));
 
-        private TArgumentSyntax GetArgumentFromSingleArgumentAttribute(SeparatedSyntaxList<TArgumentSyntax> arguments)
-        {
-            if (arguments.Count != 1)
-            {
-                return null;
-            }
-
-            // Only one argument, should be typeof expression
-            return arguments[0];
-        }
-
-        private TArgumentSyntax GetArgumentFromDoubleArgumentAttribute(SeparatedSyntaxList<TArgumentSyntax> arguments,
-            SemanticModel semanticModel)
+        private TArgumentSyntax GetArgumentFromDoubleArgumentAttribute(SeparatedSyntaxList<TArgumentSyntax> arguments, SemanticModel semanticModel)
         {
             if (arguments.Count != 2)
             {
@@ -105,8 +98,7 @@ namespace SonarAnalyzer.Rules.Common
             }
 
             var firstArgument = GetExpression(arguments[0]);
-            if (firstArgument != null &&
-                semanticModel.GetConstantValue(firstArgument).Value is string)
+            if (firstArgument != null && semanticModel.GetConstantValue(firstArgument).Value is string)
             {
                 // Two arguments, second should be typeof expression
                 return arguments[1];
@@ -115,20 +107,7 @@ namespace SonarAnalyzer.Rules.Common
             return null;
         }
 
-        protected ITypeSymbol GetAttributeTargetSymbol(SyntaxNode syntaxNode, SemanticModel semanticModel)
-        {
-            // Parent is AttributeListSyntax, we handle only class attributes
-            if (!(syntaxNode.Parent?.Parent is TClassSyntax attributeTarget))
-            {
-                return null;
-            }
-
-            return semanticModel.GetDeclaredSymbol(attributeTarget) as ITypeSymbol;
-        }
-
-        protected abstract string GetIdentifier(TArgumentSyntax argumentSyntax);
-        protected abstract TExpressionSyntax GetExpression(TArgumentSyntax argumentSyntax);
-        // Retrieve the expression inside of the typeof()/GetType() (e.g. typeof(Foo) => Foo)
-        protected abstract SyntaxNode GetTypeOfOrGetTypeExpression(TExpressionSyntax expressionSyntax);
+        private static TArgumentSyntax GetArgumentFromSingleArgumentAttribute(SeparatedSyntaxList<TArgumentSyntax> arguments) =>
+            arguments.Count != 1 ? null : arguments[0]; // Only one argument, should be typeof expression
     }
 }
