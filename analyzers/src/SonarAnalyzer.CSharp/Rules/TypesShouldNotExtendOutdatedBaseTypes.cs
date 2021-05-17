@@ -37,7 +37,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> OutdatedTypes =
             ImmutableArray.Create(
@@ -48,8 +47,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Collections_Queue,
                 KnownType.System_Collections_ReadOnlyCollectionBase,
                 KnownType.System_Collections_SortedList,
-                KnownType.System_Collections_Stack
-            );
+                KnownType.System_Collections_Stack);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
