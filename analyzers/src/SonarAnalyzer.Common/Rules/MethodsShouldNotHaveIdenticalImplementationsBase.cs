@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
@@ -30,13 +31,19 @@ namespace SonarAnalyzer.Rules
         where TLanguageKindEnum : struct
     {
         protected const string DiagnosticId = "S4144";
-        protected const string MessageFormat = "Update this method so that its implementation is not identical to '{0}'.";
+        private const string MessageFormat = "Update this method so that its implementation is not identical to '{0}'.";
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        private readonly DiagnosticDescriptor rule;
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected abstract ILanguageFacade<TLanguageKindEnum> Language { get; }
         protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
 
+        protected MethodsShouldNotHaveIdenticalImplementationsBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
@@ -91,8 +98,7 @@ namespace SonarAnalyzer.Rules
                 return false;
             }
 
-            return leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 })
-                                 .All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
+            return leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 }).All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
         }
     }
 }

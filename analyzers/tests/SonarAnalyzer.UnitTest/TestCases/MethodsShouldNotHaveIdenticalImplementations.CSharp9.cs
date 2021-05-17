@@ -48,6 +48,14 @@ public record Sample
     {
         Console.WriteLine("Result: 0");
     }
+
+    public string Method5()
+    {
+        return "foo";
+    }
+
+    public string Method6() =>
+        "foo";
 }
 
 public record SamplePositional(string Value)
