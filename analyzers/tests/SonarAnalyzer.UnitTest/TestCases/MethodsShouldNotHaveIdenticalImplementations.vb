@@ -3,6 +3,12 @@
 Namespace Tests.Diagnostics
     Class Program
 
+        Sub SubFirstNoParentheses
+            Dim s As String = "test"
+            Dim k As String = "test"
+            Console.WriteLine("Result: {0}", s)
+        End Sub
+
         Sub Foo1()
 '           ^^^^ Secondary
 '           ^^^^ Secondary@-1
@@ -86,7 +92,7 @@ Namespace Tests.Diagnostics
             Return val.ToString() ' Compliant because we ignore one liner
         End Function
 
-        Sub SubNoParentheses
+        Sub SubSecondNoParentheses
             Dim s As String = "test"
             Console.WriteLine("Result: {0}", s)
         End Sub

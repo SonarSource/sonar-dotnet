@@ -77,5 +77,22 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
 
         protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
+
+        protected static bool HaveSameParameters<TSyntax>(SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
+            where TSyntax : SyntaxNode
+        {
+            if (leftParameters == null && rightParameters == null)
+            {
+                return true;
+            }
+
+            if (leftParameters == null || rightParameters == null || leftParameters.Value.Count != rightParameters.Value.Count)
+            {
+                return false;
+            }
+
+            return leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 })
+                                 .All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
+        }
     }
 }

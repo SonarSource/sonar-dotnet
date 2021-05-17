@@ -52,31 +52,12 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node) =>
             ((TypeDeclarationSyntax)node).GetMethodDeclarations();
 
-        protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod)
-        {
-            return firstMethod.Body != null
-                   && firstMethod.Body.Statements.Count > 1
-                   && firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText
-                   && HaveSameParameters(firstMethod.ParameterList?.Parameters, secondMethod.ParameterList?.Parameters)
-                   && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
-
-            static bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
-            {
-                if (leftParameters == null && rightParameters == null)
-                {
-                    return true;
-                }
-
-                if (leftParameters == null || rightParameters == null || leftParameters.Value.Count != rightParameters.Value.Count)
-                {
-                    return false;
-                }
-
-                return leftParameters.Value
-                    .Zip(rightParameters.Value, (p1, p2) => new { p1, p2 })
-                    .All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
-            }
-        }
+        protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod) =>
+            firstMethod.Body != null
+            && firstMethod.Body.Statements.Count > 1
+            && firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText
+            && HaveSameParameters<ParameterSyntax>(firstMethod.ParameterList.Parameters, secondMethod.ParameterList.Parameters)
+            && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
 
         protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) => method.Identifier;
     }

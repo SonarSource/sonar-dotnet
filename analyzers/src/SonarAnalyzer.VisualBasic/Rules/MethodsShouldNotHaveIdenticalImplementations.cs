@@ -48,29 +48,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return classDeclaration.Members.OfType<MethodBlockSyntax>();
         }
 
-        protected override bool AreDuplicates(MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod)
-        {
-            return firstMethod.Statements.Count > 1
-                   && firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText()
-                   && HaveSameParameters(firstMethod.GetParameters(), secondMethod.GetParameters())
-                   && VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
-
-            static bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
-            {
-                if (leftParameters == null && rightParameters == null)
-                {
-                    return true;
-                }
-
-                if (leftParameters == null || rightParameters == null || leftParameters.Value.Count != rightParameters.Value.Count)
-                {
-                    return false;
-                }
-
-                return leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 })
-                                     .All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
-            }
-        }
+        protected override bool AreDuplicates(MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod) =>
+            firstMethod.Statements.Count > 1
+            && firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText()
+            && HaveSameParameters(firstMethod.GetParameters(), secondMethod.GetParameters())
+            && VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
 
         protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) =>
             method.SubOrFunctionStatement.Identifier;
