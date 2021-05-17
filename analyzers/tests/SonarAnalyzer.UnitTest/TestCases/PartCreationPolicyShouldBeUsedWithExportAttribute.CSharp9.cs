@@ -17,12 +17,12 @@ record Program2 : Program2_Base
 {
 }
 
-[PartCreationPolicy(CreationPolicy.Any)] // Compliant - FN
+[PartCreationPolicy(CreationPolicy.Any)] // Noncompliant
 record Program3
 {
 }
 
-[PartCreationPolicy(CreationPolicy.Any)] // Compliant - FN
+[PartCreationPolicy(CreationPolicy.Any)] // Noncompliant
 record Program4 : Program1
 {
     public void Method()
@@ -31,4 +31,15 @@ record Program4 : Program1
         void LocalFunction()
         { }
     }
+}
+
+[Export(typeof(Foo))]
+[PartCreationPolicy(CreationPolicy.Any)] // Compliant
+record Foo(string X)
+{
+}
+
+[PartCreationPolicy(CreationPolicy.Any)] // Noncompliant
+record Bar(string X)
+{
 }

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override ClassStatementSyntax GetClassDeclaration(AttributeSyntax attribute) =>
+        protected override ClassStatementSyntax GetTypeDeclaration(AttributeSyntax attribute) =>
             attribute.FirstAncestorOrSelf<ClassStatementSyntax>();
 
         protected override void Initialize(SonarAnalysisContext context) =>

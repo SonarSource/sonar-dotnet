@@ -20,7 +20,7 @@ namespace Tests.Diagnostics
     {
     }
 
-    [PartCreationPolicy(CreationPolicy.Any)] // Noncompliant {{Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this class definition.}}
+    [PartCreationPolicy(CreationPolicy.Any)] // Noncompliant {{Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this type definition.}}
 //   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     class Program3
     {
@@ -55,7 +55,7 @@ namespace Tests.Diagnostics
     class Program7 : Program2_Base { }
 
     [Foo]
-    [PartCreationPolicy(CreationPolicy.Any)] // Noncompliant {{Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this class definition.}}
+    [PartCreationPolicy(CreationPolicy.Any)] // Noncompliant {{Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this type definition.}}
     class Program8 { }
 
     [PartCreationPolicy(CreationPolicy.NonShared)] // Compliant, InheritedExport is present on interface

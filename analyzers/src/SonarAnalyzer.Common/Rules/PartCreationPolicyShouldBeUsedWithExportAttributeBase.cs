@@ -25,16 +25,15 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class PartCreationPolicyShouldBeUsedWithExportAttributeBase<TAttributeSyntax, TClassSyntax> : SonarDiagnosticAnalyzer
+    public abstract class PartCreationPolicyShouldBeUsedWithExportAttributeBase<TAttributeSyntax, TDeclarationSyntax> : SonarDiagnosticAnalyzer
         where TAttributeSyntax : SyntaxNode
-        where TClassSyntax : SyntaxNode
+        where TDeclarationSyntax : SyntaxNode
     {
         internal const string DiagnosticId = "S4428";
 
-        protected const string MessageFormat = "Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute'" +
-            " to/from this class definition.";
+        protected const string MessageFormat = "Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this type definition.";
 
-        protected abstract TClassSyntax GetClassDeclaration(TAttributeSyntax attribute);
+        protected abstract TDeclarationSyntax GetTypeDeclaration(TAttributeSyntax attribute);
 
         protected void AnalyzeNode(SyntaxNodeAnalysisContext c)
         {
@@ -44,30 +43,26 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var classDeclaration = GetClassDeclaration(attribute);
-            if (classDeclaration == null)
+            var declaration = GetTypeDeclaration(attribute);
+            if (declaration == null)
             {
                 return;
             }
 
-            var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration) as ITypeSymbol;
-            if (classSymbol == null ||
-                classSymbol.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_ExportAttribute) ||
-                classSymbol.GetSelfAndBaseTypes()
-                    .Union(classSymbol.AllInterfaces)
-                    .Any(s => s.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_InheritedExportAttribute)))
+            if (!(c.SemanticModel.GetDeclaredSymbol(declaration) is ITypeSymbol symbol)
+                || symbol.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_ExportAttribute)
+                || symbol.GetSelfAndBaseTypes()
+                         .Union(symbol.AllInterfaces)
+                         .Any(s => s.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_InheritedExportAttribute)))
             {
                 return;
             }
 
-            c.ReportDiagnosticWhenActive(
-                Diagnostic.Create(
-                    SupportedDiagnostics[0],
-                    attribute.GetLocation()));
+            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], attribute.GetLocation()));
 
             bool IsPartCreationPolicyAttribute(TAttributeSyntax attributeSyntax) =>
-                c.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol is IMethodSymbol attributeSymbol &&
-                attributeSymbol.ContainingType.Is(KnownType.System_ComponentModel_Composition_PartCreationPolicyAttribute);
+                c.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol is IMethodSymbol attributeSymbol
+                && attributeSymbol.ContainingType.Is(KnownType.System_ComponentModel_Composition_PartCreationPolicyAttribute);
         }
     }
 }

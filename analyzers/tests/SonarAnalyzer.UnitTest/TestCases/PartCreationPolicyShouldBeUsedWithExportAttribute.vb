@@ -20,7 +20,7 @@ Namespace Tests.TestCases
 
     End Class
 
-    <PartCreationPolicy(CreationPolicy.Any)> ' Noncompliant {{Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this class definition.}}
+    <PartCreationPolicy(CreationPolicy.Any)> ' Noncompliant {{Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this type definition.}}
     class Program3
 '    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@-1
 
@@ -48,7 +48,7 @@ Namespace Tests.TestCases
     End Class
 
     <Foo>
-    <PartCreationPolicy(CreationPolicy.Any)> ' Noncompliant {{Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this class definition.}}
+    <PartCreationPolicy(CreationPolicy.Any)> ' Noncompliant {{Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this type definition.}}
     Class Program8
     End Class
 
