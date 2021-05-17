@@ -166,4 +166,18 @@ namespace Tests.Diagnostics
 
         protected void Bar() { }
     }
+
+    public class MyClass5 : MyDisposable
+    {
+        void MyDisposable.NotDispose() // Noncompliant
+        {
+        }
+
+        protected void Bar() { }
+    }
+
+    public interface MyDisposable
+    {
+        void NotDispose();
+    }
 }
