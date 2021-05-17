@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class RedundantInheritanceListCodeFixProvider : SonarCodeFixProvider
     {
-        internal const string Title = "Remove redundant declaration";
+        private const string Title = "Remove redundant declaration";
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantInheritanceList.DiagnosticId);
         public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
@@ -66,8 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
             token.HasTrailingTrivia
             && token.TrailingTrivia.Last().IsKind(SyntaxKind.EndOfLineTrivia);
 
-        private static SyntaxNode RemoveDeclaration(SyntaxNode root, BaseListSyntax baseList,
-            int redundantIndex)
+        private static SyntaxNode RemoveDeclaration(SyntaxNode root, BaseListSyntax baseList, int redundantIndex)
         {
             var newBaseList = baseList.RemoveNode(baseList.Types[redundantIndex], SyntaxRemoveOptions.KeepNoTrivia)
                                       .WithAdditionalAnnotations(Formatter.Annotation);

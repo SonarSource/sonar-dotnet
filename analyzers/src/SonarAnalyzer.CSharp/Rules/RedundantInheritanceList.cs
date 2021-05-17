@@ -39,10 +39,10 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class RedundantInheritanceList : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1939";
-        internal const string MessageEnum = "'int' should not be explicitly used as the underlying type.";
-        internal const string MessageObjectBase = "'Object' should not be explicitly extended.";
-        internal const string MessageAlreadyImplements = "'{0}' implements '{1}' so '{1}' can be removed from the inheritance list.";
         internal const string RedundantIndexKey = "redundantIndex";
+        private const string MessageEnum = "'int' should not be explicitly used as the underlying type.";
+        private const string MessageObjectBase = "'Object' should not be explicitly extended.";
+        private const string MessageAlreadyImplements = "'{0}' implements '{1}' so '{1}' can be removed from the inheritance list.";
         private const string MessageFormat = "{0}";
 
         private static readonly DiagnosticDescriptor Rule =
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
             if (context.ContainingSymbol.Kind != SymbolKind.NamedType
-                || IsBaseListNullEmpty(typeDeclaration))
+                || IsBaseListNullOrEmpty(typeDeclaration))
             {
                 return;
             }
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckInterface(SyntaxNodeAnalysisContext context)
         {
             var interfaceDeclaration = (InterfaceDeclarationSyntax)context.Node;
-            if (IsBaseListNullEmpty(interfaceDeclaration))
+            if (IsBaseListNullOrEmpty(interfaceDeclaration))
             {
                 return;
             }
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckEnum(SyntaxNodeAnalysisContext context)
         {
             var enumDeclaration = (EnumDeclarationSyntax)context.Node;
-            if (IsBaseListNullEmpty(enumDeclaration))
+            if (IsBaseListNullOrEmpty(enumDeclaration))
             {
                 return;
             }
@@ -183,10 +183,10 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             collidingDeclaration = baseClassMapping.Key;
-            return CanInterfacebeRemovedbasedOnMembers(declaredType, interfaceType);
+            return CanInterfaceBeRemovedBasedOnMembers(declaredType, interfaceType);
         }
 
-        private static bool CanInterfacebeRemovedbasedOnMembers(INamedTypeSymbol declaredType, INamedTypeSymbol interfaceType)
+        private static bool CanInterfaceBeRemovedBasedOnMembers(INamedTypeSymbol declaredType, INamedTypeSymbol interfaceType)
         {
             var allMembersOfInterface = interfaceType.AllInterfaces.Concat(new[] { interfaceType })
                 .SelectMany(i => i.GetMembers())
@@ -230,7 +230,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return Location.Create(type.SyntaxTree, new TextSpan(start, end - start));
         }
 
-        private static bool IsBaseListNullEmpty(BaseTypeDeclarationSyntax baseTypeDelcaration) =>
-            baseTypeDelcaration.BaseList == null || !baseTypeDelcaration.BaseList.Types.Any();
+        private static bool IsBaseListNullOrEmpty(BaseTypeDeclarationSyntax baseTypeDeclaration) =>
+            baseTypeDeclaration.BaseList == null || !baseTypeDeclaration.BaseList.Types.Any();
     }
 }
