@@ -54,17 +54,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         })
                         .Where(f => FieldIsRelevant(f.Symbol)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, field.Syntax.Identifier.GetLocation(),
-                            field.Syntax.Identifier.ValueText));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, field.Syntax.Identifier.GetLocation(), field.Syntax.Identifier.ValueText));
                     }
                 },
                 SyntaxKind.FieldDeclaration);
 
         private static bool FieldIsRelevant(IFieldSymbol fieldSymbol) =>
-            fieldSymbol != null
-            && fieldSymbol.IsStatic
-            && !fieldSymbol.IsConst
-            && !fieldSymbol.IsReadOnly
+            fieldSymbol is { IsStatic: true, IsConst: false, IsReadOnly: false }
             && fieldSymbol.DeclaredAccessibility != Accessibility.Private;
     }
 }
