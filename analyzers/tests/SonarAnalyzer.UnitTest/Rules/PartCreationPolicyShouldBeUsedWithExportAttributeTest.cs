@@ -36,13 +36,22 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PartCreationPolicyShouldBeUsedWithExportAttribute_UnresolvedSymbol_CS() =>
+            Verifier.VerifyCSharpAnalyzer(@"
+[UnresolvedAttribute] // Error [CS0246]
+class Bar { }",
+                                          new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
+                                          CompilationErrorBehavior.Ignore,
+                                          MetadataReferenceFacade.SystemComponentModelComposition);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs",
-                                    new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
-                                    MetadataReferenceFacade.SystemComponentModelComposition);
+                                                      new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
+                                                      MetadataReferenceFacade.SystemComponentModelComposition);
 #endif
 
         [TestMethod]

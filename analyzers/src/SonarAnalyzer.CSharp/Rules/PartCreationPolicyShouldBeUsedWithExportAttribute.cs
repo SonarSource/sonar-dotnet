@@ -25,21 +25,35 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public sealed class PartCreationPolicyShouldBeUsedWithExportAttribute
-        : PartCreationPolicyShouldBeUsedWithExportAttributeBase<AttributeSyntax, ClassDeclarationSyntax>
+        : PartCreationPolicyShouldBeUsedWithExportAttributeBase<AttributeSyntax, TypeDeclarationSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override ClassDeclarationSyntax GetClassDeclaration(AttributeSyntax attribute) =>
-            attribute.FirstAncestorOrSelf<MemberDeclarationSyntax>() as ClassDeclarationSyntax;
+        protected override TypeDeclarationSyntax GetTypeDeclaration(AttributeSyntax attribute)
+        {
+            var declaration = attribute.FirstAncestorOrSelf<MemberDeclarationSyntax>();
+            if (declaration is ClassDeclarationSyntax classDeclaration)
+            {
+                return classDeclaration;
+            }
+            else if (RecordDeclarationSyntaxWrapper.IsInstance(declaration))
+            {
+                return (RecordDeclarationSyntaxWrapper)declaration;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeNode, SyntaxKind.Attribute);
