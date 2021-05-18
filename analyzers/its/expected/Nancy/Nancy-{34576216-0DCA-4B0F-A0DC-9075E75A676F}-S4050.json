@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4050",
-"message":  "Provide an implementation for: 'operator-', 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
+"message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4050",
-"message":  "Provide an implementation for: 'operator-', 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
+"message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4050",
-"message":  "Provide an implementation for: 'operator-', 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
+"message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
 "region":  {

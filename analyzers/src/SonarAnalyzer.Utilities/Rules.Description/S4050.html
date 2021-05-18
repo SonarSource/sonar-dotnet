@@ -4,8 +4,8 @@ implementation.</p>
 <ul>
   <li> When providing <code>operator ==</code> you should also provide <code>operator !=</code> and vice-versa. </li>
   <li> When providing <code>operator ==</code> you should also provide <code>Equals(Object)</code> and <code>GetHashCode()</code>. </li>
-  <li> When providing <code>operator +</code> or <code>operator -</code> you should also provide <code>operator ==</code>, respecting previous
-  guidelines. </li>
+  <li> When providing <code>operator +, -, *, / or %</code>&nbsp;you should also provide <code>operator ==</code>, respecting previous guidelines.
+  </li>
 </ul>
 <p>This rule raises an issue when any of these guidelines are not followed on publicly-visible type (public, protected or protected internal).</p>
 <h2>Noncompliant Code Example</h2>
