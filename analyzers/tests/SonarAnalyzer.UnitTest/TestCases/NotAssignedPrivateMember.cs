@@ -18,6 +18,11 @@ namespace Tests.Diagnostics
         public RefType field1;
     }
 
+    public interface ISampleInterface
+    {
+        string Name { get; }
+    }
+
     class MyClass
     {
         class Nested

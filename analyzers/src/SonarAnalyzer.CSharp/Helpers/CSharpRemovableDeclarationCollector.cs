@@ -23,6 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -36,19 +37,13 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        public static bool IsNodeStructOrClassDeclaration(SyntaxNode node) =>
-            node.IsKind(SyntaxKind.ClassDeclaration) || node.IsKind(SyntaxKind.StructDeclaration);
-
-        public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
-            IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceDeclaration);
-
         protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(
             SyntaxNodeAndSemanticModel<BaseTypeDeclarationSyntax> container, ISet<SyntaxKind> kinds) =>
             container.SyntaxNode.DescendantNodes(IsNodeContainerTypeDeclaration)
                 .Where(node => kinds.Contains(node.Kind()));
 
         public override IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableFieldLikeDeclarations(
-    ISet<SyntaxKind> kinds, Accessibility maxAcessibility)
+    ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
         {
             var fieldLikeNodes = TypeDeclarations
                 .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
@@ -62,10 +57,16 @@ namespace SonarAnalyzer.Helpers
             return fieldLikeNodes
                 .SelectMany(fieldLikeNode => fieldLikeNode.SyntaxNode.Declaration.Variables
                     .Select(variable => SelectNodeTuple(variable, fieldLikeNode.SemanticModel))
-                    .Where(tuple => IsRemovable(tuple.Symbol, maxAcessibility)));
+                    .Where(tuple => IsRemovable(tuple.Symbol, maxAccessibility)));
         }
 
         internal override BaseTypeDeclarationSyntax GetOwnerOfSubnodes(BaseTypeDeclarationSyntax node) =>
             node;
+
+        public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
+            IsNodeStructOrClassOrRecordDeclaration(node) || node.IsKind(SyntaxKind.InterfaceDeclaration);
+
+        private static bool IsNodeStructOrClassOrRecordDeclaration(SyntaxNode node) =>
+            node.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordDeclaration);
     }
 }

@@ -14,21 +14,22 @@ public record InteropMethodArgument
 
 public record Record
 {
-    private int field; // Compliant - FN
+    private int field; // Noncompliant {{Remove unassigned field 'field', or set its value.}}
     private int field2;
-    private static int field3; // Compliant - FN
+    private static int field3; // Noncompliant
     private static int field4;
-    private readonly int field5; // Compliant - FN
+    private readonly int field5; // Noncompliant
     private int field6; // Compliant - value is set in nested class ctor
 
-    private int Property { get; }  // Compliant - FN
+    private int Property { get; }  // Noncompliant
     private int Property2 { get; }
 
     public Record()
     {
-        field2 = 1;
-        field4 = 1;
-        Property2 = 1;
+        field2 = field;
+        field4 = field3;
+        field2 = field5;
+        Property2 = Property;
     }
 
     private record NestedRecord
@@ -37,5 +38,15 @@ public record Record
         {
             r.field6 = 5;
         }
+    }
+}
+
+public record PositionalRecord(string Value)
+{
+    private int field; // Noncompliant
+    private int field2;
+    public PositionalRecord() : this("")
+    {
+        field2 = field;
     }
 }
