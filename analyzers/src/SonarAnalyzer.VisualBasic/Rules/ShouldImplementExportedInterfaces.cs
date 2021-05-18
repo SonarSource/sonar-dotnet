@@ -31,38 +31,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<ArgumentSyntax, ExpressionSyntax>
+    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<ArgumentSyntax, ExpressionSyntax, AttributeSyntax, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override SyntaxKind[] SyntaxKinds => new[] { SyntaxKind.Attribute };
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        protected override SeparatedSyntaxList<ArgumentSyntax>? GetAttributeArguments(AttributeSyntax attributeSyntax) =>
+            attributeSyntax.ArgumentList?.Arguments;
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var attributeSyntax = (AttributeSyntax)c.Node;
-
-                    if (!(c.SemanticModel.GetSymbolInfo(attributeSyntax.Name).Symbol is IMethodSymbol attributeCtorSymbol) || !attributeCtorSymbol.ContainingType.IsAny(ExportAttributes))
-                    {
-                        return;
-                    }
-
-                    var exportedType = GetExportedTypeSymbol(attributeSyntax.ArgumentList?.Arguments, c.SemanticModel);
-                    var attributeTargetType = GetAttributeTargetSymbol(attributeSyntax, c.SemanticModel);
-
-                    if (exportedType != null && attributeTargetType != null && !IsOfExportType(attributeTargetType, exportedType))
-                    {
-                        var action = exportedType.IsInterface()
-                            ? ActionForInterface
-                            : ActionForClass;
-
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, attributeSyntax.GetLocation(), action,
-                            exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
-                            attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)));
-                    }
-                },
-                SyntaxKind.Attribute);
+        protected override SyntaxNode GetAttributeName(AttributeSyntax attributeSyntax) =>
+            attributeSyntax.Name;
 
         protected override bool IsClassOrRecordSyntax(SyntaxNode syntaxNode) =>
             syntaxNode.IsKind(SyntaxKind.ClassStatement);
