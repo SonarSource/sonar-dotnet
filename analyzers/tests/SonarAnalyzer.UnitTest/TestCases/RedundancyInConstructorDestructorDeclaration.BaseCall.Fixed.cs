@@ -98,4 +98,11 @@ namespace Tests.Diagnostics
     {
         private int i;
         LambdaCtor() => i++;     }
+
+    class LambdaCtorWithLineEnding
+    {
+        private int i;
+        LambdaCtorWithLineEnding()
+            => i++;
+    }
 }
