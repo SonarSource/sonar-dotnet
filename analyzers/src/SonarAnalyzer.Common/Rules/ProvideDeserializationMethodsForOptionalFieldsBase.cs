@@ -29,53 +29,55 @@ namespace SonarAnalyzer.Rules.Common
     public abstract class ProvideDeserializationMethodsForOptionalFieldsBase : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3926";
-        protected const string MessageFormat = "{0}";
-        protected const string BothDeserializationMethodsMissing = "Add deserialization event handlers.";
-        protected const string OnDeserializedMethodMissing = "Add the missing 'OnDeserializedAttribute' event handler.";
-        protected const string OnDeserializingMethodMissing = "Add the missing 'OnDeserializingAttribute' event handler.";
+        private const string MessageFormat = "{0}";
+        private const string BothDeserializationMethodsMissing = "Add deserialization event handlers.";
+        private const string OnDeserializedMethodMissing = "Add the missing 'OnDeserializedAttribute' event handler.";
+        private const string OnDeserializingMethodMissing = "Add the missing 'OnDeserializingAttribute' event handler.";
 
-        internal static readonly ImmutableArray<KnownType> AttributesToFind =
-            ImmutableArray.Create(
-                KnownType.System_Runtime_Serialization_OptionalFieldAttribute,
-                KnownType.System_Runtime_Serialization_OnDeserializingAttribute,
-                KnownType.System_Runtime_Serialization_OnDeserializedAttribute
-            );
+        private static readonly ImmutableArray<KnownType> AttributesToFind = ImmutableArray.Create(KnownType.System_Runtime_Serialization_OptionalFieldAttribute,
+                                                                                                   KnownType.System_Runtime_Serialization_OnDeserializingAttribute,
+                                                                                                   KnownType.System_Runtime_Serialization_OnDeserializedAttribute);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade Language { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected ProvideDeserializationMethodsForOptionalFieldsBase()
         {
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        }
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
-                    var namedTypeSymbol = (INamedTypeSymbol)c.Symbol;
-                    if (namedTypeSymbol.TypeKind != TypeKind.Class &&
-                        namedTypeSymbol.TypeKind != TypeKind.Struct)
+                    var symbol = (INamedTypeSymbol)c.Symbol;
+                    if (!symbol.IsClassOrStruct())
                     {
                         return;
                     }
 
-                    var watchedAttributes = namedTypeSymbol.GetMembers()
-                        .SelectMany(m => m.GetAttributes(AttributesToFind))
-                        .ToList();
+                    var watchedAttributes = symbol.GetMembers()
+                                                  .SelectMany(m => m.GetAttributes(AttributesToFind))
+                                                  .ToList();
 
                     var errorMessage = GetErrorMessage(watchedAttributes);
-                    var declaringSyntax = namedTypeSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+                    var declaringSyntax = symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
 
-                    if (errorMessage == null ||
-                        declaringSyntax == null)
+                    if (errorMessage == null || declaringSyntax == null)
                     {
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0],
-                        GetNamedTypeIdentifierLocation(declaringSyntax),
-                        errorMessage));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], GetNamedTypeIdentifierLocation(declaringSyntax), errorMessage));
                 },
                 SymbolKind.NamedType);
-        }
 
         protected abstract Location GetNamedTypeIdentifierLocation(SyntaxNode node);
 
-        private string GetErrorMessage(IEnumerable<AttributeData> attributes)
+        private static string GetErrorMessage(IReadOnlyCollection<AttributeData> attributes)
         {
             var hasOptionalFieldAttribute = attributes.Any(attribute =>
                 attribute.AttributeClass.Is(KnownType.System_Runtime_Serialization_OptionalFieldAttribute));
@@ -84,8 +86,7 @@ namespace SonarAnalyzer.Rules.Common
             var hasOnDeserializedAttribute = attributes.Any(attribute =>
                 attribute.AttributeClass.Is(KnownType.System_Runtime_Serialization_OnDeserializedAttribute));
 
-            if (!hasOptionalFieldAttribute ||
-                hasOnDeserializingAttribute && hasOnDeserializedAttribute)
+            if (!hasOptionalFieldAttribute || (hasOnDeserializingAttribute && hasOnDeserializedAttribute))
             {
                 return null;
             }

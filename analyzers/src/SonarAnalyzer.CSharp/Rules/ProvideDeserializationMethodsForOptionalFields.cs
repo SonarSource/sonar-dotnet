@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -33,23 +31,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ProvideDeserializationMethodsForOptionalFields : ProvideDeserializationMethodsForOptionalFieldsBase
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
-        protected override Location GetNamedTypeIdentifierLocation(SyntaxNode node)
-        {
-            switch (node.Kind())
-            {
-                case SyntaxKind.ClassDeclaration:
-                    return ((ClassDeclarationSyntax)node).Identifier.GetLocation();
-
-                case SyntaxKind.StructDeclaration:
-                    return ((StructDeclarationSyntax)node).Identifier.GetLocation();
-
-                default:
-                    return null;
-            }
-        }
+        protected override Location GetNamedTypeIdentifierLocation(SyntaxNode node) =>
+            ((TypeDeclarationSyntax)node).Identifier.GetLocation();
     }
 }

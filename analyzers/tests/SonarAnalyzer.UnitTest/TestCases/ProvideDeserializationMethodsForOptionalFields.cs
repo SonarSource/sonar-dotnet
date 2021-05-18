@@ -52,4 +52,10 @@ namespace Tests.Diagnostics
             // Set optionalField if dependent on other deserialized values.
         }
     }
+
+    public struct NoncompliantStruct // Noncompliant {{Add deserialization event handlers.}}
+    {
+        [OptionalField]
+        int optionalField;
+    }
 }

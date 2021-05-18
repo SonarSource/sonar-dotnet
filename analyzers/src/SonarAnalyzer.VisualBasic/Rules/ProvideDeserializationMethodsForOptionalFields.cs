@@ -18,10 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -33,23 +31,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class ProvideDeserializationMethodsForOptionalFields : ProvideDeserializationMethodsForOptionalFieldsBase
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
-        protected override Location GetNamedTypeIdentifierLocation(SyntaxNode node)
-        {
-            switch (node.Kind())
-            {
-                case SyntaxKind.ClassStatement:
-                    return ((ClassStatementSyntax)node).Identifier.GetLocation();
-
-                case SyntaxKind.StructureStatement:
-                    return ((StructureStatementSyntax)node).Identifier.GetLocation();
-
-                default:
-                    return null;
-            }
-        }
+        protected override Location GetNamedTypeIdentifierLocation(SyntaxNode node) =>
+            ((TypeStatementSyntax)node).Identifier.GetLocation();
     }
 }
