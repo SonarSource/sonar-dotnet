@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -65,6 +66,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(VerifyPropertyDeclaration, SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(VerifyInvocationAndCreation, SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(VerifyRecordDeclaration, SyntaxKindEx.RecordDeclaration);
         }
 
         private static void VerifyMethodDeclaration(SyntaxNodeAnalysisContext context)
@@ -116,6 +119,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleS3996, propertyDeclaration.Type.GetLocation()));
             }
         }
+
+        private static void VerifyRecordDeclaration(SyntaxNodeAnalysisContext context)
+        {
+            var declaration = (RecordDeclarationSyntaxWrapper)context.Node;
+
+            if (context.ContainingSymbol.Kind == SymbolKind.NamedType
+                && HasStringUriParams(declaration.ParameterList, context.SemanticModel))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleS3996, declaration.SyntaxNode.GetLocation()));
+            }
+        }
+
+        private static bool HasStringUriParams(BaseParameterListSyntax parameterList, SemanticModel model) =>
+            parameterList != null
+            && parameterList.Parameters.Any(parameter => NameContainsUri(parameter.Identifier.Text)
+                                                         && model.GetDeclaredSymbol(parameter).IsType(KnownType.System_String));
 
         private static void VerifyInvocationAndCreation(SyntaxNodeAnalysisContext context)
         {
