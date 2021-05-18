@@ -47,8 +47,7 @@ namespace SonarAnalyzer.Helpers
             container.SyntaxNode.DescendantNodes(IsNodeContainerTypeDeclaration)
                 .Where(node => kinds.Contains(node.Kind()));
 
-        public override IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableFieldLikeDeclarations(
-    ISet<SyntaxKind> kinds, Accessibility maxAcessibility)
+        public override IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
         {
             var fieldLikeNodes = TypeDeclarations
                 .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
@@ -62,7 +61,7 @@ namespace SonarAnalyzer.Helpers
             return fieldLikeNodes
                 .SelectMany(fieldLikeNode => fieldLikeNode.SyntaxNode.Declarators
                     .Select(variable => SelectNodeTuple(variable, fieldLikeNode.SemanticModel))
-                    .Where(tuple => IsRemovable(tuple.Symbol, maxAcessibility)));
+                    .Where(tuple => IsRemovable(tuple.Symbol, maxAccessibility)));
         }
 
         internal override TypeBlockSyntax GetOwnerOfSubnodes(TypeStatementSyntax node) =>
