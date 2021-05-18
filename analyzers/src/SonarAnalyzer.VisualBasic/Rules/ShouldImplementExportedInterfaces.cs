@@ -30,16 +30,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<ArgumentSyntax, ExpressionSyntax, AttributeSyntax, SyntaxKind>
+    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<ArgumentSyntax, SyntaxKind>
     {
         protected override SyntaxKind[] SyntaxKinds => new[] { SyntaxKind.Attribute };
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override SeparatedSyntaxList<ArgumentSyntax>? GetAttributeArguments(AttributeSyntax attributeSyntax) =>
-            attributeSyntax.ArgumentList?.Arguments;
+        protected override SeparatedSyntaxList<ArgumentSyntax>? GetAttributeArguments(SyntaxNode attributeSyntax) =>
+            (attributeSyntax as AttributeSyntax)?.ArgumentList?.Arguments;
 
-        protected override SyntaxNode GetAttributeName(AttributeSyntax attributeSyntax) =>
-            attributeSyntax.Name;
+        protected override SyntaxNode GetAttributeName(SyntaxNode attributeSyntax) =>
+            (attributeSyntax as AttributeSyntax)?.Name;
 
         protected override bool IsClassOrRecordSyntax(SyntaxNode syntaxNode) =>
             syntaxNode.IsKind(SyntaxKind.ClassStatement);
@@ -47,10 +47,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override string GetIdentifier(ArgumentSyntax argumentSyntax) =>
             (argumentSyntax as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier.ValueText;
 
-        protected override ExpressionSyntax GetExpression(ArgumentSyntax argumentSyntax) =>
+        protected override SyntaxNode GetExpression(ArgumentSyntax argumentSyntax) =>
             argumentSyntax?.GetExpression();
 
-        protected override SyntaxNode GetTypeOfOrGetTypeExpression(ExpressionSyntax expressionSyntax) =>
+        protected override SyntaxNode GetTypeOfOrGetTypeExpression(SyntaxNode expressionSyntax) =>
             (expressionSyntax as GetTypeExpressionSyntax)?.Type;
     }
 }

@@ -29,19 +29,18 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<AttributeArgumentSyntax, ExpressionSyntax, AttributeSyntax, SyntaxKind>
+    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<AttributeArgumentSyntax, SyntaxKind>
     {
         protected override SyntaxKind[] SyntaxKinds => new[] { SyntaxKind.Attribute };
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SeparatedSyntaxList<AttributeArgumentSyntax>? GetAttributeArguments(AttributeSyntax attributeSyntax) =>
-            attributeSyntax.ArgumentList?.Arguments;
+        protected override SeparatedSyntaxList<AttributeArgumentSyntax>? GetAttributeArguments(SyntaxNode attributeSyntax) =>
+            (attributeSyntax as AttributeSyntax)?.ArgumentList?.Arguments;
 
-        protected override SyntaxNode GetAttributeName(AttributeSyntax attributeSyntax) =>
-            attributeSyntax.Name;
+        protected override SyntaxNode GetAttributeName(SyntaxNode attributeSyntax) =>
+            (attributeSyntax as AttributeSyntax)?.Name;
 
         protected override bool IsClassOrRecordSyntax(SyntaxNode syntaxNode) =>
             syntaxNode.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
@@ -49,10 +48,10 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override string GetIdentifier(AttributeArgumentSyntax argumentSyntax) =>
             argumentSyntax?.NameColon?.Name.Identifier.ValueText;
 
-        protected override ExpressionSyntax GetExpression(AttributeArgumentSyntax argumentSyntax) =>
+        protected override SyntaxNode GetExpression(AttributeArgumentSyntax argumentSyntax) =>
             argumentSyntax?.Expression;
 
-        protected override SyntaxNode GetTypeOfOrGetTypeExpression(ExpressionSyntax expressionSyntax) =>
+        protected override SyntaxNode GetTypeOfOrGetTypeExpression(SyntaxNode expressionSyntax) =>
             (expressionSyntax as TypeOfExpressionSyntax)?.Type;
     }
 }

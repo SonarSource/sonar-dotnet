@@ -27,10 +27,8 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.Common
 {
-    public abstract class ShouldImplementExportedInterfacesBase<TArgumentSyntax, TExpressionSyntax, TAttributeSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ShouldImplementExportedInterfacesBase<TArgumentSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer
         where TArgumentSyntax : SyntaxNode
-        where TExpressionSyntax : SyntaxNode
-        where TAttributeSyntax : SyntaxNode
         where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S4159";
@@ -45,14 +43,14 @@ namespace SonarAnalyzer.Rules.Common
                 KnownType.System_ComponentModel_Composition_InheritedExportAttribute);
 
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
-        protected abstract SeparatedSyntaxList<TArgumentSyntax>? GetAttributeArguments(TAttributeSyntax attributeSyntax);
-        protected abstract SyntaxNode GetAttributeName(TAttributeSyntax attributeSyntax);
+        protected abstract SeparatedSyntaxList<TArgumentSyntax>? GetAttributeArguments(SyntaxNode attributeSyntax);
+        protected abstract SyntaxNode GetAttributeName(SyntaxNode attributeSyntax);
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract bool IsClassOrRecordSyntax(SyntaxNode syntaxNode);
         protected abstract string GetIdentifier(TArgumentSyntax argumentSyntax);
-        protected abstract TExpressionSyntax GetExpression(TArgumentSyntax argumentSyntax);
+        protected abstract SyntaxNode GetExpression(TArgumentSyntax argumentSyntax);
         // Retrieve the expression inside of the typeof()/GetType() (e.g. typeof(Foo) => Foo)
-        protected abstract SyntaxNode GetTypeOfOrGetTypeExpression(TExpressionSyntax expressionSyntax);
+        protected abstract SyntaxNode GetTypeOfOrGetTypeExpression(SyntaxNode expressionSyntax);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -63,7 +61,7 @@ namespace SonarAnalyzer.Rules.Common
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var attributeSyntax = (TAttributeSyntax)c.Node;
+                    var attributeSyntax = c.Node;
 
                     if (!(c.SemanticModel.GetSymbolInfo(GetAttributeName(attributeSyntax)).Symbol is IMethodSymbol attributeCtorSymbol) || !attributeCtorSymbol.ContainingType.IsAny(exportAttributes))
                     {
@@ -99,7 +97,7 @@ namespace SonarAnalyzer.Rules.Common
             }
 
             var arguments = attributeArguments.Value;
-            if (arguments.Count == 0 || arguments.Count > 2)
+            if (arguments.Count != 1 && arguments.Count != 2)
             {
                 return null;
             }
