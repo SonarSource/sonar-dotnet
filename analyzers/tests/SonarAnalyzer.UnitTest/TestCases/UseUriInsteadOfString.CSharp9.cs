@@ -11,3 +11,8 @@ public record S3994
     public virtual string Url { get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
 //                 ^^^^^^
 }
+
+public record WithParams(string uri) // Noncompliant {{Change this property type to 'System.Uri'.}}
+{
+    public WithParams(string uri, bool somethingElse) : this(uri) { } // Noncompliant {{Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.}}
+}
