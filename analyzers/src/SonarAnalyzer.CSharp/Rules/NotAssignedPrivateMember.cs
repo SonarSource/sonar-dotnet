@@ -44,11 +44,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const string DiagnosticId = "S3459";
         private const string MessageFormat = "Remove unassigned {0} '{1}', or set its value.";
+        private const Accessibility MaxAccessibility = Accessibility.Private;
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        private static readonly Accessibility MaxAccessibility = Accessibility.Private;
 
         private static readonly ISet<SyntaxKind> PreOrPostfixOpSyntaxKinds = new HashSet<SyntaxKind>
         {
@@ -72,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var removableDeclarationCollector = new CSharpRemovableDeclarationCollector(namedType, c.Compilation);
 
-                    var allCandidateMembers = RetrieveFielAndPropertyDeclarations(removableDeclarationCollector);
+                    var allCandidateMembers = GetCandidateDeclarations(removableDeclarationCollector);
                     if (!allCandidateMembers.Any())
                     {
                         return;
@@ -89,33 +88,31 @@ namespace SonarAnalyzer.Rules.CSharp
                         var field = candidateMember.SyntaxNode as VariableDeclaratorSyntax;
                         var property = candidateMember.SyntaxNode as PropertyDeclarationSyntax;
 
-                        var memberType = field != null ? "field" : "auto-property";
+                        var memberType = field == null ? "auto-property" : "field";
 
-                        var location = field != null
-                            ? field.Identifier.GetLocation()
-                            : property.Identifier.GetLocation();
+                        var location = field == null
+                            ? property.Identifier.GetLocation()
+                            : field.Identifier.GetLocation();
 
                         c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType, candidateMember.Symbol.Name));
                     }
                 },
                 SymbolKind.NamedType);
 
-        private static List<SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol>> RetrieveFielAndPropertyDeclarations(CSharpRemovableDeclarationCollector removableDeclarationCollector)
+        private static List<SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol>> GetCandidateDeclarations(CSharpRemovableDeclarationCollector removableDeclarationCollector)
         {
-            var candidateFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(
-                        new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, MaxAccessibility)
-                        .Where(tuple => !IsInitializedOrFixed((VariableDeclaratorSyntax)tuple.SyntaxNode) &&
-                                        !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
+            var candidateFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, MaxAccessibility)
+                                                               .Where(tuple => !IsInitializedOrFixed((VariableDeclaratorSyntax)tuple.SyntaxNode)
+                                                                               && !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
 
-            var candidateProperties = removableDeclarationCollector.GetRemovableDeclarations(
-                        new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, MaxAccessibility)
-                        .Where(tuple => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)tuple.SyntaxNode) &&
-                                        !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
+            var candidateProperties = removableDeclarationCollector.GetRemovableDeclarations(new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, MaxAccessibility)
+                                                                   .Where(tuple => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)tuple.SyntaxNode)
+                                                                                   && !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
 
             return candidateFields.Concat(candidateProperties).ToList();
         }
 
-        private static bool TypeDefinitionShouldBeSkipped(INamedTypeSymbol namedType) =>
+        private static bool TypeDefinitionShouldBeSkipped(ITypeSymbol namedType) =>
             !namedType.IsClassOrStruct()
             || HasStructLayoutAttribute(namedType)
             || namedType.ContainingType != null;

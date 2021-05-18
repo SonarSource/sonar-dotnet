@@ -67,16 +67,16 @@ namespace SonarAnalyzer.Helpers
         internal abstract TOwnerOfSubnodes GetOwnerOfSubnodes(TDeclaration node);
 
         public IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableDeclarations(
-            ISet<TSyntaxKind> kinds, Accessibility maxAcessibility)
+            ISet<TSyntaxKind> kinds, Accessibility maxAccessibility)
         {
             return TypeDeclarations
                 .SelectMany(container => SelectMatchingDeclarations(container, kinds)
                     .Select(node => SelectNodeTuple(node, container.SemanticModel)))
-                    .Where(tuple => IsRemovable(tuple.Symbol, maxAcessibility));
+                    .Where(tuple => IsRemovable(tuple.Symbol, maxAccessibility));
         }
 
         public abstract IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableFieldLikeDeclarations(
-            ISet<TSyntaxKind> kinds, Accessibility maxAcessibility);
+            ISet<TSyntaxKind> kinds, Accessibility maxAccessibility);
 
         public static bool IsRemovable(IMethodSymbol methodSymbol, Accessibility maxAccessibility)
         {
