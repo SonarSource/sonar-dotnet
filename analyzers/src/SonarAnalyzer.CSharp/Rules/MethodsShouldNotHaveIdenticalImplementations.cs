@@ -19,8 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -29,51 +27,31 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class MethodsShouldNotHaveIdenticalImplementations
-        : MethodsShouldNotHaveIdenticalImplementationsBase<IMethodDeclaration, SyntaxKind>
+    public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShouldNotHaveIdenticalImplementationsBase<IMethodDeclaration, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-
-        protected override SyntaxKind ClassDeclarationSyntaxKind => SyntaxKind.ClassDeclaration;
-
-        protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node)
-            => ((ClassDeclarationSyntax)node).GetMethodDeclarations();
-
-        protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod)
+        protected override SyntaxKind[] SyntaxKinds { get; } =
         {
-            return firstMethod.Body != null &&
-                secondMethod.Body != null &&
-                firstMethod.Body.Statements.Count >= 2 &&
-                firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText &&
-                HaveSameParameters(firstMethod.ParameterList?.Parameters, secondMethod.ParameterList?.Parameters) &&
-                firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
+            SyntaxKind.ClassDeclaration,
+            SyntaxKindEx.RecordDeclaration,
+        };
 
-            static bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
-            {
-                if (leftParameters == null && rightParameters == null)
-                {
-                    return true;
-                }
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-                if (leftParameters == null ||
-                    rightParameters == null ||
-                    leftParameters.Value.Count != rightParameters.Value.Count)
-                {
-                    return false;
-                }
+        protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node) =>
+            ((TypeDeclarationSyntax)node).GetMethodDeclarations();
 
-                return leftParameters.Value
-                    .Zip(rightParameters.Value, (p1, p2) => new { p1, p2 })
-                    .All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
-            }
-        }
+        protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod) =>
+            firstMethod.Body != null
+            && firstMethod.Body.Statements.Count > 1
+            && firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText
+            && HaveSameParameters<ParameterSyntax>(firstMethod.ParameterList.Parameters, secondMethod.ParameterList.Parameters)
+            && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
 
         protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) => method.Identifier;
     }

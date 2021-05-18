@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
@@ -30,16 +31,30 @@ namespace SonarAnalyzer.Rules
         where TLanguageKindEnum : struct
     {
         protected const string DiagnosticId = "S4144";
-        protected const string MessageFormat = "Update this method so that its implementation is not identical to '{0}'.";
+        private const string MessageFormat = "Update this method so that its implementation is not identical to '{0}'.";
 
-        protected abstract TLanguageKindEnum ClassDeclarationSyntaxKind { get; }
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        private readonly DiagnosticDescriptor rule;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
+        protected abstract ILanguageFacade<TLanguageKindEnum> Language { get; }
+        protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
+        protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
+        protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
+        protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected MethodsShouldNotHaveIdenticalImplementationsBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                    {
+                        return;
+                    }
+
                     var methods = GetMethodDeclarations(c.Node).ToList();
 
                     var alreadyHandledMethods = new HashSet<TMethodDeclarationSyntax>();
@@ -54,8 +69,8 @@ namespace SonarAnalyzer.Rules
                         alreadyHandledMethods.Add(method);
 
                         var duplicates = methods.Except(alreadyHandledMethods)
-                            .Where(m => AreDuplicates(method, m))
-                            .ToList();
+                                                .Where(m => AreDuplicates(method, m))
+                                                .ToList();
 
                         alreadyHandledMethods.UnionWith(duplicates);
 
@@ -66,13 +81,22 @@ namespace SonarAnalyzer.Rules
                                 messageArgs: GetMethodIdentifier(method).ValueText));
                         }
                     }
-                }, ClassDeclarationSyntaxKind);
+                }, SyntaxKinds);
+
+        protected static bool HaveSameParameters<TSyntax>(SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
+            where TSyntax : SyntaxNode
+        {
+            if (leftParameters == null && rightParameters == null)
+            {
+                return true;
+            }
+
+            if (leftParameters == null || rightParameters == null || leftParameters.Value.Count != rightParameters.Value.Count)
+            {
+                return false;
+            }
+
+            return leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 }).All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
         }
-
-        protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
-
-        protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
-
-        protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
     }
 }

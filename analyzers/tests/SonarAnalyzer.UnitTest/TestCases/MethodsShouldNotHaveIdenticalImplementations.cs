@@ -39,6 +39,12 @@ namespace Tests.Diagnostics
             Console.WriteLine("different");
         }
 
+        void Foo1(string arg1)
+        {
+            string s = arg1;
+            Console.WriteLine("Result: {0}", s);
+        }
+
 
         int DiffBySignature1(int arg1)
         {

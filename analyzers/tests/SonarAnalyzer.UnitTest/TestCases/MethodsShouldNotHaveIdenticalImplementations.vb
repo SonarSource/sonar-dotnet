@@ -3,6 +3,12 @@
 Namespace Tests.Diagnostics
     Class Program
 
+        Sub SubFirstNoParentheses
+            Dim s As String = "test"
+            Dim k As String = "test"
+            Console.WriteLine("Result: {0}", s)
+        End Sub
+
         Sub Foo1()
 '           ^^^^ Secondary
 '           ^^^^ Secondary@-1
@@ -60,6 +66,10 @@ Namespace Tests.Diagnostics
             Return arg1
         End Function
 
+        Sub Foo1(arg1 As String)
+            Dim s As String = arg1
+            Console.WriteLine("Result: {0}", s)
+        End Sub
 
         Sub Bar1()
             Throw New NotImplementedException()
@@ -86,7 +96,7 @@ Namespace Tests.Diagnostics
             Return val.ToString() ' Compliant because we ignore one liner
         End Function
 
-        Sub SubNoParentheses
+        Sub SubSecondNoParentheses
             Dim s As String = "test"
             Console.WriteLine("Result: {0}", s)
         End Sub
