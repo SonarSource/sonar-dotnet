@@ -66,6 +66,10 @@ Namespace Tests.Diagnostics
             Return arg1
         End Function
 
+        Sub Foo1(arg1 As String)
+            Dim s As String = arg1
+            Console.WriteLine("Result: {0}", s)
+        End Sub
 
         Sub Bar1()
             Throw New NotImplementedException()
