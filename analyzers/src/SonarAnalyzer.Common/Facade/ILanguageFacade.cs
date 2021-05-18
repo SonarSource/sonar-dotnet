@@ -25,18 +25,21 @@ using SonarAnalyzer.Helpers.Facade;
 
 namespace SonarAnalyzer.Helpers
 {
-    public interface ILanguageFacade<TSyntaxKind>
-        where TSyntaxKind : struct
+    public interface ILanguageFacade
     {
         AssignmentFinder AssignmentFinder { get; }
         StringComparison NameComparison { get; }
         GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         IExpressionNumericConverter ExpressionNumericConverter { get; }
+        ResourceManager RspecResources { get; }
+        IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
+    }
+
+    public interface ILanguageFacade<TSyntaxKind> : ILanguageFacade
+        where TSyntaxKind : struct
+    {
         SyntaxFacade<TSyntaxKind> Syntax { get; }
         ISyntaxKindFacade<TSyntaxKind> SyntaxKind { get; }
         ITrackerFacade<TSyntaxKind> Tracker { get; }
-        ResourceManager RspecResources { get; }
-
-        IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
     }
 }

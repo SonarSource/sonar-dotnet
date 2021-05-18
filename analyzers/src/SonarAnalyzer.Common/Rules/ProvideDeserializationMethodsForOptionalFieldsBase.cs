@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.Common
     public abstract class ProvideDeserializationMethodsForOptionalFieldsBase : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3926";
-        protected const string MessageFormat = "{0}";
+        private const string MessageFormat = "{0}";
         private const string BothDeserializationMethodsMissing = "Add deserialization event handlers.";
         private const string OnDeserializedMethodMissing = "Add the missing 'OnDeserializedAttribute' event handler.";
         private const string OnDeserializingMethodMissing = "Add the missing 'OnDeserializingAttribute' event handler.";
@@ -37,6 +37,17 @@ namespace SonarAnalyzer.Rules.Common
         private static readonly ImmutableArray<KnownType> AttributesToFind = ImmutableArray.Create(KnownType.System_Runtime_Serialization_OptionalFieldAttribute,
                                                                                                    KnownType.System_Runtime_Serialization_OnDeserializingAttribute,
                                                                                                    KnownType.System_Runtime_Serialization_OnDeserializedAttribute);
+
+        private readonly DiagnosticDescriptor rule;
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected abstract ILanguageFacade Language { get; }
+
+        protected ProvideDeserializationMethodsForOptionalFieldsBase()
+        {
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
