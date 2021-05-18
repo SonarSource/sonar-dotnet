@@ -37,6 +37,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RedundancyInConstructorDestructorDeclaration_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs", new CS.RedundancyInConstructorDestructorDeclaration());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp9() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs",
+                                   @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.Fixed.cs",
+                                   new CS.RedundancyInConstructorDestructorDeclaration(),
+                                   new CS.RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
+                                   CS.RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveBaseCall,
+                                   ParseOptionsHelper.FromCSharp9);
 #endif
 
         [TestMethod]
