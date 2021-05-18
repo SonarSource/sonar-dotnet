@@ -30,16 +30,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<ArgumentSyntax, SyntaxKind>
+    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<ArgumentSyntax, AttributeSyntax, SyntaxKind>
     {
         protected override SyntaxKind[] SyntaxKinds => new[] { SyntaxKind.Attribute };
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override SeparatedSyntaxList<ArgumentSyntax>? GetAttributeArguments(SyntaxNode attributeSyntax) =>
-            (attributeSyntax as AttributeSyntax)?.ArgumentList?.Arguments;
+        protected override SeparatedSyntaxList<ArgumentSyntax>? GetAttributeArguments(AttributeSyntax attributeSyntax) =>
+            attributeSyntax.ArgumentList?.Arguments;
 
-        protected override SyntaxNode GetAttributeName(SyntaxNode attributeSyntax) =>
-            (attributeSyntax as AttributeSyntax)?.Name;
+        protected override SyntaxNode GetAttributeName(AttributeSyntax attributeSyntax) =>
+            attributeSyntax.Name;
 
         protected override bool IsClassOrRecordSyntax(SyntaxNode syntaxNode) =>
             syntaxNode.IsKind(SyntaxKind.ClassStatement);

@@ -27,8 +27,9 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.Common
 {
-    public abstract class ShouldImplementExportedInterfacesBase<TArgumentSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ShouldImplementExportedInterfacesBase<TArgumentSyntax, TAttributeSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer
         where TArgumentSyntax : SyntaxNode
+        where TAttributeSyntax : SyntaxNode
         where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S4159";
@@ -43,8 +44,8 @@ namespace SonarAnalyzer.Rules.Common
                 KnownType.System_ComponentModel_Composition_InheritedExportAttribute);
 
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
-        protected abstract SeparatedSyntaxList<TArgumentSyntax>? GetAttributeArguments(SyntaxNode attributeSyntax);
-        protected abstract SyntaxNode GetAttributeName(SyntaxNode attributeSyntax);
+        protected abstract SeparatedSyntaxList<TArgumentSyntax>? GetAttributeArguments(TAttributeSyntax attributeSyntax);
+        protected abstract SyntaxNode GetAttributeName(TAttributeSyntax attributeSyntax);
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract bool IsClassOrRecordSyntax(SyntaxNode syntaxNode);
         protected abstract string GetIdentifier(TArgumentSyntax argumentSyntax);
@@ -61,7 +62,7 @@ namespace SonarAnalyzer.Rules.Common
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var attributeSyntax = c.Node;
+                    var attributeSyntax = (TAttributeSyntax)c.Node;
 
                     if (!(c.SemanticModel.GetSymbolInfo(GetAttributeName(attributeSyntax)).Symbol is IMethodSymbol attributeCtorSymbol) || !attributeCtorSymbol.ContainingType.IsAny(exportAttributes))
                     {

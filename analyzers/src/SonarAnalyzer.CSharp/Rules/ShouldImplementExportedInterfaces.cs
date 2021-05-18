@@ -31,16 +31,16 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<AttributeArgumentSyntax, SyntaxKind>
+    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<AttributeArgumentSyntax, AttributeSyntax, SyntaxKind>
     {
         protected override SyntaxKind[] SyntaxKinds => new[] { SyntaxKind.Attribute };
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SeparatedSyntaxList<AttributeArgumentSyntax>? GetAttributeArguments(SyntaxNode attributeSyntax) =>
-            (attributeSyntax as AttributeSyntax)?.ArgumentList?.Arguments;
+        protected override SeparatedSyntaxList<AttributeArgumentSyntax>? GetAttributeArguments(AttributeSyntax attributeSyntax) =>
+            attributeSyntax.ArgumentList?.Arguments;
 
-        protected override SyntaxNode GetAttributeName(SyntaxNode attributeSyntax) =>
-            (attributeSyntax as AttributeSyntax)?.Name;
+        protected override SyntaxNode GetAttributeName(AttributeSyntax attributeSyntax) =>
+            attributeSyntax.Name;
 
         protected override bool IsClassOrRecordSyntax(SyntaxNode syntaxNode) =>
             syntaxNode.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
