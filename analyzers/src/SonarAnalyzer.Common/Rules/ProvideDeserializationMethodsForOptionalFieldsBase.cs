@@ -40,9 +40,9 @@ namespace SonarAnalyzer.Rules.Common
 
         private readonly DiagnosticDescriptor rule;
 
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
         protected abstract ILanguageFacade Language { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected ProvideDeserializationMethodsForOptionalFieldsBase()
         {
