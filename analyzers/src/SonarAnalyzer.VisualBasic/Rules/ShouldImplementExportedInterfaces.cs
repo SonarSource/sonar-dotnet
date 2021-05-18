@@ -32,7 +32,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<ArgumentSyntax, AttributeSyntax, SyntaxKind>
     {
-        protected override SyntaxKind[] SyntaxKinds => new[] { SyntaxKind.Attribute };
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override SeparatedSyntaxList<ArgumentSyntax>? GetAttributeArguments(AttributeSyntax attributeSyntax) =>
@@ -43,12 +42,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsClassOrRecordSyntax(SyntaxNode syntaxNode) =>
             syntaxNode.IsKind(SyntaxKind.ClassStatement);
-
-        protected override string GetIdentifier(ArgumentSyntax argumentSyntax) =>
-            (argumentSyntax as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier.ValueText;
-
-        protected override SyntaxNode GetExpression(ArgumentSyntax argumentSyntax) =>
-            argumentSyntax?.GetExpression();
 
         protected override SyntaxNode GetTypeOfOrGetTypeExpression(SyntaxNode expressionSyntax) =>
             (expressionSyntax as GetTypeExpressionSyntax)?.Type;

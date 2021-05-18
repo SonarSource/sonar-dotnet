@@ -33,7 +33,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<AttributeArgumentSyntax, AttributeSyntax, SyntaxKind>
     {
-        protected override SyntaxKind[] SyntaxKinds => new[] { SyntaxKind.Attribute };
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override SeparatedSyntaxList<AttributeArgumentSyntax>? GetAttributeArguments(AttributeSyntax attributeSyntax) =>
@@ -44,12 +43,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsClassOrRecordSyntax(SyntaxNode syntaxNode) =>
             syntaxNode.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
-
-        protected override string GetIdentifier(AttributeArgumentSyntax argumentSyntax) =>
-            argumentSyntax?.NameColon?.Name.Identifier.ValueText;
-
-        protected override SyntaxNode GetExpression(AttributeArgumentSyntax argumentSyntax) =>
-            argumentSyntax?.Expression;
 
         protected override SyntaxNode GetTypeOfOrGetTypeExpression(SyntaxNode expressionSyntax) =>
             (expressionSyntax as TypeOfExpressionSyntax)?.Type;

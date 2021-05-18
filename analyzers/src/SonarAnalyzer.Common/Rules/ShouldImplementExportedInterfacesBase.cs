@@ -43,13 +43,10 @@ namespace SonarAnalyzer.Rules.Common
                 KnownType.System_ComponentModel_Composition_ExportAttribute,
                 KnownType.System_ComponentModel_Composition_InheritedExportAttribute);
 
-        protected abstract TSyntaxKind[] SyntaxKinds { get; }
         protected abstract SeparatedSyntaxList<TArgumentSyntax>? GetAttributeArguments(TAttributeSyntax attributeSyntax);
         protected abstract SyntaxNode GetAttributeName(TAttributeSyntax attributeSyntax);
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract bool IsClassOrRecordSyntax(SyntaxNode syntaxNode);
-        protected abstract string GetIdentifier(TArgumentSyntax argumentSyntax);
-        protected abstract SyntaxNode GetExpression(TArgumentSyntax argumentSyntax);
         // Retrieve the expression inside of the typeof()/GetType() (e.g. typeof(Foo) => Foo)
         protected abstract SyntaxNode GetTypeOfOrGetTypeExpression(SyntaxNode expressionSyntax);
 
@@ -64,7 +61,8 @@ namespace SonarAnalyzer.Rules.Common
                 {
                     var attributeSyntax = (TAttributeSyntax)c.Node;
 
-                    if (!(c.SemanticModel.GetSymbolInfo(GetAttributeName(attributeSyntax)).Symbol is IMethodSymbol attributeCtorSymbol) || !attributeCtorSymbol.ContainingType.IsAny(exportAttributes))
+                    if (!(c.SemanticModel.GetSymbolInfo(GetAttributeName(attributeSyntax)).Symbol is IMethodSymbol attributeCtorSymbol)
+                        || !attributeCtorSymbol.ContainingType.IsAny(exportAttributes))
                     {
                         return;
                     }
@@ -83,7 +81,7 @@ namespace SonarAnalyzer.Rules.Common
                             attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)));
                     }
                 },
-                SyntaxKinds);
+                Language.SyntaxKind.Attribute);
 
         private static bool IsOfExportType(ITypeSymbol type, INamedTypeSymbol exportedType) =>
             type.GetSelfAndBaseTypes()
@@ -107,7 +105,7 @@ namespace SonarAnalyzer.Rules.Common
                                  ?? GetArgumentFromSingleArgumentAttribute(arguments)
                                  ?? GetArgumentFromDoubleArgumentAttribute(arguments, semanticModel);
 
-            var typeOfOrGetTypeExpression = GetExpression(argumentSyntax);
+            var typeOfOrGetTypeExpression = Language.Syntax.NodeExpression(argumentSyntax);
 
             var exportedTypeSyntax = GetTypeOfOrGetTypeExpression(typeOfOrGetTypeExpression);
             return exportedTypeSyntax == null ? null : semanticModel.GetSymbolInfo(exportedTypeSyntax).Symbol as INamedTypeSymbol;
@@ -118,8 +116,7 @@ namespace SonarAnalyzer.Rules.Common
             !IsClassOrRecordSyntax(syntaxNode.Parent?.Parent) ? null : semanticModel.GetDeclaredSymbol(syntaxNode.Parent.Parent) as ITypeSymbol;
 
         private TArgumentSyntax GetArgumentFromNamedArgument(IEnumerable<TArgumentSyntax> arguments) =>
-            // it's ok to use case insensitive even for C# because if that casing is incorrect the code won't compile
-            arguments.FirstOrDefault(x => "contractType".Equals(GetIdentifier(x), StringComparison.OrdinalIgnoreCase));
+            arguments.FirstOrDefault(x => "contractType".Equals(Language.Syntax.NodeIdentifier(x)?.ValueText, Language.NameComparison));
 
         private TArgumentSyntax GetArgumentFromDoubleArgumentAttribute(SeparatedSyntaxList<TArgumentSyntax> arguments, SemanticModel semanticModel)
         {
@@ -128,7 +125,7 @@ namespace SonarAnalyzer.Rules.Common
                 return null;
             }
 
-            var firstArgument = GetExpression(arguments[0]);
+            var firstArgument = Language.Syntax.NodeExpression(arguments[0]);
             if (firstArgument != null && semanticModel.GetConstantValue(firstArgument).Value is string)
             {
                 // Two arguments, second should be typeof expression
