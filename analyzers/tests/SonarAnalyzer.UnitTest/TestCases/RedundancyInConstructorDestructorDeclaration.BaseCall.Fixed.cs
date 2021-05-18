@@ -93,4 +93,9 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    class LambdaCtor
+    {
+        private int i;
+        LambdaCtor() => i++;     }
 }

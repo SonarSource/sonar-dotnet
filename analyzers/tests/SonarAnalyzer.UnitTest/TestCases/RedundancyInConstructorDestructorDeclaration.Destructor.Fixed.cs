@@ -103,4 +103,10 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    class LambdaCtor
+    {
+        private int i;
+        LambdaCtor() : base() => i++; // Fixed
+    }
 }
