@@ -36,20 +36,14 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3253";
         private const string MessageFormat = "Remove this redundant {0}.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckConstructorDeclaration,
-                SyntaxKind.ConstructorDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckDestructorDeclaration,
-                SyntaxKind.DestructorDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckConstructorDeclaration, SyntaxKind.ConstructorDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckDestructorDeclaration, SyntaxKind.DestructorDeclaration);
         }
 
         private static void CheckDestructorDeclaration(SyntaxNodeAnalysisContext context)
@@ -58,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (IsBodyEmpty(destructorDeclaration.Body))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, destructorDeclaration.GetLocation(), "destructor"));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, destructorDeclaration.GetLocation(), "destructor"));
             }
         }
 
@@ -68,39 +62,33 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (IsConstructorRedundant(constructorDeclaration, context.SemanticModel))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, constructorDeclaration.GetLocation(), "constructor"));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, constructorDeclaration.GetLocation(), "constructor"));
                 return;
             }
 
             var initializer = constructorDeclaration.Initializer;
-            if (initializer != null &&
-                IsInitializerRedundant(initializer))
+            if (initializer != null
+                && IsInitializerRedundant(initializer))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, initializer.GetLocation(), "'base()' call"));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, initializer.GetLocation(), "'base()' call"));
             }
         }
 
-        private static bool IsInitializerRedundant(ConstructorInitializerSyntax initializer)
-        {
-            return initializer.IsKind(SyntaxKind.BaseConstructorInitializer) &&
-                initializer.ArgumentList != null &&
-                !initializer.ArgumentList.Arguments.Any();
-        }
+        private static bool IsInitializerRedundant(ConstructorInitializerSyntax initializer) =>
+            initializer.IsKind(SyntaxKind.BaseConstructorInitializer)
+            && initializer.ArgumentList != null
+            && !initializer.ArgumentList.Arguments.Any();
 
-        private static bool IsConstructorRedundant(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel)
-        {
-            return IsConstructorParameterless(constructorDeclaration) &&
-                IsBodyEmpty(constructorDeclaration.Body) &&
-                (IsSinglePublicConstructor(constructorDeclaration, semanticModel) ||
-                constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword));
-        }
+        private static bool IsConstructorRedundant(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel) =>
+            IsConstructorParameterless(constructorDeclaration)
+            && IsBodyEmpty(constructorDeclaration.Body)
+            && (IsSinglePublicConstructor(constructorDeclaration, semanticModel)
+                || constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword));
 
-        private static bool IsSinglePublicConstructor(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel)
-        {
-            return constructorDeclaration.Modifiers.Any(SyntaxKind.PublicKeyword) &&
-                IsInitializerEmptyOrRedundant(constructorDeclaration.Initializer) &&
-                TypeHasExactlyOneConstructor(constructorDeclaration, semanticModel);
-        }
+        private static bool IsSinglePublicConstructor(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel) =>
+            constructorDeclaration.Modifiers.Any(SyntaxKind.PublicKeyword)
+            && IsInitializerEmptyOrRedundant(constructorDeclaration.Initializer)
+            && TypeHasExactlyOneConstructor(constructorDeclaration, semanticModel);
 
         private static bool IsInitializerEmptyOrRedundant(ConstructorInitializerSyntax initializer)
         {
@@ -109,27 +97,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            return initializer.ArgumentList != null &&
-                !initializer.ArgumentList.Arguments.Any() &&
-                initializer.ThisOrBaseKeyword.IsKind(SyntaxKind.BaseKeyword);
+            return initializer.ArgumentList.Arguments.Count == 0
+                   && initializer.ThisOrBaseKeyword.IsKind(SyntaxKind.BaseKeyword);
         }
 
-        private static bool TypeHasExactlyOneConstructor(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel)
+        private static bool TypeHasExactlyOneConstructor(BaseMethodDeclarationSyntax constructorDeclaration, SemanticModel semanticModel)
         {
             var symbol = semanticModel.GetDeclaredSymbol(constructorDeclaration);
-            return symbol != null &&
-                symbol.ContainingType.GetMembers().OfType<IMethodSymbol>().Count(m => m.MethodKind == MethodKind.Constructor) == 1;
+            return symbol != null
+                   && symbol.ContainingType
+                            .GetMembers()
+                            .OfType<IMethodSymbol>()
+                            .Count(m => m.MethodKind == MethodKind.Constructor && !m.IsImplicitlyDeclared) == 1;
         }
 
-        private static bool IsBodyEmpty(BlockSyntax block)
-        {
-            return block != null && !block.Statements.Any();
-        }
+        private static bool IsBodyEmpty(BlockSyntax block) =>
+            block != null && !block.Statements.Any();
 
-        private static bool IsConstructorParameterless(ConstructorDeclarationSyntax constructorDeclaration)
-        {
-            return constructorDeclaration.ParameterList != null &&
-                !constructorDeclaration.ParameterList.Parameters.Any();
-        }
+        private static bool IsConstructorParameterless(BaseMethodDeclarationSyntax constructorDeclaration) =>
+            constructorDeclaration.ParameterList.Parameters.Count == 0;
     }
 }

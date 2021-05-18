@@ -9,10 +9,9 @@ record RecordBase
 record Record : RecordBase
 {
     public Record()
-        : base() { } // Noncompliant
+{ } // Fixed
 
     public Record(string s)
-        : base() // Noncompliant
     {
     }
 
@@ -24,14 +23,14 @@ record Record : RecordBase
 
 record StaticCtor
 {
-    static StaticCtor() { } // Noncompliant
+    static StaticCtor() { } // Fixed
 }
 
 record Foo
 {
-    public Foo() { } // Noncompliant
+    public Foo() { } // Fixed
 
-    ~Foo() { } // Noncompliant {{Remove this redundant destructor.}}
+    ~Foo() { } // Fixed
 }
 
 record Bar
@@ -46,5 +45,5 @@ record FooWithParams(string name)
 {
     public FooWithParams() : this("a") { } // Compliant - has initializer with arguments
 
-    ~FooWithParams() { } // Noncompliant {{Remove this redundant destructor.}}
+    ~FooWithParams() { } // Fixed
 }

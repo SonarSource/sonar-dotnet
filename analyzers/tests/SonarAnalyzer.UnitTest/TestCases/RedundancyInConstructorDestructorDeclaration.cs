@@ -108,4 +108,18 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    class LambdaCtor
+    {
+        private int i;
+        LambdaCtor() : base() => i++; // Noncompliant
+    }
+
+    class LambdaCtorWithLineEnding
+    {
+        private int i;
+        LambdaCtorWithLineEnding()
+            : base() // Noncompliant
+            => i++;
+    }
 }
