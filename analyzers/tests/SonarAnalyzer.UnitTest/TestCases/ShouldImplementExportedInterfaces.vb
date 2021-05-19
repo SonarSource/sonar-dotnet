@@ -99,9 +99,8 @@ Namespace Classes
         Implements ISomething(Of T)
     End Class
 
-    <Export(contractName: Nothing)> ' Error [BC30198]
-                                    ' Error@-1 [BC30636]
-                                    ' Error@-2 [BC30035]
+                                                 ' Noncompliant@+1
+    <Export(ContractType:=GetType(IDisposable))> ' Error [BC31501]
     Class Exporting_InvalidSyntax
     End Class
 End Namespace
