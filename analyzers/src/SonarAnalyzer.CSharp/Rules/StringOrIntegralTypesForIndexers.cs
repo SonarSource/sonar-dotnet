@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class StringOrIntegralTypesForIndexers : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3876";
+        private const string DiagnosticId = "S3876";
         private const string MessageFormat = "Use string, integral, index or range type here, or refactor this indexer into a method.";
 
         private static readonly ImmutableArray<KnownType> AllowedIndexerTypes =
