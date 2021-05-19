@@ -56,3 +56,19 @@ record PositionalRecord(int SomeProperty)
     private T SomeGenericMethod<T>() where T : class { return null; } // Noncompliant
     private T SomeGenericMethod2<T>() where T : class { return null; }
 }
+
+interface InterfaceWithDefaultImplementation
+{
+    int SomeMethod() // Compliant, part of the interface
+    {
+        return 42;
+    }
+}
+
+class SomeClass : InterfaceWithDefaultImplementation
+{
+    public void Test()
+    {
+        ((InterfaceWithDefaultImplementation)this).SomeMethod();
+    }
+}

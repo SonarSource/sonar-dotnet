@@ -165,11 +165,11 @@ namespace SonarAnalyzer.Rules
                 t.ExceptWhen(t.ArgumentAtIndexIsConst(argumentIndex)));
         }
 
-        private void TrackInvocations(TrackerInput input, MemberDescriptor[] incovationsDescriptors, int argumentIndex)
+        private void TrackInvocations(TrackerInput input, MemberDescriptor[] invocationsDescriptors, int argumentIndex)
         {
             var t = Language.Tracker.Invocation;
             t.Track(input,
-                t.MatchMethod(incovationsDescriptors),
+                t.MatchMethod(invocationsDescriptors),
                 ArgumentAtIndexIsTracked(argumentIndex),
                 t.ExceptWhen(t.ArgumentAtIndexIsConstant(argumentIndex)));
         }

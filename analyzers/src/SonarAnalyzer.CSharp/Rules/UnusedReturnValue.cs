@@ -73,6 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Where(invocation => invocation.Symbol.OriginalDefinition.Equals(declaredPrivateMethodWithReturn.Symbol))
                     .ToList();
 
+                // Method invocation is noncompliant when there is at least 1 invocation of the method, and no invocation is using the return value. The case of 0 invocation is handled by S1144.
                 if (matchingInvocations.Any() && !matchingInvocations.Any(x => IsReturnValueUsed(x)))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, declaredPrivateMethodWithReturn.SyntaxNode.ReturnType.GetLocation()));
@@ -92,8 +93,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var matchingInvocations = GetLocalMatchingInvocations(topmostContainingMethod, localFunctionSymbol, context.SemanticModel);
-            // Method invocation is noncompliant when there is at least 1 inovcation of the method, and no invocation is using the return value. The case of 0 invocation is handled by S1144.
+            var matchingInvocations = GetLocalMatchingInvocations(topmostContainingMethod, localFunctionSymbol, context.SemanticModel).ToList();
+            // Method invocation is noncompliant when there is at least 1 invocation of the method, and no invocation is using the return value. The case of 0 invocation is handled by S1144.
             if (matchingInvocations.Any() && !matchingInvocations.Any(x => IsReturnValueUsed(x)))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, localFunctionSyntax.ReturnType.GetLocation()));
@@ -151,9 +152,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 SemanticModel = container.SemanticModel,
                                 Symbol = container.SemanticModel.GetDeclaredSymbol(node)
                             }))
-                        .Where(node =>
-                            node.Symbol != null
-                            && !node.Symbol.ReturnsVoid
-                            && CSharpRemovableDeclarationCollector.IsRemovable(node.Symbol, Accessibility.Private));
+                        .Where(node => node.Symbol is { ReturnsVoid: false }
+                                       && CSharpRemovableDeclarationCollector.IsRemovable(node.Symbol, Accessibility.Private));
     }
 }
