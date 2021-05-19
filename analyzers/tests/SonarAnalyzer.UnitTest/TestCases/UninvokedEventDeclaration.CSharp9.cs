@@ -35,3 +35,18 @@ public record EventInvocations
         MyAction6?.Invoke(this, EventArgs.Empty);
     }
 }
+
+public record EventInvocationsPositionalDeclaration(string Value)
+{
+    public event EventHandler MyEvent1;
+    public event EventHandler MyEvent2; // Noncompliant
+
+    public event Action<object, EventArgs> MyAction1;
+    public event Action<object, EventArgs> MyAction2; // Noncompliant
+
+    public void InvokeAll()
+    {
+        MyEvent1(this, EventArgs.Empty);
+        MyAction1(this, EventArgs.Empty);
+    }
+}
