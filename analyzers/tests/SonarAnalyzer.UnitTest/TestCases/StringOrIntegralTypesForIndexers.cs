@@ -151,4 +151,20 @@ namespace Tests.Diagnostics
         readonly int[] bar = new int[] { 1, 2, 3, 4, 5 };
         public int this[Index index] => bar[index];
     }
+
+    class Test20
+    {
+        public int this[IntPtr index] // Noncompliant
+        {
+            get { return 0; }
+        }
+    }
+
+    class Test21
+    {
+        public int this[UIntPtr index] // Noncompliant
+        {
+            get { return 0; }
+        }
+    }
 }
