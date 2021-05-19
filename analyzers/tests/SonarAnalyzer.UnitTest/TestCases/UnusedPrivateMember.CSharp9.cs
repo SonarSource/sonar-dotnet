@@ -58,6 +58,15 @@ namespace Tests.Diagnostics
         }
     }
 
+    public record PositionalRecord(string Value)
+    {
+        private int a; // Noncompliant
+        private int b;
+        public int B() => b;
+
+        private record UnusedNested(string Name, int CategoryId) { } // Noncompliant
+    }
+
     public class TargetTypedNew
     {
         private TargetTypedNew(int arg) // Noncompliant FP
