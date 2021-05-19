@@ -98,4 +98,10 @@ Namespace Classes
     Public Class OtherSomething(Of T)
         Implements ISomething(Of T)
     End Class
+
+    <Export(contractName: Nothing)> ' Error [BC30198]
+                                    ' Error@-1 [BC30636]
+                                    ' Error@-2 [BC30035]
+    Class Exporting_InvalidSyntax
+    End Class
 End Namespace

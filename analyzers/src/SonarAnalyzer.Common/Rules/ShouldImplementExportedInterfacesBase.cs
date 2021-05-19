@@ -124,8 +124,7 @@ namespace SonarAnalyzer.Rules.Common
                 return null;
             }
 
-            var firstArgument = Language.Syntax.NodeExpression(arguments[0]);
-            if (firstArgument != null && semanticModel.GetConstantValue(firstArgument).Value is string)
+            if (Language.Syntax.NodeExpression(arguments[0]) is { } firstArgument && semanticModel.GetConstantValue(firstArgument).Value is string)
             {
                 // Two arguments, second should be typeof expression
                 return arguments[1];
