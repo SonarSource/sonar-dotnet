@@ -56,6 +56,11 @@ namespace Classes
     {
     }
 
+    [Export()]
+    class Exporting_CornerCase
+    {
+    }
+
     [Export(1)] // Error [CS1503]
     [Export(1, typeof(IComparable))] // Error [CS1503]
     [Export(typeof(ASDASD))] // Error [CS0246]

@@ -46,6 +46,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxNode NodeExpression(SyntaxNode node) =>
             node switch
             {
+                AttributeArgumentSyntax attributeArgument => attributeArgument.Expression,
                 InvocationExpressionSyntax invocation => invocation.Expression,
                 LockStatementSyntax @lock => @lock.Expression,
                 null => null,
@@ -55,6 +56,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
             node switch
             {
+                AttributeArgumentSyntax attribute => attribute.NameColon?.Name.Identifier,
                 BaseTypeDeclarationSyntax baseType => baseType.Identifier,
                 DelegateDeclarationSyntax delegateDeclaration => delegateDeclaration.Identifier,
                 EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,

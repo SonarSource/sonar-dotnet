@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -26,56 +25,26 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.Common;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ShouldImplementExportedInterfaces :
-        ShouldImplementExportedInterfacesBase<AttributeArgumentSyntax, ExpressionSyntax, ClassDeclarationSyntax>
+    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<AttributeArgumentSyntax, AttributeSyntax, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var attributeSyntax = (AttributeSyntax)c.Node;
+        protected override SeparatedSyntaxList<AttributeArgumentSyntax>? GetAttributeArguments(AttributeSyntax attributeSyntax) =>
+            attributeSyntax.ArgumentList?.Arguments;
 
-                    if (!(c.SemanticModel.GetSymbolInfo(attributeSyntax.Name).Symbol is IMethodSymbol attributeCtorSymbol) ||
-                        !attributeCtorSymbol.ContainingType.IsAny(ExportAttributes))
-                    {
-                        return;
-                    }
+        protected override SyntaxNode GetAttributeName(AttributeSyntax attributeSyntax) =>
+            attributeSyntax.Name;
 
-                    var exportedType = GetExportedTypeSymbol(attributeSyntax.ArgumentList?.Arguments, c.SemanticModel);
-                    var attributeTargetType = GetAttributeTargetSymbol(attributeSyntax, c.SemanticModel);
+        protected override bool IsClassOrRecordSyntax(SyntaxNode syntaxNode) =>
+            syntaxNode.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
 
-                    if (exportedType != null &&
-                        attributeTargetType != null &&
-                        !IsOfExportType(attributeTargetType, exportedType))
-                    {
-                        var action = exportedType.IsInterface()
-                            ? ActionForInterface
-                            : ActionForClass;
-
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeSyntax.GetLocation(), action,
-                            exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
-                            attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)));
-                    }
-                },
-                SyntaxKind.Attribute);
-        }
-
-        protected override string GetIdentifier(AttributeArgumentSyntax argumentSyntax) =>
-            argumentSyntax?.NameColon?.Name.Identifier.ValueText;
-        protected override ExpressionSyntax GetExpression(AttributeArgumentSyntax argumentSyntax) =>
-            argumentSyntax?.Expression;
-        protected override SyntaxNode GetTypeOfOrGetTypeExpression(ExpressionSyntax expressionSyntax) =>
+        protected override SyntaxNode GetTypeOfOrGetTypeExpression(SyntaxNode expressionSyntax) =>
             (expressionSyntax as TypeOfExpressionSyntax)?.Type;
     }
 }

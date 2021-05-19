@@ -98,4 +98,9 @@ Namespace Classes
     Public Class OtherSomething(Of T)
         Implements ISomething(Of T)
     End Class
+
+                                                 ' Noncompliant@+1
+    <Export(ContractType:=GetType(IDisposable))> ' Error [BC31501]
+    Class Exporting_InvalidSyntax
+    End Class
 End Namespace

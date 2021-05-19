@@ -46,6 +46,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxNode NodeExpression(SyntaxNode node) =>
             node switch
             {
+                ArgumentSyntax argument => argument.GetExpression(),
                 InvocationExpressionSyntax invocation => invocation.Expression,
                 SyncLockStatementSyntax syncLock => syncLock.Expression,
                 null => null,
@@ -57,6 +58,7 @@ namespace SonarAnalyzer.Helpers.Facade
             {
                 EnumStatementSyntax enumStatement => enumStatement.Identifier,
                 EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
+                SimpleArgumentSyntax simpleArgument => simpleArgument.NameColonEquals?.Name.Identifier,
                 SimpleNameSyntax simpleName => simpleName.Identifier,
                 MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier,
                 ParameterSyntax parameter => parameter.Identifier.Identifier,
