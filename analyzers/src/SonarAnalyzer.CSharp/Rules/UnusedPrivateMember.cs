@@ -30,6 +30,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -46,16 +47,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor RuleS1144 = DiagnosticDescriptorBuilder.GetDescriptor(S1144DiagnosticId, S1144MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
         private static readonly DiagnosticDescriptor RuleS4487 = DiagnosticDescriptorBuilder.GetDescriptor(S4487DiagnosticId, S4487MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleS1144, RuleS4487);
-
         private static readonly ImmutableArray<KnownType> IgnoredTypes =
             ImmutableArray.Create(
                 KnownType.UnityEditor_AssetModificationProcessor,
                 KnownType.UnityEditor_AssetPostprocessor,
                 KnownType.UnityEngine_MonoBehaviour,
                 KnownType.UnityEngine_ScriptableObject,
-                KnownType.Microsoft_EntityFrameworkCore_Migrations_Migration
-            );
+                KnownType.Microsoft_EntityFrameworkCore_Migrations_Migration);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleS1144, RuleS4487);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(
@@ -308,6 +308,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public CSharpRemovableSymbolWalker(Func<SyntaxTree, bool, SemanticModel> getSemanticModel) =>
                 this.getSemanticModel = node => getSemanticModel(node.SyntaxTree, false);
+
+            // This override is needed because VisitRecordDeclaration is not available due to the Roslyn version.
+            public override void Visit(SyntaxNode node)
+            {
+                if (node.IsKind(SyntaxKindEx.RecordDeclaration))
+                {
+                    ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                }
+
+                base.Visit(node);
+            }
 
             public override void VisitClassDeclaration(ClassDeclarationSyntax node)
             {

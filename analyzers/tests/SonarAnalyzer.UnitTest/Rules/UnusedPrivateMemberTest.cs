@@ -209,7 +209,14 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.cs", new CS.UnusedPrivateMember());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UnusedPrivateMember.CSharp9.cs",
+                                                      new CS.UnusedPrivateMember());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs",
+                                                      new CS.UnusedPrivateMember());
 #endif
 
         [TestMethod]
