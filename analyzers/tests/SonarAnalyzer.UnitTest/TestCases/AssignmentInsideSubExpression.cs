@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -133,5 +134,20 @@ namespace Tests.Diagnostics
         }
 
         public bool GetBool() => true;
+    }
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/4446
+    abstract class WaitingInLoop
+    {
+        public async void Process()
+        {
+            bool evaluated;
+            while ((evaluated = await GetTask().ConfigureAwait(false))) // Noncompliant FP
+            {
+                // do processing
+            }
+        }
+
+        internal abstract Task<bool> GetTask();
     }
 }
