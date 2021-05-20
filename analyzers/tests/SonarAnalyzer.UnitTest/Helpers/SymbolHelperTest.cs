@@ -18,11 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -227,5 +229,37 @@ namespace NS
                 .IsKnownType(KnownType.System_Collections_Generic_List_T, testCode.SemanticModel)
                 .Should().BeFalse();
         }
+
+        [TestMethod]
+        public void IsAnyAttributeInOverridingChain_WhenMethodSymbolIsNull_ReturnsFalse() =>
+            SymbolHelper.IsAnyAttributeInOverridingChain((IMethodSymbol)null).Should().BeFalse();
+
+        [TestMethod]
+        public void IsAnyAttributeInOverridingChain_WhenPropertySymbolIsNull_ReturnsFalse() =>
+            SymbolHelper.IsAnyAttributeInOverridingChain((IPropertySymbol)null).Should().BeFalse();
+
+        [TestMethod]
+        public void AnyAttributeDerivesFrom_WhenSymbolIsNull_ReturnsFalse() =>
+            SymbolHelper.AnyAttributeDerivesFrom(null, KnownType.Void).Should().BeFalse();
+
+        [TestMethod]
+        public void GetAttributesForKnownType_WhenSymbolIsNull_ReturnsEmpty() =>
+            SymbolHelper.GetAttributes(null, KnownType.Void).Should().BeEmpty();
+
+        [TestMethod]
+        public void GetAttributesForKnownTypes_WhenSymbolIsNull_ReturnsEmpty() =>
+            SymbolHelper.GetAttributes(null, ImmutableArray.Create(KnownType.Void)).Should().BeEmpty();
+
+        [TestMethod]
+        public void GetParameters_WhenSymbolIsNotMethodOrProperty_ReturnsEmpty() =>
+            Mock.Of<ISymbol>(x => x.Kind == SymbolKind.Alias).GetParameters().Should().BeEmpty();
+
+        [TestMethod]
+        public void GetInterfaceMember_WhenSymbolIsNull_ReturnsEmpty() =>
+            ((ISymbol)null).GetInterfaceMember().Should().BeNull();
+
+        [TestMethod]
+        public void GetOverriddenMember_WhenSymbolIsNull_ReturnsEmpty() =>
+            ((ISymbol)null).GetOverriddenMember().Should().BeNull();
     }
 }
