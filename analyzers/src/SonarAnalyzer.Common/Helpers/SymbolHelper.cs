@@ -201,7 +201,7 @@ namespace SonarAnalyzer.Helpers
             method.MethodKind == MethodKind.Destructor;
 
         public static bool IsSameNamespace(this INamespaceSymbol namespace1, INamespaceSymbol namespace2) =>
-            namespace1.IsGlobalNamespace && namespace2.IsGlobalNamespace
+            (namespace1.IsGlobalNamespace && namespace2.IsGlobalNamespace)
             || (namespace1.Name.Equals(namespace2.Name)
                 && namespace1.ContainingNamespace != null
                 && namespace2.ContainingNamespace != null
