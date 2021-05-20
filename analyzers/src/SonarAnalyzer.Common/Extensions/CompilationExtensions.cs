@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
@@ -25,6 +27,31 @@ namespace SonarAnalyzer.Extensions
 {
     public static class CompilationExtensions
     {
+        // This list is duplicated in sonar-scanner-msbuild and sonar-security and should be manually synchronized after each change.
+        public static readonly ISet<string> TestAssemblyNames = new HashSet<string>
+        {
+            "DOTMEMORY.UNIT",
+            "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
+            "MICROSOFT.VISUALSTUDIO.QUALITYTOOLS.UNITTESTFRAMEWORK",
+            "MACHINE.SPECIFICATIONS",
+            "NUNIT.FRAMEWORK",
+            "NUNITLITE",
+            "TECHTALK.SPECFLOW",
+            "XUNIT", // Legacy Xunit (v1.x)
+            "XUNIT.CORE",
+            // Assertion
+            "FLUENTASSERTIONS",
+            "SHOULDLY",
+            // Mock
+            "FAKEITEASY",
+            "MOQ",
+            "NSUBSTITUTE",
+            "RHINO.MOCKS",
+            "TELERIK.JUSTMOCK"
+        };
+
+        private static readonly ConcurrentDictionary<AssemblyIdentity, bool> AssemblyToTestProjectMap = new ConcurrentDictionary<AssemblyIdentity, bool>();
+
         public static IMethodSymbol GetTypeMethod(this Compilation compilation, SpecialType type, string methodName) =>
             (IMethodSymbol)compilation.GetSpecialType(type)
                 .GetMembers(methodName)
@@ -34,5 +61,13 @@ namespace SonarAnalyzer.Extensions
             // There's no direct way of checking compilation target framework yet (09/2020).
             // See https://github.com/dotnet/roslyn/issues/3798
             compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
+
+        public static bool IsTest(this Compilation compilation) =>
+            compilation != null // We can't detect references => it's MAIN
+            // For each compilation we check if the generated assembly references a test project or not and cache the result for performance reasons.
+            && AssemblyToTestProjectMap.GetOrAdd(compilation.Assembly.Identity, identity => ReferencesTestAssembly(compilation));
+
+        private static bool ReferencesTestAssembly(Compilation compilation) =>
+            compilation.ReferencedAssemblyNames.Any(assembly => TestAssemblyNames.Contains(assembly.Name.ToUpperInvariant()));
     }
 }

@@ -28,6 +28,7 @@ using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Extensions;
 using static SonarAnalyzer.Helpers.DiagnosticDescriptorBuilder;
 
 namespace SonarAnalyzer.Helpers
