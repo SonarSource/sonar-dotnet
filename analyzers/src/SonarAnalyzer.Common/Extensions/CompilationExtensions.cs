@@ -21,7 +21,7 @@
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
     public static class CompilationExtensions
     {
