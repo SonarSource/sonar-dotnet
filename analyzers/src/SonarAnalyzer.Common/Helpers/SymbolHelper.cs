@@ -35,27 +35,16 @@ namespace SonarAnalyzer.Helpers
                 yield break;
             }
 
-            foreach (var typeMember in @namespace.GetTypeMembers().SelectMany(t => GetAllNamedTypes(t)))
+            foreach (var typeMember in @namespace.GetTypeMembers().SelectMany(GetAllNamedTypes))
             {
                 yield return typeMember;
             }
 
-            foreach (var typeMember in @namespace.GetNamespaceMembers().SelectMany(t => GetAllNamedTypes(t)))
+            foreach (var typeMember in @namespace.GetNamespaceMembers().SelectMany(GetAllNamedTypes))
             {
                 yield return typeMember;
             }
         }
-
-        internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, KnownType attributeType) =>
-            symbol?.GetAttributes().Where(a => a.AttributeClass.Is(attributeType))
-                ?? Enumerable.Empty<AttributeData>();
-
-        internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, ImmutableArray<KnownType> attributeTypes) =>
-            symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
-                ?? Enumerable.Empty<AttributeData>();
-
-        internal static bool AnyAttributeDerivesFrom(this ISymbol symbol, KnownType attributeType) =>
-            symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesFrom(attributeType)) ?? false;
 
         public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamedTypeSymbol type)
         {
@@ -66,7 +55,7 @@ namespace SonarAnalyzer.Helpers
 
             yield return type;
 
-            foreach (var nestedType in type.GetTypeMembers().SelectMany(t => GetAllNamedTypes(t)))
+            foreach (var nestedType in type.GetTypeMembers().SelectMany(GetAllNamedTypes))
             {
                 yield return nestedType;
             }
@@ -86,10 +75,10 @@ namespace SonarAnalyzer.Helpers
             }
 
             return symbol.ContainingType
-                .AllInterfaces
-                .SelectMany(@interface => @interface.GetMembers())
-                .OfType<T>()
-                .FirstOrDefault(member => symbol.Equals(symbol.ContainingType.FindImplementationForInterfaceMember(member)));
+                         .AllInterfaces
+                         .SelectMany(@interface => @interface.GetMembers())
+                         .OfType<T>()
+                         .FirstOrDefault(member => symbol.Equals(symbol.ContainingType.FindImplementationForInterfaceMember(member)));
         }
 
         public static T GetOverriddenMember<T>(this T symbol)
@@ -105,28 +94,14 @@ namespace SonarAnalyzer.Helpers
                 return null;
             }
 
-            switch (symbol.Kind)
+            return symbol.Kind switch
             {
-                case SymbolKind.Method:
-                    return (T)((IMethodSymbol)symbol).OverriddenMethod;
-
-                case SymbolKind.Property:
-                    return (T)((IPropertySymbol)symbol).OverriddenProperty;
-
-                case SymbolKind.Event:
-                    return (T)((IEventSymbol)symbol).OverriddenEvent;
-
-                default:
-                    throw new ArgumentException(
-                        $"Only methods, properties and events can be overridden. {typeof(T).Name} was provided",
-                        nameof(symbol));
-            }
+                SymbolKind.Method => (T)((IMethodSymbol)symbol).OverriddenMethod,
+                SymbolKind.Property => (T)((IPropertySymbol)symbol).OverriddenProperty,
+                SymbolKind.Event => (T)((IEventSymbol)symbol).OverriddenEvent,
+                _ => throw new ArgumentException($"Only methods, properties and events can be overridden. {typeof(T).Name} was provided", nameof(symbol))
+            };
         }
-
-        public static bool CanSymbolBeInterfaceMemberOrOverride(ISymbol symbol) =>
-            symbol?.Kind == SymbolKind.Method
-            || symbol?.Kind == SymbolKind.Property
-            || symbol?.Kind == SymbolKind.Event;
 
         public static IEnumerable<INamedTypeSymbol> GetSelfAndBaseTypes(this ITypeSymbol type)
         {
@@ -143,18 +118,15 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool IsChangeable(this ISymbol symbol)
-        {
-            return !symbol.IsAbstract &&
-                !symbol.IsVirtual &&
-                symbol.GetInterfaceMember() == null &&
-                symbol.GetOverriddenMember() == null;
-        }
+        public static bool IsChangeable(this ISymbol symbol) =>
+            !symbol.IsAbstract
+            && !symbol.IsVirtual
+            && symbol.GetInterfaceMember() == null
+            && symbol.GetOverriddenMember() == null;
 
         public static bool IsExtensionOn(this IMethodSymbol methodSymbol, KnownType type)
         {
-            if (methodSymbol == null ||
-                !methodSymbol.IsExtensionMethod)
+            if (!(methodSymbol is {IsExtensionMethod: true}))
             {
                 return false;
             }
@@ -170,52 +142,19 @@ namespace SonarAnalyzer.Helpers
             return constructedFrom.Is(type);
         }
 
-        public static IEnumerable<IParameterSymbol> GetParameters(this ISymbol symbol)
-        {
-            switch (symbol.Kind)
+        public static IEnumerable<IParameterSymbol> GetParameters(this ISymbol symbol) =>
+            symbol.Kind switch
             {
-                case SymbolKind.Method:
-                    return ((IMethodSymbol)symbol).Parameters;
+                SymbolKind.Method => ((IMethodSymbol)symbol).Parameters,
+                SymbolKind.Property => ((IPropertySymbol)symbol).Parameters,
+                _ => Enumerable.Empty<IParameterSymbol>()
+            };
 
-                case SymbolKind.Property:
-                    return ((IPropertySymbol)symbol).Parameters;
+        public static bool IsAnyAttributeInOverridingChain(IPropertySymbol propertySymbol) =>
+            IsAnyAttributeInOverridingChain(propertySymbol, property => property.OverriddenProperty);
 
-                default:
-                    return Enumerable.Empty<IParameterSymbol>();
-            }
-        }
-
-        public static bool IsAnyAttributeInOverridingChain(IPropertySymbol propertySymbol)
-        {
-            return IsAnyAttributeInOverridingChain(propertySymbol, property => property.OverriddenProperty);
-        }
-
-        public static bool IsAnyAttributeInOverridingChain(IMethodSymbol methodSymbol)
-        {
-            return IsAnyAttributeInOverridingChain(methodSymbol, method => method.OverriddenMethod);
-        }
-
-        private static bool IsAnyAttributeInOverridingChain<TSymbol>(TSymbol symbol, Func<TSymbol, TSymbol> getOverriddenMember)
-            where TSymbol : class, ISymbol
-        {
-            var currentSymbol = symbol;
-            while (currentSymbol != null)
-            {
-                if (currentSymbol.GetAttributes().Any())
-                {
-                    return true;
-                }
-
-                if (!currentSymbol.IsOverride)
-                {
-                    return false;
-                }
-
-                currentSymbol = getOverriddenMember(currentSymbol);
-            }
-
-            return false;
-        }
+        public static bool IsAnyAttributeInOverridingChain(IMethodSymbol methodSymbol) =>
+            IsAnyAttributeInOverridingChain(methodSymbol, method => method.OverriddenMethod);
 
         public static Accessibility GetEffectiveAccessibility(this ISymbol symbol)
         {
@@ -250,20 +189,38 @@ namespace SonarAnalyzer.Helpers
         {
             var effectiveAccessibility = GetEffectiveAccessibility(symbol);
 
-            return effectiveAccessibility == Accessibility.Public ||
-                effectiveAccessibility == Accessibility.Protected ||
-                effectiveAccessibility == Accessibility.ProtectedOrInternal;
+            return effectiveAccessibility == Accessibility.Public
+                   || effectiveAccessibility == Accessibility.Protected
+                   || effectiveAccessibility == Accessibility.ProtectedOrInternal;
         }
 
-        public static bool IsConstructor(this ISymbol symbol)
-        {
-            return symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
-        }
+        public static bool IsConstructor(this ISymbol symbol) =>
+            symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
 
-        public static bool IsDestructor(this IMethodSymbol method)
-        {
-            return method.MethodKind == MethodKind.Destructor;
-        }
+        public static bool IsDestructor(this IMethodSymbol method) =>
+            method.MethodKind == MethodKind.Destructor;
+
+        public static bool IsSameNamespace(this INamespaceSymbol namespace1, INamespaceSymbol namespace2) =>
+            namespace1.IsGlobalNamespace && namespace2.IsGlobalNamespace
+            || (namespace1.Name.Equals(namespace2.Name)
+                && namespace1.ContainingNamespace != null
+                && namespace2.ContainingNamespace != null
+                && IsSameNamespace(namespace1.ContainingNamespace, namespace2.ContainingNamespace));
+
+        public static bool IsSameOrAncestorOf(this INamespaceSymbol thisNamespace, INamespaceSymbol namespaceToCheck) =>
+            IsSameNamespace(thisNamespace, namespaceToCheck)
+            || (namespaceToCheck.ContainingNamespace != null && IsSameOrAncestorOf(thisNamespace, namespaceToCheck.ContainingNamespace));
+
+        internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, KnownType attributeType) =>
+            symbol?.GetAttributes().Where(a => a.AttributeClass.Is(attributeType))
+            ?? Enumerable.Empty<AttributeData>();
+
+        internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, ImmutableArray<KnownType> attributeTypes) =>
+            symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
+            ?? Enumerable.Empty<AttributeData>();
+
+        internal static bool AnyAttributeDerivesFrom(this ISymbol symbol, KnownType attributeType) =>
+            symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesFrom(attributeType)) ?? false;
 
         internal static bool IsKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
         {
@@ -278,19 +235,31 @@ namespace SonarAnalyzer.Helpers
             return symbolType.Is(knownType);
         }
 
-        public static bool IsSameNamespace(this INamespaceSymbol namespace1, INamespaceSymbol namespace2)
-        {
-            return namespace1.IsGlobalNamespace && namespace2.IsGlobalNamespace
-                || (namespace1.Name.Equals(namespace2.Name)
-                && namespace1.ContainingNamespace != null
-                && namespace2.ContainingNamespace != null
-                && IsSameNamespace(namespace1.ContainingNamespace, namespace2.ContainingNamespace));
-        }
+        private static bool CanSymbolBeInterfaceMemberOrOverride(ISymbol symbol) =>
+            symbol?.Kind == SymbolKind.Method
+            || symbol?.Kind == SymbolKind.Property
+            || symbol?.Kind == SymbolKind.Event;
 
-        public static bool IsSameOrAncestorOf(this INamespaceSymbol thisNamespace, INamespaceSymbol namespaceToCheck)
+        private static bool IsAnyAttributeInOverridingChain<TSymbol>(TSymbol symbol, Func<TSymbol, TSymbol> getOverriddenMember)
+            where TSymbol : class, ISymbol
         {
-            return IsSameNamespace(thisNamespace, namespaceToCheck)
-                || (namespaceToCheck.ContainingNamespace != null && IsSameOrAncestorOf(thisNamespace, namespaceToCheck.ContainingNamespace));
+            var currentSymbol = symbol;
+            while (currentSymbol != null)
+            {
+                if (currentSymbol.GetAttributes().Any())
+                {
+                    return true;
+                }
+
+                if (!currentSymbol.IsOverride)
+                {
+                    return false;
+                }
+
+                currentSymbol = getOverriddenMember(currentSymbol);
+            }
+
+            return false;
         }
     }
 }
