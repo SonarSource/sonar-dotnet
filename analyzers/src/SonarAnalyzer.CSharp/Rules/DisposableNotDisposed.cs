@@ -185,26 +185,26 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ExcludeDisposedAndClosedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> excludedSymbols)
         {
-            var incovationsAndConditionalAccesses = typeDeclaration
+            var invocationsAndConditionalAccesses = typeDeclaration
                 .DescendantNodes()
                 .Where(n => n.IsKind(SyntaxKind.InvocationExpression) || n.IsKind(SyntaxKind.ConditionalAccessExpression));
 
-            foreach (var incovationOrConditionalAccess in incovationsAndConditionalAccesses)
+            foreach (var invocationOrConditionalAccess in invocationsAndConditionalAccesses)
             {
                 SimpleNameSyntax name;
                 ExpressionSyntax expression;
 
-                if (incovationOrConditionalAccess.IsKind(SyntaxKind.InvocationExpression))
+                if (invocationOrConditionalAccess.IsKind(SyntaxKind.InvocationExpression))
                 {
-                    var invocation = (InvocationExpressionSyntax)incovationOrConditionalAccess;
+                    var invocation = (InvocationExpressionSyntax)invocationOrConditionalAccess;
                     var memberAccessNode = invocation.Expression as MemberAccessExpressionSyntax;
 
                     name = memberAccessNode?.Name;
                     expression = memberAccessNode?.Expression;
                 }
-                else if (incovationOrConditionalAccess.IsKind(SyntaxKind.ConditionalAccessExpression))
+                else if (invocationOrConditionalAccess.IsKind(SyntaxKind.ConditionalAccessExpression))
                 {
-                    var conditionalAccess = (ConditionalAccessExpressionSyntax)incovationOrConditionalAccess;
+                    var conditionalAccess = (ConditionalAccessExpressionSyntax)invocationOrConditionalAccess;
                     if (!(conditionalAccess.WhenNotNull is InvocationExpressionSyntax invocation))
                     {
                         continue;
