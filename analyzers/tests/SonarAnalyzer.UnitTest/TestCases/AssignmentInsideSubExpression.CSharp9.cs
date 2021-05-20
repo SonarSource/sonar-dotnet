@@ -65,3 +65,21 @@ record PositionalRecord(int Input)
         Method(i = 42); // Noncompliant
     }
 }
+
+// See https://github.com/SonarSource/sonar-dotnet/issues/4446
+interface ICustomMsgQueue
+{
+    string? Pop();
+}
+
+class MessageQueueUseCase
+{
+    void Process(ICustomMsgQueue queue)
+    {
+        string msg;
+        while ((msg = queue.Pop()) is not null)  // Noncompliant FP
+        {
+            // do processing
+        }
+    }
+}
