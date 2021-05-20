@@ -64,12 +64,9 @@ namespace SonarAnalyzer.Helpers
         public static T GetInterfaceMember<T>(this T symbol)
             where T : class, ISymbol
         {
-            if (!CanSymbolBeInterfaceMemberOrOverride(symbol))
-            {
-                return null;
-            }
-
-            if (symbol.IsOverride)
+            if (symbol == null
+                || symbol.IsOverride
+                || !CanBeInterfaceMember(symbol))
             {
                 return null;
             }
@@ -84,12 +81,7 @@ namespace SonarAnalyzer.Helpers
         public static T GetOverriddenMember<T>(this T symbol)
             where T : class, ISymbol
         {
-            if (!CanSymbolBeInterfaceMemberOrOverride(symbol))
-            {
-                return null;
-            }
-
-            if (!symbol.IsOverride)
+            if (!(symbol is {IsOverride: true}))
             {
                 return null;
             }
@@ -235,11 +227,6 @@ namespace SonarAnalyzer.Helpers
             return symbolType.Is(knownType);
         }
 
-        private static bool CanSymbolBeInterfaceMemberOrOverride(ISymbol symbol) =>
-            symbol?.Kind == SymbolKind.Method
-            || symbol?.Kind == SymbolKind.Property
-            || symbol?.Kind == SymbolKind.Event;
-
         private static bool IsAnyAttributeInOverridingChain<TSymbol>(TSymbol symbol, Func<TSymbol, TSymbol> getOverriddenMember)
             where TSymbol : class, ISymbol
         {
@@ -261,5 +248,10 @@ namespace SonarAnalyzer.Helpers
 
             return false;
         }
+
+        private static bool CanBeInterfaceMember(ISymbol symbol) =>
+            symbol.Kind == SymbolKind.Method
+            || symbol.Kind == SymbolKind.Property
+            || symbol.Kind == SymbolKind.Event;
     }
 }
