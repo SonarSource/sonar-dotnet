@@ -28,6 +28,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.Trackers;
+using SonarAnalyzer.Helpers.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules
 {
@@ -63,13 +65,13 @@ namespace SonarAnalyzer.Rules
                     ccc.RegisterSyntaxNodeActionInNonGenerated(
                         c =>
                         {
-                            var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
+                            var objectCreation = ObjectCreationFactory.Create(c.Node);
                             if (ObjectInitializationTracker.ShouldBeReported(objectCreation, c.SemanticModel, isDefaultConstructorSafe ))
                             {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.GetLocation()));
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.GetExpression().GetLocation()));
                             }
                         },
-                        SyntaxKind.ObjectCreationExpression);
+                        SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
                     ccc.RegisterSyntaxNodeActionInNonGenerated(
                         c =>

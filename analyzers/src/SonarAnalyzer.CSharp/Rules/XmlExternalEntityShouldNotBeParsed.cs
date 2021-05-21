@@ -30,7 +30,9 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.Trackers;
+using SonarAnalyzer.Helpers.Wrappers;
 using SonarAnalyzer.Rules.XXE;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -63,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ccc.RegisterSyntaxNodeActionInNonGenerated(
                         c =>
                         {
-                            var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
+                            var objectCreation = ObjectCreationFactory.Create(c.Node);
                             var netFrameworkVersion = versionProvider.GetDotNetFrameworkVersion(c.Compilation);
                             var constructorIsSafe = ConstructorIsSafe(netFrameworkVersion);
 
@@ -71,12 +73,12 @@ namespace SonarAnalyzer.Rules.CSharp
                             if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe)
                                || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe))
                             {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation()));
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetExpression().GetLocation()));
                             }
 
-                            VerifyXPathDocumentConstructor(c);
+                            VerifyXPathDocumentConstructor(c, objectCreation);
                         },
-                        SyntaxKind.ObjectCreationExpression);
+                        SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
                     ccc.RegisterSyntaxNodeActionInNonGenerated(
                         c =>
@@ -116,21 +118,19 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void VerifyXPathDocumentConstructor(SyntaxNodeAnalysisContext context)
+        private void VerifyXPathDocumentConstructor(SyntaxNodeAnalysisContext context, IObjectCreation objectCreation)
         {
-            var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
-
-            if (!context.SemanticModel.GetTypeInfo(objectCreation).Type.Is(KnownType.System_Xml_XPath_XPathDocument) ||
+            if (!context.SemanticModel.GetTypeInfo(objectCreation.GetExpression()).Type.Is(KnownType.System_Xml_XPath_XPathDocument) ||
                 // If a XmlReader is provided in the constructor, XPathDocument will be as safe as the received reader.
                 // In this case we don't raise a warning since the XmlReader has it's own checks.
-                objectCreation.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReader, context.SemanticModel).Any())
+                objectCreation.GetArgumentList().Arguments.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReader, context.SemanticModel).Any())
             {
                 return;
             }
 
             if (!IsXPathDocumentSecureByDefault(this.versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
             {
-                context.ReportDiagnostic(Diagnostic.Create(Rule, objectCreation.GetLocation()));
+                context.ReportDiagnostic(Diagnostic.Create(Rule, objectCreation.GetExpression().GetLocation()));
             }
         }
 

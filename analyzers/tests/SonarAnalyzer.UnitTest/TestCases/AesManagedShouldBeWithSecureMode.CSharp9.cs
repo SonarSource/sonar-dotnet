@@ -5,8 +5,8 @@ namespace Tests.Diagnostics
 {
     class Program
     {
-        AesManaged field1 = new(); // FN
-        AesManaged Property1 { get; set; } = new(); // FN
+        AesManaged field1 = new(); // Noncompliant
+        AesManaged Property1 { get; set; } = new(); // Noncompliant
 
         void CtorSetsAllowedValue()
         {
@@ -15,12 +15,12 @@ namespace Tests.Diagnostics
 
         void InitializerSetsNotAllowedValue()
         {
-            AesManaged a1 = new() { Mode = CipherMode.CBC }; // FN
+            AesManaged a1 = new() { Mode = CipherMode.CBC }; // Noncompliant
         }
 
         void PropertySetsNotAllowedValue()
         {
-            AesManaged c = new(); // FN
+            AesManaged c = new(); // Noncompliant
             c.Mode = CipherMode.CBC; // Noncompliant
         }
     }

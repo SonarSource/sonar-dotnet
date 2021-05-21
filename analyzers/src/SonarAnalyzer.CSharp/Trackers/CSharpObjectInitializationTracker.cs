@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers.Wrappers;
 
 namespace SonarAnalyzer.Helpers.Trackers
 {
@@ -82,8 +83,8 @@ namespace SonarAnalyzer.Helpers.Trackers
             this.trackedConstructorArgumentIndex = trackedConstructorArgumentIndex;
         }
 
-        internal bool ShouldBeReported(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe) =>
-            IsTrackedType(objectCreation, semanticModel)
+        internal bool ShouldBeReported(IObjectCreation objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe) =>
+            IsTrackedType(objectCreation.GetExpression(), semanticModel)
             && !ObjectCreatedWithAllowedValue(objectCreation, semanticModel, isDefaultConstructorSafe)
             && !IsLaterAssignedWithAllowedValue(objectCreation, semanticModel);
 
@@ -141,9 +142,9 @@ namespace SonarAnalyzer.Helpers.Trackers
         /// <remarks>
         /// Currently we do not handle the situation with default and named arguments.
         /// </remarks>
-        private bool ObjectCreatedWithAllowedValue(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe)
+        private bool ObjectCreatedWithAllowedValue(IObjectCreation objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe)
         {
-            var trackedPropertyAssignments = GetInitializerExpressions(objectCreation.Initializer)
+            var trackedPropertyAssignments = GetInitializerExpressions(objectCreation.GetInitializer())
                 .OfType<AssignmentExpressionSyntax>()
                 .Where(assignment => IsTrackedPropertyName(assignment.Left))
                 .ToList();
@@ -153,7 +154,7 @@ namespace SonarAnalyzer.Helpers.Trackers
             }
             else if (trackedConstructorArgumentIndex != -1)
             {
-                var argumentList = objectCreation.ArgumentList;
+                var argumentList = objectCreation.GetArgumentList();
                 return argumentList == null
                     || argumentList.Arguments.Count != trackedConstructorArgumentIndex + 1
                     || IsAllowedValue(argumentList.Arguments[trackedConstructorArgumentIndex].Expression, semanticModel);
@@ -188,9 +189,9 @@ namespace SonarAnalyzer.Helpers.Trackers
             && memberAccess.Expression != null
             && IsTrackedType(memberAccess.Expression, semanticModel);
 
-        private bool IsLaterAssignedWithAllowedValue(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
+        private bool IsLaterAssignedWithAllowedValue(IObjectCreation objectCreation, SemanticModel semanticModel)
         {
-            var statement = objectCreation.FirstAncestorOrSelf<StatementSyntax>();
+            var statement = objectCreation.GetExpression().FirstAncestorOrSelf<StatementSyntax>();
             if (statement == null)
             {
                 return false;
@@ -216,14 +217,14 @@ namespace SonarAnalyzer.Helpers.Trackers
         private static IEnumerable<ExpressionSyntax> GetInitializerExpressions(InitializerExpressionSyntax initializer) =>
             initializer?.Expressions ?? Enumerable.Empty<ExpressionSyntax>();
 
-        private static ISymbol GetAssignedVariableSymbol(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
+        private static ISymbol GetAssignedVariableSymbol(IObjectCreation objectCreation, SemanticModel semanticModel)
         {
-            if (objectCreation.FirstAncestorOrSelf<AssignmentExpressionSyntax>()?.Left is { } variable)
+            if (objectCreation.GetExpression().FirstAncestorOrSelf<AssignmentExpressionSyntax>()?.Left is { } variable)
             {
                 return semanticModel.GetSymbolInfo(variable).Symbol;
             }
 
-            return objectCreation.FirstAncestorOrSelf<VariableDeclaratorSyntax>() is { }  identifier
+            return objectCreation.GetExpression().FirstAncestorOrSelf<VariableDeclaratorSyntax>() is { }  identifier
                 ? semanticModel.GetDeclaredSymbol(identifier)
                 : null;
         }
