@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe)
                                || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe))
                             {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetExpression().GetLocation()));
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation()));
                             }
 
                             VerifyXPathDocumentConstructor(c, objectCreation);
@@ -120,17 +120,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void VerifyXPathDocumentConstructor(SyntaxNodeAnalysisContext context, IObjectCreation objectCreation)
         {
-            if (!context.SemanticModel.GetTypeInfo(objectCreation.GetExpression()).Type.Is(KnownType.System_Xml_XPath_XPathDocument) ||
+            if (!context.SemanticModel.GetTypeInfo(objectCreation.Expression).Type.Is(KnownType.System_Xml_XPath_XPathDocument)
                 // If a XmlReader is provided in the constructor, XPathDocument will be as safe as the received reader.
                 // In this case we don't raise a warning since the XmlReader has it's own checks.
-                objectCreation.GetArgumentList().Arguments.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReader, context.SemanticModel).Any())
+                || objectCreation.ArgumentList.Arguments.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReader, context.SemanticModel).Any())
             {
                 return;
             }
 
             if (!IsXPathDocumentSecureByDefault(this.versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
             {
-                context.ReportDiagnostic(Diagnostic.Create(Rule, objectCreation.GetExpression().GetLocation()));
+                context.ReportDiagnostic(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation()));
             }
         }
 

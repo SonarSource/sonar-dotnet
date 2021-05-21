@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules
                             var objectCreation = ObjectCreationFactory.Create(c.Node);
                             if (ObjectInitializationTracker.ShouldBeReported(objectCreation, c.SemanticModel, isDefaultConstructorSafe ))
                             {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.GetExpression().GetLocation()));
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.Expression.GetLocation()));
                             }
                         },
                         SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);

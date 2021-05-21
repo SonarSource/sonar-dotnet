@@ -130,11 +130,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!IsServerSafe(objectCreation) && objectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, objectCreation.GetExpression().GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
             }
             else if (telnetRegexForIdentifier.IsMatch(objectCreation.GetTypeAsString(context.SemanticModel)))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, objectCreation.GetExpression().GetLocation(), TelnetKey, recommendedProtocols[TelnetKey]));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, recommendedProtocols[TelnetKey]));
             }
         }
 
@@ -168,8 +168,8 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private bool IsServerSafe(IObjectCreation objectCreation) =>
-            objectCreation.GetArgumentList()?.Arguments.Count > 0
-            && validServerRegex.IsMatch(GetText(objectCreation.GetArgumentList().Arguments[0].Expression));
+            objectCreation.ArgumentList?.Arguments.Count > 0
+            && validServerRegex.IsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression));
 
         private string GetUnsafeProtocol(SyntaxNode node)
         {

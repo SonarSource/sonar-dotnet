@@ -26,9 +26,9 @@ namespace SonarAnalyzer.Helpers.Wrappers
 {
     public interface IObjectCreation
     {
-        InitializerExpressionSyntax GetInitializer();
-        ArgumentListSyntax GetArgumentList();
-        ExpressionSyntax GetExpression();
+        InitializerExpressionSyntax Initializer { get; }
+        ArgumentListSyntax ArgumentList { get; }
+        ExpressionSyntax Expression { get; }
         string GetTypeAsString(SemanticModel semanticModel);
     }
 
@@ -42,19 +42,14 @@ namespace SonarAnalyzer.Helpers.Wrappers
         private class ObjectCreation : IObjectCreation
         {
             private readonly ObjectCreationExpressionSyntax objectCreation;
+            public InitializerExpressionSyntax Initializer => objectCreation.Initializer;
+            public ArgumentListSyntax ArgumentList => objectCreation.ArgumentList;
+            public ExpressionSyntax Expression => objectCreation;
+
             public ObjectCreation(ObjectCreationExpressionSyntax objectCreationExpressionSyntax)
             {
                 objectCreation = objectCreationExpressionSyntax;
             }
-
-            public InitializerExpressionSyntax GetInitializer() =>
-                objectCreation.Initializer;
-
-            public ArgumentListSyntax GetArgumentList() =>
-                objectCreation.ArgumentList;
-
-            public ExpressionSyntax GetExpression() =>
-                objectCreation;
 
             public string GetTypeAsString(SemanticModel semanticModel) =>
                 objectCreation.Type.ToString();
@@ -63,19 +58,14 @@ namespace SonarAnalyzer.Helpers.Wrappers
         private class ImplicitObjectCreation : IObjectCreation
         {
             private readonly ImplicitObjectCreationExpressionSyntaxWrapper objectCreation;
+            public InitializerExpressionSyntax Initializer => objectCreation.Initializer;
+            public ArgumentListSyntax ArgumentList => objectCreation.ArgumentList;
+            public ExpressionSyntax Expression => objectCreation.SyntaxNode;
+
             public ImplicitObjectCreation(ImplicitObjectCreationExpressionSyntaxWrapper wrapper)
             {
                 objectCreation = wrapper;
             }
-
-            public InitializerExpressionSyntax GetInitializer() =>
-                objectCreation.Initializer;
-
-            public ArgumentListSyntax GetArgumentList() =>
-                objectCreation.ArgumentList;
-
-            public ExpressionSyntax GetExpression() =>
-                objectCreation.SyntaxNode;
 
             public string GetTypeAsString(SemanticModel semanticModel) =>
                 semanticModel.GetTypeInfo(objectCreation).Type.Name;

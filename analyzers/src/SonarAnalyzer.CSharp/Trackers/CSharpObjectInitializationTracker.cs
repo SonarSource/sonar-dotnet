@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         }
 
         internal bool ShouldBeReported(IObjectCreation objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe) =>
-            IsTrackedType(objectCreation.GetExpression(), semanticModel)
+            IsTrackedType(objectCreation.Expression, semanticModel)
             && !ObjectCreatedWithAllowedValue(objectCreation, semanticModel, isDefaultConstructorSafe)
             && !IsLaterAssignedWithAllowedValue(objectCreation, semanticModel);
 
@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         /// </remarks>
         private bool ObjectCreatedWithAllowedValue(IObjectCreation objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe)
         {
-            var trackedPropertyAssignments = GetInitializerExpressions(objectCreation.GetInitializer())
+            var trackedPropertyAssignments = GetInitializerExpressions(objectCreation.Initializer)
                 .OfType<AssignmentExpressionSyntax>()
                 .Where(assignment => IsTrackedPropertyName(assignment.Left))
                 .ToList();
@@ -154,7 +154,7 @@ namespace SonarAnalyzer.Helpers.Trackers
             }
             else if (trackedConstructorArgumentIndex != -1)
             {
-                var argumentList = objectCreation.GetArgumentList();
+                var argumentList = objectCreation.ArgumentList;
                 return argumentList == null
                     || argumentList.Arguments.Count != trackedConstructorArgumentIndex + 1
                     || IsAllowedValue(argumentList.Arguments[trackedConstructorArgumentIndex].Expression, semanticModel);
@@ -191,7 +191,7 @@ namespace SonarAnalyzer.Helpers.Trackers
 
         private bool IsLaterAssignedWithAllowedValue(IObjectCreation objectCreation, SemanticModel semanticModel)
         {
-            var statement = objectCreation.GetExpression().FirstAncestorOrSelf<StatementSyntax>();
+            var statement = objectCreation.Expression.FirstAncestorOrSelf<StatementSyntax>();
             if (statement == null)
             {
                 return false;
@@ -219,12 +219,12 @@ namespace SonarAnalyzer.Helpers.Trackers
 
         private static ISymbol GetAssignedVariableSymbol(IObjectCreation objectCreation, SemanticModel semanticModel)
         {
-            if (objectCreation.GetExpression().FirstAncestorOrSelf<AssignmentExpressionSyntax>()?.Left is { } variable)
+            if (objectCreation.Expression.FirstAncestorOrSelf<AssignmentExpressionSyntax>()?.Left is { } variable)
             {
                 return semanticModel.GetSymbolInfo(variable).Symbol;
             }
 
-            return objectCreation.GetExpression().FirstAncestorOrSelf<VariableDeclaratorSyntax>() is { }  identifier
+            return objectCreation.Expression.FirstAncestorOrSelf<VariableDeclaratorSyntax>() is { }  identifier
                 ? semanticModel.GetDeclaredSymbol(identifier)
                 : null;
         }
