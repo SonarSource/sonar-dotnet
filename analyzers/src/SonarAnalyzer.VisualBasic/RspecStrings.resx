@@ -555,6 +555,12 @@
   <data name="S1134_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
   </data>
+  <data name="S1134_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1134_RemediationCost" xml:space="preserve">
+    <value>1h</value>
+  </data>
   <data name="S1134_Scope" xml:space="preserve">
     <value>All</value>
   </data>
@@ -581,6 +587,12 @@
   </data>
   <data name="S1135_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
+  </data>
+  <data name="S1135_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1135_RemediationCost" xml:space="preserve">
+    <value>1h</value>
   </data>
   <data name="S1135_Scope" xml:space="preserve">
     <value>All</value>
@@ -5136,6 +5148,12 @@
   <data name="S5542_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
   </data>
+  <data name="S5542_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S5542_RemediationCost" xml:space="preserve">
+    <value>20min</value>
+  </data>
   <data name="S5542_Scope" xml:space="preserve">
     <value>Main</value>
   </data>
@@ -5162,6 +5180,12 @@
   </data>
   <data name="S5547_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
+  </data>
+  <data name="S5547_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S5547_RemediationCost" xml:space="preserve">
+    <value>15min</value>
   </data>
   <data name="S5547_Scope" xml:space="preserve">
     <value>Main</value>
@@ -5310,6 +5334,12 @@
   <data name="S6145_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
   </data>
+  <data name="S6145_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S6145_RemediationCost" xml:space="preserve">
+    <value>20min</value>
+  </data>
   <data name="S6145_Scope" xml:space="preserve">
     <value>All</value>
   </data>
@@ -5336,6 +5366,12 @@
   </data>
   <data name="S6146_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
+  </data>
+  <data name="S6146_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S6146_RemediationCost" xml:space="preserve">
+    <value>3h</value>
   </data>
   <data name="S6146_Scope" xml:space="preserve">
     <value>All</value>
