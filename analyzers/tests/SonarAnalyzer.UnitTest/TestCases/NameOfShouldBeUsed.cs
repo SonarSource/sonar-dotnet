@@ -29,16 +29,29 @@ namespace Tests.Diagnostics
 
             throw new ArgumentException("argument "); // Noncompliant
             throw new ArgumentException("argument,"); // Noncompliant
-            throw new ArgumentException("This is argument."); // Noncompliant  {{Replace the string 'argument' with 'nameof(argument)'.}}
-//                                      ^^^^^^^^^^^^^^^^^^^
             throw new ArgumentException("argument!"); // Noncompliant
             throw new ArgumentException("argument?"); // Noncompliant
-            throw new ArgumentException("argument and arg2"); // Noncompliant
 
             throw new ArgumentException("argument123");
             throw new ArgumentException("ARGUMENT");
             throw new ArgumentException("arg "); // too short name
             throw new ArgumentException("arg!"); // too short name
+
+            // See https://github.com/SonarSource/sonar-dotnet/issues/4454
+            throw new ArgumentException("This is argument."); // Noncompliant FP
+            throw new ArgumentException("argument and arg2"); // Noncompliant FP
+
+            throw new ArgumentNullException("arg1"); // Noncompliant
+            throw new ArgumentNullException(nameof(arg1));
+            throw new ArgumentNullException(nameof(argument), "argument"); // Noncompliant
+            throw new ArgumentNullException(nameof(argument), "Incorrect argument value"); // Noncompliant FP
+
+            throw new ArgumentOutOfRangeException("arg1"); // Noncompliant
+            throw new ArgumentOutOfRangeException(nameof(arg1));
+            throw new ArgumentOutOfRangeException(nameof(argument), "argument"); // Noncompliant
+            throw new ArgumentOutOfRangeException(nameof(argument), "Incorrect argument value"); // Noncompliant FP
+            throw new ArgumentOutOfRangeException(nameof(argument), argument, "argument"); // Noncompliant
+            throw new ArgumentOutOfRangeException(nameof(argument), argument, "Incorrect argument value"); // Noncompliant FP
         }
 
         private void ValidateArgument(int v, string longName)
