@@ -39,8 +39,10 @@ Namespace Tests.TestCases
             Throw New ArgumentException("arg123")
 
             ' See https://github.com/SonarSource/sonar-dotnet/issues/4454
-            Throw New ArgumentException("This is argument.") ' Noncompliant FP
-            Throw New ArgumentException("argument and arg2") ' Noncompliant FP
+            Throw New ArgumentException("This is argument.") ' Noncompliant
+            Throw New ArgumentException("This is argument.", NameOf(argument)) ' Noncompliant FP
+            Throw New ArgumentException("argument and arg1") ' Noncompliant
+            Throw New ArgumentException("argument and arg1", NameOf(arg1)) ' Noncompliant FP
 
             Throw New ArgumentNullException("arg1") ' Noncompliant
             Throw New ArgumentNullException(NameOf(arg1))

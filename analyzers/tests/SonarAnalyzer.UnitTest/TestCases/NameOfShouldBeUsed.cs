@@ -38,8 +38,10 @@ namespace Tests.Diagnostics
             throw new ArgumentException("arg!"); // too short name
 
             // See https://github.com/SonarSource/sonar-dotnet/issues/4454
-            throw new ArgumentException("This is argument."); // Noncompliant FP
-            throw new ArgumentException("argument and arg2"); // Noncompliant FP
+            throw new ArgumentException("This is argument."); // Noncompliant
+            throw new ArgumentException("This is argument.", nameof(argument)); // Noncompliant FP
+            throw new ArgumentException("argument and arg1"); // Noncompliant
+            throw new ArgumentException("argument and arg1", nameof(arg1)); // Noncompliant FP
 
             throw new ArgumentNullException("arg1"); // Noncompliant
             throw new ArgumentNullException(nameof(arg1));
