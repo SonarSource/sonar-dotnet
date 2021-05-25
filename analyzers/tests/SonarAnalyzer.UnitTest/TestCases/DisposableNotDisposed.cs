@@ -145,4 +145,9 @@ namespace Tests.Diagnostics
             var y = new Struct(); // Noncompliant
         }
     }
+
+    public class Empty
+    {
+
+    }
 }
