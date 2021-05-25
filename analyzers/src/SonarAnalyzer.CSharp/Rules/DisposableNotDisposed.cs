@@ -36,13 +36,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DisposableNotDisposed : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2930";
+        private const string DiagnosticId = "S2930";
         private const string MessageFormat = "Dispose '{0}' when it is no longer needed.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly ImmutableArray<KnownType> TrackedTypes =
             ImmutableArray.Create(
@@ -56,8 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Net_Sockets_UdpClient,
 
                 KnownType.System_Drawing_Image,
-                KnownType.System_Drawing_Bitmap
-            );
+                KnownType.System_Drawing_Bitmap);
 
         private static readonly ISet<string> DisposeMethods = new HashSet<string> { "Dispose", "Close" };
 
@@ -69,32 +66,32 @@ namespace SonarAnalyzer.Rules.CSharp
             "System.Drawing.Image.FromStream"
         };
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
         private class NodeAndSymbol
         {
             public SyntaxNode Node { get; set; }
             public ISymbol Symbol { get; set; }
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
                     var namedType = (INamedTypeSymbol)c.Symbol;
-                    if (namedType.ContainingType != null ||
-                        !namedType.IsClassOrStruct())
+                    if (namedType.ContainingType != null || !namedType.IsClassOrStruct())
                     {
                         return;
                     }
 
                     var typesDeclarationsAndSemanticModels =
                         namedType.DeclaringSyntaxReferences
-                        .Select(r => new SyntaxNodeAndSemanticModel<SyntaxNode>
-                        {
-                            SyntaxNode = r.GetSyntax(),
-                            SemanticModel = c.Compilation.GetSemanticModel(r.SyntaxTree)
-                        })
-                        .ToList();
+                                 .Select(r => new SyntaxNodeAndSemanticModel<SyntaxNode>
+                                 {
+                                     SyntaxNode = r.GetSyntax(),
+                                     SemanticModel = c.Compilation.GetSemanticModel(r.SyntaxTree)
+                                 })
+                                 .ToList();
 
                     var trackedNodesAndSymbols = new HashSet<NodeAndSymbol>();
                     foreach (var typeDeclarationAndSemanticModel in typesDeclarationsAndSemanticModels)
@@ -116,13 +113,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             if (!excludedSymbols.Contains(trackedNodeAndSymbol.Symbol))
                             {
-                                c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name));
+                                c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name));
                             }
                         }
                     }
                 },
                 SymbolKind.NamedType);
-        }
 
         private static void TrackInitializedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<NodeAndSymbol> trackedNodesAndSymbols)
         {
@@ -177,11 +173,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsLocalOrPrivateField(ISymbol symbol)
-        {
-            return symbol.Kind == SymbolKind.Local ||
-                (symbol.Kind == SymbolKind.Field && symbol.DeclaredAccessibility == Accessibility.Private);
-        }
+        private static bool IsLocalOrPrivateField(ISymbol symbol) =>
+            symbol.Kind == SymbolKind.Local || (symbol.Kind == SymbolKind.Field && symbol.DeclaredAccessibility == Accessibility.Private);
 
         private static void ExcludeDisposedAndClosedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> excludedSymbols)
         {
@@ -248,7 +241,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 else if (identifierOrSimpleMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
                 {
-
                     var memberAccess = (MemberAccessExpressionSyntax)identifierOrSimpleMemberAccess;
                     if (!memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
                     {
@@ -278,20 +270,18 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var parentAsAssignment = expression.Parent as AssignmentExpressionSyntax;
 
-            return !(expression.Parent is ExpressionSyntax) ||
-                (parentAsAssignment != null && object.ReferenceEquals(expression, parentAsAssignment.Right));
+            return !(expression.Parent is ExpressionSyntax)
+                   || (parentAsAssignment != null && object.ReferenceEquals(expression, parentAsAssignment.Right));
         }
 
-        private static bool IsInstantiation(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            return IsNewTrackedTypeObjectCreation(expression, semanticModel) ||
-                IsDisposableRefStructCreation(expression, semanticModel) ||
-                IsFactoryMethodInvocation(expression, semanticModel);
-        }
+        private static bool IsInstantiation(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            IsNewTrackedTypeObjectCreation(expression, semanticModel)
+            || IsDisposableRefStructCreation(expression, semanticModel)
+            || IsFactoryMethodInvocation(expression, semanticModel);
 
         private static bool IsNewTrackedTypeObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel)
         {
-            if (!expression.IsKind(SyntaxKind.ObjectCreationExpression))
+            if (!expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
             {
                 return false;
             }
@@ -307,7 +297,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsDisposableRefStructCreation(ExpressionSyntax expression, SemanticModel semanticModel)
         {
-            if (!expression.IsKind(SyntaxKind.ObjectCreationExpression))
+            if (!expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
             {
                 return false;
             }
