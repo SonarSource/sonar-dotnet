@@ -100,31 +100,24 @@ namespace SonarAnalyzer.Rules.CSharp
                         TrackAssignmentsToLocalsAndPrivateFields(typeDeclarationAndSemanticModel.SyntaxNode, typeDeclarationAndSemanticModel.SemanticModel, trackedNodesAndSymbols);
                     }
 
-                    if (trackedNodesAndSymbols.Any())
+                    if (!trackedNodesAndSymbols.Any())
                     {
-                        HandleTrackedNodesAndSymbols(typesDeclarationsAndSemanticModels, trackedNodesAndSymbols, c);
+                        return;
+                    }
+
+                    var excludedSymbols = new HashSet<ISymbol>();
+                    foreach (var typeDeclarationAndSemanticModel in typesDeclarationsAndSemanticModels)
+                    {
+                        ExcludeDisposedAndClosedLocalsAndPrivateFields(typeDeclarationAndSemanticModel.SyntaxNode, typeDeclarationAndSemanticModel.SemanticModel, excludedSymbols);
+                        ExcludeReturnedPassedAndAliasedLocalsAndPrivateFields(typeDeclarationAndSemanticModel.SyntaxNode, typeDeclarationAndSemanticModel.SemanticModel, excludedSymbols);
+                    }
+
+                    foreach (var trackedNodeAndSymbol in trackedNodesAndSymbols.Where(x => !excludedSymbols.Contains(x.Symbol)))
+                    {
+                        c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name));
                     }
                 },
                 SymbolKind.NamedType);
-
-        private static void HandleTrackedNodesAndSymbols(List<SyntaxNodeAndSemanticModel<SyntaxNode>> typesDeclarationsAndSemanticModels, HashSet<NodeAndSymbol> trackedNodesAndSymbols,
-                                                         SymbolAnalysisContext c)
-        {
-            var excludedSymbols = new HashSet<ISymbol>();
-            foreach (var typeDeclarationAndSemanticModel in typesDeclarationsAndSemanticModels)
-            {
-                ExcludeDisposedAndClosedLocalsAndPrivateFields(typeDeclarationAndSemanticModel.SyntaxNode, typeDeclarationAndSemanticModel.SemanticModel, excludedSymbols);
-                ExcludeReturnedPassedAndAliasedLocalsAndPrivateFields(typeDeclarationAndSemanticModel.SyntaxNode, typeDeclarationAndSemanticModel.SemanticModel, excludedSymbols);
-            }
-
-            foreach (var trackedNodeAndSymbol in trackedNodesAndSymbols)
-            {
-                if (!excludedSymbols.Contains(trackedNodeAndSymbol.Symbol))
-                {
-                    c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name));
-                }
-            }
-        }
 
         private static void TrackInitializedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<NodeAndSymbol> trackedNodesAndSymbols)
         {
