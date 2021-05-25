@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Tests.Diagnostics
@@ -125,6 +126,20 @@ namespace Tests.Diagnostics
             for (int i = 0; b; i++)
             {
             }
+        }
+
+        public int LiteralInTernaryCondition(bool condition, int result)
+        {
+            return condition == false // Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/4465
+                ? result
+                : throw new Exception();
+        }
+
+        public bool LiteralInTernaryBranch(bool condition)
+        {
+            return condition
+                ? throw new Exception()
+                : true; // Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/4465
         }
     }
 

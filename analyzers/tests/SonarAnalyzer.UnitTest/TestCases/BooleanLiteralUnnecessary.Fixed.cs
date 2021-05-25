@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Tests.Diagnostics
@@ -113,6 +114,19 @@ namespace Tests.Diagnostics
             for (int i = 0; b; i++)
             {
             }
+        }
+
+        public int LiteralInTernaryCondition(bool condition, int result)
+        {
+            return !condition ? result
+                : throw new Exception();
+        }
+
+        public bool LiteralInTernaryBranch(bool condition)
+        {
+            return !condition
+|| throw new Exception()
+; // Fixed
         }
     }
 

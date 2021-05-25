@@ -31,22 +31,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void BooleanLiteralUnnecessary_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.cs",
-                new CS.BooleanLiteralUnnecessary());
+            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.cs", new CS.BooleanLiteralUnnecessary());
 
         [TestMethod]
         [TestCategory("CodeFix")]
         public void BooleanLiteralUnnecessary_CodeFix_CS() =>
-            Verifier.VerifyCodeFix(
-                @"TestCases\BooleanLiteralUnnecessary.cs",
-                @"TestCases\BooleanLiteralUnnecessary.Fixed.cs",
-                new CS.BooleanLiteralUnnecessary(),
-                new CS.BooleanLiteralUnnecessaryCodeFixProvider());
+            Verifier.VerifyCodeFix(@"TestCases\BooleanLiteralUnnecessary.cs",
+                                   @"TestCases\BooleanLiteralUnnecessary.Fixed.cs",
+                                   new CS.BooleanLiteralUnnecessary(),
+                                   new CS.BooleanLiteralUnnecessaryCodeFixProvider());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void BooleanLiteralUnnecessary_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.vb",
-                new VB.BooleanLiteralUnnecessary());
+            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.vb", new VB.BooleanLiteralUnnecessary());
     }
 }
