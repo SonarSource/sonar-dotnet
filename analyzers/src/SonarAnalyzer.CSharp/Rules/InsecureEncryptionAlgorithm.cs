@@ -59,10 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
             ((LiteralExpressionSyntax)argument.Expression).Token.ValueText;
 
         protected override Location Location(SyntaxNode objectCreation) =>
-            objectCreation switch
-            {
-                ObjectCreationExpressionSyntax objectCreationExpression => objectCreationExpression.Type.GetLocation(),
-                _ => ((ImplicitObjectCreationExpressionSyntaxWrapper)objectCreation).SyntaxNode.GetLocation()
-            };
+            objectCreation is ObjectCreationExpressionSyntax objectCreationExpression
+                ? objectCreationExpression.Type.GetLocation()
+                : ((ImplicitObjectCreationExpressionSyntaxWrapper)objectCreation).SyntaxNode.GetLocation();
     }
 }

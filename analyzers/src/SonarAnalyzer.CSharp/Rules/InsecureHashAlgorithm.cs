@@ -85,11 +85,9 @@ namespace SonarAnalyzer.Rules.CSharp
             );
 
         protected override Location Location(SyntaxNode objectCreation) =>
-            objectCreation switch
-            {
-                ObjectCreationExpressionSyntax objectCreationExpression => objectCreationExpression.Type.GetLocation(),
-                _ => ((ImplicitObjectCreationExpressionSyntaxWrapper)objectCreation).SyntaxNode.GetLocation()
-            };
+            objectCreation is ObjectCreationExpressionSyntax objectCreationExpression
+                ? objectCreationExpression.Type.GetLocation()
+                : ((ImplicitObjectCreationExpressionSyntaxWrapper)objectCreation).SyntaxNode.GetLocation();
 
         protected override ArgumentListSyntax ArgumentList(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.ArgumentList;
