@@ -25,13 +25,14 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(S2278DiagnosticId)]
     [Rule(DiagnosticId)]
-    public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
+    public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
     {
         // S2278 was deprecated in favor of S5547. Technically, there is no difference in the C# analyzer between
         // the 2 rules, but to be coherent with all the other languages, we still replace it with the new one
@@ -43,6 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S2278, Rule);
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override SyntaxKind[] ObjectCreationExpressionKinds => new[] { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
 
         protected override ArgumentListSyntax ArgumentList(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.ArgumentList;
@@ -56,7 +58,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override string StringLiteralValue(ArgumentSyntax argument) =>
             ((LiteralExpressionSyntax)argument.Expression).Token.ValueText;
 
-        protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
-            objectCreation.Type.GetLocation();
+        protected override Location Location(SyntaxNode objectCreation) =>
+            objectCreation switch
+            {
+                ObjectCreationExpressionSyntax objectCreationExpression => objectCreationExpression.Type.GetLocation(),
+                _ => ((ImplicitObjectCreationExpressionSyntaxWrapper)objectCreation).SyntaxNode.GetLocation()
+            };
     }
 }
