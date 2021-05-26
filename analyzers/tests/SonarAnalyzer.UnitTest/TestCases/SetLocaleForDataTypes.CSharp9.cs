@@ -8,9 +8,9 @@ table1 = new(); // Compliant - FN
 var table2 = new DataTable(); // Noncompliant
 
 DataTable table3 = new() { Locale = CultureInfo.InvariantCulture };
-DataTable table4 = new(); // Compliant - FN
+DataTable table4 = new(); // Noncompliant
 
-DataSet set1 = new(); // Compliant - FN
+DataSet set1 = new(); // Noncompliant
 
 DataSet set2 = new();
 set2.Locale = CultureInfo.InvariantCulture;

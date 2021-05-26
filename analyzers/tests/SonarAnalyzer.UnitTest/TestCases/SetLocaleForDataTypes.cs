@@ -56,6 +56,7 @@ namespace Tests.Diagnostics
             var dataTable1 = new DataTable(); // Noncompliant {{Set the locale for this 'DataTable'.}}
             var dataTable2 = new DataTable();
             dataTable2.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            dataTable2 = new DataTable(); // Compliant FN
         }
     }
 }
