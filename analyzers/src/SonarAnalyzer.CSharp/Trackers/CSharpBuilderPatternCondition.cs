@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         protected override bool IsObjectCreation(SyntaxNode node) =>
-            node is ObjectCreationExpressionSyntax;
+            node.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
         protected override bool IsIdentifier(SyntaxNode node, out string identifierName)
         {

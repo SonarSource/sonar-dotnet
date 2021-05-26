@@ -8,3 +8,12 @@ decoded1.WithSecret(secret).Decode(invalidToken);
 
 JwtBuilder decoded2 = new();
 decoded2.WithSecret(secret).MustVerifySignature().Decode(invalidToken); // Compliant
+
+void DecoderMethod()
+{
+    JwtBuilder decoded1 = new(); // Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
+    decoded1.WithSecret(secret).Decode(invalidToken);
+
+    JwtBuilder decoded2 = new();
+    decoded2.WithSecret(secret).MustVerifySignature().Decode(invalidToken); // Compliant
+}
