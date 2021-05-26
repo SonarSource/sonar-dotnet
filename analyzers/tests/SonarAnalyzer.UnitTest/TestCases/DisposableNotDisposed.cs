@@ -148,6 +148,5 @@ namespace Tests.Diagnostics
 
     public class Empty
     {
-
     }
 }
