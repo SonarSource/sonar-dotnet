@@ -269,8 +269,8 @@ dotnet_diagnostic.SA1028.severity = warning
 
 # Ordering Rules (SA1200-) https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/1.1.118/documentation/OrderingRules.md
 
-dotnet_diagnostic.SA1200.severity = none # needs configuration to be "outsideNamespace"
-dotnet_diagnostic.SA1201.severity = none # needs configuration for our coding style order
+dotnet_diagnostic.SA1200.severity = warning
+dotnet_diagnostic.SA1201.severity = warning # needs monitoring, might need tuning inside the stylecop.json configuration
 dotnet_diagnostic.SA1202.severity = warning
 dotnet_diagnostic.SA1203.severity = warning
 dotnet_diagnostic.SA1204.severity = none # Doesn't match our coding style for private static methods
