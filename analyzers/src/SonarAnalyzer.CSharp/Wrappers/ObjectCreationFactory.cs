@@ -18,56 +18,59 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Helpers.Wrappers
+namespace SonarAnalyzer.Wrappers
 {
     public interface IObjectCreation
     {
         InitializerExpressionSyntax Initializer { get; }
         ArgumentListSyntax ArgumentList { get; }
         ExpressionSyntax Expression { get; }
-        string GetTypeAsString(SemanticModel semanticModel);
+        string TypeAsString(SemanticModel semanticModel);
     }
 
     public class ObjectCreationFactory
     {
         public static IObjectCreation Create(SyntaxNode node) =>
-            node is ObjectCreationExpressionSyntax objectCreationExpressionSyntax
-                ? (IObjectCreation)new ObjectCreation(objectCreationExpressionSyntax)
-                : new ImplicitObjectCreation((ImplicitObjectCreationExpressionSyntaxWrapper)node);
+            node switch
+            {
+                null => throw new ArgumentNullException(nameof(node), "Argument should not be null"),
+                ObjectCreationExpressionSyntax objectCreation => new ObjectCreation(objectCreation),
+                { } wrapper when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(wrapper) => new ImplicitObjectCreation((ImplicitObjectCreationExpressionSyntaxWrapper)wrapper),
+                _ => throw new InvalidOperationException("Unexpected type: " + node.GetType().Name)
+            };
 
         private class ObjectCreation : IObjectCreation
         {
             private readonly ObjectCreationExpressionSyntax objectCreation;
+
             public InitializerExpressionSyntax Initializer => objectCreation.Initializer;
             public ArgumentListSyntax ArgumentList => objectCreation.ArgumentList;
             public ExpressionSyntax Expression => objectCreation;
 
-            public ObjectCreation(ObjectCreationExpressionSyntax objectCreationExpressionSyntax)
-            {
+            public ObjectCreation(ObjectCreationExpressionSyntax objectCreationExpressionSyntax) =>
                 objectCreation = objectCreationExpressionSyntax;
-            }
 
-            public string GetTypeAsString(SemanticModel semanticModel) =>
+            public string TypeAsString(SemanticModel semanticModel) =>
                 objectCreation.Type.ToString();
         }
 
         private class ImplicitObjectCreation : IObjectCreation
         {
             private readonly ImplicitObjectCreationExpressionSyntaxWrapper objectCreation;
+
             public InitializerExpressionSyntax Initializer => objectCreation.Initializer;
             public ArgumentListSyntax ArgumentList => objectCreation.ArgumentList;
             public ExpressionSyntax Expression => objectCreation.SyntaxNode;
 
-            public ImplicitObjectCreation(ImplicitObjectCreationExpressionSyntaxWrapper wrapper)
-            {
+            public ImplicitObjectCreation(ImplicitObjectCreationExpressionSyntaxWrapper wrapper) =>
                 objectCreation = wrapper;
-            }
 
-            public string GetTypeAsString(SemanticModel semanticModel) =>
+            public string TypeAsString(SemanticModel semanticModel) =>
                 semanticModel.GetTypeInfo(objectCreation).Type.Name;
         }
     }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Mail;
 
@@ -17,6 +17,8 @@ void Method()
     var b = "https://foo.com";
     var httpProtocolScheme = "http://"; // It's compliant when standalone
     Telnet c = new(); // Noncompliant
+    Telnet d;
+    d = new();        // Noncompliant
 
     var uri = new Uri("http://foo.com"); // Noncompliant
     var uriSafe = new Uri("https://foo.com");

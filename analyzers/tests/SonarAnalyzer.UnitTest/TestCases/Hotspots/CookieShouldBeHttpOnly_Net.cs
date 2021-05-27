@@ -21,6 +21,6 @@ class Program
     void InitializerSetsNotAllowedValue()
     {
         CookieOptions c1 = new () { HttpOnly = false }; // Noncompliant
-        CookieOptions c2 = new () { Secure = true }; // Noncompliant
+        CookieOptions c2 = new () { Secure = true };    // Noncompliant
     }
 }

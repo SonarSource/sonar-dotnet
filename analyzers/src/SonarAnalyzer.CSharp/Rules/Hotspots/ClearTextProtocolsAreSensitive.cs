@@ -31,7 +31,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.Trackers;
-using SonarAnalyzer.Helpers.Wrappers;
+using SonarAnalyzer.Wrappers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -132,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
             }
-            else if (telnetRegexForIdentifier.IsMatch(objectCreation.GetTypeAsString(context.SemanticModel)))
+            else if (telnetRegexForIdentifier.IsMatch(objectCreation.TypeAsString(context.SemanticModel)))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, recommendedProtocols[TelnetKey]));
             }

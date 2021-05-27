@@ -26,7 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Helpers.Wrappers;
+using SonarAnalyzer.Wrappers;
 
 namespace SonarAnalyzer.Helpers.Trackers
 {
