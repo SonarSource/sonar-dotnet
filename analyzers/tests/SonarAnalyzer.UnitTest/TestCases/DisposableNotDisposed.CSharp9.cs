@@ -67,7 +67,7 @@ record MyRecord
         init
         {
             backing_field1 = new FileStream("", FileMode.Open); // Noncompliant
-            // Noncompliant@-1 - duplicate
+                                                                    // Noncompliant@-1 - duplicate
         }
     }
 
@@ -76,8 +76,8 @@ record MyRecord
     {
         init
         {
-            backing_field2 = new("", FileMode.Open); // Noncompliant
-            // Noncompliant@-1 - duplicate
+            backing_field2 = new ("", FileMode.Open); // Noncompliant
+                                                      // Noncompliant@-1 - duplicate
         }
     }
 
