@@ -101,7 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             };
 
-        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(ConcurrentBag<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>> symbolsWhereTypeIsCreated, ConcurrentBag<ISymbol> symbolsWhereLocaleIsSet) =>
+        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(ConcurrentBag<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>> symbolsWhereTypeIsCreated,
+                                                                                  ConcurrentBag<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
             {
                 foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Symbol)))
