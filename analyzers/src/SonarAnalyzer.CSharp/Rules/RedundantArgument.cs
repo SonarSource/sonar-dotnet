@@ -55,19 +55,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         ? invocationExpression.ArgumentList
                         : ((ImplicitObjectCreationExpressionSyntaxWrapper)c.Node).ArgumentList;
                     var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, c.SemanticModel);
-                    var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings().ToList();
 
-                    var methodSymbol = methodParameterLookup.MethodSymbol;
-                    if (methodSymbol == null)
+                    if (methodParameterLookup.MethodSymbol != null)
                     {
-                        return;
-                    }
-
-                    foreach (var argumentMapping in argumentMappings.Where(argumentMapping => ArgumentHasDefaultValue(argumentMapping, c.SemanticModel)))
-                    {
-                        var argument = argumentMapping.SyntaxNode;
-                        var parameter = argumentMapping.Symbol;
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, argument.GetLocation(), parameter.Name));
+                        foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Where(x => ArgumentHasDefaultValue(x, c.SemanticModel)))
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, argumentMapping.SyntaxNode.GetLocation(), argumentMapping.Symbol.Name));
+                        }
                     }
                 },
                 SyntaxKind.InvocationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
