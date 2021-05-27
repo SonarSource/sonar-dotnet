@@ -58,5 +58,16 @@ namespace Tests.Diagnostics
             dataTable2.Locale = System.Globalization.CultureInfo.InvariantCulture;
             dataTable2 = new DataTable(); // Compliant FN
         }
+
+        void BadSyntax()
+        {
+            a = new DataTable();  // Error [CS0103]
+        }
+
+        void CornerCases()
+        {
+            new DataTable { Locale = CultureInfo.CurrentUICulture };
+            new DataTable();
+        }
     }
 }
