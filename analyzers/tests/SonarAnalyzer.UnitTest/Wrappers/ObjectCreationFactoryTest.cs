@@ -74,7 +74,11 @@ namespace SonarAnalyzer.UnitTest.Wrappers
         public void GivenNull_ThrowsException()
         {
             Action action = () => { ObjectCreationFactory.Create(null); };
+#if NET
+            action.Should().Throw<ArgumentNullException>().WithMessage("Argument should not be null (Parameter 'node')");
+#else
             action.Should().Throw<ArgumentNullException>().WithMessage("Argument should not be null\nParameter name: node");
+#endif
         }
 
         [TestMethod]
