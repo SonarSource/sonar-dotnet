@@ -38,9 +38,9 @@ namespace SonarAnalyzer.Wrappers
         public static IObjectCreation Create(SyntaxNode node) =>
             node switch
             {
-                null => throw new ArgumentNullException(nameof(node), "Argument should not be null"),
+                null => throw new ArgumentNullException(nameof(node)),
                 ObjectCreationExpressionSyntax objectCreation => new ObjectCreation(objectCreation),
-                { } wrapper when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(wrapper) => new ImplicitObjectCreation((ImplicitObjectCreationExpressionSyntaxWrapper)wrapper),
+                { } when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => new ImplicitObjectCreation((ImplicitObjectCreationExpressionSyntaxWrapper)node),
                 _ => throw new InvalidOperationException("Unexpected type: " + node.GetType().Name)
             };
 
