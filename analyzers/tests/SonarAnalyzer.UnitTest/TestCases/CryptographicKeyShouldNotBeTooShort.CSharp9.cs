@@ -10,7 +10,7 @@ using System;
 using System.Security.Cryptography;
 
 var x = new RSACryptoServiceProvider(); // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
-RSACryptoServiceProvider y = new(); // FN
+RSACryptoServiceProvider y = new(); // Noncompliant
 
 record Program
 {
@@ -23,20 +23,34 @@ record Program
     public void ConstArgumentResolution()
     {
         const int localValidSize = 2048;
-        new RSACryptoServiceProvider(); // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
+        new RSACryptoServiceProvider();                    // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
         new RSACryptoServiceProvider(new CspParameters()); // Noncompliant - has default key size of 1024
+        new RSACryptoServiceProvider(new ());              // Error [CS0121]
         new RSACryptoServiceProvider(2048);
         new RSACryptoServiceProvider(localValidSize);
         new RSACryptoServiceProvider(validKeySizeConst);
         new RSACryptoServiceProvider(validKeySize);
-        new RSACryptoServiceProvider(invalidKeySize); // Noncompliant
+        new RSACryptoServiceProvider(invalidKeySize);      // Noncompliant
 
         const int localInvalidSize = 1024;
-        new RSACryptoServiceProvider(1024); // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
+        new RSACryptoServiceProvider(1024);        // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         new RSACryptoServiceProvider(1024, new()); // Noncompliant
         new RSACryptoServiceProvider(invalidKeySizeConst); // Noncompliant
-        new RSACryptoServiceProvider(localInvalidSize); // Noncompliant
+        new RSACryptoServiceProvider(localInvalidSize);    // Noncompliant
+
+        RSACryptoServiceProvider provider;
+        provider = new ();                                 // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
+        provider = new (new CspParameters());              // Noncompliant - has default key size of 1024
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+        provider = new (new ());                           // Error [CS0121]
+        provider = new (2048);
+        provider = new (localValidSize);
+        provider = new (validKeySizeConst);
+        provider = new (validKeySize);
+        provider = new (invalidKeySize);                   // Noncompliant
+
+        var malformed = new UnknownCryptoServiceProvider();// Error [CS0264]
     }
 
     public void KeySize()
