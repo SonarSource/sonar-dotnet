@@ -1,16 +1,16 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 
-CookieOptions topLevelStatement1 = new(); // FN
+CookieOptions topLevelStatement1 = new(); // Noncompliant
 CookieOptions topLevelStatement2 = new CookieOptions(); // Noncompliant
 
 class Program
 {
-    CookieOptions field1 = new(); // FN
+    CookieOptions field1 = new(); // Noncompliant
     CookieOptions field2;
 
     CookieOptions Property0 { get; init; } = new CookieOptions(); // Noncompliant
-    CookieOptions Property1 { get; init; } = new (); // FN
+    CookieOptions Property1 { get; init; } = new (); // Noncompliant
     CookieOptions Property2 { get; init; }
 
     Program()
@@ -20,7 +20,7 @@ class Program
 
     void InitializerSetsNotAllowedValue()
     {
-        CookieOptions c0 = new () { Secure = false }; // FN
-        CookieOptions c1 = new () { HttpOnly = true }; // FN, as Secure is not set
+        CookieOptions c0 = new () { Secure = false }; // Noncompliant
+        CookieOptions c1 = new () { HttpOnly = true }; // Noncompliant
     }
 }

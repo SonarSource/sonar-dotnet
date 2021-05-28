@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Mail;
 
@@ -16,6 +16,9 @@ void Method()
     var a = "http://foo.com"; // Noncompliant
     var b = "https://foo.com";
     var httpProtocolScheme = "http://"; // It's compliant when standalone
+    Telnet c = new(); // Noncompliant
+    Telnet d;
+    d = new();        // Noncompliant
 
     var uri = new Uri("http://foo.com"); // Noncompliant
     var uriSafe = new Uri("https://foo.com");
@@ -32,11 +35,13 @@ public record Record
     public void Method()
     {
         using var notSet = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
-        using SmtpClient targetNew = new ("host", 25); // FN
-        using SmtpClient targetNewWithInitializer = new("host", 25) {EnableSsl = false }; // FN
+        using SmtpClient targetNew = new ("host", 25); // Noncompliant
+        using SmtpClient targetNewWithInitializer = new("host", 25) {EnableSsl = false }; // Noncompliant
 
         new TelnetRecord(); // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
     }
 }
 
 public record TelnetRecord { }
+
+public class Telnet { }

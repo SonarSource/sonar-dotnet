@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Helpers.Wrappers
+namespace SonarAnalyzer.Wrappers
 {
     public interface IMethodDeclaration
     {

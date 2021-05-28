@@ -31,6 +31,8 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.Trackers;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -117,22 +119,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 context.RegisterSyntaxNodeActionInNonGenerated(VisitStringExpressions, SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression);
-                context.RegisterSyntaxNodeActionInNonGenerated(VisitObjectCreation, SyntaxKind.ObjectCreationExpression);
+                context.RegisterSyntaxNodeActionInNonGenerated(VisitObjectCreation, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
                 context.RegisterSyntaxNodeActionInNonGenerated(VisitInvocationExpression, SyntaxKind.InvocationExpression);
                 context.RegisterSyntaxNodeActionInNonGenerated(VisitAssignments, SyntaxKind.SimpleAssignmentExpression);
             });
 
         private void VisitObjectCreation(SyntaxNodeAnalysisContext context)
         {
-            var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
+            var objectCreation = ObjectCreationFactory.Create(context.Node);
 
-            if (telnetRegexForIdentifier.IsMatch(objectCreation.Type.ToString()))
+            if (!IsServerSafe(objectCreation) && objectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, objectCreation.GetLocation(), TelnetKey, recommendedProtocols[TelnetKey]));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
             }
-            else if (!IsServerSafe(objectCreation) && objectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
+            else if (telnetRegexForIdentifier.IsMatch(objectCreation.TypeAsString(context.SemanticModel)))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, objectCreation.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, recommendedProtocols[TelnetKey]));
             }
         }
 
@@ -165,7 +167,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private bool IsServerSafe(ObjectCreationExpressionSyntax objectCreation) =>
+        private bool IsServerSafe(IObjectCreation objectCreation) =>
             objectCreation.ArgumentList?.Arguments.Count > 0
             && validServerRegex.IsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression));
 
