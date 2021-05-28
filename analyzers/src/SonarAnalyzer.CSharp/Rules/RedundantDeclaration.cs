@@ -37,26 +37,12 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class RedundantDeclaration : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3257";
+        internal const string DiagnosticTypeKey = "diagnosticType";
         private const string MessageFormat = "Remove the {0}; it is redundant.";
 
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        internal const string DiagnosticTypeKey = "diagnosticType";
-
-        internal enum RedundancyType
-        {
-            LambdaParameterType,
-            ArraySize,
-            ArrayType,
-            ExplicitDelegate,
-            ExplicitNullable,
-            ObjectInitializer,
-            DelegateParameterList
-        }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -103,33 +89,29 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var newParameterList = SyntaxFactory.ParameterList(
-                SyntaxFactory.SeparatedList(lambda.ParameterList.Parameters.Select(p => SyntaxFactory.Parameter(p.Identifier))));
+            var newParameterList = SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(lambda.ParameterList.Parameters.Select(p => SyntaxFactory.Parameter(p.Identifier))));
             var newLambda = lambda.WithParameterList(newParameterList);
 
             newLambda = ChangeSyntaxElement(lambda, newLambda, context.SemanticModel, out var newSemanticModel);
 
-            if (!(newSemanticModel.GetSymbolInfo(newLambda).Symbol is IMethodSymbol newSymbol) ||
-                ParameterTypesDoNotMatch(symbol, newSymbol))
+            if (!(newSemanticModel.GetSymbolInfo(newLambda).Symbol is IMethodSymbol newSymbol) || ParameterTypesDoNotMatch(symbol, newSymbol))
             {
                 return;
             }
 
             foreach (var parameter in lambda.ParameterList.Parameters)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.Type.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, parameter.Type.GetLocation(),
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()),
                     "type specification"));
             }
         }
 
-        private static bool IsParameterListModifiable(ParenthesizedLambdaExpressionSyntax lambda)
-        {
-            return lambda.ParameterList != null &&
-                lambda.ParameterList.Parameters.All(
-                    p => p.Type != null &&
-                    p.Modifiers.All(m => !RefOutKeywords.Contains(m.Kind())));
-        }
+        private static bool IsParameterListModifiable(ParenthesizedLambdaExpressionSyntax lambda) =>
+            lambda.ParameterList != null
+            && lambda.ParameterList.Parameters.All(
+                p => p.Type != null
+                     && p.Modifiers.All(m => !RefOutKeywords.Contains(m.Kind())));
 
         private static bool ParameterTypesDoNotMatch(IMethodSymbol method1, IMethodSymbol method2)
         {
@@ -155,9 +137,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (IsInNotVarDeclaration(objectCreation) ||
-                IsInAssignmentOrReturnValue(objectCreation) ||
-                IsInArgumentAndCanBeChanged(objectCreation, context.SemanticModel))
+            if (IsInNotVarDeclaration(objectCreation)
+                || IsInAssignmentOrReturnValue(objectCreation)
+                || IsInArgumentAndCanBeChanged(objectCreation, context.SemanticModel))
             {
                 ReportIssueOnRedundantObjectCreation(context, objectCreation, "explicit nullable type creation", RedundancyType.ExplicitNullable);
             }
@@ -165,24 +147,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsNullableCreation(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
-            if (objectCreation.ArgumentList == null ||
-                objectCreation.ArgumentList.Arguments.Count != 1)
+            if (!(objectCreation.ArgumentList is {Arguments: {Count: 1}}))
             {
                 return false;
             }
 
             var type = semanticModel.GetSymbolInfo(objectCreation).Symbol?.ContainingType;
-            return type != null &&
-                type.OriginalDefinition.Is(KnownType.System_Nullable_T);
+            return type != null && type.OriginalDefinition.Is(KnownType.System_Nullable_T);
         }
-
 
         private static bool IsInAssignmentOrReturnValue(ObjectCreationExpressionSyntax objectCreation)
         {
             var parent = objectCreation.GetFirstNonParenthesizedParent();
-            return parent is AssignmentExpressionSyntax ||
-                parent is ReturnStatementSyntax ||
-                parent is LambdaExpressionSyntax;
+            return parent is AssignmentExpressionSyntax
+                   || parent is ReturnStatementSyntax
+                   || parent is LambdaExpressionSyntax;
         }
 
         private static bool IsInNotVarDeclaration(ObjectCreationExpressionSyntax objectCreation)
@@ -190,8 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var variableDeclaration = objectCreation.GetSelfOrTopParenthesizedExpression()
                 .Parent?.Parent?.Parent as VariableDeclarationSyntax;
 
-            return variableDeclaration?.Type != null &&
-                !variableDeclaration.Type.IsVar;
+            return variableDeclaration?.Type != null && !variableDeclaration.Type.IsVar;
         }
 
         #endregion
@@ -207,21 +185,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportRedundantArraySizeSpecifier(SyntaxNodeAnalysisContext context, ArrayCreationExpressionSyntax array)
         {
-            if (array.Initializer == null ||
-                array.Type == null)
+            if (array.Initializer == null || array.Type == null)
             {
                 return;
             }
             var rankSpecifier = array.Type.RankSpecifiers.FirstOrDefault();
-            if (rankSpecifier == null ||
-                rankSpecifier.Sizes.Any(SyntaxKind.OmittedArraySizeExpression))
+            if (rankSpecifier == null || rankSpecifier.Sizes.Any(SyntaxKind.OmittedArraySizeExpression))
             {
                 return;
             }
 
             foreach (var size in rankSpecifier.Sizes)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, size.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, size.GetLocation(),
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ArraySize.ToString()),
                     "array size specification"));
             }
@@ -229,17 +205,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportRedundantArrayTypeSpecifier(SyntaxNodeAnalysisContext context, ArrayCreationExpressionSyntax array)
         {
-            if (array.Initializer == null ||
-                !array.Initializer.Expressions.Any() ||
-                array.Type == null ||
-                array.Type.RankSpecifiers.Count > 1)
+            if (array.Initializer == null
+                || !array.Initializer.Expressions.Any()
+                || array.Type == null
+                || array.Type.RankSpecifiers.Count > 1)
             {
                 return;
             }
 
             var rankSpecifier = array.Type.RankSpecifiers.FirstOrDefault();
-            if (rankSpecifier == null ||
-                rankSpecifier.Sizes.Any(s => !s.IsKind(SyntaxKind.OmittedArraySizeExpression)))
+            if (rankSpecifier == null
+                || rankSpecifier.Sizes.Any(s => !s.IsKind(SyntaxKind.OmittedArraySizeExpression)))
             {
                 return;
             }
@@ -258,7 +234,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var location = Location.Create(array.SyntaxTree, TextSpan.FromBounds(
                     array.Type.ElementType.SpanStart, array.Type.RankSpecifiers.Last().SpanStart));
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location,
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ArrayType.ToString()),
                     "array type"));
             }
@@ -276,10 +252,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (objectCreation.Initializer != null &&
-                !objectCreation.Initializer.Expressions.Any())
+            if (objectCreation.Initializer != null && !objectCreation.Initializer.Expressions.Any())
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.Initializer.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.Initializer.GetLocation(),
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ObjectInitializer.ToString()),
                     "initializer"));
             }
@@ -292,31 +267,29 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportOnExplicitDelegateCreation(SyntaxNodeAnalysisContext context)
         {
             var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
-            if (!IsDelegateCreation(objectCreation, context.SemanticModel))
-            {
-                return;
-            }
-
             var argumentExpression = objectCreation.ArgumentList?.Arguments.FirstOrDefault()?.Expression;
             if (argumentExpression == null)
             {
                 return;
             }
 
-            if (IsInDeclarationNotVarNotDelegate(objectCreation, context.SemanticModel) ||
-                IsAssignmentNotDelegate(objectCreation, context.SemanticModel) ||
-                IsReturnValueNotDelegate(objectCreation, context.SemanticModel) ||
-                IsInArgumentAndCanBeChanged(objectCreation, context.SemanticModel,
+            if (!IsDelegateCreation(objectCreation, context.SemanticModel))
+            {
+                return;
+            }
+
+            if (IsInDeclarationNotVarNotDelegate(objectCreation, context.SemanticModel)
+                || IsAssignmentNotDelegate(objectCreation, context.SemanticModel)
+                || IsReturnValueNotDelegate(objectCreation, context.SemanticModel)
+                || IsInArgumentAndCanBeChanged(objectCreation, context.SemanticModel,
                     invocation => invocation.ArgumentList.Arguments.Any(a => IsDynamic(a, context.SemanticModel))))
             {
                 ReportIssueOnRedundantObjectCreation(context, objectCreation, "explicit delegate creation", RedundancyType.ExplicitDelegate);
             }
         }
 
-        private static bool IsDynamic(ArgumentSyntax argument, SemanticModel semanticModel)
-        {
-            return semanticModel.GetTypeInfo(argument.Expression).Type is IDynamicTypeSymbol;
-        }
+        private static bool IsDynamic(ArgumentSyntax argument, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(argument.Expression).Type is IDynamicTypeSymbol;
 
         private static bool IsInDeclarationNotVarNotDelegate(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
@@ -325,32 +298,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var type = variableDeclaration?.Type;
 
-            if (type == null ||
-                type.IsVar)
+            if (type == null || type.IsVar)
             {
                 return false;
             }
 
             var typeInformation = semanticModel.GetTypeInfo(type).Type;
 
-            return typeInformation != null &&
-                !typeInformation.Is(KnownType.System_Delegate);
+            return typeInformation != null && !typeInformation.Is(KnownType.System_Delegate);
         }
 
-        private static bool IsDelegateCreation(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
-        {
+        private static bool IsDelegateCreation(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(objectCreation.Type).Symbol is INamedTypeSymbol {TypeKind: TypeKind.Delegate};
 
-            return semanticModel.GetSymbolInfo(objectCreation.Type).Symbol is INamedTypeSymbol type &&
-                type.TypeKind == TypeKind.Delegate;
-        }
-
-        private static bool IsReturnValueNotDelegate(ObjectCreationExpressionSyntax objectCreation,
-            SemanticModel semanticModel)
+        private static bool IsReturnValueNotDelegate(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
             var parent = objectCreation.GetFirstNonParenthesizedParent();
 
-            if (!(parent is ReturnStatementSyntax) &&
-                !(parent is LambdaExpressionSyntax))
+            if (!(parent is ReturnStatementSyntax) && !(parent is LambdaExpressionSyntax))
             {
                 return false;
             }
@@ -360,12 +325,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            return enclosing.ReturnType != null &&
-                !enclosing.ReturnType.Is(KnownType.System_Delegate);
+            return enclosing.ReturnType != null && !enclosing.ReturnType.Is(KnownType.System_Delegate);
         }
 
-        private static bool IsAssignmentNotDelegate(ObjectCreationExpressionSyntax objectCreation,
-            SemanticModel semanticModel)
+        private static bool IsAssignmentNotDelegate(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
             var parent = objectCreation.GetFirstNonParenthesizedParent();
             if (!(parent is AssignmentExpressionSyntax assignment))
@@ -375,8 +338,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var typeInformation = semanticModel.GetTypeInfo(assignment.Left).Type;
 
-            return typeInformation != null &&
-                !typeInformation.Is(KnownType.System_Delegate);
+            return typeInformation != null && !typeInformation.Is(KnownType.System_Delegate);
         }
 
         #endregion
@@ -407,7 +369,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!usedParameters.Intersect(methodSymbol.Parameters).Any())
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, anonymousMethod.ParameterList.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, anonymousMethod.ParameterList.GetLocation(),
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.DelegateParameterList.ToString()),
                     "parameter list"));
             }
@@ -445,15 +407,15 @@ namespace SonarAnalyzer.Rules.CSharp
             var newInvocation = invocation.WithArgumentList(newArgumentList);
             newInvocation = ChangeSyntaxElement(invocation, newInvocation, semanticModel, out var newSemanticModel);
 
-            return newSemanticModel.GetSymbolInfo(newInvocation).Symbol is IMethodSymbol newMethodSymbol &&
-                methodSymbol.ToDisplayString() == newMethodSymbol.ToDisplayString();
+            return newSemanticModel.GetSymbolInfo(newInvocation).Symbol is IMethodSymbol newMethodSymbol
+                   && methodSymbol.ToDisplayString() == newMethodSymbol.ToDisplayString();
         }
 
         private static void ReportIssueOnRedundantObjectCreation(SyntaxNodeAnalysisContext context,
             ObjectCreationExpressionSyntax objectCreation, string message, RedundancyType redundancyType)
         {
             var location = objectCreation.CreateLocation(objectCreation.Type);
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location,
                 ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, redundancyType.ToString()),
                 message));
         }
@@ -480,6 +442,17 @@ namespace SonarAnalyzer.Rules.CSharp
             newSemanticModel = newCompilation.GetSemanticModel(newTree);
 
             return (T)newTree.GetRoot().GetAnnotatedNodes(annotation).First();
+        }
+
+        internal enum RedundancyType
+        {
+            LambdaParameterType,
+            ArraySize,
+            ArrayType,
+            ExplicitDelegate,
+            ExplicitNullable,
+            ObjectInitializer,
+            DelegateParameterList
         }
     }
 }
