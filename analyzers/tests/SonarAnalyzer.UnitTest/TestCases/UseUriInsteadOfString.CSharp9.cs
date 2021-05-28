@@ -1,10 +1,23 @@
-﻿S3994 p = new("www.sonarsource.com"); // Compliant - FN
+﻿using System;
 
-string GetUrl(string url) => ""; // Compliant - FN
+Foo p = new("www.sonarsource.com");        // Noncompliant
+
+Foo q = new("www.sonarsource.com", false); // Compliant
+
+string GetUrl(string url) => "";           // Compliant - FN
+
+public record Foo
+{
+    public Foo(string uri) { }
+
+    public Foo(string uri, bool blah) { }   // Noncompliant {{Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.}}
+
+    public Foo(Uri uri) { }                 // Compliant
+}
 
 public record S3994
 {
-    public S3994(string uri) { } // Noncompliant {{Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.}}
+    public S3994(string uri) { }            // Noncompliant {{Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.}}
 
     public S3994(string uri, bool blah) { } // Noncompliant {{Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.}}
 

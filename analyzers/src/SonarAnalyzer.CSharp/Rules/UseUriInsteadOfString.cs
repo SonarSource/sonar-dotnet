@@ -65,7 +65,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             context.RegisterSyntaxNodeActionInNonGenerated(VerifyPropertyDeclaration, SyntaxKind.PropertyDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(VerifyInvocationAndCreation, SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(VerifyInvocationAndCreation,
+                                                           SyntaxKind.InvocationExpression,
+                                                           SyntaxKind.ObjectCreationExpression,
+                                                           SyntaxKindEx.ImplicitObjectCreationExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(VerifyRecordDeclaration, SyntaxKindEx.RecordDeclaration);
         }
