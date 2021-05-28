@@ -8,7 +8,8 @@ A(1);
 A(1, 2, 4);
 
 Record r1 = new(1);
-Record r2 = new(1, 5); // Compliant - FN
+Record r2 = new(1, 5); // Noncompliant
+Record r3 = new(1, 6); // Compliant
 
 int x = 5;
 var y = x switch

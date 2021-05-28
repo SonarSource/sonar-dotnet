@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -36,13 +37,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3254";
         private const string MessageFormat = "Remove this default value assigned to parameter '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -52,29 +51,23 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var methodCall = (InvocationExpressionSyntax) c.Node;
-                    var methodParameterLookup = new CSharpMethodParameterLookup(methodCall, c.SemanticModel);
-                    var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings()
-                        .ToList();
+                    var argumentList = c.Node is InvocationExpressionSyntax invocationExpression
+                        ? invocationExpression.ArgumentList
+                        : ((ImplicitObjectCreationExpressionSyntaxWrapper)c.Node).ArgumentList;
+                    var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, c.SemanticModel);
 
-                    var methodSymbol = methodParameterLookup.MethodSymbol;
-                    if (methodSymbol == null)
+                    if (methodParameterLookup.MethodSymbol != null)
                     {
-                        return;
-                    }
-
-                    foreach (var argumentMapping in argumentMappings.Where(argumentMapping => ArgumentHasDefaultValue(argumentMapping, c.SemanticModel)))
-                    {
-                        var argument = argumentMapping.SyntaxNode;
-                        var parameter = argumentMapping.Symbol;
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, argument.GetLocation(), parameter.Name));
+                        foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Where(x => ArgumentHasDefaultValue(x, c.SemanticModel)))
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, argumentMapping.SyntaxNode.GetLocation(), argumentMapping.Symbol.Name));
+                        }
                     }
                 },
-                SyntaxKind.InvocationExpression);
-        }
+                SyntaxKind.InvocationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
         internal static bool ArgumentHasDefaultValue(SyntaxNodeSymbolSemanticModelTuple<ArgumentSyntax, IParameterSymbol> argumentMapping,
-            SemanticModel semanticModel)
+                                                     SemanticModel semanticModel)
         {
             var argument = argumentMapping.SyntaxNode;
             var parameter = argumentMapping.Symbol;
