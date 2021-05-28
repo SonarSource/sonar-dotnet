@@ -20,3 +20,17 @@ record Record
         init { field = new object(); } // Compliant - FN
     }
 }
+
+public class RedundantDeclaration
+{
+    public RedundantDeclaration()
+    {
+        MyEvent += new((a, b) => { }); // Noncompliant {{Remove the explicit delegate creation; it is redundant.}}
+//                 ^^^^^^^^^^^^^^^^^^
+
+        object o = new() { }; // Noncompliant {{Remove the initializer; it is redundant.}}
+//                       ^^^
+    }
+
+    private event EventHandler MyEvent;
+}

@@ -29,6 +29,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -53,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ReportRedundantNullableConstructorCall(c);
                     ReportOnRedundantObjectInitializer(c);
                 },
-                SyntaxKind.ObjectCreationExpression);
+                SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 ReportOnRedundantParameterList,
@@ -131,32 +133,32 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportRedundantNullableConstructorCall(SyntaxNodeAnalysisContext context)
         {
-            var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
+            var objectCreation = ObjectCreationFactory.Create(context.Node);
             if (!IsNullableCreation(objectCreation, context.SemanticModel))
             {
                 return;
             }
 
-            if (IsInNotVarDeclaration(objectCreation)
-                || IsInAssignmentOrReturnValue(objectCreation)
+            if (IsInNotVarDeclaration(objectCreation.Expression)
+                || IsInAssignmentOrReturnValue(objectCreation.Expression)
                 || IsInArgumentAndCanBeChanged(objectCreation, context.SemanticModel))
             {
-                ReportIssueOnRedundantObjectCreation(context, objectCreation, "explicit nullable type creation", RedundancyType.ExplicitNullable);
+                ReportIssueOnRedundantObjectCreation(context, objectCreation.Expression, "explicit nullable type creation", RedundancyType.ExplicitNullable);
             }
         }
 
-        private static bool IsNullableCreation(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
+        private static bool IsNullableCreation(IObjectCreation objectCreation, SemanticModel semanticModel)
         {
             if (!(objectCreation.ArgumentList is {Arguments: {Count: 1}}))
             {
                 return false;
             }
 
-            var type = semanticModel.GetSymbolInfo(objectCreation).Symbol?.ContainingType;
+            var type = semanticModel.GetSymbolInfo(objectCreation.Expression).Symbol?.ContainingType;
             return type != null && type.OriginalDefinition.Is(KnownType.System_Nullable_T);
         }
 
-        private static bool IsInAssignmentOrReturnValue(ObjectCreationExpressionSyntax objectCreation)
+        private static bool IsInAssignmentOrReturnValue(SyntaxNode objectCreation)
         {
             var parent = objectCreation.GetFirstNonParenthesizedParent();
             return parent is AssignmentExpressionSyntax
@@ -164,7 +166,7 @@ namespace SonarAnalyzer.Rules.CSharp
                    || parent is LambdaExpressionSyntax;
         }
 
-        private static bool IsInNotVarDeclaration(ObjectCreationExpressionSyntax objectCreation)
+        private static bool IsInNotVarDeclaration(SyntaxNode objectCreation)
         {
             var variableDeclaration = objectCreation.GetSelfOrTopParenthesizedExpression()
                 .Parent?.Parent?.Parent as VariableDeclarationSyntax;
@@ -246,7 +248,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportOnRedundantObjectInitializer(SyntaxNodeAnalysisContext context)
         {
-            var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
+            var objectCreation = ObjectCreationFactory.Create(context.Node);
             if (objectCreation.ArgumentList == null)
             {
                 return;
@@ -266,7 +268,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportOnExplicitDelegateCreation(SyntaxNodeAnalysisContext context)
         {
-            var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
+            var objectCreation = ObjectCreationFactory.Create(context.Node);
             var argumentExpression = objectCreation.ArgumentList?.Arguments.FirstOrDefault()?.Expression;
             if (argumentExpression == null)
             {
@@ -278,20 +280,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (IsInDeclarationNotVarNotDelegate(objectCreation, context.SemanticModel)
-                || IsAssignmentNotDelegate(objectCreation, context.SemanticModel)
-                || IsReturnValueNotDelegate(objectCreation, context.SemanticModel)
+            if (IsInDeclarationNotVarNotDelegate(objectCreation.Expression, context.SemanticModel)
+                || IsAssignmentNotDelegate(objectCreation.Expression, context.SemanticModel)
+                || IsReturnValueNotDelegate(objectCreation.Expression, context.SemanticModel)
                 || IsInArgumentAndCanBeChanged(objectCreation, context.SemanticModel,
                     invocation => invocation.ArgumentList.Arguments.Any(a => IsDynamic(a, context.SemanticModel))))
             {
-                ReportIssueOnRedundantObjectCreation(context, objectCreation, "explicit delegate creation", RedundancyType.ExplicitDelegate);
+                ReportIssueOnRedundantObjectCreation(context, objectCreation.Expression, "explicit delegate creation", RedundancyType.ExplicitDelegate);
             }
         }
 
         private static bool IsDynamic(ArgumentSyntax argument, SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(argument.Expression).Type is IDynamicTypeSymbol;
 
-        private static bool IsInDeclarationNotVarNotDelegate(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
+        private static bool IsInDeclarationNotVarNotDelegate(SyntaxNode objectCreation, SemanticModel semanticModel)
         {
             var variableDeclaration = objectCreation.GetSelfOrTopParenthesizedExpression()
                 .Parent?.Parent?.Parent as VariableDeclarationSyntax;
@@ -308,10 +310,10 @@ namespace SonarAnalyzer.Rules.CSharp
             return typeInformation != null && !typeInformation.Is(KnownType.System_Delegate);
         }
 
-        private static bool IsDelegateCreation(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
-            semanticModel.GetSymbolInfo(objectCreation.Type).Symbol is INamedTypeSymbol {TypeKind: TypeKind.Delegate};
+        private static bool IsDelegateCreation(IObjectCreation objectCreation, SemanticModel semanticModel) =>
+            objectCreation.TypeSymbol(semanticModel) is INamedTypeSymbol {TypeKind: TypeKind.Delegate};
 
-        private static bool IsReturnValueNotDelegate(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
+        private static bool IsReturnValueNotDelegate(SyntaxNode objectCreation, SemanticModel semanticModel)
         {
             var parent = objectCreation.GetFirstNonParenthesizedParent();
 
@@ -328,7 +330,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return enclosing.ReturnType != null && !enclosing.ReturnType.Is(KnownType.System_Delegate);
         }
 
-        private static bool IsAssignmentNotDelegate(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
+        private static bool IsAssignmentNotDelegate(SyntaxNode objectCreation, SemanticModel semanticModel)
         {
             var parent = objectCreation.GetFirstNonParenthesizedParent();
             if (!(parent is AssignmentExpressionSyntax assignment))
@@ -377,10 +379,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #endregion
 
-        private static bool IsInArgumentAndCanBeChanged(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel,
+        private static bool IsInArgumentAndCanBeChanged(IObjectCreation objectCreation, SemanticModel semanticModel,
             Func<InvocationExpressionSyntax, bool> additionalFilter = null)
         {
-            var parent = objectCreation.GetFirstNonParenthesizedParent();
+            var parent = objectCreation.Expression.GetFirstNonParenthesizedParent();
             var argument = parent as ArgumentSyntax;
 
             if (!(argument?.Parent?.Parent is InvocationExpressionSyntax invocation))
@@ -412,9 +414,11 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void ReportIssueOnRedundantObjectCreation(SyntaxNodeAnalysisContext context,
-            ObjectCreationExpressionSyntax objectCreation, string message, RedundancyType redundancyType)
+            SyntaxNode node, string message, RedundancyType redundancyType)
         {
-            var location = objectCreation.CreateLocation(objectCreation.Type);
+            var location = node is ObjectCreationExpressionSyntax objectCreation
+                ? objectCreation.CreateLocation(objectCreation.Type)
+                : node.GetLocation();
             context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location,
                 ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, redundancyType.ToString()),
                 message));
