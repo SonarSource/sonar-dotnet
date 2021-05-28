@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
-        protected override SyntaxKind[] ObjectCreationExpressionKinds { get; } = { SyntaxKind.ObjectCreationExpression };
 
         protected override Location Location(SyntaxNode objectCreation) =>
             ((ObjectCreationExpressionSyntax)objectCreation).Type.GetLocation();
