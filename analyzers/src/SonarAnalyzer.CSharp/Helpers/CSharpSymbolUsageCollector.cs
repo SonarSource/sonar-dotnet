@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Wrappers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers
@@ -67,6 +68,11 @@ namespace SonarAnalyzer.Helpers
             semanticModel = node.EnsureCorrectSemanticModelOrDefault(semanticModel ?? compilation.GetSemanticModel(node.SyntaxTree));
             if (semanticModel != null)
             {
+                if (node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression)
+                    && knownSymbolNames.Contains(ObjectCreationFactory.Create(node).TypeAsString(semanticModel)))
+                {
+                    UsedSymbols.UnionWith(GetSymbols(node));
+                }
                 base.Visit(node);
             }
         }

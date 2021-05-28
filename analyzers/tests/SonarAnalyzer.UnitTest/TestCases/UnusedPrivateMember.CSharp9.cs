@@ -69,7 +69,12 @@ namespace Tests.Diagnostics
 
     public class TargetTypedNew
     {
-        private TargetTypedNew(int arg) // Noncompliant FP
+        private TargetTypedNew(int arg)
+        {
+            var x = arg;
+        }
+
+        private TargetTypedNew(string arg)                           // Noncompliant
         {
             var x = arg;
         }
@@ -77,6 +82,11 @@ namespace Tests.Diagnostics
         public static TargetTypedNew Create()
         {
             return new(42);
+        }
+
+        public static void Foo()
+        {
+            PositionalRecord @record = new PositionalRecord("");
         }
     }
 }
