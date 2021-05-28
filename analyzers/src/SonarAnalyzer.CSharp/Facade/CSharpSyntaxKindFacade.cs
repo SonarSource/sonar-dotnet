@@ -19,13 +19,14 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers.Facade
 {
     internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     {
         public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
-        public SyntaxKind ObjectCreationExpression => SyntaxKind.ObjectCreationExpression;
+        public SyntaxKind[] ObjectCreationExpression => new[] {SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression};
         public SyntaxKind EnumDeclaration => SyntaxKind.EnumDeclaration;
         public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
         public SyntaxKind Attribute => SyntaxKind.Attribute;

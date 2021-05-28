@@ -39,7 +39,6 @@ namespace SonarAnalyzer.Rules
         protected abstract ISet<string> AlgorithmParameterizedFactoryMethods { get; }
         protected abstract ISet<string> FactoryParameterNames { get; }
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected abstract TSyntaxKind[] ObjectCreationExpressionKinds { get;  }
         private protected abstract ImmutableArray<KnownType> AlgorithmTypes { get; }
 
         protected abstract Location Location(SyntaxNode objectCreation);
@@ -50,7 +49,7 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckObjectCreation, ObjectCreationExpressionKinds);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckObjectCreation, Language.SyntaxKind.ObjectCreationExpression);
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckInvocation, Language.SyntaxKind.InvocationExpression);
         }
 

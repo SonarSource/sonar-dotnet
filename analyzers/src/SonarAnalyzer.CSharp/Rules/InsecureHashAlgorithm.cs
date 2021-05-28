@@ -43,7 +43,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
-        protected override SyntaxKind[] ObjectCreationExpressionKinds { get; } = { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
 
         protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } =
             new HashSet<string>
@@ -87,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override Location Location(SyntaxNode objectCreation) =>
             objectCreation is ObjectCreationExpressionSyntax objectCreationExpression
                 ? objectCreationExpression.Type.GetLocation()
-                : ((ImplicitObjectCreationExpressionSyntaxWrapper)objectCreation).SyntaxNode.GetLocation();
+                : objectCreation.GetLocation();
 
         protected override ArgumentListSyntax ArgumentList(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.ArgumentList;
