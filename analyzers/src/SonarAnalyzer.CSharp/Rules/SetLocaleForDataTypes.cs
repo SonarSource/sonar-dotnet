@@ -63,23 +63,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(ConcurrentBag<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>> symbolsWhereTypeIsCreated) =>
             c =>
             {
-                if (!(GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType) || !objectType.IsAny(CheckedTypes))
+                if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
+                    && objectType.IsAny(CheckedTypes)
+                    && GetAssignmentTargetVariable(c.Node) is { } variableSyntax)
                 {
-                    return;
-                }
-
-                var variableSyntax = GetAssignmentTargetVariable(c.Node);
-                if (variableSyntax == null)
-                {
-                    return;
-                }
-
-                var variableSymbol = variableSyntax is IdentifierNameSyntax
-                    ? c.SemanticModel.GetSymbolInfo(variableSyntax).Symbol
-                    : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
-                if (variableSymbol != null)
-                {
-                    symbolsWhereTypeIsCreated.Add(variableSymbol.ToSymbolWithSyntax(c.Node));
+                    var variableSymbol = variableSyntax is IdentifierNameSyntax
+                        ? c.SemanticModel.GetSymbolInfo(variableSyntax).Symbol
+                        : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
+                    if (variableSymbol != null)
+                    {
+                        symbolsWhereTypeIsCreated.Add(variableSymbol.ToSymbolWithSyntax(c.Node));
+                    }
                 }
             };
 
@@ -87,9 +81,8 @@ namespace SonarAnalyzer.Rules.CSharp
             c =>
             {
                 var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
-                var propertySymbol = GetPropertySymbol(assignmentExpression, c.SemanticModel);
 
-                if (propertySymbol != null
+                if (GetPropertySymbol(assignmentExpression, c.SemanticModel) is { } propertySymbol
                     && propertySymbol.ContainingType.IsAny(CheckedTypes)
                     && propertySymbol.Name == "Locale")
                 {
@@ -107,20 +100,17 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Symbol)))
                 {
-                    var typeName = invalidCreation.Symbol.GetSymbolType()?.Name;
-                    if (typeName == null)
+                    if (invalidCreation.Symbol.GetSymbolType()?.Name is { }  typeName)
                     {
-                        continue;
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invalidCreation.Syntax.GetLocation(), typeName));
                     }
-
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invalidCreation.Syntax.GetLocation(), typeName));
                 }
             };
 
         private static ISymbol GetSymbolFromConstructorInvocation(SyntaxNode constructorCall, SemanticModel semanticModel) =>
             constructorCall is ObjectCreationExpressionSyntax objectCreation
                 ? semanticModel.GetSymbolInfo(objectCreation.Type).Symbol
-                : semanticModel.GetSymbolInfo(((ImplicitObjectCreationExpressionSyntaxWrapper)constructorCall).SyntaxNode).Symbol?.ContainingType;
+                : semanticModel.GetSymbolInfo(constructorCall).Symbol?.ContainingType;
 
         private static SyntaxNode GetAssignmentTargetVariable(SyntaxNode objectCreation) =>
             objectCreation.GetFirstNonParenthesizedParent() switch
