@@ -95,14 +95,23 @@ public class DotCoverReportParserTest {
   }
 
   @Test
+  public void no_script() {
+    DotCoverReportParser parser = new DotCoverReportParser(alwaysTrue);
+    File file = new File("src/test/resources/dotcover/no_script.html");
+
+    Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
+
+    assertThat(thrown).hasMessage("The report contents does not contain '<script type=\"text/javascript\">'");
+  }
+
+  @Test
   public void no_highlight() {
     DotCoverReportParser parser = new DotCoverReportParser(alwaysTrue);
     File file = new File("src/test/resources/dotcover/no_highlight.html");
 
     Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
 
-    assertThat(thrown).hasMessage("The report contents does not match the following regular expression: "
-      + ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(?<SequencePoints>\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)](,\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)])*)]\\);\\s*+</script>.*");
+    assertThat(thrown).hasMessage("The report contents does not contain 'highlightRanges(['");
   }
 
   @Test
@@ -136,6 +145,18 @@ public class DotCoverReportParserTest {
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
       .startsWith("dotCover parser: found coverage for line '12', hits '0' when analyzing the path '");
+  }
+
+  @Test
+  public void valid_big() throws Exception {
+    Coverage coverage = new Coverage();
+    new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/valid_big.html"), coverage);
+
+    String filePath = new File("mylibrary\\calc.cs").getCanonicalPath();
+    assertThat(coverage.files()).containsOnly(filePath);
+    assertThat(coverage.hits(filePath)).hasSize(10000);
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0)).startsWith("dotCover parser: found coverage for line '24', hits '1' when analyzing the path '");
   }
 
   @Test

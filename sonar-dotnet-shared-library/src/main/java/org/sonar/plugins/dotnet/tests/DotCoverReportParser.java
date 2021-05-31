@@ -32,15 +32,8 @@ import org.sonar.api.utils.log.Loggers;
 public class DotCoverReportParser implements CoverageParser {
 
   private static final String TITLE_START = "<title>";
-  // the pattern for the information about a sequence point - (lineStart, columnStart, lineEnd, columnEnd, hits)
+  // the pattern for the information about a sequence point - [lineStart, columnStart, lineEnd, columnEnd, hits]
   private static final Pattern SEQUENCE_POINT = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)]");
-  private static final String SEQUENCE_POINTS_GROUP_NAME = "SequencePoints";
-  // the file coverage has a list of sequence points
-  // we use SEQUENCE_POINT_PATTERN below to avoid non-determinism in the regular expression, due to the `[` and `]` characters appearing multiple times
-  private static final Pattern FILE_COVERAGE = Pattern.compile(
-    ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(?<" + SEQUENCE_POINTS_GROUP_NAME + ">" + SEQUENCE_POINT + "(," + SEQUENCE_POINT + ")*)]\\);\\s*+</script>.*",
-    Pattern.DOTALL);
-
   private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
   private final FileService fileService;
 
@@ -95,22 +88,15 @@ public class DotCoverReportParser implements CoverageParser {
     }
 
     private void collectCoverage(String fileCanonicalPath, String contents) {
-      Matcher fileCoverageMatcher = FILE_COVERAGE.matcher(contents);
-      if (!fileCoverageMatcher.matches()) {
-        throw new IllegalArgumentException("The report contents does not match the following regular expression: " + FILE_COVERAGE.pattern());
-      }
-
-      String highlightedContents = fileCoverageMatcher.group(SEQUENCE_POINTS_GROUP_NAME);
+      String highlightedContents = getStringFrom(getStringFrom(contents, "<script type=\"text/javascript\">"), "highlightRanges([");
       Matcher sequencePointsMatcher = SEQUENCE_POINT.matcher(highlightedContents);
 
       while (sequencePointsMatcher.find()) {
         int lineStart = Integer.parseInt(sequencePointsMatcher.group(1));
         int hits = Integer.parseInt(sequencePointsMatcher.group(2));
-
         coverage.addHits(fileCanonicalPath, lineStart, hits);
 
-        LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
-          lineStart, hits, fileCanonicalPath);
+        LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.", lineStart, hits, fileCanonicalPath);
       }
     }
 
@@ -120,6 +106,14 @@ public class DotCoverReportParser implements CoverageParser {
         throw new IllegalArgumentException("The report does not contain a valid '<title>...</title>' tag.");
       }
       return index;
+    }
+
+    private String getStringFrom(String input, String from) {
+      int index = input.indexOf(from);
+      if (index == -1) {
+        throw new IllegalArgumentException("The report contents does not contain '" + from + "'");
+      }
+      return input.substring(index + from.length());
     }
   }
 }
