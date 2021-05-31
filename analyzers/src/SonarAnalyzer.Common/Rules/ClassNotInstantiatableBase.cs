@@ -18,54 +18,80 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ClassNotInstantiatableBase : SonarDiagnosticAnalyzer
+    public abstract class ClassNotInstantiatableBase<TBaseTypeSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TBaseTypeSyntax : SyntaxNode
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S3453";
-        protected const string MessageFormat = "This {0} can't be instantiated; make {1} 'public'.";
+        private const string MessageFormat = "This {0} can't be instantiated; make {1} 'public'.";
+
+        protected readonly DiagnosticDescriptor rule;
+        private readonly HashSet<TSyntaxKind> objectCreationSyntaxKinds;
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract GeneratedCodeRecognizer CodeRecognizer { get; }
 
         protected abstract bool IsTypeDeclaration(SyntaxNode node);
-        protected abstract bool IsObjectCreation(SyntaxNode node);
+        protected abstract IEnumerable<Tuple<SyntaxNodeAndSemanticModel<TBaseTypeSyntax>, Diagnostic>> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, int count);
 
-        protected bool IsAnyConstructorCalled<TBaseTypeSyntax>(INamedTypeSymbol namedType, IEnumerable<SyntaxNodeAndSemanticModel<TBaseTypeSyntax>> typeDeclarations)
-            where TBaseTypeSyntax : SyntaxNode =>
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected ClassNotInstantiatableBase()
+        {
+            objectCreationSyntaxKinds = Language.SyntaxKind.ObjectCreationExpression.ToHashSet();
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        }
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
+
+        private bool IsAnyConstructorCalled(INamedTypeSymbol namedType, IEnumerable<Tuple<SyntaxNodeAndSemanticModel<TBaseTypeSyntax>, Diagnostic>> typeDeclarations) =>
             typeDeclarations
                 .Select(typeDeclaration => new
                 {
-                    typeDeclaration.SemanticModel,
-                    DescendantNodes = typeDeclaration.SyntaxNode.DescendantNodes().ToList()
+                    typeDeclaration.Item1.SemanticModel,
+                    DescendantNodes = typeDeclaration.Item1.SyntaxNode.DescendantNodes().ToList()
                 })
                 .Any(descendants =>
-                    IsAnyConstructorToCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel) ||
-                    IsAnyNestedTypeExtendingCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel));
+                    IsAnyConstructorToCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel)
+                    || IsAnyNestedTypeExtendingCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel));
 
-        protected static IEnumerable<IMethodSymbol> GetConstructors(IEnumerable<ISymbol> members) =>
-            members
-                .OfType<IMethodSymbol>()
-                .Where(method => method.MethodKind == MethodKind.Constructor);
+        private void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
+        {
+            var namedType = (INamedTypeSymbol)context.Symbol;
+            if (!IsNonStaticClassWithNoAttributes(namedType) || DerivesFromSafeHandle(namedType))
+            {
+                return;
+            }
 
-        protected static bool HasOnlyStaticMembers(ICollection<ISymbol> members) =>
-            members.Any()
-            && members.All(member => member.IsStatic);
+            var members = namedType.GetMembers();
+            var constructors = GetConstructors(members).Where(x => !x.IsImplicitlyDeclared).ToList();
 
-        protected static bool IsNonStaticClassWithNoAttributes(INamedTypeSymbol namedType) =>
-            namedType.IsClass()
-            && !namedType.IsStatic
-            && !namedType.GetAttributes().Any();
+            if (!HasOnlyCandidateConstructors(constructors) || HasOnlyStaticMembers(members.Except(constructors).ToList()))
+            {
+                return;
+            }
 
-        protected static bool HasOnlyCandidateConstructors(ICollection<IMethodSymbol> constructors) =>
-            constructors.Any()
-            && !HasNonPrivateConstructor(constructors)
-            && constructors.All(c => !c.GetAttributes().Any());
+            var removableDeclarationsAndErrors = CollectRemovableDeclarations(namedType, context.Compilation, constructors.Count).ToList();
 
-        protected static bool DerivesFromSafeHandle(ITypeSymbol typeSymbol) =>
-            typeSymbol.DerivesFrom(KnownType.System_Runtime_InteropServices_SafeHandle);
+            if (!IsAnyConstructorCalled(namedType, removableDeclarationsAndErrors))
+            {
+                foreach (var typeDeclaration in removableDeclarationsAndErrors)
+                {
+                    context.ReportDiagnosticIfNonGenerated(CodeRecognizer, typeDeclaration.Item2);
+                }
+            }
+        }
 
         private bool IsAnyNestedTypeExtendingCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel) =>
             descendantNodes
@@ -76,12 +102,34 @@ namespace SonarAnalyzer.Rules
 
         private bool IsAnyConstructorToCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel) =>
             descendantNodes
-                .Where(IsObjectCreation)
+                .Where(x => Language.Syntax.IsAnyKind(x, objectCreationSyntaxKinds))
                 .Select(ctor => semanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol)
                 .WhereNotNull()
                 .Any(ctor => Equals(ctor.ContainingType.OriginalDefinition, namedType));
 
         private static bool HasNonPrivateConstructor(IEnumerable<IMethodSymbol> constructors) =>
             constructors.Any(method => method.DeclaredAccessibility != Accessibility.Private);
+
+        private static IEnumerable<IMethodSymbol> GetConstructors(IEnumerable<ISymbol> members) =>
+            members
+                .OfType<IMethodSymbol>()
+                .Where(method => method.MethodKind == MethodKind.Constructor);
+
+        private static bool HasOnlyStaticMembers(ICollection<ISymbol> members) =>
+            members.Any()
+            && members.All(member => member.IsStatic);
+
+        private static bool IsNonStaticClassWithNoAttributes(INamedTypeSymbol namedType) =>
+            namedType.IsClass()
+            && !namedType.IsStatic
+            && !namedType.GetAttributes().Any();
+
+        private static bool HasOnlyCandidateConstructors(ICollection<IMethodSymbol> constructors) =>
+            constructors.Any()
+            && !HasNonPrivateConstructor(constructors)
+            && constructors.All(c => !c.GetAttributes().Any());
+
+        private static bool DerivesFromSafeHandle(ITypeSymbol typeSymbol) =>
+            typeSymbol.DerivesFrom(KnownType.System_Runtime_InteropServices_SafeHandle);
     }
 }
