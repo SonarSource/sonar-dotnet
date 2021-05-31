@@ -25,11 +25,10 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class InsecureEncryptionAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TObjectCreationExpressionSyntax, TArgumentListSyntax, TArgumentSyntax>
-        : DoNotCallInsecureSecurityAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TObjectCreationExpressionSyntax, TArgumentListSyntax, TArgumentSyntax>
+    public abstract class InsecureEncryptionAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TArgumentListSyntax, TArgumentSyntax>
+        : DoNotCallInsecureSecurityAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TArgumentListSyntax, TArgumentSyntax>
         where TSyntaxKind : struct
         where TInvocationExpressionSyntax : SyntaxNode
-        where TObjectCreationExpressionSyntax : SyntaxNode
         where TArgumentListSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
     {

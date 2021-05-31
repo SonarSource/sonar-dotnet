@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(S2278DiagnosticId)]
     [Rule(DiagnosticId)]
-    public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
+    public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
     {
         // S2278 was deprecated in favor of S5547. Technically, there is no difference in the C# analyzer between
         // the 2 rules, but to be coherent with all the other languages, we still replace it with the new one
@@ -56,7 +56,9 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override string StringLiteralValue(ArgumentSyntax argument) =>
             ((LiteralExpressionSyntax)argument.Expression).Token.ValueText;
 
-        protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
-            objectCreation.Type.GetLocation();
+        protected override Location Location(SyntaxNode objectCreation) =>
+            objectCreation is ObjectCreationExpressionSyntax objectCreationExpression
+                ? objectCreationExpression.Type.GetLocation()
+                : objectCreation.GetLocation();
     }
 }

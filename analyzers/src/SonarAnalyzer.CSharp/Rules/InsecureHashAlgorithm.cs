@@ -33,9 +33,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     [Obsolete("This rule is deprecated in favor of S4790")]
-    public sealed class InsecureHashAlgorithm : DoNotCallInsecureSecurityAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
+    public sealed class InsecureHashAlgorithm : DoNotCallInsecureSecurityAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
     {
-        internal const string DiagnosticId = "S2070";
+        private const string DiagnosticId = "S2070";
         private const string MessageFormat = "Use a stronger hashing/asymmetric algorithm.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -82,8 +82,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Security_Cryptography_HMACRIPEMD160
             );
 
-        protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
-            objectCreation.Type.GetLocation();
+        protected override Location Location(SyntaxNode objectCreation) =>
+            objectCreation is ObjectCreationExpressionSyntax objectCreationExpression
+                ? objectCreationExpression.Type.GetLocation()
+                : objectCreation.GetLocation();
 
         protected override ArgumentListSyntax ArgumentList(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.ArgumentList;
