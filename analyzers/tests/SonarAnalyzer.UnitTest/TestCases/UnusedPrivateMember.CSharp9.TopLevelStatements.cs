@@ -71,8 +71,13 @@ public record Record
 
 public class TargetTypedNew
 {
-    private TargetTypedNew(int arg) // Noncompliant FP
-                                    // Noncompliant@-1 - duplicate issue reported
+    private TargetTypedNew(int arg)
+    {
+        var x = arg;
+    }
+
+    private TargetTypedNew(string arg) // Noncompliant - FP
+                                       // Noncompliant@-1 - duplicate issue reported
     {
         var x = arg;
     }
