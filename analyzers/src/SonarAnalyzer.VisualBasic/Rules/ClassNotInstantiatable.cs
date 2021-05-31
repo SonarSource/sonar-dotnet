@@ -33,8 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ClassNotInstantiatable : ClassNotInstantiatableBase
     {
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -42,6 +41,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsTypeDeclaration(SyntaxNode node) =>
             node.IsAnyKind(SyntaxKind.ClassBlock);
+
+        protected override bool IsObjectCreation(SyntaxNode node) =>
+            node is ObjectCreationExpressionSyntax;
 
         private void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
         {
@@ -61,7 +63,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             var typeDeclarations = new VisualBasicRemovableDeclarationCollector(namedType, context.Compilation).TypeDeclarations;
 
-            if (!IsAnyConstructorCalled<TypeBlockSyntax, ObjectCreationExpressionSyntax>(namedType, typeDeclarations))
+            if (!IsAnyConstructorCalled(namedType, typeDeclarations))
             {
                 var message = constructors.Count > 1
                     ? "at least one of its constructors"

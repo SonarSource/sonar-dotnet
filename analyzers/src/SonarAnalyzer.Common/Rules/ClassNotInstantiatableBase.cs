@@ -31,12 +31,10 @@ namespace SonarAnalyzer.Rules
         protected const string MessageFormat = "This {0} can't be instantiated; make {1} 'public'.";
 
         protected abstract bool IsTypeDeclaration(SyntaxNode node);
+        protected abstract bool IsObjectCreation(SyntaxNode node);
 
-        protected bool IsAnyConstructorCalled
-            <TBaseTypeSyntax, TObjectCreationSyntax>
-            (INamedTypeSymbol namedType, IEnumerable<SyntaxNodeAndSemanticModel<TBaseTypeSyntax>> typeDeclarations)
-            where TBaseTypeSyntax : SyntaxNode
-            where TObjectCreationSyntax : SyntaxNode =>
+        protected bool IsAnyConstructorCalled<TBaseTypeSyntax>(INamedTypeSymbol namedType, IEnumerable<SyntaxNodeAndSemanticModel<TBaseTypeSyntax>> typeDeclarations)
+            where TBaseTypeSyntax : SyntaxNode =>
             typeDeclarations
                 .Select(typeDeclaration => new
                 {
@@ -44,7 +42,7 @@ namespace SonarAnalyzer.Rules
                     DescendantNodes = typeDeclaration.SyntaxNode.DescendantNodes().ToList()
                 })
                 .Any(descendants =>
-                    IsAnyConstructorToCurrentType<TObjectCreationSyntax>(descendants.DescendantNodes, namedType, descendants.SemanticModel) ||
+                    IsAnyConstructorToCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel) ||
                     IsAnyNestedTypeExtendingCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel));
 
         protected static IEnumerable<IMethodSymbol> GetConstructors(IEnumerable<ISymbol> members) =>
@@ -76,15 +74,14 @@ namespace SonarAnalyzer.Rules
                 .WhereNotNull()
                 .Any(baseType => baseType.OriginalDefinition.DerivesFrom(namedType));
 
-        private static bool HasNonPrivateConstructor(IEnumerable<IMethodSymbol> constructors) =>
-            constructors.Any(method => method.DeclaredAccessibility != Accessibility.Private);
-
-        private static bool IsAnyConstructorToCurrentType<TObjectCreationSyntax>(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel)
-            where TObjectCreationSyntax : SyntaxNode =>
+        private bool IsAnyConstructorToCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel) =>
             descendantNodes
-                .OfType<TObjectCreationSyntax>()
+                .Where(IsObjectCreation)
                 .Select(ctor => semanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol)
                 .WhereNotNull()
                 .Any(ctor => Equals(ctor.ContainingType.OriginalDefinition, namedType));
+
+        private static bool HasNonPrivateConstructor(IEnumerable<IMethodSymbol> constructors) =>
+            constructors.Any(method => method.DeclaredAccessibility != Accessibility.Private);
     }
 }
