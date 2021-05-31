@@ -28,6 +28,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class CryptographicKeyShouldNotBeTooShort : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4426";
+        private const string DiagnosticId = "S4426";
         private const string MessageFormat = "Use a key length of at least {0} bits for {1} cipher algorithm.{2}";
         private const string UselessAssignmentInfo = " This assignment does not update the underlying key size.";
 
@@ -98,17 +100,13 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                    if (!(c.SemanticModel.GetTypeInfo(objectCreation).Type is ITypeSymbol containingType))
-                    {
-                        return;
-                    }
-
-                    CheckSystemSecurityEllipticCurve(containingType, objectCreation, objectCreation.ArgumentList, c);
+                    var objectCreation = ObjectCreationFactory.Create(c.Node);
+                    var containingType = c.SemanticModel.GetTypeInfo(objectCreation.Expression).Type;
+                    CheckSystemSecurityEllipticCurve(containingType, objectCreation.Expression, objectCreation.ArgumentList, c);
                     CheckSystemSecurityCryptographyAlgorithms(containingType, objectCreation, c);
                     CheckBouncyCastleKeyGenerationParameters(containingType, objectCreation, c);
                 },
-                SyntaxKind.ObjectCreationExpression);
+                SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -191,19 +189,19 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckSystemSecurityCryptographyAlgorithms(ITypeSymbol containingType, ObjectCreationExpressionSyntax objectCreation, SyntaxNodeAnalysisContext c)
+        private static void CheckSystemSecurityCryptographyAlgorithms(ITypeSymbol containingType, IObjectCreation objectCreation, SyntaxNodeAnalysisContext c)
         {
             // DSACryptoServiceProvider is always noncompliant as it has a max key size of 1024
             // RSACryptoServiceProvider() and RSACryptoServiceProvider(System.Security.Cryptography.CspParameters) constructors are noncompliants as they have a default key size of 1024
             if (containingType.Is(KnownType.System_Security_Cryptography_DSACryptoServiceProvider)
                 || (containingType.Is(KnownType.System_Security_Cryptography_RSACryptoServiceProvider) && HasDefaultSize(objectCreation.ArgumentList.Arguments, c)))
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
             }
             else
             {
                 var firstParam = objectCreation.ArgumentList.Get(0);
-                CheckGenericDsaRsaCryptographyAlgorithms(containingType, objectCreation, firstParam, c);
+                CheckGenericDsaRsaCryptographyAlgorithms(containingType, objectCreation.Expression, firstParam, c);
             }
         }
 
@@ -231,13 +229,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckBouncyCastleKeyGenerationParameters(ITypeSymbol containingType, ObjectCreationExpressionSyntax objectCreation, SyntaxNodeAnalysisContext c)
+        private static void CheckBouncyCastleKeyGenerationParameters(ITypeSymbol containingType, IObjectCreation objectCreation, SyntaxNodeAnalysisContext c)
         {
             if (objectCreation.ArgumentList.Get(2) is { }  keyLengthParam
                 && containingType.Is(KnownType.Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters)
                 && IsInvalidCommonKeyLength(keyLengthParam, c))
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation(), MinimalCommonKeyLength, "RSA", ""));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), MinimalCommonKeyLength, "RSA", ""));
             }
         }
 
