@@ -21,6 +21,7 @@
 using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Helpers
@@ -55,5 +56,14 @@ namespace SonarAnalyzer.Helpers
             bool MatchesIdentifierName(VariableDeclaratorSyntax declarator) =>
                 declarator.Names.Any(n => identifierName.Equals(n.Identifier.ValueText, StringComparison.OrdinalIgnoreCase));
         }
+
+        protected override bool IsLoop(SyntaxNode node) =>
+            node.IsAnyKind(SyntaxKind.ForBlock,
+                           SyntaxKind.ForEachBlock,
+                           SyntaxKind.WhileBlock,
+                           SyntaxKind.DoLoopUntilBlock,
+                           SyntaxKind.DoLoopWhileBlock,
+                           SyntaxKind.DoUntilLoopBlock,
+                           SyntaxKind.DoWhileLoopBlock);
     }
 }

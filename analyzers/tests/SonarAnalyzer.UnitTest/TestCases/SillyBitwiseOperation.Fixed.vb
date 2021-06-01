@@ -64,14 +64,14 @@ Public Class Repro_4399
     Public Sub BuildMask(DaysOfWeek As IEnumerable(Of DayOfWeek))
         Dim Value As Integer = 0
         For Each dow As DayOfWeek In DaysOfWeek
-            Value = (1 << CInt(dow))   ' Fixed
+            Value = Value Or (1 << CInt(dow))   ' Compliant, value changes over iterations
         Next
     End Sub
 
     Public Sub Repro(Args() As Object)
         Dim Fail As Boolean = False
         For Each Arg As Object In Args
-            Fail = Not CheckArg(Arg)    ' Fixed
+            Fail = Fail Or Not CheckArg(Arg)    ' Compliant, using OrElse would change the logic
         Next
     End Sub
 

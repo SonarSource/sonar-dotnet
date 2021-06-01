@@ -29,14 +29,19 @@ namespace SonarAnalyzer.Helpers
         protected abstract SyntaxNode GetTopMostContainingMethod(SyntaxNode node);
         protected abstract bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, out SyntaxNode rightExpression);
         protected abstract bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer);
+        protected abstract bool IsLoop(SyntaxNode node);
 
         public SyntaxNode FindLinearPrecedingAssignmentExpression(string identifierName, SyntaxNode current, Func<SyntaxNode> defaultValue = null)
         {
             var method = GetTopMostContainingMethod(current);
             while (current != method && current?.Parent != null)
             {
-                var parent = current.Parent;
-                foreach (var statement in parent.ChildNodes().TakeWhile(x => x != current).Reverse())
+                if (IsLoop(current) && ContainsNestedAssignment(current))
+                {
+                    return null; // There's asignment inside this loop, value can be altered by each iteration
+                }
+
+                foreach (var statement in current.Parent.ChildNodes().TakeWhile(x => x != current).Reverse())
                 {
                     if (IsAssignmentToIdentifier(statement, identifierName, out var right))
                     {
@@ -46,14 +51,17 @@ namespace SonarAnalyzer.Helpers
                     {
                         return initializer;
                     }
-                    else if (statement.DescendantNodes().Any(x => IsAssignmentToIdentifier(x, identifierName, out _)))
+                    else if (ContainsNestedAssignment(statement))
                     {
                         return null; // Assignment inside nested statement (if, try, for, ...)
                     }
                 }
-                current = parent;
+                current = current.Parent;
             }
             return defaultValue == null ? null : defaultValue();
+
+            bool ContainsNestedAssignment(SyntaxNode node) =>
+                node.DescendantNodes().Any(x => IsAssignmentToIdentifier(x, identifierName, out _));
         }
     }
 }

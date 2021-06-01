@@ -66,14 +66,14 @@ Public Class Repro_4399
     Public Sub BuildMask(DaysOfWeek As IEnumerable(Of DayOfWeek))
         Dim Value As Integer = 0
         For Each dow As DayOfWeek In DaysOfWeek
-            Value = Value Or (1 << CInt(dow))   ' Noncompliant FP - root cause is in ConstantValueFinder.
+            Value = Value Or (1 << CInt(dow))   ' Compliant, value changes over iterations
         Next
     End Sub
 
     Public Sub Repro(Args() As Object)
         Dim Fail As Boolean = False
         For Each Arg As Object In Args
-            Fail = Fail Or Not CheckArg(Arg)    ' Noncompliant FP, using OrElse would change the logic
+            Fail = Fail Or Not CheckArg(Arg)    ' Compliant, using OrElse would change the logic
         Next
     End Sub
 

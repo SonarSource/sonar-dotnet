@@ -67,7 +67,7 @@ public class Repro_4399
         var value = 0;
         foreach (var dow in daysOfWeek)
         {
-            value = (1 << (int)dow); // Fixed
+            value = value | (1 << (int)dow); // Compliant, value changes over iterations
         }
     }
 
@@ -76,7 +76,7 @@ public class Repro_4399
         var fail = false;
         foreach (var arg in args)
         {
-            fail = !CheckArg(arg);   // Fixed
+            fail = fail | !CheckArg(arg);   // Compliant, using || would change the logic.
         }
     }
 

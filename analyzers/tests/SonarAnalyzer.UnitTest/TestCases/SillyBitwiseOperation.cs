@@ -72,7 +72,7 @@ public class Repro_4399
         var value = 0;
         foreach (var dow in daysOfWeek)
         {
-            value = value | (1 << (int)dow); // Noncompliant FP - root cause is in ConstantValueFinder.
+            value = value | (1 << (int)dow); // Compliant, value changes over iterations
         }
     }
 
@@ -81,7 +81,7 @@ public class Repro_4399
         var fail = false;
         foreach (var arg in args)
         {
-            fail = fail | !CheckArg(arg);   // Noncompliant FP, using || would change the logic.
+            fail = fail | !CheckArg(arg);   // Compliant, using || would change the logic.
         }
     }
 
