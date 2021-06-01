@@ -36,12 +36,11 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override IEnumerable<ConstructorContext> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, int messageArg)
+        protected override IEnumerable<ConstructorContext> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, string messageArg)
         {
             var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, compilation).TypeDeclarations;
-            var message = messageArg  > 1 ? "at least one of its constructors" : "its constructor";
 
-            return typeDeclarations.Select(x => new ConstructorContext(x, Diagnostic.Create(rule, x.SyntaxNode.Identifier.GetLocation(), DeclarationKind(x.SyntaxNode), message)));
+            return typeDeclarations.Select(x => new ConstructorContext(x, Diagnostic.Create(rule, x.SyntaxNode.Identifier.GetLocation(), DeclarationKind(x.SyntaxNode), messageArg)));
         }
 
         private static string DeclarationKind(SyntaxNode node) =>

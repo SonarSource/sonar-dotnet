@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        protected abstract IEnumerable<ConstructorContext> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, int messageArg);
+        protected abstract IEnumerable<ConstructorContext> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, string messageArg);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -82,7 +82,8 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var removableDeclarationsAndErrors = CollectRemovableDeclarations(namedType, context.Compilation, constructors.Count).ToList();
+            var messageArg = constructors.Count > 1 ? "at least one of its constructors" : "its constructor";
+            var removableDeclarationsAndErrors = CollectRemovableDeclarations(namedType, context.Compilation, messageArg).ToList();
 
             if (!IsAnyConstructorCalled(namedType, removableDeclarationsAndErrors))
             {
