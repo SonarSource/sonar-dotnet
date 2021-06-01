@@ -57,8 +57,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static string DeclarationKind(SyntaxNode node) =>
-            node.IsKind(SyntaxKindEx.RecordDeclaration)
-                ? "record"
-                : "class";
+            node.IsKind(SyntaxKindEx.RecordDeclaration) ? "record" : "class";
     }
 }
