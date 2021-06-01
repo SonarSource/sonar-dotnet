@@ -42,6 +42,17 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticTypeKey = "diagnosticType";
         private const string MessageFormat = "Remove the {0}; it is redundant.";
 
+        internal enum RedundancyType
+        {
+            LambdaParameterType,
+            ArraySize,
+            ArrayType,
+            ExplicitDelegate,
+            ExplicitNullable,
+            ObjectInitializer,
+            DelegateParameterList
+        }
+
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -110,10 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsParameterListModifiable(ParenthesizedLambdaExpressionSyntax lambda) =>
-            lambda.ParameterList != null
-            && lambda.ParameterList.Parameters.All(
-                p => p.Type != null
-                     && p.Modifiers.All(m => !RefOutKeywords.Contains(m.Kind())));
+            lambda.ParameterList != null && lambda.ParameterList.Parameters.All(p => p.Type != null && p.Modifiers.All(m => !RefOutKeywords.Contains(m.Kind())));
 
         private static bool ParameterTypesDoNotMatch(IMethodSymbol method1, IMethodSymbol method2)
         {
@@ -147,24 +155,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsNullableCreation(IObjectCreation objectCreation, SemanticModel semanticModel)
-        {
-            if (!(objectCreation.ArgumentList is {Arguments: {Count: 1}}))
+        private static bool IsNullableCreation(IObjectCreation objectCreation, SemanticModel semanticModel) =>
+            objectCreation.ArgumentList is {Arguments: {Count: 1}} && objectCreation.TypeSymbol(semanticModel).OriginalDefinition.Is(KnownType.System_Nullable_T);
+
+        private static bool IsInAssignmentOrReturnValue(SyntaxNode objectCreation) =>
+            objectCreation.GetFirstNonParenthesizedParent() switch
             {
-                return false;
-            }
-
-            var type = semanticModel.GetSymbolInfo(objectCreation.Expression).Symbol?.ContainingType;
-            return type != null && type.OriginalDefinition.Is(KnownType.System_Nullable_T);
-        }
-
-        private static bool IsInAssignmentOrReturnValue(SyntaxNode objectCreation)
-        {
-            var parent = objectCreation.GetFirstNonParenthesizedParent();
-            return parent is AssignmentExpressionSyntax
-                   || parent is ReturnStatementSyntax
-                   || parent is LambdaExpressionSyntax;
-        }
+                AssignmentExpressionSyntax assignment => true,
+                ReturnStatementSyntax @return => true,
+                LambdaExpressionSyntax lambda => true,
+                _ => false
+            };
 
         private static bool IsInNotVarDeclaration(SyntaxNode objectCreation)
         {
@@ -249,12 +250,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportOnRedundantObjectInitializer(SyntaxNodeAnalysisContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
-            if (objectCreation.ArgumentList == null)
-            {
-                return;
-            }
 
-            if (objectCreation.Initializer != null && !objectCreation.Initializer.Expressions.Any())
+            if (objectCreation.ArgumentList != null && objectCreation.Initializer != null && !objectCreation.Initializer.Expressions.Any())
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.Initializer.GetLocation(),
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ObjectInitializer.ToString()),
@@ -307,7 +304,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var typeInformation = semanticModel.GetTypeInfo(type).Type;
 
-            return typeInformation != null && !typeInformation.Is(KnownType.System_Delegate);
+            return !typeInformation.Is(KnownType.System_Delegate);
         }
 
         private static bool IsDelegateCreation(IObjectCreation objectCreation, SemanticModel semanticModel) =>
@@ -340,7 +337,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var typeInformation = semanticModel.GetTypeInfo(assignment.Left).Type;
 
-            return typeInformation != null && !typeInformation.Is(KnownType.System_Delegate);
+            return !typeInformation.Is(KnownType.System_Delegate);
         }
 
         #endregion
@@ -379,8 +376,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #endregion
 
-        private static bool IsInArgumentAndCanBeChanged(IObjectCreation objectCreation, SemanticModel semanticModel,
-            Func<InvocationExpressionSyntax, bool> additionalFilter = null)
+        private static bool IsInArgumentAndCanBeChanged(IObjectCreation objectCreation, SemanticModel semanticModel, Func<InvocationExpressionSyntax, bool> additionalFilter = null)
         {
             var parent = objectCreation.Expression.GetFirstNonParenthesizedParent();
             var argument = parent as ArgumentSyntax;
@@ -413,8 +409,7 @@ namespace SonarAnalyzer.Rules.CSharp
                    && methodSymbol.ToDisplayString() == newMethodSymbol.ToDisplayString();
         }
 
-        private static void ReportIssueOnRedundantObjectCreation(SyntaxNodeAnalysisContext context,
-            SyntaxNode node, string message, RedundancyType redundancyType)
+        private static void ReportIssueOnRedundantObjectCreation(SyntaxNodeAnalysisContext context, SyntaxNode node, string message, RedundancyType redundancyType)
         {
             var location = node is ObjectCreationExpressionSyntax objectCreation
                 ? objectCreation.CreateLocation(objectCreation.Type)
@@ -446,17 +441,6 @@ namespace SonarAnalyzer.Rules.CSharp
             newSemanticModel = newCompilation.GetSemanticModel(newTree);
 
             return (T)newTree.GetRoot().GetAnnotatedNodes(annotation).First();
-        }
-
-        internal enum RedundancyType
-        {
-            LambdaParameterType,
-            ArraySize,
-            ArrayType,
-            ExplicitDelegate,
-            ExplicitNullable,
-            ObjectInitializer,
-            DelegateParameterList
         }
     }
 }

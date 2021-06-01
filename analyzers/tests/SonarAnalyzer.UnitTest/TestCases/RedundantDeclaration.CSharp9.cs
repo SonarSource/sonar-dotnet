@@ -10,6 +10,10 @@ Action<int, int> a = static (parameter1, parameter2) => { }; // Compliant - FN, 
 Record Local() => new Record(); // Compliant - FN
 static Record LocalStatic(Record r) => r;
 
+int? xx = ((new int?(5))); // Noncompliant {{Remove the explicit nullable type creation; it is redundant.}}
+
+var myEvent = new EventHandler((a, b) => { });
+
 record Record
 {
     object field;

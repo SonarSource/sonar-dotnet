@@ -18,7 +18,10 @@ namespace Tests.Diagnostics
                 delegate (int i, int j) { });   // Noncompliant {{Remove the parameter list; it is redundant.}}
 //                       ^^^^^^^^^^^^^^
 
-            MyEvent2 = delegate (int i, int j) { Console.WriteLine(); }; //Noncompliant
+            Delegate anotherEvent = new EventHandler((a, b) => { });
+            BoolDelegate myDelegate = new BoolDelegate(() => true);      // Noncompliant {{Remove the explicit delegate creation; it is redundant.}}
+
+            MyEvent2 = delegate (int i, int j) { Console.WriteLine(); }; // Noncompliant
             MyEvent = delegate { Console.WriteLine("fdsfs"); };
 
             var l = new List<int>() { }; // Noncompliant {{Remove the initializer; it is redundant.}}

@@ -16,7 +16,10 @@ namespace Tests.Diagnostics
             MyEvent2 = new MyMethod(            // Fixed
                 delegate { });   // Fixed
 
-            MyEvent2 = delegate { Console.WriteLine(); }; //Fixed
+            Delegate anotherEvent = new EventHandler((a, b) => { });
+            BoolDelegate myDelegate = new BoolDelegate(() => true);      // Fixed
+
+            MyEvent2 = delegate { Console.WriteLine(); }; // Fixed
             MyEvent = delegate { Console.WriteLine("fdsfs"); };
 
             var l = new List<int>() { }; // Fixed
