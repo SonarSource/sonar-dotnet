@@ -80,4 +80,103 @@ Public Class Repro_4399
     Private Function CheckArg(Arg As Object) As Boolean
     End Function
 
+    Public Sub FindConstant_For()
+        Dim Value As Integer = 0
+        Dim Unchanged As Integer = 0
+        Dim Result As Integer
+        For v As Integer = 0 To 41
+            Result = Value Or v         ' Compliant, value changes over iterations
+            Result = Unchanged Or v     ' Noncompliant
+            Value = 1
+        Next
+        Unchanged = 1
+    End Sub
+
+    Public Sub FindConstant_ForEach(Values() As Integer)
+        Dim Value As Integer = 0
+        Dim Unchanged As Integer = 0
+        Dim Result As Integer
+        For Each v As Integer In Values
+            Result = Value Or v         ' Compliant, value changes over iterations
+            Result = Unchanged Or v     ' Noncompliant
+            Value = 1
+        Next
+        Unchanged = 1
+    End Sub
+
+    Public Sub FindConstant_While(Values() As Integer)
+        Dim Value As Integer = 0
+        Dim Unchanged As Integer = 0
+        Dim Result As Integer
+        Dim Index As Integer
+        While Index < Values.Length
+            Dim v As Integer = Values(Index)
+            Result = Value Or v         ' Compliant, value changes over iterations
+            Result = Unchanged Or v     ' Noncompliant
+            Value = 1
+            Index += 1
+        End While
+        Unchanged = 1
+    End Sub
+
+    Public Sub FindConstant_DoWhile(Values() As Integer)
+        Dim Value As Integer = 0
+        Dim Unchanged As Integer = 0
+        Dim Result As Integer
+        Dim Index As Integer
+        Do While Index < Values.Length
+            Dim v As Integer = Values(Index)
+            Result = Value Or v         ' Compliant, value changes over iterations
+            Result = Unchanged Or v     ' Noncompliant
+            Value = 1
+            Index += 1
+        Loop
+        Unchanged = 1
+    End Sub
+
+    Public Sub FindConstant_DoUntil(Values() As Integer)
+        Dim Value As Integer = 0
+        Dim Unchanged As Integer = 0
+        Dim Result As Integer
+        Dim Index As Integer
+        Do Until Index >= Values.Length
+            Dim v As Integer = Values(Index)
+            Result = Value Or v         ' Compliant, value changes over iterations
+            Result = Unchanged Or v     ' Noncompliant
+            Value = 1
+            Index += 1
+        Loop
+        Unchanged = 1
+    End Sub
+
+    Public Sub FindConstant_DoLoopWhile(Values() As Integer)
+        Dim Value As Integer = 0
+        Dim Unchanged As Integer = 0
+        Dim Result As Integer
+        Dim Index As Integer
+        Do
+            Dim v As Integer = Values(Index)
+            Result = Value Or v         ' Compliant, value changes over iterations
+            Result = Unchanged Or v     ' Noncompliant
+            Value = 1
+            Index += 1
+        Loop While Index < Values.Length
+        Unchanged = 1
+    End Sub
+
+    Public Sub FindConstant_DoLoopUntil(Values() As Integer)
+        Dim Value As Integer = 0
+        Dim Unchanged As Integer = 0
+        Dim Result As Integer
+        Dim Index As Integer
+        Do
+            Dim v As Integer = Values(Index)
+            Result = Value Or v         ' Compliant, value changes over iterations
+            Result = Unchanged Or v     ' Noncompliant
+            Value = 1
+            Index += 1
+        Loop Until Index >= Values.Length
+        Unchanged = 1
+    End Sub
+
 End Class
