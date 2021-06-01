@@ -58,7 +58,7 @@ public class DotCoverReportParserTest {
 
     Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
 
-    assertThat(thrown).hasMessage("The report does not contain a valid '<title>...</title>' tag.");
+    assertThat(thrown).hasMessage("The report does not contain expected '<title>'.");
   }
 
   @Test
@@ -68,7 +68,7 @@ public class DotCoverReportParserTest {
 
     Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
 
-    assertThat(thrown).hasMessage("The report does not contain a valid '<title>...</title>' tag.");
+    assertThat(thrown).hasMessage("The report does not contain expected '</title>'.");
   }
 
   @Test
@@ -78,7 +78,7 @@ public class DotCoverReportParserTest {
 
     Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
 
-    assertThat(thrown).hasMessage("The report does not contain a valid '<title>...</title>' tag.");
+    assertThat(thrown).hasMessage("The report does not contain expected '</title>'.");
   }
 
   @Test
@@ -101,7 +101,7 @@ public class DotCoverReportParserTest {
 
     Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
 
-    assertThat(thrown).hasMessage("The report contents does not contain '<script type=\"text/javascript\">'");
+    assertThat(thrown).hasMessage("The report does not contain expected '<script type=\"text/javascript\">'.");
   }
 
   @Test
@@ -111,7 +111,7 @@ public class DotCoverReportParserTest {
 
     Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
 
-    assertThat(thrown).hasMessage("The report contents does not contain 'highlightRanges(['");
+    assertThat(thrown).hasMessage("The report does not contain expected 'highlightRanges(['.");
   }
 
   @Test

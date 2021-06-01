@@ -32,6 +32,7 @@ import org.sonar.api.utils.log.Loggers;
 public class DotCoverReportParser implements CoverageParser {
 
   private static final String TITLE_START = "<title>";
+  private static final String HIGHLIGHT_RANGES_START = "highlightRanges([";
   // the pattern for the information about a sequence point - [lineStart, columnStart, lineEnd, columnEnd, hits]
   private static final Pattern SEQUENCE_POINT = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)]");
   private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
@@ -88,8 +89,9 @@ public class DotCoverReportParser implements CoverageParser {
     }
 
     private void collectCoverage(String fileCanonicalPath, String contents) {
-      String highlightedContents = getStringFrom(getStringFrom(contents, "<script type=\"text/javascript\">"), "highlightRanges([");
-      Matcher sequencePointsMatcher = SEQUENCE_POINT.matcher(highlightedContents);
+      int indexOfScript = getIndexOf(contents, "<script type=\"text/javascript\">", 0);
+      int indexOfRanges = getIndexOf(contents, HIGHLIGHT_RANGES_START, indexOfScript);
+      Matcher sequencePointsMatcher = SEQUENCE_POINT.matcher(contents.substring(indexOfRanges + HIGHLIGHT_RANGES_START.length()));
 
       while (sequencePointsMatcher.find()) {
         int lineStart = Integer.parseInt(sequencePointsMatcher.group(1));
@@ -100,20 +102,12 @@ public class DotCoverReportParser implements CoverageParser {
       }
     }
 
-    private int getIndexOf(String fileContent, String tag, int startIndex) {
-      int index = fileContent.indexOf(tag, startIndex);
+    private int getIndexOf(String fileContent, String part, int startIndex) {
+      int index = fileContent.indexOf(part, startIndex);
       if (index == -1) {
-        throw new IllegalArgumentException("The report does not contain a valid '<title>...</title>' tag.");
+        throw new IllegalArgumentException("The report does not contain expected '" + part + "'.");
       }
       return index;
-    }
-
-    private String getStringFrom(String input, String from) {
-      int index = input.indexOf(from);
-      if (index == -1) {
-        throw new IllegalArgumentException("The report contents does not contain '" + from + "'");
-      }
-      return input.substring(index + from.length());
     }
   }
 }
