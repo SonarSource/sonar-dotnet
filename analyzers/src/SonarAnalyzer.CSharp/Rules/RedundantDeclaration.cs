@@ -161,9 +161,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsInAssignmentOrReturnValue(SyntaxNode objectCreation) =>
             objectCreation.GetFirstNonParenthesizedParent() switch
             {
-                AssignmentExpressionSyntax assignment => true,
-                ReturnStatementSyntax @return => true,
-                LambdaExpressionSyntax lambda => true,
+                AssignmentExpressionSyntax _ => true,
+                ReturnStatementSyntax _ => true,
+                LambdaExpressionSyntax _ => true,
                 _ => false
             };
 

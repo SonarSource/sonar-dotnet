@@ -12,7 +12,7 @@ static Record LocalStatic(Record r) => r;
 
 int? xx = ((new int?(5))); // Noncompliant {{Remove the explicit nullable type creation; it is redundant.}}
 
-var myEvent = new EventHandler((a, b) => { });
+EventHandler myEvent = new ((a, b) => { }); // Noncompliant {{Remove the explicit delegate creation; it is redundant.}}
 
 record Record
 {
