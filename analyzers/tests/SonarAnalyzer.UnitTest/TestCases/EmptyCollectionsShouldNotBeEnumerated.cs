@@ -917,3 +917,19 @@ namespace CSharp8
         bool Convert(out int i3, out int i4);
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/4478
+public class Repro_4478
+{
+    public string Main()
+    {
+        var list = new List<String>();
+        AddInLocalFunction();
+        return list[0]; // Noncompliant FP
+
+        void AddInLocalFunction()
+        {
+            list.Add("Item1");
+        }
+    }
+}
