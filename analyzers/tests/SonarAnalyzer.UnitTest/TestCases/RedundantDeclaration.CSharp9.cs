@@ -10,6 +10,10 @@ Action<int, int> a = static (parameter1, parameter2) => { }; // Compliant - FN, 
 Record Local() => new Record(); // Compliant - FN
 static Record LocalStatic(Record r) => r;
 
+int? xx = ((new int?(5))); // Noncompliant {{Remove the explicit nullable type creation; it is redundant.}}
+
+EventHandler myEvent = new ((a, b) => { }); // Noncompliant {{Remove the explicit delegate creation; it is redundant.}}
+
 record Record
 {
     object field;
@@ -19,4 +23,18 @@ record Record
         get { return new object(); } // Compliant - FN
         init { field = new object(); } // Compliant - FN
     }
+}
+
+public class RedundantDeclaration
+{
+    public RedundantDeclaration()
+    {
+        MyEvent += new((a, b) => { }); // Noncompliant {{Remove the explicit delegate creation; it is redundant.}}
+//                 ^^^^^^^^^^^^^^^^^^
+
+        object o = new() { }; // Noncompliant {{Remove the initializer; it is redundant.}}
+//                       ^^^
+    }
+
+    private event EventHandler MyEvent;
 }

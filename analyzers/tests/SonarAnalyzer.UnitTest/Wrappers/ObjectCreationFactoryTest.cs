@@ -57,6 +57,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
             wrapper.ArgumentList.Should().BeEquivalentTo(objectCreation.ArgumentList);
             wrapper.TypeAsString(snippet.SemanticModel).Should().Be("A");
+            wrapper.TypeSymbol(snippet.SemanticModel).Name.Should().Be("A");
         }
 
         [TestMethod]
@@ -83,6 +84,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
             wrapper.ArgumentList.Should().BeEquivalentTo(objectCreation.ArgumentList);
             wrapper.TypeAsString(snippet.SemanticModel).Should().Be("A");
+            wrapper.TypeSymbol(snippet.SemanticModel).Name.Should().Be("A");
         }
 
         [TestMethod]

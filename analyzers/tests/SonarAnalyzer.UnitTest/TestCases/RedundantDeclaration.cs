@@ -18,7 +18,10 @@ namespace Tests.Diagnostics
                 delegate (int i, int j) { });   // Noncompliant {{Remove the parameter list; it is redundant.}}
 //                       ^^^^^^^^^^^^^^
 
-            MyEvent2 = delegate (int i, int j) { Console.WriteLine(); }; //Noncompliant
+            Delegate anotherEvent = new EventHandler((a, b) => { });
+            BoolDelegate myDelegate = new BoolDelegate(() => true);      // Noncompliant {{Remove the explicit delegate creation; it is redundant.}}
+
+            MyEvent2 = delegate (int i, int j) { Console.WriteLine(); }; // Noncompliant
             MyEvent = delegate { Console.WriteLine("fdsfs"); };
 
             var l = new List<int>() { }; // Noncompliant {{Remove the initializer; it is redundant.}}
@@ -33,6 +36,7 @@ namespace Tests.Diagnostics
             ints = new[] { 1, 2, 3 };
             ints = new int[3] { 1, 2, 3 }; // Noncompliant {{Remove the array size specification; it is redundant.}}
 //                         ^
+            ints = new int[] { };
 
             var ddd = new double[] { 1, 2, 3.0 }; // Compliant the element types are not the same as the specified one
 
@@ -86,6 +90,23 @@ namespace Tests.Diagnostics
             dynamic d = new object();
             Test(d, new BoolDelegate(() => true)); // Special case, d is dynamic
             Test2(null, new BoolDelegate(() => true)); // Compliant
+        }
+
+        public Delegate N()
+        {
+            Delegate foo;
+            foo = (new BoolDelegate(() => true));
+            return (new BoolDelegate(() => true));
+        }
+
+        public BoolDelegate O()
+        {
+            return (new BoolDelegate(() => true));        // Noncompliant {{Remove the explicit delegate creation; it is redundant.}}
+        }
+
+        public Func<BoolDelegate> P()
+        {
+            return (() => new BoolDelegate(() => true));  // Noncompliant {{Remove the explicit delegate creation; it is redundant.}}
         }
 
         public abstract void Test(object o, BoolDelegate f);

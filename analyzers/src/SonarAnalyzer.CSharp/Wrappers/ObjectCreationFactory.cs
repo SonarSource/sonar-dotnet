@@ -31,6 +31,7 @@ namespace SonarAnalyzer.Wrappers
         ArgumentListSyntax ArgumentList { get; }
         ExpressionSyntax Expression { get; }
         string TypeAsString(SemanticModel semanticModel);
+        ITypeSymbol TypeSymbol(SemanticModel semanticModel);
     }
 
     public class ObjectCreationFactory
@@ -57,6 +58,9 @@ namespace SonarAnalyzer.Wrappers
 
             public string TypeAsString(SemanticModel semanticModel) =>
                 objectCreation.Type.ToString();
+
+            public ITypeSymbol TypeSymbol(SemanticModel semanticModel) =>
+                semanticModel.GetTypeInfo(objectCreation).Type;
         }
 
         private class ImplicitObjectCreation : IObjectCreation
@@ -71,7 +75,10 @@ namespace SonarAnalyzer.Wrappers
                 objectCreation = wrapper;
 
             public string TypeAsString(SemanticModel semanticModel) =>
-                semanticModel.GetTypeInfo(objectCreation).Type.Name;
+                TypeSymbol(semanticModel).Name;
+
+            public ITypeSymbol TypeSymbol(SemanticModel semanticModel) =>
+                semanticModel.GetTypeInfo(objectCreation).Type;
         }
     }
 }

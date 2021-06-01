@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var objectCreation = ObjectCreationFactory.Create(c.Node);
-                    var containingType = c.SemanticModel.GetTypeInfo(objectCreation.Expression).Type;
+                    var containingType = objectCreation.TypeSymbol(c.SemanticModel);
                     CheckSystemSecurityEllipticCurve(containingType, objectCreation.Expression, objectCreation.ArgumentList, c);
                     CheckSystemSecurityCryptographyAlgorithms(containingType, objectCreation, c);
                     CheckBouncyCastleKeyGenerationParameters(containingType, objectCreation, c);

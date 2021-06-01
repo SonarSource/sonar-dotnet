@@ -16,7 +16,10 @@ namespace Tests.Diagnostics
             MyEvent2 = new MyMethod(            // Fixed
                 delegate { });   // Fixed
 
-            MyEvent2 = delegate { Console.WriteLine(); }; //Fixed
+            Delegate anotherEvent = new EventHandler((a, b) => { });
+            BoolDelegate myDelegate = new BoolDelegate(() => true);      // Fixed
+
+            MyEvent2 = delegate { Console.WriteLine(); }; // Fixed
             MyEvent = delegate { Console.WriteLine("fdsfs"); };
 
             var l = new List<int>() { }; // Fixed
@@ -27,6 +30,7 @@ namespace Tests.Diagnostics
             var ints = new int[] { 1, 2, 3 }; // Fixed
             ints = new[] { 1, 2, 3 };
             ints = new int[3] { 1, 2, 3 }; // Fixed
+            ints = new int[] { };
 
             var ddd = new double[] { 1, 2, 3.0 }; // Compliant the element types are not the same as the specified one
 
@@ -78,6 +82,23 @@ namespace Tests.Diagnostics
             dynamic d = new object();
             Test(d, new BoolDelegate(() => true)); // Special case, d is dynamic
             Test2(null, new BoolDelegate(() => true)); // Compliant
+        }
+
+        public Delegate N()
+        {
+            Delegate foo;
+            foo = (new BoolDelegate(() => true));
+            return (new BoolDelegate(() => true));
+        }
+
+        public BoolDelegate O()
+        {
+            return (new BoolDelegate(() => true));        // Fixed
+        }
+
+        public Func<BoolDelegate> P()
+        {
+            return (() => new BoolDelegate(() => true));  // Fixed
         }
 
         public abstract void Test(object o, BoolDelegate f);
