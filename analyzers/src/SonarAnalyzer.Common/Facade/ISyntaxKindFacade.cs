@@ -25,6 +25,7 @@ namespace SonarAnalyzer.Helpers.Facade
     {
         abstract TSyntaxKind InvocationExpression { get; }
         abstract TSyntaxKind[] ObjectCreationExpression { get; }
+        abstract TSyntaxKind[] ClassDeclaration { get; }
         abstract TSyntaxKind EnumDeclaration { get; }
         abstract TSyntaxKind SimpleMemberAccessExpression { get; }
         abstract TSyntaxKind Attribute { get; }

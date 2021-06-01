@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -40,8 +39,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        protected abstract bool IsTypeDeclaration(SyntaxNode node);
-        protected abstract IEnumerable<Tuple<SyntaxNodeAndSemanticModel<TBaseTypeSyntax>, Diagnostic>> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, int count);
+        protected abstract IEnumerable<ConstructorContext> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, int messageArg);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -54,12 +52,15 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
 
-        private bool IsAnyConstructorCalled(INamedTypeSymbol namedType, IEnumerable<Tuple<SyntaxNodeAndSemanticModel<TBaseTypeSyntax>, Diagnostic>> typeDeclarations) =>
+        private bool IsTypeDeclaration(SyntaxNode node) =>
+            Language.IsAnyKind(node, Language.SyntaxKind.ClassDeclaration);
+
+        private bool IsAnyConstructorCalled(INamedTypeSymbol namedType, IEnumerable<ConstructorContext> typeDeclarations) =>
             typeDeclarations
                 .Select(typeDeclaration => new
                 {
-                    typeDeclaration.Item1.SemanticModel,
-                    DescendantNodes = typeDeclaration.Item1.SyntaxNode.DescendantNodes().ToList()
+                    typeDeclaration.NodeAndSemanticModel.SemanticModel,
+                    DescendantNodes = typeDeclaration.NodeAndSemanticModel.SyntaxNode.DescendantNodes().ToList()
                 })
                 .Any(descendants =>
                     IsAnyConstructorToCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel)
@@ -87,7 +88,7 @@ namespace SonarAnalyzer.Rules
             {
                 foreach (var typeDeclaration in removableDeclarationsAndErrors)
                 {
-                    context.ReportDiagnosticIfNonGenerated(Language.GeneratedCodeRecognizer, typeDeclaration.Item2);
+                    context.ReportDiagnosticIfNonGenerated(Language.GeneratedCodeRecognizer, typeDeclaration.Diagnostic);
                 }
             }
         }
@@ -130,5 +131,17 @@ namespace SonarAnalyzer.Rules
 
         private static bool DerivesFromSafeHandle(ITypeSymbol typeSymbol) =>
             typeSymbol.DerivesFrom(KnownType.System_Runtime_InteropServices_SafeHandle);
+
+        protected class ConstructorContext
+        {
+            public readonly SyntaxNodeAndSemanticModel<TBaseTypeSyntax> NodeAndSemanticModel;
+            public readonly Diagnostic Diagnostic;
+
+            public ConstructorContext(SyntaxNodeAndSemanticModel<TBaseTypeSyntax> nodeAndSemanticModel, Diagnostic diagnostic)
+            {
+                NodeAndSemanticModel = nodeAndSemanticModel;
+                Diagnostic = diagnostic;
+            }
+        }
     }
 }

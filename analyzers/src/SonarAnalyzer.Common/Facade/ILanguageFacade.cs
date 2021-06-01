@@ -41,5 +41,6 @@ namespace SonarAnalyzer.Helpers
         SyntaxFacade<TSyntaxKind> Syntax { get; }
         ISyntaxKindFacade<TSyntaxKind> SyntaxKind { get; }
         ITrackerFacade<TSyntaxKind> Tracker { get; }
+        bool IsAnyKind(SyntaxNode node, params TSyntaxKind[] syntaxKinds);
     }
 }

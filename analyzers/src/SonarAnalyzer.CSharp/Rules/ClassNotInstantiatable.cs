@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -37,23 +36,12 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override bool IsTypeDeclaration(SyntaxNode node) =>
-            node.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
-
-        protected override IEnumerable<Tuple<SyntaxNodeAndSemanticModel<BaseTypeDeclarationSyntax>, Diagnostic>> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation,
-            int count)
+        protected override IEnumerable<ConstructorContext> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, int messageArg)
         {
             var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, compilation).TypeDeclarations;
+            var message = messageArg  > 1 ? "at least one of its constructors" : "its constructor";
 
-            var message = count > 1
-                ? "at least one of its constructors"
-                : "its constructor";
-
-            return typeDeclarations
-                .Select(x => new Tuple<SyntaxNodeAndSemanticModel<BaseTypeDeclarationSyntax>, Diagnostic>(x, Diagnostic.Create(rule,
-                                                                                                                               x.SyntaxNode.Identifier.GetLocation(),
-                                                                                                                               DeclarationKind(x.SyntaxNode),
-                                                                                                                               message)));
+            return typeDeclarations.Select(x => new ConstructorContext(x, Diagnostic.Create(rule, x.SyntaxNode.Identifier.GetLocation(), DeclarationKind(x.SyntaxNode), message)));
         }
 
         private static string DeclarationKind(SyntaxNode node) =>

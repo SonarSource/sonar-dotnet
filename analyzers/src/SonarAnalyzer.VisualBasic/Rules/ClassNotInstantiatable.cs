@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -36,23 +35,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override bool IsTypeDeclaration(SyntaxNode node) =>
-            node.IsAnyKind(SyntaxKind.ClassBlock);
-
-        protected override IEnumerable<Tuple<SyntaxNodeAndSemanticModel<TypeBlockSyntax>, Diagnostic>> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation,
-            int count)
+        protected override IEnumerable<ConstructorContext> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, int messageArg)
         {
             var typeDeclarations = new VisualBasicRemovableDeclarationCollector(namedType, compilation).TypeDeclarations;
+            var message = messageArg > 1 ? "at least one of its constructors" : "its constructor";
 
-            var message = count > 1
-                ? "at least one of its constructors"
-                : "its constructor";
-
-            return typeDeclarations
-                .Select(x => new Tuple<SyntaxNodeAndSemanticModel<TypeBlockSyntax>, Diagnostic>(x, Diagnostic.Create(rule,
-                    x.SyntaxNode.BlockStatement.Identifier.GetLocation(),
-                    "class",
-                    message)));
+            return typeDeclarations.Select(x => new ConstructorContext(x, Diagnostic.Create(rule, x.SyntaxNode.BlockStatement.Identifier.GetLocation(), "class", message)));
         }
     }
 }
