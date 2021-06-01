@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class ClassNotInstantiatable : ClassNotInstantiatableBase<TypeBlockSyntax, SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override GeneratedCodeRecognizer CodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override bool IsTypeDeclaration(SyntaxNode node) =>
             node.IsAnyKind(SyntaxKind.ClassBlock);

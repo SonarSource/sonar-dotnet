@@ -39,7 +39,6 @@ namespace SonarAnalyzer.Rules
         private readonly HashSet<TSyntaxKind> objectCreationSyntaxKinds;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected abstract GeneratedCodeRecognizer CodeRecognizer { get; }
 
         protected abstract bool IsTypeDeclaration(SyntaxNode node);
         protected abstract IEnumerable<Tuple<SyntaxNodeAndSemanticModel<TBaseTypeSyntax>, Diagnostic>> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, int count);
@@ -88,7 +87,7 @@ namespace SonarAnalyzer.Rules
             {
                 foreach (var typeDeclaration in removableDeclarationsAndErrors)
                 {
-                    context.ReportDiagnosticIfNonGenerated(CodeRecognizer, typeDeclaration.Item2);
+                    context.ReportDiagnosticIfNonGenerated(Language.GeneratedCodeRecognizer, typeDeclaration.Item2);
                 }
             }
         }

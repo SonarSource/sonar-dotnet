@@ -36,7 +36,6 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ClassNotInstantiatable : ClassNotInstantiatableBase<BaseTypeDeclarationSyntax, SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-        protected override GeneratedCodeRecognizer CodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
         protected override bool IsTypeDeclaration(SyntaxNode node) =>
             node.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
@@ -58,8 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static string DeclarationKind(SyntaxNode node) =>
-            node.IsKind(SyntaxKind.ClassDeclaration)
-                ? "class"
-                : "record";
+            node.IsKind(SyntaxKindEx.RecordDeclaration)
+                ? "record"
+                : "class";
     }
 }
