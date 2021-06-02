@@ -31,12 +31,10 @@ import org.sonar.api.utils.log.Loggers;
 
 public class DotCoverReportParser implements CoverageParser {
 
-  private static final Pattern TITLE_PATTERN = Pattern.compile(".*?<title>(.*?)</title>.*", Pattern.DOTALL);
-  private static final Pattern COVERED_LINES_PATTERN_1 = Pattern.compile(
-    ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(.*?)\\]\\);\\s*+</script>.*",
-    Pattern.DOTALL);
-  private static final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)\\]");
-
+  private static final String TITLE_START = "<title>";
+  private static final String HIGHLIGHT_RANGES_START = "highlightRanges([";
+  // the pattern for the information about a sequence point - [lineStart, columnStart, lineEnd, columnEnd, hits]
+  private static final Pattern SEQUENCE_POINT = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)]");
   private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
   private final FileService fileService;
 
@@ -79,11 +77,9 @@ public class DotCoverReportParser implements CoverageParser {
 
     @Nullable
     private String extractFileCanonicalPath(String contents) {
-      Matcher matcher = TITLE_PATTERN.matcher(contents);
-      checkMatches(matcher);
-
-      String lowerCaseAbsolutePath = matcher.group(1);
-
+      int indexOfTitleStart = getIndexOf(contents, TITLE_START, 0);
+      int indexOfTitleEnd = getIndexOf(contents, "</title>", indexOfTitleStart);
+      String lowerCaseAbsolutePath = contents.substring(indexOfTitleStart + TITLE_START.length(), indexOfTitleEnd);
       try {
         return new File(lowerCaseAbsolutePath).getCanonicalPath();
       } catch (IOException e) {
@@ -93,27 +89,25 @@ public class DotCoverReportParser implements CoverageParser {
     }
 
     private void collectCoverage(String fileCanonicalPath, String contents) {
-      Matcher matcher = COVERED_LINES_PATTERN_1.matcher(contents);
-      checkMatches(matcher);
-      String highlightedContents = matcher.group(1);
+      int indexOfScript = getIndexOf(contents, "<script type=\"text/javascript\">", 0);
+      int indexOfRanges = getIndexOf(contents, HIGHLIGHT_RANGES_START, indexOfScript);
+      Matcher sequencePointsMatcher = SEQUENCE_POINT.matcher(contents.substring(indexOfRanges + HIGHLIGHT_RANGES_START.length()));
 
-      matcher = COVERED_LINES_PATTERN_2.matcher(highlightedContents);
-
-      while (matcher.find()) {
-        int lineStart = Integer.parseInt(matcher.group(1));
-        int hits = Integer.parseInt(matcher.group(3));
-
+      while (sequencePointsMatcher.find()) {
+        int lineStart = Integer.parseInt(sequencePointsMatcher.group(1));
+        int hits = Integer.parseInt(sequencePointsMatcher.group(2));
         coverage.addHits(fileCanonicalPath, lineStart, hits);
 
-        LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
-            lineStart, hits, fileCanonicalPath);
+        LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.", lineStart, hits, fileCanonicalPath);
       }
     }
 
-    private void checkMatches(Matcher matcher) {
-      if (!matcher.matches()) {
-        throw new IllegalArgumentException("The report contents does not match the following regular expression: " + matcher.pattern().pattern());
+    private int getIndexOf(String fileContent, String part, int startIndex) {
+      int index = fileContent.indexOf(part, startIndex);
+      if (index == -1) {
+        throw new IllegalArgumentException("The report does not contain expected '" + part + "'.");
       }
+      return index;
     }
   }
 }

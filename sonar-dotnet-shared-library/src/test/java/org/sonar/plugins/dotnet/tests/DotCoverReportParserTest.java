@@ -24,11 +24,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -38,8 +38,6 @@ public class DotCoverReportParserTest {
   @Rule
   public LogTester logTester = new LogTester();
 
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
   private FileService alwaysTrue;
   private FileService alwaysFalse;
 
@@ -55,17 +53,65 @@ public class DotCoverReportParserTest {
 
   @Test
   public void no_title() {
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage("The report contents does not match the following regular expression: .*?<title>(.*?)</title>.*");
-    new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/no_title.html"), mock(Coverage.class));
+    DotCoverReportParser parser = new DotCoverReportParser(alwaysTrue);
+    File file = new File("src/test/resources/dotcover/no_title.html");
+
+    Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
+
+    assertThat(thrown).hasMessage("The report does not contain expected '<title>'.");
+  }
+
+  @Test
+  public void no_title_end() {
+    DotCoverReportParser parser = new DotCoverReportParser(alwaysTrue);
+    File file = new File("src/test/resources/dotcover/no_title_end.html");
+
+    Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
+
+    assertThat(thrown).hasMessage("The report does not contain expected '</title>'.");
+  }
+
+  @Test
+  public void title_swapped_tags() {
+    DotCoverReportParser parser = new DotCoverReportParser(alwaysTrue);
+    File file = new File("src/test/resources/dotcover/title_swapped.html");
+
+    Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
+
+    assertThat(thrown).hasMessage("The report does not contain expected '</title>'.");
+  }
+
+  @Test
+  public void title_nested_tag() {
+    Coverage coverage = new Coverage();
+    new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/title_nested_tag.html"), mock(Coverage.class));
+
+    assertThat(coverage.files()).isEmpty(); // the "title" is not a valid path
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+      .startsWith("dotCover parser: found coverage for line '12', hits '0' when analyzing the path '")
+      .endsWith("<title><\\t><\\ti><\\tit><\\ts><\\titl><\\titles><\\titlee><\\title<<\\<\\<\\<\\<\\<<<\\<<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\titl<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.");
+  }
+
+  @Test
+  public void no_script() {
+    DotCoverReportParser parser = new DotCoverReportParser(alwaysTrue);
+    File file = new File("src/test/resources/dotcover/no_script.html");
+
+    Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
+
+    assertThat(thrown).hasMessage("The report does not contain expected '<script type=\"text/javascript\">'.");
   }
 
   @Test
   public void no_highlight() {
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage("The report contents does not match the following regular expression: "
-      + ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(.*?)\\]\\);\\s*+</script>.*");
-    new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/no_highlight.html"), mock(Coverage.class));
+    DotCoverReportParser parser = new DotCoverReportParser(alwaysTrue);
+    File file = new File("src/test/resources/dotcover/no_highlight.html");
+
+    Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
+
+    assertThat(thrown).hasMessage("The report does not contain expected 'highlightRanges(['.");
   }
 
   @Test
@@ -99,6 +145,20 @@ public class DotCoverReportParserTest {
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
       .startsWith("dotCover parser: found coverage for line '12', hits '0' when analyzing the path '");
+  }
+
+  @Test
+  public void valid_big() throws Exception {
+    Coverage coverage = new Coverage();
+    new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/valid_big.html"), coverage);
+
+    String filePath = new File("mylibrary\\calc.cs").getCanonicalPath();
+    assertThat(coverage.files()).containsOnly(filePath);
+    assertThat(coverage.hits(filePath)).hasSize(10000);
+    assertThat(logTester.logs(LoggerLevel.INFO)).hasSize(1);
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(10000);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0)).startsWith("dotCover parser: found coverage for line '24', hits '1' when analyzing the path '");
   }
 
   @Test
