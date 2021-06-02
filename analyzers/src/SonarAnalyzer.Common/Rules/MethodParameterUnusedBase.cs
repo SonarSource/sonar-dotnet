@@ -27,4 +27,3 @@ namespace SonarAnalyzer.Rules
         internal const string DiagnosticId = "S1172";
     }
 }
-
