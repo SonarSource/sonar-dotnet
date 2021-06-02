@@ -85,6 +85,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 || node.Parent is QualifiedNameSyntax
                 || node.Parent is NamedFieldInitializerSyntax
                 || node.Parent is NameOfExpressionSyntax
+                || node.Parent is AsClauseSyntax
+                || node.Parent is ObjectCreationExpressionSyntax
                 || (node.Parent is NameColonEqualsSyntax nameColon && nameColon.Name == node);
 
             private static bool IsAssignmentStatement(SyntaxNode node) =>

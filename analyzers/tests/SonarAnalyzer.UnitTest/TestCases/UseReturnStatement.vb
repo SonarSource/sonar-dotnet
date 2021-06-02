@@ -140,8 +140,9 @@ Public Class DoesNotApplyOn
     End Sub
 
     ' https://github.com/SonarSource/sonar-dotnet/issues/4347
-    Public Function OtherType() As OtherType    ' Noncompliant FP
-        Dim Ret As OtherType                    ' Noncompliant FP
+    Public Function OtherType() As OtherType    ' Compliant
+        Dim Ret As OtherType                    ' Compliant
+        Dim X As New OtherType                  ' Compliant
     End Function
 
     Public Function NamespaceName() As NamespaceName.Something  'Compliant
