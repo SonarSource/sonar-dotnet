@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     .ToHashSet();
 
             return methodBlock.BlockStatement.ParameterList.Parameters
-                .Where(p => p.Identifier?.Identifier.ValueText != null && !usedIdentifiers.Contains(p.Identifier.Identifier.ValueText))
+                .Where(p => !usedIdentifiers.Contains(p.Identifier.Identifier.ValueText))
                 .ToList();
 
             static bool IsVarOrParameter(SyntaxNode node) =>

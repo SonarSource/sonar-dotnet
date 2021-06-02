@@ -48,6 +48,7 @@ Namespace Tests.TestCases
         End Function
 
         Public Sub Something(. As Integer) ' Error [BC30203] for coverage
+            Dim X As Integer = 42
         End Sub
 
     End Class
