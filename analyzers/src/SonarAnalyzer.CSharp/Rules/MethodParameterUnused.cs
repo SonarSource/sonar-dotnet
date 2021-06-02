@@ -37,14 +37,13 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class MethodParameterUnused : MethodParameterUnusedBase
     {
-        internal const string MessageUnused = "unused method parameter '{0}'";
-        internal const string MessageDead = "parameter '{0}', whose value is ignored in the method";
+        internal const string IsRemovableKey = "IsRemovable";
+        private const string MessageUnused = "unused method parameter '{0}'";
+        private const string MessageDead = "parameter '{0}', whose value is ignored in the method";
         private const string MessageFormat = "Remove this {0}.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        internal const string IsRemovableKey = "IsRemovable";
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
