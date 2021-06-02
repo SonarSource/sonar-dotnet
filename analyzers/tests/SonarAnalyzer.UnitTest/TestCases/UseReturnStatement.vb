@@ -65,8 +65,23 @@ Public Class ImplicitReturnStatementsAreNoncompliant
 
 End Class
 
+Namespace NamespaceName
+
+    Public Class Something
+    End Class
+
+End Namespace
+
+Public Class Source
+
+    Public Event SomeEvent()
+
+End Class
+
 Public Class DoesNotApplyOn
     Implements IInterface
+
+    Private WithEvents fSource As Source
 
     Public Function FunctionWithExplictReturnOnly()
         Return 42 'Compliant
@@ -122,6 +137,25 @@ Public Class DoesNotApplyOn
     End Function
 
     Private Sub WithExplicitArgumentName(ArgumentName As Integer)
+    End Sub
+
+    ' https://github.com/SonarSource/sonar-dotnet/issues/4347
+    Public Function OtherType() As OtherType    ' Compliant
+        Dim Ret As OtherType                    ' Compliant
+        Dim X As New OtherType                  ' Compliant
+    End Function
+
+    Public Function NamespaceName() As NamespaceName.Something  'Compliant
+        Dim Ret As NamespaceName.Something                      'Compliant
+    End Function
+
+    Public Function Something() As NamespaceName.Something      'Compliant
+        Dim Ret As NamespaceName.Something                      'Compliant
+    End Function
+
+    Public Sub SomeEvent() Handles fSource.SomeEvent
+        Dim S As Source
+        AddHandler S.SomeEvent, AddressOf SomeEvent
     End Sub
 
 End Class
