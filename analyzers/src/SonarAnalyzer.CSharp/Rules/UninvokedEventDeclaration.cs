@@ -69,9 +69,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
+            var invokedSymbols = GetInvokedEventSymbols(removableDeclarationCollector);
+            var possiblyCopiedSymbols = GetPossiblyCopiedSymbols(removableDeclarationCollector);
+
             removableEventFields
-                .Where(IsNotInvoked)
-                .Where(IsNotCopied)
+                .Where(tuple => !invokedSymbols.Contains(tuple.Symbol))
+                .Where(tuple => !possiblyCopiedSymbols.Contains(tuple.Symbol))
                 .ToList()
                 .ForEach(x => context.ReportDiagnosticIfNonGenerated(
                     Diagnostic.Create(Rule, GetLocation(x.SyntaxNode), x.Symbol.Name)));
@@ -80,12 +83,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 node is VariableDeclaratorSyntax variableDeclarator
                     ? variableDeclarator.Identifier.GetLocation()
                     : ((EventDeclarationSyntax)node).Identifier.GetLocation();
-
-            bool IsNotInvoked(SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol> tuple) =>
-                !GetInvokedEventSymbols(removableDeclarationCollector).Contains(tuple.Symbol);
-
-            bool IsNotCopied(SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol> tuple) =>
-                !GetPossiblyCopiedSymbols(removableDeclarationCollector).Contains(tuple.Symbol);
         }
 
         private static ISet<ISymbol> GetInvokedEventSymbols(CSharpRemovableDeclarationCollector removableDeclarationCollector)
