@@ -155,7 +155,9 @@ public class DotCoverReportParserTest {
     String filePath = new File("mylibrary\\calc.cs").getCanonicalPath();
     assertThat(coverage.files()).containsOnly(filePath);
     assertThat(coverage.hits(filePath)).hasSize(10000);
+    assertThat(logTester.logs(LoggerLevel.INFO)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(10000);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0)).startsWith("dotCover parser: found coverage for line '24', hits '1' when analyzing the path '");
   }
 
