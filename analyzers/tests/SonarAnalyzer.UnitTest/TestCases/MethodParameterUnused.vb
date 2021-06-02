@@ -223,4 +223,21 @@ Namespace Tests.TestCases
         End Sub
     End Module
 
+    ' https//github.com/SonarSource/sonar-dotnet/issues/4406
+    Public Class Source
+
+        Public Event Dirty(Name As String, Count As Integer)
+
+    End Class
+
+    Public Class Consumer
+
+        Private WithEvents fSource As Source
+
+        Private Sub fSource_Dirty(Name As String, Count As Integer) Handles fSource.Dirty 'Noncompliant FP
+            Dim S As String = Name
+        End Sub
+
+    End Class
+
 End Namespace
