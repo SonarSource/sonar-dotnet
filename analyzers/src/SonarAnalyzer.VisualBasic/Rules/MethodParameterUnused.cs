@@ -36,26 +36,23 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private const string MessageFormat = "Remove this unused procedure parameter '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var methodBlock = (MethodBlockBaseSyntax)c.Node;
 
-                    // Bail-out if this is not a method we want to report on
-                    // (only based on syntax checks)
-                    if (methodBlock.BlockStatement == null ||
-                        !HasAnyParameter(methodBlock) ||
-                        IsEmptyMethod(methodBlock) ||
-                        IsVirtualOrOverride(methodBlock) ||
-                        IsInterfaceImplementation(methodBlock) ||
-                        HasAnyAttribute(methodBlock) ||
-                        OnlyThrowsNotImplementedException(methodBlock, c.SemanticModel))
+                    // Bail-out if this is not a method we want to report on (only based on syntax checks)
+                    if (methodBlock.BlockStatement == null
+                        || !HasAnyParameter(methodBlock)
+                        || IsEmptyMethod(methodBlock)
+                        || IsVirtualOrOverride(methodBlock)
+                        || IsInterfaceImplementation(methodBlock)
+                        || HasAnyAttribute(methodBlock)
+                        || OnlyThrowsNotImplementedException(methodBlock, c.SemanticModel))
                     {
                         return;
                     }
@@ -66,92 +63,71 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    // Bail-out if this is not a method we want to report on
-                    // (only based on symbols checks)
+                    // Bail-out if this is not a method we want to report on (only based on symbols checks)
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodBlock);
-                    if (methodSymbol == null ||
-                        methodSymbol.IsAbstract ||
-                        methodSymbol.IsMainMethod() ||
-                        methodSymbol.IsEventHandler() ||
-                        methodSymbol.GetEffectiveAccessibility() != Accessibility.Private)
+                    if (methodSymbol == null
+                        || methodSymbol.IsAbstract
+                        || methodSymbol.IsMainMethod()
+                        || methodSymbol.IsEventHandler()
+                        || methodSymbol.GetEffectiveAccessibility() != Accessibility.Private)
                     {
                         return;
                     }
 
                     foreach (var parameter in unusedParameters)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(),
-                            parameter.Identifier.Identifier.ValueText));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, parameter.GetLocation(), parameter.Identifier.Identifier.ValueText));
                     }
                 },
                 SyntaxKind.SubBlock,
                 SyntaxKind.FunctionBlock);
-        }
 
         private static bool HasAnyParameter(MethodBlockBaseSyntax method) =>
             method.BlockStatement.ParameterList != null
-            && method.BlockStatement.ParameterList.Parameters.Count > 0;
+            && method.BlockStatement.ParameterList.Parameters.Any();
 
         private static bool IsEmptyMethod(MethodBlockBaseSyntax method) =>
             method.Statements.Count == 0;
 
         private static bool IsVirtualOrOverride(MethodBlockBaseSyntax method) =>
-             method.BlockStatement.Modifiers.Any(m =>
-                m.IsKind(SyntaxKind.OverridesKeyword) ||
-                m.IsKind(SyntaxKind.OverridableKeyword));
+             method.BlockStatement.Modifiers.Any(x => x.IsAnyKind(SyntaxKind.OverridesKeyword, SyntaxKind.OverridableKeyword));
 
         private static bool IsInterfaceImplementation(MethodBlockBaseSyntax method) =>
             (method.BlockStatement as MethodStatementSyntax)?.ImplementsClause != null;
 
         private static bool HasAnyAttribute(MethodBlockBaseSyntax method) =>
-            method.BlockStatement.AttributeLists.Count > 0;
+            method.BlockStatement.AttributeLists.Any();
 
         private static bool OnlyThrowsNotImplementedException(MethodBlockBaseSyntax method, SemanticModel semanticModel) =>
             method.Statements.Count == 1
             && method.Statements
                 .OfType<ThrowStatementSyntax>()
-                .Select(tss => tss.Expression)
+                .Select(x => x.Expression)
                 .OfType<ObjectCreationExpressionSyntax>()
-                .Select(oces => semanticModel.GetSymbolInfo(oces).Symbol)
+                .Select(x => semanticModel.GetSymbolInfo(x).Symbol)
                 .OfType<IMethodSymbol>()
-                .Any(s => s != null && s.ContainingType.Is(KnownType.System_NotImplementedException));
+                .Any(x => x.ContainingType.Is(KnownType.System_NotImplementedException));
 
         private static List<ParameterSyntax> GetUnusedParameters(MethodBlockBaseSyntax methodBlock)
         {
-            var usedIdentifiers = GetAllUsedVarOrParameterIdentifierNames();
-
-            return methodBlock.BlockStatement
-                .ParameterList
-                .Parameters
-                .Where(p => p.Identifier?.Identifier.ValueText != null
-                    && !usedIdentifiers.Contains(p.Identifier.Identifier.ValueText))
-                .ToList();
-
-            HashSet<string> GetAllUsedVarOrParameterIdentifierNames() =>
-                methodBlock.Statements
-                    .SelectMany(statement => statement.DescendantNodes())
-                    .Where(node => node.IsKind(SyntaxKind.IdentifierName)
-                        && IsVarOrParameter(node))
+            var usedIdentifiers = methodBlock.Statements.SelectMany(x => x.DescendantNodes())
+                    .Where(node => node.IsKind(SyntaxKind.IdentifierName) && IsVarOrParameter(node))
                     .Cast<IdentifierNameSyntax>()
-                    .Select(ins => ins.Identifier.ValueText)
+                    .Select(x => x.Identifier.ValueText)
                     .WhereNotNull()
                     .ToHashSet();
 
-            bool IsVarOrParameter(SyntaxNode node)
-            {
-                if (node.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression))
-                {
-                    return ((MemberAccessExpressionSyntax)node.Parent).Expression == node;
-                }
+            return methodBlock.BlockStatement.ParameterList.Parameters
+                .Where(p => p.Identifier?.Identifier.ValueText != null && !usedIdentifiers.Contains(p.Identifier.Identifier.ValueText))
+                .ToList();
 
-                if (node.Parent.IsKind(SyntaxKind.ConditionalAccessExpression))
+            static bool IsVarOrParameter(SyntaxNode node) =>
+                node.Parent switch
                 {
-                    return ((ConditionalAccessExpressionSyntax)node.Parent).Expression == node;
-                }
-
-                return true;
-            }
+                    MemberAccessExpressionSyntax memberAccess => memberAccess.Expression == node,
+                    ConditionalAccessExpressionSyntax conditionalAccess => conditionalAccess.Expression == node,
+                    _ => true
+                };
         }
     }
 }
-
