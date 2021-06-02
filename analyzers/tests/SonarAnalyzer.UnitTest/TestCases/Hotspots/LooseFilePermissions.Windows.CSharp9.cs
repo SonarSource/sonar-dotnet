@@ -10,18 +10,20 @@ fileSecurity.AddAccessRule(new ("User", FileSystemRights.ListDirectory, AccessCo
 fileSecurity.AddAccessRule(new ("User", FileSystemRights.ListDirectory, AccessControlType.Deny));
 fileSecurity.AddAccessRule(new ("Everyone", FileSystemRights.ListDirectory, AccessControlType.Deny));
 fileSecurity.RemoveAccessRule(new ("Everyone", FileSystemRights.ListDirectory, AccessControlType.Allow));
-fileSecurity.SetAccessRule(new ("Everyone", FileSystemRights.Write, AccessControlType.Allow)); // FN
-fileSecurity.AddAccessRule(new ("Everyone", FileSystemRights.Write, AccessControlType.Allow)); // FN
+fileSecurity.SetAccessRule(new ("Everyone", FileSystemRights.Write, AccessControlType.Allow)); // Noncompliant
+fileSecurity.AddAccessRule(new ("Everyone", FileSystemRights.Write, AccessControlType.Allow)); // Noncompliant
 
 void InVariable(FileSecurity fileSecurity)
 {
     FileSystemAccessRule unsafeAccessRule = new ("Everyone", FileSystemRights.FullControl, AccessControlType.Allow);
-
+    //                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
+    //                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary@-1
 
     fileSecurity.RemoveAccessRule(unsafeAccessRule);
 
-    fileSecurity.AddAccessRule(unsafeAccessRule); // FN
-    fileSecurity.SetAccessRule(unsafeAccessRule); // FN
+    fileSecurity.AddAccessRule(unsafeAccessRule); // Noncompliant
+    fileSecurity.SetAccessRule(unsafeAccessRule); // Noncompliant
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     FileSystemAccessRule safeAccessRule = new ("Everyone", FileSystemRights.FullControl, AccessControlType.Deny);
     fileSecurity.AddAccessRule(safeAccessRule);
