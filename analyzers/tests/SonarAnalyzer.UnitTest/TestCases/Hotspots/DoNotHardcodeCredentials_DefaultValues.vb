@@ -111,7 +111,7 @@ Namespace Tests.Diagnostics
 
             ' Reassigned
             Arg &= "Literal"
-            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg                     ' Noncompliant FP
+            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg                     ' Compliant, &= is not a constant propagating operation
             SecretVariableMethod = "literal"
             a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableMethod    ' Noncompliant
             Arg = "literal"

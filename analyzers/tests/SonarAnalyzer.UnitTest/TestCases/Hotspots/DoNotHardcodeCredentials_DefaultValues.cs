@@ -129,7 +129,7 @@ namespace Tests.Diagnostics
 
             // Reassigned
             arg += "Literal";
-            a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                    // Noncompliant FP
+            a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                    // Compliant, += is not a constant propagating operation
             secretVariableMethod = "literal";
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableMethod;   // Noncompliant
             arg = "literal";

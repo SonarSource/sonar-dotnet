@@ -31,9 +31,11 @@ namespace SonarAnalyzer.Helpers
         protected override SyntaxNode GetTopMostContainingMethod(SyntaxNode node) =>
             node.GetTopMostContainingMethod();
 
-        protected override bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, out SyntaxNode rightExpression)
+        protected override bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, bool anyAssignmentKind, out SyntaxNode rightExpression)
         {
-            if (node is AssignmentStatementSyntax assignment && assignment.Left.NameIs(identifierName))
+            if ((anyAssignmentKind || node.IsKind(SyntaxKind.SimpleAssignmentStatement))
+                && node is AssignmentStatementSyntax assignment
+                && assignment.Left.NameIs(identifierName))
             {
                 rightExpression = assignment.Right;
                 return true;
