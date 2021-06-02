@@ -47,6 +47,9 @@ Namespace Tests.TestCases
             Throw New InvalidOperationException()
         End Function
 
+        Public Sub Something(. As Integer) ' Error [BC30203] for coverage
+        End Sub
+
     End Class
 
     Structure InvalidCodeStructure

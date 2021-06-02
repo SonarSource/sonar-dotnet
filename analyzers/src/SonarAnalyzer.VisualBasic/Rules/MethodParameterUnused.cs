@@ -43,10 +43,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var methodBlock = (MethodBlockBaseSyntax)c.Node;
+                    var methodBlock = (MethodBlockSyntax)c.Node;
 
                     // Bail-out if this is not a method we want to report on (only based on syntax checks)
-                    if (methodBlock.BlockStatement == null
+                    if (methodBlock.SubOrFunctionStatement == null
                         || !HasAnyParameter(methodBlock)
                         || IsEmptyMethod(methodBlock)
                         || IsVirtualOrOverride(methodBlock)
@@ -67,7 +67,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     // Bail-out if this is not a method we want to report on (only based on symbols checks)
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodBlock);
                     if (methodSymbol == null
-                        || methodSymbol.IsAbstract
                         || methodSymbol.IsMainMethod()
                         || methodSymbol.IsEventHandler()
                         || methodSymbol.GetEffectiveAccessibility() != Accessibility.Private)
@@ -93,11 +92,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static bool IsVirtualOrOverride(MethodBlockBaseSyntax method) =>
              method.BlockStatement.Modifiers.Any(x => x.IsAnyKind(SyntaxKind.OverridesKeyword, SyntaxKind.OverridableKeyword));
 
-        private static bool IsInterfaceImplementation(MethodBlockBaseSyntax method) =>
-            (method.BlockStatement as MethodStatementSyntax)?.ImplementsClause != null;
+        private static bool IsInterfaceImplementation(MethodBlockSyntax method) =>
+            method.SubOrFunctionStatement.ImplementsClause != null;
 
-        private static bool IsWithEventsHandler(MethodBlockBaseSyntax method) =>
-            (method.BlockStatement as MethodStatementSyntax)?.HandlesClause != null;
+        private static bool IsWithEventsHandler(MethodBlockSyntax method) =>
+            method.SubOrFunctionStatement.HandlesClause != null;
 
         private static bool HasAnyAttribute(MethodBlockBaseSyntax method) =>
             method.BlockStatement.AttributeLists.Any();
