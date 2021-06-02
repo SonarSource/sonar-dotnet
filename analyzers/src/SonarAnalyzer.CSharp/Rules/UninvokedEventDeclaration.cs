@@ -73,8 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var possiblyCopiedSymbols = GetPossiblyCopiedSymbols(removableDeclarationCollector);
 
             removableEventFields
-                .Where(x => !invokedSymbols.Contains(x.Symbol))
-                .Where(x => !possiblyCopiedSymbols.Contains(x.Symbol))
+                .Where(x => !invokedSymbols.Contains(x.Symbol) && !possiblyCopiedSymbols.Contains(x.Symbol))
                 .ToList()
                 .ForEach(x => context.ReportDiagnosticIfNonGenerated(
                     Diagnostic.Create(Rule, GetLocation(x.SyntaxNode), x.Symbol.Name)));
