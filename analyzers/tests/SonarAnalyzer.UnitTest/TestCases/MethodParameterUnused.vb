@@ -209,18 +209,23 @@ Namespace Tests.TestCases
         Private Function GetFoo(ByVal s As String) ' Noncompliant
             Return ""
         End Function
+
     End Class
 
     Module MainModule
+
         Function Main(ByVal cmdArgs() As String) As Integer ' Compliant because this is the main method
             Return 1
         End Function
+
     End Module
 
     Module OtherMainModule
+
         Sub Main(ByVal cmdArgs() As String) ' Compliant because this is the main method
             Console.WriteLine()
         End Sub
+
     End Module
 
     ' https//github.com/SonarSource/sonar-dotnet/issues/4406
@@ -234,7 +239,7 @@ Namespace Tests.TestCases
 
         Private WithEvents fSource As Source
 
-        Private Sub fSource_Dirty(Name As String, Count As Integer) Handles fSource.Dirty 'Noncompliant FP
+        Private Sub fSource_Dirty(Name As String, Count As Integer) Handles fSource.Dirty 'Compliant, because it's WithEvents event handler
             Dim S As String = Name
         End Sub
 

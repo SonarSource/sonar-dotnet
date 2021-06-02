@@ -51,6 +51,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         || IsEmptyMethod(methodBlock)
                         || IsVirtualOrOverride(methodBlock)
                         || IsInterfaceImplementation(methodBlock)
+                        || IsWithEventsHandler(methodBlock)
                         || HasAnyAttribute(methodBlock)
                         || OnlyThrowsNotImplementedException(methodBlock, c.SemanticModel))
                     {
@@ -94,6 +95,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static bool IsInterfaceImplementation(MethodBlockBaseSyntax method) =>
             (method.BlockStatement as MethodStatementSyntax)?.ImplementsClause != null;
+
+        private static bool IsWithEventsHandler(MethodBlockBaseSyntax method) =>
+            (method.BlockStatement as MethodStatementSyntax)?.HandlesClause != null;
 
         private static bool HasAnyAttribute(MethodBlockBaseSyntax method) =>
             method.BlockStatement.AttributeLists.Any();
