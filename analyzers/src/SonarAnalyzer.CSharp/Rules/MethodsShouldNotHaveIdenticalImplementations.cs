@@ -27,7 +27,6 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Wrappers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,12 +34,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShouldNotHaveIdenticalImplementationsBase<IMethodDeclaration, SyntaxKind>
     {
-        protected override SyntaxKind[] SyntaxKinds { get; } =
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKindEx.RecordDeclaration,
-        };
-
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node) =>

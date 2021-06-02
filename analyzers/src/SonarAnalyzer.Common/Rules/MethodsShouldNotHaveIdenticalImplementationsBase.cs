@@ -36,7 +36,6 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade<TLanguageKindEnum> Language { get; }
-        protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
         protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
         protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
         protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
@@ -81,7 +80,7 @@ namespace SonarAnalyzer.Rules
                                 messageArgs: GetMethodIdentifier(method).ValueText));
                         }
                     }
-                }, SyntaxKinds);
+                }, Language.SyntaxKind.ClassAndRecordDeclaration);
 
         protected static bool HaveSameParameters<TSyntax>(SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
             where TSyntax : SyntaxNode
