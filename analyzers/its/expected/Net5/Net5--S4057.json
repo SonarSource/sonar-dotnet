@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4057",
+"message":  "Set the locale for this 'DataSet'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4057.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  27,
+"endLine":  7,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4057",
+"message":  "Set the locale for this 'DataTable'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4057.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  30,
+"endLine":  8,
+"endColumn":  36
+}
+}
+}
+]
+}

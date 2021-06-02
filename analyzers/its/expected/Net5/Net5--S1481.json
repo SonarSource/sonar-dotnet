@@ -67,6 +67,32 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'x'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1144.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  17,
+"endLine":  7,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'x'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1144.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  17,
+"endLine":  12,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'i'.",
 "location":  {
 "uri":  "sources\Net5\Net5\SkipLocalsInit.cs",

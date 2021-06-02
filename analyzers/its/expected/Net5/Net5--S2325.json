@@ -168,6 +168,58 @@
 "endColumn":  28
 }
 }
+},
+{
+"id":  "S2325",
+"message":  "Make 'Foo' a static method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2278.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  21,
+"endLine":  7,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsActive' a static property.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3453.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  25,
+"endLine":  9,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsActive' a static property.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3453.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  25,
+"endLine":  18,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Foo' a static method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S5659.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  21,
+"endLine":  7,
+"endColumn":  24
+}
+}
 }
 ]
 }
