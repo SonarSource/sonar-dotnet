@@ -70,7 +70,7 @@ public abstract class AbstractPropertyDefinitions {
         .category(languageName)
         .defaultValue(fileSuffixDefaultValue)
         .name("File suffixes")
-        .description("Comma-separated list of suffixes of files to analyze.")
+        .description("List of suffixes for files to analyze.")
         .multiValues(true)
         .onQualifiers(Qualifiers.PROJECT)
         .build());
