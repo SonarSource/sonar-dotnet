@@ -51,8 +51,5 @@ namespace SonarAnalyzer.Helpers
 
         public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
             new VisualBasicMethodParameterLookup((InvocationExpressionSyntax)invocation, methodSymbol);
-
-        public bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) =>
-            node.IsAnyKind(syntaxKinds);
     }
 }

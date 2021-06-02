@@ -51,7 +51,5 @@ namespace SonarAnalyzer.Helpers
 
         public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
             new CSharpMethodParameterLookup((InvocationExpressionSyntax)invocation, methodSymbol);
-        public bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) =>
-            node.IsAnyKind(syntaxKinds);
     }
 }
