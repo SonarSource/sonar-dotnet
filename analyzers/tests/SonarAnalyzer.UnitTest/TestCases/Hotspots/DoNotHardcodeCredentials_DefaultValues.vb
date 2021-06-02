@@ -110,6 +110,8 @@ Namespace Tests.Diagnostics
             a = "Server = localhost; Database = Test; User = SA; " & SomeMethod() & SecretConst                 ' Compliant
 
             ' Reassigned
+            Arg &= "Literal"
+            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg                     ' Noncompliant FP
             SecretVariableMethod = "literal"
             a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableMethod    ' Noncompliant
             Arg = "literal"

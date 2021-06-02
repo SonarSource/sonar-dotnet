@@ -128,6 +128,8 @@ namespace Tests.Diagnostics
             a = "Server = localhost; Database = Test; User = SA; " + someMethod() + secretConst;                    // Compliant
 
             // Reassigned
+            arg += "Literal";
+            a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                    // Noncompliant FP
             secretVariableMethod = "literal";
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableMethod;   // Noncompliant
             arg = "literal";
