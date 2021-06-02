@@ -144,8 +144,12 @@ Public Class DoesNotApplyOn
         Dim Ret As OtherType                    ' Noncompliant FP
     End Function
 
-    Public Function NamespaceName() As NamespaceName.Something  'Noncompliant FP
-        Dim Ret As NamespaceName.Something                      'Noncompliant FP
+    Public Function NamespaceName() As NamespaceName.Something  'Compliant
+        Dim Ret As NamespaceName.Something                      'Compliant
+    End Function
+
+    Public Function Something() As NamespaceName.Something      'Compliant
+        Dim Ret As NamespaceName.Something                      'Compliant
     End Function
 
     Public Sub SomeEvent() Handles fSource.SomeEvent
