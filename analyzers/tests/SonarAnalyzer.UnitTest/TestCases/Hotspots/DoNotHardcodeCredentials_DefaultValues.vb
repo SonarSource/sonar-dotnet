@@ -154,6 +154,16 @@ Namespace Tests.Diagnostics
             a = String.Format(arg0:=SecretConst, format:="Server = localhost; Database = Test; User = SA; Password = {0}")  ' FN, not supported
         End Sub
 
+        Private Sub ByRefVariable()
+            Dim Secret As String = "hardcoded"
+            FillByRef(Secret)
+            Dim A As String = "Server = localhost; Database = Test; User = SA; Password = " & Secret   ' Noncompliant FP
+        End Sub
+
+        Private Sub FillByRef(ByRef Arg As String)
+            Arg = SomeMethod()
+        End Sub
+
         Public Sub StandardAPI(secureString As SecureString, nonHardcodedPassword As String, byteArray As Byte(), cspParams As CspParameters)
             Const SecretLocalConst As String = "hardcodedSecret"
             Dim SecretVariable As String = "literalValue"
