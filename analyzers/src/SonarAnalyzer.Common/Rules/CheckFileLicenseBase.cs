@@ -18,30 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using System;
 using System.Collections.Immutable;
 using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
     public abstract class CheckFileLicenseBase : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1451";
-        protected const string MessageFormat = "Add or update the header of this file.";
-
         internal const string HeaderFormatRuleParameterKey = "headerFormat";
         internal const string HeaderFormatPropertyKey = nameof(HeaderFormat);
-        public abstract string HeaderFormat { get; set; }
-
         internal const string IsRegularExpressionRuleParameterKey = "isRegularExpression";
         internal const string IsRegularExpressionPropertyKey = nameof(IsRegularExpression);
         internal const string IsRegularExpressionDefaultValue = "false";
-        [RuleParameter(IsRegularExpressionRuleParameterKey, PropertyType.Boolean,
-            "Whether the headerFormat is a regular expression.", IsRegularExpressionDefaultValue)]
+        protected const string MessageFormat = "Add or update the header of this file.";
+
+        [RuleParameter(IsRegularExpressionRuleParameterKey, PropertyType.Boolean, "Whether the headerFormat is a regular expression.", IsRegularExpressionDefaultValue)]
         public bool IsRegularExpression { get; set; } = bool.Parse(IsRegularExpressionDefaultValue);
+
+        public abstract string HeaderFormat { get; set; }
 
         protected static bool IsRegexPatternValid(string pattern)
         {
@@ -74,8 +73,7 @@ namespace SonarAnalyzer.Rules
             var unixEndingHeaderFormat = HeaderFormat.Replace("\r\n", "\n").Replace("\\r\\n", "\n");
             if (!IsRegularExpression && !unixEndingHeaderFormat.EndsWith("\n"))
             {
-                // In standard text mode, we want to be sure that the matched header is on its own
-                // line, with nothing else on the same line.
+                // In standard text mode, we want to be sure that the matched header is on its own line, with nothing else on the same line.
                 unixEndingHeaderFormat += "\n";
             }
             return IsRegularExpression
@@ -83,11 +81,9 @@ namespace SonarAnalyzer.Rules
                 : unixEndingHeader.StartsWith(unixEndingHeaderFormat, StringComparison.Ordinal);
         }
 
-        protected ImmutableDictionary<string, string> CreateDiagnosticProperties()
-        {
-            return ImmutableDictionary<string, string>.Empty
+        protected ImmutableDictionary<string, string> CreateDiagnosticProperties() =>
+            ImmutableDictionary<string, string>.Empty
                 .Add(HeaderFormatPropertyKey, HeaderFormat)
                 .Add(IsRegularExpressionPropertyKey, IsRegularExpression.ToString());
-        }
     }
 }

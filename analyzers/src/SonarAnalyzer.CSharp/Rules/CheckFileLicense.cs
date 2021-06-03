@@ -53,23 +53,16 @@ namespace SonarAnalyzer.Rules.CSharp
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 ";
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        [RuleParameter(HeaderFormatRuleParameterKey, PropertyType.Text, "Expected copyright and license header.",
-            HeaderFormatDefaultValue)]
+        [RuleParameter(HeaderFormatRuleParameterKey, PropertyType.Text, "Expected copyright and license header.", HeaderFormatDefaultValue)]
         public override string HeaderFormat { get; set; } = HeaderFormatDefaultValue;
 
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
-        {
+        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxTreeActionInNonGenerated(
-                stac =>
+                c =>
                 {
                     if (HeaderFormat == null)
                     {
@@ -81,14 +74,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         throw new InvalidOperationException($"Invalid regular expression: {HeaderFormat}");
                     }
 
-                    var firstNode = stac.Tree.GetRoot().ChildTokens().FirstOrDefault().Parent;
+                    var firstNode = c.Tree.GetRoot().ChildTokens().FirstOrDefault().Parent;
                     if (!HasValidLicenseHeader(firstNode))
                     {
                         var properties = CreateDiagnosticProperties();
-                        stac.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(stac.Tree,
-                            TextSpan.FromBounds(0, 0)), properties));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Location.Create(c.Tree, TextSpan.FromBounds(0, 0)), properties));
                     }
                 });
-        }
     }
 }
