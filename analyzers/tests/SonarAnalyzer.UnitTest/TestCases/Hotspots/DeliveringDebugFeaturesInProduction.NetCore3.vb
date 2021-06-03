@@ -48,4 +48,11 @@ Namespace Tests.Diagnostics
 
     End Class
 
+    Public Class StartupDevelopment
+        Public Sub Configure(ByVal app As IApplicationBuilder, ByVal env As IWebHostEnvironment)
+            ' See: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments?view=aspnetcore-5.0#startup-class-conventions
+            app.UseDeveloperExceptionPage() ' Compliant, it is inside StartupDevelopment class
+        End Sub
+    End Class
+
 End Namespace

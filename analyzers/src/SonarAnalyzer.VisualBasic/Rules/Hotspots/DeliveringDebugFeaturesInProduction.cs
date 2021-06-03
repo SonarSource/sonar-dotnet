@@ -43,6 +43,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 context.Node.FirstAncestorOrSelf<StatementSyntax>() is { } invocationStatement
                 && invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.SemanticModel));
 
+        protected override TrackerBase<SyntaxKind, InvocationContext>.Condition IsInDevelopmentContext() =>
+            context => context.Node
+                              .Ancestors()
+                              .OfType<ClassBlockSyntax>()
+                              .Any(classBlockSyntax => classBlockSyntax.ClassStatement.Identifier.Text == StartupDevelopment);
+
         private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel) =>
             FindCondition(node).RemoveParentheses() is InvocationExpressionSyntax condition
             && IsValidationMethod(semanticModel, condition, condition.Expression.GetIdentifier()?.Identifier.ValueText);
@@ -51,7 +57,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             node switch
             {
                 MultiLineIfBlockSyntax multiline => multiline.IfStatement.Condition,
-                SingleLineIfStatementSyntax singleline => singleline.Condition,
+                SingleLineIfStatementSyntax singleLine => singleLine.Condition,
                 _ => null
             };
     }

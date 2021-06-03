@@ -43,6 +43,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.Node.FirstAncestorOrSelf<StatementSyntax>() is { } invocationStatement
                 && invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.SemanticModel));
 
+        protected override TrackerBase<SyntaxKind, InvocationContext>.Condition IsInDevelopmentContext() =>
+            context => context.Node
+                              .Ancestors()
+                              .OfType<ClassDeclarationSyntax>()
+                              .Any(declaration => declaration.Identifier.Text == StartupDevelopment);
+
         private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel) =>
             node is IfStatementSyntax ifStatement
             && ifStatement.Condition.RemoveParentheses() is InvocationExpressionSyntax condition

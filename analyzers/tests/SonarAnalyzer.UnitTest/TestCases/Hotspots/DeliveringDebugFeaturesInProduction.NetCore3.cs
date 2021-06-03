@@ -47,4 +47,11 @@ namespace NetCore3
         public void ConfigureAsArrow(IApplicationBuilder app, IWebHostEnvironment env) =>
             DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
     }
+
+    public class StartupDevelopment
+    {
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) =>
+            // See: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments?view=aspnetcore-5.0#startup-class-conventions
+            app.UseDeveloperExceptionPage(); // Compliant, it is inside StartupDevelopment class
+    }
 }

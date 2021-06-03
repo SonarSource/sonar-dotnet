@@ -31,7 +31,8 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4507";
-        protected const string MessageFormat = "Make sure this debug feature is deactivated before delivering the code in production.";
+        protected const string StartupDevelopment = "StartupDevelopment";
+        private const string MessageFormat = "Make sure this debug feature is deactivated before delivering the code in production.";
 
         private readonly ImmutableArray<MemberDescriptor> isDevelopmentMethods = ImmutableArray.Create(
             new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment"),
@@ -40,6 +41,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract TrackerBase<TSyntaxKind, InvocationContext>.Condition IsInvokedConditionally();
 
+        protected abstract TrackerBase<TSyntaxKind, InvocationContext>.Condition IsInDevelopmentContext();
+
         protected DeliveringDebugFeaturesInProductionBase(IAnalyzerConfiguration configuration)
             : base(configuration, DiagnosticId, MessageFormat) { }
 
@@ -47,10 +50,10 @@ namespace SonarAnalyzer.Rules
         {
             var t = Language.Tracker.Invocation;
             t.Track(input,
-                t.MatchMethod(
-                    new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions, "UseDeveloperExceptionPage"),
-                    new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions, "UseDatabaseErrorPage")),
-                t.ExceptWhen(IsInvokedConditionally()));
+                    t.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions, "UseDeveloperExceptionPage"),
+                                  new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions, "UseDatabaseErrorPage")),
+                    t.And(t.ExceptWhen(IsInvokedConditionally()),
+                          t.ExceptWhen(IsInDevelopmentContext())));
         }
 
         protected bool IsValidationMethod(SemanticModel semanticModel, SyntaxNode condition, string methodName)

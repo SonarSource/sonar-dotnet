@@ -38,16 +38,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
-                new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferencesNetCore2);
+                                    new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
-                new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferencesNetCore2);
+                                    new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferencesNetCore2);
 
 #if NET
 
@@ -56,32 +56,32 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.cs",
-                new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferencesNetCore3);
+                                    new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferencesNetCore3);
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.vb",
-                new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferencesNetCore3);
+                                    new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferencesNetCore3);
 
-        internal static IEnumerable<MetadataReference> AdditionalReferencesNetCore3 =>
+        private static IEnumerable<MetadataReference> AdditionalReferencesNetCore3 =>
             Enumerable.Empty<MetadataReference>()
-                .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics)
-                .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions)
-                .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions)
-                .Concat(AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions);
+                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics)
+                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions)
+                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions)
+                      .Concat(AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions);
 
 #endif
 
         internal static IEnumerable<MetadataReference> AdditionalReferencesNetCore2 =>
             Enumerable.Empty<MetadataReference>()
-                .Concat(NetStandardMetadataReference.Netstandard)
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.DotNetCore220Version))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(Constants.DotNetCore220Version))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version));
+                      .Concat(NetStandardMetadataReference.Netstandard)
+                      .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.DotNetCore220Version))
+                      .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(Constants.DotNetCore220Version))
+                      .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
+                      .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version));
     }
 }
