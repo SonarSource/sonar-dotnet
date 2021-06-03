@@ -207,5 +207,41 @@ namespace Tests.Diagnostics
             throw new ArgumentNullException(nameof(str.argument)); // Error [CS1061] Compliant, argument is missing member without a symbol
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4423
+    public class Repro_4423
+    {
+        public void InsideLocalFunction()
+        {
+            Something(null);
+
+            void Something(string localArg)
+            {
+                throw new ArgumentNullException(nameof(localArg));   // Noncompliant FP
+            }
+        }
+
+        public void LocalMethodValidatingMethodArgument(string methodArg)
+        {
+            ValidateLocal();
+            SendItToSomewhere(ValidateLocal, "Definitely not null"); // This scenario makes the ValidateLocal non-compliant
+
+            void ValidateLocal()
+            {
+                if (methodArg == null)
+                {
+                    throw new ArgumentNullException(nameof(methodArg));   // FN
+                }
+            }
+        }
+
+        public void SendItToSomewhere(Action a, string methodArg)
+        {
+            if(methodArg != null)
+            {
+                a(); // This would throw very confusing message: Value cannot be null. (Parameter 'methodArg')'
+            }
+        }
+    }
 }
 
