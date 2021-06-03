@@ -56,8 +56,32 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             wrapper.Expression.Should().BeEquivalentTo(objectCreation);
             wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
             wrapper.ArgumentList.Should().BeEquivalentTo(objectCreation.ArgumentList);
+            wrapper.InitializerExpressions.Should().BeEquivalentTo(objectCreation.Initializer.Expressions);
             wrapper.TypeAsString(snippet.SemanticModel).Should().Be("A");
             wrapper.TypeSymbol(snippet.SemanticModel).Name.Should().Be("A");
+        }
+
+        [TestMethod]
+        public void ObjectCreationEmptyInitializerSyntax()
+        {
+            const string code = @"
+                public class A
+                {
+                    public int X;
+                    public A(int y) { }
+                }
+                public class B
+                {
+                    void Foo()
+                    {
+                        var bar = new A(1);
+                    }
+                }";
+            var snippet = new SnippetCompiler(code);
+            var objectCreation = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ObjectCreationExpressionSyntax>().First();
+            var wrapper = ObjectCreationFactory.Create(objectCreation);
+            wrapper.Initializer.Should().BeNull();
+            wrapper.InitializerExpressions.Should().BeNull();
         }
 
         [TestMethod]
@@ -83,8 +107,32 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             wrapper.Expression.Should().BeEquivalentTo(objectCreation.SyntaxNode);
             wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
             wrapper.ArgumentList.Should().BeEquivalentTo(objectCreation.ArgumentList);
+            wrapper.InitializerExpressions.Should().BeEquivalentTo(objectCreation.Initializer.Expressions);
             wrapper.TypeAsString(snippet.SemanticModel).Should().Be("A");
             wrapper.TypeSymbol(snippet.SemanticModel).Name.Should().Be("A");
+        }
+
+        [TestMethod]
+        public void ImplicitObjectCreationEmptyInitializerSyntax()
+        {
+            const string code = @"
+                public class A
+                {
+                    public int X;
+                    public A(int y) { }
+                }
+                public class B
+                {
+                    void Foo()
+                    {
+                        A bar = new (1);
+                    }
+                }";
+            var snippet = new SnippetCompiler(code);
+            var objectCreation = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ImplicitObjectCreationExpressionSyntax>().First();
+            var wrapper = ObjectCreationFactory.Create(objectCreation);
+            wrapper.Initializer.Should().BeNull();
+            wrapper.InitializerExpressions.Should().BeNull();
         }
 
         [TestMethod]
