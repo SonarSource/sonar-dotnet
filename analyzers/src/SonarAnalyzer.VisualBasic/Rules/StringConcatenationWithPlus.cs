@@ -35,25 +35,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
         internal const string DiagnosticId = "S1645";
         private const string MessageFormat = "Switch this use of the '+' operator to the '&'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
 
-                    var leftType = c.SemanticModel.GetTypeInfo(binary.Left).Type;
-                    var rightType = c.SemanticModel.GetTypeInfo(binary.Right).Type;
-
-                    if (leftType.Is(KnownType.System_String) ||
-                        rightType.Is(KnownType.System_String))
+                    if (c.SemanticModel.GetTypeInfo(binary.Left).Type.Is(KnownType.System_String)
+                        || c.SemanticModel.GetTypeInfo(binary.Right).Type.Is(KnownType.System_String))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, binary.OperatorToken.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, binary.OperatorToken.GetLocation()));
                     }
                 },
                 SyntaxKind.AddExpression);
