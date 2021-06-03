@@ -269,6 +269,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.CheckFileLicense { HeaderFormat = MultiLineHeader },
                 new CS.CheckFileLicenseCodeFixProvider());
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CheckFileLicense_NullHeader_NoIssueReported_CS() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\CheckFileLicense_NoLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = null });
+
         // No need to duplicate all test cases from C#, because we are sharing the implementation
         [TestMethod]
         [TestCategory("Rule")]
