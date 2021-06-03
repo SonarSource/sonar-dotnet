@@ -69,11 +69,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var invokedSymbols = GetInvokedEventSymbols(removableDeclarationCollector);
-            var possiblyCopiedSymbols = GetPossiblyCopiedSymbols(removableDeclarationCollector);
+            var usedSymbols = GetInvokedEventSymbols(removableDeclarationCollector)
+                .Concat(GetPossiblyCopiedSymbols(removableDeclarationCollector))
+                .ToHashSet();
 
             removableEventFields
-                .Where(x => !invokedSymbols.Contains(x.Symbol) && !possiblyCopiedSymbols.Contains(x.Symbol))
+                .Where(x => !usedSymbols.Contains(x.Symbol))
                 .ToList()
                 .ForEach(x => context.ReportDiagnosticIfNonGenerated(
                     Diagnostic.Create(Rule, GetLocation(x.SyntaxNode), x.Symbol.Name)));
@@ -84,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     : ((EventDeclarationSyntax)node).Identifier.GetLocation();
         }
 
-        private static ISet<ISymbol> GetInvokedEventSymbols(CSharpRemovableDeclarationCollector removableDeclarationCollector)
+        private static IEnumerable<ISymbol> GetInvokedEventSymbols(CSharpRemovableDeclarationCollector removableDeclarationCollector)
         {
             var delegateInvocations = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.SyntaxNode.DescendantNodes()
@@ -118,17 +119,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(tuple => tuple.Symbol != null)
                 .Select(tuple => tuple.Symbol.OriginalDefinition);
 
-            return new HashSet<ISymbol>(invokedEventSymbols);
+            return invokedEventSymbols;
         }
 
-        private static ISet<ISymbol> GetPossiblyCopiedSymbols(CSharpRemovableDeclarationCollector removableDeclarationCollector)
+        private static IEnumerable<ISymbol> GetPossiblyCopiedSymbols(CSharpRemovableDeclarationCollector removableDeclarationCollector)
         {
-            var usedSymbols = new HashSet<ISymbol>();
-
             var arguments = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.SyntaxNode.DescendantNodes()
-                    .Where(node =>
-                        node.IsKind(SyntaxKind.Argument))
+                    .Where(node => node.IsKind(SyntaxKind.Argument))
                     .Cast<ArgumentSyntax>()
                     .Select(node =>
                         new SyntaxNodeAndSemanticModel<SyntaxNode>
@@ -149,8 +147,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var assignment = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.SyntaxNode.DescendantNodes()
-                    .Where(node =>
-                        node.IsKind(SyntaxKind.SimpleAssignmentExpression))
+                    .Where(node => node.IsKind(SyntaxKind.SimpleAssignmentExpression))
                     .Cast<AssignmentExpressionSyntax>()
                     .Select(node =>
                         new SyntaxNodeAndSemanticModel<SyntaxNode>
@@ -159,10 +156,9 @@ namespace SonarAnalyzer.Rules.CSharp
                             SemanticModel = container.SemanticModel
                         }));
 
-            var allNodes = arguments
-                .Concat(equalsValue)
-                .Concat(assignment);
+            var allNodes = arguments.Concat(equalsValue).Concat(assignment);
 
+            var usedSymbols = new List<ISymbol>();
             foreach (var node in allNodes)
             {
                 if (node.SemanticModel.GetSymbolInfo(node.SyntaxNode).Symbol is IEventSymbol symbol)
