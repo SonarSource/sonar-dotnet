@@ -20,8 +20,10 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -37,10 +39,39 @@ namespace SonarAnalyzer.Rules
         internal const string IsRegularExpressionDefaultValue = "false";
         protected const string MessageFormat = "Add or update the header of this file.";
 
+        private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade Language { get; }
+        public abstract string HeaderFormat { get; set; }
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
         [RuleParameter(IsRegularExpressionRuleParameterKey, PropertyType.Boolean, "Whether the headerFormat is a regular expression.", IsRegularExpressionDefaultValue)]
         public bool IsRegularExpression { get; set; } = bool.Parse(IsRegularExpressionDefaultValue);
 
-        public abstract string HeaderFormat { get; set; }
+        protected CheckFileLicenseBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+
+        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+            context.RegisterSyntaxTreeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+                {
+                    if (HeaderFormat == null)
+                    {
+                        return;
+                    }
+
+                    if (IsRegularExpression && !IsRegexPatternValid(HeaderFormat))
+                    {
+                        throw new InvalidOperationException($"Invalid regular expression: {HeaderFormat}");
+                    }
+
+                    var firstNode = c.Tree.GetRoot().ChildTokens().FirstOrDefault().Parent;
+                    if (!HasValidLicenseHeader(firstNode))
+                    {
+                        var properties = CreateDiagnosticProperties();
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(c.Tree, TextSpan.FromBounds(0, 0)), properties));
+                    }
+                });
 
         protected static bool IsRegexPatternValid(string pattern)
         {

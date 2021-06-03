@@ -18,12 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -41,34 +37,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 ' You can also set it in SonarLint.xml additional file for SonarLint or standalone NuGet analyzer.
 ";
 
-        // FIXME: Refactor
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
         [RuleParameter(HeaderFormatRuleParameterKey, PropertyType.Text, "Expected copyright and license header.", HeaderFormatDefaultValue)]
         public override string HeaderFormat { get; set; } = HeaderFormatDefaultValue;
-
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
-            context.RegisterSyntaxTreeActionInNonGenerated(
-                c =>
-                {
-                    if (HeaderFormat == null)
-                    {
-                        return;
-                    }
-
-                    if (IsRegularExpression && !IsRegexPatternValid(HeaderFormat))
-                    {
-                        throw new InvalidOperationException($"Invalid regular expression: {HeaderFormat}");
-                    }
-
-                    var firstNode = c.Tree.GetRoot().ChildTokens().FirstOrDefault().Parent;
-                    if (!HasValidLicenseHeader(firstNode))
-                    {
-                        var properties = CreateDiagnosticProperties();
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Location.Create(c.Tree, TextSpan.FromBounds(0, 0)), properties));
-                    }
-                });
     }
 }
