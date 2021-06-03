@@ -36,12 +36,11 @@ namespace SonarAnalyzer.Rules
 
         private readonly ImmutableArray<MemberDescriptor> isDevelopmentMethods = ImmutableArray.Create(
             new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment"),
-            new MemberDescriptor(KnownType.Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions, "IsDevelopment")
-            );
+            new MemberDescriptor(KnownType.Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions, "IsDevelopment"));
 
-        protected abstract TrackerBase<TSyntaxKind, InvocationContext>.Condition IsInvokedConditionally();
+        protected abstract bool IsInvokedConditionally(SyntaxNode node, SemanticModel semanticModel);
 
-        protected abstract TrackerBase<TSyntaxKind, InvocationContext>.Condition IsInDevelopmentContext();
+        protected abstract bool IsInDevelopmentContext(SyntaxNode node);
 
         protected DeliveringDebugFeaturesInProductionBase(IAnalyzerConfiguration configuration)
             : base(configuration, DiagnosticId, MessageFormat) { }
@@ -52,8 +51,8 @@ namespace SonarAnalyzer.Rules
             t.Track(input,
                     t.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions, "UseDeveloperExceptionPage"),
                                   new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions, "UseDatabaseErrorPage")),
-                    t.And(t.ExceptWhen(IsInvokedConditionally()),
-                          t.ExceptWhen(IsInDevelopmentContext())));
+                    t.ExceptWhen(c => IsInvokedConditionally(c.Node, c.SemanticModel)),
+                    t.ExceptWhen(c => IsInDevelopmentContext(c.Node)));
         }
 
         protected bool IsValidationMethod(SemanticModel semanticModel, SyntaxNode condition, string methodName)

@@ -38,16 +38,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration configuration) : base(configuration) { }
 
-        protected override TrackerBase<SyntaxKind, InvocationContext>.Condition IsInvokedConditionally() =>
-            context =>
-                context.Node.FirstAncestorOrSelf<StatementSyntax>() is { } invocationStatement
-                && invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.SemanticModel));
+        protected override bool IsInvokedConditionally(SyntaxNode node, SemanticModel semanticModel) =>
+            node.FirstAncestorOrSelf<StatementSyntax>() is { } invocationStatement
+            && invocationStatement.Ancestors().Any(x => IsDevelopmentCheck(x, semanticModel));
 
-        protected override TrackerBase<SyntaxKind, InvocationContext>.Condition IsInDevelopmentContext() =>
-            context => context.Node
-                              .Ancestors()
-                              .OfType<ClassDeclarationSyntax>()
-                              .Any(declaration => declaration.Identifier.Text == StartupDevelopment);
+        protected override bool IsInDevelopmentContext(SyntaxNode node) =>
+            node.Ancestors()
+                .OfType<ClassDeclarationSyntax>()
+                .Any(x => x.Identifier.Text == StartupDevelopment);
 
         private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel) =>
             node is IfStatementSyntax ifStatement
