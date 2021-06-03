@@ -87,6 +87,28 @@ public class Repro_4399
 
     private bool CheckArg(object arg) => false;
 
+    public void FindConstant_For_AssignedInsideLoop()
+    {
+        var value = 1;
+        int result;
+        for (var v = 0; v < 42; v++)
+        {
+            value = 0;
+            result = value | v;     // Noncompliant
+        }
+    }
+
+    public void FindConstant_For_ReassignedToTheSameValue()
+    {
+        var value = 0;
+        int result;
+        for (var v = 0; v < 42; v++)
+        {
+            result = value | v;     // FN per rule description, but expected behavior for ConstantValueFinder. Variable "value" is reassigned inside a loop.
+            value = 0;
+        }
+    }
+
     public void FindConstant_For()
     {
         var value = 0;

@@ -80,6 +80,24 @@ Public Class Repro_4399
     Private Function CheckArg(Arg As Object) As Boolean
     End Function
 
+    Public Sub FindConstant_For_AssignedInsideLoop()
+        Dim Value As Integer = 1
+        Dim Result As Integer
+        For v As Integer = 0 To 41
+            Value = 0
+            Result = Value Or v     ' Noncompliant
+        Next
+    End Sub
+
+    Public Sub FindConstant_For_ReassignedToTheSameValue()
+        Dim Value As Integer = 0
+        Dim Result As Integer
+        For v As Integer = 0 To 41
+            Result = Value Or v     ' FN per rule description, but expected behavior for ConstantValueFinder. Variable "Value" is reassigned inside a Loop.
+            Value = 0
+        Next
+    End Sub
+
     Public Sub FindConstant_For()
         Dim Value As Integer = 0
         Dim Unchanged As Integer = 0
