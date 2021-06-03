@@ -56,7 +56,6 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             wrapper.Expression.Should().BeEquivalentTo(objectCreation);
             wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
             wrapper.ArgumentList.Should().BeEquivalentTo(objectCreation.ArgumentList);
-            wrapper.InitializerExpressions.Should().BeEquivalentTo(objectCreation.Initializer.Expressions);
             wrapper.TypeAsString(snippet.SemanticModel).Should().Be("A");
             wrapper.TypeSymbol(snippet.SemanticModel).Name.Should().Be("A");
         }
@@ -81,7 +80,6 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             var objectCreation = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ObjectCreationExpressionSyntax>().First();
             var wrapper = ObjectCreationFactory.Create(objectCreation);
             wrapper.Initializer.Should().BeNull();
-            wrapper.InitializerExpressions.Should().BeNull();
         }
 
         [TestMethod]
@@ -107,7 +105,6 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             wrapper.Expression.Should().BeEquivalentTo(objectCreation.SyntaxNode);
             wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
             wrapper.ArgumentList.Should().BeEquivalentTo(objectCreation.ArgumentList);
-            wrapper.InitializerExpressions.Should().BeEquivalentTo(objectCreation.Initializer.Expressions);
             wrapper.TypeAsString(snippet.SemanticModel).Should().Be("A");
             wrapper.TypeSymbol(snippet.SemanticModel).Name.Should().Be("A");
         }
@@ -132,7 +129,6 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             var objectCreation = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ImplicitObjectCreationExpressionSyntax>().First();
             var wrapper = ObjectCreationFactory.Create(objectCreation);
             wrapper.Initializer.Should().BeNull();
-            wrapper.InitializerExpressions.Should().BeNull();
         }
 
         [TestMethod]
