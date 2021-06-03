@@ -13,7 +13,7 @@ namespace Tests.Diagnostics
 
     class SillyBitwiseOperation
     {
-        static void Main(string[] args  )
+        static void Main(string[] args)
         {
             int result;
             int bitMask = 0x010F;
@@ -67,7 +67,7 @@ public class Repro_4399
         var value = 0;
         foreach (var dow in daysOfWeek)
         {
-            value = (1 << (int)dow); // Fixed
+            value = value | (1 << (int)dow); // Compliant, value changes over iterations
         }
     }
 
@@ -76,9 +76,92 @@ public class Repro_4399
         var fail = false;
         foreach (var arg in args)
         {
-            fail = !CheckArg(arg);   // Fixed
+            fail = fail | !CheckArg(arg);   // Compliant, using short-circuit operator || would change the logic.
         }
     }
 
     private bool CheckArg(object arg) => false;
+
+    public void FindConstant_For_AssignedInsideLoop()
+    {
+        var value = 1;
+        int result;
+        for (var v = 0; v < 42; v++)
+        {
+            value = 0;
+            result = v;     // Fixed
+        }
+    }
+
+    public void FindConstant_For_ReassignedToTheSameValue()
+    {
+        var value = 0;
+        int result;
+        for (var v = 0; v < 42; v++)
+        {
+            result = value | v;     // FN per rule description, but expected behavior for ConstantValueFinder. Variable "value" is reassigned inside a loop.
+            value = 0;
+        }
+    }
+
+    public void FindConstant_For()
+    {
+        var value = 0;
+        var unchanged = 0;
+        int result;
+        for (var v = 0; v < 42; v++)
+        {
+            result = value | v;     // Compliant, value changes over iterations
+            result = v; // Fixed
+            value = 1;
+        }
+    }
+
+    public void FindConstant_ForEach(int[] values)
+    {
+        var value = 0;
+        var unchanged = 0;
+        int result;
+        foreach (var v in values)
+        {
+            result = value | v;     // Compliant, value changes over iterations
+            result = v; // Fixed
+            value = 1;
+        }
+        unchanged = 1;
+    }
+
+    public void FindConstant_While(int[] values)
+    {
+        var value = 0;
+        var unchanged = 0;
+        int result;
+        int index = 0;
+        while (index < values.Length)
+        {
+            var v = values[index];
+            result = value | v;     // Compliant, value changes over iterations
+            result = v; // Fixed
+            value = 1;
+            index++;
+        }
+        unchanged = 1;
+    }
+
+    public void FindConstant_Do(int[] values)
+    {
+        var value = 0;
+        var unchanged = 0;
+        int result;
+        var index = 0;
+        do
+        {
+            var v = values[index];
+            result = value | v;     // Compliant, value changes over iterations
+            result = v; // Fixed
+            value = 1;
+            index++;
+        } while (index < values.Length);
+        unchanged = 1;
+    }
 }

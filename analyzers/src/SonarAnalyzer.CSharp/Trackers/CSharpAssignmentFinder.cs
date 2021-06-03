@@ -20,6 +20,7 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
@@ -55,5 +56,8 @@ namespace SonarAnalyzer.Helpers
             initializer = null;
             return false;
         }
+
+        protected override bool IsLoop(SyntaxNode node) =>
+            node.IsAnyKind(SyntaxKind.ForStatement, SyntaxKind.ForEachStatement, SyntaxKind.WhileStatement, SyntaxKind.DoStatement);
     }
 }

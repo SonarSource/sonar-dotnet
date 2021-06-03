@@ -1,4 +1,7 @@
-﻿nint resultNint;
+﻿using System.Threading.Tasks;
+using System.Collections.Generic;
+
+nint resultNint;
 nint bitMaskNint = 0x010F;
 nint nOne = 1;
 nint nZero = 0;
@@ -35,3 +38,21 @@ MyMethod(1 | 0x00000); // Noncompliant
 
 static void MyMethod(nuint u) { }
 static nuint returnNuint() => 1;
+
+
+public class CSharp8
+{
+    public async Task FindConstant_AwaitForEach(IAsyncEnumerable<int> values)
+    {
+        var value = 0;
+        var unchanged = 0;
+        int result;
+        await foreach (var v in values)
+        {
+            result = value | v;     // Compliant, value changes over iterations
+            result = unchanged | v; // Noncompliant
+            value = 1;
+        }
+        unchanged = 1;
+    }
+}
