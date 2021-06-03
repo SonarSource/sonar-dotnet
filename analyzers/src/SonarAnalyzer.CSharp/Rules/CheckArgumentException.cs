@@ -40,37 +40,32 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string ConstructorParametersInverted = "ArgumentException constructor arguments have been inverted.";
         private const string InvalidParameterName = "The parameter name '{0}' is not declared in the argument list.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> ArgumentExceptionTypesToCheck =
             ImmutableArray.Create(
                 KnownType.System_ArgumentException,
                 KnownType.System_ArgumentNullException,
                 KnownType.System_ArgumentOutOfRangeException,
-                KnownType.System_DuplicateWaitObjectException
-            );
+                KnownType.System_DuplicateWaitObjectException);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue,
-                SyntaxKind.ObjectCreationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.ObjectCreationExpression);
 
         private static void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
             var objectCreationSyntax = (ObjectCreationExpressionSyntax)analysisContext.Node;
-            var methodSymbol = analysisContext.SemanticModel.GetSymbolInfo(objectCreationSyntax).Symbol
-                as IMethodSymbol;
-            if (methodSymbol?.ContainingType == null ||
-                !methodSymbol.ContainingType.IsAny(ArgumentExceptionTypesToCheck))
+            var methodSymbol = analysisContext.SemanticModel.GetSymbolInfo(objectCreationSyntax).Symbol as IMethodSymbol;
+            if (methodSymbol?.ContainingType == null || !methodSymbol.ContainingType.IsAny(ArgumentExceptionTypesToCheck))
             {
                 return;
             }
 
             if (objectCreationSyntax.ArgumentList.Arguments.Count == 0)
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreationSyntax.GetLocation(),
-                    ParameterLessConstructorMessage));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreationSyntax.GetLocation(), ParameterLessConstructorMessage));
                 return;
             }
 
@@ -79,8 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
             for (var i = 0; i < methodSymbol.Parameters.Length; i++)
             {
                 var argumentExpression = objectCreationSyntax.ArgumentList.Arguments[i].Expression;
-                if (methodSymbol.Parameters[i].MetadataName == "paramName" ||
-                    methodSymbol.Parameters[i].MetadataName == "parameterName")
+                if (methodSymbol.Parameters[i].MetadataName == "paramName" || methodSymbol.Parameters[i].MetadataName == "parameterName")
                 {
                     parameterNameValue = analysisContext.SemanticModel.GetConstantValue(argumentExpression);
                 }
@@ -101,33 +95,23 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var methodArgumentNames = GetMethodArgumentNames(objectCreationSyntax);
-            if (methodArgumentNames.Contains(TakeOnlyBeforeDot(parameterNameValue)))
+            if (!methodArgumentNames.Contains(TakeOnlyBeforeDot(parameterNameValue)))
             {
-                // paramName exists
-                return;
+                var message = messageValue.HasValue && messageValue.Value != null && methodArgumentNames.Contains(TakeOnlyBeforeDot(messageValue))
+                    ? ConstructorParametersInverted
+                    : string.Format(InvalidParameterName, parameterNameValue.Value);
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreationSyntax.GetLocation(), message));
             }
-
-            if (messageValue.HasValue &&
-                messageValue.Value != null &&
-                methodArgumentNames.Contains(TakeOnlyBeforeDot(messageValue)))
-            {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                    objectCreationSyntax.GetLocation(), ConstructorParametersInverted));
-                return;
-            }
-
-            analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreationSyntax.GetLocation(),
-                    string.Format(InvalidParameterName, parameterNameValue.Value)));
         }
 
         private static ISet<string> GetMethodArgumentNames(ObjectCreationExpressionSyntax creationSyntax)
         {
             var creationContext = creationSyntax.AncestorsAndSelf().FirstOrDefault(ancestor =>
-                ancestor is SimpleLambdaExpressionSyntax ||
-                ancestor is ParenthesizedLambdaExpressionSyntax ||
-                ancestor is AccessorDeclarationSyntax ||
-                ancestor is BaseMethodDeclarationSyntax ||
-                ancestor is IndexerDeclarationSyntax);
+                ancestor is SimpleLambdaExpressionSyntax
+                || ancestor is ParenthesizedLambdaExpressionSyntax
+                || ancestor is AccessorDeclarationSyntax
+                || ancestor is BaseMethodDeclarationSyntax
+                || ancestor is IndexerDeclarationSyntax);
 
             return new HashSet<string>(GetArgumentNames(creationContext));
         }
@@ -138,21 +122,18 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return new[] { simpleLambda.Parameter.Identifier.ValueText };
             }
-
-            if (node is BaseMethodDeclarationSyntax method)
+            else if (node is BaseMethodDeclarationSyntax method)
             {
                 return method.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
             }
-
-            if (node is ParenthesizedLambdaExpressionSyntax lambda)
+            else if (node is ParenthesizedLambdaExpressionSyntax lambda)
             {
                 return lambda.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
             }
-            if (node is AccessorDeclarationSyntax accessor)
+            else if (node is AccessorDeclarationSyntax accessor)
             {
                 var arguments = new List<string>();
-                var indexer = node.FirstAncestorOrSelf<IndexerDeclarationSyntax>();
-                if (indexer != null)
+                if (node.FirstAncestorOrSelf<IndexerDeclarationSyntax>() is { }  indexer)
                 {
                     arguments.AddRange(indexer.ParameterList.Parameters.Select(p => p.Identifier.ValueText));
                 }
@@ -163,12 +144,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return arguments;
             }
-            if (node is IndexerDeclarationSyntax indexerDeclaration)
+            else if (node is IndexerDeclarationSyntax indexerDeclaration)
             {
                 return indexerDeclaration.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
             }
-
-            return Enumerable.Empty<string>();
+            else
+            {
+                return Enumerable.Empty<string>();
+            }
         }
 
         private static string TakeOnlyBeforeDot(Optional<object> value) =>
