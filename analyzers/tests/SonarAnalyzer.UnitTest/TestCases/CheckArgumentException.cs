@@ -217,7 +217,7 @@ namespace Tests.Diagnostics
 
             void Something(string localArg)
             {
-                throw new ArgumentNullException(nameof(localArg));   // Noncompliant FP
+                throw new ArgumentNullException(nameof(localArg));   // Compliant
             }
         }
 
@@ -230,7 +230,7 @@ namespace Tests.Diagnostics
             {
                 if (methodArg == null)
                 {
-                    throw new ArgumentNullException(nameof(methodArg));   // FN
+                    throw new ArgumentNullException(nameof(methodArg));   // Noncompliant
                 }
             }
         }

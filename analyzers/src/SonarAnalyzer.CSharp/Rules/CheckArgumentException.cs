@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -94,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var methodArgumentNames = GetMethodArgumentNames(objectCreationSyntax);
+            var methodArgumentNames = GetMethodArgumentNames(objectCreationSyntax).ToHashSet();
             if (!methodArgumentNames.Contains(TakeOnlyBeforeDot(parameterNameValue)))
             {
                 var message = messageValue.HasValue && messageValue.Value != null && methodArgumentNames.Contains(TakeOnlyBeforeDot(messageValue))
@@ -104,38 +105,34 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static ISet<string> GetMethodArgumentNames(ObjectCreationExpressionSyntax creationSyntax)
+        private static IEnumerable<string> GetMethodArgumentNames(ObjectCreationExpressionSyntax creationSyntax)
         {
-            var creationContext = creationSyntax.AncestorsAndSelf().FirstOrDefault(ancestor =>
+            var node = creationSyntax.AncestorsAndSelf().FirstOrDefault(ancestor =>
                 ancestor is SimpleLambdaExpressionSyntax
                 || ancestor is ParenthesizedLambdaExpressionSyntax
                 || ancestor is AccessorDeclarationSyntax
                 || ancestor is BaseMethodDeclarationSyntax
-                || ancestor is IndexerDeclarationSyntax);
+                || ancestor is IndexerDeclarationSyntax
+                || LocalFunctionStatementSyntaxWrapper.IsInstance(ancestor));
 
-            return new HashSet<string>(GetArgumentNames(creationContext));
-        }
-
-        private static IEnumerable<string> GetArgumentNames(SyntaxNode node)
-        {
             if (node is SimpleLambdaExpressionSyntax simpleLambda)
             {
                 return new[] { simpleLambda.Parameter.Identifier.ValueText };
             }
             else if (node is BaseMethodDeclarationSyntax method)
             {
-                return method.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
+                return IdentifierNames(method.ParameterList);
             }
             else if (node is ParenthesizedLambdaExpressionSyntax lambda)
             {
-                return lambda.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
+                return IdentifierNames(lambda.ParameterList);
             }
             else if (node is AccessorDeclarationSyntax accessor)
             {
                 var arguments = new List<string>();
-                if (node.FirstAncestorOrSelf<IndexerDeclarationSyntax>() is { }  indexer)
+                if (node.FirstAncestorOrSelf<IndexerDeclarationSyntax>() is { } indexer)
                 {
-                    arguments.AddRange(indexer.ParameterList.Parameters.Select(p => p.Identifier.ValueText));
+                    arguments.AddRange(IdentifierNames(indexer.ParameterList));
                 }
                 if (accessor.IsKind(SyntaxKind.SetAccessorDeclaration))
                 {
@@ -146,12 +143,19 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (node is IndexerDeclarationSyntax indexerDeclaration)
             {
-                return indexerDeclaration.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
+                return IdentifierNames(indexerDeclaration.ParameterList);
+            }
+            else if (LocalFunctionStatementSyntaxWrapper.IsInstance(node))
+            {
+                return IdentifierNames(((LocalFunctionStatementSyntaxWrapper)node).ParameterList);
             }
             else
             {
                 return Enumerable.Empty<string>();
             }
+
+            static IEnumerable<string> IdentifierNames(BaseParameterListSyntax parameterList) =>
+                parameterList.Parameters.Select(x => x.Identifier.ValueText);
         }
 
         private static string TakeOnlyBeforeDot(Optional<object> value) =>

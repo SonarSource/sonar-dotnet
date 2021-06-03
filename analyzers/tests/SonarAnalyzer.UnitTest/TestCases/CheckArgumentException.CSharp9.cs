@@ -81,8 +81,8 @@ public class Repro_4423
 
         static void Something(string localArg)
         {
-            throw new ArgumentNullException(nameof(localArg));   // Noncompliant FP
-            throw new ArgumentNullException(nameof(methodArg));  // FN, this method even doesn't see methodArg value
+            throw new ArgumentNullException(nameof(localArg));   // Compliant
+            throw new ArgumentNullException(nameof(methodArg));  // Noncompliant, this method even doesn't see methodArg value
         }
     }
 }
