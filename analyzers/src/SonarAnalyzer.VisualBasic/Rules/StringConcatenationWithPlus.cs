@@ -52,6 +52,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     }
                 },
                 SyntaxKind.AddExpression);
-        }
     }
 }
