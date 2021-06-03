@@ -81,7 +81,7 @@ public class Repro_4399
         var fail = false;
         foreach (var arg in args)
         {
-            fail = fail | !CheckArg(arg);   // Compliant, using || would change the logic.
+            fail = fail | !CheckArg(arg);   // Compliant, using short-circuit operator || would change the logic.
         }
     }
 

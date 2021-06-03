@@ -71,7 +71,7 @@ Public Class Repro_4399
     Public Sub Repro(Args() As Object)
         Dim Fail As Boolean = False
         For Each Arg As Object In Args
-            Fail = Fail Or Not CheckArg(Arg)    ' Compliant, using OrElse would change the logic
+            Fail = Fail Or Not CheckArg(Arg)    ' Compliant, using short-circuit operator OrElse would change the logic.
         Next
     End Sub
 

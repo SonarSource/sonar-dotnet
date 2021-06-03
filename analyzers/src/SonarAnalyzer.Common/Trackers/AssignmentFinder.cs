@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
             var method = GetTopMostContainingMethod(current);
             while (current != method && current?.Parent != null)
             {
-                if (IsLoop(current) && ContainsNestedAssignment(current))
+                if (IsLoop(current) && ContainsNestedAssignmentToIdentifier(current))
                 {
                     return null; // There's asignment inside this loop, value can be altered by each iteration
                 }
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Helpers
                     {
                         return initializer;
                     }
-                    else if (ContainsNestedAssignment(statement))
+                    else if (ContainsNestedAssignmentToIdentifier(statement))
                     {
                         return null; // Assignment inside nested statement (if, try, for, ...)
                     }
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Helpers
             }
             return defaultValue == null ? null : defaultValue();
 
-            bool ContainsNestedAssignment(SyntaxNode node) =>
+            bool ContainsNestedAssignmentToIdentifier(SyntaxNode node) =>
                 node.DescendantNodes().Any(x => IsAssignmentToIdentifier(x, identifierName, out _));
         }
     }
