@@ -8,6 +8,8 @@ jobs:
   create_card:
     name: Create card
     runs-on: ubuntu-latest
+    # Single quotes must be used here https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#literals
+    if: github.event.issue.state != 'closed'
 
     steps:
       # https://github.com/actions/github-script
