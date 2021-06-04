@@ -10,7 +10,7 @@ namespace Tests.TestCases
         public double Pi3 = 3.14;
 
         [ThreadStatic]
-        public static int value;
+        public static int value; // Compliant, thread static field values are not shared between threads
     }
 
     public class Shape

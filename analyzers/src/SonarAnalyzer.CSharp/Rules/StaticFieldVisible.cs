@@ -55,13 +55,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<Diagnostic> GetDiagnostics(VariableDeclarationSyntax declaration, SemanticModel semanticModel) =>
             declaration.Variables
-                       .Select(declarator => new {Syntax = declarator, Symbol = semanticModel.GetDeclaredSymbol(declarator) as IFieldSymbol})
-                       .Where(f => FieldIsRelevant(f.Symbol))
-                       .Select(pair => Diagnostic.Create(Rule, pair.Syntax.Identifier.GetLocation(), pair.Syntax.Identifier.ValueText));
+                       .Where(x => FieldIsRelevant(semanticModel.GetDeclaredSymbol(x) as IFieldSymbol))
+                       .Select(x => Diagnostic.Create(Rule, x.Identifier.GetLocation(), x.Identifier.ValueText));
 
         private static bool FieldIsRelevant(IFieldSymbol fieldSymbol) =>
             fieldSymbol is {IsStatic: true, IsConst: false, IsReadOnly: false}
             && fieldSymbol.DeclaredAccessibility != Accessibility.Private
-            && !fieldSymbol.GetAttributes().Any(attribute => attribute.AttributeClass.Is(KnownType.System_ThreadStaticAttribute));
+            && !fieldSymbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.System_ThreadStaticAttribute));
     }
 }
