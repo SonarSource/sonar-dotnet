@@ -71,3 +71,18 @@ using System.Collections.Generic;
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/4423
+public class Repro_4423
+{
+    public void InsideLocalFunction_Static(string methodArg)
+    {
+        Something(null);
+
+        static void Something(string localArg)
+        {
+            throw new ArgumentNullException(nameof(localArg));   // Compliant
+            throw new ArgumentNullException(nameof(methodArg));  // Noncompliant, this method even doesn't see methodArg value
+        }
+    }
+}

@@ -34,6 +34,7 @@ namespace Tests.Diagnostics
         void Foo(int a)
         {
             throw new ArgumentException(); // Noncompliant {{Use a constructor overloads that allows a more meaningful exception message to be provided.}}
+            throw new ArgumentException { Source = null }; // Noncompliant
             throw new ArgumentNullException(); // Noncompliant
             throw new ArgumentOutOfRangeException(); // Noncompliant
             throw new DuplicateWaitObjectException(); // Noncompliant
@@ -205,6 +206,42 @@ namespace Tests.Diagnostics
             throw new ArgumentNullException(nameof(argument)); // Noncompliant {{The parameter name '' is not declared in the argument list.}} FP with wrong message
             throw new ArgumentNullException(nameof(argument.argument)); // Compliant
             throw new ArgumentNullException(nameof(str.argument)); // Error [CS1061] Compliant, argument is missing member without a symbol
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4423
+    public class Repro_4423
+    {
+        public void InsideLocalFunction()
+        {
+            Something(null);
+
+            void Something(string localArg)
+            {
+                throw new ArgumentNullException(nameof(localArg));   // Compliant
+            }
+        }
+
+        public void LocalMethodValidatingMethodArgument(string methodArg)
+        {
+            ValidateLocal();
+            SendItToSomewhere(ValidateLocal, "Definitely not null"); // This scenario makes the ValidateLocal non-compliant
+
+            void ValidateLocal()
+            {
+                if (methodArg == null)
+                {
+                    throw new ArgumentNullException(nameof(methodArg));   // Noncompliant
+                }
+            }
+        }
+
+        public void SendItToSomewhere(Action a, string methodArg)
+        {
+            if(methodArg != null)
+            {
+                a(); // This would throw very confusing message: Value cannot be null. (Parameter 'methodArg')'
+            }
         }
     }
 }
