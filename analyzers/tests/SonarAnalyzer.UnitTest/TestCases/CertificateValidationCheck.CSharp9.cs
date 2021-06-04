@@ -48,11 +48,12 @@ namespace Tests.Diagnostics
 
         void ConstructorArguments()
         {
-            OptionalConstructorArguments optA = new(this, cb: InvalidValidation);   // FN [flow-invalid-1]
+            OptionalConstructorArguments optA = new(this, cb: InvalidValidation);   // Noncompliant [flow-invalid-1]
             OptionalConstructorArguments optB = new(this, cb: CompliantValidation);
 
             using (var ms = new System.IO.MemoryStream())
-            using (System.Net.Security.SslStream ssl = new (ms, true, (sender, chain, certificate, SslPolicyErrors) => true)) // FN
+            using (System.Net.Security.SslStream ssl = new (ms, true, (sender, chain, certificate, SslPolicyErrors) => true)) // Noncompliant
+                                                                                                                              // Secondary@-1
             {
             }
         }
@@ -124,7 +125,7 @@ namespace Tests.Diagnostics
 
         static bool InvalidValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-            return true;    //Secondary [flow-invalid-2, flow-FindInvalid]
+            return true;    //Secondary [flow-invalid-1, flow-invalid-2, flow-FindInvalid]
         }
 
         static bool CompliantValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
