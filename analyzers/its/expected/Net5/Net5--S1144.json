@@ -67,6 +67,19 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private method 'Foo'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2077.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  10,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field 'cookie'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2092.cs",
@@ -75,6 +88,19 @@
 "startColumn":  9,
 "endLine":  7,
 "endColumn":  83
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Foo'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2612.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  12,
+"endColumn":  10
 }
 }
 },
@@ -158,6 +184,19 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private field 'exception'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3928.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field 'foo'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S4005.cs",
@@ -231,6 +270,32 @@
 "startColumn":  9,
 "endLine":  7,
 "endColumn":  95
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Foo'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4830.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  11,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'builder'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S5122.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  47
 }
 }
 },

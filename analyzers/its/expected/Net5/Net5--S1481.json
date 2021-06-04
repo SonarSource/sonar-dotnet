@@ -93,6 +93,19 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'command'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2077.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  27,
+"endLine":  9,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'i'.",
 "location":  {
 "uri":  "sources\Net5\Net5\SkipLocalsInit.cs",

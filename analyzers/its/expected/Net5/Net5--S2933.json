@@ -119,6 +119,19 @@
 },
 {
 "id":  "S2933",
+"message":  "Make 'exception' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3928.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  27,
+"endLine":  7,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2933",
 "message":  "Make 'foo' 'readonly'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S4005.cs",
@@ -192,6 +205,19 @@
 "startColumn":  32,
 "endLine":  7,
 "endColumn":  37
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'builder' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S5122.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  27,
+"endLine":  7,
+"endColumn":  34
 }
 }
 },
