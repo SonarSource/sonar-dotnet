@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Helpers.Trackers
     public class VisualBasicObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.ObjectCreationExpression };
+        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = { SyntaxKind.ObjectCreationExpression };
 
         internal override Condition ArgumentAtIndexIsConst(int index) =>
             context => ((ObjectCreationExpressionSyntax)context.Node).ArgumentList  is { } argumentList

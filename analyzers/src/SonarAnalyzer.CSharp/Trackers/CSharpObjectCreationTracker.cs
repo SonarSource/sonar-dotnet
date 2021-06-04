@@ -21,22 +21,24 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers.Trackers
 {
     public class CSharpObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = { SyntaxKind.ObjectCreationExpression };
+        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
 
         internal override Condition ArgumentAtIndexIsConst(int index) =>
-            context => ((ObjectCreationExpressionSyntax)context.Node).ArgumentList is { } argumentList
+            context => ObjectCreationFactory.Create(context.Node).ArgumentList is { } argumentList
                        && argumentList.Arguments.Count > index
                        && argumentList.Arguments[index].Expression.HasConstantValue(context.SemanticModel);
 
         internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName)
         {
-            var argumentList = ((ObjectCreationExpressionSyntax)context.Node).ArgumentList;
+            var argumentList = ObjectCreationFactory.Create(context.Node).ArgumentList;
             var values = CSharpSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName);
             return values.Length == 1 && values[0] is ExpressionSyntax valueSyntax
                 ? valueSyntax.FindConstantValue(context.SemanticModel)

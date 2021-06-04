@@ -26,6 +26,8 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.XXE
 {
@@ -65,7 +67,8 @@ namespace SonarAnalyzer.Rules.XXE
             var unsafeResolver = isXmlResolverSafeByDefault;
 
             var objectCreation = GetObjectCreation(settings, invocation, semanticModel);
-            var objectCreationAssignments = objectCreation.GetInitializerExpressions().OfType<AssignmentExpressionSyntax>();
+            var objectCreationAssignments = objectCreation?.InitializerExpressions.OfType<AssignmentExpressionSyntax>()
+                ?? Enumerable.Empty<AssignmentExpressionSyntax>();
 
             var propertyAssignments = GetAssignments(invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>())
                 .Where(assignment => IsMemberAccessOnSymbol(assignment.Left, settings, semanticModel));
@@ -111,16 +114,17 @@ namespace SonarAnalyzer.Rules.XXE
         private static bool IsXmlReaderSettings(ExpressionSyntax expressionSyntax, SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(expressionSyntax).Type.Is(KnownType.System_Xml_XmlReaderSettings);
 
-        private static ObjectCreationExpressionSyntax GetObjectCreation(ISymbol symbol, InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+        private static IObjectCreation GetObjectCreation(ISymbol symbol, InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             // First we search for object creations at the syntax level to see if the object is created inline
             // and if not we look for the identifier declaration.
             invocation.DescendantNodes()
                       .Union(symbol.GetLocationNodes(invocation))
-                      .OfType<ObjectCreationExpressionSyntax>()
+                      .Where(x => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
+                      .Select(ObjectCreationFactory.Create)
                       .FirstOrDefault(objectCreation => IsXmlReaderSettingsCreationWithInitializer(objectCreation, semanticModel));
 
-        private static bool IsXmlReaderSettingsCreationWithInitializer(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
-            objectCreation.Initializer != null && IsXmlReaderSettings(objectCreation, semanticModel);
+        private static bool IsXmlReaderSettingsCreationWithInitializer(IObjectCreation objectCreation, SemanticModel semanticModel) =>
+            objectCreation.Initializer != null && objectCreation.TypeSymbol(semanticModel).Is(KnownType.System_Xml_XmlReaderSettings);
 
         private static bool IsXmlResolverDtdProcessingUnsafe(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
             semanticModel.GetConstantValue(assignment.Right).Value switch

@@ -96,7 +96,7 @@ namespace Tests.Diagnostics
                 var safeBuilder = new CorsPolicyBuilder("https://trustedwebsite.com");
                 options.AddPolicy("SafeBuilder", safeBuilder.Build());
 
-                CorsPolicyBuilder builder = new ("*"); // FN
+                CorsPolicyBuilder builder = new ("*");     // Noncompliant
 
                 builder = new CorsPolicyBuilder { };
             });

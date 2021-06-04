@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
@@ -31,6 +32,8 @@ namespace SonarAnalyzer.Wrappers
         InitializerExpressionSyntax Initializer { get; }
         ArgumentListSyntax ArgumentList { get; }
         ExpressionSyntax Expression { get; }
+        IEnumerable<ExpressionSyntax> InitializerExpressions { get; }
+
         bool IsKnownType(KnownType knownType, SemanticModel semanticModel);
         string TypeAsString(SemanticModel semanticModel);
         ITypeSymbol TypeSymbol(SemanticModel semanticModel);
@@ -54,6 +57,7 @@ namespace SonarAnalyzer.Wrappers
             public InitializerExpressionSyntax Initializer => objectCreation.Initializer;
             public ArgumentListSyntax ArgumentList => objectCreation.ArgumentList;
             public ExpressionSyntax Expression => objectCreation;
+            public IEnumerable<ExpressionSyntax> InitializerExpressions => objectCreation.Initializer?.Expressions;
 
             public ObjectCreation(ObjectCreationExpressionSyntax objectCreationExpressionSyntax) =>
                 objectCreation = objectCreationExpressionSyntax;
@@ -75,6 +79,7 @@ namespace SonarAnalyzer.Wrappers
             public InitializerExpressionSyntax Initializer => objectCreation.Initializer;
             public ArgumentListSyntax ArgumentList => objectCreation.ArgumentList;
             public ExpressionSyntax Expression => objectCreation.SyntaxNode;
+            public IEnumerable<ExpressionSyntax> InitializerExpressions => objectCreation.Initializer?.Expressions;
 
             public ImplicitObjectCreation(ImplicitObjectCreationExpressionSyntaxWrapper wrapper) =>
                 objectCreation = wrapper;

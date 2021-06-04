@@ -58,6 +58,32 @@ public class Base
             tracker.ConstArgumentForParameter(context, "nonExistingParameterName").Should().BeNull();
         }
 
+#if NET
+        [TestMethod]
+        public void ImplicitConstArgumentForParameter_CS()
+        {
+            const string testInput = @"
+public class Base
+{
+    private Base(string a, string b, bool c, int d, object e) {}
+
+    private Base Usage(string notAConst)
+    {
+      return new (notAConst, ""myConst"", true, 4, new object());
+    }
+}";
+            var context = CreateContext<CSharpSyntax.ImplicitObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
+            var tracker = new CSharpObjectCreationTracker();
+
+            tracker.ConstArgumentForParameter(context, "a").Should().BeNull();
+            tracker.ConstArgumentForParameter(context, "b").Should().Be("myConst");
+            tracker.ConstArgumentForParameter(context, "c").Should().Be(true);
+            tracker.ConstArgumentForParameter(context, "d").Should().Be(4);
+            tracker.ConstArgumentForParameter(context, "e").Should().BeNull();
+            tracker.ConstArgumentForParameter(context, "nonExistingParameterName").Should().BeNull();
+        }
+#endif
+
         [TestMethod]
         public void ConstArgumentForParameter_VB()
         {

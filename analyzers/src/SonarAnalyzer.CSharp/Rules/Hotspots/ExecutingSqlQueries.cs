@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -46,9 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 : null;
 
         protected override ExpressionSyntax GetArgumentAtIndex(ObjectCreationContext context, int index) =>
-            context.Node is ObjectCreationExpressionSyntax objectCreation
-                ? objectCreation.ArgumentList.Get(index)
-                : null;
+            ObjectCreationFactory.Create(context.Node).ArgumentList.Get(index);
 
         protected override ExpressionSyntax GetSetValue(PropertyAccessContext context) =>
             context.Node is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()

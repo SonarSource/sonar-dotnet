@@ -1,4 +1,6 @@
-﻿using System.Xml;
+﻿using System.IO;
+using System.Xml;
+using System.Xml.Linq;
 
 // Secondary@+2
 // Secondary@+1
@@ -23,3 +25,16 @@ unsafeSettings.XmlResolver = new XmlUrlResolver();
 
 XmlReader.Create("uri", safeSettings).Dispose(); // Compliant
 XmlReader.Create("uri", unsafeSettings).Dispose(); // Compliant - FN
+
+class Foo
+{
+    void Bar()
+    {
+        XmlReaderSettings settings = new ();
+        settings.ProhibitDtd = false;                  // Secondary {{This value enables external entities in XML parsing.}}
+        settings.DtdProcessing = DtdProcessing.Parse;  // Secondary {{This value enables external entities in XML parsing.}}
+        settings.XmlResolver = new XmlUrlResolver();   // Secondary {{This value enables external entities in XML parsing.}}
+        XmlReader reader = XmlReader.Create(new MemoryStream(), settings, "resources/"); // Noncompliant
+        XDocument xdocument = XDocument.Load(reader); // we already raise on XmlReader
+    }
+}
