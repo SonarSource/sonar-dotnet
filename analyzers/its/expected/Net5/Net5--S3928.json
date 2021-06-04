@@ -12,6 +12,19 @@
 "endColumn":  93
 }
 }
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'foo' is not declared in the argument list.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3928.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  39,
+"endLine":  7,
+"endColumn":  55
+}
+}
 }
 ]
 }
