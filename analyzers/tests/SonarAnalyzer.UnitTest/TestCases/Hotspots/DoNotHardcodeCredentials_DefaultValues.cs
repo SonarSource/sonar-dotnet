@@ -15,10 +15,10 @@ namespace Tests.Diagnostics
         private string secretFieldConst = secretConst;
         private string secretFieldUninitialized;
         private string secretFieldNull = null;
-        private string secretFieldMethod = someMethod();
+        private string secretFieldMethod = SomeMethod();
         private string invalidField = invalidField; // // Error [CS0236] A field initializer cannot reference the non-static field, method, or property
 
-        private static string someMethod() => "";
+        private static string SomeMethod() => "";
 
         public void Test(string user)
         {
@@ -97,7 +97,7 @@ namespace Tests.Diagnostics
             var secretVariable = "literalValue";
             var secretVariableConst = secretConst;
             string secretVariableNull = null;
-            var secretVariableMethod = someMethod();
+            var secretVariableMethod = SomeMethod();
             string a;
 
             a = "Server = localhost; Database = Test; User = SA; Password = " + "hardcoded";        // Noncompliant
@@ -121,18 +121,20 @@ namespace Tests.Diagnostics
             a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixVariable + secretConst;     // Noncompliant
             a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst + " suffix";       // Noncompliant
             //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            a = someMethod() + " Database = Test; User = SA; Password = " + secretConst + " suffix";                // Noncompliant
+            a = SomeMethod() + " Database = Test; User = SA; Password = " + secretConst + " suffix";                // Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst + arg + " suffix";      // Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " + arg + secretConst + " suffix";      // Compliant
             a = secretConst + "Server = localhost; Database = Test; User = SA; Password = " + arg;                  // Compliant
-            a = "Server = localhost; Database = Test; User = SA; " + someMethod() + secretConst;                    // Compliant
+            a = "Server = localhost; Database = Test; User = SA; " + SomeMethod() + secretConst;                    // Compliant
 
             // Reassigned
+            arg += "Literal";
+            a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                    // Compliant, += is not a constant propagating operation
             secretVariableMethod = "literal";
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableMethod;   // Noncompliant
             arg = "literal";
             a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                    // Noncompliant
-            secretVariable = someMethod();
+            secretVariable = SomeMethod();
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;         // Compliant
 
             var invalidVariable = invalidVariable; // Error [CS0841] Cannot use local variable invalid before it's declared
@@ -177,13 +179,23 @@ namespace Tests.Diagnostics
             a = String.Format(arg0: secretConst, format: "Server = localhost; Database = Test; User = SA; Password = {0}");  // FN, not supported
         }
 
+        public void RefVariable()
+        {
+            var secret = "hardcoded";
+            FillRef(ref secret);
+            var a = "Server = localhost; Database = Test; User = SA; Password = " + secret;   // Noncompliant FP
+        }
+
+        private void FillRef(ref string arg) =>
+            arg = SomeMethod();
+
         public void StandardAPI(SecureString secureString, string nonHardcodedPassword, byte[] byteArray, CspParameters cspParams)
         {
             const string secretLocalConst = "hardcodedSecret";
             var secretVariable = "literalValue";
             var secretVariableConst = secretConst;
             string secretVariableNull = null;
-            var secretVariableMethod = someMethod();
+            var secretVariableMethod = SomeMethod();
             var networkCredential = new NetworkCredential();
             networkCredential.Password = nonHardcodedPassword;
             networkCredential.Domain = "hardcodedDomain";

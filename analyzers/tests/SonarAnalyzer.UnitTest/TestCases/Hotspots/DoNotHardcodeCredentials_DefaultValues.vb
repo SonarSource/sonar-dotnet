@@ -110,6 +110,8 @@ Namespace Tests.Diagnostics
             a = "Server = localhost; Database = Test; User = SA; " & SomeMethod() & SecretConst                 ' Compliant
 
             ' Reassigned
+            Arg &= "Literal"
+            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg                     ' Compliant, &= is not a constant propagating operation
             SecretVariableMethod = "literal"
             a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableMethod    ' Noncompliant
             Arg = "literal"
@@ -150,6 +152,16 @@ Namespace Tests.Diagnostics
             a = String.Format("{0} Argument 1 is not used", "Hello", "User = SA; Password = hardcoded")                 ' Compliant
 
             a = String.Format(arg0:=SecretConst, format:="Server = localhost; Database = Test; User = SA; Password = {0}")  ' FN, not supported
+        End Sub
+
+        Private Sub ByRefVariable()
+            Dim Secret As String = "hardcoded"
+            FillByRef(Secret)
+            Dim A As String = "Server = localhost; Database = Test; User = SA; Password = " & Secret   ' Noncompliant FP
+        End Sub
+
+        Private Sub FillByRef(ByRef Arg As String)
+            Arg = SomeMethod()
         End Sub
 
         Public Sub StandardAPI(secureString As SecureString, nonHardcodedPassword As String, byteArray As Byte(), cspParams As CspParameters)
