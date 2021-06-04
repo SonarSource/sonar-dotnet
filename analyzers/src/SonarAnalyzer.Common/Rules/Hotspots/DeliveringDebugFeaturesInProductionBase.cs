@@ -31,14 +31,16 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4507";
-        protected const string MessageFormat = "Make sure this debug feature is deactivated before delivering the code in production.";
+        protected const string StartupDevelopment = "StartupDevelopment";
+        private const string MessageFormat = "Make sure this debug feature is deactivated before delivering the code in production.";
 
         private readonly ImmutableArray<MemberDescriptor> isDevelopmentMethods = ImmutableArray.Create(
             new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment"),
-            new MemberDescriptor(KnownType.Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions, "IsDevelopment")
-            );
+            new MemberDescriptor(KnownType.Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions, "IsDevelopment"));
 
-        protected abstract TrackerBase<TSyntaxKind, InvocationContext>.Condition IsInvokedConditionally();
+        protected abstract bool IsInvokedConditionally(SyntaxNode node, SemanticModel semanticModel);
+
+        protected abstract bool IsInDevelopmentContext(SyntaxNode node);
 
         protected DeliveringDebugFeaturesInProductionBase(IAnalyzerConfiguration configuration)
             : base(configuration, DiagnosticId, MessageFormat) { }
@@ -47,10 +49,10 @@ namespace SonarAnalyzer.Rules
         {
             var t = Language.Tracker.Invocation;
             t.Track(input,
-                t.MatchMethod(
-                    new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions, "UseDeveloperExceptionPage"),
-                    new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions, "UseDatabaseErrorPage")),
-                t.ExceptWhen(IsInvokedConditionally()));
+                    t.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions, "UseDeveloperExceptionPage"),
+                                  new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions, "UseDatabaseErrorPage")),
+                    t.ExceptWhen(c => IsInvokedConditionally(c.Node, c.SemanticModel)),
+                    t.ExceptWhen(c => IsInDevelopmentContext(c.Node)));
         }
 
         protected bool IsValidationMethod(SemanticModel semanticModel, SyntaxNode condition, string methodName)

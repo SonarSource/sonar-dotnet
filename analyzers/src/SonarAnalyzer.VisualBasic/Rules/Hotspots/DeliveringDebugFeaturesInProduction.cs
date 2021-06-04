@@ -38,10 +38,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration configuration) : base(configuration) { }
 
-        protected override TrackerBase<SyntaxKind, InvocationContext>.Condition IsInvokedConditionally() =>
-            context =>
-                context.Node.FirstAncestorOrSelf<StatementSyntax>() is { } invocationStatement
-                && invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.SemanticModel));
+        protected override bool IsInvokedConditionally(SyntaxNode node, SemanticModel semanticModel) =>
+            node.FirstAncestorOrSelf<StatementSyntax>() is var invocationStatement
+            && invocationStatement.Ancestors().Any(x => IsDevelopmentCheck(x, semanticModel));
+
+        protected override bool IsInDevelopmentContext(SyntaxNode node) =>
+            node.Ancestors()
+                .OfType<ClassBlockSyntax>()
+                .Any(x => x.ClassStatement.Identifier.Text == StartupDevelopment);
 
         private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel) =>
             FindCondition(node).RemoveParentheses() is InvocationExpressionSyntax condition
@@ -51,7 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             node switch
             {
                 MultiLineIfBlockSyntax multiline => multiline.IfStatement.Condition,
-                SingleLineIfStatementSyntax singleline => singleline.Condition,
+                SingleLineIfStatementSyntax singleLine => singleLine.Condition,
                 _ => null
             };
     }
