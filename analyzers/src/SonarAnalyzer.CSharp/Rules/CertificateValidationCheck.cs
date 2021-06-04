@@ -28,6 +28,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -52,7 +54,8 @@ namespace SonarAnalyzer.Rules.CSharp
             argumentListNode switch
             {
                 InvocationExpressionSyntax invocation => new CSharpMethodParameterLookup(invocation.ArgumentList, method),
-                ObjectCreationExpressionSyntax ctor => new CSharpMethodParameterLookup(ctor.ArgumentList, method),
+                { } when argumentListNode.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression) =>
+                    new CSharpMethodParameterLookup(ObjectCreationFactory.Create(argumentListNode).ArgumentList, method),
                 _ => throw new ArgumentException("Unexpected type.", nameof(argumentListNode))  // This should be throw only by bad usage of this method, not by input dependency
             };
 
@@ -65,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(CheckAssignmentSyntax, SyntaxKind.SimpleAssignmentExpression);
 
             // Handling of constructor parameter syntax (SslStream)
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
         }
 
         protected override Location ExpressionLocation(SyntaxNode expression) =>
