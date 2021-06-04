@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules
         private const string MessageFormat = "This {0} can't be instantiated; make {1} 'public'.";
 
         protected readonly DiagnosticDescriptor rule;
-        private readonly HashSet<TSyntaxKind> objectCreationSyntaxKinds;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
@@ -43,11 +42,8 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected ClassNotInstantiatableBase()
-        {
-            objectCreationSyntaxKinds = Language.SyntaxKind.ObjectCreationExpression.ToHashSet();
+        protected ClassNotInstantiatableBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
-        }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
@@ -103,7 +99,7 @@ namespace SonarAnalyzer.Rules
 
         private bool IsAnyConstructorToCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel) =>
             descendantNodes
-                .Where(x => Language.Syntax.IsAnyKind(x, objectCreationSyntaxKinds))
+                .Where(x => Language.Syntax.IsAnyKind(x, Language.SyntaxKind.ObjectCreationExpression))
                 .Select(ctor => semanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol)
                 .WhereNotNull()
                 .Any(ctor => Equals(ctor.ContainingType.OriginalDefinition, namedType));
