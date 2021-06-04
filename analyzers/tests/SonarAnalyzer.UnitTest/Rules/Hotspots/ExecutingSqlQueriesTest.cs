@@ -89,7 +89,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     ParseOptionsHelper.FromVisualBasic15,
                                     GetReferencesNetCore(Constants.DotNetCore220Version));
 
-
         internal static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>
             Enumerable.Empty<MetadataReference>()
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
