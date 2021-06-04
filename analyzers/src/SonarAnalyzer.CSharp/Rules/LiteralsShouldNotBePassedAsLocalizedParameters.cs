@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // Calling to/from debug-only code
             if (methodSymbol.IsDiagnosticDebugMethod()
-                || CSharpDebugOnlyCodeHelper.IsConditionalDebugMethod(methodSymbol)
+                || methodSymbol.IsConditionalDebugMethod()
                 || CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(invocationSyntax, context.SemanticModel))
             {
                 return;
@@ -82,13 +82,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            methodSymbol.Parameters
-                .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
-                .Where(x => x.parameter != null && x.syntax != null)
-                .Where(x => IsLocalizable(x.parameter))
-                .Where(x => IsStringLiteral(x.syntax.Expression, context.SemanticModel))
-                .ToList()
-                .ForEach(x => context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, x.syntax.GetLocation())));
+            var nonCompliantParameters = methodSymbol.Parameters
+                                                     .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
+                                                     .Where(x => IsLocalizableStringLiteral(x.parameter, x.syntax, context.SemanticModel));
+
+            foreach (var nonCompliantParameter in nonCompliantParameters)
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, nonCompliantParameter.syntax.GetLocation()));
+            }
         }
 
         private static void AnalyzeAssignments(SyntaxNodeAnalysisContext context)
@@ -103,22 +104,27 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsStringLiteral(ExpressionSyntax expression, SemanticModel semanticModel) =>
+        private static bool IsStringLiteral(SyntaxNode expression, SemanticModel semanticModel) =>
             expression != null
-            && semanticModel.GetConstantValue(expression) is { HasValue: true } constant
-            && constant.Value is string;
+            && semanticModel.GetConstantValue(expression) is { HasValue: true, Value: string _ };
 
         private static bool IsLocalizable(ISymbol symbol) =>
             symbol?.Name != null
-            && symbol.GetAttributes(KnownType.System_ComponentModel_LocalizableAttribute) is var localizableAttribute
-            && IsLocalizable(symbol.Name, localizableAttribute);
+            && symbol.GetAttributes(KnownType.System_ComponentModel_LocalizableAttribute) is var localizableAttributes
+            && IsLocalizable(symbol.Name, new List<AttributeData>(localizableAttributes).AsReadOnly());
 
-        private static bool IsLocalizable(string symbolName, IEnumerable<AttributeData> localizableAttribute) =>
-            localizableAttribute.Any(x => AttributeHasConstructorArgument(x, true))
+        private static bool IsLocalizable(string symbolName, IReadOnlyCollection<AttributeData> localizableAttributes) =>
+            localizableAttributes.Any(x => HasConstructorWithBoolValue(x, true))
             || (symbolName.SplitCamelCaseToWords().Any(LocalizableSymbolNames.Contains)
-               && (!localizableAttribute.Any(x => AttributeHasConstructorArgument(x, false))));
+               && (!localizableAttributes.Any(x => HasConstructorWithBoolValue(x, false))));
 
-        private static bool AttributeHasConstructorArgument(AttributeData attribute, bool expectedValue) =>
+        private static bool IsLocalizableStringLiteral(IParameterSymbol parameter, ArgumentSyntax argumentSyntax, SemanticModel semanticModel) =>
+            parameter != null
+            && argumentSyntax != null
+            && IsLocalizable(parameter)
+            && IsStringLiteral(argumentSyntax.Expression, semanticModel);
+
+        private static bool HasConstructorWithBoolValue(AttributeData attribute, bool expectedValue) =>
             attribute.ConstructorArguments.Any(c => c.Value is bool boolValue && boolValue == expectedValue);
     }
 }
