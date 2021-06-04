@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Wrappers
         bool IsKnownType(KnownType knownType, SemanticModel semanticModel);
         string TypeAsString(SemanticModel semanticModel);
         ITypeSymbol TypeSymbol(SemanticModel semanticModel);
+        IMethodSymbol MethodSymbol(SemanticModel semanticModel);
     }
 
     internal class ObjectCreationFactory
@@ -70,6 +71,9 @@ namespace SonarAnalyzer.Wrappers
 
             public ITypeSymbol TypeSymbol(SemanticModel semanticModel) =>
                 semanticModel.GetTypeInfo(objectCreation).Type;
+
+            public IMethodSymbol MethodSymbol(SemanticModel semanticModel) =>
+                semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
         }
 
         private class ImplicitObjectCreation : IObjectCreation
@@ -92,6 +96,9 @@ namespace SonarAnalyzer.Wrappers
 
             public ITypeSymbol TypeSymbol(SemanticModel semanticModel) =>
                 semanticModel.GetTypeInfo(objectCreation).Type;
+
+            public IMethodSymbol MethodSymbol(SemanticModel semanticModel) =>
+                semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
         }
     }
 }
