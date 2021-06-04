@@ -34,6 +34,7 @@ namespace Tests.Diagnostics
         void Foo(int a)
         {
             throw new ArgumentException(); // Noncompliant {{Use a constructor overloads that allows a more meaningful exception message to be provided.}}
+            throw new ArgumentException { Source = null }; // Noncompliant
             throw new ArgumentNullException(); // Noncompliant
             throw new ArgumentOutOfRangeException(); // Noncompliant
             throw new DuplicateWaitObjectException(); // Noncompliant

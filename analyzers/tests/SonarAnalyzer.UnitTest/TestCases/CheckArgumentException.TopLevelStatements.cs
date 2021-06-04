@@ -17,3 +17,15 @@ if (args.Length > 0)
         Console.WriteLine(arg);
     }
 }
+
+void LocalFunction(string localArg)
+{
+    throw new ArgumentNullException(nameof(localArg));  // Compliant
+    throw new ArgumentNullException(nameof(args));      // Noncompliant
+}
+
+static void StaticLocalFunction(string localArg)
+{
+    throw new ArgumentNullException(nameof(localArg));  // Compliant
+    throw new ArgumentNullException(nameof(args));      // Noncompliant, this method even doesn't see args value
+}

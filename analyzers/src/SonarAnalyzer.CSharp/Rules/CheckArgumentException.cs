@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (objectCreationSyntax.ArgumentList.Arguments.Count == 0)
+            if (objectCreationSyntax.ArgumentList == null || objectCreationSyntax.ArgumentList.Arguments.Count == 0)
             {
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreationSyntax.GetLocation(), ParameterLessConstructorMessage));
                 return;
