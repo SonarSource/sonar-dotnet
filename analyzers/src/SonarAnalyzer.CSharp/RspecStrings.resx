@@ -1021,7 +1021,7 @@
     <value>Constant/Issue</value>
   </data>
   <data name="S1134_RemediationCost" xml:space="preserve">
-    <value>1h</value>
+    <value>0min</value>
   </data>
   <data name="S1134_Scope" xml:space="preserve">
     <value>All</value>
@@ -1054,7 +1054,7 @@
     <value>Constant/Issue</value>
   </data>
   <data name="S1135_RemediationCost" xml:space="preserve">
-    <value>1h</value>
+    <value>0min</value>
   </data>
   <data name="S1135_Scope" xml:space="preserve">
     <value>All</value>
@@ -8443,6 +8443,12 @@
   <data name="S3717_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
   </data>
+  <data name="S3717_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3717_RemediationCost" xml:space="preserve">
+    <value>1h</value>
+  </data>
   <data name="S3717_Scope" xml:space="preserve">
     <value>All</value>
   </data>
@@ -12694,6 +12700,12 @@
   <data name="S5445_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
   </data>
+  <data name="S5445_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S5445_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
   <data name="S5445_Scope" xml:space="preserve">
     <value>Main</value>
   </data>
@@ -12786,6 +12798,12 @@
   </data>
   <data name="S5659_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
+  </data>
+  <data name="S5659_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S5659_RemediationCost" xml:space="preserve">
+    <value>30min</value>
   </data>
   <data name="S5659_Scope" xml:space="preserve">
     <value>Main</value>
