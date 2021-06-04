@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.VisualBasic;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StringConcatenationWithPlus() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringConcatenationWithPlus.vb", new VB.StringConcatenationWithPlus());
+            Verifier.VerifyAnalyzer(@"TestCases\StringConcatenationWithPlus.vb", new StringConcatenationWithPlus(), MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemXmlLinq));
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -38,7 +40,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\StringConcatenationWithPlus.vb",
                 @"TestCases\StringConcatenationWithPlus.Fixed.vb",
-                new VB.StringConcatenationWithPlus(),
-                new VB.StringConcatenationWithPlusCodeFixProvider());
+                new StringConcatenationWithPlus(),
+                new StringConcatenationWithPlusCodeFixProvider(),
+                additionalReferences: MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemXmlLinq));
     }
 }
