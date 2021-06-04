@@ -45,6 +45,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
+        public void DoNotHardcodeCredentials_CSharp8_DefaultValues() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp8.cs",
+                new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
+                ParseOptionsHelper.FromCSharp8,
+                AdditionalReferences);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_CS_CustomValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },

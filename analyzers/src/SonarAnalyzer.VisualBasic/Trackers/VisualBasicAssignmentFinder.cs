@@ -31,6 +31,7 @@ namespace SonarAnalyzer.Helpers
         protected override SyntaxNode GetTopMostContainingMethod(SyntaxNode node) =>
             node.GetTopMostContainingMethod();
 
+        /// <param name="anyAssignmentKind">'true' will find any AssignmentExpressionSyntax like =, +=, -=, &=. 'false' will find only '=' SimpleAssignmentExpression.</param>
         protected override bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, bool anyAssignmentKind, out SyntaxNode rightExpression)
         {
             if ((anyAssignmentKind || node.IsKind(SyntaxKind.SimpleAssignmentStatement))
