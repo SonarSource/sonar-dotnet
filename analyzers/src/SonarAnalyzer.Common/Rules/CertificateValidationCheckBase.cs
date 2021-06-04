@@ -69,7 +69,6 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxNode LocalVariableScope(TVariableSyntax variable);
         protected abstract SyntaxNode ExtractArgumentExpressionNode(SyntaxNode expression);
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
-        protected abstract bool IsClassOrRecordDeclaration(SyntaxNode expression);
         private protected abstract KnownType GenericDelegateType();
 
         protected CertificateValidationCheckBase() =>
@@ -153,6 +152,9 @@ namespace SonarAnalyzer.Rules
             }
             return current;
         }
+
+        private bool IsClassOrRecordDeclaration(SyntaxNode expression) =>
+            Language.Syntax.IsAnyKind(expression, Language.SyntaxKind.ClassAndRecordDeclaration);
 
         private void TryReportLocations(InspectionContext c, Location primaryLocation, SyntaxNode expression)
         {

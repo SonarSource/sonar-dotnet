@@ -26,6 +26,7 @@ namespace SonarAnalyzer.Helpers.Facade
     {
         public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
         public SyntaxKind[] ObjectCreationExpression => new[] {SyntaxKind.ObjectCreationExpression};
+        public SyntaxKind[] ClassAndRecordDeclaration => new[] {SyntaxKind.ClassBlock};
         public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
         public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
         public SyntaxKind Attribute => SyntaxKind.Attribute;

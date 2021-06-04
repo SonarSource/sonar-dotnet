@@ -138,9 +138,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return syntax is MethodStatementSyntax ? syntax.Parent : syntax;
         }
 
-        protected override bool IsClassOrRecordDeclaration(SyntaxNode expression) =>
-            expression.IsKind(SyntaxKind.ClassBlock);
-
         private protected override KnownType GenericDelegateType() => KnownType.System_Func_T1_T2_T3_T4_TResult_VB;
     }
 }

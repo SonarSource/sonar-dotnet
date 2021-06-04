@@ -85,13 +85,22 @@ public record WithAttribute2
     private WithAttribute2() { }
 }
 
-public class Foo    // Noncompliant FP
+public class Foo
 {
     public static readonly Foo Instance = new();
 
     public bool IsActive => true;
 
-    private Foo()
-    {
-    }
+    private Foo() { }
+}
+
+public class Baz { }
+
+public class Bar  // Noncompliant
+{
+    public static readonly Baz Instance = new();
+
+    public bool IsActive => true;
+
+    private Bar() { }
 }

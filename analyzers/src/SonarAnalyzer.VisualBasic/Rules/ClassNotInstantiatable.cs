@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -31,47 +31,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ClassNotInstantiatable : ClassNotInstantiatableBase
+    public sealed class ClassNotInstantiatable : ClassNotInstantiatableBase<TypeBlockSyntax, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
-
-        protected override bool IsTypeDeclaration(SyntaxNode node) =>
-            node.IsAnyKind(SyntaxKind.ClassBlock);
-
-        private void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
+        protected override IEnumerable<ConstructorContext> CollectRemovableDeclarations(INamedTypeSymbol namedType, Compilation compilation, string messageArg)
         {
-            var namedType = context.Symbol as INamedTypeSymbol;
-            if (!IsNonStaticClassWithNoAttributes(namedType) || DerivesFromSafeHandle(namedType))
-            {
-                return;
-            }
+            var typeDeclarations = new VisualBasicRemovableDeclarationCollector(namedType, compilation).TypeDeclarations;
 
-            var members = namedType.GetMembers();
-            var constructors = GetConstructors(members).ToList();
-
-            if (!HasOnlyCandidateConstructors(constructors) || HasOnlyStaticMembers(members.Except(constructors).ToList()))
-            {
-                return;
-            }
-
-            var typeDeclarations = new VisualBasicRemovableDeclarationCollector(namedType, context.Compilation).TypeDeclarations;
-
-            if (!IsAnyConstructorCalled<TypeBlockSyntax, ObjectCreationExpressionSyntax>(namedType, typeDeclarations))
-            {
-                var message = constructors.Count > 1
-                    ? "at least one of its constructors"
-                    : "its constructor";
-
-                foreach (var classDeclaration in typeDeclarations)
-                {
-                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, classDeclaration.SyntaxNode.BlockStatement.Identifier.GetLocation(), "class", message));
-                }
-            }
+            return typeDeclarations.Select(x => new ConstructorContext(x, Diagnostic.Create(rule, x.SyntaxNode.BlockStatement.Identifier.GetLocation(), "class", messageArg)));
         }
     }
 }

@@ -37,6 +37,8 @@ namespace SonarAnalyzer.Helpers.Facade
 
         public override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
 
+        public override bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) => node.IsAnyKind(syntaxKinds);
+
         public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
             @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();
 

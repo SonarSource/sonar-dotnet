@@ -28,7 +28,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -115,9 +114,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxNode SyntaxFromReference(SyntaxReference reference) =>
             reference.GetSyntax();   // VB.NET has more complicated logic
-
-        protected override bool IsClassOrRecordDeclaration(SyntaxNode expression) =>
-            expression.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
 
         private protected override KnownType GenericDelegateType() => KnownType.System_Func_T1_T2_T3_T4_TResult;
     }

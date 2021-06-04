@@ -33,7 +33,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShouldNotHaveIdenticalImplementationsBase<MethodBlockSyntax, SyntaxKind>
     {
-        protected override SyntaxKind[] SyntaxKinds { get; } = { SyntaxKind.ClassBlock };
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node)
