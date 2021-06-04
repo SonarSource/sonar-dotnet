@@ -24,6 +24,7 @@ jobs:
             const IN_PROGRESS_COLUMN = 4971952;
             const REVIEW_IN_PROGRESS_COLUMN = 4971953;
             const REVIEW_APPROVED_COLUMN = 4971954;
+            const VALIDATE_PEACH_COLUMN = 7838551;
             const DONE_COLUMN = 4971955;
             //
             async function getIssue(issue_number) {
@@ -42,7 +43,7 @@ jobs:
             //
             async function findCard(content_url) {
                 // Columns are searched from the most probable one
-                const allColumns = [REVIEW_IN_PROGRESS_COLUMN, REVIEW_APPROVED_COLUMN, IN_PROGRESS_COLUMN, TODO_COLUMN, DONE_COLUMN];
+                const allColumns = [REVIEW_IN_PROGRESS_COLUMN, REVIEW_APPROVED_COLUMN, IN_PROGRESS_COLUMN, TODO_COLUMN, VALIDATE_PEACH_COLUMN, DONE_COLUMN];
                 for (let i = 0; i < allColumns.length; i++) {
                     let cards = await github.projects.listCards({ column_id: allColumns[i] });
                     let card = cards.data.find(x => x.content_url == content_url);
