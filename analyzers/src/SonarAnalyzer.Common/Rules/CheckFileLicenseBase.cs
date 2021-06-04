@@ -32,12 +32,12 @@ namespace SonarAnalyzer.Rules
     public abstract class CheckFileLicenseBase : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1451";
-        internal const string HeaderFormatRuleParameterKey = "headerFormat";
         internal const string HeaderFormatPropertyKey = nameof(HeaderFormat);
-        internal const string IsRegularExpressionRuleParameterKey = "isRegularExpression";
         internal const string IsRegularExpressionPropertyKey = nameof(IsRegularExpression);
-        internal const string IsRegularExpressionDefaultValue = "false";
-        protected const string MessageFormat = "Add or update the header of this file.";
+        protected const string HeaderFormatRuleParameterKey = "headerFormat";
+        private const string IsRegularExpressionRuleParameterKey = "isRegularExpression";
+        private const string IsRegularExpressionDefaultValue = "false";
+        private const string MessageFormat = "Add or update the header of this file.";
 
         private readonly DiagnosticDescriptor rule;
 
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
                     }
                 });
 
-        protected static bool IsRegexPatternValid(string pattern)
+        private static bool IsRegexPatternValid(string pattern)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected bool HasValidLicenseHeader(SyntaxNode node)
+        private bool HasValidLicenseHeader(SyntaxNode node)
         {
             if (node == null || !node.HasLeadingTrivia)
             {
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules
             return header != null && AreHeadersEqual(header);
         }
 
-        protected bool AreHeadersEqual(string currentHeader)
+        private bool AreHeadersEqual(string currentHeader)
         {
             var unixEndingHeader = currentHeader.Replace("\r\n", "\n");
             var unixEndingHeaderFormat = HeaderFormat.Replace("\r\n", "\n").Replace("\\r\\n", "\n");
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules
                 : unixEndingHeader.StartsWith(unixEndingHeaderFormat, StringComparison.Ordinal);
         }
 
-        protected ImmutableDictionary<string, string> CreateDiagnosticProperties() =>
+        private ImmutableDictionary<string, string> CreateDiagnosticProperties() =>
             ImmutableDictionary<string, string>.Empty
                 .Add(HeaderFormatPropertyKey, HeaderFormat)
                 .Add(IsRegularExpressionPropertyKey, IsRegularExpression.ToString());
