@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckObjectCreation, Language.SyntaxKind.ObjectCreationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckObjectCreation, Language.SyntaxKind.ObjectCreationExpressions);
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckInvocation, Language.SyntaxKind.InvocationExpression);
         }
 

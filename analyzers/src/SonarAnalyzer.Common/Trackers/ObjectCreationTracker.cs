@@ -26,6 +26,8 @@ namespace SonarAnalyzer.Helpers.Trackers
     public abstract class ObjectCreationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ObjectCreationContext>
         where TSyntaxKind : struct
     {
+        protected override TSyntaxKind[] TrackedSyntaxKinds => Language.SyntaxKind.ObjectCreationExpressions;
+
         internal abstract Condition ArgumentAtIndexIsConst(int index);
         internal abstract object ConstArgumentForParameter(ObjectCreationContext context, string parameterName);
 

@@ -75,6 +75,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
+        public void ExecutingSqlQueries_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ExecutingSqlQueries.CSharp9.cs",
+                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                GetReferencesNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_VB_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
                                     new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),

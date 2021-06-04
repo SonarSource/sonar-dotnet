@@ -30,8 +30,8 @@ namespace SonarAnalyzer.Rules
         where TIdentifierNameSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S2077";
-        protected const string AssignmentWithFormattingMessage = "SQL Query is dynamically formatted and assigned to {0}.";
-        protected const string AssignmentMessage = "SQL query is assigned to {0}.";
+        private const string AssignmentWithFormattingMessage = "SQL Query is dynamically formatted and assigned to {0}.";
+        private const string AssignmentMessage = "SQL query is assigned to {0}.";
         private const string MessageFormat = "Make sure using a dynamically formatted SQL query is safe here.";
         private const int FirstArgumentIndex = 0;
         private const int SecondArgumentIndex = 1;

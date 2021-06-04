@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class CookieShouldBeHttpOnly : ObjectShouldBeInitializedCorrectlyBase
     {
-        internal const string DiagnosticId = "S3330";
+        private const string DiagnosticId = "S3330";
         private const string MessageFormat = "Make sure creating this cookie without the \"HttpOnly\" flag is safe.";
 
         private static readonly ImmutableArray<KnownType> TrackedTypes =

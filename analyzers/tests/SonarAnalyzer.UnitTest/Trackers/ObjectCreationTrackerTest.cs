@@ -58,6 +58,32 @@ public class Base
             tracker.ConstArgumentForParameter(context, "nonExistingParameterName").Should().BeNull();
         }
 
+#if NET
+        [TestMethod]
+        public void ImplicitConstArgumentForParameter_CS()
+        {
+            const string testInput = @"
+public class Base
+{
+    private Base(string a, string b, bool c, int d, object e) {}
+
+    private Base Usage(string notAConst)
+    {
+      return new (notAConst, ""myConst"", true, 4, new object());
+    }
+}";
+            var context = CreateContext<CSharpSyntax.ImplicitObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
+            var tracker = new CSharpObjectCreationTracker();
+
+            tracker.ConstArgumentForParameter(context, "a").Should().BeNull();
+            tracker.ConstArgumentForParameter(context, "b").Should().Be("myConst");
+            tracker.ConstArgumentForParameter(context, "c").Should().Be(true);
+            tracker.ConstArgumentForParameter(context, "d").Should().Be(4);
+            tracker.ConstArgumentForParameter(context, "e").Should().BeNull();
+            tracker.ConstArgumentForParameter(context, "nonExistingParameterName").Should().BeNull();
+        }
+#endif
+
         [TestMethod]
         public void ConstArgumentForParameter_VB()
         {
@@ -100,6 +126,7 @@ public class Base
             tracker.WhenImplements(KnownType.System_IDisposable)(context).Should().BeFalse();
             tracker.WhenDerivesOrImplementsAny(KnownType.System_Boolean)(context).Should().BeFalse();
             tracker.MatchConstructor(KnownType.System_Boolean)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsConst(0).Invoke(context).Should().BeTrue();
         }
 
         [TestMethod]
@@ -125,6 +152,23 @@ public class Base : Exception, IDisposable
             tracker.WhenImplements(KnownType.System_IDisposable)(context).Should().BeFalse();
             tracker.WhenDerivesOrImplementsAny(KnownType.System_Exception)(context).Should().BeFalse();
             tracker.MatchConstructor(KnownType.System_Boolean)(context).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ObjectCreationNoArgumentsSupplied()
+        {
+            const string testInput = @"
+public class Base
+{
+    public int Foo;
+    private void Usage()
+    {
+      new Base { Foo = 42 };
+    }
+}";
+            var context = CreateContext<CSharpSyntax.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
+            var tracker = new CSharpObjectCreationTracker();
+            tracker.ArgumentAtIndexIsConst(0).Invoke(context).Should().BeFalse();
         }
 
         [TestMethod]

@@ -28,6 +28,8 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.Trackers;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.Hotspots
 {
@@ -97,7 +99,7 @@ namespace SonarAnalyzer.Rules.Hotspots
         private static void SetupObjectCreationTracker(ObjectCreationTracker<SyntaxKind> tracker, TrackerInput input) =>
             tracker.Track(input,
                           tracker.MatchConstructor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder),
-                          c => ContainsStar((ObjectCreationExpressionSyntax)c.Node, c.SemanticModel));
+                          c => ContainsStar(ObjectCreationFactory.Create(c.Node), c.SemanticModel));
 
         private void VisitAttribute(SyntaxNodeAnalysisContext context)
         {
@@ -130,7 +132,8 @@ namespace SonarAnalyzer.Rules.Hotspots
                 LiteralExpressionSyntax literal => ContainsStar(semanticModel.GetConstantValue(literal)),
                 IdentifierNameSyntax identifier => ContainsStar(semanticModel.GetConstantValue(identifier)),
                 ImplicitArrayCreationExpressionSyntax arrayCreation => ContainsStar(arrayCreation.Initializer.Expressions, semanticModel),
-                ObjectCreationExpressionSyntax objectCreation => ContainsStar(objectCreation, semanticModel),
+                { } objectCreation when objectCreation.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression) =>
+                    ContainsStar(ObjectCreationFactory.Create(objectCreation), semanticModel),
                 _ => false
             };
 
@@ -140,7 +143,7 @@ namespace SonarAnalyzer.Rules.Hotspots
         private static bool ContainsStar(Optional<object> constantValue) =>
             constantValue is {HasValue: true, Value: StarConstant};
 
-        private static bool ContainsStar(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
+        private static bool ContainsStar(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.ArgumentList is { } argumentList
             && (objectCreation.IsKnownType(KnownType.Microsoft_Extensions_Primitives_StringValues, semanticModel)
                 || objectCreation.IsKnownType(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder, semanticModel))

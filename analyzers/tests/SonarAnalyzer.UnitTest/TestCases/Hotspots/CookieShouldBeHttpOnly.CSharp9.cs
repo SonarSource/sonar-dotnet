@@ -1,8 +1,10 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
+using Nancy.Cookies;
 
-CookieOptions topLevelStatement1 = new(); // Noncompliant
-CookieOptions topLevelStatement2 = new CookieOptions(); // Noncompliant
+CookieOptions topLevelStatement1 = new();                // Noncompliant
+CookieOptions topLevelStatement2 = new CookieOptions();  // Noncompliant
+NancyCookie topLevelStatement3 = new ("name", "secure"); // Noncompliant
 
 class Program
 {
@@ -18,9 +20,10 @@ class Program
         Property2.HttpOnly = false; // Noncompliant
     }
 
-    void InitializerSetsNotAllowedValue()
+    void InitializerSetsNotAllowedValue(DateTime? expires, string domain, string path)
     {
         CookieOptions c1 = new () { HttpOnly = false }; // Noncompliant
         CookieOptions c2 = new () { Secure = true };    // Noncompliant
+        NancyCookie cookie2 = new ("name", "secure") { Expires = expires, Domain = domain, Path = path };  // Noncompliant
     }
 }
