@@ -267,20 +267,31 @@ function AppendVbTestCase($ruleTestsFolder) {
     $existingClassText = Get-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" -Raw
     $snippetText = Get-Content -Path "${RuleTemplateFolder}\\VbNetTestSnippet.cs" -Raw
 
-    $namespaceToken = "using CS = SonarAnalyzer.Rules.CSharp;"
+    $usingToken = "using SonarAnalyzer.Rules.CSharp;"
+    $csUsingToken = "using CS = SonarAnalyzer.Rules.CSharp;"
+    $vbNetUsingToken = "using VB = SonarAnalyzer.Rules.VisualBasic;"
+    $namespaceToken = "namespace SonarAnalyzer.UnitTest.Rules"
     $token = "    }"
-    $idx = $existingClassText.LastIndexOf($token)
-    $namespaceTokenIdx = $existingClassText.LastIndexOf($namespaceToken)
-    $newText = ""
-    if ($idx -gt -1) {
-        $newText = $existingClassText.Remove($idx, $token.Length).Insert($idx, "`r`n${snippetText}`r`n${token}")
-    }
-    else {
-        $newText = "${existingClassText}`r`n${snippetText}"
+    $usingTokenIdx = $existingClassText.LastIndexOf($usingToken)
+
+    $newText = $existingClassText
+    if ($usingTokenIdx -gt -1) {
+        $newText = $existingClassText.Remove($usingTokenIdx, $usingToken.Length + 1)
     }
 
+    $idx = $newText.LastIndexOf($token)
+
+    if ($idx -gt -1) {
+        $newText = $newText.Remove($idx, $token.Length).Insert($idx, "`r`n${snippetText}`r`n${token}")
+    }
+    else {
+        $newText = "${$newText}`r`n${snippetText}"
+    }
+
+    $namespaceTokenIdx = $newText.LastIndexOf($namespaceToken);
+
     if ($namespaceTokenIdx -gt -1) {
-        $newText = $newText.Insert($namespaceTokenIdx + $namespaceToken.Length + 1, "using VB = SonarAnalyzer.Rules.VisualBasic;`r`n")
+        $newText = $newText.Insert($namespaceTokenIdx - 1, "${csUsingToken}`r`n${vbNetUsingToken}`r`n")
     }
 
     $replaced = ReplaceTokens -text $newText
