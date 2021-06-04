@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsLocalizable(ISymbol symbol) =>
             symbol?.Name != null
-            && symbol.GetAttributes(KnownType.System_ComponentModel_LocalizableAttribute) is { } localizableAttribute
+            && symbol.GetAttributes(KnownType.System_ComponentModel_LocalizableAttribute) is var localizableAttribute
             && IsLocalizable(symbol.Name, localizableAttribute);
 
         private static bool IsLocalizable(string symbolName, IEnumerable<AttributeData> localizableAttribute) =>

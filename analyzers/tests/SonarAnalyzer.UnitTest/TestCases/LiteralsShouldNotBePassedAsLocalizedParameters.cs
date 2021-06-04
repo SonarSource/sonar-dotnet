@@ -20,6 +20,10 @@ namespace Tests.Diagnostics
         public string OtherText { get; set; }
         public string TextualRepresenatation { get; set; }
 
+        private string message;
+        [Localizable(true)]
+        public int IntProperty { get; set; }
+
         public void Foo()
         {
             Bar("param1", // Noncompliant {{Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.}}
@@ -54,7 +58,11 @@ namespace Tests.Diagnostics
             OtherText = "other text"; // Noncompliant
             TextualRepresenatation = "different things here"; // Compliant, property does not match exactly
 
-            InvalidAttribute("some parameter");
+            message = "message text"; // Compliant as it is a field
+            IntProperty = 42; // Compliant as it is not a string property.
+
+            InvalidAttribute1("some parameter");
+            InvalidAttribute2("some parameter");
         }
 
         public void Bar([Localizable(true)]string param1, string message, string text, string caption)
@@ -65,7 +73,11 @@ namespace Tests.Diagnostics
         {
         }
 
-        public void InvalidAttribute([Localizable] string param1) // Error [CS7036]
+        public void InvalidAttribute1([Localizable] string param1) // Error [CS7036]
+        {
+        }
+
+        public void InvalidAttribute2([Localizable(42)] string param1) // Error [CS1503]
         {
         }
     }
