@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2092.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  30,
+"endLine":  7,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3330.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  30,
+"endLine":  7,
+"endColumn":  51
+}
+}
+}
+]
+}
