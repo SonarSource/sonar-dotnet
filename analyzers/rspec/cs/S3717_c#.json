@@ -2,6 +2,10 @@
   "title": "Track use of \"NotImplementedException\"",
   "type": "CODE_SMELL",
   "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1h"
+  },
   "tags": [
     
   ],
