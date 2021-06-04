@@ -12,6 +12,8 @@ namespace Tests.Diagnostics
         public string Property1 { get; set; }
         [Localizable(false)]
         public string Property2 { get; set; }
+        [Localizable(false)]
+        public string SomeMessage { get; set; }
         public string Message { get; set; }
         public string Text { get; set; }
         public string Caption { get; set; }
@@ -32,6 +34,7 @@ namespace Tests.Diagnostics
             const string localConst = "unchangeable";
 
             Baz("param1",
+                "some parameter", // Compliant as Localizable is set to false
                 "param2", // Noncompliant
                 localConst, // Noncompliant
                 ConstText, // Noncompliant
@@ -44,18 +47,25 @@ namespace Tests.Diagnostics
 
             Property1 = "some text"; // Noncompliant
             Property2 = "moar text";
+            SomeMessage = "some text"; // Compliant as Localizable is set to false
             Message = "message text"; // Noncompliant
             Text = "textual text"; // Noncompliant
             Caption = "caption text"; // Noncompliant
             OtherText = "other text"; // Noncompliant
             TextualRepresenatation = "different things here"; // Compliant, property does not match exactly
+
+            InvalidAttribute("some parameter");
         }
 
         public void Bar([Localizable(true)]string param1, string message, string text, string caption)
         {
         }
 
-        public void Baz([Localizable(false)]string param1, string myMessage, string otherText, string captionString, string captionlessTitle)
+        public void Baz([Localizable(false)]string param1, [Localizable(false)] string someMessage, string myMessage, string otherText, string captionString, string captionlessTitle)
+        {
+        }
+
+        public void InvalidAttribute([Localizable] string param1) // Error [CS7036]
         {
         }
     }

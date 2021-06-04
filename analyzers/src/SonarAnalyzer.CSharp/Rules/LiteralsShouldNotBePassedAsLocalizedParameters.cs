@@ -127,9 +127,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            return symbol.Name.SplitCamelCaseToWords().Any(localizableSymbolNames.Contains) ||
-                symbol.GetAttributes(KnownType.System_ComponentModel_LocalizableAttribute)
-                    .Any(a => a.ConstructorArguments.Any(c => (c.Value as bool?) ?? false));
+            var localizableAttribute = symbol.GetAttributes(KnownType.System_ComponentModel_LocalizableAttribute);
+
+            return (symbol.Name.SplitCamelCaseToWords().Any(localizableSymbolNames.Contains)
+                    && (!localizableAttribute.Any(x => AttributeHasConstructorArgument(x, false))))
+                   || localizableAttribute.Any(x => AttributeHasConstructorArgument(x, true));
         }
+
+        private static bool AttributeHasConstructorArgument(AttributeData attribute, bool expectedValue) =>
+            attribute.ConstructorArguments.Any(c => c.Value is bool boolValue && boolValue == expectedValue);
     }
 }
