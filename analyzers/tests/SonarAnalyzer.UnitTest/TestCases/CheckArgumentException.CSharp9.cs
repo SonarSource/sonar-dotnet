@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
         void Foo3(int a)
         {
-            ArgumentException exception = new ("a", "foo"); // FN arguments have been inverted
+            ArgumentException exception = new ("a", "foo"); // Noncompliant
             throw exception;
         }
 

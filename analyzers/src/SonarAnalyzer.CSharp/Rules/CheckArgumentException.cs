@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -35,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public class CheckArgumentException : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3928";
+        private const string DiagnosticId = "S3928";
         private const string MessageFormat = "{0}";
         private const string ParameterLessConstructorMessage = "Use a constructor overloads that allows a more meaningful exception message to be provided.";
         private const string ConstructorParametersInverted = "ArgumentException constructor arguments have been inverted.";
@@ -53,20 +54,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_DuplicateWaitObjectException);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.ObjectCreationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
         private static void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
-            var objectCreationSyntax = (ObjectCreationExpressionSyntax)analysisContext.Node;
-            var methodSymbol = analysisContext.SemanticModel.GetSymbolInfo(objectCreationSyntax).Symbol as IMethodSymbol;
+            var objectCreation = ObjectCreationFactory.Create(analysisContext.Node);
+            var methodSymbol = objectCreation.MethodSymbol(analysisContext.SemanticModel);
             if (methodSymbol?.ContainingType == null || !methodSymbol.ContainingType.IsAny(ArgumentExceptionTypesToCheck))
             {
                 return;
             }
 
-            if (objectCreationSyntax.ArgumentList == null || objectCreationSyntax.ArgumentList.Arguments.Count == 0)
+            if (objectCreation.ArgumentList == null || objectCreation.ArgumentList.Arguments.Count == 0)
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreationSyntax.GetLocation(), ParameterLessConstructorMessage));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), ParameterLessConstructorMessage));
                 return;
             }
 
@@ -74,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var messageValue = new Optional<object>();
             for (var i = 0; i < methodSymbol.Parameters.Length; i++)
             {
-                var argumentExpression = objectCreationSyntax.ArgumentList.Arguments[i].Expression;
+                var argumentExpression = objectCreation.ArgumentList.Arguments[i].Expression;
                 if (methodSymbol.Parameters[i].MetadataName == "paramName" || methodSymbol.Parameters[i].MetadataName == "parameterName")
                 {
                     parameterNameValue = analysisContext.SemanticModel.GetConstantValue(argumentExpression);
@@ -95,17 +96,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var methodArgumentNames = GetMethodArgumentNames(objectCreationSyntax).ToHashSet();
+            var methodArgumentNames = GetMethodArgumentNames(objectCreation.Expression).ToHashSet();
             if (!methodArgumentNames.Contains(TakeOnlyBeforeDot(parameterNameValue)))
             {
                 var message = messageValue.HasValue && messageValue.Value != null && methodArgumentNames.Contains(TakeOnlyBeforeDot(messageValue))
                     ? ConstructorParametersInverted
                     : string.Format(InvalidParameterName, parameterNameValue.Value);
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreationSyntax.GetLocation(), message));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), message));
             }
         }
 
-        private static IEnumerable<string> GetMethodArgumentNames(ObjectCreationExpressionSyntax creationSyntax)
+        private static IEnumerable<string> GetMethodArgumentNames(SyntaxNode creationSyntax)
         {
             var node = creationSyntax.AncestorsAndSelf().FirstOrDefault(ancestor =>
                 ancestor is SimpleLambdaExpressionSyntax
