@@ -35,15 +35,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class LiteralsShouldNotBePassedAsLocalizedParameters : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4055";
+        private const string DiagnosticId = "S4055";
         private const string MessageFormat = "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ISet<string> localizableSymbolNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        private static readonly ISet<string> LocalizableSymbolNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "TEXT",
             "CAPTION",
@@ -52,87 +51,72 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var invocationSyntax = (InvocationExpressionSyntax)c.Node;
-                    if (!(c.SemanticModel.GetSymbolInfo(invocationSyntax).Symbol is IMethodSymbol methodSymbol) ||
-                        invocationSyntax.ArgumentList == null)
-                    {
-                        return;
-                    }
-
-                    // Calling to/from debug-only code
-                    if (methodSymbol.IsDiagnosticDebugMethod() ||
-                        CSharpDebugOnlyCodeHelper.IsConditionalDebugMethod(methodSymbol) ||
-                        CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(invocationSyntax, c.SemanticModel))
-                    {
-                        return;
-                    }
-
-                    if (methodSymbol.IsConsoleWrite() || methodSymbol.IsConsoleWriteLine())
-                    {
-                        var firstArgument = invocationSyntax.ArgumentList.Arguments.FirstOrDefault();
-                        if (IsStringLiteral(firstArgument?.Expression, c.SemanticModel))
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstArgument.GetLocation()));
-                        }
-                        return;
-                    }
-
-                    methodSymbol.Parameters
-                        .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
-                        .Where(x => x.parameter != null && x.syntax != null)
-                        .Where(x => IsLocalizable(x.parameter))
-                        .Where(x => IsStringLiteral(x.syntax.Expression, c.SemanticModel))
-                        .ToList()
-                        .ForEach(x =>
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, x.syntax.GetLocation()));
-                        });
-                },
-                SyntaxKind.InvocationExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var assignmentSyntax = (AssignmentExpressionSyntax)c.Node;
-                    if (c.SemanticModel.GetSymbolInfo(assignmentSyntax.Left).Symbol is IPropertySymbol propertySymbol &&
-                        IsLocalizable(propertySymbol) &&
-                        IsStringLiteral(assignmentSyntax.Right, c.SemanticModel) &&
-                        !CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, c.SemanticModel))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignmentSyntax.GetLocation()));
-                    }
-                },
-
-            SyntaxKind.SimpleAssignmentExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocations, SyntaxKind.InvocationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeAssignments, SyntaxKind.SimpleAssignmentExpression);
         }
 
-        private static bool IsStringLiteral(ExpressionSyntax expression, SemanticModel semanticModel)
+        private static void AnalyzeInvocations(SyntaxNodeAnalysisContext context)
         {
-            if (expression == null)
+            var invocationSyntax = (InvocationExpressionSyntax)context.Node;
+            if (!(context.SemanticModel.GetSymbolInfo(invocationSyntax).Symbol is IMethodSymbol methodSymbol)
+                || invocationSyntax.ArgumentList == null)
             {
-                return false;
+                return;
             }
 
-            var constant = semanticModel.GetConstantValue(expression);
-            return constant.HasValue && constant.Value is string;
-        }
-
-        private static bool IsLocalizable(ISymbol symbol)
-        {
-            if (symbol?.Name == null)
+            // Calling to/from debug-only code
+            if (methodSymbol.IsDiagnosticDebugMethod()
+                || CSharpDebugOnlyCodeHelper.IsConditionalDebugMethod(methodSymbol)
+                || CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(invocationSyntax, context.SemanticModel))
             {
-                return false;
+                return;
             }
 
-            var localizableAttribute = symbol.GetAttributes(KnownType.System_ComponentModel_LocalizableAttribute);
+            if (methodSymbol.IsConsoleWrite() || methodSymbol.IsConsoleWriteLine())
+            {
+                var firstArgument = invocationSyntax.ArgumentList.Arguments.FirstOrDefault();
+                if (IsStringLiteral(firstArgument?.Expression, context.SemanticModel))
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, firstArgument.GetLocation()));
+                }
+                return;
+            }
 
-            return (symbol.Name.SplitCamelCaseToWords().Any(localizableSymbolNames.Contains)
-                    && (!localizableAttribute.Any(x => AttributeHasConstructorArgument(x, false))))
-                   || localizableAttribute.Any(x => AttributeHasConstructorArgument(x, true));
+            methodSymbol.Parameters
+                .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
+                .Where(x => x.parameter != null && x.syntax != null)
+                .Where(x => IsLocalizable(x.parameter))
+                .Where(x => IsStringLiteral(x.syntax.Expression, context.SemanticModel))
+                .ToList()
+                .ForEach(x => context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, x.syntax.GetLocation())));
         }
+
+        private static void AnalyzeAssignments(SyntaxNodeAnalysisContext context)
+        {
+            var assignmentSyntax = (AssignmentExpressionSyntax)context.Node;
+            if (context.SemanticModel.GetSymbolInfo(assignmentSyntax.Left).Symbol is IPropertySymbol propertySymbol
+                && IsLocalizable(propertySymbol)
+                && IsStringLiteral(assignmentSyntax.Right, context.SemanticModel)
+                && !CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, context.SemanticModel))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignmentSyntax.GetLocation()));
+            }
+        }
+
+        private static bool IsStringLiteral(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression != null
+            && semanticModel.GetConstantValue(expression) is { HasValue: true } constant
+            && constant.Value is string;
+
+        private static bool IsLocalizable(ISymbol symbol) =>
+            symbol?.Name != null
+            && symbol.GetAttributes(KnownType.System_ComponentModel_LocalizableAttribute) is { } localizableAttribute
+            && IsLocalizable(symbol.Name, localizableAttribute);
+
+        private static bool IsLocalizable(string symbolName, IEnumerable<AttributeData> localizableAttribute) =>
+            localizableAttribute.Any(x => AttributeHasConstructorArgument(x, true))
+            || (symbolName.SplitCamelCaseToWords().Any(LocalizableSymbolNames.Contains)
+               && (!localizableAttribute.Any(x => AttributeHasConstructorArgument(x, false))));
 
         private static bool AttributeHasConstructorArgument(AttributeData attribute, bool expectedValue) =>
             attribute.ConstructorArguments.Any(c => c.Value is bool boolValue && boolValue == expectedValue);
