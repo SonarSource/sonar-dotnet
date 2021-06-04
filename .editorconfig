@@ -267,6 +267,49 @@ dotnet_diagnostic.SA1026.severity = warning
 dotnet_diagnostic.SA1027.severity = none # RSPEC-105
 dotnet_diagnostic.SA1028.severity = warning
 
+# Readability Rules (SA1100-) https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/1.1.118/DOCUMENTATION.md
+
+dotnet_diagnostic.SA1100.severity = warning
+dotnet_diagnostic.SA1101.severity = none    # Doesn't match our coding style, we don't use "this." when not neded
+dotnet_diagnostic.SA1102.severity = warning
+dotnet_diagnostic.SA1103.severity = warning
+dotnet_diagnostic.SA1104.severity = warning
+dotnet_diagnostic.SA1105.severity = warning
+dotnet_diagnostic.SA1106.severity = warning
+dotnet_diagnostic.SA1107.severity = warning
+dotnet_diagnostic.SA1108.severity = none    # Noisy for short comments on short lines (if, for, foreach)
+dotnet_diagnostic.SA1109.severity = warning
+dotnet_diagnostic.SA1110.severity = warning
+dotnet_diagnostic.SA1111.severity = warning
+dotnet_diagnostic.SA1112.severity = warning
+dotnet_diagnostic.SA1113.severity = warning
+dotnet_diagnostic.SA1114.severity = none    # Prevents putting comment before first member in ImmutableArray.Create
+dotnet_diagnostic.SA1115.severity = warning
+dotnet_diagnostic.SA1116.severity = none    # Waste of new lines in simple scenarios
+dotnet_diagnostic.SA1117.severity = none    # Waste of new lines in simple scenarios
+dotnet_diagnostic.SA1118.severity = none    # Noisy in UTs
+dotnet_diagnostic.SA1119.severity = warning
+dotnet_diagnostic.SA1120.severity = warning
+dotnet_diagnostic.SA1121.severity = warning
+dotnet_diagnostic.SA1122.severity = warning
+dotnet_diagnostic.SA1123.severity = warning
+dotnet_diagnostic.SA1124.severity = none    # We need regions sometimes
+dotnet_diagnostic.SA1125.severity = warning
+dotnet_diagnostic.SA1126.severity = none    # Deprecated / not implemented rule
+dotnet_diagnostic.SA1127.severity = none    # Noisy for single-line method declarations
+dotnet_diagnostic.SA1128.severity = none    # Doesn't match our code base
+dotnet_diagnostic.SA1129.severity = warning
+dotnet_diagnostic.SA1130.severity = warning
+dotnet_diagnostic.SA1131.severity = warning
+dotnet_diagnostic.SA1132.severity = warning
+dotnet_diagnostic.SA1133.severity = warning
+dotnet_diagnostic.SA1134.severity = warning
+dotnet_diagnostic.SA1135.severity = none    # Noisy for generics
+dotnet_diagnostic.SA1136.severity = warning
+dotnet_diagnostic.SA1137.severity = warning
+dotnet_diagnostic.SA1138.severity = none    # Deprecated / not implemented rule
+dotnet_diagnostic.SA1139.severity = warning
+
 # Ordering Rules (SA1200-) https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/1.1.118/documentation/OrderingRules.md
 
 dotnet_diagnostic.SA1200.severity = warning
@@ -317,7 +360,7 @@ dotnet_diagnostic.SA1405.severity = warning
 dotnet_diagnostic.SA1406.severity = warning
 dotnet_diagnostic.SA1407.severity = none # very noisy on hash calculations; can lead to less readable code
 dotnet_diagnostic.SA1408.severity = warning
-# SA1409 is not part of StyleCop.Analyzers
+dotnet_diagnostic.SA1409.severity = none # Deprecated / not implemented rule
 dotnet_diagnostic.SA1410.severity = warning
 dotnet_diagnostic.SA1411.severity = warning
 dotnet_diagnostic.SA1412.severity = warning
@@ -404,56 +447,6 @@ dotnet_diagnostic.SA1649.severity = none
 dotnet_diagnostic.SA1650.severity = none
 dotnet_diagnostic.SA1651.severity = none
 dotnet_diagnostic.SA1652.severity = none
-
-#####################
-# Unused rule areas #
-#####################
-
-# Readability Rules (SA1100-) https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/1.1.118/DOCUMENTATION.md
-
-dotnet_diagnostic.SA1100.severity = none
-dotnet_diagnostic.SA1101.severity = none
-dotnet_diagnostic.SA1102.severity = none
-dotnet_diagnostic.SA1103.severity = none
-dotnet_diagnostic.SA1104.severity = none
-dotnet_diagnostic.SA1105.severity = none
-dotnet_diagnostic.SA1106.severity = none
-dotnet_diagnostic.SA1107.severity = none
-dotnet_diagnostic.SA1108.severity = none
-dotnet_diagnostic.SA1109.severity = none
-dotnet_diagnostic.SA1110.severity = none
-dotnet_diagnostic.SA1111.severity = none
-dotnet_diagnostic.SA1112.severity = none
-dotnet_diagnostic.SA1113.severity = none
-dotnet_diagnostic.SA1114.severity = none
-dotnet_diagnostic.SA1115.severity = none
-dotnet_diagnostic.SA1116.severity = none
-dotnet_diagnostic.SA1117.severity = none
-dotnet_diagnostic.SA1118.severity = none
-dotnet_diagnostic.SA1119.severity = none
-dotnet_diagnostic.SA1120.severity = none
-dotnet_diagnostic.SA1121.severity = none
-dotnet_diagnostic.SA1122.severity = none
-dotnet_diagnostic.SA1123.severity = none
-dotnet_diagnostic.SA1124.severity = none
-dotnet_diagnostic.SA1125.severity = none
-dotnet_diagnostic.SA1126.severity = none
-dotnet_diagnostic.SA1127.severity = none
-dotnet_diagnostic.SA1128.severity = none
-dotnet_diagnostic.SA1129.severity = none
-dotnet_diagnostic.SA1130.severity = none
-dotnet_diagnostic.SA1131.severity = none
-dotnet_diagnostic.SA1132.severity = none
-dotnet_diagnostic.SA1133.severity = none
-dotnet_diagnostic.SA1134.severity = none
-dotnet_diagnostic.SA1135.severity = none
-dotnet_diagnostic.SA1136.severity = none
-dotnet_diagnostic.SA1137.severity = none
-dotnet_diagnostic.SA1138.severity = none
-dotnet_diagnostic.SA1139.severity = none
-dotnet_diagnostic.SA1140.severity = none
-dotnet_diagnostic.SA1141.severity = none
-dotnet_diagnostic.SA1142.severity = none
 
 # Alternative Rules (SX0000-)
 
