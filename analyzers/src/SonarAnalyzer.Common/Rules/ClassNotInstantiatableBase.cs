@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules
 
         private bool IsAnyConstructorToCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel) =>
             descendantNodes
-                .Where(x => Language.Syntax.IsAnyKind(x, Language.SyntaxKind.ObjectCreationExpression))
+                .Where(x => Language.Syntax.IsAnyKind(x, Language.SyntaxKind.ObjectCreationExpressions))
                 .Select(ctor => semanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol)
                 .WhereNotNull()
                 .Any(ctor => Equals(ctor.ContainingType.OriginalDefinition, namedType));
