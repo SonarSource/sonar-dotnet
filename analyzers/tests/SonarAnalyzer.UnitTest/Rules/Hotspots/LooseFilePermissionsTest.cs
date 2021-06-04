@@ -47,7 +47,12 @@ namespace SonarAnalyzer.UnitTest.Rules.Hotspots
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
-        public void LooseFilePermissions_Unix() =>
+        public void LooseFilePermissions_Windows_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\LooseFilePermissions.Windows.CSharp9.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LooseFilePermissions_Unix_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Unix.cs",
                                     new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
                                     NuGetMetadataReference.MonoPosixNetStandard());

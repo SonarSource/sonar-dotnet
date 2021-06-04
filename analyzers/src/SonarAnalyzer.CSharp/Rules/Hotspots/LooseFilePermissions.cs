@@ -27,6 +27,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.Hotspots
 {
@@ -56,7 +58,7 @@ namespace SonarAnalyzer.Rules.Hotspots
                 && (GetObjectCreation(invocation, context.SemanticModel) is { } objectCreation))
             {
                 var invocationLocation = invocation.GetLocation();
-                var secondaryLocation = objectCreation.GetLocation();
+                var secondaryLocation = objectCreation.Expression.GetLocation();
 
                 var diagnostic = invocationLocation.GetLineSpan().StartLinePosition.Line == secondaryLocation.GetLineSpan().StartLinePosition.Line
                     ? Diagnostic.Create(Rule, invocationLocation)
@@ -72,28 +74,27 @@ namespace SonarAnalyzer.Rules.Hotspots
         private static bool IsAddAccessRule(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             invocation.IsMemberAccessOnKnownType("AddAccessRule", KnownType.System_Security_AccessControl_FileSystemSecurity, semanticModel);
 
-        private static ObjectCreationExpressionSyntax GetObjectCreation(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+        private static IObjectCreation GetObjectCreation(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
         {
-            var accessRuleSyntaxNode = GetVulnerableFileSystemAccessRule(invocation.DescendantNodes());
-            if (accessRuleSyntaxNode != null)
+            if (GetVulnerableFileSystemAccessRule(invocation.DescendantNodes()) is { }  accessRuleSyntaxNode)
             {
                 return accessRuleSyntaxNode;
             }
-
-            var accessRuleSymbol = invocation.GetArgumentSymbolsOfKnownType(KnownType.System_Security_AccessControl_FileSystemAccessRule, semanticModel).FirstOrDefault();
-            if (accessRuleSymbol == null || accessRuleSymbol is IMethodSymbol)
+            else if (invocation.GetArgumentSymbolsOfKnownType(KnownType.System_Security_AccessControl_FileSystemAccessRule, semanticModel).FirstOrDefault() is { } accessRuleSymbol
+                && !(accessRuleSymbol is IMethodSymbol))
+            {
+                return GetVulnerableFileSystemAccessRule(accessRuleSymbol.GetLocationNodes(invocation));
+            }
+            else
             {
                 return null;
             }
 
-            return GetVulnerableFileSystemAccessRule(accessRuleSymbol.GetLocationNodes(invocation));
-
-            ObjectCreationExpressionSyntax GetVulnerableFileSystemAccessRule(IEnumerable<SyntaxNode> nodes) =>
-                nodes.OfType<ObjectCreationExpressionSyntax>()
-                     .FirstOrDefault(objectCreation => IsFileSystemAccessRuleForEveryoneWithAllow(objectCreation, semanticModel));
+            IObjectCreation GetVulnerableFileSystemAccessRule(IEnumerable<SyntaxNode> nodes) =>
+                FilterObjectCreations(nodes).FirstOrDefault(x => IsFileSystemAccessRuleForEveryoneWithAllow(x, semanticModel));
         }
 
-        private static bool IsFileSystemAccessRuleForEveryoneWithAllow(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
+        private static bool IsFileSystemAccessRuleForEveryoneWithAllow(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.IsKnownType(KnownType.System_Security_AccessControl_FileSystemAccessRule, semanticModel)
             && objectCreation.ArgumentList is { } argumentList
             && IsEveryone(argumentList.Arguments.First().Expression, semanticModel)
@@ -101,18 +102,20 @@ namespace SonarAnalyzer.Rules.Hotspots
 
         private static bool IsEveryone(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
             semanticModel.GetConstantValue(syntaxNode) is {HasValue: true, Value: Everyone}
-            || syntaxNode.DescendantNodesAndSelf()
-                         .OfType<ObjectCreationExpressionSyntax>()
-                         .Any(objectCreation => IsNTAccountWithEveryone(objectCreation, semanticModel) || IsSecurityIdentifierWithEveryone(objectCreation, semanticModel));
+            || FilterObjectCreations(syntaxNode.DescendantNodesAndSelf()).Any(x => IsNTAccountWithEveryone(x, semanticModel) || IsSecurityIdentifierWithEveryone(x, semanticModel));
 
-        private static bool IsNTAccountWithEveryone(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
+        private static bool IsNTAccountWithEveryone(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.IsKnownType(KnownType.System_Security_Principal_NTAccount, semanticModel)
             && objectCreation.ArgumentList is { } argumentList
             && semanticModel.GetConstantValue(argumentList.Arguments.Last().Expression) is { HasValue: true, Value: Everyone};
 
-        private static bool IsSecurityIdentifierWithEveryone(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
+        private static bool IsSecurityIdentifierWithEveryone(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.IsKnownType(KnownType.System_Security_Principal_SecurityIdentifier, semanticModel)
             && objectCreation.ArgumentList is { } argumentList
             && semanticModel.GetConstantValue(argumentList.Arguments.First().Expression) is { HasValue: true, Value: 1};
+
+        private static IEnumerable<IObjectCreation> FilterObjectCreations(IEnumerable<SyntaxNode> nodes) =>
+            nodes.Where(x => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
+                 .Select(x => ObjectCreationFactory.Create(x));
     }
 }

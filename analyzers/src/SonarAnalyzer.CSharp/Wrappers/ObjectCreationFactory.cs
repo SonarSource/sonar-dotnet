@@ -21,20 +21,22 @@
 using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Wrappers
 {
-    public interface IObjectCreation
+    internal interface IObjectCreation
     {
         InitializerExpressionSyntax Initializer { get; }
         ArgumentListSyntax ArgumentList { get; }
         ExpressionSyntax Expression { get; }
+        bool IsKnownType(KnownType knownType, SemanticModel semanticModel);
         string TypeAsString(SemanticModel semanticModel);
         ITypeSymbol TypeSymbol(SemanticModel semanticModel);
     }
 
-    public class ObjectCreationFactory
+    internal class ObjectCreationFactory
     {
         public static IObjectCreation Create(SyntaxNode node) =>
             node switch
@@ -56,6 +58,9 @@ namespace SonarAnalyzer.Wrappers
             public ObjectCreation(ObjectCreationExpressionSyntax objectCreationExpressionSyntax) =>
                 objectCreation = objectCreationExpressionSyntax;
 
+            public bool IsKnownType(KnownType knownType, SemanticModel semanticModel) =>
+                objectCreation.Type.GetName().EndsWith(knownType.ShortName) && objectCreation.IsKnownType(knownType, semanticModel);
+
             public string TypeAsString(SemanticModel semanticModel) =>
                 objectCreation.Type.ToString();
 
@@ -73,6 +78,9 @@ namespace SonarAnalyzer.Wrappers
 
             public ImplicitObjectCreation(ImplicitObjectCreationExpressionSyntaxWrapper wrapper) =>
                 objectCreation = wrapper;
+
+            public bool IsKnownType(KnownType knownType, SemanticModel semanticModel) =>
+                semanticModel.GetTypeInfo(objectCreation).Type.Is(knownType);
 
             public string TypeAsString(SemanticModel semanticModel) =>
                 TypeSymbol(semanticModel).Name;
