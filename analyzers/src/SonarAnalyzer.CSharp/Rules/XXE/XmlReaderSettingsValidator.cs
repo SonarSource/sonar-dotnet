@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.XXE
 
         private static bool IsMemberAccessOnSymbol(ExpressionSyntax expression, ISymbol symbol, SemanticModel semanticModel) =>
             expression is MemberAccessExpressionSyntax memberAccess
-            && IsXmlReaderSettings(memberAccess.Expression, semanticModel)
+            && semanticModel.GetTypeInfo(memberAccess.Expression).Type.Is(KnownType.System_Xml_XmlReaderSettings)
             && symbol.Equals(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol);
 
         private static IEnumerable<AssignmentExpressionSyntax> GetAssignments(SyntaxNode node) =>
@@ -110,9 +110,6 @@ namespace SonarAnalyzer.Rules.XXE
 
         private static bool IsXmlResolverPropertySafeByDefault(NetFrameworkVersion version) =>
             version == NetFrameworkVersion.Probably35 || version == NetFrameworkVersion.Between4And451;
-
-        private static bool IsXmlReaderSettings(ExpressionSyntax expressionSyntax, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(expressionSyntax).Type.Is(KnownType.System_Xml_XmlReaderSettings);
 
         private static IObjectCreation GetObjectCreation(ISymbol symbol, InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             // First we search for object creations at the syntax level to see if the object is created inline

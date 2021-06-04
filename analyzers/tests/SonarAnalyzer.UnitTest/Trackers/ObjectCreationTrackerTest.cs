@@ -126,6 +126,7 @@ public class Base
             tracker.WhenImplements(KnownType.System_IDisposable)(context).Should().BeFalse();
             tracker.WhenDerivesOrImplementsAny(KnownType.System_Boolean)(context).Should().BeFalse();
             tracker.MatchConstructor(KnownType.System_Boolean)(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsConst(0).Invoke(context).Should().BeTrue();
         }
 
         [TestMethod]
@@ -151,6 +152,23 @@ public class Base : Exception, IDisposable
             tracker.WhenImplements(KnownType.System_IDisposable)(context).Should().BeFalse();
             tracker.WhenDerivesOrImplementsAny(KnownType.System_Exception)(context).Should().BeFalse();
             tracker.MatchConstructor(KnownType.System_Boolean)(context).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ObjectCreationNoArgumentsSupplied()
+        {
+            const string testInput = @"
+public class Base
+{
+    public int Foo;
+    private void Usage()
+    {
+      new Base { Foo = 42 };
+    }
+}";
+            var context = CreateContext<CSharpSyntax.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
+            var tracker = new CSharpObjectCreationTracker();
+            tracker.ArgumentAtIndexIsConst(0).Invoke(context).Should().BeFalse();
         }
 
         [TestMethod]

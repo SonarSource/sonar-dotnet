@@ -10,7 +10,7 @@ void Foo(DbContext context, SqliteConnection connection, string query, params ob
     context.Database.ExecuteSqlCommand(ConstQuery); // Compliant, constants are safe
     context.Database.ExecuteSqlCommand(query); // Compliant, not concat or format
 
-    context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query} AND mycol2={0}", parameters[0]); // Noncompliant, string interpolation  it is RawSqlString
+    context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query} AND mycol2={0}", parameters[0]); // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
 
     context.Query<User>().FromSql(ConstQuery);                                               // Compliant, constants are safe
     context.Query<User>().FromSql("" + query, parameters);                                   // Noncompliant

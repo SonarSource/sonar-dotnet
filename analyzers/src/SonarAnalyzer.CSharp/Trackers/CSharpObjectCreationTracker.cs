@@ -22,14 +22,12 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Wrappers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers.Trackers
 {
     public class CSharpObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
 
         internal override Condition ArgumentAtIndexIsConst(int index) =>
             context => ObjectCreationFactory.Create(context.Node).ArgumentList is { } argumentList

@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Helpers.Facade
     internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     {
         public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
-        public SyntaxKind[] ObjectCreationExpression => new[] {SyntaxKind.ObjectCreationExpression};
+        public SyntaxKind[] ObjectCreationExpressions => new[] {SyntaxKind.ObjectCreationExpression};
         public SyntaxKind[] ClassAndRecordDeclaration => new[] {SyntaxKind.ClassBlock};
         public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
         public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
