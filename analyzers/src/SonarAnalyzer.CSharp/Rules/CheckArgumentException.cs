@@ -115,22 +115,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 || ancestor is IndexerDeclarationSyntax
                 || LocalFunctionStatementSyntaxWrapper.IsInstance(ancestor));
 
-            if (node is SimpleLambdaExpressionSyntax simpleLambda)
+            return node switch
             {
-                return new[] { simpleLambda.Parameter.Identifier.ValueText };
-            }
-            else if (node is BaseMethodDeclarationSyntax method)
-            {
-                return IdentifierNames(method.ParameterList);
-            }
-            else if (node is ParenthesizedLambdaExpressionSyntax lambda)
-            {
-                return IdentifierNames(lambda.ParameterList);
-            }
-            else if (node is AccessorDeclarationSyntax accessor)
+                SimpleLambdaExpressionSyntax simpleLambda => new[] { simpleLambda.Parameter.Identifier.ValueText },
+                BaseMethodDeclarationSyntax method => IdentifierNames(method.ParameterList),
+                ParenthesizedLambdaExpressionSyntax lambda => IdentifierNames(lambda.ParameterList),
+                AccessorDeclarationSyntax accessor => AccessorIdentifierNames(accessor),
+                IndexerDeclarationSyntax indexerDeclaration => IdentifierNames(indexerDeclaration.ParameterList),
+                { } when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => IdentifierNames(((LocalFunctionStatementSyntaxWrapper)node).ParameterList),
+                _ => Enumerable.Empty<string>()
+            };
+
+            static IEnumerable<string> IdentifierNames(BaseParameterListSyntax parameterList) =>
+                    parameterList.Parameters.Select(x => x.Identifier.ValueText);
+
+            static IEnumerable<string> AccessorIdentifierNames(AccessorDeclarationSyntax accessor)
             {
                 var arguments = new List<string>();
-                if (node.FirstAncestorOrSelf<IndexerDeclarationSyntax>() is { } indexer)
+                if (accessor.FirstAncestorOrSelf<IndexerDeclarationSyntax>() is { } indexer)
                 {
                     arguments.AddRange(IdentifierNames(indexer.ParameterList));
                 }
@@ -138,24 +140,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     arguments.Add("value");
                 }
-
                 return arguments;
             }
-            else if (node is IndexerDeclarationSyntax indexerDeclaration)
-            {
-                return IdentifierNames(indexerDeclaration.ParameterList);
-            }
-            else if (LocalFunctionStatementSyntaxWrapper.IsInstance(node))
-            {
-                return IdentifierNames(((LocalFunctionStatementSyntaxWrapper)node).ParameterList);
-            }
-            else
-            {
-                return Enumerable.Empty<string>();
-            }
-
-            static IEnumerable<string> IdentifierNames(BaseParameterListSyntax parameterList) =>
-                parameterList.Parameters.Select(x => x.Identifier.ValueText);
         }
 
         private static string TakeOnlyBeforeDot(Optional<object> value) =>
