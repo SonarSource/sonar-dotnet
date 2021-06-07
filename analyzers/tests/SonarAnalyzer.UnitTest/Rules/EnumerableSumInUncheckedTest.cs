@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EnumerableSumInUnchecked() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EnumerableSumInUnchecked.cs", new CS.EnumerableSumInUnchecked());
+            Verifier.VerifyAnalyzer(@"TestCases\EnumerableSumInUnchecked.cs", new EnumerableSumInUnchecked());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EnumerableSumInUnchecked_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EnumerableSumInUnchecked.CSharp9.cs", new CS.EnumerableSumInUnchecked());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EnumerableSumInUnchecked.CSharp9.cs", new EnumerableSumInUnchecked());
 #endif
     }
 }

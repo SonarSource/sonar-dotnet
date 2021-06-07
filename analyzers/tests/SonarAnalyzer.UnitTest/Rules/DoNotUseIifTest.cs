@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,17 +32,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotUseIif() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb",
-                new VB.DoNotUseIif(),
-                MetadataReferenceFacade.MicrosoftVisualBasic);
+                                    new DoNotUseIif(),
+                                    MetadataReferenceFacade.MicrosoftVisualBasic);
 
         [TestMethod]
         [TestCategory("CodeFix")]
         public void DoNotUseIif_CodeFix() =>
-            Verifier.VerifyCodeFix(
-                @"TestCases\DoNotUseIif.vb",
-                @"TestCases\DoNotUseIif.Fixed.vb",
-                new VB.DoNotUseIif(),
-                new VB.DoNotUseIifCodeFixProvider(),
-                additionalReferences: MetadataReferenceFacade.MicrosoftVisualBasic);
+            Verifier.VerifyCodeFix(@"TestCases\DoNotUseIif.vb",
+                                   @"TestCases\DoNotUseIif.Fixed.vb",
+                                   new DoNotUseIif(),
+                                   new DoNotUseIifCodeFixProvider(),
+                                   additionalReferences: MetadataReferenceFacade.MicrosoftVisualBasic);
     }
 }

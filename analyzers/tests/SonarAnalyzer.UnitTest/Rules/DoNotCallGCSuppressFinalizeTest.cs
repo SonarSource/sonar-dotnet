@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,18 +30,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallGCSuppressFinalize() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.cs", new CS.DoNotCallGCSuppressFinalize());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.cs", new DoNotCallGCSuppressFinalize());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallGCSuppressFinalize_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.NetCore.cs", new CS.DoNotCallGCSuppressFinalize(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.NetCore.cs", new DoNotCallGCSuppressFinalize(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallGCSuppressFinalize_Net5() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotCallGCSuppressFinalize.Net5.cs", new CS.DoNotCallGCSuppressFinalize());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotCallGCSuppressFinalize.Net5.cs", new DoNotCallGCSuppressFinalize());
 #endif
     }
 }

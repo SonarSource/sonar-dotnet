@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,8 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs",
-                new CS.ExpectedExceptionAttributeShouldNotBeUsed(),
-                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+                                    new ExpectedExceptionAttributeShouldNotBeUsed(),
+                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
@@ -43,8 +43,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
-                new CS.ExpectedExceptionAttributeShouldNotBeUsed(),
-                NuGetMetadataReference.NUnit(testFwkVersion));
+                                    new ExpectedExceptionAttributeShouldNotBeUsed(),
+                                    NuGetMetadataReference.NUnit(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("3.0.0")]
@@ -53,8 +53,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [Description("Starting with version 3.0.0 the attribute was removed.")]
         public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_NoIssue(string testFwkVersion) =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
-                new CS.ExpectedExceptionAttributeShouldNotBeUsed(),
-                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion),
-                checkMode: CompilationErrorBehavior.Ignore);
+                                           new ExpectedExceptionAttributeShouldNotBeUsed(),
+                                           additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion),
+                                           checkMode: CompilationErrorBehavior.Ignore);
     }
 }

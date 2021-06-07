@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FinalizerShouldNotBeEmpty() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FinalizerShouldNotBeEmpty.cs", new CS.FinalizerShouldNotBeEmpty());
+            Verifier.VerifyAnalyzer(@"TestCases\FinalizerShouldNotBeEmpty.cs", new FinalizerShouldNotBeEmpty());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void FinalizerShouldNotBeEmpty_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FinalizerShouldNotBeEmpty.CSharp9.cs", new CS.FinalizerShouldNotBeEmpty());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FinalizerShouldNotBeEmpty.CSharp9.cs", new FinalizerShouldNotBeEmpty());
 #endif
 
         [TestMethod]
@@ -45,6 +45,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCSharpAnalyzer(@"class Program4
     {
         ~Program4() =>
-    }", new CS.FinalizerShouldNotBeEmpty(), CompilationErrorBehavior.Ignore);
+    }", new FinalizerShouldNotBeEmpty(), CompilationErrorBehavior.Ignore);
     }
 }

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
-using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotUseByVal() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseByVal.vb",
-                new VB.DoNotUseByVal());
+                new DoNotUseByVal());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -39,8 +39,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\DoNotUseByVal.vb",
                 @"TestCases\DoNotUseByVal.Fixed.vb",
-                new VB.DoNotUseByVal(),
-                new VB.DoNotUseByValCodeFixProvider(),
-                VB.DoNotUseByValCodeFixProvider.Title);
+                new DoNotUseByVal(),
+                new DoNotUseByValCodeFixProvider(),
+                DoNotUseByValCodeFixProvider.Title);
     }
 }

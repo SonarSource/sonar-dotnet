@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableTypesNeedFinalizers() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs", new CS.DisposableTypesNeedFinalizers());
+            Verifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs", new DisposableTypesNeedFinalizers());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableTypesNeedFinalizers_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DisposableTypesNeedFinalizers.CSharp9.cs", new CS.DisposableTypesNeedFinalizers());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DisposableTypesNeedFinalizers.CSharp9.cs", new DisposableTypesNeedFinalizers());
 #endif
 
         [TestMethod]
@@ -46,6 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 public class Foo_05 : IDisposable
 {
     private HandleRef;
-}", new CS.DisposableTypesNeedFinalizers(), CompilationErrorBehavior.Ignore);
+}", new DisposableTypesNeedFinalizers(), CompilationErrorBehavior.Ignore);
     }
 }

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void IssueSuppression() =>
-            Verifier.VerifyAnalyzer(@"TestCases\IssueSuppression.cs", new CS.IssueSuppression());
+            Verifier.VerifyAnalyzer(@"TestCases\IssueSuppression.cs", new IssueSuppression());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void IssueSuppression_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IssueSuppression.CSharp9.cs", new CS.IssueSuppression());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IssueSuppression.CSharp9.cs", new IssueSuppression());
 #endif
     }
 }

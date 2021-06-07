@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotCallAssemblyLoadInvalidMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.cs",
-                                    new CS.DoNotCallAssemblyLoadInvalidMethods(),
+                                    new DoNotCallAssemblyLoadInvalidMethods(),
                                     MetadataReferenceFacade.SystemSecurityPermissions);
 
 #if NET
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs",
-                                    new CS.DoNotCallAssemblyLoadInvalidMethods(),
+                                    new DoNotCallAssemblyLoadInvalidMethods(),
                                     MetadataReferenceFacade.SystemSecurityPermissions);
 #endif
 
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotCallAssemblyLoadInvalidMethods_EvidenceParameter() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.Evidence.cs",
-                                    new CS.DoNotCallAssemblyLoadInvalidMethods());
+                                    new DoNotCallAssemblyLoadInvalidMethods());
 #endif
     }
 }

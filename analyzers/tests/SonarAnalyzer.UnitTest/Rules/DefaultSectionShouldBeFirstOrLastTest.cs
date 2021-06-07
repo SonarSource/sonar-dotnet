@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DefaultSectionShouldBeFirstOrLast() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DefaultSectionShouldBeFirstOrLast.cs", new CS.DefaultSectionShouldBeFirstOrLast());
+            Verifier.VerifyAnalyzer(@"TestCases\DefaultSectionShouldBeFirstOrLast.cs", new DefaultSectionShouldBeFirstOrLast());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DefaultSectionShouldBeFirstOrLast_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DefaultSectionShouldBeFirstOrLast.CSharp9.cs", new CS.DefaultSectionShouldBeFirstOrLast());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DefaultSectionShouldBeFirstOrLast.CSharp9.cs", new DefaultSectionShouldBeFirstOrLast());
 #endif
     }
 }

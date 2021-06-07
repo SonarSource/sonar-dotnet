@@ -19,11 +19,11 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.TestFramework;
+using SonarAnalyzer.Rules.CSharp;
 #if NET
 using SonarAnalyzer.UnitTest.MetadataReferences;
 #endif
-using CS = SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,14 +34,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs",
-                                    new CS.DisposableMemberInNonDisposableClass(),
+                                    new DisposableMemberInNonDisposableClass(),
                                     ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new CS.DisposableMemberInNonDisposableClass());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new DisposableMemberInNonDisposableClass());
 
         [TestMethod]
         public void DisposableMemberInNonDisposableClass_IAsyncDisposable() => // IAsyncDisposable is available only on .Net Core
@@ -89,7 +89,7 @@ namespace Namespace
     {
         public ValueTask DisposeAsync() => new ValueTask();
     }
-}", new CS.DisposableMemberInNonDisposableClass(), additionalReferences: NetStandardMetadataReference.Netstandard);
+}", new DisposableMemberInNonDisposableClass(), additionalReferences: NetStandardMetadataReference.Netstandard);
 #endif
     }
 }

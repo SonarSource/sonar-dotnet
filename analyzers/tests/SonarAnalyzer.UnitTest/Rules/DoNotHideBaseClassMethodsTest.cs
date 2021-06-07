@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHideBaseClassMethods() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotHideBaseClassMethods.cs", new CS.DoNotHideBaseClassMethods());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotHideBaseClassMethods.cs", new DoNotHideBaseClassMethods());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHideBaseClassMethods_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotHideBaseClassMethods.CSharp9.cs", new CS.DoNotHideBaseClassMethods());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotHideBaseClassMethods.CSharp9.cs", new DoNotHideBaseClassMethods());
 #endif
     }
 }

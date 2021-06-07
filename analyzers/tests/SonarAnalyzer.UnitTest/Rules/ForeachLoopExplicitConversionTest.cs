@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ForeachLoopExplicitConversion() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ForeachLoopExplicitConversion.cs", new CS.ForeachLoopExplicitConversion());
+            Verifier.VerifyAnalyzer(@"TestCases\ForeachLoopExplicitConversion.cs", new ForeachLoopExplicitConversion());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\ForeachLoopExplicitConversion.cs",
                 @"TestCases\ForeachLoopExplicitConversion.Fixed.cs",
-                new CS.ForeachLoopExplicitConversion(),
-                new CS.ForeachLoopExplicitConversionCodeFixProvider());
+                new ForeachLoopExplicitConversion(),
+                new ForeachLoopExplicitConversionCodeFixProvider());
     }
 }

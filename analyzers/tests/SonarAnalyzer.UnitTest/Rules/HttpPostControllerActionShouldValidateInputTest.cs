@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void HttpPostControllerActionShouldValidateInput(string aspNetMvcVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\HttpPostControllerActionShouldValidateInput.cs",
-                new CS.HttpPostControllerActionShouldValidateInput(),
-                NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
+                                    new HttpPostControllerActionShouldValidateInput(),
+                                    NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
     }
 }

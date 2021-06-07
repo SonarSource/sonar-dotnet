@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,18 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InheritedCollidingInterfaceMembers() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.cs", new CS.InheritedCollidingInterfaceMembers());
+            Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.cs", new InheritedCollidingInterfaceMembers());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void InheritedCollidingInterfaceMembers_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.AfterCSharp8.cs",
-                new CS.InheritedCollidingInterfaceMembers(),
+                                    new InheritedCollidingInterfaceMembers(),
 #if NETFRAMEWORK
-                ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
+                                    ParseOptionsHelper.FromCSharp8,
+                                    NuGetMetadataReference.NETStandardV2_1_0);
 #else
-                ParseOptionsHelper.FromCSharp8);
+                                    ParseOptionsHelper.FromCSharp8);
 #endif
     }
 }

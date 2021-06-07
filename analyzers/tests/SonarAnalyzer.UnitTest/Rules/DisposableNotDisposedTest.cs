@@ -21,7 +21,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,17 +32,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisposableNotDisposed() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.cs",
-                new CS.DisposableNotDisposed(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.SystemNetHttp);
+                                    new DisposableNotDisposed(),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    MetadataReferenceFacade.SystemNetHttp);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableNotDisposed_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableNotDisposed.CSharp9.cs",
-                new CS.DisposableNotDisposed(),
-                MetadataReferenceFacade.SystemNetHttp);
+                                                      new DisposableNotDisposed(),
+                                                      MetadataReferenceFacade.SystemNetHttp);
 #endif
     }
 }

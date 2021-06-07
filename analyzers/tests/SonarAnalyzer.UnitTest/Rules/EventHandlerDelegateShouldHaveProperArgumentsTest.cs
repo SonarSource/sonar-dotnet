@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,14 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EventHandlerDelegateShouldHaveProperArguments() =>
             Verifier.VerifyAnalyzer(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.cs",
-                new CS.EventHandlerDelegateShouldHaveProperArguments());
+                new EventHandlerDelegateShouldHaveProperArguments());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EventHandlerDelegateShouldHaveProperArguments_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.CSharp9.cs",
-                new CS.EventHandlerDelegateShouldHaveProperArguments());
+                new EventHandlerDelegateShouldHaveProperArguments());
 #endif
     }
 }

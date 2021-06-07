@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCatchSystemException() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCatchSystemException.cs", new CS.DoNotCatchSystemException());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCatchSystemException.cs", new DoNotCatchSystemException());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCatchSystemException_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchSystemException.CSharp9.cs", new CS.DoNotCatchSystemException());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchSystemException.CSharp9.cs", new DoNotCatchSystemException());
 #endif
     }
 }

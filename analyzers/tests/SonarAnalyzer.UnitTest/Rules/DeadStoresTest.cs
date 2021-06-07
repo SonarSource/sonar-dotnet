@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DeadStores() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeadStores.cs",
-                                    new CS.DeadStores(),
+                                    new DeadStores(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
                                     NuGetMetadataReference.NETStandardV2_1_0);
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DeadStores_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeadStores.CSharp9.cs", new CS.DeadStores());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeadStores.CSharp9.cs", new DeadStores());
 #endif
     }
 }

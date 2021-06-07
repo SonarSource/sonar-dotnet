@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementISerializableCorrectly() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementISerializableCorrectly.cs", new CS.ImplementISerializableCorrectly());
+            Verifier.VerifyAnalyzer(@"TestCases\ImplementISerializableCorrectly.cs", new ImplementISerializableCorrectly());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementISerializableCorrectly_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ImplementISerializableCorrectly.CSharp9.cs", new CS.ImplementISerializableCorrectly());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ImplementISerializableCorrectly.CSharp9.cs", new ImplementISerializableCorrectly());
 #endif
     }
 }

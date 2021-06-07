@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,19 +30,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs", new CS.DoNotExposeListT(),
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs", new DoNotExposeListT(),
                 MetadataReferences.MetadataReferenceFacade.SystemXml);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.CSharp8.cs", new CS.DoNotExposeListT(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.CSharp8.cs", new DoNotExposeListT(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new CS.DoNotExposeListT());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
 #endif
 
         [TestMethod]
@@ -59,7 +59,7 @@ public class InvalidCode
     public List<InvalidType> Method() => null;
 
     public InvalidType Method2() => null;
-}", new CS.DoNotExposeListT(), CompilationErrorBehavior.Ignore);
+}", new DoNotExposeListT(), CompilationErrorBehavior.Ignore);
         }
     }
 }

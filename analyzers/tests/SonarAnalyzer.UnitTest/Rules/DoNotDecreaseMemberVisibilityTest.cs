@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotDecreaseMemberVisibility() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotDecreaseMemberVisibility.cs",
-                                    new CS.DoNotDecreaseMemberVisibility(),
+                                    new DoNotDecreaseMemberVisibility(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
                                     NuGetMetadataReference.NETStandardV2_1_0);
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotDecreaseMemberVisibility_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotDecreaseMemberVisibility.CSharp9.cs", new CS.DoNotDecreaseMemberVisibility());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotDecreaseMemberVisibility.CSharp9.cs", new DoNotDecreaseMemberVisibility());
 #endif
     }
 }
