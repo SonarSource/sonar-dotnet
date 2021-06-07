@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="Deployer.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -16,79 +16,112 @@ using Akka.Util.Internal;
 
 namespace Akka.Actor
 {
+    /// <summary>
+    /// Used to configure and deploy actors.
+    /// </summary>
     public class Deployer
     {
-        private readonly Config _default;
+        /// <summary>
+        /// TBD
+        /// </summary>
+        protected readonly Config Default;
         private readonly Settings _settings;
-        private readonly AtomicReference<WildcardTree<Deploy>> _deployments = new AtomicReference<WildcardTree<Deploy>>(new WildcardTree<Deploy>());
+        private readonly AtomicReference<WildcardIndex<Deploy>> _deployments = 
+            new AtomicReference<WildcardIndex<Deploy>>(new WildcardIndex<Deploy>());
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Deployer"/> class.
+        /// </summary>
+        /// <param name="settings">The settings used to configure the deployer.</param>
         public Deployer(Settings settings)
         {
             _settings = settings;
-            var config = settings.Config.GetConfig("akka.actor.deployment");
-            _default = config.GetConfig("default");
+            var config = _settings.Config.GetConfig("akka.actor.deployment");
+            Default = config.GetConfig("default");
 
             var rootObj = config.Root.GetObject();
             if (rootObj == null) return;
-            var unwrapped = rootObj.Unwrapped.Where(d => !d.Key.Equals("default")).ToArray();
-            foreach (var d in unwrapped.Select(x => ParseConfig(x.Key, config.GetConfig(x.Key))))
+            var deploys = rootObj.Items
+                .Where(d => !d.Key.Equals("default"))
+                .Select(kvp => ParseConfig(kvp.Key, kvp.Value.ToConfig()));
+            foreach (var d in deploys)
             {
                 SetDeploy(d);
             }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="path">TBD</param>
+        /// <returns>TBD</returns>
         public Deploy Lookup(ActorPath path)
         {
-            if (path.Elements.Head() != "user" || path.Elements.Count() < 2)
+            var rawElements = path.Elements;
+            if (rawElements[0] != "user" || rawElements.Count < 2)
+            {
                 return Deploy.None;
+            }
 
-            var elements = path.Elements.Drop(1);
+            var elements = rawElements.Drop(1);
             return Lookup(elements);
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="path">TBD</param>
+        /// <returns>TBD</returns>
         public Deploy Lookup(IEnumerable<string> path)
         {
-            return Lookup(path.GetEnumerator());
+            return _deployments.Value.Find(path);
         }
 
-        public Deploy Lookup(IEnumerator<string> path)
-        {
-            return _deployments.Value.Find(path).Data;
-        }
-
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="deploy">TBD</param>
+        /// <exception cref="IllegalActorNameException">
+        /// This exception is thrown if the actor name in the deployment path is empty or contains invalid ASCII.
+        /// Valid ASCII includes letters and anything from <see cref="ActorPath.ValidSymbols"/>. Note that paths
+        /// cannot start with the <c>$</c>.
+        /// </exception>
         public void SetDeploy(Deploy deploy)
         {
-            Action<IList<string>, Deploy> add = (path, d) =>
+            void add(IList<string> path, Deploy d)
             {
-                bool set;
-                do
+                var w = _deployments.Value;
+                foreach (var t in path)
                 {
-                    var w = _deployments.Value;
-                    foreach (var t in path)
+                    if (string.IsNullOrEmpty(t))
+                        throw new IllegalActorNameException($"Actor name in deployment [{d.Path}] must not be empty");
+                    if (!ActorPath.IsValidPathElement(t))
                     {
-                        var curPath = t;
-                        if (string.IsNullOrEmpty(curPath))
-                            throw new IllegalActorNameException(string.Format("Actor name in deployment [{0}] must not be empty", d.Path));
-                        if (!ActorPath.IsValidPathElement(t))
-                        {
-                            throw new IllegalActorNameException(
-                                string.Format("Illegal actor name [{0}] in deployment [${1}]. Actor paths MUST: not start with `$`, include only ASCII letters and can only contain these special characters: ${2}.", t, d.Path, new String(ActorPath.ValidSymbols)));
-                        }
+                        throw new IllegalActorNameException(
+                            $"Illegal actor name [{t}] in deployment [${d.Path}]. Actor paths MUST: not start with `$`, include only ASCII letters and can only contain these special characters: ${new string(ActorPath.ValidSymbols)}.");
                     }
-                    set = _deployments.CompareAndSet(w, w.Insert(path.GetEnumerator(), d));
-                } while(!set);
-            };
+                }
+                if (!_deployments.CompareAndSet(w, w.Insert(path, d))) add(path, d);
+            }
+
             var elements = deploy.Path.Split('/').Drop(1).ToList();
             add(elements, deploy);
         }
 
+        /// <summary>
+        /// Creates an actor deployment to the supplied path, <paramref name="key"/>, using the supplied configuration, <paramref name="config"/>.
+        /// </summary>
+        /// <param name="key">The path used to deploy the actor.</param>
+        /// <param name="config">The configuration used to configure the deployed actor.</param>
+        /// <returns>A configured actor deployment to the given path.</returns>
         public virtual Deploy ParseConfig(string key, Config config)
         {
-            var deployment = config.WithFallback(_default);
-            var routerType = deployment.GetString("router");
+            var deployment = config.WithFallback(Default);
+            var routerType = deployment.GetString("router", "from-code");
+            // var router = CreateRouterConfig(routerType, key, config, deployment);
             var router = CreateRouterConfig(routerType, deployment);
-            var dispatcher = deployment.GetString("dispatcher");
-            var mailbox = deployment.GetString("mailbox");
+            var dispatcher = deployment.GetString("dispatcher", "");
+            var mailbox = deployment.GetString("mailbox", "");
             var deploy = new Deploy(key, deployment, router, Deploy.NoScopeGiven, dispatcher, mailbox);
             return deploy;
         }
@@ -96,11 +129,43 @@ namespace Akka.Actor
         private RouterConfig CreateRouterConfig(string routerTypeAlias, Config deployment)
         {
             if (routerTypeAlias == "from-code")
-                return RouterConfig.NoRouter;
+                return NoRouter.Instance;
+
+            if (deployment.IsNullOrEmpty())
+                throw ConfigurationException.NullOrEmptyConfig<RouterConfig>();
 
             var path = string.Format("akka.actor.router.type-mapping.{0}", routerTypeAlias);
-            var routerTypeName = _settings.Config.GetString(path);
-            var routerType = Type.GetType(routerTypeName);
+            var routerTypeName = _settings.Config.GetString(path, null);
+
+            if(routerTypeName == null)
+            {
+                var message = $"Could not find type mapping for router alias [{routerTypeAlias}].";
+                if (routerTypeAlias == "cluster-metrics-adaptive-group" ||
+                    routerTypeAlias == "cluster-metrics-adaptive-pool")
+                    message += " Please install Akka.Cluster.Metrics extension nuget package.";
+                else
+                    message += " Did you forgot to install a specific router extension?";
+
+                throw new ConfigurationException(message);
+            }
+
+            Type routerType;
+            try
+            {
+                routerType = Type.GetType(routerTypeName);
+            }
+            catch (ArgumentNullException e)
+            {
+                var message = $"Could not find extension Type [{routerTypeAlias}] for router alias [{routerTypeAlias}].";
+                if (routerTypeAlias == "cluster-metrics-adaptive-group" ||
+                    routerTypeAlias == "cluster-metrics-adaptive-pool")
+                    message += " Please install Akka.Cluster.Metrics extension nuget package.";
+                else
+                    message += " Did you forgot to install a specific router extension?";
+
+                throw new ConfigurationException(message, e);
+            }
+
             Debug.Assert(routerType != null, "routerType != null");
             var routerConfig = (RouterConfig)Activator.CreateInstance(routerType, deployment);
 
@@ -108,4 +173,3 @@ namespace Akka.Actor
         }
     }
 }
-

@@ -1,4 +1,11 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Echo.cs" company="Akka.NET Project">
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System;
 using Akka.Actor;
 using Akka.Cluster;
 using Akka.Cluster.Tools.PublishSubscribe;
@@ -25,19 +32,19 @@ namespace ClusterToolsExample.Shared
         public EchoReceiver()
         {
             Receive<Echo>(echo => Console.WriteLine(echo.Message));
-            Receive<Distributed.SubscribeAck>(ack =>
+            Receive<SubscribeAck>(ack =>
                 Console.WriteLine("Actor [{0}] has subscribed to topic [{1}]", ack.Subscribe.Ref, ack.Subscribe.Topic));
         }
 
         protected override void PreStart()
         {
             base.PreStart();
-            Mediator.Tell(new Distributed.Subscribe(Topic, Self));
+            Mediator.Tell(new Subscribe(Topic, Self));
         }
 
         protected override void PostStop()
         {
-            Mediator.Tell(new Distributed.Unsubscribe(Topic, Self));
+            Mediator.Tell(new Unsubscribe(Topic, Self));
             base.PostStop();
         }
     }

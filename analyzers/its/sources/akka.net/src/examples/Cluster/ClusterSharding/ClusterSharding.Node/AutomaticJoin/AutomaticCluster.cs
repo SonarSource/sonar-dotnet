@@ -1,9 +1,16 @@
-﻿using System.Collections.Immutable;
-using System.Data.SQLite;
+﻿//-----------------------------------------------------------------------
+// <copyright file="AutomaticCluster.cs" company="Akka.NET Project">
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System.Collections.Immutable;
 using System.Linq;
 using Akka.Actor;
 using Akka.Cluster;
 using Akka.Persistence.Sqlite;
+using Microsoft.Data.Sqlite;
 
 namespace ClusterSharding.Node.AutomaticJoin
 {
@@ -19,12 +26,13 @@ namespace ClusterSharding.Node.AutomaticJoin
 
         public AutomaticCluster(ActorSystem system)
         {
-            _system = system;
+            _system = system;        
             _cluster = Cluster.Get(system);
             _persistence = SqlitePersistence.Get(system);
             _dbHelper = new DbHelper(() =>
             {
-                var conn = new SQLiteConnection(_persistence.JournalSettings.ConnectionString);
+                var str = _system.Settings.Config.GetString("akka.persistence.journal.sqlite.connection-string", null);
+                var conn = new SqliteConnection(str);
                 conn.Open();
                 return conn;
             });

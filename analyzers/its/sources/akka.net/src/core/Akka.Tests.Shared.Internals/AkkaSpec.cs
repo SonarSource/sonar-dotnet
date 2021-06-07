@@ -1,16 +1,24 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="AkkaSpec.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
+using Akka.Actor;
+using Akka.Actor.Setup;
 using Akka.Configuration;
+using Akka.TestKit.Internal.StringMatcher;
+using Akka.TestKit.TestEvent;
+using Akka.Util;
+using Akka.Util.Internal;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -36,7 +44,9 @@ namespace Akka.TestKit
               #  }
               #}
             }
-          }");
+          }
+          # use random ports to avoid race conditions with binding contention
+          akka.remote.dot-netty.tcp.port = 0");
 
         private static int _systemNumber = 0;
 
@@ -47,6 +57,24 @@ namespace Akka.TestKit
 
         public AkkaSpec(Config config = null, ITestOutputHelper output = null)
             : base(config.SafeWithFallback(_akkaSpecConfig), GetCallerName(), output)
+        {
+            BeforeAll();
+        }
+
+        public AkkaSpec(ActorSystemSetup setup, ITestOutputHelper output = null)
+            : base(setup, GetCallerName(), output)
+        {
+            BeforeAll();
+        }
+
+        public AkkaSpec(ITestOutputHelper output, Config config = null)
+            : base(config.SafeWithFallback(_akkaSpecConfig), GetCallerName(), output)
+        {
+            BeforeAll();
+        }
+
+        public AkkaSpec(ActorSystem system, ITestOutputHelper output = null)
+            : base(system, output)
         {
             BeforeAll();
         }
@@ -80,13 +108,12 @@ namespace Akka.TestKit
                 SkipWhile(m => m.DeclaringType.Name == "AkkaSpec").
                 Select(m => _nameReplaceRegex.Replace(m.DeclaringType.Name + "-" + systemNumber, "-")).
                 FirstOrDefault() ?? "test";
+
             return name;
         }
 
-        protected static Config AkkaSpecConfig { get { return _akkaSpecConfig; } }
-
-
-
+        public static Config AkkaSpecConfig { get { return _akkaSpecConfig; } }
+        
         protected T ExpectMsgPf<T>(TimeSpan? timeout, string hint, Func<object, T> function)
         {
             MessageEnvelope envelope;
@@ -97,24 +124,22 @@ namespace Akka.TestKit
             var message = envelope.Message;
             Assertions.AssertTrue(message != null, string.Format("expected {0} but got null message", hint));
             //TODO: Check next line. 
-            Assertions.AssertTrue(function.Method.GetParameters().Any(x => x.ParameterType.IsInstanceOfType(message)), string.Format("expected {0} but got {1} instead", hint, message));
+            Assertions.AssertTrue(function.GetMethodInfo().GetParameters().Any(x => x.ParameterType.IsInstanceOfType(message)), string.Format("expected {0} but got {1} instead", hint, message));
             return function.Invoke(message);
         }
-
-
 
         protected T ExpectMsgPf<T>(string hint, Func<object, T> pf)
         {
             var t = ExpectMsg<T>();
             //TODO: Check if this really is needed:
-            Assertions.AssertTrue(pf.Method.GetParameters().Any(x => x.ParameterType.IsInstanceOfType(t)), string.Format("expected {0} but got {1} instead", hint, t));
+            Assertions.AssertTrue(pf.GetMethodInfo().GetParameters().Any(x => x.ParameterType.IsInstanceOfType(t)), string.Format("expected {0} but got {1} instead", hint, t));
             return pf.Invoke(t);
         }
 
 
-        protected void Intercept<T>(Action actionThatThrows) where T : Exception
+        protected T Intercept<T>(Action actionThatThrows) where T : Exception
         {
-            Assert.Throws<T>(() => actionThatThrows());
+            return Assert.Throws<T>(() => actionThatThrows());
         }
 
         protected void Intercept(Action actionThatThrows)
@@ -122,6 +147,19 @@ namespace Akka.TestKit
             try
             {
                 actionThatThrows();
+            }
+            catch(Exception)
+            {
+                return;
+            }
+            throw new ThrowsException(typeof(Exception));
+        }
+        
+        protected async Task InterceptAsync(Func<Task> asyncActionThatThrows)
+        {
+            try
+            {
+                await asyncActionThatThrows();
             }
             catch(Exception)
             {
@@ -148,6 +186,23 @@ namespace Akka.TestKit
             return ExpectMsgPf<T>(duration, hint, pf);
         }
 
+        protected void MuteDeadLetters(params Type[] messageClasses)
+        {
+            if (!Sys.Log.IsDebugEnabled)
+                return;
+
+            Action<Type> mute =
+                clazz =>
+                    Sys.EventStream.Publish(
+                        new Mute(new DeadLettersFilter(new PredicateMatcher(_ => true),
+                            new PredicateMatcher(_ => true),
+                            letter => clazz == typeof(object) || letter.Message.GetType() == clazz)));
+
+            if (messageClasses.Length == 0)
+                mute(typeof(object));
+            else
+                messageClasses.ForEach(mute);
+        }
     }
 
     // ReSharper disable once InconsistentNaming

@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="StringBuilderExtensions.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -11,10 +11,7 @@ using System.Text;
 
 namespace Akka.Util.Internal
 {
-    /// <summary>
-    /// <remarks>Note! Part of internal API. Breaking changes may occur without notice. Use at own risk.</remarks>
-    /// </summary>
-    public static class StringBuilderExtensions
+    internal static class StringBuilderExtensions
     {
         public static StringBuilder AppendJoin<T>(this StringBuilder sb, string separator, IEnumerable<T> values)
         {
@@ -46,7 +43,8 @@ namespace Akka.Util.Internal
                     index++;
                     sb.Append(separator);
                     // ReSharper disable CompareNonConstrainedGenericWithNull
-                    if (enumerator.Current != null)
+                    current = enumerator.Current;
+                    if (current != null)
                         // ReSharper restore CompareNonConstrainedGenericWithNull
                     {
                         valueAppender(sb, current, index);
@@ -55,6 +53,7 @@ namespace Akka.Util.Internal
             }
             return sb;
         }
+
         private static void DefaultAppendValue<T>(StringBuilder sb, T value, int index)
         {
             var s = value.ToString();

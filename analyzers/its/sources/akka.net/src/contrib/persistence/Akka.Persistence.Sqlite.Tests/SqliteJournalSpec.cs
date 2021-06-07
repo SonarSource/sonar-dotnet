@@ -1,12 +1,12 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="SqliteJournalSpec.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
 using Akka.Configuration;
-using Akka.Persistence.TestKit.Journal;
+using Akka.Persistence.TCK.Journal;
 using Akka.Util.Internal;
 using Xunit.Abstractions;
 
@@ -17,12 +17,15 @@ namespace Akka.Persistence.Sqlite.Tests
         private static AtomicCounter counter = new AtomicCounter(0);
 
         public SqliteJournalSpec(ITestOutputHelper output)
-            : base(CreateSpecConfig("FullUri=file:memdb-journal-" + counter.IncrementAndGet() + ".db?mode=memory&cache=shared;"), "SqliteJournalSpec", output)
+            : base(CreateSpecConfig("Filename=file:memdb-journal-" + counter.IncrementAndGet() + ".db;Mode=Memory;Cache=Shared"), "SqliteJournalSpec", output)
         {
             SqlitePersistence.Get(Sys);
 
             Initialize();
         }
+
+        // TODO: hack. Replace when https://github.com/akkadotnet/akka.net/issues/3811
+        protected override bool SupportsSerialization => false;
 
         private static Config CreateSpecConfig(string connectionString)
         {
@@ -35,6 +38,7 @@ namespace Akka.Persistence.Sqlite.Tests
                             class = ""Akka.Persistence.Sqlite.Journal.SqliteJournal, Akka.Persistence.Sqlite""
                             plugin-dispatcher = ""akka.actor.default-dispatcher""
                             table-name = event_journal
+                            metadata-table-name = journal_metadata
                             auto-initialize = on
                             connection-string = """ + connectionString + @"""
                         }

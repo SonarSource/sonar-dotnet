@@ -1,11 +1,12 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="Gossip.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Akka.Remote;
@@ -44,43 +45,66 @@ namespace Akka.Cluster
     /// `Removed` by removing it from the `members` set and sending a `Removed` command to the
     /// removed node telling it to shut itself down.
     /// </summary>
-    class Gossip
+    internal sealed class Gossip
     {
+        /// <summary>
+        /// An empty set of members
+        /// </summary>
         public static readonly ImmutableSortedSet<Member> EmptyMembers = ImmutableSortedSet.Create<Member>();
+
+        /// <summary>
+        /// An empty <see cref="Gossip"/> object.
+        /// </summary>
         public static readonly Gossip Empty = new Gossip(EmptyMembers);
 
+        /// <summary>
+        /// Creates a new <see cref="Gossip"/> from the given set of members.
+        /// </summary>
+        /// <param name="members">The current membership of the cluster.</param>
+        /// <returns>A gossip object for the given members.</returns>
         public static Gossip Create(ImmutableSortedSet<Member> members)
         {
             if (members.IsEmpty) return Empty;
             return Empty.Copy(members: members);
         }
 
-        static readonly ImmutableHashSet<MemberStatus> LeaderMemberStatus =
-            ImmutableHashSet.Create(MemberStatus.Up, MemberStatus.Leaving);
-
-        static readonly ImmutableHashSet<MemberStatus> ConvergenceMemberStatus =
-            ImmutableHashSet.Create(MemberStatus.Up, MemberStatus.Leaving);
-
-        public static readonly ImmutableHashSet<MemberStatus> ConvergenceSkipUnreachableWithMemberStatus =
-            ImmutableHashSet.Create(MemberStatus.Down, MemberStatus.Exiting);
-
-        public static readonly ImmutableHashSet<MemberStatus> RemoveUnreachableWithMemberStatus =
-            ImmutableHashSet.Create(MemberStatus.Down, MemberStatus.Exiting);
-
         readonly ImmutableSortedSet<Member> _members;
         readonly GossipOverview _overview;
         readonly VectorClock _version;
-        private readonly Lazy<Reachability> _reachability;
 
+        /// <summary>
+        /// The current members of the cluster
+        /// </summary>
         public ImmutableSortedSet<Member> Members { get { return _members; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public GossipOverview Overview { get { return _overview; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public VectorClock Version { get { return _version; } }
-        public Reachability ReachabilityExcludingDownedObservers { get { return _reachability.Value; } }
 
-        public Gossip(ImmutableSortedSet<Member> members) : this(members, new GossipOverview(), VectorClock.Create() ) {}
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="members">TBD</param>
+        public Gossip(ImmutableSortedSet<Member> members) : this(members, new GossipOverview(), VectorClock.Create()) { }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="members">TBD</param>
+        /// <param name="overview">TBD</param>
         public Gossip(ImmutableSortedSet<Member> members, GossipOverview overview) : this(members, overview, VectorClock.Create()) { }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="members">TBD</param>
+        /// <param name="overview">TBD</param>
+        /// <param name="version">TBD</param>
+        /// <exception cref="ArgumentException">TBD</exception>
         public Gossip(ImmutableSortedSet<Member> members, GossipOverview overview, VectorClock version)
         {
             _members = members;
@@ -90,18 +114,22 @@ namespace Akka.Cluster
             _membersMap = new Lazy<ImmutableDictionary<UniqueAddress, Member>>(
                 () => members.ToImmutableDictionary(m => m.UniqueAddress, m => m));
 
-            _reachability = new Lazy<Reachability>(() =>
+            ReachabilityExcludingDownedObservers = new Lazy<Reachability>(() =>
             {
-                var downed = _members
-                    .Where(m => m.Status == MemberStatus.Down)
-                    .Select(m=>m.UniqueAddress);
-
-                return overview.Reachability.Remove(downed);
+                var downed = Members.Where(m => m.Status == MemberStatus.Down);
+                return Overview.Reachability.RemoveObservers(downed.Select(m => m.UniqueAddress).ToImmutableHashSet());
             });
 
             if (Cluster.IsAssertInvariantsEnabled) AssertInvariants();
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="members">TBD</param>
+        /// <param name="overview">TBD</param>
+        /// <param name="version">TBD</param>
+        /// <returns>TBD</returns>
         public Gossip Copy(ImmutableSortedSet<Member> members = null, GossipOverview overview = null,
             VectorClock version = null)
         {
@@ -110,20 +138,33 @@ namespace Akka.Cluster
 
         private void AssertInvariants()
         {
-            if(_members.Any(m => m.Status == MemberStatus.Removed))
-                throw new ArgumentException(string.Format("Live members must not have status [Removed], got {0}", 
-                    _members.Where(m => m.Status == MemberStatus.Removed).Select(m => m.ToString()).Aggregate((a, b) => a + ", " + b)));
+            void IfTrueThrow(bool func, string expected, string actual)
+            {
+                if (func) throw new ArgumentException($"{expected}, but found [{actual}]");
+            }
 
-            var inReachabilityButNotMember =
-                _overview.Reachability.AllObservers.Except(_members.Select(m => m.UniqueAddress));
-            if(!inReachabilityButNotMember.IsEmpty)
-                throw new ArgumentException("Nodes not part of cluster in reachability table, got {0}", 
-                    inReachabilityButNotMember.Select(a => a.ToString()).Aggregate((a,b) => a + ", " + b));
+
+            IfTrueThrow(_members.Any(m => m.Status == MemberStatus.Removed),
+                expected: "Live members must not have status [Removed]",
+                actual: string.Join(", ",
+                    _members.Where(m => m.Status == MemberStatus.Removed).Select(m => m.ToString())));
+
+
+            var inReachabilityButNotMember = _overview.Reachability.AllObservers.Except(_members.Select(m => m.UniqueAddress));
+            IfTrueThrow(!inReachabilityButNotMember.IsEmpty,
+                expected: "Nodes not part of cluster in reachability table",
+                actual: string.Join(", ", inReachabilityButNotMember.Select(a => a.ToString())));
+
+            var inReachabilityVersionsButNotMember =
+                _overview.Reachability.Versions.Keys.Except(Members.Select(x => x.UniqueAddress)).ToImmutableHashSet();
+            IfTrueThrow(!inReachabilityVersionsButNotMember.IsEmpty,
+                expected: "Nodes not part of cluster in reachability versions table",
+                actual: string.Join(", ", inReachabilityVersionsButNotMember.Select(a => a.ToString())));
 
             var seenButNotMember = _overview.Seen.Except(_members.Select(m => m.UniqueAddress));
-            if (!seenButNotMember.IsEmpty)
-                throw new ArgumentException("Nodes not part of cluster have marked the Gossip as seen, got {0}",
-                    seenButNotMember.Select(a => a.ToString()).Aggregate((a, b) => a + ", " + b));
+            IfTrueThrow(!seenButNotMember.IsEmpty,
+                expected: "Nodes not part of cluster have marked the Gossip as seen",
+                actual: string.Join(", ", seenButNotMember.Select(a => a.ToString())));
         }
 
         //TODO: Serializer should ignore
@@ -132,6 +173,8 @@ namespace Akka.Cluster
         /// <summary>
         /// Increments the version for this 'Node'.
         /// </summary>
+        /// <param name="node">TBD</param>
+        /// <returns>TBD</returns>
         public Gossip Increment(VectorClock.Node node)
         {
             return Copy(version: _version.Increment(node));
@@ -140,8 +183,8 @@ namespace Akka.Cluster
         /// <summary>
         /// Adds a member to the member node ring.
         /// </summary>
-        /// <param name="member"></param>
-        /// <returns></returns>
+        /// <param name="member">TBD</param>
+        /// <returns>TBD</returns>
         public Gossip AddMember(Member member)
         {
             if (_members.Contains(member)) return this;
@@ -151,18 +194,31 @@ namespace Akka.Cluster
         /// <summary>
         /// Marks the gossip as seen by this node (address) by updating the address entry in the 'gossip.overview.seen'
         /// </summary>
+        /// <param name="node">TBD</param>
+        /// <returns>TBD</returns>
         public Gossip Seen(UniqueAddress node)
         {
             if (SeenByNode(node)) return this;
             return Copy(overview: _overview.Copy(seen: _overview.Seen.Add(node)));
         }
-        
+
         /// <summary>
         /// Marks the gossip as seen by only this node (address) by replacing the 'gossip.overview.seen'
         /// </summary>
+        /// <param name="node">TBD</param>
+        /// <returns>TBD</returns>
         public Gossip OnlySeen(UniqueAddress node)
         {
             return Copy(overview: _overview.Copy(seen: ImmutableHashSet.Create(node)));
+        }
+
+        /// <summary>
+        /// Removes all seen entries from the gossip.
+        /// </summary>
+        /// <returns>A copy of the current gossip with no seen entries.</returns>
+        public Gossip ClearSeen()
+        {
+            return Copy(overview: Overview.Copy(seen: ImmutableHashSet<UniqueAddress>.Empty));
         }
 
         /// <summary>
@@ -176,16 +232,28 @@ namespace Akka.Cluster
         /// <summary>
         /// Has this Gossip been seen by this node.
         /// </summary>
+        /// <param name="node">The unique address of the node.</param>
+        /// <returns><c>true</c> if this gossip has been seen by the given node, <c>false</c> otherwise.</returns>
         public bool SeenByNode(UniqueAddress node)
         {
             return _overview.Seen.Contains(node);
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="that">TBD</param>
+        /// <returns>TBD</returns>
         public Gossip MergeSeen(Gossip that)
         {
             return Copy(overview: _overview.Copy(seen: _overview.Seen.Union(that._overview.Seen)));
         }
 
+        /// <summary>
+        /// Merges two <see cref="Gossip"/> objects together into a consistent view of the <see cref="Cluster"/>.
+        /// </summary>
+        /// <param name="that">The other gossip object to be merged.</param>
+        /// <returns>A combined gossip object that uses the underlying <see cref="VectorClock"/> to determine which items are newest.</returns>
         public Gossip Merge(Gossip that)
         {
             //TODO: Member ordering import?
@@ -196,7 +264,7 @@ namespace Akka.Cluster
             var mergedMembers = EmptyMembers.Union(Member.PickHighestPriority(this._members, that._members));
 
             // 3. merge reachability table by picking records with highest version
-            var mergedReachability = this._overview.Reachability.Merge(mergedMembers.Select(m => m.UniqueAddress),
+            var mergedReachability = _overview.Reachability.Merge(mergedMembers.Select(m => m.UniqueAddress).ToImmutableSortedSet(),
                 that._overview.Reachability);
 
             // 4. Nobody can have seen this new gossip yet
@@ -205,85 +273,55 @@ namespace Akka.Cluster
             return new Gossip(mergedMembers, new GossipOverview(mergedSeen, mergedReachability), mergedVClock);
         }
 
-        // First check that:
-        //   1. we don't have any members that are unreachable, or
-        //   2. all unreachable members in the set have status DOWN or EXITING
-        // Else we can't continue to check for convergence
-        // When that is done we check that all members with a convergence
-        // status is in the seen table and has the latest vector clock
-        // version
-        public bool Convergence(UniqueAddress selfUniqueAddress)
-        {
-            var unreachable = _overview.Reachability.AllUnreachableOrTerminated
-                .Where(node => node != selfUniqueAddress)
-                .Select(GetMember);
+        /// <summary>
+        /// TBD
+        /// </summary>
+        public Lazy<Reachability> ReachabilityExcludingDownedObservers { get; }
 
-            var convergedUnreachable = unreachable
-                .All(m => ConvergenceSkipUnreachableWithMemberStatus.Contains(m.Status));
-
-            var convergedSeen =
-                !_members.Any(m => ConvergenceMemberStatus.Contains(m.Status) && !SeenByNode(m.UniqueAddress));
-
-            return convergedUnreachable && convergedSeen;
-        }
-
-        public bool IsLeader(UniqueAddress node, UniqueAddress selfUniqueAddress)
-        {
-            return Leader(selfUniqueAddress) == node && node != null;
-        }
-
-        public UniqueAddress Leader(UniqueAddress selfUniqueAddress)
-        {
-           return LeaderOf(_members, selfUniqueAddress);
-        }
-
-        public UniqueAddress RoleLeader(string role, UniqueAddress selfUniqueAddress)
-        {
-            var roleMembers = _members
-                .Where(m => m.HasRole(role))
-                .ToImmutableSortedSet();
-
-            return LeaderOf(roleMembers, selfUniqueAddress);
-        }
-
-        private UniqueAddress LeaderOf(ImmutableSortedSet<Member> mbrs, UniqueAddress selfUniqueAddress)
-        {
-            var reachableMembers = _overview.Reachability.IsAllReachable
-                ? mbrs
-                : mbrs
-                    .Where(m => _overview.Reachability.IsReachable(m.UniqueAddress) || m.UniqueAddress == selfUniqueAddress)
-                    .ToImmutableSortedSet();
-
-            if (!reachableMembers.Any()) return null;
-
-            var member = reachableMembers.FirstOrDefault(m => LeaderMemberStatus.Contains(m.Status)) ??
-                         reachableMembers.Min(Member.LeaderStatusOrdering);
-
-            return member.UniqueAddress;
-        }
-
+        /// <summary>
+        /// TBD
+        /// </summary>
         public ImmutableHashSet<string> AllRoles
         {
             get { return _members.SelectMany(m => m.Roles).ToImmutableHashSet(); }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public bool IsSingletonCluster
         {
             get { return _members.Count == 1; }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="node">TBD</param>
+        /// <returns>TBD</returns>
         public Member GetMember(UniqueAddress node)
         {
-            return _membersMap.Value.GetOrElse(node, 
+            return _membersMap.Value.GetOrElse(node,
                 Member.Removed(node)); // placeholder for removed member
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="node">TBD</param>
+        /// <returns>TBD</returns>
         public bool HasMember(UniqueAddress node)
         {
             return _membersMap.Value.ContainsKey(node);
         }
 
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <exception cref="Exception">
+        /// This exception is thrown when there are no members in the cluster.
+        /// </exception>
         public Member YoungestMember
         {
             get
@@ -294,38 +332,92 @@ namespace Akka.Cluster
             }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="removedNode">TBD</param>
+        /// <returns>TBD</returns>
+        public Gossip Prune(VectorClock.Node removedNode)
+        {
+            var newVersion = Version.Prune(removedNode);
+            if (newVersion.Equals(Version))
+                return this;
+            else
+                return new Gossip(Members, Overview, newVersion);
+        }
+
+        public Gossip MarkAsDown(Member member)
+        {
+            // replace member (changed status)
+            var newMembers = Members.Remove(member).Add(member.Copy(MemberStatus.Down));
+            // remove nodes marked as DOWN from the 'seen' table
+            var newSeen = Overview.Seen.Remove(member.UniqueAddress);
+
+            //update gossip overview
+            var newOverview = Overview.Copy(seen: newSeen);
+            return Copy(newMembers, overview: newOverview);
+        }
+
+        /// <inheritdoc/>
         public override string ToString()
         {
-            return String.Format("Gossip(members = [{0}], overview = {1}, version = {2}",
-                _members.Select(m => m.ToString()).Aggregate((a, b) => a + ", " + b), _overview, _version);
+            var members = string.Join(", ", _members.Select(m => m.ToString()));
+            return $"Gossip(members = [{members}], overview = {_overview}, version = {_version}";
         }
     }
 
     /// <summary>
     /// Represents the overview of the cluster, holds the cluster convergence table and set with unreachable nodes.
     /// </summary>
-    class GossipOverview
+    internal class GossipOverview
     {
         readonly ImmutableHashSet<UniqueAddress> _seen;
         readonly Reachability _reachability;
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public GossipOverview() : this(ImmutableHashSet.Create<UniqueAddress>(), Reachability.Empty) { }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="reachability">TBD</param>
         public GossipOverview(Reachability reachability) : this(ImmutableHashSet.Create<UniqueAddress>(), reachability) { }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="seen">TBD</param>
+        /// <param name="reachability">TBD</param>
         public GossipOverview(ImmutableHashSet<UniqueAddress> seen, Reachability reachability)
         {
             _seen = seen;
             _reachability = reachability;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="seen">TBD</param>
+        /// <param name="reachability">TBD</param>
+        /// <returns>TBD</returns>
         public GossipOverview Copy(ImmutableHashSet<UniqueAddress> seen = null, Reachability reachability = null)
         {
             return new GossipOverview(seen ?? _seen, reachability ?? _reachability);
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public ImmutableHashSet<UniqueAddress> Seen { get { return _seen; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public Reachability Reachability { get { return _reachability; } }
+        
+        /// <inheritdoc/>
+        public override string ToString() => $"GossipOverview(seen=[{string.Join(", ", Seen)}], reachability={Reachability})";
     }
 
     /// <summary>
@@ -337,12 +429,17 @@ namespace Akka.Cluster
     /// </summary>
     class GossipEnvelope : IClusterMessage
     {
-        //TODO: Serialization?
-        //TODO: ser stuff?
-
         readonly UniqueAddress _from;
         readonly UniqueAddress _to;
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="from">TBD</param>
+        /// <param name="to">TBD</param>
+        /// <param name="gossip">TBD</param>
+        /// <param name="deadline">TBD</param>
+        /// <returns>TBD</returns>
         public GossipEnvelope(UniqueAddress from, UniqueAddress to, Gossip gossip, Deadline deadline = null)
         {
             _from = from;
@@ -351,9 +448,21 @@ namespace Akka.Cluster
             Deadline = deadline;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public UniqueAddress From { get { return _from; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public UniqueAddress To { get { return _to; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public Gossip Gossip { get; set; }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public Deadline Deadline { get; set; }
     }
 
@@ -368,28 +477,42 @@ namespace Akka.Cluster
         readonly UniqueAddress _from;
         readonly VectorClock _version;
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public UniqueAddress From { get { return _from; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public VectorClock Version { get { return _version; } }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="from">TBD</param>
+        /// <param name="version">TBD</param>
         public GossipStatus(UniqueAddress from, VectorClock version)
         {
             _from = from;
             _version = version;
         }
 
+        /// <inheritdoc/>
         protected bool Equals(GossipStatus other)
         {
             return _from.Equals(other._from) && _version.IsSameAs(other._version);
         }
 
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((GossipStatus) obj);
+            return Equals((GossipStatus)obj);
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             unchecked
@@ -398,7 +521,7 @@ namespace Akka.Cluster
             }
         }
 
+        /// <inheritdoc/>
+        public override string ToString() => $"GossipStatus(from={From}, version={Version})";
     }
 }
-
-

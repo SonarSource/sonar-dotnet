@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ThreadPoolBuilder.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -18,6 +18,11 @@ namespace Akka.Dispatch
     /// </summary>
     internal static class DedicatedThreadPoolConfigHelpers
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="cfg">TBD</param>
+        /// <returns>TBD</returns>
         internal static TimeSpan? GetSafeDeadlockTimeout(Config cfg)
         {
             var timespan = cfg.GetTimeSpan("deadlock-timeout", TimeSpan.FromSeconds(-1));
@@ -26,20 +31,15 @@ namespace Akka.Dispatch
             return timespan;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="threadType">TBD</param>
+        /// <returns>TBD</returns>
         internal static ThreadType ConfigureThreadType(string threadType)
         {
-            return string.Compare(threadType, ThreadType.Foreground.ToString(), StringComparison.InvariantCultureIgnoreCase) == 0 ?
+            return string.Compare(threadType, ThreadType.Foreground.ToString(), StringComparison.OrdinalIgnoreCase) == 0 ?
                 ThreadType.Foreground : ThreadType.Background;
-        }
-
-        internal static ApartmentState GetApartmentState(Config cfg)
-        {
-            var s = cfg.GetString("apartment");
-            return string.Compare(s, "sta", StringComparison.InvariantCultureIgnoreCase) == 0
-                ? ApartmentState.STA
-                : string.Compare(s, "mta", StringComparison.InvariantCultureIgnoreCase) == 0
-                    ? ApartmentState.MTA
-                    : ApartmentState.Unknown;
         }
 
         /// <summary>
@@ -56,28 +56,48 @@ namespace Akka.Dispatch
     {
         private readonly Config _config;
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="config">TBD</param>
         public ThreadPoolConfig(Config config)
         {
             _config = config;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public int PoolSizeMin
         {
-            get { return _config.GetInt("pool-size-min"); }
+            get { return _config.GetInt("pool-size-min", 0); }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public double PoolSizeFactor
         {
-            get { return _config.GetDouble("pool-size-factor"); }
+            get { return _config.GetDouble("pool-size-factor", 0); }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public int PoolSizeMax
         {
-            get { return _config.GetInt("pool-size-max"); }
+            get { return _config.GetInt("pool-size-max", 0); }
         }
 
         #region Static methods
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="floor">TBD</param>
+        /// <param name="scalar">TBD</param>
+        /// <param name="ceiling">TBD</param>
+        /// <returns>TBD</returns>
         public static int ScaledPoolSize(int floor, double scalar, int ceiling)
         {
             return Math.Min(Math.Max((int) (Environment.ProcessorCount*scalar), floor), ceiling);

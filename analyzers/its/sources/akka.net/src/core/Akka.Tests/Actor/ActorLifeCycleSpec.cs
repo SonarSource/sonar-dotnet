@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ActorLifeCycleSpec.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -36,14 +36,14 @@ namespace Akka.Tests
 
             private void Report(object message)
             {
-                testActor.Tell(Tuple.Create((string)message,id,CurrentGeneration));
+                testActor.Tell(((string)message,id,CurrentGeneration));
             }
 
             protected override void OnReceive(object message)
             {
                 if (message is string && (string)message == "status")
                 {
-                    testActor.Tell(Tuple.Create("OK",id,CurrentGeneration));
+                    testActor.Tell(("OK",id,CurrentGeneration));
                 }
             }
 
@@ -84,14 +84,14 @@ namespace Akka.Tests
 
             private void Report(object message)
             {
-                testActor.Tell(Tuple.Create((string)message, id, CurrentGeneration));
+                testActor.Tell(((string)message, id, CurrentGeneration));
             }
 
             protected override void OnReceive(object message)
             {
                 if (message is string && (string)message == "status")
                 {
-                    testActor.Tell(Tuple.Create("OK", id, CurrentGeneration));
+                    testActor.Tell(("OK", id, CurrentGeneration));
                 }
             }
 
@@ -107,7 +107,7 @@ namespace Akka.Tests
         }
 
         [Fact(DisplayName = "invoke preRestart, preStart, postRestart when using OneForOneStrategy")]
-        public void ActorLifecycleTest1()
+        public void Actor_lifecycle_test1()
         {
             var generationProvider = new AtomicCounter();
             string id = Guid.NewGuid().ToString();
@@ -115,30 +115,30 @@ namespace Akka.Tests
             var restarterProps = Props.Create(() => new LifeCycleTestActor(TestActor, id, generationProvider));
             var restarter = supervisor.Ask<IActorRef>(restarterProps).Result;
 
-            ExpectMsg(Tuple.Create( "preStart", id, 0));
+            ExpectMsg(("preStart", id, 0));
             restarter.Tell(Kill.Instance);
-            ExpectMsg(Tuple.Create("preRestart", id, 0));
-            ExpectMsg(Tuple.Create("postRestart", id, 1));
+            ExpectMsg(("preRestart", id, 0));
+            ExpectMsg(("postRestart", id, 1));
             restarter.Tell("status");
-            ExpectMsg(Tuple.Create("OK", id, 1));
+            ExpectMsg(("OK", id, 1));
             restarter.Tell(Kill.Instance);
-            ExpectMsg(Tuple.Create("preRestart", id, 1));
-            ExpectMsg(Tuple.Create("postRestart", id, 2));
+            ExpectMsg(("preRestart", id, 1));
+            ExpectMsg(("postRestart", id, 2));
             restarter.Tell("status");
-            ExpectMsg(Tuple.Create("OK", id, 2));
+            ExpectMsg(("OK", id, 2));
             restarter.Tell(Kill.Instance);
-            ExpectMsg(Tuple.Create("preRestart", id, 2));
-            ExpectMsg(Tuple.Create("postRestart", id, 3));
+            ExpectMsg(("preRestart", id, 2));
+            ExpectMsg(("postRestart", id, 3));
             restarter.Tell("status");
-            ExpectMsg(Tuple.Create("OK", id, 3));
+            ExpectMsg(("OK", id, 3));
             restarter.Tell(Kill.Instance);
-            ExpectMsg(Tuple.Create("postStop", id, 3));
+            ExpectMsg(("postStop", id, 3));
             ExpectNoMsg(TimeSpan.FromSeconds(1));
             Sys.Stop(supervisor);
         }
 
         [Fact(DisplayName="default for preRestart and postRestart is to call postStop and preStart respectively")]
-        public void ActorLifecycleTest2()
+        public void Actor_lifecycle_test2()
         {
             var generationProvider = new AtomicCounter();
             string id = Guid.NewGuid().ToString();            
@@ -146,30 +146,30 @@ namespace Akka.Tests
             var restarterProps = Props.Create(() => new LifeCycleTest2Actor(TestActor, id, generationProvider));
             var restarter = supervisor.Ask<IActorRef>(restarterProps).Result;
 
-            ExpectMsg(Tuple.Create("preStart", id, 0));
+            ExpectMsg(("preStart", id, 0));
             restarter.Tell(Kill.Instance);
-            ExpectMsg(Tuple.Create("postStop", id, 0));
-            ExpectMsg(Tuple.Create("preStart", id, 1));
+            ExpectMsg(("postStop", id, 0));
+            ExpectMsg(("preStart", id, 1));
             restarter.Tell("status");
-            ExpectMsg(Tuple.Create("OK", id, 1));
+            ExpectMsg(("OK", id, 1));
             restarter.Tell(Kill.Instance);
-            ExpectMsg(Tuple.Create("postStop", id, 1));
-            ExpectMsg(Tuple.Create("preStart", id, 2));
+            ExpectMsg(("postStop", id, 1));
+            ExpectMsg(("preStart", id, 2));
             restarter.Tell("status");
-            ExpectMsg(Tuple.Create("OK", id, 2));
+            ExpectMsg(("OK", id, 2));
             restarter.Tell(Kill.Instance);
-            ExpectMsg(Tuple.Create("postStop", id, 2));
-            ExpectMsg(Tuple.Create("preStart", id, 3));
+            ExpectMsg(("postStop", id, 2));
+            ExpectMsg(("preStart", id, 3));
             restarter.Tell("status");
-            ExpectMsg(Tuple.Create("OK", id, 3));
+            ExpectMsg(("OK", id, 3));
             restarter.Tell(Kill.Instance);
-            ExpectMsg(Tuple.Create("postStop", id, 3));
+            ExpectMsg(("postStop", id, 3));
             ExpectNoMsg(TimeSpan.FromSeconds(1));
             Sys.Stop(supervisor);
         } 
 
         [Fact(DisplayName="not invoke preRestart and postRestart when never restarted using OneForOneStrategy")]
-        public void ActorLifecycleTest3()
+        public void Actor_lifecycle_test3()
         {
             var generationProvider = new AtomicCounter();
             string id = Guid.NewGuid().ToString();            
@@ -177,11 +177,11 @@ namespace Akka.Tests
             var restarterProps = Props.Create(() => new LifeCycleTest2Actor(TestActor, id, generationProvider));
             var restarter = supervisor.Ask<IInternalActorRef>(restarterProps).Result;
 
-            ExpectMsg(Tuple.Create("preStart", id, 0));
+            ExpectMsg(("preStart", id, 0));
             restarter.Tell("status");
-            ExpectMsg(Tuple.Create("OK", id, 0));
+            ExpectMsg(("OK", id, 0));
             restarter.Stop();
-            ExpectMsg(Tuple.Create("postStop", id, 0));
+            ExpectMsg(("postStop", id, 0));
             ExpectNoMsg(TimeSpan.FromSeconds(1));
         }
 
@@ -199,7 +199,7 @@ namespace Akka.Tests
         }
 
         [Fact(DisplayName="log failures in postStop")]
-        public void LogFailuresInPostStop()
+        public void Log_failures_in_PostStop()
         {
             var a = Sys.ActorOf<EmptyActor>();
             EventFilter.Exception<Exception>(message: "hurrah").ExpectOne(() =>
@@ -255,7 +255,7 @@ namespace Akka.Tests
         }
 
         [Fact]
-        public void ClearBehaviorStackUponRestart()
+        public void Clear_behavior_stack_upon_restart()
         {
             var a = Sys.ActorOf(Props.Create(() => new BecomeActor(TestActor)));
 
@@ -285,7 +285,7 @@ namespace Akka.Tests
                     .With<Spawn>(m =>
                     {
                         Context.ActorOf(Props.Create(() => new KillableActor(testActor)), m.Name);
-                        testActor.Tell(Tuple.Create("Created", m.Name));
+                        testActor.Tell(("Created", m.Name));
                     })
                     .With<ContextStop>(m =>
                     {
@@ -330,7 +330,7 @@ namespace Akka.Tests
             protected override void PostStop()
             {
                 Debug.WriteLine("inside poststop");
-                testActor.Tell(Tuple.Create("Terminated", Self.Path.Name));
+                testActor.Tell(("Terminated", Self.Path.Name));
             }
 
             protected override void OnReceive(object message)
@@ -339,20 +339,20 @@ namespace Akka.Tests
         }
 
         [Fact(DisplayName="If a parent receives a Terminated event for a child actor, the parent should no longer supervise it")]
-        public void ClearChildUponTerminated()
+        public void Clear_child_upon_terminated()
         {
             var names = new[] {"Bob", "Jameson", "Natasha"};
             var supervisor = Sys.ActorOf(Props.Create(() => new SupervisorTestActor(TestActor)));
             supervisor.Tell(new SupervisorTestActor.Spawn(){ Name = names[0] });
-            ExpectMsg(Tuple.Create("Created",names[0]));
+            ExpectMsg(("Created",names[0]));
             supervisor.Tell(new SupervisorTestActor.Count());
             ExpectMsg(1);
             supervisor.Tell(new SupervisorTestActor.Spawn() { Name = names[1] });
-            ExpectMsg(Tuple.Create("Created", names[1]));
+            ExpectMsg(("Created", names[1]));
             supervisor.Tell(new SupervisorTestActor.Count());
             ExpectMsg(2);
             supervisor.Tell(new SupervisorTestActor.ContextStop() { Name = names[1] });
-            ExpectMsg(Tuple.Create("Terminated", names[1]));
+            ExpectMsg(("Terminated", names[1]));
        
             //we need to wait for the child actor to unregister itself from the parent.
             //this is done after PostStop so we have no way to wait for it
@@ -361,14 +361,14 @@ namespace Akka.Tests
             supervisor.Tell(new SupervisorTestActor.Count());
             ExpectMsg(1);
             supervisor.Tell(new SupervisorTestActor.Spawn() { Name = names[2] });
-            ExpectMsg(Tuple.Create("Created", names[2]));
+            ExpectMsg(("Created", names[2]));
             Task.Delay(100).Wait();
             supervisor.Tell(new SupervisorTestActor.Count());
             ExpectMsg(2);
             supervisor.Tell(new SupervisorTestActor.Stop() { Name = names[0] });
-            ExpectMsg(Tuple.Create("Terminated", names[0]));
+            ExpectMsg(("Terminated", names[0]));
             supervisor.Tell(new SupervisorTestActor.Stop() { Name = names[2] });
-            ExpectMsg(Tuple.Create("Terminated", names[2]));
+            ExpectMsg(("Terminated", names[2]));
 
             Task.Delay(100).Wait();
             supervisor.Tell(new SupervisorTestActor.Count());
@@ -379,7 +379,7 @@ namespace Akka.Tests
         class MyCustomException : Exception {}
 
         [Fact(DisplayName="PreRestart should receive correct cause, message and sender")]
-        public void CallPreStartWithCorrectMessageAndSender()
+        public void Call_PreStart_with_correct_message_and_sender()
         {
             var broken = ActorOf(c =>
             {

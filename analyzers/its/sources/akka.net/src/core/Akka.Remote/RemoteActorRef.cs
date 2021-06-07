@@ -1,14 +1,17 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="RemoteActorRef.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Akka.Actor;
+using Akka.Annotations;
 using Akka.Dispatch.SysMsg;
+using Akka.Event;
 
 namespace Akka.Remote
 {
@@ -16,10 +19,12 @@ namespace Akka.Remote
     /// Marker interface for Actors that are deployed in a remote scope
     /// </summary>
 // ReSharper disable once InconsistentNaming
-    internal interface IRemoteRef : IActorRefScope { }
+    [InternalApi]
+    public interface IRemoteRef : IActorRefScope { }
 
     /// <summary>
-    /// Class RemoteActorRef.
+    /// RemoteActorRef - used to provide a local handle to an actor
+    /// running in a remote process.
     /// </summary>
     public class RemoteActorRef : InternalActorRefBase, IRemoteRef
     {
@@ -48,7 +53,7 @@ namespace Akka.Remote
         /// <param name="parent">The parent.</param>
         /// <param name="props">The props.</param>
         /// <param name="deploy">The deploy.</param>
-        internal RemoteActorRef(RemoteTransport remote, Address localAddressToUse, ActorPath path, IInternalActorRef parent,
+        public RemoteActorRef(RemoteTransport remote, Address localAddressToUse, ActorPath path, IInternalActorRef parent,
             Props props, Deploy deploy)
         {
             Remote = remote;
@@ -57,6 +62,9 @@ namespace Akka.Remote
             _parent = parent;
             _props = props;
             _deploy = deploy;
+
+            if (path.Address.HasLocalScope)
+                throw new ArgumentException($"Unexpected local address in RemoteActorRef [{this}]");
         }
 
         /// <summary>
@@ -75,31 +83,41 @@ namespace Akka.Remote
         /// Gets the parent.
         /// </summary>
         /// <value>The parent.</value>
-        public override IInternalActorRef Parent
-        {
-            get { return _parent; }
-        }
+        public override IInternalActorRef Parent => _parent;
 
         /// <summary>
         /// Gets the provider.
         /// </summary>
         /// <value>The provider.</value>
-        public override IActorRefProvider Provider
-        {
-            get { return Remote.Provider; }
-        }
+        public override IActorRefProvider Provider => Remote.Provider;
 
-        public override bool IsTerminated { get { return false; } }
+        private IRemoteActorRefProvider RemoteProvider => Provider as IRemoteActorRefProvider;
+
+        /// <summary>
+        /// Obsolete. Use <see cref="Watch"/> or <see cref="ReceiveActor.Receive{T}(Action{T}, Predicate{T})">Receive&lt;<see cref="Akka.Actor.Terminated"/>&gt;</see>
+        /// </summary>
+        [Obsolete("Use Context.Watch and Receive<Terminated> [1.1.0]")]
+        public override bool IsTerminated => false;
+
 
         /// <summary>
         /// Gets the child.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>ActorRef.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
+        /// <exception cref="System.NotImplementedException">TBD</exception>
         public override IActorRef GetChild(IEnumerable<string> name)
         {
-            throw new NotImplementedException();
+            var items = name.ToList();
+            switch (items.FirstOrDefault())
+            {
+                case null:
+                    return this;
+                case "..":
+                    return Parent.GetChild(items.Skip(1));
+                default:
+                    return new RemoteActorRef(Remote, LocalAddressToUse, Path / items, ActorRefs.Nobody, Props.None, Deploy.None);
+            }
         }
 
         /// <summary>
@@ -116,7 +134,7 @@ namespace Akka.Remote
         /// </summary>
         public override void Stop()
         {
-            SendSystemMessage(Terminate.Instance);
+            SendSystemMessage(new Terminate());
         }
 
         /// <summary>
@@ -133,27 +151,50 @@ namespace Akka.Remote
         /// </summary>
         public override void Suspend()
         {
-            SendSystemMessage(Akka.Dispatch.SysMsg.Suspend.Instance);
+            SendSystemMessage(new Akka.Dispatch.SysMsg.Suspend());
         }
 
-        public override bool IsLocal
-        {
-            get { return false; }
-        }
+        /// <inheritdoc cref="IInternalActorRef"/>
+        public override bool IsLocal => false;
 
-        public override ActorPath Path
+        /// <inheritdoc cref="IActorRef"/>
+        public override ActorPath Path => _path;
+
+        private void HandleException(Exception ex)
         {
-            get { return _path; }
+            Remote.System.EventStream.Publish(new Error(ex, Path.ToString(), GetType(), "swallowing exception during message send"));
         }
 
         /// <summary>
         /// Sends the system message.
         /// </summary>
         /// <param name="message">The message.</param>
-        private void SendSystemMessage(ISystemMessage message)
+        public override void SendSystemMessage(ISystemMessage message)
         {
-            Remote.Send(message, null, this);
-            Remote.Provider.AfterSendSystemMessage(message);
+            try
+            {
+                //send to remote, unless watch message is intercepted by the remoteWatcher
+                if (message is Watch watch && IsWatchIntercepted(watch.Watchee, watch.Watcher))
+                {
+                    RemoteProvider.RemoteWatcher.Tell(new RemoteWatcher.WatchRemote(watch.Watchee, watch.Watcher));
+                }
+                else
+                {
+                    if (message is Unwatch unwatch && IsWatchIntercepted(unwatch.Watchee, unwatch.Watcher))
+                    {
+                        RemoteProvider.RemoteWatcher.Tell(new RemoteWatcher.UnwatchRemote(unwatch.Watchee,
+                            unwatch.Watcher));
+                    }
+                    else
+                    {
+                        Remote.Send(message, null, this);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
         }
 
         /// <summary>
@@ -161,11 +202,23 @@ namespace Akka.Remote
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="sender">The sender.</param>
+        /// <exception cref="InvalidMessageException">TBD</exception>
         protected override void TellInternal(object message, IActorRef sender)
         {
-            Remote.Send(message, sender, this);
-            var systemMessage = message as ISystemMessage;
-            if (systemMessage != null) Remote.Provider.AfterSendSystemMessage(systemMessage);
+            if(message == null) throw new InvalidMessageException("Message is null.");
+            try { Remote.Send(message, sender, this);}catch(Exception ex) {  HandleException(ex);}
+        }
+
+        /// <summary>
+        /// Determine if a <see cref="Watch"/>/<see cref="Unwatch"/> message must be handled by the <see cref="RemoteWatcher"/>
+        /// actor, or sent to this <see cref="RemoteActorRef"/>.
+        /// </summary>
+        /// <param name="watchee">The actor being watched.</param>
+        /// <param name="watcher">The actor watching.</param>
+        /// <returns>TBD</returns>
+        public bool IsWatchIntercepted(IActorRef watchee, IActorRef watcher)
+        {
+            return !watcher.Equals(RemoteProvider.RemoteWatcher) && watchee.Equals(this);
         }
 
         /// <summary>

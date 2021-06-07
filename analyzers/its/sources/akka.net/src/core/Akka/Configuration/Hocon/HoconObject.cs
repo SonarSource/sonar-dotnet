@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="HoconObject.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace Akka.Configuration.Hocon
 {
@@ -32,6 +33,8 @@ namespace Akka.Configuration.Hocon
     /// </summary>
     public class HoconObject : IHoconElement
     {
+        private static readonly Regex EscapeRegex = new Regex("[ \t:]{1}", RegexOptions.Compiled);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HoconObject"/> class.
         /// </summary>
@@ -74,16 +77,15 @@ namespace Akka.Configuration.Hocon
         }
 
         /// <summary>
-        /// Retrieves the string representation of this element.
+        /// N/A
         /// </summary>
-        /// <returns>The string representation of this element.</returns>
-        /// <exception cref="System.NotImplementedException">
-        /// This element is an object. It is not a string.
-        /// Therefore this method will throw an exception.
+        /// <returns>N/A</returns>
+        /// <exception cref="NotImplementedException">
+        /// This exception is thrown automatically since this element is an object and not a string.
         /// </exception>
         public string GetString()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("This element is an object and not a string.");
         }
 
         /// <summary>
@@ -96,16 +98,15 @@ namespace Akka.Configuration.Hocon
         }
 
         /// <summary>
-        /// Retrieves a list of elements associated with this element.
+        /// N/A
         /// </summary>
-        /// <returns>A list of elements associated with this element.</returns>
-        /// <exception cref="System.NotImplementedException">
-        /// This element is an object. It is not an array.
-        /// Therefore this method will throw an exception.
+        /// <returns>N/A</returns>
+        /// <exception cref="NotImplementedException">
+        /// This exception is thrown automatically since this element is an object and not an array.
         /// </exception>
         public IList<HoconValue> GetArray()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("This element is an object and not an array.");
         }
 
         /// <summary>
@@ -118,11 +119,8 @@ namespace Akka.Configuration.Hocon
         /// </returns>
         public HoconValue GetKey(string key)
         {
-            if (Items.ContainsKey(key))
-            {
-                return Items[key];
-            }
-            return null;
+            Items.TryGetValue(key, out var value);
+            return value;
         }
 
         /// <summary>
@@ -134,10 +132,8 @@ namespace Akka.Configuration.Hocon
         /// <returns>The value associated with the supplied key.</returns>
         public HoconValue GetOrCreateKey(string key)
         {
-            if (Items.ContainsKey(key))
-            {
-                return Items[key];
-            }
+            if (Items.TryGetValue(key, out var value))
+                return value;
             var child = new HoconValue();
             Items.Add(key, child);
             return child;
@@ -171,39 +167,90 @@ namespace Akka.Configuration.Hocon
 
         private string QuoteIfNeeded(string text)
         {
-            if (text.ToCharArray().Intersect(" \t".ToCharArray()).Any())
+            if (text == null) return "";
+
+            if (EscapeRegex.IsMatch(text))
             {
                 return "\"" + text + "\"";
             }
+
             return text;
         }
 
+        /// <summary>
+        /// Merges the specified object into this instance.
+        /// </summary>
+        /// <param name="other">The object to merge into this instance.</param>
         public void Merge(HoconObject other)
         {
             var thisItems = Items;
             var otherItems = other.Items;
+            var modified = new List<KeyValuePair<string, HoconValue>>();
 
             foreach (var otherItem in otherItems)
             {
-                if (thisItems.ContainsKey(otherItem.Key))
+                //if other key was present in this object and if we have a value, 
+                //just ignore the other value, unless it is an object
+                if (thisItems.TryGetValue(otherItem.Key, out var thisItem))
                 {
-                    //other key was present in this object.
-                    //if we have a value, just ignore the other value, unless it is an object
-                    var thisItem = thisItems[otherItem.Key];
-
                     //if both values are objects, merge them
                     if (thisItem.IsObject() && otherItem.Value.IsObject())
                     {
-                        thisItem.GetObject().Merge(otherItem.Value.GetObject());
+                        var newObject = thisItem.GetObject().MergeImmutable(otherItem.Value.GetObject());
+                        var value = new HoconValue();
+                        value.Values.Add(newObject);
+                        modified.Add(new KeyValuePair<string, HoconValue>(otherItem.Key, value));
                     }
+                    else
+                        modified.Add(new KeyValuePair<string, HoconValue>(otherItem.Key, otherItem.Value));
                 }
                 else
                 {
                     //other key was not present in this object, just copy it over
-                    Items.Add(otherItem.Key,otherItem.Value);
+                    modified.Add(new KeyValuePair<string, HoconValue>(otherItem.Key, otherItem.Value));
                 }
-            }            
+            }
+
+            if (modified.Count == 0)
+                return;
+
+            foreach(var kvp in modified)
+                Items[kvp.Key] = kvp.Value;
+        }
+
+        /// <summary>
+        /// Merges the specified object with this instance producing new one.
+        /// </summary>
+        /// <param name="other">The object to merge into this instance.</param>
+        internal HoconObject MergeImmutable(HoconObject other)
+        {
+            var thisItems = new Dictionary<string, HoconValue>(Items);
+            var otherItems = other.Items;
+
+            foreach (var otherItem in otherItems)
+            {
+                //if other key was present in this object and if we have a value,
+                //just ignore the other value, unless it is an object
+                if (thisItems.TryGetValue(otherItem.Key, out var thisItem))
+                {
+                    //if both values are objects, merge them
+                    if (thisItem.IsObject() && otherItem.Value.IsObject())
+                    {
+                        var mergedObject = thisItem.GetObject().MergeImmutable(otherItem.Value.GetObject());
+                        var mergedValue = new HoconValue();
+                        mergedValue.AppendValue(mergedObject);
+                        thisItems[otherItem.Key] = mergedValue;
+                    }
+                    else
+                        thisItems[otherItem.Key] = otherItem.Value;
+                }
+                else
+                {
+                    //other key was not present in this object, just copy it over
+                    thisItems.Add(otherItem.Key, new HoconValue(otherItem.Value.Values));
+                }
+            }
+            return new HoconObject {Items = thisItems};
         }
     }
 }
-

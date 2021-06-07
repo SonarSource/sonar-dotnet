@@ -1,48 +1,91 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="SqliteJournal.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
 using System.Data.Common;
-using System.Data.SQLite;
-using Akka.Actor;
+using Microsoft.Data.Sqlite;
+using Akka.Configuration;
 using Akka.Persistence.Sql.Common.Journal;
 
 namespace Akka.Persistence.Sqlite.Journal
 {
-    public class SqliteJournalEngine : JournalDbEngine
-    {
-        public SqliteJournalEngine(ActorSystem system)
-            : base(system)
-        {
-            QueryBuilder = new SqliteQueryBuilder(Settings.TableName);
-        }
-
-        protected override string JournalConfigPath { get { return SqliteJournalSettings.ConfigPath; } }
-
-        protected override DbConnection CreateDbConnection(string connectionString)
-        {
-            return new SQLiteConnection(connectionString);
-        }
-
-        protected override void CopyParamsToCommand(DbCommand sqlCommand, JournalEntry entry)
-        {
-            sqlCommand.Parameters["@PersistenceId"].Value = entry.PersistenceId;
-            sqlCommand.Parameters["@SequenceNr"].Value = entry.SequenceNr;
-            sqlCommand.Parameters["@IsDeleted"].Value = entry.IsDeleted;
-            sqlCommand.Parameters["@Manifest"].Value = entry.Manifest;
-            sqlCommand.Parameters["@Timestamp"].Value = entry.Timestamp;
-            sqlCommand.Parameters["@Payload"].Value = entry.Payload;
-        }
-    }
-
+    /// <summary>
+    /// TBD
+    /// </summary>
     public class SqliteJournal : SqlJournal
     {
-        public readonly SqlitePersistence Extension = SqlitePersistence.Get(Context.System);
-        public SqliteJournal() : base(new SqliteJournalEngine(Context.System))
+        /// <summary>
+        /// TBD
+        /// </summary>
+        public static readonly SqlitePersistence Extension = SqlitePersistence.Get(Context.System);
+
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="journalConfig">TBD</param>
+        public SqliteJournal(Config journalConfig) : base(journalConfig.WithFallback(Extension.DefaultJournalConfig))
         {
+            var config = journalConfig.WithFallback(Extension.DefaultJournalConfig);
+            QueryExecutor = new SqliteQueryExecutor(new QueryConfiguration(
+                schemaName: null,
+                journalEventsTableName: config.GetString("table-name", null),
+                metaTableName: config.GetString("metadata-table-name", null),
+                persistenceIdColumnName: "persistence_id",
+                sequenceNrColumnName: "sequence_nr",
+                payloadColumnName: "payload",
+                manifestColumnName: "manifest",
+                timestampColumnName: "timestamp",
+                isDeletedColumnName: "is_deleted",
+                tagsColumnName: "tags",
+                orderingColumnName: "ordering",
+                serializerIdColumnName: "serializer_id",
+                timeout: config.GetTimeSpan("connection-timeout", null),
+                defaultSerializer: config.GetString("serializer", null),
+                useSequentialAccess: config.GetBoolean("use-sequential-access", false)), 
+                    Context.System.Serialization, 
+                    GetTimestampProvider(config.GetString("timestamp-provider", null)));
+        }
+
+        /// <summary>
+        /// TBD
+        /// </summary>
+        public override IJournalQueryExecutor QueryExecutor { get; }
+        
+        /// <summary>
+        /// TBD
+        /// </summary>
+        protected override string JournalConfigPath => SqlitePersistence.JournalConfigPath;
+
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="connectionString">TBD</param>
+        /// <returns>TBD</returns>
+        protected override DbConnection CreateDbConnection(string connectionString)
+        {
+            return new SqliteConnection(connectionString);
+        }
+
+        /// <summary>
+        /// TBD
+        /// </summary>
+        protected override void PreStart()
+        {
+            ConnectionContext.Remember(GetConnectionString());
+            base.PreStart();
+        }
+
+        /// <summary>
+        /// TBD
+        /// </summary>
+        protected override void PostStop()
+        {
+            base.PostStop();
+            ConnectionContext.Forget(GetConnectionString());
         }
     }
 }

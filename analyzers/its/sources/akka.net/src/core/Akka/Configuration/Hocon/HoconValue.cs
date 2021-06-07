@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="HoconValue.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace Akka.Configuration.Hocon
@@ -19,12 +20,26 @@ namespace Akka.Configuration.Hocon
     /// </summary>
     public class HoconValue : IMightBeAHoconObject
     {
+        private static readonly Regex EscapeRegex = new Regex("[ \t:]{1}", RegexOptions.Compiled);
+        private static readonly Regex TimeSpanRegex = new Regex(@"^(?<value>([0-9]+(\.[0-9]+)?))\s*(?<unit>(nanoseconds|nanosecond|nanos|nano|ns|microseconds|microsecond|micros|micro|us|milliseconds|millisecond|millis|milli|ms|seconds|second|s|minutes|minute|m|hours|hour|h|days|day|d))$", RegexOptions.Compiled);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HoconValue"/> class.
         /// </summary>
         public HoconValue()
         {
             Values = new List<IHoconElement>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HoconValue"/> class.
+        /// </summary>
+        /// <param name="values">The list of elements inside this HOCON value.</param>
+        /// <param name="adoptedFromFallback">Indicates whether this instance was constructed during association with fallback <see cref="Config"/>.</param>
+        public HoconValue(List<IHoconElement> values, bool adoptedFromFallback = true)
+        {
+            Values = values;
+            AdoptedFromFallback = adoptedFromFallback;
         }
 
         /// <summary>
@@ -51,6 +66,17 @@ namespace Akka.Configuration.Hocon
         /// The list of elements inside this HOCON value
         /// </summary>
         public List<IHoconElement> Values { get; private set; }
+
+        /// <summary>
+        /// Marker for values were merged during fallback attaching
+        /// serving exclusively to skip rendering such values in <see cref="HoconObject.ToString()"/>
+        /// </summary>
+        internal bool AdoptedFromFallback { get; private set; }
+
+        public Config ToConfig()
+        {
+            return new Config(new HoconRoot(this, Enumerable.Empty<HoconSubstitution>()));
+        }
 
         /// <summary>
         /// Wraps this <see cref="HoconValue"/> into a new <see cref="Config"/> object at the specified key.
@@ -128,7 +154,7 @@ namespace Akka.Configuration.Hocon
         /// </returns>
         public bool IsString()
         {
-            return Values.Any() && Values.All(v => v.IsString());
+            return Values.Count > 0 && Values.All(v => v.IsString());
         }
 
         private string ConcatString()
@@ -148,15 +174,15 @@ namespace Akka.Configuration.Hocon
         /// <returns>The element at the given key.</returns>
         public HoconValue GetChildObject(string key)
         {
-            return GetObject().GetKey(key);
+            return GetObject()?.GetKey(key);
         }
 
         /// <summary>
         /// Retrieves the boolean value from this <see cref="HoconValue"/>.
         /// </summary>
         /// <returns>The boolean value represented by this <see cref="HoconValue"/>.</returns>
-        /// <exception cref="System.NotSupportedException">
-        /// This exception occurs when the <see cref="HoconValue"/> doesn't
+        /// <exception cref="NotSupportedException">
+        /// This exception is thrown if the <see cref="HoconValue"/> doesn't
         /// conform to the standard boolean values: "on", "off", "true", or "false"
         /// </exception>
         public bool GetBoolean()
@@ -173,7 +199,7 @@ namespace Akka.Configuration.Hocon
                 case "false":
                     return false;
                 default:
-                    throw new NotSupportedException("Unknown boolean format: " + v);
+                    throw new NotSupportedException($"Unknown boolean format: {v}");
             }
         }
 
@@ -322,9 +348,9 @@ namespace Akka.Configuration.Hocon
         /// <returns>A list of values represented by this <see cref="HoconValue"/>.</returns>
         public IList<HoconValue> GetArray()
         {
-            IEnumerable<HoconValue> x = from arr in Values
-                where arr.IsArray()
-                from e in arr.GetArray()
+            IEnumerable<HoconValue> x = from element in Values
+                where element.IsArray()
+                from e in element.GetArray()
                 select e;
 
             return x.ToList();
@@ -338,51 +364,66 @@ namespace Akka.Configuration.Hocon
         /// </returns>
         public bool IsArray()
         {
-            return GetArray() != null;
-        }
-
-
-        [Obsolete("Use GetTimeSpan instead")]
-        public TimeSpan GetMillisDuration(bool allowInfinite = true)
-        {
-            return GetTimeSpan(allowInfinite);
+            return GetArray().Count != 0;
         }
 
         /// <summary>
         /// Retrieves the time span value from this <see cref="HoconValue"/>.
         /// </summary>
-        /// <param name="allowInfinite">A flag used to set inifinite durations.</param>
+        /// <param name="allowInfinite">A flag used to set infinite durations.</param>
+        /// <exception cref="FormatException">
+        /// This exception is thrown if the timespan given in the <see cref="HoconValue"/> is negative.
+        /// </exception>
         /// <returns>The time span value represented by this <see cref="HoconValue"/>.</returns>
         public TimeSpan GetTimeSpan(bool allowInfinite = true)
         {
             string res = GetString();
-            if (res.EndsWith("ms"))
-            //TODO: Add support for ns, us, and non abbreviated versions (second, seconds and so on) see https://github.com/typesafehub/config/blob/master/HOCON.md#duration-format
+
+            var match = TimeSpanRegex.Match(res);
+            if (match.Success) 
             {
-                var v = res.Substring(0, res.Length - 2);
-                return TimeSpan.FromMilliseconds(ParsePositiveValue(v));
+                var u = match.Groups["unit"].Value;
+                var v = ParsePositiveValue(match.Groups["value"].Value);
+
+                switch (u) 
+                {
+                    case "nanoseconds":
+                    case "nanosecond":
+                    case "nanos":
+                    case "nano":
+                    case "ns":
+                        return TimeSpan.FromTicks((long) Math.Round(TimeSpan.TicksPerMillisecond * v / 1000000.0));
+                    case "microseconds":
+                    case "microsecond":
+                    case "micros":
+                    case "micro":
+                        return TimeSpan.FromTicks((long) Math.Round(TimeSpan.TicksPerMillisecond * v / 1000.0));
+                    case "milliseconds":
+                    case "millisecond":
+                    case "millis":
+                    case "milli":
+                    case "ms":
+                        return TimeSpan.FromMilliseconds(v);
+                    case "seconds":
+                    case "second":
+                    case "s":
+                        return TimeSpan.FromSeconds(v);
+                    case "minutes":
+                    case "minute":
+                    case "m":
+                        return TimeSpan.FromMinutes(v);
+                    case "hours":
+                    case "hour":
+                    case "h":
+                        return TimeSpan.FromHours(v);
+                    case "days":
+                    case "day":
+                    case "d":
+                        return TimeSpan.FromDays(v);
+                }
             }
-            if (res.EndsWith("s"))
-            {
-                var v = res.Substring(0, res.Length - 1);
-                return TimeSpan.FromSeconds(ParsePositiveValue(v));
-            }
-            if(res.EndsWith("m"))
-            {
-                var v = res.Substring(0, res.Length - 1);
-                return TimeSpan.FromMinutes(ParsePositiveValue(v));
-            }
-            if(res.EndsWith("h"))
-            {
-                var v = res.Substring(0, res.Length - 1);
-                return TimeSpan.FromHours(ParsePositiveValue(v));
-            }
-            if (res.EndsWith("d"))
-            {
-                var v = res.Substring(0, res.Length - 1);
-                return TimeSpan.FromDays(ParsePositiveValue(v));
-            }
-            if(allowInfinite && res.Equals("infinite", StringComparison.OrdinalIgnoreCase))  //Not in Hocon spec
+
+            if (allowInfinite && res.Equals("infinite", StringComparison.OrdinalIgnoreCase))  //Not in Hocon spec
             {
                 return Timeout.InfiniteTimeSpan;
             }
@@ -394,24 +435,67 @@ namespace Akka.Configuration.Hocon
         {
             var value = double.Parse(v, NumberFormatInfo.InvariantInfo);
             if(value < 0)
-                throw new FormatException("Expected a positive value instead of " + value);
+                throw new FormatException($"Expected a positive value instead of {value}");
             return value;
         }
 
+        private struct ByteSize
+        {
+            public long Factor { get; set; }
+            public string[] Suffixes { get; set; }
+        }
+
+        private static ByteSize[] ByteSizes { get; } =
+            new ByteSize[]
+            {
+                new ByteSize { Factor = 1024L * 1024L * 1024L * 1024L * 1024 * 1024L, Suffixes = new string[] { "E", "e", "Ei", "EiB", "exbibyte", "exbibytes" } },
+                new ByteSize { Factor = 1000L * 1000L * 1000L * 1000L * 1000L * 1000L, Suffixes = new string[] { "EB", "exabyte", "exabytes" } },
+                new ByteSize { Factor = 1024L * 1024L * 1024L * 1024L * 1024L, Suffixes = new string[] { "P", "p", "Pi", "PiB", "pebibyte", "pebibytes" } },
+                new ByteSize { Factor = 1000L * 1000L * 1000L * 1000L * 1000L, Suffixes = new string[] { "PB", "petabyte", "petabytes" } },
+                new ByteSize { Factor = 1024L * 1024L * 1024L * 1024L, Suffixes = new string[] { "T", "t", "Ti", "TiB", "tebibyte", "tebibytes" } },
+                new ByteSize { Factor = 1000L * 1000L * 1000L * 1000L, Suffixes = new string[] { "TB", "terabyte", "terabytes" } },
+                new ByteSize { Factor = 1024L * 1024L * 1024L, Suffixes = new string[] { "G", "g", "Gi", "GiB", "gibibyte", "gibibytes" } },
+                new ByteSize { Factor = 1000L * 1000L * 1000L, Suffixes = new string[] { "GB", "gigabyte", "gigabytes" } },
+                new ByteSize { Factor = 1024L * 1024L, Suffixes = new string[] { "M", "m", "Mi", "MiB", "mebibyte", "mebibytes" } },
+                new ByteSize { Factor = 1000L * 1000L, Suffixes = new string[] { "MB", "megabyte", "megabytes" } },
+                new ByteSize { Factor = 1024L, Suffixes = new string[] { "K", "k", "Ki", "KiB", "kibibyte", "kibibytes" } },
+                new ByteSize { Factor = 1000L, Suffixes = new string[] { "kB", "kilobyte", "kilobytes" } },
+                new ByteSize { Factor = 1, Suffixes = new string[] { "b", "B", "byte", "bytes" } }
+            };
+
+        private static char[] Digits { get; } = "0123456789".ToCharArray();
+
         /// <summary>
-        /// Retrieves the long value, optionally suffixed with a 'b', from this <see cref="HoconValue"/>.
+        /// Retrieves the long value, optionally suffixed with a case sensitive
+        /// <see href="https://github.com/lightbend/config/blob/master/HOCON.md#size-in-bytes-format">byte size suffix</see>, from
+        /// this <see cref="HoconValue"/>. An empty value results in <see langword="null"/>.
         /// </summary>
         /// <returns>The long value represented by this <see cref="HoconValue"/>.</returns>
         public long? GetByteSize()
         {
             var res = GetString();
-            if (res.EndsWith("b"))
+            if (string.IsNullOrEmpty(res))
+                return null;
+            res = res.Trim();
+            var index = res.LastIndexOfAny(Digits);
+            if (index == -1 || index + 1 >= res.Length)
+                return long.Parse(res);
+
+            var value = res.Substring(0, index + 1);
+            var unit = res.Substring(index + 1).Trim();
+
+            for (var byteSizeIndex = 0; byteSizeIndex < ByteSizes.Length; byteSizeIndex++)
             {
-                var v = res.Substring(0, res.Length - 1);
-                return long.Parse(v);
+                var byteSize = ByteSizes[byteSizeIndex];
+                for (var suffixIndex = 0; suffixIndex < byteSize.Suffixes.Length; suffixIndex++)
+                {
+                    var suffix = byteSize.Suffixes[suffixIndex];
+                    if (string.Equals(unit, suffix, StringComparison.Ordinal))
+                        return byteSize.Factor * long.Parse(value);
+                }
             }
 
-            return long.Parse(res);
+            throw new FormatException($"{unit} is not a valid byte size suffix");
         }
 
         /// <summary>
@@ -437,8 +521,15 @@ namespace Akka.Configuration.Hocon
             }
             if (IsObject())
             {
-                var i = new string(' ', indent*2);
-                return string.Format("{{\r\n{1}{0}}}", i, GetObject().ToString(indent + 1));
+                if (indent == 0)
+                {
+                    return GetObject().ToString(indent + 1);
+                }
+                else
+                {
+                    var i = new string(' ', indent * 2);
+                    return string.Format("{{\r\n{1}{0}}}", i, GetObject().ToString(indent + 1));
+                }
             }
             if (IsArray())
             {
@@ -449,11 +540,13 @@ namespace Akka.Configuration.Hocon
 
         private string QuoteIfNeeded(string text)
         {
-            if(text == null) return "";
-            if(text.ToCharArray().Intersect(" \t".ToCharArray()).Any())
+            if (text == null) return "";
+
+            if (EscapeRegex.IsMatch(text))
             {
                 return "\"" + text + "\"";
             }
+
             return text;
         }
     }

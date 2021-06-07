@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="Util.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -12,9 +12,19 @@ using Akka.Configuration;
 
 namespace Akka.Cluster
 {
+    /// <summary>
+    /// TBD
+    /// </summary>
     static class Utils
     {
         //TODO: Tests
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <typeparam name="T">TBD</typeparam>
+        /// <param name="source">TBD</param>
+        /// <param name="comparer">TBD</param>
+        /// <returns>TBD</returns>
         public static T Min<T>(this IEnumerable<T> source,
             IComparer<T> comparer)
         {
@@ -37,6 +47,14 @@ namespace Akka.Cluster
             }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <typeparam name="TSource">TBD</typeparam>
+        /// <typeparam name="TKey">TBD</typeparam>
+        /// <param name="source">TBD</param>
+        /// <param name="selector">TBD</param>
+        /// <returns>TBD</returns>
         public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source,
             Func<TSource, TKey> selector)
         {
@@ -44,6 +62,15 @@ namespace Akka.Cluster
         }
 
         //TODO: Test
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <typeparam name="TSource">TBD</typeparam>
+        /// <typeparam name="TKey">TBD</typeparam>
+        /// <param name="source">TBD</param>
+        /// <param name="selector">TBD</param>
+        /// <param name="comparer">TBD</param>
+        /// <returns>TBD</returns>
         public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source,
             Func<TSource, TKey> selector, IComparer<TKey> comparer)
         {
@@ -73,21 +100,31 @@ namespace Akka.Cluster
             }
         }
 
-
-        [Obsolete("Use GetTimeSpanWithOffSwitch instead")]
-        public static TimeSpan? GetMillisDurationWithOffSwitch(this Config @this, string key)
-        {
-            return GetTimeSpanWithOffSwitch(@this, key);
-        }
-
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="this">TBD</param>
+        /// <param name="key">TBD</param>
+        /// <returns>TBD</returns>
         public static TimeSpan? GetTimeSpanWithOffSwitch(this Config @this, string key)
         {
             TimeSpan? ret = null;
-            if (@this.GetString(key).ToLower() != "off") ret = @this.GetTimeSpan(key);
+            var useTimeSpanOffSwitch = @this.GetString(key, "");
+            if (useTimeSpanOffSwitch.ToLower() != "off" &&
+                useTimeSpanOffSwitch.ToLower() != "false" &&
+                useTimeSpanOffSwitch.ToLower() != "no")
+                ret = @this.GetTimeSpan(key, null);
             return ret;
         }
 
-        public static Tuple<ImmutableSortedSet<T>, ImmutableSortedSet<T>> Partition<T>(this ImmutableSortedSet<T> @this,
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <typeparam name="T">TBD</typeparam>
+        /// <param name="this">TBD</param>
+        /// <param name="partitioner">TBD</param>
+        /// <returns>TBD</returns>
+        public static (ImmutableSortedSet<T>, ImmutableSortedSet<T>) Partition<T>(this ImmutableSortedSet<T> @this,
             Func<T, bool> partitioner)
         {
             var @true = new List<T>();
@@ -98,7 +135,7 @@ namespace Akka.Cluster
                 (partitioner(item) ? @true : @false).Add(item);
             }
 
-            return Tuple.Create(@true.ToImmutableSortedSet(), @false.ToImmutableSortedSet());
+            return (@true.ToImmutableSortedSet(), @false.ToImmutableSortedSet());
         }
     }
 }

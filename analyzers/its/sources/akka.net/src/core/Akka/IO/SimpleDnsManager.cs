@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="SimpleDnsManager.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -11,6 +11,9 @@ using Akka.Event;
 
 namespace Akka.IO
 {
+    /// <summary>
+    /// TBD
+    /// </summary>
     public class SimpleDnsManager : ActorBase, IRequiresMessageQueue<IUnboundedMessageQueueSemantics>
     {
         private readonly DnsExt _ext;
@@ -19,6 +22,10 @@ namespace Akka.IO
         private IPeriodicCacheCleanup _cacheCleanup;
         private ICancelable _cleanupTimer;
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="ext">TBD</param>
         public SimpleDnsManager(DnsExt ext)
         {
             _ext = ext;
@@ -30,11 +37,16 @@ namespace Akka.IO
 
             if (_cacheCleanup != null)
             {
-                var interval = ext.Settings.ResolverConfig.GetTimeSpan("cache-cleanup-interval");
+                var interval = ext.Settings.ResolverConfig.GetTimeSpan("cache-cleanup-interval", null);
                 _cleanupTimer = Context.System.Scheduler.ScheduleTellRepeatedlyCancelable(interval, interval, Self, CacheCleanup.Instance, Self);
             }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="message">TBD</param>
+        /// <returns>TBD</returns>
         protected override bool Receive(object message)
         {
             var r = message as Dns.Resolve;
@@ -42,6 +54,7 @@ namespace Akka.IO
             {
                 _log.Debug("Resolution request for {0} from {1}", r.Name, Sender);
                 _resolver.Forward(r);
+                return true;
             }
             if (message is CacheCleanup)
             {
@@ -52,14 +65,23 @@ namespace Akka.IO
             return false;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         protected override void PostStop()
         {
             if (_cleanupTimer != null)
                 _cleanupTimer.Cancel();
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         internal class CacheCleanup
         {
+            /// <summary>
+            /// TBD
+            /// </summary>
             public static readonly CacheCleanup Instance = new CacheCleanup();
         }
     }

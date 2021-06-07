@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="AlreadyCanceledCancelable.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -13,24 +13,28 @@ namespace Akka.Actor
     /// <summary>
     /// A <see cref="ICancelable"/> that is already canceled.
     /// </summary>
-    public class AlreadyCanceledCancelable : ICancelable
+    internal sealed class AlreadyCanceledCancelable : ICancelable
     {
         private static readonly AlreadyCanceledCancelable _instance = new AlreadyCanceledCancelable();
 
         private AlreadyCanceledCancelable() { }
+
+        /// <inheritdoc/>
         public void Cancel()
         {
             //Intentionally left blank
         }
 
-        public bool IsCancellationRequested { get { return true; } }
+        /// <inheritdoc/>
+        public bool IsCancellationRequested => true;
 
-        public static ICancelable Instance { get { return _instance; } }
+        /// <summary>
+        /// Gets an instance of an already canceled <see cref="ICancelable"/>.
+        /// </summary>
+        public static ICancelable Instance => _instance;
 
-        public CancellationToken Token
-        {
-            get { return new CancellationToken(true); }
-        }
+        /// <inheritdoc/>
+        public CancellationToken Token => new CancellationToken(true);
 
         void ICancelable.CancelAfter(TimeSpan delay)
         {
@@ -42,7 +46,7 @@ namespace Akka.Actor
             //Intentionally left blank            
         }
 
-        public void Cancel(bool throwOnFirstException)
+        void ICancelable.Cancel(bool throwOnFirstException)
         {
             //Intentionally left blank
         }

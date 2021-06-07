@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="RemoteDeliverySpec.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Akka.Actor;
 using Akka.Remote.TestKit;
+using Akka.Configuration;
 
 namespace Akka.Remote.Tests.MultiNode
 {
@@ -21,12 +22,15 @@ namespace Akka.Remote.Tests.MultiNode
             Second = Role("second");
             Third = Role("third");
 
-            CommonConfig = DebugConfig(false);
+            CommonConfig = DebugConfig(true)
+                .WithFallback(ConfigurationFactory.ParseString(@"
+                  akka.remote.dot-netty.tcp.batching.enabled = false # disable batching
+                "));
         }
 
-        public RoleName First { get; private set; }
-        public RoleName Second { get; private set; }
-        public RoleName Third { get; private set; }
+        public RoleName First { get; }
+        public RoleName Second { get; }
+        public RoleName Third { get; }
 
         public sealed class Letter
         {
@@ -53,28 +57,16 @@ namespace Akka.Remote.Tests.MultiNode
         }
     }
 
-    public class RemoteDeliveryMultiNetNode1 : RemoteDeliverySpec
-    {
-    }
-
-    public class RemoteDeliveryMultiNetNode2 : RemoteDeliverySpec
-    {
-    }
-
-    public class RemoteDeliveryMultiNetNode3 : RemoteDeliverySpec
-    {
-    }
-
     public class RemoteDeliverySpec : MultiNodeSpec
     {
         private readonly RemoteDeliveryMultiNetSpec _config;
         private readonly Func<RoleName, string, IActorRef> _identify;
 
-        protected RemoteDeliverySpec() : this(new RemoteDeliveryMultiNetSpec())
+        public RemoteDeliverySpec() : this(new RemoteDeliveryMultiNetSpec())
         {
         }
 
-        protected RemoteDeliverySpec(RemoteDeliveryMultiNetSpec config) : base(config)
+        protected RemoteDeliverySpec(RemoteDeliveryMultiNetSpec config) : base(config, typeof(RemoteDeliverySpec))
         {
             _config = config;
 
