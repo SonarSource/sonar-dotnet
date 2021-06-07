@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2077.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  37,
+"endLine":  9,
+"endColumn":  99
+}
+}
+}
+]
+}

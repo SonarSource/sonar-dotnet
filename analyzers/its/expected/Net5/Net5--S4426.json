@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4426",
+"message":  "Use a key length of at least 2048 bits for RSA cipher algorithm.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4426.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  53,
+"endLine":  7,
+"endColumn":  59
+}
+}
+}
+]
+}

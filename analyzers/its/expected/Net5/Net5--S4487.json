@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S4487",
+"message":  "Remove this unread private field 'backing_field' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2930.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  28,
+"endLine":  7,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4487",
 "message":  "Remove this unread private field 'list' or refactor the code to use its value.",
 "location":  {
 "uri":  "sources\Net5\Net5\TargetTypedNew.cs",

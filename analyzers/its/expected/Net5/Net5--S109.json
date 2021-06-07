@@ -272,6 +272,19 @@
 "endColumn":  42
 }
 }
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1144.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  20
+}
+}
 }
 ]
 }

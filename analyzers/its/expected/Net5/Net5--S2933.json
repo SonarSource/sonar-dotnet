@@ -15,6 +15,214 @@
 },
 {
 "id":  "S2933",
+"message":  "Make 'md5' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2070.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  34,
+"endLine":  7,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'cookie' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2092.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  21,
+"endLine":  7,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'doc' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2755.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  21,
+"endLine":  9,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'reader' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2755.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  23,
+"endLine":  10,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'xPathDocument' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2755.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  23,
+"endLine":  11,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'r' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3254.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  16,
+"endLine":  5,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'handler' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3257.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  22,
+"endLine":  7,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'cookie' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3330.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  21,
+"endLine":  7,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'exception' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3928.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  27,
+"endLine":  7,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'foo' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4005.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  13,
+"endLine":  7,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'dataSet' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4057.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  17,
+"endLine":  7,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'dataTable' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4057.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  19,
+"endLine":  8,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'provider' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4426.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  42,
+"endLine":  7,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'foo' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4432.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  20,
+"endLine":  7,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'field' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4433.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  32,
+"endLine":  7,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'builder' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S5122.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  27,
+"endLine":  7,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2933",
 "message":  "Make 'dict' 'readonly'.",
 "location":  {
 "uri":  "sources\Net5\Net5\TargetTypedNew.cs",

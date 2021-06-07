@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Security.AccessControl.FileSystemSecurity' instead of 'System.Security.AccessControl.FileSecurity'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2612.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  31,
+"endLine":  7,
+"endColumn":  43
+}
+}
+}
+]
+}

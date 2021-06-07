@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'y'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3254.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  27,
+"endLine":  5,
+"endColumn":  28
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2930",
+"message":  "Dispose 'backing_field' when it is no longer needed.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2930.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  17,
+"endLine":  12,
+"endColumn":  56
+}
+}
+}
+]
+}

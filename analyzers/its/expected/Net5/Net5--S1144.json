@@ -41,6 +41,266 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private constructor 'S1144'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1144.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'md5'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2070.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Foo'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2077.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  10,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'cookie'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2092.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Foo'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2612.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  12,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'doc'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2755.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  9,
+"endLine":  9,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'reader'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2755.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  9,
+"endLine":  10,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'xPathDocument'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2755.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  11,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'r'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3254.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'handler'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3257.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'cookie'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3330.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'exception'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3928.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'foo'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4005.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'dataSet'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4057.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'dataTable'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4057.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  9,
+"endLine":  8,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'provider'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4426.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'foo'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4432.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'field'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4433.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Foo'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4830.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  11,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'builder'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S5122.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field 'dict'.",
 "location":  {
 "uri":  "sources\Net5\Net5\TargetTypedNew.cs",
