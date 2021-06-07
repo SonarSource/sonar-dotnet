@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="WildcardTree.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -14,20 +14,44 @@ namespace Akka.Util
     /// <summary>
     /// A searchable nested dictionary, represents a searchable tree structure underneath
     /// </summary>
-    public sealed class WildcardTree<T> where T:class
+    /// <typeparam name="T">TBD</typeparam>
+    internal sealed class WildcardTree<T> where T:class
     {
+        public bool IsEmpty => Data == null && Children.Count == 0;
+
+        /// <summary>
+        /// TBD
+        /// </summary>
         public WildcardTree() : this(null, new Dictionary<string, WildcardTree<T>>()) { }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="data">TBD</param>
+        /// <param name="children">TBD</param>
+        /// <returns>TBD</returns>
         public WildcardTree(T data, IDictionary<string, WildcardTree<T>> children)
         {
             Children = children;
             Data = data;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public T Data { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public IDictionary<string, WildcardTree<T>> Children { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="elements">TBD</param>
+        /// <param name="data">TBD</param>
+        /// <returns>TBD</returns>
         public WildcardTree<T> Insert(IEnumerator<string> elements, T data)
         {
             if (!elements.MoveNext())
@@ -43,22 +67,43 @@ namespace Akka.Util
             }
         }
 
-        public WildcardTree<T> Find(IEnumerator<string> elements)
+        public WildcardTree<T> FindWithSingleWildcard(IEnumerator<string> elements)
         {
             if (!elements.MoveNext()) return this;
+
+            if(Children.TryGetValue(elements.Current, out var next))
+                return next.FindWithSingleWildcard(elements);
             else
-            {
-                var next = Children.GetOrElse(elements.Current, Children.GetOrElse("*", null));
-                return next == null ? Empty : next.Find(elements);
-            }
+                if (Children.TryGetValue("*", out next))
+                    return next.FindWithSingleWildcard(elements);
+                else
+                    return Empty;
         }
 
+        public WildcardTree<T> FindWithTerminalDoubleWildcard(IEnumerator<string> elements, WildcardTree<T> alt)
+        {
+            if (!elements.MoveNext()) return this;
+            if (alt == null) alt = Empty;
+
+            var newAlt = Children.GetOrElse("**", alt);
+
+            if (Children.TryGetValue(elements.Current, out var next))
+                return next.FindWithTerminalDoubleWildcard(elements, newAlt);
+            else
+                if (Children.TryGetValue("*", out next))
+                    return next.FindWithTerminalDoubleWildcard(elements, newAlt);
+                else
+                    return newAlt;
+        }
+
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
             return GetHashCode() == obj.GetHashCode();
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             unchecked
@@ -71,6 +116,9 @@ namespace Akka.Util
 
         #region Static methods
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public static readonly WildcardTree<T> Empty = new WildcardTree<T>();
 
         #endregion

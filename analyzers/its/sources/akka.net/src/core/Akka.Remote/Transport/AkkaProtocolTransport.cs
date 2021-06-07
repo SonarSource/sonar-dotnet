@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="AkkaProtocolTransport.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -12,27 +12,42 @@ using System.Threading.Tasks;
 using Akka.Actor;
 using Akka.Actor.Internal;
 using Akka.Event;
+using Akka.Remote.Serialization;
 using Akka.Util.Internal;
-using Google.ProtocolBuffers;
+using Google.Protobuf;
 
 namespace Akka.Remote.Transport
 {
     /// <summary>
-    /// Pairs an <see cref="AkkaProtocolTransport"/> with its <see cref="Address"/> binding.
-    /// 
+    /// <para>
+    /// This class represents a pairing of an <see cref="AkkaProtocolTransport"/> with its <see cref="Address"/> binding.
+    /// </para>
+    /// <para>
     /// This is the information that's used to allow external <see cref="ActorSystem"/> messages to address
     /// this system over the network.
+    /// </para>
     /// </summary>
     internal class ProtocolTransportAddressPair
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProtocolTransportAddressPair"/> class.
+        /// </summary>
+        /// <param name="protocolTransport">The protocol transport to pair with the specified <paramref name="address"/>.</param>
+        /// <param name="address">The address to pair with the specified <paramref name="protocolTransport"/>.</param>
         public ProtocolTransportAddressPair(AkkaProtocolTransport protocolTransport, Address address)
         {
             ProtocolTransport = protocolTransport;
             Address = address;
         }
 
+        /// <summary>
+        /// The protocol transport part of the pairing.
+        /// </summary>
         public AkkaProtocolTransport ProtocolTransport { get; private set; }
 
+        /// <summary>
+        /// The address part of the pairing.
+        /// </summary>
         public Address Address { get; private set; }
     }
 
@@ -61,15 +76,22 @@ namespace Akka.Remote.Transport
 
     /// <summary>
     /// Implementation of the Akka protocol as a (logical) <see cref="Transport"/> that wraps an underlying (physical) <see cref="Transport"/> instance.
-    /// 
+    ///
     /// Features provided by this transport include:
     ///  - Soft-state associations via the use of heartbeats and failure detectors
     ///  - Transparent origin address handling
-    /// 
+    ///
     /// This transport is loaded automatically by <see cref="Remoting"/> and will wrap all dynamically loaded transports.
     /// </summary>
     internal class AkkaProtocolTransport : ActorTransportAdapter
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="wrappedTransport">TBD</param>
+        /// <param name="system">TBD</param>
+        /// <param name="settings">TBD</param>
+        /// <param name="codec">TBD</param>
         public AkkaProtocolTransport(Transport wrappedTransport, ActorSystem system, AkkaProtocolSettings settings, AkkaPduCodec codec)
             : base(wrappedTransport, system)
         {
@@ -77,18 +99,30 @@ namespace Akka.Remote.Transport
             Settings = settings;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public AkkaProtocolSettings Settings { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         protected AkkaPduCodec Codec { get; private set; }
 
         private readonly SchemeAugmenter _schemeAugmenter = new SchemeAugmenter(RemoteSettings.AkkaScheme);
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         protected override SchemeAugmenter SchemeAugmenter
         {
             get { return _schemeAugmenter; }
         }
 
         private string _managerName;
+        /// <summary>
+        /// TBD
+        /// </summary>
         protected override string ManagerName
         {
             get
@@ -101,9 +135,13 @@ namespace Akka.Remote.Transport
         }
 
         private Props _managerProps;
+        /// <summary>
+        /// TBD
+        /// </summary>
         protected override Props ManagerProps
         {
-            get {
+            get
+            {
                 return _managerProps ??
                        (_managerProps =
                            Props.Create(() => new AkkaProtocolManager(WrappedTransport, Settings))
@@ -111,45 +149,71 @@ namespace Akka.Remote.Transport
             }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="message">TBD</param>
+        /// <returns>TBD</returns>
         public override Task<bool> ManagementCommand(object message)
         {
             return WrappedTransport.ManagementCommand(message);
         }
 
-        public Task<AkkaProtocolHandle> Associate(Address remoteAddress, int? refuseUid)
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="remoteAddress">TBD</param>
+        /// <param name="refuseUid">TBD</param>
+        /// <returns>TBD</returns>
+        public async Task<AkkaProtocolHandle> Associate(Address remoteAddress, int? refuseUid)
         {
             // Prepare a Task and pass its completion source to the manager
             var statusPromise = new TaskCompletionSource<AssociationHandle>();
 
             manager.Tell(new AssociateUnderlyingRefuseUid(SchemeAugmenter.RemoveScheme(remoteAddress), statusPromise, refuseUid));
 
-            return statusPromise.Task.CastTask<AssociationHandle, AkkaProtocolHandle>();
+            return (AkkaProtocolHandle)await statusPromise.Task.ConfigureAwait(false);
         }
 
         #region Static properties
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public static AtomicCounter UniqueId = new AtomicCounter(0);
 
         #endregion
     }
 
+    /// <summary>
+    /// TBD
+    /// </summary>
     internal class AkkaProtocolManager : ActorTransportAdapterManager
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="wrappedTransport">TBD</param>
+        /// <param name="settings">TBD</param>
         public AkkaProtocolManager(Transport wrappedTransport, AkkaProtocolSettings settings)
         {
             _wrappedTransport = wrappedTransport;
             _settings = settings;
         }
 
-        private Transport _wrappedTransport;
+        private readonly Transport _wrappedTransport;
 
-        private AkkaProtocolSettings _settings;
+        private readonly AkkaProtocolSettings _settings;
 
         /// <summary>
         /// The <see cref="AkkaProtocolTransport"/> does not handle recovery of associations, this task is implemented
         /// in the remoting itself. Hence the strategy <see cref="Directive.Stop"/>.
         /// </summary>
         private readonly SupervisorStrategy _supervisor = new OneForOneStrategy(exception => Directive.Stop);
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <returns>TBD</returns>
         protected override SupervisorStrategy SupervisorStrategy()
         {
             return _supervisor;
@@ -157,26 +221,38 @@ namespace Akka.Remote.Transport
 
         #region ActorBase / ActorTransportAdapterManager overrides
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="message">TBD</param>
         protected override void Ready(object message)
         {
-            message.Match()
-                .With<InboundAssociation>(ia => //need to create an Inbound ProtocolStateActor
-                {
+            switch (message)
+            {
+                case InboundAssociation ia:
                     var handle = ia.Association;
                     var stateActorLocalAddress = LocalAddress;
                     var stateActorAssociationListener = AssociationListener;
                     var stateActorSettings = _settings;
                     var failureDetector = CreateTransportFailureDetector();
                     Context.ActorOf(RARP.For(Context.System).ConfigureDispatcher(ProtocolStateActor.InboundProps(
-                        new HandshakeInfo(stateActorLocalAddress, AddressUidExtension.Uid(Context.System)), 
+                        new HandshakeInfo(stateActorLocalAddress, AddressUidExtension.Uid(Context.System)),
                         handle,
                         stateActorAssociationListener,
                         stateActorSettings,
-                        new AkkaPduProtobuffCodec(),
+                        new AkkaPduProtobuffCodec(Context.System),
                         failureDetector)), ActorNameFor(handle.RemoteAddress));
-                })
-                .With<AssociateUnderlying>(au => CreateOutboundStateActor(au.RemoteAddress, au.StatusPromise, null)) //need to create an Outbound ProtocolStateActor
-                .With<AssociateUnderlyingRefuseUid>(au => CreateOutboundStateActor(au.RemoteAddress, au.StatusCompletionSource, au.RefuseUid));
+                    break;
+                case AssociateUnderlying au:
+                    CreateOutboundStateActor(au.RemoteAddress, au.StatusPromise, null);
+                    break;
+                case AssociateUnderlyingRefuseUid aur:
+                    CreateOutboundStateActor(aur.RemoteAddress, aur.StatusCompletionSource, aur.RefuseUid);
+                    break;
+                default:
+                    Unhandled(message);
+                    break;
+            }
         }
 
         #endregion
@@ -202,21 +278,30 @@ namespace Akka.Remote.Transport
                 statusPromise,
                 stateActorWrappedTransport,
                 stateActorSettings,
-                new AkkaPduProtobuffCodec(), failureDetector, refuseUid)),
+                new AkkaPduProtobuffCodec(Context.System), failureDetector, refuseUid)),
                 ActorNameFor(remoteAddress));
         }
 
         private FailureDetector CreateTransportFailureDetector()
         {
-            return FailureDetectorLoader.LoadFailureDetector(Context, _settings.TransportFailureDetectorImplementationClass,
+            return Context.LoadFailureDetector(_settings.TransportFailureDetectorImplementationClass,
                 _settings.TransportFailureDetectorConfig);
         }
 
         #endregion
     }
 
+    /// <summary>
+    /// TBD
+    /// </summary>
     internal class AssociateUnderlyingRefuseUid : INoSerializationVerificationNeeded
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="remoteAddress">TBD</param>
+        /// <param name="statusCompletionSource">TBD</param>
+        /// <param name="refuseUid">TBD</param>
         public AssociateUnderlyingRefuseUid(Address remoteAddress, TaskCompletionSource<AssociationHandle> statusCompletionSource, int? refuseUid = null)
         {
             RefuseUid = refuseUid;
@@ -224,30 +309,54 @@ namespace Akka.Remote.Transport
             RemoteAddress = remoteAddress;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public Address RemoteAddress { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public TaskCompletionSource<AssociationHandle> StatusCompletionSource { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public int? RefuseUid { get; private set; }
     }
 
+    /// <summary>
+    /// TBD
+    /// </summary>
     internal sealed class HandshakeInfo
     {
-        public HandshakeInfo(Address origin, long uid)
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="origin">TBD</param>
+        /// <param name="uid">TBD</param>
+        public HandshakeInfo(Address origin, int uid)
         {
             Origin = origin;
             Uid = uid;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public Address Origin { get; private set; }
 
-        public long Uid { get; private set; }
+        /// <summary>
+        /// TBD
+        /// </summary>
+        public int Uid { get; private set; }
 
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj is HandshakeInfo && Equals((HandshakeInfo) obj);
+            return obj is HandshakeInfo && Equals((HandshakeInfo)obj);
         }
 
         private bool Equals(HandshakeInfo other)
@@ -255,6 +364,7 @@ namespace Akka.Remote.Transport
             return Equals(Origin, other.Origin) && Uid == other.Uid;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             unchecked
@@ -264,8 +374,21 @@ namespace Akka.Remote.Transport
         }
     }
 
+    /// <summary>
+    /// TBD
+    /// </summary>
     internal class AkkaProtocolHandle : AbstractTransportAdapterHandle
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="originalLocalAddress">TBD</param>
+        /// <param name="originalRemoteAddress">TBD</param>
+        /// <param name="readHandlerCompletionSource">TBD</param>
+        /// <param name="wrappedHandle">TBD</param>
+        /// <param name="handshakeInfo">TBD</param>
+        /// <param name="stateActor">TBD</param>
+        /// <param name="codec">TBD</param>
         public AkkaProtocolHandle(Address originalLocalAddress, Address originalRemoteAddress,
             TaskCompletionSource<IHandleEventListener> readHandlerCompletionSource, AssociationHandle wrappedHandle,
             HandshakeInfo handshakeInfo, IActorRef stateActor, AkkaPduCodec codec)
@@ -277,40 +400,60 @@ namespace Akka.Remote.Transport
             Codec = codec;
         }
 
+        /// <summary>
+        /// The current handshake information.
+        /// </summary>
         public readonly HandshakeInfo HandshakeInfo;
 
+        /// <summary>
+        /// The <see cref="ProtocolStateActor"/> responsible for this association.
+        /// </summary>
         public readonly IActorRef StateActor;
 
+        /// <summary>
+        /// The codec instance used for managing transport-specific commands.
+        /// </summary>
         public readonly AkkaPduCodec Codec;
 
+        /// <inheritdoc cref="AssociationHandle"/>
         public override bool Write(ByteString payload)
         {
             return WrappedHandle.Write(Codec.ConstructPayload(payload));
         }
 
+#pragma warning disable CS0672 // Member overrides obsolete member
+        /// <inheritdoc cref="AssociationHandle"/>
         public override void Disassociate()
+#pragma warning restore CS0672 // Member overrides obsolete member
         {
             Disassociate(DisassociateInfo.Unknown);
         }
 
+        /// <summary>
+        /// Forces a disassociation of the current transport.
+        /// </summary>
+        /// <param name="info">The reason for disassociating.</param>
         public void Disassociate(DisassociateInfo info)
         {
             StateActor.Tell(new DisassociateUnderlying(info));
         }
 
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((AkkaProtocolHandle) obj);
+            return Equals((AkkaProtocolHandle)obj);
         }
 
+        /// <inheritdoc/>
         protected bool Equals(AkkaProtocolHandle other)
         {
             return base.Equals(other) && Equals(HandshakeInfo, other.HandshakeInfo) && Equals(StateActor, other.StateActor);
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             unchecked
@@ -323,36 +466,79 @@ namespace Akka.Remote.Transport
         }
     }
 
+    /// <summary>
+    /// TBD
+    /// </summary>
     internal enum AssociationState
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
         Closed = 0,
+        /// <summary>
+        /// TBD
+        /// </summary>
         WaitHandshake = 1,
+        /// <summary>
+        /// TBD
+        /// </summary>
         Open = 2
     }
 
+    /// <summary>
+    /// TBD
+    /// </summary>
     internal class HeartbeatTimer : INoSerializationVerificationNeeded { }
 
+    internal class HandshakeTimer : INoSerializationVerificationNeeded { }
+
+    /// <summary>
+    /// TBD
+    /// </summary>
     internal sealed class HandleMsg : INoSerializationVerificationNeeded
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="handle">TBD</param>
         public HandleMsg(AssociationHandle handle)
         {
             Handle = handle;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public AssociationHandle Handle { get; private set; }
     }
 
+    /// <summary>
+    /// TBD
+    /// </summary>
     internal sealed class HandleListenerRegistered : INoSerializationVerificationNeeded
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="listener">TBD</param>
         public HandleListenerRegistered(IHandleEventListener listener)
         {
             Listener = listener;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public IHandleEventListener Listener { get; private set; }
     }
 
+    /// <summary>
+    /// TBD
+    /// </summary>
     internal abstract class ProtocolStateData { }
+    /// <summary>
+    /// TBD
+    /// </summary>
     internal abstract class InitialProtocolStateData : ProtocolStateData { }
 
     /// <summary>
@@ -360,6 +546,12 @@ namespace Akka.Remote.Transport
     /// </summary>
     internal sealed class OutboundUnassociated : InitialProtocolStateData
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="remoteAddress">TBD</param>
+        /// <param name="statusCompletionSource">TBD</param>
+        /// <param name="transport">TBD</param>
         public OutboundUnassociated(Address remoteAddress, TaskCompletionSource<AssociationHandle> statusCompletionSource, Transport transport)
         {
             Transport = transport;
@@ -367,10 +559,19 @@ namespace Akka.Remote.Transport
             RemoteAddress = remoteAddress;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public Address RemoteAddress { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public TaskCompletionSource<AssociationHandle> StatusCompletionSource { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public Transport Transport { get; private set; }
     }
 
@@ -379,14 +580,25 @@ namespace Akka.Remote.Transport
     /// </summary>
     internal sealed class OutboundUnderlyingAssociated : ProtocolStateData
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="statusCompletionSource">TBD</param>
+        /// <param name="wrappedHandle">TBD</param>
         public OutboundUnderlyingAssociated(TaskCompletionSource<AssociationHandle> statusCompletionSource, AssociationHandle wrappedHandle)
         {
             WrappedHandle = wrappedHandle;
             StatusCompletionSource = statusCompletionSource;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public TaskCompletionSource<AssociationHandle> StatusCompletionSource { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public AssociationHandle WrappedHandle { get; private set; }
     }
 
@@ -395,14 +607,25 @@ namespace Akka.Remote.Transport
     /// </summary>
     internal sealed class InboundUnassociated : InitialProtocolStateData
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="associationEventListener">TBD</param>
+        /// <param name="wrappedHandle">TBD</param>
         public InboundUnassociated(IAssociationEventListener associationEventListener, AssociationHandle wrappedHandle)
         {
             WrappedHandle = wrappedHandle;
             AssociationEventListener = associationEventListener;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public IAssociationEventListener AssociationEventListener { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public AssociationHandle WrappedHandle { get; private set; }
     }
 
@@ -411,6 +634,12 @@ namespace Akka.Remote.Transport
     /// </summary>
     internal sealed class AssociatedWaitHandler : ProtocolStateData
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="handlerListener">TBD</param>
+        /// <param name="wrappedHandle">TBD</param>
+        /// <param name="queue">TBD</param>
         public AssociatedWaitHandler(Task<IHandleEventListener> handlerListener, AssociationHandle wrappedHandle, Queue<ByteString> queue)
         {
             Queue = queue;
@@ -418,10 +647,19 @@ namespace Akka.Remote.Transport
             HandlerListener = handlerListener;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public Task<IHandleEventListener> HandlerListener { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public AssociationHandle WrappedHandle { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public Queue<ByteString> Queue { get; private set; }
     }
 
@@ -430,14 +668,25 @@ namespace Akka.Remote.Transport
     /// </summary>
     internal sealed class ListenerReady : ProtocolStateData
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="listener">TBD</param>
+        /// <param name="wrappedHandle">TBD</param>
         public ListenerReady(IHandleEventListener listener, AssociationHandle wrappedHandle)
         {
             WrappedHandle = wrappedHandle;
             Listener = listener;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public IHandleEventListener Listener { get; private set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public AssociationHandle WrappedHandle { get; private set; }
     }
 
@@ -446,34 +695,59 @@ namespace Akka.Remote.Transport
     /// </summary>
     internal class TimeoutReason
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="errorMessage">TBD</param>
         public TimeoutReason(string errorMessage)
         {
             ErrorMessage = errorMessage;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public string ErrorMessage { get; private set; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
-            return string.Format("Timeout: {0}", ErrorMessage);
+            return $"Timeout: {ErrorMessage}";
         }
     }
+
+    /// <summary>
+    /// TBD
+    /// </summary>
     internal class ForbiddenUidReason { }
 
+    /// <summary>
+    /// INTERNAL API.
+    /// </summary>
     internal class ProtocolStateActor : FSM<AssociationState, ProtocolStateData>
     {
         private readonly ILoggingAdapter _log = Context.GetLogger();
-        private InitialProtocolStateData _initialData;
-        private HandshakeInfo _localHandshakeInfo;
+        private readonly InitialProtocolStateData _initialData;
+        private readonly HandshakeInfo _localHandshakeInfo;
         private int? _refuseUid;
-        private AkkaProtocolSettings _settings;
-        private Address _localAddress;
-        private AkkaPduCodec _codec;
-        private FailureDetector _failureDetector;
+        private readonly AkkaProtocolSettings _settings;
+        private readonly Address _localAddress;
+        private readonly AkkaPduCodec _codec;
+        private readonly FailureDetector _failureDetector;
+
+        private const string HandshakeTimerKey = "handshake-timer";
 
         /// <summary>
         /// Constructor for outbound ProtocolStateActors
         /// </summary>
+        /// <param name="handshakeInfo">TBD</param>
+        /// <param name="remoteAddress">TBD</param>
+        /// <param name="statusCompletionSource">TBD</param>
+        /// <param name="transport">TBD</param>
+        /// <param name="settings">TBD</param>
+        /// <param name="codec">TBD</param>
+        /// <param name="failureDetector">TBD</param>
+        /// <param name="refuseUid">TBD</param>
         public ProtocolStateActor(HandshakeInfo handshakeInfo, Address remoteAddress,
             TaskCompletionSource<AssociationHandle> statusCompletionSource, Transport transport,
             AkkaProtocolSettings settings, AkkaPduCodec codec, FailureDetector failureDetector, int? refuseUid = null)
@@ -487,12 +761,60 @@ namespace Akka.Remote.Transport
         /// <summary>
         /// Constructor for inbound ProtocolStateActors
         /// </summary>
+        /// <param name="handshakeInfo">TBD</param>
+        /// <param name="wrappedHandle">TBD</param>
+        /// <param name="associationEventListener">TBD</param>
+        /// <param name="settings">TBD</param>
+        /// <param name="codec">TBD</param>
+        /// <param name="failureDetector">TBD</param>
         public ProtocolStateActor(HandshakeInfo handshakeInfo, AssociationHandle wrappedHandle, IAssociationEventListener associationEventListener, AkkaProtocolSettings settings, AkkaPduCodec codec, FailureDetector failureDetector)
             : this(new InboundUnassociated(associationEventListener, wrappedHandle), handshakeInfo, settings, codec, failureDetector, refuseUid: null) { }
 
         /// <summary>
         /// Common constructor used by both the outbound and the inbound cases
         /// </summary>
+        /// <param name="initialData">TBD</param>
+        /// <param name="localHandshakeInfo">TBD</param>
+        /// <param name="settings">TBD</param>
+        /// <param name="codec">TBD</param>
+        /// <param name="failureDetector">TBD</param>
+        /// <param name="refuseUid">TBD</param>
+        /// <exception cref="AkkaProtocolException">
+        /// This exception is thrown for a number of reasons that include the following:
+        /// <dl>
+        ///   <dt><b>when in the <see cref="AssociationState.WaitHandshake"/> state</b></dt>
+        ///   <dd>
+        ///     <dl>
+        ///       <dt><b>the event is of type <see cref="HeartbeatTimer"/></b></dt>
+        ///       <dd>This exception is thrown when there is no response from the remote system causing the timeout.</dd>
+        ///     </dl>
+        ///   </dd>
+        ///   <dt><b>when in the <see cref="AssociationState.Open"/> state</b></dt>
+        ///   <dd>
+        ///     <dl>
+        ///       <dt><b>the event is of type <see cref="InboundPayload"/></b></dt>
+        ///       <dd>This exception is thrown when the message type could not be handled.</dd>
+        ///       <dt><b>the event is of type <see cref="HeartbeatTimer"/></b></dt>
+        ///       <dd>This exception is thrown when there is no response from the remote system causing the timeout.</dd>
+        ///       <dt><b>the event is of type <see cref="DisassociateUnderlying"/></b></dt>
+        ///       <dd>This exception is thrown when the message type could not be handled.</dd>
+        ///     </dl>
+        ///   </dd>
+        ///   <dt><b>when the FSM is terminating <see cref="FSM{TState, TData}.OnTermination(Action{Akka.Actor.FSMBase.StopEvent{TState, TData}})"/></b></dt>
+        ///   <dd>
+        ///     <dl>
+        ///       <dt><b>the event is of type <see cref="OutboundUnassociated"/></b></dt>
+        ///       <dd>This exception is thrown when the transport disassociated before the handshake finished.</dd>
+        ///       <dt><b>the event is of type <see cref="OutboundUnderlyingAssociated" /> with <see cref="Akka.Actor.FSMBase.StopEvent{TState, TData}.Reason "/>
+        ///           being <see cref="Akka.Actor.FSMBase.Failure"/></b>
+        ///       </dt>
+        ///       <dd>This exception is thrown when either a timeout occurs, the remote system is shutting down,
+        ///           this system has been quarantined, or the transport disassociated before handshake finished.
+        ///       </dd>
+        ///     </dl>
+        ///   </dd>
+        /// </dl>
+        /// </exception>
         protected ProtocolStateActor(InitialProtocolStateData initialData, HandshakeInfo localHandshakeInfo, AkkaProtocolSettings settings, AkkaPduCodec codec, FailureDetector failureDetector, int? refuseUid)
         {
             _initialData = initialData;
@@ -511,241 +833,249 @@ namespace Akka.Remote.Transport
         {
             When(AssociationState.Closed, fsmEvent =>
             {
-                State<AssociationState, ProtocolStateData> nextState = null;
-                //Transport layer events for outbound associations
-                fsmEvent.FsmEvent.Match()
-                    .With<Status.Failure>(f => fsmEvent.StateData.Match()
-                        .With<OutboundUnassociated>(ou =>
+                switch (fsmEvent.FsmEvent)
+                {
+                    case Status.Failure f:
+                        switch (fsmEvent.StateData)
                         {
-                            ou.StatusCompletionSource.SetException(f.Cause);
-                            nextState = Stop();
-                        }))
-                    .With<AssociationHandle>(h => fsmEvent.StateData.Match()
-                        .With<OutboundUnassociated>(ou =>
-                        {
-                            /*
-                             * Association has been established, but handshake is not yet complete.
-                             * This actor, the outbound ProtocolStateActor, can now set itself as 
-                             * the read handler for the remainder of the handshake process.
-                             */
-                            AssociationHandle wrappedHandle = h;
-                            var statusPromise = ou.StatusCompletionSource;
-                            wrappedHandle.ReadHandlerSource.TrySetResult(new ActorHandleEventListener(Self));
-                            if (SendAssociate(wrappedHandle, _localHandshakeInfo))
-                            {
-                                _failureDetector.HeartBeat();
-                                InitTimers();
-                                // wait for reply from the inbound side of the connection (WaitHandshake)
-                                nextState =
-                                    GoTo(AssociationState.WaitHandshake)
-                                        .Using(new OutboundUnderlyingAssociated(statusPromise, wrappedHandle));
-                            }
-                            else
-                            {
-                                //Otherwise, retry
-                                SetTimer("associate-retry", wrappedHandle,
-                                    ((RemoteActorRefProvider) ((ActorSystemImpl) Context.System).Provider) //TODO: rewrite using RARP ActorSystem Extension
-                                        .RemoteSettings.BackoffPeriod, repeat: false);
-                                nextState = Stay();
-                            }
-                        }))
-                    .With<DisassociateUnderlying>(d =>
-                    {
-                        nextState = Stop();
-                    })
-                    .Default(m => { nextState = Stay(); });
+                            case OutboundUnassociated ou:
+                                ou.StatusCompletionSource.SetException(f.Cause);
+                                return Stop();
+                        }
 
-                return nextState;
+                        return null;
+                    case HandleMsg h:
+                        switch (fsmEvent.StateData)
+                        {
+                            case OutboundUnassociated ou:
+                                /*
+                                 * Association has been established, but handshake is not yet complete.
+                                 * This actor, the outbound ProtocolStateActor, can now set itself as
+                                 * the read handler for the remainder of the handshake process.
+                                 */
+                                var wrappedHandle = h.Handle;
+                                var statusPromise = ou.StatusCompletionSource;
+                                wrappedHandle.ReadHandlerSource.TrySetResult(new ActorHandleEventListener(Self));
+                                if (SendAssociate(wrappedHandle, _localHandshakeInfo))
+                                {
+                                    _failureDetector.HeartBeat();
+                                    InitHeartbeatTimer();
+                                    // wait for reply from the inbound side of the connection (WaitHandshake)
+                                    return
+                                        GoTo(AssociationState.WaitHandshake)
+                                            .Using(new OutboundUnderlyingAssociated(statusPromise, wrappedHandle));
+                                }
+                                else
+                                {
+                                    // Underlying transport was busy -- Associate could not be sent
+                                    SetTimer("associate-retry", new HandleMsg(wrappedHandle),
+                                        RARP.For(Context.System).Provider
+                                            .RemoteSettings.BackoffPeriod, repeat: false);
+                                    return Stay();
+                                }
+                        }
+
+                        return Stay();
+                    case DisassociateUnderlying du:
+                        return Stop();
+                    case HandshakeTimer t when fsmEvent.StateData is OutboundUnassociated ou:
+                        var errMsg = $"No response from remote for outbound association. Associate timed out after " +
+                                     $"[{_settings.HandshakeTimeout.TotalMilliseconds} ms].";
+                        ou.StatusCompletionSource.SetException(new TimeoutException(errMsg));
+                        return Stop(new Failure(new TimeoutReason(errMsg)));
+                    default:
+                        return Stay();
+                }
             });
 
             //Transport layer events for outbound associations
             When(AssociationState.WaitHandshake, @event =>
             {
-                State<AssociationState, ProtocolStateData> nextState = null;
-
-                @event.FsmEvent.Match()
-                    .With<UnderlyingTransportError>(e =>
-                    {
-                        PublishError(e);
-                        nextState = Stay();
-                    })
-                    .With<Disassociated>(d =>
-                    {
-                        nextState = Stop(new Failure(d.Info));
-                    })
-                    .With<InboundPayload>(m =>
-                    {
-                        var pdu = DecodePdu(m.Payload);
-                        @event.StateData.Match()
-                            .With<OutboundUnderlyingAssociated>(ola =>
+                switch (@event.FsmEvent)
+                {
+                    case Disassociated d:
+                        return Stop(new Failure(d.Info));
+                    case InboundPayload p when @event.StateData is OutboundUnderlyingAssociated ola:
+                        {
+                            var pdu = DecodePdu(p.Payload);
+                            /*
+                             * This state is used for OutboundProtocolState actors when they receive
+                             * a reply back from the inbound end of the association.
+                             */
+                            var wrappedHandle = ola.WrappedHandle;
+                            var statusCompletionSource = ola.StatusCompletionSource;
+                            switch (pdu)
                             {
-                                /*
-                                 * This state is used for OutboundProtocolState actors when they receive
-                                 * a reply back from the inbound end of the association.
-                                 */
-                                var wrappedHandle = ola.WrappedHandle;
-                                var statusCompletionSource = ola.StatusCompletionSource;
-                                pdu.Match()
-                                    .With<Associate>(a =>
+                                case Associate a:
+                                    var handshakeInfo = a.Info;
+                                    if (_refuseUid.HasValue && _refuseUid == handshakeInfo.Uid) //refused UID
                                     {
-
-                                        var handshakeInfo = a.Info;
-                                        if (_refuseUid.HasValue && _refuseUid == handshakeInfo.Uid) //refused UID
-                                        {
-                                            SendDisassociate(wrappedHandle, DisassociateInfo.Quarantined);
-                                            nextState = Stop(new Failure(new ForbiddenUidReason()));
-                                        }
-                                        else //accepted UID
-                                        {
-                                            _failureDetector.HeartBeat();
-                                            nextState =
-                                                GoTo(AssociationState.Open)
-                                                    .Using(
-                                                        new AssociatedWaitHandler(
-                                                            NotifyOutboundHandler(wrappedHandle, handshakeInfo,
-                                                                statusCompletionSource), wrappedHandle,
-                                                            new Queue<ByteString>()));
-                                        }
-                                    })
-                                    .With<Disassociate>(d =>
+                                        SendDisassociate(wrappedHandle, DisassociateInfo.Quarantined);
+                                        return Stop(new Failure(new ForbiddenUidReason()));
+                                    }
+                                    else //accepted UID
                                     {
-                                        //After receiving Disassociate we MUST NOT send back a Disassociate (loop)
-                                        nextState = Stop(new Failure(d.Reason));
-                                    })
-                                    .Default(d =>
-                                    {
-                                        _log.Debug("Expected message of type Associate; instead received {0}", d);
-                                        //Expect handshake to be finished, dropping connection
-                                        SendDisassociate(wrappedHandle, DisassociateInfo.Unknown);
-                                        nextState = Stop();
-                                    });
-                            })
-                            .With<InboundUnassociated>(iu =>
-                            {
-                                /*
-                                 * This state is used by inbound protocol state actors
-                                 * when they receive an association attempt from the
-                                 * outbound side of the association.
-                                 */
-                                var associationHandler = iu.AssociationEventListener;
-                                var wrappedHandle = iu.WrappedHandle;
-                                pdu.Match()
-                                    .With<Disassociate>(d =>
-                                    {
-                                        nextState = Stop(new Failure(d.Reason));
-                                    })
-                                    .With<Associate>(a =>
-                                    {
-                                        SendAssociate(wrappedHandle, _localHandshakeInfo);
                                         _failureDetector.HeartBeat();
-                                        InitTimers();
-                                        nextState =
+                                        CancelTimer(HandshakeTimerKey);
+                                        return
                                             GoTo(AssociationState.Open)
                                                 .Using(
                                                     new AssociatedWaitHandler(
-                                                        NotifyInboundHandler(wrappedHandle, a.Info, associationHandler),
-                                                        wrappedHandle, new Queue<ByteString>()));
-                                    })
-                                    .Default(d =>
-                                    {
-                                        SendDisassociate(wrappedHandle, DisassociateInfo.Unknown);
-                                        nextState = Stop();
-                                    });
-                            });
+                                                        NotifyOutboundHandler(wrappedHandle, handshakeInfo,
+                                                            statusCompletionSource), wrappedHandle,
+                                                        new Queue<ByteString>()));
+                                    }
+                                case Disassociate d:
+                                    //After receiving Disassociate we MUST NOT send back a Disassociate (loop)
+                                    return Stop(new Failure(d.Reason));
+                                default:
+                                    //Expect handshake to be finished, dropping connection
+                                    if (_log.IsDebugEnabled)
+                                        _log.Debug("Expected message of type Associate; instead received {0}", @event.FsmEvent.GetType());
 
-                    })
-                    .With<HeartbeatTimer>(h => @event.StateData.Match()
-                        .With<OutboundUnderlyingAssociated>(ou => nextState = HandleTimers(ou.WrappedHandle)));
+                                    SendDisassociate(wrappedHandle, DisassociateInfo.Unknown);
+                                    return Stop();
+                            }
+                        }
 
-                return nextState;
+                    case HeartbeatTimer t when @event.StateData is OutboundUnderlyingAssociated oua:
+                        return HandleTimers(oua.WrappedHandle);
+
+                    // Events for inbound associations
+                    case InboundPayload p when @event.StateData is InboundUnassociated iu:
+                        {
+                            var pdu = DecodePdu(p.Payload);
+                            /*
+                             * This state is used by inbound protocol state actors
+                             * when they receive an association attempt from the
+                             * outbound side of the association.
+                             */
+                            var associationHandler = iu.AssociationEventListener;
+                            var wrappedHandle = iu.WrappedHandle;
+                            switch (pdu)
+                            {
+                                case Disassociate d:
+                                    // After receiving Disassociate we MUST NOT send back a Disassociate (loop)
+                                    return Stop(new Failure(d.Reason));
+                                case Associate a:
+                                    // Incoming association -- implicitly ACK by a heartbeat
+                                    SendAssociate(wrappedHandle, _localHandshakeInfo);
+                                    _failureDetector.HeartBeat();
+                                    InitHeartbeatTimer();
+                                    CancelTimer(HandshakeTimerKey);
+                                    return GoTo(AssociationState.Open).Using(
+                                        new AssociatedWaitHandler(
+                                            NotifyInboundHandler(wrappedHandle, a.Info, associationHandler),
+                                            wrappedHandle, new Queue<ByteString>()));
+
+                                // Got a stray message -- explicitly reset the association (force remote endpoint to reassociate)
+                                default:
+                                    if (_log.IsDebugEnabled)
+                                        _log.Debug("Sending disassociate to [{0}] because unexpected message of type [{1}] was received unassociated.", wrappedHandle, @event.FsmEvent.GetType());
+                                    SendDisassociate(wrappedHandle, DisassociateInfo.Unknown);
+                                    return Stop();
+                            }
+                        }
+
+                    case HandshakeTimer t when @event.StateData is OutboundUnderlyingAssociated oua:
+                        if (_log.IsDebugEnabled)
+                            _log.Debug("Sending disassociate to [{0}] because handshake timed out for outbound association after [{1}] ms.", oua.WrappedHandle, _settings.HandshakeTimeout.TotalMilliseconds);
+                        SendDisassociate(oua.WrappedHandle, DisassociateInfo.Unknown);
+                        return Stop(new Failure(new TimeoutReason(
+                            $"No response from remote for outbound association. Handshake timed out after [{_settings.HandshakeTimeout.TotalMilliseconds}] ms")));
+                    case HandshakeTimer t when @event.StateData is InboundUnassociated iu:
+                        if (_log.IsDebugEnabled)
+                            _log.Debug("Sending disassociate to [{0}] because handshake timed out for inbound association after [{1}] ms.", iu.WrappedHandle, _settings.HandshakeTimeout.TotalMilliseconds);
+                        SendDisassociate(iu.WrappedHandle, DisassociateInfo.Unknown);
+                        return Stop(new Failure(new TimeoutReason(
+                            $"No response from remote for inbound association. Handshake timed out after [{_settings.HandshakeTimeout.TotalMilliseconds}] ms")));
+                    case UnderlyingTransportError ue:
+                        PublishError(ue);
+                        return Stay();
+                    default:
+                        return null;
+                }
             });
 
             When(AssociationState.Open, @event =>
             {
-                State<AssociationState, ProtocolStateData> nextState = null;
-                @event.FsmEvent.Match()
-                    .With<UnderlyingTransportError>(e =>
-                    {
-                        PublishError(e);
-                        nextState = Stay();
-                    })
-                    .With<Disassociated>(d =>
-                    {
-                        nextState = Stop(new Failure(d.Info));
-                    })
-                    .With<InboundPayload>(ip =>
-                    {
-                        var pdu = DecodePdu(ip.Payload);
-                        pdu.Match()
-                            .With<Disassociate>(d =>
-                            {
-                                nextState = Stop(new Failure(d.Reason));
-                            })
-                            .With<Heartbeat>(h =>
-                            {
-                                _failureDetector.HeartBeat();
-                                nextState = Stay();
-                            })
-                            .With<Payload>(p =>
-                            {
-                                _failureDetector.HeartBeat();
-                                @event.StateData.Match()
-                                    .With<AssociatedWaitHandler>(awh =>
-                                    {
-                                        var nQueue = new Queue<ByteString>(awh.Queue);
-                                        nQueue.Enqueue(p.Bytes);
-                                        nextState =
-                                            Stay()
-                                                .Using(new AssociatedWaitHandler(awh.HandlerListener, awh.WrappedHandle,
-                                                    nQueue));
-                                    })
-                                    .With<ListenerReady>(lr =>
-                                    {
-                                        lr.Listener.Notify(new InboundPayload(p.Bytes));
-                                        nextState = Stay();
-                                    })
-                                    .Default(msg =>
-                                    {
-                                        throw new AkkaProtocolException(
-                                            string.Format(
-                                                "Unhandled message in state Open(InboundPayload) with type {0}",
-                                                msg));
-                                    });
-                            })
-                            .Default(d =>
-                            {
-                                nextState = Stay();
-                            });
-                    })
-                    .With<HeartbeatTimer>(hrt => @event.StateData.Match()
-                        .With<AssociatedWaitHandler>(awh => nextState = HandleTimers(awh.WrappedHandle))
-                        .With<ListenerReady>(lr => nextState = HandleTimers(lr.WrappedHandle)))
-                    .With<DisassociateUnderlying>(du =>
-                    {
-                        AssociationHandle handle = null;
-                        @event.StateData.Match()
-                            .With<ListenerReady>(lr => handle = lr.WrappedHandle)
-                            .With<AssociatedWaitHandler>(awh => handle = awh.WrappedHandle)
-                            .Default(
-                                msg =>
-                                {
-                                    throw new AkkaProtocolException(
-                                        string.Format(
-                                            "unhandled message in state Open(DisassociateUnderlying) with type {0}", msg));
-
-                                });
-                        SendDisassociate(handle, du.Info);
-                        nextState = Stop();
-                    })
-                    .With<HandleListenerRegistered>(hlr => @event.StateData.Match()
-                        .With<AssociatedWaitHandler>(awh =>
+                switch (@event.FsmEvent)
+                {
+                    case Disassociated d:
+                        return Stop(new Failure(d.Info));
+                    case InboundPayload ip:
                         {
-                            foreach (var msg in awh.Queue)
-                                hlr.Listener.Notify(new InboundPayload(msg));
-                            nextState = Stay().Using(new ListenerReady(hlr.Listener, awh.WrappedHandle));
-                        }));
+                            var pdu = DecodePdu(ip.Payload);
+                            switch (pdu)
+                            {
+                                case Disassociate d:
+                                    return Stop(new Failure(d.Reason));
+                                case Heartbeat h:
+                                    _failureDetector.HeartBeat();
+                                    return Stay();
+                                case Payload p:
+                                    // use incoming ordinary message as alive sign
+                                    _failureDetector.HeartBeat();
+                                    switch (@event.StateData)
+                                    {
+                                        case AssociatedWaitHandler awh:
+                                            var nQueue = new Queue<ByteString>(awh.Queue);
+                                            nQueue.Enqueue(p.Bytes);
+                                            return
+                                                Stay()
+                                                    .Using(new AssociatedWaitHandler(awh.HandlerListener, awh.WrappedHandle,
+                                                        nQueue));
+                                        case ListenerReady lr:
+                                            lr.Listener.Notify(new InboundPayload(p.Bytes));
+                                            return Stay();
+                                        default:
+                                            throw new AkkaProtocolException(
+                                                $"Unhandled message in state Open(InboundPayload) with type [{@event.FsmEvent?.GetType()}]");
+                                    }
+                                default:
+                                    return Stay();
+                            }
+                        }
+                    case HeartbeatTimer ht when @event.StateData is AssociatedWaitHandler awh:
+                        return HandleTimers(awh.WrappedHandle);
+                    case HeartbeatTimer ht when @event.StateData is ListenerReady lr:
+                        return HandleTimers(lr.WrappedHandle);
+                    case DisassociateUnderlying dl:
+                        {
+                            AssociationHandle GetHandle(ProtocolStateData data)
+                            {
+                                switch (data)
+                                {
+                                    case ListenerReady lr:
+                                        return lr.WrappedHandle;
+                                    case AssociatedWaitHandler awh:
+                                        return awh.WrappedHandle;
+                                    default:
+                                        throw new AkkaProtocolException(
+                                            $"Unhandled message in state Open(DisassociateUnderlying) with type [{@event.FsmEvent.GetType()}]");
+                                }
+                            }
 
-                return nextState;
+                            var handle = GetHandle(@event.StateData);
+
+                            // No debug logging here as sending DisassociateUnderlying(Unknown) should have been logged from where
+                            // it was sent
+                            SendDisassociate(handle, dl.Info);
+                            return Stop();
+                        }
+                    case HandleListenerRegistered hlr when @event.StateData is AssociatedWaitHandler awh:
+                        foreach (var p in awh.Queue)
+                        {
+                            hlr.Listener.Notify(new InboundPayload(p));
+                        }
+
+                        return Stay().Using(new ListenerReady(hlr.Listener, awh.WrappedHandle));
+                    case UnderlyingTransportError e:
+                        PublishError(e);
+                        return Stay();
+                    default:
+                        return null;
+                }
             });
 
             OnTermination(@event => @event.StateData.Match()
@@ -774,10 +1104,12 @@ namespace Akka.Remote.Transport
                                             "Transport disassociated before handshake finished"));
 
                     oua.StatusCompletionSource.TrySetException(associationFailure);
-                    oua.WrappedHandle.Disassociate();
+                    oua.WrappedHandle.Disassociate(DisassociationReason(@event.Reason), _log);
                 })
                 .With<AssociatedWaitHandler>(awh =>
                 {
+                    // Invalidate exposed but still unfinished promise. The underlying association disappeared, so after
+                    // registration immediately signal a disassociate
                     Disassociated disassociateNotification = null;
                     if (@event.Reason is Failure && @event.Reason.AsInstanceOf<Failure>().Cause is DisassociateInfo)
                     {
@@ -790,24 +1122,25 @@ namespace Akka.Remote.Transport
                     }
                     awh.HandlerListener.ContinueWith(result => result.Result.Notify(disassociateNotification),
                         TaskContinuationOptions.ExecuteSynchronously);
+                    awh.WrappedHandle.Disassociate(DisassociationReason(@event.Reason), _log);
                 })
                 .With<ListenerReady>(lr =>
                 {
                     Disassociated disassociateNotification = null;
-                    if (@event.Reason is Failure && ((Failure)@event.Reason).Cause is DisassociateInfo)
+                    if (@event.Reason is Failure failure && failure.Cause is DisassociateInfo)
                     {
                         disassociateNotification =
-                            new Disassociated(((Failure)@event.Reason).Cause.AsInstanceOf<DisassociateInfo>());
+                            new Disassociated(failure.Cause.AsInstanceOf<DisassociateInfo>());
                     }
                     else
                     {
                         disassociateNotification = new Disassociated(DisassociateInfo.Unknown);
                     }
                     lr.Listener.Notify(disassociateNotification);
-                    lr.WrappedHandle.Disassociate();
+                    lr.WrappedHandle.Disassociate(DisassociationReason(@event.Reason), _log);
                 })
                 .With<InboundUnassociated>(iu =>
-                    iu.WrappedHandle.Disassociate()));
+                    iu.WrappedHandle.Disassociate(DisassociationReason(@event.Reason), _log)));
 
             /*
              * Set the initial ProtocolStateActor state to CLOSED if OUTBOUND
@@ -817,8 +1150,8 @@ namespace Akka.Remote.Transport
                 .With<OutboundUnassociated>(d =>
                 {
                     // attempt to open underlying transport to the remote address
-                    // if using Helios, this is where the socket connection is opened.
-                    d.Transport.Associate(d.RemoteAddress).PipeTo(Self);
+                    // if using DotNetty, this is where the socket connection is opened.
+                    d.Transport.Associate(d.RemoteAddress).ContinueWith(result => new HandleMsg(result.Result), TaskContinuationOptions.ExecuteSynchronously).PipeTo(Self);
                     StartWith(AssociationState.Closed, d);
                 })
                 .With<InboundUnassociated>(d =>
@@ -827,15 +1160,34 @@ namespace Akka.Remote.Transport
                     // therefore we just have to set ourselves as listener and wait for
                     // incoming handshake attempts from the client.
                     d.WrappedHandle.ReadHandlerSource.SetResult(new ActorHandleEventListener(Self));
+
                     StartWith(AssociationState.WaitHandshake, d);
                 });
-
+            InitHandshakeTimer();
         }
 
+        private static string DisassociationReason(Reason reason)
+        {
+            switch (reason)
+            {
+                case Normal n:
+                    return "the ProtocolStateActor was stopped normally";
+                case Shutdown s:
+                    return "the ProtocolStateActor was shutdown";
+                case Failure f:
+                    return $"the ProtocolStateActor failed: {f.Cause}";
+                default:
+                    throw new AkkaProtocolException($"Unrecognized shutdown reason: {reason}");
+            }
+        }
+
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="reason">TBD</param>
         protected override void LogTermination(Reason reason)
         {
-            var failure = reason as Failure;
-            if (failure != null)
+            if (reason is Failure failure)
             {
                 failure.Cause.Match()
                     .With<DisassociateInfo>(() => { }) //no logging
@@ -848,19 +1200,16 @@ namespace Akka.Remote.Transport
 
         #endregion
 
-        #region Actor methods
-
         protected override void PostStop()
         {
             CancelTimer("heartbeat-timer");
             base.PostStop(); //pass to OnTermination
         }
 
-        #endregion
 
         #region Internal protocol messaging methods
 
-        private Exception DisassociateException(DisassociateInfo info)
+        private static Exception DisassociateException(DisassociateInfo info)
         {
             switch (info)
             {
@@ -883,16 +1232,21 @@ namespace Akka.Remote.Transport
             }
             else
             {
+                if (_log.IsDebugEnabled)
+                {
+                    _log.Debug("Sending disassociate to [{0}] because failure detector triggered in state [{1}]", wrappedHandle, StateName);
+                }
+
                 //send disassociate just to be sure
                 SendDisassociate(wrappedHandle, DisassociateInfo.Unknown);
-                return Stop(new Failure(new TimeoutReason("No response from remote. Handshake timed out or transport failure detector triggered.")));
+                return Stop(new Failure(new TimeoutReason($"No response from remote. Handshake timed out or transport failure detector triggered. (internal state was {StateName})")));
             }
         }
 
         private void ListenForListenerRegistration(TaskCompletionSource<IHandleEventListener> readHandlerSource)
         {
             readHandlerSource.Task.ContinueWith(rh => new HandleListenerRegistered(rh.Result),
-                TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.AttachedToParent).PipeTo(Self);
+                TaskContinuationOptions.ExecuteSynchronously).PipeTo(Self);
         }
 
         private Task<IHandleEventListener> NotifyOutboundHandler(AssociationHandle wrappedHandle,
@@ -901,7 +1255,8 @@ namespace Akka.Remote.Transport
             var readHandlerPromise = new TaskCompletionSource<IHandleEventListener>();
             ListenForListenerRegistration(readHandlerPromise);
 
-            statusPromise.SetResult(new AkkaProtocolHandle(_localAddress, wrappedHandle.RemoteAddress, readHandlerPromise, wrappedHandle, handshakeInfo, Self, _codec));
+            statusPromise.SetResult(new AkkaProtocolHandle(_localAddress, wrappedHandle.RemoteAddress,
+                readHandlerPromise, wrappedHandle, handshakeInfo, Self, _codec));
 
             return readHandlerPromise.Task;
         }
@@ -926,14 +1281,18 @@ namespace Akka.Remote.Transport
             }
             catch (Exception ex)
             {
-                throw new AkkaProtocolException(
-                    string.Format("Error while decoding incoming Akka PDU of length {0}", pdu.Length), ex);
+                throw new AkkaProtocolException($"Error while decoding incoming Akka PDU of length {pdu.Length}", ex);
             }
         }
 
-        private void InitTimers()
+        private void InitHeartbeatTimer()
         {
             SetTimer("heartbeat-timer", new HeartbeatTimer(), _settings.TransportHeartBeatInterval, true);
+        }
+
+        private void InitHandshakeTimer()
+        {
+            SetTimer(HandshakeTimerKey, new HandshakeTimer(), _settings.HandshakeTimeout, true);
         }
 
         private bool SendAssociate(AssociationHandle wrappedHandle, HandshakeInfo info)
@@ -985,21 +1344,22 @@ namespace Akka.Remote.Transport
         #region Static methods
 
 
+
         /// <summary>
         /// <see cref="Props"/> used when creating OUTBOUND associations to remote endpoints.
-        /// 
+        ///
         /// These <see cref="Props"/> create outbound <see cref="ProtocolStateActor"/> instances,
-        /// which begin a state of 
+        /// which begin a state of
         /// </summary>
-        /// <param name="handshakeInfo"></param>
-        /// <param name="remoteAddress"></param>
-        /// <param name="statusCompletionSource"></param>
-        /// <param name="transport"></param>
-        /// <param name="settings"></param>
-        /// <param name="codec"></param>
-        /// <param name="failureDetector"></param>
-        /// <param name="refuseUid"></param>
-        /// <returns></returns>
+        /// <param name="handshakeInfo">TBD</param>
+        /// <param name="remoteAddress">TBD</param>
+        /// <param name="statusCompletionSource">TBD</param>
+        /// <param name="transport">TBD</param>
+        /// <param name="settings">TBD</param>
+        /// <param name="codec">TBD</param>
+        /// <param name="failureDetector">TBD</param>
+        /// <param name="refuseUid">TBD</param>
+        /// <returns>TBD</returns>
         public static Props OutboundProps(HandshakeInfo handshakeInfo, Address remoteAddress,
             TaskCompletionSource<AssociationHandle> statusCompletionSource,
             Transport transport, AkkaProtocolSettings settings, AkkaPduCodec codec, FailureDetector failureDetector, int? refuseUid = null)
@@ -1007,13 +1367,20 @@ namespace Akka.Remote.Transport
             return Props.Create(() => new ProtocolStateActor(handshakeInfo, remoteAddress, statusCompletionSource, transport, settings, codec, failureDetector, refuseUid));
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="handshakeInfo">TBD</param>
+        /// <param name="wrappedHandle">TBD</param>
+        /// <param name="associationEventListener">TBD</param>
+        /// <param name="settings">TBD</param>
+        /// <param name="codec">TBD</param>
+        /// <param name="failureDetector">TBD</param>
+        /// <returns>TBD</returns>
         public static Props InboundProps(HandshakeInfo handshakeInfo, AssociationHandle wrappedHandle,
             IAssociationEventListener associationEventListener, AkkaProtocolSettings settings, AkkaPduCodec codec, FailureDetector failureDetector)
         {
-            return
-                Props.Create(
-                    () =>
-                        new ProtocolStateActor(handshakeInfo, wrappedHandle, associationEventListener, settings, codec, failureDetector));
+            return Props.Create(() => new ProtocolStateActor(handshakeInfo, wrappedHandle, associationEventListener, settings, codec, failureDetector));
         }
 
         #endregion

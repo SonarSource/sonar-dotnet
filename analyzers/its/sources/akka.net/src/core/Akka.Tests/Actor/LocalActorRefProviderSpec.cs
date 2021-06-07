@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="LocalActorRefProviderSpec.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -12,12 +12,10 @@ using Akka.Actor;
 using Akka.Actor.Internal;
 using Akka.TestKit;
 using Xunit;
-using Xunit.Extensions;
+using Akka.TestKit.TestActors;
 
 namespace Akka.Tests.Actor
 {
-    using Akka.TestKit.TestActors;
-
     public class LocalActorRefProviderSpec : AkkaSpec
     {
         [Fact]
@@ -81,7 +79,6 @@ namespace Akka.Tests.Actor
         [InlineData("%1t","Illegal actor name")]
         [InlineData("a?","Illegal actor name")]
         [InlineData("üß","include only ASCII")]
-        [InlineData("a?", "Illegal actor name")]
         [InlineData("åäö", "Illegal actor name")]
         public void An_ActorRefFactory_must_throw_suitable_exceptions_for_malformed_actor_names(string name, string expectedExceptionMessageSubstring)
         {
@@ -89,7 +86,7 @@ namespace Akka.Tests.Actor
                 {
                     Sys.ActorOf(Props.Empty, name);
                 });
-            Assert.Contains(expectedExceptionMessageSubstring, exception.Message, StringComparison.InvariantCultureIgnoreCase);
+            Assert.Contains(expectedExceptionMessageSubstring, exception.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         private class ActorWithDuplicateChild : ActorBase

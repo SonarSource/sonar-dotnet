@@ -1,4 +1,11 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="Akka.NET Project">
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System;
 using Akka.Actor;
 using Akka.Cluster.Tools.Client;
 using Akka.Cluster.Tools.PublishSubscribe;
@@ -43,7 +50,7 @@ namespace ClusterToolsExample.Seed
             var mediator = DistributedPubSub.Get(system).Mediator;
 
             system.Scheduler.ScheduleTellRepeatedly(TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5), mediator,
-                new Distributed.Publish("echo", new Echo("hello world")), ActorRefs.NoSender);
+                new Publish("echo", new Echo("hello world")), ActorRefs.NoSender);
         }
 
         /// <summary>

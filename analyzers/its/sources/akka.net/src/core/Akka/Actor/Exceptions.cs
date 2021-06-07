@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="Exceptions.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -109,16 +109,39 @@ namespace Akka.Actor
     }
 
     /// <summary>
+    /// This exception is thrown when an actor is interrupted in the midst of processing messages.
+    /// 
+    /// This is an exception typically thrown when the underlying dispatcher's threads are aborted.
+    /// </summary>
+    public class ActorInterruptedException : AkkaException
+    {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="message">TBD</param>
+        /// <param name="cause">TBD</param>
+        public ActorInterruptedException(string message = null, Exception cause = null) : base(message, cause) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ActorInterruptedException"/> class.
+        /// </summary>
+        /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information about the source or destination.</param>
+        protected ActorInterruptedException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
+
+    /// <summary>
     /// This exception is thrown when the initialization logic for an Actor fails.
     /// </summary>
     public class ActorInitializationException : AkkaException
     {
-        private readonly IActorRef _actor;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ActorInitializationException"/> class.
         /// </summary>
-        protected ActorInitializationException()
+        public ActorInitializationException()
             : base()
         {
         }
@@ -151,7 +174,7 @@ namespace Akka.Actor
         public ActorInitializationException(IActorRef actor, string message, Exception cause = null)
             : base(message, cause)
         {
-            _actor = actor;
+            Actor = actor;
         }
 
         /// <summary>
@@ -162,12 +185,20 @@ namespace Akka.Actor
         protected ActorInitializationException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
+            Actor = (IActorRef)info.GetValue("Actor", typeof(IActorRef));
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null) throw new ArgumentNullException(nameof(info));
+            info.AddValue("Actor", Actor);
+            base.GetObjectData(info, context);
         }
 
         /// <summary>
         /// Retrieves the actor whose initialization logic failed.
         /// </summary>
-        public IActorRef Actor { get { return _actor; } }
+        public IActorRef Actor { get; set; }
 
         /// <summary>
         /// Returns a <see cref="String" /> that represents this instance.
@@ -177,8 +208,8 @@ namespace Akka.Actor
         /// </returns>
         public override string ToString()
         {
-            if (_actor == null) return base.ToString();
-            return _actor + ": " + base.ToString();
+            if (Actor == null) return base.ToString();
+            return Actor + ": " + base.ToString();
         }
     }
 
@@ -231,6 +262,10 @@ namespace Akka.Actor
     /// </summary>
     public class ActorKilledException : AkkaException
     {
+        public ActorKilledException()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ActorKilledException"/> class.
         /// </summary>
@@ -308,8 +343,6 @@ namespace Akka.Actor
     /// </summary>
     public class DeathPactException : AkkaException
     {
-        private readonly IActorRef _deadActor;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DeathPactException"/> class.
         /// </summary>
@@ -317,7 +350,7 @@ namespace Akka.Actor
         public DeathPactException(IActorRef deadActor)
             : base("Monitored actor [" + deadActor + "] terminated")
         {
-            _deadActor = deadActor;
+            DeadActor = deadActor;
         }
 
         /// <summary>
@@ -328,15 +361,20 @@ namespace Akka.Actor
         protected DeathPactException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
+            DeadActor = (IActorRef)info.GetValue("DeadActor", typeof(IActorRef));
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null) throw new ArgumentNullException(nameof(info));
+            info.AddValue("DeadActor", DeadActor);
+            base.GetObjectData(info, context);
         }
 
         /// <summary>
         /// Retrieves the actor that has been terminated.
         /// </summary>
-        public IActorRef DeadActor
-        {
-            get { return _deadActor; }
-        }
+        public IActorRef DeadActor { get; }
     }
 
     /// <summary>
@@ -347,12 +385,10 @@ namespace Akka.Actor
     /// hence it is only visible as log entry on the event stream.
     /// </note>
     /// </summary>
-    public class PreRestartException : AkkaException
+    public class PreRestartException : ActorInitializationException
     {
-        private IActorRef Actor;
-        private Exception e; //TODO: what is this?
-        private Exception exception;
-        private object optionalMessage;
+        public Exception RestartException { get; } //TODO: what is this?
+        public object OptionalMessage { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PreRestartException"/> class.
@@ -362,11 +398,11 @@ namespace Akka.Actor
         /// <param name="cause">The exception which caused the restart in the first place.</param>
         /// <param name="optionalMessage">The message which was optionally passed into <see cref="ActorBase.PreRestart"/>.</param>
         public PreRestartException(IActorRef actor, Exception restartException, Exception cause, object optionalMessage)
+        :base(actor,"Exception pre restart (" + (restartException == null ?"null" : restartException.GetType().ToString()) + ")", cause)
         {
             Actor = actor;
-            e = restartException;
-            exception = cause;
-            this.optionalMessage = optionalMessage;
+            RestartException = restartException;
+            OptionalMessage = optionalMessage;
         }
 
         /// <summary>
@@ -377,7 +413,18 @@ namespace Akka.Actor
         protected PreRestartException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
+            RestartException = (Exception)info.GetValue("RestartException", typeof(Exception));
+            OptionalMessage = info.GetValue("OptionalMessage", typeof(object));
         }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null) throw new ArgumentNullException(nameof(info));
+            info.AddValue("RestartException", RestartException);
+            info.AddValue("OptionalMessage", OptionalMessage);
+            base.GetObjectData(info, context);
+        }
+
     }
 
     /// <summary>
@@ -386,8 +433,6 @@ namespace Akka.Actor
     /// </summary>
     public class PostRestartException : ActorInitializationException
     {
-        private readonly Exception _originalCause;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PostRestartException"/> class.
         /// </summary>
@@ -397,7 +442,7 @@ namespace Akka.Actor
         public PostRestartException(IActorRef actor, Exception cause, Exception originalCause)
             :base(actor,"Exception post restart (" + (originalCause == null ?"null" : originalCause.GetType().ToString()) + ")", cause)
         {
-            _originalCause = originalCause;
+            OriginalCause = originalCause;
         }
 
         /// <summary>
@@ -408,12 +453,20 @@ namespace Akka.Actor
         protected PostRestartException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
+            OriginalCause = (Exception)info.GetValue("OriginalCause", typeof(Exception));
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null) throw new ArgumentNullException(nameof(info));
+            info.AddValue("OriginalCause", OriginalCause);
+            base.GetObjectData(info, context);
         }
 
         ///<summary>
         /// Retrieves the exception which caused the restart in the first place.
         /// </summary>
-        public Exception OriginalCause { get { return _originalCause; } }
+        public Exception OriginalCause { get; }
     }
 
     /// <summary>
@@ -438,6 +491,13 @@ namespace Akka.Actor
             : base(info, context)
         {
         }
+
+        /// <summary>
+        /// <see cref="ActorNotFoundException"/> that takes a descriptive <paramref name="message"/> and optional <paramref name="innerException"/>.
+        /// </summary>
+        /// <param name="message">A user-defined error message.</param>
+        /// <param name="innerException">An inner <see cref="Exception"/>.</param>
+        public ActorNotFoundException(string message, Exception innerException = null) : base(message, innerException) { }
     }
 
     /// <summary>

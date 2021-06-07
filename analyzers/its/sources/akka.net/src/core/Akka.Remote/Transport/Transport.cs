@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="Transport.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -9,21 +9,46 @@ using System;
 using System.Threading.Tasks;
 using Akka.Actor;
 using Akka.Configuration;
-using Google.ProtocolBuffers;
+using Google.Protobuf;
 using System.Runtime.Serialization;
+using Akka.Event;
 
 namespace Akka.Remote.Transport
 {
+    /// <summary>
+    /// TBD
+    /// </summary>
     public abstract class Transport
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
         public Config Config { get; protected set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public ActorSystem System { get; protected set; }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public virtual string SchemeIdentifier { get; protected set; }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public virtual long MaximumPayloadBytes { get; protected set; }
-        public abstract Task<Tuple<Address, TaskCompletionSource<IAssociationEventListener>>> Listen();
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <returns>TBD</returns>
+        public abstract Task<(Address, TaskCompletionSource<IAssociationEventListener>)> Listen();
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="remote">TBD</param>
+        /// <returns>TBD</returns>
         public abstract bool IsResponsibleFor(Address remote);
 
         /// <summary>
@@ -95,23 +120,41 @@ namespace Akka.Remote.Transport
     /// </summary>
     public sealed class InboundPayload : IHandleEvent
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="payload">TBD</param>
         public InboundPayload(ByteString payload)
         {
             Payload = payload;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public ByteString Payload { get; private set; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
-            return string.Format("InboundPayload(size = {0} bytes)", Payload.Length);
+            return $"InboundPayload(size = {Payload.Length} bytes)";
         }
     }
 
-    public sealed class Disassociated : IHandleEvent
+    /// <summary>
+    /// TBD
+    /// </summary>
+    public sealed class Disassociated : IHandleEvent, IDeadLetterSuppression
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
         internal readonly DisassociateInfo Info;
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="info">TBD</param>
         public Disassociated(DisassociateInfo info)
         {
             Info = info;
@@ -123,9 +166,20 @@ namespace Akka.Remote.Transport
     /// </summary>
     public sealed class UnderlyingTransportError : IHandleEvent
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
         internal readonly Exception Cause;
+        /// <summary>
+        /// TBD
+        /// </summary>
         internal readonly string Message;
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="cause">TBD</param>
+        /// <param name="message">TBD</param>
         public UnderlyingTransportError(Exception cause, string message)
         {
             Cause = cause;
@@ -138,8 +192,17 @@ namespace Akka.Remote.Transport
     /// </summary>
     public enum DisassociateInfo
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
         Unknown = 0,
+        /// <summary>
+        /// TBD
+        /// </summary>
         Shutdown = 1,
+        /// <summary>
+        /// TBD
+        /// </summary>
         Quarantined = 2
     }
 
@@ -190,7 +253,7 @@ namespace Akka.Remote.Transport
     /// <summary>
     /// Marker type for whenever new actors / endpoints are associated with this <see cref="ActorSystem"/> via remoting.
     /// </summary>
-    public interface IAssociationEvent
+    public interface IAssociationEvent : INoSerializationVerificationNeeded
     {
 
     }
@@ -201,11 +264,18 @@ namespace Akka.Remote.Transport
     /// </summary>
     public sealed class InboundAssociation : IAssociationEvent
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="association">TBD</param>
         public InboundAssociation(AssociationHandle association)
         {
             Association = association;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public AssociationHandle Association { get; private set; }
     }
 
@@ -260,6 +330,11 @@ namespace Akka.Remote.Transport
     /// </summary>
     public abstract class AssociationHandle
     {
+        /// <summary>
+        /// Creates a handle to an association between two remote addresses.
+        /// </summary>
+        /// <param name="localAddress">The local address to use.</param>
+        /// <param name="remoteAddress">The remote address to use.</param>
         protected AssociationHandle(Address localAddress, Address remoteAddress)
         {
             LocalAddress = localAddress;
@@ -305,10 +380,31 @@ namespace Akka.Remote.Transport
         /// transports may not support it. Remote endpoint of the channel or connection MAY be notified, but this is not
         /// guaranteed.
         /// 
-        /// The transport that provides the handle MUST guarantee that <see cref="Disassociate"/> could be called arbitrarily many times.
+        /// The transport that provides the handle MUST guarantee that <see cref="Disassociate()"/> could be called arbitrarily many times.
         /// </summary>
+        [Obsolete("Use the method that states reasons to make sure disassociation reasons are logged.")]
         public abstract void Disassociate();
 
+        /// <summary>
+        /// Closes the underlying transport link, if needed. Some transports might not need an explicit teardown (UDP) and some
+        /// transports may not support it. Remote endpoint of the channel or connection MAY be notified, but this is not
+        /// guaranteed.
+        /// 
+        /// The transport that provides the handle MUST guarantee that <see cref="Disassociate()"/> could be called arbitrarily many times.
+        /// </summary>
+        public void Disassociate(string reason, ILoggingAdapter log)
+        {
+            if (log.IsDebugEnabled)
+            {
+                log.Debug("Association between local [{0}] and remote [{1}] was disassociated because {2}", LocalAddress, RemoteAddress, reason);
+            }
+
+#pragma warning disable 618
+            Disassociate();
+#pragma warning restore 618
+        }
+
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -317,11 +413,13 @@ namespace Akka.Remote.Transport
             return Equals((AssociationHandle) obj);
         }
 
+        /// <inheritdoc/>
         protected bool Equals(AssociationHandle other)
         {
             return Equals(LocalAddress, other.LocalAddress) && Equals(RemoteAddress, other.RemoteAddress);
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             unchecked

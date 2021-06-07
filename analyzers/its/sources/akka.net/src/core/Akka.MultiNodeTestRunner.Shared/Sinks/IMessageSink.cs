@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="IMessageSink.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Akka.Actor;
 using Akka.Event;
+using Akka.MultiNodeTestRunner.Shared.Reporting;
 
 namespace Akka.MultiNodeTestRunner.Shared.Sinks
 {
@@ -64,42 +65,15 @@ namespace Akka.MultiNodeTestRunner.Shared.Sinks
         /// <summary>
         /// Report that the test runner is terminating the current test in the suite.
         /// </summary>
-        void EndTest();
+        void EndTest(string className, string methodName, SpecLog specLog);
 
         /// <summary>
         /// Report that an individual node has passed its test.
         /// </summary>
         /// <param name="nodeIndex">The Id of the node in the 0-N index.</param>
-        void Success(int nodeIndex);
-
-        /// <summary>
-        /// Report that an individual node has passed its test.
-        /// </summary>
-        /// <param name="nodeIndex">The Id of the node in the 0-N index.</param>
+        /// <param name="nodeRole">The Role of the node.</param>
         /// <param name="message">A string message included with the notification.</param>
-        void Success(int nodeIndex, string message);
-
-        /// <summary>
-        /// Report that an individual node has failed its test.
-        /// </summary>
-        /// <param name="nodeIndex">The Id of the node in the 0-N index.</param>
-        void Fail(int nodeIndex);
-
-        /// <summary>
-        /// Report that an individual node has failed its test.
-        /// </summary>
-        /// <param name="nodeIndex">The Id of the node in the 0-N index.</param>
-        /// <param name="message">A string message included with the notification.</param>
-        void Fail(int nodeIndex, string message);
-
-        /// <summary>
-        /// Report a log message for an individual node.
-        /// </summary>
-        /// <param name="nodeIndex">The Id of the node in the 0-N index.</param>
-        /// <param name="message">A string message included with the notification.</param>
-        /// <param name="logSource">The source of a log message.</param>
-        /// <param name="level">The <see cref="LogLevel"/> of this message.</param>
-        void Log(int nodeIndex, string message,  string logSource, LogLevel level);
+        void Success(int nodeIndex, string nodeRole, string message);
 
         /// <summary>
         /// Report a log message from the MultiNodeTestRunner itself.

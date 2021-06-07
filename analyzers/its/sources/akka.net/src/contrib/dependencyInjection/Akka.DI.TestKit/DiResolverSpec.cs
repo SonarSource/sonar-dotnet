@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="DiResolverSpec.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -11,6 +11,7 @@ using Akka.Actor;
 using Akka.Configuration;
 using Akka.DI.Core;
 using Akka.Dispatch;
+using Akka.Dispatch.MessageQueues;
 using Akka.TestKit;
 using Akka.TestKit.TestActors;
 using Akka.TestKit.Xunit2;
@@ -218,6 +219,8 @@ namespace Akka.DI.TestKit
             Bind<DisposableActor>(container);
             Bind<DiPerRequestActor>(container);
             Bind<DiSingletonActor>(container);
+            Bind<BoundedStashActor>(container);
+            Bind<UnboundedStashActor>(container);
             return NewDependencyResolver(container, system);
         }
 
@@ -237,15 +240,15 @@ namespace Akka.DI.TestKit
         protected abstract IDependencyResolver NewDependencyResolver(object diContainer, ActorSystem system);
 
         /// <summary>
-        /// Create a binding for type <typeparam name="T"/> on the provided DI container.
+        /// Create a binding for type <typeparamref name="T"/> on the provided DI container.
         /// </summary>
         /// <typeparam name="T">The type we're binding onto the DI container.</typeparam>
         /// <param name="diContainer">The DI container.</param>
-        /// <param name="generator">A generator function that yields new objects of type <typeparam name="T"/>.</param>
+        /// <param name="generator">A generator function that yields new objects of type <typeparamref name="T"/>.</param>
         protected abstract void Bind<T>(object diContainer, Func<T> generator);
 
         /// <summary>
-        /// Create a binding for type <typeparam name="T"/> on the provided DI container.
+        /// Create a binding for type <typeparamref name="T"/> on the provided DI container.
         /// 
         /// Used for DI frameworks that require the DI target to be registered as well
         /// as the injected components.
@@ -333,9 +336,10 @@ namespace Akka.DI.TestKit
             var stashActorProps = Sys.DI().Props<DiPerRequestActor>();
             var stashActor = Sys.ActorOf(stashActorProps);
 
-            var internalRef = (LocalActorRef)stashActor;
+            var internalRef = (RepointableActorRef)stashActor;
+            AwaitCondition(() => internalRef.IsStarted);
 
-            Assert.IsType<UnboundedMailbox>(internalRef.Cell.Mailbox);
+            Assert.IsType<UnboundedMessageQueue>(internalRef.Underlying.AsInstanceOf<ActorCell>().Mailbox.MessageQueue);
         }
 
         [Fact]
@@ -344,9 +348,10 @@ namespace Akka.DI.TestKit
             var stashActorProps = Sys.DI().Props<UnboundedStashActor>();
             var stashActor = Sys.ActorOf(stashActorProps);
 
-            var internalRef = (LocalActorRef) stashActor;
+            var internalRef = (RepointableActorRef)stashActor;
+            AwaitCondition(() => internalRef.IsStarted);
 
-            Assert.IsType<UnboundedDequeBasedMailbox>(internalRef.Cell.Mailbox);
+            Assert.IsType<UnboundedDequeMessageQueue>(internalRef.Underlying.AsInstanceOf<ActorCell>().Mailbox.MessageQueue);
         }
 
         [Fact]
@@ -355,9 +360,10 @@ namespace Akka.DI.TestKit
             var stashActorProps = Sys.DI().Props<BoundedStashActor>();
             var stashActor = Sys.ActorOf(stashActorProps);
 
-            var internalRef = (LocalActorRef)stashActor;
+            var internalRef = (RepointableActorRef)stashActor;
+            AwaitCondition(() => internalRef.IsStarted);
 
-            Assert.IsType<BoundedDequeBasedMailbox>(internalRef.Cell.Mailbox);
+            Assert.IsType<BoundedDequeMessageQueue>(internalRef.Underlying.AsInstanceOf<ActorCell>().Mailbox.MessageQueue);
         }
 
         [Fact]
@@ -384,12 +390,18 @@ namespace Akka.DI.TestKit
 
         #endregion
 
+        /// <inheritdoc/>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        /// <param name="disposing">if set to <c>true</c> the method has been called directly or indirectly by a 
+        /// user's code. Managed and unmanaged resources will be disposed.<br />
+        /// if set to <c>false</c> the method has been called by the runtime from inside the finalizer and only 
+        /// unmanaged resources can be disposed.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

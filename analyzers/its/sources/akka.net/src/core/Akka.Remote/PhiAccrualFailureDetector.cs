@@ -1,12 +1,13 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="PhiAccrualFailureDetector.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Akka.Actor;
 using Akka.Configuration;
@@ -15,31 +16,32 @@ using Akka.Util;
 
 namespace Akka.Remote
 {
-    /**
-     * Implementation of 'The Phi Accrual Failure Detector' by Hayashibara et al. as defined in their paper:
-     * [http://ddg.jaist.ac.jp/pub/HDY+04.pdf]
-     *
-     * The suspicion level of failure is given by a value called φ (phi).
-     * The basic idea of the φ failure detector is to express the value of φ on a scale that
-     * is dynamically adjusted to reflect current network conditions. A configurable
-     * threshold is used to decide if φ is considered to be a failure.
-     *
-     * The value of φ is calculated as:
-     *
-     * {{{
-     * φ = -log10(1 - F(timeSinceLastHeartbeat)
-     * }}}
-     * where F is the cumulative distribution function of a normal distribution with mean
-     * and standard deviation estimated from historical heartbeat inter-arrival times.
-     */
+    /// <summary>
+    /// Implementation of 'The Phi Accrual Failure Detector' by Hayashibara et al. as defined in their paper:
+    /// [http://ddg.jaist.ac.jp/pub/HDY+04.pdf]
+    ///
+    /// The suspicion level of failure is given by a value called φ (phi).
+    /// The basic idea of the φ failure detector is to express the value of φ on a scale that
+    /// is dynamically adjusted to reflect current network conditions. A configurable
+    /// threshold is used to decide if φ is considered to be a failure.
+    ///
+    /// The value of φ is calculated as:
+    ///
+    /// <code>
+    /// φ = -log10(1 - F(timeSinceLastHeartbeat)
+    /// </code>
+    /// 
+    /// where F is the cumulative distribution function of a normal distribution with mean
+    /// and standard deviation estimated from historical heartbeat inter-arrival times.
+    /// </summary>
     public class PhiAccrualFailureDetector : FailureDetector
     {
-        private double _threshold;
-        private int _maxSampleSize;
+        private readonly double _threshold;
+        private readonly int _maxSampleSize;
         private TimeSpan _minStdDeviation;
         private TimeSpan _acceptableHeartbeatPause;
         private TimeSpan _firstHeartbeatEstimate;
-        private Clock _clock;
+        private readonly Clock _clock;
 
         /// <summary>
         /// Procedural constructor for PhiAccrualDetector
@@ -75,17 +77,27 @@ namespace Akka.Remote
         /// Expecting config properties named 'threshold', 'max-sample-size',
         /// 'min-std-deviation', 'acceptable-heartbeat-pause', and 'heartbeat-interval'.
         /// </summary>
+        /// <param name="config">The HOCON configuration for the failure detector.</param>
+        /// <param name="ev">The <see cref="EventStream"/> for this <see cref="ActorSystem"/>.</param>
         public PhiAccrualFailureDetector(Config config, EventStream ev)
             : this(DefaultClock)
         {
-            _threshold = config.GetDouble("threshold");
-            _maxSampleSize = config.GetInt("max-sample-size");
-            _minStdDeviation = config.GetTimeSpan("min-std-deviation");
-            _acceptableHeartbeatPause = config.GetTimeSpan("acceptable-heartbeat-pause");
-            _firstHeartbeatEstimate = config.GetTimeSpan("heartbeat-interval");
+            if (config.IsNullOrEmpty())
+                throw ConfigurationException.NullOrEmptyConfig<PhiAccrualFailureDetector>();
+
+            _threshold = config.GetDouble("threshold", 0);
+            _maxSampleSize = config.GetInt("max-sample-size", 0);
+            _minStdDeviation = config.GetTimeSpan("min-std-deviation", null);
+            _acceptableHeartbeatPause = config.GetTimeSpan("acceptable-heartbeat-pause", null);
+            _firstHeartbeatEstimate = config.GetTimeSpan("heartbeat-interval", null);
             state = new State(FirstHeartBeat, null);
+            EventStream = ev ?? Option<EventStream>.None;
         }
 
+        /// <summary>
+        /// Protected constructor to be used for sub-classing only.
+        /// </summary>
+        /// <param name="clock">The clock used fo marking time.</param>
         protected PhiAccrualFailureDetector(Clock clock)
         {
             _clock = clock ?? DefaultClock;
@@ -106,45 +118,72 @@ namespace Akka.Remote
             }
         }
 
+        private Option<EventStream> EventStream { get; }
+
+        /// <summary>
+        /// Address introduced as a mutable property in order to avoid shuffling around API signatures
+        /// </summary>
+        public string Address { get; set; } = "N/A";
+
         /// <summary>
         /// Uses volatile memory and immutability for lockless concurrency.
         /// </summary>
         internal class State
         {
+            /// <summary>
+            /// TBD
+            /// </summary>
+            /// <param name="history">TBD</param>
+            /// <param name="timeStamp">TBD</param>
             public State(HeartbeatHistory history, long? timeStamp)
             {
                 TimeStamp = timeStamp;
                 History = history;
             }
 
+            /// <summary>
+            /// TBD
+            /// </summary>
             public HeartbeatHistory History { get; private set; }
 
+            /// <summary>
+            /// TBD
+            /// </summary>
             public long? TimeStamp { get; private set; }
         }
 
         private AtomicReference<State> _state;
 
-        private State state
+        internal State state
         {
             get { return _state; }
             set { _state = value; }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public override bool IsAvailable
         {
             get { return IsTimeStampAvailable(_clock()); }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public override bool IsMonitoring
         {
             get { return state.TimeStamp.HasValue; }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public override void HeartBeat()
         {
             var timestamp = _clock();
             var oldState = state;
-            HeartbeatHistory newHistory = null;
+            HeartbeatHistory newHistory;
 
             if (!oldState.TimeStamp.HasValue)
             {
@@ -157,11 +196,20 @@ namespace Akka.Remote
                 //this is a known connection
                 var interval = timestamp - oldState.TimeStamp.Value;
                 //don't use the first heartbeat after failure for the history, since a long pause will skew the stats
-                if (IsTimeStampAvailable(timestamp)) newHistory = (oldState.History + interval);
+                if (IsTimeStampAvailable(timestamp))
+                {
+                    if (interval >= (AcceptableHeartbeatPauseMillis / 3 * 2) && EventStream.HasValue)
+                    {
+                        EventStream.Value.Publish(new Warning(ToString(), GetType(),
+                            $"heartbeat interval is growing too large for address {Address}: {interval} millis"));
+                    }
+                    newHistory = (oldState.History + interval);
+                }
                 else newHistory = oldState.History;
             }
 
             var newState = new State(newHistory, timestamp);
+
             //if we won the race then update else try again
             if(!_state.CompareAndSet(oldState, newState)) HeartBeat();
         }
@@ -173,11 +221,19 @@ namespace Akka.Remote
             return Phi(timestamp) < _threshold;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         internal double CurrentPhi
         {
             get { return Phi(_clock()); }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="timestamp">TBD</param>
+        /// <returns>TBD</returns>
         internal double Phi(long timestamp)
         {
             var oldState = state;
@@ -187,11 +243,14 @@ namespace Akka.Remote
                 return 0.0d; //treat unmanaged connections, e.g. with zero heartbeats, as healthy connections
             else
             {
-                var timeDiff = timestamp - oldTimestamp.Value;
-                var history = oldState.History;
-                var mean = history.Mean;
-                var stdDeviation = EnsureValidStdDeviation(history.StdDeviation);
-                return Phi(timeDiff, mean + AcceptableHeartbeatPauseMillis, stdDeviation);
+                unchecked // in the extremely rare event of a clock roll-over
+                {
+                    var timeDiff = timestamp - oldTimestamp.Value;
+                    var history = oldState.History;
+                    var mean = history.Mean;
+                    var stdDeviation = EnsureValidStdDeviation(history.StdDeviation);
+                    return Phi(timeDiff, mean + AcceptableHeartbeatPauseMillis, stdDeviation);
+                }
             }
         }
 
@@ -204,6 +263,10 @@ namespace Akka.Remote
         ///  Error is 0.00014 at +- 3.16
         /// The calculated value is equivalent to -log10(1 - CDF(y))
         /// </summary>
+        /// <param name="timeDiff">TBD</param>
+        /// <param name="mean">TBD</param>
+        /// <param name="stdDeviation">TBD</param>
+        /// <returns>TBD</returns>
         internal double Phi(long timeDiff, double mean, double stdDeviation)
         {
             var y = (timeDiff - mean)/stdDeviation;
@@ -214,14 +277,14 @@ namespace Akka.Remote
                 return -Math.Log10(1.0d - 1.0d/(1.0d + e));
         }
 
-        private long MinStdDeviationMillis
+        private double MinStdDeviationMillis
         {
-            get { return (long)_minStdDeviation.TotalMilliseconds; }
+            get { return _minStdDeviation.TotalMilliseconds; }
         }
 
-        private long AcceptableHeartbeatPauseMillis
+        private double AcceptableHeartbeatPauseMillis
         {
-            get { return (long)_acceptableHeartbeatPause.TotalMilliseconds; }
+            get { return _acceptableHeartbeatPause.TotalMilliseconds; }
         }
 
         private double EnsureValidStdDeviation(double stdDeviation)
@@ -239,48 +302,61 @@ namespace Akka.Remote
     /// The stats (mean, variance, stdDeviation) are not defined for empty
     /// <see cref="HeartbeatHistory"/>, i.e. throws Exception
     /// </summary>
-    internal class HeartbeatHistory
+    internal readonly struct HeartbeatHistory
     {
-        private int _maxSampleSize;
-        private List<long> _intervals;
-        private long _intervalSum;
-        private long _squaredIntervalSum;
+        private readonly int _maxSampleSize;
+        private readonly long _intervalSum;
+        private readonly long _squaredIntervalSum;
 
-        public HeartbeatHistory(int maxSampleSize, List<long> intervals, long intervalSum, long squaredIntervalSum)
+        /// <summary>
+        /// Creates a new <see cref="HeartbeatHistory"/> instance.
+        /// </summary>
+        /// <param name="maxSampleSize">The maximum number of samples to retain. Older ones are dropped once intervals exceeds this value.</param>
+        /// <param name="intervals">The range of recorded time intervals.</param>
+        /// <param name="intervalSum">The sum of the recorded time intervals.</param>
+        /// <param name="squaredIntervalSum">The squared sum of the intervals.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// This exception is thrown for the following reasons:
+        /// <ul>
+        /// <li>The specified <paramref name="maxSampleSize"/> is less than one.</li>
+        /// <li>The specified <paramref name="intervalSum"/> is less than zero.</li>
+        /// <li>The specified <paramref name="squaredIntervalSum"/> is less than zero.</li>
+        /// </ul>
+        /// </exception>
+        public HeartbeatHistory(int maxSampleSize, ImmutableList<long> intervals, long intervalSum, long squaredIntervalSum)
         {
             _maxSampleSize = maxSampleSize;
-            _intervals = intervals;
+            Intervals = intervals;
             _intervalSum = intervalSum;
             _squaredIntervalSum = squaredIntervalSum;
 
             if (maxSampleSize < 1)
-                throw new ArgumentOutOfRangeException("maxSampleSize", string.Format("maxSampleSize must be >= 1, got {0}", maxSampleSize));
+                throw new ArgumentOutOfRangeException(nameof(maxSampleSize), $"maxSampleSize must be >= 1, got {maxSampleSize}");
             if (intervalSum < 0L)
-                throw new ArgumentOutOfRangeException("intervalSum", string.Format("intervalSum must be >= 0, got {0}", intervalSum));
+                throw new ArgumentOutOfRangeException(nameof(intervalSum), $"intervalSum must be >= 0, got {intervalSum}");
             if (squaredIntervalSum < 0L)
-                throw new ArgumentOutOfRangeException("squaredIntervalSum", string.Format("squaredIntervalSum must be >= 0, got {0}", squaredIntervalSum));
+                throw new ArgumentOutOfRangeException(nameof(squaredIntervalSum), $"squaredIntervalSum must be >= 0, got {squaredIntervalSum}");
         }
 
-        public double Mean
-        {
-            get { return ((double)_intervalSum / _intervals.Count); }
-        }
+        public double Mean => ((double)_intervalSum / Intervals.Count);
 
-        public double Variance
-        {
-            get { return ((double)_squaredIntervalSum / _intervals.Count) - (Mean * Mean); }
-        }
+        public double Variance => ((double)_squaredIntervalSum / Intervals.Count) - (Mean * Mean);
 
-        public double StdDeviation
-        {
-            get { return Math.Sqrt(Variance); }
-        }
+        public double StdDeviation => Math.Sqrt(Variance);
 
+        public ImmutableList<long> Intervals { get; }
+
+        /// <summary>
+        /// Increments the <see cref="HeartbeatHistory"/>.
+        /// </summary>
+        /// <param name="history">The current history.</param>
+        /// <param name="interval">The new interval which will be added.</param>
+        /// <returns>A new heartbeat history instance with the added interval.</returns>
         public static HeartbeatHistory operator +(HeartbeatHistory history, long interval)
         {
-            if (history._intervals.Count < history._maxSampleSize)
+            if (history.Intervals.Count < history._maxSampleSize)
             {
-                return new HeartbeatHistory(history._maxSampleSize, history._intervals.Concat(new[] { interval }).ToList(),
+                return new HeartbeatHistory(history._maxSampleSize, history.Intervals.Add(interval),
                     history._intervalSum + interval, history._squaredIntervalSum + Pow2(interval));
             }
             else
@@ -291,7 +367,8 @@ namespace Akka.Remote
 
         private static HeartbeatHistory DropOldest(HeartbeatHistory history)
         {
-            return new HeartbeatHistory(history._maxSampleSize, history._intervals.Skip(1).ToList(), history._intervalSum - history._intervals.First(), history._squaredIntervalSum - Pow2(history._intervals.First()));
+            return new HeartbeatHistory(history._maxSampleSize, history.Intervals.RemoveAt(0), history._intervalSum - history.Intervals.First(), 
+                history._squaredIntervalSum - Pow2(history.Intervals.First()));
         }
 
         private static long Pow2(long x)
@@ -307,9 +384,11 @@ namespace Akka.Remote
         /// The stats (mean, variance, stdDeviation) are not defined for empty
         /// HeartbeatHistory and will throw DivideByZero exceptions
         /// </summary>
+        /// <param name="maxSampleSize">The maximum number of samples to include in this history.</param>
+        /// <returns>A new <see cref="HeartbeatHistory"/> instance.</returns>
         public static HeartbeatHistory Apply(int maxSampleSize)
         {
-            return new HeartbeatHistory(maxSampleSize, new List<long>(), 0L, 0L);
+            return new HeartbeatHistory(maxSampleSize, ImmutableList<long>.Empty, 0L, 0L);
         }
 
         #endregion

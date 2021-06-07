@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ActorSystemTests.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Akka.Tests
 {
-    
+
     public class ActorSystemTests
     {
         public class TestActor : UntypedActor
@@ -34,8 +34,8 @@ namespace Akka.Tests
 
             //assert
             var children = system.Provider.Guardian.Children;
-            Assert.True(children.Any(c => c == child));
-        }        
+            Assert.Contains(children, c => c == child);
+        }
 
         [Fact]
         public void ActorOf_gives_child_unique_name_if_not_specified()

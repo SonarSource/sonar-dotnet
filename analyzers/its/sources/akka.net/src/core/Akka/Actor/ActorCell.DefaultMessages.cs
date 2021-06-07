@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ActorCell.DefaultMessages.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -13,6 +13,7 @@ using Akka.Dispatch;
 using Akka.Dispatch.SysMsg;
 using Akka.Event;
 using Debug = Akka.Event.Debug;
+using System.Globalization;
 
 namespace Akka.Actor
 {
@@ -38,6 +39,9 @@ namespace Akka.Actor
 
         private int _currentEnvelopeId;
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public int CurrentEnvelopeId
         {
             get { return _currentEnvelopeId; }
@@ -46,20 +50,38 @@ namespace Akka.Actor
         ///     Invokes the specified envelope.
         /// </summary>
         /// <param name="envelope">The envelope.</param>
+        /// <exception cref="ActorKilledException">
+        /// This exception is thrown if a <see cref="Akka.Actor.Kill"/> message is included in the given <paramref name="envelope"/>.
+        /// </exception>>
         public void Invoke(Envelope envelope)
         {
+
             var message = envelope.Message;
-            CurrentMessage = message;
-            _currentEnvelopeId ++;
-            Sender = MatchSender(envelope);
+            var influenceReceiveTimeout = !(message is INotInfluenceReceiveTimeout);
 
             try
             {
-                var autoReceivedMessage = message as IAutoReceivedMessage;
-                if (autoReceivedMessage != null)
+                // Akka JVM doesn't have these lines
+                CurrentMessage = envelope.Message;
+                _currentEnvelopeId++;
+                if (_currentEnvelopeId == int.MaxValue) _currentEnvelopeId = 0;
+
+                Sender = MatchSender(envelope);
+
+                if (influenceReceiveTimeout)
+                {
+                    CancelReceiveTimeout();
+                }
+
+                if (message is IAutoReceivedMessage)
+                {
                     AutoReceiveMessage(envelope);
+                }
                 else
+                {
                     ReceiveMessage(message);
+                }
+                CurrentMessage = null;
             }
             catch (Exception cause)
             {
@@ -67,7 +89,8 @@ namespace Akka.Actor
             }
             finally
             {
-                CheckReceiveTimeout(); // Reschedule receive timeout
+                // Schedule or reschedule receive timeout
+                CheckReceiveTimeout(influenceReceiveTimeout);
             }
         }
 
@@ -100,7 +123,14 @@ namespace Akka.Actor
   }
          */
 
-        protected virtual void AutoReceiveMessage(Envelope envelope)
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="envelope">TBD</param>
+        /// <exception cref="ActorKilledException">
+        /// This exception is thrown if a <see cref="Akka.Actor.Kill"/> message is included in the given <paramref name="envelope"/>.
+        /// </exception>
+        protected internal virtual void AutoReceiveMessage(Envelope envelope)
         {
             var message = envelope.Message;
 
@@ -111,18 +141,33 @@ namespace Akka.Actor
                 Publish(new Debug(Self.Path.ToString(), actorType, "received AutoReceiveMessage " + message));
 
             var m = envelope.Message;
-            if (m is Terminated) ReceivedTerminated(m as Terminated);
-            else if (m is AddressTerminated) AddressTerminated((m as AddressTerminated).Address);
-            else if (m is Kill) Kill();
-            else if (m is PoisonPill) HandlePoisonPill();
-            else if (m is ActorSelectionMessage) ReceiveSelection(m as ActorSelectionMessage);
-            else if (m is Identify) HandleIdentity(m as Identify);
+            switch (m)
+            {
+                case Terminated terminated:
+                    ReceivedTerminated(terminated);
+                    break;
+                case AddressTerminated terminated:
+                    AddressTerminated(terminated.Address);
+                    break;
+                case Kill _:
+                    Kill();
+                    break;
+                case PoisonPill _:
+                    HandlePoisonPill();
+                    break;
+                case ActorSelectionMessage selectionMessage:
+                    ReceiveSelection(selectionMessage);
+                    break;
+                case Identify identify:
+                    HandleIdentity(identify);
+                    break;
+            }
         }
 
         /// <summary>
         /// This is only intended to be called from TestKit's TestActorRef
         /// </summary>
-        /// <param name="envelope"></param>
+        /// <param name="envelope">TBD</param>
         public void ReceiveMessageForTest(Envelope envelope)
         {
             var message = envelope.Message;
@@ -139,19 +184,23 @@ namespace Akka.Actor
             }
         }
 
-        internal void ReceiveMessage(object message)
+        /// <summary>
+        /// Receives the next message from the mailbox and feeds it to the underlying actor instance.
+        /// </summary>
+        /// <param name="message">The message that will be sent to the actor.</param>
+        protected virtual void ReceiveMessage(object message)
         {
             var wasHandled = _actor.AroundReceive(_state.GetCurrentBehavior(), message);
 
             if (System.Settings.AddLoggingReceive && _actor is ILogReceive)
             {
                 //TODO: akka alters the receive handler for logging, but the effect is the same. keep it this way?
-                Publish(new Debug(Self.Path.ToString(), _actor.GetType(),
-                    "received " + (wasHandled ? "handled" : "unhandled") + " message " + message));
+                var msg = "received " + (wasHandled ? "handled" : "unhandled") + " message " + message + " from " + Sender.Path;
+                Publish(new Debug(Self.Path.ToString(), _actor.GetType(), msg));
             }
         }
 
-        /// <summary>   
+        /// <summary>
         ///     Receives the selection.
         /// </summary>
         /// <param name="m">The m.</param>
@@ -161,70 +210,159 @@ namespace Akka.Actor
             selection.Tell(m.Message, Sender);
         }
 
+        /* SystemMessage handling */
+
+        private int CalculateState()
+        {
+            if(IsWaitingForChildren) return SuspendedWaitForChildrenState;
+            if(Mailbox.IsSuspended()) return SuspendedState;
+            return DefaultState;
+        }
+
+        private static bool ShouldStash(SystemMessage m, int state)
+        {
+            switch (state)
+            {
+                case SuspendedWaitForChildrenState:
+                    return m is IStashWhenWaitingForChildren;
+                case SuspendedState:
+                    return m is IStashWhenFailed;
+                case DefaultState:
+                default:
+                    return false;
+            }
+        }
+
+        private void SendAllToDeadLetters(EarliestFirstSystemMessageList messages)
+        {
+            if (messages.IsEmpty) return; // don't run any of this if there are no system messages
+            do
+            {
+                var msg = messages.Head;
+                messages = messages.Tail;
+                msg.Unlink();
+                SystemImpl.Provider.DeadLetters.Tell(msg, Self);
+            } while (messages.NonEmpty);
+        }
+
+        private void SysMsgInvokeAll(EarliestFirstSystemMessageList messages, int currentState)
+        {
+            while (true)
+            {
+                var rest = messages.Tail;
+                var message = messages.Head;
+                message.Unlink();
+
+                try
+                {
+                    switch (message)
+                    {
+                        case SystemMessage sm when ShouldStash(sm, currentState):
+                            Stash(message);
+                            break;
+                        case ActorTaskSchedulerMessage atsm:
+                            HandleActorTaskSchedulerMessage(atsm);
+                            break;
+                        case Failed f:
+                            HandleFailed(f);
+                            break;
+                        case DeathWatchNotification n:
+                            WatchedActorTerminated(n.Actor, n.ExistenceConfirmed, n.AddressTerminated);
+                            break;
+                        case Create c:
+                            Create(c.Failure);
+                            break;
+                        case Watch w:
+                            AddWatcher(w.Watchee, w.Watcher);
+                            break;
+                        case Unwatch uw:
+                            RemWatcher(uw.Watchee, uw.Watcher);
+                            break;
+                        case Recreate r:
+                            FaultRecreate(r.Cause);
+                            break;
+                        case Suspend _:
+                            FaultSuspend();
+                            break;
+                        case Resume r:
+                            FaultResume(r.CausedByFailure);
+                            break;
+                        case Terminate _:
+                            Terminate();
+                            break;
+                        case Supervise s:
+                            Supervise(s.Child, s.Async);
+                            break;
+                        default:
+                            throw new NotSupportedException($"Unknown message {message.GetType().Name}");
+                    }
+                }
+                catch (Exception cause)
+                {
+                    HandleInvokeFailure(cause);
+                }
+
+                var nextState = CalculateState();
+                // As each state accepts a strict subset of another state, it is enough to unstash if we "walk up" the state
+                // chain
+                var todo = nextState < currentState ? rest + UnstashAll() : rest;
+
+                if (IsTerminated)
+                {
+                    SendAllToDeadLetters(todo);
+                    break;
+                }
+                else if (todo.IsEmpty) break;
+
+                currentState = nextState;
+                messages = todo;
+            }
+        }
+
         /// <summary>
-        ///     Systems the invoke.
+        ///   Used to invoke system messages.
         /// </summary>
         /// <param name="envelope">The envelope.</param>
-        public void SystemInvoke(Envelope envelope)
+        /// <exception cref="ActorInitializationException">
+        /// This exception is thrown if a <see cref="Akka.Dispatch.SysMsg.Create"/> system message is included in the given <paramref name="envelope"/>.
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        /// This exception is thrown if an unknown message type is included in the given <paramref name="envelope"/>.
+        /// </exception>
+        internal void SystemInvoke(ISystemMessage envelope)
         {
-
-            try
-            {
-                var m = envelope.Message;
-
-                if (m is ActorTaskSchedulerMessage) HandleActorTaskSchedulerMessage(m as ActorTaskSchedulerMessage);
-                else if (m is Failed) HandleFailed(m as Failed);
-                else if (m is DeathWatchNotification)
-                {
-                    var msg = m as DeathWatchNotification;
-                    WatchedActorTerminated(msg.Actor, msg.ExistenceConfirmed, msg.AddressTerminated);
-                }
-                else if (m is Create) HandleCreate((m as Create).Failure);
-                else if (m is Watch)
-                {
-                    var watch = m as Watch;
-                    AddWatcher(watch.Watchee, watch.Watcher);
-                }
-                else if (m is Unwatch)
-                {
-                    var unwatch = m as Unwatch;
-                    RemWatcher(unwatch.Watchee, unwatch.Watcher);
-                }
-                else if (m is Recreate) FaultRecreate((m as Recreate).Cause);
-                else if (m is Suspend) FaultSuspend();
-                else if (m is Resume) FaultResume((m as Resume).CausedByFailure);
-                else if (m is Terminate) Terminate();
-                else if (m is Supervise)
-                {
-                    var supervise = m as Supervise;
-                    Supervise(supervise.Child, supervise.Async);
-                }
-                else
-                {
-                    throw new NotSupportedException("Unknown message " + m.GetType().Name);
-                }
-            }
-            catch (Exception cause)
-            {
-                HandleInvokeFailure(cause);
-            }
+            SysMsgInvokeAll(new EarliestFirstSystemMessageList((SystemMessage)envelope), CalculateState());
         }
 
         private void HandleActorTaskSchedulerMessage(ActorTaskSchedulerMessage m)
         {
+            //set the current message captured in the async operation
+            //current message was cleared earlier when the async receive handler completed
+            CurrentMessage = m.Message;
             if (m.Exception != null)
             {
+                Resume(m.Exception);
                 HandleInvokeFailure(m.Exception);
                 return;
             }
 
             m.ExecuteTask();
+            CurrentMessage = null;
         }
 
-        public void SwapMailbox(DeadLetterMailbox mailbox)
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="mailbox">TBD</param>
+        /// <returns>TBD</returns>
+        internal Mailbox SwapMailbox(Mailbox mailbox)
         {
-            Mailbox.DebugPrint("{0} Swapping mailbox to DeadLetterMailbox", Self);
-            Interlocked.Exchange(ref _mailbox, mailbox);
+            Mailbox.DebugPrint("{0} Swapping mailbox to {1}", Self, mailbox);
+            var ret = _mailboxDoNotCallMeDirectly;
+#pragma warning disable 420
+            Interlocked.Exchange(ref _mailboxDoNotCallMeDirectly, mailbox);
+#pragma warning restore 420
+            return ret;
         }
 
         /// <summary>
@@ -245,7 +383,6 @@ namespace Akka.Actor
 
         private void Supervise(IActorRef child, bool async)
         {
-            //TODO: complete this
             if (!IsTerminating)
             {
                 var childRestartStats = InitChild((IInternalActorRef)child);
@@ -266,9 +403,9 @@ namespace Akka.Actor
 
         private void HandleSupervise(IActorRef child, bool async)
         {
-            if (async && child is RepointableActorRef)
+            if (async && child is RepointableActorRef @ref)
             {
-                ((RepointableActorRef)child).Point();
+                @ref.Point();
             }
         }
 
@@ -293,15 +430,11 @@ namespace Akka.Actor
         /// <summary>
         ///     Restarts the specified cause.
         /// </summary>
+        /// <remarks>➡➡➡ NEVER SEND THE SAME SYSTEM MESSAGE OBJECT TO TWO ACTORS ⬅⬅⬅</remarks>
         /// <param name="cause">The cause.</param>
         public void Restart(Exception cause)
         {
             SendSystemMessage(new Recreate(cause));
-        }
-
-        private void HandleCreate(Exception failure)
-        {
-            Create(failure);
         }
 
         private void Create(Exception failure)
@@ -333,8 +466,8 @@ namespace Akka.Actor
         /// </summary>
         public virtual void Start()
         {
-            PreStart();
-            Mailbox.Start();
+            // This call is expected to start off the actor by scheduling its mailbox.
+            Dispatcher.Attach(this);
         }
 
         /// <summary>
@@ -347,6 +480,7 @@ namespace Akka.Actor
         /// <summary>
         ///     Resumes the specified caused by failure.
         /// </summary>
+        /// <remarks>➡➡➡ NEVER SEND THE SAME SYSTEM MESSAGE OBJECT TO TWO ACTORS ⬅⬅⬅</remarks>
         /// <param name="causedByFailure">The caused by failure.</param>
         public void Resume(Exception causedByFailure)
         {
@@ -356,24 +490,31 @@ namespace Akka.Actor
         /// <summary>
         ///     Async stop this actor
         /// </summary>
+        /// <remarks>➡➡➡ NEVER SEND THE SAME SYSTEM MESSAGE OBJECT TO TWO ACTORS ⬅⬅⬅</remarks>
         public void Stop()
         {
-            SendSystemMessage(Dispatch.SysMsg.Terminate.Instance);
+            SendSystemMessage(new Dispatch.SysMsg.Terminate());
         }
 
         /// <summary>
         ///     Suspends this instance.
         /// </summary>
+        /// <remarks>➡➡➡ NEVER SEND THE SAME SYSTEM MESSAGE OBJECT TO TWO ACTORS ⬅⬅⬅</remarks>
         public void Suspend()
         {
-            SendSystemMessage(Dispatch.SysMsg.Suspend.Instance);
+            SendSystemMessage(new Dispatch.SysMsg.Suspend());
         }
 
-        private void SendSystemMessage(ISystemMessage systemMessage)
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <remarks>➡➡➡ NEVER SEND THE SAME SYSTEM MESSAGE OBJECT TO TWO ACTORS ⬅⬅⬅</remarks>
+        /// <param name="systemMessage">TBD</param>
+        public void SendSystemMessage(ISystemMessage systemMessage)
         {
             try
             {
-                Self.Tell(systemMessage);
+                Dispatcher.SystemDispatch(this, (SystemMessage)systemMessage);
             }
             catch (Exception e)
             {
@@ -381,10 +522,6 @@ namespace Akka.Actor
             }
         }
 
-        /// <summary>
-        ///     Kills this instance.
-        /// </summary>
-        /// <exception cref="ActorKilledException">Kill</exception>
         private void Kill()
         {
             throw new ActorKilledException("Kill");

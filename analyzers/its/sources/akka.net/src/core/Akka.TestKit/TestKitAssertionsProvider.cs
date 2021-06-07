@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="TestKitAssertionsProvider.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -16,12 +16,18 @@ namespace Akka.TestKit
     {
         private readonly ITestKitAssertions _assertions;
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="assertions">TBD</param>
         public TestKitAssertionsProvider(ITestKitAssertions assertions)
         {
             _assertions = assertions;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public ITestKitAssertions Assertions { get { return _assertions; } }
     }
 }
-

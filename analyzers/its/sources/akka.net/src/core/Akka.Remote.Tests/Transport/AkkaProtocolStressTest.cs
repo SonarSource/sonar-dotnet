@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="AkkaProtocolStressTest.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ namespace Akka.Remote.Tests.Transport
                 akka {
                   actor.serialize-messages = off
                   actor.provider = ""Akka.Remote.RemoteActorRefProvider, Akka.Remote""
-                  remote.helios.tcp.hostname = ""localhost""
+                  remote.dot-netty.tcp.hostname = ""localhost""
                   remote.log-remote-lifecycle-events = on
 
                 ## Keep gate duration in this test for a low value otherwise too much messages are dropped
@@ -47,8 +47,8 @@ namespace Akka.Remote.Tests.Transport
                         heartbeat-interval = 1 s
                         acceptable-heartbeat-pause = 1 s
                   }
-                  remote.helios.tcp.applied-adapters = [""gremlin""]
-                  remote.helios.tcp.port = 0
+                  remote.dot-netty.tcp.applied-adapters = [""gremlin""]
+                  remote.dot-netty.tcp.port = 0
                 }");
             }
         }
@@ -110,7 +110,7 @@ namespace Akka.Remote.Tests.Transport
 
                         if (seq > Limit*0.5)
                         {
-                            _controller.Tell(Tuple.Create(MaxSeq, Losses));
+                            _controller.Tell((MaxSeq, Losses));
                             Context.System.Scheduler.ScheduleTellRepeatedly(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1), Self,
                                 ResendFinal.Instance, Self);
                             Context.Become(Done);
@@ -128,7 +128,7 @@ namespace Akka.Remote.Tests.Transport
             {
                 if (message is ResendFinal)
                 {
-                    _controller.Tell(Tuple.Create(MaxSeq, Losses));
+                    _controller.Tell((MaxSeq, Losses));
                 }
             }
         }
@@ -178,10 +178,12 @@ namespace Akka.Remote.Tests.Transport
 
         #region Tests
 
-        [Fact(Skip = "fails due to out-of-order processing as a result of Helios eventing")]
+        [Fact(Skip = "Extremely racy")]
         public void AkkaProtocolTransport_must_guarantee_at_most_once_delivery_and_message_ordering_despite_packet_loss()
         {
             //todo mute both systems for deadletters for any type of message
+            EventFilter.DeadLetter().Mute();
+            CreateEventFilter(systemB).DeadLetter().Mute();
             var mc =
                 RARP.For(Sys)
                     .Provider.Transport.ManagementCommand(new FailureInjectorTransportAdapter.One(AddressB,
@@ -193,7 +195,7 @@ namespace Akka.Remote.Tests.Transport
             var tester = Sys.ActorOf(Props.Create(() => new SequenceVerifier(here, TestActor)));
             tester.Tell("start");
 
-            ExpectMsg<Tuple<int,int>>(TimeSpan.FromSeconds(60));
+            ExpectMsg<(int,int)>(TimeSpan.FromSeconds(60));
         }
 
         #endregion

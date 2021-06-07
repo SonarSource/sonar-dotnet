@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="LambdaExpressionCompiler.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -11,16 +11,19 @@ using System.Reflection.Emit;
 
 namespace Akka.Tools.MatchHandler
 {
-    public class LambdaExpressionCompiler : ILambdaExpressionCompiler
+    /// <summary>
+    /// TBD
+    /// </summary>
+    internal class LambdaExpressionCompiler : ILambdaExpressionCompiler
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="expression">TBD</param>
+        /// <returns>TBD</returns>
         public Delegate Compile(LambdaExpression expression)
         {
             return expression.Compile();
-        }
-
-        public void CompileToMethod(LambdaExpression expression, MethodBuilder method)
-        {
-            expression.CompileToMethod(method);
         }
     }
 }

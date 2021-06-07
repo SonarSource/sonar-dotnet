@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+<Import Project="..\..\common.props" />
+  <Import Project="..\..\xunitSettings.props" />
+  <PropertyGroup>
+    <AssemblyName>Akka.Streams.Tests.TCK</AssemblyName>
+    <!-- Reactive.Streams.TCK isn't compatible with .NET Core -->
+    <!--UNit.Framework does not yet support .NET 5 - build will fail-->
+    <TargetFrameworks>$(NetFrameworkTestVersion);$(NetCoreTestVersion)</TargetFrameworks>
+  </PropertyGroup>
+ 
+  <ItemGroup>
+    <ProjectReference Include="..\Akka\Akka.csproj" />
+    <ProjectReference Include="..\Akka.Streams\Akka.Streams.csproj" />
+    <ProjectReference Include="..\Akka.Streams.TestKit\Akka.Streams.TestKit.csproj" />
+    <ProjectReference Include="..\Akka.Streams.TestKit.Tests\Akka.Streams.TestKit.Tests.csproj" />
+    <ProjectReference Include="..\Akka.TestKit\Akka.TestKit.csproj" />
+    <ProjectReference Include="..\..\contrib\testkits\Akka.TestKit.Xunit2\Akka.TestKit.Xunit2.csproj" />
+    <ProjectReference Include="..\Akka.Tests.Shared.Internals\Akka.Tests.Shared.Internals.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSdkVersion)" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="Reactive.Streams.TCK" Version="1.0.2" />
+    <!-- !!!WARNING!!! 
+         NUNIT VERSION HAVE TO MATCH WITH THE VERSION USED BY REACTIVE TCK. 
+         !!!WARNING!!! -->
+    <PackageReference Include="NUnit" Version="3.7.1" Condition="'$(TargetFramework)' == '$(NetCoreTestVersion)'"/>
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == '$(NetFrameworkTestVersion)' ">
+    <DefineConstants>$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+  </PropertyGroup>
+</Project>

@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="AkkaConfigurationSection.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -43,6 +43,7 @@ namespace Akka.Configuration.Hocon
         /// Retrieves the HOCON (Human-Optimized Config Object Notation)
         /// configuration string from the custom akka node.
         /// <code>
+        /// <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <configuration>
         ///   <configSections>
@@ -54,6 +55,7 @@ namespace Akka.Configuration.Hocon
         ///      </hocon>
         ///   </akka>
         /// </configuration>
+        /// ]]>
         /// </code>
         /// </summary>
         [ConfigurationProperty(ConfigurationPropertyName, IsRequired = true)]
@@ -64,4 +66,3 @@ namespace Akka.Configuration.Hocon
         }
     }
 }
-

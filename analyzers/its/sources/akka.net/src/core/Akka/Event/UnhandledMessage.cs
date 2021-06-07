@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="UnhandledMessage.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -10,40 +10,19 @@ using Akka.Actor;
 namespace Akka.Event
 {
     /// <summary>
-    /// Represents an UnhandledMessage that was not handled by the Recipient.
+    /// This message is published to the EventStream whenever an Actor receives a message it doesn't understand
     /// </summary>
-    public class UnhandledMessage
+    public sealed class UnhandledMessage : AllDeadLetters, IWrappedMessage
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UnhandledMessage" /> class.
         /// </summary>
-        /// <param name="message">The message.</param>
-        /// <param name="sender">The sender.</param>
-        /// <param name="recipient">The recipient.</param>
-        internal UnhandledMessage(object message, IActorRef sender, IActorRef recipient)
+        /// <param name="message">The original message that could not be handled.</param>
+        /// <param name="sender">The actor that sent the message.</param>
+        /// <param name="recipient">The actor that was to receive the message.</param>
+        public UnhandledMessage(object message, IActorRef sender, IActorRef recipient)
+            : base(message, sender, recipient)
         {
-            Message = message;
-            Sender = sender;
-            Recipient = recipient;
         }
-
-        /// <summary>
-        /// Gets the original message that could not be handled.
-        /// </summary>
-        /// <value>The message.</value>
-        public object Message { get; private set; }
-
-        /// <summary>
-        /// Gets the sender of the message.
-        /// </summary>
-        /// <value>The sender of the message.</value>
-        public IActorRef Sender { get; private set; }
-
-        /// <summary>
-        /// Gets the recipient of the message.
-        /// </summary>
-        /// <value>The recipient of the message.</value>
-        public IActorRef Recipient { get; private set; }
     }
 }
-

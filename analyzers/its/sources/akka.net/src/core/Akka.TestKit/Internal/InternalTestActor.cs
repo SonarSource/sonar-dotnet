@@ -1,10 +1,11 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="InternalTestActor.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
 using System.Collections.Concurrent;
 using Akka.Actor;
 using Akka.Event;
@@ -20,15 +21,37 @@ namespace Akka.TestKit.Internal
         private readonly ITestActorQueue<MessageEnvelope> _queue;
         private TestKit.TestActor.Ignore _ignore;
         private AutoPilot _autoPilot;
+        private DelegatingSupervisorStrategy _supervisorStrategy = new DelegatingSupervisorStrategy();
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="queue">TBD</param>
         public InternalTestActor(ITestActorQueue<MessageEnvelope> queue)
         {
             _queue = queue;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="message">TBD</param>
+        /// <returns>TBD</returns>
         protected override bool Receive(object message)
         {
-            global::System.Diagnostics.Debug.WriteLine("TestActor received " + message);
+            try
+            {
+                global::System.Diagnostics.Debug.WriteLine("TestActor received " + message);
+            }
+            catch (FormatException)
+            {
+                if (message is LogEvent evt && evt.Message is LogMessage msg)
+                    global::System.Diagnostics.Debug.WriteLine(
+                        $"TestActor received a malformed formatted message. Template:[{msg.Format}], args:[{string.Join(",", msg.Args)}]");
+                else
+                    throw;
+            }
+
             var setIgnore = message as TestKit.TestActor.SetIgnore;
             if(setIgnore != null)
             {
@@ -53,6 +76,18 @@ namespace Akka.TestKit.Internal
                 _autoPilot = setAutoPilot.AutoPilot;
                 return true;
             }
+            
+            var spawn = message as TestKit.TestActor.Spawn;
+            if (spawn != null)
+            {
+                var actor = spawn.Apply(Context);
+                if (spawn._supervisorStrategy.HasValue)
+                {
+                    _supervisorStrategy.Update(actor, spawn._supervisorStrategy.Value);
+                }
+                _queue.Enqueue(new RealMessageEnvelope(actor, Self));
+                return true;
+            }
 
             var actorRef = Sender;
             if(_autoPilot != null)
@@ -66,18 +101,18 @@ namespace Akka.TestKit.Internal
             return true;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         protected override void PostStop()
         {
             var self = Self;
-            foreach(var messageEnvelope in _queue.GetAll())
+            foreach(var messageEnvelope in _queue.ToList())
             {
                 var messageSender = messageEnvelope.Sender;
                 var message = messageEnvelope.Message;
                 Context.System.DeadLetters.Tell(new DeadLetter(message, messageSender, self), messageSender);
-            }          
+            }
         }
-
-
     }
 }
-

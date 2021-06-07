@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ActorCell.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -11,27 +11,69 @@ using System.Threading;
 using Akka.Actor.Internal;
 using Akka.Dispatch;
 using Akka.Dispatch.SysMsg;
+using Akka.Event;
+using System.Reflection;
+using System.Runtime.Serialization;
 using Akka.Serialization;
+using Akka.Util;
+using Assert = System.Diagnostics.Debug;
 
 namespace Akka.Actor
 {
-    public partial class ActorCell : IUntypedActorContext, ICell 
+    /// <summary>
+    /// INTERNAL API.
+    ///
+    /// The hosting infrastructure for actors.
+    /// </summary>
+    public partial class ActorCell : IUntypedActorContext, ICell
     {
         /// <summary>NOTE! Only constructor and ClearActorFields is allowed to update this</summary>
         private IInternalActorRef _self;
+
+        /// <summary>
+        /// Constant placeholder value for actors without a defined unique identifier.
+        /// </summary>
         public const int UndefinedUid = 0;
+
         private Props _props;
-        private static readonly Props terminatedProps=new TerminatedProps();
+        private const int DefaultState = 0;
+        private const int SuspendedState = 1;
+        private const int SuspendedWaitForChildrenState = 2;
 
-
-        private long _uid;
         private ActorBase _actor;
         private bool _actorHasBeenCleared;
-        private Mailbox _mailbox;
+        private volatile Mailbox _mailboxDoNotCallMeDirectly;
         private readonly ActorSystemImpl _systemImpl;
         private ActorTaskScheduler _taskScheduler;
 
+        // special system message stash, used when we aren't able to handle other system messages just yet
+        private LatestFirstSystemMessageList _sysMsgStash = SystemMessageList.LNil;
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="msg">TBD</param>
+        protected void Stash(SystemMessage msg)
+        {
+            Assert.Assert(msg.Unlinked);
+            _sysMsgStash = _sysMsgStash + msg;
+        }
+
+        private LatestFirstSystemMessageList UnstashAll()
+        {
+            var unstashed = _sysMsgStash;
+            _sysMsgStash = SystemMessageList.LNil;
+            return unstashed;
+        }
+
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="system">TBD</param>
+        /// <param name="self">TBD</param>
+        /// <param name="props">TBD</param>
+        /// <param name="dispatcher">TBD</param>
+        /// <param name="parent">TBD</param>
         public ActorCell(ActorSystemImpl system, IInternalActorRef self, Props props, MessageDispatcher dispatcher, IInternalActorRef parent)
         {
             _self = self;
@@ -39,33 +81,87 @@ namespace Akka.Actor
             _systemImpl = system;
             Parent = parent;
             Dispatcher = dispatcher;
-            
+
         }
 
-        public object CurrentMessage { get; private set; }
-        public Mailbox Mailbox { get { return _mailbox; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
+        public object CurrentMessage { get; internal set; }
+        /// <summary>
+        /// TBD
+        /// </summary>
+        public Mailbox Mailbox => Volatile.Read(ref _mailboxDoNotCallMeDirectly);
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public MessageDispatcher Dispatcher { get; private set; }
-        public bool IsLocal { get{return true;} }
+        /// <summary>
+        /// TBD
+        /// </summary>
+        public bool IsLocal { get { return true; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         protected ActorBase Actor { get { return _actor; } }
-        public bool IsTerminated { get { return ReferenceEquals(_systemImpl.Mailboxes.DeadLetterMailbox,_mailbox) || _mailbox.IsClosed; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
+        public bool IsTerminated => Mailbox.IsClosed();
+        /// <summary>
+        /// TBD
+        /// </summary>
         internal static ActorCell Current
         {
             get { return InternalCurrentActorCellKeeper.Current; }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public ActorSystem System { get { return _systemImpl; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public ActorSystemImpl SystemImpl { get { return _systemImpl; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public Props Props { get { return _props; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public IActorRef Self { get { return _self; } }
         IActorRef IActorContext.Parent { get { return Parent; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public IInternalActorRef Parent { get; private set; }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public IActorRef Sender { get; private set; }
-        public bool HasMessages { get { return Mailbox.HasUnscheduledMessages; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
+        public bool HasMessages { get { return Mailbox.HasMessages; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         public int NumberOfMessages { get { return Mailbox.NumberOfMessages; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
         internal bool ActorHasBeenCleared { get { return _actorHasBeenCleared; } }
-        internal static Props TerminatedProps { get { return terminatedProps; } }
+        /// <summary>
+        /// TBD
+        /// </summary>
+        internal static Props TerminatedProps { get; } = new TerminatedProps();
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         public ActorTaskScheduler TaskScheduler
         {
             get
@@ -80,68 +176,89 @@ namespace Akka.Actor
             }
         }
 
-        public void Init(bool sendSupervise, Func<Mailbox> createMailbox /*, MailboxType mailboxType*/) //TODO: switch from  Func<Mailbox> createMailbox to MailboxType mailboxType
+        /// <summary>
+        /// Initialize this cell, i.e. set up mailboxes and supervision. The UID must be
+        /// reasonably different from the previous UID of a possible actor with the same path,
+        /// which can be achieved by using <see cref="ThreadLocalRandom"/>
+        /// </summary>
+        /// <param name="sendSupervise">TBD</param>
+        /// <param name="mailboxType">TBD</param>
+        public void Init(bool sendSupervise, MailboxType mailboxType)
         {
-            var mailbox = createMailbox(); //Akka: dispatcher.createMailbox(this, mailboxType)
-            Dispatcher.Attach(this);
-            mailbox.Setup(Dispatcher);
-            mailbox.SetActor(this);
-            _mailbox = mailbox;
+            /*
+             * Create the mailbox and enqueue the Create() message to ensure that
+             * this is processed before anything else.
+             */
+            var mailbox = Dispatcher.CreateMailbox(this, mailboxType);
 
-            var createMessage = new Create();
-            // AKKA:
-            //   /*
-            //    * The mailboxType was calculated taking into account what the MailboxType
-            //    * has promised to produce. If that was more than the default, then we need
-            //    * to reverify here because the dispatcher may well have screwed it up.
-            //    */
-            //// we need to delay the failure to the point of actor creation so we can handle
-            //// it properly in the normal way
-            //val actorClass = props.actorClass
-            //val createMessage = mailboxType match {
-            //    case _: ProducesMessageQueue[_] if system.mailboxes.hasRequiredType(actorClass) ⇒
-            //    val req = system.mailboxes.getRequiredType(actorClass)
-            //    if (req isInstance mbox.messageQueue) Create(None)
-            //    else {
-            //        val gotType = if (mbox.messageQueue == null) "null" else mbox.messageQueue.getClass.getName
-            //        Create(Some(ActorInitializationException(self,
-            //        s"Actor [$self] requires mailbox type [$req] got [$gotType]")))
-            //    }
-            //    case _ ⇒ Create(None)
-            //}
+            Create createMessage;
+            /*
+             * The mailboxType was calculated taking into account what the MailboxType
+             * has promised to produce. If that was more than the default, then we need
+             * to reverify here because the dispatcher may well have screwed it up.
+             */
+            // we need to delay the failure to the point of actor creation so we can handle
+            // it properly in the normal way
+            var actorClass = Props.Type;
+            if (System.Mailboxes.ProducesMessageQueue(mailboxType.GetType()) && System.Mailboxes.HasRequiredType(actorClass))
+            {
+                var req = System.Mailboxes.GetRequiredType(actorClass);
+                if (req.IsInstanceOfType(mailbox.MessageQueue)) createMessage = new Create(null); //success
+                else
+                {
+                    var gotType = mailbox.MessageQueue == null ? "null" : mailbox.MessageQueue.GetType().FullName;
+                    createMessage = new Create(new ActorInitializationException(Self, $"Actor [{Self}] requires mailbox type [{req}] got [{gotType}]"));
+                }
+            }
+            else
+            {
+                createMessage = new Create(null);
+            }
 
-            //swapMailbox(mbox)
-            //mailbox.setActor(this)
+            SwapMailbox(mailbox);
+            Mailbox.SetActor(this);
 
             //// ➡➡➡ NEVER SEND THE SAME SYSTEM MESSAGE OBJECT TO TWO ACTORS ⬅⬅⬅
-            //mailbox.systemEnqueue(self, createMessage)
             var self = Self;
-            mailbox.Post(self, new Envelope {Message = createMessage, Sender = self});
+            mailbox.SystemEnqueue(self, createMessage);
 
-            if(sendSupervise)
+            if (sendSupervise)
             {
-                Parent.Tell(new Supervise(self, async: false), self);
+                Parent.SendSystemMessage(new Supervise(self, async: false));
             }
         }
 
-        [Obsolete("Use TryGetChildStatsByName", true)]
+        /// <summary>
+        /// Obsolete. Use <see cref="TryGetChildStatsByName(string, out IChildStats)"/> instead.
+        /// </summary>
+        /// <param name="name">N/A</param>
+        /// <returns>N/A</returns>
+        [Obsolete("Use TryGetChildStatsByName [0.7.1]", true)]
         public IInternalActorRef GetChildByName(string name)   //TODO: Should return  Option[ChildStats]
         {
-            IInternalActorRef child;
-            return TryGetSingleChild(name, out child) ? child : ActorRefs.Nobody;
+            return TryGetSingleChild(name, out var child) ? child : ActorRefs.Nobody;
         }
 
         IActorRef IActorContext.Child(string name)
         {
-            IInternalActorRef child;
-            return TryGetSingleChild(name, out child) ? child : ActorRefs.Nobody;
+            return TryGetSingleChild(name, out var child) ? child : ActorRefs.Nobody;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="path">TBD</param>
+        /// <returns>TBD</returns>
         public ActorSelection ActorSelection(string path)
         {
             return ActorRefFactoryShared.ActorSelection(path, _systemImpl, Self);
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="path">TBD</param>
+        /// <returns>TBD</returns>
         public ActorSelection ActorSelection(ActorPath path)
         {
             return ActorRefFactoryShared.ActorSelection(path, _systemImpl);
@@ -153,37 +270,36 @@ namespace Akka.Actor
             return GetChildren();
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <returns>TBD</returns>
         public IEnumerable<IInternalActorRef> GetChildren()
         {
             return ChildrenContainer.Children;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="receive">TBD</param>
         public void Become(Receive receive)
         {
             _state = _state.Become(receive);
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="receive">TBD</param>
         public void BecomeStacked(Receive receive)
         {
             _state = _state.BecomeStacked(receive);
         }
 
-
-        [Obsolete("Use Become or BecomeStacked instead. This method will be removed in future versions")]
-        void IActorContext.Become(Receive receive, bool discardOld = true)
-        {
-            if(discardOld)
-                Become(receive);
-            else
-                BecomeStacked(receive);
-        }
-
-        [Obsolete("Use UnbecomeStacked instead. This method will be removed in future versions")]
-        void IActorContext.Unbecome()
-        {
-            UnbecomeStacked();
-        }
-
+        /// <summary>
+        /// TBD
+        /// </summary>
         public void UnbecomeStacked()
         {
             _state = _state.UnbecomeStacked();
@@ -199,25 +315,20 @@ namespace Akka.Actor
             BecomeStacked(m => { receive(m); return true; });
         }
 
-        [Obsolete("Use Become or BecomeStacked instead. This method will be removed in future versions")]
-        void IUntypedActorContext.Become(UntypedReceive receive, bool discardOld)
-        {
-            if (discardOld)
-                Become(m => { receive(m); return true; });
-            else
-                BecomeStacked(m => { receive(m); return true; });
-        }
-
         private long NewUid()
         {
-            var auid = Interlocked.Increment(ref _uid);
-            return auid;
+            // Note that this uid is also used as hashCode in ActorRef, so be careful
+            // to not break hashing if you change the way uid is generated
+            var uid = ThreadLocalRandom.Current.Next();
+            while (uid == UndefinedUid)
+                uid = ThreadLocalRandom.Current.Next();
+            return uid;
         }
 
         private ActorBase NewActor()
         {
             PrepareForNewActor();
-            ActorBase instance=null;
+            ActorBase instance = null;
             //set the thread static context or things will break
             UseThreadContext(() =>
             {
@@ -231,6 +342,10 @@ namespace Akka.Actor
             return instance;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <returns>TBD</returns>
         protected virtual ActorBase CreateNewActorInstance()
         {
             var actor = _props.NewActor();
@@ -238,15 +353,18 @@ namespace Akka.Actor
             // Apply default of custom behaviors to actor.
             var pipeline = _systemImpl.ActorPipelineResolver.ResolvePipeline(actor.GetType());
             pipeline.AfterActorIncarnated(actor, this);
-            
-            var initializableActor = actor as IInitializableActor;
-            if(initializableActor != null)
+
+            if (actor is IInitializableActor initializableActor)
             {
                 initializableActor.Init();
             }
             return actor;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="action">TBD</param>
         public void UseThreadContext(Action action)
         {
             var tmp = InternalCurrentActorCellKeeper.Current;
@@ -262,8 +380,11 @@ namespace Akka.Actor
             }
         }
 
-
-        public virtual void Post(IActorRef sender, object message)
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="message">TBD</param>
+        public virtual void SendMessage(Envelope message)
         {
             if (Mailbox == null)
             {
@@ -272,36 +393,48 @@ namespace Akka.Actor
                 //this._systemImpl.DeadLetters.Tell(new DeadLetter(message, sender, this.Self));
             }
 
-            if (_systemImpl.Settings.SerializeAllMessages && !(message is INoSerializationVerificationNeeded))
+            try
             {
-                Serializer serializer = _systemImpl.Serialization.FindSerializerFor(message);
-                byte[] serialized = serializer.ToBinary(message);
-                object deserialized = _systemImpl.Serialization.Deserialize(serialized, serializer.Identifier,
-                    message.GetType());
-                message = deserialized;
-            }           
+                var messageToDispatch = _systemImpl.Settings.SerializeAllMessages
+                    ? SerializeAndDeserialize(message)
+                    : message;
 
-            var m = new Envelope
+                Dispatcher.Dispatch(this, messageToDispatch);
+            }
+            catch (Exception e)
             {
-                Sender = sender,
-                Message = message,
-            };
-
-            Mailbox.Post(Self, m);
+                _systemImpl.EventStream.Publish(new Error(e, _self.Parent.ToString(), ActorType, "Swallowing exception during message send"));
+            }
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="sender">TBD</param>
+        /// <param name="message">TBD</param>
+        public virtual void SendMessage(IActorRef sender, object message)
+        {
+            SendMessage(new Envelope(message, sender, System));
+        }
+
+        /// <summary>
+        /// TBD
+        /// </summary>
         protected void ClearActorCell()
         {
-            //TODO_ UnstashAll stashed system messages (this is not the same stash that might exist on the actor)
-            _props = terminatedProps;
+            UnstashAll();
+            _props = TerminatedProps;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="actor">TBD</param>
         protected void ClearActor(ActorBase actor)
         {
             if (actor != null)
             {
-                var disposable = actor as IDisposable;
-                if (disposable != null)
+                if (actor is IDisposable disposable)
                 {
                     try
                     {
@@ -309,11 +442,8 @@ namespace Akka.Actor
                     }
                     catch (Exception e)
                     {
-                        if (_systemImpl.Log != null)
-                        {
-                            _systemImpl.Log.Error(e, "An error occurred while disposing {0} actor. Reason: {1}", 
-                                actor.GetType(), e.Message);
-                        }
+                        _systemImpl.Log?.Error(e, "An error occurred while disposing {0} actor. Reason: {1}",
+                            actor.GetType(), e.Message);
                     }
                 }
 
@@ -332,36 +462,98 @@ namespace Akka.Actor
             _props.Release(a);
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         protected void PrepareForNewActor()
         {
             _state = _state.ClearBehaviorStack();
             _actorHasBeenCleared = false;
         }
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="actor">TBD</param>
         protected void SetActorFields(ActorBase actor)
         {
-            if (actor != null)
-            {
-                actor.Unclear();
-            }
+            actor?.Unclear();
         }
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="name">TBD</param>
+        /// <returns>TBD</returns>
         public static NameAndUid SplitNameAndUid(string name)
         {
             var i = name.IndexOf('#');
-            return i < 0 
+            return i < 0
                 ? new NameAndUid(name, UndefinedUid)
                 : new NameAndUid(name.Substring(0, i), Int32.Parse(name.Substring(i + 1)));
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <returns>TBD</returns>
         public static IActorRef GetCurrentSelfOrNoSender()
         {
             var current = Current;
             return current != null ? current.Self : ActorRefs.NoSender;
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <returns>TBD</returns>
         public static IActorRef GetCurrentSenderOrNoSender()
         {
             var current = Current;
             return current != null ? current.Sender : ActorRefs.NoSender;
+        }
+
+        private Envelope SerializeAndDeserialize(Envelope envelope)
+        {
+            DeadLetter deadLetter;
+            var unwrapped = (deadLetter = envelope.Message as DeadLetter) != null ? deadLetter.Message : envelope.Message;
+
+            if (unwrapped is INoSerializationVerificationNeeded)
+                return envelope;
+
+            object deserializedMsg;
+            try
+            {
+                deserializedMsg = SerializeAndDeserializePayload(unwrapped);
+            }
+            catch (Exception e)
+            {
+                throw new SerializationException($"Failed to serialize and deserialize payload object [{unwrapped.GetType()}]. Envelope: [{envelope}], Actor type: [{Actor.GetType()}]", e);
+            }
+
+            if (deadLetter != null)
+                return new Envelope(new DeadLetter(deserializedMsg, deadLetter.Sender, deadLetter.Recipient), envelope.Sender);
+            return new Envelope(deserializedMsg, envelope.Sender);
+
+        }
+
+        private object SerializeAndDeserializePayload(object obj)
+        {
+            var serializer = _systemImpl.Serialization.FindSerializerFor(obj);
+            var oldInfo = Serialization.Serialization.CurrentTransportInformation;
+            try
+            {
+                if (oldInfo == null)
+                    Serialization.Serialization.CurrentTransportInformation =
+                        SystemImpl.Provider.SerializationInformation;
+
+                var bytes = serializer.ToBinary(obj);
+
+                var manifest = Serialization.Serialization.ManifestFor(serializer, obj);
+                return _systemImpl.Serialization.Deserialize(bytes, serializer.Identifier, manifest);
+            }
+            finally
+            {
+                Serialization.Serialization.CurrentTransportInformation = oldInfo;
+            }
         }
     }
 }

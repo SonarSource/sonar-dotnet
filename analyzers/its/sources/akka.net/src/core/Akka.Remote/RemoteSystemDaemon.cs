@@ -1,12 +1,14 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="RemoteDaemon.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+// <copyright file="RemoteSystemDaemon.cs" company="Akka.NET Project">
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Akka.Actor;
 using Akka.Actor.Internal;
@@ -88,8 +90,8 @@ namespace Akka.Remote
         /// <param name="system">The system.</param>
         /// <param name="path">The path.</param>
         /// <param name="parent">The parent.</param>
-        /// <param name="terminator"></param>
-        /// <param name="log"></param>
+        /// <param name="terminator">TBD</param>
+        /// <param name="log">TBD</param>
         public RemoteSystemDaemon(ActorSystemImpl system, ActorPath path, IInternalActorRef parent,IActorRef terminator, ILoggingAdapter log)
             : base(system.Provider, path, parent, log)
         {
@@ -99,108 +101,6 @@ namespace Akka.Remote
         }
 
        
-        /// <summary>
-        ///     Called when [receive].
-        /// </summary>
-        /// <param name="message">The message that was received.</param>
-        /// <param name="sender">The actor that sent the message.</param>
-        protected void OnReceive(object message, IActorRef sender)
-        {
-            //note: RemoteDaemon does not handle ActorSelection messages - those are handled directly by the RemoteActorRefProvider.
-            if (message is IDaemonMsg)
-            {
-                Log.Debug("Received command [{0}] to RemoteSystemDaemon on [{1}]", message, Path.Address);
-                if (message is DaemonMsgCreate) HandleDaemonMsgCreate((DaemonMsgCreate)message);
-            }
-
-            //Remote ActorSystem on another process / machine has died. 
-            //Need to clean up any references to remote deployments here.
-            else if (message is AddressTerminated)
-            {
-                var addressTerminated = (AddressTerminated) message;
-                //stop any remote actors that belong to this address
-                ForEachChild(@ref =>
-                {
-                    if(@ref.Parent.Path.Address == addressTerminated.Address) _system.Stop(@ref);
-                });
-            }
-            else if (message is Identify)
-            {
-                var identify = message as Identify;
-                sender.Tell(new ActorIdentity(identify.MessageId, this));
-            }
-            else if (message is TerminationHook)
-            {
-                _terminating.SwitchOn(() =>
-                {
-                    TerminationHookDoneWhenNoChildren();
-                    ForEachChild(c => _system.Stop(c));
-                });
-            }
-            else if (message is DeathWatchNotification)
-            {
-                var deathWatchNotification = message as DeathWatchNotification;
-                var child = deathWatchNotification.Actor as ActorRefWithCell;
-                if (child != null)
-                {
-                    if (child.IsLocal)
-                    {
-                        //    removeChild(child.path.elements.drop(1).mkString("/"), child)
-                        //    val parent = child.getParent
-                        //    if (removeChildParentNeedsUnwatch(parent, child)) parent.sendSystemMessage(Unwatch(parent, this))
-                        //    terminationHookDoneWhenNoChildren()
-
-                        _terminating.Locked(() =>
-                        {
-                            var name = child.Path.Elements.Drop(1).Join("/");
-                            RemoveChild(name,child);
-                            var parent = child.Parent;
-                            if (RemoveChildParentNeedsUnwatch(parent, child))
-                            {
-                                parent.Tell(new Unwatch(parent, this));
-                            }
-                            TerminationHookDoneWhenNoChildren();
-
-                        });
-                    }
-                }
-                else
-                {
-                    //case DeathWatchNotification(parent: ActorRef with ActorRefScope, _, _) if !parent.isLocal ⇒
-                    //  terminating.locked {
-                    //    parent2children.remove(parent) match {
-                    //      case null ⇒
-                    //      case children ⇒
-                    //        for (c ← children) {
-                    //          system.stop(c)
-                    //          removeChild(c.path.elements.drop(1).mkString("/"), c)
-                    //        }
-                    //        terminationHookDoneWhenNoChildren()
-                    //    }
-                    //  }
-                    var parent = deathWatchNotification.Actor;
-                    var parentWithScope = parent as IActorRefScope;
-                    if (parentWithScope != null && !parentWithScope.IsLocal)
-                    {
-                        _terminating.Locked(() =>
-                        {
-                            IImmutableSet<IActorRef> children;
-                            if (_parent2Children.TryRemove(parent,out children))
-                            {
-                                foreach (var c in children)
-                                {
-                                    _system.Stop(c);
-                                    var name = c.Path.Elements.Drop(1).Join("/");
-                                    RemoveChild(name,c);
-                                }
-                                TerminationHookDoneWhenNoChildren();
-                            }
-                        });
-                    }
-                }               
-            }
-        }
-
         private void TerminationHookDoneWhenNoChildren()
         {
             _terminating.WhileOn(() =>
@@ -212,10 +112,6 @@ namespace Akka.Remote
             });
         }
 
-  //      def terminationHookDoneWhenNoChildren(): Unit = terminating.whileOn {
-  //  if (!hasChildren) terminator.tell(TerminationHookDone, this)
-  //}
-
         /// <summary>
         ///     Tells the internal.
         /// </summary>
@@ -223,7 +119,136 @@ namespace Akka.Remote
         /// <param name="sender">The sender.</param>
         protected override void TellInternal(object message, IActorRef sender)
         {
-            OnReceive(message, sender);
+            //note: RemoteDaemon does not handle ActorSelection messages - those are handled directly by the RemoteActorRefProvider.
+            if (message is IDaemonMsg)
+            {
+                Log.Debug("Received command [{0}] to RemoteSystemDaemon on [{1}]", message, Path.Address);
+                if (message is DaemonMsgCreate) HandleDaemonMsgCreate((DaemonMsgCreate)message);
+            }
+            else if (message is ActorSelectionMessage sel)
+            {
+                var iter = sel.Elements.Iterator();
+
+                (IEnumerable<string>, object) Rec(IImmutableList<string> acc)
+                {
+                    while (true)
+                    {
+                        if (iter.IsEmpty())
+                            return (acc.Reverse(), sel.Message);
+
+                        // find child elements, and the message to send, which is a remaining ActorSelectionMessage
+                        // in case of SelectChildPattern, otherwise the actual message of the selection
+                        switch (iter.Next())
+                        {
+                            case SelectChildName n:
+                                acc = ImmutableList.Create(n.Name).AddRange(acc);
+                                continue;
+                            case SelectParent p when !acc.Any():
+                                continue;
+                            case SelectParent p:
+                                acc = acc.Skip(1).ToImmutableList();
+                                continue;
+                            case SelectChildPattern pat:
+                                return (acc.Reverse(), sel.Copy(elements: new[] { pat }.Concat(iter.ToVector()).ToArray()));
+                            default: // compiler ceremony - should never be hit
+                                throw new InvalidOperationException("Unknown ActorSelectionPart []");
+                        }
+                    }
+                }
+
+                var t = Rec(ImmutableList<string>.Empty);
+                var concatenatedChildNames = t.Item1;
+                var m = t.Item2;
+
+                var child = GetChild(concatenatedChildNames);
+                if (child.IsNobody())
+                {
+                    var emptyRef = new EmptyLocalActorRef(_system.Provider,
+                        Path / sel.Elements.Select(el => el.ToString()), _system.EventStream);
+                    emptyRef.Tell(sel, sender);
+                }
+                else
+                {
+                    child.Tell(m, sender);
+                }
+            }
+            //Remote ActorSystem on another process / machine has died. 
+            //Need to clean up any references to remote deployments here.
+            else if (message is AddressTerminated)
+            {
+                var addressTerminated = (AddressTerminated)message;
+                //stop any remote actors that belong to this address
+                ForEachChild(@ref =>
+                {
+                    if (@ref.Parent.Path.Address == addressTerminated.Address) _system.Stop(@ref);
+                });
+            }
+            else if (message is Identify identify)
+            {
+                sender.Tell(new ActorIdentity(identify.MessageId, this));
+            }
+            else if (message is TerminationHook)
+            {
+                _terminating.SwitchOn(() =>
+                {
+                    TerminationHookDoneWhenNoChildren();
+                    ForEachChild(c => _system.Stop(c));
+                });
+            }
+        }
+
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="message">TBD</param>
+        public override void SendSystemMessage(ISystemMessage message)
+        {
+            if (message is DeathWatchNotification deathWatchNotification)
+            {
+                if (deathWatchNotification.Actor is ActorRefWithCell child)
+                {
+                    if (child.IsLocal)
+                    {
+
+                        _terminating.Locked(() =>
+                        {
+                            var name = child.Path.Elements.Drop(1).Join("/");
+                            RemoveChild(name, child);
+                            var parent = child.Parent;
+                            if (RemoveChildParentNeedsUnwatch(parent, child))
+                            {
+                                parent.SendSystemMessage(new Unwatch(parent, this));
+                            }
+                            TerminationHookDoneWhenNoChildren();
+
+                        });
+                    }
+                }
+                else
+                {
+                    var parent = deathWatchNotification.Actor;
+                    if (parent is IActorRefScope parentWithScope && !parentWithScope.IsLocal)
+                    {
+                        _terminating.Locked(() =>
+                        {
+                            if (_parent2Children.TryRemove(parent, out var children))
+                            {
+                                foreach (var c in children)
+                                {
+                                    _system.Stop(c);
+                                    var name = c.Path.Elements.Drop(1).Join("/");
+                                    RemoveChild(name, c);
+                                }
+                                TerminationHookDoneWhenNoChildren();
+                            }
+                        });
+                    }
+                }
+            }
+            else
+            {
+                base.SendSystemMessage(message);
+            }
         }
 
         /// <summary>
@@ -238,27 +263,30 @@ namespace Akka.Remote
             ActorPath childPath;
             if(ActorPath.TryParse(message.Path, out childPath))
             {
-                IEnumerable<string> subPath = childPath.Elements.Drop(1); //drop the /remote
-                ActorPath path = Path/subPath;
+                IEnumerable<string> subPath = childPath.ElementsWithUid.Drop(1); //drop the /remote
+                ActorPath p = Path/subPath;
+                var s = subPath.Join("/");
+                var i = s.IndexOf("#", StringComparison.Ordinal);
+                var childName = i < 0 ? s : s.Substring(0, i); // extract the name without the UID
                 var localProps = props; //.WithDeploy(new Deploy(Scope.Local));
 
                 bool isTerminating = !_terminating.WhileOff(() =>
                 {
-                    IInternalActorRef actor = _system.Provider.ActorOf(_system, localProps, supervisor, path, false,
+                    IInternalActorRef actor = _system.Provider.ActorOf(_system, localProps, supervisor, p, false,
                     message.Deploy, true, false);
-                    string childName = subPath.Join("/");
+                   
                     AddChild(childName, actor);
-                    actor.Tell(new Watch(actor, this));
+                    actor.SendSystemMessage(new Watch(actor, this));
                     actor.Start();
                     if (AddChildParentNeedsWatch(parent, actor))
                     {
                         //TODO: figure out why current transport is not set when this message is sent
-                        parent.Tell(new Watch(parent, this),this);
+                        parent.SendSystemMessage(new Watch(parent, this));
                     }
                 });
                 if (isTerminating)
                 {
-                    Log.Error("Skipping [{0}] to RemoteSystemDaemon on [{1}] while terminating", message, path.Address);
+                    Log.Error("Skipping [{0}] to RemoteSystemDaemon on [{1}] while terminating", message, p.Address);
                 }
                 
             }
@@ -269,33 +297,31 @@ namespace Akka.Remote
         }
 
         /// <summary>
-        ///     Gets the child.
+        ///     Find the longest matching path which we know about and return that <see cref="IActorRef"/>
+        ///     (or ask that <see cref="IActorRef"/> to continue searching if elements are left).
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>ActorRef.</returns>
         public override IActorRef GetChild(IEnumerable<string> name)
         {
-            string[] parts = name.ToArray();
-            //TODO: I have no clue what the scala version does
-            if (!parts.Any())
-                return this;
-
-            string n = parts.First();
-            if (string.IsNullOrEmpty(n))
-                return this;
-
-            for (int i = parts.Length; i >= 0; i--)
+            var path = name.Join("/");
+            var n = 0;
+            while (true)
             {
-                string joined = string.Join("/", parts, 0, i);
-                IInternalActorRef child;
-                if (TryGetChild(joined, out child))
+                var nameAndUid = ActorCell.SplitNameAndUid(path);
+                if (TryGetChild(nameAndUid.Name, out var child))
                 {
-                    //longest match found
-                    IEnumerable<string> rest = parts.Skip(i);
-                    return child.GetChild(rest);
+                    if (nameAndUid.Uid != ActorCell.UndefinedUid && nameAndUid.Uid != child.Path.Uid)
+                        return Nobody.Instance;
+                    return n == 0 ? child : child.GetChild(name.TakeRight(n));
                 }
+
+                var last = path.LastIndexOf("/", StringComparison.Ordinal);
+                if (last == -1)
+                    return Nobody.Instance;
+                path = path.Substring(0, last);
+                n++;
             }
-            return ActorRefs.Nobody;
         }
 
         private bool AddChildParentNeedsWatch(IActorRef parent, IActorRef child)
@@ -303,15 +329,12 @@ namespace Akka.Remote
             const bool weDontHaveTailRecursion = true;
             while (weDontHaveTailRecursion)
             {
-                if (_parent2Children.TryAdd(parent, ImmutableTreeSet<IActorRef>.Create(child)))
+                if (_parent2Children.TryAdd(parent, ImmutableHashSet<IActorRef>.Empty.Add(child)))
                     return true; //child was successfully added
 
-                IImmutableSet<IActorRef> children;
-                if (_parent2Children.TryGetValue(parent, out children))
-                {
+                if (_parent2Children.TryGetValue(parent, out var children))
                     if (_parent2Children.TryUpdate(parent, children.Add(child), children))
                         return false; //child successfully added
-                }
             }
         }
 
@@ -320,8 +343,7 @@ namespace Akka.Remote
             const bool weDontHaveTailRecursion = true;
             while (weDontHaveTailRecursion)
             {
-                IImmutableSet<IActorRef> children;
-                if (!_parent2Children.TryGetValue(parent, out children)) 
+                if (!_parent2Children.TryGetValue(parent, out var children)) 
                     return false; //parent is missing, so child does not need to be removed
 
                 if (_parent2Children.TryUpdate(parent, children.Remove(child), children))

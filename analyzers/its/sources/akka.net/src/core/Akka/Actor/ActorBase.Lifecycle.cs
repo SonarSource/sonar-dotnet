@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ActorBase.Lifecycle.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -9,23 +9,22 @@ using System;
 using System.Linq;
 namespace Akka.Actor
 {
-    /// <summary>
-    ///     Class ActorBase.
-    /// </summary>
     public abstract partial class ActorBase
     {
         /// <summary>
-        ///     Can be overridden to intercept calls to `preRestart`. Calls `preRestart` by default.
+        /// Can be overridden to intercept calls to `PreRestart`. Calls `PreRestart` by default.
         /// </summary>
         /// <param name="cause">The cause.</param>
         /// <param name="message">The message.</param>
         public virtual void AroundPreRestart(Exception cause, object message)
         {
+            if (this is IWithTimers withTimers)
+                withTimers.Timers?.CancelAll();
             PreRestart(cause, message);
         }
 
         /// <summary>
-        ///     Can be overridden to intercept calls to `preStart`. Calls `preStart` by default.
+        /// Can be overridden to intercept calls to `PreStart`. Calls `PreStart` by default.
         /// </summary>
         public virtual void AroundPreStart()
         {
@@ -44,7 +43,7 @@ namespace Akka.Actor
         }
 
         /// <summary>
-        ///     Can be overridden to intercept calls to `postRestart`. Calls `postRestart` by default.
+        ///     Can be overridden to intercept calls to `PostRestart`. Calls `PostRestart` by default.
         /// </summary>
         /// <param name="cause">The cause.</param>
         /// <param name="message">The message.</param>
@@ -72,7 +71,7 @@ namespace Akka.Actor
         }
 
         /// <summary>
-        ///     User overridable callback: By default it calls `preStart()`.
+        ///     User overridable callback: By default it calls `PreStart()`.
         ///     <p />
         ///     Is called right AFTER restart on the newly created Actor to allow reinitialization after an Actor crash.
         /// </summary>
@@ -83,10 +82,12 @@ namespace Akka.Actor
         }
 
         /// <summary>
-        ///     Can be overridden to intercept calls to `postStop`. Calls `postStop` by default..
+        ///     Can be overridden to intercept calls to `PostStop`. Calls `PostStop` by default..
         /// </summary>
         public virtual void AroundPostStop()
         {
+            if (this is IWithTimers withTimers)
+                withTimers.Timers?.CancelAll();
             PostStop();
         }
 

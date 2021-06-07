@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ActorCellKeepingSynchronizationContext.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -16,25 +16,36 @@ using Akka.Actor.Internal;
 
 namespace Akka.TestKit
 {
+    /// <summary>
+    /// TBD
+    /// </summary>
     class ActorCellKeepingSynchronizationContext : SynchronizationContext
     {
         private readonly ActorCell _cell;
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="cell">TBD</param>
         public ActorCellKeepingSynchronizationContext(ActorCell cell)
         {
             _cell = cell;
         }
 
-
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="d">TBD</param>
+        /// <param name="state">TBD</param>
         public override void Post(SendOrPostCallback d, object state)
         {
-            ThreadPool.UnsafeQueueUserWorkItem(_ =>
+            ThreadPool.QueueUserWorkItem(_ =>
             {
                 var oldCell = InternalCurrentActorCellKeeper.Current;
                 var oldContext = Current;
                 SetSynchronizationContext(this);
                 InternalCurrentActorCellKeeper.Current = _cell;
-                
+
                 try
                 {
                     d(state);
@@ -47,6 +58,11 @@ namespace Akka.TestKit
             }, state);
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <param name="d">TBD</param>
+        /// <param name="state">TBD</param>
         public override void Send(SendOrPostCallback d, object state)
         {
             var tcs = new TaskCompletionSource<int>();
@@ -66,4 +82,3 @@ namespace Akka.TestKit
         }
     }
 }
- 

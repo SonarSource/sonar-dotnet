@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="PersistenceSpec.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -12,27 +12,26 @@ using System.Linq;
 using Akka.Configuration;
 using Akka.TestKit;
 using Akka.Util.Internal;
+using FluentAssertions;
 using Xunit.Abstractions;
 
 namespace Akka.Persistence.Tests
 {
     public abstract class PersistenceSpec : AkkaSpec
     {
-        public static Config Configuration(string plugin, string test, string serialization = null,
+        public static Config Configuration(string test, string serialization = null,
             string extraConfig = null)
         {
-            var c = extraConfig == null
-                ? ConfigurationFactory.Empty
-                : ConfigurationFactory.ParseString(extraConfig);
             var configString = string.Format(@"
                 akka.actor.serialize-creators = {0}
                 akka.actor.serialize-messages = {0}
                 akka.persistence.publish-plugin-commands = on
-                akka.persistence.journal.plugin = ""akka.persistence.journal.{1}""
-                akka.persistence.snapshot-store.local.dir = ""target/snapshots-{2}/""
-                akka.test.single-expect-default = 10s", serialization ?? "on", plugin, test);
+                akka.persistence.snapshot-store.local.dir = ""target/snapshots-{1}/""
+                akka.test.single-expect-default = 10s", serialization ?? "on", test);
 
-            return c.WithFallback(ConfigurationFactory.ParseString(configString));
+            if(extraConfig == null)
+                return ConfigurationFactory.ParseString(configString);
+            return ConfigurationFactory.ParseString(extraConfig).WithFallback(ConfigurationFactory.ParseString(configString));
         }
 
         internal readonly Cleanup Clean;
@@ -72,8 +71,21 @@ namespace Akka.Persistence.Tests
         {
             var msg = ExpectMsg<object[]>();
             msg
-                //.Select(x => x.ToString())
                 .ShouldOnlyContainInOrder(ordered);
+        }
+
+        protected void ExpectAnyMsgInOrder(params IEnumerable<object>[] expected)
+        {
+            var msg = ExpectMsg<object[]>();
+            foreach (var e in expected)
+            {
+                if (e.SequenceEqual(msg))
+                    return;
+            }
+
+            false.Should()
+                .BeTrue(
+                    $"[{string.Join(",", msg)}] should match any expected value {string.Join(",", expected.Select(x => "[" + string.Join(",", x) + "]"))}");
         }
     }
 
@@ -87,7 +99,7 @@ namespace Akka.Persistence.Tests
             StorageLocations = new[]
             {
                 "akka.persistence.snapshot-store.local.dir"
-            }.Select(s => new DirectoryInfo(spec.Sys.Settings.Config.GetString(s))).ToList();
+            }.Select(s => new DirectoryInfo(spec.Sys.Settings.Config.GetString(s, null))).ToList();
         }
 
         public void Initialize()

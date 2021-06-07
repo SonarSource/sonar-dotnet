@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ThrottlerTransportAdapterSpec.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -17,6 +17,7 @@ using Akka.TestKit.TestEvent;
 using Akka.Util;
 using Akka.Util.Internal;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Akka.Remote.Tests.Transport
 {
@@ -30,15 +31,17 @@ namespace Akka.Remote.Tests.Transport
             {
                 return ConfigurationFactory.ParseString(@"
                 akka {
-                  akka.test.single-expect-default = 6s #to help overcome issues with gated connections
+                  loglevel = ""DEBUG""
+                  stdout-loglevel = ""DEBUG""
+                  test.single-expect-default = 6s #to help overcome issues with gated connections
                   actor.provider = ""Akka.Remote.RemoteActorRefProvider, Akka.Remote""
-                  remote.helios.tcp.hostname = ""localhost""
+                  remote.dot-netty.tcp.hostname = ""localhost""
                   remote.log-remote-lifecycle-events = off
                   remote.retry-gate-closed-for = 1 s
                   remote.transport-failure-detector.heartbeat-interval = 1 s
                   remote.transport-failure-detector.acceptable-heartbeat-pause = 3 s
-                  remote.helios.tcp.applied-adapters = [""trttl""]
-                  remote.helios.tcp.port = 0
+                  remote.dot-netty.tcp.applied-adapters = [""trttl""]
+                  remote.dot-netty.tcp.port = 0
                 }");
             }
         }
@@ -90,7 +93,7 @@ namespace Akka.Remote.Tests.Transport
                     Msg = msg;
                 }
 
-                public string Msg { get; private set; }
+                public string Msg { get; }
 
                 public bool Equals(Lost other)
                 {
@@ -108,7 +111,12 @@ namespace Akka.Remote.Tests.Transport
 
                 public override int GetHashCode()
                 {
-                    return (Msg != null ? Msg.GetHashCode() : 0);
+                    return Msg?.GetHashCode() ?? 0;
+                }
+
+                public override string ToString()
+                {
+                    return GetType() + ": " + Msg;
                 }
             }
         }
@@ -164,8 +172,8 @@ namespace Akka.Remote.Tests.Transport
 
         #endregion
 
-        public ThrottlerTransportAdapterSpec()
-            : base(ThrottlerTransportAdapterSpecConfig)
+        public ThrottlerTransportAdapterSpec(ITestOutputHelper output)
+            : base(ThrottlerTransportAdapterSpecConfig, output)
         {
             systemB = ActorSystem.Create("systemB", Sys.Settings.Config);
             remote = systemB.ActorOf(Props.Create<Echo>(), "echo");
@@ -176,7 +184,7 @@ namespace Akka.Remote.Tests.Transport
         [Fact]
         public void ThrottlerTransportAdapter_must_maintain_average_message_rate()
         {
-            Throttle(ThrottleTransportAdapter.Direction.Send, new TokenBucket(PingPacketSize*4, BytesPerSecond, 0, 0)).ShouldBeTrue();
+            Throttle(ThrottleTransportAdapter.Direction.Send, new Remote.Transport.TokenBucket(PingPacketSize*4, BytesPerSecond, 0, 0)).ShouldBeTrue();
             var tester = Sys.ActorOf(Props.Create(() => new ThrottlingTester(Here, TestActor)));
             tester.Tell("start");
 
@@ -200,7 +208,7 @@ namespace Akka.Remote.Tests.Transport
             here.Tell(new ThrottlingTester.Lost("BlackHole 2"));
             ExpectNoMsg(TimeSpan.FromSeconds(1));
             Disassociate().ShouldBeTrue();
-            ExpectNoMsg(TimeSpan.FromSeconds(3));
+            ExpectNoMsg(TimeSpan.FromSeconds(1));
 
             Throttle(ThrottleTransportAdapter.Direction.Both, Unthrottled.Instance).ShouldBeTrue();
 

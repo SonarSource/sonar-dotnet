@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="RouterMsg.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ namespace Akka.Routing
         /// Sends a <see cref="RouterManagementMessage"/> to a <see cref="Router"/>
         /// to retrieve a list of routees that the router is currently using.
         /// </summary>
-        public static readonly GetRoutees GetRoutees = new GetRoutees();
+        public static readonly GetRoutees GetRoutees = GetRoutees.Instance;
     }
 
     /// <summary>
@@ -39,6 +39,10 @@ namespace Akka.Routing
     /// </summary>
     public sealed class GetRoutees : RouterManagementMessage
     {
+        /// <summary>
+        /// The singleton instance of GetRoutees.
+        /// </summary>
+        public static GetRoutees Instance { get; } = new GetRoutees();
     }
 
     /// <summary>
@@ -111,7 +115,7 @@ namespace Akka.Routing
 
     /// <summary>
     /// This class represents a <see cref="RouterManagementMessage"/> sent to a <see cref="Pool"/> router instructing
-    /// it to increase or decrease the number of alloted routees the router can use. It may be handled after other messages.
+    /// it to increase or decrease the number of allotted routees the router can use. It may be handled after other messages.
     /// 
     /// <remarks>
     /// Positive <see cref="Change"/> will add that number of routees to the <see cref="Pool"/>.

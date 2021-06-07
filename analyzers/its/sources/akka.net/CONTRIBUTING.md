@@ -17,7 +17,7 @@ If you have commits that looks like this _"Merge branch 'my-branch' into dev"_ o
 
 After reviewing a Pull request, we might ask you to fix some commits. After you've done that you need to force push to update your branch in your local fork.
 
-####Title and Description for the Pull Request####
+#### Title and Description for the Pull Request  
 Give the PR a descriptive title and in the description field describe what you have done in general terms and why. This will help the reviewers greatly, and provide a history for the future.
 
 Especially if you modify something existing, be very clear! Have you changed any algorithms, or did you just intend to reorder the code? Justify why the changes are needed.
@@ -109,6 +109,9 @@ If we ask you to change already published commits using interactive rebase (like
 git push -f origin my-new-branch-123
 ```
 
+### The build server isn't picking up a Pull request that I've modified
+The build server relies on git commit timestamps to keep track of new builds that it needs to perform. When updating a PR, sometimes the timestamp of the latest commit in the PR isn't updated. This leads the build server to think that the PR has already been built and tested. In order to force the build server to rebuild and test the updated PR, please follow the instructions outlined in this post [How can one change the timestamp of an old commit in Git?](http://stackoverflow.com/questions/454734/how-can-one-change-the-timestamp-of-an-old-commit-in-git/31540373#31540373).
+
 ### All my commits are on dev. How do I get them to a new branch? ###
 If all commits are on _dev_ you need to move them to a new feature branch.
 
@@ -127,10 +130,32 @@ git cherry-pick rev           #repeat until you have picked all commits
 git branch -m dev old-dev     #rename dev
 git branch dev upstream/dev   #create a new dev
 ```
+### What to do with feature branch after the pull request is merged and closed ? ###
+After a pull request has been merged and closed you can delete the feature branch.
+
+Get latest changes from the upstream
+
+```
+git checkout dev
+git fetch upstream
+git merge --ff-only upstream/dev
+git push origin dev
+```
+
+Remove the branch locally
+
+```
+git branch -d my-new-branch-123
+```
+Remove the branch on remote
+
+```
+git push origin --delete my-new-branch-123
+```
 
 ## Code guidelines
 
-See our [Contributor Guidelines](http://getakka.net/docs/Contributor%20guidelines) for more information on following the project's conventions.
+See our [Contributor Guidelines](http://getakka.net/community/contributor-guidelines.html) for more information on following the project's conventions.
 
 ---
 Props to [NancyFX](https://github.com/NancyFx/Nancy) from which we've "borrowed" some of this text.

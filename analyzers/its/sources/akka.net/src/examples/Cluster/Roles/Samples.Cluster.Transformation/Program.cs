@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="Program.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -26,16 +26,17 @@ namespace Samples.Cluster.Transformation
             LaunchBackend(new[] { "2552" });
             LaunchBackend(new string[0]);
             LaunchFrontend(new string[0]);
+            LaunchFrontend(new string[0]);
             //starting 2 frontend nodes and 3 backend nodes
             Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
+            Console.ReadLine();
         }
 
         static void LaunchBackend(string[] args)
         {
             var port = args.Length > 0 ? args[0] : "0";
             var config =
-                    ConfigurationFactory.ParseString("akka.remote.helios.tcp.port=" + port)
+                    ConfigurationFactory.ParseString("akka.remote.dot-netty.tcp.port=" + port)
                     .WithFallback(ConfigurationFactory.ParseString("akka.cluster.roles = [backend]"))
                         .WithFallback(_clusterConfig);
 
@@ -47,7 +48,7 @@ namespace Samples.Cluster.Transformation
         {
             var port = args.Length > 0 ? args[0] : "0";
             var config =
-                    ConfigurationFactory.ParseString("akka.remote.helios.tcp.port=" + port)
+                    ConfigurationFactory.ParseString("akka.remote.dot-netty.tcp.port=" + port)
                     .WithFallback(ConfigurationFactory.ParseString("akka.cluster.roles = [frontend]"))
                         .WithFallback(_clusterConfig);
 

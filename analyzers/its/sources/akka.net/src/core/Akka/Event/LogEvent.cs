@@ -1,18 +1,45 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="LogEvent.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2015 Typesafe Inc. <http://www.typesafe.com>
-//     Copyright (C) 2013-2015 Akka.NET project <https://github.com/akkadotnet/akka.net>
+//     Copyright (C) 2009-2021 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2021 .NET Foundation <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Akka.Actor;
 
 namespace Akka.Event
 {
     /// <summary>
-    /// Represents a LogEvent in the system.
+    /// INTERNAL API.
+    /// 
+    /// Avoids redundant parsing of log levels and other frequently-used log items
+    /// </summary>
+    internal static class LogFormats
+    {
+        public static readonly IReadOnlyDictionary<LogLevel, string> PrettyPrintedLogLevel;
+
+        static LogFormats()
+        {
+            var dict = new Dictionary<LogLevel, string>();
+            foreach(LogLevel i in Enum.GetValues(typeof(LogLevel)))
+            {
+                dict.Add(i, Enum.GetName(typeof(LogLevel), i).Replace("Level", "").ToUpperInvariant());
+            }
+            PrettyPrintedLogLevel = dict;
+        }
+
+        public static string PrettyNameFor(this LogLevel level)
+        {
+            return PrettyPrintedLogLevel[level];
+        }
+    }
+
+    /// <summary>
+    /// This class represents a logging event in the system.
     /// </summary>
     public abstract class LogEvent : INoSerializationVerificationNeeded
     {
@@ -26,39 +53,39 @@ namespace Akka.Event
         }
 
         /// <summary>
-        /// Gets the timestamp of this LogEvent.
+        /// The exception that caused the log event. Can be <c>null</c>
         /// </summary>
-        /// <value>The timestamp.</value>
+        public Exception Cause { get; protected set; }
+
+        /// <summary>
+        /// The timestamp that this event occurred.
+        /// </summary>
         public DateTime Timestamp { get; private set; }
 
         /// <summary>
-        /// Gets the thread of this LogEvent.
+        /// The thread where this event occurred.
         /// </summary>
-        /// <value>The thread.</value>
         public Thread Thread { get; private set; }
 
         /// <summary>
-        /// Gets the log source of this LogEvent.
+        /// The source that generated this event.
         /// </summary>
-        /// <value>The log source.</value>
         public string LogSource { get; protected set; }
 
         /// <summary>
-        /// Gets the log class of this LogEvent.
+        /// The type that generated this event.
         /// </summary>
-        /// <value>The log class.</value>
         public Type LogClass { get; protected set; }
 
         /// <summary>
-        /// Gets the message of this LogEvent.
+        /// The message associated with this event.
         /// </summary>
-        /// <value>The message.</value>
         public object Message { get; protected set; }
 
         /// <summary>
-        /// Gets the specified LogLevel for this LogEvent.
+        /// Retrieves the <see cref="Akka.Event.LogLevel" /> used to classify this event.
         /// </summary>
-        /// <returns>LogLevel.</returns>
+        /// <returns>The <see cref="Akka.Event.LogLevel" /> used to classify this event.</returns>
         public abstract LogLevel LogLevel();
 
         /// <summary>
@@ -67,8 +94,11 @@ namespace Akka.Event
         /// <returns>A <see cref="System.String" /> that represents this LogEvent.</returns>
         public override string ToString()
         {
-            return string.Format("[{0}][{1}][Thread {2}][{3}] {4}", LogLevel().ToString().Replace("Level", "").ToUpperInvariant(), Timestamp, Thread.ManagedThreadId.ToString().PadLeft(4, '0'), LogSource, Message);
+            if(Cause == null)
+                return
+                    $"[{LogLevel().PrettyNameFor()}][{Timestamp}][Thread {Thread.ManagedThreadId.ToString().PadLeft(4, '0')}][{LogSource}] {Message}";
+            return
+                $"[{LogLevel().PrettyNameFor()}][{Timestamp}][Thread {Thread.ManagedThreadId.ToString().PadLeft(4, '0')}][{LogSource}] {Message}{Environment.NewLine}Cause: {Cause}";
         }
     }
 }
-
