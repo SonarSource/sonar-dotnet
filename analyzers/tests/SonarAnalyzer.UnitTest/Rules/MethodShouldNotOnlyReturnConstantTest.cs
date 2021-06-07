@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,6 +31,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MethodShouldNotOnlyReturnConstant() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldNotOnlyReturnConstant.cs",
-                new CS.MethodShouldNotOnlyReturnConstant());
+                new MethodShouldNotOnlyReturnConstant());
     }
 }

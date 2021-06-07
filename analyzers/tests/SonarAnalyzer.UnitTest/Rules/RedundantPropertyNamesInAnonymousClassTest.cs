@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantPropertyNamesInAnonymousClass() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantPropertyNamesInAnonymousClass.cs", new CS.RedundantPropertyNamesInAnonymousClass());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantPropertyNamesInAnonymousClass.cs", new RedundantPropertyNamesInAnonymousClass());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\RedundantPropertyNamesInAnonymousClass.cs",
                 @"TestCases\RedundantPropertyNamesInAnonymousClass.Fixed.cs",
-                new CS.RedundantPropertyNamesInAnonymousClass(),
-                new CS.RedundantPropertyNamesInAnonymousClassCodeFixProvider());
+                new RedundantPropertyNamesInAnonymousClass(),
+                new RedundantPropertyNamesInAnonymousClassCodeFixProvider());
     }
 }

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void LiteralSuffixUpperCase() =>
             Verifier.VerifyAnalyzer(@"TestCases\LiteralSuffixUpperCase.cs",
-                new CS.LiteralSuffixUpperCase());
+                                    new LiteralSuffixUpperCase());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\LiteralSuffixUpperCase.cs",
                 @"TestCases\LiteralSuffixUpperCase.Fixed.cs",
-                new CS.LiteralSuffixUpperCase(),
-                new CS.LiteralSuffixUpperCaseCodeFixProvider());
+                new LiteralSuffixUpperCase(),
+                new LiteralSuffixUpperCaseCodeFixProvider());
     }
 }

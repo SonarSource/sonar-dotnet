@@ -20,9 +20,9 @@
 
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void LdapConnectionsShouldBeSecure() =>
             Verifier.VerifyAnalyzer(@"TestCases\LdapConnectionShouldBeSecure.cs",
-                new CS.LdapConnectionShouldBeSecure(),
+                new LdapConnectionShouldBeSecure(),
                 ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK
                 MetadataReferenceFacade.SystemDirectoryServices.Concat(NuGetMetadataReference.NETStandardV2_1_0));
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void LdapConnectionsShouldBeSecure_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp9.cs",
-                new CS.LdapConnectionShouldBeSecure(),
+                new LdapConnectionShouldBeSecure(),
                 MetadataReferenceFacade.SystemDirectoryServices);
 #endif
     }

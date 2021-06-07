@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,14 +32,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PropertiesShouldBePreferred() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesShouldBePreferred.cs",
-                                    new CS.PropertiesShouldBePreferred(),
+                                    new PropertiesShouldBePreferred(),
                                     MetadataReferenceFacade.SystemThreadingTasks);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesShouldBePreferred_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesShouldBePreferred.CSharp9.cs", new CS.PropertiesShouldBePreferred());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesShouldBePreferred.CSharp9.cs", new PropertiesShouldBePreferred());
 #endif
     }
 }

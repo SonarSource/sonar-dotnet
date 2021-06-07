@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MethodOverrideAddsParams() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideAddsParams.cs",
-                new CS.MethodOverrideAddsParams(),
+                new MethodOverrideAddsParams(),
 #if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,
                 NuGetMetadataReference.NETStandardV2_1_0);
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideAddsParams_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideAddsParams.CSharp9.cs", new CS.MethodOverrideAddsParams());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideAddsParams.CSharp9.cs", new MethodOverrideAddsParams());
 #endif
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodOverrideAddsParams.cs",
                 @"TestCases\MethodOverrideAddsParams.Fixed.cs",
-                new CS.MethodOverrideAddsParams(),
-                new CS.MethodOverrideAddsParamsCodeFixProvider());
+                new MethodOverrideAddsParams(),
+                new MethodOverrideAddsParamsCodeFixProvider());
     }
 }

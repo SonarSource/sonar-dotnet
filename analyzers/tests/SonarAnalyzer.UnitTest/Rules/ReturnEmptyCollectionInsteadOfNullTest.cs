@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,14 +32,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ReturnEmptyCollectionInsteadOfNull() =>
             Verifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
-                                    new CS.ReturnEmptyCollectionInsteadOfNull(),
+                                    new ReturnEmptyCollectionInsteadOfNull(),
                                     MetadataReferenceFacade.SystemXml);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ReturnEmptyCollectionInsteadOfNull_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnEmptyCollectionInsteadOfNull.CSharp9.cs", new CS.ReturnEmptyCollectionInsteadOfNull());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnEmptyCollectionInsteadOfNull.CSharp9.cs", new ReturnEmptyCollectionInsteadOfNull());
 #endif
     }
 }

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodParameterMissingOptional() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterMissingOptional.cs", new CS.MethodParameterMissingOptional());
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterMissingOptional.cs", new MethodParameterMissingOptional());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodParameterMissingOptional_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodParameterMissingOptional.CSharp9.cs", new CS.MethodParameterMissingOptional());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodParameterMissingOptional.CSharp9.cs", new MethodParameterMissingOptional());
 #endif
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodParameterMissingOptional.cs",
                 @"TestCases\MethodParameterMissingOptional.Fixed.cs",
-                new CS.MethodParameterMissingOptional(),
-                new CS.MethodParameterMissingOptionalCodeFixProvider());
+                new MethodParameterMissingOptional(),
+                new MethodParameterMissingOptionalCodeFixProvider());
     }
 }

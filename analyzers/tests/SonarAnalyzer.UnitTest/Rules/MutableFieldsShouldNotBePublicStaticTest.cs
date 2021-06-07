@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MutableFieldsShouldNotBePublicStatic() =>
             Verifier.VerifyAnalyzer(@"TestCases\MutableFieldsShouldNotBePublicStatic.cs",
-                new CS.MutableFieldsShouldNotBePublicStatic(),
-                NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
+                                    new MutableFieldsShouldNotBePublicStatic(),
+                                    NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
     }
 }

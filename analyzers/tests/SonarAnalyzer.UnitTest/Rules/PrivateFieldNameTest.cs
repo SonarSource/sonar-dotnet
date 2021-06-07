@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
-using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PrivateFieldName() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PrivateFieldName.vb", new VB.PrivateFieldName());
+            Verifier.VerifyAnalyzer(@"TestCases\PrivateFieldName.vb", new PrivateFieldName());
     }
 }

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ObjectCreatedDropped() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ObjectCreatedDropped.cs", new CS.ObjectCreatedDropped());
+            Verifier.VerifyAnalyzer(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ObjectCreatedDropped_InTest() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\ObjectCreatedDropped.cs", new CS.ObjectCreatedDropped());
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
     }
 }

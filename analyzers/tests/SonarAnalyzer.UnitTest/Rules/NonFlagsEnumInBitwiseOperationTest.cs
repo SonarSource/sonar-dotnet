@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void NonFlagsEnumInBitwiseOperation() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
-                                    new CS.NonFlagsEnumInBitwiseOperation(),
+                                    new NonFlagsEnumInBitwiseOperation(),
                                     MetadataReferenceFacade.SystemComponentModelPrimitives);
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void NonFlagsEnumInBitwiseOperation_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
                                    @"TestCases\NonFlagsEnumInBitwiseOperation.Fixed.cs",
-                                   new CS.NonFlagsEnumInBitwiseOperation(),
-                                   new CS.NonFlagsEnumInBitwiseOperationCodeFixProvider());
+                                   new NonFlagsEnumInBitwiseOperation(),
+                                   new NonFlagsEnumInBitwiseOperationCodeFixProvider());
     }
 }

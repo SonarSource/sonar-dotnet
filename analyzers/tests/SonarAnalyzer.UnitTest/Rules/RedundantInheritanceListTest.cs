@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,21 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantInheritanceList() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.cs", new CS.RedundantInheritanceList());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.cs", new RedundantInheritanceList());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantInheritanceList_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantInheritanceList.CSharp9.cs", new CS.RedundantInheritanceList());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantInheritanceList.CSharp9.cs", new RedundantInheritanceList());
 
         [TestMethod]
         [TestCategory("CodeFix")]
         public void RedundantInheritanceList_CSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantInheritanceList.CSharp9.cs",
                                    @"TestCases\RedundantInheritanceList.CSharp9.Fixed.cs",
-                                   new CS.RedundantInheritanceList(),
-                                   new CS.RedundantInheritanceListCodeFixProvider(),
+                                   new RedundantInheritanceList(),
+                                   new RedundantInheritanceListCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp9);
 
 #endif
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantInheritanceList_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantInheritanceList.cs",
                                    @"TestCases\RedundantInheritanceList.Fixed.cs",
-                                   new CS.RedundantInheritanceList(),
-                                   new CS.RedundantInheritanceListCodeFixProvider());
+                                   new RedundantInheritanceList(),
+                                   new RedundantInheritanceListCodeFixProvider());
     }
 }

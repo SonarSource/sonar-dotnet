@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OperatorOverloadsShouldHaveNamedAlternatives() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.cs", new CS.OperatorOverloadsShouldHaveNamedAlternatives());
+            Verifier.VerifyAnalyzer(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.cs", new OperatorOverloadsShouldHaveNamedAlternatives());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void OperatorOverloadsShouldHaveNamedAlternatives_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.CSharp9.cs", new CS.OperatorOverloadsShouldHaveNamedAlternatives());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.CSharp9.cs", new OperatorOverloadsShouldHaveNamedAlternatives());
 #endif
     }
 }

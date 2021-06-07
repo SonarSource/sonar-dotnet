@@ -20,8 +20,8 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NotAssignedPrivateMember() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs", new CS.NotAssignedPrivateMember());
+            Verifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs", new NotAssignedPrivateMember());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void NotAssignedPrivateMember_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NotAssignedPrivateMember.CSharp9.cs", new CS.NotAssignedPrivateMember());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NotAssignedPrivateMember.CSharp9.cs", new NotAssignedPrivateMember());
 #endif
 
         [TestMethod]
@@ -55,6 +55,6 @@ unsafe struct FixedArray
         a[0] = 42;
         b[0] = 42;
     }
-}", new CS.NotAssignedPrivateMember(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_3) });
+}", new NotAssignedPrivateMember(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_3) });
     }
 }

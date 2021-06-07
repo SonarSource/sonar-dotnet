@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantToCharArrayCall() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantToCharArrayCall.cs", new CS.RedundantToCharArrayCall());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantToCharArrayCall.cs", new RedundantToCharArrayCall());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\RedundantToCharArrayCall.cs",
                 @"TestCases\RedundantToCharArrayCall.Fixed.cs",
-                new CS.RedundantToCharArrayCall(),
-                new CS.RedundantToCharArrayCallCodeFixProvider());
+                new RedundantToCharArrayCall(),
+                new RedundantToCharArrayCallCodeFixProvider());
     }
 }

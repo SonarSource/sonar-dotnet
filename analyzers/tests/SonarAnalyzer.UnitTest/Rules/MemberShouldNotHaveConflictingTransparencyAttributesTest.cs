@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldNotHaveConflictingTransparencyAttributes() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes.cs",
-                new CS.MemberShouldNotHaveConflictingTransparencyAttributes());
+            Verifier.VerifyAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel.cs",
-                new CS.MemberShouldNotHaveConflictingTransparencyAttributes());
+            Verifier.VerifyAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
     }
 }

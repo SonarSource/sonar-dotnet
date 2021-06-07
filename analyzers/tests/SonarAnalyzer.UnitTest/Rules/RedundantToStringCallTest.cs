@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantToStringCall() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantToStringCall.cs", new CS.RedundantToStringCall());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantToStringCall.cs", new RedundantToStringCall());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantToStringCall_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantToStringCall.CSharp9.cs", new CS.RedundantToStringCall());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantToStringCall.CSharp9.cs", new RedundantToStringCall());
 #endif
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantToStringCall_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantToStringCall.cs",
                                    @"TestCases\RedundantToStringCall.Fixed.cs",
-                                   new CS.RedundantToStringCall(),
-                                   new CS.RedundantToStringCallCodeFixProvider());
+                                   new RedundantToStringCall(),
+                                   new RedundantToStringCallCodeFixProvider());
     }
 }

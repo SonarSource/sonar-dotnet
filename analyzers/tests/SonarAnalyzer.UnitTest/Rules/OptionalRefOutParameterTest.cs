@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalRefOutParameter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OptionalRefOutParameter.cs", new CS.OptionalRefOutParameter());
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalRefOutParameter.cs", new OptionalRefOutParameter());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalRefOutParameter_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\OptionalRefOutParameter.CSharp9.cs", new CS.OptionalRefOutParameter());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\OptionalRefOutParameter.CSharp9.cs", new OptionalRefOutParameter());
 #endif
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void OptionalRefOutParameter_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\OptionalRefOutParameter.cs",
                                    @"TestCases\OptionalRefOutParameter.Fixed.cs",
-                                   new CS.OptionalRefOutParameter(),
-                                   new CS.OptionalRefOutParameterCodeFixProvider());
+                                   new OptionalRefOutParameter(),
+                                   new OptionalRefOutParameterCodeFixProvider());
     }
 }

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MagicNumberShouldNotBeUsed() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MagicNumberShouldNotBeUsed.cs",
-                new CS.MagicNumberShouldNotBeUsed());
+            Verifier.VerifyAnalyzer(@"TestCases\MagicNumberShouldNotBeUsed.cs", new MagicNumberShouldNotBeUsed());
     }
 }
