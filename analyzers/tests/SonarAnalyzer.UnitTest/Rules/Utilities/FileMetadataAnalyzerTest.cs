@@ -26,8 +26,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -161,7 +161,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
-        private class TestFileMetadataAnalyzer : CS.FileMetadataAnalyzer
+        private class TestFileMetadataAnalyzer : FileMetadataAnalyzer
         {
             public TestFileMetadataAnalyzer(string outPath, bool isTestProject)
             {

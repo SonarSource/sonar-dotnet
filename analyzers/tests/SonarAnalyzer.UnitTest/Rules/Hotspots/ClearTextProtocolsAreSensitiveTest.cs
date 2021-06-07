@@ -23,9 +23,9 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void ClearTextProtocolsAreSensitive() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.cs",
-                                    new CS.ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
+                                    new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     AdditionalReferences);
 
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs",
-                                                      new CS.ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
+                                                      new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                                                       AdditionalReferences);
 #endif
 

@@ -31,7 +31,7 @@ using SonarAnalyzer.Helpers.Trackers;
 using SonarAnalyzer.Wrappers;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Rules.Hotspots
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]

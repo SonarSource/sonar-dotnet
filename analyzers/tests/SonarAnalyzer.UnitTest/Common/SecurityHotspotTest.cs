@@ -27,7 +27,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.Rules.Hotspots;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.Rules;
 using SonarAnalyzer.UnitTest.TestFramework;
