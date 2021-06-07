@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -36,8 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2223";
         private const string MessageFormat = "Change the visibility of '{0}' or make it 'const' or 'readonly'.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -46,21 +46,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
-                    foreach (var field in fieldDeclaration.Declaration.Variables
-                        .Select(variableDeclaratorSyntax => new
-                        {
-                            Syntax = variableDeclaratorSyntax,
-                            Symbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaratorSyntax) as IFieldSymbol
-                        })
-                        .Where(f => FieldIsRelevant(f.Symbol)))
+                    foreach (var diagnostic in GetDiagnostics(fieldDeclaration.Declaration, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, field.Syntax.Identifier.GetLocation(), field.Syntax.Identifier.ValueText));
+                        c.ReportDiagnosticWhenActive(diagnostic);
                     }
                 },
                 SyntaxKind.FieldDeclaration);
 
+        private static IEnumerable<Diagnostic> GetDiagnostics(VariableDeclarationSyntax declaration, SemanticModel semanticModel) =>
+            declaration.Variables
+                       .Where(x => FieldIsRelevant(semanticModel.GetDeclaredSymbol(x) as IFieldSymbol))
+                       .Select(x => Diagnostic.Create(Rule, x.Identifier.GetLocation(), x.Identifier.ValueText));
+
         private static bool FieldIsRelevant(IFieldSymbol fieldSymbol) =>
-            fieldSymbol is { IsStatic: true, IsConst: false, IsReadOnly: false }
-            && fieldSymbol.DeclaredAccessibility != Accessibility.Private;
+            fieldSymbol is {IsStatic: true, IsConst: false, IsReadOnly: false}
+            && fieldSymbol.DeclaredAccessibility != Accessibility.Private
+            && !fieldSymbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.System_ThreadStaticAttribute));
     }
 }

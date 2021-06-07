@@ -9,7 +9,7 @@ public record StaticFieldVisible
     public static Shape Empty = Shape.Empty; // Noncompliant {{Change the visibility of 'Empty' or make it 'const' or 'readonly'.}}
 
     [ThreadStatic]
-    public static int value; // Noncompliant, FP - thread static field values are not shared between threads. See https://github.com/SonarSource/sonar-dotnet/issues/4407
+    public static int value; // Compliant, thread static field values are not shared between threads
 }
 
 public record Shape

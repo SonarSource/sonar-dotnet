@@ -41,19 +41,6 @@
 },
 {
 "id":  "S2223",
-"message":  "Change the visibility of 'CurrentWorker' or make it 'const' or 'readonly'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
-"region":  {
-"startLine":  292,
-"startColumn":  36,
-"endLine":  292,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S2223",
 "message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
