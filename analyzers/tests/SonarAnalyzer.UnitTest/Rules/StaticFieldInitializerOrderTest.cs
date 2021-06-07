@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\StaticFieldInitializerOrder.cs",
                     @"TestCases\StaticFieldInitializerOrder_PartialClass.cs"
                 },
-                new CS.StaticFieldInitializerOrder(),
+                new StaticFieldInitializerOrder(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldInitializerOrder_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldInitializerOrder.CSharp9.cs", new CS.StaticFieldInitializerOrder());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldInitializerOrder.CSharp9.cs", new StaticFieldInitializerOrder());
 #endif
     }
 }

@@ -20,9 +20,9 @@
 
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TypesShouldNotExtendOutdatedBaseTypes() =>
             Verifier.VerifyAnalyzer(@"TestCases\TypesShouldNotExtendOutdatedBaseTypes.cs",
-                                    new CS.TypesShouldNotExtendOutdatedBaseTypes(),
+                                    new TypesShouldNotExtendOutdatedBaseTypes(),
                                     MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemCollections));
     }
 }

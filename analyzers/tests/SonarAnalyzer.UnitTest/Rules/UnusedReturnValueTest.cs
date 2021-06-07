@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,21 +31,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UnusedReturnValue() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedReturnValue.cs",
-                                    new CS.UnusedReturnValue(),
+                                    new UnusedReturnValue(),
                                     ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedReturnValueWithPartialClasses() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\UnusedReturnValue.part1.cs", @"TestCases\UnusedReturnValue.part2.cs", @"TestCases\UnusedReturnValue.External.cs" },
-                                    new CS.UnusedReturnValue(),
+                                    new UnusedReturnValue(),
                                     ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedReturnValue_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedReturnValue.CSharp9.cs", new CS.UnusedReturnValue());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedReturnValue.CSharp9.cs", new UnusedReturnValue());
 #endif
     }
 }

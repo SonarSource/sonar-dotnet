@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -83,7 +83,7 @@ public class InterfaceImpl : IInterface
 {
     int IInterface.InterfaceProperty { get { return 0; } set { } }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -140,6 +140,6 @@ public class PropertyUsages
         this[""5""] = 10;
     }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
     }
 }

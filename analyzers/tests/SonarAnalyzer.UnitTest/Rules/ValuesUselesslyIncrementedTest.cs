@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ValuesUselesslyIncremented() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ValuesUselesslyIncremented.cs", new CS.ValuesUselesslyIncremented());
+            Verifier.VerifyAnalyzer(@"TestCases\ValuesUselesslyIncremented.cs", new ValuesUselesslyIncremented());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ValuesUselesslyIncremented_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ValuesUselesslyIncremented.CSharp9.cs", new CS.ValuesUselesslyIncremented());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ValuesUselesslyIncremented.CSharp9.cs", new ValuesUselesslyIncremented());
 #endif
     }
 }

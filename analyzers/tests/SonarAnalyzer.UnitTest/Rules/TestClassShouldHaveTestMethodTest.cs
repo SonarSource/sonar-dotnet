@@ -22,9 +22,9 @@
 using System.Linq;
 #endif
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.NUnit.cs",
-                                    new CS.TestClassShouldHaveTestMethod(),
+                                    new TestClassShouldHaveTestMethod(),
                                     NuGetMetadataReference.NUnit(testFwkVersion));
 
         [DataTestMethod]
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
-                                    new CS.TestClassShouldHaveTestMethod(),
+                                    new TestClassShouldHaveTestMethod(),
                                     NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
 #if NET
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestClassShouldHaveTestMethod.CSharp9.cs",
-                            new CS.TestClassShouldHaveTestMethod(),
+                            new TestClassShouldHaveTestMethod(),
                             NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)
                                 .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)));
 #endif

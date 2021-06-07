@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -65,7 +65,7 @@ public class NonPrivateMembers
         public InnerPublicClass(char c) { var x = 5; }
     }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -96,7 +96,7 @@ public abstract class PrivateConstructors
         static Constructor4() { var x = 5; }
     }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -125,7 +125,7 @@ public class Inheritance
         public DerivedClass2() { }
     }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -135,7 +135,7 @@ public class PrivateConstructors
 {
     private PrivateConstructors(int i) { } // Compliant, empty ctors are reported from another rule
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -148,6 +148,6 @@ public interface IInterface
     // UnusedPrivateMember rule does not trigger AD0001 error from NullReferenceException
     IInterface() {} // Error [CS0526]
 }
-", new CS.UnusedPrivateMember(), CompilationErrorBehavior.Ignore);
+", new UnusedPrivateMember(), CompilationErrorBehavior.Ignore);
     }
 }

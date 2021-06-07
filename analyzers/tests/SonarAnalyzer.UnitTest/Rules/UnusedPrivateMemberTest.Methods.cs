@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -82,7 +82,7 @@ public class InterfaceImpl : IInterface
 {
     int IInterface.InterfaceMethod() => 0;
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -133,7 +133,7 @@ public class MethodUsages
         new[] { 1, 2, 3 }.Select(Method12);
     }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -165,6 +165,6 @@ public class NewClass5
 {
     static async Task<string> Main(string[] args) { return ""a""; } // Noncompliant
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
     }
 }

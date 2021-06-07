@@ -22,9 +22,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,23 +35,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace() =>
             Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace.cs",
-                new CS.SqlKeywordsDelimitedBySpace(),
-                ParseOptionsHelper.FromCSharp8,
-                GetAdditionalReferences());
+                                    new SqlKeywordsDelimitedBySpace(),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
             Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
-                new CS.SqlKeywordsDelimitedBySpace(),
-                GetAdditionalReferences());
+                                    new SqlKeywordsDelimitedBySpace(),
+                                    GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_DefaultNamespace() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\SqlKeywordsDelimitedBySpace_DefaultNamespace.cs",
-                new CS.SqlKeywordsDelimitedBySpace(),
-                GetAdditionalReferences());
+                                                 new SqlKeywordsDelimitedBySpace(),
+                                                 GetAdditionalReferences());
 
         [DataRow("System.Data")]
         [DataRow("System.Data.SqlClient")]
@@ -90,7 +90,7 @@ namespace TestNamespace
     }}
 }}
 ",
-                new CS.SqlKeywordsDelimitedBySpace(), references.ToArray());
+                new SqlKeywordsDelimitedBySpace(), references.ToArray());
         }
 
         [DataRow("System.Data.SqlClient")]
@@ -119,7 +119,7 @@ namespace TestNamespace
     }}
 }}
 ",
-                new CS.SqlKeywordsDelimitedBySpace(), references.ToArray());
+                new SqlKeywordsDelimitedBySpace(), references.ToArray());
         }
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

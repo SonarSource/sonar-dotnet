@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
-using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SimpleDoLoop() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SimpleDoLoop.vb", new VB.SimpleDoLoop());
+            Verifier.VerifyAnalyzer(@"TestCases\SimpleDoLoop.vb", new SimpleDoLoop());
     }
 }

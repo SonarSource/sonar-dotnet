@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SetLocaleForDataTypes() =>
             Verifier.VerifyAnalyzer(@"TestCases\SetLocaleForDataTypes.cs",
-                                    new CS.SetLocaleForDataTypes(),
+                                    new SetLocaleForDataTypes(),
                                     MetadataReferenceFacade.SystemData);
 
 #if NET
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SetLocaleForDataTypes_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SetLocaleForDataTypes.CSharp9.cs",
-                                    new CS.SetLocaleForDataTypes(),
+                                    new SetLocaleForDataTypes(),
                                     MetadataReferenceFacade.SystemData);
 #endif
     }

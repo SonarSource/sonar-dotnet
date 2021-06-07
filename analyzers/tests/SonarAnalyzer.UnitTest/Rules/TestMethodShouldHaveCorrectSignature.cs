@@ -22,9 +22,9 @@
 using System.Linq;
 #endif
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.MsTest.cs",
-                                    new CS.TestMethodShouldHaveCorrectSignature(),
+                                    new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [DataTestMethod]
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.NUnit.cs",
-                                    new CS.TestMethodShouldHaveCorrectSignature(),
+                                    new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.NUnit(testFwkVersion));
 
         [DataTestMethod]
@@ -55,14 +55,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_Xunit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.cs",
-                                    new CS.TestMethodShouldHaveCorrectSignature(),
+                                    new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.XunitFramework(testFwkVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_Xunit_Legacy() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.Legacy.cs",
-                                    new CS.TestMethodShouldHaveCorrectSignature(),
+                                    new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.XunitFrameworkV1);
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             // We have to specify a test framework for the tests, but it doesn't really matter which
             // one, so we're using MSTest and only testing a single version.
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Misc.cs",
-                                    new CS.TestMethodShouldHaveCorrectSignature(),
+                                    new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.MSTestTestFrameworkV1);
 
 #if NET
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldHaveCorrectSignature.CSharp9.cs",
-                                                new CS.TestMethodShouldHaveCorrectSignature(),
+                                                new TestMethodShouldHaveCorrectSignature(),
                                                 NuGetMetadataReference.MSTestTestFrameworkV1
                                                     .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
                                                     .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))

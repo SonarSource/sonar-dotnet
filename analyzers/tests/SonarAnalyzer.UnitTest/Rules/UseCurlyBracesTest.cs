@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,14 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseCurlyBraces() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.cs",
-                new CS.UseCurlyBraces());
+            Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.cs", new UseCurlyBraces());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UseCurlyBraces_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.CSharp7.cs",
-                new CS.UseCurlyBraces(),
+                new UseCurlyBraces(),
                 ParseOptionsHelper.FromCSharp7);
     }
 }

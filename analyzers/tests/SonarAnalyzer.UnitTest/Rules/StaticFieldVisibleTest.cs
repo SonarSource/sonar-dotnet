@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldVisible() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldVisible.cs", new CS.StaticFieldVisible());
+            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldVisible.cs", new StaticFieldVisible());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldVisible_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldVisible.CSharp9.cs", new CS.StaticFieldVisible());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldVisible.CSharp9.cs", new StaticFieldVisible());
 #endif
     }
 }

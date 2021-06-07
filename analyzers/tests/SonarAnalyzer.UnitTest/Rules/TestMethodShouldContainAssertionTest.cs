@@ -22,9 +22,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\TestMethodShouldContainAssertion.MsTest.cs", @"TestCases\TestMethodShouldContainAssertion.MsTest.AnotherFile.cs" },
-                new CS.TestMethodShouldContainAssertion(),
+                new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion)));
 
         [DataTestMethod]
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.NUnit.cs",
-                new CS.TestMethodShouldContainAssertion(),
+                new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion, nSubstituteVersion));
 
         [DataTestMethod]
@@ -114,7 +114,7 @@ public class Foo
         var x = System.IO.File.Open("""", System.IO.FileMode.Open);
     }
 }",
-                new CS.TestMethodShouldContainAssertion(),
+                new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.NUnit(testFwkVersion)));
 
         [DataTestMethod]
@@ -123,14 +123,14 @@ public class Foo
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.cs",
-                new CS.TestMethodShouldContainAssertion(),
+                new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.XunitFramework(testFwkVersion), fluentVersion, nSubstituteVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_Xunit_Legacy() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.Legacy.cs",
-                new CS.TestMethodShouldContainAssertion(),
+                new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.XunitFrameworkV1));
 
         [DataTestMethod]
@@ -166,14 +166,14 @@ public class Foo
         act.ShouldNotThrow<Exception>();
     }
 }",
-                new CS.TestMethodShouldContainAssertion(),
+                new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Custom.cs",
-                new CS.TestMethodShouldContainAssertion(),
+                new TestMethodShouldContainAssertion(),
                 NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion));
 
 #if NET
@@ -181,7 +181,7 @@ public class Foo
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldContainAssertion.CSharp9.cs",
-                                                new CS.TestMethodShouldContainAssertion(),
+                                                new TestMethodShouldContainAssertion(),
                                                 NuGetMetadataReference.MSTestTestFrameworkV1
                                                     .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
                                                     .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
