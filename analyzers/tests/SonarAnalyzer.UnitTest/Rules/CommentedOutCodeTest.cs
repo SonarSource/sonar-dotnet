@@ -20,8 +20,8 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,12 +31,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CommentedOutCode() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CS.CommentedOutCode());
+            Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CommentedOutCode_NoDocumentation() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CS.CommentedOutCode(),
+            Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode(),
                 new[] { new CSharpParseOptions(documentationMode: Microsoft.CodeAnalysis.DocumentationMode.None) });
     }
 }

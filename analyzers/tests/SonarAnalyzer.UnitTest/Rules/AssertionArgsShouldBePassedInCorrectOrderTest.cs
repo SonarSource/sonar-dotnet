@@ -22,7 +22,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,8 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs",
-                new CS.AssertionArgsShouldBePassedInCorrectOrder(),
-                NuGetMetadataReference.MSTestTestFramework(testFwkVersion).ToArray());
+                                    new AssertionArgsShouldBePassedInCorrectOrder(),
+                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion).ToArray());
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
@@ -44,8 +44,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs",
-                new CS.AssertionArgsShouldBePassedInCorrectOrder(),
-                NuGetMetadataReference.NUnit(testFwkVersion).ToArray());
+                                    new AssertionArgsShouldBePassedInCorrectOrder(),
+                                    NuGetMetadataReference.NUnit(testFwkVersion).ToArray());
 
         [DataTestMethod]
         [DataRow("2.0.0")]
@@ -53,9 +53,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs",
-                new CS.AssertionArgsShouldBePassedInCorrectOrder(),
-                NuGetMetadataReference.XunitFramework(testFwkVersion)
-                    .Concat(NetStandardMetadataReference.Netstandard)
-                    .ToArray());
+                                    new AssertionArgsShouldBePassedInCorrectOrder(),
+                                    NuGetMetadataReference.XunitFramework(testFwkVersion)
+                                        .Concat(NetStandardMetadataReference.Netstandard)
+                                        .ToArray());
     }
 }

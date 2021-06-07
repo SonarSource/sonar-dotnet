@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,16 +32,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CollectionPropertiesShouldBeReadOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
-                new CS.CollectionPropertiesShouldBeReadOnly(),
-                MetadataReferenceFacade.SystemRuntimeSerialization);
+                                    new CollectionPropertiesShouldBeReadOnly(),
+                                    MetadataReferenceFacade.SystemRuntimeSerialization);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CollectionPropertiesShouldBeReadOnly_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CollectionPropertiesShouldBeReadOnly.CSharp9.cs",
-                new CS.CollectionPropertiesShouldBeReadOnly(),
-                MetadataReferenceFacade.SystemRuntimeSerialization);
+                                                      new CollectionPropertiesShouldBeReadOnly(),
+                                                      MetadataReferenceFacade.SystemRuntimeSerialization);
 #endif
     }
 }

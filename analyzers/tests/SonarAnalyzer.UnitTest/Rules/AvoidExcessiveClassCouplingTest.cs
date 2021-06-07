@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs", new CS.AvoidExcessiveClassCoupling { Threshold = 1 });
+            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -43,7 +43,7 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
     public void Foo<T, V>(IDictionary<T, V> dictionary) { } // +1 for dictionary
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -60,7 +60,7 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
     }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -75,7 +75,7 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
     }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -91,7 +91,7 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
     }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -103,7 +103,7 @@ public class Tasks // Compliant, Task types are not counted
     public void Foo<T>(Task task1, Task<T> task2) { }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -115,7 +115,7 @@ public class Actions // Compliant, Action types are not counted
     public void Foo<T>(Action action1, Action<T> action2, Action<T, T> action3, Action<T, T, T> action4, Action<T, T, T, T> action5) { }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -127,7 +127,7 @@ public class Functions // Compliant, Func types are not counted
     public void Foo<T>(Func<T> func1, Func<T, T> func2, Func<T, T, T> func3, Func<T, T, T, T> func4) { }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -139,7 +139,7 @@ public class Pointers // Compliant, pointers are not counted
     public void Foo(int* pointer) { } // Error [CS0214]
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -151,7 +151,7 @@ public class Pointers // Compliant, enums are not counted
     public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -164,7 +164,7 @@ public class Lazyness // Noncompliant {{Split this class into smaller and more s
     public void Foo(Lazy<IEnumerable<int>> lazy) { } // +1 IEnumerable
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -182,7 +182,7 @@ public class Fields // Noncompliant {{Split this class into smaller and more spe
     public static IEqualityComparer<int> c5;
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -215,7 +215,7 @@ public class Properties // Noncompliant {{Split this class into smaller and more
     public object C7 => new Dictionary<int, int>();
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -233,7 +233,7 @@ public class Indexers // Noncompliant {{Split this class into smaller and more s
     public int this[IEqualityComparer<int> i, Stack<int> j] { get { return 0; } } // +1 IEqualityComparer, +1 Stack
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -264,7 +264,7 @@ public class Events // Noncompliant {{Split this class into smaller and more spe
     }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -295,7 +295,7 @@ public class Methods // Noncompliant {{Split this class into smaller and more sp
     private void M10() => Debug.Write(1); // +1 Debug
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -322,7 +322,7 @@ public struct OuterStruct // Noncompliant {{Split this struct into smaller and m
     }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -336,7 +336,7 @@ public interface I // Noncompliant {{Split this interface into smaller and more 
     // interfaces cannot contain other types
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -349,7 +349,7 @@ public class Self // Compliant, self references are not counted
     void M1(Self other) { }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -364,7 +364,7 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
     public object Clone() { return null; }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -381,7 +381,7 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
     }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -397,7 +397,7 @@ public class Self // Compliant, attributes are not counted
     }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -412,13 +412,13 @@ public class A // Compliant, types referenced by the nameof expression are not c
     }
 }
 ",
-                new CS.AvoidExcessiveClassCoupling { Threshold = 0 });
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveClassCoupling.CSharp9.cs", new CS.AvoidExcessiveClassCoupling { Threshold = 1 });
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveClassCoupling.CSharp9.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -429,7 +429,7 @@ public record Pointers // Compliant, enums are not counted
 {
     public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
 }
-", new CS.AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
+", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -445,7 +445,7 @@ public record Self // Noncompliant
     {
     }
 }
-", new CS.AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
+", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -462,7 +462,7 @@ public class Types // Compliant, pointers are not counted
         double d2, string s1,
         object o1) { }
 }
-", new CS.AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
+", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
 #endif
     }
 }
