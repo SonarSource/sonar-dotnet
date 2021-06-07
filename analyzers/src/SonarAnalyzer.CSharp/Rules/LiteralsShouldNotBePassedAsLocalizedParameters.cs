@@ -111,20 +111,20 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsLocalizable(ISymbol symbol) =>
             symbol?.Name != null
             && symbol.GetAttributes(KnownType.System_ComponentModel_LocalizableAttribute) is var localizableAttributes
-            && IsLocalizable(symbol.Name, new List<AttributeData>(localizableAttributes).AsReadOnly());
+            && IsLocalizable(symbol.Name, new List<AttributeData>(localizableAttributes));
 
         private static bool IsLocalizable(string symbolName, IReadOnlyCollection<AttributeData> localizableAttributes) =>
-            localizableAttributes.Any(x => HasConstructorWithBoolValue(x, true))
+            localizableAttributes.Any(x => HasConstructorWitValue(x, true))
             || (symbolName.SplitCamelCaseToWords().Any(LocalizableSymbolNames.Contains)
-               && (!localizableAttributes.Any(x => HasConstructorWithBoolValue(x, false))));
+               && (!localizableAttributes.Any(x => HasConstructorWitValue(x, false))));
 
-        private static bool IsLocalizableStringLiteral(IParameterSymbol parameter, ArgumentSyntax argumentSyntax, SemanticModel semanticModel) =>
-            parameter != null
+        private static bool IsLocalizableStringLiteral(ISymbol symbol, ArgumentSyntax argumentSyntax, SemanticModel semanticModel) =>
+            symbol != null
             && argumentSyntax != null
-            && IsLocalizable(parameter)
+            && IsLocalizable(symbol)
             && IsStringLiteral(argumentSyntax.Expression, semanticModel);
 
-        private static bool HasConstructorWithBoolValue(AttributeData attribute, bool expectedValue) =>
+        private static bool HasConstructorWitValue(AttributeData attribute, bool expectedValue) =>
             attribute.ConstructorArguments.Any(c => c.Value is bool boolValue && boolValue == expectedValue);
     }
 }
