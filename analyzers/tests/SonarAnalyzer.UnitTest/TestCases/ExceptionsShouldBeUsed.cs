@@ -27,6 +27,7 @@ namespace Tests.Diagnostics
             if (new Exception() != null) { }
             return new Exception();
             throw new Exception();
+            new ExceptionsShouldBeUsed(); // for coverage
         }
 
         void Foo(Exception ex) { }
