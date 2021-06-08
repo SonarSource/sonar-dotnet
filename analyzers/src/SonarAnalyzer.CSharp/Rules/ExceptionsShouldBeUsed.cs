@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ExceptionsShouldBeUsed : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3984";
+        private const string DiagnosticId = "S3984";
         private const string MessageFormat = "Throw this exception or remove this useless statement.";
 
         private static readonly DiagnosticDescriptor Rule =
