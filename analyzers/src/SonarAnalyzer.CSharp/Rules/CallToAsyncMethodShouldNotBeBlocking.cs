@@ -160,11 +160,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsAwaitForMultipleTasksExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Lazy<ISymbol> accessedSymbol) =>
             IsNamedSymbolOfExpectedType((MemberAccessExpressionSyntax)invocation.Expression, semanticModel, WaitForMultipleTasksExecutionCalls)
-            && invocation.ArgumentList.Arguments.Any(x => accessedSymbol.Value.Equals(semanticModel.GetSymbolInfo(x.Expression).Symbol));
+            && invocation.ArgumentList.Arguments.Any(x => Equals(accessedSymbol.Value, semanticModel.GetSymbolInfo(x.Expression).Symbol));
 
         private static bool IsAwaitForSingleTaskExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Lazy<ISymbol> accessedSymbol) =>
             IsNamedSymbolOfExpectedType((MemberAccessExpressionSyntax)invocation.Expression, semanticModel, WaitForSingleExecutionCalls)
-            && accessedSymbol.Value.Equals(semanticModel.GetSymbolInfo(((MemberAccessExpressionSyntax)invocation.Expression).Expression).Symbol);
+            && Equals(accessedSymbol.Value, semanticModel.GetSymbolInfo(((MemberAccessExpressionSyntax)invocation.Expression).Expression).Symbol);
 
         private static bool IsResultInContinueWithCall(string memberAccessName, MemberAccessExpressionSyntax memberAccess) =>
             memberAccessName == ResultName &&
