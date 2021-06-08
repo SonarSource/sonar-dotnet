@@ -312,8 +312,9 @@ namespace Tests.Diagnostics
         public void TaskIsNull()
         {
             Task<long>[] arr;
-            var x = arr[0].Result;  // Error [CS0165]
-                                    // Noncompliant@-1
+            Task.WaitAll(arr[0]);   // Error [CS0165]
+                                    // Noncompliant@-1 FP
+            var x = arr[0].Result;
         }
 
         public class TaskLike
