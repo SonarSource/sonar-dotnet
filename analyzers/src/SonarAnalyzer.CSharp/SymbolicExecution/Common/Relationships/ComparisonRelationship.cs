@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SonarAnalyzer.SymbolicExecution.SymbolicValues;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.Relationships
 {
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
         {
             ComparisonKind = comparisonKind;
 
-            this.hash = new Lazy<int>(() =>
+            hash = new Lazy<int>(() =>
             {
                 var h = 19;
                 h = h * 31 + ComparisonKind.GetHashCode();
@@ -47,9 +47,9 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 
         public override BinaryRelationship Negate()
         {
-            var otherComparisonKind = ComparisonKind == ComparisonKind.Less
-                ? ComparisonKind.LessOrEqual
-                : ComparisonKind.Less;
+            var otherComparisonKind = ComparisonKind == ComparisonKind.LessThan
+                ? ComparisonKind.LessThanOrEqual
+                : ComparisonKind.LessThan;
 
             return new ComparisonRelationship(otherComparisonKind, RightOperand, LeftOperand);
         }
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             // a < b and a <= b contradicts b < a
             var isLessOpContradicting = relationships
                 .OfType<ComparisonRelationship>()
-                .Where(c => c.ComparisonKind == ComparisonKind.Less)
+                .Where(c => c.ComparisonKind == ComparisonKind.LessThan)
                 .Any(rel => AreOperandsSwapped(rel));
 
             if (isLessOpContradicting)
@@ -67,12 +67,12 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
                 return true;
             }
 
-            if (ComparisonKind == ComparisonKind.Less)
+            if (ComparisonKind == ComparisonKind.LessThan)
             {
                 // a < b contradicts b <= a
                 var isLessEqualOpContradicting = relationships
                     .OfType<ComparisonRelationship>()
-                    .Where(c => c.ComparisonKind == ComparisonKind.LessOrEqual)
+                    .Where(c => c.ComparisonKind == ComparisonKind.LessThanOrEqual)
                     .Any(rel => AreOperandsSwapped(rel));
 
                 if (isLessEqualOpContradicting)
@@ -91,12 +91,12 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
                 }
             }
 
-            if (ComparisonKind == ComparisonKind.LessOrEqual)
+            if (ComparisonKind == ComparisonKind.LessThanOrEqual)
             {
                 // a <= b contradicts a >= b && a != b
                 var isLessEqualOp = relationships
                     .OfType<ComparisonRelationship>()
-                    .Where(c => c.ComparisonKind == ComparisonKind.LessOrEqual)
+                    .Where(c => c.ComparisonKind == ComparisonKind.LessThanOrEqual)
                     .Any(rel => AreOperandsSwapped(rel));
 
                 var isNotEqualOpContradicting = relationships
@@ -138,9 +138,9 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 
         private ComparisonRelationship GetTransitiveRelationship(ComparisonRelationship other)
         {
-            var comparisonKind = ComparisonKind == ComparisonKind.LessOrEqual && other.ComparisonKind == ComparisonKind.LessOrEqual
-                    ? ComparisonKind.LessOrEqual
-                    : ComparisonKind.Less;
+            var comparisonKind = ComparisonKind == ComparisonKind.LessThanOrEqual && other.ComparisonKind == ComparisonKind.LessThanOrEqual
+                    ? ComparisonKind.LessThanOrEqual
+                    : ComparisonKind.LessThan;
 
             if (RightOperand.Equals(other.LeftOperand))
             {
@@ -186,12 +186,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
         }
 
         public override string ToString()
-        {
-            var op = ComparisonKind == ComparisonKind.Less
-                ? "<"
-                : "<=";
-            return $"{op}({LeftOperand}, {RightOperand})";
-        }
+            => $"{ComparisonKind.CSharp()}({LeftOperand}, {RightOperand})";
 
         public override bool Equals(object obj)
         {

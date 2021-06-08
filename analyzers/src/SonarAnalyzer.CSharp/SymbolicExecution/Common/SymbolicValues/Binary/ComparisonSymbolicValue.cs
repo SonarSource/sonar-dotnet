@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Relationships;
 
@@ -62,12 +63,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 : relationship.Negate();
         }
 
-        public override string ToString()
-        {
-            var op = this.comparisonKind == ComparisonKind.Less
-                ? "<"
-                : "<=";
-            return $"{op}({LeftOperand}, {RightOperand})";
-        }
+        public override string ToString() =>
+            $"{comparisonKind.CSharp()}({LeftOperand}, {RightOperand})";
     }
 }

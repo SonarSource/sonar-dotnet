@@ -170,12 +170,12 @@ namespace SonarAnalyzer.SymbolicExecution
         private static void RemoveRedundantLessEquals(HashSet<BinaryRelationship> relationships)
         {
             // a <= b && a < b  ->  a < b
-            var leComparisions = GetComparisions(relationships, ComparisonKind.LessOrEqual);
-            var lComparisions = GetComparisions(relationships, ComparisonKind.Less);
+            var leComparisions = GetComparisions(relationships, ComparisonKind.LessThanOrEqual);
+            var lComparisions = GetComparisions(relationships, ComparisonKind.LessThan);
             relationships.ExceptWith(leComparisions.Where(le => lComparisions.Any(l => le.AreOperandsMatching(l))));
 
             // a <= b && a == b  ->  a == b
-            leComparisions = GetComparisions(relationships, ComparisonKind.LessOrEqual);
+            leComparisions = GetComparisions(relationships, ComparisonKind.LessThanOrEqual);
             var equals = relationships.OfType<EqualsRelationship>();
             relationships.ExceptWith(leComparisions.Where(le => equals.Any(e => le.AreOperandsMatching(e))));
         }
@@ -184,7 +184,7 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             // a <= b && a != b  ->  a < b
 
-            var leComparisions = GetComparisions(relationships, ComparisonKind.LessOrEqual);
+            var leComparisions = GetComparisions(relationships, ComparisonKind.LessThanOrEqual);
             var notEquals = relationships.OfType<ValueNotEqualsRelationship>();
 
             var toChange = new List<ComparisonRelationship>();
@@ -202,7 +202,7 @@ namespace SonarAnalyzer.SymbolicExecution
             foreach (var item in toChange)
             {
                 relationships.Remove(item);
-                relationships.Add(new ComparisonRelationship(ComparisonKind.Less, item.LeftOperand, item.RightOperand));
+                relationships.Add(new ComparisonRelationship(ComparisonKind.LessThan, item.LeftOperand, item.RightOperand));
             }
         }
 
@@ -210,7 +210,7 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             // a <= b && b <= a  ->  a == b
 
-            var leComparisions = GetComparisions(relationships, ComparisonKind.LessOrEqual);
+            var leComparisions = GetComparisions(relationships, ComparisonKind.LessThanOrEqual);
 
             var toChange = new List<ComparisonRelationship>();
             for (var i = 0; i < leComparisions.Count; i++)

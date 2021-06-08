@@ -238,19 +238,19 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKind.LessThanExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.Less, l, r));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessThan, l, r));
                     break;
 
                 case SyntaxKind.LessThanOrEqualExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessOrEqual, l, r));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessThanOrEqual, l, r));
                     break;
 
                 case SyntaxKind.GreaterThanExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.Less, r, l));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessThan, r, l));
                     break;
 
                 case SyntaxKind.GreaterThanOrEqualExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessOrEqual, r, l));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessThanOrEqual, r, l));
                     break;
 
                 case SyntaxKind.SubtractExpression:

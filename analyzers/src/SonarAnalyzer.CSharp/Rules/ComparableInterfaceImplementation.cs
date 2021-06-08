@@ -60,17 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
             "op_Equality",
             "op_Inequality"
         };
-
-        private static readonly IDictionary<string, string> OperatorNamesMap = new Dictionary<string, string>
-        {
-            { "op_LessThan", "<" },
-            { "op_GreaterThan", ">" },
-            { "op_LessThanOrEqual", "<=" },
-            { "op_GreaterThanOrEqual", ">=" },
-            { "op_Equality", "==" },
-            { "op_Inequality" , "!=" },
-        };
-
+                
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -147,7 +137,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var op in RequiredOperators.Except(overridenOperators))
             {
-                yield return OperatorNamesMap[op];
+                yield return ComparisonKinds.OperatorName(op).CSharp();
             }
         }
     }
