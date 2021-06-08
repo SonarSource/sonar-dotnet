@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassShouldNotBeAbstract() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassShouldNotBeAbstract.cs", new CS.ClassShouldNotBeAbstract());
+            Verifier.VerifyAnalyzer(@"TestCases\ClassShouldNotBeAbstract.cs", new ClassShouldNotBeAbstract());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassShouldNotBeAbstract_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ClassShouldNotBeAbstract.CSharp9.cs", new CS.ClassShouldNotBeAbstract());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ClassShouldNotBeAbstract.CSharp9.cs", new ClassShouldNotBeAbstract());
 #endif
     }
 }

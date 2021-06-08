@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -57,7 +57,7 @@ public class NonPrivateTypes
     protected internal struct ProtectedInternalStruct { }
     public struct PublicStruct { }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -69,7 +69,7 @@ public class PrivateTypes
     private class PrivateClass { } // Noncompliant
     internal class InternalClass { } // Compliant, internal types are not reported when InternalsVisibleTo is present
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -92,7 +92,7 @@ public class Sample
     {
         public const int X = 5;
     }
-}", new CS.UnusedPrivateMember());
+}", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -122,7 +122,7 @@ public class PrivateTypes
         o.OfType<PrivateClass4>();
     }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -156,6 +156,6 @@ public class PrivateTypes
 
     public static int PerformCalculation(int x, int y) => x + y;
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
     }
 }

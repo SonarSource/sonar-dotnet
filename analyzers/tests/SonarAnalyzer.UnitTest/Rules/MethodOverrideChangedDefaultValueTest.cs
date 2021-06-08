@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MethodOverrideChangedDefaultValue() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
-                new CS.MethodOverrideChangedDefaultValue(),
+                new MethodOverrideChangedDefaultValue(),
 #if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,
                 NuGetMetadataReference.NETStandardV2_1_0);
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideChangedDefaultValue_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new CS.MethodOverrideChangedDefaultValue());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new MethodOverrideChangedDefaultValue());
 #endif
 
         [TestMethod]
@@ -54,8 +54,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\MethodOverrideChangedDefaultValue.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.Batch.cs",
-                new CS.MethodOverrideChangedDefaultValue(),
-                new CS.MethodOverrideChangedDefaultValueCodeFixProvider(),
+                new MethodOverrideChangedDefaultValue(),
+                new MethodOverrideChangedDefaultValueCodeFixProvider(),
                 ParseOptionsHelper.FromCSharp8,
                 NuGetMetadataReference.NETStandardV2_1_0);
     }

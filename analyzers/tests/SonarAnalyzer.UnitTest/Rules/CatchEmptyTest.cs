@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CatchEmpty() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CatchEmpty.cs", new CS.CatchEmpty());
+            Verifier.VerifyAnalyzer(@"TestCases\CatchEmpty.cs", new CatchEmpty());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CatchEmpty_InTest() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\CatchEmpty.cs", new CS.CatchEmpty());
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\CatchEmpty.cs", new CatchEmpty());
     }
 }

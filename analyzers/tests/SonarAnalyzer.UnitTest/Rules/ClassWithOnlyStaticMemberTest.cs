@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassWithOnlyStaticMember() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassWithOnlyStaticMember.cs", new CS.ClassWithOnlyStaticMember());
+            Verifier.VerifyAnalyzer(@"TestCases\ClassWithOnlyStaticMember.cs", new ClassWithOnlyStaticMember());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassWithOnlyStaticMember_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassWithOnlyStaticMember.CSharp9.cs", new CS.ClassWithOnlyStaticMember());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassWithOnlyStaticMember.CSharp9.cs", new ClassWithOnlyStaticMember());
 #endif
     }
 }

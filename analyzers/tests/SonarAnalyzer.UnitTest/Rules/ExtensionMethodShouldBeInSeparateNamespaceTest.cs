@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,15 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExtensionMethodShouldBeInSeparateNamespace() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.cs",
-                new CS.ExtensionMethodShouldBeInSeparateNamespace());
+            Verifier.VerifyAnalyzer(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.cs", new ExtensionMethodShouldBeInSeparateNamespace());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ExtensionMethodShouldBeInSeparateNamespace_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp9.cs",
-                new CS.ExtensionMethodShouldBeInSeparateNamespace());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp9.cs", new ExtensionMethodShouldBeInSeparateNamespace());
 #endif
     }
 }

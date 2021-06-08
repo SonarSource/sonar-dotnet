@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NativeMethodsShouldBeWrapped() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs", new CS.NativeMethodsShouldBeWrapped(), CompilationErrorBehavior.Ignore);
+            Verifier.VerifyAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs", new NativeMethodsShouldBeWrapped(), CompilationErrorBehavior.Ignore);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void NativeMethodsShouldBeWrapped_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NativeMethodsShouldBeWrapped.CSharp9.cs", new CS.NativeMethodsShouldBeWrapped());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NativeMethodsShouldBeWrapped.CSharp9.cs", new NativeMethodsShouldBeWrapped());
 #endif
 
         [TestMethod]
@@ -59,6 +59,6 @@ public class InvalidSyntax
     {
         Extern3(x);
     }
-}", new CS.NativeMethodsShouldBeWrapped(), CompilationErrorBehavior.Ignore);
+}", new NativeMethodsShouldBeWrapped(), CompilationErrorBehavior.Ignore);
     }
 }

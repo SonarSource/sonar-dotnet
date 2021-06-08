@@ -26,9 +26,9 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Nancy.cs",
-                                    new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                                    new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferences);
 
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
-                                    new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                                    new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemWeb);
 
         [DataTestMethod]
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var webConfigPath = Path.Combine(root, WebConfig);
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_WithWebConfig.cs",
-                                    new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                                    new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemWeb,
                                     TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var webConfigPath = Path.Combine(root, WebConfig);
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
-                                    new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                                    new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemWeb,
                                     TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_NetCore.cs",
-                                    new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                                    new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences_NetCore());
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\CookieShouldBeHttpOnly.CSharp9.cs",
-                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()));
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchCaseFallsThroughToDefault() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchCaseFallsThroughToDefault.cs", new CS.SwitchCaseFallsThroughToDefault());
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchCaseFallsThroughToDefault.cs", new SwitchCaseFallsThroughToDefault());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchCaseFallsThroughToDefault_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SwitchCaseFallsThroughToDefault.CSharp9.cs", new CS.SwitchCaseFallsThroughToDefault());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SwitchCaseFallsThroughToDefault.CSharp9.cs", new SwitchCaseFallsThroughToDefault());
 #endif
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SwitchCaseFallsThroughToDefault_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\SwitchCaseFallsThroughToDefault.cs",
                                    @"TestCases\SwitchCaseFallsThroughToDefault.Fixed.cs",
-                                   new CS.SwitchCaseFallsThroughToDefault(),
-                                   new CS.SwitchCaseFallsThroughToDefaultCodeFixProvider());
+                                   new SwitchCaseFallsThroughToDefault(),
+                                   new SwitchCaseFallsThroughToDefaultCodeFixProvider());
     }
 }

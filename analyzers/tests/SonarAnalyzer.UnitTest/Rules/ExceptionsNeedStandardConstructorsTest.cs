@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,8 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExceptionsNeedStandardConstructors() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExceptionsNeedStandardConstructors.cs",
-                new CS.ExceptionsNeedStandardConstructors());
+            Verifier.VerifyAnalyzer(@"TestCases\ExceptionsNeedStandardConstructors.cs", new ExceptionsNeedStandardConstructors());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -46,6 +45,6 @@ public class  : Exception
     My_07_Exception(string message, Exception innerException) {}
 
     My_07_Exception(SerializationInfo info, StreamingContext context) {}
-}", new CS.ExceptionsNeedStandardConstructors(), CompilationErrorBehavior.Ignore);
+}", new ExceptionsNeedStandardConstructors(), CompilationErrorBehavior.Ignore);
     }
 }

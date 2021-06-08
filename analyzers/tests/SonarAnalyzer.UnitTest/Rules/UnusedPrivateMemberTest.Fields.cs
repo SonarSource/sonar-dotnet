@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -72,7 +72,7 @@ public class NonPrivateMembers
         public static int publicStaticField;
     }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -89,7 +89,7 @@ public class PrivateMembers
 
     public int Method1() => b;
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -134,6 +134,6 @@ public class FieldUsages
         return null;
     }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
     }
 }

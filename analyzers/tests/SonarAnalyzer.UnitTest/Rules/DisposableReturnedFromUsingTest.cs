@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableReturnedFromUsing() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisposableReturnedFromUsing.cs", new CS.DisposableReturnedFromUsing(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\DisposableReturnedFromUsing.cs", new DisposableReturnedFromUsing(), ParseOptionsHelper.FromCSharp8);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableReturnedFromUsing_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableReturnedFromUsing.CSharp9.cs", new CS.DisposableReturnedFromUsing());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableReturnedFromUsing.CSharp9.cs", new DisposableReturnedFromUsing());
 #endif
     }
 }

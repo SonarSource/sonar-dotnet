@@ -20,7 +20,7 @@
 
 using System.Collections.Immutable;
 
-namespace SonarAnalyzer.Rules.Hotspots
+namespace SonarAnalyzer.Rules
 {
     public static class LooseFilePermissionsConfig
     {

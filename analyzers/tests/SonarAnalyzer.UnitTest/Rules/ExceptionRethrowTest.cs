@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExceptionRethrow() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExceptionRethrow.cs", new CS.ExceptionRethrow());
+            Verifier.VerifyAnalyzer(@"TestCases\ExceptionRethrow.cs", new ExceptionRethrow());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\ExceptionRethrow.cs",
                 @"TestCases\ExceptionRethrow.Fixed.cs",
-                new CS.ExceptionRethrow(),
-                new CS.ExceptionRethrowCodeFixProvider());
+                new ExceptionRethrow(),
+                new ExceptionRethrowCodeFixProvider());
     }
 }

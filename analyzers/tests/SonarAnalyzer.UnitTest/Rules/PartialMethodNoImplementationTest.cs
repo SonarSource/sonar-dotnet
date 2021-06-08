@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PartialMethodNoImplementation() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PartialMethodNoImplementation.cs", new CS.PartialMethodNoImplementation());
+            Verifier.VerifyAnalyzer(@"TestCases\PartialMethodNoImplementation.cs", new PartialMethodNoImplementation());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void PartialMethodNoImplementation_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartialMethodNoImplementation.CSharp9.cs", new CS.PartialMethodNoImplementation());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartialMethodNoImplementation.CSharp9.cs", new PartialMethodNoImplementation());
 #endif
     }
 }

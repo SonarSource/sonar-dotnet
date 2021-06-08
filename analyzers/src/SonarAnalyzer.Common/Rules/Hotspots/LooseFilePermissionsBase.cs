@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.Hotspots
+namespace SonarAnalyzer.Rules
 {
     public abstract class LooseFilePermissionsBase<TSyntaxKind> : HotspotDiagnosticAnalyzer
         where TSyntaxKind : struct

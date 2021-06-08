@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ReturnValueIgnored() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReturnValueIgnored.cs", new CS.ReturnValueIgnored());
+            Verifier.VerifyAnalyzer(@"TestCases\ReturnValueIgnored.cs", new ReturnValueIgnored());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ReturnValueIgnored_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnValueIgnored.CSharp9.cs", new CS.ReturnValueIgnored());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnValueIgnored.CSharp9.cs", new ReturnValueIgnored());
 #endif
     }
 }

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ThreadStaticNonStaticField() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ThreadStaticNonStaticField.cs", new CS.ThreadStaticNonStaticField());
+            Verifier.VerifyAnalyzer(@"TestCases\ThreadStaticNonStaticField.cs", new ThreadStaticNonStaticField());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ThreadStaticNonStaticField_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThreadStaticNonStaticField.CSharp9.cs", new CS.ThreadStaticNonStaticField());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThreadStaticNonStaticField.CSharp9.cs", new ThreadStaticNonStaticField());
 #endif
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ThreadStaticNonStaticField_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\ThreadStaticNonStaticField.cs",
                                    @"TestCases\ThreadStaticNonStaticField.Fixed.cs",
-                                   new CS.ThreadStaticNonStaticField(),
-                                   new CS.ThreadStaticNonStaticFieldCodeFixProvider());
+                                   new ThreadStaticNonStaticField(),
+                                   new ThreadStaticNonStaticFieldCodeFixProvider());
     }
 }

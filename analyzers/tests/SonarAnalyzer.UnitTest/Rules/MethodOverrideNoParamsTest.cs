@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideNoParams() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideNoParams.cs", new CS.MethodOverrideNoParams());
+            Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideNoParams.cs", new MethodOverrideNoParams());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideNoParams_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideNoParams.CSharp9.cs", new CS.MethodOverrideNoParams());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideNoParams.CSharp9.cs", new MethodOverrideNoParams());
 #endif
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodOverrideNoParams.cs",
                 @"TestCases\MethodOverrideNoParams.Fixed.cs",
-                new CS.MethodOverrideNoParams(),
-                new CS.MethodOverrideNoParamsCodeFixProvider());
+                new MethodOverrideNoParams(),
+                new MethodOverrideNoParamsCodeFixProvider());
     }
 }

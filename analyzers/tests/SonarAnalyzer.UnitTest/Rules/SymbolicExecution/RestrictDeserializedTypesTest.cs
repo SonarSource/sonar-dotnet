@@ -20,9 +20,9 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 #if NETFRAMEWORK
 using System.Collections.Generic;
 using System.Linq;
@@ -85,6 +85,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
-            new SymbolicExecutionRunner(new CS.RestrictDeserializedTypes());
+            new SymbolicExecutionRunner(new RestrictDeserializedTypes());
     }
 }

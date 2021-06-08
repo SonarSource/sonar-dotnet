@@ -20,8 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void InsecureDeserialization() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\InsecureDeserialization.cs",
-                                    new CS.InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
+                                    new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8);
 
 #if NET
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void InsecureDeserialization_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\InsecureDeserialization.CSharp9.cs", new CS.InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\InsecureDeserialization.CSharp9.cs", new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
 #endif
     }
 }

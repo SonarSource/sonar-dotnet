@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,8 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.MsTest.cs",
-                new CS.DoNotUseLiteralBoolInAssertions(),
-                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+                                    new DoNotUseLiteralBoolInAssertions(),
+                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
@@ -43,8 +43,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.NUnit.cs",
-                new CS.DoNotUseLiteralBoolInAssertions(),
-                NuGetMetadataReference.NUnit(testFwkVersion));
+                                    new DoNotUseLiteralBoolInAssertions(),
+                                    NuGetMetadataReference.NUnit(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("2.0.0")]
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.Xunit.cs",
-                new CS.DoNotUseLiteralBoolInAssertions(),
-                NuGetMetadataReference.XunitFramework(testFwkVersion));
+                                    new DoNotUseLiteralBoolInAssertions(),
+                                    NuGetMetadataReference.XunitFramework(testFwkVersion));
     }
 }

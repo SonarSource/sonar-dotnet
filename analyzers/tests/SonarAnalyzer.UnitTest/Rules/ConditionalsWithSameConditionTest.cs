@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,18 +30,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalsWithSameCondition() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalsWithSameCondition.cs", new CS.ConditionalsWithSameCondition());
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalsWithSameCondition.cs", new ConditionalsWithSameCondition());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalsWithSameCondition_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ConditionalsWithSameCondition.CSharp9.cs", new CS.ConditionalsWithSameCondition());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ConditionalsWithSameCondition.CSharp9.cs", new ConditionalsWithSameCondition());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalsWithSameCondition_CSharp9_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalsWithSameCondition.CSharp9.TopLevelStatements.cs", new CS.ConditionalsWithSameCondition());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalsWithSameCondition.CSharp9.TopLevelStatements.cs", new ConditionalsWithSameCondition());
 #endif
     }
 }

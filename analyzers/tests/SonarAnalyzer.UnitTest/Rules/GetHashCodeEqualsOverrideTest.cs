@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GetHashCodeEqualsOverride() =>
             Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeEqualsOverride.cs",
-                                    new CS.GetHashCodeEqualsOverride(),
+                                    new GetHashCodeEqualsOverride(),
                                     MetadataReferenceFacade.SystemComponentModelPrimitives);
 
 #if NET
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GetHashCodeEqualsOverride_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeEqualsOverride.CSharp9.cs",
-                                                      new CS.GetHashCodeEqualsOverride(),
+                                                      new GetHashCodeEqualsOverride(),
                                                       MetadataReferenceFacade.SystemComponentModelPrimitives);
 #endif
     }

@@ -20,9 +20,9 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void DoNotUseRandom() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotUseRandom.cs",
-                new CS.DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemSecurityCryptography);
+                                    new DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
+                                    MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

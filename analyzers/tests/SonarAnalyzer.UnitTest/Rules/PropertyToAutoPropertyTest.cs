@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,18 +30,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyToAutoProperty() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.cs", new CS.PropertyToAutoProperty());
+            Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.cs", new PropertyToAutoProperty());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyToAutoProperty_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.CSharp7.cs", new CS.PropertyToAutoProperty(), ParseOptionsHelper.FromCSharp7);
+            Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.CSharp7.cs", new PropertyToAutoProperty(), ParseOptionsHelper.FromCSharp7);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyToAutoProperty_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyToAutoProperty.CSharp9.cs", new CS.PropertyToAutoProperty());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyToAutoProperty.CSharp9.cs", new PropertyToAutoProperty());
 #endif
     }
 }

@@ -21,8 +21,8 @@
 using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -38,14 +38,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
                     @"ResourceTests\SomeResources.Designer.cs"
                 },
-                new CS.MarkAssemblyWithNeutralResourcesLanguageAttribute());
+                new MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenAttributeButNoResx_DoesntThrow() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
-                new CS.MarkAssemblyWithNeutralResourcesLanguageAttribute());
+                new MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 {
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs",
                     @"ResourceTests\SomeResources.Designer.cs"
-                }, new CS.MarkAssemblyWithNeutralResourcesLanguageAttribute());
+                }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
                 "CSharp*: Unexpected primary issue on line 1, span (0,0)-(0,0) with message 'Mark this assembly with 'System.Resources.NeutralResourcesLanguageAttribute'.'." + Environment.NewLine +
                 "See output to see all actual diagnostics raised on the file");

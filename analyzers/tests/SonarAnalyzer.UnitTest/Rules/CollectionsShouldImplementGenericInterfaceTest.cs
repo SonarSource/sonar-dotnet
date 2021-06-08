@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CollectionsShouldImplementGenericInterface() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionsShouldImplementGenericInterface.cs",
-                                    new CS.CollectionsShouldImplementGenericInterface(),
+                                    new CollectionsShouldImplementGenericInterface(),
                                     CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
                                     MetadataReferenceFacade.SystemCollections);
     }

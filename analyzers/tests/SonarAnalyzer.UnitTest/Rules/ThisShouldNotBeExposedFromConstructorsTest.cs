@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ThisShouldNotBeExposedFromConstructors() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ThisShouldNotBeExposedFromConstructors.cs", new CS.ThisShouldNotBeExposedFromConstructors());
+            Verifier.VerifyAnalyzer(@"TestCases\ThisShouldNotBeExposedFromConstructors.cs", new ThisShouldNotBeExposedFromConstructors());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ThisShouldNotBeExposedFromConstructors_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp9.cs", new CS.ThisShouldNotBeExposedFromConstructors());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp9.cs", new ThisShouldNotBeExposedFromConstructors());
 #endif
     }
 }

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotTestThisWithIsOperator() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotTestThisWithIsOperator.cs", new CS.DoNotTestThisWithIsOperator());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotTestThisWithIsOperator.cs", new DoNotTestThisWithIsOperator());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotTestThisWithIsOperator_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotTestThisWithIsOperator.CSharp9.cs", new CS.DoNotTestThisWithIsOperator());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotTestThisWithIsOperator.CSharp9.cs", new DoNotTestThisWithIsOperator());
 #endif
     }
 }

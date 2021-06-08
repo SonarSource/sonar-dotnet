@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,8 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyNamesShouldNotMatchGetMethods() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs",
-                new CS.PropertyNamesShouldNotMatchGetMethods());
+            Verifier.VerifyAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs", new PropertyNamesShouldNotMatchGetMethods());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -39,6 +38,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCSharpAnalyzer(@"
     public int { get; } // Missing identifier on purpose
     public int () { return 42; } // Missing identifier on purpose
-", new CS.PropertyNamesShouldNotMatchGetMethods(), CompilationErrorBehavior.Ignore);
+", new PropertyNamesShouldNotMatchGetMethods(), CompilationErrorBehavior.Ignore);
     }
 }

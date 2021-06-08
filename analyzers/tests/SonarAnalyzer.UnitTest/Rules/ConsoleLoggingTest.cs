@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,16 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConsoleLogging() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging.cs", new CS.ConsoleLogging());
+            Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging.cs", new ConsoleLogging());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConsoleLogging_ConditionalDirectives1() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging_Conditionals1.cs", new CS.ConsoleLogging());
+            Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging_Conditionals1.cs", new ConsoleLogging());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConsoleLogging_ConditionalDirectives2() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging_Conditionals2.cs", new CS.ConsoleLogging());
+            Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging_Conditionals2.cs", new ConsoleLogging());
     }
 }

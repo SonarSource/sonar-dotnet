@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GetTypeWithIsAssignableFrom() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GetTypeWithIsAssignableFrom.cs", new CS.GetTypeWithIsAssignableFrom());
+            Verifier.VerifyAnalyzer(@"TestCases\GetTypeWithIsAssignableFrom.cs", new GetTypeWithIsAssignableFrom());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void GetTypeWithIsAssignableFrom_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs", new CS.GetTypeWithIsAssignableFrom());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs", new GetTypeWithIsAssignableFrom());
 #endif
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.cs",
                                    @"TestCases\GetTypeWithIsAssignableFrom.Fixed.cs",
                                    @"TestCases\GetTypeWithIsAssignableFrom.Fixed.Batch.cs",
-                                   new CS.GetTypeWithIsAssignableFrom(),
-                                   new CS.GetTypeWithIsAssignableFromCodeFixProvider());
+                                   new GetTypeWithIsAssignableFrom(),
+                                   new GetTypeWithIsAssignableFromCodeFixProvider());
     }
 }

@@ -19,11 +19,11 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 #if NET
 using SonarAnalyzer.UnitTest.MetadataReferences;
 #endif
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,19 +35,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureHashAlgorithm_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InsecureHashAlgorithm.NetFx.cs", new CS.InsecureHashAlgorithm());
+            Verifier.VerifyAnalyzer(@"TestCases\InsecureHashAlgorithm.NetFx.cs", new InsecureHashAlgorithm());
 
 #else
 
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureHashAlgorithm_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureHashAlgorithm.CSharp9.cs", new CS.InsecureHashAlgorithm(), MetadataReferenceFacade.SystemSecurityCryptography);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureHashAlgorithm.CSharp9.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureHashAlgorithm() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureHashAlgorithm.cs", new CS.InsecureHashAlgorithm(), MetadataReferenceFacade.SystemSecurityCryptography);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureHashAlgorithm.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.SystemSecurityCryptography);
 #endif
     }
 }

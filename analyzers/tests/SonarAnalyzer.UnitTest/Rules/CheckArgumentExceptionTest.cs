@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,18 +30,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckArgumentException() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckArgumentException.cs", new CS.CheckArgumentException());
+            Verifier.VerifyAnalyzer(@"TestCases\CheckArgumentException.cs", new CheckArgumentException());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckArgumentException_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CheckArgumentException.CSharp9.cs", new CS.CheckArgumentException());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CheckArgumentException.CSharp9.cs", new CheckArgumentException());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckArgumentException_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CheckArgumentException.TopLevelStatements.cs", new CS.CheckArgumentException());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CheckArgumentException.TopLevelStatements.cs", new CheckArgumentException());
 #endif
     }
 }

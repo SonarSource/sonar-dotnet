@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseValueParameter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new CS.UseValueParameter());
+            Verifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new UseValueParameter());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void UseValueParameter_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseValueParameter.CSharp9.cs", new CS.UseValueParameter());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseValueParameter.CSharp9.cs", new UseValueParameter());
 #endif
 
         [TestMethod]
@@ -47,6 +47,6 @@ public int Foo
 {
     get => field;
     set => // Noncompliant
-}", new CS.UseValueParameter(), CompilationErrorBehavior.Ignore);
+}", new UseValueParameter(), CompilationErrorBehavior.Ignore);
     }
 }

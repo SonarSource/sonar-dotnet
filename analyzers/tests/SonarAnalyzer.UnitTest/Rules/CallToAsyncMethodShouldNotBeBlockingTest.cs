@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CallToAsyncMethodShouldNotBeBlocking() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.cs", new CS.CallToAsyncMethodShouldNotBeBlocking());
+            Verifier.VerifyAnalyzer(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.cs", new CallToAsyncMethodShouldNotBeBlocking());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CallToAsyncMethodShouldNotBeBlocking_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.CSharp9.cs", new CS.CallToAsyncMethodShouldNotBeBlocking());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.CSharp9.cs", new CallToAsyncMethodShouldNotBeBlocking());
 #endif
     }
 }

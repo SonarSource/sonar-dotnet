@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldsShouldBeEncapsulatedInProperties() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldBeEncapsulatedInProperties.cs", new CS.FieldsShouldBeEncapsulatedInProperties());
+            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldBeEncapsulatedInProperties.cs", new FieldsShouldBeEncapsulatedInProperties());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldsShouldBeEncapsulatedInProperties_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldBeEncapsulatedInProperties.CSharp9.cs", new CS.FieldsShouldBeEncapsulatedInProperties());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldBeEncapsulatedInProperties.CSharp9.cs", new FieldsShouldBeEncapsulatedInProperties());
 #endif
     }
 }

@@ -26,9 +26,9 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -41,21 +41,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DatabasePasswordsShouldBeSecure_CS(string entityFrameworkCoreVersion, string oracleVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.cs",
-                                    new CS.DatabasePasswordsShouldBeSecure(),
+                                    new DatabasePasswordsShouldBeSecure(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetReferences(entityFrameworkCoreVersion, oracleVersion));
 
         [TestMethod]
         public void DatabasePasswordsShouldBeSecure_Net5_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.Net5.cs",
-                                    new CS.DatabasePasswordsShouldBeSecure(),
+                                    new DatabasePasswordsShouldBeSecure(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetReferences("5.0.2", "5.21.1"));
 
         [TestMethod]
         public void DatabasePasswordsShouldBeSecure_NetCore3_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.NetCore31.cs",
-                                    new CS.DatabasePasswordsShouldBeSecure(),
+                                    new DatabasePasswordsShouldBeSecure(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetReferences("3.1.11", "3.19.80"));
 
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var webConfigPath = GetWebConfigPath(root);
             DiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
-                new CS.DatabasePasswordsShouldBeSecure(),
+                new DatabasePasswordsShouldBeSecure(),
                 File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var externalConfigPath = Path.Combine(root, "external.config");
             DiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
-                new CS.DatabasePasswordsShouldBeSecure(),
+                new DatabasePasswordsShouldBeSecure(),
                 File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath, externalConfigPath)));
         }
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var nonExistingFilePath = GetWebConfigPath(missingDirectory);
             DiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
-                new CS.DatabasePasswordsShouldBeSecure(),
+                new DatabasePasswordsShouldBeSecure(),
                 File.ReadAllText(corruptFilePath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
         }

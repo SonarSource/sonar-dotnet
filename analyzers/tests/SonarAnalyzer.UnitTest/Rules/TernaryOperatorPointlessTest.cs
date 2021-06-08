@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TernaryOperatorPointless() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TernaryOperatorPointless.cs", new CS.TernaryOperatorPointless());
+            Verifier.VerifyAnalyzer(@"TestCases\TernaryOperatorPointless.cs", new TernaryOperatorPointless());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\TernaryOperatorPointless.cs",
                 @"TestCases\TernaryOperatorPointless.Fixed.cs",
-                new CS.TernaryOperatorPointless(),
-                new CS.TernaryOperatorPointlessCodeFixProvider());
+                new TernaryOperatorPointless(),
+                new TernaryOperatorPointlessCodeFixProvider());
     }
 }

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SuppressFinalizeUseless() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SuppressFinalizeUseless.cs", new CS.SuppressFinalizeUseless());
+            Verifier.VerifyAnalyzer(@"TestCases\SuppressFinalizeUseless.cs", new SuppressFinalizeUseless());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void SuppressFinalizeUseless_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SuppressFinalizeUseless.CSharp9.cs", new CS.SuppressFinalizeUseless());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SuppressFinalizeUseless.CSharp9.cs", new SuppressFinalizeUseless());
 #endif
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SuppressFinalizeUseless_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\SuppressFinalizeUseless.cs",
                                    @"TestCases\SuppressFinalizeUseless.Fixed.cs",
-                                   new CS.SuppressFinalizeUseless(),
-                                   new CS.SuppressFinalizeUselessCodeFixProvider());
+                                   new SuppressFinalizeUseless(),
+                                   new SuppressFinalizeUselessCodeFixProvider());
     }
 }

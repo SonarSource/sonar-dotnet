@@ -27,7 +27,6 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Hotspots;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {

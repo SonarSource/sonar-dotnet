@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberInitializedToDefault() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberInitializedToDefault.cs", new CS.MemberInitializedToDefault());
+            Verifier.VerifyAnalyzer(@"TestCases\MemberInitializedToDefault.cs", new MemberInitializedToDefault());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberInitializedToDefault_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializedToDefault.CSharp9.cs", new CS.MemberInitializedToDefault());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializedToDefault.CSharp9.cs", new MemberInitializedToDefault());
 #endif
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\MemberInitializedToDefault.cs",
                 @"TestCases\MemberInitializedToDefault.Fixed.cs",
-                new CS.MemberInitializedToDefault(),
-                new CS.MemberInitializedToDefaultCodeFixProvider());
+                new MemberInitializedToDefault(),
+                new MemberInitializedToDefaultCodeFixProvider());
     }
 }

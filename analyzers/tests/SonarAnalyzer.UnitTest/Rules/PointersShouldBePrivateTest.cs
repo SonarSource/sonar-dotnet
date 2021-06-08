@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PointersShouldBePrivate() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PointersShouldBePrivate.cs", new CS.PointersShouldBePrivate());
+            Verifier.VerifyAnalyzer(@"TestCases\PointersShouldBePrivate.cs", new PointersShouldBePrivate());
 
 #if NET // Function pointers are supported only by .Net 5 runtime
         [TestMethod]
         [TestCategory("Rule")]
         public void PointersShouldBePrivate_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PointersShouldBePrivate.CSharp9.cs", new CS.PointersShouldBePrivate());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PointersShouldBePrivate.CSharp9.cs", new PointersShouldBePrivate());
 #endif
     }
 }

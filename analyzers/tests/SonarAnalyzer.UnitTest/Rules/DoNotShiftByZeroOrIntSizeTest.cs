@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotShiftByZeroOrIntSize() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotShiftByZeroOrIntSize.cs", new CS.DoNotShiftByZeroOrIntSize());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotShiftByZeroOrIntSize.cs", new DoNotShiftByZeroOrIntSize());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotShiftByZeroOrIntSize_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotShiftByZeroOrIntSize.CSharp9.cs", new CS.DoNotShiftByZeroOrIntSize());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotShiftByZeroOrIntSize.CSharp9.cs", new DoNotShiftByZeroOrIntSize());
 #endif
     }
 }

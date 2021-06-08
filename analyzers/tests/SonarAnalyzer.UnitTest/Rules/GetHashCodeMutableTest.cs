@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GetHashCodeMutable() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs", new CS.GetHashCodeMutable());
+            Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs", new GetHashCodeMutable());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void GetHashCodeMutable_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeMutable.CSharp9.cs", new CS.GetHashCodeMutable());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeMutable.CSharp9.cs", new GetHashCodeMutable());
 #endif
 
         [TestMethod]
@@ -44,8 +44,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GetHashCodeMutable_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\GetHashCodeMutable.cs",
                                    @"TestCases\GetHashCodeMutable.Fixed.cs",
-                                   new CS.GetHashCodeMutable(),
-                                   new CS.GetHashCodeMutableCodeFixProvider());
+                                   new GetHashCodeMutable(),
+                                   new GetHashCodeMutableCodeFixProvider());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -57,6 +57,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         return i; // we don't report on this
     }
-}", new CS.GetHashCodeMutable(), CompilationErrorBehavior.Ignore);
+}", new GetHashCodeMutable(), CompilationErrorBehavior.Ignore);
     }
 }

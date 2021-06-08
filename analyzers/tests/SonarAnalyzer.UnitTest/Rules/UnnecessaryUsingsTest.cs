@@ -24,9 +24,9 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UnnecessaryUsings() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.cs",
-                                    new CS.UnnecessaryUsings(),
+                                    new UnnecessaryUsings(),
                                     GetAdditionalReferences());
 
 #if NET
@@ -45,19 +45,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnnecessaryUsings_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new CS.UnnecessaryUsings());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new UnnecessaryUsings());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnnecessaryUsings_TupleDeconstruct_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetCore.cs", new CS.UnnecessaryUsings());
+            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetCore.cs", new UnnecessaryUsings());
 
 #elif NETFRAMEWORK
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnnecessaryUsings_TupleDeconstruct_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetFx.cs", new CS.UnnecessaryUsings());
+            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetFx.cs", new UnnecessaryUsings());
 
 #endif
 
@@ -67,16 +67,16 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(@"TestCases\UnnecessaryUsings.cs",
                                    @"TestCases\UnnecessaryUsings.Fixed.cs",
                                    @"TestCases\UnnecessaryUsings.Fixed.Batch.cs",
-                                   new CS.UnnecessaryUsings(),
-                                   new CS.UnnecessaryUsingsCodeFixProvider(),
+                                   new UnnecessaryUsings(),
+                                   new UnnecessaryUsingsCodeFixProvider(),
                                    additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         public void EquivalentNameSyntax_Equals_Object()
         {
-            var main = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-            object same = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-            object different = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Ipsum"));
+            var main = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
+            object same = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
+            object different = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Ipsum"));
 
             main.Equals(same).Should().BeTrue();
             main.Equals(null).Should().BeFalse();
@@ -87,9 +87,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void EquivalentNameSyntax_Equals_EquivalentNameSyntax()
         {
-            var main = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-            var same = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-            var different = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Ipsum"));
+            var main = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
+            var same = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
+            var different = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Ipsum"));
 
             main.Equals(same).Should().BeTrue();
             main.Equals(null).Should().BeFalse();

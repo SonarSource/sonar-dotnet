@@ -21,9 +21,9 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,26 +36,26 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.cs",
-                new CS.MemberShouldBeStatic(),
-                NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
-                    .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
-                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
-                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
-                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion))
-                    .ToImmutableArray());
+                                    new MemberShouldBeStatic(),
+                                    NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion))
+                                        .ToImmutableArray());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldBeStatic_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MemberShouldBeStatic.CSharp9.cs", new CS.MemberShouldBeStatic());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MemberShouldBeStatic.CSharp9.cs", new MemberShouldBeStatic());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldBeStatic_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.CSharp8.cs",
-                new CS.MemberShouldBeStatic(),
+                new MemberShouldBeStatic(),
 #if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,
                 NuGetMetadataReference.NETStandardV2_1_0);
@@ -74,7 +74,7 @@ public class HttpApplication1 : System.Web.HttpApplication
 
     protected int FooFoo() => 0; // Noncompliant
 }",
-                new CS.MemberShouldBeStatic(),
+                new MemberShouldBeStatic(),
                 CompilationErrorBehavior.Ignore);
 #endif
 
@@ -91,6 +91,6 @@ public class Class7
         result = await f();
         return result;
     }
-}", new CS.MemberShouldBeStatic(), CompilationErrorBehavior.Ignore);
+}", new MemberShouldBeStatic(), CompilationErrorBehavior.Ignore);
     }
 }

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,21 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void VirtualEventField() =>
-            Verifier.VerifyAnalyzer(@"TestCases\VirtualEventField.cs", new CS.VirtualEventField());
+            Verifier.VerifyAnalyzer(@"TestCases\VirtualEventField.cs", new VirtualEventField());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void VirtualEventField_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\VirtualEventField.CSharp9.cs", new CS.VirtualEventField());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\VirtualEventField.CSharp9.cs", new VirtualEventField());
 
         [TestMethod]
         [TestCategory("CodeFix")]
         public void VirtualEventField_CSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\VirtualEventField.CSharp9.cs",
                                    @"TestCases\VirtualEventField.CSharp9.Fixed.cs",
-                                   new CS.VirtualEventField(),
-                                   new CS.VirtualEventFieldCodeFixProvider(),
+                                   new VirtualEventField(),
+                                   new VirtualEventFieldCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp9);
 #endif
 
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\VirtualEventField.cs",
                 @"TestCases\VirtualEventField.Fixed.cs",
-                new CS.VirtualEventField(),
-                new CS.VirtualEventFieldCodeFixProvider());
+                new VirtualEventField(),
+                new VirtualEventFieldCodeFixProvider());
     }
 }

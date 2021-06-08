@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DontMixIncrementOrDecrementWithOtherOperators() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.cs", new CS.DontMixIncrementOrDecrementWithOtherOperators());
+            Verifier.VerifyAnalyzer(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.cs", new DontMixIncrementOrDecrementWithOtherOperators());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DontMixIncrementOrDecrementWithOtherOperators_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.CSharp9.cs", new CS.DontMixIncrementOrDecrementWithOtherOperators());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.CSharp9.cs", new DontMixIncrementOrDecrementWithOtherOperators());
 #endif
     }
 }

@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TrackNotImplementedException() =>
             Verifier.VerifyAnalyzer(@"TestCases\TrackNotImplementedException.cs",
-                new CS.TrackNotImplementedException(),
+                new TrackNotImplementedException(),
 #if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,
                 NuGetMetadataReference.NETStandardV2_1_0);

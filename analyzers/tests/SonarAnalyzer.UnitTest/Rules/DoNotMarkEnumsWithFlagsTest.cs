@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotMarkEnumsWithFlags() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotMarkEnumsWithFlags.cs", new CS.DoNotMarkEnumsWithFlags());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotMarkEnumsWithFlags.cs", new DoNotMarkEnumsWithFlags());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -40,6 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 public enum InvalidStringEnum : string // Noncompliant
 {
     MyValue = ""toto"" // Secondary
-}", new CS.DoNotMarkEnumsWithFlags(), CompilationErrorBehavior.Ignore);
+}", new DoNotMarkEnumsWithFlags(), CompilationErrorBehavior.Ignore);
     }
 }

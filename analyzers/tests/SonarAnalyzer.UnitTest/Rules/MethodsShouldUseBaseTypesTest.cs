@@ -20,8 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -59,20 +59,20 @@ internal class Bar
 
             foreach (var compilation in solution.Compile())
             {
-                DiagnosticVerifier.Verify(compilation, new CS.MethodsShouldUseBaseTypes(), CompilationErrorBehavior.FailTest);
+                DiagnosticVerifier.Verify(compilation, new MethodsShouldUseBaseTypes(), CompilationErrorBehavior.FailTest);
             }
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldUseBaseTypes.cs", new CS.MethodsShouldUseBaseTypes());
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldUseBaseTypes.cs", new MethodsShouldUseBaseTypes());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new CS.MethodsShouldUseBaseTypes());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new MethodsShouldUseBaseTypes());
 #endif
 
         [TestMethod]
@@ -96,6 +96,6 @@ public class Foo
     {
         a.ToList();
     }
-}", new CS.MethodsShouldUseBaseTypes(), CompilationErrorBehavior.Ignore);
+}", new MethodsShouldUseBaseTypes(), CompilationErrorBehavior.Ignore);
     }
 }

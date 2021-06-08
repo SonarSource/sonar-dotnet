@@ -26,9 +26,9 @@ using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -56,7 +56,7 @@ public class MethodUsages
         var x = Property3;
     }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -77,7 +77,7 @@ public class FieldUsages
     [Obsolete]
     private class Class1 { }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -91,7 +91,7 @@ public static class Foo
         public const string AppCompany = ""foo"";
     }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -101,7 +101,7 @@ public static class Foo
                                         @"TestCases\UnusedPrivateMember.part1.cs",
                                         @"TestCases\UnusedPrivateMember.part2.cs"
                                     },
-                                    new CS.UnusedPrivateMember());
+                                    new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -120,7 +120,7 @@ public partial class PartialClass
 {
     private void Handler(object sender, EventArgs e) { } // intentional False Negative
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -158,7 +158,7 @@ namespace UnityEditor
     public class AssetPostprocessor { }
     public class AssetModificationProcessor { }
 }
-", new CS.UnusedPrivateMember());
+", new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -175,7 +175,7 @@ namespace EntityFrameworkMigrations
         protected override void Up(MigrationBuilder migrationBuilder) { }
     }
 }
-", new CS.UnusedPrivateMember(), additionalReferences: GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
+", new UnusedPrivateMember(), additionalReferences: GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -183,21 +183,21 @@ namespace EntityFrameworkMigrations
         [TestCategory("Rule")]
         public void UnusedPrivateMember(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.cs",
-                                    new CS.UnusedPrivateMember(),
+                                    new UnusedPrivateMember(),
                                     TestHelper.ProjectTypeReference(projectType));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp7.cs",
-                                    new CS.UnusedPrivateMember(),
+                                    new UnusedPrivateMember(),
                                     ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
-                                    new CS.UnusedPrivateMember(),
+                                    new UnusedPrivateMember(),
                                     ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK
                                     NuGetMetadataReference.NETStandardV2_1_0.Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version)));
@@ -210,13 +210,13 @@ namespace EntityFrameworkMigrations
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UnusedPrivateMember.CSharp9.cs",
-                                                      new CS.UnusedPrivateMember());
+                                                      new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs",
-                                                      new CS.UnusedPrivateMember());
+                                                      new UnusedPrivateMember());
 #endif
 
         [TestMethod]
@@ -225,8 +225,8 @@ namespace EntityFrameworkMigrations
             Verifier.VerifyCodeFix(@"TestCases\UnusedPrivateMember.cs",
                                    @"TestCases\UnusedPrivateMember.Fixed.cs",
                                    @"TestCases\UnusedPrivateMember.Fixed.Batch.cs",
-                                   new CS.UnusedPrivateMember(),
-                                   new CS.UnusedPrivateMemberCodeFixProvider());
+                                   new UnusedPrivateMember(),
+                                   new UnusedPrivateMemberCodeFixProvider());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -236,14 +236,14 @@ namespace EntityFrameworkMigrations
                                         @"TestCases\UnusedPrivateMember.CalledFromGenerated.cs",
                                         @"TestCases\UnusedPrivateMember.Generated.cs"
                                     },
-                                    new CS.UnusedPrivateMember());
+                                    new UnusedPrivateMember());
 
         [TestMethod]
         [TestCategory("Performance")]
         public void UnusedPrivateMember_Performance()
         {
             Action verifyAnalyzer = () => Verifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
-                                                                  new CS.UnusedPrivateMember(),
+                                                                  new UnusedPrivateMember(),
                                                                   GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
 
             // Once the NuGet packages are downloaded, the time to execute the analyzer on the given file is

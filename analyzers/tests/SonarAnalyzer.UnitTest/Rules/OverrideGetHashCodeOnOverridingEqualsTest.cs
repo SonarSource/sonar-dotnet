@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OverrideGetHashCodeOnOverridingEquals() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OverrideGetHashCodeOnOverridingEquals.cs", new CS.OverrideGetHashCodeOnOverridingEquals());
+            Verifier.VerifyAnalyzer(@"TestCases\OverrideGetHashCodeOnOverridingEquals.cs", new OverrideGetHashCodeOnOverridingEquals());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void OverrideGetHashCodeOnOverridingEquals_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OverrideGetHashCodeOnOverridingEquals.CSharp9.cs", new CS.OverrideGetHashCodeOnOverridingEquals());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OverrideGetHashCodeOnOverridingEquals.CSharp9.cs", new OverrideGetHashCodeOnOverridingEquals());
 #endif
     }
 }

@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RedundantJumpStatement() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantJumpStatement.cs",
-                                    new CS.RedundantJumpStatement(),
+                                    new RedundantJumpStatement(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
                                     NuGetMetadataReference.NETStandardV2_1_0);
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantJumpStatement_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantJumpStatement.CSharp9.cs", new CS.RedundantJumpStatement());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantJumpStatement.CSharp9.cs", new RedundantJumpStatement());
 #endif
     }
 }

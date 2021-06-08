@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCatchNullReferenceException() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCatchNullReferenceException.cs", new CS.DoNotCatchNullReferenceException());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCatchNullReferenceException.cs", new DoNotCatchNullReferenceException());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCatchNullReferenceException_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchNullReferenceException.CSharp9.cs", new CS.DoNotCatchNullReferenceException());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchNullReferenceException.CSharp9.cs", new DoNotCatchNullReferenceException());
 #endif
     }
 }

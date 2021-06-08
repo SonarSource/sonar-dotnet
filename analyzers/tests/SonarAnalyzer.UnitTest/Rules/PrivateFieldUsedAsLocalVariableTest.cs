@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PrivateFieldUsedAsLocalVariable() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PrivateFieldUsedAsLocalVariable.cs", new CS.PrivateFieldUsedAsLocalVariable());
+            Verifier.VerifyAnalyzer(@"TestCases\PrivateFieldUsedAsLocalVariable.cs", new PrivateFieldUsedAsLocalVariable());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void PrivateFieldUsedAsLocalVariable_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PrivateFieldUsedAsLocalVariable.CSharp9.cs", new CS.PrivateFieldUsedAsLocalVariable());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PrivateFieldUsedAsLocalVariable.CSharp9.cs", new PrivateFieldUsedAsLocalVariable());
 #endif
     }
 }

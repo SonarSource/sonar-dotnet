@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AsyncVoidMethod() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.cs", new CS.AsyncVoidMethod());
+            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.cs", new AsyncVoidMethod());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AsyncVoidMethod_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AsyncVoidMethod.CSharp9.cs", new CS.AsyncVoidMethod());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AsyncVoidMethod.CSharp9.cs", new AsyncVoidMethod());
 #endif
 
         [DataTestMethod]
@@ -46,14 +46,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void AsyncVoidMethod_MsTestV2(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV2.cs",
-                new CS.AsyncVoidMethod(),
-                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+                                    new AsyncVoidMethod(),
+                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AsyncVoidMethod_MsTestV1() =>
             Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV1.cs",
-                new CS.AsyncVoidMethod(),
-                NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
+                                    new AsyncVoidMethod(),
+                                    NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
     }
 }

@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EquatableClassShouldBeSealed() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EquatableClassShouldBeSealed.cs", new CS.EquatableClassShouldBeSealed());
+            Verifier.VerifyAnalyzer(@"TestCases\EquatableClassShouldBeSealed.cs", new EquatableClassShouldBeSealed());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EquatableClassShouldBeSealed_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\EquatableClassShouldBeSealed.CSharp9.cs", new CS.EquatableClassShouldBeSealed());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\EquatableClassShouldBeSealed.CSharp9.cs", new EquatableClassShouldBeSealed());
 #endif
     }
 }

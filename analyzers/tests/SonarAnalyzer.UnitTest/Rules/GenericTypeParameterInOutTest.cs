@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericTypeParameterInOut() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.cs", new CS.GenericTypeParameterInOut());
+            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.cs", new GenericTypeParameterInOut());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericTypeParameterInOut_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.CSharp7.cs", new CS.GenericTypeParameterInOut(), ParseOptionsHelper.FromCSharp7);
+            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.CSharp7.cs", new GenericTypeParameterInOut(), ParseOptionsHelper.FromCSharp7);
     }
 }

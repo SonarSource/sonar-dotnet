@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,21 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantModifier() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantModifier.cs", new CS.RedundantModifier());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantModifier.cs", new RedundantModifier());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantModifier_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantModifier.CSharp9.cs", new CS.RedundantModifier());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantModifier.CSharp9.cs", new RedundantModifier());
 
         [TestMethod]
         [TestCategory("CodeFix")]
         public void RedundantModifier_CodeFix_CSharp9() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantModifier.CSharp9.cs",
                                    @"TestCases\RedundantModifier.CSharp9.Fixed.cs",
-                                   new CS.RedundantModifier(),
-                                   new CS.RedundantModifierCodeFixProvider(),
+                                   new RedundantModifier(),
+                                   new RedundantModifierCodeFixProvider(),
                                    options: ParseOptionsHelper.FromCSharp9);
 #endif
 
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantModifier_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantModifier.cs",
                                    @"TestCases\RedundantModifier.Fixed.cs",
-                                   new CS.RedundantModifier(),
-                                   new CS.RedundantModifierCodeFixProvider());
+                                   new RedundantModifier(),
+                                   new RedundantModifierCodeFixProvider());
     }
 }

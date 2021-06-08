@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,14 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExceptionShouldNotBeThrownFromUnexpectedMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.cs",
-                new CS.ExceptionShouldNotBeThrownFromUnexpectedMethods(),
-                ParseOptionsHelper.FromCSharp8);
+                                    new ExceptionShouldNotBeThrownFromUnexpectedMethods(),
+                                    ParseOptionsHelper.FromCSharp8);
  #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs",
-                new CS.ExceptionShouldNotBeThrownFromUnexpectedMethods());
+                                                      new ExceptionShouldNotBeThrownFromUnexpectedMethods());
 #endif
 
     }

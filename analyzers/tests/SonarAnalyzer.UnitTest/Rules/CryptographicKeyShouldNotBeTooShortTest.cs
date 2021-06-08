@@ -22,9 +22,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,17 +35,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CryptographicKeyShouldNotBeTooShort() =>
             Verifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.cs",
-                new CS.CryptographicKeyShouldNotBeTooShort(),
-                ParseOptionsHelper.FromCSharp8,
-                GetAdditionalReferences());
+                                    new CryptographicKeyShouldNotBeTooShort(),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    GetAdditionalReferences());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CryptographicKeyShouldNotBeTooShort_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CryptographicKeyShouldNotBeTooShort.CSharp9.cs",
-                new CS.CryptographicKeyShouldNotBeTooShort(),
-                GetAdditionalReferences());
+                                                      new CryptographicKeyShouldNotBeTooShort(),
+                                                      GetAdditionalReferences());
 #endif
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

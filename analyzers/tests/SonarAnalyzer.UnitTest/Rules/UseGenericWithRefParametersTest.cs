@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UseGenericWithRefParameters() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseGenericWithRefParameters.cs",
-                new CS.UseGenericWithRefParameters());
+                new UseGenericWithRefParameters());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -39,6 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCSharpAnalyzer(@"
 public void (ref object o1)
 {
-}", new CS.UseGenericWithRefParameters(), CompilationErrorBehavior.Ignore);
+}", new UseGenericWithRefParameters(), CompilationErrorBehavior.Ignore);
     }
 }

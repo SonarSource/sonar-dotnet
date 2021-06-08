@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShouldBeReadonly() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs", new CS.FieldShouldBeReadonly(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs", new FieldShouldBeReadonly(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShouldBeReadonly_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShouldBeReadonly.CSharp9.cs", new CS.FieldShouldBeReadonly());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShouldBeReadonly.CSharp9.cs", new FieldShouldBeReadonly());
 #endif
 
         [TestMethod]
@@ -45,8 +45,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\FieldShouldBeReadonly.cs",
                 @"TestCases\FieldShouldBeReadonly.Fixed.cs",
-                new CS.FieldShouldBeReadonly(),
-                new CS.FieldShouldBeReadonlyCodeFixProvider(),
+                new FieldShouldBeReadonly(),
+                new FieldShouldBeReadonlyCodeFixProvider(),
                 ParseOptionsHelper.FromCSharp8);
     }
 }

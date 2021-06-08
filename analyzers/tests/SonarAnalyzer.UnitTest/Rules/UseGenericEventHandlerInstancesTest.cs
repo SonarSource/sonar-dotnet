@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseGenericEventHandlerInstances() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseGenericEventHandlerInstances.cs", new CS.UseGenericEventHandlerInstances());
+            Verifier.VerifyAnalyzer(@"TestCases\UseGenericEventHandlerInstances.cs", new UseGenericEventHandlerInstances());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void UseGenericEventHandlerInstances_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseGenericEventHandlerInstances.CSharp9.cs", new CS.UseGenericEventHandlerInstances());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseGenericEventHandlerInstances.CSharp9.cs", new UseGenericEventHandlerInstances());
 #endif
     }
 }

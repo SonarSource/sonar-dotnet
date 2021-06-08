@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,8 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchDefaultClauseEmpty() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchDefaultClauseEmpty.cs",
-                new CS.SwitchDefaultClauseEmpty());
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchDefaultClauseEmpty.cs", new SwitchDefaultClauseEmpty());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -39,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\SwitchDefaultClauseEmpty.cs",
                 @"TestCases\SwitchDefaultClauseEmpty.Fixed.cs",
-                new CS.SwitchDefaultClauseEmpty(),
-                new CS.SwitchDefaultClauseEmptyCodeFixProvider());
+                new SwitchDefaultClauseEmpty(),
+                new SwitchDefaultClauseEmptyCodeFixProvider());
     }
 }

@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,15 +32,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void AesManagedShouldBeWithSecureMode() =>
             Verifier.VerifyAnalyzer(@"TestCases\AesManagedShouldBeWithSecureMode.cs",
-                                    new CS.AesManagedShouldBeWithSecureMode(),
+                                    new AesManagedShouldBeWithSecureMode(),
                                     MetadataReferenceFacade.SystemSecurityCryptography);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AesManagedShouldBeWithSecureMode_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AesManagedShouldBeWithSecureMode.CSharp9.cs",
-                            new CS.AesManagedShouldBeWithSecureMode(),
-                            MetadataReferenceFacade.SystemSecurityCryptography);
+                                                      new AesManagedShouldBeWithSecureMode(),
+                                                      MetadataReferenceFacade.SystemSecurityCryptography);
 #endif
     }
 }

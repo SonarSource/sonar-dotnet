@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantParenthesesObjectCreation() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesObjectCreation.cs", new CS.RedundantParenthesesObjectsCreation());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesObjectCreation.cs", new RedundantParenthesesObjectsCreation());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantParenthesesObjectCreation_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantParenthesesObjectCreation.CSharp9.cs", new CS.RedundantParenthesesObjectsCreation());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantParenthesesObjectCreation.CSharp9.cs", new RedundantParenthesesObjectsCreation());
 #endif
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantParenthesesObjectCreation_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantParenthesesObjectCreation.cs",
                                    @"TestCases\RedundantParenthesesObjectCreation.Fixed.cs",
-                                   new CS.RedundantParenthesesObjectsCreation(),
-                                   new CS.RedundantParenthesesCodeFixProvider());
+                                   new RedundantParenthesesObjectsCreation(),
+                                   new RedundantParenthesesCodeFixProvider());
     }
 }

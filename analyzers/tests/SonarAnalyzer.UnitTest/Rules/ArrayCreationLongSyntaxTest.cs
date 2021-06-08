@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
-using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,15 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ArrayCreationLongSyntax() =>
             Verifier.VerifyAnalyzer(@"TestCases\ArrayCreationLongSyntax.vb",
-                new VB.ArrayCreationLongSyntax());
+                                    new ArrayCreationLongSyntax());
 
         [TestMethod]
         [TestCategory("CodeFix")]
         public void ArrayCreationLongSyntax_CodeFix() =>
-            Verifier.VerifyCodeFix(
-                @"TestCases\ArrayCreationLongSyntax.vb",
-                @"TestCases\ArrayCreationLongSyntax.Fixed.vb",
-                new VB.ArrayCreationLongSyntax(),
-                new VB.ArrayCreationLongSyntaxCodeFixProvider());
+            Verifier.VerifyCodeFix(@"TestCases\ArrayCreationLongSyntax.vb",
+                                   @"TestCases\ArrayCreationLongSyntax.Fixed.vb",
+                                   new ArrayCreationLongSyntax(),
+                                   new ArrayCreationLongSyntaxCodeFixProvider());
     }
 }

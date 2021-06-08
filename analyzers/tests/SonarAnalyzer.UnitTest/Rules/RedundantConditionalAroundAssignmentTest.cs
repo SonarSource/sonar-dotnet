@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantConditionalAroundAssignment() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantConditionalAroundAssignment.cs", new CS.RedundantConditionalAroundAssignment());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantConditionalAroundAssignment.cs", new RedundantConditionalAroundAssignment());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantConditionalAroundAssignment_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new CS.RedundantConditionalAroundAssignment());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new RedundantConditionalAroundAssignment());
 #endif
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantConditionalAroundAssignment_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.cs",
                                    @"TestCases\RedundantConditionalAroundAssignment.Fixed.cs",
-                                   new CS.RedundantConditionalAroundAssignment(),
-                                   new CS.RedundantConditionalAroundAssignmentCodeFixProvider());
+                                   new RedundantConditionalAroundAssignment(),
+                                   new RedundantConditionalAroundAssignmentCodeFixProvider());
     }
 }
