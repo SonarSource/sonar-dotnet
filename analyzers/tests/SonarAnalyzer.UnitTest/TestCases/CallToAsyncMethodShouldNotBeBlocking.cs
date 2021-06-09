@@ -314,7 +314,7 @@ namespace Tests.Diagnostics
             Task<long>[] arr;
             Task.WaitAll(arr[0]);   // Error [CS0165]
                                     // Noncompliant@-1 FP
-            var x = arr[0].Result;
+            var x = arr[0].Result;  // Noncompliant
         }
 
         public class TaskLike
