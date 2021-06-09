@@ -32,33 +32,26 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ExceptionsShouldBeUsed : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3984";
+        private const string DiagnosticId = "S3984";
         private const string MessageFormat = "Throw this exception or remove this useless statement.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-
-                var createdObjectType = c.SemanticModel.GetSymbolInfo(objectCreation.Type).Symbol as INamedTypeSymbol;
-                if (!createdObjectType.DerivesFrom(KnownType.System_Exception))
-                {
-                    return;
-                }
-
                 var parent = objectCreation.GetFirstNonParenthesizedParent();
-                if (parent.IsKind(SyntaxKind.ExpressionStatement))
+                if (parent.IsKind(SyntaxKind.ExpressionStatement)
+                    && c.SemanticModel.GetSymbolInfo(objectCreation.Type).Symbol is INamedTypeSymbol createdObjectType
+                    && createdObjectType.DerivesFrom(KnownType.System_Exception))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation()));
                 }
             },
             SyntaxKind.ObjectCreationExpression);
-        }
     }
 }

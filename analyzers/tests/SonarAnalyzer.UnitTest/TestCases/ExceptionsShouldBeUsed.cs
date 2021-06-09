@@ -4,11 +4,17 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
+    public class CustomEx : Exception
+    {
+    }
+
     class ExceptionsShouldBeUsed
     {
         void NotCompliant()
         {
             new Exception(); // Noncompliant {{Throw this exception or remove this useless statement.}}
+            new CustomEx(); // Noncompliant
+            new ArgumentOutOfRangeException(); // Noncompliant
         }
 
         Exception Compliant()
@@ -21,6 +27,7 @@ namespace Tests.Diagnostics
             if (new Exception() != null) { }
             return new Exception();
             throw new Exception();
+            new ExceptionsShouldBeUsed(); // for coverage
         }
 
         void Foo(Exception ex) { }
