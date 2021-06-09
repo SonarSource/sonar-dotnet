@@ -24,7 +24,7 @@ namespace AutoMapper.UnitTests.Projection
 
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Foo, FooDto>();
+            cfg.CreateProjection<Foo, FooDto>();
         });
 
         [Fact]
@@ -42,9 +42,8 @@ namespace AutoMapper.UnitTests.Projection
         {
             _config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Address, AddressDto>();
-                cfg.CreateMap<Customer, CustomerDto>();
-                cfg.CreateMissingTypeMaps = false;
+                cfg.CreateProjection<Address, AddressDto>();
+                cfg.CreateProjection<Customer, CustomerDto>();
             });
         }
 
@@ -60,6 +59,18 @@ namespace AutoMapper.UnitTests.Projection
             typeof(InvalidOperationException).ShouldBeThrownBy(() => projected = customers.ProjectTo<Unmapped>(_config).ToList());
 
             projected.ShouldBeNull();
+        }
+
+        [Fact]
+        public void DynamicProjectToShouldWork()
+        {
+            var customers =
+                new[] { new Customer { FirstName = "Bill", LastName = "White", Address = new Address("Street1") } }
+                    .AsQueryable();
+
+            IQueryable projected = customers.ProjectTo(typeof(CustomerDto), _config);
+
+            projected.Cast<CustomerDto>().Single().FirstName.ShouldBe("Bill");
         }
 
         public class Customer

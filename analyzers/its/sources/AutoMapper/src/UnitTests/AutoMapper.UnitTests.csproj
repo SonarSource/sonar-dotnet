@@ -1,52 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!-- We need to manually mark this project as TEST. See analyzers\its\SonarAnalyzer.Testing.ImportBefore.targets for details.-->
-    <SonarQubeTestProject>true</SonarQubeTestProject>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <TargetFrameworks>net452;netcoreapp2.0;netcoreapp1.1;</TargetFrameworks>
-    <AssemblyName>AutoMapper.UnitTests</AssemblyName>
-    <PackageId>AutoMapper.UnitTests</PackageId>
-    <NoWarn>$(NoWarn);0649</NoWarn>
-    <ProjectGuid>F0CC7EF4-B035-4FE1-A476-0676F7251200</ProjectGuid>
-    <CodeAnalysisRuleSet>..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
-    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <DefineConstants>NET45</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net452' OR '$(TargetFramework)' == 'netcoreapp2.0'">
-    <DefineConstants>DYNAMIC_METHODS</DefineConstants>
+    <TargetFrameworks>net461;net5.0</TargetFrameworks>
+    <NoWarn>$(NoWarn);649;618</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\AutoMapper\ReflectionExtensions.cs" Link="ReflectionExtensions.cs" />
-    <Compile Include="..\AutoMapper\TypeExtensions.cs" Link="TypeExtensions.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Shouldly" Version="3.0.0" />
-    <PackageReference Include="FakeItEasy" Version="4.6.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
-    <PackageReference Include="xunit" Version="2.3.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-    <PackageReference Include="System.Data.Common" Version="4.3.0" />
-    <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
     <ProjectReference Include="..\AutoMapper\AutoMapper.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
-    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Runtime.Serialization" />
+    <PackageReference Include="Shouldly" Version="3.0.2" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

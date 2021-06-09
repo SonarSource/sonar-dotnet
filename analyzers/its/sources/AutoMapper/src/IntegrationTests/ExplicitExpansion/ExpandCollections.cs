@@ -16,9 +16,9 @@ namespace AutoMapper.IntegrationTests.Net4
 
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Category, CategoryDto>();
-            cfg.CreateMap<TrainingCourse, TrainingCourseDto>();
-            cfg.CreateMap<TrainingContent, TrainingContentDto>().ForMember(c => c.Category, o => o.ExplicitExpansion());
+            cfg.CreateProjection<Category, CategoryDto>();
+            cfg.CreateProjection<TrainingCourse, TrainingCourseDto>();
+            cfg.CreateProjection<TrainingContent, TrainingContentDto>().ForMember(c => c.Category, o => o.ExplicitExpansion());
         });
 
         protected override void Because_of()
@@ -26,7 +26,7 @@ namespace AutoMapper.IntegrationTests.Net4
             using(var context = new ClientContext())
             {
                 context.Database.Log = s => Trace.WriteLine(s);
-                _course = context.TrainingCourses.ProjectTo<TrainingCourseDto>(Configuration, c => c.Content.Select(co => co.Category)).FirstOrDefault(n => n.CourseName == "Course 1");
+                _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses, null, c => c.Content.Select(co => co.Category)).FirstOrDefault(n => n.CourseName == "Course 1");
             }
         }
 

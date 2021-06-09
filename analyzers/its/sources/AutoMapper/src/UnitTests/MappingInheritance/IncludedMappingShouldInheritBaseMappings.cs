@@ -1,8 +1,77 @@
 ﻿using Shouldly;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
-namespace AutoMapper.UnitTests.Bug
+namespace AutoMapper.UnitTests
 {
+    public class ReadonlyCollectionPropertiesOverride : AutoMapperSpecBase
+    {
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<SourceBase, DestinationBase>()
+                .Include<Source, Destination>()
+                .ForMember(d=>d.CodeList, o => o.UseDestinationValue());
+            cfg.CreateMap<Source, Destination>().ForMember(d=>d.CodeList, o => o.DoNotUseDestinationValue());
+        });
+        public class SourceBase
+        {
+            public ICollection<string> CodeList { get; } = new List<string>();
+        }
+        public class Source : SourceBase
+        {
+        }
+        public class DestinationBase
+        {
+            public ICollection<string> CodeList { get; set; } = new HashSet<string>();
+        }
+        public class Destination : DestinationBase
+        {
+        }
+        [Fact]
+        public void ShouldMapOk() => Mapper.Map<Destination>(new Source { CodeList = { "DMItemCode1" } }).CodeList.ShouldNotBeOfType<HashSet<string>>();
+    }
+    public class ReadonlyCollectionProperties : AutoMapperSpecBase
+    {
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
+        {
+            cfg.CreateMap<DomainModelBase, ModelBase>()
+                .ForMember(d => d.CodeList, o => o.MapFrom(s => s.CodeList))
+                .ForMember(d => d.KeyValuesOtherName, o => o.MapFrom(s => new[] { new KeyValueModel { Key = "key1", Value = "value1" } }))
+                .Include<DomainModel, Model>();
+            cfg.CreateMap<DomainModel, Model>();
+        });
+        public class DomainModelBase
+        {
+            public ICollection<string> CodeList { get; } = new List<string>();
+        }
+        public class DomainModel : DomainModelBase
+        {
+        }
+        public class ModelBase
+        {
+            public ICollection<KeyValueModel> KeyValuesOtherName { get; } = new List<KeyValueModel>();
+            public ICollection<string> CodeList { get; } = new List<string>();
+        }
+        public class Model : ModelBase
+        {
+        }
+        public class KeyValueModel
+        {
+            public string Key { get; set; }
+            public string Value { get; set; }
+        }
+        [Fact]
+        public void ShouldMapOk()
+        {
+            var domainModel = new DomainModel { CodeList = { "DMItemCode1" } };
+            var result = Mapper.Map<Model>(domainModel);
+            result.CodeList.First().ShouldBe("DMItemCode1");
+            var keyValue = result.KeyValuesOtherName.First();
+            keyValue.Key.ShouldBe("key1");
+            keyValue.Value.ShouldBe("value1");
+        }
+    }
     public class IncludedBaseMappingShouldInheritBaseMappings : SpecBase
     {
         public class ModelObject
@@ -150,7 +219,7 @@ namespace AutoMapper.UnitTests.Bug
                     ;
                 cfg.CreateMap<ModelSubObject, DtoSubObject>()
                     .IncludeBase<ModelObject, DtoObject>()
-                    .ForMember(d => d.BaseString, m => m.UseValue("789"));
+                    .ForMember(d => d.BaseString, m => m.MapFrom(src => "789"));
             });
             config.AssertConfigurationIsValid();
         }
@@ -163,7 +232,7 @@ namespace AutoMapper.UnitTests.Bug
                     .ForMember(d => d.BaseString, m => m.MapFrom(s => s.DifferentBaseString));
                 cfg.CreateMap<ModelSubObject, DtoSubObject>()
                     .IncludeBase<ModelObject, DtoObject>()
-                    .ForMember(d => d.BaseString, m => m.UseValue("789"));
+                    .ForMember(d => d.BaseString, m => m.MapFrom(src => "789"));
             });
             var mapper = config.CreateMapper();
             var dto = mapper.Map<DtoSubObject>(new ModelSubObject
@@ -186,7 +255,7 @@ namespace AutoMapper.UnitTests.Bug
                     ;
                 cfg.CreateMap<ModelSubObject, DtoSubObject>()
                     .IncludeBase<ModelObject, DtoObject>()
-                    .ForMember(d => d.BaseString, m => m.UseValue("789"));
+                    .ForMember(d => d.BaseString, m => m.MapFrom(src => "789"));
             });
             var mapper = config.CreateMapper();
             var dto = mapper.Map<ModelSubObject, DtoSubObject>(new ModelSubObject

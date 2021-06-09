@@ -1,15 +1,24 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace AutoMapper
 {
-    using System;
     using Internal;
+    using System.ComponentModel;
 
     [DebuggerDisplay("{DestinationExpression}")]
-    public class PathMap
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public class PathMap : MemberMap
     {
+        public PathMap(PathMap pathMap, TypeMap typeMap, IncludedMember includedMember) : this(pathMap.DestinationExpression, pathMap.MemberPath, typeMap)
+        {
+            IncludedMember = includedMember.Chain(pathMap.IncludedMember);
+            CustomMapExpression = pathMap.CustomMapExpression;
+            Condition = pathMap.Condition;
+            Ignored = pathMap.Ignored;
+        }
+
         public PathMap(LambdaExpression destinationExpression, MemberPath memberPath, TypeMap typeMap)
         {
             MemberPath = memberPath;
@@ -17,12 +26,19 @@ namespace AutoMapper
             DestinationExpression = destinationExpression;
         }
 
-        public TypeMap TypeMap { get; }
+        public override TypeMap TypeMap { get; }
+
+        public override Type SourceType => CustomMapExpression.ReturnType;
+        public override IncludedMember IncludedMember { get; }
         public LambdaExpression DestinationExpression { get; }
-        public LambdaExpression SourceExpression { get; set; }
+        public override LambdaExpression CustomMapExpression { get; set; }
         public MemberPath MemberPath { get; }
-        public MemberInfo DestinationMember => MemberPath.Last;
-        public bool Ignored { get; set; }
-        public LambdaExpression Condition { get; set; }
+        public override Type DestinationType => MemberPath.Last.GetMemberType();
+        public override string DestinationName => MemberPath.ToString();
+
+        public override bool CanResolveValue => !Ignored;
+        public override bool CanBeSet => ReflectionHelper.CanBeSet(MemberPath.Last);
+        public override bool Ignored { get; set; }
+        public override LambdaExpression Condition { get; set; }
     }
 }

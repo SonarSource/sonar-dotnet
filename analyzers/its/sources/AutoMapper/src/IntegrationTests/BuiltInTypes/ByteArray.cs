@@ -56,7 +56,7 @@ namespace AutoMapper.IntegrationTests
 
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Customer, CustomerViewModel>();
+            cfg.CreateProjection<Customer, CustomerViewModel>();
         });
 
         [Fact]
@@ -64,7 +64,7 @@ namespace AutoMapper.IntegrationTests
         {
             using (var context = new Context())
             {
-                var customerVms = context.Customers.ProjectTo<CustomerViewModel>(Configuration).ToList();
+                var customerVms = ProjectTo<CustomerViewModel>(context.Customers).ToList();
                 customerVms.ForEach(x =>
                 {
                     x.RowVersion.SequenceEqual(new byte[] { 1, 2, 3 }).ShouldBeTrue();

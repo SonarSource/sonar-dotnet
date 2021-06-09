@@ -116,10 +116,7 @@ namespace AutoMapper.UnitTests.ConditionalMapping
                 .ForMember(dest => dest.Value, opt =>
                 {
                     opt.Condition(src => src.Value > 0);
-                    opt.ResolveUsing((Source src) =>
-                    {
-                        return 10;
-                    });
+                    opt.MapFrom(src => 10);
                 });
         });
 
@@ -256,7 +253,7 @@ namespace AutoMapper.UnitTests.ConditionalMapping
                 .ReverseMap()
                 .IgnoreAllSourcePropertiesWithAnInaccessibleSetter()
                 .ForMember(dest => dest.ReverseForce, opt => opt.MapFrom(src => src.ReverseForce))
-                .ForSourceMember(dest => dest.IsVisible, opt => opt.Ignore());
+                .ForSourceMember(dest => dest.IsVisible, opt => opt.DoNotValidate());
         });
 
         protected override void Because_of()

@@ -1,58 +1,75 @@
-﻿using System;
+﻿using AutoMapper.Internal;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using AutoMapper.Execution;
-using AutoMapper.QueryableExtensions;
-using AutoMapper.QueryableExtensions.Impl;
-
 namespace AutoMapper
 {
-    using static Expression;
-
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public class ConstructorMap
     {
-        private readonly IList<ConstructorParameterMap> _ctorParams = new List<ConstructorParameterMap>();
-
+        private bool? _canResolve;
+        private readonly List<ConstructorParameterMap> _ctorParams = new List<ConstructorParameterMap>();
         public ConstructorInfo Ctor { get; }
         public TypeMap TypeMap { get; }
-        internal IEnumerable<ConstructorParameterMap> CtorParams => _ctorParams;
-
+        public IEnumerable<ConstructorParameterMap> CtorParams => _ctorParams;
         public ConstructorMap(ConstructorInfo ctor, TypeMap typeMap)
         {
             Ctor = ctor;
             TypeMap = typeMap;
         }
-
-        private static readonly IExpressionResultConverter[] ExpressionResultConverters =
+        public bool CanResolve
         {
-            new MemberResolverExpressionResultConverter(),
-            new MemberGetterExpressionResultConverter()
-        };
-
-        public bool CanResolve => CtorParams.All(param => param.CanResolve);
-
-        public Expression NewExpression(Expression instanceParameter)
+            get => _canResolve ??= ParametersCanResolve();
+            set => _canResolve = value;
+        }
+        private bool ParametersCanResolve()
         {
-            var parameters = CtorParams.Select(map =>
+            foreach (var param in _ctorParams)
             {
-                var result = new ExpressionResolutionResult(instanceParameter, Ctor.DeclaringType);
-
-                var matchingExpressionConverter =
-                    ExpressionResultConverters.FirstOrDefault(c => c.CanGetExpressionResolutionResult(result, map));
-
-                result = matchingExpressionConverter?.GetExpressionResolutionResult(result, map)
-                    ?? throw new AutoMapperMappingException($"Unable to generate the instantiation expression for the constructor {Ctor}: no expression could be mapped for constructor parameter '{map.Parameter}'.", null, TypeMap.Types);
-
-                return result;
-            });
-            return New(Ctor, parameters.Select(p => p.ResolutionExpression));
+                if (!param.CanResolveValue)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
-
-        public void AddParameter(ParameterInfo parameter, MemberInfo[] resolvers, bool canResolve)
+        public void AddParameter(ParameterInfo parameter, IEnumerable<MemberInfo> sourceMembers, bool canResolve) =>
+            _ctorParams.Add(new ConstructorParameterMap(TypeMap, parameter, sourceMembers, canResolve));
+    }
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public class ConstructorParameterMap : MemberMap
+    {
+        private readonly MemberInfo[] _sourceMembers;
+        private Type _sourceType;
+        public ConstructorParameterMap(TypeMap typeMap, ParameterInfo parameter, IEnumerable<MemberInfo> sourceMembers, bool canResolveValue)
         {
-            _ctorParams.Add(new ConstructorParameterMap(parameter, resolvers, canResolve));
+            TypeMap = typeMap;
+            Parameter = parameter;
+            _sourceMembers = sourceMembers.ToArray();
+            CanResolveValue = canResolveValue;
         }
+        public ParameterInfo Parameter { get; }
+        public override TypeMap TypeMap { get; }
+        public override Type SourceType
+        {
+            get => _sourceType ??=
+                CustomMapExpression?.ReturnType ??
+                CustomMapFunction?.ReturnType ??
+                (_sourceMembers.Length > 0 ? _sourceMembers[_sourceMembers.Length - 1].GetMemberType() : Parameter.ParameterType);
+            protected set => _sourceType = value;
+        }
+        public override Type DestinationType => Parameter.ParameterType;
+        public override MemberInfo[] SourceMembers => _sourceMembers;
+        public override string DestinationName => Parameter.Name;
+        public bool HasDefaultValue => Parameter.IsOptional;
+        public override LambdaExpression CustomMapExpression { get; set; }
+        public override LambdaExpression CustomMapFunction { get; set; }
+        public override bool CanResolveValue { get; set; }
+        public override bool Inline { get; set; }
+        public Expression DefaultValue() => Parameter.GetDefaultValue();
+        public override string ToString() => Parameter.Member.DeclaringType + "." + Parameter.Member + ".parameter " + Parameter.Name;
     }
 }

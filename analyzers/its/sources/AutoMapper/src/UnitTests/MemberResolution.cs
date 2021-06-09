@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using AutoMapper.Mappers;
+using AutoMapper.Internal.Mappers;
 using Shouldly;
 using Xunit;
 using System.Reflection;
@@ -10,6 +10,29 @@ namespace AutoMapper.UnitTests
 {
     namespace MemberResolution
     {
+        public class When_multiple_source_members_match : AutoMapperSpecBase
+        {
+            class Source
+            {
+                public int Value { get; set; }
+                public int GetValue() => 10;
+                public int OtherValue { get; set; }
+                public int GetOtherValue { get; set; }
+            }
+            class Destination
+            {
+                public int Value { get; set; }
+                public int OtherValue { get; set; }
+            }
+            protected override MapperConfiguration Configuration => new MapperConfiguration(c=>c.CreateMap<Source, Destination>());
+            [Fact]
+            public void Should_prefer_the_property()
+            {
+                var destination = Map<Destination>(new Source { Value = 42, OtherValue = 42 });
+                destination.Value.ShouldBe(42);
+                destination.OtherValue.ShouldBe(42);
+            }
+        }
         public class When_mapping_derived_classes_in_arrays : AutoMapperSpecBase
         {
             private DtoObject[] _result;
@@ -536,7 +559,7 @@ namespace AutoMapper.UnitTests
 
         public class When_ignoring_a_dto_property_during_configuration : AutoMapperSpecBase
         {
-            private TypeMap[] _allTypeMaps;
+            private IReadOnlyCollection<TypeMap> _allTypeMaps;
             private Source _source;
 
             public class Source
@@ -1008,9 +1031,9 @@ namespace AutoMapper.UnitTests
             {
                 cfg.CreateMap(typeof (Order), typeof (OrderDTO))
                     .ForMember("CurrentState", map => map.MapFrom("Status"))
-                    .ForMember("Contact", map => map.ResolveUsing(new StringCAPS(), "Customer"))
-                    .ForMember("Tracking", map => map.ResolveUsing(typeof (StringLower), "ShippingCode"))
-                    .ForMember("Postal", map => map.ResolveUsing(new StringPadder(6), "Zip"));
+                    .ForMember("Contact", map => map.MapFrom(new StringCAPS(), "Customer"))
+                    .ForMember("Tracking", map => map.MapFrom(typeof (StringLower), "ShippingCode"))
+                    .ForMember("Postal", map => map.MapFrom(new StringPadder(6), "Zip"));
 
             });
 
@@ -1228,6 +1251,57 @@ namespace AutoMapper.UnitTests
             }
         }
 
+        public class When_source_members_configured_in_a_root_profile_contain_prefixes : AutoMapperSpecBase
+        {
+            private Destination _destination;
+
+            public class Source
+            {
+                public int FooValue { get; set; }
+                public int GetOtherValue()
+                {
+                    return 10;
+                }
+            }
+
+            public class Destination
+            {
+                public int Value { get; set; }
+                public int OtherValue { get; set; }
+            }
+
+            public class ChildProfile : Profile
+            {
+                public ChildProfile()
+                {
+                    CreateMap<Source, Destination>();
+                }
+            }
+
+            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
+            {
+                cfg.RecognizePrefixes("Foo");
+                cfg.AddProfile<ChildProfile>();                
+            });
+
+            protected override void Because_of()
+            {
+                _destination = Mapper.Map<Source, Destination>(new Source { FooValue = 5 });
+            }
+
+            [Fact]
+            public void Registered_prefixes_ignored()
+            {
+                _destination.Value.ShouldBe(5);
+            }
+
+            [Fact]
+            public void Default_prefix_included()
+            {
+                _destination.OtherValue.ShouldBe(10);
+            }
+        }
+
         public class When_source_members_contain_prefixes : AutoMapperSpecBase
         {
             private Destination _destination;
@@ -1358,6 +1432,59 @@ namespace AutoMapper.UnitTests
             }
         }
 
+        public class When_source_members_configured_in_a_root_profile_contain_postfixes_and_prefixes : AutoMapperSpecBase
+        {
+            private Destination _destination;
+
+            public class Source
+            {
+                public int FooValueBar { get; set; }
+                public int GetOtherValue()
+                {
+                    return 10;
+                }
+            }
+
+            public class Destination
+            {
+                public int Value { get; set; }
+                public int OtherValue { get; set; }
+            }
+
+            public class ChildProfile : Profile
+            {
+                public ChildProfile()
+                {
+                    CreateMap<Source, Destination>();
+                }
+            }
+
+            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
+            {
+                cfg.RecognizePrefixes("Foo");
+                cfg.RecognizePostfixes("Bar");
+                cfg.AddProfile<ChildProfile>();
+            });
+
+            protected override void Because_of()
+            {
+                _destination = Mapper.Map<Source, Destination>(new Source { FooValueBar = 5 });
+            }
+
+            [Fact]
+            public void Registered_prefixes_ignored()
+            {
+                _destination.Value.ShouldBe(5);
+            }
+
+            [Fact]
+            public void Default_prefix_included()
+            {
+                _destination.OtherValue.ShouldBe(10);
+            }
+        }
+
+
         public class When_source_members_contain_postfixes_and_prefixes : AutoMapperSpecBase
         {
             private Destination _destination;
@@ -1449,7 +1576,7 @@ namespace AutoMapper.UnitTests
 
             protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
             {
-                cfg.RecognizeAlias("Foo", "Bar");
+                cfg.ReplaceMemberName("Foo", "Bar");
                 cfg.CreateMap<Source, Destination>();
             });
 

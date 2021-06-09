@@ -3,11 +3,30 @@ using Shouldly;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using AutoMapper.Internal;
 
 namespace AutoMapper.UnitTests
 {
+    public class When_an_extension_method_is_for_a_base_class : AutoMapperSpecBase
+    {
+        class Source
+        {
+        }
+        class Destination
+        {
+            public int Value { get; set; }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(c=>
+        {
+            c.IncludeSourceExtensionMethods(typeof(BarExtensions));
+            c.CreateMap<Source, Destination>();
+        });
+        [Fact]
+        public void It_should_be_used() => Map<Destination>(new Source()).Value.ShouldBe(12);
+    }
     public static class BarExtensions
     {
+        public static int GetValue(this object obj) => 12;
         public static string GetSimpleName(this When_null_is_passed_to_an_extension_method.Bar source)
         {
             if(source == null)
@@ -171,6 +190,79 @@ namespace AutoMapper.UnitTests
         public void Should_resolve_LINQ_method_automatically()
         {
             _destination.ValuesCount.ShouldBe(10);
+        }
+    }
+
+    public class When_disabling_method_maping : NonValidatingSpecBase
+    {
+        public class Source
+        {
+            public IEnumerable<int> Values { get; set; }
+            public int OtherValue() => 42;
+            public string StringValue;
+        }
+        public class Destination
+        {
+            public int ValuesCount { get; set; }
+            public int OtherValue { get; set; }
+            public string StringValue;
+            public string AnotherStringValue;
+        }
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
+        {
+            cfg.Internal().FieldMappingEnabled = false;
+            cfg.Internal().MethodMappingEnabled = false;
+            cfg.CreateMap<Source, Destination>();
+        });
+        [Fact]
+        public void Should_fail_validation()
+        {
+            new Action(Configuration.AssertConfigurationIsValid).ShouldThrow<AutoMapperConfigurationException>().Errors[0]
+                .UnmappedPropertyNames.ShouldBe(new[] { "ValuesCount", "OtherValue" });
+            Mapper.Map<Destination>(new Source { StringValue = "42" }).StringValue.ShouldBeNull();
+        }
+    }
+
+    public class When_a_static_method_has_first_parameter_null : AutoMapperSpecBase
+    {
+        class FirstName
+        {
+            public string Name;
+        }
+
+        class LastName
+        {
+            public string Name;
+        }
+
+        class FullName
+        {
+            public string Name;
+        }
+
+        class CombinedNames
+        {
+            public FirstName First;
+
+            public LastName Last;
+        }
+
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
+        {
+            cfg.CreateMap<CombinedNames, FullName>()
+                .ForMember(dst => dst.Name, o => o.MapFrom(src => string.Concat(src.First.Name, src.Last.Name)));
+        });
+
+        [Fact]
+        public void It_should_not_be_null_checked()
+        {
+            var combinedNames = new CombinedNames
+            {
+                First = new FirstName { Name = null },
+                Last = new LastName { Name = "Doe" }
+            };
+            var fullName = Mapper.Map<FullName>(combinedNames);
+            fullName.Name.ShouldBe("Doe");
         }
     }
 }

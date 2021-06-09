@@ -71,8 +71,8 @@ namespace AutoMapper.IntegrationTests
 
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Customer, CustomerViewModel>();
-            cfg.CreateMap<LocalizedString, string>().ProjectUsing(v=>v.Value);
+            cfg.CreateProjection<Customer, CustomerViewModel>();
+            cfg.CreateProjection<LocalizedString, string>().ConvertUsing(v => v.Value);
         });
 
         [Fact]
@@ -80,7 +80,7 @@ namespace AutoMapper.IntegrationTests
         {
             using (var context = new Context())
             {
-                var customerVm = context.Customers.ProjectTo<CustomerViewModel>(Configuration).First();
+                var customerVm = ProjectTo<CustomerViewModel>(context.Customers).First();
                 customerVm.Address.ShouldBe("home");
             }
         }

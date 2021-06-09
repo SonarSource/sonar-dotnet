@@ -1,8 +1,216 @@
-﻿namespace AutoMapper.UnitTests
+﻿using Shouldly;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
+
+namespace AutoMapper.UnitTests
 {
-    using MappingInheritance;
-    using Shouldly;
-    using Xunit;
+    public class OpenGenerics_With_Base_Generic : AutoMapperSpecBase
+    {
+        public class Foo<T>
+        {
+            public T Value1 { get; set; }
+        }
+        public class BarBase<T>
+        {
+            public T Value2 { get; set; }
+        }
+        public class Bar<T> : BarBase<T>
+        {
+        }
+        protected override MapperConfiguration Configuration { get; } = new(mapper => mapper.CreateMap(typeof(Foo<>), typeof(Bar<>)).ForMember("Value2", to => to.MapFrom("Value1")));
+        [Fact]
+        public void Can_map_base_members() => Map<Bar<int>>(new Foo<int> { Value1 = 5 }).Value2.ShouldBe(5);
+    }
+    public class GenericMapsAsNonGeneric : AutoMapperSpecBase
+    {
+        class Source
+        {
+            public int Value;
+        }
+        class Destination<T>
+        {
+            public T Value;
+        }
+        class NonGenericDestination : Destination<string>
+        {
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap(typeof(Source), typeof(Destination<>)).As(typeof(NonGenericDestination));
+            cfg.CreateMap(typeof(Source), typeof(NonGenericDestination));
+        });
+        [Fact]
+        public void Should_work() => Mapper.Map<Destination<string>>(new Source { Value = 42 }).Value.ShouldBe("42");
+    }
+    public class GenericMapsPriority : AutoMapperSpecBase
+    {
+        class Source<T>
+        {
+            public T Value;
+        }
+        class Destination<T>
+        {
+            public T Value;
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap(typeof(Source<>), typeof(Destination<string>));
+            cfg.CreateMap(typeof(Source<>), typeof(Destination<>)).ForAllMembers(o=>o.Ignore());
+            cfg.CreateMap(typeof(Source<string>), typeof(Destination<>)).ForAllMembers(o => o.Ignore());
+            cfg.CreateMap(typeof(Source<int>), typeof(Destination<>));
+        });
+        [Fact]
+        public void Should_work()
+        {
+            Mapper.Map<Destination<int>>(new Source<int> { Value = 42 }).Value.ShouldBe(42);
+            Mapper.Map<Destination<string>>(new Source<string> { Value = "42" }).Value.ShouldBe("42");
+        }
+    }
+    public class GenericMapWithUntypedMap : AutoMapperSpecBase
+    {
+        class Source<T>
+        {
+            public T Value;
+        }
+        class Destination<T>
+        {
+            public T Value;
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>cfg.CreateMap(typeof(Source<>), typeof(Destination<>)));
+        [Fact]
+        public void Should_work() => new Action(() => Mapper.Map(new Source<int>(), null, typeof(Destination<>)))
+            .ShouldThrow<ArgumentException>().Message.ShouldStartWith($"Type {typeof(Destination<>).FullName}[T] is a generic type definition");
+    }
+    public class GenericValueResolverTypeMismatch : AutoMapperSpecBase
+    {
+        class Source<T>
+        {
+            public T Value;
+        }
+        class Destination
+        {
+            public string Value;
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
+            cfg.CreateMap(typeof(Source<>), typeof(Destination)).ForMember("Value", o => o.MapFrom(typeof(ValueResolver<>))));
+        class ValueResolver<T> : IValueResolver<Source<T>, Destination, object>
+        {
+            public object Resolve(Source<T> source, Destination destination, object destMember, ResolutionContext context) => int.MaxValue;
+        }
+        [Fact]
+        public void Should_map_ok() => Map<Destination>(new Source<object>()).Value.ShouldBe(int.MaxValue.ToString());
+    }
+    public class GenericValueResolver : AutoMapperSpecBase
+    {
+        class Destination
+        {
+            public string MyKey;
+            public string MyValue;
+        }
+        class Destination<TKey, TValue>
+        {
+            public TKey MyKey;
+            public TValue MyValue;
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
+                .ForMember("MyKey", o => o.MapFrom(typeof(KeyResolver<>)))
+                .ForMember("MyValue", o => o.MapFrom(typeof(ValueResolver<,>)));
+            cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination<,>))
+                .ForMember("MyKey", o => o.MapFrom(typeof(KeyResolver<,,>)))
+                .ForMember("MyValue", o => o.MapFrom(typeof(ValueResolver<,,,>)));
+        });
+        private class KeyResolver<TKey> : IValueResolver<KeyValuePair<TKey, int>, Destination, string>
+        {
+            public string Resolve(KeyValuePair<TKey, int> source, Destination destination, string destMember, ResolutionContext context) => source.Key.ToString();
+        }
+        private class ValueResolver<TKey, TValue> : IValueResolver<KeyValuePair<TKey, TValue>, Destination, string>
+        {
+            public string Resolve(KeyValuePair<TKey, TValue> source, Destination destination, string destMember, ResolutionContext context) => source.Value.ToString();
+        }
+        private class KeyResolver<TKeySource, TValueSource, TKeyDestination>
+            : IValueResolver<KeyValuePair<TKeySource, TValueSource>, Destination<TKeyDestination, string>, string>
+        {
+            public string Resolve(KeyValuePair<TKeySource, TValueSource> source, Destination<TKeyDestination, string> destination, string destMember, ResolutionContext context)
+                => source.Key.ToString();
+        }
+        private class ValueResolver<TKeySource, TValueSource, TKeyDestination, TValueDestination>
+            : IValueResolver<KeyValuePair<TKeySource, TValueSource>, Destination<TKeyDestination, TValueDestination>, string>
+        {
+            public string Resolve(KeyValuePair<TKeySource, TValueSource> source, Destination<TKeyDestination, TValueDestination> destination, string destMember, ResolutionContext context)
+                => source.Value.ToString();
+        }
+        [Fact]
+        public void Should_map_non_generic_destination()
+        {
+            var destination = Map<Destination>(new KeyValuePair<int, int>(1,2));
+            destination.MyKey.ShouldBe("1");
+            destination.MyValue.ShouldBe("2");
+        }
+        [Fact]
+        public void Should_map_generic_destination()
+        {
+            var destination = Map<Destination<string, string>>(new KeyValuePair<int, int>(1, 2));
+            destination.MyKey.ShouldBe("1");
+            destination.MyValue.ShouldBe("2");
+        }
+    }
+
+    public class GenericMemberValueResolver : AutoMapperSpecBase
+    {
+        class Destination
+        {
+            public string MyKey;
+            public string MyValue;
+        }
+        class Destination<TKey, TValue>
+        {
+            public TKey MyKey;
+            public TValue MyValue;
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
+                .ForMember("MyKey", o => o.MapFrom(typeof(Resolver<>), "Key"))
+                .ForMember("MyValue", o => o.MapFrom(typeof(Resolver<,>), "Value"));
+            cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination<,>))
+                .ForMember("MyKey", o => o.MapFrom(typeof(Resolver<,,>), "Key"))
+                .ForMember("MyValue", o => o.MapFrom(typeof(Resolver<,,,>), "Value"));
+        });
+        private class Resolver<TKey> : IMemberValueResolver<KeyValuePair<TKey, int>, Destination, int, string>
+        {
+            public string Resolve(KeyValuePair<TKey, int> source, Destination destination, int sourceMember, string destMember, ResolutionContext context) => sourceMember.ToString();
+        }
+        private class Resolver<TKey, TValue> : IMemberValueResolver<KeyValuePair<TKey, TValue>, Destination, int, string>
+        {
+            public string Resolve(KeyValuePair<TKey, TValue> source, Destination destination, int sourceMember, string destMember, ResolutionContext context) => sourceMember.ToString();
+        }
+        private class Resolver<TKey, TValue, TDestinatonKey> : IMemberValueResolver<KeyValuePair<TKey, TValue>, Destination<TDestinatonKey, string>, int, string>
+        {
+            public string Resolve(KeyValuePair<TKey, TValue> source, Destination<TDestinatonKey, string> destination, int sourceMember, string destMember, ResolutionContext context) => sourceMember.ToString();
+        }
+        private class Resolver<TKey, TValue, TDestinatonKey, TDestinatonValue> : IMemberValueResolver<KeyValuePair<TKey, TValue>, Destination<TDestinatonKey, TDestinatonValue>, int, string>
+        {
+            public string Resolve(KeyValuePair<TKey, TValue> source, Destination<TDestinatonKey, TDestinatonValue> destination, int sourceMember, string destMember, ResolutionContext context) => sourceMember.ToString();
+        }
+        [Fact]
+        public void Should_map_non_generic_destination()
+        {
+            var destination = Map<Destination>(new KeyValuePair<int, int>(1, 2));
+            destination.MyKey.ShouldBe("1");
+            destination.MyValue.ShouldBe("2");
+        }
+        [Fact]
+        public void Should_map_generic_destination()
+        {
+            var destination = Map<Destination<string, string>>(new KeyValuePair<int, int>(1, 2));
+            destination.MyKey.ShouldBe("1");
+            destination.MyValue.ShouldBe("2");
+        }
+    }
 
     public class RecursiveOpenGenerics : AutoMapperSpecBase
     {
@@ -40,6 +248,83 @@
             var source = new SourceTree<string>("value", new SourceTree<string>[0]);
             Mapper.Map<DestinationTree<string>>(source).Value.ShouldBe("value");
         }
+    }
+
+    public class OpenGenericsValidation : NonValidatingSpecBase
+    {
+        public class Source<T>
+        {
+            public T Value { get; set; }
+        }
+
+        public class Dest<T>
+        {
+            public int A { get; set; }
+            public T Value { get; set; }
+        }
+
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateMap(typeof(Source<>), typeof(Dest<>)));
+
+        [Fact]
+        public void Should_report_unmapped_property()
+        {
+            new Action(Configuration.AssertConfigurationIsValid)
+                .ShouldThrow<AutoMapperConfigurationException>()
+                .Errors.Single().UnmappedPropertyNames.Single().ShouldBe("A");
+        }
+    }
+
+    public class OpenGenericsProfileValidationNonGenericMembers : NonValidatingSpecBase
+    {
+        public class Source<T>
+        {
+            public T[] Value { get; set; }
+        }
+
+        public class Dest<T>
+        {
+            public int A { get; set; }
+            public T[] Value { get; set; }
+        }
+
+        class MyProfile : Profile
+        {
+            public MyProfile()
+            {
+                CreateMap(typeof(Source<>), typeof(Dest<>));
+            }
+        }
+
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.AddProfile<MyProfile>());
+
+        [Fact]
+        public void Should_report_unmapped_property() =>
+            new Action(()=> AssertConfigurationIsValid<MyProfile>())
+                .ShouldThrow<AutoMapperConfigurationException>()
+                .Errors.Single().UnmappedPropertyNames.Single().ShouldBe("A");
+    }
+
+    public class OpenGenericsProfileValidation : AutoMapperSpecBase
+    {
+        public class Source<T>
+        {
+            public T[] Value { get; set; }
+        }
+
+        public class Dest<T>
+        {
+            public T[] Value { get; set; }
+        }
+
+        class MyProfile : Profile
+        {
+            public MyProfile()
+            {
+                CreateMap(typeof(Source<>), typeof(Dest<>));
+            }
+        }
+
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.AddProfile<MyProfile>());
     }
 
     public class OpenGenerics
@@ -138,6 +423,54 @@
 
             dest.C.ShouldBe(5);
             dest.D.ShouldBe(10);
+        }
+    }
+
+    public class OpenGenerics_With_UntypedMapFrom : AutoMapperSpecBase
+    {
+        public class Foo<T>
+        {
+            public T Value1 { get; set; }
+        }
+
+        public class Bar<T>
+        {
+            public T Value2 { get; set; }
+        }
+
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(mapper => {
+            mapper.CreateMap(typeof(Foo<>), typeof(Bar<>)).ForMember("Value2", to => to.MapFrom("Value1"));
+        });
+
+        [Fact]
+        public void Can_remap_explicit_members()
+        {
+            var dest = Mapper.Map<Bar<int>>(new Foo<int> { Value1 = 5 });
+            dest.Value2.ShouldBe(5);
+        }
+    }
+
+    public class OpenGenerics_With_UntypedMapFromStructs : AutoMapperSpecBase
+    {
+        public class Foo<T> where T : struct
+        {
+            public T Value1 { get; set; }
+        }
+
+        public class Bar<T> where T : struct
+        {
+            public T Value2 { get; set; }
+        }
+
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(mapper => {
+            mapper.CreateMap(typeof(Foo<>), typeof(Bar<>)).ForMember("Value2", to => to.MapFrom("Value1"));
+        });
+
+        [Fact]
+        public void Can_remap_explicit_members()
+        {
+            var dest = Mapper.Map<Bar<int>>(new Foo<int> { Value1 = 5 });
+            dest.Value2.ShouldBe(5);
         }
     }
 }

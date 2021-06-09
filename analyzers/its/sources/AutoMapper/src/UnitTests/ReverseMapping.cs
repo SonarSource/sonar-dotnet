@@ -4,9 +4,23 @@ using System.Linq;
 using System;
 using System.Text.RegularExpressions;
 using System.Reflection;
+using AutoMapper.Internal;
 
 namespace AutoMapper.UnitTests
 {
+    public class ReverseMapWithStaticField : AutoMapperSpecBase
+    {
+        class Source
+        {
+            public Guid Id { get; set; }
+        }
+        class Destination
+        {
+            public Guid Id { get; set; }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(c=>
+            c.CreateMap<Destination, Source>().ForMember(src => src.Id, opt => opt.MapFrom(_ => Guid.Empty)).ReverseMap());
+    }
     public class InvalidReverseMap : NonValidatingSpecBase
     {
         public class One
@@ -31,9 +45,8 @@ namespace AutoMapper.UnitTests
 
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
         {
-            cfg.CreateMissingTypeMaps = false;
             cfg.CreateMap<One, Two>()
-                .ForMember(d => d.Name, o => o.MapFrom(s => s))
+                .ForMember(d => d.Name, o => o.MapFrom(s => "name"))
                 .ForMember(d => d.Three, o => o.MapFrom(s => s.Three2))
                 .ReverseMap();
             cfg.CreateMap<Three, Three2>();
@@ -45,7 +58,7 @@ namespace AutoMapper.UnitTests
             new Action(() => Configuration.AssertConfigurationIsValid())
                 .ShouldThrowException<AutoMapperConfigurationException>(ex =>
                 {
-                    ex.PropertyMap.DestinationProperty.ShouldBe(typeof(Two).GetProperty("Three"));
+                    ex.MemberMap.DestinationName.ShouldBe("Three");
                     ex.Types.ShouldBe(new TypePair(typeof(One), typeof(Two)));
                 });
         }
@@ -68,7 +81,7 @@ namespace AutoMapper.UnitTests
             c.CreateMap<Destination, Source>()
              .ForMember(dest => dest.Total, opt => opt.MapFrom(x => x.Total))
              .ReverseMap()
-             .ForMember(dest => dest.Total, opt => opt.ResolveUsing<CustomResolver>());
+             .ForMember(dest => dest.Total, opt => opt.MapFrom<CustomResolver>());
         });
 
         public class CustomResolver : IValueResolver<Source, Destination, int>
@@ -200,6 +213,66 @@ namespace AutoMapper.UnitTests
             var model = Mapper.Map<Order>(dto);
             model.CustomerHolder.Customer.Name.ShouldBe("George Costanza");
             model.CustomerHolder.Customer.Total.ShouldBe(74.85m);
+        }
+    }
+
+    public class ReverseMapFromNamingConvention : AutoMapperSpecBase
+    {
+        public class OrderEntity
+        {
+            public int order_id { get; set; }
+            public string order_name { get; set; }
+        }
+
+        public class OrderDto
+        {
+            public int OrderId { get; set; }
+            public string OrderName { get; set; }
+        }
+
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.SourceMemberNamingConvention = new LowerUnderscoreNamingConvention();
+            cfg.DestinationMemberNamingConvention = new PascalCaseNamingConvention();
+            cfg.CreateMap<OrderEntity, OrderDto>()
+                .ReverseMap();
+        });
+
+        [Fact]
+        public void Should_map_reverse()
+        {
+            var dto = new OrderDto { OrderId = 123, OrderName = "Test order" };
+            var model = Mapper.Map<OrderEntity>(dto);
+            model.order_id.ShouldBe(123);
+            model.order_name.ShouldBe("Test order");
+        }
+    }
+
+    public class ReverseMapFromSourceMemberName : AutoMapperSpecBase
+    {
+        public class Source
+        {
+            public int Value { get; set; }
+        }
+
+        public class Destination
+        {
+            public int Value2 { get; set; }
+        }
+
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(d => d.Value2, o => o.MapFrom("Value"))
+                .ReverseMap();
+        });
+
+        [Fact]
+        public void Should_reverse_map_ok()
+        {
+            Destination destination = new Destination { Value2 = 1337 };
+            Source source = Mapper.Map<Source>(destination);
+            source.Value.ShouldBe(1337);
         }
     }
 
@@ -400,7 +473,7 @@ namespace AutoMapper.UnitTests
         {
             var typeMap = ConfigProvider.FindTypeMapFor<Source, Destination>();
 
-            typeMap.GetPropertyMaps().Count().ShouldBe(1);
+            typeMap.PropertyMaps.Count().ShouldBe(1);
         }
 
         [Fact]
@@ -476,8 +549,8 @@ namespace AutoMapper.UnitTests
         protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Source, Destination>(MemberList.Source)
-                .ForMember(dest => dest.Value3, opt => opt.ResolveUsing(src => src.Value2))
-                .ForSourceMember(src => src.Value2, opt => opt.Ignore());
+                .ForMember(dest => dest.Value3, opt => opt.MapFrom(src => src.Value2))
+                .ForSourceMember(src => src.Value2, opt => opt.DoNotValidate());
         });
 
         [Fact]
@@ -593,6 +666,37 @@ namespace AutoMapper.UnitTests
         public void Should_create_a_map_with_the_reverse_items()
         {
             _source.Value.ShouldBe(10);
+        }
+    }
+
+    public class When_reverse_mapping_open_generics_with_MapFrom : AutoMapperSpecBase
+    {
+        public class Source<T>
+        {
+            public T Value { get; set; }
+            public string StringValue { get; set; }
+        }
+        public class Destination<T>
+        {
+            public T Value2 { get; set; }
+            public string StringValue2 { get; set; }
+        }
+
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap(typeof(Source<>), typeof(Destination<>))
+                .ForMember("Value2", o => o.MapFrom("Value"))
+                .ForMember("StringValue2", o => o.MapFrom("StringValue"))
+                .ReverseMap();
+        });
+
+        [Fact]
+        public void Should_reverse_map_ok()
+        {
+            Destination<int> destination = new Destination<int> { Value2 = 1337, StringValue2 = "StringValue2" };
+            Source<int> source = Mapper.Map<Destination<int>, Source<int>>(destination);
+            source.Value.ShouldBe(1337);
+            source.StringValue.ShouldBe("StringValue2");
         }
     }
 }
