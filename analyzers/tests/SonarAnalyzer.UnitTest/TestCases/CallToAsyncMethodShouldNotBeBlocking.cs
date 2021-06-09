@@ -309,12 +309,10 @@ namespace Tests.Diagnostics
             return Task.Run(() => num);
         }
 
-        public void TaskIsNull()
+        public void TaskIsNull(Task<long>[] arr)
         {
-            Task<long>[] arr;
-            Task.WaitAll(arr[0]);   // Error [CS0165]
-                                    // Noncompliant@-1 FP
-            var x = arr[0].Result;  // Noncompliant
+            Task.WaitAll(arr[0]);   // Noncompliant
+            var x = arr[0].Result;  // Noncompliant FP
         }
 
         public class TaskLike
