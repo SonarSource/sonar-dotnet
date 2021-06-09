@@ -35,7 +35,7 @@
 
     <MakeDir Condition="$(SonarAnalyzerRegressionTestRunning)" Directories="$(SonarProjectOutputPath)"/>
     <!-- First FINDSTR removes \bin\, \obj\ and \packages\ subdirectories from FilesToAnalyze.txt. Second FINDSTR includes only files with an extension, because DIR lists also directories themselves.-->
-    <Exec Command="dir &quot;$(MSBuildStartupDirectory)\sources\$(PROJECT)&quot; /s /b | findstr /v &quot;\\bin\\ \\obj\\ \\packages\\&quot; | findstr /e /r &quot;\\[^\\]*\.[^\\]*&quot; > &quot;$(SonarFilesToAnalyzePath)&quot;"/>
+    <Exec Command="dir &quot;$(MSBuildStartupDirectory)\sources\$(PROJECT)&quot; /s /b | findstr /v &quot;\\bin\\ \\obj\\ \\packages\\&quot; | findstr /e /r &quot;\\[^\\]*\.[^\\]*&quot; > &quot;$(SonarFilesToAnalyzePath)&quot;" Condition="'$(TargetFrameworks)' == ''"/>
     <WriteLinesToFile Condition="$(SonarAnalyzerRegressionTestRunning)"
             File="$(SonarProjectConfigFilePath)"
             Lines="@(SonarProjectConfigLine)"
@@ -55,8 +55,10 @@
 
     <PropertyGroup Condition="$(SonarAnalyzerRegressionTestRunning)">
       <!-- Set the path to the SARIF report -->
-      <ErrorLog>$(SonarProjectOutputPath)-$(ProjectGuid).json</ErrorLog>
-      <RazorCompilationErrorLog>$(SonarProjectOutputPath)-$(ProjectGuid).Views.json</RazorCompilationErrorLog>
+      <ErrorLog Condition="'$(TargetFramework)' != ''">$(SonarProjectOutputPath)-$(ProjectGuid)-$(TargetFramework).json</ErrorLog>
+      <ErrorLog Condition="'$(TargetFramework)' == ''">$(SonarProjectOutputPath)-$(ProjectGuid).json</ErrorLog>
+      <RazorCompilationErrorLog Condition="'$(TargetFramework)' != ''">$(SonarProjectOutputPath)-$(ProjectGuid)-$(TargetFramework).Views.json</RazorCompilationErrorLog>
+      <RazorCompilationErrorLog Condition="'$(TargetFramework)' == ''">$(SonarProjectOutputPath)-$(ProjectGuid).Views.json</RazorCompilationErrorLog>
 
       <!-- Override the ruleset with all SonarAnalyzer rules -->
       <ResolvedCodeAnalysisRuleSet>$(MSBuildStartupDirectory)\output\AllSonarAnalyzerRules.ruleset</ResolvedCodeAnalysisRuleSet>
