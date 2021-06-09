@@ -8,6 +8,8 @@ jobs:
   create_card:
     name: Create card
     runs-on: ubuntu-latest
+    # Single quotes must be used here https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#literals
+    if: github.event.issue.state != 'closed'
 
     steps:
       # https://github.com/actions/github-script
@@ -16,7 +18,31 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const TODO_COLUMN = 4971951;
-            console.log("Creating Issue card");
-            // Action will fail if a card already exists for this issue
-            github.projects.createCard({ column_id: TODO_COLUMN, content_id: context.payload.issue.id, content_type: "Issue" });
+            const IN_PROGRESS_COLUMN = 4971952;
+            const REVIEW_IN_PROGRESS_COLUMN = 4971953;
+            const REVIEW_APPROVED_COLUMN = 4971954;
+            const VALIDATE_PEACH_COLUMN = 7838551;
+            const DONE_COLUMN = 4971955;
+            //
+            async function findCard(content_url) {
+                // Columns are searched from the most probable one
+                const allColumns = [TODO_COLUMN, IN_PROGRESS_COLUMN, REVIEW_IN_PROGRESS_COLUMN, REVIEW_APPROVED_COLUMN, VALIDATE_PEACH_COLUMN, DONE_COLUMN];
+                for (let i = 0; i < allColumns.length; i++) {
+                    let cards = await github.projects.listCards({ column_id: allColumns[i] });
+                    let card = cards.data.find(x => x.content_url == content_url);
+                    if (card) {
+                        return card;
+                    }
+                }
+                console.log("Card not found for: " + content_url);
+                return null;
+            }
+            //
+            const card = await findCard(context.payload.issue.url);
+            if (card) {
+                console.log("Card already exists");
+            } else {
+                console.log("Creating Issue card");
+                github.projects.createCard({ column_id: TODO_COLUMN, content_id: context.payload.issue.id, content_type: "Issue" });
+            }
             console.log("Done");
