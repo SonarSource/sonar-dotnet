@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -144,27 +143,26 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsAwaited(SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax simpleMemberAccess)
         {
-            var accessedSymbol = new Lazy<ISymbol>(() => context.SemanticModel.GetSymbolInfo(simpleMemberAccess.Expression).Symbol);
-
-            return simpleMemberAccess.FirstAncestorOrSelf<StatementSyntax>() is { } currentStatement
+            return context.SemanticModel.GetSymbolInfo(simpleMemberAccess.Expression).Symbol is { } accessedSymbol
+                   && simpleMemberAccess.FirstAncestorOrSelf<StatementSyntax>() is { } currentStatement
                    && currentStatement.GetPreviousStatements().Any(statement =>
                        statement.DescendantNodes()
-                            .OfType<InvocationExpressionSyntax>()
-                            .Where(x => x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
-                            .Any(IsTaskAwaited));
+                           .OfType<InvocationExpressionSyntax>()
+                           .Where(x => x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                           .Any(IsTaskAwaited));
 
             bool IsTaskAwaited(InvocationExpressionSyntax invocation) =>
                 IsAwaitForMultipleTasksExecutionCall(invocation, context.SemanticModel, accessedSymbol)
                 || IsAwaitForSingleTaskExecutionCall(invocation, context.SemanticModel, accessedSymbol);
         }
 
-        private static bool IsAwaitForMultipleTasksExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Lazy<ISymbol> accessedSymbol) =>
+        private static bool IsAwaitForMultipleTasksExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, ISymbol accessedSymbol) =>
             IsNamedSymbolOfExpectedType((MemberAccessExpressionSyntax)invocation.Expression, semanticModel, WaitForMultipleTasksExecutionCalls)
-            && invocation.ArgumentList.Arguments.Any(x => accessedSymbol.Value.Equals(semanticModel.GetSymbolInfo(x.Expression).Symbol));
+            && invocation.ArgumentList.Arguments.Any(x => Equals(accessedSymbol, semanticModel.GetSymbolInfo(x.Expression).Symbol));
 
-        private static bool IsAwaitForSingleTaskExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Lazy<ISymbol> accessedSymbol) =>
+        private static bool IsAwaitForSingleTaskExecutionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, ISymbol accessedSymbol) =>
             IsNamedSymbolOfExpectedType((MemberAccessExpressionSyntax)invocation.Expression, semanticModel, WaitForSingleExecutionCalls)
-            && accessedSymbol.Value.Equals(semanticModel.GetSymbolInfo(((MemberAccessExpressionSyntax)invocation.Expression).Expression).Symbol);
+            && Equals(accessedSymbol, semanticModel.GetSymbolInfo(((MemberAccessExpressionSyntax)invocation.Expression).Expression).Symbol);
 
         private static bool IsResultInContinueWithCall(string memberAccessName, MemberAccessExpressionSyntax memberAccess) =>
             memberAccessName == ResultName &&

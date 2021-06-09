@@ -309,6 +309,12 @@ namespace Tests.Diagnostics
             return Task.Run(() => num);
         }
 
+        public void TaskIsNull(Task<long>[] arr)
+        {
+            Task.WaitAll(arr[0]);   // Noncompliant
+            var x = arr[0].Result;  // Noncompliant FP
+        }
+
         public class TaskLike
         {
             public static Task WhenAll(params Task[] tasks) { return null; }
