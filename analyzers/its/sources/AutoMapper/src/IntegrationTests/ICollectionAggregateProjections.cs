@@ -61,17 +61,22 @@ namespace AutoMapper.IntegrationTests
             }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(_ => { });
+        public class CustomerItemCodes
+        {
+            public List<int> ItemCodes { get; set; }
+        }
+
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateProjection<CustomerItemCodes, CustomerViewModel>());
 
         [Fact]
         public void Can_map_with_projection()
         {
             using (var context = new Context())
             {
-                var result = context.Customers.Select(customer => new
+                var result = ProjectTo<CustomerViewModel>(context.Customers.Select(customer => new CustomerItemCodes
                 {
-                    ItemCodes = (ICollection<int>)customer.Items.Select(item => item.Code).ToList()
-                }).ProjectTo<CustomerViewModel>(Configuration).Single();
+                    ItemCodes = customer.Items.Select(item => item.Code).ToList()
+                })).Single();
 
                 result.ItemCodesCount.ShouldBe(3);
                 result.ItemCodesMin.ShouldBe(1);

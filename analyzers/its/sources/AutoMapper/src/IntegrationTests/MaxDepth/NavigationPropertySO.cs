@@ -90,8 +90,8 @@ namespace AutoMapper.IntegrationTests.Net4
 
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Customer, CustomerDTO>().MaxDepth(1);
-            cfg.CreateMap<Cust, CustDTO>();
+            cfg.CreateProjection<Customer, CustomerDTO>().MaxDepth(1);
+            cfg.CreateProjection<Cust, CustDTO>();
         });
 
         [Fact]
@@ -99,7 +99,7 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             using(var context = new Context())
             {
-                _destination = context.Customers.ProjectTo<CustomerDTO>(Configuration).Single();
+                _destination = ProjectTo<CustomerDTO>(context.Customers).Single();
                 _destination.Id.ShouldBe(1);
                 _destination.Name1.SequenceEqual("Bob");
                 _destination.Cust.CustomerID.ShouldBe(1);

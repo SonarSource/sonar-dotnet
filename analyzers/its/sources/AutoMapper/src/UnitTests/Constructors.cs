@@ -8,33 +8,103 @@ using System.Diagnostics;
 
 namespace AutoMapper.UnitTests.Constructors
 {
+    public class ConstructorValidation : AutoMapperSpecBase
+    {
+        class Source
+        {
+        }
+        class Destination
+        {
+            public Destination(int otherValue, int value = 2) { }
+            public int Value { get; set; }
+            public int OtherValue { get; set; }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(c => 
+            c.CreateMap<Source, Destination>().ForCtorParam("otherValue", o=>o.MapFrom(s=>0)));
+    }
+    public class Nullable_enum_default_value : AutoMapperSpecBase
+    {
+        public enum SourceEnum { A, B }
+        public class Source
+        {
+            public SourceEnum? Enum { get; set; }
+        }
+        public enum TargetEnum { A, B }
+        public class Target
+        {
+            public TargetEnum? Enum { get; set; }
+            public Target(TargetEnum? Enum = TargetEnum.A)
+            {
+                this.Enum = Enum;
+            }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>cfg.CreateMap<Source, Target>());
+        [Fact]
+        void Should_work() => Mapper.Map<Target>(new Source { Enum = SourceEnum.B }).Enum.ShouldBe(TargetEnum.B);
+    }
+    public class Nullable_enum_default_value_null : AutoMapperSpecBase
+    {
+        public class Source
+        {
+        }
+        public enum TargetEnum { A, B }
+        public class Target
+        {
+            public TargetEnum? Enum { get; }
+            public Target(TargetEnum? Enum = null)
+            {
+                this.Enum = Enum;
+            }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateMap<Source, Target>());
+        [Fact]
+        void Should_work() => Mapper.Map<Target>(new Source()).Enum.ShouldBeNull();
+    }
+    public class Nullable_enum_default_value_not_null : AutoMapperSpecBase
+    {
+        public class Source
+        {
+        }
+        public enum TargetEnum { A, B }
+        public class Target
+        {
+            public TargetEnum? Enum { get; }
+            public Target(TargetEnum? Enum = TargetEnum.B)
+            {
+                this.Enum = Enum;
+            }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateMap<Source, Target>());
+        [Fact]
+        void Should_work() => Mapper.Map<Target>(new Source()).Enum.ShouldBe(TargetEnum.B);
+    }
     public class Dynamic_constructor_mapping : AutoMapperSpecBase
     {
-        public class ParentDTO
+        public class ParentDTO<T>
         {
-            public ChildDTO First => Children[0];
-            public List<ChildDTO> Children { get; set; } = new List<ChildDTO>();
+            public ChildDTO<T> First => Children[0];
+            public List<ChildDTO<T>> Children { get; set; } = new List<ChildDTO<T>>();
             public int IdParent { get; set; }
         }
 
-        public class ChildDTO
+        public class ChildDTO<T>
         {
             public int IdChild { get; set; }
-            public ParentDTO Parent { get; set; }
+            public ParentDTO<T> Parent { get; set; }
         }
 
-        public class ParentModel
+        public class ParentModel<T>
         {
-            public ChildModel First { get; set; }
-            public List<ChildModel> Children { get; set; } = new List<ChildModel>();
+            public ChildModel<T> First { get; set; }
+            public List<ChildModel<T>> Children { get; set; } = new List<ChildModel<T>>();
             public int IdParent { get; set; }
         }
 
-        public class ChildModel
+        public class ChildModel<T>
         {
             int _idChild;
 
-            public ChildModel(ParentModel parent)
+            public ChildModel(ParentModel<T> parent)
             {
                 Parent = parent;
             }
@@ -44,28 +114,32 @@ namespace AutoMapper.UnitTests.Constructors
                 get => _idChild;
                 set
                 {
-                    if(_idChild != 0)
+                    if (_idChild != 0)
                     {
                         throw new Exception("Set IdChild again.");
                     }
                     _idChild = value;
                 }
             }
-            public ParentModel Parent { get; }
+            public ParentModel<T> Parent { get; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(_=> { });
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap(typeof(ParentModel<>), typeof(ParentDTO<>)).ReverseMap();
+            cfg.CreateMap(typeof(ChildModel<>), typeof(ChildDTO<>)).ReverseMap();
+        });
 
         [Fact]
         public void Should_work()
         {
-            var parentDto = new ParentDTO { IdParent = 1 };
-            for(var i = 0; i < 5; i++)
+            var parentDto = new ParentDTO<int> { IdParent = 1 };
+            for (var i = 0; i < 5; i++)
             {
-                parentDto.Children.Add(new ChildDTO { IdChild = i, Parent = parentDto });
+                parentDto.Children.Add(new ChildDTO<int> { IdChild = i, Parent = parentDto });
             }
-            var parentModel = Mapper.Map<ParentModel>(parentDto);
-            var mappedChildren = Mapper.Map<List<ChildDTO>, List<ChildModel>>(parentDto.Children);
+            var parentModel = Mapper.Map<ParentModel<int>>(parentDto);
+            var mappedChildren = Mapper.Map<List<ChildDTO<int>>, List<ChildModel<int>>>(parentDto.Children);
         }
     }
 
@@ -504,6 +578,7 @@ namespace AutoMapper.UnitTests.Constructors
         [Fact]
         public void Should_map_from_the_property()
         {
+            var typeMap = FindTypeMapFor<Person, PersonDto>();
             _destination.Name.ShouldBe("John");
         }
     }
@@ -892,6 +967,44 @@ namespace AutoMapper.UnitTests.Constructors
         }
     }
 
+    public class When_mapping_constructor_argument_fails : NonValidatingSpecBase
+    {
+        public class Source
+        {
+            public int Foo { get; set; }
+            public int Bar { get; set; }
+        }
+
+        public class Dest
+        {
+            private readonly int _foo;
+
+            public int Foo
+            {
+                get { return _foo; }
+            }
+
+            public int Bar { get; set; }
+
+            public Dest(DateTime foo)
+            {
+                _foo = foo.Day;
+            }
+        }
+
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Source, Dest>();
+        });
+
+        [Fact]
+        public void Should_say_what_parameter_fails()
+        {
+            new Action(Configuration.AssertConfigurationIsValid).ShouldThrowException<AutoMapperConfigurationException>(ex =>
+                  ex.MemberMap.ToString().ShouldBe("AutoMapper.UnitTests.Constructors.When_mapping_constructor_argument_fails+Dest.Void .ctor(System.DateTime).parameter foo"));
+        }
+    }
+
     public class When_mapping_to_an_object_with_a_constructor_with_a_matching_argument : AutoMapperSpecBase
     {
         private Dest _dest;
@@ -1129,6 +1242,24 @@ namespace AutoMapper.UnitTests.Constructors
             _dest.Bar.ShouldBe(10);
         }
     }
+    public class When_mapping_with_optional_parameters_and_constructor_mapping_is_disabled : AutoMapperSpecBase
+    {
+        public class Destination
+        {
+            public Destination(Destination destination = null)
+            {
+                Dest = destination;
+            }
+            public Destination Dest { get; }
+        }
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
+        {
+            cfg.DisableConstructorMapping();
+            cfg.CreateMap<object, Destination>();
+        });
+        [Fact]
+        public void Should_map_ok() => Mapper.Map<Destination>(new object()).Dest.ShouldBeNull();
+    }
     public class UsingMappingEngineToResolveConstructorArguments
     {
         [Fact]
@@ -1209,7 +1340,6 @@ namespace AutoMapper.UnitTests.Constructors
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<SourceBar, DestinationBar>();
-
                 cfg.CreateMap<SourceFoo, DestinationFoo>();
             });
 
@@ -1284,15 +1414,18 @@ namespace AutoMapper.UnitTests.Constructors
         [Fact]
         public void Should_resolve_constructor_when_args_are_optional()
         {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<SourceFoo, DestinationFoo>());
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SourceBar, DestinationBar>();
+                cfg.CreateMap<SourceFoo, DestinationFoo>();
+            });
 
             var sourceBar = new SourceBar("fooBar");
             var sourceFoo = new SourceFoo(sourceBar);
 
             var destinationFoo = config.CreateMapper().Map<DestinationFoo>(sourceFoo);
 
-            destinationFoo.Bar.ShouldBeNull();
+            destinationFoo.Bar.FooBar.ShouldBe("fooBar");
             destinationFoo.Str.ShouldBe("hello");
         }
 
@@ -1361,14 +1494,18 @@ namespace AutoMapper.UnitTests.Constructors
         [Fact]
         public void Should_resolve_constructor_when_arg_is_optional()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<SourceFoo, DestinationFoo>());
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SourceBar, DestinationBar>();
+                cfg.CreateMap<SourceFoo, DestinationFoo>();
+            });
 
             var sourceBar = new SourceBar("fooBar");
             var sourceFoo = new SourceFoo(sourceBar);
 
             var destinationFoo = config.CreateMapper().Map<DestinationFoo>(sourceFoo);
 
-            destinationFoo.Bar.ShouldBeNull();
+            destinationFoo.Bar.FooBar.ShouldBe("fooBar");
         }
 
 
@@ -1555,7 +1692,7 @@ namespace AutoMapper.UnitTests.Constructors
 
         protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Source, Dest>().ForCtorParam("thing", opt => opt.ResolveUsing(src => src.Value));
+            cfg.CreateMap<Source, Dest>().ForCtorParam("thing", opt => opt.MapFrom(src => src.Value));
         });
 
         [Fact]
@@ -1566,4 +1703,135 @@ namespace AutoMapper.UnitTests.Constructors
             dest.Value1.ShouldBeNull();
         }
     }
+
+    public class When_configuring_ctor_param_members_without_source_property_1 : AutoMapperSpecBase
+    {
+        public class Source
+        {
+            public string Result { get; }
+
+            public Source(string result)
+            {
+                Result = result;
+            }
+        }
+
+        public class Dest
+        {
+            public string Result{ get; }
+            public dynamic Details { get; }
+
+            public Dest(string result, DestInner1 inner1)
+            {
+                Result = result;
+                Details = inner1;
+            }
+            public Dest(string result, DestInner2 inner2)
+            {
+                Result = result;
+                Details = inner2;
+            }
+
+            public class DestInner1
+            {
+                public int Value { get; }
+
+                public DestInner1(int value)
+                {
+                    Value = value;
+                }
+            }
+
+            public class DestInner2
+            {
+                public int Value { get; }
+
+                public DestInner2(int value)
+                {
+                    Value = value;
+                }
+            }
+        }
+
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(config =>
+        {
+            config.CreateMap<Source, Dest>()
+                .ForCtorParam("inner1", cfg => cfg.MapFrom(_ => new Dest.DestInner1(100)));
+        });
+
+        [Fact]
+        public void Should_redirect_value()
+        {
+            var dest = Mapper.Map<Dest>(new Source("Success"));
+
+            dest.ShouldNotBeNull();
+            Assert.Equal("100", dest.Details.Value.ToString());
+        }
+    }
+
+    public class When_configuring_ctor_param_members_without_source_property_2 : AutoMapperSpecBase
+    {
+        public class Source
+        {
+            public string Result { get; }
+
+            public Source(string result)
+            {
+                Result = result;
+            }
+        }
+
+        public class Dest
+        {
+            public string Result{ get; }
+            public dynamic Details { get; }
+
+            public Dest(string result, DestInner1 inner1)
+            {
+                Result = result;
+                Details = inner1;
+            }
+            public Dest(string result, DestInner2 inner2)
+            {
+                Result = result;
+                Details = inner2;
+            }
+
+            public class DestInner1
+            {
+                public int Value { get; }
+
+                public DestInner1(int value)
+                {
+                    Value = value;
+                }
+            }
+
+            public class DestInner2
+            {
+                public int Value { get; }
+
+                public DestInner2(int value)
+                {
+                    Value = value;
+                }
+            }
+        }
+
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(config =>
+        {
+            config.CreateMap<Source, Dest>()
+                .ForCtorParam("inner2", cfg => cfg.MapFrom(_ => new Dest.DestInner2(100)));
+        });
+
+        [Fact]
+        public void Should_redirect_value()
+        {
+            var dest = Mapper.Map<Dest>(new Source("Success"));
+
+            dest.ShouldNotBeNull();
+            Assert.Equal("100", dest.Details.Value.ToString());
+        }
+    }
+
 }

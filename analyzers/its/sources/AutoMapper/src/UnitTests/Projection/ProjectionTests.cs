@@ -1,20 +1,33 @@
-﻿namespace AutoMapper.UnitTests.Projection
-{
-    using System.Linq;
-    using Xunit;
-    using Shouldly;
-    using AutoMapper;
-    using QueryableExtensions;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
+﻿using System.Linq;
+using Xunit;
+using Shouldly;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using System.Collections.Generic;
 
+namespace AutoMapper.UnitTests.Projection
+{
+    public class NonNullableToNullable : AutoMapperSpecBase
+    {
+        class Source
+        {
+            public int Id { get; set; }
+        }
+        class Destination
+        {
+            public int? Id { get; set; }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(c=>c.CreateProjection<Source, Destination>());
+        [Fact]
+        public void Should_project() => ProjectTo<Destination>(new[] { new Source() }.AsQueryable()).First().Id.ShouldBe(0);
+    }
     public class InMemoryMapObjectPropertyFromSubQuery : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Product, ProductModel>()
+            cfg.CreateProjection<Product, ProductModel>()
                 .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-            cfg.CreateMap<Article, PriceModel>()
+            cfg.CreateProjection<Article, PriceModel>()
                 .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
         });
 
@@ -61,98 +74,6 @@
         {
             public int Id { get; set; }
             public PriceModel Price { get; set; }
-        }
-    }
-
-
-    public class ProjectionTests
-    {
-        string _niceGreeting = "Hello";
-        string _badGreeting = "GRRRRR";
-        
-
-        [Fact]
-        public void Direct_assignability_shouldnt_trump_custom_projection() {
-            var config = new MapperConfiguration(x => {
-                x.CreateMap<string, string>()
-                    .ProjectUsing(s => _niceGreeting);
-
-                x.CreateMap<Source, Target>();
-                x.CreateMap<SourceChild, TargetChild>();
-            });
-
-            var target = new[] { new Source() { Greeting = _badGreeting } }
-                            .AsQueryable()
-                            .ProjectTo<Target>(config)
-                            .First();
-
-            target.Greeting.ShouldBe(_niceGreeting);
-        }
-
-
-        [Fact]
-        public void Root_is_subject_to_custom_projection() {
-            var config = new MapperConfiguration(x => {
-                x.CreateMap<Source, Target>()
-                    .ProjectUsing(s => new Target() { Greeting = _niceGreeting });
-            });
-
-            var target = new[] { new Source() }
-                            .AsQueryable()
-                            .ProjectTo<Target>(config)
-                            .First();
-
-            target.Greeting.ShouldBe(_niceGreeting);
-        }
-
-
-        [Fact]
-        public void Child_nodes_are_subject_to_custom_projection() {
-            var config = new MapperConfiguration(x => {
-                x.CreateMap<SourceChild, TargetChild>()
-                    .ProjectUsing(s => new TargetChild() { Greeting = _niceGreeting });
-
-                x.CreateMap<Source, Target>();
-            });
-
-            var target = new[] { new Source() }
-                            .AsQueryable()
-                            .ProjectTo<Target>(config)
-                            .First();
-
-            target.Child.Greeting.ShouldBe(_niceGreeting);
-        }
-
-
-
-
-        class Source
-        {
-            public string Greeting { get; set; }
-            public int Number { get; set; }
-            public SourceChild Child { get; set; }
-
-            public Source() {
-                Child = new SourceChild();
-            }
-        }
-
-        class SourceChild
-        {
-            public string Greeting { get; set; }
-        }
-
-
-        class Target
-        {
-            public string Greeting { get; set; }
-            public int? Number { get; set; }
-            public TargetChild Child { get; set; }
-        }
-
-        class TargetChild
-        {
-            public string Greeting { get; set; }
         }
     }
 }

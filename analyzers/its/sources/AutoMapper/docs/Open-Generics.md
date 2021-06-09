@@ -12,7 +12,7 @@ public class Destination<T> {
 }
 
 // Create the mapping
-Mapper.Initialize(cfg => cfg.CreateMap(typeof(Source<>), typeof(Destination<>)));
+var configuration = new MapperConfiguration(cfg => cfg.CreateMap(typeof(Source<>), typeof(Destination<>)));
 ```
 
 You don't need to create maps for closed generic types. AutoMapper will apply any configuration from the open generic mapping to the closed mapping at runtime:
@@ -31,15 +31,17 @@ AutoMapper will skip open generic type maps during configuration validation, sin
 You can also create an open generic type converter:
 
 ```c#
-Mapper.Initialize(cfg =>
+var configuration = new MapperConfiguration(cfg =>
    cfg.CreateMap(typeof(Source<>), typeof(Destination<>)).ConvertUsing(typeof(Converter<>)));
 ```
 
 AutoMapper also supports open generic type converters with any number of generic arguments:
 
 ```c#
-Mapper.Initialize(cfg =>
+var configuration = new MapperConfiguration(cfg =>
    cfg.CreateMap(typeof(Source<>), typeof(Destination<>)).ConvertUsing(typeof(Converter<,>)));
 ```
 
 The closed type from `Source` will be the first generic argument, and the closed type of `Destination` will be the second argument to close `Converter<,>`.
+
+The same idea applies to value resolvers. Check [the tests](https://github.com/AutoMapper/AutoMapper/blob/e8249d582d384ea3b72eec31408126a0b69619bc/src/UnitTests/OpenGenerics.cs#L11).

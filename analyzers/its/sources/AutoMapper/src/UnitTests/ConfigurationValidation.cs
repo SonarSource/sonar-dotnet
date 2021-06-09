@@ -1,72 +1,41 @@
 using System;
 using System.Collections.Generic;
-using AutoMapper.Mappers;
+using System.Linq;
 using Shouldly;
 using Xunit;
 
 namespace AutoMapper.UnitTests.ConfigurationValidation
 {
-    public class When_using_custom_validation
+    public class ConstructorMappingValidation : NonValidatingSpecBase
     {
-        bool _calledForRoot = false;
-        bool _calledForValues = false;
-        bool _calledForInt = false;
-
+        public class Destination
+        {
+            public Destination(ComplexType myComplexMember)
+            {
+                MyComplexMember = myComplexMember;
+            }
+            public ComplexType MyComplexMember { get; }
+        }
         public class Source
         {
-            public int[] Values { get; set; }
+            public string MyComplexMember { get; set; }
         }
-
-        public class Dest
+        public class ComplexType
         {
-            public int[] Values { get; set; }
+            public int SomeMember { get; }
+            private ComplexType(int someMember)
+            {
+                SomeMember = someMember;
+            }
         }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
 
         [Fact]
-        public void Should_call_the_validator()
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.Advanced.Validator(Validator);
-                cfg.CreateMap<Source, Dest>();
-            });
-
-            config.AssertConfigurationIsValid();
-
-            _calledForRoot.ShouldBeTrue();
-            _calledForValues.ShouldBeTrue();
-            _calledForInt.ShouldBeTrue();
-        }
-
-        private void Validator(ValidationContext context)
-        {
-            if(context.TypeMap != null)
-            {
-                _calledForRoot = true;
-                context.TypeMap.Types.ShouldBe(context.Types);
-                context.Types.SourceType.ShouldBe(typeof(Source));
-                context.Types.DestinationType.ShouldBe(typeof(Dest));
-                context.ObjectMapper.ShouldBeNull();
-                context.PropertyMap.ShouldBeNull();
-            }
-            else
-            {
-                context.PropertyMap.SourceMember.Name.ShouldBe("Values");
-                context.PropertyMap.DestinationProperty.Name.ShouldBe("Values");
-                if(context.Types.Equals(new TypePair(typeof(int), typeof(int))))
-                {
-                    _calledForInt = true;
-                    context.ObjectMapper.ShouldBeOfType<AssignableMapper>();
-                }
-                else
-                {
-                    _calledForValues = true;
-                    context.ObjectMapper.ShouldBeOfType<ArrayCopyMapper>();
-                    context.Types.SourceType.ShouldBe(typeof(int[]));
-                    context.Types.DestinationType.ShouldBe(typeof(int[]));
-                }
-            }
-        }
+        public void Should_fail_validation() => new Action(Configuration.AssertConfigurationIsValid).ShouldThrowException<AutoMapperConfigurationException>(ex=>
+            ex.MemberMap.ToString().ShouldBe("AutoMapper.UnitTests.ConfigurationValidation.ConstructorMappingValidation+Destination.Void .ctor(ComplexType).parameter myComplexMember"));
     }
 
     public class When_using_a_type_converter : AutoMapperSpecBase
@@ -148,6 +117,26 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         {
             typeof(AutoMapperConfigurationException).ShouldBeThrownBy(() => Configuration.AssertConfigurationIsValid());
         }
+    }
+
+    public class When_constructor_does_not_match_ForCtorParam : AutoMapperSpecBase
+    {
+        public class Source
+        {
+        }
+        public class Dest
+        {
+            public Dest(int value)
+            {
+                Value = value;
+            }
+            public int Value { get; }
+        }
+
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => cfg.CreateMap<Source, Dest>().ForCtorParam("value", o=>o.MapFrom(s=>4)));
+
+        [Fact]
+        public void Should_map() => Mapper.Map<Dest>(new Source()).Value.ShouldBe(4);
     }
 
     public class When_constructor_partially_matches : NonValidatingSpecBase
@@ -296,6 +285,23 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
     }
 
+    public class NonMemberExpressionWithSourceValidation : NonValidatingSpecBase
+    {
+        class Source
+        {
+            public string Value { get; set; }
+        }
+        class Destination
+        {
+            public string OtherValue { get; set; }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(c=>c.CreateMap<Source, Destination>(MemberList.Source)
+            .ForMember(d=>d.OtherValue, o=>o.MapFrom(s=>s.Value ?? "")));
+        [Fact]
+        public void Should_be_ignored() => new Action(Configuration.AssertConfigurationIsValid)
+            .ShouldThrow<AutoMapperConfigurationException>().Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Source.Value));
+    }
+
     public class When_testing_a_dto_with_fully_mapped_and_custom_matchers : NonValidatingSpecBase
     {
         public class ModelObject
@@ -338,7 +344,6 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Source, Destination>();
-            cfg.CreateMissingTypeMaps = false;
         });
 
         [Fact]
@@ -465,7 +470,6 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Source, Destination>();
-            cfg.CreateMissingTypeMaps = false;
         });
 
         [Fact]
@@ -500,7 +504,6 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Source, Destination>();
-            cfg.CreateMissingTypeMaps = false;
         });
 
         [Fact]
@@ -571,10 +574,11 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         });
 
         [Fact]
-        public void Should_ignore_bad_dtos_in_other_profiles()
-        {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() => Configuration.AssertConfigurationIsValid("Good"));
-        }
+        public void Should_ignore_bad_dtos_in_other_profiles() =>
+            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() => AssertConfigurationIsValid("Good"));
+        [Fact]
+        public void Should_throw_when_profile_name_does_not_exist() =>
+            typeof(ArgumentOutOfRangeException).ShouldBeThrownBy(() => AssertConfigurationIsValid("Does not exist"));
     }
 
     public class When_testing_a_dto_with_mismatched_custom_member_mapping : NonValidatingSpecBase
@@ -599,7 +603,6 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         {
             cfg.CreateMap<ModelObject, ModelDto>()
                 .ForMember(dest => dest.Bar, opt => opt.MapFrom(src => src.Barr));
-            cfg.CreateMissingTypeMaps = false;
         });
 
         [Fact]
@@ -621,7 +624,7 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         {
             object i = 7;
             cfg.CreateMap<Source, Destination>()
-                .ForMember(dest => dest.Value, opt => opt.UseValue(i));
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => i));
         });
 
         [Fact]
@@ -709,6 +712,32 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         interface IAbstractDest
         {
             string DifferentName { get; set; }
+        }
+    }
+
+    public class When_configuring_a_resolver : AutoMapperSpecBase
+    {
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Query, Command>().ForMember(d => d.Details, o => o.MapFrom<DetailsValueResolver>());
+        });
+        public class DetailsValueResolver : IValueResolver<Query, Command, List<KeyValuePair<string, string>>>
+        {
+            public List<KeyValuePair<string, string>> Resolve(Query source, Command destination, List<KeyValuePair<string, string>> destMember, ResolutionContext context)
+            {
+                return source.Details
+                    .Select(d => new KeyValuePair<string, string>(d.ToString(), d.ToString()))
+                    .ToList();
+            }
+        }
+        public class Query
+        {
+            public List<int> Details { get; set; }
+        }
+
+        public class Command
+        {
+            public List<KeyValuePair<string, string>> Details { get; private set; }
         }
     }
 }

@@ -96,7 +96,7 @@ namespace AutoMapper.IntegrationTests
 
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Source, Dto>()
+            cfg.CreateProjection<Source, Dto>()
                 .ForMember(dto => dto.Desc, conf => conf.ExplicitExpansion())
                 .ForMember(dto => dto.Name, conf => conf.ExplicitExpansion())
                 .ForMember(dto => dto.InnerDescFlattened, conf => { conf.ExplicitExpansion(); conf.MapFrom(_ => _.Inner.Ides); })
@@ -109,7 +109,7 @@ namespace AutoMapper.IntegrationTests
         {
             using (var ctx = new Context())
             {
-                var dto = ctx.Sources.ProjectTo<Dto>(Configuration).ToList().First();
+                var dto = ProjectTo<Dto>(ctx.Sources).ToList().First();
                 var sqlSelect = ctx.GetLastSelectSqlLogEntry();
                 sqlSelect.SqlFromShouldStartWith(nameof(ctx.Sources));
                 sqlSelect.ShouldNotContain("JOIN");
@@ -125,7 +125,7 @@ namespace AutoMapper.IntegrationTests
         {
             using (var ctx = new Context())
             {
-                var dto = ctx.Sources.ProjectTo<Dto>(Configuration, _ => _.Name).First();
+                var dto = ProjectTo<Dto>(ctx.Sources, null,  _ => _.Name).First();
                 var sqlSelect = ctx.GetLastSelectSqlLogEntry();
                 sqlSelect.SqlFromShouldStartWith(nameof(ctx.Sources));
                 sqlSelect.ShouldNotContain("JOIN");
@@ -140,7 +140,7 @@ namespace AutoMapper.IntegrationTests
         {
             using (var ctx = new Context())
             {
-                var dto = ctx.Sources.ProjectTo<Dto>(Configuration, _ => _.Desc).First();
+                var dto = ProjectTo<Dto>(ctx.Sources, null,  _ => _.Desc).First();
 
                 var sqlSelect = ctx.GetLastSelectSqlLogEntry();
                 sqlSelect.SqlFromShouldStartWith(nameof(ctx.Sources));
@@ -157,7 +157,7 @@ namespace AutoMapper.IntegrationTests
         {
             using (var ctx = new Context())
             {
-                var dto = ctx.Sources.ProjectTo<Dto>(Configuration, _ => _.Name, _ => _.Desc).First();
+                var dto = ProjectTo<Dto>(ctx.Sources, null,  _ => _.Name, _ => _.Desc).First();
 
                 var sqlSelect = ctx.GetLastSelectSqlLogEntry();
                 sqlSelect.SqlFromShouldStartWith(nameof(ctx.Sources));
@@ -174,7 +174,7 @@ namespace AutoMapper.IntegrationTests
         {
             using (var ctx = new Context())
             {
-                var dto = ctx.Sources.ProjectTo<Dto>(Configuration, _ => _.InnerDescFlattened).ToList().First();
+                var dto = ProjectTo<Dto>(ctx.Sources, null,  _ => _.InnerDescFlattened).ToList().First();
 
                 dto.InnerDescFlattened.ShouldBe(_iqf.Inner.Ides);
                 dto.InnerFlattenedNonKey.ShouldBeNull();
@@ -194,7 +194,7 @@ namespace AutoMapper.IntegrationTests
         {
             using (var ctx = new Context())
             {
-                var dto = ctx.Sources.ProjectTo<Dto>(Configuration, _ => _.InnerFlattenedNonKey).ToList().First();
+                var dto = ProjectTo<Dto>(ctx.Sources, null,  _ => _.InnerFlattenedNonKey).ToList().First();
 
                 dto.InnerFlattenedNonKey.ShouldBe(_iqf.Inner.Ide1);
                 dto.InnerDescFlattened.ShouldBeNull();
@@ -215,7 +215,7 @@ namespace AutoMapper.IntegrationTests
         {
             using (var ctx = new Context())
             {
-                var dto = ctx.Sources.ProjectTo<Dto>(Configuration, _ => _.DeepFlattened).ToList().First();
+                var dto = ProjectTo<Dto>(ctx.Sources, null,  _ => _.DeepFlattened).ToList().First();
                 var sqlSelect = ctx.GetLastSelectSqlLogEntry();
                 sqlSelect.SqlFromShouldStartWith(nameof(ctx.Sources));
 
@@ -225,7 +225,6 @@ namespace AutoMapper.IntegrationTests
                 sqlSelect.ShouldContain("JOIN");
                 sqlSelect.ShouldContain(nameof(ctx.SourceInners));
                 sqlSelect.ShouldContain("JOIN"); // ???
-                sqlSelect.ShouldContain(nameof(ctx.SourceDeepInners)); // ???
                 sqlSelect.SqlShouldNotSelectColumn(nameof(_iqf.Name));   dto.Name.ShouldBeNull();
                 sqlSelect.SqlShouldNotSelectColumn(nameof(_iqf.Desc));   dto.Desc.ShouldBeNull();
             }

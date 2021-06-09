@@ -1,29 +1,273 @@
-﻿using System;
-using Shouldly;
+﻿using Shouldly;
 using System.Linq;
 using System.Collections.Generic;
 using AutoMapper.UnitTests;
 using System.Data.Entity;
 using Xunit;
-
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq.Expressions;
 namespace AutoMapper.IntegrationTests
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq.Expressions;
-    using QueryableExtensions;
+    public class MemberWithSubQueryProjections : AutoMapperSpecBase
+    {
+        public class Customer
+        {
+            [Key]
+            public int Id { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public ICollection<Item> Items { get; set; }
+        }
+        public class Item
+        {
+            public int Id { get; set; }
+            public int Code { get; set; }
+        }
+        public class ItemModel
+        {
+            public int Id { get; set; }
+            public int Code { get; set; }
+        }
+        public class CustomerViewModel
+        {
+            public CustomerNameModel Name { get; set; }
+            public ItemModel FirstItem { get; set; }
+        }
+        public class CustomerNameModel
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+        }
+        public class Context : DbContext
+        {
+            public Context() => Database.SetInitializer(new DatabaseInitializer());
+            public DbSet<Customer> Customers { get; set; }
+        }
+        public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
+        {
+            protected override void Seed(Context context)
+            {
+                context.Customers.Add(new Customer
+                {
+                    Id = 1, FirstName = "Bob", LastName = "Smith", Items = new[] { new Item { Code = 1 }, new Item { Code = 3 }, new Item { Code = 5 } }
+                });
+                base.Seed(context);
+            }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateProjection<Customer, CustomerViewModel>()
+                .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.LastName != null ? src : null))
+                .ForMember(dst => dst.FirstItem, opt => opt.MapFrom(src => src.Items.FirstOrDefault()));
+            cfg.CreateProjection<Customer, CustomerNameModel>();
+            cfg.CreateProjection<Item, ItemModel>();
+        });
+        [Fact]
+        public void Should_work()
+        {
+            using (var context = new Context())
+            {
+                var resultQuery = ProjectTo<CustomerViewModel>(context.Customers);
+                var result = resultQuery.Single();
+                result.Name.FirstName.ShouldBe("Bob");
+                result.Name.LastName.ShouldBe("Smith");
+                result.FirstItem.Id.ShouldBe(1);
+                result.FirstItem.Code.ShouldBe(1);
+            }
+        }
+    }
+    public class MemberWithSubQueryProjectionsNoMap : AutoMapperSpecBase
+    {
+        public class Customer
+        {
+            [Key]
+            public int Id { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public ICollection<Item> Items { get; set; }
+        }
+        public class Item
+        {
+            public int Id { get; set; }
+            public int Code { get; set; }
+        }
+        public class ItemModel
+        {
+            public int Id { get; set; }
+            public int Code { get; set; }
+        }
+        public class CustomerViewModel
+        {
+            public string Name { get; set; }
+            public ItemModel FirstItem { get; set; }
+        }
+        public class Context : DbContext
+        {
+            public Context() => Database.SetInitializer(new DatabaseInitializer());
+            public DbSet<Customer> Customers { get; set; }
+        }
+        public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
+        {
+            protected override void Seed(Context context)
+            {
+                context.Customers.Add(new Customer
+                {
+                    Id = 1,
+                    FirstName = "Bob",
+                    LastName = "Smith",
+                    Items = new[] { new Item { Code = 1 }, new Item { Code = 3 }, new Item { Code = 5 } }
+                });
+                base.Seed(context);
+            }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateProjection<Customer, CustomerViewModel>()
+                .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.LastName != null ? src.LastName : null))
+                .ForMember(dst => dst.FirstItem, opt => opt.MapFrom(src => src.Items.FirstOrDefault()));
+            cfg.CreateProjection<Item, ItemModel>();
+        });
+        [Fact]
+        public void Should_work()
+        {
+            using (var context = new Context())
+            {
+                var resultQuery = ProjectTo<CustomerViewModel>(context.Customers);
+                var result = resultQuery.Single();
+                result.Name.ShouldBe("Smith");
+                result.FirstItem.Id.ShouldBe(1);
+                result.FirstItem.Code.ShouldBe(1);
+            }
+        }
+    }
+    public class MapObjectPropertyFromSubQueryTypeNameMax : AutoMapperSpecBase
+    {
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateProjection<Product, ProductModel>()
+                .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
+            cfg.CreateProjection<Article, PriceModel>()
+                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+        });
+
+        [Fact]
+        public void Should_cache_the_subquery()
+        {
+            using(var context = new ClientContext())
+            {
+                var projection = ProjectTo<ProductModel>(context.Products);
+                var counter = new FirstOrDefaultCounter();
+                counter.Visit(projection.Expression);
+                counter.Count.ShouldBe(1);
+                var productModel = projection.First();
+                productModel.Price.RegionId.ShouldBe((short)1);
+                productModel.Price.IsDefault.ShouldBeTrue();
+                productModel.Price.Id.ShouldBe(1);
+                productModel.Id.ShouldBe(1);
+            }
+        }
+
+        class FirstOrDefaultCounter : ExpressionVisitor
+        {
+            public int Count;
+
+            protected override Expression VisitMethodCall(MethodCallExpression node)
+            {
+                if(node.Method.Name == "FirstOrDefault")
+                {
+                    Count++;
+                }
+                return base.VisitMethodCall(node);
+            }
+        }
+
+        public partial class Article
+        {
+            public int Id { get; set; }
+            public int ProductId { get; set; }
+            public bool IsDefault { get; set; }
+            public short NationId { get; set; }
+            public virtual Product Product { get; set; }
+        }
+
+        public partial class Product
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public bool ECommercePublished { get; set; }
+            public virtual ICollection<Article> Articles { get; set; }
+            public int Value { get; }
+            [NotMapped]
+            public int NotMappedValue { get; set; }
+            public virtual List<Article> OtherArticles { get; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName1 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName2 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName3 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName4 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName5 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName6 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName7 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName8 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName9 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName10 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName11 { get; set; }
+        }
+
+        public class PriceModel
+        {
+            public int Id { get; set; }
+            public short RegionId { get; set; }
+            public bool IsDefault { get; set; }
+        }
+
+        public class ProductModel
+        {
+            public int Id { get; set; }
+            public PriceModel Price { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName1 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName2 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName3 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName4 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName5 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName6 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName7 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName8 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName9 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName10 { get; set; }
+            public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName11 { get; set; }
+        }
+
+        class Initializer : DropCreateDatabaseAlways<ClientContext>
+        {
+            protected override void Seed(ClientContext context)
+            {
+                context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
+            }
+        }
+
+        class ClientContext : DbContext
+        {
+            protected override void OnModelCreating(DbModelBuilder modelBuilder)
+            {
+                Database.SetInitializer(new Initializer());
+            }
+
+            public DbSet<Product> Products { get; set; }
+        }
+    }
 
     public class MapObjectPropertyFromSubQueryExplicitExpansion : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Product, ProductModel>()
+            cfg.CreateProjection<Product, ProductModel>()
                 .ForMember(d => d.Price, o =>
                 {
                     o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault());
                     o.ExplicitExpansion();
                 });
-            cfg.CreateMap<Article, PriceModel>()
+            cfg.CreateProjection<Article, PriceModel>()
                 .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
         });
 
@@ -32,7 +276,7 @@ namespace AutoMapper.IntegrationTests
         {
             using(var context = new ClientContext())
             {
-                var projection = context.Products.ProjectTo<ProductModel>(Configuration);
+                var projection = ProjectTo<ProductModel>(context.Products);
                 var counter = new FirstOrDefaultCounter();
                 counter.Visit(projection.Expression);
                 counter.Count.ShouldBe(0);
@@ -111,9 +355,9 @@ namespace AutoMapper.IntegrationTests
     {
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
         {
-            cfg.CreateMap<Product, ProductModel>()
+            cfg.CreateProjection<Product, ProductModel>()
                 .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-            cfg.CreateMap<Article, PriceModel>()
+            cfg.CreateProjection<Article, PriceModel>()
                 .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
         });
 
@@ -122,7 +366,7 @@ namespace AutoMapper.IntegrationTests
         {
             using(var context = new ClientContext())
             {
-                var projection = context.Products.ProjectTo<ProductModel>(Configuration);
+                var projection = ProjectTo<ProductModel>(context.Products);
                 var counter = new FirstOrDefaultCounter();
                 counter.Visit(projection.Expression);
                 counter.Count.ShouldBe(1);
@@ -205,10 +449,10 @@ namespace AutoMapper.IntegrationTests
     {
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<ProductArticle, ProductArticleModel>();
-            cfg.CreateMap<Product, ProductModel>()
+            cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+            cfg.CreateProjection<Product, ProductModel>()
                 .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-            cfg.CreateMap<Article, PriceModel>()
+            cfg.CreateProjection<Article, PriceModel>()
                 .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
         });
 
@@ -217,7 +461,7 @@ namespace AutoMapper.IntegrationTests
         {
             using(var context = new ClientContext())
             {
-                var projection = context.ProductArticles.ProjectTo<ProductArticleModel>(Configuration);
+                var projection = ProjectTo<ProductArticleModel>(context.ProductArticles);
                 var counter = new FirstOrDefaultCounter();
                 counter.Visit(projection.Expression);
                 counter.Count.ShouldBe(2);
@@ -232,20 +476,6 @@ namespace AutoMapper.IntegrationTests
                 otherProductModel.Price.IsDefault.ShouldBeTrue();
                 otherProductModel.Price.Id.ShouldBe(2);
                 otherProductModel.Id.ShouldBe(2);
-            }
-        }
-
-        class FirstOrDefaultCounter : ExpressionVisitor
-        {
-            public int Count;
-
-            protected override Expression VisitMethodCall(MethodCallExpression node)
-            {
-                if(node.Method.Name == "FirstOrDefault")
-                {
-                    Count++;
-                }
-                return base.VisitMethodCall(node);
             }
         }
 
@@ -319,10 +549,10 @@ namespace AutoMapper.IntegrationTests
     {
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<ProductArticle, ProductArticleModel>();
-            cfg.CreateMap<Product, ProductModel>()
+            cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+            cfg.CreateProjection<Product, ProductModel>()
                 .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-            cfg.CreateMap<Article, PriceModel>()
+            cfg.CreateProjection<Article, PriceModel>()
                 .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
         });
 
@@ -331,7 +561,7 @@ namespace AutoMapper.IntegrationTests
         {
             using(var context = new ClientContext())
             {
-                var projection = context.ProductArticles.ProjectTo<ProductArticleModel>(Configuration);
+                var projection = ProjectTo<ProductArticleModel>(context.ProductArticles);
                 var counter = new FirstOrDefaultCounter();
                 counter.Visit(projection.Expression);
                 counter.Count.ShouldBe(1);
@@ -420,15 +650,16 @@ namespace AutoMapper.IntegrationTests
         }
     }
 
-    public class MapObjectPropertyFromSubQueryWithCollectionSameName : AutoMapperSpecBase
+    public class MapObjectPropertyFromSubQueryWithCollectionSameName : NonValidatingSpecBase
     {
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<ProductArticle, ProductArticleModel>();
-            cfg.CreateMap<Product, ProductModel>()
+            cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+            cfg.CreateProjection<Product, ProductModel>()
                 .ForMember(d=>d.ArticlesModel, o=>o.MapFrom(s=>s))
                 .ForMember(d => d.Articles, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-            cfg.CreateMap<Article, PriceModel>()
+            cfg.CreateProjection<Product, ArticlesModel>();
+            cfg.CreateProjection<Article, PriceModel>()
                 .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
         });
 
@@ -437,7 +668,7 @@ namespace AutoMapper.IntegrationTests
         {
             using(var context = new ClientContext())
             {
-                var projection = context.ProductArticles.ProjectTo<ProductArticleModel>(Configuration);
+                var projection = ProjectTo<ProductArticleModel>(context.ProductArticles);
                 var counter = new FirstOrDefaultCounter();
                 counter.Visit(projection.Expression);
                 counter.Count.ShouldBe(1);
@@ -625,8 +856,8 @@ namespace AutoMapper.IntegrationTests
 
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<CableEnd, CableEndModel>().ForMember(dest => dest.DataHallId, opt => opt.MapFrom(src => src.Rack.DataHall.DataCentreId));
-            cfg.CreateMap<Cable, CableListModel>()
+            cfg.CreateProjection<CableEnd, CableEndModel>().ForMember(dest => dest.DataHallId, opt => opt.MapFrom(src => src.Rack.DataHall.DataCentreId));
+            cfg.CreateProjection<Cable, CableListModel>()
                 .ForMember(dest => dest.AEnd, opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "A")))
                 .ForMember(dest => dest.AnotherEnd, opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "B")));
         });
@@ -636,10 +867,95 @@ namespace AutoMapper.IntegrationTests
         {
             using(var context = new ClientContext())
             {
-                var projection = context.Cables.ProjectTo<CableListModel>(Configuration);
+                var projection = ProjectTo<CableListModel>(context.Cables);
                 var result = projection.Single();
                 result.AEnd.DataHallId.ShouldBe(10);
                 result.AnotherEnd.DataHallId.ShouldBeNull();
+            }
+        }
+    }
+
+    public class MapObjectPropertyFromSubQueryCustomSource : AutoMapperSpecBase
+    {
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateProjection<Owner, OwnerDto>();
+            cfg.CreateProjection<Brand, BrandDto>()
+                .ForMember(dest => dest.Owner, opt => opt.MapFrom(src => src.Owners.FirstOrDefault()));
+            cfg.CreateProjection<ProductReview, ProductReviewDto>()
+                .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Product.Brand));
+        });
+
+        public class Owner
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
+        public class Brand
+        {
+            public int Id { get; set; }
+            public List<Owner> Owners { get; set; } = new List<Owner>();
+        }
+        public class Product
+        {
+            public int Id { get; set; }
+            public Brand Brand { get; set; }
+        }
+        public class ProductReview
+        {
+            public int Id { get; set; }
+            public Product Product { get; set; }
+        }
+        /* Destination types */
+        public class ProductReviewDto
+        {
+            public int Id { get; set; }
+            public BrandDto Brand { get; set; }
+        }
+        public class BrandDto
+        {
+            public int Id { get; set; }
+            public OwnerDto Owner { get; set; }
+        }
+        public class OwnerDto
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
+
+        class ClientContext : DbContext
+        {
+            protected override void OnModelCreating(DbModelBuilder modelBuilder)
+            {
+                Database.SetInitializer(new Initializer());
+            }
+            public DbSet<Owner> Owners { get; set; }
+            public DbSet<Product> Products { get; set; }
+            public DbSet<Brand> Brands { get; set; }
+            public DbSet<ProductReview> ProductReviews { get; set; }
+        }
+
+        class Initializer : DropCreateDatabaseAlways<ClientContext>
+        {
+            protected override void Seed(ClientContext context)
+            {
+                context.ProductReviews.AddRange(new[]{
+                    new ProductReview { Product = new Product { Brand = new Brand{ Owners = { new Owner{ Name = "Owner" } } } } },
+                    new ProductReview { Product = new Product { Brand = new Brand { } } },
+                    new ProductReview { Product = new Product { } } });
+            }
+        }
+
+        [Fact]
+        public void Should_project_ok()
+        {
+            using(var context = new ClientContext())
+            {
+                var projection = ProjectTo<ProductReviewDto>(context.ProductReviews);
+                var results = projection.ToArray();
+                results[0].Brand.Owner.Name.ShouldBe("Owner");
+                results[1].Brand.Owner.ShouldBeNull();
+                results[2].Brand.ShouldBeNull();
             }
         }
     }

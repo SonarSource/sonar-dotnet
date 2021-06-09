@@ -38,17 +38,17 @@ public class CustomResolver : IValueResolver<Source, Destination, int>
 
 Once we have our IValueResolver implementation, we'll need to tell AutoMapper to use this custom value resolver when resolving a specific destination member.  We have several options in telling AutoMapper a custom value resolver to use, including:
 
-* ResolveUsing\<TValueResolver\>
-* ResolveUsing(typeof(CustomValueResolver))
-* ResolveUsing(aValueResolverInstance)
+* MapFrom\<TValueResolver\>
+* MapFrom(typeof(CustomValueResolver))
+* MapFrom(aValueResolverInstance)
 
 In the below example, we'll use the first option, telling AutoMapper the custom resolver type through generics:
 
 ```c#
-Mapper.Initialize(cfg =>
+var configuration = new MapperConfiguration(cfg =>
    cfg.CreateMap<Source, Destination>()
-	 .ForMember(dest => dest.Total, opt => opt.ResolveUsing<CustomResolver>()));
-Mapper.AssertConfigurationIsValid();
+	 .ForMember(dest => dest.Total, opt => opt.MapFrom<CustomResolver>()));
+configuration.AssertConfigurationIsValid();
 
 var source = new Source
 	{
@@ -56,7 +56,7 @@ var source = new Source
 		Value2 = 7
 	};
 
-var result = Mapper.Map<Source, Destination>(source);
+var result = mapper.Map<Source, Destination>(source);
 
 result.Total.ShouldEqual(12);
 ```
@@ -80,26 +80,30 @@ Because we only supplied the type of the custom resolver to AutoMapper, the mapp
 If we don't want AutoMapper to use reflection to create the instance, we can supply it directly:
 
 ```c#
-Mapper.Initialize(cfg => cfg.CreateMap<Source, Destination>()
+var configuration = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>()
 	.ForMember(dest => dest.Total,
-		opt => opt.ResolveUsing(new CustomResolver())
+		opt => opt.MapFrom(new CustomResolver())
 	));
 ```
 
 AutoMapper will use that specific object, helpful in scenarios where the resolver might have constructor arguments or need to be constructed by an IoC container.
+
+### The resolved value is mapped to the destination property
+
+Note that the value you return from your resolver is not simply assigned to the destination property. Any map that applies will be used and the result of that mapping will be the final destination property value. Check [the execution plan](Understanding-your-mapping.html).
 
 ### Customizing the source value supplied to the resolver
 
 By default, AutoMapper passes the source object to the resolver. This limits the reusability of resolvers, since the resolver is coupled to the source type. If, however, we supply a common resolver across multiple types, we configure AutoMapper to redirect the source value supplied to the resolver, and also use a different resolver interface so that our resolver can get use of the source/destination members:
 
 ```c#
-Mapper.Initialize(cfg => {
+var configuration = new MapperConfiguration(cfg => {
 cfg.CreateMap<Source, Destination>()
     .ForMember(dest => dest.Total,
-        opt => opt.ResolveUsing<CustomResolver, decimal>(src => src.SubTotal));
+        opt => opt.MapFrom<CustomResolver, decimal>(src => src.SubTotal));
 cfg.CreateMap<OtherSource, OtherDest>()
     .ForMember(dest => dest.OtherTotal,
-        opt => opt.ResolveUsing<CustomResolver, decimal>(src => src.OtherSubTotal));
+        opt => opt.MapFrom<CustomResolver, decimal>(src => src.OtherSubTotal));
 });
 
 public class CustomResolver : IMemberValueResolver<object, object, decimal, decimal> {
@@ -114,14 +118,14 @@ public class CustomResolver : IMemberValueResolver<object, object, decimal, deci
 When calling map you can pass in extra objects by using key-value and using a custom resolver to get the object from context.
 
 ```c#
-Mapper.Map<Source, Dest>(src, opt => opt.Items["Foo"] = "Bar");
+mapper.Map<Source, Dest>(src, opt => opt.Items["Foo"] = "Bar");
 ```
 
 This is how to setup the mapping for this custom resolver
 
 ```c#
-Mapper.CreateMap<Source, Dest>()
-    .ForMember(dest => dest.Foo, opt => opt.ResolveUsing((src, dest, destMember, context) => context.Items["Foo"]));
+cfg.CreateMap<Source, Dest>()
+    .ForMember(dest => dest.Foo, opt => opt.MapFrom((src, dest, destMember, context) => context.Items["Foo"]));
 ```
 
 ### ForPath

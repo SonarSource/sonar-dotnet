@@ -61,7 +61,7 @@ namespace AutoMapper.IntegrationTests
 
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Customer, CustomerViewModel>().ForMember(d=>d.ItemsIds, o=>o.MapFrom(s=>s.Items.Select(i=>i.Id)));
+            cfg.CreateProjection<Customer, CustomerViewModel>().ForMember(d=>d.ItemsIds, o=>o.MapFrom(s=>s.Items.Select(i=>i.Id)));
         });
 
         [Fact]
@@ -69,7 +69,7 @@ namespace AutoMapper.IntegrationTests
         {
             using(var context = new Context())
             {
-                var customer = context.Customers.ProjectTo<CustomerViewModel>(Configuration).Single();
+                var customer = ProjectTo<CustomerViewModel>(context.Customers).Single();
                 customer.ItemsIds.SequenceEqual(new int[] { 1, 2, 3 }).ShouldBeTrue();
             }
         }

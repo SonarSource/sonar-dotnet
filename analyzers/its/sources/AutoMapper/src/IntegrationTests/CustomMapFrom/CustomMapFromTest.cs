@@ -79,7 +79,7 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Customer, CustomerViewModel>()
+                cfg.CreateProjection<Customer, CustomerViewModel>()
                     .ForMember(x => x.FullAddress,
                         o => o.MapFrom(c => c.Address.Street + ", " + c.Address.City + " " + c.Address.State));
             });
@@ -102,7 +102,7 @@ namespace AutoMapper.IntegrationTests.Net4
                         x.FullAddress.ShouldNotBeEmpty();
                     });
 
-                    customerVms = context.Customers.ProjectTo<CustomerViewModel>(Configuration).ToList();
+                    customerVms = ProjectTo<CustomerViewModel>(context.Customers).ToList();
                     customerVms.ForEach(x =>
                     {
                         x.FullAddress.ShouldNotBeNull();

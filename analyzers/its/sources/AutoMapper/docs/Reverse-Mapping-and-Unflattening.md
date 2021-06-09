@@ -25,7 +25,7 @@ public class OrderDto {
 We can map both directions, including unflattening:
 
 ```c#
-Mapper.Initialize(cfg => {
+var configuration = new MapperConfiguration(cfg => {
   cfg.CreateMap<Order, OrderDto>()
      .ReverseMap();
 });
@@ -43,11 +43,11 @@ var order = new Order {
   Total = 15.8m
 };
 
-var orderDto = Mapper.Map<Order, OrderDto>(order);
+var orderDto = mapper.Map<Order, OrderDto>(order);
 
 orderDto.CustomerName = "Joe";
 
-Mapper.Map(orderDto, order);
+mapper.Map(orderDto, order);
 
 order.Customer.Name.ShouldEqual("Joe");
 ```
@@ -84,4 +84,10 @@ cfg.CreateMap<Order, OrderDto>()
   .ForMember(d => d.CustomerName, opt => opt.MapFrom(src => src.Customer.Name))
   .ReverseMap()
   .ForPath(s => s.Customer.Name, opt => opt.Ignore());
+```
+### IncludeMembers
+
+`ReverseMap` also integrates with [`IncludeMembers`](Flattening.html#includemembers) and configuration like 
+```c#
+ForMember(destination => destination.IncludedMember, member => member.MapFrom(source => source))
 ```

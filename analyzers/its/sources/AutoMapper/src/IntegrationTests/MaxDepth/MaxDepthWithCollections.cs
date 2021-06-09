@@ -16,15 +16,15 @@ namespace AutoMapper.IntegrationTests.Net4
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
             //cfg.AllowNullDestinationValues = false;
-            cfg.CreateMap<TrainingCourse, TrainingCourseDto>().MaxDepth(1);
-            cfg.CreateMap<TrainingContent, TrainingContentDto>();
+            cfg.CreateProjection<TrainingCourse, TrainingCourseDto>().MaxDepth(1);
+            cfg.CreateProjection<TrainingContent, TrainingContentDto>();
         });
 
         protected override void Because_of()
         {
             using(var context = new ClientContext())
             {
-                _course = context.TrainingCourses.ProjectTo<TrainingCourseDto>(Configuration).FirstOrDefault(n => n.CourseName == "Course 1");
+                _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses).FirstOrDefault(n => n.CourseName == "Course 1");
             }
         }
 

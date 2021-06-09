@@ -52,7 +52,7 @@ namespace AutoMapper.IntegrationTests
         {
             using(var context = new ClientContext())
             {
-                _result = context.Entities.ProjectTo<QueryableDto>(ConfigProvider).ToArray();
+                _result = ProjectTo<QueryableDto>(context.Entities).ToArray();
             }
         }
 
@@ -63,6 +63,6 @@ namespace AutoMapper.IntegrationTests
             _result.FirstOrDefault(dto => dto.Id == "Two").ShouldNotBeNull();
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateMap<IQueryableInterface, QueryableDto>());
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateProjection<IQueryableInterface, QueryableDto>());
     }
 }

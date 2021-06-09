@@ -8,6 +8,206 @@ using System;
 
 namespace AutoMapper.UnitTests.NullBehavior
 {
+    public class When_mappping_null_with_DoNotAllowNull : AutoMapperSpecBase
+    {
+        class Source
+        {
+            public InnerSource Inner { get; set; }
+            public int[] Collection { get; set; }
+        }
+        public class InnerSource
+        {
+            public int Integer { get; set; }
+        }
+        class Destination
+        {
+            public InnerDestination Inner { get; set; }
+            public int[] Collection { get; set; }
+        }
+        public class InnerDestination
+        {
+            public int Integer { get; set; }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.DoNotAllowNull());
+            cfg.CreateMap<InnerSource, InnerDestination>();
+            cfg.AllowNullDestinationValues = true;
+            cfg.AllowNullCollections = true;
+        });
+        [Fact]
+        public void Should_map_to_non_null()
+        {
+            var destination = Mapper.Map<Destination>(new Source());
+            destination.Collection.ShouldNotBeNull();
+            destination.Inner.ShouldNotBeNull();
+        }
+    }
+    public class When_mappping_null_with_AllowNull : AutoMapperSpecBase
+    {
+        class Source
+        {
+            public InnerSource Inner { get; set; }
+            public int[] Collection { get; set; }
+        }
+        public class InnerSource
+        {
+            public int Integer { get; set; }
+        }
+        class Destination
+        {
+            public InnerDestination Inner { get; set; }
+            public int[] Collection { get; set; }
+        }
+        public class InnerDestination
+        {
+            public int Integer { get; set; }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>().ForAllMembers(o=>o.AllowNull());
+            cfg.CreateMap<InnerSource, InnerDestination>();
+            cfg.AllowNullDestinationValues = false;
+            cfg.AllowNullCollections = false;
+        });
+        [Fact]
+        public void Should_map_to_null()
+        {
+            var destination = Mapper.Map<Destination>(new Source());
+            destination.Collection.ShouldBeNull();
+            destination.Inner.ShouldBeNull();
+        }
+    }
+    public class When_mappping_null_with_AllowNull_and_inheritance : AutoMapperSpecBase
+    {
+        class Source
+        {
+            public InnerSource Inner { get; set; }
+            public int[] Collection { get; set; }
+        }
+        class SourceDerived : Source
+        {
+        }
+        public class InnerSource
+        {
+            public int Integer { get; set; }
+        }
+        class Destination
+        {
+            public InnerDestination Inner { get; set; }
+            public int[] Collection { get; set; }
+        }
+        class DestinationDerived : Destination
+        {
+        }
+        public class InnerDestination
+        {
+            public int Integer { get; set; }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.AllowNull());
+            cfg.CreateMap<SourceDerived, DestinationDerived>().IncludeBase<Source, Destination>();
+            cfg.CreateMap<InnerSource, InnerDestination>();
+            cfg.AllowNullDestinationValues = false;
+            cfg.AllowNullCollections = false;
+        });
+        [Fact]
+        public void Should_map_to_null()
+        {
+            var destination = Mapper.Map<DestinationDerived>(new SourceDerived());
+            destination.Collection.ShouldBeNull();
+            destination.Inner.ShouldBeNull();
+        }
+    }
+    public class When_mappping_null_with_DoNotAllowNull_and_inheritance : AutoMapperSpecBase
+    {
+        class Source
+        {
+            public InnerSource Inner { get; set; }
+            public int[] Collection { get; set; }
+        }
+        class SourceDerived : Source
+        {
+        }
+        public class InnerSource
+        {
+            public int Integer { get; set; }
+        }
+        class Destination
+        {
+            public InnerDestination Inner { get; set; }
+            public int[] Collection { get; set; }
+        }
+        class DestinationDerived : Destination
+        {
+        }
+        public class InnerDestination
+        {
+            public int Integer { get; set; }
+        }
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.AllowNull());
+            cfg.CreateMap<SourceDerived, DestinationDerived>().IncludeBase<Source, Destination>().ForAllMembers(o => o.DoNotAllowNull());
+            cfg.CreateMap<InnerSource, InnerDestination>();
+            cfg.AllowNullDestinationValues = true;
+            cfg.AllowNullCollections = true;
+        });
+        [Fact]
+        public void Should_map_to_non_null()
+        {
+            var destination = Mapper.Map<DestinationDerived>(new SourceDerived());
+            destination.Collection.ShouldNotBeNull();
+            destination.Inner.ShouldNotBeNull();
+        }
+    }
+    public class When_mappping_null_collection_with_AllowNullCollections_false : AutoMapperSpecBase
+    {
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => {});
+
+        [Fact]
+        public void Should_map_to_non_null()
+        {
+            Mapper.Map<int[]>(null).ShouldNotBeNull();
+            Mapper.Map<int[]>(null, _=> { }).ShouldNotBeNull();
+        }
+    }
+
+    public class When_mappping_null_collection_with_AllowNullCollections_true : AutoMapperSpecBase
+    {
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.AllowNullCollections = true);
+
+        [Fact]
+        public void Should_map_to_null()
+        {
+            Mapper.Map<int[]>(null).ShouldBeNull();
+            Mapper.Map<int[]>(null, _ => { }).ShouldBeNull();
+        }
+    }
+
+    public class When_mappping_null_array_with_AllowNullDestinationValues_false : AutoMapperSpecBase
+    {
+        class Source
+        {
+            public int[] Collection { get; set; }
+        }
+
+        class Destination
+        {
+            public int[] Collection { get; set; }
+        }
+
+        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+            cfg.AllowNullDestinationValues = false;
+        });
+
+        [Fact]
+        public void Should_map_to_non_null() => Mapper.Map<Destination>(new Source()).Collection.ShouldNotBeNull();
+    }
+
     public class When_mappping_null_array_to_IEnumerable_with_MapAtRuntime : AutoMapperSpecBase
     {
         class Source
@@ -539,7 +739,7 @@ namespace AutoMapper.UnitTests.NullBehavior
         protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Source, Destination>()
-                .ForMember(dest => dest.Name, opt => opt.ResolveUsing<NullResolver, string>(src => src.MyName));
+                .ForMember(dest => dest.Name, opt => opt.MapFrom<NullResolver, string>(src => src.MyName));
             _source = new Source();
         });
 

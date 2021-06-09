@@ -1,10 +1,59 @@
+using AutoMapper.Configuration.Conventions;
+using AutoMapper.Internal;
 using Shouldly;
+using System;
+using System.Linq;
 using Xunit;
 
 namespace AutoMapper.UnitTests.Bug
 {
     namespace NamingConventions
     {
+        public class RemoveNameSplitMapper : NonValidatingSpecBase
+        {
+            class Source
+            {
+                public InnerSource InnerSource { get; set; }
+            }
+            class InnerSource
+            {
+                public int Value { get; set; }
+            }
+            class Destination
+            {
+                public int InnerSourceValue { get; set; }
+            }
+            protected override MapperConfiguration Configuration => new MapperConfiguration(c =>
+            {
+                var mappers = c.Internal().DefaultMemberConfig.MemberMappers;
+                mappers.Remove(mappers.OfType<NameSplitMember>().Single());
+                c.CreateMap<Source, Destination>();
+            });
+            [Fact]
+            public void Should_not_validate() => Should.Throw<AutoMapperConfigurationException>(() => Configuration.AssertConfigurationIsValid())
+                .Errors.Single().UnmappedPropertyNames.Single().ShouldBe(nameof(Destination.InnerSourceValue));
+        }
+        public class ExactMatchNamingConvention : NonValidatingSpecBase
+        {
+            class Source
+            {
+                public string Name { get; set; }
+            }
+            class Destination
+            {
+                public string Name { get; set; }
+                public string COMPANY_Name { get; set; }
+            }
+            protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
+            {
+                cfg.DestinationMemberNamingConvention = new AutoMapper.ExactMatchNamingConvention();
+                cfg.CreateMap<Source, Destination>();
+            });
+            [Fact]
+            public void Should_not_use_pascal_naming_convention() =>
+                new Action(Mapper.ConfigurationProvider.AssertConfigurationIsValid).ShouldThrow<AutoMapperConfigurationException>()
+                    .Errors[0].UnmappedPropertyNames.ShouldContain("COMPANY_Name");
+        }
         public class Neda
         {
             public string cmok { get; set; }

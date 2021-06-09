@@ -1,10 +1,10 @@
 # Queryable Extensions
 
-When using an ORM such as NHibernate or Entity Framework with AutoMapper's standard `Mapper.Map` functions, you may notice that the ORM will query all the fields of all the objects within a graph when AutoMapper is attempting to map the results to a destination type.
+When using an ORM such as NHibernate or Entity Framework with AutoMapper's standard `mapper.Map` functions, you may notice that the ORM will query all the fields of all the objects within a graph when AutoMapper is attempting to map the results to a destination type.
 
 If your ORM exposes `IQueryable`s, you can use AutoMapper's QueryableExtensions helper methods to address this key pain.
 
-Using Entity Framework for an example, say that you have an entity `OrderLine` with a relationship with an entity `Item`. If you want to map this to an `OrderLineDTO` with the `Item`'s `Name` property, the standard `Mapper.Map` call will result in Entity Framework querying the entire `OrderLine` and `Item` table.
+Using Entity Framework for an example, say that you have an entity `OrderLine` with a relationship with an entity `Item`. If you want to map this to an `OrderLineDTO` with the `Item`'s `Name` property, the standard `mapper.Map` call will result in Entity Framework querying the entire `OrderLine` and `Item` table.
 
 Use this approach instead.
 
@@ -41,7 +41,7 @@ public class OrderLineDTO
 You can use the Queryable Extensions like so:
 
 ```c#
-Mapper.Initialize(cfg =>
+var configuration = new MapperConfiguration(cfg =>
     cfg.CreateMap<OrderLine, OrderLineDTO>()
     .ForMember(dto => dto.Item, conf => conf.MapFrom(ol => ol.Item.Name)));
 
@@ -50,14 +50,20 @@ public List<OrderLineDTO> GetLinesForOrder(int orderId)
   using (var context = new orderEntities())
   {
     return context.OrderLines.Where(ol => ol.OrderId == orderId)
-             .ProjectTo<OrderLineDTO>().ToList();
+             .ProjectTo<OrderLineDTO>(configuration).ToList();
   }
 }
 ```
 
 The `.ProjectTo<OrderLineDTO>()` will tell AutoMapper's mapping engine to emit a `select` clause to the IQueryable that will inform entity framework that it only needs to query the Name column of the Item table, same as if you manually projected your `IQueryable` to an `OrderLineDTO` with a `Select` clause.
 
+`ProjectTo` must be the last call in the chain. ORMs work with entities, not DTOs. So apply any filtering and sorting on entities and, as the last step, project to DTOs.
+
 Note that for this feature to work, all type conversions must be explicitly handled in your Mapping. For example, you can not rely on the `ToString()` override of the `Item` class to inform entity framework to only select from the `Name` column, and any data type changes, such as `Double` to `Decimal` must be explicitly handled as well.
+
+### The instance API
+
+Starting with 8.0 there are similar ProjectTo methods on IMapper that feel more natural when you use IMapper with DI.
 
 ### Preventing lazy loading/SELECT N+1 problems
 
@@ -87,10 +93,10 @@ This map through AutoMapper will result in a SELECT N+1 problem, as each child `
 
 ### Custom projection
 
-In the case where members names don't line up, or you want to create calculated property, you can use MapFrom (and not ResolveUsing) to supply a custom expression for a destination member:
+In the case where members names don't line up, or you want to create calculated property, you can use MapFrom (the expression-based overload) to supply a custom expression for a destination member:
 
 ```c#
-Mapper.Initialize(cfg => cfg.CreateMap<Customer, CustomerDto>()
+var configuration = new MapperConfiguration(cfg => cfg.CreateMap<Customer, CustomerDto>()
     .ForMember(d => d.FullName, opt => opt.MapFrom(c => c.FirstName + " " + c.LastName))
     .ForMember(d => d.TotalContacts, opt => opt.MapFrom(c => c.Contacts.Count()));
 ```
@@ -101,21 +107,21 @@ If the expression is rejected from your query provider (Entity Framework, NHiber
 
 ### Custom Type Conversion
 
-Occasionally, you need to completely replace a type conversion from a source to a destination type. In normal runtime mapping, this is accomplished via the ConvertUsing method. To perform the analog in LINQ projection, use the ProjectUsing method:
+Occasionally, you need to completely replace a type conversion from a source to a destination type. In normal runtime mapping, this is accomplished via the ConvertUsing method. To perform the analog in LINQ projection, use the ConvertUsing method:
 
 ```c#
-cfg.CreateMap<Source, Dest>().ProjectUsing(src => new Dest { Value = 10 });
+cfg.CreateMap<Source, Dest>().ConvertUsing(src => new Dest { Value = 10 });
 ```
 
-`ProjectUsing` is slightly more limited than `ConvertUsing` as only what is allowed in an Expression and the underlying LINQ provider will work.
+The expression-based `ConvertUsing` is slightly more limited than Func-based `ConvertUsing` overloads as only what is allowed in an Expression and the underlying LINQ provider will work.
 
 ### Custom destination type constructors
 
-If your destination type has a custom constructor but you don't want to override the entire mapping, use the ConstructProjectionUsing method:
+If your destination type has a custom constructor but you don't want to override the entire mapping, use the ConstructUsing expression-based method overload:
 
 ```c#
 cfg.CreateMap<Source, Dest>()
-    .ConstructProjectionUsing(src => new Dest(src.Value + 10));
+    .ConstructUsing(src => new Dest(src.Value + 10));
 ```
 
 AutoMapper will automatically match up destination constructor parameters to source members based on matching names, so only use this method if AutoMapper can't match up the destination constructor properly, or if you need extra customization during construction.
@@ -131,7 +137,7 @@ public class Order {
 public class OrderDto {
     public string OrderType { get; set; }
 }
-var orders = dbContext.Orders.ProjectTo<OrderDto>().ToList();
+var orders = dbContext.Orders.ProjectTo<OrderDto>(configuration).ToList();
 orders[0].OrderType.ShouldEqual("Online");
 ```
 
@@ -140,14 +146,18 @@ orders[0].OrderType.ShouldEqual("Online");
 In some scenarios, such as OData, a generic DTO is returned through an IQueryable controller action. Without explicit instructions, AutoMapper will expand all members in the result. To control which members are expanded during projection, set ExplicitExpansion in the configuration and then pass in the members you want to explicitly expand:
 
 ```c#
-dbContext.Orders.ProjectTo<OrderDto>(
+dbContext.Orders.ProjectTo<OrderDto>(configuration,
     dest => dest.Customer,
     dest => dest.LineItems);
 // or string-based
-dbContext.Orders.ProjectTo<OrderDto>(
+dbContext.Orders.ProjectTo<OrderDto>(configuration,
     null,
     "Customer",
     "LineItems");
+// for collections
+dbContext.Orders.ProjectTo<OrderDto>(configuration,
+    null,
+    dest => dest.LineItems.Select(item => item.Product));
 ```
 For more information, see [the tests](https://github.com/AutoMapper/AutoMapper/search?p=1&q=ExplicitExpansion&utf8=%E2%9C%93).
 
@@ -194,20 +204,23 @@ However, using a dictionary will result in hard-coded values in the query instea
 ### Supported mapping options
 
 Not all mapping options can be supported, as the expression generated must be interpreted by a LINQ provider. Only what is supported by LINQ providers is supported by AutoMapper:
-* MapFrom
+* MapFrom (Expression-based)
+* ConvertUsing (Expression-based)
 * Ignore
-* UseValue
 * NullSubstitute
+* Value transformers
+* IncludeMembers
 
 Not supported:
 * Condition
-* DoNotUseDestinationValue
 * SetMappingOrder
 * UseDestinationValue
-* ResolveUsing
+* MapFrom (Func-based)
 * Before/AfterMap
 * Custom resolvers
 * Custom type converters
+* ForPath
+* Value converters
 * **Any calculated property on your domain object**
 
 Additionally, recursive or self-referencing destination types are not supported as LINQ providers do not support this. Typically hierarchical relational data models require common table expressions (CTEs) to correctly resolve a recursive join.

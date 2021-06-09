@@ -5,6 +5,8 @@ using System.Reflection;
 using Shouldly;
 using Xunit;
 using AutoMapper.QueryableExtensions;
+using AutoMapper.QueryableExtensions.Impl;
+using AutoMapper.Internal;
 
 namespace AutoMapper.UnitTests.Projection.MapFromTest
 {
@@ -15,26 +17,11 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<UserModel, UserDto>()
+                cfg.CreateProjection<UserModel, UserDto>()
                                 .ForMember(dto => dto.FullName, opt => opt.MapFrom(src => src.LastName + " " + src.FirstName));
             });
 
-            typeof(NullReferenceException).ShouldNotBeThrownBy(() => config.ExpressionBuilder.GetMapExpression<UserModel, UserDto>()); //null reference exception here
-        }
-
-        [Fact]
-        public void Should_fail_Untyped()
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<UserModel, UserDto>()
-                    .ForMember(dto => dto.FullName, opt => opt.MapFrom(src => src.LastName + " " + src.FirstName));
-            });
-
-            typeof(ArgumentNullException).ShouldBeThrownBy(() => config.ExpressionBuilder.GetMapExpression(null, typeof(UserDto), new Dictionary<string, object>(), new MemberInfo[0])); //ArgumentNullException here
-            typeof(ArgumentNullException).ShouldBeThrownBy(() => config.ExpressionBuilder.GetMapExpression(typeof(UserModel), null, new Dictionary<string, object>(), new MemberInfo[0])); //ArgumentNullException here
-            typeof(ArgumentNullException).ShouldBeThrownBy(() => config.ExpressionBuilder.GetMapExpression(typeof(UserModel), typeof(UserDto), (IDictionary<string, object>) null, new MemberInfo[0])); //ArgumentNullException here
-            typeof(ArgumentNullException).ShouldBeThrownBy(() => config.ExpressionBuilder.GetMapExpression(typeof(UserModel), typeof(UserDto), new Dictionary<string, object>(), null)); //ArgumentNullException here
+            typeof(NullReferenceException).ShouldNotBeThrownBy(() => config.Internal().ProjectionBuilder.GetMapExpression<UserModel, UserDto>()); //null reference exception here
         }
 
         [Fact]
@@ -77,7 +64,7 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
             public string ShortDescription { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(c => c.CreateMap<Model, Dto>().ForMember(d => d.ShortDescription, o => o.MapFrom(s => "mappedFrom")));
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(c => c.CreateProjection<Model, Dto>().ForMember(d => d.ShortDescription, o => o.MapFrom(s => "mappedFrom")));
 
         protected override void Because_of()
         {
@@ -89,5 +76,44 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
         {
             _destination.ShortDescription.ShouldBe("mappedFrom");
         }
+    }
+    public class When_mapping_from_chained_properties : AutoMapperSpecBase
+    {
+        class Model
+        {
+            public InnerModel Inner { get; set; }
+        }
+        class InnerModel
+        {
+            public InnerModel(string value) => Value = value ?? throw new ArgumentNullException(nameof(value));
+            private string Value { get; set; }
+        }
+        class Dto
+        {
+            public string Value { get; set; }
+        }
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(c => c.CreateMap<Model, Dto>().ForMember(d => d.Value, o => o.MapFrom("Inner.Value")));
+        [Fact]
+        public void Should_map_ok() => Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") }).Value.ShouldBe("mappedFrom");
+    }
+    public class When_mapping_from_private_method : AutoMapperSpecBase
+    {
+        class Model
+        {
+            public InnerModel Inner { get; set; }
+        }
+        class InnerModel
+        {
+            public InnerModel(string value) => SomeValue = value ?? throw new ArgumentNullException(nameof(value));
+            private string SomeValue { get; set; }
+            private string GetSomeValue() => SomeValue;
+        }
+        class Dto
+        {
+            public string Value { get; set; }
+        }
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(c => c.CreateMap<Model, Dto>().ForMember(d => d.Value, o => o.MapFrom("Inner.GetSomeValue")));
+        [Fact]
+        public void Should_map_ok() => Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") }).Value.ShouldBe("mappedFrom");
     }
 }

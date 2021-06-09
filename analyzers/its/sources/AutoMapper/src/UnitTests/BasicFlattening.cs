@@ -126,11 +126,11 @@ namespace AutoMapper.UnitTests
         }
         public class Data
         {
-            public int? Value { get; set; }
+            public int? Integer { get; set; }
         }
         public class Destination
         {
-            public int? ParentDataValue { get; set; }
+            public int? ParentDataInteger { get; set; }
         }
 
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
@@ -146,7 +146,7 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_handle_inner_nulls()
         {
-            _destination.ParentDataValue.ShouldBeNull();
+            _destination.ParentDataInteger.ShouldBeNull();
         }
     }
 
@@ -205,5 +205,33 @@ namespace AutoMapper.UnitTests
         {
             _dto.VendorCurrency.ShouldBeNull();
         }
+    }
+
+    public class FlatteningWithSourceValidation : NonValidatingSpecBase
+    {
+        public class Customer
+        {
+            public int Id { get; set; }
+            public int AnotherId { get; set; }
+            public string Name { get; set; }
+            public Address Address { get; set; }
+        }
+        public class Address
+        {
+            public int Id { get; set; }
+            public string Street { get; set; }
+            public string City { get; set; }
+            public string Country { get; set; }
+        }
+        public class CustomerDTO
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string AddressCity { get; set; }
+        }
+        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => cfg.CreateMap<Customer, CustomerDTO>(MemberList.Source).ForMember(d=>d.Id, o=>o.MapFrom(s=>s.AnotherId)));
+        [Fact]
+        public void Should_validate() =>
+            new Action(() => Configuration.AssertConfigurationIsValid()).ShouldThrowException<AutoMapperConfigurationException>(ex => ex.Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Address.Id)));
     }
 }

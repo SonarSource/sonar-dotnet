@@ -22,7 +22,7 @@ namespace AutoMapper.UnitTests
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
             cfg.AddGlobalIgnore("ShouldBeMapped");
-            cfg.CreateMap<Source, Destination>().ForMember(d => d.ShouldBeMapped, o => o.UseValue(12));
+            cfg.CreateMap<Source, Destination>().ForMember(d => d.ShouldBeMapped, o => o.MapFrom(src => 12));
         });
 
         protected override void Because_of()
@@ -154,7 +154,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Ignore_On_Source_Field()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>());
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddIgnoreMapAttribute();
+                cfg.CreateMap<Source, Destination>();
+            });
             config.AssertConfigurationIsValid();
 
             Source source = new Source
@@ -186,8 +190,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Ignore_On_Source_Field()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>()
-                .ReverseMap());
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddIgnoreMapAttribute();
+                cfg.CreateMap<Source, Destination>().ReverseMap();
+            });
             config.AssertConfigurationIsValid();
 
             Destination source = new Destination
