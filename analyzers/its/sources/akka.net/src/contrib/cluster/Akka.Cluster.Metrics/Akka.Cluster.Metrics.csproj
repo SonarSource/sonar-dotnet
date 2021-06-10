@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <Import Project="..\..\..\common.props" />
 
     <PropertyGroup>
@@ -10,6 +10,7 @@
         <TargetFramework>$(NetStandardLibVersion)</TargetFramework>
         <PackageTags>$(AkkaPackageTags);network;cluster;sharding</PackageTags>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <CodeAnalysisRuleSet>..\..\..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 <Import Project="..\..\common.props" />
 <PropertyGroup>
   <Description>Akka.Remote x-plat performance benchmark</Description>
@@ -8,6 +8,7 @@
   <Authors>Akka.NET Team</Authors>
   <TargetFrameworks>$(NetFrameworkTestVersion);$(NetTestVersion);$(NetCoreTestVersion)</TargetFrameworks>
   <OutputType>Exe</OutputType>
+  <CodeAnalysisRuleSet>..\..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
 </PropertyGroup>
 
 <PropertyGroup>

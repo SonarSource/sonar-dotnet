@@ -3,8 +3,13 @@
   <Import Project="..\..\..\xunitSettings.props" />
 
   <PropertyGroup>
+    <!-- We need to manually mark this project as TEST. See analyzers\its\SonarAnalyzer.Testing.ImportBefore.targets for details.-->
+    <SonarQubeTestProject>true</SonarQubeTestProject>
+  </PropertyGroup>
+  <PropertyGroup>
     <AssemblyTitle>Akka.DependencyInjection.Tests</AssemblyTitle>
     <TargetFrameworks>$(NetFrameworkTestVersion);$(NetTestVersion);$(NetCoreTestVersion)</TargetFrameworks>
+    <CodeAnalysisRuleSet>..\..\..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,6 +2,7 @@
   <Import Project="..\..\..\common.props" />
   <PropertyGroup>
     <TargetFramework>$(NetCoreTestVersion)</TargetFramework>
+    <CodeAnalysisRuleSet>..\..\..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="app.conf" />

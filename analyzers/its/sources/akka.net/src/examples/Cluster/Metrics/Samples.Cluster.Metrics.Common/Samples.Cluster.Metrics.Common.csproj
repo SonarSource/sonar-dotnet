@@ -4,6 +4,7 @@
   <PropertyGroup>
     <TargetFramework>$(NetStandardLibVersion)</TargetFramework>
     <IsPackable>false</IsPackable>
+    <CodeAnalysisRuleSet>..\..\..\..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
