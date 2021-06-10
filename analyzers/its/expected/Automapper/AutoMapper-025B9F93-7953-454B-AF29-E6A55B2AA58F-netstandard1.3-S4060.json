@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MapToAttribute.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  18,
+"endLine":  7,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IgnoreMapAttribute.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  36
+}
+}
+}
+]
+}

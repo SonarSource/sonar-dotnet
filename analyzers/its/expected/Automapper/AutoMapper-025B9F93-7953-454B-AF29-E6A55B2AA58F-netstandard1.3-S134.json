@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  29,
+"endLine":  97,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  25,
+"endLine":  111,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  25,
+"endLine":  121,
+"endColumn":  32
+}
+}
+}
+]
+}

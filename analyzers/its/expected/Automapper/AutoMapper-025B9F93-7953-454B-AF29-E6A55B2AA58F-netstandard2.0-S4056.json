@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  25,
+"endLine":  51,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\LowerUnderscoreNamingConvention.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  52,
+"endLine":  11,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToEnumMapper.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  45,
+"endLine":  25,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToUnderlyingTypeMapper.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  76,
+"endLine":  15,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PascalCaseNamingConvention.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  52,
+"endLine":  10,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PascalCaseNamingConvention.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  52,
+"endLine":  10,
+"endColumn":  87
+}
+}
+}
+]
+}

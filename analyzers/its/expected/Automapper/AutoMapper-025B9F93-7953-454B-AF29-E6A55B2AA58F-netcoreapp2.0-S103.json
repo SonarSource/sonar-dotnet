@@ -1,0 +1,719 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 317 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  1,
+"endLine":  74,
+"endColumn":  318
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 221 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\DefaultMember.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  1,
+"endLine":  13,
+"endColumn":  222
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\IChildMemberConfiguration.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  209
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\NameSplitMember.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\NameSplitMember.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 229 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\NameSplitMember.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  1,
+"endLine":  52,
+"endColumn":  230
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\ParentSourceToDestinationNameMapper.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  204
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  496,
+"startColumn":  1,
+"endLine":  496,
+"endColumn":  205
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 236 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ConstructorMap.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  1,
+"endLine":  46,
+"endColumn":  237
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 340 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  341
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  442,
+"startColumn":  1,
+"endLine":  442,
+"endColumn":  203
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ICtorParamConfigurationExpression.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  1,
+"endLine":  65,
+"endColumn":  214
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 251 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  1,
+"endLine":  137,
+"endColumn":  252
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 319 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  1,
+"endLine":  143,
+"endColumn":  320
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 275 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  1,
+"endLine":  249,
+"endColumn":  276
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 367 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  1,
+"endLine":  255,
+"endColumn":  368
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  1,
+"endLine":  124,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IObjectMapper.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  214
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 414 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  415
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayMapper.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\AssignableMapper.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  221
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ConvertMapper.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\DictionaryMapper.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumerableMapper.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 229 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  230
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumerableToDictionaryMapper.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ExplicitConversionOperatorMapper.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\HashSetMapper.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ImplicitConversionOperatorMapper.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 275 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  1,
+"endLine":  22,
+"endColumn":  276
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  1,
+"endLine":  89,
+"endColumn":  206
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  1,
+"endLine":  101,
+"endColumn":  214
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 223 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\NameValueCollectionMapper.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  1,
+"endLine":  24,
+"endColumn":  224
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ReadOnlyCollectionMapper.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ReadOnlyCollectionMapper.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  1,
+"endLine":  31,
+"endColumn":  204
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\StringMapper.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ToStringDictionaryMapper.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 299 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  1,
+"endLine":  287,
+"endColumn":  300
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  1,
+"endLine":  299,
+"endColumn":  215
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  1,
+"endLine":  444,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  1,
+"endLine":  555,
+"endColumn":  215
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Extensions.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  1,
+"endLine":  59,
+"endColumn":  218
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Extensions.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  1,
+"endLine":  113,
+"endColumn":  207
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 265 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IExpressionBinder.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  266
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 272 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\AssignableExpressionBinder.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  273
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 272 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\CustomProjectionExpressionBinder.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  273
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 272 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\EnumerableExpressionBinder.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  273
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 273 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\EnumerableExpressionBinder.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  274
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 272 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MappedTypeExpressionBinder.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  1,
+"endLine":  13,
+"endColumn":  273
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 273 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MappedTypeExpressionBinder.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  274
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 272 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\NullableDestinationExpressionBinder.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  273
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 271 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\NullableSourceExpressionBinder.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  272
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 272 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\StringExpressionBinder.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  273
+}
+}
+}
+]
+}

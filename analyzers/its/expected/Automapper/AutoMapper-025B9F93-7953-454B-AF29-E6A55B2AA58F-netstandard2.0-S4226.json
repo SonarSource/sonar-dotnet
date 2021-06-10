@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ReflectionExtensions.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  30,
+"endLine":  14,
+"endColumn":  39
+}
+}
+}
+]
+}

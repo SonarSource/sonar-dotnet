@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  21,
+"endLine":  188,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  17,
+"endLine":  191,
+"endColumn":  18
+}
+}
+]
+}
+]
+}

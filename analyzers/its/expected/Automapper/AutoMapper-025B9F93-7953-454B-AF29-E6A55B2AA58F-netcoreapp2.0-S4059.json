@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'MemberPath' or the name of method 'GetMemberPath' to make them distinguishable.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Internal\MemberVisitor.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  40,
+"endLine":  23,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Internal\MemberVisitor.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  47,
+"endLine":  10,
+"endColumn":  60
+}
+}
+]
+}
+]
+}

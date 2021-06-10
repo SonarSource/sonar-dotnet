@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  17,
+"endLine":  261,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeDetails.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  29,
+"endLine":  209,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  46,
+"endLine":  351,
+"endColumn":  68
+}
+}
+}
+]
+}

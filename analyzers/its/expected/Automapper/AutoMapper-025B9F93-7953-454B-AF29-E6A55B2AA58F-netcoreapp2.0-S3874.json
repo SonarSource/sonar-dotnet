@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  13,
+"endLine":  20,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  172,
+"endLine":  89,
+"endColumn":  175
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  180,
+"endLine":  101,
+"endColumn":  183
+}
+}
+}
+]
+}

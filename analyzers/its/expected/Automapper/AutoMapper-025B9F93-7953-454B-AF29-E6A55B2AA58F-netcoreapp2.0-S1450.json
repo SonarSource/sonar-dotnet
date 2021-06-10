@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_fieldBuilder' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\PropertyEmitter.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  39,
+"endLine":  14,
+"endColumn":  52
+}
+}
+}
+]
+}

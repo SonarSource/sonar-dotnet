@@ -1,0 +1,946 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this accessor to reduce its Cognitive Complexity from 26 to the 3 allowed.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  17,
+"endLine":  45,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  21,
+"endLine":  56,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  25,
+"endLine":  58,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  31,
+"endLine":  61,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  17,
+"endLine":  70,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  21,
+"endLine":  76,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  25,
+"endLine":  82,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  25,
+"endLine":  94,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  29,
+"endLine":  97,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  25,
+"endLine":  102,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  565,
+"startColumn":  21,
+"endLine":  565,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  567,
+"startColumn":  13,
+"endLine":  567,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  570,
+"startColumn":  17,
+"endLine":  570,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  574,
+"startColumn":  21,
+"endLine":  574,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  579,
+"startColumn":  17,
+"endLine":  579,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  579,
+"startColumn":  79,
+"endLine":  579,
+"endColumn":  81
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  585,
+"startColumn":  13,
+"endLine":  585,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  587,
+"startColumn":  17,
+"endLine":  587,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  593,
+"startColumn":  13,
+"endLine":  593,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  597,
+"startColumn":  13,
+"endLine":  597,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  601,
+"startColumn":  13,
+"endLine":  601,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  605,
+"startColumn":  13,
+"endLine":  605,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  609,
+"startColumn":  13,
+"endLine":  609,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  614,
+"startColumn":  13,
+"endLine":  614,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  17,
+"endLine":  617,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  621,
+"startColumn":  17,
+"endLine":  621,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  625,
+"startColumn":  17,
+"endLine":  625,
+"endColumn":  24
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  22,
+"endLine":  56,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  13,
+"endLine":  58,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  13,
+"endLine":  62,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  17,
+"endLine":  64,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  17,
+"endLine":  69,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  49,
+"endLine":  69,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  13,
+"endLine":  78,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  17,
+"endLine":  81,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  21,
+"endLine":  84,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  17,
+"endLine":  91,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  22,
+"endLine":  56,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  28,
+"endLine":  500,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  507,
+"startColumn":  13,
+"endLine":  507,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  512,
+"startColumn":  13,
+"endLine":  512,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  517,
+"startColumn":  13,
+"endLine":  517,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  524,
+"startColumn":  21,
+"endLine":  524,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  54,
+"endLine":  522,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  533,
+"startColumn":  13,
+"endLine":  533,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  533,
+"startColumn":  53,
+"endLine":  533,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  536,
+"startColumn":  17,
+"endLine":  536,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  536,
+"startColumn":  44,
+"endLine":  536,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  17,
+"endLine":  540,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  545,
+"startColumn":  13,
+"endLine":  545,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  550,
+"startColumn":  13,
+"endLine":  550,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  13,
+"endLine":  555,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  558,
+"startColumn":  17,
+"endLine":  558,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  558,
+"startColumn":  44,
+"endLine":  558,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  22,
+"endLine":  77,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  13,
+"endLine":  80,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  13,
+"endLine":  85,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  13,
+"endLine":  89,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  55,
+"endLine":  98,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  13,
+"endLine":  99,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  17,
+"endLine":  101,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  38,
+"endLine":  101,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  17,
+"endLine":  107,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  21,
+"endLine":  109,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  25,
+"endLine":  111,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  21,
+"endLine":  118,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  25,
+"endLine":  121,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  17,
+"endLine":  140,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  17,
+"endLine":  151,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  36,
+"endLine":  151,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  28,
+"endLine":  402,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  13,
+"endLine":  408,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  68,
+"endLine":  408,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  410,
+"startColumn":  13,
+"endLine":  410,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  13,
+"endLine":  414,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  418,
+"startColumn":  13,
+"endLine":  418,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  420,
+"startColumn":  17,
+"endLine":  420,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  422,
+"startColumn":  17,
+"endLine":  422,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  17,
+"endLine":  434,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  446,
+"startColumn":  13,
+"endLine":  446,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  451,
+"startColumn":  13,
+"endLine":  451,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  458,
+"startColumn":  13,
+"endLine":  458,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  461,
+"startColumn":  21,
+"endLine":  461,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  464,
+"startColumn":  13,
+"endLine":  464,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  467,
+"startColumn":  17,
+"endLine":  467,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  469,
+"startColumn":  17,
+"endLine":  469,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  473,
+"startColumn":  13,
+"endLine":  473,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  13,
+"endLine":  487,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  25,
+"endLine":  225,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  13,
+"endLine":  229,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  17,
+"endLine":  232,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  17,
+"endLine":  237,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  17,
+"endLine":  242,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  17,
+"endLine":  246,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  21,
+"endLine":  249,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  13,
+"endLine":  256,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  17,
+"endLine":  257,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  59,
+"endLine":  258,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  64,
+"endLine":  259,
+"endColumn":  66
+}
+}
+]
+}
+]
+}

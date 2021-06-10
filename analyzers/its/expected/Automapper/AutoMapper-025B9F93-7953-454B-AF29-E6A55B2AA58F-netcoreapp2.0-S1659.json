@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'assignNewExpression' in a separate statement.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  37,
+"endLine":  37,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare '_newObject' in a separate statement.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  519,
+"startColumn":  57,
+"endLine":  519,
+"endColumn":  67
+}
+}
+}
+]
+}

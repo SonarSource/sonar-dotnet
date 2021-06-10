@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Flags' suffix.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  17,
+"endLine":  61,
+"endColumn":  33
+}
+}
+}
+]
+}

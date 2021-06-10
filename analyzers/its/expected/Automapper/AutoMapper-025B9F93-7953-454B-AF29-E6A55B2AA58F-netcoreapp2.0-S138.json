@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'EmitProxy' has 88 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  29,
+"endLine":  46,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CreatePropertyMapFunc' has 82 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  28,
+"endLine":  402,
+"endColumn":  49
+}
+}
+}
+]
+}
