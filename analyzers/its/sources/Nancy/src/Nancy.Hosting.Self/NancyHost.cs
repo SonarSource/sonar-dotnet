@@ -6,12 +6,13 @@
     using System.IO;
     using System.Linq;
     using System.Net;
+    using System.Security.Cryptography.X509Certificates;
     using System.Security.Principal;
     using System.Threading.Tasks;
     using Nancy.Bootstrapper;
     using Nancy.Extensions;
-    using Nancy.Helpers;
     using Nancy.IO;
+    using System.Threading;
 
     /// <summary>
     /// Allows to host Nancy server inside any application - console or windows service.
@@ -123,20 +124,27 @@
         {
             this.StartListener();
 
-            Task.Factory.StartNew(async () =>
+            Task.Run(() =>
             {
-                try
+                var semaphore = new Semaphore(this.configuration.MaximumConnectionCount, this.configuration.MaximumConnectionCount);
+                while (!this.stop)
                 {
-                    while(!this.stop)
+                    semaphore.WaitOne();
+
+                    this.listener.GetContextAsync().ContinueWith(async (contextTask) =>
                     {
-                        HttpListenerContext context = await listener.GetContextAsync();
-                        Process(context);
-                    }
-                }
-                catch(Exception ex)
-                {
-                    this.configuration.UnhandledExceptionCallback.Invoke(ex);
-                    throw;
+                        try
+                        {
+                            semaphore.Release();
+                            var context = await contextTask.ConfigureAwait(false);
+                            await this.Process(context).ConfigureAwait(false);
+                        }
+                        catch (Exception ex)
+                        {
+                            this.configuration.UnhandledExceptionCallback.Invoke(ex);
+                            throw;
+                        }
+                    });
                 }
             });
         }
@@ -158,7 +166,7 @@
                 throw new InvalidOperationException("Unable to configure namespace reservation");
             }
 
-            if (!TryStartListener())
+            if (!this.TryStartListener())
             {
                 throw new InvalidOperationException("Unable to start listener");
             }
@@ -208,8 +216,8 @@
 
         private string GetUser()
         {
-            return !string.IsNullOrWhiteSpace(this.configuration.UrlReservations.User) 
-                ? this.configuration.UrlReservations.User 
+            return !string.IsNullOrWhiteSpace(this.configuration.UrlReservations.User)
+                ? this.configuration.UrlReservations.User
                 : WindowsIdentity.GetCurrent().Name;
         }
 
@@ -218,10 +226,10 @@
         /// </summary>
         public void Stop()
         {
-            if (this.listener.IsListening)
+            if (this.listener != null && this.listener.IsListening)
             {
                 this.stop = true;
-                listener.Stop();
+                this.listener.Stop();
             }
         }
 
@@ -252,7 +260,6 @@
             var expectedRequestLength =
                 GetExpectedRequestLength(request.Headers.ToDictionary());
 
-            var relativeUrl = baseUri.MakeAppLocalPath(request.Url);
 
             var nancyUrl = new Url
             {
@@ -260,11 +267,11 @@
                 HostName = request.Url.Host,
                 Port = request.Url.IsDefaultPort ? null : (int?)request.Url.Port,
                 BasePath = baseUri.AbsolutePath.TrimEnd('/'),
-                Path = HttpUtility.UrlDecode(relativeUrl),
-                Query = request.Url.Query,
+                Path = baseUri.MakeAppLocalPath(request.Url),
+                Query = request.Url.Query
             };
 
-            byte[] certificate = null;
+            X509Certificate2 certificate = null;
 
             if (this.configuration.EnableClientCertificates)
             {
@@ -272,7 +279,7 @@
 
                 if (x509Certificate != null)
                 {
-                    certificate = x509Certificate.RawData;
+                    certificate = x509Certificate;
                 }
             }
 
@@ -336,7 +343,7 @@
 
             response.StatusCode = (int)nancyResponse.StatusCode;
 
-            if (configuration.AllowChunkedEncoding)
+            if (this.configuration.AllowChunkedEncoding)
             {
                 OutputWithDefaultTransferEncoding(nancyResponse, response);
             }
@@ -363,8 +370,9 @@
                 buffer = memoryStream.ToArray();
             }
 
-            var contentLength = (nancyResponse.Headers.ContainsKey("Content-Length")) ?
-                Convert.ToInt64(nancyResponse.Headers["Content-Length"]) :
+            string value;
+            var contentLength = nancyResponse.Headers.TryGetValue("Content-Length", out value) ?
+                Convert.ToInt64(value) :
                 buffer.Length;
 
             response.SendChunked = false;
@@ -387,13 +395,13 @@
                 return 0;
             }
 
-            if (!incomingHeaders.ContainsKey("Content-Length"))
+            IEnumerable<string> values;
+            if (!incomingHeaders.TryGetValue("Content-Length", out values))
             {
                 return 0;
             }
 
-            var headerValue =
-                incomingHeaders["Content-Length"].SingleOrDefault();
+            var headerValue = values.SingleOrDefault();
 
             if (headerValue == null)
             {

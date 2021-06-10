@@ -17,23 +17,26 @@
         /// <summary>
         /// User-configured root namespaces for assemblies.
         /// </summary>
-        public readonly static IDictionary<Assembly, string> RootNamespaces = new Dictionary<Assembly, string>();
+        public static readonly IDictionary<Assembly, string> RootNamespaces = new Dictionary<Assembly, string>();
 
         /// <summary>
         /// A list of assemblies to ignore when scanning for embedded views.
         /// </summary>
-        public readonly static IList<Assembly> Ignore = new List<Assembly>();
+        public static readonly IList<Assembly> Ignore = new List<Assembly>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ResourceViewLocationProvider"/> class.
+        /// Initializes a new instance of the <see cref="ResourceViewLocationProvider"/> class, with
+        /// the provided <paramref name="assemblyCatalog"/>.
         /// </summary>
-        public ResourceViewLocationProvider()
-            : this(new DefaultResourceReader(), new ResourceAssemblyProvider())
+        /// <param name="assemblyCatalog">An <see cref="IAssemblyCatalog"/> instance.</param>
+        public ResourceViewLocationProvider(IAssemblyCatalog assemblyCatalog)
+            : this(new DefaultResourceReader(), new ResourceAssemblyProvider(assemblyCatalog))
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ResourceViewLocationProvider"/> class.
+        /// Initializes a new instance of the <see cref="ResourceViewLocationProvider"/> class, with
+        /// the provided <paramref name="resourceReader"/> and <paramref name="resourceAssemblyProvider"/>.
         /// </summary>
         /// <param name="resourceReader">An <see cref="IResourceReader"/> instance that should be used when extracting embedded views.</param>
         /// <param name="resourceAssemblyProvider">An <see cref="IResourceAssemblyProvider"/> instance that should be used to determine which assemblies to scan for embedded views.</param>
@@ -67,6 +70,7 @@
         /// Returns an <see cref="ViewLocationResult"/> instance for all the views matching the viewName that could be located by the provider.
         /// </summary>
         /// <param name="supportedViewExtensions">An <see cref="IEnumerable{T}"/> instance, containing the view engine file extensions that is supported by the running instance of Nancy.</param>
+        /// <param name="location">Location of the view</param>
         /// <param name="viewName">The name of the view to try and find</param>
         /// <returns>An <see cref="IEnumerable{T}"/> instance, containing <see cref="ViewLocationResult"/> instances for the located views.</returns>
         /// <remarks>If no views could be located, this method should return an empty enumerable, never <see langword="null"/>.</remarks>

@@ -14,9 +14,27 @@
     [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class DynamicDictionary : DynamicObject, IEquatable<DynamicDictionary>, IHideObjectMembers, IEnumerable<string>, IDictionary<string, object>
     {
+        private readonly GlobalizationConfiguration globalizationConfiguration;
+
         private readonly IDictionary<string, dynamic> dictionary =
             new Dictionary<string, dynamic>(StaticConfiguration.CaseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase);
 
+        /// <summary>
+        /// Initializes a new istance of the <see cref="DynamicDictionary"/> class.
+        /// </summary>
+        public DynamicDictionary()
+            : this(GlobalizationConfiguration.Default)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new istance of the <see cref="DynamicDictionary"/> class.
+        /// </summary>
+        /// <param name="globalizationConfiguration">A <see cref="GlobalizationConfiguration"/> instance.</param>
+        public DynamicDictionary(GlobalizationConfiguration globalizationConfiguration)
+        {
+            this.globalizationConfiguration = globalizationConfiguration;
+        }
 
         /// <summary>
         /// Returns an empty dynamic dictionary.
@@ -24,20 +42,18 @@
         /// <value>A <see cref="DynamicDictionary"/> instance.</value>
         public static DynamicDictionary Empty
         {
-            get
-            {
-                return new DynamicDictionary();
-            }
+            get { return new DynamicDictionary(); }
         }
 
         /// <summary>
         /// Creates a dynamic dictionary from an <see cref="IDictionary{TKey,TValue}"/> instance.
         /// </summary>
         /// <param name="values">An <see cref="IDictionary{TKey,TValue}"/> instance, that the dynamic dictionary should be created from.</param>
+        /// <param name="globalizationConfiguration"></param>
         /// <returns>An <see cref="DynamicDictionary"/> instance.</returns>
-        public static DynamicDictionary Create(IDictionary<string, object> values)
+        public static DynamicDictionary Create(IDictionary<string, object> values, GlobalizationConfiguration globalizationConfiguration)
         {
-            var instance = new DynamicDictionary();
+            var instance = new DynamicDictionary(globalizationConfiguration);
 
             foreach (var key in values.Keys)
             {
@@ -65,9 +81,9 @@
         /// <param name="binder">Provides information about the object that called the dynamic operation. The binder.Name property provides the name of the member on which the dynamic operation is performed. For example, for the Console.WriteLine(sampleObject.SampleProperty) statement, where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Name returns "SampleProperty". The binder.IgnoreCase property specifies whether the member name is case-sensitive.</param><param name="result">The result of the get operation. For example, if the method is called for a property, you can assign the property value to <paramref name="result"/>.</param>
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            if (!dictionary.TryGetValue(binder.Name, out result))
+            if (!this.dictionary.TryGetValue(binder.Name, out result))
             {
-                result = new DynamicDictionaryValue(null);
+                result = new DynamicDictionaryValue(null, this.globalizationConfiguration);
             }
 
             return true;
@@ -79,7 +95,7 @@
         /// <returns>A <see cref="IEnumerable{T}"/> that contains dynamic member names.</returns>
         public override IEnumerable<string> GetDynamicMemberNames()
         {
-            return dictionary.Keys;
+            return this.dictionary.Keys;
         }
 
         /// <summary>
@@ -88,7 +104,7 @@
         /// <returns>A <see cref="IEnumerable{T}"/> that contains dynamic member names.</returns>
         public IEnumerator<string> GetEnumerator()
         {
-            return dictionary.Keys.GetEnumerator();
+            return this.dictionary.Keys.GetEnumerator();
         }
 
         /// <summary>
@@ -97,7 +113,7 @@
         /// <returns>A <see cref="IEnumerator"/> that contains dynamic member names.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return dictionary.Keys.GetEnumerator();
+            return this.dictionary.Keys.GetEnumerator();
         }
 
         /// <summary>
@@ -111,9 +127,9 @@
                 name = GetNeutralKey(name);
 
                 dynamic member;
-                if (!dictionary.TryGetValue(name, out member))
+                if (!this.dictionary.TryGetValue(name, out member))
                 {
-                    member = new DynamicDictionaryValue(null);
+                    member = new DynamicDictionaryValue(null, this.globalizationConfiguration);
                 }
 
                 return member;
@@ -122,7 +138,7 @@
             {
                 name = GetNeutralKey(name);
 
-                dictionary[name] = value is DynamicDictionaryValue ? value : new DynamicDictionaryValue(value);
+                this.dictionary[name] = value is DynamicDictionaryValue ? value : new DynamicDictionaryValue(value, this.globalizationConfiguration);
             }
         }
 
@@ -176,7 +192,7 @@
         /// <returns> A hash code for this <see cref="DynamicDictionary"/>, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         public override int GetHashCode()
         {
-            return (dictionary != null ? dictionary.GetHashCode() : 0);
+            return (this.dictionary != null ? this.dictionary.GetHashCode() : 0);
         }
 
         /// <summary>
@@ -257,7 +273,7 @@
         public bool Contains(KeyValuePair<string, dynamic> item)
         {
             var dynamicValueKeyValuePair =
-                GetDynamicKeyValuePair(item);
+                this.GetDynamicKeyValuePair(item);
 
             return this.dictionary.Contains(dynamicValueKeyValuePair);
         }
@@ -300,7 +316,7 @@
         public bool Remove(KeyValuePair<string, dynamic> item)
         {
             var dynamicValueKeyValuePair =
-                GetDynamicKeyValuePair(item);
+                this.GetDynamicKeyValuePair(item);
 
             return this.dictionary.Remove(dynamicValueKeyValuePair);
         }
@@ -317,10 +333,10 @@
             }
         }
 
-        private static KeyValuePair<string, dynamic> GetDynamicKeyValuePair(KeyValuePair<string, dynamic> item)
+        private KeyValuePair<string, dynamic> GetDynamicKeyValuePair(KeyValuePair<string, dynamic> item)
         {
             var dynamicValueKeyValuePair =
-                new KeyValuePair<string, dynamic>(item.Key, new DynamicDictionaryValue(item.Value));
+                new KeyValuePair<string, dynamic>(item.Key, new DynamicDictionaryValue(item.Value, this.globalizationConfiguration));
             return dynamicValueKeyValuePair;
         }
 
@@ -337,7 +353,7 @@
         {
             var data = new Dictionary<string, object>();
 
-            foreach (var item in dictionary)
+            foreach (var item in this.dictionary)
             {
                 var newKey = item.Key;
                 var newValue = ((DynamicDictionaryValue)item.Value).Value;
@@ -360,7 +376,7 @@
                 for (var i = 0; i < maxItems; i++)
                 {
                     var item = this.dictionary.ElementAt(i);
-                    
+
                     builder.AppendFormat(" {0} = {1}{2}", item.Key, item.Value, i < maxItems - 1 ? "," : string.Empty);
                 }
 

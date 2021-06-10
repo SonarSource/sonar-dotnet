@@ -1,0 +1,58 @@
+<Project>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Nancy.ruleset</CodeAnalysisRuleSet>
+    <Configurations>Debug;Release</Configurations>
+    <DisableImplicitFrameworkReferences Condition=" '$(TargetFramework)' == 'net452' ">true</DisableImplicitFrameworkReferences>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
+    <DefineConstants>$(DefineConstants);CORE</DefineConstants>
+    <RuntimeFrameworkVersion>2.0.5</RuntimeFrameworkVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'MonoRelease' ">
+    <DefineConstants>$(DefineConstants);MONO</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ProjectUnderTest>$(MSBuildProjectName.Substring(0, $(MSBuildProjectName.IndexOf(".Tests"))))</ProjectUnderTest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Nancy/Nancy.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(MSBuildProjectName)' != 'Nancy.Tests' and '$(MSBuildProjectName)' != 'Nancy.Tests.Functional' ">
+    <ProjectReference Include="../../src/$(ProjectUnderTest)/$(ProjectUnderTest).csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(MSBuildProjectName)' != 'Nancy.Testing.Tests' ">
+    <ProjectReference Include="../../src/Nancy.Testing/Nancy.Testing.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(MSBuildProjectName)' != 'Nancy.Tests' and '$(MSBuildProjectName)' != 'Nancy.ViewEngines.Razor.Tests.Models' ">
+    <Compile Include="..\Nancy.Tests\Fakes\*.cs;..\Nancy.Tests\ShouldExtensions.cs;..\Nancy.Tests\xUnitExtensions\*.cs" Exclude="bin\**;obj\**;packages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FakeItEasy" Version="4.6.0" />
+    <PackageReference Include="FakeItEasy.Analyzer.CSharp" Version="4.6.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="xunit" Version="2.4.0-beta.1.build3958" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0-beta.1.build3958" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Dynamic.Runtime" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Core" />
+    <Reference Include="System" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.4.0-beta.1.build3958" />
+  </ItemGroup>
+</Project>

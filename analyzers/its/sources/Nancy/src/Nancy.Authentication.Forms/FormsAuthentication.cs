@@ -243,12 +243,11 @@ namespace Nancy.Authentication.Forms
         /// <returns>Returns user guid, or Guid.Empty if not present or invalid</returns>
         private static Guid GetAuthenticatedUserFromCookie(NancyContext context, FormsAuthenticationConfiguration configuration)
         {
-            if (!context.Request.Cookies.ContainsKey(formsAuthenticationCookieName))
+            string cookieValueEncrypted;
+            if (!context.Request.Cookies.TryGetValue(formsAuthenticationCookieName, out cookieValueEncrypted))
             {
                 return Guid.Empty;
             }
-
-            var cookieValueEncrypted = context.Request.Cookies[formsAuthenticationCookieName];
 
             if (string.IsNullOrEmpty(cookieValueEncrypted))
             {
@@ -258,7 +257,7 @@ namespace Nancy.Authentication.Forms
             var cookieValue = DecryptAndValidateAuthenticationCookie(cookieValueEncrypted, configuration);
 
             Guid returnGuid;
-            if (String.IsNullOrEmpty(cookieValue) || !Guid.TryParse(cookieValue, out returnGuid))
+            if (string.IsNullOrEmpty(cookieValue) || !Guid.TryParse(cookieValue, out returnGuid))
             {
                 return Guid.Empty;
             }

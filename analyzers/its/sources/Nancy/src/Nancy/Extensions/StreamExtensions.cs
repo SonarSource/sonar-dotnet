@@ -1,73 +1,39 @@
 ﻿namespace Nancy.Extensions
 {
-    using System;
     using System.IO;
+    using System.Text;
 
     /// <summary>
-    /// Containing extensions for the <see cref="Stream"/> object.
+    /// Extensions for Stream.
     /// </summary>
     public static class StreamExtensions
     {
-        /// <summary>
-        /// Buffer size for copy operations
-        /// </summary>
         internal const int BufferSize = 4096;
 
         /// <summary>
-        /// Copies the contents between two <see cref="Stream"/> instances in an async fashion.
+        /// Gets the request body as a string.
         /// </summary>
-        /// <param name="source">The source stream to copy from.</param>
-        /// <param name="destination">The destination stream to copy to.</param>
-        /// <param name="onComplete">Delegate that should be invoked when the operation has completed. Will pass the source, destination and exception (if one was thrown) to the function. Can pass in <see langword="null" />.</param>
-        public static void CopyTo(this Stream source, Stream destination, Action<Stream, Stream, Exception> onComplete)
+        /// <param name="stream">The request body stream.</param>
+        /// <param name="encoding">The encoding to use, <see cref="Encoding.UTF8"/> by default.</param>
+        /// <returns>The request body as a <see cref="string"/>.</returns>
+        public static string AsString(this Stream stream, Encoding encoding = null)
         {
-            var buffer =
-                new byte[BufferSize];
-
-            Action<Exception> done = e =>
+            using (var reader = new StreamReader(stream, encoding ?? Encoding.UTF8, true, BufferSize, true))
             {
-                if (onComplete != null)
+                if (stream.CanSeek)
                 {
-                    onComplete.Invoke(source, destination, e);
+                    var initialPosition = stream.Position;
+
+                    stream.Position = 0;
+
+                    var content = reader.ReadToEnd();
+
+                    stream.Position = initialPosition;
+
+                    return content;
                 }
-            };
-
-            AsyncCallback rc = null;
-
-            rc = readResult =>
-            {
-                try
-                {
-                    var read =
-                        source.EndRead(readResult);
-
-                    if (read <= 0)
-                    {
-                        done.Invoke(null);
-                        return;
-                    }
-
-                    destination.BeginWrite(buffer, 0, read, writeResult =>
-                    {
-                        try
-                        {
-                            destination.EndWrite(writeResult);
-                            source.BeginRead(buffer, 0, buffer.Length, rc, null);
-                        }
-                        catch (Exception ex)
-                        {
-                            done.Invoke(ex);
-                        }
-
-                    }, null);
-                }
-                catch (Exception ex)
-                {
-                    done.Invoke(ex);
-                }
-            };
-
-            source.BeginRead(buffer, 0, buffer.Length, rc, null);
+                return string.Empty;
+            }
         }
     }
 }

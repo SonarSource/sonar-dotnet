@@ -4,12 +4,7 @@
     using System.CodeDom.Compiler;
     using System.Collections.Generic;
     using System.Web.Razor;
-    using System.Web.Razor.Generator;
-
-    using Microsoft.CSharp;
     using Microsoft.CSharp.RuntimeBinder;
-
-    using Nancy.Extensions;
 
     /// <summary>
     /// Renderer for CSharp razor files.
@@ -47,18 +42,18 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="CSharpRazorViewRenderer"/> class.
         /// </summary>
-        public CSharpRazorViewRenderer()
+        public CSharpRazorViewRenderer(RazorAssemblyProvider razorAssemblyProvider)
         {
             this.Assemblies = new List<string>
             {
-                typeof(Binder).GetAssemblyPath()
+                typeof(Binder).Assembly.Location
             };
 
             this.ModelCodeGenerator = typeof(ModelCodeGenerator);
 
-            this.Provider = new CSharpCodeProvider();
+            this.Provider = new Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider();
 
-            this.Host = new NancyRazorEngineHost(new CSharpRazorCodeLanguage());
+            this.Host = new NancyRazorEngineHost(new CSharpRazorCodeLanguage(), razorAssemblyProvider);
 
             this.Host.NamespaceImports.Add("Microsoft.CSharp.RuntimeBinder");
         }
@@ -66,7 +61,6 @@
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
             if (this.Provider != null)

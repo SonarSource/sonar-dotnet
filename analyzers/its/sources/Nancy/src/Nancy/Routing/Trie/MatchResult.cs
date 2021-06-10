@@ -10,7 +10,7 @@ namespace Nancy.Routing.Trie
     {
         private static readonly MatchResult noMatch = new MatchResult();
 
-        private static readonly MatchResult[] noMatches = new MatchResult[] { };
+        private static readonly MatchResult[] noMatches = ArrayCache.Empty<MatchResult>();
 
         /// <summary>
         /// Gets or sets the captured parameters
@@ -39,11 +39,18 @@ namespace Nancy.Routing.Trie
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MatchResult"/> class.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
         public MatchResult(IDictionary<string, object> parameters)
         {
             this.Parameters = parameters;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MatchResult"/> class.
+        /// </summary>
         public MatchResult()
             : this(new Dictionary<string, object>())
         {

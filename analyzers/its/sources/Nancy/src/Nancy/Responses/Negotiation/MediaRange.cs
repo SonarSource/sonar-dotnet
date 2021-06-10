@@ -6,17 +6,26 @@ namespace Nancy.Responses.Negotiation
     /// <summary>
     /// Represents a media range from an accept header
     /// </summary>
-    public class MediaRange
+    public class MediaRange : IEquatable<MediaRange>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MediaRange"/> class from a string representation of a media range
+        /// Initializes a new instance of the <see cref="MediaRange"/> class, with
+        /// the provided <paramref name="contentType"/>.
         /// </summary>
-        /// <param name="contentType">the content type</param>
-        public MediaRange(string contentType) : this()
+        /// <param name="contentType">string representation of a media range</param>
+        public MediaRange(string contentType)
+        {
+            this.ParseContentType(contentType);
+        }
+
+        private void ParseContentType(string contentType)
         {
             if (string.IsNullOrEmpty(contentType))
             {
-                throw new ArgumentException("inputString cannot be null or empty", contentType);
+                this.Type = string.Empty;
+                this.Subtype = string.Empty;
+                this.Parameters = new MediaRangeParameters();
+                return;
             }
 
             if (contentType.Equals("*"))
@@ -36,19 +45,14 @@ namespace Nancy.Responses.Negotiation
             this.Type = parts[0];
             this.Subtype = parts[1].TrimEnd();
 
-            if (parts.Length > 2)
+            if (parts.Length <= 2)
             {
-                var separator = contentType.IndexOf(';');
-                this.Parameters = MediaRangeParameters.FromString(contentType.Substring(separator));
+                this.Parameters = new MediaRangeParameters();
+                return;
             }
-        }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MediaRange"/> class.
-        /// </summary>
-        public MediaRange()
-        {
-            this.Parameters = new MediaRangeParameters();
+            var separator = contentType.IndexOf(';');
+            this.Parameters = MediaRangeParameters.FromString(contentType.Substring(separator));
         }
 
         /// <summary>
@@ -97,21 +101,58 @@ namespace Nancy.Responses.Negotiation
             return this.Matches(other) && this.Parameters.Matches(other.Parameters);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="MediaRange"/>.
+        /// </summary>
+        /// <param name="contentType">Type of the content.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator MediaRange(string contentType)
         {
             return new MediaRange(contentType);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="MediaRange"/> to <see cref="System.String"/>.
+        /// </summary>
+        /// <param name="mediaRange">The media range.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator string(MediaRange mediaRange)
         {
-            if (mediaRange.Parameters.Any())
+            if (null == mediaRange)
             {
-                return string.Format("{0}/{1};{2}", mediaRange.Type, mediaRange.Subtype, mediaRange.Parameters);
+                return null;
             }
 
-            return string.Format("{0}/{1}", mediaRange.Type, mediaRange.Subtype);
+            if (mediaRange.Parameters.Any())
+            {
+                return string.Concat(mediaRange.Type, "/", mediaRange.Subtype, ";", mediaRange.Parameters);
+            }
+
+            return string.Concat(mediaRange.Type, "/",  mediaRange.Subtype);
         }
 
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+        /// </returns>
+        /// <param name="other">An object to compare with this object.</param>
+        public bool Equals(MediaRange other)
+        {
+            return this.Matches(other);
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return this;

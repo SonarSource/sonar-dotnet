@@ -29,74 +29,13 @@
 namespace Nancy.Json
 {
     using System;
-    using System.Globalization;
-    using System.IO;
-    using System.Text;
 
-    internal static class Json
+    /// <summary>
+    /// JSON Helper Class.
+    /// </summary>
+    public static class Json
     {
-
-        public static void Serialize(object obj, StringBuilder output)
-        {
-            Serialize(obj, JavaScriptSerializer.DefaultSerializer, output);
-        }
-
-        public static void Serialize(object obj, JavaScriptSerializer jss, StringBuilder output)
-        {
-            JsonSerializer js = new JsonSerializer(jss);
-            js.Serialize(obj, output);
-            js = null;
-        }
-
-        public static void Serialize(object obj, TextWriter output)
-        {
-            Serialize(obj, JavaScriptSerializer.DefaultSerializer, output);
-        }
-
-        public static void Serialize(object obj, JavaScriptSerializer jss, TextWriter output)
-        {
-            JsonSerializer js = new JsonSerializer(jss);
-            js.Serialize(obj, output);
-            js = null;
-        }
-
-        public static object Deserialize(string input)
-        {
-            return Deserialize(input, JavaScriptSerializer.DefaultSerializer);
-        }
-
-        public static object Deserialize(string input, JavaScriptSerializer jss)
-        {
-            if (jss == null)
-            {
-                throw new ArgumentNullException("jss");
-            }
-            return Deserialize(new StringReader(input), jss);
-        }
-
-        public static object Deserialize(TextReader input)
-        {
-            return Deserialize(input, JavaScriptSerializer.DefaultSerializer);
-        }
-
-        public static object Deserialize(TextReader input, JavaScriptSerializer jss)
-        {
-            if (jss == null)
-            {
-                throw new ArgumentNullException("jss");
-            }
-            JsonDeserializer ser = new JsonDeserializer(jss);
-            return ser.Deserialize(input);
-        }
-
-        public static IFormatProvider DefaultNumberFormatInfo
-        {
-            get
-            {
-                return new NumberFormatInfo(){ NumberDecimalSeparator = ".", NumberGroupSeparator = string.Empty };
-            }
-
-        }
+        private const StringComparison ComparisonType = StringComparison.OrdinalIgnoreCase;
 
         /// <summary>
         /// Attempts to detect if the content type is JSON.
@@ -110,17 +49,23 @@ namespace Nancy.Json
         /// <returns>True if content type is JSON, false otherwise</returns>
         public static bool IsJsonContentType(string contentType)
         {
-            if (String.IsNullOrEmpty(contentType))
+            if (string.IsNullOrEmpty(contentType))
             {
                 return false;
             }
 
-            var contentMimeType = contentType.Split(';')[0];
+            var index = contentType.IndexOf(';');
 
-            return contentMimeType.Equals("application/json", StringComparison.OrdinalIgnoreCase) ||
-            contentMimeType.StartsWith("application/json-", StringComparison.OrdinalIgnoreCase) ||
-            contentMimeType.Equals("text/json", StringComparison.OrdinalIgnoreCase) ||
-            contentMimeType.EndsWith("+json", StringComparison.OrdinalIgnoreCase);
+            if (index >= 0)
+            {
+                contentType = contentType.Substring(0, index);
+            }
+
+            contentType = contentType.Trim();
+
+            return contentType.StartsWith("application/json", ComparisonType)
+                || contentType.Equals("text/json", ComparisonType)
+                || contentType.EndsWith("+json", ComparisonType);
         }
     }
 }

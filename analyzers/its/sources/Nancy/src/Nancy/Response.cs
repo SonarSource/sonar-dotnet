@@ -6,7 +6,6 @@ namespace Nancy
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-
     using Nancy.Cookies;
     using Nancy.Helpers;
     using Nancy.Responses;
@@ -43,7 +42,11 @@ namespace Nancy
         /// <remarks>The default value is <c>text/html</c>.</remarks>
         public string ContentType
         {
-            get { return Headers.ContainsKey("content-type") ? Headers["content-type"] : this.contentType; }
+            get
+            {
+                string value;
+                return Headers.TryGetValue("content-type", out value) ? value : this.contentType;
+            }
             set { this.contentType = value; }
         }
 

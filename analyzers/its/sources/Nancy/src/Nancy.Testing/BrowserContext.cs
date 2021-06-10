@@ -198,7 +198,7 @@
 
         /// <summary>
         /// Sets the ClientCertificate to a default embedded certificate
-        /// <remarks>The default certificate is embedded using the Nancy.Testing.Nancy Testing Cert.pfx resource name (secured with password "nancy")</remarks>
+        /// <remarks>The default certificate is embedded using the Nancy.Testing.NancyTestingCert.pfx resource name (secured with password "nancy")</remarks>
         /// </summary>
         public void Certificate()
         {
@@ -206,8 +206,8 @@
 
             using (
                 var pkcs12 =
-                    Assembly.GetAssembly(typeof (BrowserContext))
-                            .GetManifestResourceStream("Nancy.Testing.Resources.Nancy Testing Cert.pfx"))
+                    typeof (BrowserContext).GetTypeInfo().Assembly
+                            .GetManifestResourceStream("Nancy.Testing.Resources.NancyTestingCert.pfx"))
             {
                 using (var br = new BinaryReader(pkcs12))
                 {

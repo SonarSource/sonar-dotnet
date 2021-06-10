@@ -5,31 +5,33 @@
     using System.IO;
     using System.Linq;
     using System.Threading;
+    using Configuration;
 
     /// <summary>
-    /// The default implementation for how views are located by Nancy.
+    /// The default implementation of <see cref="IViewLocator"/>.
     /// </summary>
     public class DefaultViewLocator : IViewLocator
     {
         private readonly List<ViewLocationResult> viewLocationResults;
-
         private readonly IViewLocationProvider viewLocationProvider;
-
         private readonly IEnumerable<IViewEngine> viewEngines;
-
         private readonly ReaderWriterLockSlim padlock = new ReaderWriterLockSlim();
-
         private readonly char[] invalidCharacters;
+        private readonly ViewConfiguration configuration;
 
-        public DefaultViewLocator(IViewLocationProvider viewLocationProvider, IEnumerable<IViewEngine> viewEngines)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultViewLocator"/> class.
+        /// </summary>
+        /// <param name="viewLocationProvider">An <see cref="IViewLocationProvider"/> instance.</param>
+        /// <param name="viewEngines">An <see cref="IEnumerable{T}"/> of <see cref="IViewEngine"/> instances.</param>
+        /// <param name="environment">An <see cref="INancyEnvironment"/> instance.</param>
+        public DefaultViewLocator(IViewLocationProvider viewLocationProvider, IEnumerable<IViewEngine> viewEngines, INancyEnvironment environment)
         {
             this.viewLocationProvider = viewLocationProvider;
             this.viewEngines = viewEngines;
-
             this.invalidCharacters = Path.GetInvalidFileNameChars().Where(c => c != '/').ToArray();
-
-            // No need to lock here, we get constructed on app startup
-            this.viewLocationResults = new List<ViewLocationResult>(this.GetInititialViewLocations());
+            this.viewLocationResults = new List<ViewLocationResult>(this.GetInitialViewLocations());
+            this.configuration = environment.GetValue<ViewConfiguration>();
         }
 
         /// <summary>
@@ -52,7 +54,7 @@
 
             // If we can't do runtime discovery there's no need to lock anything
             // as we can assume our cache is immutable.
-            if (!StaticConfiguration.Caching.EnableRuntimeViewDiscovery)
+            if (!this.configuration.RuntimeViewDiscovery)
             {
                 return this.LocateCachedView(viewName);
             }
@@ -67,12 +69,9 @@
                     return cachedResult;
                 }
 
-                if (!StaticConfiguration.Caching.EnableRuntimeViewDiscovery)
-                {
-                    return null;
-                }
-
-                return this.LocateAndCacheUncachedView(viewName);
+                return !this.configuration.RuntimeViewDiscovery
+                    ? null
+                    : this.LocateAndCacheUncachedView(viewName);
             }
             finally
             {
@@ -84,7 +83,7 @@
         /// Gets all the views that are currently discovered
         /// Note: this is *not* the recommended way to deal with the view locator
         /// as it doesn't allow for runtime discovery of views with the
-        /// <see cref="StaticConfiguration.Caching"/> settings.
+        /// <see cref="ViewConfiguration"/>.
         /// </summary>
         /// <returns>A collection of <see cref="ViewLocationResult"/> instances</returns>
         public IEnumerable<ViewLocationResult> GetAllCurrentlyDiscoveredViews()
@@ -124,7 +123,7 @@
 
             if (uncachedResults.Length > 1)
             {
-                throw new AmbiguousViewsException(GetAmgiguousViewExceptionMessage(uncachedResults.Length, uncachedResults));
+                throw new AmbiguousViewsException(GetAmbiguousViewExceptionMessage(uncachedResults.Length, uncachedResults));
             }
 
             return uncachedResults.First();
@@ -140,7 +139,7 @@
 
             if (cachedResults.Length > 1)
             {
-                throw new AmbiguousViewsException(GetAmgiguousViewExceptionMessage(cachedResults.Length, cachedResults));
+                throw new AmbiguousViewsException(GetAmbiguousViewExceptionMessage(cachedResults.Length, cachedResults));
             }
 
             return null;
@@ -150,9 +149,9 @@
         {
             var viewExtension = GetExtensionFromViewName(viewName);
 
-            var supportedViewExtensions = String.IsNullOrEmpty(viewExtension)
-                                              ? GetSupportedViewExtensions()
-                                              : new[] { viewExtension };
+            var supportedViewExtensions = string.IsNullOrEmpty(viewExtension)
+                ? this.GetSupportedViewExtensions()
+                : new[] { viewExtension };
 
             var location = GetLocationFromViewName(viewName);
             var nameWithoutExtension = GetFilenameWithoutExtensionFromViewName(viewName);
@@ -169,10 +168,10 @@
                        .ToArray();
         }
 
-        private IEnumerable<ViewLocationResult> GetInititialViewLocations()
+        private IEnumerable<ViewLocationResult> GetInitialViewLocations()
         {
             var supportedViewExtensions =
-                GetSupportedViewExtensions();
+                this.GetSupportedViewExtensions();
 
             var viewsLocatedByProviders =
                 this.viewLocationProvider.GetLocatedViews(supportedViewExtensions);
@@ -187,9 +186,9 @@
                 .Distinct();
         }
 
-        private static string GetAmgiguousViewExceptionMessage(int count, IEnumerable<ViewLocationResult> viewsThatMatchesCritera)
+        private static string GetAmbiguousViewExceptionMessage(int count, IEnumerable<ViewLocationResult> viewsThatMatchesCriteria)
         {
-            return string.Format("This exception was thrown because multiple views were found. {0} view(s):\r\n\t{1}", count, string.Join("\r\n\t", viewsThatMatchesCritera.Select(GetFullLocationOfView).ToArray()));
+            return string.Format("This exception was thrown because multiple views were found. {0} view(s):\r\n\t{1}", count, string.Join("\r\n\t", viewsThatMatchesCriteria.Select(GetFullLocationOfView).ToArray()));
         }
 
         private static string GetFullLocationOfView(ViewLocationResult viewLocationResult)
@@ -230,7 +229,7 @@
             var filename = Path.GetFileName(viewName);
             var index = viewName.LastIndexOf(filename, StringComparison.OrdinalIgnoreCase);
             var location = index >= 0 ? viewName.Remove(index, filename.Length) : viewName;
-            location = location.TrimEnd(new[] { '/' });
+            location = location.TrimEnd('/');
             return location;
         }
 
@@ -238,7 +237,7 @@
         {
             var extension = Path.GetExtension(viewName);
 
-            return !String.IsNullOrEmpty(extension) ? extension.Substring(1) : extension;
+            return !string.IsNullOrEmpty(extension) ? extension.Substring(1) : extension;
         }
 
         private bool IsValidViewName(string viewName)

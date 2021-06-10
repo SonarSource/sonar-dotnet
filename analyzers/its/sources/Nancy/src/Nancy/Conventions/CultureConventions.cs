@@ -5,30 +5,40 @@
     using System.Collections.Generic;
     using System.Globalization;
 
+
     /// <summary>
     /// Collection class for static culture conventions
     /// </summary>
-    public class CultureConventions : IEnumerable<Func<NancyContext, CultureInfo>>
+    /// <seealso cref="Func{TContext, TGlobalizationConfiguration, TResult}" />
+    public class CultureConventions : IEnumerable<Func<NancyContext, GlobalizationConfiguration, CultureInfo>>
     {
-        private readonly IEnumerable<Func<NancyContext, CultureInfo>> conventions;
+        private readonly IEnumerable<Func<NancyContext, GlobalizationConfiguration, CultureInfo>> conventions;
+
 
         /// <summary>
-        /// Creates a new instance of CultureConventions
+        /// Initializes a new instance of the <see cref="CultureConventions"/> class, with
+        /// the provided <paramref name="conventions"/>.
         /// </summary>
-        /// <param name="conventions"></param>
-        public CultureConventions(IEnumerable<Func<NancyContext, CultureInfo>> conventions)
+        /// <param name="conventions">The conventions.</param>
+        public CultureConventions(IEnumerable<Func<NancyContext, GlobalizationConfiguration, CultureInfo>> conventions)
         {
             this.conventions = conventions;
         }
 
-        public IEnumerator<Func<NancyContext, CultureInfo>> GetEnumerator()
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        /// An enumerator that can be used to iterate through the collection.
+        /// </returns>
+        public IEnumerator<Func<NancyContext, GlobalizationConfiguration, CultureInfo>> GetEnumerator()
         {
-            return conventions.GetEnumerator();
+            return this.conventions.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
     }
 }

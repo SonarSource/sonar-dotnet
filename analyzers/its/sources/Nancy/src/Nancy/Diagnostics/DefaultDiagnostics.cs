@@ -4,6 +4,7 @@
 
     using Nancy.Bootstrapper;
     using Nancy.Configuration;
+    using Nancy.Conventions;
     using Nancy.Culture;
     using Nancy.Localization;
     using Nancy.ModelBinding;
@@ -28,6 +29,9 @@
         private readonly IEnumerable<IRouteMetadataProvider> routeMetadataProviders;
         private readonly ITextResource textResource;
         private readonly INancyEnvironment environment;
+        private readonly ITypeCatalog typeCatalog;
+        private readonly IAssemblyCatalog assemblyCatalog;
+        private readonly AcceptHeaderCoercionConventions acceptHeaderCoercionConventions;
 
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultDiagnostics"/> class.
@@ -43,6 +47,10 @@
         /// <param name="requestTraceFactory"></param>
         /// <param name="routeMetadataProviders"></param>
         /// <param name="textResource"></param>
+        /// <param name="environment"></param>
+        /// <param name="typeCatalog"></param>
+        /// <param name="assemblyCatalog"></param>
+        /// <param name="acceptHeaderCoercionConventions"></param>
         public DefaultDiagnostics(
             IEnumerable<IDiagnosticsProvider> diagnosticProviders,
             IRootPathProvider rootPathProvider,
@@ -55,7 +63,10 @@
             IRequestTraceFactory requestTraceFactory,
             IEnumerable<IRouteMetadataProvider> routeMetadataProviders,
             ITextResource textResource,
-            INancyEnvironment environment)
+            INancyEnvironment environment,
+            ITypeCatalog typeCatalog,
+            IAssemblyCatalog assemblyCatalog,
+            AcceptHeaderCoercionConventions acceptHeaderCoercionConventions)
         {
             this.diagnosticProviders = diagnosticProviders;
             this.rootPathProvider = rootPathProvider;
@@ -69,6 +80,9 @@
             this.routeMetadataProviders = routeMetadataProviders;
             this.textResource = textResource;
             this.environment = environment;
+            this.typeCatalog = typeCatalog;
+            this.assemblyCatalog = assemblyCatalog;
+            this.acceptHeaderCoercionConventions = acceptHeaderCoercionConventions;
         }
 
         /// <summary>
@@ -90,7 +104,10 @@
                 this.requestTraceFactory,
                 this.routeMetadataProviders,
                 this.textResource,
-                this.environment);
+                this.environment,
+                this.typeCatalog,
+                this.assemblyCatalog,
+                this.acceptHeaderCoercionConventions);
         }
     }
 }

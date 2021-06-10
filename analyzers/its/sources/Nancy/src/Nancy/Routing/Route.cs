@@ -6,57 +6,31 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Stores information about a declared route in Nancy.
+    /// Defines the core functionality of a route.
     /// </summary>
-    [DebuggerDisplay("{Description.DebuggerDisplay, nq}")]
-    public class Route
+    public abstract class Route
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Route"/> type, with the specified <see cref="RouteDescription"/>.
         /// </summary>
-        /// <param name="description"></param>
-        /// <param name="action">The action that should take place when the route is invoked.</param>
-        public Route(RouteDescription description, Func<dynamic, CancellationToken, Task<dynamic>> action)
+        /// <param name="description">An <see cref="RouteDescription"/> instance.</param>
+        protected Route(RouteDescription description)
         {
-            if (action == null)
-            {
-                throw new ArgumentNullException("action");
-            }
-
             this.Description = description;
-            this.Action = action;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Route"/> type, with the specified definition.
+        /// Initializes a new instance of the <see cref="Route{T}"/> type, with the specified definition.
         /// </summary>
         /// <param name="name">Route name</param>
         /// <param name="method">The HTTP method that the route is declared for.</param>
         /// <param name="path">The path that the route is declared for.</param>
         /// <param name="condition">A condition that needs to be satisfied inorder for the route to be eligible for invocation.</param>
-        /// <param name="action">The action that should take place when the route is invoked.</param>
-        public Route(string name, string method, string path, Func<NancyContext, bool> condition, Func<dynamic, CancellationToken, Task<dynamic>> action)
-            : this(new RouteDescription(name, method, path, condition), action)
+        /// <param name="returnType">The <see cref="Type"/> of the value returned by the route.</param>
+        protected Route(string name, string method, string path, Func<NancyContext, bool> condition, Type returnType)
+            : this(new RouteDescription(name, method, path, condition, returnType))
         {
         }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Route"/> type, with the specified definition.
-        /// </summary>
-        /// <param name="method">The HTTP method that the route is declared for.</param>
-        /// <param name="path">The path that the route is declared for.</param>
-        /// <param name="condition">A condition that needs to be satisfied inorder for the route to be eligiable for invocation.</param>
-        /// <param name="action">The action that should take place when the route is invoked.</param>
-        public Route(string method, string path, Func<NancyContext, bool> condition, Func<dynamic, CancellationToken, Task<dynamic>> action)
-            : this(string.Empty, method, path, condition, action)
-        {
-        }
-
-        /// <summary>
-        /// Gets or sets the action that should take place when the route is invoked.
-        /// </summary>
-        /// <value>A <see cref="Func{T,K}"/> that represents the action of the route.</value>
-        public Func<dynamic, CancellationToken, Task<dynamic>> Action { get; set; }
 
         /// <summary>
         /// Gets the description of the route.
@@ -69,74 +43,67 @@
         /// </summary>
         /// <param name="parameters">A <see cref="DynamicDictionary"/> that contains the parameters that should be passed to the route.</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>A (hot) task of <see cref="Response"/> instance.</returns>
-        public Task<dynamic> Invoke(DynamicDictionary parameters, CancellationToken cancellationToken)
-        {
-            return this.Action.Invoke(parameters, cancellationToken);
-        }
+        /// <returns>The value that was produced by the route.</returns>
+        public abstract Task<object> Invoke(DynamicDictionary parameters, CancellationToken cancellationToken);
+    }
 
+    /// <summary>
+    /// Stores information about a declared route in Nancy.
+    /// </summary>
+    [DebuggerDisplay("{Description.DebuggerDisplay, nq}")]
+    public class Route<T> : Route
+    {
         /// <summary>
-        /// Creates a route from a sync delegate signature
+        /// Initializes a new instance of the <see cref="Route{T}"/> type, with the specified <see cref="RouteDescription"/>.
         /// </summary>
         /// <param name="description"></param>
-        /// <param name="syncFunc">The action that should take place when the route is invoked.</param>
-        /// <returns>A Route instance</returns>
-        public static Route FromSync(RouteDescription description, Func<dynamic, dynamic> syncFunc)
+        /// <param name="action">The action that should take place when the route is invoked.</param>
+        public Route(RouteDescription description, Func<object, CancellationToken, Task<T>> action)
+            : base(description)
         {
-            return new Route(description, Wrap(syncFunc));
+            this.Action = action;
         }
 
         /// <summary>
-        /// Creates a route from a sync delegate signature
-        /// </summary>
-        /// <param name="method">The HTTP method that the route is declared for.</param>
-        /// <param name="path">The path that the route is declared for.</param>
-        /// <param name="condition">A condition that needs to be satisfied inorder for the route to be eligiable for invocation.</param>
-        /// <param name="syncFunc">The action that should take place when the route is invoked.</param>
-        /// <returns>A Route instance</returns>
-        public static Route FromSync(string method, string path, Func<NancyContext, bool> condition, Func<dynamic, dynamic> syncFunc)
-        {
-            return FromSync(string.Empty, method, path, condition, syncFunc);
-        }
-
-        /// <summary>
-        /// Creates a route from a sync delegate signature
+        /// Initializes a new instance of the <see cref="Route{T}"/> type, with the specified definition.
         /// </summary>
         /// <param name="name">Route name</param>
         /// <param name="method">The HTTP method that the route is declared for.</param>
         /// <param name="path">The path that the route is declared for.</param>
         /// <param name="condition">A condition that needs to be satisfied inorder for the route to be eligible for invocation.</param>
-        /// <param name="syncFunc">The action that should take place when the route is invoked.</param>
-        /// <returns>A Route instance</returns>
-        public static Route FromSync(string name, string method, string path, Func<NancyContext, bool> condition, Func<dynamic, dynamic> syncFunc)
+        /// <param name="action">The action that should take place when the route is invoked.</param>
+        public Route(string name, string method, string path, Func<NancyContext, bool> condition, Func<object, CancellationToken, Task<T>> action)
+            : this(new RouteDescription(name, method, path, condition, typeof(T)), action)
         {
-            return FromSync(new RouteDescription(name, method, path, condition), syncFunc);
         }
 
         /// <summary>
-        /// Wraps a sync delegate in a delegate that returns a task
+        /// Initializes a new instance of the <see cref="Route{T}"/> type, with the specified definition.
         /// </summary>
-        /// <param name="syncFunc">Sync delegate</param>
-        /// <returns>Task wrapped version</returns>
-        private static Func<dynamic, CancellationToken, Task<dynamic>> Wrap(Func<object, object> syncFunc)
+        /// <param name="method">The HTTP method that the route is declared for.</param>
+        /// <param name="path">The path that the route is declared for.</param>
+        /// <param name="condition">A condition that needs to be satisfied inorder for the route to be eligiable for invocation.</param>
+        /// <param name="action">The action that should take place when the route is invoked.</param>
+        public Route(string method, string path, Func<NancyContext, bool> condition, Func<object, CancellationToken, Task<T>> action)
+            : this(string.Empty, method, path, condition, action)
         {
-            return (parameters, context) =>
-                {
-                    var tcs = new TaskCompletionSource<dynamic>();
+        }
 
-                    try
-                    {
-                        var result = syncFunc.Invoke(parameters);
+        /// <summary>
+        /// Gets or sets the action that should take place when the route is invoked.
+        /// </summary>
+        /// <value>A <see cref="Func{T,K}"/> that represents the action of the route.</value>
+        public Func<object, CancellationToken, Task<T>> Action { get; set; }
 
-                        tcs.SetResult(result);
-                    }
-                    catch (Exception e)
-                    {
-                        tcs.SetException(e);
-                    }
-
-                    return tcs.Task;
-                };
+        /// <summary>
+        /// Invokes the route with the provided <paramref name="parameters"/>.
+        /// </summary>
+        /// <param name="parameters">A <see cref="DynamicDictionary"/> that contains the parameters that should be passed to the route.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A (hot) task of <see cref="Response"/> instance.</returns>
+        public override async Task<object> Invoke(DynamicDictionary parameters, CancellationToken cancellationToken)
+        {
+            return await this.Action.Invoke(parameters, cancellationToken).ConfigureAwait(false); 
         }
     }
 }

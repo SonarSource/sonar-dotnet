@@ -3,7 +3,9 @@ namespace Nancy.ErrorHandling
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
+    using Nancy.Configuration;
     using Nancy.Extensions;
     using Nancy.IO;
     using Nancy.Responses.Negotiation;
@@ -14,18 +16,20 @@ namespace Nancy.ErrorHandling
     /// </summary>
     public class DefaultStatusCodeHandler : IStatusCodeHandler
     {
-        private const string DisableErrorTracesTrueMessage = "Error details are currently disabled. Please set <code>StaticConfiguration.DisableErrorTraces = false;</code> to enable.";
+        private const string DisplayErrorTracesFalseMessage = "Error details are currently disabled.<br />To enable it, please set <strong>TraceConfiguration.DisplayErrorTraces</strong> to <strong>true</strong>.<br />For example by overriding your Bootstrapper's <strong>Configure</strong> method and calling<br/> <strong>environment.Tracing(enabled: false, displayErrorTraces: true);</strong>.";
 
         private readonly IDictionary<HttpStatusCode, string> errorMessages;
         private readonly IDictionary<HttpStatusCode, string> errorPages;
         private readonly IResponseNegotiator responseNegotiator;
         private readonly HttpStatusCode[] supportedStatusCodes = { HttpStatusCode.NotFound, HttpStatusCode.InternalServerError };
+        private readonly TraceConfiguration configuration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultStatusCodeHandler"/> type.
         /// </summary>
         /// <param name="responseNegotiator">The response negotiator.</param>
-        public DefaultStatusCodeHandler(IResponseNegotiator responseNegotiator)
+        /// <param name="environment">An <see cref="INancyEnvironment"/> instance.</param>
+        public DefaultStatusCodeHandler(IResponseNegotiator responseNegotiator, INancyEnvironment environment)
         {
             this.errorMessages = new Dictionary<HttpStatusCode, string>
             {
@@ -40,6 +44,7 @@ namespace Nancy.ErrorHandling
             };
 
             this.responseNegotiator = responseNegotiator;
+            this.configuration = environment.GetValue<TraceConfiguration>();
         }
 
         /// <summary>
@@ -82,7 +87,17 @@ namespace Nancy.ErrorHandling
             // from swapping a view model with a `DefaultStatusCodeHandlerResult`
             context.NegotiationContext = new NegotiationContext();
 
-            var result = new DefaultStatusCodeHandlerResult(statusCode, this.errorMessages[statusCode], StaticConfiguration.DisableErrorTraces ? DisableErrorTracesTrueMessage : context.GetExceptionDetails());
+            var details = !this.configuration.DisplayErrorTraces
+                ? DisplayErrorTracesFalseMessage
+                : string.Concat("<pre>", context.GetExceptionDetails().Replace("<", "&gt;").Replace(">", "&lt;"), "</pre>");
+
+            var result = new DefaultStatusCodeHandlerResult
+            {
+                Details = details,
+                Message = this.errorMessages[statusCode],
+                StatusCode = statusCode
+            };
+            
             try
             {
                 context.Response = this.responseNegotiator.NegotiateResponse(result, context);
@@ -129,7 +144,8 @@ namespace Nancy.ErrorHandling
 
         private static string LoadResource(string filename)
         {
-            var resourceStream = typeof(INancyEngine).Assembly.GetManifestResourceStream(string.Format("Nancy.ErrorHandling.Resources.{0}", filename));
+            var resourceStream = typeof(INancyEngine).GetTypeInfo().Assembly.GetManifestResourceStream(string.Format("Nancy.ErrorHandling.Resources.{0}", filename));
+
 
             if (resourceStream == null)
             {
@@ -142,20 +158,13 @@ namespace Nancy.ErrorHandling
             }
         }
 
-        internal class DefaultStatusCodeHandlerResult
+        public class DefaultStatusCodeHandlerResult
         {
-            public DefaultStatusCodeHandlerResult(HttpStatusCode statusCode, string message, string details)
-            {
-                this.StatusCode = statusCode;
-                this.Message = message;
-                this.Details = details;
-            }
+            public HttpStatusCode StatusCode { get; set; }
 
-            public HttpStatusCode StatusCode { get; private set; }
+            public string Message { get; set; }
 
-            public string Message { get; private set; }
-
-            public string Details { get; private set; }
+            public string Details { get; set; }
         }
     }
 }

@@ -23,10 +23,7 @@ namespace Nancy.Session
         /// <value>Cookie name</value>
         public string CookieName
         {
-            get
-            {
-                return this.currentConfiguration.CookieName;
-            }
+            get { return this.currentConfiguration.CookieName; }
         }
 
         /// <summary>
@@ -61,8 +58,6 @@ namespace Nancy.Session
             }
             this.currentConfiguration = configuration;
         }
-
-
 
         /// <summary>
         /// Initialise and add cookie based session hooks to the application pipeline
@@ -171,10 +166,10 @@ namespace Nancy.Session
             var cookieName = this.currentConfiguration.CookieName;
             var hmacProvider = this.currentConfiguration.CryptographyConfiguration.HmacProvider;
             var encryptionProvider = this.currentConfiguration.CryptographyConfiguration.EncryptionProvider;
-
-            if (request.Cookies.ContainsKey(cookieName))
+            string cookieValue;
+            if (request.Cookies.TryGetValue(cookieName, out cookieValue))
             {
-                var cookieData = HttpUtility.UrlDecode(request.Cookies[cookieName]);
+                var cookieData = HttpUtility.UrlDecode(cookieValue);
                 var hmacLength = Base64Helpers.GetBase64Length(hmacProvider.HmacLength);
                 if (cookieData.Length < hmacLength)
                 {

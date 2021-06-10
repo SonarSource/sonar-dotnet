@@ -14,10 +14,13 @@ namespace Nancy.Bootstrapper
     public abstract class NancyBootstrapperWithRequestContainerBase<TContainer> : NancyBootstrapperBase<TContainer>
         where TContainer : class
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NancyBootstrapperWithRequestContainerBase{TContainer}"/> class.
+        /// </summary>
         protected NancyBootstrapperWithRequestContainerBase()
         {
-            this.RequestScopedTypes = new TypeRegistration[0];
-            this.RequestScopedCollectionTypes = new CollectionTypeRegistration[0];
+            this.RequestScopedTypes = ArrayCache.Empty<TypeRegistration>();
+            this.RequestScopedCollectionTypes = ArrayCache.Empty<CollectionTypeRegistration>();
         }
         /// <summary>
         /// Context key for storing the child container in the context
@@ -114,7 +117,7 @@ namespace Nancy.Bootstrapper
             foreach (var applicationRegistrationTask in registrationTasks.ToList())
             {
                 var applicationTypeRegistrations = applicationRegistrationTask.TypeRegistrations == null ?
-                                                        new TypeRegistration[] { } :
+                                                        ArrayCache.Empty<TypeRegistration>() :
                                                         applicationRegistrationTask.TypeRegistrations.ToArray();
 
                 this.RegisterTypes(this.ApplicationContainer, applicationTypeRegistrations.Where(tr => tr.Lifetime != Lifetime.PerRequest));
@@ -123,7 +126,7 @@ namespace Nancy.Bootstrapper
                         .ToArray();
 
                 var applicationCollectionRegistrations = applicationRegistrationTask.CollectionTypeRegistrations == null ?
-                                                            new CollectionTypeRegistration[] { } :
+                                                            ArrayCache.Empty<CollectionTypeRegistration>() :
                                                             applicationRegistrationTask.CollectionTypeRegistrations.ToArray();
 
                 this.RegisterCollectionTypes(this.ApplicationContainer, applicationCollectionRegistrations.Where(tr => tr.Lifetime != Lifetime.PerRequest));
@@ -209,7 +212,7 @@ namespace Nancy.Bootstrapper
         /// <summary>
         /// Retrieve a specific module instance from the container
         /// </summary>
-        /// <param name="container">Container to use</param>
+        /// <param name="container">Container to use</param> 
         /// <param name="moduleType">Type of the module</param>
         /// <returns>NancyModule instance</returns>
         protected abstract INancyModule GetModule(TContainer container, Type moduleType);

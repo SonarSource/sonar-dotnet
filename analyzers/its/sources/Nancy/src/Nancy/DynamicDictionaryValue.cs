@@ -5,27 +5,47 @@
     using System.Dynamic;
     using System.Globalization;
     using System.Linq.Expressions;
+    using System.Reflection;
 
     using Microsoft.CSharp.RuntimeBinder;
-    using Nancy.Routing.Trie.Nodes;
+    using Extensions;
 
+    using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
+
+    /// <summary>
+    /// A value that is stored inside a <see cref="DynamicDictionary"/> instance.
+    /// </summary>
     public class DynamicDictionaryValue : DynamicObject, IEquatable<DynamicDictionaryValue>, IHideObjectMembers, IConvertible
     {
         private readonly object value;
+        private readonly GlobalizationConfiguration globalizationConfiguration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DynamicDictionaryValue"/> class.
+        /// Initializes a new instance of the <see cref="DynamicDictionaryValue"/> class, with
+        /// the provided <paramref name="value"/>.
         /// </summary>
         /// <param name="value">The value to store in the instance</param>
         public DynamicDictionaryValue(object value)
+            : this(value, GlobalizationConfiguration.Default)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DynamicDictionaryValue"/> class, with
+        /// the provided <paramref name="value"/> and <paramref name="globalizationConfiguration"/>.
+        /// </summary>
+        /// <param name="value">The value to store in the instance</param>
+        /// <param name="globalizationConfiguration">A <see cref="GlobalizationConfiguration"/> instance.</param>
+        public DynamicDictionaryValue(object value, GlobalizationConfiguration globalizationConfiguration)
         {
             this.value = value;
+            this.globalizationConfiguration = globalizationConfiguration;
         }
 
         /// <summary>
         /// Gets a value indicating whether this instance has value.
         /// </summary>
-        /// <value><c>true</c> if this instance has value; otherwise, <c>false</c>.</value>
+        /// <value><see langword="true"/>  if this instance has value; otherwise, <see langword="false"/> .</value>
         /// <remarks><see langword="null"/> is considered as not being a value.</remarks>
         public bool HasValue
         {
@@ -52,13 +72,12 @@
             {
                 try
                 {
-                    return (T)value;
+                    return (T)this.value;
                 }
                 catch
                 {
-                    var typeName = value.GetType().Name;
-                    var message = string.Format("Cannot convert value of type '{0}' to type '{1}'",
-                                                typeName, typeof(T).Name);
+                    var typeName = this.value.GetType().Name;
+                    var message = string.Format("Cannot convert value of type '{0}' to type '{1}'", typeName, typeof(T).Name);
 
                     throw new InvalidCastException(message);
                 }
@@ -79,21 +98,21 @@
             {
                 try
                 {
-                    var valueType = value.GetType();
+                    var valueType = this.value.GetType();
                     var parseType = typeof(T);
 
                     // check for direct cast
                     if (valueType.IsAssignableFrom(parseType))
                     {
-                        return (T)value;
+                        return (T)this.value;
                     }
 
-                    var stringValue = value as string;
+                    var stringValue = this.value as string;
                     if (parseType == typeof(DateTime))
                     {
                         DateTime result;
 
-                        if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
+                        if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, this.globalizationConfiguration.DateTimeStyles, out result))
                         {
                             return (T)((object)result);
                         }
@@ -105,7 +124,7 @@
                     {
                         var converter = TypeDescriptor.GetConverter(parseType);
 
-                        if (converter.IsValid(stringValue))
+                        if (converter.CanConvertFrom(typeof(string)))
                         {
                             return (T) converter.ConvertFromInvariantString(stringValue);
                         }
@@ -115,7 +134,7 @@
 
                     var underlyingType = Nullable.GetUnderlyingType(parseType) ?? parseType;
 
-                    return (T)Convert.ChangeType(value, underlyingType, CultureInfo.InvariantCulture);
+                    return (T)Convert.ChangeType(this.value, underlyingType, CultureInfo.InvariantCulture);
                 }
                 catch
                 {
@@ -126,6 +145,12 @@
             return defaultValue;
         }
 
+        /// <summary>
+        /// == operator for <see cref="DynamicDictionaryValue"/>
+        /// </summary>
+        /// <param name="dynamicValue"><see cref="DynamicDictionaryValue"/></param>
+        /// <param name="compareValue"><see cref="object"/> value to compare to</param>
+        /// <returns><see langword="true"/> if equal,<see langword="false"/> otherwise</returns>
         public static bool operator ==(DynamicDictionaryValue dynamicValue, object compareValue)
         {
             if (ReferenceEquals(null, dynamicValue))
@@ -141,6 +166,12 @@
             return dynamicValue.value != null && dynamicValue.value.Equals(compareValue);
         }
 
+        /// <summary>
+        /// != operator for <see cref="DynamicDictionaryValue"/>
+        /// </summary>
+        /// <param name="dynamicValue"><see cref="DynamicDictionaryValue"/></param>
+        /// <param name="compareValue"><see cref="object"/> value to compare to</param>
+        /// <returns><see langword="true"/> if not equal,<see langword="false"/> otherwise</returns>
         public static bool operator !=(DynamicDictionaryValue dynamicValue, object compareValue)
         {
             return !(dynamicValue == compareValue);
@@ -149,7 +180,7 @@
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
-        /// <returns><c>true</c> if the current object is equal to the <paramref name="compareValue"/> parameter; otherwise, <c>false</c>.
+        /// <returns><see langword="true"/> if the current object is equal to the <paramref name="compareValue"/> parameter; otherwise, <see langword="false"/>.
         /// </returns>
         /// <param name="compareValue">An <see cref="DynamicDictionaryValue"/> to compare with this instance.</param>
         public bool Equals(DynamicDictionaryValue compareValue)
@@ -165,7 +196,7 @@
         /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="object"/>.
         /// </summary>
-        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current <see cref="DynamicDictionaryValue"/>; otherwise, <c>false</c>.</returns>
+        /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current <see cref="DynamicDictionaryValue"/>; otherwise, <see langword="false"/>.</returns>
         /// <param name="compareValue">The <see cref="object"/> to compare with the current <see cref="DynamicDictionaryValue"/>.</param>
         public override bool Equals(object compareValue)
         {
@@ -194,7 +225,7 @@
         /// <summary>
         /// Provides implementation for binary operations. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for operations such as addition and multiplication.
         /// </summary>
-        /// <returns><c>true</c> if the operation is successful; otherwise, <c>false</c>. If this method returns <c>false</c>, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)</returns>
+        /// <returns><see langword="true"/>  if the operation is successful; otherwise, <see langword="false"/>. If this method returns <see langword="false"/>, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)</returns>
         /// <param name="binder">Provides information about the binary operation. The binder.Operation property returns an <see cref="T:System.Linq.Expressions.ExpressionType"/> object. For example, for the sum = first + second statement, where first and second are derived from the DynamicObject class, binder.Operation returns ExpressionType.Add.</param><param name="arg">The right operand for the binary operation. For example, for the sum = first + second statement, where first and second are derived from the DynamicObject class, <paramref name="arg"/> is equal to second.</param><param name="result">The result of the binary operation.</param>
         public override bool TryBinaryOperation(BinaryOperationBinder binder, object arg, out object result)
         {
@@ -209,7 +240,7 @@
             var convert =
                 Binder.Convert(CSharpBinderFlags.None, arg.GetType(), typeof(DynamicDictionaryValue));
 
-            if (!TryConvert((ConvertBinder)convert, out resultOfCast))
+            if (!this.TryConvert((ConvertBinder)convert, out resultOfCast))
             {
                 return false;
             }
@@ -224,28 +255,28 @@
         /// <summary>
         /// Provides implementation for type conversion operations. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for operations that convert an object from one type to another.
         /// </summary>
-        /// <returns><c>true</c> if the operation is successful; otherwise, <c>false</c>. If this method returns <c>false</c>, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)</returns>
+        /// <returns><see langword="true"/>  if the operation is successful; otherwise, <see langword="false"/>. If this method returns <see langword="false"/>, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)</returns>
         /// <param name="binder">Provides information about the conversion operation. The binder.Type property provides the type to which the object must be converted. For example, for the statement (String)sampleObject in C# (CType(sampleObject, Type) in Visual Basic), where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Type returns the <see cref="T:System.String"/> type. The binder.Explicit property provides information about the kind of conversion that occurs. It returns true for explicit conversion and false for implicit conversion.</param><param name="result">The result of the type conversion operation.</param>
         public override bool TryConvert(ConvertBinder binder, out object result)
         {
             result = null;
 
-            if (value == null)
+            if (this.value == null)
             {
                 return true;
             }
 
             var binderType = binder.Type;
-            if (binderType == typeof(String))
+            if (binderType == typeof(string))
             {
-                result = Convert.ToString(value);
+                result = Convert.ToString(this.value);
                 return true;
             }
 
             if (binderType == typeof(Guid) || binderType == typeof(Guid?))
             {
                 Guid guid;
-                if (Guid.TryParse(Convert.ToString(value), out guid))
+                if (Guid.TryParse(Convert.ToString(this.value), out guid))
                 {
                     result = guid;
                     return true;
@@ -254,20 +285,20 @@
             else if (binderType == typeof(TimeSpan) || binderType == typeof(TimeSpan?))
             {
                 TimeSpan timespan;
-                if (TimeSpan.TryParse(Convert.ToString(value), out timespan))
+                if (TimeSpan.TryParse(Convert.ToString(this.value), out timespan))
                 {
                     result = timespan;
                     return true;
                 }
             }
-            else if (binderType.IsEnum)
+            else if (binderType.GetTypeInfo().IsEnum)
             {
                 // handles enum to enum assignments
-                if (value.GetType().IsEnum)
+                if (this.value.GetType().GetTypeInfo().IsEnum)
                 {
-                    if (binderType == value.GetType())
+                    if (binderType == this.value.GetType())
                     {
-                        result = value;
+                        result = this.value;
                         return true;
                     }
 
@@ -275,9 +306,9 @@
                 }
 
                 // handles number to enum assignments
-                if (Enum.GetUnderlyingType(binderType) == value.GetType())
+                if (Enum.GetUnderlyingType(binderType) == this.value.GetType())
                 {
-                    result = Enum.ToObject(binderType, value);
+                    result = Enum.ToObject(binderType, this.value);
                     return true;
                 }
 
@@ -285,18 +316,18 @@
             }
             else
             {
-                if (binderType.IsGenericType && binderType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                if (binderType.GetTypeInfo().IsGenericType && binderType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     binderType = binderType.GetGenericArguments()[0];
                 }
 
-                var typeCode = Type.GetTypeCode(binderType);
+                var typeCode = binderType.GetTypeCode();
 
                 if (typeCode == TypeCode.Object)
                 {
-                    if (binderType.IsAssignableFrom(value.GetType()))
+                    if (binderType.IsAssignableFrom(this.value.GetType()))
                     {
-                        result = value;
+                        result = this.value;
                         return true;
                     }
                     else
@@ -305,18 +336,36 @@
                     }
                 }
 
-                result = Convert.ChangeType(value, typeCode);
+#if !NETSTANDARD1_6
+                result = Convert.ChangeType(this.value, typeCode);
+#else
+                result = Convert.ChangeType(this.value, binderType);
+#endif
 
                 return true;
             }
             return base.TryConvert(binder, out result);
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents a <see cref="DynamicDictionaryValue"/> instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return this.value == null ? base.ToString() : Convert.ToString(this.value);
         }
 
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="Nullable{T}"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator bool?(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -327,6 +376,15 @@
             return (bool)dynamicValue;
         }
 
+
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="System.Boolean"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator bool(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -334,7 +392,7 @@
                 return false;
             }
 
-            if (dynamicValue.value.GetType().IsValueType)
+            if (dynamicValue.value.GetType().GetTypeInfo().IsValueType)
             {
                 return (Convert.ToBoolean(dynamicValue.value));
             }
@@ -348,6 +406,13 @@
             return true;
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="System.String"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator string(DynamicDictionaryValue dynamicValue)
         {
             return dynamicValue.HasValue
@@ -355,6 +420,15 @@
                        : null;
         }
 
+
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="Nullable{T}"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator int?(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -365,6 +439,14 @@
             return (int)dynamicValue;
         }
 
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="System.Int32"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator int(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -372,7 +454,7 @@
                 return default(int);
             }
 
-            if (dynamicValue.value.GetType().IsValueType)
+            if (dynamicValue.value.GetType().GetTypeInfo().IsValueType)
             {
                 return Convert.ToInt32(dynamicValue.value);
             }
@@ -380,6 +462,14 @@
             return int.Parse(dynamicValue.ToString());
         }
 
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="System.Nullable{Guid}"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator Guid?(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -390,6 +480,14 @@
             return (Guid)dynamicValue;
         }
 
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="Guid"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator Guid(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -405,6 +503,15 @@
             return Guid.Parse(dynamicValue.ToString());
         }
 
+
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="System.Nullable{DateTime}"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator DateTime?(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -415,6 +522,15 @@
             return (DateTime)dynamicValue;
         }
 
+
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="DateTime"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator DateTime(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -427,9 +543,17 @@
                 return (DateTime)dynamicValue.value;
             }
 
-            return DateTime.Parse(dynamicValue.ToString());
+            return DateTime.Parse(dynamicValue.ToString(), CultureInfo.InvariantCulture, dynamicValue.globalizationConfiguration.DateTimeStyles);
         }
 
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="System.Nullable{TimeSpan}"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator TimeSpan?(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -440,6 +564,15 @@
             return (TimeSpan)dynamicValue;
         }
 
+
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="TimeSpan"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator TimeSpan(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -455,6 +588,11 @@
             return TimeSpan.Parse(dynamicValue.ToString());
         }
 
+
+        /// <summary>
+        /// Implicit type conversion operator from <see cref="DynamicDictionaryValue"/> to long?
+        /// </summary>
+        /// <param name="dynamicValue"><see cref="DynamicDictionaryValue"/></param>
         public static implicit operator long?(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -465,6 +603,14 @@
             return (long)dynamicValue;
         }
 
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="System.Int64"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator long(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -472,7 +618,7 @@
                 return default(long);
             }
 
-            if (dynamicValue.value.GetType().IsValueType)
+            if (dynamicValue.value.GetType().GetTypeInfo().IsValueType)
             {
                 return Convert.ToInt64(dynamicValue.value);
             }
@@ -480,6 +626,15 @@
             return long.Parse(dynamicValue.ToString());
         }
 
+
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="Nullable{T}"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator float?(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -490,6 +645,15 @@
             return (float)dynamicValue;
         }
 
+
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="System.Single"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator float(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -497,7 +661,7 @@
                 return default(float);
             }
 
-            if (dynamicValue.value.GetType().IsValueType)
+            if (dynamicValue.value.GetType().GetTypeInfo().IsValueType)
             {
                 return Convert.ToSingle(dynamicValue.value);
             }
@@ -505,6 +669,15 @@
             return float.Parse(dynamicValue.ToString());
         }
 
+
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="Nullable{T}"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator decimal?(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -515,6 +688,15 @@
             return (decimal)dynamicValue;
         }
 
+
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="System.Decimal"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator decimal(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -522,7 +704,7 @@
                 return default(decimal);
             }
 
-            if (dynamicValue.value.GetType().IsValueType)
+            if (dynamicValue.value.GetType().GetTypeInfo().IsValueType)
             {
                 return Convert.ToDecimal(dynamicValue.value);
             }
@@ -530,6 +712,15 @@
             return decimal.Parse(dynamicValue.ToString());
         }
 
+
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="Nullable{T}"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator double?(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -540,6 +731,14 @@
             return (double)dynamicValue;
         }
 
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="DynamicDictionaryValue"/> to <see cref="System.Double"/>.
+        /// </summary>
+        /// <param name="dynamicValue">The <see cref="DynamicDictionaryValue"/> instance</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator double(DynamicDictionaryValue dynamicValue)
         {
             if (!dynamicValue.HasValue)
@@ -547,7 +746,7 @@
                 return default(double);
             }
 
-            if (dynamicValue.value.GetType().IsValueType)
+            if (dynamicValue.value.GetType().GetTypeInfo().IsValueType)
             {
                 return Convert.ToDouble(dynamicValue.value);
             }
@@ -555,7 +754,7 @@
             return double.Parse(dynamicValue.ToString());
         }
 
-        #region Implementation of IConvertible
+#region Implementation of IConvertible
 
         /// <summary>
         /// Returns the <see cref="T:System.TypeCode"/> for this instance.
@@ -566,8 +765,12 @@
         /// <filterpriority>2</filterpriority>
         public TypeCode GetTypeCode()
         {
-            if (value == null) return TypeCode.Empty;
-            return Type.GetTypeCode(value.GetType());
+            if (this.value == null)
+            {
+                return TypeCode.Empty;
+            }
+
+            return this.value.GetType().GetTypeCode();
         }
 
         /// <summary>
@@ -579,7 +782,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public bool ToBoolean(IFormatProvider provider)
         {
-            return Convert.ToBoolean(value, provider);
+            return Convert.ToBoolean(this.value, provider);
         }
 
         /// <summary>
@@ -591,7 +794,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public char ToChar(IFormatProvider provider)
         {
-            return Convert.ToChar(value, provider);
+            return Convert.ToChar(this.value, provider);
         }
 
         /// <summary>
@@ -603,7 +806,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public sbyte ToSByte(IFormatProvider provider)
         {
-            return Convert.ToSByte(value, provider);
+            return Convert.ToSByte(this.value, provider);
         }
 
         /// <summary>
@@ -615,7 +818,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public byte ToByte(IFormatProvider provider)
         {
-            return Convert.ToByte(value, provider);
+            return Convert.ToByte(this.value, provider);
         }
 
         /// <summary>
@@ -627,7 +830,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public short ToInt16(IFormatProvider provider)
         {
-            return Convert.ToInt16(value, provider);
+            return Convert.ToInt16(this.value, provider);
         }
 
         /// <summary>
@@ -639,7 +842,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public ushort ToUInt16(IFormatProvider provider)
         {
-            return Convert.ToUInt16(value, provider);
+            return Convert.ToUInt16(this.value, provider);
         }
 
         /// <summary>
@@ -651,7 +854,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public int ToInt32(IFormatProvider provider)
         {
-            return Convert.ToInt32(value, provider);
+            return Convert.ToInt32(this.value, provider);
         }
 
         /// <summary>
@@ -663,7 +866,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public uint ToUInt32(IFormatProvider provider)
         {
-            return Convert.ToUInt32(value, provider);
+            return Convert.ToUInt32(this.value, provider);
         }
 
         /// <summary>
@@ -675,7 +878,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public long ToInt64(IFormatProvider provider)
         {
-            return Convert.ToInt64(value, provider);
+            return Convert.ToInt64(this.value, provider);
         }
 
         /// <summary>
@@ -687,7 +890,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public ulong ToUInt64(IFormatProvider provider)
         {
-            return Convert.ToUInt64(value, provider);
+            return Convert.ToUInt64(this.value, provider);
         }
 
         /// <summary>
@@ -699,7 +902,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public float ToSingle(IFormatProvider provider)
         {
-            return Convert.ToSingle(value, provider);
+            return Convert.ToSingle(this.value, provider);
         }
 
         /// <summary>
@@ -711,7 +914,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public double ToDouble(IFormatProvider provider)
         {
-            return Convert.ToDouble(value, provider);
+            return Convert.ToDouble(this.value, provider);
         }
 
         /// <summary>
@@ -723,7 +926,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public decimal ToDecimal(IFormatProvider provider)
         {
-            return Convert.ToDecimal(value, provider);
+            return Convert.ToDecimal(this.value, provider);
         }
 
         /// <summary>
@@ -735,7 +938,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public DateTime ToDateTime(IFormatProvider provider)
         {
-            return Convert.ToDateTime(value, provider);
+            return Convert.ToDateTime(this.value, provider);
         }
 
         /// <summary>
@@ -747,7 +950,7 @@
         /// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public string ToString(IFormatProvider provider)
         {
-            return Convert.ToString(value, provider);
+            return Convert.ToString(this.value, provider);
         }
 
         /// <summary>
@@ -759,9 +962,9 @@
         /// <param name="conversionType">The <see cref="T:System.Type"/> to which the value of this instance is converted. </param><param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
         public object ToType(Type conversionType, IFormatProvider provider)
         {
-            return Convert.ChangeType(value, conversionType, provider);
+            return Convert.ChangeType(this.value, conversionType, provider);
         }
 
-        #endregion
+#endregion
     }
 }

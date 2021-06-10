@@ -288,7 +288,7 @@ namespace Nancy.Testing
 
             var useFormValues = !string.IsNullOrEmpty(contextValues.FormValues);
             var bodyContents = useFormValues ? contextValues.FormValues : contextValues.BodyString;
-            var bodyBytes = bodyContents != null ? Encoding.UTF8.GetBytes(bodyContents) : new byte[] { };
+            var bodyBytes = bodyContents != null ? Encoding.UTF8.GetBytes(bodyContents) : ArrayCache.Empty<byte>();
 
             if (useFormValues && !contextValues.Headers.ContainsKey("Content-Type"))
             {
@@ -326,9 +326,7 @@ namespace Nancy.Testing
             var requestStream =
                 RequestStream.FromStream(contextValues.Body, 0, true);
 
-            var certBytes = (contextValues.ClientCertificate == null)
-                ? new byte[] { }
-                : contextValues.ClientCertificate.GetRawCertData();
+            var certBytes = contextValues.ClientCertificate ?? null;
 
             var requestUrl = url;
             requestUrl.Scheme = string.IsNullOrWhiteSpace(contextValues.Protocol) ? requestUrl.Scheme : contextValues.Protocol;

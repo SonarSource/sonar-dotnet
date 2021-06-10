@@ -3,7 +3,7 @@ namespace Nancy.Testing
     using System;
     using System.IO;
     using System.Xml.Serialization;
-
+    using Nancy.Extensions;
     using Nancy.Json;
 
     /// <summary>
@@ -20,9 +20,10 @@ namespace Nancy.Testing
             // We only really want to generate this once, so we'll stick it in the context
             // This isn't ideal, but we don't want to hide the guts of the context from the
             // tests this will have to do.
-            if (context.Items.ContainsKey(key))
+            object value;
+            if (context.Items.TryGetValue(key, out value))
             {
-                return (T)context.Items[key];
+                return (T)value;
             }
 
             T data = getData.Invoke();
@@ -43,7 +44,7 @@ namespace Nancy.Testing
                 {
                     context.Response.Contents.Invoke(contentsStream);
                     contentsStream.Position = 0;
-                    return new DocumentWrapper(contentsStream.GetBuffer());
+                    return new DocumentWrapper(contentsStream.GetBufferSegment());
                 }
             });
         }
@@ -78,9 +79,9 @@ namespace Nancy.Testing
                 {
                     context.Response.Contents.Invoke(contentsStream);
                     contentsStream.Position = 0;
-                    var serializer = new XmlSerializer(typeof (TModel));
+                    var serializer = new XmlSerializer(typeof(TModel));
                     var model = serializer.Deserialize(contentsStream);
-                    return (TModel) model;
+                    return (TModel)model;
                 }
             });
         }

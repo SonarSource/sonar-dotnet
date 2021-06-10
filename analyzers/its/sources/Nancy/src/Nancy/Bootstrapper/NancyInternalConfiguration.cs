@@ -3,7 +3,6 @@ namespace Nancy.Bootstrapper
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using Nancy.Configuration;
     using Nancy.Culture;
     using Nancy.Diagnostics;
@@ -29,155 +28,290 @@ namespace Nancy.Bootstrapper
         /// <summary>
         /// Gets the Nancy default configuration
         /// </summary>
-        public static NancyInternalConfiguration Default
+        public static Func<ITypeCatalog, NancyInternalConfiguration> Default
         {
             get
             {
-                return new NancyInternalConfiguration
+                return typeCatalog => new NancyInternalConfiguration
                 {
-                    RouteResolver = typeof(DefaultRouteResolver),
-                    RoutePatternMatcher = typeof(DefaultRoutePatternMatcher),
-                    ContextFactory = typeof(DefaultNancyContextFactory),
-                    NancyEngine = typeof(NancyEngine),
-                    RouteCache = typeof(RouteCache),
-                    RouteCacheProvider = typeof(DefaultRouteCacheProvider),
-                    ViewLocator = typeof(DefaultViewLocator),
-                    ViewFactory = typeof(DefaultViewFactory),
-                    NancyModuleBuilder = typeof(DefaultNancyModuleBuilder),
-                    ResponseFormatterFactory = typeof(DefaultResponseFormatterFactory),
-                    ModelBinderLocator = typeof(DefaultModelBinderLocator),
                     Binder = typeof(DefaultBinder),
                     BindingDefaults = typeof(BindingDefaults),
-                    FieldNameConverter = typeof(DefaultFieldNameConverter),
-                    ViewResolver = typeof(DefaultViewResolver),
-                    ViewCache = typeof(DefaultViewCache),
-                    RenderContextFactory = typeof(DefaultRenderContextFactory),
-                    ModelValidatorLocator = typeof(DefaultValidatorLocator),
-                    ViewLocationProvider = typeof(FileSystemViewLocationProvider),
-                    StatusCodeHandlers = new List<Type>(AppDomainAssemblyTypeScanner.TypesOf<IStatusCodeHandler>(ScanMode.ExcludeNancy).Concat(new[] { typeof(DefaultStatusCodeHandler) })),
+                    ContextFactory = typeof(DefaultNancyContextFactory),
                     CsrfTokenValidator = typeof(DefaultCsrfTokenValidator),
-                    ObjectSerializer = typeof(DefaultObjectSerializer),
-                    Serializers = AppDomainAssemblyTypeScanner.TypesOf<ISerializer>(ScanMode.ExcludeNancy).Union(new List<Type>(new[] { typeof(DefaultJsonSerializer), typeof(DefaultXmlSerializer) })).ToList(),
-                    InteractiveDiagnosticProviders = new List<Type>(AppDomainAssemblyTypeScanner.TypesOf<IDiagnosticsProvider>()),
-                    RequestTracing = typeof(DefaultRequestTracing),
-                    RouteInvoker = typeof(DefaultRouteInvoker),
-                    ResponseProcessors = AppDomainAssemblyTypeScanner.TypesOf<IResponseProcessor>().ToList(),
-                    RequestDispatcher = typeof(DefaultRequestDispatcher),
-                    Diagnostics = typeof(DefaultDiagnostics),
-                    RouteSegmentExtractor = typeof(DefaultRouteSegmentExtractor),
-                    RouteDescriptionProvider = typeof(DefaultRouteDescriptionProvider),
                     CultureService = typeof(DefaultCultureService),
-                    TextResource = typeof(ResourceBasedTextResource),
-                    ResourceAssemblyProvider = typeof(ResourceAssemblyProvider),
-                    ResourceReader = typeof(DefaultResourceReader),
-                    StaticContentProvider = typeof(DefaultStaticContentProvider),
-                    RouteResolverTrie = typeof(RouteResolverTrie),
-                    TrieNodeFactory = typeof(TrieNodeFactory),
-                    RouteSegmentConstraints = AppDomainAssemblyTypeScanner.TypesOf<IRouteSegmentConstraint>().ToList(),
-                    RequestTraceFactory = typeof(DefaultRequestTraceFactory),
-                    ResponseNegotiator = typeof(DefaultResponseNegotiator),
-                    RouteMetadataProviders = AppDomainAssemblyTypeScanner.TypesOf<IRouteMetadataProvider>().ToList(),
+                    DefaultConfigurationProviders = typeCatalog.GetTypesAssignableTo<INancyDefaultConfigurationProvider>().ToList(),
+                    Diagnostics = typeof(DefaultDiagnostics),
                     EnvironmentFactory = typeof(DefaultNancyEnvironmentFactory),
                     EnvironmentConfigurator = typeof(DefaultNancyEnvironmentConfigurator),
-                    DefaultConfigurationProviders = AppDomainAssemblyTypeScanner.TypesOf<INancyDefaultConfigurationProvider>().ToList(),
-                    SerializerFactory = typeof(DefaultSerializerFactory),
+                    FieldNameConverter = typeof(DefaultFieldNameConverter),
+                    InteractiveDiagnosticProviders = new List<Type>(typeCatalog.GetTypesAssignableTo<IDiagnosticsProvider>()),
+                    ModelBinderLocator = typeof(DefaultModelBinderLocator),
+                    ModelValidatorLocator = typeof(DefaultValidatorLocator),
+                    NancyEngine = typeof(NancyEngine),
+                    NancyModuleBuilder = typeof(DefaultNancyModuleBuilder),
+                    ObjectSerializer = typeof(DefaultObjectSerializer),
+                    RenderContextFactory = typeof(DefaultRenderContextFactory),
+                    RequestDispatcher = typeof(DefaultRequestDispatcher),
+                    RequestTraceFactory = typeof(DefaultRequestTraceFactory),
+                    RequestTracing = typeof(DefaultRequestTracing),
+                    ResourceAssemblyProvider = typeof(ResourceAssemblyProvider),
+                    ResourceReader = typeof(DefaultResourceReader),
+                    ResponseFormatterFactory = typeof(DefaultResponseFormatterFactory),
+                    ResponseNegotiator = typeof(DefaultResponseNegotiator),
+                    ResponseProcessors = typeCatalog.GetTypesAssignableTo<IResponseProcessor>().ToList(),
+                    RouteCache = typeof(RouteCache),
+                    RouteCacheProvider = typeof(DefaultRouteCacheProvider),
+                    RouteInvoker = typeof(DefaultRouteInvoker),
+                    RouteResolver = typeof(DefaultRouteResolver),
+                    RouteResolverTrie = typeof(RouteResolverTrie),
+                    RouteSegmentConstraints = typeCatalog.GetTypesAssignableTo<IRouteSegmentConstraint>().ToList(),
+                    RouteSegmentExtractor = typeof(DefaultRouteSegmentExtractor),
+                    RouteMetadataProviders = typeCatalog.GetTypesAssignableTo<IRouteMetadataProvider>().ToList(),
+                    RouteDescriptionProvider = typeof(DefaultRouteDescriptionProvider),
                     RuntimeEnvironmentInformation = typeof(DefaultRuntimeEnvironmentInformation),
+                    SerializerFactory = typeof(DefaultSerializerFactory),
+                    Serializers = typeCatalog.GetTypesAssignableTo<ISerializer>(TypeResolveStrategies.ExcludeNancy).Union(new List<Type>(new[] { typeof(DefaultJsonSerializer), typeof(DefaultXmlSerializer) })).ToList(),
+                    StaticContentProvider = typeof(DefaultStaticContentProvider),
+                    StatusCodeHandlers = new List<Type>(typeCatalog.GetTypesAssignableTo<IStatusCodeHandler>(TypeResolveStrategies.ExcludeNancy).Concat(new[] { typeof(DefaultStatusCodeHandler) })),
+                    TextResource = typeof(ResourceBasedTextResource),
+                    TrieNodeFactory = typeof(TrieNodeFactory),
+                    ViewLocator = typeof(DefaultViewLocator),
+                    ViewFactory = typeof(DefaultViewFactory),
+                    ViewResolver = typeof(DefaultViewResolver),
+                    ViewCache = typeof(DefaultViewCache),
+                    ViewLocationProvider = typeof(FileSystemViewLocationProvider),
                 };
             }
         }
 
+        /// <summary>
+        /// Gets or sets the runtime environment information
+        /// </summary>
         public Type RuntimeEnvironmentInformation { get; set; }
 
+        /// <summary>
+        /// Gets or sets the serializer factory.
+        /// </summary>
         public Type SerializerFactory { get; set; }
 
+        /// <summary>
+        /// Gets or sets the default configuration providers
+        /// </summary>
         public IList<Type> DefaultConfigurationProviders { get; set; }
 
+        /// <summary>
+        /// Gets or sets the environment configurator
+        /// </summary>
         public Type EnvironmentConfigurator { get; set; }
 
+        /// <summary>
+        ///Gets or sets the environment factory
+        /// </summary>
         public Type EnvironmentFactory { get; set; }
 
+        /// <summary>
+        /// Gets or sets the route metadata providers
+        /// </summary>
         public IList<Type> RouteMetadataProviders { get; set; }
 
+        /// <summary>
+        /// Gets or sets the route resolver
+        /// </summary>
         public Type RouteResolver { get; set; }
 
-        public Type RoutePatternMatcher { get; set; }
-
+        /// <summary>
+        /// Gets or sets the context factory
+        /// </summary>
         public Type ContextFactory { get; set; }
 
+        /// <summary>
+        /// Gets or sets the nancy engine
+        /// </summary>
         public Type NancyEngine { get; set; }
 
+        /// <summary>
+        /// Gets or sets the route cache
+        /// </summary>
         public Type RouteCache { get; set; }
 
+        /// <summary>
+        /// Gets or sets the route cache provider
+        /// </summary>
         public Type RouteCacheProvider { get; set; }
 
+        /// <summary>
+        /// Gets or sets the view locator
+        /// </summary>
         public Type ViewLocator { get; set; }
 
+        /// <summary>
+        /// Gets or sets the view factory
+        /// </summary>
         public Type ViewFactory { get; set; }
 
+        /// <summary>
+        /// Gets or sets the nancy module builder
+        /// </summary>
         public Type NancyModuleBuilder { get; set; }
 
+        /// <summary>
+        /// Gets or sets the response formatter factory
+        /// </summary>
         public Type ResponseFormatterFactory { get; set; }
 
+        /// <summary>
+        /// Gets or sets themodel binder locator
+        /// </summary>
         public Type ModelBinderLocator { get; set; }
 
+        /// <summary>
+        /// Gets or sets the binder
+        /// </summary>
         public Type Binder { get; set; }
 
+        /// <summary>
+        /// Gets or sets the binding defaults
+        /// </summary>
         public Type BindingDefaults { get; set; }
 
+        /// <summary>
+        /// Gets or sets the field name converter
+        /// </summary>
         public Type FieldNameConverter { get; set; }
 
+        /// <summary>
+        /// Gets or sets the model validator locator
+        /// </summary>
         public Type ModelValidatorLocator { get; set; }
 
+        /// <summary>
+        ///Gets or sets the view resolver
+        /// </summary>
         public Type ViewResolver { get; set; }
 
+        /// <summary>
+        /// Gets or sets the view cache
+        /// </summary>
         public Type ViewCache { get; set; }
 
+        /// <summary>
+        /// Gets or sets the render context factory
+        /// </summary>
         public Type RenderContextFactory { get; set; }
 
+        /// <summary>
+        /// Gets or sets the view location provider
+        /// </summary>
         public Type ViewLocationProvider { get; set; }
 
+        /// <summary>
+        /// Gets or sets the status code handlers
+        /// </summary>
         public IList<Type> StatusCodeHandlers { get; set; }
 
+        /// <summary>
+        /// Gets or sets the CSRF token validator
+        /// </summary>
         public Type CsrfTokenValidator { get; set; }
 
+        /// <summary>
+        /// Gets or sets the object serializer
+        /// </summary>
         public Type ObjectSerializer { get; set; }
 
+        /// <summary>
+        /// Gets or sets the types for serializers
+        /// </summary>
         public IList<Type> Serializers { get; set; }
 
+        /// <summary>
+        /// Gets or sets the interactive diagnostic providers
+        /// </summary>
         public IList<Type> InteractiveDiagnosticProviders { get; set; }
 
+        /// <summary>
+        /// Gets or sets the request tracing
+        /// </summary>
         public Type RequestTracing { get; set; }
 
+        /// <summary>
+        /// Gets or sets the route invoker
+        /// </summary>
         public Type RouteInvoker { get; set; }
 
+        /// <summary>
+        /// Gets or sets the response processors
+        /// </summary>
         public IList<Type> ResponseProcessors { get; set; }
 
+        /// <summary>
+        /// Gets or sets the request dispatcher
+        /// </summary>
         public Type RequestDispatcher { get; set; }
 
+        /// <summary>
+        /// Gets or sets the diagnostics
+        /// </summary>
         public Type Diagnostics { get; set; }
 
+        /// <summary>
+        /// Gets or sets the route segment extractor
+        /// </summary>
         public Type RouteSegmentExtractor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the route description provider
+        /// </summary>
         public Type RouteDescriptionProvider { get; set; }
 
+        /// <summary>
+        /// Gets or sets the culture service
+        /// </summary>
         public Type CultureService { get; set; }
 
+        /// <summary>
+        /// Gets or sets the text resource
+        /// </summary>
         public Type TextResource { get; set; }
 
+        /// <summary>
+        /// Gets or sets the resource assembly provider
+        /// </summary>
         public Type ResourceAssemblyProvider { get; set; }
 
+        /// <summary>
+        /// Gets or sets the resource reader
+        /// </summary>
         public Type ResourceReader { get; set; }
 
+        /// <summary>
+        /// Gets or sets the static content provider
+        /// </summary>
         public Type StaticContentProvider { get; set; }
 
+        /// <summary>
+        /// Gets or sets the route resolver trie
+        /// </summary>
         public Type RouteResolverTrie { get; set; }
 
+        /// <summary>
+        /// Gets or sets the trie node factory
+        /// </summary>
         public Type TrieNodeFactory { get; set; }
 
+        /// <summary>
+        /// Gets or sets the route segment constraints
+        /// </summary>
         public IList<Type> RouteSegmentConstraints { get; set; }
 
+        /// <summary>
+        /// Gets or sets the request trace factory
+        /// </summary>
         public Type RequestTraceFactory { get; set; }
 
+        /// <summary>
+        /// Gets or sets the response negotiator
+        /// </summary>
         public Type ResponseNegotiator { get; set; }
 
         /// <summary>
@@ -199,17 +333,21 @@ namespace Nancy.Bootstrapper
         }
 
         /// <summary>
-        /// Default Nancy configuration with specific overloads
+        /// Creates a new nancy internal configuration initializer with overrides for default types.
         /// </summary>
-        /// <param name="configurationBuilder">Configuration builder for overriding the default configuration properties.</param>
-        /// <returns>Nancy configuration instance</returns>
-        public static NancyInternalConfiguration WithOverrides(Action<NancyInternalConfiguration> configurationBuilder)
+        /// <param name="builder">Action that overrides default configuration types</param>
+        /// <returns>Initializer with overriden default types</returns>
+        public static Func<ITypeCatalog, NancyInternalConfiguration> WithOverrides(Action<NancyInternalConfiguration> builder)
         {
-            var configuration = Default;
+            return catalog =>
+            {
+                var configuration =
+                    Default.Invoke(catalog);
 
-            configurationBuilder.Invoke(configuration);
+                builder.Invoke(configuration);
 
-            return configuration;
+                return configuration;
+            };
         }
 
         /// <summary>
@@ -224,7 +362,6 @@ namespace Nancy.Bootstrapper
                 new TypeRegistration(typeof(INancyEngine), this.NancyEngine),
                 new TypeRegistration(typeof(IRouteCache), this.RouteCache),
                 new TypeRegistration(typeof(IRouteCacheProvider), this.RouteCacheProvider),
-                new TypeRegistration(typeof(IRoutePatternMatcher), this.RoutePatternMatcher),
                 new TypeRegistration(typeof(IViewLocator), this.ViewLocator),
                 new TypeRegistration(typeof(IViewFactory), this.ViewFactory),
                 new TypeRegistration(typeof(INancyContextFactory), this.ContextFactory),

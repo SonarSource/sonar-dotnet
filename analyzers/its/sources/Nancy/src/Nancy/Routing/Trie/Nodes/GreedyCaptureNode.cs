@@ -23,6 +23,13 @@
             get { return 0; }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GreedyCaptureNode"/> class with
+        /// the provided <paramref name="parent"/>, <paramref name="segment"/> and <paramref name="nodeFactory"/>.
+        /// </summary>
+        /// <param name="parent">Parent node</param>
+        /// <param name="segment">Segment of the route definition</param>
+        /// <param name="nodeFactory">Factory for creating new nodes</param>
         public GreedyCaptureNode(TrieNode parent, string segment, ITrieNodeFactory nodeFactory)
             : base(parent, segment, nodeFactory)
         {
@@ -89,7 +96,7 @@
         {
             if (!this.NodeData.Any())
             {
-                return new MatchResult[] { };
+                return ArrayCache.Empty<MatchResult>();
             }
 
             var value = segments.Skip(currentIndex).Aggregate((seg1, seg2) => seg1 + "/" + seg2);
