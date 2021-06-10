@@ -458,7 +458,7 @@ try {
     Build-Project-MSBuild "Ember-MM" "Ember Media Manager.sln"
     Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.CS" "ManuallyAddedNoncompliantIssues.CS.sln"
     Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.VB" "ManuallyAddedNoncompliantIssues.VB.sln"
-    Build-Project-MSBuild "Nancy" "src\Nancy.sln"
+    Build-Project-MSBuild "Nancy" "Nancy.sln"
     Build-Project-MSBuild "SkipGenerated.CS" "SkipGenerated.CS.sln"
     Build-Project-MSBuild "SkipGenerated.VB" "SkipGenerated.VB.sln"
     Build-Project-MSBuild "WebConfig" "WebConfig.sln"
