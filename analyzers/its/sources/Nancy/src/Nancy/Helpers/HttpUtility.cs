@@ -1,3 +1,5 @@
+#pragma warning disable CS1591, CS1574, CS1711, CS1712 //  Disable XML comment related warnings
+
 //
 // System.Web.HttpUtility
 //
@@ -31,6 +33,7 @@
 
 namespace Nancy.Helpers
 {
+    using Extensions;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -118,7 +121,8 @@ namespace Nancy.Helpers
 
         static char[] GetChars(MemoryStream b, Encoding e)
         {
-            return e.GetChars(b.GetBuffer(), 0, (int)b.Length);
+            var buffer = b.GetBufferSegment();
+            return e.GetChars(buffer.Array, buffer.Offset, buffer.Count);
         }
 
         static void WriteCharBytes(IList buf, char ch, Encoding e)
@@ -251,10 +255,7 @@ namespace Nancy.Helpers
             if (bytes == null)
                 return null;
             if (count == 0)
-                return String.Empty;
-
-            if (bytes == null)
-                throw new ArgumentNullException("bytes");
+                return string.Empty;
 
             if (offset < 0 || offset > bytes.Length)
                 throw new ArgumentOutOfRangeException("offset");
@@ -262,8 +263,8 @@ namespace Nancy.Helpers
             if (count < 0 || offset + count > bytes.Length)
                 throw new ArgumentOutOfRangeException("count");
 
-            StringBuilder output = new StringBuilder();
-            MemoryStream acc = new MemoryStream();
+            var output = new StringBuilder();
+            var acc = new MemoryStream();
 
             int end = count + offset;
             int xchar;
@@ -348,7 +349,7 @@ namespace Nancy.Helpers
             if (bytes == null)
                 return null;
             if (count == 0)
-                return new byte[0];
+                return ArrayCache.Empty<byte>();
 
             int len = bytes.Length;
             if (offset < 0 || offset >= len)
@@ -451,7 +452,7 @@ namespace Nancy.Helpers
                 return null;
 
             if (str.Length == 0)
-                return new byte[0];
+                return ArrayCache.Empty<byte>();
 
             byte[] bytes = e.GetBytes(str);
             return UrlEncodeToBytes(bytes, 0, bytes.Length);
@@ -463,7 +464,7 @@ namespace Nancy.Helpers
                 return null;
 
             if (bytes.Length == 0)
-                return new byte[0];
+                return ArrayCache.Empty<byte>();
 
             return UrlEncodeToBytes(bytes, 0, bytes.Length);
         }
@@ -493,7 +494,7 @@ namespace Nancy.Helpers
                 return null;
 
             if (str.Length == 0)
-                return new byte[0];
+                return ArrayCache.Empty<byte>();
 
             MemoryStream result = new MemoryStream(str.Length);
             foreach (char c in str)
@@ -539,7 +540,7 @@ namespace Nancy.Helpers
 #endif
             }
 
-            if (!String.IsNullOrEmpty(s))
+            if (!string.IsNullOrEmpty(s))
             {
 #if NET_4_0
 				HttpEncoder.Current.HtmlDecode (s, output);
@@ -580,7 +581,7 @@ namespace Nancy.Helpers
 #endif
             }
 
-            if (!String.IsNullOrEmpty(s))
+            if (!string.IsNullOrEmpty(s))
             {
 #if NET_4_0
 				HttpEncoder.Current.HtmlEncode (s, output);
@@ -609,7 +610,7 @@ namespace Nancy.Helpers
 
 		public static string JavaScriptStringEncode (string value, bool addDoubleQuotes)
 		{
-			if (String.IsNullOrEmpty (value))
+			if (string.IsNullOrEmpty (value))
 				return addDoubleQuotes ? "\"\"" : String.Empty;
 
 			int len = value.Length;
@@ -750,6 +751,6 @@ namespace Nancy.Helpers
             return new KeyValuePair<string, string>(key, value);
         }
 
-        #endregion // Methods
+#endregion // Methods
     }
 }

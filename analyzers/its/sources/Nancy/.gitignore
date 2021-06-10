@@ -8,10 +8,10 @@
 *.pidb
 *.ide
 *.userprefs
-
+/AssemblyInfo.cs
 .DS_Store
 deploy/
-build/
+/build/
 [Bb]in/
 [Dd]ebug/
 [Oo]bj/
@@ -28,3 +28,11 @@ Thumbs.db
 *.GhostDoc.xml
 Gemfile.lock
 .vs/
+packages/
+project.lock.json
+TestAssembly.dll
+[Tt]ools/Cake.*
+.vscode/
+.dotnet/
+[Tt]ools/Addins/
+TestResults/

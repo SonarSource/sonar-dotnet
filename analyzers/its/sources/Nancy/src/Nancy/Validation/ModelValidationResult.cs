@@ -77,14 +77,27 @@
 
             foreach (var result in results)
             {
+                IList<ModelValidationError> value;
                 foreach (var name in result.MemberNames)
                 {
-                    if (!output.ContainsKey(name))
+                    if (!output.TryGetValue(name, out value))
                     {
-                        output.Add(name, new List<ModelValidationError>());
+                        value = new List<ModelValidationError>();
+                        output.Add(name, value);
                     }
 
-                    output[name].Add(result);
+                    value.Add(result);
+                }
+                
+                if (!result.MemberNames.Any() && !string.IsNullOrEmpty(result.ErrorMessage))
+                {
+                    if (!output.TryGetValue(string.Empty, out value))
+                    {
+                        value = new List<ModelValidationError>();
+                        output.Add(string.Empty, value);
+                    }
+
+                    value.Add(result);
                 }
             }
 

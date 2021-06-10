@@ -5,7 +5,7 @@
     using System.IO;
     using System.Threading.Tasks;
 
- 	  /// <summary>
+ 	/// <summary>
     /// Represents a HEAD only response.
     /// </summary>
     public class HeadResponse : Response
@@ -14,7 +14,8 @@
         private readonly Response innerResponse;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HeadResponse"/> class.
+        /// Initializes a new instance of the <see cref="HeadResponse"/> class, with
+        /// the provided <paramref name="response"/>.
         /// </summary>
         /// <param name="response">
         /// The full response to create the head response from.
@@ -33,6 +34,15 @@
             this.ReasonPhrase = response.ReasonPhrase;
         }
 
+
+        /// <summary>
+        /// Executes at the end of the nancy execution pipeline and before control is passed back to the hosting.
+        /// Can be used to pre-render/validate views while still inside the main pipeline/error handling.
+        /// </summary>
+        /// <param name="context">Nancy context</param>
+        /// <returns>
+        /// Task for completion/erroring
+        /// </returns>
         public override Task PreExecute(NancyContext context)
         {
             return this.innerResponse.PreExecute(context);
@@ -62,6 +72,7 @@
             {
             }
 
+#if !NETSTANDARD1_6
             public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
             {
                 throw new NotSupportedException();
@@ -71,6 +82,7 @@
             {
                 throw new NotSupportedException();
             }
+#endif
 
             public override long Seek(long offset, SeekOrigin origin)
             {

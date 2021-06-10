@@ -98,7 +98,12 @@
                 this.DefaultModel;
         }
 
-        internal void SetModule(INancyModule module)
+        /// <summary>
+        /// Sets the given Nancy module.
+        /// </summary>
+        /// <param name="module">The Nancy module instance.</param>
+        /// <exception cref="System.ArgumentNullException">module</exception>
+        public void SetModule(INancyModule module)
         {
             if (module == null)
             {

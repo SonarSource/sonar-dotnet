@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -13,6 +14,7 @@
     using Routing;
 
     using Helpers;
+    using Nancy.Configuration;
     using Responses.Negotiation;
 
     /// <summary>
@@ -20,16 +22,24 @@
     /// </summary>
     public class NancyEngine : INancyEngine
     {
+        /// <summary>
+        /// Key for error type
+        /// </summary>
         public const string ERROR_KEY = "ERROR_TRACE";
+
+        /// <summary>
+        /// Key for error exception message
+        /// </summary>
         public const string ERROR_EXCEPTION = "ERROR_EXCEPTION";
 
         private readonly IRequestDispatcher dispatcher;
         private readonly INancyContextFactory contextFactory;
         private readonly IRequestTracing requestTracing;
-        private readonly IEnumerable<IStatusCodeHandler> statusCodeHandlers;
+        private readonly IReadOnlyCollection<IStatusCodeHandler> statusCodeHandlers;
         private readonly IStaticContentProvider staticContentProvider;
         private readonly IResponseNegotiator negotiator;
         private readonly CancellationTokenSource engineDisposedCts;
+        private readonly TraceConfiguration traceConfiguration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NancyEngine"/> class.
@@ -40,12 +50,14 @@
         /// <param name="requestTracing">The request tracing instance.</param>
         /// <param name="staticContentProvider">The provider to use for serving static content</param>
         /// <param name="negotiator">The response negotiator.</param>
+        /// <param name="environment">An <see cref="INancyEnvironment"/> instance.</param>
         public NancyEngine(IRequestDispatcher dispatcher,
             INancyContextFactory contextFactory,
             IEnumerable<IStatusCodeHandler> statusCodeHandlers,
             IRequestTracing requestTracing,
             IStaticContentProvider staticContentProvider,
-            IResponseNegotiator negotiator)
+            IResponseNegotiator negotiator,
+            INancyEnvironment environment)
         {
             if (dispatcher == null)
             {
@@ -79,11 +91,12 @@
 
             this.dispatcher = dispatcher;
             this.contextFactory = contextFactory;
-            this.statusCodeHandlers = statusCodeHandlers;
+            this.statusCodeHandlers = statusCodeHandlers.ToArray();
             this.requestTracing = requestTracing;
             this.staticContentProvider = staticContentProvider;
             this.negotiator = negotiator;
             this.engineDisposedCts = new CancellationTokenSource();
+            this.traceConfiguration = environment.GetValue<TraceConfiguration>();
         }
 
         /// <summary>
@@ -170,8 +183,7 @@
 
         private bool EnableTracing(NancyContext ctx)
         {
-            return StaticConfiguration.EnableRequestTracing &&
-                   !ctx.Items.ContainsKey(DiagnosticsHook.ItemsKey);
+            return this.traceConfiguration.Enabled && !ctx.Items.ContainsKey(DiagnosticsHook.ItemsKey);
         }
 
         private Guid GetDiagnosticsSessionGuid(NancyContext ctx)
@@ -213,23 +225,54 @@
                 return;
             }
 
-            var handlers = this.statusCodeHandlers
-                .Where(x => x.HandlesStatusCode(context.Response.StatusCode, context))
-                .ToList();
+            IStatusCodeHandler defaultHandler = null;
+            IStatusCodeHandler customHandler = null;
 
-            var defaultHandler = handlers
-                .FirstOrDefault(x => x is DefaultStatusCodeHandler);
+            foreach (var statusCodeHandler in this.statusCodeHandlers)
+            {
+                if (!statusCodeHandler.HandlesStatusCode(context.Response.StatusCode, context))
+                {
+                    continue;
+                }
 
-            var customHandler = handlers
-                .FirstOrDefault(x => !(x is DefaultStatusCodeHandler));
+                if (defaultHandler == null && (statusCodeHandler is DefaultStatusCodeHandler))
+                {
+                    defaultHandler = statusCodeHandler;
+                    continue;
+                }
+
+                if (customHandler == null && !(statusCodeHandler is DefaultStatusCodeHandler))
+                {
+                    customHandler = statusCodeHandler;
+                    continue;
+                }
+
+                if ((defaultHandler != null) && (customHandler != null))
+                {
+                    break;
+                }
+            }
 
             var handler = customHandler ?? defaultHandler;
+
             if (handler == null)
             {
                 return;
             }
 
-            handler.Handle(context.Response.StatusCode, context);
+            try
+            {
+                handler.Handle(context.Response.StatusCode, context);
+            }
+            catch (Exception)
+            {
+                if (defaultHandler == null)
+                {
+                    throw;
+                }
+
+                defaultHandler.Handle(context.Response.StatusCode, context);
+            }
         }
 
         private async Task<NancyContext> InvokeRequestLifeCycle(NancyContext context, CancellationToken cancellationToken, IPipelines pipelines)
@@ -245,7 +288,7 @@
 
                 await response.PreExecute(context).ConfigureAwait(false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 this.InvokeOnErrorHook(context, pipelines.OnError, ex);
             }

@@ -1,9 +1,11 @@
 namespace Nancy.Hosting.Aspnet
 {
+    using System;
     using System.Collections.Generic;
     using System.Configuration;
     using System.Globalization;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
     using System.Web;
 
@@ -72,7 +74,7 @@ namespace Nancy.Hosting.Aspnet
 
             RequestStream body = null;
 
-            if (expectedRequestLength != 0)
+            if (expectedRequestLength != 0 || HasChunkedEncoding(incomingHeaders))
             {
                 body = RequestStream.FromStream(context.Request.InputStream, expectedRequestLength, StaticConfiguration.DisableRequestStreamSwitching ?? true);
             }
@@ -84,7 +86,7 @@ namespace Nancy.Hosting.Aspnet
                 body, 
                 incomingHeaders, 
                 context.Request.UserHostAddress, 
-                certificate,
+                new X509Certificate2(certificate),
                 protocolVersion);
         }
 
@@ -95,13 +97,13 @@ namespace Nancy.Hosting.Aspnet
                 return 0;
             }
 
-            if (!incomingHeaders.ContainsKey("Content-Length"))
+            IEnumerable<string> values;
+            if (!incomingHeaders.TryGetValue("Content-Length", out values))
             {
                 return 0;
             }
 
-            var headerValue =
-                incomingHeaders["Content-Length"].SingleOrDefault();
+            var headerValue = values.SingleOrDefault();
 
             if (headerValue == null)
             {
@@ -115,6 +117,17 @@ namespace Nancy.Hosting.Aspnet
             }
 
             return contentLength;
+        }
+
+        private static bool HasChunkedEncoding(IDictionary<string, IEnumerable<string>> incomingHeaders)
+        {
+            IEnumerable<string> transferEncodingValue;
+            if (incomingHeaders == null || !incomingHeaders.TryGetValue("Transfer-Encoding", out transferEncodingValue))
+            {
+                return false;
+            }
+            var transferEncodingString = transferEncodingValue.SingleOrDefault() ?? string.Empty;
+            return transferEncodingString.Equals("chunked", StringComparison.OrdinalIgnoreCase);
         }
 
         public static void SetNancyResponseToHttpResponse(HttpContextBase context, Response response)

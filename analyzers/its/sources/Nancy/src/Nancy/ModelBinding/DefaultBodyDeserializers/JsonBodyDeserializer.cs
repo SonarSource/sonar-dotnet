@@ -12,7 +12,8 @@ namespace Nancy.ModelBinding.DefaultBodyDeserializers
     public class JsonBodyDeserializer : IBodyDeserializer
     {
         private readonly MethodInfo deserializeMethod = typeof(JavaScriptSerializer).GetMethod("Deserialize", BindingFlags.Instance | BindingFlags.Public);
-        private readonly JsonConfiguration configuration;
+        private readonly JsonConfiguration jsonConfiguration;
+        private readonly GlobalizationConfiguration globalizationConfiguration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonBodyDeserializer"/>,
@@ -21,7 +22,8 @@ namespace Nancy.ModelBinding.DefaultBodyDeserializers
         /// <param name="environment">An <see cref="INancyEnvironment"/> instance.</param>
         public JsonBodyDeserializer(INancyEnvironment environment)
         {
-            this.configuration = environment.GetValue<JsonConfiguration>();
+            this.jsonConfiguration = environment.GetValue<JsonConfiguration>();
+            this.globalizationConfiguration = environment.GetValue<GlobalizationConfiguration>();
         }
 
         /// <summary>
@@ -44,19 +46,15 @@ namespace Nancy.ModelBinding.DefaultBodyDeserializers
         /// <returns>Model instance</returns>
         public object Deserialize(MediaRange mediaRange, Stream bodyStream, BindingContext context)
         {
-            var serializer = new JavaScriptSerializer(
-                null,
-                false,
-                this.configuration.MaxJsonLength,
-                this.configuration.MaxRecursions,
-                this.configuration.RetainCasing,
-                this.configuration.UseISO8601DateFormat,
-                this.configuration.Converters,
-                this.configuration.PrimitiveConverters);
+            var serializer = new JavaScriptSerializer(this.jsonConfiguration, this.globalizationConfiguration);
 
-            serializer.RegisterConverters(this.configuration.Converters, this.configuration.PrimitiveConverters);
+            serializer.RegisterConverters(this.jsonConfiguration.Converters, this.jsonConfiguration.PrimitiveConverters);
 
-            bodyStream.Position = 0;
+            if (bodyStream.CanSeek)
+            {
+                bodyStream.Position = 0;
+            }
+
             string bodyText;
             using (var bodyReader = new StreamReader(bodyStream))
             {

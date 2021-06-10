@@ -68,20 +68,23 @@
                         var owinRequestProtocol = Get<string>(environment, "owin.RequestProtocol");
                         var owinCallCancelled = Get<CancellationToken>(environment, "owin.CallCancelled");
                         var owinRequestHost = GetHeader(owinRequestHeaders, "Host") ?? Dns.GetHostName();
-                        var owinUser = GetUser(environment); 
+                        var owinUser = GetUser(environment);
 
-                        byte[] certificate = null;
+                        X509Certificate2 certificate = null;
                         if (options.EnableClientCertificates)
                         {
-                            var clientCertificate = Get<X509Certificate>(environment, "ssl.ClientCertificate");
-                            certificate = (clientCertificate == null) ? null : clientCertificate.GetRawCertData();
+                            certificate = new X509Certificate2(Get<X509Certificate>(environment, "ssl.ClientCertificate").Export(X509ContentType.Cert));
                         }
 
                         var serverClientIp = Get<string>(environment, "server.RemoteIpAddress");
 
                         var url = CreateUrl(owinRequestHost, owinRequestScheme, owinRequestPathBase, owinRequestPath, owinRequestQueryString);
 
-                        var nancyRequestStream = new RequestStream(owinRequestBody, ExpectedLength(owinRequestHeaders), StaticConfiguration.DisableRequestStreamSwitching ?? false);
+                        var expectedLength = ExpectedLength(owinRequestHeaders);
+                        // If length is 0 just use empty memory stream; as there is no body
+                        var nancyRequestStream = (expectedLength == 0) ?
+                            (Stream)new MemoryStream() :
+                            new RequestStream(owinRequestBody, expectedLength ?? 0, StaticConfiguration.DisableRequestStreamSwitching ?? false);
 
                         var nancyRequest = new Request(
                                 owinRequestMethod,
@@ -133,20 +136,21 @@
 
                 foreach (var responseHeader in nancyResponse.Headers)
                 {
-                    owinResponseHeaders[responseHeader.Key] = new[] {responseHeader.Value};
+                    owinResponseHeaders[responseHeader.Key] = new[] { responseHeader.Value };
                 }
 
                 if (!string.IsNullOrWhiteSpace(nancyResponse.ContentType))
                 {
-                    owinResponseHeaders["Content-Type"] = new[] {nancyResponse.ContentType};
+                    owinResponseHeaders["Content-Type"] = new[] { nancyResponse.ContentType };
                 }
 
                 if (nancyResponse.Cookies != null && nancyResponse.Cookies.Count != 0)
                 {
                     const string setCookieHeaderKey = "Set-Cookie";
-                    string[] setCookieHeader = owinResponseHeaders.ContainsKey(setCookieHeaderKey)
-                                                    ? owinResponseHeaders[setCookieHeaderKey]
-                                                    : new string[0];
+                    string[] cookieHeader;
+                    string[] setCookieHeader = owinResponseHeaders.TryGetValue(setCookieHeaderKey, out cookieHeader)
+                                                    ? cookieHeader
+                                                    : ArrayCache.Empty<string>();
                     owinResponseHeaders[setCookieHeaderKey] = setCookieHeader
                         .Concat(nancyResponse.Cookies.Select(cookie => cookie.ToString()))
                         .ToArray();
@@ -193,14 +197,24 @@
             return null;
         }
 
-        private static long ExpectedLength(IDictionary<string, string[]> headers)
+        private static long? ExpectedLength(IDictionary<string, string[]> headers)
         {
             var header = GetHeader(headers, "Content-Length");
-            if (string.IsNullOrWhiteSpace(header))
-                return 0;
 
-            int contentLength;
-            return int.TryParse(header, NumberStyles.Any, CultureInfo.InvariantCulture, out contentLength) ? contentLength : 0;
+            if (string.IsNullOrWhiteSpace(header))
+            {
+                header = GetHeader(headers, "Transfer-Encoding");
+                if (string.IsNullOrWhiteSpace(header))
+                {
+                    // No content-length or transfer-encoding means the length is definately 0
+                    return 0;
+                }
+                // Has transfer-encoding, length is unknown
+                return null;
+            }
+
+            // If length cannot be converted to an int, treat it as unknown
+            return int.TryParse(header, NumberStyles.Any, CultureInfo.InvariantCulture, out int contentLength) ? contentLength : (long?)null;
         }
 
         /// <summary>
@@ -248,7 +262,8 @@
         /// <summary>
         /// Gets a delegate to store the OWIN environment and flow the user into the NancyContext
         /// </summary>
-        /// <param name="environment">OWIN Environment</param>
+        /// <param name="environment">The OWIN environment.</param>
+        /// <param name="user">The user as a ClaimsPrincipal.</param>
         /// <returns>Delegate</returns>
         private static Func<NancyContext, NancyContext> StoreEnvironment(IDictionary<string, object> environment, ClaimsPrincipal user)
         {

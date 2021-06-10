@@ -9,18 +9,19 @@ namespace Nancy
     /// Represents a full Url of the form scheme://hostname:port/basepath/path?query
     /// </summary>
     /// <remarks>Since this is for  internal use, and fragments are not passed to the server, fragments are not supported.</remarks>
-    public sealed class Url : ICloneable
+    public sealed class Url
     {
         private string basePath;
 
         private string query;
 
+
         /// <summary>
-        /// Creates an instance of the <see cref="Url" /> class
+        /// Initializes a new instance of the <see cref="Url"/> class.
         /// </summary>
         public Url()
         {
-            this.Scheme = Uri.UriSchemeHttp;
+            this.Scheme = "http";
             this.HostName = string.Empty;
             this.Port = null;
             this.BasePath = string.Empty;
@@ -29,7 +30,8 @@ namespace Nancy
         }
 
         /// <summary>
-        /// Creates an instance of the <see cref="Url" /> class
+        /// Initializes a new instance of the <see cref="Url" /> class, with
+        /// the provided <paramref name="url"/>.
         /// </summary>
         /// <param name="url">A <see cref="string" /> containing a URL.</param>
         public Url(string url)
@@ -91,7 +93,7 @@ namespace Nancy
             {
                 return new StringBuilder()
                     .Append(this.Scheme)
-                    .Append(Uri.SchemeDelimiter)
+                    .Append("://")
                     .Append(GetHostName(this.HostName))
                     .Append(GetPort(this.Port))
                     .ToString();
@@ -105,30 +107,27 @@ namespace Nancy
         {
             get
             {
-                return Uri.UriSchemeHttps.Equals(this.Scheme, StringComparison.OrdinalIgnoreCase);
+                return "https".Equals(this.Scheme, StringComparison.OrdinalIgnoreCase);
             }
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return new StringBuilder()
                 .Append(this.Scheme)
-                .Append(Uri.SchemeDelimiter)
+                .Append("://")
                 .Append(GetHostName(this.HostName))
                 .Append(GetPort(this.Port))
                 .Append(GetCorrectPath(this.BasePath))
                 .Append(GetCorrectPath(this.Path))
                 .Append(this.Query)
                 .ToString();
-        }
-
-        /// <summary>
-        /// Clones the url.
-        /// </summary>
-        /// <returns>Returns a new cloned instance of the url.</returns>
-        object ICloneable.Clone()
-        {
-            return this.Clone();
         }
 
         /// <summary>

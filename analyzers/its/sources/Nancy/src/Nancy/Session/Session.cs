@@ -12,7 +12,16 @@ namespace Nancy.Session
         private readonly IDictionary<string, object> dictionary;
         private bool hasChanged;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Session"/> class.
+        /// </summary>
         public Session() : this(new Dictionary<string, object>(0)){}
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Session"/> class, with
+        /// the provided <paramref name="dictionary"/>.
+        /// </summary>
+        /// <param name="dictionary">The dictionary.</param>
         public Session(IDictionary<string, object> dictionary)
         {
             this.dictionary = dictionary;
@@ -55,7 +64,11 @@ namespace Nancy.Session
         /// <returns>The value, or null or the key didn't exist</returns>
         public object this[string key]
         {
-            get { return dictionary.ContainsKey(key) ? dictionary[key] : null; }
+            get
+            {
+                object value;
+                return dictionary.TryGetValue(key, out value) ? value : null;
+            }
             set
             {
                 var existingValue = this[key] ?? new Object();

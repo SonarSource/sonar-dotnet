@@ -17,6 +17,8 @@
     internal abstract class ClrTypeResolver<TSymbolType, TSymbol>
         where TSymbol : SymbolBase<TSymbolType>
     {
+        private readonly RazorAssemblyProvider razorAssemblyProvider;
+
         private readonly TSymbolType identifier;
         private readonly TSymbolType keyword;
         private readonly TSymbolType dot;
@@ -30,17 +32,19 @@
         protected Queue<TSymbol> Symbols { get; private set; }
 
         /// <summary>
-        /// Initializes new instance of ClrTypeResolver class. 
+        /// Initializes new instance of ClrTypeResolver class.
         /// Provided parameters are used to recognized specific symbols in particular language
         /// </summary>
+        /// <param name="razorAssemblyProvider">An <see cref="RazorAssemblyProvider"/> used to resolve model types from the available assemblies.</param>
         /// <param name="identifier">Symbol type for identifier</param>
         /// <param name="keyword">Symbol type for keyword</param>
         /// <param name="dot">Symbol type for dot ('.')</param>
         /// <param name="whiteSpace">Symbol type for whitespace</param>
         /// <param name="arrayBegin">Type of symbol that begins array</param>
         /// <param name="arrayEnd">Type of symbol that ends array</param>
-        protected ClrTypeResolver(TSymbolType identifier, TSymbolType keyword, TSymbolType dot, TSymbolType whiteSpace, TSymbolType arrayBegin, TSymbolType arrayEnd)
+        protected ClrTypeResolver(RazorAssemblyProvider razorAssemblyProvider, TSymbolType identifier, TSymbolType keyword, TSymbolType dot, TSymbolType whiteSpace, TSymbolType arrayBegin, TSymbolType arrayEnd)
         {
+            this.razorAssemblyProvider = razorAssemblyProvider;
             this.identifier = identifier;
             this.keyword = keyword;
             this.dot = dot;
@@ -81,7 +85,7 @@
         protected abstract bool MoveOutOfGenericArguments();
 
         /// <summary>
-        /// Gets CLR from name (keyword) used by specific language 
+        /// Gets CLR from name (keyword) used by specific language
         /// </summary>
         /// <param name="typeName">Type name to resolve</param>
         /// <returns>CLR type</returns>
@@ -181,9 +185,13 @@
         private Type ResolveTypeByName(string typeName)
         {
             return Type.GetType(typeName)
-                   ?? ResolvePrimitiveType(typeName)
-                   ?? AppDomainAssemblyTypeScanner.Types.FirstOrDefault(t => t.FullName == typeName)
-                   ?? AppDomainAssemblyTypeScanner.Types.FirstOrDefault(t => t.Name == typeName);
+                   ?? this.ResolvePrimitiveType(typeName)
+                   ?? this.ResolveTypeFromAssemblyCatalog(typeName);
+        }
+
+        private Type ResolveTypeFromAssemblyCatalog(string typeName)
+        {
+            return this.razorAssemblyProvider.GetAssemblies().Select(assembly => assembly.GetType(typeName)).FirstOrDefault(type => type != null);
         }
 
         [DebuggerDisplay("{GenericTypeName}`{GenericArguments.Count}")]
@@ -207,7 +215,7 @@
             /// <returns>Resolved CLR type</returns>
             public Type Resolve(Func<string, Type> resolveType)
             {
-                var effectiveArguments = this.GenericArguments.Where(x => x.GenericTypeName != string.Empty).ToArray();                
+                var effectiveArguments = this.GenericArguments.Where(x => x.GenericTypeName != string.Empty).ToArray();
 
                 Type resultType = null;
 

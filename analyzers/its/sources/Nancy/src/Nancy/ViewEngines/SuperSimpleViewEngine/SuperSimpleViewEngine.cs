@@ -650,7 +650,7 @@ namespace Nancy.ViewEngines.SuperSimpleViewEngine
                 result,
                 m =>
                 {
-                    var partialViewName = m.Groups["ViewName"].Value;
+                    var partialViewName = ReplaceCurrentMatch(m.Groups["ViewName"].Value, model, host);
                     var partialModel = model;
                     var properties = GetCaptureGroupValues(m, "ParameterName");
 
@@ -714,8 +714,8 @@ namespace Nancy.ViewEngines.SuperSimpleViewEngine
                 m =>
                 {
                     var sectionName = m.Groups["SectionName"].Value;
-
-                    return sections.ContainsKey(sectionName) ? sections[sectionName] : string.Empty;
+                    string sectionValue;
+                    return sections.TryGetValue(sectionName, out sectionValue) ? sectionValue : string.Empty;
                 });
 
             return result;
