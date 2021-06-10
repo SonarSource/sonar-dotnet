@@ -1,11 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 <Import Project="..\..\common.props" />
   <Import Project="..\..\xunitSettings.props" />
+  <PropertyGroup>
+    <!-- We need to manually mark this project as TEST. See analyzers\its\SonarAnalyzer.Testing.ImportBefore.targets for details.-->
+    <SonarQubeTestProject>true</SonarQubeTestProject>
+  </PropertyGroup>
   <PropertyGroup>
     <AssemblyName>Akka.Streams.Tests.TCK</AssemblyName>
     <!-- Reactive.Streams.TCK isn't compatible with .NET Core -->
     <!--UNit.Framework does not yet support .NET 5 - build will fail-->
     <TargetFrameworks>$(NetFrameworkTestVersion);$(NetCoreTestVersion)</TargetFrameworks>
+    <CodeAnalysisRuleSet>..\..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
  
   <ItemGroup>

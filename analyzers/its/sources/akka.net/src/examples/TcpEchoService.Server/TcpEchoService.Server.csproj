@@ -4,6 +4,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>$(NetCoreTestVersion)</TargetFramework>
+        <CodeAnalysisRuleSet>..\..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
     <ItemGroup>
