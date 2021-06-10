@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData.LightningDB\LmdbDurableStore.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  40,
+"endLine":  149,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData.LightningDB\LmdbDurableStore.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  41,
+"endLine":  150,
+"endColumn":  50
+}
+}
+}
+]
+}

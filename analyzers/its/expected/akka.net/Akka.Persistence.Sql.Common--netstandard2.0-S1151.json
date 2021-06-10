@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 13 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  758,
+"startColumn":  21,
+"endLine":  758,
+"endColumn":  44
+}
+}
+}
+]
+}

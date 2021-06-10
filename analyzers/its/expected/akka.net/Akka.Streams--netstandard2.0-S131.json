@@ -1,0 +1,303 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  13,
+"endLine":  296,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  13,
+"endLine":  335,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  13,
+"endLine":  414,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  518,
+"startColumn":  17,
+"endLine":  518,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1813,
+"startColumn":  21,
+"endLine":  1813,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  21,
+"endLine":  141,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  17,
+"endLine":  240,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  13,
+"endLine":  265,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  21,
+"endLine":  500,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1084,
+"startColumn":  17,
+"endLine":  1084,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1113,
+"startColumn":  21,
+"endLine":  1113,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2203,
+"startColumn":  25,
+"endLine":  2203,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2227,
+"startColumn":  25,
+"endLine":  2227,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2275,
+"startColumn":  29,
+"endLine":  2275,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2316,
+"startColumn":  25,
+"endLine":  2316,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  1087,
+"startColumn":  17,
+"endLine":  1087,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  1164,
+"startColumn":  13,
+"endLine":  1164,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  13,
+"endLine":  126,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  21,
+"endLine":  193,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  17,
+"endLine":  149,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  21,
+"endLine":  252,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  17,
+"endLine":  184,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  17,
+"endLine":  210,
+"endColumn":  23
+}
+}
+}
+]
+}

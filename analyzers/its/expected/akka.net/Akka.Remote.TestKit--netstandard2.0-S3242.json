@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<string>' instead of 'System.Collections.Immutable.ImmutableList<string>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  67,
+"endLine":  122,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Net.EndPoint' instead of 'System.Net.IPEndPoint'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\RemoteConnection.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  77,
+"endLine":  88,
+"endColumn":  90
+}
+}
+}
+]
+}

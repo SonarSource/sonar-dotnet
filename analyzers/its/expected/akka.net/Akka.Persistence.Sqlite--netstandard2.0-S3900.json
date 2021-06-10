@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Extension.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  13,
+"endLine":  58,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\BatchingSqliteJournal.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  45,
+"endLine":  31,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'journalConfig' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteJournal.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  59,
+"endLine":  30,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Snapshot\SqliteSnapshotStore.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  45,
+"endLine":  30,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'reader' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Snapshot\SqliteSnapshotStore.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  33,
+"endLine":  86,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'snapshotConfig' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Snapshot\SqliteSnapshotStore.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  18,
+"endLine":  112,
+"endColumn":  32
+}
+}
+}
+]
+}

@@ -1,0 +1,316 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'TestActorRefBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ISurrogated.ToSurrogate'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  32,
+"endLine":  248,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestActorRefBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActorRefScope.IsLocal'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  29,
+"endLine":  253,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestActorRefBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Parent'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  45,
+"endLine":  255,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestActorRefBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Provider'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  45,
+"endLine":  257,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestActorRefBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.IsTerminated'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  32,
+"endLine":  259,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestActorRefBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.GetChild'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  37,
+"endLine":  261,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestActorRefBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Resume'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  266,
+"startColumn":  32,
+"endLine":  266,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestActorRefBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Start'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  32,
+"endLine":  271,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestActorRefBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Stop'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  32,
+"endLine":  276,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestActorRefBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Restart'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  32,
+"endLine":  281,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestActorRefBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Suspend'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  32,
+"endLine":  286,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActorRef.Path'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  29,
+"endLine":  107,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICanTell.Tell'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  23,
+"endLine":  109,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ISurrogated.ToSurrogate'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  32,
+"endLine":  114,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActorRefScope.IsLocal'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  29,
+"endLine":  119,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Parent'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  45,
+"endLine":  121,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Provider'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  45,
+"endLine":  123,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.IsTerminated'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  32,
+"endLine":  125,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.GetChild'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  37,
+"endLine":  127,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Resume'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  32,
+"endLine":  132,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Start'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  32,
+"endLine":  137,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Stop'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  32,
+"endLine":  142,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Restart'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  32,
+"endLine":  147,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'TestProbe' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActorRef.Suspend'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  32,
+"endLine":  152,
+"endColumn":  39
+}
+}
+}
+]
+}

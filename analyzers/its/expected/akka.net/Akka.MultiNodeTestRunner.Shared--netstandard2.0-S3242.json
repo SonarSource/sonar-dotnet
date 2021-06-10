@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>' instead of 'System.Collections.Generic.Dictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  96,
+"endLine":  126,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>' instead of 'System.Collections.Generic.Dictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  96,
+"endLine":  146,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>' instead of 'System.Collections.Generic.Dictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  45,
+"endLine":  161,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>' instead of 'System.Collections.Generic.Dictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  101,
+"endLine":  182,
+"endColumn":  112
+}
+}
+}
+]
+}

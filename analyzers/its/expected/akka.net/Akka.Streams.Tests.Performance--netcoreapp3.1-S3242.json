@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IMaterializer' instead of 'Akka.Streams.ActorMaterializer'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\FlowSelectBenchmark.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  48,
+"endLine":  234,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.ClosedShape, Akka.TestKit.TestLatch>' instead of 'Akka.Streams.Dsl.IRunnableGraph<Akka.TestKit.TestLatch>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\FusedGraphsBenchmark.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  80,
+"endLine":  163,
+"endColumn":  85
+}
+}
+}
+]
+}

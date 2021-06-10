@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, string[]>>' instead of 'System.Collections.Generic.IDictionary<string, string[]>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  141,
+"endLine":  309,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Exception' instead of 'Akka.Pattern.IllegalStateException'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  49,
+"endLine":  289,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.IEnumerable' instead of 'System.Collections.Generic.IEnumerable<Akka.Persistence.IPersistentEnvelope>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\WriteJournal.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  100,
+"endLine":  37,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Persistence.IPersistentRepresentation' instead of 'Akka.Persistence.Persistent'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  39,
+"endLine":  398,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Tools.MatchHandler.MatchBuilder<object>' instead of 'Akka.Tools.MatchHandler.MatchBuilder'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  75,
+"endLine":  360,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Persistence.IPersistentEnvelope' instead of 'Akka.Persistence.AtomicWrite'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  66,
+"endLine":  92,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.FileInfo'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  67,
+"endLine":  283,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.FileInfo'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  71,
+"endLine":  338,
+"endColumn":  79
+}
+}
+}
+]
+}

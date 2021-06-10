@@ -1,0 +1,2526 @@
+{
+"issues":  [
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'GraphDsl.Create' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  50,
+"endLine":  83,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'GraphDsl.Create' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  50,
+"endLine":  119,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'GraphDsl.Create' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  50,
+"endLine":  160,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'GraphDsl.Create' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  50,
+"endLine":  206,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'IUnzipWithCreator' interface to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  22,
+"endLine":  19,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWithCreator' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  27,
+"endLine":  35,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWithCreator' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  27,
+"endLine":  54,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWithCreator' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  27,
+"endLine":  74,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWithCreator' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  27,
+"endLine":  95,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWithCreator' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  27,
+"endLine":  117,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWithCreator' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  27,
+"endLine":  140,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  59,
+"endLine":  181,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  66,
+"endLine":  196,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  73,
+"endLine":  212,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  80,
+"endLine":  229,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  87,
+"endLine":  247,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  18,
+"endLine":  259,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  18,
+"endLine":  382,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  532,
+"startColumn":  18,
+"endLine":  532,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  709,
+"startColumn":  18,
+"endLine":  709,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  913,
+"startColumn":  18,
+"endLine":  913,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnzipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1144,
+"startColumn":  18,
+"endLine":  1144,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  55,
+"endLine":  40,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  61,
+"endLine":  54,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  67,
+"endLine":  69,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  73,
+"endLine":  85,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  79,
+"endLine":  102,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  85,
+"endLine":  120,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith.Apply' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  91,
+"endLine":  139,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  18,
+"endLine":  151,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  18,
+"endLine":  273,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  18,
+"endLine":  412,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  568,
+"startColumn":  18,
+"endLine":  568,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  741,
+"startColumn":  18,
+"endLine":  741,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  931,
+"startColumn":  18,
+"endLine":  931,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1138,
+"startColumn":  18,
+"endLine":  1138,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ZipWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1362,
+"startColumn":  18,
+"endLine":  1362,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanInShapeN' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  18,
+"endLine":  20,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanInShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  18,
+"endLine":  98,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanInShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  18,
+"endLine":  151,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanInShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  18,
+"endLine":  211,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanInShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  18,
+"endLine":  278,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanInShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  18,
+"endLine":  352,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanInShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  433,
+"startColumn":  18,
+"endLine":  433,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanInShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  521,
+"startColumn":  18,
+"endLine":  521,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanInShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  616,
+"startColumn":  18,
+"endLine":  616,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanOutShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  18,
+"endLine":  19,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanOutShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  18,
+"endLine":  71,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanOutShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  18,
+"endLine":  130,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanOutShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  18,
+"endLine":  196,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanOutShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  18,
+"endLine":  269,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanOutShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  18,
+"endLine":  349,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanOutShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  18,
+"endLine":  436,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanOutShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  530,
+"startColumn":  18,
+"endLine":  530,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'BidiFlow.FromGraph' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  64,
+"endLine":  30,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'BidiFlow.FromFlowsMat' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  64,
+"endLine":  68,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'BidiFlow.FromFlows' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  67,
+"endLine":  103,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'BidiFlow.FromFunction' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  67,
+"endLine":  120,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'BidiFlow' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  18,
+"endLine":  152,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'BidiFlow.AtopMat' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  60,
+"endLine":  281,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'Flow' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  25,
+"endLine":  27,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'Flow.JoinMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  43,
+"endLine":  337,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'Flow.FromSinkAndSource' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  508,
+"startColumn":  45,
+"endLine":  508,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Select' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  43,
+"endLine":  175,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.SelectMany' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  43,
+"endLine":  208,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.StatefulSelectMany' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  43,
+"endLine":  248,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.SelectAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  292,
+"startColumn":  43,
+"endLine":  292,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.SelectAsyncUnordered' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  43,
+"endLine":  337,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Collect' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  46,
+"endLine":  474,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Collect' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  46,
+"endLine":  500,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Scan' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  663,
+"startColumn":  46,
+"endLine":  663,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.ScanAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  701,
+"startColumn":  46,
+"endLine":  701,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Aggregate' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  734,
+"startColumn":  46,
+"endLine":  734,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.AggregateAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  769,
+"startColumn":  46,
+"endLine":  769,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.ConflateWithSeed' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1064,
+"startColumn":  46,
+"endLine":  1064,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Batch' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1135,
+"startColumn":  45,
+"endLine":  1135,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.BatchWeighted' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1174,
+"startColumn":  46,
+"endLine":  1174,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Expand' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1207,
+"startColumn":  46,
+"endLine":  1207,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Transform' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1253,
+"startColumn":  46,
+"endLine":  1253,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.GroupBy' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1324,
+"startColumn":  60,
+"endLine":  1324,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.ConcatMany' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1502,
+"startColumn":  46,
+"endLine":  1502,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.MergeMany' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1528,
+"startColumn":  46,
+"endLine":  1528,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.KeepAlive' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1670,
+"startColumn":  50,
+"endLine":  1670,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.AlsoToMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1774,
+"startColumn":  46,
+"endLine":  1774,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.WatchTermination' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1820,
+"startColumn":  46,
+"endLine":  1820,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Monitor' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1838,
+"startColumn":  46,
+"endLine":  1838,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Zip' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1936,
+"startColumn":  49,
+"endLine":  1936,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.ZipWith' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1962,
+"startColumn":  43,
+"endLine":  1962,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Interleave' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1998,
+"startColumn":  43,
+"endLine":  1998,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.InterleaveMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2028,
+"startColumn":  44,
+"endLine":  2028,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Merge' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2054,
+"startColumn":  46,
+"endLine":  2054,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.MergeMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2078,
+"startColumn":  47,
+"endLine":  2078,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.Prepend' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2220,
+"startColumn":  46,
+"endLine":  2220,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.OrElseMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2276,
+"startColumn":  41,
+"endLine":  2276,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowOperations.AsFlowWithContext' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2303,
+"startColumn":  73,
+"endLine":  2303,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContext' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContext.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  25,
+"endLine":  23,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContext.ViaMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContext.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  66,
+"endLine":  52,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContext.From' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContext.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  73,
+"endLine":  84,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContextOperations.Select' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  69,
+"endLine":  22,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContextOperations.SelectAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  69,
+"endLine":  32,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContextOperations.Collect' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  69,
+"endLine":  43,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContextOperations.Where' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  68,
+"endLine":  57,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContextOperations.WhereNot' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  68,
+"endLine":  67,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContextOperations.Grouped' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  98,
+"endLine":  78,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContextOperations.Sliding' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  98,
+"endLine":  102,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContextOperations.SelectConcat' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  69,
+"endLine":  127,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContextOperations.StatefulSelectConcat' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  69,
+"endLine":  134,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlowWithContextOperations.SelectContext' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  69,
+"endLine":  152,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceWithContextOperations.Select' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  60,
+"endLine":  167,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceWithContextOperations.SelectAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  60,
+"endLine":  177,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceWithContextOperations.Collect' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  60,
+"endLine":  188,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceWithContextOperations.SelectConcat' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  60,
+"endLine":  270,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceWithContextOperations.StatefulSelectConcat' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  60,
+"endLine":  277,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceWithContextOperations.SelectContext' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  60,
+"endLine":  295,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'Builder.Add' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  29,
+"endLine":  80,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ForwardOps.To' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  478,
+"startColumn":  46,
+"endLine":  478,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ForwardOps.To' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  496,
+"startColumn":  46,
+"endLine":  496,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ForwardOps.To' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  516,
+"startColumn":  46,
+"endLine":  516,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ForwardOps.Bind' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  530,
+"startColumn":  38,
+"endLine":  530,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ForwardOps.Via' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  547,
+"startColumn":  56,
+"endLine":  547,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ForwardOps.Via' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  565,
+"startColumn":  56,
+"endLine":  565,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ForwardOps.Via' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  584,
+"startColumn":  56,
+"endLine":  584,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ForwardOps.Via' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  601,
+"startColumn":  56,
+"endLine":  601,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ReverseOps.From' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  718,
+"startColumn":  46,
+"endLine":  718,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ReverseOps.Via' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  746,
+"startColumn":  56,
+"endLine":  746,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ReverseOps.Via' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  764,
+"startColumn":  56,
+"endLine":  764,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'InternalFlowOperations.GroupBy' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1276,
+"startColumn":  49,
+"endLine":  1276,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'GroupByMergeBack' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1300,
+"startColumn":  24,
+"endLine":  1300,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'InternalFlowOperations.ZipWith' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1960,
+"startColumn":  39,
+"endLine":  1960,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'InternalFlowOperations.ZipWithGraph' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1966,
+"startColumn":  56,
+"endLine":  1966,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'InternalFlowOperations.InterleaveMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2060,
+"startColumn":  40,
+"endLine":  2060,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'InternalFlowOperations.MergeMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2123,
+"startColumn":  42,
+"endLine":  2123,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'InternalFlowOperations.OrElseMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2388,
+"startColumn":  39,
+"endLine":  2388,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'InternalFlowOperations.AlsoToMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2400,
+"startColumn":  42,
+"endLine":  2400,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'PartitionWith' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  18,
+"endLine":  22,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'RestartWithBackoffFlow' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  27,
+"endLine":  341,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'RestartWithBackoffLogic' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  429,
+"startColumn":  29,
+"endLine":  429,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'Retry.Create' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  86,
+"endLine":  46,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'Retry.Concat' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  86,
+"endLine":  88,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'RetryCoordinator' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  23,
+"endLine":  102,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'RetryConcatCoordinator' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  23,
+"endLine":  219,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'Source.CombineMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  784,
+"startColumn":  46,
+"endLine":  784,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceGen.UnfoldFlowWith' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  42,
+"endLine":  83,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnfoldFlowWithGraphStageLogic' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  23,
+"endLine":  110,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceGen.UnfoldFlowGraph' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  43,
+"endLine":  143,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceOperations.AlsoToMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1671,
+"startColumn":  43,
+"endLine":  1671,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceOperations.ZipWith' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1848,
+"startColumn":  40,
+"endLine":  1848,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceOperations.InterleaveMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1912,
+"startColumn":  41,
+"endLine":  1912,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceOperations.MergeMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1961,
+"startColumn":  44,
+"endLine":  1961,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceOperations.CombineMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2087,
+"startColumn":  46,
+"endLine":  2087,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceOperations.OrElseMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2172,
+"startColumn":  40,
+"endLine":  2172,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceWithContext' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceWithContext.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  25,
+"endLine":  23,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SourceWithContext.ViaMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceWithContext.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  55,
+"endLine":  52,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlow' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlow.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.Select' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  52,
+"endLine":  172,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.SelectMany' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  53,
+"endLine":  205,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.StatefulSelectMany' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  53,
+"endLine":  243,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.SelectAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  52,
+"endLine":  287,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.SelectAsyncUnordered' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  52,
+"endLine":  330,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.Collect' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  53,
+"endLine":  460,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.Scan' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  614,
+"startColumn":  53,
+"endLine":  614,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.ScanAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  53,
+"endLine":  649,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.Aggregate' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  679,
+"startColumn":  53,
+"endLine":  679,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.AggregateAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  711,
+"startColumn":  52,
+"endLine":  711,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.ConflateWithSeed' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1000,
+"startColumn":  53,
+"endLine":  1000,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.Batch' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1062,
+"startColumn":  53,
+"endLine":  1062,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.BatchWeighted' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1101,
+"startColumn":  53,
+"endLine":  1101,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.Expand' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1134,
+"startColumn":  53,
+"endLine":  1134,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.Transform' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1180,
+"startColumn":  53,
+"endLine":  1180,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.ConcatMany' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1230,
+"startColumn":  53,
+"endLine":  1230,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.MergeMany' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1256,
+"startColumn":  53,
+"endLine":  1256,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.KeepAlive' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1398,
+"startColumn":  57,
+"endLine":  1398,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.AlsoToMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1502,
+"startColumn":  53,
+"endLine":  1502,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.WatchTermination' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1548,
+"startColumn":  53,
+"endLine":  1548,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.Zip' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1642,
+"startColumn":  56,
+"endLine":  1642,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.ZipWith' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1668,
+"startColumn":  50,
+"endLine":  1668,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.Interleave' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1704,
+"startColumn":  50,
+"endLine":  1704,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.InterleaveMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1734,
+"startColumn":  51,
+"endLine":  1734,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.Merge' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1760,
+"startColumn":  53,
+"endLine":  1760,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.MergeMaterialized' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1785,
+"startColumn":  54,
+"endLine":  1785,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowOperations.Prepend' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1927,
+"startColumn":  53,
+"endLine":  1927,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'UnfoldFlowGraphStageLogic' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\UnfoldFlow.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  29,
+"endLine":  15,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FanOut2UnfoldingStage' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\UnfoldFlow.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  20,
+"endLine":  77,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TimedSourceDsl.Timed' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Implicits.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  43,
+"endLine":  31,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TimedFlowDsl.Timed' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Implicits.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  47,
+"endLine":  68,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TimedOps.Timed' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Timed.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  43,
+"endLine":  39,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TimedOps.Timed' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Timed.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  47,
+"endLine":  63,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FlattenMerge' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  27,
+"endLine":  30,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ProcessorModule' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2535,
+"startColumn":  25,
+"endLine":  2535,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'SubFlowImpl' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  18,
+"endLine":  37,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'BidiShape' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  582,
+"startColumn":  25,
+"endLine":  582,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'BidiShape.FromFlows' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  696,
+"startColumn":  59,
+"endLine":  696,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'PushPullGraphStageWithMaterializedValue' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"region":  {
+"startLine":  308,
+"startColumn":  18,
+"endLine":  308,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'AbstractStage' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"region":  {
+"startLine":  523,
+"startColumn":  27,
+"endLine":  523,
+"endColumn":  40
+}
+}
+}
+]
+}

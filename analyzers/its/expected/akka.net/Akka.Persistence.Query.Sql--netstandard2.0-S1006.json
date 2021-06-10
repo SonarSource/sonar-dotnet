@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  85,
+"endLine":  199,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  92,
+"endLine":  220,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  71,
+"endLine":  236,
+"endColumn":  77
+}
+}
+}
+]
+}

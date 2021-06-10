@@ -1,0 +1,2877 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Actor' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  35,
+"endLine":  233,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'InitialInputBufferSize' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  29,
+"endLine":  348,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'MaxInputBufferSize' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  29,
+"endLine":  352,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Dispatcher' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  32,
+"endLine":  356,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'SupervisionDecider' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  33,
+"endLine":  360,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'SubscriptionTimeoutSettings' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  59,
+"endLine":  364,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'IsDebugLogging' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  30,
+"endLine":  368,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'OutputBurstLimit' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  372,
+"startColumn":  29,
+"endLine":  372,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'IsFuzzingMode' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  30,
+"endLine":  376,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'IsAutoFusing' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  30,
+"endLine":  380,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'MaxFixedBufferSize' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  29,
+"endLine":  384,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'SyncProcessingLimit' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  29,
+"endLine":  388,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'StreamRefSettings' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  43,
+"endLine":  393,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Mode' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  685,
+"startColumn":  66,
+"endLine":  685,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Timeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  690,
+"startColumn":  34,
+"endLine":  690,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Subscriber' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  40,
+"endLine":  31,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Count' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  30,
+"endLine":  91,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Cause' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  731,
+"startColumn":  35,
+"endLine":  731,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Stop' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  735,
+"startColumn":  30,
+"endLine":  735,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Subscription' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  39,
+"endLine":  26,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Element' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  32,
+"endLine":  52,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Cause' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  35,
+"endLine":  73,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Subscription' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  43,
+"endLine":  394,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Requested' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  34,
+"endLine":  398,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'IsCanceled' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  34,
+"endLine":  402,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'HighWatermark' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\RequestStrategies.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  29,
+"endLine":  77,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LowWatermark' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\RequestStrategies.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  29,
+"endLine":  81,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Max' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\RequestStrategies.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  29,
+"endLine":  126,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Value' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  36,
+"endLine":  51,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Initial' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  33,
+"endLine":  91,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Max' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  33,
+"endLine":  95,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'OnElement' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  38,
+"endLine":  145,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'OnFinish' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  38,
+"endLine":  149,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'OnFailure' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  38,
+"endLine":  153,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Name' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  545,
+"startColumn":  36,
+"endLine":  545,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Decider' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  584,
+"startColumn":  37,
+"endLine":  584,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'N' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  29,
+"endLine":  25,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  35,
+"endLine":  29,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In1s' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  51,
+"endLine":  33,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  35,
+"endLine":  103,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  35,
+"endLine":  107,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  35,
+"endLine":  156,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  35,
+"endLine":  160,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  35,
+"endLine":  164,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  35,
+"endLine":  216,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  35,
+"endLine":  220,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  35,
+"endLine":  224,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  35,
+"endLine":  228,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  35,
+"endLine":  283,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  35,
+"endLine":  287,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  35,
+"endLine":  291,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  35,
+"endLine":  295,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In4' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  35,
+"endLine":  299,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  357,
+"startColumn":  35,
+"endLine":  357,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  361,
+"startColumn":  35,
+"endLine":  361,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  365,
+"startColumn":  35,
+"endLine":  365,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  35,
+"endLine":  369,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In4' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  35,
+"endLine":  373,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In5' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  35,
+"endLine":  377,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  35,
+"endLine":  438,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  442,
+"startColumn":  35,
+"endLine":  442,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  446,
+"startColumn":  35,
+"endLine":  446,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  450,
+"startColumn":  35,
+"endLine":  450,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In4' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  35,
+"endLine":  454,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In5' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  458,
+"startColumn":  35,
+"endLine":  458,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In6' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  35,
+"endLine":  462,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  526,
+"startColumn":  35,
+"endLine":  526,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  530,
+"startColumn":  35,
+"endLine":  530,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  534,
+"startColumn":  35,
+"endLine":  534,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  538,
+"startColumn":  35,
+"endLine":  538,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In4' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  542,
+"startColumn":  35,
+"endLine":  542,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In5' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  546,
+"startColumn":  35,
+"endLine":  546,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In6' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  550,
+"startColumn":  35,
+"endLine":  550,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In7' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  554,
+"startColumn":  35,
+"endLine":  554,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  621,
+"startColumn":  35,
+"endLine":  621,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  625,
+"startColumn":  35,
+"endLine":  625,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  629,
+"startColumn":  35,
+"endLine":  629,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  633,
+"startColumn":  35,
+"endLine":  633,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In4' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  637,
+"startColumn":  35,
+"endLine":  637,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In5' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  641,
+"startColumn":  35,
+"endLine":  641,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In6' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  645,
+"startColumn":  35,
+"endLine":  645,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In7' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  35,
+"endLine":  649,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In8' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  35,
+"endLine":  653,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  36,
+"endLine":  24,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  36,
+"endLine":  28,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  36,
+"endLine":  76,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  36,
+"endLine":  80,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  36,
+"endLine":  84,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  36,
+"endLine":  135,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  36,
+"endLine":  139,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  36,
+"endLine":  143,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  36,
+"endLine":  147,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  36,
+"endLine":  201,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  36,
+"endLine":  205,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  36,
+"endLine":  209,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  36,
+"endLine":  213,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out4' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  36,
+"endLine":  217,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  36,
+"endLine":  274,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  36,
+"endLine":  278,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  36,
+"endLine":  282,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  36,
+"endLine":  286,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out4' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  36,
+"endLine":  290,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out5' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  36,
+"endLine":  294,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  36,
+"endLine":  354,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  36,
+"endLine":  358,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  36,
+"endLine":  362,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  36,
+"endLine":  366,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out4' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  370,
+"startColumn":  36,
+"endLine":  370,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out5' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  374,
+"startColumn":  36,
+"endLine":  374,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out6' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  36,
+"endLine":  378,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  441,
+"startColumn":  36,
+"endLine":  441,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  445,
+"startColumn":  36,
+"endLine":  445,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  449,
+"startColumn":  36,
+"endLine":  449,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  453,
+"startColumn":  36,
+"endLine":  453,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out4' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  457,
+"startColumn":  36,
+"endLine":  457,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out5' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  461,
+"startColumn":  36,
+"endLine":  461,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out6' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  465,
+"startColumn":  36,
+"endLine":  465,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out7' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  469,
+"startColumn":  36,
+"endLine":  469,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out0' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  36,
+"endLine":  535,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  539,
+"startColumn":  36,
+"endLine":  539,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  36,
+"endLine":  543,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  547,
+"startColumn":  36,
+"endLine":  547,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out4' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  551,
+"startColumn":  36,
+"endLine":  551,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out5' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  36,
+"endLine":  555,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out6' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  559,
+"startColumn":  36,
+"endLine":  559,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out7' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  563,
+"startColumn":  36,
+"endLine":  563,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out8' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  567,
+"startColumn":  36,
+"endLine":  567,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Left' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  870,
+"startColumn":  34,
+"endLine":  870,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Right' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  875,
+"startColumn":  34,
+"endLine":  875,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  880,
+"startColumn":  35,
+"endLine":  880,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1012,
+"startColumn":  34,
+"endLine":  1012,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1173,
+"startColumn":  34,
+"endLine":  1173,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'N' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  29,
+"endLine":  211,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Counter' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  512,
+"startColumn":  43,
+"endLine":  512,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Props' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  537,
+"startColumn":  35,
+"endLine":  537,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Name' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  542,
+"startColumn":  36,
+"endLine":  542,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Refs' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  607,
+"startColumn":  54,
+"endLine":  607,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Settings' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  640,
+"startColumn":  51,
+"endLine":  640,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'HaveShutdown' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  644,
+"startColumn":  39,
+"endLine":  644,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Count' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  29,
+"endLine":  104,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Pump' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  31,
+"endLine":  108,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Actor' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  35,
+"endLine":  354,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Pump' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  31,
+"endLine":  358,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Implementor' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  35,
+"endLine":  322,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Subscriber' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  40,
+"endLine":  326,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ActiveReceive' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ExposedPublisherReceive.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  33,
+"endLine":  23,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Unhandled' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ExposedPublisherReceive.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  40,
+"endLine":  27,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'AllOfMarkedInputs' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  39,
+"endLine":  45,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'AnyOfMarkedInputs' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  39,
+"endLine":  49,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'SubReceive' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  36,
+"endLine":  53,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'AllOfMarkedOutputs' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  39,
+"endLine":  126,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'AnyOfMarkedOutputs' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  39,
+"endLine":  133,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'SubReceive' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  36,
+"endLine":  138,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'MaterializedValueIds' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  35,
+"endLine":  33,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Assembly' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  39,
+"endLine":  37,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Stages' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  75,
+"endLine":  99,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'OriginalAttributes' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  38,
+"endLine":  103,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Inlets' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  33,
+"endLine":  107,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'InletOwners' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  31,
+"endLine":  111,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Outlets' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  34,
+"endLine":  115,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'OutletOwners' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  31,
+"endLine":  119,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Reason' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  39,
+"endLine":  135,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'PreviousElement' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  36,
+"endLine":  139,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Logics' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  43,
+"endLine":  376,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Assembly' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  39,
+"endLine":  380,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Materializer' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  39,
+"endLine":  384,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Log' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  41,
+"endLine":  388,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Connections' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  38,
+"endLine":  392,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'OnAsyncInput' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  396,
+"startColumn":  73,
+"endLine":  396,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'FuzzingMode' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  30,
+"endLine":  400,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'RunningStagesCount' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  20,
+"endLine":  411,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Stage' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  73,
+"endLine":  78,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Inlet' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  34,
+"endLine":  140,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Outlet' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  35,
+"endLine":  144,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Outlet' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  702,
+"startColumn":  35,
+"endLine":  702,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Outlet' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  795,
+"startColumn":  35,
+"endLine":  795,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Outlet' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  864,
+"startColumn":  35,
+"endLine":  864,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2663,
+"startColumn":  36,
+"endLine":  2663,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2667,
+"startColumn":  38,
+"endLine":  2667,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2813,
+"startColumn":  36,
+"endLine":  2813,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2817,
+"startColumn":  38,
+"endLine":  2817,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  554,
+"startColumn":  34,
+"endLine":  554,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  639,
+"startColumn":  34,
+"endLine":  639,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  743,
+"startColumn":  34,
+"endLine":  743,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  885,
+"startColumn":  34,
+"endLine":  885,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Combinator' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  58,
+"endLine":  51,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Left' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  52,
+"endLine":  55,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Right' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  52,
+"endLine":  59,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Module' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  37,
+"endLine":  90,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Transformator' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  50,
+"endLine":  117,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Node' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  52,
+"endLine":  121,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Timeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  34,
+"endLine":  94,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Timeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  34,
+"endLine":  165,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Timeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  34,
+"endLine":  247,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Timeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  34,
+"endLine":  335,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Timeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  431,
+"startColumn":  34,
+"endLine":  431,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  36,
+"endLine":  436,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'In2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  440,
+"startColumn":  37,
+"endLine":  440,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  37,
+"endLine":  444,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  38,
+"endLine":  448,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Delay' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  34,
+"endLine":  540,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'State' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  32,
+"endLine":  56,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'UnfoldFunc' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  66,
+"endLine":  60,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  42,
+"endLine":  64,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'State' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  32,
+"endLine":  147,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'UnfoldFunc' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  72,
+"endLine":  151,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  42,
+"endLine":  155,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'State' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  32,
+"endLine":  217,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'UnfoldFunc' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  58,
+"endLine":  221,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Out' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  42,
+"endLine":  225,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Name' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  32,
+"endLine":  71,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Name' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  32,
+"endLine":  133,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Outlet' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  38,
+"endLine":  351,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Inlet' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  507,
+"startColumn":  36,
+"endLine":  507,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Inlet1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  587,
+"startColumn":  37,
+"endLine":  587,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Inlet2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  591,
+"startColumn":  37,
+"endLine":  591,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Outlet1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  595,
+"startColumn":  39,
+"endLine":  595,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Outlet2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  599,
+"startColumn":  39,
+"endLine":  599,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Factory' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  69,
+"endLine":  313,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'InCount' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  786,
+"startColumn":  29,
+"endLine":  786,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'OutCount' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  790,
+"startColumn":  29,
+"endLine":  790,
+"endColumn":  37
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  20,
+"endLine":  105,
+"endColumn":  58
+}
+}
+}
+]
+}

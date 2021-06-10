@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2201",
+"message":  "Use the return value of method 'Select'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  13,
+"endLine":  63,
+"endColumn":  123
+}
+}
+}
+]
+}

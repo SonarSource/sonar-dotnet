@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\PluginSpec.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  21,
+"endLine":  63,
+"endColumn":  30
+}
+}
+}
+]
+}

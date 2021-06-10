@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  43,
+"endLine":  33,
+"endColumn":  94
+}
+}
+}
+]
+}

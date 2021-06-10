@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'mailboxType'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  29,
+"endLine":  397,
+"endColumn":  40
+}
+}
+}
+]
+}

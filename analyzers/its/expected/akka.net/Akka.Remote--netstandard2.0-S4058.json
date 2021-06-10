@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'elements.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  365,
+"startColumn":  21,
+"endLine":  365,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'elements.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  26,
+"endLine":  366,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'p.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  432,
+"startColumn":  17,
+"endLine":  432,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'p.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  433,
+"startColumn":  17,
+"endLine":  433,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'actorPath.ToStringWithoutAddress().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  25,
+"endLine":  493,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useLogFrameSize.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  17,
+"endLine":  34,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useLogFrameSize.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  17,
+"endLine":  35,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useLogFrameSize.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  17,
+"endLine":  36,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useBufferSizeLog.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  17,
+"endLine":  38,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useBufferSizeLog.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  17,
+"endLine":  39,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useBufferSizeLog.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  17,
+"endLine":  40,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'protoMessage.Path.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  17,
+"endLine":  189,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'scheme.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  17,
+"endLine":  175,
+"endColumn":  80
+}
+}
+}
+]
+}

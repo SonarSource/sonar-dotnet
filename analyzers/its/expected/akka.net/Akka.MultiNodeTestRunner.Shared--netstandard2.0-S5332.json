@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  48,
+"endLine":  16,
+"endColumn":  106
+}
+}
+}
+]
+}

@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAttributeList' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  35,
+"endLine":  346,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAttribute' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  22,
+"endLine":  375,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetFirstAttribute' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  22,
+"endLine":  384,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMandatoryAttribute' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  22,
+"endLine":  393,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetNameLifted' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  425,
+"startColumn":  23,
+"endLine":  425,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAsyncCallback' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Context.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  23,
+"endLine":  256,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAsyncCallback' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Context.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  33,
+"endLine":  283,
+"endColumn":  49
+}
+}
+}
+]
+}

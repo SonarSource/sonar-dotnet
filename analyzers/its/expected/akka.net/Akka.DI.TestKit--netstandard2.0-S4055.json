@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  27,
+"endLine":  271,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  27,
+"endLine":  272,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  27,
+"endLine":  273,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  27,
+"endLine":  303,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  27,
+"endLine":  304,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  305,
+"startColumn":  27,
+"endLine":  305,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  24,
+"endLine":  326,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  24,
+"endLine":  327,
+"endColumn":  37
+}
+}
+}
+]
+}

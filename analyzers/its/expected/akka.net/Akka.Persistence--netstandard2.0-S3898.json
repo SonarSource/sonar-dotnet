@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Tagged'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\Tagged.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  19,
+"endLine":  22,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'PluginHolder'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  21,
+"endLine":  21,
+"endColumn":  33
+}
+}
+}
+]
+}

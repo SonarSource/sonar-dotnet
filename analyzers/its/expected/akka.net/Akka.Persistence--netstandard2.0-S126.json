@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  21,
+"endLine":  153,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  13,
+"endLine":  368,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  17,
+"endLine":  144,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  29,
+"endLine":  313,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  324,
+"startColumn":  21,
+"endLine":  324,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  21,
+"endLine":  348,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  20
+}
+}
+}
+]
+}

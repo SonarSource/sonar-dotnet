@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "Remove the array size specification; it is redundant.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  41,
+"endLine":  77,
+"endColumn":  43
+}
+}
+}
+]
+}

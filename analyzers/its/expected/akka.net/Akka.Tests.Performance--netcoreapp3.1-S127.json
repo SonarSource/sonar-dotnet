@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  19,
+"endLine":  144,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  19,
+"endLine":  88,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  19,
+"endLine":  102,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  19,
+"endLine":  237,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  19,
+"endLine":  255,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  19,
+"endLine":  273,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  19,
+"endLine":  291,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  19,
+"endLine":  59,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  19,
+"endLine":  82,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  19,
+"endLine":  118,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Event\EventStreamThroughputSpec.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  18,
+"endLine":  70,
+"endColumn":  19
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_completedObject' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  22,
+"endLine":  53,
+"endColumn":  38
+}
+}
+}
+]
+}

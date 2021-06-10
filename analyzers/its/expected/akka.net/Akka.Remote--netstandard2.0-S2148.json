@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1364,
+"startColumn":  46,
+"endLine":  1364,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1621,
+"startColumn":  54,
+"endLine":  1621,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1622,
+"startColumn":  54,
+"endLine":  1622,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1623,
+"startColumn":  52,
+"endLine":  1623,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  22,
+"endLine":  29,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  22,
+"endLine":  30,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  22,
+"endLine":  59,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  22,
+"endLine":  60,
+"endColumn":  29
+}
+}
+}
+]
+}

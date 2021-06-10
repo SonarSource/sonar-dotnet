@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  39,
+"endLine":  108,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  36,
+"endLine":  194,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  24,
+"endLine":  345,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  20,
+"endLine":  351,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  24,
+"endLine":  171,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  24,
+"endLine":  322,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  17,
+"endLine":  354,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  24,
+"endLine":  373,
+"endColumn":  33
+}
+}
+}
+]
+}

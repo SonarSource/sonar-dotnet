@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  21,
+"endLine":  44,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  21,
+"endLine":  67,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ShutdownAfterJoinSeedNodesSpec.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  21,
+"endLine":  49,
+"endColumn":  105
+}
+}
+}
+]
+}

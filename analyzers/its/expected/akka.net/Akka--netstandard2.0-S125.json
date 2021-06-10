@@ -1,0 +1,537 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  17,
+"endLine":  393,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"region":  {
+"startLine":  292,
+"startColumn":  21,
+"endLine":  292,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  1,
+"endLine":  111,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  13,
+"endLine":  122,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  13,
+"endLine":  381,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  842,
+"startColumn":  1,
+"endLine":  842,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"region":  {
+"startLine":  440,
+"startColumn":  13,
+"endLine":  440,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  35,
+"endLine":  390,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  35,
+"endLine":  187,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  17,
+"endLine":  230,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildStats.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  13,
+"endLine":  103,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  13,
+"endLine":  121,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  13,
+"endLine":  360,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  499,
+"startColumn":  17,
+"endLine":  499,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  9,
+"endLine":  41,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  17,
+"endLine":  337,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  490,
+"startColumn":  13,
+"endLine":  490,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  694,
+"startColumn":  5,
+"endLine":  694,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  542,
+"startColumn":  1,
+"endLine":  542,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  513,
+"startColumn":  17,
+"endLine":  513,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  520,
+"startColumn":  17,
+"endLine":  520,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  92,
+"endLine":  28,
+"endColumn":  180
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  29,
+"endLine":  49,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  17,
+"endLine":  232,
+"endColumn":  158
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serializer.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  1,
+"endLine":  192,
+"endColumn":  165
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchBuilder.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  9,
+"endLine":  26,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  13,
+"endLine":  54,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  25,
+"endLine":  79,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  25,
+"endLine":  85,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  25,
+"endLine":  102,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  29,
+"endLine":  112,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  25,
+"endLine":  123,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  13,
+"endLine":  287,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  13,
+"endLine":  298,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  13,
+"endLine":  315,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  9,
+"endLine":  328,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  13,
+"endLine":  59,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  17,
+"endLine":  64,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  21,
+"endLine":  68,
+"endColumn":  64
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  25,
+"endLine":  319,
+"endColumn":  134
+}
+}
+}
+]
+}

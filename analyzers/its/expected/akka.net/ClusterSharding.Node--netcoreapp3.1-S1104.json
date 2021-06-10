@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Customers.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  36,
+"endLine":  43,
+"endColumn":  72
+}
+}
+}
+]
+}

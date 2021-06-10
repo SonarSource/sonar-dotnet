@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  32,
+"endLine":  379,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"region":  {
+"startLine":  418,
+"startColumn":  55,
+"endLine":  418,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  32,
+"endLine":  346,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  64,
+"endLine":  377,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  42,
+"endLine":  100,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1116,
+"startColumn":  52,
+"endLine":  1116,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1376,
+"startColumn":  56,
+"endLine":  1376,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  34,
+"endLine":  166,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  13,
+"endLine":  167,
+"endColumn":  62
+}
+}
+}
+]
+}

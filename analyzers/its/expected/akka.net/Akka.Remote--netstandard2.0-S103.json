@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\DefaultFailureDetectorRegistry.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  211
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  301,
+"startColumn":  1,
+"endLine":  301,
+"endColumn":  204
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  581,
+"startColumn":  1,
+"endLine":  581,
+"endColumn":  217
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  1,
+"endLine":  359,
+"endColumn":  215
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  1,
+"endLine":  362,
+"endColumn":  202
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  770,
+"startColumn":  1,
+"endLine":  770,
+"endColumn":  232
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  818,
+"startColumn":  1,
+"endLine":  818,
+"endColumn":  209
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  982,
+"startColumn":  1,
+"endLine":  982,
+"endColumn":  207
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  988,
+"startColumn":  1,
+"endLine":  988,
+"endColumn":  205
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  1,
+"endLine":  339,
+"endColumn":  226
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 291 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  1,
+"endLine":  369,
+"endColumn":  292
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  1,
+"endLine":  100,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 224 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"region":  {
+"startLine":  323,
+"startColumn":  1,
+"endLine":  323,
+"endColumn":  225
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  23,
+"endLine":  46,
+"endColumn":  24
+}
+}
+}
+]
+}

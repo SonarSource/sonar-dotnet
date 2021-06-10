@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  48,
+"endLine":  179,
+"endColumn":  104
+}
+}
+}
+]
+}

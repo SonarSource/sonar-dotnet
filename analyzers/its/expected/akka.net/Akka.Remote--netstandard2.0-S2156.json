@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  9,
+"endLine":  332,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  9,
+"endLine":  364,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  9,
+"endLine":  389,
+"endColumn":  18
+}
+}
+}
+]
+}

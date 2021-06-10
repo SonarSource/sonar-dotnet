@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1227",
+"message":  "Refactor the code in order to remove this break statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  25,
+"endLine":  136,
+"endColumn":  31
+}
+}
+}
+]
+}

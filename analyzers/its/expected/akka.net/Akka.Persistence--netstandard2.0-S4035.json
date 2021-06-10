@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4035",
+"message":  "Seal class 'PersistentFSMSnapshot' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  22,
+"endLine":  203,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'EventSequence' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  18,
+"endLine":  66,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'Persistent' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  18,
+"endLine":  297,
+"endColumn":  28
+}
+}
+}
+]
+}

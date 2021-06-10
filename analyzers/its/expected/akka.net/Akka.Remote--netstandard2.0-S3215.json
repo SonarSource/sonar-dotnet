@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  28,
+"endLine":  342,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  28,
+"endLine":  367,
+"endColumn":  40
+}
+}
+}
+]
+}

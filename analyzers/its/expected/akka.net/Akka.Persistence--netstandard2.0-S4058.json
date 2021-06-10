@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  24,
+"endLine":  235,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useSnapshot.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  17,
+"endLine":  462,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useSnapshot.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  463,
+"startColumn":  17,
+"endLine":  463,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useSnapshot.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  464,
+"startColumn":  17,
+"endLine":  464,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'pluginId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  17,
+"endLine":  109,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'pluginId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  22,
+"endLine":  111,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'r.Persistent.WriterGuid.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  25,
+"endLine":  149,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  20,
+"endLine":  173,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'm.PersistenceId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  64,
+"endLine":  125,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  23,
+"endLine":  173,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  383,
+"startColumn":  23,
+"endLine":  383,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  23,
+"endLine":  384,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  23,
+"endLine":  388,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  23,
+"endLine":  401,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  23,
+"endLine":  402,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  406,
+"startColumn":  23,
+"endLine":  406,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'pid.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  28,
+"endLine":  349,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  20,
+"endLine":  112,
+"endColumn":  69
+}
+}
+}
+]
+}

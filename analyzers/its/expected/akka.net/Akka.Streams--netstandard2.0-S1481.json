@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'dispatcher'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\IOSinks.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  17,
+"endLine":  91,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'settings'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\IOSinks.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  17,
+"endLine":  158,
+"endColumn":  25
+}
+}
+}
+]
+}

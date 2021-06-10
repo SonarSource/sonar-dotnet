@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable<Akka.Persistence.Journal.IEventAdapter>' is empty or not.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  31,
+"endLine":  366,
+"endColumn":  36
+}
+}
+}
+]
+}

@@ -1,0 +1,290 @@
+{
+"issues":  [
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  30,
+"endLine":  169,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  49,
+"endLine":  179,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  43,
+"endLine":  151,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  35,
+"endLine":  269,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  25,
+"endLine":  332,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"region":  {
+"startLine":  334,
+"startColumn":  64,
+"endLine":  334,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"region":  {
+"startLine":  517,
+"startColumn":  49,
+"endLine":  517,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  31,
+"endLine":  167,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  37,
+"endLine":  198,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  515,
+"startColumn":  26,
+"endLine":  515,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  520,
+"startColumn":  29,
+"endLine":  520,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  538,
+"startColumn":  31,
+"endLine":  538,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  44,
+"endLine":  220,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  33,
+"endLine":  151,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  35,
+"endLine":  298,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  576,
+"startColumn":  51,
+"endLine":  576,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RootGuardianSupervisor.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  26,
+"endLine":  66,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RootGuardianSupervisor.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  29,
+"endLine":  76,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RootGuardianSupervisor.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  42,
+"endLine":  82,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\Internal\AbstractStash.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  29,
+"endLine":  37,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  29,
+"endLine":  55,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  21,
+"endLine":  104,
+"endColumn":  39
+}
+}
+}
+]
+}

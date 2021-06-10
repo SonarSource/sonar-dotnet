@@ -1,0 +1,70 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  27,
+"endLine":  33,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  27,
+"endLine":  33,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  21,
+"endLine":  195,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  956,
+"startColumn":  23,
+"endLine":  956,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  956,
+"startColumn":  23,
+"endLine":  956,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  967,
+"startColumn":  25,
+"endLine":  967,
+"endColumn":  32
+}
+}
+]
+}
+]
+}

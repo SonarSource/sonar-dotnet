@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'withOperationTimeout' to match pascal case naming rules, consider using 'WithOperationTimeout'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Coordination\TimeoutSettings.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  32,
+"endLine":  96,
+"endColumn":  52
+}
+}
+}
+]
+}

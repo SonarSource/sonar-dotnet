@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Status' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  36,
+"endLine":  28,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Cause' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  39,
+"endLine":  49,
+"endColumn":  44
+}
+}
+}
+]
+}

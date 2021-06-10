@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathEqualitySpec.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  69,
+"endLine":  20,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  69,
+"endLine":  20,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  50,
+"endLine":  200,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  69,
+"endLine":  21,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  44,
+"endLine":  28,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\GetMailboxTypeSpec.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  50,
+"endLine":  31,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Event\EventStreamThroughputSpec.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  50,
+"endLine":  41,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  40,
+"endLine":  130,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  46,
+"endLine":  131,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Util\SerializationBenchmarks.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  33,
+"endLine":  36,
+"endColumn":  40
+}
+}
+}
+]
+}

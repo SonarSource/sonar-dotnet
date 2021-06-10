@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1939",
+"message":  "'UntypedPersistentActor' implements 'IWithUnboundedStash' so 'IWithUnboundedStash' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\TestActor.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  54,
+"endLine":  15,
+"endColumn":  75
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this expression which always evaluates to 'null'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  51,
+"endLine":  59,
+"endColumn":  55
+}
+}
+}
+]
+}

@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Get'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  21,
+"endLine":  43,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Select'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  21,
+"endLine":  79,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'StartWatch'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  21,
+"endLine":  121,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'StopWatch'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  21,
+"endLine":  149,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Kick'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  21,
+"endLine":  167,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Envelope'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Message.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  19,
+"endLine":  15,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ByteSize'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  442,
+"startColumn":  24,
+"endLine":  442,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ValuePathEntry'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  23,
+"endLine":  43,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'StringPathEntry'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  23,
+"endLine":  85,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'LatestFirstSystemMessageList'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  21,
+"endLine":  83,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'EarliestFirstSystemMessageList'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  21,
+"endLine":  157,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'LogSource'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  19,
+"endLine":  28,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'SemaphoreState'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  537,
+"startColumn":  28,
+"endLine":  537,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'CacheLinePadding'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  560,
+"startColumn":  28,
+"endLine":  560,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ReadResult'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  835,
+"startColumn":  24,
+"endLine":  835,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'SocketEvent'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  33,
+"endLine":  134,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Iterator'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\Iterator.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  21,
+"endLine":  13,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Option'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Option.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  28,
+"endLine":  19,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'WrappedEnvelope'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\StableListPriorityQueue.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  24,
+"endLine":  23,
+"endColumn":  39
+}
+}
+}
+]
+}

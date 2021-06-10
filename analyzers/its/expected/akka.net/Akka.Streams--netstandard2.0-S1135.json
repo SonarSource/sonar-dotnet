@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  509,
+"startColumn":  12,
+"endLine":  509,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  838,
+"startColumn":  20,
+"endLine":  838,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2071,
+"startColumn":  20,
+"endLine":  2071,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2311,
+"startColumn":  20,
+"endLine":  2311,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2489,
+"startColumn":  11,
+"endLine":  2489,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Timed.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  16,
+"endLine":  65,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  16,
+"endLine":  130,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  716,
+"startColumn":  9,
+"endLine":  716,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  752,
+"startColumn":  16,
+"endLine":  752,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  8,
+"endLine":  385,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2978,
+"startColumn":  12,
+"endLine":  2978,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  41,
+"endLine":  104,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  12,
+"endLine":  217,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"region":  {
+"startLine":  481,
+"startColumn":  12,
+"endLine":  481,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  8,
+"endLine":  19,
+"endColumn":  12
+}
+}
+}
+]
+}

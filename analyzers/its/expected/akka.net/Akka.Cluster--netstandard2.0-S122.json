@@ -1,0 +1,2019 @@
+{
+"issues":  [
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  17,
+"endLine":  66,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  17,
+"endLine":  67,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  13,
+"endLine":  132,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  13,
+"endLine":  171,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  21,
+"endLine":  200,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  25,
+"endLine":  215,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  17,
+"endLine":  68,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  17,
+"endLine":  69,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  17,
+"endLine":  70,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  17,
+"endLine":  167,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  17,
+"endLine":  168,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  17,
+"endLine":  226,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  17,
+"endLine":  227,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  321,
+"startColumn":  17,
+"endLine":  321,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  17,
+"endLine":  322,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  17,
+"endLine":  363,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  17,
+"endLine":  364,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  403,
+"startColumn":  17,
+"endLine":  403,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  17,
+"endLine":  404,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  572,
+"startColumn":  17,
+"endLine":  572,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1250,
+"startColumn":  21,
+"endLine":  1250,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1253,
+"startColumn":  21,
+"endLine":  1253,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1298,
+"startColumn":  29,
+"endLine":  1298,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1305,
+"startColumn":  21,
+"endLine":  1305,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1523,
+"startColumn":  17,
+"endLine":  1523,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1668,
+"startColumn":  13,
+"endLine":  1668,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1699,
+"startColumn":  21,
+"endLine":  1699,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2047,
+"startColumn":  13,
+"endLine":  2047,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2113,
+"startColumn":  25,
+"endLine":  2113,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2137,
+"startColumn":  17,
+"endLine":  2137,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2228,
+"startColumn":  17,
+"endLine":  2228,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2491,
+"startColumn":  13,
+"endLine":  2491,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  3152,
+"startColumn":  13,
+"endLine":  3152,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  17,
+"endLine":  269,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  428,
+"startColumn":  17,
+"endLine":  428,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  17,
+"endLine":  474,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  548,
+"startColumn":  17,
+"endLine":  548,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  17,
+"endLine":  617,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  710,
+"startColumn":  17,
+"endLine":  710,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  760,
+"startColumn":  17,
+"endLine":  760,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  827,
+"startColumn":  17,
+"endLine":  827,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1074,
+"startColumn":  13,
+"endLine":  1074,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1079,
+"startColumn":  13,
+"endLine":  1079,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1093,
+"startColumn":  13,
+"endLine":  1093,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1094,
+"startColumn":  13,
+"endLine":  1094,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1095,
+"startColumn":  13,
+"endLine":  1095,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1096,
+"startColumn":  13,
+"endLine":  1096,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1097,
+"startColumn":  13,
+"endLine":  1097,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1099,
+"startColumn":  13,
+"endLine":  1099,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1100,
+"startColumn":  13,
+"endLine":  1100,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  21,
+"endLine":  47,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  17,
+"endLine":  300,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  301,
+"startColumn":  17,
+"endLine":  301,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  17,
+"endLine":  342,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  17,
+"endLine":  343,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  21,
+"endLine":  100,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  13,
+"endLine":  148,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  13,
+"endLine":  67,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  13,
+"endLine":  123,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  17,
+"endLine":  143,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  13,
+"endLine":  190,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  13,
+"endLine":  201,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  17,
+"endLine":  330,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  509,
+"startColumn":  13,
+"endLine":  509,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  510,
+"startColumn":  13,
+"endLine":  510,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  511,
+"startColumn":  13,
+"endLine":  511,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  13,
+"endLine":  136,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  13,
+"endLine":  145,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  13,
+"endLine":  193,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  17,
+"endLine":  225,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  17,
+"endLine":  226,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  17,
+"endLine":  228,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  17,
+"endLine":  230,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  17,
+"endLine":  248,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  17,
+"endLine":  249,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  17,
+"endLine":  270,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  17,
+"endLine":  271,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  17,
+"endLine":  272,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  17,
+"endLine":  273,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  17,
+"endLine":  274,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  17,
+"endLine":  275,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  17,
+"endLine":  276,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  17,
+"endLine":  277,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  17,
+"endLine":  278,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  17,
+"endLine":  296,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  17,
+"endLine":  297,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  17,
+"endLine":  318,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  17,
+"endLine":  369,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  21,
+"endLine":  373,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  13,
+"endLine":  394,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  395,
+"startColumn":  13,
+"endLine":  395,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  396,
+"startColumn":  13,
+"endLine":  396,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  13,
+"endLine":  397,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  13,
+"endLine":  398,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  13,
+"endLine":  399,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  13,
+"endLine":  400,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  13,
+"endLine":  401,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  13,
+"endLine":  402,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  403,
+"startColumn":  13,
+"endLine":  403,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  13,
+"endLine":  404,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  13,
+"endLine":  405,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  498,
+"startColumn":  13,
+"endLine":  498,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  499,
+"startColumn":  13,
+"endLine":  499,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  13,
+"endLine":  522,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  529,
+"startColumn":  13,
+"endLine":  529,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  13,
+"endLine":  94,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  13,
+"endLine":  111,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  13,
+"endLine":  178,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  13,
+"endLine":  179,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  13,
+"endLine":  177,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  13,
+"endLine":  180,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  13,
+"endLine":  289,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  13,
+"endLine":  304,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  305,
+"startColumn":  13,
+"endLine":  305,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  13,
+"endLine":  338,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  13,
+"endLine":  352,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  13,
+"endLine":  368,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  17,
+"endLine":  382,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  17,
+"endLine":  436,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  490,
+"startColumn":  25,
+"endLine":  490,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  30,
+"endLine":  491,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  13,
+"endLine":  187,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  13,
+"endLine":  188,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  13,
+"endLine":  189,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  13,
+"endLine":  227,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  13,
+"endLine":  228,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  17,
+"endLine":  226,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  504,
+"startColumn":  13,
+"endLine":  504,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  507,
+"startColumn":  13,
+"endLine":  507,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  559,
+"startColumn":  13,
+"endLine":  559,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  597,
+"startColumn":  13,
+"endLine":  597,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  13,
+"endLine":  600,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  13,
+"endLine":  653,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  711,
+"startColumn":  17,
+"endLine":  711,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  730,
+"startColumn":  17,
+"endLine":  730,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  13,
+"endLine":  138,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  13,
+"endLine":  139,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  13,
+"endLine":  140,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  13,
+"endLine":  224,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  18,
+"endLine":  225,
+"endColumn":  186
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  13,
+"endLine":  258,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  13,
+"endLine":  41,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  17,
+"endLine":  154,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  371,
+"startColumn":  13,
+"endLine":  371,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  17,
+"endLine":  381,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  17,
+"endLine":  382,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  17,
+"endLine":  384,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  386,
+"startColumn":  17,
+"endLine":  386,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  21,
+"endLine":  393,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  25,
+"endLine":  397,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  21,
+"endLine":  401,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  21,
+"endLine":  408,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  413,
+"startColumn":  17,
+"endLine":  413,
+"endColumn":  80
+}
+}
+}
+]
+}

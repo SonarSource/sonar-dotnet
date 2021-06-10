@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable<Akka.Streams.Attributes.IAttribute>' is empty or not.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  28,
+"endLine":  331,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable<Akka.Streams.Attributes.IAttribute>' is empty or not.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  828,
+"startColumn":  93,
+"endLine":  828,
+"endColumn":  98
+}
+}
+}
+]
+}

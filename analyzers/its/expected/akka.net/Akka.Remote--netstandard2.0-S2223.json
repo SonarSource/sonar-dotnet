@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Empty' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  33,
+"endLine":  245,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'UniqueId' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  37,
+"endLine":  183,
+"endColumn":  45
+}
+}
+}
+]
+}

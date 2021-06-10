@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  13,
+"endLine":  181,
+"endColumn":  20
+}
+}
+}
+]
+}

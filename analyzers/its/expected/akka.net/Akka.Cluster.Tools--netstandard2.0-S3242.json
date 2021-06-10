@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  45,
+"endLine":  493,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<Akka.Actor.Address, long>>' instead of 'System.Collections.Immutable.IImmutableDictionary<Akka.Actor.Address, long>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  407,
+"startColumn":  80,
+"endLine":  407,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  75,
+"endLine":  80,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.IWrappedMessage' instead of 'Akka.Cluster.Tools.PublishSubscribe.Send'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  41,
+"endLine":  210,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.IWrappedMessage' instead of 'Akka.Cluster.Tools.PublishSubscribe.SendToAll'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  51,
+"endLine":  225,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.IWrappedMessage' instead of 'Akka.Cluster.Tools.PublishSubscribe.Publish'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  47,
+"endLine":  240,
+"endColumn":  54
+}
+}
+}
+]
+}

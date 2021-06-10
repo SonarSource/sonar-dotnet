@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  17,
+"endLine":  153,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  17,
+"endLine":  185,
+"endColumn":  94
+}
+}
+}
+]
+}

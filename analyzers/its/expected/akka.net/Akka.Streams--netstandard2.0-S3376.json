@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3376",
+"message":  "Make this class name end with 'Exception'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  29,
+"endLine":  72,
+"endColumn":  43
+}
+}
+}
+]
+}

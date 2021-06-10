@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'CreateEWMA' to match pascal case naming rules, consider using 'CreateEwma'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  44,
+"endLine":  59,
+"endColumn":  54
+}
+}
+}
+]
+}

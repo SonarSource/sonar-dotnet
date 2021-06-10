@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  40,
+"endLine":  60,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  13,
+"endLine":  49,
+"endColumn":  20
+}
+}
+}
+]
+}

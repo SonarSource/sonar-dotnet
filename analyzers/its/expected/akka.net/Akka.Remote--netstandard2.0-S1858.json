@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()' on a string.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  69,
+"endLine":  404,
+"endColumn":  80
+}
+}
+}
+]
+}

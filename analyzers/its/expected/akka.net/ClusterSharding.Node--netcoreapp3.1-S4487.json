@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_persistence' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\AutomaticCluster.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  44,
+"endLine":  24,
+"endColumn":  56
+}
+}
+}
+]
+}

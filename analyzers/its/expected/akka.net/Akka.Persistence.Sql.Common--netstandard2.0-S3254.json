@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  50,
+"endLine":  90,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  74,
+"endLine":  260,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  67,
+"endLine":  288,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  64,
+"endLine":  294,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Settings.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  58,
+"endLine":  74,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Settings.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  58,
+"endLine":  137,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Settings.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  64,
+"endLine":  140,
+"endColumn":  68
+}
+}
+}
+]
+}

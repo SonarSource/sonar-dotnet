@@ -1,0 +1,667 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  56,
+"endLine":  491,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  114,
+"endLine":  238,
+"endColumn":  158
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  76,
+"endLine":  247,
+"endColumn":  151
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"region":  {
+"startLine":  267,
+"startColumn":  114,
+"endLine":  267,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  76,
+"endLine":  276,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  27,
+"endLine":  338,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  52,
+"endLine":  555,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  17,
+"endLine":  122,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  21,
+"endLine":  124,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  21,
+"endLine":  126,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  24,
+"endLine":  137,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconObject.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  17,
+"endLine":  163,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  28,
+"endLine":  600,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  482,
+"startColumn":  24,
+"endLine":  482,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  494,
+"startColumn":  50,
+"endLine":  494,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  531,
+"startColumn":  28,
+"endLine":  531,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  536,
+"startColumn":  24,
+"endLine":  536,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  510,
+"startColumn":  64,
+"endLine":  510,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  516,
+"startColumn":  53,
+"endLine":  516,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  534,
+"startColumn":  65,
+"endLine":  534,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  70,
+"endLine":  535,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DefaultLogMessageFormatter.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  20,
+"endLine":  23,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  24,
+"endLine":  60,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  25,
+"endLine":  66,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  25,
+"endLine":  72,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  21,
+"endLine":  85,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  17,
+"endLine":  181,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStream.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  29,
+"endLine":  138,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStream.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  25,
+"endLine":  156,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  75,
+"endLine":  99,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  71,
+"endLine":  101,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  22,
+"endLine":  196,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  17,
+"endLine":  146,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  17,
+"endLine":  147,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  17,
+"endLine":  148,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  17,
+"endLine":  149,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  17,
+"endLine":  150,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  51,
+"endLine":  147,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\TraceLogger.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  60,
+"endLine":  44,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  74,
+"endLine":  57,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  69,
+"endLine":  59,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  35,
+"endLine":  359,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\OpenCircuitException.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  33,
+"endLine":  94,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  33,
+"endLine":  102,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  33,
+"endLine":  104,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  33,
+"endLine":  123,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  39,
+"endLine":  165,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  31,
+"endLine":  182,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  31,
+"endLine":  192,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  31,
+"endLine":  193,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicCounterLong.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  20,
+"endLine":  143,
+"endColumn":  38
+}
+}
+}
+]
+}

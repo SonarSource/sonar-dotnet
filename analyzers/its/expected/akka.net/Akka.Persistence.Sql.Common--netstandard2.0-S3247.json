@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  17,
+"endLine":  356,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  29,
+"endLine":  358,
+"endColumn":  69
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,277 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorMemoryFootprintSpec.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  13,
+"endLine":  114,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  27,
+"endLine":  113,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  29,
+"endLine":  124,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  13,
+"endLine":  131,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSystemShutdownSpec.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  13,
+"endLine":  299,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Pattern\AskSpec.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  13,
+"endLine":  49,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Pattern\AskSpec.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  22,
+"endLine":  59,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Scheduler\DefaultSchedulerPerformanceTests.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Scheduler\DefaultSchedulerPerformanceTests.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  13,
+"endLine":  84,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  13,
+"endLine":  93,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\GetMailboxTypeSpec.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  13,
+"endLine":  62,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  22,
+"endLine":  38,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  13,
+"endLine":  91,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxMemoryFootprintSpec.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  33,
+"endLine":  104,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MessageDispatchAndReceiveBenchmark.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\ReceiveOnlyBenchmark.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  13,
+"endLine":  67,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Event\EventStreamThroughputSpec.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpSingleConnectionSpec.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  13,
+"endLine":  149,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpSingleConnectionSpec.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  13,
+"endLine":  167,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Util\SerializationBenchmarks.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  13,
+"endLine":  51,
+"endColumn":  36
+}
+}
+}
+]
+}

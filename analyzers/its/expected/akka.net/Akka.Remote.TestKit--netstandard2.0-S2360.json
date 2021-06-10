@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  62,
+"endLine":  205,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  546,
+"startColumn":  56,
+"endLine":  546,
+"endColumn":  62
+}
+}
+}
+]
+}

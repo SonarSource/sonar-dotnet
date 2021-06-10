@@ -1,0 +1,2292 @@
+{
+"issues":  [
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  60,
+"endLine":  69,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  17,
+"endLine":  70,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  13,
+"endLine":  104,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  58,
+"endLine":  104,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  58,
+"endLine":  56,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  51,
+"endLine":  68,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  84,
+"endLine":  76,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  77,
+"endLine":  90,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  42,
+"endLine":  250,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  62,
+"endLine":  265,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  72,
+"endLine":  299,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  49,
+"endLine":  313,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  324,
+"startColumn":  65,
+"endLine":  324,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  89,
+"endLine":  337,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  69,
+"endLine":  359,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  53,
+"endLine":  379,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  93,
+"endLine":  379,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  72,
+"endLine":  476,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  489,
+"startColumn":  83,
+"endLine":  489,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  489,
+"startColumn":  118,
+"endLine":  489,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  508,
+"startColumn":  94,
+"endLine":  508,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  508,
+"startColumn":  130,
+"endLine":  508,
+"endColumn":  169
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  580,
+"startColumn":  38,
+"endLine":  580,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  595,
+"startColumn":  60,
+"endLine":  595,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  13,
+"endLine":  85,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  13,
+"endLine":  119,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1502,
+"startColumn":  116,
+"endLine":  1502,
+"endColumn":  169
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1528,
+"startColumn":  128,
+"endLine":  1528,
+"endColumn":  181
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1775,
+"startColumn":  46,
+"endLine":  1775,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1799,
+"startColumn":  102,
+"endLine":  1799,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1936,
+"startColumn":  103,
+"endLine":  1936,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1962,
+"startColumn":  105,
+"endLine":  1962,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1998,
+"startColumn":  104,
+"endLine":  1998,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2029,
+"startColumn":  13,
+"endLine":  2029,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2054,
+"startColumn":  111,
+"endLine":  2054,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2079,
+"startColumn":  13,
+"endLine":  2079,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2107,
+"startColumn":  107,
+"endLine":  2107,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2133,
+"startColumn":  106,
+"endLine":  2133,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2161,
+"startColumn":  107,
+"endLine":  2161,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2190,
+"startColumn":  102,
+"endLine":  2190,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2221,
+"startColumn":  13,
+"endLine":  2221,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2254,
+"startColumn":  84,
+"endLine":  2254,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2276,
+"startColumn":  111,
+"endLine":  2276,
+"endColumn":  150
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContext.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  13,
+"endLine":  39,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContext.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  51,
+"endLine":  179,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  56,
+"endLine":  201,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  53,
+"endLine":  255,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  267,
+"startColumn":  59,
+"endLine":  267,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  478,
+"startColumn":  115,
+"endLine":  478,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  565,
+"startColumn":  128,
+"endLine":  565,
+"endColumn":  171
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  657,
+"startColumn":  109,
+"endLine":  657,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  764,
+"startColumn":  126,
+"endLine":  764,
+"endColumn":  168
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  13,
+"endLine":  108,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  13,
+"endLine":  141,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1280,
+"startColumn":  13,
+"endLine":  1280,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1399,
+"startColumn":  13,
+"endLine":  1399,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1504,
+"startColumn":  13,
+"endLine":  1504,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1576,
+"startColumn":  13,
+"endLine":  1576,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1602,
+"startColumn":  13,
+"endLine":  1602,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1924,
+"startColumn":  13,
+"endLine":  1924,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1930,
+"startColumn":  13,
+"endLine":  1930,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1961,
+"startColumn":  13,
+"endLine":  1961,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1967,
+"startColumn":  13,
+"endLine":  1967,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2031,
+"startColumn":  13,
+"endLine":  2031,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2061,
+"startColumn":  13,
+"endLine":  2061,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2067,
+"startColumn":  13,
+"endLine":  2067,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2099,
+"startColumn":  13,
+"endLine":  2099,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2124,
+"startColumn":  13,
+"endLine":  2124,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2131,
+"startColumn":  13,
+"endLine":  2131,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2163,
+"startColumn":  85,
+"endLine":  2163,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2189,
+"startColumn":  85,
+"endLine":  2189,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2216,
+"startColumn":  85,
+"endLine":  2216,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2222,
+"startColumn":  80,
+"endLine":  2222,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2252,
+"startColumn":  13,
+"endLine":  2252,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2265,
+"startColumn":  13,
+"endLine":  2265,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2301,
+"startColumn":  13,
+"endLine":  2301,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2307,
+"startColumn":  13,
+"endLine":  2307,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2345,
+"startColumn":  80,
+"endLine":  2345,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2348,
+"startColumn":  75,
+"endLine":  2348,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2388,
+"startColumn":  107,
+"endLine":  2388,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2401,
+"startColumn":  42,
+"endLine":  2401,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2424,
+"startColumn":  89,
+"endLine":  2424,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2429,
+"startColumn":  84,
+"endLine":  2429,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PagedSource.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  73,
+"endLine":  50,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  13,
+"endLine":  47,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  13,
+"endLine":  89,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  37,
+"endLine":  73,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  55,
+"endLine":  194,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  67,
+"endLine":  326,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  550,
+"startColumn":  65,
+"endLine":  550,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  561,
+"startColumn":  60,
+"endLine":  561,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  47,
+"endLine":  64,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  67,
+"endLine":  75,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  69,
+"endLine":  101,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  76,
+"endLine":  214,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  74,
+"endLine":  228,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  58,
+"endLine":  253,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  48,
+"endLine":  265,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  37,
+"endLine":  303,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  110,
+"endLine":  375,
+"endColumn":  174
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  59,
+"endLine":  393,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  13,
+"endLine":  405,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  517,
+"startColumn":  58,
+"endLine":  517,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  599,
+"startColumn":  87,
+"endLine":  599,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  759,
+"startColumn":  117,
+"endLine":  759,
+"endColumn":  181
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  784,
+"startColumn":  148,
+"endLine":  784,
+"endColumn":  212
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  801,
+"startColumn":  66,
+"endLine":  801,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  813,
+"startColumn":  13,
+"endLine":  813,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  933,
+"startColumn":  13,
+"endLine":  933,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  86,
+"endLine":  47,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  100,
+"endLine":  83,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  89,
+"endLine":  143,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  151,
+"endLine":  143,
+"endColumn":  197
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  13,
+"endLine":  83,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  13,
+"endLine":  116,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1407,
+"startColumn":  105,
+"endLine":  1407,
+"endColumn":  158
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1432,
+"startColumn":  117,
+"endLine":  1432,
+"endColumn":  170
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1672,
+"startColumn":  43,
+"endLine":  1672,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1695,
+"startColumn":  91,
+"endLine":  1695,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1823,
+"startColumn":  92,
+"endLine":  1823,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1848,
+"startColumn":  94,
+"endLine":  1848,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1883,
+"startColumn":  93,
+"endLine":  1883,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1913,
+"startColumn":  13,
+"endLine":  1913,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1937,
+"startColumn":  100,
+"endLine":  1937,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1962,
+"startColumn":  13,
+"endLine":  1962,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1989,
+"startColumn":  96,
+"endLine":  1989,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2014,
+"startColumn":  96,
+"endLine":  2014,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2041,
+"startColumn":  96,
+"endLine":  2041,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2069,
+"startColumn":  91,
+"endLine":  2069,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2087,
+"startColumn":  151,
+"endLine":  2087,
+"endColumn":  215
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2117,
+"startColumn":  13,
+"endLine":  2117,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2149,
+"startColumn":  82,
+"endLine":  2149,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2172,
+"startColumn":  109,
+"endLine":  2172,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceWithContext.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  13,
+"endLine":  39,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceWithContext.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlow.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  56,
+"endLine":  30,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlow.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  76,
+"endLine":  41,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlow.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  46,
+"endLine":  59,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlow.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  43,
+"endLine":  71,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  13,
+"endLine":  85,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  13,
+"endLine":  119,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1230,
+"startColumn":  134,
+"endLine":  1230,
+"endColumn":  187
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1256,
+"startColumn":  147,
+"endLine":  1256,
+"endColumn":  200
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1503,
+"startColumn":  53,
+"endLine":  1503,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1527,
+"startColumn":  120,
+"endLine":  1527,
+"endColumn":  154
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1642,
+"startColumn":  121,
+"endLine":  1642,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1668,
+"startColumn":  123,
+"endLine":  1668,
+"endColumn":  158
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1704,
+"startColumn":  122,
+"endLine":  1704,
+"endColumn":  157
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1735,
+"startColumn":  13,
+"endLine":  1735,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1760,
+"startColumn":  129,
+"endLine":  1760,
+"endColumn":  167
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1786,
+"startColumn":  13,
+"endLine":  1786,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1814,
+"startColumn":  125,
+"endLine":  1814,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1840,
+"startColumn":  125,
+"endLine":  1840,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1868,
+"startColumn":  125,
+"endLine":  1868,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1897,
+"startColumn":  120,
+"endLine":  1897,
+"endColumn":  157
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1928,
+"startColumn":  13,
+"endLine":  1928,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1961,
+"startColumn":  111,
+"endLine":  1961,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  911,
+"startColumn":  52,
+"endLine":  911,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  919,
+"startColumn":  52,
+"endLine":  919,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  88,
+"endLine":  64,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  88,
+"endLine":  53,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  3626,
+"startColumn":  35,
+"endLine":  3626,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  36,
+"endLine":  103,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  834,
+"startColumn":  41,
+"endLine":  834,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  850,
+"startColumn":  43,
+"endLine":  850,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  860,
+"startColumn":  34,
+"endLine":  860,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  587,
+"startColumn":  40,
+"endLine":  587,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  612,
+"startColumn":  37,
+"endLine":  612,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  56,
+"endLine":  67,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  76,
+"endLine":  81,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  46,
+"endLine":  106,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  43,
+"endLine":  117,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
+"region":  {
+"startLine":  324,
+"startColumn":  31,
+"endLine":  324,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  83,
+"endLine":  358,
+"endColumn":  136
+}
+}
+}
+]
+}

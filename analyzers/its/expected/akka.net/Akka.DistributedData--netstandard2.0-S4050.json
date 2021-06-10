@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4050",
+"message":  "Provide an implementation for: 'Object.GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  27,
+"endLine":  26,
+"endColumn":  40
+}
+}
+}
+]
+}

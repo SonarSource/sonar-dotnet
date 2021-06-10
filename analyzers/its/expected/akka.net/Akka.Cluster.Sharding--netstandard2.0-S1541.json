@@ -1,0 +1,1015 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  25,
+"endLine":  217,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  25,
+"endLine":  217,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  94,
+"endLine":  221,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  25,
+"endLine":  224,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  94,
+"endLine":  230,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  194,
+"endLine":  231,
+"endColumn":  195
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  25,
+"endLine":  233,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  87,
+"endLine":  245,
+"endColumn":  89
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  25,
+"endLine":  248,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  87,
+"endLine":  254,
+"endColumn":  89
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  199,
+"endLine":  255,
+"endColumn":  200
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  25,
+"endLine":  257,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  182,
+"endLine":  270,
+"endColumn":  183
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  25,
+"endLine":  272,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  25,
+"endLine":  284,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  54,
+"endLine":  60,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  54,
+"endLine":  60,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  17,
+"endLine":  75,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  21,
+"endLine":  77,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  17,
+"endLine":  97,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  21,
+"endLine":  104,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  25,
+"endLine":  106,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  13,
+"endLine":  117,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  17,
+"endLine":  125,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  21,
+"endLine":  133,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  46,
+"endLine":  133,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  124,
+"endLine":  139,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  25,
+"endLine":  143,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  26,
+"endLine":  191,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  26,
+"endLine":  191,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  17,
+"endLine":  197,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  109,
+"endLine":  197,
+"endColumn":  111
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  80,
+"endLine":  197,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  55,
+"endLine":  197,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  36,
+"endLine":  197,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  41,
+"endLine":  199,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  60,
+"endLine":  199,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  86,
+"endLine":  199,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  122,
+"endLine":  199,
+"endColumn":  124
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  161,
+"endLine":  199,
+"endColumn":  163
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  26,
+"endLine":  117,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  26,
+"endLine":  117,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  25,
+"endLine":  122,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  25,
+"endLine":  128,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  29,
+"endLine":  135,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  73,
+"endLine":  138,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  25,
+"endLine":  146,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  29,
+"endLine":  153,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  29,
+"endLine":  155,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  73,
+"endLine":  158,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  29,
+"endLine":  166,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  29,
+"endLine":  168,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  73,
+"endLine":  171,
+"endColumn":  74
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  33,
+"endLine":  220,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  33,
+"endLine":  220,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  21,
+"endLine":  226,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  77,
+"endLine":  228,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  61,
+"endLine":  228,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  21,
+"endLine":  231,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  77,
+"endLine":  233,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  61,
+"endLine":  233,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  21,
+"endLine":  236,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  73,
+"endLine":  238,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  57,
+"endLine":  238,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  21,
+"endLine":  241,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  73,
+"endLine":  243,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  57,
+"endLine":  243,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  22,
+"endLine":  653,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  22,
+"endLine":  653,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  656,
+"startColumn":  13,
+"endLine":  656,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  659,
+"startColumn":  13,
+"endLine":  659,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  659,
+"startColumn":  41,
+"endLine":  659,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  661,
+"startColumn":  17,
+"endLine":  661,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  664,
+"startColumn":  25,
+"endLine":  664,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  668,
+"startColumn":  21,
+"endLine":  668,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  670,
+"startColumn":  25,
+"endLine":  670,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  679,
+"startColumn":  26,
+"endLine":  679,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  692,
+"startColumn":  25,
+"endLine":  692,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  696,
+"startColumn":  21,
+"endLine":  696,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  723,
+"startColumn":  22,
+"endLine":  723,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  723,
+"startColumn":  22,
+"endLine":  723,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  725,
+"startColumn":  13,
+"endLine":  725,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  728,
+"startColumn":  17,
+"endLine":  728,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  730,
+"startColumn":  21,
+"endLine":  730,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  735,
+"startColumn":  21,
+"endLine":  735,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  739,
+"startColumn":  37,
+"endLine":  739,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  749,
+"startColumn":  17,
+"endLine":  749,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  751,
+"startColumn":  21,
+"endLine":  751,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  754,
+"startColumn":  25,
+"endLine":  754,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  758,
+"startColumn":  29,
+"endLine":  758,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  776,
+"startColumn":  21,
+"endLine":  776,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  783,
+"startColumn":  25,
+"endLine":  783,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  786,
+"startColumn":  41,
+"endLine":  786,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  982,
+"startColumn":  22,
+"endLine":  982,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  982,
+"startColumn":  22,
+"endLine":  982,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  988,
+"startColumn":  25,
+"endLine":  988,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1014,
+"startColumn":  21,
+"endLine":  1014,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1016,
+"startColumn":  25,
+"endLine":  1016,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1016,
+"startColumn":  49,
+"endLine":  1016,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1026,
+"startColumn":  21,
+"endLine":  1026,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1029,
+"startColumn":  21,
+"endLine":  1029,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1032,
+"startColumn":  25,
+"endLine":  1032,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1048,
+"startColumn":  25,
+"endLine":  1048,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1050,
+"startColumn":  29,
+"endLine":  1050,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1056,
+"startColumn":  33,
+"endLine":  1056,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1073,
+"startColumn":  25,
+"endLine":  1073,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1079,
+"startColumn":  25,
+"endLine":  1079,
+"endColumn":  27
+}
+}
+]
+}
+]
+}

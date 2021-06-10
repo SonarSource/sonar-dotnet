@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\FailureDetectorPuppet.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  30,
+"endLine":  123,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\FailureDetectorPuppet.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  37,
+"endLine":  125,
+"endColumn":  41
+}
+}
+}
+]
+}

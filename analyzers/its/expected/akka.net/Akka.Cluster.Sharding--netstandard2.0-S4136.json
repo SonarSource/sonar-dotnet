@@ -1,0 +1,208 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'StartProxy' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  956,
+"startColumn":  26,
+"endLine":  956,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  1033,
+"startColumn":  26,
+"endLine":  1033,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'StartProxyAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  997,
+"startColumn":  38,
+"endLine":  997,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  1060,
+"startColumn":  32,
+"endLine":  1060,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Start' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  314,
+"startColumn":  26,
+"endLine":  314,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  442,
+"startColumn":  26,
+"endLine":  442,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  510,
+"startColumn":  26,
+"endLine":  510,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  569,
+"startColumn":  26,
+"endLine":  569,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  641,
+"startColumn":  26,
+"endLine":  641,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  769,
+"startColumn":  26,
+"endLine":  769,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  837,
+"startColumn":  26,
+"endLine":  837,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  896,
+"startColumn":  26,
+"endLine":  896,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'StartAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  38,
+"endLine":  382,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  32,
+"endLine":  476,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  542,
+"startColumn":  32,
+"endLine":  542,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  32,
+"endLine":  598,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  709,
+"startColumn":  38,
+"endLine":  709,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  803,
+"startColumn":  32,
+"endLine":  803,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  869,
+"startColumn":  32,
+"endLine":  869,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  925,
+"startColumn":  32,
+"endLine":  925,
+"endColumn":  42
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,124 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Self downed, stopping ClusterSingletonManager' 5 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  935,
+"startColumn":  30,
+"endLine":  935,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1004,
+"startColumn":  30,
+"endLine":  1004,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1171,
+"startColumn":  30,
+"endLine":  1171,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1210,
+"startColumn":  34,
+"endLine":  1210,
+"endColumn":  81
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1301,
+"startColumn":  34,
+"endLine":  1301,
+"endColumn":  81
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Self removed, stopping ClusterSingletonManager' 7 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  842,
+"startColumn":  26,
+"endLine":  842,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  942,
+"startColumn":  34,
+"endLine":  942,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1011,
+"startColumn":  34,
+"endLine":  1011,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1271,
+"startColumn":  34,
+"endLine":  1271,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1359,
+"startColumn":  30,
+"endLine":  1359,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1385,
+"startColumn":  34,
+"endLine":  1385,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1483,
+"startColumn":  34,
+"endLine":  1483,
+"endColumn":  82
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_teamCityWriter' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  42,
+"endLine":  25,
+"endColumn":  57
+}
+}
+}
+]
+}

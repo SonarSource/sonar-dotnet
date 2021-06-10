@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1210",
+"message":  "When implementing IComparable<T>, you should also override Equals, <, >, <=, >=, ==, !=.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\Offset.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  27,
+"endLine":  18,
+"endColumn":  33
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4050",
+"message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  18,
+"endLine":  22,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4050",
+"message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  18,
+"endLine":  28,
+"endColumn":  32
+}
+}
+}
+]
+}

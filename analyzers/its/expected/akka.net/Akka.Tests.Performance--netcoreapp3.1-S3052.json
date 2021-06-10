@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  43,
+"endLine":  38,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  43,
+"endLine":  26,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  43,
+"endLine":  71,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  43,
+"endLine":  126,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  43,
+"endLine":  160,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'nameCounter', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Internal\ChildrenContainerSpec.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  33,
+"endLine":  28,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_messagesSeen', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  36,
+"endLine":  35,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'i', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpInboundOnlySpec.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  27,
+"endLine":  40,
+"endColumn":  30
+}
+}
+}
+]
+}

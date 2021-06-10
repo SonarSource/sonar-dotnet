@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  20,
+"endLine":  411,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  773,
+"startColumn":  30,
+"endLine":  773,
+"endColumn":  51
+}
+}
+}
+]
+}

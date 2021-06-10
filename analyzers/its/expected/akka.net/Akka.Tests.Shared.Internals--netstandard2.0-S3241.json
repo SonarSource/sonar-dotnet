@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3241",
+"message":  "Change return type to 'void'; not a single caller uses the returned value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\AsyncContext.TaskQueue.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  20,
+"endLine":  60,
+"endColumn":  24
+}
+}
+}
+]
+}

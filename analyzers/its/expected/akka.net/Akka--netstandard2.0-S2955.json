@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(S)' instead or add a constraint to 'S' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\FastLazy.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  25,
+"endLine":  114,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\StringBuilderExtensions.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  32,
+"endLine":  35,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\StringBuilderExtensions.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  36,
+"endLine":  47,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Option.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  33,
+"endLine":  33,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Result.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  29,
+"endLine":  76,
+"endColumn":  33
+}
+}
+}
+]
+}

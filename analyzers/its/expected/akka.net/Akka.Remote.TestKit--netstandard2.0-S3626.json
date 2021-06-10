@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3626",
+"message":  "Remove this redundant jump.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  395,
+"startColumn":  17,
+"endLine":  395,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3626",
+"message":  "Remove this redundant jump.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  25,
+"endLine":  102,
+"endColumn":  32
+}
+}
+}
+]
+}

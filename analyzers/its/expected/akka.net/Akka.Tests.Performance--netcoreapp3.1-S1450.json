@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_receiver' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  27,
+"endLine":  25,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_mailboxThroughput' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  25,
+"endLine":  201,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_fullContainer' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Internal\ChildrenContainerSpec.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  36,
+"endLine":  24,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_configurator' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  47,
+"endLine":  33,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_mailboxThroughput' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Event\EventStreamThroughputSpec.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  25,
+"endLine":  42,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_targetActor' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Event\EventStreamThroughputSpec.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  27,
+"endLine":  44,
+"endColumn":  39
+}
+}
+}
+]
+}

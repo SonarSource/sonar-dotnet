@@ -1,0 +1,277 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'flipToMode' to 'mode' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Valve.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  43,
+"endLine":  53,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'name' to 'namePrefix' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\IMaterializer.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  52,
+"endLine":  111,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'name' to 'namePrefix' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  61,
+"endLine":  289,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefBackpressureSinkStage.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  62,
+"endLine":  67,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'elements' to 'n' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  494,
+"startColumn":  38,
+"endLine":  494,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'newShape' to 'shape' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  52,
+"endLine":  82,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'elements' to 'n' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  826,
+"startColumn":  38,
+"endLine":  826,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  613,
+"startColumn":  62,
+"endLine":  613,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2911,
+"startColumn":  62,
+"endLine":  2911,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'enclosingAttributes' to 'inheritedAttributes' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  67,
+"endLine":  168,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ex' to 'e' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  53,
+"endLine":  295,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ex' to 'e' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  53,
+"endLine":  462,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  828,
+"startColumn":  66,
+"endLine":  828,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  62,
+"endLine":  194,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'other' to 'that' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  612,
+"startColumn":  45,
+"endLine":  612,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'other' to 'that' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  626,
+"startColumn":  57,
+"endLine":  626,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'other' to 'that' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  696,
+"startColumn":  48,
+"endLine":  696,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'other' to 'that' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  708,
+"startColumn":  60,
+"endLine":  708,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cause' to 'e' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  53,
+"endLine":  210,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'o' to 'obj' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\StreamRefSerializer.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  48,
+"endLine":  58,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'inheritedAttributes' to 'attributes' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  110,
+"endLine":  155,
+"endColumn":  129
+}
+}
+}
+]
+}

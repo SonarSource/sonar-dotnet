@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  942,
+"startColumn":  43,
+"endLine":  942,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1042,
+"startColumn":  38,
+"endLine":  1042,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1068,
+"startColumn":  44,
+"endLine":  1068,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1080,
+"startColumn":  44,
+"endLine":  1080,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1090,
+"startColumn":  38,
+"endLine":  1090,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1108,
+"startColumn":  38,
+"endLine":  1108,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1150,
+"startColumn":  38,
+"endLine":  1150,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1195,
+"startColumn":  38,
+"endLine":  1195,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1247,
+"startColumn":  49,
+"endLine":  1247,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  36,
+"endLine":  327,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  34,
+"endLine":  416,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  36,
+"endLine":  112,
+"endColumn":  46
+}
+}
+}
+]
+}

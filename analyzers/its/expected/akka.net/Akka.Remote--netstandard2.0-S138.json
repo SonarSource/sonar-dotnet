@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'Accepting' has 179 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  705,
+"startColumn":  24,
+"endLine":  705,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'InitializeFSM' has 280 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  832,
+"startColumn":  22,
+"endLine":  832,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Ready' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  33,
+"endLine":  359,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'InitializeFSM' has 162 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1102,
+"startColumn":  22,
+"endLine":  1102,
+"endColumn":  35
+}
+}
+}
+]
+}

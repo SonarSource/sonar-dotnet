@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  1,
+"endLine":  183,
+"endColumn":  203
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  1,
+"endLine":  214,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  1,
+"endLine":  202,
+"endColumn":  213
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 218 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  1,
+"endLine":  207,
+"endColumn":  219
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  1,
+"endLine":  218,
+"endColumn":  206
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 218 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  1,
+"endLine":  223,
+"endColumn":  219
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  862,
+"startColumn":  1,
+"endLine":  862,
+"endColumn":  207
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  1,
+"endLine":  186,
+"endColumn":  214
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  1,
+"endLine":  57,
+"endColumn":  217
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1031,
+"startColumn":  1,
+"endLine":  1031,
+"endColumn":  210
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  602,
+"startColumn":  1,
+"endLine":  602,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 224 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  225
+}
+}
+}
+]
+}

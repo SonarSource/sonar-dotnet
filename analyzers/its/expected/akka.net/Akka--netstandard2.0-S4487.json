@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_actorAwaitingResultSender' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  36,
+"endLine":  116,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_mcn' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  33,
+"endLine":  237,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_system' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  38,
+"endLine":  322,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'respondTo' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\FutureActor.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  27,
+"endLine":  18,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_owner' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggerMailbox.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  36,
+"endLine":  51,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_system' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggerMailbox.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  38,
+"endLine":  52,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_tc' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  38,
+"endLine":  204,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_bufferPool' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  926,
+"startColumn":  42,
+"endLine":  926,
+"endColumn":  53
+}
+}
+}
+]
+}

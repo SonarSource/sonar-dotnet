@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Coordination\Lease.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  36,
+"endLine":  52,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Coordination\Lease.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  36,
+"endLine":  63,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Coordination\Lease.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  36,
+"endLine":  69,
+"endColumn":  43
+}
+}
+}
+]
+}

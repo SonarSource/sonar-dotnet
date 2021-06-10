@@ -1,0 +1,18 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'dep.Name.ToLower()
+                    .Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  31,
+"endLine":  62,
+"endColumn":  83
+}
+}
+}
+]
+}

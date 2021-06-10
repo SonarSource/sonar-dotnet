@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  21,
+"endLine":  140,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  24,
+"endLine":  172,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  34,
+"endLine":  218,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AskExtensions.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  31,
+"endLine":  17,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\Helpers\XAssert.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  25,
+"endLine":  41,
+"endColumn":  31
+}
+}
+}
+]
+}

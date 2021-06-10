@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'Intercept' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  21,
+"endLine":  140,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Intercept' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  24,
+"endLine":  145,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'InterceptAsync' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  30,
+"endLine":  158,
+"endColumn":  44
+}
+}
+}
+]
+}

@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  415,
+"startColumn":  25,
+"endLine":  415,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  647,
+"startColumn":  34,
+"endLine":  647,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  706,
+"startColumn":  33,
+"endLine":  706,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  724,
+"startColumn":  17,
+"endLine":  724,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  580,
+"startColumn":  18,
+"endLine":  580,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  18,
+"endLine":  377,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  28,
+"endLine":  191,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.WaitAll' with 'await Task.WhenAll'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  13,
+"endLine":  332,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  68,
+"endLine":  55,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  18,
+"endLine":  230,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  20,
+"endLine":  257,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  47,
+"endLine":  257,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Result.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  102,
+"endLine":  140,
+"endColumn":  113
+}
+}
+}
+]
+}

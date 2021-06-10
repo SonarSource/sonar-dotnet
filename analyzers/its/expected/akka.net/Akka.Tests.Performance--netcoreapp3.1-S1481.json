@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'b'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathEqualitySpec.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  17,
+"endLine":  42,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'b'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathEqualitySpec.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  17,
+"endLine":  56,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'newPath'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  17,
+"endLine":  114,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'newPath'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  17,
+"endLine":  128,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'actorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  17,
+"endLine":  113,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'actorRef2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  17,
+"endLine":  124,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'stringMessage'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  28,
+"endLine":  85,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'intMessage'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  25,
+"endLine":  90,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'id'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  17,
+"endLine":  38,
+"endColumn":  19
+}
+}
+}
+]
+}

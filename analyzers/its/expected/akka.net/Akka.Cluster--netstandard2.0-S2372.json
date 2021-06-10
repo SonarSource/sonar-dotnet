@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  307,
+"startColumn":  21,
+"endLine":  307,
+"endColumn":  150
+}
+}
+},
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  3041,
+"startColumn":  25,
+"endLine":  3041,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  38,
+"endLine":  330,
+"endColumn":  89
+}
+}
+}
+]
+}

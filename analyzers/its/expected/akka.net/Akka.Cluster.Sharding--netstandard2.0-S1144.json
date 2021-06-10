@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_cluster'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  9,
+"endLine":  155,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_sharding'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  9,
+"endLine":  156,
+"endColumn":  90
+}
+}
+}
+]
+}

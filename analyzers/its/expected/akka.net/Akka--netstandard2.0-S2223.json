@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  656,
+"startColumn":  30,
+"endLine":  656,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'DefaultDecider' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  32,
+"endLine":  90,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  684,
+"startColumn":  42,
+"endLine":  684,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  700,
+"startColumn":  41,
+"endLine":  700,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  835,
+"startColumn":  42,
+"endLine":  835,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  872,
+"startColumn":  35,
+"endLine":  872,
+"endColumn":  43
+}
+}
+}
+]
+}

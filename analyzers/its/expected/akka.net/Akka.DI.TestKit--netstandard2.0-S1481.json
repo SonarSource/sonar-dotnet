@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'resolver'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  17,
+"endLine":  206,
+"endColumn":  25
+}
+}
+}
+]
+}

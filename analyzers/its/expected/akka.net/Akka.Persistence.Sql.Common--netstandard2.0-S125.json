@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  857,
+"startColumn":  17,
+"endLine":  857,
+"endColumn":  158
+}
+}
+}
+]
+}

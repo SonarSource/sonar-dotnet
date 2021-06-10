@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'message'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  819,
+"startColumn":  45,
+"endLine":  819,
+"endColumn":  71
+}
+}
+}
+]
+}

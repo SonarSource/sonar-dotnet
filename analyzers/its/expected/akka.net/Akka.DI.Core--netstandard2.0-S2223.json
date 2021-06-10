@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'DIExtensionProvider' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIExtension.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  35,
+"endLine":  20,
+"endColumn":  54
+}
+}
+}
+]
+}

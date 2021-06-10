@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  25,
+"endLine":  198,
+"endColumn":  47
+}
+}
+}
+]
+}

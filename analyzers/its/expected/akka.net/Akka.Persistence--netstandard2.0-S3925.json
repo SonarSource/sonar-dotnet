@@ -1,0 +1,85 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  18,
+"endLine":  202,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  12,
+"endLine":  202,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  25,
+"endLine":  121,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  19,
+"endLine":  121,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  16,
+"endLine":  144,
+"endColumn":  41
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\NoSnapshotStore.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  22,
+"endLine":  26,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\NoSnapshotStore.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  16,
+"endLine":  26,
+"endColumn":  21
+}
+}
+]
+}
+]
+}

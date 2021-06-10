@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'path' to 's' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  36,
+"endLine":  37,
+"endColumn":  40
+}
+}
+}
+]
+}

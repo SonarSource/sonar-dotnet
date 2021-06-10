@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  29,
+"endLine":  138,
+"endColumn":  65
+}
+}
+}
+]
+}

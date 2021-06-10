@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 488.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  17,
+"endLine":  491,
+"endColumn":  35
+}
+}
+}
+]
+}

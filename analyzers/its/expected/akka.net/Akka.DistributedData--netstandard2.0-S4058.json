@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'key.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  21,
+"endLine":  390,
+"endColumn":  38
+}
+}
+}
+]
+}

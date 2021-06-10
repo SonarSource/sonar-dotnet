@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'data' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  27,
+"endLine":  85,
+"endColumn":  31
+}
+}
+}
+]
+}

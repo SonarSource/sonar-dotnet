@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  42,
+"endLine":  113,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  40,
+"endLine":  121,
+"endColumn":  48
+}
+}
+}
+]
+}

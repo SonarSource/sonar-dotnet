@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  44,
+"endLine":  48,
+"endColumn":  60
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4035",
+"message":  "Seal class 'UniqueAddress' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  468,
+"startColumn":  18,
+"endLine":  468,
+"endColumn":  31
+}
+}
+}
+]
+}

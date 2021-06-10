@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.ReceiveTimeout.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  57,
+"endLine":  28,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  59,
+"endLine":  116,
+"endColumn":  65
+}
+}
+}
+]
+}

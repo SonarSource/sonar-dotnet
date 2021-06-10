@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SingleDisposable%20(of%20T).cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SingleDisposable%20(of%20T).cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SingleDisposable%20(of%20T).cs",
+"region":  {
+"startLine":  66,
+"startColumn":  21,
+"endLine":  66,
+"endColumn":  28
+}
+}
+]
+}
+]
+}

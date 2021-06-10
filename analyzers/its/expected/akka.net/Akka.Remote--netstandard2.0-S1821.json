@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  839,
+"startColumn":  25,
+"endLine":  839,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  848,
+"startColumn":  25,
+"endLine":  848,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  907,
+"startColumn":  29,
+"endLine":  907,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  955,
+"startColumn":  29,
+"endLine":  955,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1009,
+"startColumn":  29,
+"endLine":  1009,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1019,
+"startColumn":  37,
+"endLine":  1019,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1047,
+"startColumn":  33,
+"endLine":  1047,
+"endColumn":  39
+}
+}
+}
+]
+}

@@ -1,0 +1,537 @@
+{
+"issues":  [
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  29,
+"endLine":  177,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  25,
+"endLine":  159,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  29,
+"endLine":  221,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  467,
+"startColumn":  25,
+"endLine":  467,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"region":  {
+"startLine":  308,
+"startColumn":  25,
+"endLine":  308,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  1065,
+"startColumn":  25,
+"endLine":  1065,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  1098,
+"startColumn":  25,
+"endLine":  1098,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  33,
+"endLine":  212,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  33,
+"endLine":  221,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  33,
+"endLine":  239,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  33,
+"endLine":  243,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  33,
+"endLine":  255,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  25,
+"endLine":  219,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  433,
+"startColumn":  37,
+"endLine":  433,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  37,
+"endLine":  448,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  470,
+"startColumn":  33,
+"endLine":  470,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  473,
+"startColumn":  33,
+"endLine":  473,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  33,
+"endLine":  476,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  25,
+"endLine":  462,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  563,
+"startColumn":  25,
+"endLine":  563,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  29,
+"endLine":  302,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  618,
+"startColumn":  29,
+"endLine":  618,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  572,
+"startColumn":  25,
+"endLine":  572,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"region":  {
+"startLine":  688,
+"startColumn":  25,
+"endLine":  688,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  25,
+"endLine":  157,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  630,
+"startColumn":  29,
+"endLine":  630,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  25,
+"endLine":  176,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  25,
+"endLine":  62,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  33,
+"endLine":  354,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  481,
+"startColumn":  29,
+"endLine":  481,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  485,
+"startColumn":  29,
+"endLine":  485,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  33,
+"endLine":  147,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  33,
+"endLine":  53,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisorBase.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  33,
+"endLine":  100,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  25,
+"endLine":  163,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  25,
+"endLine":  225,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Index.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  25,
+"endLine":  73,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Index.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  25,
+"endLine":  177,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  25,
+"endLine":  109,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  25,
+"endLine":  78,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  25,
+"endLine":  102,
+"endColumn":  27
+}
+}
+}
+]
+}

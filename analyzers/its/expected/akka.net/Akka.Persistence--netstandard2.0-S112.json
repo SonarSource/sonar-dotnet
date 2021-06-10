@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  61,
+"endLine":  82,
+"endColumn":  131
+}
+}
+}
+]
+}

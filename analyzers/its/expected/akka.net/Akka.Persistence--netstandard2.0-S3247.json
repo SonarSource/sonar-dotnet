@@ -1,0 +1,436 @@
+{
+"issues":  [
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  631,
+"startColumn":  26,
+"endLine":  631,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  633,
+"startColumn":  34,
+"endLine":  633,
+"endColumn":  59
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  17,
+"endLine":  101,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  25,
+"endLine":  103,
+"endColumn":  54
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  17,
+"endLine":  107,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  25,
+"endLine":  109,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  17,
+"endLine":  113,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  25,
+"endLine":  115,
+"endColumn":  57
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  17,
+"endLine":  119,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  25,
+"endLine":  121,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  22,
+"endLine":  304,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  306,
+"startColumn":  27,
+"endLine":  306,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  17,
+"endLine":  195,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  45,
+"endLine":  198,
+"endColumn":  68
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  21,
+"endLine":  236,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  30,
+"endLine":  238,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  21,
+"endLine":  268,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  36,
+"endLine":  270,
+"endColumn":  59
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  26,
+"endLine":  274,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  29,
+"endLine":  276,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  30,
+"endLine":  319,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  321,
+"startColumn":  33,
+"endLine":  321,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  324,
+"startColumn":  30,
+"endLine":  324,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  33,
+"endLine":  326,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  25,
+"endLine":  333,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  33,
+"endLine":  335,
+"endColumn":  54
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  30,
+"endLine":  338,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  340,
+"startColumn":  33,
+"endLine":  340,
+"endColumn":  54
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  30,
+"endLine":  343,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  33,
+"endLine":  345,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  30,
+"endLine":  348,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  33,
+"endLine":  350,
+"endColumn":  57
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  26,
+"endLine":  354,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  40,
+"endLine":  356,
+"endColumn":  63
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  17,
+"endLine":  134,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  25,
+"endLine":  136,
+"endColumn":  50
+}
+}
+]
+}
+]
+}

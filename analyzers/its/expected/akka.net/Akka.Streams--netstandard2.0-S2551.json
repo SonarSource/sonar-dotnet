@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2551",
+"message":  "Lock on a dedicated object instance instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  2548,
+"startColumn":  19,
+"endLine":  2548,
+"endColumn":  23
+}
+}
+}
+]
+}

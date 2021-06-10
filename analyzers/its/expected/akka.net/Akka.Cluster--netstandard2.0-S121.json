@@ -1,0 +1,4268 @@
+{
+"issues":  [
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  17,
+"endLine":  66,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  17,
+"endLine":  67,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  13,
+"endLine":  132,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  13,
+"endLine":  171,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  21,
+"endLine":  200,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  25,
+"endLine":  215,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  13,
+"endLine":  231,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  13,
+"endLine":  264,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  17,
+"endLine":  304,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  306,
+"startColumn":  17,
+"endLine":  306,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  13,
+"endLine":  118,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  13,
+"endLine":  195,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  13,
+"endLine":  197,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  355,
+"startColumn":  13,
+"endLine":  355,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  396,
+"startColumn":  13,
+"endLine":  396,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  441,
+"startColumn":  13,
+"endLine":  441,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  443,
+"startColumn":  13,
+"endLine":  443,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  606,
+"startColumn":  17,
+"endLine":  606,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  17,
+"endLine":  617,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  627,
+"startColumn":  17,
+"endLine":  627,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  638,
+"startColumn":  17,
+"endLine":  638,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  650,
+"startColumn":  17,
+"endLine":  650,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  663,
+"startColumn":  17,
+"endLine":  663,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  21,
+"endLine":  176,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  21,
+"endLine":  178,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  17,
+"endLine":  68,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  17,
+"endLine":  69,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  17,
+"endLine":  70,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  17,
+"endLine":  167,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  17,
+"endLine":  168,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  17,
+"endLine":  226,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  17,
+"endLine":  227,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  321,
+"startColumn":  17,
+"endLine":  321,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  17,
+"endLine":  322,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  17,
+"endLine":  363,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  17,
+"endLine":  364,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  403,
+"startColumn":  17,
+"endLine":  403,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  17,
+"endLine":  404,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  572,
+"startColumn":  17,
+"endLine":  572,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  850,
+"startColumn":  17,
+"endLine":  850,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  939,
+"startColumn":  17,
+"endLine":  939,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1093,
+"startColumn":  17,
+"endLine":  1093,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1095,
+"startColumn":  17,
+"endLine":  1095,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1100,
+"startColumn":  17,
+"endLine":  1100,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1250,
+"startColumn":  21,
+"endLine":  1250,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1253,
+"startColumn":  21,
+"endLine":  1253,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1298,
+"startColumn":  29,
+"endLine":  1298,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1299,
+"startColumn":  29,
+"endLine":  1299,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1305,
+"startColumn":  21,
+"endLine":  1305,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1349,
+"startColumn":  17,
+"endLine":  1349,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1523,
+"startColumn":  17,
+"endLine":  1523,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1668,
+"startColumn":  13,
+"endLine":  1668,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1679,
+"startColumn":  17,
+"endLine":  1679,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1699,
+"startColumn":  21,
+"endLine":  1699,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1740,
+"startColumn":  17,
+"endLine":  1740,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1742,
+"startColumn":  17,
+"endLine":  1742,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1798,
+"startColumn":  13,
+"endLine":  1798,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1800,
+"startColumn":  18,
+"endLine":  1800,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2005,
+"startColumn":  17,
+"endLine":  2005,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2047,
+"startColumn":  13,
+"endLine":  2047,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2113,
+"startColumn":  25,
+"endLine":  2113,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2114,
+"startColumn":  25,
+"endLine":  2114,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2132,
+"startColumn":  17,
+"endLine":  2132,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2137,
+"startColumn":  17,
+"endLine":  2137,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2164,
+"startColumn":  21,
+"endLine":  2164,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2173,
+"startColumn":  21,
+"endLine":  2173,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2228,
+"startColumn":  17,
+"endLine":  2228,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2373,
+"startColumn":  21,
+"endLine":  2373,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2383,
+"startColumn":  17,
+"endLine":  2383,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2412,
+"startColumn":  17,
+"endLine":  2412,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2417,
+"startColumn":  17,
+"endLine":  2417,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2467,
+"startColumn":  25,
+"endLine":  2467,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2471,
+"startColumn":  25,
+"endLine":  2471,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2475,
+"startColumn":  25,
+"endLine":  2475,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2491,
+"startColumn":  13,
+"endLine":  2491,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2516,
+"startColumn":  17,
+"endLine":  2516,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2527,
+"startColumn":  13,
+"endLine":  2527,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2538,
+"startColumn":  13,
+"endLine":  2538,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2548,
+"startColumn":  13,
+"endLine":  2548,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2559,
+"startColumn":  13,
+"endLine":  2559,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2584,
+"startColumn":  21,
+"endLine":  2584,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2604,
+"startColumn":  17,
+"endLine":  2604,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2641,
+"startColumn":  13,
+"endLine":  2641,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2711,
+"startColumn":  13,
+"endLine":  2711,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2752,
+"startColumn":  21,
+"endLine":  2752,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2816,
+"startColumn":  13,
+"endLine":  2816,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2838,
+"startColumn":  21,
+"endLine":  2838,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  3063,
+"startColumn":  17,
+"endLine":  3063,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  3069,
+"startColumn":  17,
+"endLine":  3069,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  3075,
+"startColumn":  17,
+"endLine":  3075,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  3096,
+"startColumn":  13,
+"endLine":  3096,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  3152,
+"startColumn":  13,
+"endLine":  3152,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  21,
+"endLine":  178,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  17,
+"endLine":  252,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  17,
+"endLine":  269,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  419,
+"startColumn":  17,
+"endLine":  419,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  428,
+"startColumn":  17,
+"endLine":  428,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  17,
+"endLine":  474,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  548,
+"startColumn":  17,
+"endLine":  548,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  17,
+"endLine":  617,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  710,
+"startColumn":  17,
+"endLine":  710,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  760,
+"startColumn":  17,
+"endLine":  760,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  827,
+"startColumn":  17,
+"endLine":  827,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  933,
+"startColumn":  13,
+"endLine":  933,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  952,
+"startColumn":  17,
+"endLine":  952,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  982,
+"startColumn":  13,
+"endLine":  982,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1064,
+"startColumn":  21,
+"endLine":  1064,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1074,
+"startColumn":  13,
+"endLine":  1074,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1079,
+"startColumn":  13,
+"endLine":  1079,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1080,
+"startColumn":  13,
+"endLine":  1080,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1093,
+"startColumn":  13,
+"endLine":  1093,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1094,
+"startColumn":  13,
+"endLine":  1094,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1095,
+"startColumn":  13,
+"endLine":  1095,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1096,
+"startColumn":  13,
+"endLine":  1096,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1097,
+"startColumn":  13,
+"endLine":  1097,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1099,
+"startColumn":  13,
+"endLine":  1099,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1100,
+"startColumn":  13,
+"endLine":  1100,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  21,
+"endLine":  47,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  13,
+"endLine":  179,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  17,
+"endLine":  300,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  301,
+"startColumn":  17,
+"endLine":  301,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  17,
+"endLine":  342,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  17,
+"endLine":  343,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  480,
+"startColumn":  13,
+"endLine":  480,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  596,
+"startColumn":  13,
+"endLine":  596,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  29,
+"endLine":  137,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  21,
+"endLine":  100,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  13,
+"endLine":  148,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  13,
+"endLine":  37,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  13,
+"endLine":  90,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  18,
+"endLine":  92,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  13,
+"endLine":  94,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  25,
+"endLine":  113,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  13,
+"endLine":  67,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  13,
+"endLine":  123,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  17,
+"endLine":  143,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  13,
+"endLine":  190,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  13,
+"endLine":  201,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  17,
+"endLine":  330,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  13,
+"endLine":  343,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  13,
+"endLine":  345,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  509,
+"startColumn":  13,
+"endLine":  509,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  510,
+"startColumn":  13,
+"endLine":  510,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  511,
+"startColumn":  13,
+"endLine":  511,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  13,
+"endLine":  136,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  13,
+"endLine":  145,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  13,
+"endLine":  193,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  13,
+"endLine":  196,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  17,
+"endLine":  225,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  17,
+"endLine":  226,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  17,
+"endLine":  228,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  17,
+"endLine":  230,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  17,
+"endLine":  248,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  17,
+"endLine":  249,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  17,
+"endLine":  270,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  17,
+"endLine":  271,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  17,
+"endLine":  272,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  17,
+"endLine":  273,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  17,
+"endLine":  274,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  17,
+"endLine":  275,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  17,
+"endLine":  276,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  17,
+"endLine":  277,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  17,
+"endLine":  278,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  17,
+"endLine":  296,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  17,
+"endLine":  297,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  17,
+"endLine":  318,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  13,
+"endLine":  339,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  13,
+"endLine":  343,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  13,
+"endLine":  346,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  13,
+"endLine":  348,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  17,
+"endLine":  369,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  21,
+"endLine":  373,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  13,
+"endLine":  394,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  395,
+"startColumn":  13,
+"endLine":  395,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  396,
+"startColumn":  13,
+"endLine":  396,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  13,
+"endLine":  397,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  13,
+"endLine":  398,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  13,
+"endLine":  399,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  13,
+"endLine":  400,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  13,
+"endLine":  401,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  13,
+"endLine":  402,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  403,
+"startColumn":  13,
+"endLine":  403,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  13,
+"endLine":  404,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  13,
+"endLine":  405,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  498,
+"startColumn":  13,
+"endLine":  498,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  499,
+"startColumn":  13,
+"endLine":  499,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  13,
+"endLine":  522,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  529,
+"startColumn":  13,
+"endLine":  529,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  13,
+"endLine":  94,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  13,
+"endLine":  111,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  13,
+"endLine":  178,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  13,
+"endLine":  179,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  17,
+"endLine":  107,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  21,
+"endLine":  108,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  13,
+"endLine":  177,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  13,
+"endLine":  180,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  17,
+"endLine":  184,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  13,
+"endLine":  190,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  13,
+"endLine":  193,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  21,
+"endLine":  223,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  17,
+"endLine":  227,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  21,
+"endLine":  228,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  25,
+"endLine":  229,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  17,
+"endLine":  231,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  21,
+"endLine":  232,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  25,
+"endLine":  233,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  17,
+"endLine":  236,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  13,
+"endLine":  289,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  13,
+"endLine":  291,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  13,
+"endLine":  304,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  305,
+"startColumn":  13,
+"endLine":  305,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  13,
+"endLine":  338,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  13,
+"endLine":  352,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  13,
+"endLine":  368,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  17,
+"endLine":  382,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  17,
+"endLine":  436,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  490,
+"startColumn":  25,
+"endLine":  490,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  30,
+"endLine":  491,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  13,
+"endLine":  68,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  17,
+"endLine":  76,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  13,
+"endLine":  93,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  13,
+"endLine":  151,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  13,
+"endLine":  167,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  13,
+"endLine":  187,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  13,
+"endLine":  188,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  13,
+"endLine":  189,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  13,
+"endLine":  227,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  13,
+"endLine":  228,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  13,
+"endLine":  300,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  490,
+"startColumn":  13,
+"endLine":  490,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  13,
+"endLine":  493,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  715,
+"startColumn":  13,
+"endLine":  715,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  812,
+"startColumn":  13,
+"endLine":  812,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  856,
+"startColumn":  13,
+"endLine":  856,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  966,
+"startColumn":  13,
+"endLine":  966,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  13,
+"endLine":  84,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  13,
+"endLine":  114,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  17,
+"endLine":  212,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  17,
+"endLine":  226,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  21,
+"endLine":  243,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  13,
+"endLine":  293,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  13,
+"endLine":  302,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  310,
+"startColumn":  13,
+"endLine":  310,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  13,
+"endLine":  318,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  13,
+"endLine":  327,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  13,
+"endLine":  359,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  361,
+"startColumn":  13,
+"endLine":  361,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  13,
+"endLine":  476,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  478,
+"startColumn":  13,
+"endLine":  478,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  480,
+"startColumn":  13,
+"endLine":  480,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  504,
+"startColumn":  13,
+"endLine":  504,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  507,
+"startColumn":  13,
+"endLine":  507,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  17,
+"endLine":  535,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  13,
+"endLine":  540,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  559,
+"startColumn":  13,
+"endLine":  559,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  597,
+"startColumn":  13,
+"endLine":  597,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  13,
+"endLine":  600,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  633,
+"startColumn":  17,
+"endLine":  633,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  638,
+"startColumn":  13,
+"endLine":  638,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  13,
+"endLine":  653,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  700,
+"startColumn":  17,
+"endLine":  700,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  711,
+"startColumn":  17,
+"endLine":  711,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  716,
+"startColumn":  17,
+"endLine":  716,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  719,
+"startColumn":  17,
+"endLine":  719,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  728,
+"startColumn":  13,
+"endLine":  728,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  21,
+"endLine":  178,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  26,
+"endLine":  185,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  26,
+"endLine":  188,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  13,
+"endLine":  212,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  18,
+"endLine":  216,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  13,
+"endLine":  219,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  13,
+"endLine":  225,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  320,
+"startColumn":  13,
+"endLine":  320,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  21,
+"endLine":  367,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  21,
+"endLine":  379,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  37,
+"endLine":  408,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  37,
+"endLine":  411,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  486,
+"startColumn":  17,
+"endLine":  486,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  21,
+"endLine":  487,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  489,
+"startColumn":  17,
+"endLine":  489,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  527,
+"startColumn":  21,
+"endLine":  527,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  21,
+"endLine":  543,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  557,
+"startColumn":  13,
+"endLine":  557,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  559,
+"startColumn":  13,
+"endLine":  559,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  578,
+"startColumn":  17,
+"endLine":  578,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  584,
+"startColumn":  21,
+"endLine":  584,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  619,
+"startColumn":  13,
+"endLine":  619,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  627,
+"startColumn":  13,
+"endLine":  627,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  629,
+"startColumn":  13,
+"endLine":  629,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  642,
+"startColumn":  29,
+"endLine":  642,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  645,
+"startColumn":  29,
+"endLine":  645,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  656,
+"startColumn":  13,
+"endLine":  656,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  730,
+"startColumn":  17,
+"endLine":  730,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverProvider.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  17,
+"endLine":  40,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  13,
+"endLine":  34,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  13,
+"endLine":  39,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  13,
+"endLine":  44,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  25,
+"endLine":  63,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  17,
+"endLine":  80,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  17,
+"endLine":  91,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  17,
+"endLine":  110,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  17,
+"endLine":  117,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"region":  {
+"startLine":  445,
+"startColumn":  13,
+"endLine":  445,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  13,
+"endLine":  26,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  13,
+"endLine":  138,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  13,
+"endLine":  139,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  13,
+"endLine":  140,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  13,
+"endLine":  224,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  18,
+"endLine":  225,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  13,
+"endLine":  226,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  13,
+"endLine":  258,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Util.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  13,
+"endLine":  113,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  13,
+"endLine":  41,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  17,
+"endLine":  154,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  13,
+"endLine":  325,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  13,
+"endLine":  339,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  371,
+"startColumn":  13,
+"endLine":  371,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  17,
+"endLine":  381,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  17,
+"endLine":  382,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  17,
+"endLine":  384,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  386,
+"startColumn":  17,
+"endLine":  386,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  21,
+"endLine":  393,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  25,
+"endLine":  397,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  21,
+"endLine":  401,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  21,
+"endLine":  408,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  413,
+"startColumn":  17,
+"endLine":  413,
+"endColumn":  19
+}
+}
+}
+]
+}

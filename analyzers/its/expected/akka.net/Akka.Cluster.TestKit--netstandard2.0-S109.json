@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '25' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  65,
+"endLine":  358,
+"endColumn":  67
+}
+}
+}
+]
+}

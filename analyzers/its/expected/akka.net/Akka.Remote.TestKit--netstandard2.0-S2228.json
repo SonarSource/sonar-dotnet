@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  687,
+"startColumn":  21,
+"endLine":  687,
+"endColumn":  38
+}
+}
+}
+]
+}

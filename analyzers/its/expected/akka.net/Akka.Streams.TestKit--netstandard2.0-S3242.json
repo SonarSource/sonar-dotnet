@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<T>' instead of 'System.Collections.Generic.List<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  63,
+"endLine":  233,
+"endColumn":  68
+}
+}
+}
+]
+}

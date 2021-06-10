@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  17,
+"endLine":  332,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  17,
+"endLine":  354,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  21,
+"endLine":  53,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  21,
+"endLine":  65,
+"endColumn":  27
+}
+}
+}
+]
+}

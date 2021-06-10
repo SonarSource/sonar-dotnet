@@ -1,0 +1,2253 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  84,
+"endLine":  330,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  76,
+"endLine":  331,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  336,
+"startColumn":  71,
+"endLine":  336,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000000000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  76,
+"endLine":  339,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  340,
+"startColumn":  77,
+"endLine":  340,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  679,
+"startColumn":  72,
+"endLine":  679,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\RequestStrategies.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  56,
+"endLine":  90,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\RequestStrategies.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  41,
+"endLine":  147,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  50,
+"endLine":  64,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  32,
+"endLine":  101,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  58,
+"endLine":  101,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  105,
+"endLine":  101,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  76,
+"endLine":  67,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  55,
+"endLine":  438,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  83,
+"endLine":  438,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '256' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  523,
+"startColumn":  72,
+"endLine":  523,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  717,
+"startColumn":  75,
+"endLine":  717,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4095' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1135,
+"startColumn":  30,
+"endLine":  1135,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1142,
+"startColumn":  39,
+"endLine":  1142,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1145,
+"startColumn":  45,
+"endLine":  1145,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1145,
+"startColumn":  62,
+"endLine":  1145,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1556,
+"startColumn":  54,
+"endLine":  1556,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1556,
+"startColumn":  76,
+"endLine":  1556,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  383,
+"startColumn":  49,
+"endLine":  383,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  415,
+"startColumn":  93,
+"endLine":  415,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  767,
+"startColumn":  49,
+"endLine":  767,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  823,
+"startColumn":  93,
+"endLine":  823,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamConverters.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  98,
+"endLine":  65,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamConverters.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  63,
+"endLine":  107,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamRefs.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  66,
+"endLine":  65,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamRefs.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  102,
+"endLine":  67,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamRefs.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  126,
+"endLine":  68,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  75,
+"endLine":  144,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000000000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  70,
+"endLine":  99,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  711,
+"startColumn":  64,
+"endLine":  711,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  46,
+"endLine":  164,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  964,
+"startColumn":  69,
+"endLine":  964,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  347,
+"startColumn":  125,
+"endLine":  347,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  114,
+"endLine":  367,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  467,
+"startColumn":  70,
+"endLine":  467,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  467,
+"startColumn":  123,
+"endLine":  467,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  570,
+"startColumn":  117,
+"endLine":  570,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  466,
+"startColumn":  48,
+"endLine":  466,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  470,
+"startColumn":  53,
+"endLine":  470,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  3237,
+"startColumn":  138,
+"endLine":  3237,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  3237,
+"startColumn":  145,
+"endLine":  3237,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  3255,
+"startColumn":  36,
+"endLine":  3255,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  86,
+"endLine":  263,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '255' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  48,
+"endLine":  389,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '63' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  48,
+"endLine":  235,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  92,
+"endLine":  251,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  588,
+"startColumn":  60,
+"endLine":  588,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  588,
+"startColumn":  83,
+"endLine":  588,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2390,
+"startColumn":  63,
+"endLine":  2390,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2431,
+"startColumn":  96,
+"endLine":  2431,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2432,
+"startColumn":  73,
+"endLine":  2432,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2437,
+"startColumn":  103,
+"endLine":  2437,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  61,
+"endLine":  36,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  64,
+"endLine":  36,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  113,
+"endLine":  36,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  668,
+"startColumn":  34,
+"endLine":  668,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  669,
+"startColumn":  35,
+"endLine":  669,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  81,
+"endLine":  30,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '28' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  21,
+"endLine":  32,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  25,
+"endLine":  32,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '29' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  29,
+"endLine":  32,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '14' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  33,
+"endLine":  32,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  37,
+"endLine":  32,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  41,
+"endLine":  32,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  13,
+"endLine":  33,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '22' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  17,
+"endLine":  33,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  21,
+"endLine":  33,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  25,
+"endLine":  33,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '25' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  29,
+"endLine":  33,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '17' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  33,
+"endLine":  33,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  37,
+"endLine":  33,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  41,
+"endLine":  33,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '31' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  13,
+"endLine":  34,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '27' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  17,
+"endLine":  34,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  21,
+"endLine":  34,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '23' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  25,
+"endLine":  34,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '21' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  29,
+"endLine":  34,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '19' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  33,
+"endLine":  34,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  37,
+"endLine":  34,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  41,
+"endLine":  34,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '26' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  13,
+"endLine":  35,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  17,
+"endLine":  35,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '18' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  21,
+"endLine":  35,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  25,
+"endLine":  35,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  29,
+"endLine":  35,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  33,
+"endLine":  35,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  37,
+"endLine":  35,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  41,
+"endLine":  35,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  68,
+"endLine":  38,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  17,
+"endLine":  40,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  25,
+"endLine":  40,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  29,
+"endLine":  40,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '21' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  33,
+"endLine":  40,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  37,
+"endLine":  40,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '29' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  41,
+"endLine":  40,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  13,
+"endLine":  41,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '14' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  17,
+"endLine":  41,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  21,
+"endLine":  41,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '18' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  25,
+"endLine":  41,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '22' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  29,
+"endLine":  41,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '25' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  33,
+"endLine":  41,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  37,
+"endLine":  41,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  41,
+"endLine":  41,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  17,
+"endLine":  42,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  21,
+"endLine":  42,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '28' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  25,
+"endLine":  42,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  29,
+"endLine":  42,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '17' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  33,
+"endLine":  42,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  37,
+"endLine":  42,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  41,
+"endLine":  42,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '19' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '27' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  17,
+"endLine":  43,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '23' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  21,
+"endLine":  43,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  25,
+"endLine":  43,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '26' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  29,
+"endLine":  43,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  33,
+"endLine":  43,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  37,
+"endLine":  43,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '31' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  41,
+"endLine":  43,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  24,
+"endLine":  56,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '31' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  20,
+"endLine":  58,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  24,
+"endLine":  72,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  20,
+"endLine":  115,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  31,
+"endLine":  131,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  31,
+"endLine":  132,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  31,
+"endLine":  133,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  31,
+"endLine":  134,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '130329821' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  40,
+"endLine":  141,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '27' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  56,
+"endLine":  141,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  47,
+"endLine":  158,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  42,
+"endLine":  159,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  61,
+"endLine":  159,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  47,
+"endLine":  178,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  42,
+"endLine":  179,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '56' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  61,
+"endLine":  179,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  24,
+"endLine":  203,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '125613361' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  62,
+"endLine":  210,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '27' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  78,
+"endLine":  210,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  24,
+"endLine":  233,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  63,
+"endLine":  233,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  47,
+"endLine":  248,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  47,
+"endLine":  260,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  47,
+"endLine":  272,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  47,
+"endLine":  284,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  24,
+"endLine":  24,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  24,
+"endLine":  25,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  24,
+"endLine":  26,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  24,
+"endLine":  27,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1431655765' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  29,
+"endLine":  29,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  24,
+"endLine":  30,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '858993459' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  29,
+"endLine":  30,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '858993459' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  48,
+"endLine":  30,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  24,
+"endLine":  31,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '252645135' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  34,
+"endLine":  31,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  23,
+"endLine":  32,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  23,
+"endLine":  33,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '63' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  21,
+"endLine":  34,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  33,
+"endLine":  36,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  24,
+"endLine":  47,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1431655765' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  30,
+"endLine":  50,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  25,
+"endLine":  51,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '858993459' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  30,
+"endLine":  51,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '858993459' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  49,
+"endLine":  51,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  25,
+"endLine":  52,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '252645135' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  35,
+"endLine":  52,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  24,
+"endLine":  53,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  24,
+"endLine":  54,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '63' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\Int32Extensions.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  25,
+"endLine":  55,
+"endColumn":  35
+}
+}
+}
+]
+}

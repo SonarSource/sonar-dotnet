@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This constructor 'BatchingSqlJournal' has 95 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  561,
+"startColumn":  19,
+"endLine":  561,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ExecuteChunk' has 88 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  942,
+"startColumn":  43,
+"endLine":  942,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This constructor 'AbstractQueryExecutor' has 87 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  19,
+"endLine":  317,
+"endColumn":  40
+}
+}
+}
+]
+}

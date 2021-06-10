@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1905",
+"message":  "Remove this unnecessary cast to 'int'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1197,
+"startColumn":  60,
+"endLine":  1197,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1905",
+"message":  "Remove this unnecessary cast to 'int'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1339,
+"startColumn":  39,
+"endLine":  1339,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1905",
+"message":  "Remove this unnecessary cast to 'Exception'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  28,
+"endLine":  104,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1905",
+"message":  "Remove this unnecessary cast to 'Exception'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  28,
+"endLine":  121,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1905",
+"message":  "Remove this unnecessary cast to 'Exception'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  18,
+"endLine":  204,
+"endColumn":  27
+}
+}
+}
+]
+}

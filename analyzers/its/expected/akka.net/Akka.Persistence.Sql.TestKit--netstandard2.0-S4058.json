@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'str.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlJournalConnectionFailureSpec.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  40,
+"endLine":  42,
+"endColumn":  59
+}
+}
+}
+]
+}

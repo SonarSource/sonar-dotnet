@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Modules.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  81,
+"endLine":  84,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  71,
+"endLine":  96,
+"endColumn":  74
+}
+}
+}
+]
+}

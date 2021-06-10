@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'CommonConfig' or replace the property with a 'SetCommonConfig' method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  23,
+"endLine":  48,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'TestTransport' or replace the property with a 'SetTestTransport' method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  21,
+"endLine":  110,
+"endColumn":  34
+}
+}
+}
+]
+}

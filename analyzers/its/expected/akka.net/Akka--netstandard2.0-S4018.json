@@ -1,0 +1,511 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefFactoryExtensions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  33,
+"endLine":  22,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  27,
+"endLine":  302,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  316,
+"startColumn":  30,
+"endLine":  316,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ExtendedActorSystem.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  35,
+"endLine":  67,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  25,
+"endLine":  96,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  25,
+"endLine":  110,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  25,
+"endLine":  129,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  31,
+"endLine":  73,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  31,
+"endLine":  86,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  31,
+"endLine":  103,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  37,
+"endLine":  120,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  35,
+"endLine":  184,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  27,
+"endLine":  385,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  410,
+"startColumn":  30,
+"endLine":  410,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  29,
+"endLine":  373,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  29,
+"endLine":  385,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  407,
+"startColumn":  29,
+"endLine":  407,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Setup\ActorSystemSetup.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  26,
+"endLine":  62,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\StashFactory.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  30,
+"endLine":  25,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  826,
+"startColumn":  53,
+"endLine":  826,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationException.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  46,
+"endLine":  19,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationFactory.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  30,
+"endLine":  116,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  28,
+"endLine":  31,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  28,
+"endLine":  44,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  32,
+"endLine":  299,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\PatternMatch.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  31,
+"endLine":  34,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\PatternMatch.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  21,
+"endLine":  86,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\PatternMatch.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  24,
+"endLine":  191,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serializer.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  18,
+"endLine":  99,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\DynamicAccess.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  36,
+"endLine":  30,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Extensions.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  25,
+"endLine":  25,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\TaskEx.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  47,
+"endLine":  29,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\TaskEx.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  31,
+"endLine":  75,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\IPartialActionBuilder.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  26,
+"endLine":  32,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialActionBuilder.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  33,
+"endLine":  57,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Resolver.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  11,
+"endLine":  24,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Result.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  33,
+"endLine":  127,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\TypeExtensions.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  28,
+"endLine":  28,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Vector.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  47,
+"endLine":  25,
+"endColumn":  51
+}
+}
+}
+]
+}

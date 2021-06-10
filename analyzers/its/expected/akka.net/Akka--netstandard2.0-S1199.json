@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1199",
+"message":  "Extract this nested code block into a separate method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  25,
+"endLine":  119,
+"endColumn":  26
+}
+}
+}
+]
+}

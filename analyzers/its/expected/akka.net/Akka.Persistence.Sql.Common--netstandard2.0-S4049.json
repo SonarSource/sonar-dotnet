@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetConnectionString' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"region":  {
+"startLine":  505,
+"startColumn":  34,
+"endLine":  505,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetConnectionString' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  34,
+"endLine":  148,
+"endColumn":  53
+}
+}
+}
+]
+}

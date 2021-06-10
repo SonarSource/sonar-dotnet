@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  34,
+"endLine":  373,
+"endColumn":  45
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1147",
+"message":  "Remove this call to 'Environment.Exit' or ensure it is really required.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  41,
+"endLine":  522,
+"endColumn":  45
+}
+}
+}
+]
+}

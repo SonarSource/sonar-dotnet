@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2933",
+"message":  "Make '_pruningPerformed' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  307,
+"startColumn":  58,
+"endLine":  307,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_tombstonedNodes' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  308,
+"startColumn":  49,
+"endLine":  308,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_startTime' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  26,
+"endLine":  358,
+"endColumn":  36
+}
+}
+}
+]
+}

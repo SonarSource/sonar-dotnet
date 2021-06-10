@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  21,
+"endLine":  228,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  17,
+"endLine":  227,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  21,
+"endLine":  232,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  17,
+"endLine":  231,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  657,
+"startColumn":  17,
+"endLine":  657,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  656,
+"startColumn":  13,
+"endLine":  656,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

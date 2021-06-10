@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\MultiValueDictionaryExtensions.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  48,
+"endLine":  26,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\MultiValueDictionaryExtensions.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  51,
+"endLine":  46,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\MultiValueDictionaryExtensions.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  51,
+"endLine":  61,
+"endColumn":  98
+}
+}
+}
+]
+}

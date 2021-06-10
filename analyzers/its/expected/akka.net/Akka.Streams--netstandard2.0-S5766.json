@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  20,
+"endLine":  56,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  20,
+"endLine":  92,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  20,
+"endLine":  53,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  20,
+"endLine":  88,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  372,
+"startColumn":  20,
+"endLine":  372,
+"endColumn":  29
+}
+}
+}
+]
+}

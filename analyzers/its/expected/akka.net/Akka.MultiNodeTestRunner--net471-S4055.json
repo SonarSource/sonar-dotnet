@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  409,
+"startColumn":  50,
+"endLine":  409,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  433,
+"startColumn":  43,
+"endLine":  433,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  46,
+"endLine":  434,
+"endColumn":  118
+}
+}
+}
+]
+}

@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1144,
+"startColumn":  20,
+"endLine":  1144,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1189,
+"startColumn":  20,
+"endLine":  1189,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1240,
+"startColumn":  20,
+"endLine":  1240,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  20,
+"endLine":  343,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  20,
+"endLine":  124,
+"endColumn":  29
+}
+}
+}
+]
+}

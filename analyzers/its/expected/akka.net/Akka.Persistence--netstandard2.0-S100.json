@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'GetPersistentFSMSnapshot' to match pascal case naming rules, consider using 'GetPersistentFsmSnapshot'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  39,
+"endLine":  134,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'GetPersistentFSMSnapshot' to match pascal case naming rules, consider using 'GetPersistentFsmSnapshot'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  24,
+"endLine":  229,
+"endColumn":  48
+}
+}
+}
+]
+}

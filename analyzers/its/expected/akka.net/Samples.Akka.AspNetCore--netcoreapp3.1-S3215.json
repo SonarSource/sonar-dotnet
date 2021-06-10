@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Startup.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  58,
+"endLine":  37,
+"endColumn":  117
+}
+}
+}
+]
+}

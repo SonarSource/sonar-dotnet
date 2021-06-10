@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_pruneInterval' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  35,
+"endLine":  118,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field 'singletonLeaseName' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  638,
+"startColumn":  33,
+"endLine":  638,
+"endColumn":  51
+}
+}
+}
+]
+}

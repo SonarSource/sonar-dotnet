@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\JsonPersistentTestRunStore.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  56,
+"endLine":  53,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SpecLog.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  51,
+"endLine":  26,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  79,
+"endLine":  33,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  38,
+"endLine":  40,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  56,
+"endLine":  142,
+"endColumn":  58
+}
+}
+}
+]
+}

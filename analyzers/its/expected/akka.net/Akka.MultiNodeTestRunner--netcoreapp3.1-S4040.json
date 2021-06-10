@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  30,
+"endLine":  179,
+"endColumn":  46
+}
+}
+}
+]
+}

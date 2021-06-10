@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  525,
+"startColumn":  27,
+"endLine":  525,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  527,
+"startColumn":  39,
+"endLine":  527,
+"endColumn":  80
+}
+}
+]
+}
+]
+}

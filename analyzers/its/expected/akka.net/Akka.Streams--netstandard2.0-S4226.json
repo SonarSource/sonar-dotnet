@@ -1,0 +1,3410 @@
+{
+"issues":  [
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  45,
+"endLine":  52,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  45,
+"endLine":  84,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  45,
+"endLine":  118,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  45,
+"endLine":  146,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  43,
+"endLine":  175,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  43,
+"endLine":  208,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  43,
+"endLine":  248,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  292,
+"startColumn":  43,
+"endLine":  292,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  43,
+"endLine":  337,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  45,
+"endLine":  364,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  391,
+"startColumn":  45,
+"endLine":  391,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  425,
+"startColumn":  45,
+"endLine":  425,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  45,
+"endLine":  448,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  46,
+"endLine":  474,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  46,
+"endLine":  500,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  528,
+"startColumn":  58,
+"endLine":  528,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  562,
+"startColumn":  45,
+"endLine":  562,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  601,
+"startColumn":  45,
+"endLine":  601,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  629,
+"startColumn":  58,
+"endLine":  629,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  663,
+"startColumn":  46,
+"endLine":  663,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  701,
+"startColumn":  46,
+"endLine":  701,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  734,
+"startColumn":  46,
+"endLine":  734,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  769,
+"startColumn":  46,
+"endLine":  769,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  801,
+"startColumn":  45,
+"endLine":  801,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  833,
+"startColumn":  45,
+"endLine":  833,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  863,
+"startColumn":  45,
+"endLine":  863,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  894,
+"startColumn":  58,
+"endLine":  894,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  928,
+"startColumn":  45,
+"endLine":  928,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  951,
+"startColumn":  45,
+"endLine":  951,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  973,
+"startColumn":  45,
+"endLine":  973,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1001,
+"startColumn":  45,
+"endLine":  1001,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1029,
+"startColumn":  45,
+"endLine":  1029,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1064,
+"startColumn":  46,
+"endLine":  1064,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1097,
+"startColumn":  45,
+"endLine":  1097,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1135,
+"startColumn":  45,
+"endLine":  1135,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1174,
+"startColumn":  46,
+"endLine":  1174,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1207,
+"startColumn":  46,
+"endLine":  1207,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1235,
+"startColumn":  45,
+"endLine":  1235,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1253,
+"startColumn":  46,
+"endLine":  1253,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1278,
+"startColumn":  86,
+"endLine":  1278,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1324,
+"startColumn":  60,
+"endLine":  1324,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1390,
+"startColumn":  60,
+"endLine":  1390,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1406,
+"startColumn":  60,
+"endLine":  1406,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1461,
+"startColumn":  60,
+"endLine":  1461,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1477,
+"startColumn":  60,
+"endLine":  1477,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1502,
+"startColumn":  46,
+"endLine":  1502,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1528,
+"startColumn":  46,
+"endLine":  1528,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1546,
+"startColumn":  53,
+"endLine":  1546,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1569,
+"startColumn":  45,
+"endLine":  1569,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1592,
+"startColumn":  45,
+"endLine":  1592,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1616,
+"startColumn":  45,
+"endLine":  1616,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1640,
+"startColumn":  45,
+"endLine":  1640,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1670,
+"startColumn":  50,
+"endLine":  1670,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1710,
+"startColumn":  45,
+"endLine":  1710,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1751,
+"startColumn":  45,
+"endLine":  1751,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1774,
+"startColumn":  46,
+"endLine":  1774,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1799,
+"startColumn":  45,
+"endLine":  1799,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1820,
+"startColumn":  46,
+"endLine":  1820,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1838,
+"startColumn":  46,
+"endLine":  1838,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1861,
+"startColumn":  45,
+"endLine":  1861,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1883,
+"startColumn":  45,
+"endLine":  1883,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1913,
+"startColumn":  45,
+"endLine":  1913,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1936,
+"startColumn":  49,
+"endLine":  1936,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1962,
+"startColumn":  43,
+"endLine":  1962,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1998,
+"startColumn":  43,
+"endLine":  1998,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2028,
+"startColumn":  44,
+"endLine":  2028,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2054,
+"startColumn":  46,
+"endLine":  2054,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2078,
+"startColumn":  47,
+"endLine":  2078,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2107,
+"startColumn":  45,
+"endLine":  2107,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2133,
+"startColumn":  44,
+"endLine":  2133,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2161,
+"startColumn":  45,
+"endLine":  2161,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2190,
+"startColumn":  45,
+"endLine":  2190,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2220,
+"startColumn":  46,
+"endLine":  2220,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2254,
+"startColumn":  40,
+"endLine":  2254,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2276,
+"startColumn":  41,
+"endLine":  2276,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2288,
+"startColumn":  40,
+"endLine":  2288,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2303,
+"startColumn":  73,
+"endLine":  2303,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  69,
+"endLine":  22,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  69,
+"endLine":  32,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  69,
+"endLine":  43,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  68,
+"endLine":  57,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  68,
+"endLine":  67,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  98,
+"endLine":  78,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  98,
+"endLine":  102,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  69,
+"endLine":  127,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  69,
+"endLine":  134,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  69,
+"endLine":  152,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  60,
+"endLine":  167,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  60,
+"endLine":  177,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  60,
+"endLine":  188,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  59,
+"endLine":  202,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  59,
+"endLine":  212,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  89,
+"endLine":  223,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  89,
+"endLine":  246,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  60,
+"endLine":  270,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  60,
+"endLine":  277,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  60,
+"endLine":  295,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  427,
+"startColumn":  46,
+"endLine":  427,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  443,
+"startColumn":  46,
+"endLine":  443,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  46,
+"endLine":  460,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  478,
+"startColumn":  46,
+"endLine":  478,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  496,
+"startColumn":  46,
+"endLine":  496,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  516,
+"startColumn":  46,
+"endLine":  516,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  547,
+"startColumn":  56,
+"endLine":  547,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  565,
+"startColumn":  56,
+"endLine":  565,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  584,
+"startColumn":  56,
+"endLine":  584,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  601,
+"startColumn":  56,
+"endLine":  601,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  623,
+"startColumn":  46,
+"endLine":  623,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  640,
+"startColumn":  46,
+"endLine":  640,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  657,
+"startColumn":  46,
+"endLine":  657,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  675,
+"startColumn":  46,
+"endLine":  675,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  692,
+"startColumn":  46,
+"endLine":  692,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  718,
+"startColumn":  46,
+"endLine":  718,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  746,
+"startColumn":  56,
+"endLine":  746,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  764,
+"startColumn":  56,
+"endLine":  764,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  782,
+"startColumn":  54,
+"endLine":  782,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  798,
+"startColumn":  54,
+"endLine":  798,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  42,
+"endLine":  51,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  42,
+"endLine":  82,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  42,
+"endLine":  115,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  42,
+"endLine":  143,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  42,
+"endLine":  168,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  43,
+"endLine":  200,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  43,
+"endLine":  237,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  42,
+"endLine":  280,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  42,
+"endLine":  322,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  42,
+"endLine":  345,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  42,
+"endLine":  368,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  42,
+"endLine":  401,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  423,
+"startColumn":  42,
+"endLine":  423,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  43,
+"endLine":  448,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  473,
+"startColumn":  43,
+"endLine":  473,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  55,
+"endLine":  500,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  533,
+"startColumn":  39,
+"endLine":  533,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  568,
+"startColumn":  39,
+"endLine":  568,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  595,
+"startColumn":  55,
+"endLine":  595,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  625,
+"startColumn":  43,
+"endLine":  625,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  659,
+"startColumn":  43,
+"endLine":  659,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  688,
+"startColumn":  43,
+"endLine":  688,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  719,
+"startColumn":  43,
+"endLine":  719,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  747,
+"startColumn":  42,
+"endLine":  747,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  778,
+"startColumn":  42,
+"endLine":  778,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  807,
+"startColumn":  42,
+"endLine":  807,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  837,
+"startColumn":  55,
+"endLine":  837,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  870,
+"startColumn":  42,
+"endLine":  870,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  892,
+"startColumn":  42,
+"endLine":  892,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  913,
+"startColumn":  42,
+"endLine":  913,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  940,
+"startColumn":  42,
+"endLine":  940,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  967,
+"startColumn":  42,
+"endLine":  967,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  998,
+"startColumn":  43,
+"endLine":  998,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1027,
+"startColumn":  42,
+"endLine":  1027,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1058,
+"startColumn":  43,
+"endLine":  1058,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1096,
+"startColumn":  43,
+"endLine":  1096,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1128,
+"startColumn":  43,
+"endLine":  1128,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1155,
+"startColumn":  42,
+"endLine":  1155,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1172,
+"startColumn":  43,
+"endLine":  1172,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1196,
+"startColumn":  83,
+"endLine":  1196,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1236,
+"startColumn":  65,
+"endLine":  1236,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1300,
+"startColumn":  65,
+"endLine":  1300,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1315,
+"startColumn":  65,
+"endLine":  1315,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1368,
+"startColumn":  65,
+"endLine":  1368,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1383,
+"startColumn":  65,
+"endLine":  1383,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1407,
+"startColumn":  43,
+"endLine":  1407,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1432,
+"startColumn":  43,
+"endLine":  1432,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1451,
+"startColumn":  51,
+"endLine":  1451,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1473,
+"startColumn":  42,
+"endLine":  1473,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1495,
+"startColumn":  42,
+"endLine":  1495,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1518,
+"startColumn":  42,
+"endLine":  1518,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1541,
+"startColumn":  42,
+"endLine":  1541,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1570,
+"startColumn":  47,
+"endLine":  1570,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1609,
+"startColumn":  42,
+"endLine":  1609,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1649,
+"startColumn":  42,
+"endLine":  1649,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1671,
+"startColumn":  43,
+"endLine":  1671,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1695,
+"startColumn":  42,
+"endLine":  1695,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1715,
+"startColumn":  43,
+"endLine":  1715,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1732,
+"startColumn":  43,
+"endLine":  1732,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1754,
+"startColumn":  42,
+"endLine":  1754,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1775,
+"startColumn":  42,
+"endLine":  1775,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1801,
+"startColumn":  42,
+"endLine":  1801,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1823,
+"startColumn":  46,
+"endLine":  1823,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1848,
+"startColumn":  40,
+"endLine":  1848,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1883,
+"startColumn":  40,
+"endLine":  1883,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1912,
+"startColumn":  41,
+"endLine":  1912,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1937,
+"startColumn":  43,
+"endLine":  1937,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1961,
+"startColumn":  44,
+"endLine":  1961,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1989,
+"startColumn":  42,
+"endLine":  1989,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2014,
+"startColumn":  42,
+"endLine":  2014,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2041,
+"startColumn":  42,
+"endLine":  2041,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2069,
+"startColumn":  42,
+"endLine":  2069,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2087,
+"startColumn":  46,
+"endLine":  2087,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2116,
+"startColumn":  43,
+"endLine":  2116,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2149,
+"startColumn":  39,
+"endLine":  2149,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2172,
+"startColumn":  40,
+"endLine":  2172,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2185,
+"startColumn":  59,
+"endLine":  2185,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2198,
+"startColumn":  39,
+"endLine":  2198,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  60,
+"endLine":  52,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  52,
+"endLine":  84,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  52,
+"endLine":  118,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  52,
+"endLine":  146,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  52,
+"endLine":  172,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  53,
+"endLine":  205,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  53,
+"endLine":  243,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  52,
+"endLine":  287,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  52,
+"endLine":  330,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  52,
+"endLine":  354,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  52,
+"endLine":  378,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  52,
+"endLine":  412,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  435,
+"startColumn":  52,
+"endLine":  435,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  53,
+"endLine":  460,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  485,
+"startColumn":  65,
+"endLine":  485,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  519,
+"startColumn":  49,
+"endLine":  519,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  49,
+"endLine":  555,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  583,
+"startColumn":  65,
+"endLine":  583,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  614,
+"startColumn":  53,
+"endLine":  614,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  53,
+"endLine":  649,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  679,
+"startColumn":  53,
+"endLine":  679,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  711,
+"startColumn":  52,
+"endLine":  711,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  740,
+"startColumn":  52,
+"endLine":  740,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  772,
+"startColumn":  52,
+"endLine":  772,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  802,
+"startColumn":  52,
+"endLine":  802,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  833,
+"startColumn":  65,
+"endLine":  833,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  867,
+"startColumn":  52,
+"endLine":  867,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  890,
+"startColumn":  52,
+"endLine":  890,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  912,
+"startColumn":  52,
+"endLine":  912,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  940,
+"startColumn":  52,
+"endLine":  940,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  968,
+"startColumn":  52,
+"endLine":  968,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1000,
+"startColumn":  53,
+"endLine":  1000,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1030,
+"startColumn":  52,
+"endLine":  1030,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1062,
+"startColumn":  53,
+"endLine":  1062,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1101,
+"startColumn":  53,
+"endLine":  1101,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1134,
+"startColumn":  53,
+"endLine":  1134,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1162,
+"startColumn":  52,
+"endLine":  1162,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1180,
+"startColumn":  53,
+"endLine":  1180,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1205,
+"startColumn":  93,
+"endLine":  1205,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1230,
+"startColumn":  53,
+"endLine":  1230,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1256,
+"startColumn":  53,
+"endLine":  1256,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1274,
+"startColumn":  61,
+"endLine":  1274,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1297,
+"startColumn":  52,
+"endLine":  1297,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1320,
+"startColumn":  52,
+"endLine":  1320,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1344,
+"startColumn":  52,
+"endLine":  1344,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1368,
+"startColumn":  52,
+"endLine":  1368,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1398,
+"startColumn":  57,
+"endLine":  1398,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1438,
+"startColumn":  52,
+"endLine":  1438,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1479,
+"startColumn":  52,
+"endLine":  1479,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1502,
+"startColumn":  53,
+"endLine":  1502,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1527,
+"startColumn":  52,
+"endLine":  1527,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1548,
+"startColumn":  53,
+"endLine":  1548,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1570,
+"startColumn":  52,
+"endLine":  1570,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1592,
+"startColumn":  52,
+"endLine":  1592,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1619,
+"startColumn":  52,
+"endLine":  1619,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1642,
+"startColumn":  56,
+"endLine":  1642,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1668,
+"startColumn":  50,
+"endLine":  1668,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1704,
+"startColumn":  50,
+"endLine":  1704,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1734,
+"startColumn":  51,
+"endLine":  1734,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1760,
+"startColumn":  53,
+"endLine":  1760,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1785,
+"startColumn":  54,
+"endLine":  1785,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1814,
+"startColumn":  52,
+"endLine":  1814,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1840,
+"startColumn":  52,
+"endLine":  1840,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1868,
+"startColumn":  52,
+"endLine":  1868,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1897,
+"startColumn":  52,
+"endLine":  1897,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1927,
+"startColumn":  53,
+"endLine":  1927,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1961,
+"startColumn":  49,
+"endLine":  1961,
+"endColumn":  55
+}
+}
+}
+]
+}

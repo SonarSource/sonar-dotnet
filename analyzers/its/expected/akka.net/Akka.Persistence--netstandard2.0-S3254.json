@@ -1,0 +1,498 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  109,
+"endLine":  67,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  470,
+"startColumn":  57,
+"endLine":  470,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  63,
+"endLine":  58,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  68,
+"endLine":  59,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  69,
+"endLine":  60,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  82,
+"endLine":  81,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  89,
+"endLine":  82,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  76,
+"endLine":  83,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  113,
+"endLine":  58,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  113,
+"endLine":  70,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  63,
+"endLine":  115,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  53,
+"endLine":  117,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  87,
+"endLine":  120,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  73,
+"endLine":  155,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  70,
+"endLine":  81,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  77,
+"endLine":  88,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  98,
+"endLine":  102,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  78,
+"endLine":  125,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  66,
+"endLine":  273,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  82,
+"endLine":  277,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  68,
+"endLine":  359,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  86,
+"endLine":  360,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  413,
+"startColumn":  101,
+"endLine":  413,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  107,
+"endLine":  414,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  415,
+"startColumn":  138,
+"endLine":  415,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  103,
+"endLine":  416,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'redeliverInterval'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  464,
+"startColumn":  29,
+"endLine":  464,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'redeliveryBurstLimit'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  464,
+"startColumn":  35,
+"endLine":  464,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'unconfirmedAttemptsToWarn'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  464,
+"startColumn":  41,
+"endLine":  464,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'redeliverInterval'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  29,
+"endLine":  474,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'redeliverInterval'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  484,
+"startColumn":  29,
+"endLine":  484,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'redeliveryBurstLimit'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  484,
+"startColumn":  35,
+"endLine":  484,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  502,
+"startColumn":  131,
+"endLine":  502,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  503,
+"startColumn":  126,
+"endLine":  503,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  67,
+"endLine":  54,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  105,
+"endLine":  56,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  62,
+"endLine":  57,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  65,
+"endLine":  59,
+"endColumn":  69
+}
+}
+}
+]
+}

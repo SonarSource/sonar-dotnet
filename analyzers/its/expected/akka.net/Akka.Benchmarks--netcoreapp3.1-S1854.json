@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  37,
+"endLine":  129,
+"endColumn":  40
+}
+}
+}
+]
+}

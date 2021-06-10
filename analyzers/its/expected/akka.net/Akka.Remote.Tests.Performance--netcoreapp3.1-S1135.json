@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  46,
+"endLine":  100,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  63,
+"endLine":  181,
+"endColumn":  67
+}
+}
+}
+]
+}

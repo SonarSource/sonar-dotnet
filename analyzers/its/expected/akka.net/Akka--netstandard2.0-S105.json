@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  16,
+"endLine":  45,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  37,
+"endLine":  39,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  72,
+"endLine":  26,
+"endColumn":  72
+}
+}
+}
+]
+}

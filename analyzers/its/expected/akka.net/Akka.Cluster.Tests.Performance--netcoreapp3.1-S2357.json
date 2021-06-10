@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make '_clusterMemberUp' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  43,
+"endLine":  33,
+"endColumn":  59
+}
+}
+}
+]
+}

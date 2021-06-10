@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  33,
+"endLine":  91,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  395,
+"startColumn":  104,
+"endLine":  395,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\WildcardIndex.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  33,
+"endLine":  80,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\WildcardIndex.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  40,
+"endLine":  81,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\WildcardIndex.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  40,
+"endLine":  82,
+"endColumn":  50
+}
+}
+}
+]
+}

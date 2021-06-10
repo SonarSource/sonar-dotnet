@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  18,
+"endLine":  115,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  18,
+"endLine":  164,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  18,
+"endLine":  241,
+"endColumn":  37
+}
+}
+}
+]
+}

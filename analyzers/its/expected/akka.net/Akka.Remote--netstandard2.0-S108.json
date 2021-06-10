@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  602,
+"startColumn":  105,
+"endLine":  602,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  778,
+"startColumn":  22,
+"endLine":  778,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  316,
+"startColumn":  17,
+"endLine":  317,
+"endColumn":  18
+}
+}
+}
+]
+}

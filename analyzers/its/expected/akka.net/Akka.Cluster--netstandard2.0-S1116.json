@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  810,
+"startColumn":  113,
+"endLine":  810,
+"endColumn":  114
+}
+}
+}
+]
+}

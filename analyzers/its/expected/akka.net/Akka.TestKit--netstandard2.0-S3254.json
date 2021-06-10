@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  65,
+"endLine":  89,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  82,
+"endLine":  97,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  76,
+"endLine":  105,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'name'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  39,
+"endLine":  29,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'name'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  56,
+"endLine":  50,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'name'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  55,
+"endLine":  76,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  79,
+"endLine":  37,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  90,
+"endLine":  38,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  84,
+"endLine":  39,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  77,
+"endLine":  41,
+"endColumn":  82
+}
+}
+}
+]
+}

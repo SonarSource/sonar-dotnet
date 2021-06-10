@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  22,
+"endLine":  27,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  26,
+"endLine":  649,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  26,
+"endLine":  66,
+"endColumn":  45
+}
+}
+}
+]
+}

@@ -1,0 +1,2097 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\DeadLettersFilter.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  125,
+"endLine":  28,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  87,
+"endLine":  74,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  95,
+"endLine":  94,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  128,
+"endLine":  94,
+"endColumn":  134
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  73,
+"endLine":  124,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  94,
+"endLine":  124,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  118,
+"endLine":  124,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  140,
+"endLine":  124,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  81,
+"endLine":  153,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  102,
+"endLine":  153,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  126,
+"endLine":  153,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  148,
+"endLine":  153,
+"endColumn":  154
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  181,
+"endLine":  153,
+"endColumn":  187
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  82,
+"endLine":  207,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  103,
+"endLine":  207,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  127,
+"endLine":  207,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  149,
+"endLine":  207,
+"endColumn":  155
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  96,
+"endLine":  237,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  71,
+"endLine":  270,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  101,
+"endLine":  282,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  72,
+"endLine":  293,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  305,
+"startColumn":  100,
+"endLine":  305,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\DebugFilter.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  58,
+"endLine":  23,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\DebugFilter.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  95,
+"endLine":  23,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  58,
+"endLine":  28,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  95,
+"endLine":  28,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  78,
+"endLine":  43,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  115,
+"endLine":  43,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  150,
+"endLine":  43,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  153,
+"endLine":  274,
+"endColumn":  159
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  329,
+"startColumn":  164,
+"endLine":  329,
+"endColumn":  170
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  176,
+"endLine":  337,
+"endColumn":  182
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\InfoFilter.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  57,
+"endLine":  23,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\InfoFilter.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  94,
+"endLine":  23,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  74,
+"endLine":  26,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\PredicateMatcher.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  73,
+"endLine":  25,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\WarningFilter.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  60,
+"endLine":  23,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\WarningFilter.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  97,
+"endLine":  23,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  62,
+"endLine":  83,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  105,
+"endLine":  156,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  125,
+"endLine":  156,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\ITestKitAssertions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  33,
+"endLine":  22,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\ITestKitAssertions.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  55,
+"endLine":  29,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\ITestKitAssertions.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  56,
+"endLine":  36,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\ITestKitAssertions.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  65,
+"endLine":  45,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\ITestKitAssertions.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  90,
+"endLine":  56,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  88,
+"endLine":  29,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  108,
+"endLine":  29,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  94,
+"endLine":  33,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  112,
+"endLine":  33,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  62,
+"endLine":  45,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActors\EchoActor.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  74,
+"endLine":  25,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActors\EchoActor.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  84,
+"endLine":  48,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBarrier.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  84,
+"endLine":  39,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  81,
+"endLine":  31,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  101,
+"endLine":  31,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  130,
+"endLine":  31,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  69,
+"endLine":  51,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  66,
+"endLine":  74,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  83,
+"endLine":  88,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  117,
+"endLine":  88,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  85,
+"endLine":  101,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  81,
+"endLine":  75,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  109,
+"endLine":  75,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  109,
+"endLine":  91,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  138,
+"endLine":  91,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  100,
+"endLine":  107,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  129,
+"endLine":  107,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  466,
+"startColumn":  57,
+"endLine":  466,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  466,
+"startColumn":  91,
+"endLine":  466,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  480,
+"startColumn":  80,
+"endLine":  480,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  480,
+"startColumn":  114,
+"endLine":  480,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  574,
+"startColumn":  61,
+"endLine":  574,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  585,
+"startColumn":  82,
+"endLine":  585,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  599,
+"startColumn":  59,
+"endLine":  599,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  90,
+"endLine":  109,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  75,
+"endLine":  128,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  114,
+"endLine":  173,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  92,
+"endLine":  186,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  135,
+"endLine":  204,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  113,
+"endLine":  221,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  101,
+"endLine":  234,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  79,
+"endLine":  246,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  146,
+"endLine":  264,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  171,
+"endLine":  264,
+"endColumn":  178
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  124,
+"endLine":  281,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  149,
+"endLine":  281,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  133,
+"endLine":  300,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  158,
+"endLine":  300,
+"endColumn":  165
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  111,
+"endLine":  317,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  136,
+"endLine":  317,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  336,
+"startColumn":  170,
+"endLine":  336,
+"endColumn":  176
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  336,
+"startColumn":  195,
+"endLine":  336,
+"endColumn":  202
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  148,
+"endLine":  354,
+"endColumn":  154
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  173,
+"endLine":  354,
+"endColumn":  180
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  69,
+"endLine":  34,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  94,
+"endLine":  34,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  80,
+"endLine":  73,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  105,
+"endLine":  73,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  84,
+"endLine":  112,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  109,
+"endLine":  112,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  119,
+"endLine":  196,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  130,
+"endLine":  230,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  109,
+"endLine":  254,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  120,
+"endLine":  272,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  50,
+"endLine":  34,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  70,
+"endLine":  34,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  60,
+"endLine":  52,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  80,
+"endLine":  52,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  73,
+"endLine":  72,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  93,
+"endLine":  72,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  67,
+"endLine":  97,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  87,
+"endLine":  97,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  94,
+"endLine":  117,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  114,
+"endLine":  117,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  94,
+"endLine":  140,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  114,
+"endLine":  140,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  88,
+"endLine":  160,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  108,
+"endLine":  160,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  80,
+"endLine":  177,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  100,
+"endLine":  177,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  72,
+"endLine":  31,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  92,
+"endLine":  31,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  82,
+"endLine":  51,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  102,
+"endLine":  51,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  95,
+"endLine":  71,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  115,
+"endLine":  71,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  108,
+"endLine":  97,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  128,
+"endLine":  97,
+"endColumn":  134
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  96,
+"endLine":  133,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  116,
+"endLine":  133,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  110,
+"endLine":  154,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  130,
+"endLine":  154,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  81,
+"endLine":  29,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  101,
+"endLine":  29,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  74,
+"endLine":  43,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  94,
+"endLine":  43,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  48,
+"endLine":  71,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  79,
+"endLine":  107,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  97,
+"endLine":  190,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  113,
+"endLine":  210,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  87,
+"endLine":  230,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  110,
+"endLine":  230,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  127,
+"endLine":  230,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  90,
+"endLine":  286,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  113,
+"endLine":  286,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  130,
+"endLine":  286,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  181,
+"endLine":  286,
+"endColumn":  187
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  80,
+"endLine":  30,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  94,
+"endLine":  38,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  83,
+"endLine":  55,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  114,
+"endLine":  55,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  97,
+"endLine":  63,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  128,
+"endLine":  63,
+"endColumn":  134
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  83,
+"endLine":  80,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  100,
+"endLine":  97,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  86,
+"endLine":  116,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  117,
+"endLine":  116,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  109,
+"endLine":  178,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  140,
+"endLine":  178,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  97,
+"endLine":  29,
+"endColumn":  102
+}
+}
+}
+]
+}

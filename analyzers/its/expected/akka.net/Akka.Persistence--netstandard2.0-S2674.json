@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2674",
+"message":  "Check the return value of the 'Read' call to see how many bytes were read.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  13,
+"endLine":  209,
+"endColumn":  50
+}
+}
+}
+]
+}

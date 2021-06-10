@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_failed', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  486,
+"startColumn":  30,
+"endLine":  486,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_testTransport', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  29,
+"endLine":  43,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_loggedDisconnect', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  576,
+"startColumn":  40,
+"endLine":  576,
+"endColumn":  47
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  17,
+"endLine":  45,
+"endColumn":  73
+}
+}
+}
+]
+}

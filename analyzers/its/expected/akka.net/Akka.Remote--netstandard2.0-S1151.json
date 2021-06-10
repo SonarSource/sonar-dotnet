@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  984,
+"startColumn":  25,
+"endLine":  984,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  847,
+"startColumn":  21,
+"endLine":  847,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  850,
+"startColumn":  29,
+"endLine":  850,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 16 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  898,
+"startColumn":  21,
+"endLine":  898,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 14 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  945,
+"startColumn":  21,
+"endLine":  945,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 14 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1006,
+"startColumn":  21,
+"endLine":  1006,
+"endColumn":  44
+}
+}
+}
+]
+}

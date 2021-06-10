@@ -1,0 +1,145 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  33,
+"endLine":  40,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  13,
+"endLine":  46,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  17,
+"endLine":  48,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  45,
+"endLine":  48,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  17,
+"endLine":  51,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  13,
+"endLine":  62,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  13,
+"endLine":  68,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  13,
+"endLine":  74,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  13,
+"endLine":  81,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  17,
+"endLine":  84,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  13,
+"endLine":  93,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  17,
+"endLine":  96,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  13,
+"endLine":  99,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  32,
+"endLine":  99,
+"endColumn":  34
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'NextTagSequenceNr'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  9,
+"endLine":  424,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'ToSnapshotEntry'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  9,
+"endLine":  239,
+"endColumn":  10
+}
+}
+}
+]
+}

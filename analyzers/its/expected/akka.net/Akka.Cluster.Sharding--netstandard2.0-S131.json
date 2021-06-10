@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  1329,
+"startColumn":  13,
+"endLine":  1329,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  1370,
+"startColumn":  13,
+"endLine":  1370,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  13,
+"endLine":  91,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShard.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  13,
+"endLine":  144,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  17,
+"endLine":  119,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1317,
+"startColumn":  13,
+"endLine":  1317,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1341,
+"startColumn":  13,
+"endLine":  1341,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1346,
+"startColumn":  21,
+"endLine":  1346,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1414,
+"startColumn":  13,
+"endLine":  1414,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  13,
+"endLine":  129,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  13,
+"endLine":  195,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  578,
+"startColumn":  17,
+"endLine":  578,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  629,
+"startColumn":  13,
+"endLine":  629,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  671,
+"startColumn":  13,
+"endLine":  671,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  684,
+"startColumn":  13,
+"endLine":  684,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  1054,
+"startColumn":  13,
+"endLine":  1054,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  13,
+"endLine":  189,
+"endColumn":  19
+}
+}
+}
+]
+}

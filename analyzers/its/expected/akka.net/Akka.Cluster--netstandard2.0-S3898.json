@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'HeartbeatNodeRing'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  569,
+"startColumn":  21,
+"endLine":  569,
+"endColumn":  38
+}
+}
+}
+]
+}

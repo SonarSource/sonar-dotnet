@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  95,
+"endLine":  56,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  95,
+"endLine":  63,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  95,
+"endLine":  60,
+"endColumn":  96
+}
+}
+}
+]
+}

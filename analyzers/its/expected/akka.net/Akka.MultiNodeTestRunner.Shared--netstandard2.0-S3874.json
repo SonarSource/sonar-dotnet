@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\SpecEvent.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  33,
+"endLine":  24,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\SpecEvent.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  52,
+"endLine":  24,
+"endColumn":  55
+}
+}
+}
+]
+}

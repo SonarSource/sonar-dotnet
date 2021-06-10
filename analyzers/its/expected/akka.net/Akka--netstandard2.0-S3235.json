@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"region":  {
+"startLine":  566,
+"startColumn":  49,
+"endLine":  566,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  40,
+"endLine":  338,
+"endColumn":  42
+}
+}
+}
+]
+}

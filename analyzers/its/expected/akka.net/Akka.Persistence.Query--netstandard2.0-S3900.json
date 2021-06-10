@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\Offset.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  65,
+"endLine":  62,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\Offset.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  111,
+"endLine":  82,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\Offset.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  111,
+"endLine":  104,
+"endColumn":  116
+}
+}
+}
+]
+}

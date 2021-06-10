@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3902",
+"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  40,
+"endLine":  148,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3902",
+"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  36,
+"endLine":  543,
+"endColumn":  56
+}
+}
+}
+]
+}

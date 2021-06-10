@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  37,
+"endLine":  175,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  67,
+"endLine":  175,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  44,
+"endLine":  45,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  48,
+"endLine":  57,
+"endColumn":  49
+}
+}
+}
+]
+}

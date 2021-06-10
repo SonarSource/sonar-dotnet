@@ -1,0 +1,303 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'NoSender', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  51,
+"endLine":  229,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_runningClrHook', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  47,
+"endLine":  280,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_generation', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  1002,
+"startColumn":  34,
+"endLine":  1002,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_inboxNr', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  37,
+"endLine":  408,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Aborting', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  41,
+"endLine":  192,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'None', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  43,
+"endLine":  48,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_startTime', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  33,
+"endLine":  71,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_threadRunning', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  44,
+"endLine":  104,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_readers', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  30,
+"endLine":  107,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_shuttingDown', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  36,
+"endLine":  242,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_actor', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  43,
+"endLine":  87,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_systemQueueDoNotCallMeDirectly', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  72,
+"endLine":  88,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_mailboxSizeWarningIssued', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  48,
+"endLine":  152,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_mailboxNonZeroPushTimeoutWarningIssued', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  62,
+"endLine":  153,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_parallelWorkers', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  47,
+"endLine":  108,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_totalSizeInBytes', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  964,
+"startColumn":  43,
+"endLine":  964,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_readingSuspended', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  40,
+"endLine":  31,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_pendingSend', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  53,
+"endLine":  59,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'UsePoolDispatcher', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  56,
+"endLine":  268,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_created', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\FastLazy.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  31,
+"endLine":  27,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_creating', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\FastLazy.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  32,
+"endLine":  28,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_created', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\FastLazy.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  31,
+"endLine":  100,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_creating', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\FastLazy.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  32,
+"endLine":  101,
+"endColumn":  35
+}
+}
+}
+]
+}

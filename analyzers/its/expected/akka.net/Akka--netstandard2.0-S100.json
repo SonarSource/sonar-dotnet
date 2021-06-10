@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename local function 'add' to match pascal case naming rules, consider using 'Add'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  18,
+"endLine":  91,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'PeerSentEOF' to match pascal case naming rules, consider using 'PeerSentEof'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  25,
+"endLine":  238,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'IsICMPError' to match pascal case naming rules, consider using 'IsIcmpError'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  22,
+"endLine":  144,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename local function 'tryAttempt' to match pascal case naming rules, consider using 'TryAttempt'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  21,
+"endLine":  97,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method '_IsWindows' to match pascal case naming rules, trim underscores from the name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\RuntimeDetector.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  29,
+"endLine":  38,
+"endColumn":  39
+}
+}
+}
+]
+}

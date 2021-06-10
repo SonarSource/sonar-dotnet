@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'AnyNumber'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Helpers\AnyNumber.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  19,
+"endLine":  18,
+"endColumn":  28
+}
+}
+}
+]
+}

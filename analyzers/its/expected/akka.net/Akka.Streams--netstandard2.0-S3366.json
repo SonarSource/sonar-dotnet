@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  64,
+"endLine":  140,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  84,
+"endLine":  141,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  67,
+"endLine":  388,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  83,
+"endLine":  389,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  67,
+"endLine":  87,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  83,
+"endLine":  88,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  121,
+"endLine":  166,
+"endColumn":  125
+}
+}
+}
+]
+}

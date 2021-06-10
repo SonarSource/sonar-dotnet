@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  945,
+"startColumn":  17,
+"endLine":  945,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  961,
+"startColumn":  17,
+"endLine":  961,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  21,
+"endLine":  261,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  40,
+"endLine":  133,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  51,
+"endLine":  196,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  48,
+"endLine":  197,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  65,
+"endLine":  198,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  25,
+"endLine":  203,
+"endColumn":  55
+}
+}
+}
+]
+}

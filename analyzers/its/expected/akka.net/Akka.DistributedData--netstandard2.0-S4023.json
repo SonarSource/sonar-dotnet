@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\IReplicatedDataSerialization.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  22,
+"endLine":  15,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"region":  {
+"startLine":  1019,
+"startColumn":  22,
+"endLine":  1019,
+"endColumn":  40
+}
+}
+}
+]
+}

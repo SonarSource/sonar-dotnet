@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\TestRun.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  13,
+"endLine":  32,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  21,
+"endLine":  191,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  21,
+"endLine":  200,
+"endColumn":  23
+}
+}
+}
+]
+}

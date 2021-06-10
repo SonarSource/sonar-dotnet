@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 36 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  26,
+"endLine":  23,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 47 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  26,
+"endLine":  28,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 43 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  26,
+"endLine":  24,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 46 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  25,
+"endLine":  153,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 35 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  25,
+"endLine":  120,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 37 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  668,
+"startColumn":  27,
+"endLine":  668,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 48 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  18,
+"endLine":  35,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 31 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  18,
+"endLine":  35,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 61 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  29,
+"endLine":  50,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 34 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  20,
+"endLine":  22,
+"endColumn":  33
+}
+}
+}
+]
+}

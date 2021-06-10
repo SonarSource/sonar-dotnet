@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Constructor has 12 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  41,
+"endLine":  423,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 12 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  47,
+"endLine":  464,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  590,
+"startColumn":  26,
+"endLine":  590,
+"endColumn":  167
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 9 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"region":  {
+"startLine":  691,
+"startColumn":  26,
+"endLine":  691,
+"endColumn":  182
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  504,
+"startColumn":  27,
+"endLine":  504,
+"endColumn":  181
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 9 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"region":  {
+"startLine":  604,
+"startColumn":  27,
+"endLine":  604,
+"endColumn":  198
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  447,
+"startColumn":  42,
+"endLine":  456,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  53,
+"endLine":  220,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  32,
+"endLine":  446,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1239,
+"startColumn":  36,
+"endLine":  1247,
+"endColumn":  35
+}
+}
+}
+]
+}

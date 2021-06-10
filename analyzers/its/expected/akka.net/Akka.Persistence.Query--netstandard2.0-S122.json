@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\EventEnvelope.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  13,
+"endLine":  55,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\EventEnvelope.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\Offset.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  13,
+"endLine":  68,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\Offset.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  13,
+"endLine":  69,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\PersistenceQuery.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  13,
+"endLine":  59,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\PersistenceQuery.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  13,
+"endLine":  62,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\PersistenceQuery.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  13,
+"endLine":  65,
+"endColumn":  87
+}
+}
+}
+]
+}

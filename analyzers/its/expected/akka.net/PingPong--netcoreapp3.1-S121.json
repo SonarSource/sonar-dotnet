@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  17,
+"endLine":  233,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  17,
+"endLine":  235,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  17,
+"endLine":  252,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  22,
+"endLine":  254,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  17,
+"endLine":  270,
+"endColumn":  19
+}
+}
+}
+]
+}

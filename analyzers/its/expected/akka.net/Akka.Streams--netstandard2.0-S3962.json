@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  37,
+"endLine":  33,
+"endColumn":  44
+}
+}
+}
+]
+}

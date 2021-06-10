@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'AggregatedTimelineLog' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SpecLog.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  29,
+"endLine":  20,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'NodeLogs' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SpecLog.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  73,
+"endLine":  24,
+"endColumn":  81
+}
+}
+}
+]
+}

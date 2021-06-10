@@ -1,0 +1,517 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'hello' 5 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  20,
+"endLine":  56,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  113,
+"endLine":  67,
+"endColumn":  120
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  113,
+"endLine":  98,
+"endColumn":  120
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  20,
+"endLine":  119,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  114,
+"endLine":  129,
+"endColumn":  121
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'world' 5 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  20,
+"endLine":  58,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  113,
+"endLine":  68,
+"endColumn":  120
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  113,
+"endLine":  99,
+"endColumn":  120
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  20,
+"endLine":  121,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  125,
+"endLine":  130,
+"endColumn":  132
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'a black car-done' 4 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  23,
+"endLine":  51,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  23,
+"endLine":  92,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  23,
+"endLine":  138,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  23,
+"endLine":  197,
+"endColumn":  41
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'a green apple-done' 5 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  23,
+"endLine":  49,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  23,
+"endLine":  90,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  23,
+"endLine":  136,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  27,
+"endLine":  172,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  23,
+"endLine":  195,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'a black car' 5 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  20,
+"endLine":  50,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  114,
+"endLine":  72,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  20,
+"endLine":  91,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  20,
+"endLine":  137,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  20,
+"endLine":  196,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'a green leaf' 5 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  20,
+"endLine":  56,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  113,
+"endLine":  66,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  113,
+"endLine":  120,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  20,
+"endLine":  143,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  114,
+"endLine":  159,
+"endColumn":  128
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'a green banana' 6 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  20,
+"endLine":  54,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  113,
+"endLine":  63,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  113,
+"endLine":  112,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  20,
+"endLine":  141,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  125,
+"endLine":  152,
+"endColumn":  141
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  20,
+"endLine":  198,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'green' 6 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  55,
+"endLine":  59,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  55,
+"endLine":  108,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  56,
+"endLine":  148,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  55,
+"endLine":  155,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  55,
+"endLine":  175,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  55,
+"endLine":  201,
+"endColumn":  62
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'a green apple' 10 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  20,
+"endLine":  48,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  113,
+"endLine":  62,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  114,
+"endLine":  78,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  20,
+"endLine":  89,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  113,
+"endLine":  111,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  20,
+"endLine":  135,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  114,
+"endLine":  151,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  24,
+"endLine":  171,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  89,
+"endLine":  181,
+"endColumn":  104
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  20,
+"endLine":  194,
+"endColumn":  35
+}
+}
+]
+}
+]
+}

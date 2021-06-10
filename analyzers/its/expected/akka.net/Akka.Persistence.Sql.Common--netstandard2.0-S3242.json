@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<TKey, System.Collections.Generic.HashSet<TVal>>' instead of 'System.Collections.Generic.Dictionary<TKey, System.Collections.Generic.HashSet<TVal>>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\MultiValueDictionaryExtensions.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  85,
+"endLine":  26,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<TKey, System.Collections.Generic.HashSet<TVal>>' instead of 'System.Collections.Generic.Dictionary<TKey, System.Collections.Generic.HashSet<TVal>>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\MultiValueDictionaryExtensions.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  88,
+"endLine":  46,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Data.IDataRecord' instead of 'System.Data.Common.DbDataReader'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"region":  {
+"startLine":  588,
+"startColumn":  51,
+"endLine":  588,
+"endColumn":  57
+}
+}
+}
+]
+}

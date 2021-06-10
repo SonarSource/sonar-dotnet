@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Identifier'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\Identifier.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  19,
+"endLine":  13,
+"endColumn":  29
+}
+}
+}
+]
+}

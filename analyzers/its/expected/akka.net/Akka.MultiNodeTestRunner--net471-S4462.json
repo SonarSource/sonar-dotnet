@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  506,
+"startColumn":  13,
+"endLine":  506,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  527,
+"startColumn":  23,
+"endLine":  527,
+"endColumn":  129
+}
+}
+}
+]
+}

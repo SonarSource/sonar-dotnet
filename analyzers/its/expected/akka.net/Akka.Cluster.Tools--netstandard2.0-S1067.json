@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1447,
+"startColumn":  26,
+"endLine":  1487,
+"endColumn":  14
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  361,
+"startColumn":  27,
+"endLine":  361,
+"endColumn":  42
+}
+}
+}
+]
+}

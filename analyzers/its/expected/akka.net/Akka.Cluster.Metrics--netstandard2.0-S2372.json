@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\WeightedRoutees.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  21,
+"endLine":  56,
+"endColumn":  100
+}
+}
+}
+]
+}

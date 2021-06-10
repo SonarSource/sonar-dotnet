@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'useReconnect.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientSettings.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  17,
+"endLine":  54,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useReconnect.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientSettings.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  17,
+"endLine":  55,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useReconnect.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientSettings.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  17,
+"endLine":  56,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'pathElements.Last().StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  630,
+"startColumn":  76,
+"endLine":  630,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'key.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  469,
+"startColumn":  25,
+"endLine":  469,
+"endColumn":  52
+}
+}
+}
+]
+}

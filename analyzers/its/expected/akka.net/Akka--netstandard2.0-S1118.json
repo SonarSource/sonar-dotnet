@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1118",
+"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationFactory.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  18,
+"endLine":  22,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1118",
+"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  1105,
+"startColumn":  18,
+"endLine":  1105,
+"endColumn":  28
+}
+}
+}
+]
+}

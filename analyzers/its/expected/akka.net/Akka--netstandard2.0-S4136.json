@@ -1,0 +1,460 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Equals' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  21,
+"endLine":  236,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  30,
+"endLine":  487,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ToStringWithAddress' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  519,
+"startColumn":  23,
+"endLine":  519,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  565,
+"startColumn":  23,
+"endLine":  565,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Equals' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  30,
+"endLine":  303,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  21,
+"endLine":  346,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'CompareTo' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  20,
+"endLine":  327,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  20,
+"endLine":  356,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Cancel' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\ICancelable.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  14,
+"endLine":  30,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\ICancelable.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  14,
+"endLine":  72,
+"endColumn":  20
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetExtension' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  32,
+"endLine":  348,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  27,
+"endLine":  385,
+"endColumn":  39
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Equals' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  21,
+"endLine":  265,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  323,
+"startColumn":  30,
+"endLine":  323,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Create' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  29,
+"endLine":  352,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  407,
+"startColumn":  29,
+"endLine":  407,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Take' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  23,
+"endLine":  103,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  21,
+"endLine":  148,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Matches' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  21,
+"endLine":  64,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  21,
+"endLine":  119,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Info' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggingAdapterBase.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  29,
+"endLine":  237,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggingAdapterBase.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  29,
+"endLine":  339,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Equals' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\NotUsed.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  30,
+"endLine":  37,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\NotUsed.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  21,
+"endLine":  49,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'WithTransport' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  25,
+"endLine":  135,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  25,
+"endLine":  239,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Equals' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  30,
+"endLine":  535,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  547,
+"startColumn":  21,
+"endLine":  547,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Remove' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Index.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  21,
+"endLine":  147,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Index.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  36,
+"endLine":  193,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'CopyAndAdd' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  34,
+"endLine":  35,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  54,
+"endLine":  78,
+"endColumn":  64
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'CopyAndRemove' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  34,
+"endLine":  55,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  54,
+"endLine":  95,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'SwitchOff' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  21,
+"endLine":  63,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  21,
+"endLine":  84,
+"endColumn":  30
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'SwitchOn' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  21,
+"endLine":  75,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  21,
+"endLine":  97,
+"endColumn":  29
+}
+}
+]
+}
+]
+}

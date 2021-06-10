@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  17,
+"endLine":  60,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  17,
+"endLine":  71,
+"endColumn":  48
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'otherIdx' in a separate statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  30,
+"endLine":  408,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'b' in a separate statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  29,
+"endLine":  235,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'n' in a separate statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  36,
+"endLine":  235,
+"endColumn":  37
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  35,
+"endLine":  214,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  34,
+"endLine":  221,
+"endColumn":  73
+}
+}
+}
+]
+}

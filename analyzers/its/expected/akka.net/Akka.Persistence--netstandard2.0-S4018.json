@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  25,
+"endLine":  400,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  30,
+"endLine":  399,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  26,
+"endLine":  434,
+"endColumn":  37
+}
+}
+}
+]
+}

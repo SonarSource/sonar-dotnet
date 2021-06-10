@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2292",
+"message":  "Make this an auto-implemented property and remove its backing field.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BlockingMessageQueue.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  25,
+"endLine":  29,
+"endColumn":  37
+}
+}
+}
+]
+}

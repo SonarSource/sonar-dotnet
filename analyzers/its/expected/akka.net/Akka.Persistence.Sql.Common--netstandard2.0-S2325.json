@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'GetTimestampProvider' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"region":  {
+"startLine":  524,
+"startColumn":  38,
+"endLine":  524,
+"endColumn":  58
+}
+}
+}
+]
+}

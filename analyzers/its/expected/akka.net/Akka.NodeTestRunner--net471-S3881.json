@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  11,
+"endLine":  23,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  11,
+"endLine":  23,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  21,
+"endLine":  90,
+"endColumn":  28
+}
+}
+]
+}
+]
+}

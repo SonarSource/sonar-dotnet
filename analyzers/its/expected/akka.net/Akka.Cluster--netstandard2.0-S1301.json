@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  17,
+"endLine":  71,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2768,
+"startColumn":  13,
+"endLine":  2768,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  514,
+"startColumn":  13,
+"endLine":  514,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  518,
+"startColumn":  21,
+"endLine":  518,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  608,
+"startColumn":  13,
+"endLine":  608,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  612,
+"startColumn":  21,
+"endLine":  612,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  321,
+"startColumn":  17,
+"endLine":  321,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  25,
+"endLine":  325,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  13,
+"endLine":  364,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  29,
+"endLine":  401,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  449,
+"startColumn":  13,
+"endLine":  449,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  581,
+"startColumn":  13,
+"endLine":  581,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  637,
+"startColumn":  21,
+"endLine":  637,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  21,
+"endLine":  290,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  21,
+"endLine":  303,
+"endColumn":  27
+}
+}
+}
+]
+}

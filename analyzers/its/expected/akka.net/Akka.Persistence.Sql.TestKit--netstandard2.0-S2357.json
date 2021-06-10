@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'ToSequenceNr' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\TestActor.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  34,
+"endLine":  18,
+"endColumn":  46
+}
+}
+}
+]
+}

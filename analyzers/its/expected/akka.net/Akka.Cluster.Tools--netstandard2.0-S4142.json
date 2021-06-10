@@ -1,0 +1,148 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  17,
+"endLine":  223,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  17,
+"endLine":  222,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  17,
+"endLine":  245,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  17,
+"endLine":  244,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  17,
+"endLine":  389,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  17,
+"endLine":  388,
+"endColumn":  51
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  117,
+"endLine":  161,
+"endColumn":  141
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  91,
+"endLine":  161,
+"endColumn":  115
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  106,
+"endLine":  163,
+"endColumn":  120
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  90,
+"endLine":  163,
+"endColumn":  104
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  104,
+"endLine":  55,
+"endColumn":  117
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  89,
+"endLine":  55,
+"endColumn":  102
+}
+}
+]
+}
+]
+}

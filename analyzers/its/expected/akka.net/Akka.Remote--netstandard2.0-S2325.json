@@ -1,0 +1,394 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'Phi' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  25,
+"endLine":  270,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ValueOrNull' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ExceptionSupport.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  24,
+"endLine":  153,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ActorRefToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  24,
+"endLine":  176,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'HeartbeatRspToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  24,
+"endLine":  197,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'HearthbeatRspFromProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  44,
+"endLine":  204,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'RemoteScopeToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  24,
+"endLine":  213,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'RemoteScopeFromProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  29,
+"endLine":  220,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ConfigToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  24,
+"endLine":  229,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ConfigFromProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  24,
+"endLine":  237,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DefaultResizerToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  24,
+"endLine":  285,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DefaultResizerFromProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  32,
+"endLine":  298,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SuperviseToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  24,
+"endLine":  128,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'WatchToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  24,
+"endLine":  146,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'UnwatchToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  24,
+"endLine":  167,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DeathWatchNotificationToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  24,
+"endLine":  211,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AckBuilder' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"region":  {
+"startLine":  461,
+"startColumn":  37,
+"endLine":  461,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DecodeControlPdu' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"region":  {
+"startLine":  505,
+"startColumn":  26,
+"endLine":  505,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DISASSOCIATE' a static property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"region":  {
+"startLine":  531,
+"startColumn":  28,
+"endLine":  531,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DISASSOCIATE_SHUTTING_DOWN' a static property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"region":  {
+"startLine":  536,
+"startColumn":  28,
+"endLine":  536,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DISASSOCIATE_QUARANTINED' a static property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"region":  {
+"startLine":  541,
+"startColumn":  28,
+"endLine":  541,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Format' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  26,
+"endLine":  129,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FormatByteBuffer' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  16,
+"endLine":  172,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FormatByteBufferHolder' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  16,
+"endLine":  194,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FormatSimple' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  16,
+"endLine":  220,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ResolveNameAsync' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  40,
+"endLine":  402,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ResolveNameAsync' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"region":  {
+"startLine":  410,
+"startColumn":  40,
+"endLine":  410,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Rng' a static property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  24,
+"endLine":  201,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DefaultShutdown' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  28,
+"endLine":  252,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'RemoteListenerRelativeTo' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  616,
+"startColumn":  37,
+"endLine":  616,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AskModeWithDeathCompletion' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  534,
+"startColumn":  38,
+"endLine":  534,
+"endColumn":  64
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'input.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  25,
+"endLine":  45,
+"endColumn":  46
+}
+}
+}
+]
+}

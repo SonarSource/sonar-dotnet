@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  13,
+"endLine":  411,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  20,
+"endLine":  24,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  53,
+"endLine":  24,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'String.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  20,
+"endLine":  23,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'String.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  53,
+"endLine":  23,
+"endColumn":  82
+}
+}
+}
+]
+}

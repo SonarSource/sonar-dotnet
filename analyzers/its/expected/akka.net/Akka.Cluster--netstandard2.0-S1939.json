@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1939",
+"message":  "'IClusterDomainEvent' implements 'IDeadLetterSuppression' so 'IDeadLetterSuppression' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  563,
+"startColumn":  70,
+"endLine":  563,
+"endColumn":  94
+}
+}
+}
+]
+}

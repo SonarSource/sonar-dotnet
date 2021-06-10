@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  1,
+"endLine":  281,
+"endColumn":  211
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 366 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  1,
+"endLine":  317,
+"endColumn":  367
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 218 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  1,
+"endLine":  55,
+"endColumn":  219
+}
+}
+}
+]
+}

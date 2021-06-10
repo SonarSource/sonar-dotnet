@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'state', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  28,
+"endLine":  63,
+"endColumn":  32
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpInboundOnlySpec.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  28,
+"endLine":  90,
+"endColumn":  103
+}
+}
+}
+]
+}

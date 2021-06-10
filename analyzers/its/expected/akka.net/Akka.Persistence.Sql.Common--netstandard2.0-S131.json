@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  908,
+"startColumn":  13,
+"endLine":  908,
+"endColumn":  19
+}
+}
+}
+]
+}

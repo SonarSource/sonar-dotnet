@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  32,
+"endLine":  50,
+"endColumn":  38
+}
+}
+}
+]
+}

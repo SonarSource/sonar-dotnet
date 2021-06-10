@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteDeployerSpec.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  21,
+"endLine":  55,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  21,
+"endLine":  195,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  21,
+"endLine":  204,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  21,
+"endLine":  136,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  21,
+"endLine":  183,
+"endColumn":  129
+}
+}
+}
+]
+}

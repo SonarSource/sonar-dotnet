@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  22,
+"endLine":  21,
+"endColumn":  42
+}
+}
+}
+]
+}

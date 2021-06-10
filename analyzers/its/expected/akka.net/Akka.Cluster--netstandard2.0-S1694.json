@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  33,
+"endLine":  39,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  31,
+"endLine":  235,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  592,
+"startColumn":  31,
+"endLine":  592,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  27,
+"endLine":  209,
+"endColumn":  52
+}
+}
+}
+]
+}

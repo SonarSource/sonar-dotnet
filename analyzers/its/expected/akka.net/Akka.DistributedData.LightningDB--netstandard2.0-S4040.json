@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData.LightningDB\LmdbDurableStore.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  81,
+"endLine":  118,
+"endColumn":  97
+}
+}
+}
+]
+}

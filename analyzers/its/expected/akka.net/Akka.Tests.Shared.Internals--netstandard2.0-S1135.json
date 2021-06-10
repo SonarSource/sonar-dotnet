@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  15,
+"endLine":  126,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  15,
+"endLine":  134,
+"endColumn":  19
+}
+}
+}
+]
+}

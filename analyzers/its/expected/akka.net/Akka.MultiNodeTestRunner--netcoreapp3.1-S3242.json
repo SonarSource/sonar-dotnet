@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Xunit.Abstractions.ITestCaseMessage' instead of 'Xunit.Abstractions.ITestCaseDiscoveryMessage'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  78,
+"endLine":  70,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  504,
+"startColumn":  61,
+"endLine":  504,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Akka.MultiNodeTestRunner.Shared.NodeTest>' instead of 'System.Collections.Generic.IList<Akka.MultiNodeTestRunner.Shared.NodeTest>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  524,
+"startColumn":  56,
+"endLine":  524,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  524,
+"startColumn":  73,
+"endLine":  524,
+"endColumn":  90
+}
+}
+}
+]
+}

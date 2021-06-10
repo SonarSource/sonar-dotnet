@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_resetEvent'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  18,
+"endLine":  19,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_resetEvent'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  18,
+"endLine":  19,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'EventBlock'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  27,
+"endLine":  20,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'ResetEvent'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\ReceiveOnlyBenchmark.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'cancel', 'clientSocket', 'resetEvent', 'stream'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpInboundOnlySpec.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  18,
+"endLine":  22,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'resetEvent'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpSingleConnectionSpec.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  18,
+"endLine":  21,
+"endColumn":  41
+}
+}
+}
+]
+}

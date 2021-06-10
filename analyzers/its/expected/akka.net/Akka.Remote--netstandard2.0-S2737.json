@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2737",
+"message":  "Add logic to this catch clause or eliminate it and rethrow the exception automatically.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1964,
+"startColumn":  29,
+"endLine":  1967,
+"endColumn":  30
+}
+}
+}
+]
+}

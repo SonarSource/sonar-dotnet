@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '60' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Customers.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  52,
+"endLine":  47,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Program.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  26,
+"endLine":  96,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Program.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  79,
+"endLine":  108,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Program.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  104,
+"endLine":  108,
+"endColumn":  105
+}
+}
+}
+]
+}

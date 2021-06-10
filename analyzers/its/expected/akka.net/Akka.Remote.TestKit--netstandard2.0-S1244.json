@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1244",
+"message":  "Do not check floating point equality with exact values, use a range instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  55,
+"endLine":  487,
+"endColumn":  57
+}
+}
+}
+]
+}

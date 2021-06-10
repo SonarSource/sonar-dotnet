@@ -1,0 +1,9 @@
+{
+"issues":  [
+{
+"id":  "S3992",
+"message":  "Provide a 'ComVisible' attribute for assembly 'Akka.Persistence.TestKit.Xunit2'.",
+"location":  null
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterBase.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  22,
+"endLine":  46,
+"endColumn":  34
+}
+}
+}
+]
+}

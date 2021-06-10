@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Services\IPublicHashingService.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  25,
+"endLine":  21,
+"endColumn":  29
+}
+}
+}
+]
+}

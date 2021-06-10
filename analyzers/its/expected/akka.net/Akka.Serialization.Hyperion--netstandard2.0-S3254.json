@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  69,
+"endLine":  194,
+"endColumn":  73
+}
+}
+}
+]
+}

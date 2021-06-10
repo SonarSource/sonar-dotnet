@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  21,
+"endLine":  82,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceSnapshotSerializer.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  21,
+"endLine":  55,
+"endColumn":  83
+}
+}
+}
+]
+}

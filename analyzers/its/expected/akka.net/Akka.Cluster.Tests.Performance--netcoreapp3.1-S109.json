@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  154,
+"endLine":  63,
+"endColumn":  155
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  212,
+"endLine":  63,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  152,
+"endLine":  77,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  210,
+"endLine":  77,
+"endColumn":  214
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  59,
+"endLine":  94,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  122,
+"endLine":  43,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  56,
+"endLine":  67,
+"endColumn":  57
+}
+}
+}
+]
+}

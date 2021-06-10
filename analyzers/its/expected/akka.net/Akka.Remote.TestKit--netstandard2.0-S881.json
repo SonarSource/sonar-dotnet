@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  97,
+"endLine":  284,
+"endColumn":  99
+}
+}
+}
+]
+}

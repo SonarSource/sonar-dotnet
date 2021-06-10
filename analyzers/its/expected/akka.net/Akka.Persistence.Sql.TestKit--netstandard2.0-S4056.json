@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\TestActor.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  39,
+"endLine":  45,
+"endColumn":  76
+}
+}
+}
+]
+}

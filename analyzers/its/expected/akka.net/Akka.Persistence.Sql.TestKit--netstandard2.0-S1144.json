@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'State'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlJournalConnectionFailureSpec.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  13,
+"endLine":  55,
+"endColumn":  81
+}
+}
+}
+]
+}

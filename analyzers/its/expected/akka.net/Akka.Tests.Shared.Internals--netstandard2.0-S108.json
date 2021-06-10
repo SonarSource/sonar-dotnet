@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SynchronousTaskExtensions.cs.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  13,
+"endLine":  101,
+"endColumn":  14
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  51,
+"endLine":  142,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  51,
+"endLine":  161,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  918,
+"startColumn":  67,
+"endLine":  918,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2949,
+"startColumn":  31,
+"endLine":  2951,
+"endColumn":  32
+}
+}
+}
+]
+}

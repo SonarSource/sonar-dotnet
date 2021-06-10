@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_initialPendingRequests' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestPublisher.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  35,
+"endLine":  170,
+"endColumn":  58
+}
+}
+}
+]
+}

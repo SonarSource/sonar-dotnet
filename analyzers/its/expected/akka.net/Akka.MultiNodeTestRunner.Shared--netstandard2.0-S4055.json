@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  34,
+"endLine":  56,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  46,
+"endLine":  67,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  30,
+"endLine":  83,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  30,
+"endLine":  107,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  31,
+"endLine":  143,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  31,
+"endLine":  150,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  31,
+"endLine":  157,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  31,
+"endLine":  211,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\FileSystemMessageSinkActor.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  35,
+"endLine":  68,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\FileSystemMessageSinkActor.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  39,
+"endLine":  76,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\FileSystemMessageSinkActor.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  35,
+"endLine":  79,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  31,
+"endLine":  114,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxMessageSink.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  31,
+"endLine":  24,
+"endColumn":  53
+}
+}
+}
+]
+}

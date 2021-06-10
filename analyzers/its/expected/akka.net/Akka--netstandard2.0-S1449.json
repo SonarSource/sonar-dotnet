@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  30,
+"endLine":  80,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  28,
+"endLine":  82,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Use 'CompareOrdinal' or 'Compare' with the locale specified instead of 'CompareTo'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  50,
+"endLine":  235,
+"endColumn":  59
+}
+}
+}
+]
+}

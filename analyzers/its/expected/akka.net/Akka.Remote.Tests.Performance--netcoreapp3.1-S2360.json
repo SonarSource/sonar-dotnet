@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  32,
+"endLine":  45,
+"endColumn":  38
+}
+}
+}
+]
+}

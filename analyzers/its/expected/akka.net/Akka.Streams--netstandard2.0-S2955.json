@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TIn)' instead or add a constraint to 'TIn' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  70,
+"endLine":  221,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TOut)' instead or add a constraint to 'TOut' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  488,
+"startColumn":  37,
+"endLine":  488,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TOut)' instead or add a constraint to 'TOut' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1038,
+"startColumn":  61,
+"endLine":  1038,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TOut)' instead or add a constraint to 'TOut' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1347,
+"startColumn":  61,
+"endLine":  1347,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2541,
+"startColumn":  67,
+"endLine":  2541,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TOut)' instead or add a constraint to 'TOut' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2774,
+"startColumn":  57,
+"endLine":  2774,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TKey)' instead or add a constraint to 'TKey' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  32,
+"endLine":  399,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1828,
+"startColumn":  28,
+"endLine":  1828,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1203,
+"startColumn":  91,
+"endLine":  1203,
+"endColumn":  95
+}
+}
+}
+]
+}

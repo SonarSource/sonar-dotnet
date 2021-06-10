@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterBase.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  22,
+"endLine":  46,
+"endColumn":  34
+}
+}
+}
+]
+}

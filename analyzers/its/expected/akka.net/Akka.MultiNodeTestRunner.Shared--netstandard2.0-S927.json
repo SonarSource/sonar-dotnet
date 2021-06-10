@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'log' to 'specLog' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  74,
+"endLine":  226,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'beginNewSpec' to 'newSpec' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  60,
+"endLine":  50,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'logMessage' to 'logMessageFragment' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TestCoordinatorEnabledMessageSink.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  85,
+"endLine":  72,
+"endColumn":  95
+}
+}
+}
+]
+}

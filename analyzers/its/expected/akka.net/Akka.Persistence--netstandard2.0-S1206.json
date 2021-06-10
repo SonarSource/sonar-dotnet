@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  25,
+"endLine":  34,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  18,
+"endLine":  66,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This struct overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  19,
+"endLine":  100,
+"endColumn":  38
+}
+}
+}
+]
+}

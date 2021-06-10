@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3923",
+"message":  "Remove this conditional structure or edit its code blocks so that they're not all the same.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  25,
+"endLine":  43,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3923",
+"message":  "Remove this conditional structure or edit its code blocks so that they're not all the same.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  21,
+"endLine":  96,
+"endColumn":  23
+}
+}
+}
+]
+}

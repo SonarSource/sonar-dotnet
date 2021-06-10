@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  775,
+"startColumn":  38,
+"endLine":  775,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  676,
+"startColumn":  38,
+"endLine":  676,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'Timeouts must fit in a 32-bit unsigned int' is not declared in the argument list.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  374,
+"startColumn":  23,
+"endLine":  374,
+"endColumn":  100
+}
+}
+}
+]
+}

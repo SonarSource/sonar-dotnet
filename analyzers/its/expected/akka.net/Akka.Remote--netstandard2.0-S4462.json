@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  21,
+"endLine":  195,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  521,
+"startColumn":  17,
+"endLine":  521,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  814,
+"startColumn":  17,
+"endLine":  814,
+"endColumn":  28
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  691,
+"startColumn":  17,
+"endLine":  691,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  742,
+"startColumn":  13,
+"endLine":  742,
+"endColumn":  15
+}
+}
+}
+]
+}

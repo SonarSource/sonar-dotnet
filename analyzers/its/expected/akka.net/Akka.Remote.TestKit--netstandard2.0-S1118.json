@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1118",
+"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  18,
+"endLine":  29,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1118",
+"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\RemoteConnection.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  20,
+"endLine":  40,
+"endColumn":  36
+}
+}
+}
+]
+}

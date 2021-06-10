@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationBackend.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  153,
+"endLine":  42,
+"endColumn":  160
+}
+}
+}
+]
+}

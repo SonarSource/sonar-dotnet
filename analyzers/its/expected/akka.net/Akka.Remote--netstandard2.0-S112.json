@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  23,
+"endLine":  47,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  23,
+"endLine":  53,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  23,
+"endLine":  74,
+"endColumn":  98
+}
+}
+}
+]
+}

@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  13,
+"endLine":  251,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  17,
+"endLine":  157,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  879,
+"startColumn":  13,
+"endLine":  879,
+"endColumn":  191
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  888,
+"startColumn":  13,
+"endLine":  888,
+"endColumn":  174
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  92,
+"endLine":  332,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Context.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  5,
+"endLine":  16,
+"endColumn":  8
+}
+}
+}
+]
+}

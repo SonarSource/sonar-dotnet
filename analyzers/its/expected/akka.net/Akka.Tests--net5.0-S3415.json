@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  25,
+"endLine":  27,
+"endColumn":  46
+}
+}
+}
+]
+}

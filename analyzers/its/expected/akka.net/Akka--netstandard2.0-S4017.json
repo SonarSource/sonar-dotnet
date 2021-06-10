@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  868,
+"startColumn":  74,
+"endLine":  868,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  13,
+"endLine":  79,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  13,
+"endLine":  96,
+"endColumn":  59
+}
+}
+}
+]
+}

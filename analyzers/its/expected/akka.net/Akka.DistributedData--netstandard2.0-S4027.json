@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  25,
+"endLine":  84,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"region":  {
+"startLine":  897,
+"startColumn":  25,
+"endLine":  897,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"region":  {
+"startLine":  1001,
+"startColumn":  18,
+"endLine":  1001,
+"endColumn":  38
+}
+}
+}
+]
+}

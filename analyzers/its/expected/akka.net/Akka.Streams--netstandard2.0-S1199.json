@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1199",
+"message":  "Extract this nested code block into a separate method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  862,
+"startColumn":  13,
+"endLine":  862,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1199",
+"message":  "Extract this nested code block into a separate method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  873,
+"startColumn":  13,
+"endLine":  873,
+"endColumn":  14
+}
+}
+}
+]
+}

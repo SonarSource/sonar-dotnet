@@ -1,0 +1,433 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ServerBinding'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  23,
+"endLine":  36,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'IncomingConnection'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  23,
+"endLine":  66,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'OutgoingConnection'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  23,
+"endLine":  113,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'MaterializationContext'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\IMaterializer.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  19,
+"endLine":  190,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'OnError'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  23,
+"endLine":  412,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'OnComplete'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  439,
+"startColumn":  23,
+"endLine":  439,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'OnNext'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  23,
+"endLine":  460,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'OnSubscribe'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  23,
+"endLine":  487,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'SubInput'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  23,
+"endLine":  544,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'SubstreamRequestMore'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  406,
+"startColumn":  23,
+"endLine":  406,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'SubstreamCancel'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  433,
+"startColumn":  23,
+"endLine":  433,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'SubstreamSubscribePending'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  23,
+"endLine":  454,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ExposedPublishers'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  510,
+"startColumn":  23,
+"endLine":  510,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'OnError'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  457,
+"startColumn":  23,
+"endLine":  457,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'OnComplete'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  489,
+"startColumn":  23,
+"endLine":  489,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'OnNext'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  515,
+"startColumn":  23,
+"endLine":  515,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'OnSubscribe'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  547,
+"startColumn":  23,
+"endLine":  547,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'RequestMore'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  579,
+"startColumn":  23,
+"endLine":  579,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Cancel'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  611,
+"startColumn":  23,
+"endLine":  611,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'SubscribePending'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  637,
+"startColumn":  23,
+"endLine":  637,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ExposedPublisher'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  663,
+"startColumn":  23,
+"endLine":  663,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'AsyncInput'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  695,
+"startColumn":  23,
+"endLine":  695,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Resume'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  734,
+"startColumn":  23,
+"endLine":  734,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Abort'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  751,
+"startColumn":  23,
+"endLine":  751,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Continue'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  24,
+"endLine":  64,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Continue'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamPublisher.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  24,
+"endLine":  43,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Data'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  25,
+"endLine":  75,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Failed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  25,
+"endLine":  127,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Outbound'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  320,
+"startColumn":  25,
+"endLine":  320,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Inbound'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  361,
+"startColumn":  25,
+"endLine":  361,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'TransferPhase'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"region":  {
+"startLine":  365,
+"startColumn":  19,
+"endLine":  365,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'IOResult'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\IO\IOResult.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  19,
+"endLine":  17,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'LogicAndMaterializedValue'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  19,
+"endLine":  49,
+"endColumn":  44
+}
+}
+}
+]
+}

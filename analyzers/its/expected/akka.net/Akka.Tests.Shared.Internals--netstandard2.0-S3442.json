@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  9,
+"endLine":  53,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  9,
+"endLine":  58,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  9,
+"endLine":  64,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  9,
+"endLine":  70,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  9,
+"endLine":  76,
+"endColumn":  15
+}
+}
+}
+]
+}

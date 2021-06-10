@@ -1,0 +1,1735 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  63,
+"endLine":  56,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  63,
+"endLine":  56,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  13,
+"endLine":  60,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  17,
+"endLine":  69,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  21,
+"endLine":  75,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  17,
+"endLine":  83,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  21,
+"endLine":  88,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  25,
+"endLine":  97,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  29,
+"endLine":  105,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  41,
+"endLine":  110,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  37,
+"endLine":  113,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  74,
+"endLine":  113,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  21,
+"endLine":  127,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  63,
+"endLine":  186,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  63,
+"endLine":  186,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  13,
+"endLine":  191,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  17,
+"endLine":  193,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  21,
+"endLine":  195,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  56,
+"endLine":  195,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  47,
+"endLine":  204,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  67,
+"endLine":  211,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  63,
+"endLine":  214,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  43,
+"endLine":  220,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  17,
+"endLine":  226,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  67,
+"endLine":  229,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  59,
+"endLine":  233,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  43,
+"endLine":  237,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  80,
+"endLine":  246,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  43,
+"endLine":  254,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1417,
+"startColumn":  22,
+"endLine":  1417,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1417,
+"startColumn":  22,
+"endLine":  1417,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1423,
+"startColumn":  13,
+"endLine":  1423,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1427,
+"startColumn":  17,
+"endLine":  1427,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1429,
+"startColumn":  21,
+"endLine":  1429,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1431,
+"startColumn":  25,
+"endLine":  1431,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1431,
+"startColumn":  105,
+"endLine":  1431,
+"endColumn":  107
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1431,
+"startColumn":  69,
+"endLine":  1431,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1431,
+"startColumn":  126,
+"endLine":  1431,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1435,
+"startColumn":  81,
+"endLine":  1435,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1438,
+"startColumn":  29,
+"endLine":  1438,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1438,
+"startColumn":  64,
+"endLine":  1438,
+"endColumn":  66
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1219,
+"startColumn":  22,
+"endLine":  1219,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1219,
+"startColumn":  22,
+"endLine":  1219,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1221,
+"startColumn":  13,
+"endLine":  1221,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1232,
+"startColumn":  17,
+"endLine":  1232,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1235,
+"startColumn":  21,
+"endLine":  1235,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1235,
+"startColumn":  88,
+"endLine":  1235,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1235,
+"startColumn":  62,
+"endLine":  1235,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1243,
+"startColumn":  17,
+"endLine":  1243,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1246,
+"startColumn":  21,
+"endLine":  1246,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1246,
+"startColumn":  91,
+"endLine":  1246,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1246,
+"startColumn":  65,
+"endLine":  1246,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1251,
+"startColumn":  17,
+"endLine":  1251,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1253,
+"startColumn":  21,
+"endLine":  1253,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1253,
+"startColumn":  54,
+"endLine":  1253,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  622,
+"startColumn":  22,
+"endLine":  622,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  622,
+"startColumn":  22,
+"endLine":  622,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  630,
+"startColumn":  17,
+"endLine":  630,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  633,
+"startColumn":  21,
+"endLine":  633,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  636,
+"startColumn":  49,
+"endLine":  636,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  644,
+"startColumn":  22,
+"endLine":  644,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  21,
+"endLine":  653,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  656,
+"startColumn":  49,
+"endLine":  656,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  670,
+"startColumn":  17,
+"endLine":  670,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  680,
+"startColumn":  17,
+"endLine":  680,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  682,
+"startColumn":  21,
+"endLine":  682,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  696,
+"startColumn":  21,
+"endLine":  696,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  696,
+"startColumn":  39,
+"endLine":  696,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  701,
+"startColumn":  26,
+"endLine":  701,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  717,
+"startColumn":  21,
+"endLine":  717,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  36,
+"endLine":  180,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  36,
+"endLine":  180,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  28,
+"endLine":  194,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  48,
+"endLine":  195,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  70,
+"endLine":  196,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  52,
+"endLine":  197,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  40,
+"endLine":  198,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  50,
+"endLine":  199,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  66,
+"endLine":  200,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  42,
+"endLine":  201,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  54,
+"endLine":  202,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  66,
+"endLine":  203,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  80,
+"endLine":  204,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  44,
+"endLine":  205,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  975,
+"startColumn":  44,
+"endLine":  975,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  975,
+"startColumn":  44,
+"endLine":  975,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  984,
+"startColumn":  21,
+"endLine":  984,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  987,
+"startColumn":  21,
+"endLine":  987,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  990,
+"startColumn":  21,
+"endLine":  990,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  998,
+"startColumn":  17,
+"endLine":  998,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1007,
+"startColumn":  13,
+"endLine":  1007,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1012,
+"startColumn":  21,
+"endLine":  1012,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1014,
+"startColumn":  29,
+"endLine":  1014,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1022,
+"startColumn":  21,
+"endLine":  1022,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1027,
+"startColumn":  21,
+"endLine":  1027,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1029,
+"startColumn":  29,
+"endLine":  1029,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1036,
+"startColumn":  21,
+"endLine":  1036,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 35 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  32,
+"endLine":  107,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  32,
+"endLine":  107,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  17,
+"endLine":  111,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  17,
+"endLine":  112,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  17,
+"endLine":  113,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  17,
+"endLine":  114,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  17,
+"endLine":  115,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  17,
+"endLine":  116,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  17,
+"endLine":  117,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  17,
+"endLine":  118,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  17,
+"endLine":  119,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  17,
+"endLine":  120,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  17,
+"endLine":  121,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  17,
+"endLine":  122,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  17,
+"endLine":  123,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  17,
+"endLine":  124,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  17,
+"endLine":  125,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  17,
+"endLine":  126,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  17,
+"endLine":  128,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  17,
+"endLine":  129,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  17,
+"endLine":  130,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  17,
+"endLine":  131,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  17,
+"endLine":  132,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  17,
+"endLine":  133,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  17,
+"endLine":  136,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  17,
+"endLine":  137,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  17,
+"endLine":  138,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  17,
+"endLine":  139,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  17,
+"endLine":  140,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  17,
+"endLine":  141,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  17,
+"endLine":  142,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  17,
+"endLine":  143,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  17,
+"endLine":  144,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  17,
+"endLine":  145,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  17,
+"endLine":  148,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  17,
+"endLine":  149,
+"endColumn":  21
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  508,
+"startColumn":  32,
+"endLine":  508,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  508,
+"startColumn":  32,
+"endLine":  508,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  512,
+"startColumn":  17,
+"endLine":  512,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  513,
+"startColumn":  17,
+"endLine":  513,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  514,
+"startColumn":  17,
+"endLine":  514,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  515,
+"startColumn":  17,
+"endLine":  515,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  516,
+"startColumn":  17,
+"endLine":  516,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  517,
+"startColumn":  17,
+"endLine":  517,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  518,
+"startColumn":  17,
+"endLine":  518,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  519,
+"startColumn":  17,
+"endLine":  519,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  520,
+"startColumn":  17,
+"endLine":  520,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  521,
+"startColumn":  17,
+"endLine":  521,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  17,
+"endLine":  522,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  523,
+"startColumn":  17,
+"endLine":  523,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  524,
+"startColumn":  17,
+"endLine":  524,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  525,
+"startColumn":  17,
+"endLine":  525,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  526,
+"startColumn":  17,
+"endLine":  526,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  527,
+"startColumn":  17,
+"endLine":  527,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  528,
+"startColumn":  17,
+"endLine":  528,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  529,
+"startColumn":  17,
+"endLine":  529,
+"endColumn":  21
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  26,
+"endLine":  166,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  26,
+"endLine":  166,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  13,
+"endLine":  172,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  17,
+"endLine":  174,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  91,
+"endLine":  174,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  58,
+"endLine":  174,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  22,
+"endLine":  175,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  49,
+"endLine":  175,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  22,
+"endLine":  176,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  88,
+"endLine":  176,
+"endColumn":  89
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  22,
+"endLine":  177,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  89,
+"endLine":  177,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  21,
+"endLine":  181,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  25,
+"endLine":  183,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  29,
+"endLine":  185,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  30,
+"endLine":  188,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  29,
+"endLine":  190,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  26,
+"endLine":  197,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  25,
+"endLine":  199,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  25,
+"endLine":  205,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  22,
+"endLine":  145,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  22,
+"endLine":  145,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  70,
+"endLine":  150,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  73,
+"endLine":  152,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  55,
+"endLine":  152,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  13,
+"endLine":  155,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  27,
+"endLine":  155,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  18,
+"endLine":  156,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  18,
+"endLine":  157,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  48,
+"endLine":  157,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  18,
+"endLine":  158,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  48,
+"endLine":  158,
+"endColumn":  50
+}
+}
+]
+}
+]
+}

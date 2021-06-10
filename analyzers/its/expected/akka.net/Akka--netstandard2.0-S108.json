@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  1123,
+"startColumn":  31,
+"endLine":  1123,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  424,
+"startColumn":  13,
+"endLine":  426,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  55,
+"endLine":  121,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  634,
+"startColumn":  33,
+"endLine":  635,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"region":  {
+"startLine":  576,
+"startColumn":  112,
+"endLine":  576,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  69,
+"endLine":  600,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  1028,
+"startColumn":  39,
+"endLine":  1028,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  700,
+"startColumn":  47,
+"endLine":  700,
+"endColumn":  50
+}
+}
+}
+]
+}

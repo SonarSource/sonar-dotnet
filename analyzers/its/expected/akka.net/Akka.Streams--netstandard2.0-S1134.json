@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  15,
+"endLine":  213,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  440,
+"startColumn":  20,
+"endLine":  440,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  16,
+"endLine":  92,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  16,
+"endLine":  82,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  1205,
+"startColumn":  13,
+"endLine":  1205,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\IOSources.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  16,
+"endLine":  88,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  20,
+"endLine":  74,
+"endColumn":  25
+}
+}
+}
+]
+}

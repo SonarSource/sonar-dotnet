@@ -1,0 +1,46 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'mailbox-type' 4 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  58,
+"endLine":  169,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  59,
+"endLine":  273,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  61,
+"endLine":  274,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  41,
+"endLine":  331,
+"endColumn":  55
+}
+}
+]
+}
+]
+}

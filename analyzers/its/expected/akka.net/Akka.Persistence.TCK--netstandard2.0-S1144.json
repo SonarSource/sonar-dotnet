@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused internal type 'MyPayload2Serializer'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  9,
+"endLine":  217,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal type 'MyWriteAdapter'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  9,
+"endLine":  236,
+"endColumn":  10
+}
+}
+}
+]
+}

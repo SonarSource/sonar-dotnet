@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\AutomaticCluster.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  114,
+"endLine":  34,
+"endColumn":  118
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  17,
+"endLine":  233,
+"endColumn":  23
+}
+}
+}
+]
+}

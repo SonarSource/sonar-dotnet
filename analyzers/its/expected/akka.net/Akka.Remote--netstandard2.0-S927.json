@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'obj' to 'o' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  48,
+"endLine":  86,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'obj' to 'o' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\PrimitiveSerializers.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  48,
+"endLine":  79,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  71,
+"endLine":  36,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  73,
+"endLine":  42,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  67,
+"endLine":  48,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  69,
+"endLine":  54,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  69,
+"endLine":  60,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cause' to 'exception' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  84,
+"endLine":  60,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  72,
+"endLine":  66,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  63,
+"endLine":  72,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  66,
+"endLine":  78,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  69,
+"endLine":  84,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  64,
+"endLine":  90,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  69,
+"endLine":  96,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  65,
+"endLine":  102,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  64,
+"endLine":  113,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  59,
+"endLine":  123,
+"endColumn":  62
+}
+}
+}
+]
+}

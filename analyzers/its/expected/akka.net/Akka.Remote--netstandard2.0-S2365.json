@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2365",
+"message":  "Refactor 'AllEndpoints' into a method, properties should not copy collections.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  26,
+"endLine":  304,
+"endColumn":  88
+}
+}
+}
+]
+}

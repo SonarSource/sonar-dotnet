@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  615,
+"startColumn":  13,
+"endLine":  615,
+"endColumn":  29
+}
+}
+}
+]
+}

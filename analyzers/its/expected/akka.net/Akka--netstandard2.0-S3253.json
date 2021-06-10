@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  13,
+"endLine":  145,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  13,
+"endLine":  225,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  481,
+"startColumn":  13,
+"endLine":  481,
+"endColumn":  21
+}
+}
+}
+]
+}

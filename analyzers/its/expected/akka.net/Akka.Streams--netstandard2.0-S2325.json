@@ -1,0 +1,186 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'ProductPrefix' a static property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamRefs.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  23,
+"endLine":  83,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsCopiedModuleWithGraphStageAndMaterializedValue' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  900,
+"startColumn":  22,
+"endLine":  900,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AddMapping' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  911,
+"startColumn":  22,
+"endLine":  911,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'RemoveMapping' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  919,
+"startColumn":  27,
+"endLine":  919,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Hash' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  962,
+"startColumn":  25,
+"endLine":  962,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Flatten' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  854,
+"startColumn":  31,
+"endLine":  854,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsEnabled' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2956,
+"startColumn":  26,
+"endLine":  2956,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Supervision' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Stages\Stages.cs",
+"region":  {
+"startLine":  506,
+"startColumn":  27,
+"endLine":  506,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DoSubscribe' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2487,
+"startColumn":  22,
+"endLine":  2487,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DeserializeRemoteSinkCompleted' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\StreamRefSerializer.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  39,
+"endLine":  102,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DeserializeRemoteSinkFailure' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\StreamRefSerializer.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  37,
+"endLine":  108,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DeserializeCumulativeDemand' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\StreamRefSerializer.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  34,
+"endLine":  122,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SerializeSourceRef' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\StreamRefSerializer.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  28,
+"endLine":  148,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DequeueHeadAndAddToTail' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  519,
+"startColumn":  33,
+"endLine":  519,
+"endColumn":  56
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  20,
+"endLine":  102,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  80,
+"endLine":  139,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  66,
+"endLine":  164,
+"endColumn":  85
+}
+}
+}
+]
+}

@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1871",
+"message":  "Either merge this branch with the identical one on line 59 or change one of the implementations.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\CoordinatedShutdownLeave.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  17,
+"endLine":  71,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\CoordinatedShutdownLeave.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  17,
+"endLine":  63,
+"endColumn":  18
+}
+}
+]
+}
+]
+}

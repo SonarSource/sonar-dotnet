@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  530,
+"startColumn":  13,
+"endLine":  530,
+"endColumn":  25
+}
+}
+}
+]
+}

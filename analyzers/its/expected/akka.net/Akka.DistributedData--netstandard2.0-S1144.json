@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_pruningPerformed'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  307,
+"startColumn":  9,
+"endLine":  307,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_tombstonedNodes'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  308,
+"startColumn":  9,
+"endLine":  308,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'this[]'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  60,
+"endColumn":  14
+}
+}
+}
+]
+}

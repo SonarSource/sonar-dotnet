@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  445,
+"startColumn":  36,
+"endLine":  445,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  80,
+"endLine":  385,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreakerState.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  125,
+"endLine":  194,
+"endColumn":  132
+}
+}
+}
+]
+}

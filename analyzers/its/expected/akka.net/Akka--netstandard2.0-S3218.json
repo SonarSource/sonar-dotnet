@@ -1,0 +1,407 @@
+{
+"issues":  [
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  47,
+"endLine":  60,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  51,
+"endLine":  66,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  51,
+"endLine":  72,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  52,
+"endLine":  78,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  43,
+"endLine":  271,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  42,
+"endLine":  299,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  51,
+"endLine":  322,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  42,
+"endLine":  346,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  42,
+"endLine":  369,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  671,
+"startColumn":  50,
+"endLine":  671,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  684,
+"startColumn":  42,
+"endLine":  684,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  700,
+"startColumn":  41,
+"endLine":  700,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  835,
+"startColumn":  42,
+"endLine":  835,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  872,
+"startColumn":  35,
+"endLine":  872,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  915,
+"startColumn":  43,
+"endLine":  915,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  930,
+"startColumn":  44,
+"endLine":  930,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  951,
+"startColumn":  52,
+"endLine":  951,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  971,
+"startColumn":  47,
+"endLine":  971,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  42,
+"endLine":  135,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  43,
+"endLine":  278,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  49,
+"endLine":  298,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  51,
+"endLine":  326,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  50,
+"endLine":  341,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  54,
+"endLine":  434,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  44,
+"endLine":  448,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  42,
+"endLine":  128,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  47,
+"endLine":  253,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  51,
+"endLine":  271,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  50,
+"endLine":  286,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  46,
+"endLine":  349,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  49,
+"endLine":  364,
+"endColumn":  57
+}
+}
+}
+]
+}

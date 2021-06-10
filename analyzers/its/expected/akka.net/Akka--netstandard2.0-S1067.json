@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  52,
+"endLine":  128,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  50,
+"endLine":  131,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (12) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  20,
+"endLine":  209,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  556,
+"startColumn":  24,
+"endLine":  556,
+"endColumn":  261
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  20,
+"endLine":  352,
+"endColumn":  311
+}
+}
+}
+]
+}

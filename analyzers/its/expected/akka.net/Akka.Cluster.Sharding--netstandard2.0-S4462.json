@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  29,
+"endLine":  328,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  655,
+"startColumn":  29,
+"endLine":  655,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  961,
+"startColumn":  25,
+"endLine":  961,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  78,
+"endLine":  80,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  52,
+"endLine":  300,
+"endColumn":  69
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1050,
+"startColumn":  21,
+"endLine":  1050,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1058,
+"startColumn":  33,
+"endLine":  1058,
+"endColumn":  39
+}
+}
+}
+]
+}

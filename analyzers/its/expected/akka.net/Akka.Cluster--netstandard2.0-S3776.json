@@ -1,0 +1,1774 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  32,
+"endLine":  157,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  13,
+"endLine":  160,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  17,
+"endLine":  161,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  13,
+"endLine":  172,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  17,
+"endLine":  174,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  21,
+"endLine":  176,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  21,
+"endLine":  178,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  21,
+"endLine":  181,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  21,
+"endLine":  188,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  21,
+"endLine":  195,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  17,
+"endLine":  200,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  13,
+"endLine":  205,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2076,
+"startColumn":  21,
+"endLine":  2076,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2078,
+"startColumn":  13,
+"endLine":  2078,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2084,
+"startColumn":  17,
+"endLine":  2084,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2089,
+"startColumn":  25,
+"endLine":  2089,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2091,
+"startColumn":  17,
+"endLine":  2091,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2096,
+"startColumn":  17,
+"endLine":  2096,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2102,
+"startColumn":  17,
+"endLine":  2102,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2111,
+"startColumn":  21,
+"endLine":  2111,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2113,
+"startColumn":  25,
+"endLine":  2113,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2114,
+"startColumn":  25,
+"endLine":  2114,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2425,
+"startColumn":  21,
+"endLine":  2425,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2427,
+"startColumn":  13,
+"endLine":  2427,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2437,
+"startColumn":  72,
+"endLine":  2437,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2443,
+"startColumn":  72,
+"endLine":  2443,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2446,
+"startColumn":  17,
+"endLine":  2446,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2446,
+"startColumn":  62,
+"endLine":  2446,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2456,
+"startColumn":  21,
+"endLine":  2456,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2467,
+"startColumn":  25,
+"endLine":  2467,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2471,
+"startColumn":  25,
+"endLine":  2471,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2475,
+"startColumn":  25,
+"endLine":  2475,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2150,
+"startColumn":  21,
+"endLine":  2150,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2152,
+"startColumn":  13,
+"endLine":  2152,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2155,
+"startColumn":  17,
+"endLine":  2155,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2162,
+"startColumn":  17,
+"endLine":  2162,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2164,
+"startColumn":  21,
+"endLine":  2164,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2169,
+"startColumn":  17,
+"endLine":  2169,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2173,
+"startColumn":  21,
+"endLine":  2173,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2173,
+"startColumn":  64,
+"endLine":  2173,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2176,
+"startColumn":  21,
+"endLine":  2176,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2176,
+"startColumn":  61,
+"endLine":  2176,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2189,
+"startColumn":  13,
+"endLine":  2189,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1570,
+"startColumn":  21,
+"endLine":  1570,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1573,
+"startColumn":  13,
+"endLine":  1573,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1578,
+"startColumn":  13,
+"endLine":  1578,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1583,
+"startColumn":  13,
+"endLine":  1583,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1588,
+"startColumn":  13,
+"endLine":  1588,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1595,
+"startColumn":  17,
+"endLine":  1595,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1595,
+"startColumn":  41,
+"endLine":  1595,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1599,
+"startColumn":  21,
+"endLine":  1599,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1604,
+"startColumn":  17,
+"endLine":  1604,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1611,
+"startColumn":  21,
+"endLine":  1611,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1622,
+"startColumn":  17,
+"endLine":  1622,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1638,
+"startColumn":  21,
+"endLine":  1638,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1642,
+"startColumn":  25,
+"endLine":  1642,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1648,
+"startColumn":  21,
+"endLine":  1648,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2287,
+"startColumn":  21,
+"endLine":  2287,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2295,
+"startColumn":  115,
+"endLine":  2295,
+"endColumn":  117
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2295,
+"startColumn":  77,
+"endLine":  2295,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2309,
+"startColumn":  17,
+"endLine":  2309,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2313,
+"startColumn":  21,
+"endLine":  2313,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2318,
+"startColumn":  75,
+"endLine":  2318,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2320,
+"startColumn":  21,
+"endLine":  2320,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2327,
+"startColumn":  17,
+"endLine":  2327,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2337,
+"startColumn":  13,
+"endLine":  2337,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2337,
+"startColumn":  45,
+"endLine":  2337,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2366,
+"startColumn":  17,
+"endLine":  2366,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2366,
+"startColumn":  46,
+"endLine":  2366,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2373,
+"startColumn":  21,
+"endLine":  2373,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2383,
+"startColumn":  17,
+"endLine":  2383,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2387,
+"startColumn":  17,
+"endLine":  2387,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2389,
+"startColumn":  67,
+"endLine":  2389,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2393,
+"startColumn":  17,
+"endLine":  2393,
+"endColumn":  24
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1344,
+"startColumn":  22,
+"endLine":  1344,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1346,
+"startColumn":  13,
+"endLine":  1346,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1349,
+"startColumn":  17,
+"endLine":  1349,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1352,
+"startColumn":  13,
+"endLine":  1352,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1356,
+"startColumn":  13,
+"endLine":  1356,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1360,
+"startColumn":  13,
+"endLine":  1360,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1364,
+"startColumn":  13,
+"endLine":  1364,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1368,
+"startColumn":  13,
+"endLine":  1368,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1372,
+"startColumn":  13,
+"endLine":  1372,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1376,
+"startColumn":  13,
+"endLine":  1376,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1381,
+"startColumn":  13,
+"endLine":  1381,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1385,
+"startColumn":  13,
+"endLine":  1385,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1389,
+"startColumn":  13,
+"endLine":  1389,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1393,
+"startColumn":  13,
+"endLine":  1393,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1397,
+"startColumn":  13,
+"endLine":  1397,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1401,
+"startColumn":  13,
+"endLine":  1401,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1405,
+"startColumn":  13,
+"endLine":  1405,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1409,
+"startColumn":  13,
+"endLine":  1409,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1414,
+"startColumn":  13,
+"endLine":  1414,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1418,
+"startColumn":  13,
+"endLine":  1418,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1419,
+"startColumn":  13,
+"endLine":  1419,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1853,
+"startColumn":  34,
+"endLine":  1853,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1859,
+"startColumn":  13,
+"endLine":  1859,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1865,
+"startColumn":  13,
+"endLine":  1865,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1871,
+"startColumn":  13,
+"endLine":  1871,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1876,
+"startColumn":  13,
+"endLine":  1876,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1881,
+"startColumn":  13,
+"endLine":  1881,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1893,
+"startColumn":  13,
+"endLine":  1893,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1897,
+"startColumn":  57,
+"endLine":  1897,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1910,
+"startColumn":  57,
+"endLine":  1910,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1921,
+"startColumn":  25,
+"endLine":  1921,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1921,
+"startColumn":  82,
+"endLine":  1921,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1931,
+"startColumn":  25,
+"endLine":  1931,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1931,
+"startColumn":  82,
+"endLine":  1931,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1949,
+"startColumn":  13,
+"endLine":  1949,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1953,
+"startColumn":  13,
+"endLine":  1953,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1961,
+"startColumn":  13,
+"endLine":  1961,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1963,
+"startColumn":  17,
+"endLine":  1963,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1972,
+"startColumn":  13,
+"endLine":  1972,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1978,
+"startColumn":  13,
+"endLine":  1978,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1980,
+"startColumn":  17,
+"endLine":  1980,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2000,
+"startColumn":  13,
+"endLine":  2000,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2000,
+"startColumn":  52,
+"endLine":  2000,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2005,
+"startColumn":  17,
+"endLine":  2005,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2011,
+"startColumn":  13,
+"endLine":  2011,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2011,
+"startColumn":  49,
+"endLine":  2011,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2017,
+"startColumn":  13,
+"endLine":  2017,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  646,
+"startColumn":  45,
+"endLine":  646,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  648,
+"startColumn":  13,
+"endLine":  648,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  652,
+"startColumn":  13,
+"endLine":  652,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  661,
+"startColumn":  21,
+"endLine":  661,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  663,
+"startColumn":  25,
+"endLine":  663,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  663,
+"startColumn":  54,
+"endLine":  663,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  668,
+"startColumn":  25,
+"endLine":  668,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  672,
+"startColumn":  29,
+"endLine":  672,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  672,
+"startColumn":  47,
+"endLine":  672,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  675,
+"startColumn":  29,
+"endLine":  675,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  679,
+"startColumn":  29,
+"endLine":  679,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  691,
+"startColumn":  21,
+"endLine":  691,
+"endColumn":  22
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  29,
+"endLine":  207,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  13,
+"endLine":  212,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  17,
+"endLine":  220,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  35,
+"endLine":  220,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  68,
+"endLine":  222,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  21,
+"endLine":  223,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  17,
+"endLine":  227,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  35,
+"endLine":  227,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  21,
+"endLine":  228,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  25,
+"endLine":  229,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  17,
+"endLine":  231,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  35,
+"endLine":  231,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  21,
+"endLine":  232,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  25,
+"endLine":  233,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  17,
+"endLine":  236,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  386,
+"startColumn":  24,
+"endLine":  386,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  17,
+"endLine":  390,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  25,
+"endLine":  397,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  29,
+"endLine":  401,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  37,
+"endLine":  408,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  37,
+"endLine":  411,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  417,
+"startColumn":  25,
+"endLine":  417,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  292,
+"startColumn":  22,
+"endLine":  292,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  13,
+"endLine":  296,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  17,
+"endLine":  303,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  48,
+"endLine":  303,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  311,
+"startColumn":  17,
+"endLine":  311,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  311,
+"startColumn":  54,
+"endLine":  311,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  320,
+"startColumn":  13,
+"endLine":  320,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  320,
+"startColumn":  31,
+"endLine":  320,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  321,
+"startColumn":  17,
+"endLine":  321,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  25,
+"endLine":  325,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  33,
+"endLine":  328,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  33,
+"endLine":  335,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  37,
+"endLine":  337,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  37,
+"endLine":  341,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  13,
+"endLine":  364,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  21,
+"endLine":  367,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 38 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  33,
+"endLine":  376,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  17,
+"endLine":  381,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  58,
+"endLine":  381,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  17,
+"endLine":  382,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  46,
+"endLine":  382,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  17,
+"endLine":  384,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  85,
+"endLine":  384,
+"endColumn":  86
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  386,
+"startColumn":  17,
+"endLine":  386,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  386,
+"startColumn":  86,
+"endLine":  386,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  17,
+"endLine":  389,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  21,
+"endLine":  393,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  21,
+"endLine":  394,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  25,
+"endLine":  397,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  21,
+"endLine":  401,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  17,
+"endLine":  405,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  21,
+"endLine":  408,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  413,
+"startColumn":  17,
+"endLine":  413,
+"endColumn":  19
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,368 @@
+{
+"issues":  [
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  18,
+"endLine":  228,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  18,
+"endLine":  259,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  25,
+"endLine":  281,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  22,
+"endLine":  117,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1205,
+"startColumn":  25,
+"endLine":  1205,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  29,
+"endLine":  72,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\One2OneBidiFlow.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  18,
+"endLine":  36,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\One2OneBidiFlow.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  18,
+"endLine":  58,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  25,
+"endLine":  300,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  18,
+"endLine":  109,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  18,
+"endLine":  24,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  18,
+"endLine":  21,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2134,
+"startColumn":  22,
+"endLine":  2134,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamSubscriptionTimeout.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  18,
+"endLine":  20,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\OverflowStrategy.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  18,
+"endLine":  94,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  2186,
+"startColumn":  18,
+"endLine":  2186,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StageException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamLimitReachedException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  25,
+"endLine":  56,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  25,
+"endLine":  75,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  25,
+"endLine":  92,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  25,
+"endLine":  112,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  25,
+"endLine":  145,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamTcpException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamTcpException.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  18,
+"endLine":  49,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamTcpException.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  18,
+"endLine":  64,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamTcpException.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  18,
+"endLine":  88,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\WatchedActorTerminatedException.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  18,
+"endLine":  21,
+"endColumn":  49
+}
+}
+}
+]
+}

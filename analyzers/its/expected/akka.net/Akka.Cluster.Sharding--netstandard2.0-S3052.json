@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_allRegionsRegistered', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  44,
+"endLine":  49,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_terminating', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  35,
+"endLine":  52,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_allRegionsRegistered', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1251,
+"startColumn":  44,
+"endLine":  1251,
+"endColumn":  51
+}
+}
+}
+]
+}

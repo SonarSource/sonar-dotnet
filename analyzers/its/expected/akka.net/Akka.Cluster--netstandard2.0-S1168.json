@@ -1,0 +1,41 @@
+{
+"issues":  [
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2590,
+"startColumn":  13,
+"endLine":  2590,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  17,
+"endLine":  491,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  495,
+"startColumn":  17,
+"endLine":  495,
+"endColumn":  29
+}
+}
+]
+}
+]
+}

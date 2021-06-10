@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'interruption'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  403,
+"startColumn":  23,
+"endLine":  403,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'bindFlags'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\IPExtensions.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  26,
+"endLine":  32,
+"endColumn":  35
+}
+}
+}
+]
+}

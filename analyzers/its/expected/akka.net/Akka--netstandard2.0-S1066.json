@@ -1,0 +1,196 @@
+{
+"issues":  [
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  21,
+"endLine":  412,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  410,
+"startColumn":  17,
+"endLine":  410,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  21,
+"endLine":  216,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  17,
+"endLine":  214,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  25,
+"endLine":  219,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  21,
+"endLine":  216,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  21,
+"endLine":  58,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  17,
+"endLine":  56,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Routing\RoutedActorCell.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  17,
+"endLine":  138,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Routing\RoutedActorCell.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  13,
+"endLine":  136,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Index.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  21,
+"endLine":  175,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Index.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  17,
+"endLine":  173,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Index.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  25,
+"endLine":  177,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Index.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  21,
+"endLine":  175,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  29,
+"endLine":  80,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  25,
+"endLine":  78,
+"endColumn":  27
+}
+}
+]
+}
+]
+}

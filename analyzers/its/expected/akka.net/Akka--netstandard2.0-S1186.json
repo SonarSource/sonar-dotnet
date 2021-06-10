@@ -1,0 +1,186 @@
+{
+"issues":  [
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CurrentSynchronizationContextDispatcher.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  25,
+"endLine":  114,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  33,
+"endLine":  27,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  33,
+"endLine":  34,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  21,
+"endLine":  170,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  21,
+"endLine":  178,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  21,
+"endLine":  185,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  21,
+"endLine":  193,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  21,
+"endLine":  200,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  21,
+"endLine":  207,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  21,
+"endLine":  215,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  21,
+"endLine":  222,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  21,
+"endLine":  230,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  21,
+"endLine":  238,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  21,
+"endLine":  247,
+"endColumn":  24
+}
+}
+}
+]
+}

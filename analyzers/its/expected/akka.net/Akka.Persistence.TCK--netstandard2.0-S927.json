@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'obj' to 'o' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  52,
+"endLine":  179,
+"endColumn":  55
+}
+}
+}
+]
+}

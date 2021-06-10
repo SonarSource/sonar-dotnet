@@ -1,0 +1,914 @@
+{
+"issues":  [
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  21,
+"endLine":  175,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  21,
+"endLine":  250,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  21,
+"endLine":  377,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  17,
+"endLine":  348,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  947,
+"startColumn":  29,
+"endLine":  947,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1098,
+"startColumn":  25,
+"endLine":  1098,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1105,
+"startColumn":  25,
+"endLine":  1105,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1140,
+"startColumn":  17,
+"endLine":  1140,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1287,
+"startColumn":  25,
+"endLine":  1287,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1737,
+"startColumn":  33,
+"endLine":  1737,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  769,
+"startColumn":  25,
+"endLine":  769,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  868,
+"startColumn":  21,
+"endLine":  868,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1673,
+"startColumn":  17,
+"endLine":  1673,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\KeepAliveConcat.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  17,
+"endLine":  94,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  21,
+"endLine":  72,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  21,
+"endLine":  90,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  29,
+"endLine":  176,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Valve.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  25,
+"endLine":  120,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  17,
+"endLine":  164,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  17,
+"endLine":  388,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  925,
+"startColumn":  21,
+"endLine":  925,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1153,
+"startColumn":  21,
+"endLine":  1153,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1408,
+"startColumn":  17,
+"endLine":  1408,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1424,
+"startColumn":  13,
+"endLine":  1424,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1435,
+"startColumn":  17,
+"endLine":  1435,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  821,
+"startColumn":  13,
+"endLine":  821,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  850,
+"startColumn":  13,
+"endLine":  850,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  1030,
+"startColumn":  13,
+"endLine":  1030,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  1053,
+"startColumn":  17,
+"endLine":  1053,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  1080,
+"startColumn":  17,
+"endLine":  1080,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  1120,
+"startColumn":  17,
+"endLine":  1120,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1078,
+"startColumn":  17,
+"endLine":  1078,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1231,
+"startColumn":  21,
+"endLine":  1231,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1357,
+"startColumn":  25,
+"endLine":  1357,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1379,
+"startColumn":  29,
+"endLine":  1379,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1854,
+"startColumn":  17,
+"endLine":  1854,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2061,
+"startColumn":  17,
+"endLine":  2061,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2259,
+"startColumn":  21,
+"endLine":  2259,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2620,
+"startColumn":  25,
+"endLine":  2620,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2648,
+"startColumn":  17,
+"endLine":  2648,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2764,
+"startColumn":  17,
+"endLine":  2764,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2794,
+"startColumn":  21,
+"endLine":  2794,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  3099,
+"startColumn":  17,
+"endLine":  3099,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  3129,
+"startColumn":  17,
+"endLine":  3129,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  3525,
+"startColumn":  21,
+"endLine":  3525,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  427,
+"startColumn":  21,
+"endLine":  427,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  451,
+"startColumn":  21,
+"endLine":  451,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  596,
+"startColumn":  21,
+"endLine":  596,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  611,
+"startColumn":  21,
+"endLine":  611,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  745,
+"startColumn":  21,
+"endLine":  745,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  778,
+"startColumn":  21,
+"endLine":  780,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  879,
+"startColumn":  17,
+"endLine":  879,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  1115,
+"startColumn":  21,
+"endLine":  1115,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  1272,
+"startColumn":  17,
+"endLine":  1272,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  1284,
+"startColumn":  21,
+"endLine":  1284,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  1351,
+"startColumn":  13,
+"endLine":  1351,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  1367,
+"startColumn":  13,
+"endLine":  1367,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  21,
+"endLine":  169,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  17,
+"endLine":  222,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  17,
+"endLine":  157,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  504,
+"startColumn":  21,
+"endLine":  504,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  17,
+"endLine":  543,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  17,
+"endLine":  134,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2371,
+"startColumn":  17,
+"endLine":  2371,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  17,
+"endLine":  256,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  17,
+"endLine":  283,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1722,
+"startColumn":  25,
+"endLine":  1722,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1851,
+"startColumn":  21,
+"endLine":  1851,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  2542,
+"startColumn":  13,
+"endLine":  2542,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"region":  {
+"startLine":  426,
+"startColumn":  25,
+"endLine":  426,
+"endColumn":  32
+}
+}
+}
+]
+}

@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1509,
+"startColumn":  18,
+"endLine":  1509,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1509,
+"startColumn":  12,
+"endLine":  1509,
+"endColumn":  17
+}
+}
+]
+}
+]
+}

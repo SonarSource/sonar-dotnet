@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  32,
+"endLine":  26,
+"endColumn":  34
+}
+}
+}
+]
+}

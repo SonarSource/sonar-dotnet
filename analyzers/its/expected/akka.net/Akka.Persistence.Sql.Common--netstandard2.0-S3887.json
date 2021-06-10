@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'EntryTags'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\Messages.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  25,
+"endLine":  107,
+"endColumn":  86
+}
+}
+}
+]
+}

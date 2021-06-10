@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeployer.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  17,
+"endLine":  75,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  41,
+"endLine":  271,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  13,
+"endLine":  294,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"region":  {
+"startLine":  301,
+"startColumn":  13,
+"endLine":  301,
+"endColumn":  16
+}
+}
+}
+]
+}

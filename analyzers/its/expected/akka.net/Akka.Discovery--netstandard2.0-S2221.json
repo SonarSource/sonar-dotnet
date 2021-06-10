@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Discovery\Aggregate\AggregateServiceDiscovery.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  28,
+"endLine":  75,
+"endColumn":  37
+}
+}
+}
+]
+}

@@ -1,0 +1,186 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_heartbeatTimestamp', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  42,
+"endLine":  23,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_active', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  39,
+"endLine":  24,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_bailoutAt', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  515,
+"startColumn":  37,
+"endLine":  515,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_maxSilenceTimer', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  541,
+"startColumn":  46,
+"endLine":  541,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_lastAck', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1078,
+"startColumn":  30,
+"endLine":  1078,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_writeCount', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1362,
+"startColumn":  33,
+"endLine":  1362,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_fullBackoff', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1365,
+"startColumn":  35,
+"endLine":  1365,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_smallBackoffCount', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1369,
+"startColumn":  40,
+"endLine":  1369,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_noBackoffCount', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1370,
+"startColumn":  37,
+"endLine":  1370,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_normalShutdown', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  475,
+"startColumn":  38,
+"endLine":  475,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_upstreamListener', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  70,
+"endLine":  207,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'MaximumOverhead', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  39,
+"endLine":  214,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_upstreamListener', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  65,
+"endLine":  408,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'UniqueId', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"region":  {
+"startLine":  577,
+"startColumn":  33,
+"endLine":  577,
+"endColumn":  37
+}
+}
+}
+]
+}

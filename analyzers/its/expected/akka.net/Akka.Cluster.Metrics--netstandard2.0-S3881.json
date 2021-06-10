@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Collectors\DefaultCollector.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  18,
+"endLine":  27,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Collectors\DefaultCollector.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  18,
+"endLine":  27,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Collectors\DefaultCollector.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  21,
+"endLine":  48,
+"endColumn":  28
+}
+}
+]
+}
+]
+}

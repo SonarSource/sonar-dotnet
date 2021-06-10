@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'ProcessorForMethod'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  13,
+"endLine":  109,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'CreateSubscription'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  13,
+"endLine":  36,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'AddFollowUps'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  542,
+"startColumn":  13,
+"endLine":  554,
+"endColumn":  14
+}
+}
+}
+]
+}

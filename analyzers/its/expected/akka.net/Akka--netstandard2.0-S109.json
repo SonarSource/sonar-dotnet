@@ -1,0 +1,2786 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  53,
+"endLine":  143,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  115,
+"endLine":  143,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  33,
+"endLine":  145,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  387,
+"startColumn":  63,
+"endLine":  387,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1970' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  77,
+"endLine":  216,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  59,
+"endLine":  265,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\NormalChildrenContainer.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  36,
+"endLine":  101,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\TerminatingChildrenContainer.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  36,
+"endLine":  150,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  65,
+"endLine":  61,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  50,
+"endLine":  53,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1073741824' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  33,
+"endLine":  91,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  33,
+"endLine":  233,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"region":  {
+"startLine":  501,
+"startColumn":  18,
+"endLine":  501,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"region":  {
+"startLine":  507,
+"startColumn":  18,
+"endLine":  507,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"region":  {
+"startLine":  710,
+"startColumn":  18,
+"endLine":  710,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  395,
+"startColumn":  104,
+"endLine":  395,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  104,
+"endLine":  400,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  451,
+"startColumn":  41,
+"endLine":  451,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  451,
+"startColumn":  49,
+"endLine":  451,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  451,
+"startColumn":  57,
+"endLine":  451,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  451,
+"startColumn":  65,
+"endLine":  451,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  451,
+"startColumn":  73,
+"endLine":  451,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  451,
+"startColumn":  80,
+"endLine":  451,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  41,
+"endLine":  452,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  49,
+"endLine":  452,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  57,
+"endLine":  452,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  65,
+"endLine":  452,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  73,
+"endLine":  452,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  81,
+"endLine":  452,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  453,
+"startColumn":  41,
+"endLine":  453,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  453,
+"startColumn":  49,
+"endLine":  453,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  453,
+"startColumn":  57,
+"endLine":  453,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  453,
+"startColumn":  65,
+"endLine":  453,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  453,
+"startColumn":  73,
+"endLine":  453,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  41,
+"endLine":  454,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  49,
+"endLine":  454,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  57,
+"endLine":  454,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  65,
+"endLine":  454,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  73,
+"endLine":  454,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  455,
+"startColumn":  41,
+"endLine":  455,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  455,
+"startColumn":  49,
+"endLine":  455,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  455,
+"startColumn":  57,
+"endLine":  455,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  455,
+"startColumn":  65,
+"endLine":  455,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  456,
+"startColumn":  41,
+"endLine":  456,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  456,
+"startColumn":  49,
+"endLine":  456,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  456,
+"startColumn":  57,
+"endLine":  456,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  456,
+"startColumn":  65,
+"endLine":  456,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  457,
+"startColumn":  41,
+"endLine":  457,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  457,
+"startColumn":  49,
+"endLine":  457,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  457,
+"startColumn":  57,
+"endLine":  457,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  458,
+"startColumn":  41,
+"endLine":  458,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  458,
+"startColumn":  49,
+"endLine":  458,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  458,
+"startColumn":  57,
+"endLine":  458,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  459,
+"startColumn":  41,
+"endLine":  459,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  459,
+"startColumn":  49,
+"endLine":  459,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  41,
+"endLine":  460,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  49,
+"endLine":  460,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  461,
+"startColumn":  41,
+"endLine":  461,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  41,
+"endLine":  462,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  117,
+"endLine":  99,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  113,
+"endLine":  101,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  102,
+"endLine":  147,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  30,
+"endLine":  544,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  548,
+"startColumn":  30,
+"endLine":  548,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  552,
+"startColumn":  30,
+"endLine":  552,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  559,
+"startColumn":  55,
+"endLine":  559,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '256' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  60,
+"endLine":  108,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '250' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  75,
+"endLine":  109,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  67,
+"endLine":  111,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '256' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DisabledBufferPool.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  114,
+"endLine":  22,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  40,
+"endLine":  62,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2048' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SocketEventArgsPool.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  35,
+"endLine":  63,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  93,
+"endLine":  45,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  71,
+"endLine":  47,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  94,
+"endLine":  48,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '512' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  65,
+"endLine":  56,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  71,
+"endLine":  56,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  79,
+"endLine":  57,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  93,
+"endLine":  43,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '36500' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  89,
+"endLine":  160,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  107,
+"endLine":  342,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RoutedActorCell.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  81,
+"endLine":  143,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  26,
+"endLine":  159,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  26,
+"endLine":  160,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  45,
+"endLine":  178,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  26,
+"endLine":  184,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  26,
+"endLine":  185,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  45,
+"endLine":  188,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  66,
+"endLine":  191,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  26,
+"endLine":  194,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  26,
+"endLine":  195,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  41,
+"endLine":  224,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  61,
+"endLine":  224,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  45,
+"endLine":  227,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  65,
+"endLine":  227,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Base64Encoding.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  32,
+"endLine":  42,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  50,
+"endLine":  18,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  50,
+"endLine":  19,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  33,
+"endLine":  20,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  50,
+"endLine":  20,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  33,
+"endLine":  21,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  50,
+"endLine":  26,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  33,
+"endLine":  27,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  50,
+"endLine":  27,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  33,
+"endLine":  28,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  50,
+"endLine":  28,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1970' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Extensions\DateTimeExtensions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  51,
+"endLine":  22,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Extensions.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  29,
+"endLine":  69,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  32,
+"endLine":  132,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  32,
+"endLine":  165,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  32,
+"endLine":  166,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  32,
+"endLine":  201,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  32,
+"endLine":  202,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  32,
+"endLine":  203,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  32,
+"endLine":  240,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  32,
+"endLine":  241,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  32,
+"endLine":  242,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  32,
+"endLine":  243,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  32,
+"endLine":  282,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  32,
+"endLine":  283,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  32,
+"endLine":  284,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  32,
+"endLine":  285,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  32,
+"endLine":  286,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  32,
+"endLine":  327,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  32,
+"endLine":  328,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  329,
+"startColumn":  32,
+"endLine":  329,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  32,
+"endLine":  330,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  32,
+"endLine":  331,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  32,
+"endLine":  332,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  32,
+"endLine":  375,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  32,
+"endLine":  376,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  32,
+"endLine":  377,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  32,
+"endLine":  378,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  32,
+"endLine":  379,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  32,
+"endLine":  380,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  32,
+"endLine":  381,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  426,
+"startColumn":  32,
+"endLine":  426,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  427,
+"startColumn":  32,
+"endLine":  427,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  428,
+"startColumn":  32,
+"endLine":  428,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  429,
+"startColumn":  32,
+"endLine":  429,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  430,
+"startColumn":  32,
+"endLine":  430,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  431,
+"startColumn":  32,
+"endLine":  431,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  432,
+"startColumn":  32,
+"endLine":  432,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  433,
+"startColumn":  34,
+"endLine":  433,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  480,
+"startColumn":  32,
+"endLine":  480,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  481,
+"startColumn":  32,
+"endLine":  481,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  482,
+"startColumn":  32,
+"endLine":  482,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  32,
+"endLine":  483,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  484,
+"startColumn":  32,
+"endLine":  484,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  485,
+"startColumn":  32,
+"endLine":  485,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  486,
+"startColumn":  32,
+"endLine":  486,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  34,
+"endLine":  487,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  488,
+"startColumn":  34,
+"endLine":  488,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  537,
+"startColumn":  32,
+"endLine":  537,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  538,
+"startColumn":  32,
+"endLine":  538,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  539,
+"startColumn":  32,
+"endLine":  539,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  32,
+"endLine":  540,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  541,
+"startColumn":  32,
+"endLine":  541,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  542,
+"startColumn":  32,
+"endLine":  542,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  32,
+"endLine":  543,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  34,
+"endLine":  544,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  545,
+"startColumn":  34,
+"endLine":  545,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  546,
+"startColumn":  34,
+"endLine":  546,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  597,
+"startColumn":  32,
+"endLine":  597,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  32,
+"endLine":  598,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  599,
+"startColumn":  32,
+"endLine":  599,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  32,
+"endLine":  600,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  601,
+"startColumn":  32,
+"endLine":  601,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  602,
+"startColumn":  32,
+"endLine":  602,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  603,
+"startColumn":  32,
+"endLine":  603,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  604,
+"startColumn":  34,
+"endLine":  604,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  605,
+"startColumn":  34,
+"endLine":  605,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  606,
+"startColumn":  34,
+"endLine":  606,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  607,
+"startColumn":  34,
+"endLine":  607,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  660,
+"startColumn":  32,
+"endLine":  660,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  661,
+"startColumn":  32,
+"endLine":  661,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  662,
+"startColumn":  32,
+"endLine":  662,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  663,
+"startColumn":  32,
+"endLine":  663,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  664,
+"startColumn":  32,
+"endLine":  664,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  665,
+"startColumn":  32,
+"endLine":  665,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  666,
+"startColumn":  32,
+"endLine":  666,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  667,
+"startColumn":  34,
+"endLine":  667,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  668,
+"startColumn":  34,
+"endLine":  668,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  669,
+"startColumn":  34,
+"endLine":  669,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  670,
+"startColumn":  34,
+"endLine":  670,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  671,
+"startColumn":  34,
+"endLine":  671,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  726,
+"startColumn":  32,
+"endLine":  726,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  727,
+"startColumn":  32,
+"endLine":  727,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  728,
+"startColumn":  32,
+"endLine":  728,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  729,
+"startColumn":  32,
+"endLine":  729,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  730,
+"startColumn":  32,
+"endLine":  730,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  731,
+"startColumn":  32,
+"endLine":  731,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  732,
+"startColumn":  32,
+"endLine":  732,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  733,
+"startColumn":  34,
+"endLine":  733,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  734,
+"startColumn":  34,
+"endLine":  734,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  735,
+"startColumn":  34,
+"endLine":  735,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  736,
+"startColumn":  34,
+"endLine":  736,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  737,
+"startColumn":  34,
+"endLine":  737,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '14' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"region":  {
+"startLine":  738,
+"startColumn":  34,
+"endLine":  738,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '23' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  52,
+"endLine":  60,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '23' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  52,
+"endLine":  70,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  29,
+"endLine":  95,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  29,
+"endLine":  105,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  57,
+"endLine":  118,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  73,
+"endLine":  118,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  23,
+"endLine":  130,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  23,
+"endLine":  132,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  56,
+"endLine":  146,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  56,
+"endLine":  157,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  26,
+"endLine":  216,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  51,
+"endLine":  249,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  68,
+"endLine":  249,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  31,
+"endLine":  270,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\TokenBucket.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  55,
+"endLine":  87,
+"endColumn":  56
+}
+}
+}
+]
+}

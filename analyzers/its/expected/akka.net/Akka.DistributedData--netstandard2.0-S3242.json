@@ -1,0 +1,342 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<long, Akka.DistributedData.IReplicatedData>>' instead of 'System.Collections.Immutable.ImmutableSortedDictionary<long, Akka.DistributedData.IReplicatedData>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  62,
+"endLine":  178,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  48,
+"endLine":  63,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  48,
+"endLine":  81,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  48,
+"endLine":  100,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  48,
+"endLine":  123,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  42,
+"endLine":  142,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  48,
+"endLine":  164,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  54,
+"endLine":  179,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  58,
+"endLine":  191,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IPruningState' instead of 'Akka.DistributedData.PruningPerformed'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  447,
+"startColumn":  74,
+"endLine":  447,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<Akka.Cluster.UniqueAddress, Akka.DistributedData.IPruningState>>' instead of 'System.Collections.Immutable.IImmutableDictionary<Akka.Cluster.UniqueAddress, Akka.DistributedData.IPruningState>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  528,
+"startColumn":  111,
+"endLine":  528,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<TKey, TValue>' instead of 'System.Collections.Immutable.ImmutableDictionary<TKey, TValue>.Builder'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  812,
+"startColumn":  100,
+"endLine":  812,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<TKey, TValue>' instead of 'System.Collections.Immutable.ImmutableDictionary<TKey, TValue>.Builder'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  812,
+"startColumn":  156,
+"endLine":  812,
+"endColumn":  172
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IReplicatedData' instead of 'Akka.DistributedData.ORDictionary<TKey, TValue>.IDeltaOperation'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  888,
+"startColumn":  58,
+"endLine":  888,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<TValue>' instead of 'System.Collections.Immutable.IImmutableSet<TValue>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  114,
+"endLine":  156,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<T, Akka.DistributedData.VersionVector>' instead of 'System.Collections.Immutable.ImmutableDictionary<T, Akka.DistributedData.VersionVector>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  51,
+"endLine":  394,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.ORSet<T>.AtomicDeltaOperation' instead of 'Akka.DistributedData.ORSet<T>.RemoveDeltaOperation'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  699,
+"startColumn":  64,
+"endLine":  699,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, Akka.DistributedData.Internal.DataEnvelope>' instead of 'System.Collections.Immutable.IImmutableDictionary<string, Akka.DistributedData.Internal.DataEnvelope>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1159,
+"startColumn":  79,
+"endLine":  1159,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object, Akka.DistributedData.VersionVector>>' instead of 'System.Collections.Immutable.ImmutableDictionary<object, Akka.DistributedData.VersionVector>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  94,
+"endLine":  358,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.IEnumerable' instead of 'System.Collections.Generic.IEnumerable<object>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  589,
+"startColumn":  69,
+"endLine":  589,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IList<Akka.DistributedData.ORDictionary.IDeltaOperation>' instead of 'System.Collections.Generic.List<Akka.DistributedData.ORDictionary.IDeltaOperation>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  846,
+"startColumn":  48,
+"endLine":  846,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.IEnumerable' instead of 'System.Collections.Generic.List<Akka.DistributedData.ORDictionary.IDeltaOperation>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  859,
+"startColumn":  48,
+"endLine":  859,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IGetResponse' instead of 'Akka.DistributedData.GetFailure'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  67,
+"endLine":  280,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IGetResponse' instead of 'Akka.DistributedData.NotFound'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  61,
+"endLine":  293,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.Internal.ISendingSystemUid' instead of 'Akka.DistributedData.Internal.Read'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  496,
+"startColumn":  49,
+"endLine":  496,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<Akka.DistributedData.Serialization.Proto.Msg.DataEnvelope.Types.PruningEntry>' instead of 'Google.Protobuf.Collections.RepeatedField<Akka.DistributedData.Serialization.Proto.Msg.DataEnvelope.Types.PruningEntry>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  563,
+"startColumn":  141,
+"endLine":  563,
+"endColumn":  148
+}
+}
+}
+]
+}

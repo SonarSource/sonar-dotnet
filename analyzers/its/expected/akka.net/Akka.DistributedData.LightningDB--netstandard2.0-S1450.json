@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_serialization' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData.LightningDB\LmdbDurableStore.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  59,
+"endLine":  53,
+"endColumn":  73
+}
+}
+}
+]
+}

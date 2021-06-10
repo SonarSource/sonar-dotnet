@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\InboundMessageDispatcherSpec.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  48,
+"endLine":  88,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Serialization\FastHashSpecs.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  30,
+"endLine":  21,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  34,
+"endLine":  63,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  40,
+"endLine":  125,
+"endColumn":  47
+}
+}
+}
+]
+}

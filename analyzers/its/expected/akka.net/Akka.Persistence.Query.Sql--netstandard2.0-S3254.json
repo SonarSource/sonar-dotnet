@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  71,
+"endLine":  50,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  70,
+"endLine":  51,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  63,
+"endLine":  52,
+"endColumn":  64
+}
+}
+}
+]
+}

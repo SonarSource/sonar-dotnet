@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "The parameter name 'minimum supported akka.scheduler.tick-duration on Windows is 10ms' is not declared in the argument list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  23,
+"endLine":  54,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'akka.scheduler.tick-duration' is not declared in the argument list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  23,
+"endLine":  66,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  31,
+"endLine":  203,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'Parameter attempt should not be null.' is not declared in the argument list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  40,
+"endLine":  50,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'Empty version not supported.' is not declared in the argument list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  31,
+"endLine":  157,
+"endColumn":  94
+}
+}
+}
+]
+}

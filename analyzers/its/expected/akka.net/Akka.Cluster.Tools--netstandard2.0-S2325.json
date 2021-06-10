@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'SelectRandomNode' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  603,
+"startColumn":  25,
+"endLine":  603,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ForwardMessages' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  22,
+"endLine":  80,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'StatusToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  24,
+"endLine":  138,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'StatusFrom' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  33,
+"endLine":  153,
+"endColumn":  43
+}
+}
+}
+]
+}

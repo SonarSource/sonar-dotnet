@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3885",
+"message":  "Replace this call to 'Assembly.LoadFrom' with 'Assembly.Load'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  45,
+"endLine":  74,
+"endColumn":  53
+}
+}
+}
+]
+}

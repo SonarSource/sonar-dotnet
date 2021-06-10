@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  31,
+"endLine":  244,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "ArgumentException constructor arguments have been inverted.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\EWMA.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  31,
+"endLine":  50,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "ArgumentException constructor arguments have been inverted.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\EWMA.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  31,
+"endLine":  86,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  35,
+"endLine":  162,
+"endColumn":  68
+}
+}
+}
+]
+}

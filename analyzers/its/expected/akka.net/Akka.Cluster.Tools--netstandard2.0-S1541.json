@@ -1,0 +1,2302 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  355,
+"startColumn":  25,
+"endLine":  355,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  355,
+"startColumn":  25,
+"endLine":  355,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  17,
+"endLine":  359,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  22,
+"endLine":  363,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  22,
+"endLine":  367,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  371,
+"startColumn":  22,
+"endLine":  371,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  21,
+"endLine":  373,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  383,
+"startColumn":  22,
+"endLine":  383,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  387,
+"startColumn":  22,
+"endLine":  387,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  391,
+"startColumn":  22,
+"endLine":  391,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  21,
+"endLine":  394,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  22,
+"endLine":  401,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  22,
+"endLine":  405,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  407,
+"startColumn":  21,
+"endLine":  407,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  22,
+"endLine":  276,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  22,
+"endLine":  276,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  279,
+"startColumn":  13,
+"endLine":  279,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  13,
+"endLine":  288,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  17,
+"endLine":  290,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  18,
+"endLine":  299,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  17,
+"endLine":  303,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  43,
+"endLine":  309,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  18,
+"endLine":  318,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  18,
+"endLine":  322,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  18,
+"endLine":  326,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  18,
+"endLine":  330,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  334,
+"startColumn":  18,
+"endLine":  334,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  18,
+"endLine":  338,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  18,
+"endLine":  343,
+"endColumn":  20
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 24 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  33,
+"endLine":  436,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  33,
+"endLine":  436,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  13,
+"endLine":  438,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  440,
+"startColumn":  17,
+"endLine":  440,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  439,
+"startColumn":  17,
+"endLine":  439,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  446,
+"startColumn":  18,
+"endLine":  446,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  17,
+"endLine":  448,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  455,
+"startColumn":  18,
+"endLine":  455,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  17,
+"endLine":  460,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  463,
+"startColumn":  21,
+"endLine":  463,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  25,
+"endLine":  476,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  480,
+"startColumn":  21,
+"endLine":  480,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  486,
+"startColumn":  18,
+"endLine":  486,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  490,
+"startColumn":  70,
+"endLine":  490,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  495,
+"startColumn":  18,
+"endLine":  495,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  497,
+"startColumn":  17,
+"endLine":  497,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  503,
+"startColumn":  18,
+"endLine":  503,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  505,
+"startColumn":  17,
+"endLine":  505,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  509,
+"startColumn":  22,
+"endLine":  509,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  515,
+"startColumn":  18,
+"endLine":  515,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  519,
+"startColumn":  18,
+"endLine":  519,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  526,
+"startColumn":  18,
+"endLine":  526,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  531,
+"startColumn":  18,
+"endLine":  531,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  18,
+"endLine":  535,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  539,
+"startColumn":  18,
+"endLine":  539,
+"endColumn":  20
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 40 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  16,
+"endLine":  150,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  16,
+"endLine":  150,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  13,
+"endLine":  152,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  13,
+"endLine":  157,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  55,
+"endLine":  157,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  17,
+"endLine":  170,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  76,
+"endLine":  171,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  81,
+"endLine":  170,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  21,
+"endLine":  175,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  21,
+"endLine":  180,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  25,
+"endLine":  182,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  29,
+"endLine":  185,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  17,
+"endLine":  191,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  17,
+"endLine":  204,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  17,
+"endLine":  211,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  17,
+"endLine":  221,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  21,
+"endLine":  223,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  86,
+"endLine":  223,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  21,
+"endLine":  238,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  21,
+"endLine":  274,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  17,
+"endLine":  290,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  58,
+"endLine":  290,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  21,
+"endLine":  294,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  21,
+"endLine":  297,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  49,
+"endLine":  297,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  17,
+"endLine":  309,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  311,
+"startColumn":  21,
+"endLine":  311,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  25,
+"endLine":  313,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  29,
+"endLine":  315,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  29,
+"endLine":  318,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  17,
+"endLine":  330,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  21,
+"endLine":  331,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  73,
+"endLine":  331,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  66,
+"endLine":  339,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  17,
+"endLine":  346,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  17,
+"endLine":  350,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  17,
+"endLine":  354,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  17,
+"endLine":  362,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  371,
+"startColumn":  17,
+"endLine":  371,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  22,
+"endLine":  373,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  395,
+"startColumn":  21,
+"endLine":  395,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 156 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  875,
+"startColumn":  22,
+"endLine":  875,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  875,
+"startColumn":  22,
+"endLine":  875,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  890,
+"startColumn":  29,
+"endLine":  890,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  890,
+"startColumn":  88,
+"endLine":  890,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  894,
+"startColumn":  33,
+"endLine":  894,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  907,
+"startColumn":  17,
+"endLine":  907,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  907,
+"startColumn":  83,
+"endLine":  907,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  910,
+"startColumn":  21,
+"endLine":  910,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  912,
+"startColumn":  110,
+"endLine":  912,
+"endColumn":  111
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  914,
+"startColumn":  25,
+"endLine":  914,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  926,
+"startColumn":  107,
+"endLine":  926,
+"endColumn":  108
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  926,
+"startColumn":  138,
+"endLine":  926,
+"endColumn":  139
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  928,
+"startColumn":  25,
+"endLine":  928,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  928,
+"startColumn":  58,
+"endLine":  928,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  933,
+"startColumn":  22,
+"endLine":  933,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  933,
+"startColumn":  66,
+"endLine":  933,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  938,
+"startColumn":  22,
+"endLine":  938,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  940,
+"startColumn":  21,
+"endLine":  940,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  948,
+"startColumn":  22,
+"endLine":  948,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  948,
+"startColumn":  69,
+"endLine":  948,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  950,
+"startColumn":  21,
+"endLine":  950,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  956,
+"startColumn":  22,
+"endLine":  956,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  959,
+"startColumn":  21,
+"endLine":  959,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  959,
+"startColumn":  60,
+"endLine":  959,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  977,
+"startColumn":  17,
+"endLine":  977,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  984,
+"startColumn":  22,
+"endLine":  984,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  984,
+"startColumn":  53,
+"endLine":  984,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  987,
+"startColumn":  21,
+"endLine":  987,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  989,
+"startColumn":  25,
+"endLine":  989,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1002,
+"startColumn":  22,
+"endLine":  1002,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1002,
+"startColumn":  66,
+"endLine":  1002,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1007,
+"startColumn":  22,
+"endLine":  1007,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1009,
+"startColumn":  21,
+"endLine":  1009,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1020,
+"startColumn":  22,
+"endLine":  1020,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1020,
+"startColumn":  69,
+"endLine":  1020,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1022,
+"startColumn":  21,
+"endLine":  1022,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1025,
+"startColumn":  21,
+"endLine":  1025,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1031,
+"startColumn":  26,
+"endLine":  1031,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1031,
+"startColumn":  93,
+"endLine":  1031,
+"endColumn":  95
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1040,
+"startColumn":  22,
+"endLine":  1040,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1040,
+"startColumn":  55,
+"endLine":  1040,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1052,
+"startColumn":  25,
+"endLine":  1052,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1061,
+"startColumn":  41,
+"endLine":  1061,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1067,
+"startColumn":  37,
+"endLine":  1067,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1075,
+"startColumn":  22,
+"endLine":  1075,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1075,
+"startColumn":  68,
+"endLine":  1075,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1077,
+"startColumn":  21,
+"endLine":  1077,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1080,
+"startColumn":  107,
+"endLine":  1080,
+"endColumn":  108
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1081,
+"startColumn":  25,
+"endLine":  1081,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1085,
+"startColumn":  26,
+"endLine":  1085,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1085,
+"startColumn":  68,
+"endLine":  1085,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1092,
+"startColumn":  26,
+"endLine":  1092,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1107,
+"startColumn":  17,
+"endLine":  1107,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1110,
+"startColumn":  21,
+"endLine":  1110,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1121,
+"startColumn":  22,
+"endLine":  1121,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1121,
+"startColumn":  94,
+"endLine":  1121,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1121,
+"startColumn":  53,
+"endLine":  1121,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1129,
+"startColumn":  22,
+"endLine":  1129,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1136,
+"startColumn":  22,
+"endLine":  1136,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1144,
+"startColumn":  17,
+"endLine":  1144,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1144,
+"startColumn":  83,
+"endLine":  1144,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1149,
+"startColumn":  17,
+"endLine":  1149,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1149,
+"startColumn":  48,
+"endLine":  1149,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1154,
+"startColumn":  17,
+"endLine":  1154,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1161,
+"startColumn":  22,
+"endLine":  1161,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1169,
+"startColumn":  22,
+"endLine":  1169,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1169,
+"startColumn":  56,
+"endLine":  1169,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1180,
+"startColumn":  17,
+"endLine":  1180,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1180,
+"startColumn":  83,
+"endLine":  1180,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1184,
+"startColumn":  22,
+"endLine":  1184,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1184,
+"startColumn":  53,
+"endLine":  1184,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1188,
+"startColumn":  22,
+"endLine":  1188,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1194,
+"startColumn":  22,
+"endLine":  1194,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1194,
+"startColumn":  93,
+"endLine":  1194,
+"endColumn":  95
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1194,
+"startColumn":  62,
+"endLine":  1194,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1199,
+"startColumn":  22,
+"endLine":  1199,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1206,
+"startColumn":  22,
+"endLine":  1206,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1206,
+"startColumn":  98,
+"endLine":  1206,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1206,
+"startColumn":  66,
+"endLine":  1206,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1208,
+"startColumn":  21,
+"endLine":  1208,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1219,
+"startColumn":  22,
+"endLine":  1219,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1219,
+"startColumn":  53,
+"endLine":  1219,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1222,
+"startColumn":  21,
+"endLine":  1222,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1238,
+"startColumn":  17,
+"endLine":  1238,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1238,
+"startColumn":  63,
+"endLine":  1238,
+"endColumn":  65
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1240,
+"startColumn":  21,
+"endLine":  1240,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1241,
+"startColumn":  25,
+"endLine":  1241,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1240,
+"startColumn":  48,
+"endLine":  1240,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1241,
+"startColumn":  61,
+"endLine":  1241,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1243,
+"startColumn":  64,
+"endLine":  1243,
+"endColumn":  65
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1245,
+"startColumn":  26,
+"endLine":  1245,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1247,
+"startColumn":  25,
+"endLine":  1247,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1248,
+"startColumn":  130,
+"endLine":  1248,
+"endColumn":  131
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1250,
+"startColumn":  131,
+"endLine":  1250,
+"endColumn":  132
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1252,
+"startColumn":  25,
+"endLine":  1252,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1263,
+"startColumn":  22,
+"endLine":  1263,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1263,
+"startColumn":  53,
+"endLine":  1263,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1267,
+"startColumn":  22,
+"endLine":  1267,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1269,
+"startColumn":  21,
+"endLine":  1269,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1269,
+"startColumn":  89,
+"endLine":  1269,
+"endColumn":  91
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1274,
+"startColumn":  26,
+"endLine":  1274,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1277,
+"startColumn":  29,
+"endLine":  1277,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1276,
+"startColumn":  29,
+"endLine":  1276,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1275,
+"startColumn":  29,
+"endLine":  1275,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1283,
+"startColumn":  22,
+"endLine":  1283,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1285,
+"startColumn":  21,
+"endLine":  1285,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1284,
+"startColumn":  21,
+"endLine":  1284,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1290,
+"startColumn":  22,
+"endLine":  1290,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1297,
+"startColumn":  22,
+"endLine":  1297,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1297,
+"startColumn":  101,
+"endLine":  1297,
+"endColumn":  103
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1297,
+"startColumn":  66,
+"endLine":  1297,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1299,
+"startColumn":  21,
+"endLine":  1299,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1316,
+"startColumn":  17,
+"endLine":  1316,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1318,
+"startColumn":  21,
+"endLine":  1318,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1317,
+"startColumn":  21,
+"endLine":  1317,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1322,
+"startColumn":  22,
+"endLine":  1322,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1324,
+"startColumn":  21,
+"endLine":  1324,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1323,
+"startColumn":  21,
+"endLine":  1323,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1330,
+"startColumn":  22,
+"endLine":  1330,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1343,
+"startColumn":  17,
+"endLine":  1343,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1345,
+"startColumn":  21,
+"endLine":  1345,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1344,
+"startColumn":  21,
+"endLine":  1344,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1356,
+"startColumn":  17,
+"endLine":  1356,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1357,
+"startColumn":  21,
+"endLine":  1357,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1362,
+"startColumn":  17,
+"endLine":  1362,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1362,
+"startColumn":  69,
+"endLine":  1362,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1373,
+"startColumn":  17,
+"endLine":  1373,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1381,
+"startColumn":  17,
+"endLine":  1381,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1383,
+"startColumn":  21,
+"endLine":  1383,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1383,
+"startColumn":  89,
+"endLine":  1383,
+"endColumn":  91
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1390,
+"startColumn":  25,
+"endLine":  1390,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1397,
+"startColumn":  17,
+"endLine":  1397,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1399,
+"startColumn":  21,
+"endLine":  1399,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1405,
+"startColumn":  17,
+"endLine":  1405,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1410,
+"startColumn":  17,
+"endLine":  1410,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1415,
+"startColumn":  17,
+"endLine":  1415,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1417,
+"startColumn":  21,
+"endLine":  1417,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1422,
+"startColumn":  17,
+"endLine":  1422,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1430,
+"startColumn":  17,
+"endLine":  1430,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1432,
+"startColumn":  21,
+"endLine":  1432,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1451,
+"startColumn":  17,
+"endLine":  1451,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1452,
+"startColumn":  17,
+"endLine":  1452,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1453,
+"startColumn":  17,
+"endLine":  1453,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1455,
+"startColumn":  17,
+"endLine":  1455,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1455,
+"startColumn":  66,
+"endLine":  1455,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1457,
+"startColumn":  21,
+"endLine":  1457,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1457,
+"startColumn":  61,
+"endLine":  1457,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1460,
+"startColumn":  25,
+"endLine":  1460,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1464,
+"startColumn":  33,
+"endLine":  1464,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1464,
+"startColumn":  50,
+"endLine":  1464,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1472,
+"startColumn":  17,
+"endLine":  1472,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1472,
+"startColumn":  58,
+"endLine":  1472,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1478,
+"startColumn":  17,
+"endLine":  1478,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1478,
+"startColumn":  57,
+"endLine":  1478,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1479,
+"startColumn":  17,
+"endLine":  1479,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1479,
+"startColumn":  57,
+"endLine":  1479,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1481,
+"startColumn":  21,
+"endLine":  1481,
+"endColumn":  23
+}
+}
+]
+}
+]
+}

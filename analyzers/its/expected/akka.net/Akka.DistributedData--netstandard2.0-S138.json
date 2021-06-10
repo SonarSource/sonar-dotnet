@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'ReceiveUpdate' has 96 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  622,
+"startColumn":  22,
+"endLine":  622,
+"endColumn":  35
+}
+}
+}
+]
+}

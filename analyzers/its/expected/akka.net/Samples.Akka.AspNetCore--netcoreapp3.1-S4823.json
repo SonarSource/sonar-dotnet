@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4823",
+"message":  "Make sure that command line arguments are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Program.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  28,
+"endLine":  21,
+"endColumn":  32
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'data' with 'nameof(data)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\JsonPersistentTestRunStore.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  63,
+"endLine":  63,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'filePath' with 'nameof(filePath)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\JsonPersistentTestRunStore.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  77,
+"endLine":  64,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'filePath' with 'nameof(filePath)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\JsonPersistentTestRunStore.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  77,
+"endLine":  84,
+"endColumn":  113
+}
+}
+}
+]
+}

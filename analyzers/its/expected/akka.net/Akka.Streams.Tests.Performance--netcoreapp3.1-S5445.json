@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S5445",
+"message":  "'Path.GetTempFileName()' is insecure. Use 'Path.GetRandomFileName()' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\IO\FileSourcesBenchmark.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  37,
+"endLine":  48,
+"endColumn":  57
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeFact.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  18,
+"endLine":  13,
+"endColumn":  40
+}
+}
+}
+]
+}

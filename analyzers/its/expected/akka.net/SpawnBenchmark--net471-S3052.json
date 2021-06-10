@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_count', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\SpawnBenchmark\SpawnActor.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  29,
+"endLine":  28,
+"endColumn":  33
+}
+}
+}
+]
+}

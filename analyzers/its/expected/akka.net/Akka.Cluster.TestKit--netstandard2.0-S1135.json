@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  7,
+"endLine":  27,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  11,
+"endLine":  176,
+"endColumn":  15
+}
+}
+}
+]
+}

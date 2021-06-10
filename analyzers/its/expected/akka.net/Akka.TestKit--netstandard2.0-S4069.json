@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Equals' for the operator '=='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  37,
+"endLine":  39,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Equals' for the operator '!='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  37,
+"endLine":  51,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Equals' for the operator '=='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  37,
+"endLine":  63,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Equals' for the operator '!='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  37,
+"endLine":  75,
+"endColumn":  39
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  63,
+"endLine":  42,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  89,
+"endLine":  43,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  90,
+"endLine":  44,
+"endColumn":  92
+}
+}
+}
+]
+}

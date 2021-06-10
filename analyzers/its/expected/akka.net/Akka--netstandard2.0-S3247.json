@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\BuiltInActors.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  22,
+"endLine":  46,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\BuiltInActors.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  31,
+"endLine":  47,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  526,
+"startColumn":  17,
+"endLine":  526,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  527,
+"startColumn":  35,
+"endLine":  527,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  25,
+"endLine":  101,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  30,
+"endLine":  103,
+"endColumn":  64
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  21,
+"endLine":  89,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  41,
+"endLine":  91,
+"endColumn":  77
+}
+}
+]
+}
+]
+}

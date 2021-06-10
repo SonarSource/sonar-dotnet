@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  21,
+"endLine":  212,
+"endColumn":  83
+}
+}
+}
+]
+}

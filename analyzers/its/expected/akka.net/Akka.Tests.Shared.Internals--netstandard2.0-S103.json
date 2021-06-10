@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\AsyncContext.SynchronizationContext.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  1,
+"endLine":  47,
+"endColumn":  205
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\BoundAction.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  1,
+"endLine":  49,
+"endColumn":  202
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SingleDisposable%20(of%20T).cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  205
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SingleDisposable%20(of%20T).cs",
+"region":  {
+"startLine":  64,
+"startColumn":  1,
+"endLine":  64,
+"endColumn":  209
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SingleDisposable%20(of%20T).cs",
+"region":  {
+"startLine":  87,
+"startColumn":  1,
+"endLine":  87,
+"endColumn":  202
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 252 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SynchronousTaskExtensions.cs.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  253
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 252 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SynchronousTaskExtensions.cs.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  1,
+"endLine":  71,
+"endColumn":  253
+}
+}
+}
+]
+}

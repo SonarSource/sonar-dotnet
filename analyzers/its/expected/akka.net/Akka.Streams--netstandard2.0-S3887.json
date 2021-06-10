@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'MaterializedValueIds'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  25,
+"endLine":  33,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Stages'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  25,
+"endLine":  99,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'OriginalAttributes'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  25,
+"endLine":  103,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Inlets'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  25,
+"endLine":  107,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'InletOwners'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  25,
+"endLine":  111,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Outlets'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  25,
+"endLine":  115,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'OutletOwners'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  25,
+"endLine":  119,
+"endColumn":  30
+}
+}
+}
+]
+}

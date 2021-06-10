@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientSettings.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  74,
+"endLine":  52,
+"endColumn":  90
+}
+}
+}
+]
+}

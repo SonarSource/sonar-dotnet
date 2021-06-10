@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  20,
+"endLine":  103,
+"endColumn":  24
+}
+}
+}
+]
+}

@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4456",
+"message":  "Split this method into two, one handling parameters check and the other handling the iterator.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  1098,
+"startColumn":  77,
+"endLine":  1098,
+"endColumn":  95
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  1114,
+"startColumn":  31,
+"endLine":  1114,
+"endColumn":  133
+}
+}
+]
+},
+{
+"id":  "S4456",
+"message":  "Split this method into two, one handling parameters check and the other handling the iterator.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  42,
+"endLine":  59,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  31,
+"endLine":  68,
+"endColumn":  116
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\PersistenceQuery.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  54,
+"endLine":  58,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\PersistenceQuery.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  50,
+"endLine":  61,
+"endColumn":  54
+}
+}
+}
+]
+}

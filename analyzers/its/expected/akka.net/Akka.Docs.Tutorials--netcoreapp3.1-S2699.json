@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Docs.Tutorials\Tutorial1\ActorHierarchyExperiments.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  21,
+"endLine":  100,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Docs.Tutorials\Tutorial1\ActorHierarchyExperiments.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  21,
+"endLine":  110,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Docs.Tutorials\Tutorial1\ActorHierarchyExperiments.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  21,
+"endLine":  119,
+"endColumn":  37
+}
+}
+}
+]
+}

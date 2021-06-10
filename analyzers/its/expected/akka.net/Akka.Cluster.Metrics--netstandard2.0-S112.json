@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\WeightedRoutees.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  23,
+"endLine":  85,
+"endColumn":  116
+}
+}
+}
+]
+}

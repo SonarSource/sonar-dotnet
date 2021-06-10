@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  27,
+"endLine":  233,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  17,
+"endLine":  404,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  42,
+"endLine":  438,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  38,
+"endLine":  543,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  570,
+"startColumn":  21,
+"endLine":  570,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  572,
+"startColumn":  21,
+"endLine":  572,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  34,
+"endLine":  140,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  551,
+"startColumn":  26,
+"endLine":  551,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\RemoteConnection.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  18,
+"endLine":  120,
+"endColumn":  46
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'ReceivePersistentActor' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInitializableActor.Init'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  34,
+"endLine":  348,
+"endColumn":  38
+}
+}
+}
+]
+}

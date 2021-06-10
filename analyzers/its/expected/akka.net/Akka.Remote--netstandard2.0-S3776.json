@@ -1,0 +1,2674 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1921,
+"startColumn":  22,
+"endLine":  1921,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1927,
+"startColumn":  17,
+"endLine":  1927,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1935,
+"startColumn":  17,
+"endLine":  1935,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1938,
+"startColumn":  21,
+"endLine":  1938,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1938,
+"startColumn":  57,
+"endLine":  1938,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1940,
+"startColumn":  21,
+"endLine":  1940,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1942,
+"startColumn":  25,
+"endLine":  1942,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1947,
+"startColumn":  25,
+"endLine":  1947,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1956,
+"startColumn":  29,
+"endLine":  1956,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1960,
+"startColumn":  29,
+"endLine":  1960,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1964,
+"startColumn":  29,
+"endLine":  1964,
+"endColumn":  34
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  682,
+"startColumn":  24,
+"endLine":  682,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  686,
+"startColumn":  17,
+"endLine":  686,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  688,
+"startColumn":  21,
+"endLine":  688,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  690,
+"startColumn":  21,
+"endLine":  690,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  701,
+"startColumn":  17,
+"endLine":  701,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  706,
+"startColumn":  17,
+"endLine":  706,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  706,
+"startColumn":  55,
+"endLine":  706,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  713,
+"startColumn":  21,
+"endLine":  713,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  713,
+"startColumn":  44,
+"endLine":  713,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  723,
+"startColumn":  17,
+"endLine":  723,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  682,
+"startColumn":  24,
+"endLine":  682,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1528,
+"startColumn":  22,
+"endLine":  1528,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1532,
+"startColumn":  17,
+"endLine":  1532,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1549,
+"startColumn":  17,
+"endLine":  1549,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1549,
+"startColumn":  31,
+"endLine":  1549,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1551,
+"startColumn":  21,
+"endLine":  1551,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1565,
+"startColumn":  17,
+"endLine":  1565,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1566,
+"startColumn":  17,
+"endLine":  1566,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1576,
+"startColumn":  38,
+"endLine":  1576,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1577,
+"startColumn":  13,
+"endLine":  1577,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1577,
+"startColumn":  32,
+"endLine":  1577,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1580,
+"startColumn":  17,
+"endLine":  1580,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1593,
+"startColumn":  13,
+"endLine":  1593,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1598,
+"startColumn":  13,
+"endLine":  1598,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1600,
+"startColumn":  17,
+"endLine":  1600,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1603,
+"startColumn":  21,
+"endLine":  1603,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  21,
+"endLine":  81,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  13,
+"endLine":  90,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  17,
+"endLine":  92,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  17,
+"endLine":  93,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  21,
+"endLine":  95,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  13,
+"endLine":  105,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  83,
+"endLine":  105,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  46,
+"endLine":  105,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  17,
+"endLine":  107,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  17,
+"endLine":  112,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  21,
+"endLine":  114,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  25,
+"endLine":  115,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  29,
+"endLine":  116,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  21,
+"endLine":  124,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  17,
+"endLine":  130,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  54,
+"endLine":  130,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  17,
+"endLine":  135,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  17,
+"endLine":  139,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  13,
+"endLine":  146,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  84,
+"endLine":  146,
+"endColumn":  86
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  47,
+"endLine":  146,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  17,
+"endLine":  149,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  17,
+"endLine":  154,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  17,
+"endLine":  159,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  13,
+"endLine":  166,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  546,
+"startColumn":  47,
+"endLine":  546,
+"endColumn":  65
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  552,
+"startColumn":  21,
+"endLine":  552,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  556,
+"startColumn":  29,
+"endLine":  556,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  556,
+"startColumn":  71,
+"endLine":  556,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  573,
+"startColumn":  17,
+"endLine":  573,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  579,
+"startColumn":  33,
+"endLine":  579,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  586,
+"startColumn":  25,
+"endLine":  586,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  586,
+"startColumn":  60,
+"endLine":  586,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  602,
+"startColumn":  25,
+"endLine":  602,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  602,
+"startColumn":  66,
+"endLine":  602,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  603,
+"startColumn":  25,
+"endLine":  603,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  941,
+"startColumn":  22,
+"endLine":  941,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  945,
+"startColumn":  13,
+"endLine":  945,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  948,
+"startColumn":  17,
+"endLine":  948,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  953,
+"startColumn":  17,
+"endLine":  953,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  960,
+"startColumn":  13,
+"endLine":  960,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  962,
+"startColumn":  17,
+"endLine":  962,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  964,
+"startColumn":  17,
+"endLine":  964,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  967,
+"startColumn":  21,
+"endLine":  967,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  972,
+"startColumn":  29,
+"endLine":  972,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  981,
+"startColumn":  29,
+"endLine":  981,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  985,
+"startColumn":  29,
+"endLine":  985,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  992,
+"startColumn":  29,
+"endLine":  992,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 62 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  705,
+"startColumn":  24,
+"endLine":  705,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  729,
+"startColumn":  17,
+"endLine":  729,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  729,
+"startColumn":  47,
+"endLine":  729,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  737,
+"startColumn":  17,
+"endLine":  737,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  737,
+"startColumn":  49,
+"endLine":  737,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  741,
+"startColumn":  21,
+"endLine":  741,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  748,
+"startColumn":  21,
+"endLine":  748,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  748,
+"startColumn":  50,
+"endLine":  748,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  753,
+"startColumn":  21,
+"endLine":  753,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  758,
+"startColumn":  17,
+"endLine":  758,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  758,
+"startColumn":  54,
+"endLine":  758,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  762,
+"startColumn":  17,
+"endLine":  762,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  768,
+"startColumn":  17,
+"endLine":  768,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  775,
+"startColumn":  17,
+"endLine":  775,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  775,
+"startColumn":  53,
+"endLine":  775,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  777,
+"startColumn":  17,
+"endLine":  777,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  777,
+"startColumn":  58,
+"endLine":  777,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  778,
+"startColumn":  17,
+"endLine":  778,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  783,
+"startColumn":  82,
+"endLine":  783,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  792,
+"startColumn":  21,
+"endLine":  792,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  807,
+"startColumn":  25,
+"endLine":  807,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  824,
+"startColumn":  17,
+"endLine":  824,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  830,
+"startColumn":  25,
+"endLine":  830,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  831,
+"startColumn":  25,
+"endLine":  831,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  856,
+"startColumn":  17,
+"endLine":  856,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  859,
+"startColumn":  25,
+"endLine":  859,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  866,
+"startColumn":  25,
+"endLine":  866,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  893,
+"startColumn":  29,
+"endLine":  893,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  893,
+"startColumn":  50,
+"endLine":  893,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  895,
+"startColumn":  33,
+"endLine":  895,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  905,
+"startColumn":  31,
+"endLine":  905,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  905,
+"startColumn":  52,
+"endLine":  905,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  907,
+"startColumn":  35,
+"endLine":  907,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  911,
+"startColumn":  64,
+"endLine":  911,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  915,
+"startColumn":  17,
+"endLine":  915,
+"endColumn":  24
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  30,
+"endLine":  204,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  13,
+"endLine":  206,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  17,
+"endLine":  208,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  21,
+"endLine":  210,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  29,
+"endLine":  218,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  17,
+"endLine":  227,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  21,
+"endLine":  230,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  66,
+"endLine":  230,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  29,
+"endLine":  234,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  33,
+"endLine":  236,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  13,
+"endLine":  248,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  33,
+"endLine":  120,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  13,
+"endLine":  123,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  17,
+"endLine":  126,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  13,
+"endLine":  128,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  21,
+"endLine":  134,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  25,
+"endLine":  136,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  25,
+"endLine":  141,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  17,
+"endLine":  164,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  17,
+"endLine":  170,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  13,
+"endLine":  177,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  21,
+"endLine":  183,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  13,
+"endLine":  186,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  13,
+"endLine":  190,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  23,
+"endLine":  198,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  13,
+"endLine":  206,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  17,
+"endLine":  208,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  21,
+"endLine":  211,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  17,
+"endLine":  220,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  21,
+"endLine":  225,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  25,
+"endLine":  228,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  21,
+"endLine":  231,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  53,
+"endLine":  231,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  21,
+"endLine":  237,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  32,
+"endLine":  112,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  13,
+"endLine":  114,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  13,
+"endLine":  115,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  13,
+"endLine":  116,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  13,
+"endLine":  117,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  13,
+"endLine":  118,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  13,
+"endLine":  119,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  13,
+"endLine":  120,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  13,
+"endLine":  121,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  13,
+"endLine":  122,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  13,
+"endLine":  123,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  13,
+"endLine":  124,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  13,
+"endLine":  125,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  13,
+"endLine":  126,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  13,
+"endLine":  127,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  13,
+"endLine":  128,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  13,
+"endLine":  129,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  13,
+"endLine":  130,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  13,
+"endLine":  131,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  13,
+"endLine":  132,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  32,
+"endLine":  60,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  13,
+"endLine":  62,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  13,
+"endLine":  63,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  13,
+"endLine":  64,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  13,
+"endLine":  65,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  13,
+"endLine":  66,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  13,
+"endLine":  67,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  13,
+"endLine":  68,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  13,
+"endLine":  69,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  13,
+"endLine":  70,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  71,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  13,
+"endLine":  72,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  13,
+"endLine":  73,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  13,
+"endLine":  74,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  13,
+"endLine":  75,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  13,
+"endLine":  76,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  13,
+"endLine":  78,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  13,
+"endLine":  79,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  13,
+"endLine":  80,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  32,
+"endLine":  86,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  13,
+"endLine":  88,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  13,
+"endLine":  89,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  13,
+"endLine":  90,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  13,
+"endLine":  91,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  13,
+"endLine":  92,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  13,
+"endLine":  93,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  13,
+"endLine":  94,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  13,
+"endLine":  95,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  13,
+"endLine":  96,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  13,
+"endLine":  97,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  13,
+"endLine":  98,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  13,
+"endLine":  99,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  13,
+"endLine":  100,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  13,
+"endLine":  101,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  13,
+"endLine":  102,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  13,
+"endLine":  103,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  13,
+"endLine":  104,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  13,
+"endLine":  105,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  13,
+"endLine":  106,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 70 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  832,
+"startColumn":  22,
+"endLine":  832,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  836,
+"startColumn":  17,
+"endLine":  836,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  839,
+"startColumn":  25,
+"endLine":  839,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  848,
+"startColumn":  25,
+"endLine":  848,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  859,
+"startColumn":  33,
+"endLine":  859,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  868,
+"startColumn":  33,
+"endLine":  868,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  894,
+"startColumn":  17,
+"endLine":  894,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  907,
+"startColumn":  29,
+"endLine":  907,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  911,
+"startColumn":  37,
+"endLine":  911,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  911,
+"startColumn":  61,
+"endLine":  911,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  916,
+"startColumn":  37,
+"endLine":  916,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  933,
+"startColumn":  37,
+"endLine":  933,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  955,
+"startColumn":  29,
+"endLine":  955,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  973,
+"startColumn":  37,
+"endLine":  973,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  981,
+"startColumn":  25,
+"endLine":  981,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  987,
+"startColumn":  25,
+"endLine":  987,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1002,
+"startColumn":  17,
+"endLine":  1002,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1009,
+"startColumn":  29,
+"endLine":  1009,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1019,
+"startColumn":  37,
+"endLine":  1019,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1047,
+"startColumn":  33,
+"endLine":  1047,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1067,
+"startColumn":  25,
+"endLine":  1067,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1083,
+"startColumn":  21,
+"endLine":  1083,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1114,
+"startColumn":  21,
+"endLine":  1114,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1114,
+"startColumn":  50,
+"endLine":  1114,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1119,
+"startColumn":  21,
+"endLine":  1119,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1130,
+"startColumn":  21,
+"endLine":  1130,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1130,
+"startColumn":  58,
+"endLine":  1130,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1135,
+"startColumn":  21,
+"endLine":  1135,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  33,
+"endLine":  359,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  361,
+"startColumn":  13,
+"endLine":  361,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  13,
+"endLine":  367,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  21,
+"endLine":  376,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  21,
+"endLine":  380,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  13,
+"endLine":  388,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  13,
+"endLine":  400,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  407,
+"startColumn":  17,
+"endLine":  407,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  409,
+"startColumn":  21,
+"endLine":  409,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  420,
+"startColumn":  13,
+"endLine":  420,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  424,
+"startColumn":  17,
+"endLine":  424,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  426,
+"startColumn":  21,
+"endLine":  426,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  449,
+"startColumn":  13,
+"endLine":  449,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  453,
+"startColumn":  17,
+"endLine":  453,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  455,
+"startColumn":  21,
+"endLine":  455,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  478,
+"startColumn":  13,
+"endLine":  478,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 56 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1102,
+"startColumn":  22,
+"endLine":  1102,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1106,
+"startColumn":  17,
+"endLine":  1106,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1106,
+"startColumn":  64,
+"endLine":  1106,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1121,
+"startColumn":  17,
+"endLine":  1121,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1121,
+"startColumn":  55,
+"endLine":  1121,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1126,
+"startColumn":  21,
+"endLine":  1126,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1138,
+"startColumn":  17,
+"endLine":  1138,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1145,
+"startColumn":  17,
+"endLine":  1145,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1145,
+"startColumn":  53,
+"endLine":  1145,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1152,
+"startColumn":  25,
+"endLine":  1152,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1158,
+"startColumn":  25,
+"endLine":  1158,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1180,
+"startColumn":  17,
+"endLine":  1180,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1187,
+"startColumn":  17,
+"endLine":  1187,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1199,
+"startColumn":  17,
+"endLine":  1199,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1208,
+"startColumn":  17,
+"endLine":  1208,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1220,
+"startColumn":  17,
+"endLine":  1220,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1224,
+"startColumn":  21,
+"endLine":  1224,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1226,
+"startColumn":  21,
+"endLine":  1226,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1232,
+"startColumn":  17,
+"endLine":  1232,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1238,
+"startColumn":  17,
+"endLine":  1238,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1240,
+"startColumn":  21,
+"endLine":  1240,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1246,
+"startColumn":  25,
+"endLine":  1246,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1258,
+"startColumn":  17,
+"endLine":  1258,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1265,
+"startColumn":  17,
+"endLine":  1265,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1270,
+"startColumn":  17,
+"endLine":  1270,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1273,
+"startColumn":  21,
+"endLine":  1273,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1280,
+"startColumn":  13,
+"endLine":  1280,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1282,
+"startColumn":  13,
+"endLine":  1282,
+"endColumn":  17
+}
+}
+]
+}
+]
+}

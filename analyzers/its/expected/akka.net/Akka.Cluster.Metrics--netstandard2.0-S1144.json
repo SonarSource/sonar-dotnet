@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'BufferSize'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  9,
+"endLine":  27,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'SystemLoadAverageMetricsSelectorManifest'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  9,
+"endLine":  36,
+"endColumn":  77
+}
+}
+}
+]
+}

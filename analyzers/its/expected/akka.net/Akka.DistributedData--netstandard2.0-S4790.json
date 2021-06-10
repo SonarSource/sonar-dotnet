@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4790",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  906,
+"startColumn":  30,
+"endLine":  906,
+"endColumn":  43
+}
+}
+}
+]
+}

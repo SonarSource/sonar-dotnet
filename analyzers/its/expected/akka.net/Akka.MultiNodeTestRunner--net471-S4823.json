@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4823",
+"message":  "Make sure that command line arguments are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  21,
+"endLine":  136,
+"endColumn":  25
+}
+}
+}
+]
+}

@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\DeadLettersFilter.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  21,
+"endLine":  46,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\DeadLettersFilter.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  17,
+"endLine":  45,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  560,
+"startColumn":  25,
+"endLine":  560,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  558,
+"startColumn":  21,
+"endLine":  558,
+"endColumn":  23
+}
+}
+]
+}
+]
+}

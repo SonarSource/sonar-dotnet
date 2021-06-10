@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  79,
+"endLine":  152,
+"endColumn":  83
+}
+}
+}
+]
+}

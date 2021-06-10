@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\DelegatingSupervisorStrategy.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  13,
+"endLine":  24,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\DelegatingSupervisorStrategy.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  13,
+"endLine":  45,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\BlockingQueue.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  44,
+"endLine":  243,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  14,
+"endLine":  318,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"region":  {
+"startLine":  323,
+"startColumn":  14,
+"endLine":  323,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  14,
+"endLine":  328,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  14,
+"endLine":  333,
+"endColumn":  50
+}
+}
+}
+]
+}

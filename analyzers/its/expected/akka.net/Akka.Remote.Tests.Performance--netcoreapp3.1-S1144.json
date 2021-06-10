@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_echo'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  9,
+"endLine":  31,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_remoteEcho'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  9,
+"endLine":  32,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_remoteReceiver'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  9,
+"endLine":  33,
+"endColumn":  43
+}
+}
+}
+]
+}

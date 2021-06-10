@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2365",
+"message":  "Refactor 'Elements' into a method, properties should not copy collections.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  672,
+"startColumn":  32,
+"endLine":  672,
+"endColumn":  42
+}
+}
+}
+]
+}

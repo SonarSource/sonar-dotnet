@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'ExpectEnvelope' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  31,
+"endLine":  109,
+"endColumn":  45
+}
+}
+}
+]
+}

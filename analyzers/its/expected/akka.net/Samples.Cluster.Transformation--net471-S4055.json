@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\Program.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  31,
+"endLine":  31,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationBackend.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  80,
+"endLine":  68,
+"endColumn":  123
+}
+}
+}
+]
+}

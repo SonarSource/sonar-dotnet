@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'TrustedSelectionPaths' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  32,
+"endLine":  98,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'TransportNames' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  30,
+"endLine":  143,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Adapters' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  44,
+"endLine":  148,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Adapters' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  34,
+"endLine":  268,
+"endColumn":  42
+}
+}
+}
+]
+}

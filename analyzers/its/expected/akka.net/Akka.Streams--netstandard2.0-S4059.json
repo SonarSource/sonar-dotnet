@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'AttributeList' or the name of method 'GetAttributeList' to make them distinguishable.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  40,
+"endLine":  322,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  35,
+"endLine":  346,
+"endColumn":  51
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'StageActor' or the name of method 'GetStageActor' to make them distinguishable.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  867,
+"startColumn":  27,
+"endLine":  867,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1622,
+"startColumn":  30,
+"endLine":  1622,
+"endColumn":  43
+}
+}
+]
+}
+]
+}

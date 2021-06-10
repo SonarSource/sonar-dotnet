@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1227",
+"message":  "Refactor the code in order to remove this break statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  21,
+"endLine":  246,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1227",
+"message":  "Refactor the code in order to remove this break statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  21,
+"endLine":  254,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1227",
+"message":  "Refactor the code in order to remove this break statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  21,
+"endLine":  303,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1227",
+"message":  "Refactor the code in order to remove this break statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  21,
+"endLine":  328,
+"endColumn":  27
+}
+}
+}
+]
+}

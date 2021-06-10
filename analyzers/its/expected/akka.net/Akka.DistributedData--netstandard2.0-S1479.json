@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1479",
+"message":  "Consider reworking this 'switch' to reduce the number of 'case's from 35 to at most 30.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  13,
+"endLine":  109,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1479",
+"message":  "Consider reworking this 'switch' to reduce the number of 'case's from 35 to at most 30.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  13,
+"endLine":  157,
+"endColumn":  19
+}
+}
+}
+]
+}

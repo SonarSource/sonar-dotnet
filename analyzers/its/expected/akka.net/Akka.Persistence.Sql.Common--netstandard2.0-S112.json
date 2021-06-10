@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  804,
+"startColumn":  31,
+"endLine":  804,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1034,
+"startColumn":  35,
+"endLine":  1034,
+"endColumn":  105
+}
+}
+}
+]
+}

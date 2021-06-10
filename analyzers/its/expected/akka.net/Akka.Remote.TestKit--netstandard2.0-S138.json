@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'InitFSM' has 118 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  495,
+"startColumn":  24,
+"endLine":  495,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'InitFSM' has 81 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"region":  {
+"startLine":  355,
+"startColumn":  24,
+"endLine":  355,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'OnReceive' has 113 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  33,
+"endLine":  277,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Encode' has 108 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  33,
+"endLine":  45,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'InitFSM' has 199 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  21,
+"endLine":  350,
+"endColumn":  28
+}
+}
+}
+]
+}

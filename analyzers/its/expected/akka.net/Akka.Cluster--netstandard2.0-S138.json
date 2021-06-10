@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'ReceiveGossip' has 135 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1853,
+"startColumn":  34,
+"endLine":  1853,
+"endColumn":  47
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_firstNode' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  22,
+"endLine":  46,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_lastNode' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  22,
+"endLine":  47,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_middleNode' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  22,
+"endLine":  48,
+"endColumn":  33
+}
+}
+}
+]
+}

@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename interface 'ILWWDictionaryKey' to match pascal case naming rules, consider using 'ILwwDictionaryKey'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  24,
+"endLine":  25,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'ILWWDictionaryDeltaOperation' to match pascal case naming rules, consider using 'ILwwDictionaryDeltaOperation'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  24,
+"endLine":  37,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'LWWDictionaryKey' to match pascal case naming rules, consider using 'LwwDictionaryKey'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  25,
+"endLine":  49,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'ILWWDictionary' to match pascal case naming rules, consider using 'ILwwDictionary'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  24,
+"endLine":  66,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'LWWDictionary' to match pascal case naming rules, consider using 'LwwDictionary'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  25,
+"endLine":  76,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'LWWDictionary' to match pascal case naming rules, consider using 'LwwDictionary'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  25,
+"endLine":  131,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'LWWDictionaryDelta' to match pascal case naming rules, consider using 'LwwDictionaryDelta'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"region":  {
+"startLine":  344,
+"startColumn":  31,
+"endLine":  344,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'ILWWRegisterKey' to match pascal case naming rules, consider using 'ILwwRegisterKey'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  24,
+"endLine":  28,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'LWWRegisterKey' to match pascal case naming rules, consider using 'LwwRegisterKey'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  25,
+"endLine":  38,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'ILWWRegister' to match pascal case naming rules, consider using 'ILwwRegister'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  24,
+"endLine":  56,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'LWWRegister' to match pascal case naming rules, consider using 'LwwRegister'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  25,
+"endLine":  85,
+"endColumn":  36
+}
+}
+}
+]
+}

@@ -1,0 +1,1317 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorMemoryFootprintSpec.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  162,
+"endLine":  75,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorMemoryFootprintSpec.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  151,
+"endLine":  87,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorMemoryFootprintSpec.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  151,
+"endLine":  99,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorMemoryFootprintSpec.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  59,
+"endLine":  114,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathEqualitySpec.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  64,
+"endLine":  35,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathEqualitySpec.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  90,
+"endLine":  35,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathEqualitySpec.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  64,
+"endLine":  49,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathEqualitySpec.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  90,
+"endLine":  49,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  64,
+"endLine":  31,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  90,
+"endLine":  31,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  64,
+"endLine":  43,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  90,
+"endLine":  43,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  64,
+"endLine":  55,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  90,
+"endLine":  55,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  64,
+"endLine":  68,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  90,
+"endLine":  68,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  64,
+"endLine":  81,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  90,
+"endLine":  81,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  64,
+"endLine":  94,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  90,
+"endLine":  94,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  64,
+"endLine":  107,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  90,
+"endLine":  107,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  64,
+"endLine":  121,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  90,
+"endLine":  121,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  64,
+"endLine":  133,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  90,
+"endLine":  133,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  33,
+"endLine":  141,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  34,
+"endLine":  67,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  90,
+"endLine":  67,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  34,
+"endLine":  79,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  34,
+"endLine":  94,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  34,
+"endLine":  108,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  90,
+"endLine":  108,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  34,
+"endLine":  118,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  90,
+"endLine":  118,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSystemShutdownSpec.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  133,
+"endLine":  38,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSystemShutdownSpec.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  53,
+"endLine":  48,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSystemShutdownSpec.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  54,
+"endLine":  53,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSystemShutdownSpec.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  55,
+"endLine":  60,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  53,
+"endLine":  43,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  49,
+"endLine":  96,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  82,
+"endLine":  137,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  83,
+"endLine":  138,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  145,
+"endLine":  218,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  117,
+"endLine":  219,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  117,
+"endLine":  220,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  64,
+"endLine":  226,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  35,
+"endLine":  227,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  64,
+"endLine":  244,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  35,
+"endLine":  245,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  262,
+"startColumn":  64,
+"endLine":  262,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  35,
+"endLine":  263,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  64,
+"endLine":  280,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  35,
+"endLine":  281,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  58,
+"endLine":  299,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  153,
+"endLine":  29,
+"endColumn":  155
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  179,
+"endLine":  29,
+"endColumn":  183
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  154,
+"endLine":  38,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  180,
+"endLine":  38,
+"endColumn":  184
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  64,
+"endLine":  48,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  90,
+"endLine":  48,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  33,
+"endLine":  56,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9091' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  73,
+"endLine":  58,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Internal\ChildrenContainerSpec.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  67,
+"endLine":  58,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Internal\ChildrenContainerSpec.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  123,
+"endLine":  58,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Internal\ChildrenContainerSpec.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  67,
+"endLine":  70,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Internal\ChildrenContainerSpec.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  123,
+"endLine":  70,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Internal\ChildrenContainerSpec.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  67,
+"endLine":  82,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Internal\ChildrenContainerSpec.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  123,
+"endLine":  82,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Pattern\AskSpec.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  35,
+"endLine":  44,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Pattern\AskSpec.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  62,
+"endLine":  44,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Scheduler\DefaultSchedulerPerformanceTests.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  79,
+"endLine":  58,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '40' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Scheduler\DefaultSchedulerPerformanceTests.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  34,
+"endLine":  61,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  154,
+"endLine":  74,
+"endColumn":  155
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\GetMailboxTypeSpec.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  163,
+"endLine":  46,
+"endColumn":  165
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\GetMailboxTypeSpec.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  59,
+"endLine":  62,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  45,
+"endLine":  44,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1500' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  134,
+"endLine":  44,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  45,
+"endLine":  52,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1500' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  134,
+"endLine":  52,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  45,
+"endLine":  72,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1500' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  134,
+"endLine":  72,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  45,
+"endLine":  80,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1500' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  134,
+"endLine":  80,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxMemoryFootprintSpec.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  162,
+"endLine":  52,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxMemoryFootprintSpec.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  166,
+"endLine":  64,
+"endColumn":  168
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxMemoryFootprintSpec.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  164,
+"endLine":  76,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxMemoryFootprintSpec.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  164,
+"endLine":  88,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MessageDispatchAndReceiveBenchmark.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  45,
+"endLine":  46,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1500' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MessageDispatchAndReceiveBenchmark.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  134,
+"endLine":  46,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\ReceiveOnlyBenchmark.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  45,
+"endLine":  56,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\ReceiveOnlyBenchmark.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  134,
+"endLine":  56,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Event\EventStreamThroughputSpec.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  64,
+"endLine":  61,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Event\EventStreamThroughputSpec.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  35,
+"endLine":  62,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '50' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  37,
+"endLine":  153,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '50' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpInboundOnlySpec.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  32,
+"endLine":  84,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '50' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpSingleConnectionSpec.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  32,
+"endLine":  142,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Util\SerializationBenchmarks.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  75,
+"endLine":  32,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Util\SerializationBenchmarks.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  33,
+"endLine":  36,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Util\StandardOutWriterMemoryBenchmark.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  34,
+"endLine":  39,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Util\StandardOutWriterMemoryBenchmark.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  93,
+"endLine":  39,
+"endColumn":  97
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  63,
+"endLine":  48,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  91,
+"endLine":  67,
+"endColumn":  92
+}
+}
+}
+]
+}

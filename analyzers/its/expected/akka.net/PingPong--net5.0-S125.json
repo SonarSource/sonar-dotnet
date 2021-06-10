@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\ClientActorBase.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  21,
+"endLine":  41,
+"endColumn":  71
+}
+}
+}
+]
+}

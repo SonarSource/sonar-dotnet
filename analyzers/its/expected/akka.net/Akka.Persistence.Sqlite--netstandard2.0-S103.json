@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\BatchingSqliteJournal.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  1,
+"endLine":  69,
+"endColumn":  226
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\BatchingSqliteJournal.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  1,
+"endLine":  70,
+"endColumn":  226
+}
+}
+}
+]
+}

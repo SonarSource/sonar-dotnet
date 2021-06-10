@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3217",
+"message":  "Either change the type of 'task' to 'Task' or iterate on a generic collection of type 'Task<Finished>'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  26,
+"endLine":  80,
+"endColumn":  40
+}
+}
+}
+]
+}

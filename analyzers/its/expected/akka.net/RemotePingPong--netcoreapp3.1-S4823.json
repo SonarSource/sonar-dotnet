@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4823",
+"message":  "Make sure that command line arguments are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  35,
+"endLine":  71,
+"endColumn":  39
+}
+}
+}
+]
+}

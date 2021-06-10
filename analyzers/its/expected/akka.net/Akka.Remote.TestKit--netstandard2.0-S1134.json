@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  44,
+"endLine":  349,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  505,
+"startColumn":  42,
+"endLine":  505,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  526,
+"startColumn":  67,
+"endLine":  526,
+"endColumn":  72
+}
+}
+}
+]
+}

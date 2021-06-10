@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  32,
+"endLine":  102,
+"endColumn":  38
+}
+}
+}
+]
+}

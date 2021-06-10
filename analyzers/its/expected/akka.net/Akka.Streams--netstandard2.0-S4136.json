@@ -1,0 +1,268 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'GetAttribute' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  22,
+"endLine":  356,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  22,
+"endLine":  375,
+"endColumn":  34
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetFirstAttribute' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  22,
+"endLine":  367,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  22,
+"endLine":  384,
+"endColumn":  39
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Create' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  47,
+"endLine":  26,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  47,
+"endLine":  56,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'From' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  623,
+"startColumn":  46,
+"endLine":  623,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  718,
+"startColumn":  46,
+"endLine":  718,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'OnNext' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  21,
+"endLine":  58,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  21,
+"endLine":  74,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Dispatch' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  21,
+"endLine":  375,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  21,
+"endLine":  408,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Cancel' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  559,
+"startColumn":  25,
+"endLine":  559,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  573,
+"startColumn":  25,
+"endLine":  573,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Cancel' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamSubscriptionTimeout.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  21,
+"endLine":  107,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamSubscriptionTimeout.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  21,
+"endLine":  135,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ToSurrogate' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\SerializationTools.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  34,
+"endLine":  39,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\SerializationTools.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  34,
+"endLine":  65,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'IsAvailable' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1170,
+"startColumn":  33,
+"endLine":  1170,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1303,
+"startColumn":  33,
+"endLine":  1303,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'IsClosed' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1184,
+"startColumn":  24,
+"endLine":  1184,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1311,
+"startColumn":  24,
+"endLine":  1311,
+"endColumn":  32
+}
+}
+]
+}
+]
+}

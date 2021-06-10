@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 251 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  1,
+"endLine":  155,
+"endColumn":  252
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  1,
+"endLine":  183,
+"endColumn":  215
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 271 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  1,
+"endLine":  219,
+"endColumn":  272
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  1,
+"endLine":  73,
+"endColumn":  204
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  1,
+"endLine":  126,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  1,
+"endLine":  315,
+"endColumn":  213
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  1,
+"endLine":  354,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 229 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  1,
+"endLine":  366,
+"endColumn":  230
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  1,
+"endLine":  31,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"region":  {
+"startLine":  573,
+"startColumn":  1,
+"endLine":  573,
+"endColumn":  211
+}
+}
+}
+]
+}

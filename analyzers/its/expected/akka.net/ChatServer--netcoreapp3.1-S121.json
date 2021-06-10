@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatServer\Program.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  17,
+"endLine":  57,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatServer\Program.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  17,
+"endLine":  77,
+"endColumn":  24
+}
+}
+}
+]
+}

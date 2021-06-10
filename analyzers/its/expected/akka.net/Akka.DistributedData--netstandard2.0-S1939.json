@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1939",
+"message":  "'IRequireCausualDeliveryOfDeltas' implements 'IReplicatedDelta' so 'IReplicatedDelta' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  446,
+"startColumn":  44,
+"endLine":  446,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'IRequireCausualDeliveryOfDeltas' implements 'IReplicatedDelta' so 'IReplicatedDelta' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  44,
+"endLine":  476,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'IUpdateResponse' implements 'INoSerializationVerificationNeeded' so 'INoSerializationVerificationNeeded' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"region":  {
+"startLine":  554,
+"startColumn":  83,
+"endLine":  554,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'IRemovedNodePruning<VersionVector>' implements 'IReplicatedData<VersionVector>' so 'IReplicatedData<VersionVector>' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  43,
+"endLine":  26,
+"endColumn":  74
+}
+}
+}
+]
+}

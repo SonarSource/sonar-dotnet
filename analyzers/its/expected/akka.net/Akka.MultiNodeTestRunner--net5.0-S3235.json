@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  63,
+"endLine":  414,
+"endColumn":  65
+}
+}
+}
+]
+}

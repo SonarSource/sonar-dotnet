@@ -1,0 +1,193 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Delay must be greater than zero' 7 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  69,
+"endLine":  56,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  70,
+"endLine":  226,
+"endColumn":  103
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  69,
+"endLine":  253,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  69,
+"endLine":  284,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  69,
+"endLine":  315,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"region":  {
+"startLine":  347,
+"startColumn":  69,
+"endLine":  347,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"region":  {
+"startLine":  410,
+"startColumn":  69,
+"endLine":  410,
+"endColumn":  102
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Delay must be greater than zero' 6 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  69,
+"endLine":  193,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  69,
+"endLine":  221,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  69,
+"endLine":  253,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  69,
+"endLine":  285,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  69,
+"endLine":  318,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"region":  {
+"startLine":  383,
+"startColumn":  69,
+"endLine":  383,
+"endColumn":  102
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Delay must be greater than zero' 6 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  69,
+"endLine":  59,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  69,
+"endLine":  183,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  69,
+"endLine":  207,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  69,
+"endLine":  235,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  69,
+"endLine":  263,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"region":  {
+"startLine":  292,
+"startColumn":  69,
+"endLine":  292,
+"endColumn":  102
+}
+}
+]
+}
+]
+}

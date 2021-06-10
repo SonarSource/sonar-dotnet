@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  22,
+"endLine":  79,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  26,
+"endLine":  32,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  26,
+"endLine":  39,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  30,
+"endLine":  240,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  900,
+"startColumn":  26,
+"endLine":  900,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\FlowMonitor.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  26,
+"endLine":  31,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  22,
+"endLine":  280,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  22,
+"endLine":  18,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  26,
+"endLine":  34,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  26,
+"endLine":  39,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\QueueOfferResult.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  22,
+"endLine":  15,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Context.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  22,
+"endLine":  29,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Context.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  22,
+"endLine":  33,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Context.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  22,
+"endLine":  37,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  22,
+"endLine":  35,
+"endColumn":  28
+}
+}
+}
+]
+}

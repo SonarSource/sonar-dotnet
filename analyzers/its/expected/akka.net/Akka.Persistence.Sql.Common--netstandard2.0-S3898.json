@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'RequestChunk'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  387,
+"startColumn":  24,
+"endLine":  387,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'EventId'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\Messages.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  19,
+"endLine":  68,
+"endColumn":  26
+}
+}
+}
+]
+}

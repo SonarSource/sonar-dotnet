@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3060",
+"message":  "Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  19,
+"endLine":  177,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3060",
+"message":  "Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  24,
+"endLine":  181,
+"endColumn":  41
+}
+}
+}
+]
+}

@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  9,
+"endLine":  294,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1221,
+"startColumn":  9,
+"endLine":  1221,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"region":  {
+"startLine":  312,
+"startColumn":  9,
+"endLine":  312,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  9,
+"endLine":  69,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  9,
+"endLine":  86,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  9,
+"endLine":  106,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  9,
+"endLine":  129,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  9,
+"endLine":  163,
+"endColumn":  18
+}
+}
+}
+]
+}

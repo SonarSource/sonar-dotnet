@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2346",
+"message":  "Rename 'No' to 'None'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  13,
+"endLine":  278,
+"endColumn":  19
+}
+}
+}
+]
+}

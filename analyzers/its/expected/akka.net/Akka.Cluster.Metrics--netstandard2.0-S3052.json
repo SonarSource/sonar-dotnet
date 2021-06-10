@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_collectorInstance', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\ClusterMetricsSupervisor.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  40,
+"endLine":  24,
+"endColumn":  43
+}
+}
+}
+]
+}

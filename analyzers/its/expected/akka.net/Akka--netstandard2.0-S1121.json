@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'deadLetter' from this expression.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  517,
+"startColumn":  41,
+"endLine":  517,
+"endColumn":  42
+}
+}
+}
+]
+}

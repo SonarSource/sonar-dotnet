@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('>') instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  17,
+"endLine":  125,
+"endColumn":  49
+}
+}
+}
+]
+}

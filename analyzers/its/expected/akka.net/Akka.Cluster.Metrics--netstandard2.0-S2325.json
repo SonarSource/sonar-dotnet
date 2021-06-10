@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'SelectRandomNode' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  33,
+"endLine":  207,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetProcesses' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Collectors\DefaultCollector.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  27,
+"endLine":  138,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Requiring' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Configuration\ClusterMetricsSettings.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  19,
+"endLine":  76,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Weights' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\MetricSelectors.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  57,
+"endLine":  77,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Compress' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  24,
+"endLine":  64,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Decompress' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  24,
+"endLine":  78,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AddressFromProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  36,
+"endLine":  188,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'MapWithErrorMessage' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  21,
+"endLine":  193,
+"endColumn":  40
+}
+}
+}
+]
+}

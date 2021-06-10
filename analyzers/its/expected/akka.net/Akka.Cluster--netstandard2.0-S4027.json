@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  714,
+"startColumn":  18,
+"endLine":  714,
+"endColumn":  44
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Use 'CompareOrdinal' or 'Compare' with the locale specified instead of 'CompareTo'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  559,
+"startColumn":  74,
+"endLine":  559,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Use 'CompareOrdinal' or 'Compare' with the locale specified instead of 'CompareTo'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  559,
+"startColumn":  108,
+"endLine":  559,
+"endColumn":  117
+}
+}
+}
+]
+}

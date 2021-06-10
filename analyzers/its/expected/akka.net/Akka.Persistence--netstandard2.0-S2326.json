@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'T' is not used in the class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  32,
+"endLine":  66,
+"endColumn":  33
+}
+}
+}
+]
+}

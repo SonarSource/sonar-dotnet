@@ -1,0 +1,88 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Expected Actual: ' 4 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  58,
+"endLine":  138,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  59,
+"endLine":  151,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  58,
+"endLine":  164,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  59,
+"endLine":  177,
+"endColumn":  78
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal ' to be less than ' 4 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  89,
+"endLine":  138,
+"endColumn":  108
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  90,
+"endLine":  151,
+"endColumn":  109
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  89,
+"endLine":  164,
+"endColumn":  108
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  90,
+"endLine":  177,
+"endColumn":  109
+}
+}
+]
+}
+]
+}

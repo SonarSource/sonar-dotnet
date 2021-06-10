@@ -1,0 +1,394 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  29,
+"endLine":  150,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  514,
+"startColumn":  28,
+"endLine":  514,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  518,
+"startColumn":  28,
+"endLine":  518,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  28,
+"endLine":  522,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  526,
+"startColumn":  28,
+"endLine":  526,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  530,
+"startColumn":  28,
+"endLine":  530,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  27,
+"endLine":  277,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  33,
+"endLine":  282,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  26,
+"endLine":  286,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  26,
+"endLine":  291,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  26,
+"endLine":  295,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  26,
+"endLine":  299,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  26,
+"endLine":  303,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  308,
+"startColumn":  26,
+"endLine":  308,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  312,
+"startColumn":  26,
+"endLine":  312,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  316,
+"startColumn":  26,
+"endLine":  316,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  321,
+"startColumn":  26,
+"endLine":  321,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  26,
+"endLine":  325,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  329,
+"startColumn":  26,
+"endLine":  329,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  26,
+"endLine":  333,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  26,
+"endLine":  338,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  26,
+"endLine":  342,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  29,
+"endLine":  49,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  29,
+"endLine":  54,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  29,
+"endLine":  59,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  29,
+"endLine":  64,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  29,
+"endLine":  68,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  29,
+"endLine":  72,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  29,
+"endLine":  76,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  29,
+"endLine":  41,
+"endColumn":  49
+}
+}
+}
+]
+}

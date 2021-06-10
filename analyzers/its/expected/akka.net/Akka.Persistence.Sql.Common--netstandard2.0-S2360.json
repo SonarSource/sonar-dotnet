@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1297,
+"startColumn":  111,
+"endLine":  1297,
+"endColumn":  115
+}
+}
+}
+]
+}

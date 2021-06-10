@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  424,
+"startColumn":  1,
+"endLine":  424,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  1,
+"endLine":  201,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  1,
+"endLine":  255,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  1,
+"endLine":  183,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  1,
+"endLine":  285,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  505,
+"startColumn":  1,
+"endLine":  505,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  1,
+"endLine":  402,
+"endColumn":  24
+}
+}
+}
+]
+}

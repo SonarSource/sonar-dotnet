@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  29,
+"endLine":  109,
+"endColumn":  36
+}
+}
+}
+]
+}

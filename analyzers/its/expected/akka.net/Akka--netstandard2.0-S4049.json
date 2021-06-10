@@ -1,0 +1,394 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCurrentSelfOrNoSender' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  498,
+"startColumn":  33,
+"endLine":  498,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCurrentSenderOrNoSender' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  508,
+"startColumn":  33,
+"endLine":  508,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetExtension' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  27,
+"endLine":  302,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetChildren' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cell.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  40,
+"endLine":  93,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetChildren' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\IActorContext.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  32,
+"endLine":  137,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetBoolean' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  21,
+"endLine":  188,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetString' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  23,
+"endLine":  210,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDecimal' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  24,
+"endLine":  223,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetFloat' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  22,
+"endLine":  232,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDouble' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  23,
+"endLine":  241,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetLong' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  21,
+"endLine":  250,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetInt' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  20,
+"endLine":  259,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetByte' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  21,
+"endLine":  268,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetByteList' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  28,
+"endLine":  277,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetIntList' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  27,
+"endLine":  286,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetLongList' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  28,
+"endLine":  295,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetBooleanList' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  28,
+"endLine":  304,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetFloatList' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  29,
+"endLine":  313,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDoubleList' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  30,
+"endLine":  322,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDecimalList' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  31,
+"endLine":  331,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetStringList' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  340,
+"startColumn":  30,
+"endLine":  340,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetArray' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  34,
+"endLine":  349,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetByteSize' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  22,
+"endLine":  474,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetObject' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\IHoconElement.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  21,
+"endLine":  29,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetString' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\IHoconElement.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  16,
+"endLine":  47,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetArray' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\IHoconElement.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  27,
+"endLine":  57,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetResolver' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  26,
+"endLine":  274,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCurrentTransportInformation' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  35,
+"endLine":  115,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAndDecrement' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicCounter.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  20,
+"endLine":  86,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAndIncrement' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\IAtomicCounter.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  11,
+"endLine":  30,
+"endColumn":  26
+}
+}
+}
+]
+}

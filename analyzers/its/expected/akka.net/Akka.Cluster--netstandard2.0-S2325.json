@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'ClusterCore' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1110,
+"startColumn":  32,
+"endLine":  1110,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SelectRandomNode' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2489,
+"startColumn":  30,
+"endLine":  2489,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'PublishDiff' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1091,
+"startColumn":  22,
+"endLine":  1091,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ReverseDecision' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  420,
+"startColumn":  26,
+"endLine":  420,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ResolveSplitBrainStrategy' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  37,
+"endLine":  39,
+"endColumn":  62
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2953",
+"message":  "Either implement 'IDisposable.Dispose', or totally rename this method to prevent confusion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SingleDisposable%20(of%20T).cs",
+"region":  {
+"startLine":  58,
+"startColumn":  33,
+"endLine":  58,
+"endColumn":  40
+}
+}
+}
+]
+}

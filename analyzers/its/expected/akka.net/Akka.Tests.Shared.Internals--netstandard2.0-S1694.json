@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  27,
+"endLine":  29,
+"endColumn":  35
+}
+}
+}
+]
+}

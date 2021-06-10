@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverProvider.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  24
+}
+}
+}
+]
+}

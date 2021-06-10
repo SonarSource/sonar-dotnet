@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  29,
+"endLine":  38,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  29,
+"endLine":  50,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  32,
+"endLine":  63,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  32,
+"endLine":  76,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  39,
+"endLine":  89,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  39,
+"endLine":  102,
+"endColumn":  78
+}
+}
+}
+]
+}

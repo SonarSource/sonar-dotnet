@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3249",
+"message":  "Remove this 'base' call to 'object.Equals', which is directly based on the object reference.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  20,
+"endLine":  251,
+"endColumn":  50
+}
+}
+}
+]
+}

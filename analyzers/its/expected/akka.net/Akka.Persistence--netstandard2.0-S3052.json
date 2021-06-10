@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_asyncTaskRunning', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  40,
+"endLine":  89,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_pendingStashingPersistInvocations', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  57,
+"endLine":  92,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_delivered', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  437,
+"startColumn":  37,
+"endLine":  437,
+"endColumn":  41
+}
+}
+}
+]
+}

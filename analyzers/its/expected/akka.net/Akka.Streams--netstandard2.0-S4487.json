@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_producerCount' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  48,
+"endLine":  176,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_callbackCount' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1550,
+"startColumn":  26,
+"endLine":  1550,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_callbackCount' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1742,
+"startColumn":  30,
+"endLine":  1742,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_charsInObject' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  21,
+"endLine":  52,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_enumerator' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"region":  {
+"startLine":  447,
+"startColumn":  44,
+"endLine":  447,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_onPull' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  63,
+"endLine":  448,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_andThen' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"region":  {
+"startLine":  449,
+"startColumn":  49,
+"endLine":  449,
+"endColumn":  57
+}
+}
+}
+]
+}

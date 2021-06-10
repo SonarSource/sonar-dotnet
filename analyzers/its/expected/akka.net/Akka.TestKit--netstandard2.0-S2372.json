@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  21,
+"endLine":  100,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\NullMessageEnvelope.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  19,
+"endLine":  32,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2372",
+"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\NullMessageEnvelope.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  19,
+"endLine":  43,
+"endColumn":  98
+}
+}
+}
+]
+}

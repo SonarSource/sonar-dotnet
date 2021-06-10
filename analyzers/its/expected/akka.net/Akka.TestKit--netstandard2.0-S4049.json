@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetTestActorCell' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  33,
+"endLine":  70,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAll' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\ITestActorQueue.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  24,
+"endLine":  39,
+"endColumn":  30
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  43,
+"endLine":  60,
+"endColumn":  45
+}
+}
+}
+]
+}

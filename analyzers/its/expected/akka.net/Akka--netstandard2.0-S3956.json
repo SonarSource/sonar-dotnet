@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  766,
+"startColumn":  16,
+"endLine":  766,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this constructor to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  27,
+"endLine":  39,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  16,
+"endLine":  68,
+"endColumn":  35
+}
+}
+}
+]
+}

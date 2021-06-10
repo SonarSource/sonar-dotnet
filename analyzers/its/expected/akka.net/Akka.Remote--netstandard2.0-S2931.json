@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_current'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorPathCache.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  27,
+"endLine":  17,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_current'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorRefResolveCache.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  27,
+"endLine":  17,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_current'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\AddressCache.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  27,
+"endLine":  17,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_nextScheduledFlush'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  20,
+"endLine":  37,
+"endColumn":  45
+}
+}
+}
+]
+}

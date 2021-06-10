@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  13,
+"endLine":  392,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  13,
+"endLine":  284,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  13,
+"endLine":  298,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  533,
+"startColumn":  25,
+"endLine":  533,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  13,
+"endLine":  328,
+"endColumn":  19
+}
+}
+}
+]
+}

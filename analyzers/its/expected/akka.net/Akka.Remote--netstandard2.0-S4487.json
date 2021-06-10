@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_codec' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  449,
+"startColumn":  30,
+"endLine":  449,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_transportSupervisor' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  27,
+"endLine":  128,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_payloadSupport' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  48,
+"endLine":  21,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_allMode' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  39,
+"endLine":  209,
+"endColumn":  67
+}
+}
+}
+]
+}

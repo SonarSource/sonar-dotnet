@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\InboundMessageDispatcherSpec.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  129,
+"endLine":  94,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Serialization\FastHashSpecs.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  75,
+"endLine":  24,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Serialization\FastHashSpecs.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  75,
+"endLine":  33,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  34,
+"endLine":  69,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  60,
+"endLine":  69,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  63,
+"endLine":  170,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  34,
+"endLine":  171,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportAssociationStressSpec.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  20,
+"endLine":  43,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportRemoteMessagingThroughputSpec.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  20,
+"endLine":  45,
+"endColumn":  22
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'Execute' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\FlowSelectBenchmark.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  22,
+"endLine":  234,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateFile' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\IO\FileSourcesBenchmark.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  26,
+"endLine":  44,
+"endColumn":  36
+}
+}
+}
+]
+}

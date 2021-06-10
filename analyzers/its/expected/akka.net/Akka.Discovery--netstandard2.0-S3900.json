@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Discovery\Aggregate\AggregateServiceDiscovery.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  36,
+"endLine":  26,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Discovery\Aggregate\AggregateServiceDiscovery.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  66,
+"endLine":  44,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Discovery\Config\ConfigServiceDiscovery.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  17,
+"endLine":  47,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'lookup' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Discovery\Config\ConfigServiceDiscovery.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  67,
+"endLine":  55,
+"endColumn":  73
+}
+}
+}
+]
+}

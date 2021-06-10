@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\ByteStringBenchmarks.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  42,
+"endLine":  38,
+"endColumn":  44
+}
+}
+}
+]
+}

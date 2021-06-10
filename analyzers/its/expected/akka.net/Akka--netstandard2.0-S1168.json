@@ -1,0 +1,67 @@
+{
+"issues":  [
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"region":  {
+"startLine":  371,
+"startColumn":  34,
+"endLine":  371,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  17,
+"endLine":  384,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ActorTaskScheduler.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  13,
+"endLine":  52,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  45,
+"endLine":  161,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\ByteArraySerializer.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  17,
+"endLine":  44,
+"endColumn":  29
+}
+}
+}
+]
+}

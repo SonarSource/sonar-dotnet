@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1227",
+"message":  "Refactor the code in order to remove this break statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  504,
+"startColumn":  25,
+"endLine":  504,
+"endColumn":  31
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  17,
+"endLine":  30,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Program.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  27,
+"endLine":  97,
+"endColumn":  71
+}
+}
+}
+]
+}

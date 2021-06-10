@@ -1,0 +1,6796 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  43,
+"endLine":  452,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  43,
+"endLine":  452,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  467,
+"startColumn":  39,
+"endLine":  467,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  468,
+"startColumn":  35,
+"endLine":  468,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  469,
+"startColumn":  27,
+"endLine":  469,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  470,
+"startColumn":  35,
+"endLine":  470,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  471,
+"startColumn":  44,
+"endLine":  471,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  472,
+"startColumn":  35,
+"endLine":  472,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  473,
+"startColumn":  32,
+"endLine":  473,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  33,
+"endLine":  474,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  475,
+"startColumn":  30,
+"endLine":  475,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  29,
+"endLine":  476,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  477,
+"startColumn":  35,
+"endLine":  477,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  478,
+"startColumn":  36,
+"endLine":  478,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  613,
+"startColumn":  30,
+"endLine":  613,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  613,
+"startColumn":  30,
+"endLine":  613,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  615,
+"startColumn":  13,
+"endLine":  615,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  627,
+"startColumn":  78,
+"endLine":  627,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  626,
+"startColumn":  48,
+"endLine":  626,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  625,
+"startColumn":  50,
+"endLine":  625,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  624,
+"startColumn":  62,
+"endLine":  624,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  623,
+"startColumn":  56,
+"endLine":  623,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  622,
+"startColumn":  52,
+"endLine":  622,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  621,
+"startColumn":  78,
+"endLine":  621,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  620,
+"startColumn":  60,
+"endLine":  620,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  619,
+"startColumn":  44,
+"endLine":  619,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  618,
+"startColumn":  60,
+"endLine":  618,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  68,
+"endLine":  617,
+"endColumn":  70
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  42,
+"endLine":  487,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  42,
+"endLine":  487,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  489,
+"startColumn":  13,
+"endLine":  489,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  492,
+"startColumn":  17,
+"endLine":  492,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  499,
+"startColumn":  21,
+"endLine":  499,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  501,
+"startColumn":  25,
+"endLine":  501,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  507,
+"startColumn":  25,
+"endLine":  507,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  514,
+"startColumn":  18,
+"endLine":  514,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  520,
+"startColumn":  21,
+"endLine":  520,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  526,
+"startColumn":  21,
+"endLine":  526,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  527,
+"startColumn":  25,
+"endLine":  527,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  531,
+"startColumn":  21,
+"endLine":  531,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  21,
+"endLine":  535,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  21,
+"endLine":  540,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  541,
+"startColumn":  21,
+"endLine":  541,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  542,
+"startColumn":  25,
+"endLine":  542,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  549,
+"startColumn":  18,
+"endLine":  549,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  551,
+"startColumn":  17,
+"endLine":  551,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  558,
+"startColumn":  18,
+"endLine":  558,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  560,
+"startColumn":  17,
+"endLine":  560,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  20,
+"endLine":  269,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  20,
+"endLine":  269,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  21,
+"endLine":  278,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  21,
+"endLine":  282,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  25,
+"endLine":  285,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  25,
+"endLine":  286,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  48,
+"endLine":  286,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  21,
+"endLine":  293,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  21,
+"endLine":  297,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  25,
+"endLine":  300,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  301,
+"startColumn":  25,
+"endLine":  301,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  301,
+"startColumn":  48,
+"endLine":  301,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 16 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  20,
+"endLine":  393,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  20,
+"endLine":  393,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  21,
+"endLine":  402,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  406,
+"startColumn":  21,
+"endLine":  406,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  409,
+"startColumn":  25,
+"endLine":  409,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  410,
+"startColumn":  25,
+"endLine":  410,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  410,
+"startColumn":  48,
+"endLine":  410,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  417,
+"startColumn":  21,
+"endLine":  417,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  421,
+"startColumn":  21,
+"endLine":  421,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  424,
+"startColumn":  25,
+"endLine":  424,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  425,
+"startColumn":  25,
+"endLine":  425,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  425,
+"startColumn":  48,
+"endLine":  425,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  432,
+"startColumn":  21,
+"endLine":  432,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  21,
+"endLine":  436,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  439,
+"startColumn":  25,
+"endLine":  439,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  440,
+"startColumn":  25,
+"endLine":  440,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  440,
+"startColumn":  48,
+"endLine":  440,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 21 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  20,
+"endLine":  544,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  20,
+"endLine":  544,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  553,
+"startColumn":  21,
+"endLine":  553,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  557,
+"startColumn":  21,
+"endLine":  557,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  560,
+"startColumn":  25,
+"endLine":  560,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  561,
+"startColumn":  25,
+"endLine":  561,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  561,
+"startColumn":  48,
+"endLine":  561,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  568,
+"startColumn":  21,
+"endLine":  568,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  572,
+"startColumn":  21,
+"endLine":  572,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  575,
+"startColumn":  25,
+"endLine":  575,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  576,
+"startColumn":  25,
+"endLine":  576,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  576,
+"startColumn":  48,
+"endLine":  576,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  583,
+"startColumn":  21,
+"endLine":  583,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  587,
+"startColumn":  21,
+"endLine":  587,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  590,
+"startColumn":  25,
+"endLine":  590,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  591,
+"startColumn":  25,
+"endLine":  591,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  591,
+"startColumn":  48,
+"endLine":  591,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  21,
+"endLine":  598,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  602,
+"startColumn":  21,
+"endLine":  602,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  605,
+"startColumn":  25,
+"endLine":  605,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  606,
+"startColumn":  25,
+"endLine":  606,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  606,
+"startColumn":  48,
+"endLine":  606,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 26 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  722,
+"startColumn":  20,
+"endLine":  722,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  722,
+"startColumn":  20,
+"endLine":  722,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  731,
+"startColumn":  21,
+"endLine":  731,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  735,
+"startColumn":  21,
+"endLine":  735,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  738,
+"startColumn":  25,
+"endLine":  738,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  739,
+"startColumn":  25,
+"endLine":  739,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  739,
+"startColumn":  48,
+"endLine":  739,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  746,
+"startColumn":  21,
+"endLine":  746,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  750,
+"startColumn":  21,
+"endLine":  750,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  753,
+"startColumn":  25,
+"endLine":  753,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  754,
+"startColumn":  25,
+"endLine":  754,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  754,
+"startColumn":  48,
+"endLine":  754,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  761,
+"startColumn":  21,
+"endLine":  761,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  765,
+"startColumn":  21,
+"endLine":  765,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  768,
+"startColumn":  25,
+"endLine":  768,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  769,
+"startColumn":  25,
+"endLine":  769,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  769,
+"startColumn":  48,
+"endLine":  769,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  776,
+"startColumn":  21,
+"endLine":  776,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  780,
+"startColumn":  21,
+"endLine":  780,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  783,
+"startColumn":  25,
+"endLine":  783,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  784,
+"startColumn":  25,
+"endLine":  784,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  784,
+"startColumn":  48,
+"endLine":  784,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  791,
+"startColumn":  21,
+"endLine":  791,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  795,
+"startColumn":  21,
+"endLine":  795,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  798,
+"startColumn":  25,
+"endLine":  798,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  799,
+"startColumn":  25,
+"endLine":  799,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  799,
+"startColumn":  48,
+"endLine":  799,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 31 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  927,
+"startColumn":  20,
+"endLine":  927,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  927,
+"startColumn":  20,
+"endLine":  927,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  936,
+"startColumn":  21,
+"endLine":  936,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  940,
+"startColumn":  21,
+"endLine":  940,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  943,
+"startColumn":  25,
+"endLine":  943,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  944,
+"startColumn":  25,
+"endLine":  944,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  944,
+"startColumn":  48,
+"endLine":  944,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  951,
+"startColumn":  21,
+"endLine":  951,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  955,
+"startColumn":  21,
+"endLine":  955,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  958,
+"startColumn":  25,
+"endLine":  958,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  959,
+"startColumn":  25,
+"endLine":  959,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  959,
+"startColumn":  48,
+"endLine":  959,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  966,
+"startColumn":  21,
+"endLine":  966,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  970,
+"startColumn":  21,
+"endLine":  970,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  973,
+"startColumn":  25,
+"endLine":  973,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  974,
+"startColumn":  25,
+"endLine":  974,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  974,
+"startColumn":  48,
+"endLine":  974,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  981,
+"startColumn":  21,
+"endLine":  981,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  985,
+"startColumn":  21,
+"endLine":  985,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  988,
+"startColumn":  25,
+"endLine":  988,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  989,
+"startColumn":  25,
+"endLine":  989,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  989,
+"startColumn":  48,
+"endLine":  989,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  996,
+"startColumn":  21,
+"endLine":  996,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1000,
+"startColumn":  21,
+"endLine":  1000,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1003,
+"startColumn":  25,
+"endLine":  1003,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1004,
+"startColumn":  25,
+"endLine":  1004,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1004,
+"startColumn":  48,
+"endLine":  1004,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1011,
+"startColumn":  21,
+"endLine":  1011,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1015,
+"startColumn":  21,
+"endLine":  1015,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1018,
+"startColumn":  25,
+"endLine":  1018,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1019,
+"startColumn":  25,
+"endLine":  1019,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1019,
+"startColumn":  48,
+"endLine":  1019,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 36 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1159,
+"startColumn":  20,
+"endLine":  1159,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1159,
+"startColumn":  20,
+"endLine":  1159,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1168,
+"startColumn":  21,
+"endLine":  1168,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1172,
+"startColumn":  21,
+"endLine":  1172,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1175,
+"startColumn":  25,
+"endLine":  1175,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1176,
+"startColumn":  25,
+"endLine":  1176,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1176,
+"startColumn":  48,
+"endLine":  1176,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1183,
+"startColumn":  21,
+"endLine":  1183,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1187,
+"startColumn":  21,
+"endLine":  1187,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1190,
+"startColumn":  25,
+"endLine":  1190,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1191,
+"startColumn":  25,
+"endLine":  1191,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1191,
+"startColumn":  48,
+"endLine":  1191,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1198,
+"startColumn":  21,
+"endLine":  1198,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1202,
+"startColumn":  21,
+"endLine":  1202,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1205,
+"startColumn":  25,
+"endLine":  1205,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1206,
+"startColumn":  25,
+"endLine":  1206,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1206,
+"startColumn":  48,
+"endLine":  1206,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1213,
+"startColumn":  21,
+"endLine":  1213,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1217,
+"startColumn":  21,
+"endLine":  1217,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1220,
+"startColumn":  25,
+"endLine":  1220,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1221,
+"startColumn":  25,
+"endLine":  1221,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1221,
+"startColumn":  48,
+"endLine":  1221,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1228,
+"startColumn":  21,
+"endLine":  1228,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1232,
+"startColumn":  21,
+"endLine":  1232,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1235,
+"startColumn":  25,
+"endLine":  1235,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1236,
+"startColumn":  25,
+"endLine":  1236,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1236,
+"startColumn":  48,
+"endLine":  1236,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1243,
+"startColumn":  21,
+"endLine":  1243,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1247,
+"startColumn":  21,
+"endLine":  1247,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1250,
+"startColumn":  25,
+"endLine":  1250,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1251,
+"startColumn":  25,
+"endLine":  1251,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1251,
+"startColumn":  48,
+"endLine":  1251,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1258,
+"startColumn":  21,
+"endLine":  1258,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1262,
+"startColumn":  21,
+"endLine":  1262,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1265,
+"startColumn":  25,
+"endLine":  1265,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1266,
+"startColumn":  25,
+"endLine":  1266,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  1266,
+"startColumn":  48,
+"endLine":  1266,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  576,
+"startColumn":  20,
+"endLine":  576,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  576,
+"startColumn":  20,
+"endLine":  576,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  582,
+"startColumn":  21,
+"endLine":  582,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  585,
+"startColumn":  21,
+"endLine":  585,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  591,
+"startColumn":  21,
+"endLine":  591,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  594,
+"startColumn":  21,
+"endLine":  594,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  21,
+"endLine":  600,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  603,
+"startColumn":  21,
+"endLine":  603,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  609,
+"startColumn":  21,
+"endLine":  609,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  612,
+"startColumn":  21,
+"endLine":  612,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  618,
+"startColumn":  21,
+"endLine":  618,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  621,
+"startColumn":  21,
+"endLine":  621,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  749,
+"startColumn":  20,
+"endLine":  749,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  749,
+"startColumn":  20,
+"endLine":  749,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  755,
+"startColumn":  21,
+"endLine":  755,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  758,
+"startColumn":  21,
+"endLine":  758,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  764,
+"startColumn":  21,
+"endLine":  764,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  767,
+"startColumn":  21,
+"endLine":  767,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  773,
+"startColumn":  21,
+"endLine":  773,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  776,
+"startColumn":  21,
+"endLine":  776,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  782,
+"startColumn":  21,
+"endLine":  782,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  785,
+"startColumn":  21,
+"endLine":  785,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  791,
+"startColumn":  21,
+"endLine":  791,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  794,
+"startColumn":  21,
+"endLine":  794,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  800,
+"startColumn":  21,
+"endLine":  800,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  803,
+"startColumn":  21,
+"endLine":  803,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 15 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  939,
+"startColumn":  20,
+"endLine":  939,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  939,
+"startColumn":  20,
+"endLine":  939,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  945,
+"startColumn":  21,
+"endLine":  945,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  948,
+"startColumn":  21,
+"endLine":  948,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  954,
+"startColumn":  21,
+"endLine":  954,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  957,
+"startColumn":  21,
+"endLine":  957,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  963,
+"startColumn":  21,
+"endLine":  963,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  966,
+"startColumn":  21,
+"endLine":  966,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  972,
+"startColumn":  21,
+"endLine":  972,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  975,
+"startColumn":  21,
+"endLine":  975,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  981,
+"startColumn":  21,
+"endLine":  981,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  984,
+"startColumn":  21,
+"endLine":  984,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  990,
+"startColumn":  21,
+"endLine":  990,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  993,
+"startColumn":  21,
+"endLine":  993,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  999,
+"startColumn":  21,
+"endLine":  999,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1002,
+"startColumn":  21,
+"endLine":  1002,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 17 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1146,
+"startColumn":  20,
+"endLine":  1146,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1146,
+"startColumn":  20,
+"endLine":  1146,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1152,
+"startColumn":  21,
+"endLine":  1152,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1155,
+"startColumn":  21,
+"endLine":  1155,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1161,
+"startColumn":  21,
+"endLine":  1161,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1164,
+"startColumn":  21,
+"endLine":  1164,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1170,
+"startColumn":  21,
+"endLine":  1170,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1173,
+"startColumn":  21,
+"endLine":  1173,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1179,
+"startColumn":  21,
+"endLine":  1179,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1182,
+"startColumn":  21,
+"endLine":  1182,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1188,
+"startColumn":  21,
+"endLine":  1188,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1191,
+"startColumn":  21,
+"endLine":  1191,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1197,
+"startColumn":  21,
+"endLine":  1197,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1200,
+"startColumn":  21,
+"endLine":  1200,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1206,
+"startColumn":  21,
+"endLine":  1206,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1209,
+"startColumn":  21,
+"endLine":  1209,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1215,
+"startColumn":  21,
+"endLine":  1215,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1218,
+"startColumn":  21,
+"endLine":  1218,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1370,
+"startColumn":  20,
+"endLine":  1370,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1370,
+"startColumn":  20,
+"endLine":  1370,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1376,
+"startColumn":  21,
+"endLine":  1376,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1379,
+"startColumn":  21,
+"endLine":  1379,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1385,
+"startColumn":  21,
+"endLine":  1385,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1388,
+"startColumn":  21,
+"endLine":  1388,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1394,
+"startColumn":  21,
+"endLine":  1394,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1397,
+"startColumn":  21,
+"endLine":  1397,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1403,
+"startColumn":  21,
+"endLine":  1403,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1406,
+"startColumn":  21,
+"endLine":  1406,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1412,
+"startColumn":  21,
+"endLine":  1412,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1415,
+"startColumn":  21,
+"endLine":  1415,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1421,
+"startColumn":  21,
+"endLine":  1421,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1424,
+"startColumn":  21,
+"endLine":  1424,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1430,
+"startColumn":  21,
+"endLine":  1430,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1433,
+"startColumn":  21,
+"endLine":  1433,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1439,
+"startColumn":  21,
+"endLine":  1439,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1442,
+"startColumn":  21,
+"endLine":  1442,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1448,
+"startColumn":  21,
+"endLine":  1448,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1451,
+"startColumn":  21,
+"endLine":  1451,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1068,
+"startColumn":  20,
+"endLine":  1068,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1068,
+"startColumn":  20,
+"endLine":  1068,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1075,
+"startColumn":  17,
+"endLine":  1075,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1082,
+"startColumn":  25,
+"endLine":  1082,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1085,
+"startColumn":  29,
+"endLine":  1085,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1089,
+"startColumn":  33,
+"endLine":  1089,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1091,
+"startColumn":  37,
+"endLine":  1091,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1098,
+"startColumn":  30,
+"endLine":  1098,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1103,
+"startColumn":  25,
+"endLine":  1103,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1105,
+"startColumn":  30,
+"endLine":  1105,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1107,
+"startColumn":  29,
+"endLine":  1107,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1110,
+"startColumn":  33,
+"endLine":  1110,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 14 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1248,
+"startColumn":  20,
+"endLine":  1248,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1248,
+"startColumn":  20,
+"endLine":  1248,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1254,
+"startColumn":  73,
+"endLine":  1254,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1258,
+"startColumn":  17,
+"endLine":  1258,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1263,
+"startColumn":  25,
+"endLine":  1263,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1266,
+"startColumn":  29,
+"endLine":  1266,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1269,
+"startColumn":  25,
+"endLine":  1269,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1271,
+"startColumn":  29,
+"endLine":  1271,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1273,
+"startColumn":  33,
+"endLine":  1273,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1277,
+"startColumn":  33,
+"endLine":  1277,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1286,
+"startColumn":  25,
+"endLine":  1286,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1287,
+"startColumn":  30,
+"endLine":  1287,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1287,
+"startColumn":  45,
+"endLine":  1287,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1290,
+"startColumn":  29,
+"endLine":  1290,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1290,
+"startColumn":  58,
+"endLine":  1290,
+"endColumn":  60
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  745,
+"startColumn":  26,
+"endLine":  745,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  745,
+"startColumn":  26,
+"endLine":  745,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  747,
+"startColumn":  17,
+"endLine":  747,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  750,
+"startColumn":  21,
+"endLine":  750,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  761,
+"startColumn":  17,
+"endLine":  761,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  765,
+"startColumn":  21,
+"endLine":  765,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  767,
+"startColumn":  25,
+"endLine":  767,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  769,
+"startColumn":  30,
+"endLine":  769,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  774,
+"startColumn":  29,
+"endLine":  774,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  781,
+"startColumn":  29,
+"endLine":  781,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  790,
+"startColumn":  17,
+"endLine":  790,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  807,
+"startColumn":  17,
+"endLine":  807,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1632,
+"startColumn":  26,
+"endLine":  1632,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1632,
+"startColumn":  26,
+"endLine":  1632,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1636,
+"startColumn":  17,
+"endLine":  1636,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1639,
+"startColumn":  21,
+"endLine":  1639,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1647,
+"startColumn":  22,
+"endLine":  1647,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1649,
+"startColumn":  22,
+"endLine":  1649,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1652,
+"startColumn":  21,
+"endLine":  1652,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1657,
+"startColumn":  25,
+"endLine":  1657,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1662,
+"startColumn":  25,
+"endLine":  1662,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1662,
+"startColumn":  42,
+"endLine":  1662,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1664,
+"startColumn":  29,
+"endLine":  1664,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1673,
+"startColumn":  22,
+"endLine":  1673,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1678,
+"startColumn":  21,
+"endLine":  1678,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  1680,
+"startColumn":  25,
+"endLine":  1680,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 16 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  20,
+"endLine":  30,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  20,
+"endLine":  30,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  21,
+"endLine":  37,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  61,
+"endLine":  37,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  25,
+"endLine":  40,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  26,
+"endLine":  43,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  68,
+"endLine":  43,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  25,
+"endLine":  46,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  21,
+"endLine":  54,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  21,
+"endLine":  60,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  25,
+"endLine":  63,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  29,
+"endLine":  68,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  26,
+"endLine":  72,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  21,
+"endLine":  78,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  25,
+"endLine":  81,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  29,
+"endLine":  86,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PartitionWith.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  26,
+"endLine":  90,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  24,
+"endLine":  112,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  24,
+"endLine":  112,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  25,
+"endLine":  120,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  25,
+"endLine":  126,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  25,
+"endLine":  132,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  25,
+"endLine":  144,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  29,
+"endLine":  149,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  33,
+"endLine":  154,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  25,
+"endLine":  168,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  53,
+"endLine":  168,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  29,
+"endLine":  170,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  34,
+"endLine":  176,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  24,
+"endLine":  229,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  24,
+"endLine":  229,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  25,
+"endLine":  236,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  25,
+"endLine":  238,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  25,
+"endLine":  247,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  46,
+"endLine":  247,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  25,
+"endLine":  253,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  29,
+"endLine":  255,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  29,
+"endLine":  263,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  25,
+"endLine":  277,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  29,
+"endLine":  282,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  33,
+"endLine":  287,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  37,
+"endLine":  291,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  37,
+"endLine":  294,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  41,
+"endLine":  296,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  41,
+"endLine":  304,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  25,
+"endLine":  318,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  46,
+"endLine":  318,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  320,
+"startColumn":  29,
+"endLine":  320,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  33,
+"endLine":  326,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  32,
+"endLine":  129,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  32,
+"endLine":  129,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  13,
+"endLine":  131,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  17,
+"endLine":  133,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  22,
+"endLine":  135,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  22,
+"endLine":  137,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  25,
+"endLine":  143,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  25,
+"endLine":  148,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  25,
+"endLine":  153,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  25,
+"endLine":  158,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  25,
+"endLine":  162,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSourceActor.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  25,
+"endLine":  166,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  16,
+"endLine":  61,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  16,
+"endLine":  61,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  13,
+"endLine":  65,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  56,
+"endLine":  75,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  21,
+"endLine":  89,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  50,
+"endLine":  89,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  21,
+"endLine":  94,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  25,
+"endLine":  99,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  46,
+"endLine":  99,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  21,
+"endLine":  107,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  21,
+"endLine":  110,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  44,
+"endLine":  110,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  20,
+"endLine":  234,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  20,
+"endLine":  234,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  13,
+"endLine":  238,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  25,
+"endLine":  245,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  25,
+"endLine":  252,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  21,
+"endLine":  268,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  21,
+"endLine":  273,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  21,
+"endLine":  278,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  279,
+"startColumn":  21,
+"endLine":  279,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  21,
+"endLine":  285,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  41,
+"endLine":  285,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  21,
+"endLine":  293,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  21,
+"endLine":  298,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  21,
+"endLine":  303,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  21,
+"endLine":  309,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  776,
+"startColumn":  23,
+"endLine":  776,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  776,
+"startColumn":  23,
+"endLine":  776,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  779,
+"startColumn":  17,
+"endLine":  779,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  781,
+"startColumn":  33,
+"endLine":  781,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  782,
+"startColumn":  13,
+"endLine":  782,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  786,
+"startColumn":  13,
+"endLine":  786,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  791,
+"startColumn":  13,
+"endLine":  791,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  791,
+"startColumn":  37,
+"endLine":  791,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  801,
+"startColumn":  13,
+"endLine":  801,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  801,
+"startColumn":  37,
+"endLine":  801,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  815,
+"startColumn":  13,
+"endLine":  815,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  816,
+"startColumn":  17,
+"endLine":  816,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  819,
+"startColumn":  13,
+"endLine":  819,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  821,
+"startColumn":  18,
+"endLine":  821,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  824,
+"startColumn":  17,
+"endLine":  824,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  826,
+"startColumn":  21,
+"endLine":  826,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 20 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  36,
+"endLine":  153,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  36,
+"endLine":  153,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  13,
+"endLine":  188,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  17,
+"endLine":  192,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  73,
+"endLine":  192,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  21,
+"endLine":  200,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  50,
+"endLine":  200,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  29,
+"endLine":  206,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  29,
+"endLine":  205,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  25,
+"endLine":  207,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  13,
+"endLine":  236,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  17,
+"endLine":  240,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  73,
+"endLine":  240,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  21,
+"endLine":  244,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  51,
+"endLine":  244,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  25,
+"endLine":  248,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  13,
+"endLine":  283,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  13,
+"endLine":  290,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  13,
+"endLine":  295,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  66,
+"endLine":  297,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  54,
+"endLine":  299,
+"endColumn":  55
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 30 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  82,
+"endLine":  322,
+"endColumn":  89
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  82,
+"endLine":  322,
+"endColumn":  89
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  17,
+"endLine":  331,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  54,
+"endLine":  330,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  35,
+"endLine":  332,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  13,
+"endLine":  333,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  336,
+"startColumn":  38,
+"endLine":  336,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  13,
+"endLine":  338,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  17,
+"endLine":  341,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  21,
+"endLine":  343,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  25,
+"endLine":  345,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  365,
+"startColumn":  25,
+"endLine":  365,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  29,
+"endLine":  384,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  53,
+"endLine":  384,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  387,
+"startColumn":  33,
+"endLine":  387,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  29,
+"endLine":  393,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  54,
+"endLine":  393,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  396,
+"startColumn":  33,
+"endLine":  396,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  424,
+"startColumn":  21,
+"endLine":  424,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  17,
+"endLine":  436,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  439,
+"startColumn":  21,
+"endLine":  439,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  455,
+"startColumn":  21,
+"endLine":  455,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  458,
+"startColumn":  25,
+"endLine":  458,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  465,
+"startColumn":  21,
+"endLine":  465,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  472,
+"startColumn":  25,
+"endLine":  472,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  471,
+"startColumn":  48,
+"endLine":  471,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  475,
+"startColumn":  21,
+"endLine":  475,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  485,
+"startColumn":  21,
+"endLine":  485,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  25,
+"endLine":  487,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  25,
+"endLine":  491,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  30,
+"endLine":  493,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 16 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  50,
+"endLine":  170,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  50,
+"endLine":  170,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  13,
+"endLine":  177,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  17,
+"endLine":  184,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  21,
+"endLine":  187,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  40,
+"endLine":  187,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  17,
+"endLine":  195,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  21,
+"endLine":  198,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  41,
+"endLine":  198,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  17,
+"endLine":  205,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  13,
+"endLine":  219,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  48,
+"endLine":  222,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  49,
+"endLine":  223,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  17,
+"endLine":  227,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  21,
+"endLine":  233,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  17,
+"endLine":  240,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  21,
+"endLine":  247,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2190,
+"startColumn":  34,
+"endLine":  2190,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2190,
+"startColumn":  34,
+"endLine":  2190,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2194,
+"startColumn":  17,
+"endLine":  2194,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2205,
+"startColumn":  29,
+"endLine":  2205,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2208,
+"startColumn":  29,
+"endLine":  2208,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2211,
+"startColumn":  29,
+"endLine":  2211,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2216,
+"startColumn":  22,
+"endLine":  2216,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2229,
+"startColumn":  29,
+"endLine":  2229,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2232,
+"startColumn":  29,
+"endLine":  2232,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2235,
+"startColumn":  29,
+"endLine":  2235,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2241,
+"startColumn":  17,
+"endLine":  2241,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2243,
+"startColumn":  17,
+"endLine":  2243,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2253,
+"startColumn":  34,
+"endLine":  2253,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2253,
+"startColumn":  34,
+"endLine":  2253,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2255,
+"startColumn":  17,
+"endLine":  2255,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2257,
+"startColumn":  21,
+"endLine":  2257,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2259,
+"startColumn":  26,
+"endLine":  2259,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2262,
+"startColumn":  22,
+"endLine":  2262,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2265,
+"startColumn":  21,
+"endLine":  2265,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2277,
+"startColumn":  33,
+"endLine":  2277,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2280,
+"startColumn":  33,
+"endLine":  2280,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2282,
+"startColumn":  37,
+"endLine":  2282,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2284,
+"startColumn":  33,
+"endLine":  2284,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2294,
+"startColumn":  21,
+"endLine":  2294,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2611,
+"startColumn":  26,
+"endLine":  2611,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2611,
+"startColumn":  26,
+"endLine":  2611,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2614,
+"startColumn":  17,
+"endLine":  2614,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2616,
+"startColumn":  21,
+"endLine":  2616,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2618,
+"startColumn":  25,
+"endLine":  2618,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2620,
+"startColumn":  30,
+"endLine":  2620,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2623,
+"startColumn":  26,
+"endLine":  2623,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2625,
+"startColumn":  25,
+"endLine":  2625,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2625,
+"startColumn":  56,
+"endLine":  2625,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2631,
+"startColumn":  25,
+"endLine":  2631,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2635,
+"startColumn":  25,
+"endLine":  2635,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2635,
+"startColumn":  56,
+"endLine":  2635,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1336,
+"startColumn":  20,
+"endLine":  1336,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1336,
+"startColumn":  20,
+"endLine":  1336,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1343,
+"startColumn":  41,
+"endLine":  1343,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1347,
+"startColumn":  21,
+"endLine":  1347,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1347,
+"startColumn":  42,
+"endLine":  1347,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1352,
+"startColumn":  25,
+"endLine":  1352,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1357,
+"startColumn":  30,
+"endLine":  1357,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1357,
+"startColumn":  57,
+"endLine":  1357,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1363,
+"startColumn":  29,
+"endLine":  1363,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1367,
+"startColumn":  25,
+"endLine":  1367,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1371,
+"startColumn":  29,
+"endLine":  1371,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1374,
+"startColumn":  29,
+"endLine":  1374,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1379,
+"startColumn":  34,
+"endLine":  1379,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1379,
+"startColumn":  61,
+"endLine":  1379,
+"endColumn":  63
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1957,
+"startColumn":  20,
+"endLine":  1957,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1957,
+"startColumn":  20,
+"endLine":  1957,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1964,
+"startColumn":  21,
+"endLine":  1964,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1967,
+"startColumn":  29,
+"endLine":  1967,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1973,
+"startColumn":  21,
+"endLine":  1973,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1976,
+"startColumn":  29,
+"endLine":  1976,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1982,
+"startColumn":  21,
+"endLine":  1982,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1985,
+"startColumn":  29,
+"endLine":  1985,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1991,
+"startColumn":  21,
+"endLine":  1991,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1994,
+"startColumn":  29,
+"endLine":  1994,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2000,
+"startColumn":  21,
+"endLine":  2000,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2005,
+"startColumn":  29,
+"endLine":  2005,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2009,
+"startColumn":  21,
+"endLine":  2009,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2012,
+"startColumn":  29,
+"endLine":  2012,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  29,
+"endLine":  414,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  29,
+"endLine":  414,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  13,
+"endLine":  416,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  417,
+"startColumn":  13,
+"endLine":  417,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  418,
+"startColumn":  13,
+"endLine":  418,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  419,
+"startColumn":  13,
+"endLine":  419,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  424,
+"startColumn":  17,
+"endLine":  424,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  427,
+"startColumn":  17,
+"endLine":  427,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  431,
+"startColumn":  17,
+"endLine":  431,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  17,
+"endLine":  434,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  439,
+"startColumn":  17,
+"endLine":  439,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  17,
+"endLine":  444,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  26,
+"endLine":  113,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  26,
+"endLine":  113,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  17,
+"endLine":  117,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  21,
+"endLine":  123,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  22,
+"endLine":  136,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  22,
+"endLine":  143,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  22,
+"endLine":  148,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  21,
+"endLine":  150,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  48,
+"endLine":  150,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  22,
+"endLine":  153,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  22,
+"endLine":  157,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  21,
+"endLine":  159,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  525,
+"startColumn":  26,
+"endLine":  525,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  525,
+"startColumn":  26,
+"endLine":  525,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  529,
+"startColumn":  17,
+"endLine":  529,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  530,
+"startColumn":  22,
+"endLine":  530,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  531,
+"startColumn":  22,
+"endLine":  531,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  532,
+"startColumn":  22,
+"endLine":  532,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  533,
+"startColumn":  22,
+"endLine":  533,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  534,
+"startColumn":  22,
+"endLine":  534,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  22,
+"endLine":  535,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  536,
+"startColumn":  22,
+"endLine":  536,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  21,
+"endLine":  540,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  22,
+"endLine":  543,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  545,
+"startColumn":  21,
+"endLine":  545,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  22,
+"endLine":  127,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  22,
+"endLine":  127,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  13,
+"endLine":  129,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  43,
+"endLine":  129,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  18,
+"endLine":  135,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  46,
+"endLine":  135,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  18,
+"endLine":  138,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  37,
+"endLine":  138,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  18,
+"endLine":  144,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  18,
+"endLine":  149,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  17,
+"endLine":  151,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  18,
+"endLine":  156,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  47,
+"endLine":  156,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  18,
+"endLine":  162,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  45,
+"endLine":  162,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  17,
+"endLine":  167,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  18,
+"endLine":  173,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  42,
+"endLine":  173,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  17,
+"endLine":  176,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  18,
+"endLine":  179,
+"endColumn":  20
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 17 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  36,
+"endLine":  229,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  36,
+"endLine":  229,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  25,
+"endLine":  235,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  29,
+"endLine":  237,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  33,
+"endLine":  240,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  34,
+"endLine":  243,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  34,
+"endLine":  248,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  37,
+"endLine":  254,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  37,
+"endLine":  255,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  37,
+"endLine":  259,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  37,
+"endLine":  260,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  37,
+"endLine":  263,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  37,
+"endLine":  268,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  25,
+"endLine":  283,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  29,
+"endLine":  285,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  76,
+"endLine":  285,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  56,
+"endLine":  285,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  25,
+"endLine":  295,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2350,
+"startColumn":  26,
+"endLine":  2350,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2350,
+"startColumn":  26,
+"endLine":  2350,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2354,
+"startColumn":  13,
+"endLine":  2354,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2357,
+"startColumn":  13,
+"endLine":  2357,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2362,
+"startColumn":  17,
+"endLine":  2362,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2364,
+"startColumn":  22,
+"endLine":  2364,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2371,
+"startColumn":  22,
+"endLine":  2371,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2371,
+"startColumn":  54,
+"endLine":  2371,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2377,
+"startColumn":  13,
+"endLine":  2377,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2385,
+"startColumn":  13,
+"endLine":  2385,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2388,
+"startColumn":  17,
+"endLine":  2388,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2392,
+"startColumn":  13,
+"endLine":  2392,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  708,
+"startColumn":  32,
+"endLine":  708,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  708,
+"startColumn":  32,
+"endLine":  708,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  710,
+"startColumn":  13,
+"endLine":  710,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  713,
+"startColumn":  13,
+"endLine":  713,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  716,
+"startColumn":  13,
+"endLine":  716,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  720,
+"startColumn":  40,
+"endLine":  720,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  721,
+"startColumn":  47,
+"endLine":  721,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  723,
+"startColumn":  47,
+"endLine":  723,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  725,
+"startColumn":  17,
+"endLine":  725,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  730,
+"startColumn":  13,
+"endLine":  730,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  730,
+"startColumn":  38,
+"endLine":  730,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  731,
+"startColumn":  18,
+"endLine":  731,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  731,
+"startColumn":  44,
+"endLine":  731,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1710,
+"startColumn":  21,
+"endLine":  1710,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1710,
+"startColumn":  21,
+"endLine":  1710,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1717,
+"startColumn":  28,
+"endLine":  1717,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1719,
+"startColumn":  13,
+"endLine":  1719,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1721,
+"startColumn":  17,
+"endLine":  1721,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1723,
+"startColumn":  21,
+"endLine":  1723,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1725,
+"startColumn":  21,
+"endLine":  1725,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1731,
+"startColumn":  17,
+"endLine":  1731,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1733,
+"startColumn":  21,
+"endLine":  1733,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1735,
+"startColumn":  21,
+"endLine":  1735,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1741,
+"startColumn":  17,
+"endLine":  1741,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1751,
+"startColumn":  25,
+"endLine":  1751,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1759,
+"startColumn":  17,
+"endLine":  1759,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1763,
+"startColumn":  21,
+"endLine":  1763,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1826,
+"startColumn":  21,
+"endLine":  1826,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1826,
+"startColumn":  21,
+"endLine":  1826,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1828,
+"startColumn":  13,
+"endLine":  1828,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1832,
+"startColumn":  17,
+"endLine":  1832,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1834,
+"startColumn":  21,
+"endLine":  1834,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1834,
+"startColumn":  39,
+"endLine":  1834,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1836,
+"startColumn":  25,
+"endLine":  1836,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1843,
+"startColumn":  21,
+"endLine":  1843,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1857,
+"startColumn":  21,
+"endLine":  1857,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1877,
+"startColumn":  13,
+"endLine":  1877,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1880,
+"startColumn":  17,
+"endLine":  1880,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1896,
+"startColumn":  17,
+"endLine":  1896,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1901,
+"startColumn":  21,
+"endLine":  1901,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1906,
+"startColumn":  17,
+"endLine":  1906,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1906,
+"startColumn":  45,
+"endLine":  1906,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1913,
+"startColumn":  17,
+"endLine":  1913,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 30 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  28,
+"endLine":  172,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  28,
+"endLine":  172,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  27,
+"endLine":  175,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  17,
+"endLine":  180,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  13,
+"endLine":  202,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  13,
+"endLine":  204,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  13,
+"endLine":  209,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  13,
+"endLine":  211,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  13,
+"endLine":  213,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  13,
+"endLine":  218,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  13,
+"endLine":  226,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  13,
+"endLine":  234,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  13,
+"endLine":  249,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  13,
+"endLine":  251,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  13,
+"endLine":  253,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  34,
+"endLine":  253,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  13,
+"endLine":  255,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  34,
+"endLine":  255,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  13,
+"endLine":  259,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  28,
+"endLine":  259,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  13,
+"endLine":  263,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  29,
+"endLine":  263,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  43,
+"endLine":  269,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  13,
+"endLine":  271,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  37,
+"endLine":  274,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  13,
+"endLine":  276,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  17,
+"endLine":  281,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  17,
+"endLine":  283,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  13,
+"endLine":  287,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  13,
+"endLine":  290,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  32,
+"endLine":  290,
+"endColumn":  34
+}
+}
+]
+}
+]
+}

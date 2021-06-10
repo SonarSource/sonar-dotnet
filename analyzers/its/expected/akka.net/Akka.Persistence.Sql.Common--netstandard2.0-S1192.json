@@ -1,0 +1,157 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '@PersistenceId' 5 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1051,
+"startColumn":  35,
+"endLine":  1051,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1061,
+"startColumn":  39,
+"endLine":  1061,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1073,
+"startColumn":  35,
+"endLine":  1073,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1216,
+"startColumn":  39,
+"endLine":  1216,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1320,
+"startColumn":  39,
+"endLine":  1320,
+"endColumn":  55
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '@Ordering' 4 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  39,
+"endLine":  493,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  568,
+"startColumn":  39,
+"endLine":  568,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  596,
+"startColumn":  39,
+"endLine":  596,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  620,
+"startColumn":  39,
+"endLine":  620,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '@PersistenceId' 6 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  523,
+"startColumn":  39,
+"endLine":  523,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  652,
+"startColumn":  39,
+"endLine":  652,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  709,
+"startColumn":  51,
+"endLine":  709,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  711,
+"startColumn":  45,
+"endLine":  711,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  730,
+"startColumn":  57,
+"endLine":  730,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  808,
+"startColumn":  35,
+"endLine":  808,
+"endColumn":  51
+}
+}
+]
+}
+]
+}

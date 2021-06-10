@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Discovery\ServiceDiscovery.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  55,
+"endLine":  140,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Discovery\ServiceDiscovery.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  57,
+"endLine":  164,
+"endColumn":  93
+}
+}
+}
+]
+}

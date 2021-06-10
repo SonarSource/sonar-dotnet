@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Constructor has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  42,
+"endLine":  317,
+"endColumn":  367
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 15 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  34,
+"endLine":  224,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  34,
+"endLine":  145,
+"endColumn":  38
+}
+}
+}
+]
+}
