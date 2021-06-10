@@ -1,8 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>Test harness for Nancy applications.</Description>
     <PackageTags>$(PackageTags);Testing</PackageTags>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <CodeAnalysisRuleSet>..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

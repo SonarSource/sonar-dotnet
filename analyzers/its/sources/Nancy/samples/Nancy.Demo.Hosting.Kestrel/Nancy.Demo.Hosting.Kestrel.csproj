@@ -5,6 +5,7 @@
     <DebugType>portable</DebugType>
     <AssemblyName>Nancy.Demo.Hosting.Kestrel</AssemblyName>
     <OutputType>Exe</OutputType>
+    <CodeAnalysisRuleSet>..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
