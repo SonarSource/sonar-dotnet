@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2933",
+"message":  "Make '_currentPath' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  32,
+"endLine":  405,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_savedPaths' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  406,
+"startColumn":  32,
+"endLine":  406,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_configurationProvider' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  407,
+"startColumn":  36,
+"endLine":  407,
+"endColumn":  58
+}
+}
+}
+]
+}

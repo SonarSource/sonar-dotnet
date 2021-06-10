@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  498,
+"startColumn":  30,
+"endLine":  498,
+"endColumn":  171
+}
+}
+}
+]
+}

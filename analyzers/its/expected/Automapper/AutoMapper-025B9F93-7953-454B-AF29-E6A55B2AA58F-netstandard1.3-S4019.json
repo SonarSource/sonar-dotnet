@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4019",
+"message":  "Remove or rename that method because it hides 'AutoMapper.Configuration.MappingExpression<object, object>.ConstructProjectionUsing(System.Linq.Expressions.Expression<System.Func<object, object>>)'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  35,
+"endLine":  76,
+"endColumn":  59
+}
+}
+}
+]
+}

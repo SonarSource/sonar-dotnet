@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'PostFixes' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\PrePostfixName.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  37,
+"endLine":  57,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CheckIsDerived' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  515,
+"startColumn":  22,
+"endLine":  515,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NullCheck' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  28,
+"endLine":  258,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DestinationConstructorExpression' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  34,
+"endLine":  233,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'PossibleNames' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeDetails.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  37,
+"endLine":  32,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'MapDestinationPropertyToSource' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMapFactory.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  22,
+"endLine":  40,
+"endColumn":  52
+}
+}
+}
+]
+}

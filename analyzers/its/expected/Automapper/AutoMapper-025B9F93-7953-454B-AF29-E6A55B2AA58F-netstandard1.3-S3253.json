@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  48,
+"endLine":  13,
+"endColumn":  56
+}
+}
+}
+]
+}

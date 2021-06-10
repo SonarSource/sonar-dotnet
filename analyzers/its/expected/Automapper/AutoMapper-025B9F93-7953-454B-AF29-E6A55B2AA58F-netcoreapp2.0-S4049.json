@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMappers' a property.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  36,
+"endLine":  101,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetSubQueryMarker' a property.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  545,
+"startColumn":  35,
+"endLine":  545,
+"endColumn":  52
+}
+}
+}
+]
+}

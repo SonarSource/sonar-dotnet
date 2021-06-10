@@ -1,0 +1,1675 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this accessor is 18 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  17,
+"endLine":  45,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  34,
+"endLine":  50,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  67,
+"endLine":  50,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  40,
+"endLine":  51,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  21,
+"endLine":  56,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  25,
+"endLine":  58,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  31,
+"endLine":  61,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  73,
+"endLine":  61,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  115,
+"endLine":  61,
+"endColumn":  116
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  129,
+"endLine":  62,
+"endColumn":  130
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  171,
+"endLine":  62,
+"endColumn":  172
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  17,
+"endLine":  70,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  21,
+"endLine":  76,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  25,
+"endLine":  82,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  25,
+"endLine":  94,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  29,
+"endLine":  97,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  25,
+"endLine":  102,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this accessor is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  13,
+"endLine":  44,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  13,
+"endLine":  44,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  17,
+"endLine":  48,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  47,
+"endLine":  48,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  26,
+"endLine":  48,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  55,
+"endLine":  48,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  40,
+"endLine":  52,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  68,
+"endLine":  52,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  40,
+"endLine":  54,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  72,
+"endLine":  54,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  17,
+"endLine":  56,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  17,
+"endLine":  64,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  565,
+"startColumn":  21,
+"endLine":  565,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  565,
+"startColumn":  21,
+"endLine":  565,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  567,
+"startColumn":  13,
+"endLine":  567,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  570,
+"startColumn":  17,
+"endLine":  570,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  574,
+"startColumn":  21,
+"endLine":  574,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  576,
+"startColumn":  36,
+"endLine":  576,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  579,
+"startColumn":  17,
+"endLine":  579,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  579,
+"startColumn":  79,
+"endLine":  579,
+"endColumn":  81
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  585,
+"startColumn":  13,
+"endLine":  585,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  587,
+"startColumn":  17,
+"endLine":  587,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  593,
+"startColumn":  13,
+"endLine":  593,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  597,
+"startColumn":  13,
+"endLine":  597,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  601,
+"startColumn":  13,
+"endLine":  601,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  605,
+"startColumn":  13,
+"endLine":  605,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  609,
+"startColumn":  13,
+"endLine":  609,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  614,
+"startColumn":  13,
+"endLine":  614,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  17,
+"endLine":  617,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  621,
+"startColumn":  17,
+"endLine":  621,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  625,
+"startColumn":  17,
+"endLine":  625,
+"endColumn":  24
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  28,
+"endLine":  402,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  28,
+"endLine":  402,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  13,
+"endLine":  408,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  68,
+"endLine":  408,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  13,
+"endLine":  414,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  420,
+"startColumn":  17,
+"endLine":  420,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  17,
+"endLine":  434,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  446,
+"startColumn":  13,
+"endLine":  446,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  458,
+"startColumn":  13,
+"endLine":  458,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  461,
+"startColumn":  21,
+"endLine":  461,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  467,
+"startColumn":  17,
+"endLine":  467,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  473,
+"startColumn":  13,
+"endLine":  473,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  13,
+"endLine":  487,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  28,
+"endLine":  500,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  28,
+"endLine":  500,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  507,
+"startColumn":  13,
+"endLine":  507,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  512,
+"startColumn":  18,
+"endLine":  512,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  517,
+"startColumn":  18,
+"endLine":  517,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  524,
+"startColumn":  21,
+"endLine":  524,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  54,
+"endLine":  522,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  533,
+"startColumn":  18,
+"endLine":  533,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  533,
+"startColumn":  53,
+"endLine":  533,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  536,
+"startColumn":  17,
+"endLine":  536,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  536,
+"startColumn":  44,
+"endLine":  536,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  550,
+"startColumn":  13,
+"endLine":  550,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  18,
+"endLine":  555,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  557,
+"startColumn":  55,
+"endLine":  557,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  558,
+"startColumn":  17,
+"endLine":  558,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  558,
+"startColumn":  44,
+"endLine":  558,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  22,
+"endLine":  77,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  22,
+"endLine":  77,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  13,
+"endLine":  80,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  13,
+"endLine":  89,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  96,
+"endLine":  98,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  55,
+"endLine":  98,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  13,
+"endLine":  99,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  17,
+"endLine":  101,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  38,
+"endLine":  101,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  17,
+"endLine":  107,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  21,
+"endLine":  109,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  25,
+"endLine":  111,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  25,
+"endLine":  121,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  17,
+"endLine":  140,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  17,
+"endLine":  151,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  36,
+"endLine":  151,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  25,
+"endLine":  400,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  25,
+"endLine":  400,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  403,
+"startColumn":  13,
+"endLine":  403,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  13,
+"endLine":  411,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  23,
+"endLine":  411,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  17,
+"endLine":  414,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  420,
+"startColumn":  13,
+"endLine":  420,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  420,
+"startColumn":  32,
+"endLine":  420,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  423,
+"startColumn":  17,
+"endLine":  423,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  431,
+"startColumn":  57,
+"endLine":  431,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  435,
+"startColumn":  13,
+"endLine":  435,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  22,
+"endLine":  444,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  25,
+"endLine":  225,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  25,
+"endLine":  225,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  13,
+"endLine":  229,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  17,
+"endLine":  232,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  17,
+"endLine":  237,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  17,
+"endLine":  242,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  17,
+"endLine":  246,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  21,
+"endLine":  249,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  13,
+"endLine":  256,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  17,
+"endLine":  261,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  17,
+"endLine":  260,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  17,
+"endLine":  259,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  17,
+"endLine":  258,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  17,
+"endLine":  257,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  59,
+"endLine":  258,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  64,
+"endLine":  259,
+"endColumn":  66
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 42 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  16,
+"endLine":  26,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  16,
+"endLine":  26,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  65,
+"endLine":  31,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  104,
+"endLine":  31,
+"endColumn":  106
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  81,
+"endLine":  31,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  77,
+"endLine":  32,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  122,
+"endLine":  32,
+"endColumn":  124
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  93,
+"endLine":  32,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  97,
+"endLine":  33,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  152,
+"endLine":  33,
+"endColumn":  154
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  113,
+"endLine":  33,
+"endColumn":  114
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  75,
+"endLine":  34,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  119,
+"endLine":  34,
+"endColumn":  121
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  91,
+"endLine":  34,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  53,
+"endLine":  35,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  86,
+"endLine":  35,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  69,
+"endLine":  35,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  59,
+"endLine":  36,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  95,
+"endLine":  36,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  75,
+"endLine":  36,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  65,
+"endLine":  37,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  104,
+"endLine":  37,
+"endColumn":  106
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  81,
+"endLine":  37,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  67,
+"endLine":  38,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  107,
+"endLine":  38,
+"endColumn":  109
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  83,
+"endLine":  38,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  61,
+"endLine":  39,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  98,
+"endLine":  39,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  77,
+"endLine":  39,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  59,
+"endLine":  42,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  38,
+"endLine":  42,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  99,
+"endLine":  45,
+"endColumn":  101
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  79,
+"endLine":  45,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  50,
+"endLine":  49,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  50,
+"endLine":  50,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  87,
+"endLine":  52,
+"endColumn":  89
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  71,
+"endLine":  52,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  114,
+"endLine":  53,
+"endColumn":  116
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  89,
+"endLine":  53,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  111,
+"endLine":  54,
+"endColumn":  113
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  87,
+"endLine":  54,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  99,
+"endLine":  55,
+"endColumn":  101
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  79,
+"endLine":  55,
+"endColumn":  80
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  37,
+"endLine":  258,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  37,
+"endLine":  258,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  13,
+"endLine":  261,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  82,
+"endLine":  263,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  262,
+"startColumn":  145,
+"endLine":  262,
+"endColumn":  147
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  262,
+"startColumn":  84,
+"endLine":  262,
+"endColumn":  86
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  279,
+"startColumn":  17,
+"endLine":  279,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  17,
+"endLine":  284,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  91,
+"endLine":  287,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  106,
+"endLine":  287,
+"endColumn":  107
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  139,
+"endLine":  287,
+"endColumn":  140
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  212,
+"endLine":  287,
+"endColumn":  213
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  17,
+"endLine":  291,
+"endColumn":  19
+}
+}
+]
+}
+]
+}

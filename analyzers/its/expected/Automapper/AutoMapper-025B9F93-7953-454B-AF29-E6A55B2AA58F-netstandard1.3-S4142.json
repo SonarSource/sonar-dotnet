@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  36,
+"endLine":  166,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  27,
+"endLine":  166,
+"endColumn":  34
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  39,
+"endLine":  167,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  30,
+"endLine":  167,
+"endColumn":  37
+}
+}
+]
+}
+]
+}

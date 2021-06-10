@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2551",
+"message":  "Lock on a dedicated object instance instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  23,
+"endLine":  263,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2551",
+"message":  "Lock on a dedicated object instance instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  18,
+"endLine":  393,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2551",
+"message":  "Lock on a dedicated object instance instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  440,
+"startColumn":  18,
+"endLine":  440,
+"endColumn":  22
+}
+}
+}
+]
+}

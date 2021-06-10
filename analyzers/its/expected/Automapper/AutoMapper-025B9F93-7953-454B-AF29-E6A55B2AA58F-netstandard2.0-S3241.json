@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3241",
+"message":  "Change return type to 'void'; not a single caller uses the returned value.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  17,
+"endLine":  30,
+"endColumn":  30
+}
+}
+}
+]
+}

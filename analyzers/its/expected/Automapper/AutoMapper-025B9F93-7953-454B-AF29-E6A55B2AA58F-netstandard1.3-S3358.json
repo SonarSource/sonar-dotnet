@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\DelegateFactory.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  16,
+"endLine":  36,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\DelegateFactory.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  24,
+"endLine":  57,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  20,
+"endLine":  62,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  573,
+"startColumn":  30,
+"endLine":  573,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  574,
+"startColumn":  46,
+"endLine":  574,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  19,
+"endLine":  123,
+"endColumn":  50
+}
+}
+}
+]
+}

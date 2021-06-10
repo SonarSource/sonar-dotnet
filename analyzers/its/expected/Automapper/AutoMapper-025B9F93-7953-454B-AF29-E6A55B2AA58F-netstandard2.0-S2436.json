@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'MemberConfigurationExpression.ResolveUsing' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  25,
+"endLine":  124,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'MemberConfigurationExpression' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  18,
+"endLine":  12,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'PathConfigurationExpression' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\PathConfigurationExpression.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'IMemberConfigurationExpression' interface to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  22,
+"endLine":  13,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'IMemberConfigurationExpression.ResolveUsing' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  14,
+"endLine":  242,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'IPathConfigurationExpression' interface to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IPathConfigurationExpression.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  22,
+"endLine":  12,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ConditionParameters' struct to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IPathConfigurationExpression.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  19,
+"endLine":  31,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'IValueResolver' interface to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IValueResolver.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  22,
+"endLine":  6,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'IMemberValueResolver' interface to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IValueResolver.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  22,
+"endLine":  22,
+"endColumn":  42
+}
+}
+}
+]
+}

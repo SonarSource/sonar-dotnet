@@ -1,0 +1,103 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  18,
+"endLine":  7,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  12,
+"endLine":  7,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  12,
+"endLine":  7,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  18,
+"endLine":  8,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  12,
+"endLine":  8,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  12,
+"endLine":  8,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\DuplicateTypeMapConfigurationException.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  18,
+"endLine":  6,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\DuplicateTypeMapConfigurationException.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  12,
+"endLine":  6,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\DuplicateTypeMapConfigurationException.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  12,
+"endLine":  6,
+"endColumn":  17
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Retrieve'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  509,
+"startColumn":  17,
+"endLine":  514,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private type 'ReplaceMemberAccessesVisitor'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  517,
+"startColumn":  13,
+"endLine":  535,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'ReplaceMemberAccessesVisitor'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  521,
+"startColumn":  17,
+"endLine":  525,
+"endColumn":  18
+}
+}
+}
+]
+}
