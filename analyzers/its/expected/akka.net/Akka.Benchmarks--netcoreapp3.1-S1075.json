@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\ActorPathBenchmarks.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  36,
+"endLine":  30,
+"endColumn":  73
+}
+}
+}
+]
+}

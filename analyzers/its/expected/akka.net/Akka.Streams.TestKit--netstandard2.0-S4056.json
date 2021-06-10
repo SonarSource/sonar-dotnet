@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  513,
+"startColumn":  53,
+"endLine":  513,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  518,
+"startColumn":  55,
+"endLine":  518,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  523,
+"startColumn":  56,
+"endLine":  523,
+"endColumn":  83
+}
+}
+}
+]
+}

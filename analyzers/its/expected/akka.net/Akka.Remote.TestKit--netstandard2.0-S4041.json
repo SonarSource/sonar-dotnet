@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4041",
+"message":  "Change the name of type 'Data' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  29,
+"endLine":  51,
+"endColumn":  33
+}
+}
+}
+]
+}

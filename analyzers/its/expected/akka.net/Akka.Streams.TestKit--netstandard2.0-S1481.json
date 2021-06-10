@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable '_'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestPublisher.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  21,
+"endLine":  189,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable '_'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  21,
+"endLine":  544,
+"endColumn":  22
+}
+}
+}
+]
+}

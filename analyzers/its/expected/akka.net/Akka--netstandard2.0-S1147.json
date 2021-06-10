@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1147",
+"message":  "Remove this call to 'Environment.Exit' or ensure it is really required.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  45,
+"endLine":  649,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1147",
+"message":  "Remove this call to 'Environment.Exit' or ensure it is really required.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  661,
+"startColumn":  45,
+"endLine":  661,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1147",
+"message":  "Remove this call to 'Environment.Exit' or ensure it is really required.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  668,
+"startColumn":  37,
+"endLine":  668,
+"endColumn":  41
+}
+}
+}
+]
+}

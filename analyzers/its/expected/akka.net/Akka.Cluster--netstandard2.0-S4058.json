@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to '_gossip.ToString().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  53,
+"endLine":  233,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'node.Address.Protocol.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1573,
+"startColumn":  18,
+"endLine":  1573,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'node.Address.System.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1578,
+"startColumn":  23,
+"endLine":  1578,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '_role.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  549,
+"startColumn":  24,
+"endLine":  549,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useDownRemoval.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  21,
+"endLine":  63,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useDownRemoval.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  21,
+"endLine":  64,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'useDownRemoval.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  21,
+"endLine":  65,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  20,
+"endLine":  182,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '_value.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  24,
+"endLine":  155,
+"endColumn":  50
+}
+}
+}
+]
+}

@@ -1,0 +1,70 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  27,
+"endLine":  171,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  27,
+"endLine":  171,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  21,
+"endLine":  393,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  18,
+"endLine":  35,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  18,
+"endLine":  35,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  374,
+"startColumn":  21,
+"endLine":  374,
+"endColumn":  28
+}
+}
+]
+}
+]
+}

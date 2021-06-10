@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\InterpreterBenchmark.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  20,
+"endLine":  62,
+"endColumn":  25
+}
+}
+}
+]
+}

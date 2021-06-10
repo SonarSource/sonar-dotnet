@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  607,
+"startColumn":  41,
+"endLine":  607,
+"endColumn":  42
+}
+}
+}
+]
+}

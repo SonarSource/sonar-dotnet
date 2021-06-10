@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'ForceRestart' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  26,
+"endLine":  90,
+"endColumn":  38
+}
+}
+}
+]
+}

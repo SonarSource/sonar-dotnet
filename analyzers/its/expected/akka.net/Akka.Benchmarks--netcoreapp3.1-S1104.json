@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\HeartbeatNodeRingBenchmarks.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  20,
+"endLine":  21,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  24,
+"endLine":  23,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  24,
+"endLine":  24,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  20,
+"endLine":  21,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  23,
+"endLine":  43,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  23,
+"endLine":  44,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  23,
+"endLine":  45,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\ByteStringBenchmarks.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  31
+}
+}
+}
+]
+}

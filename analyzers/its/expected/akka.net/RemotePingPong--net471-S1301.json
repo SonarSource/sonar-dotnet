@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  17,
+"endLine":  233,
+"endColumn":  23
+}
+}
+}
+]
+}

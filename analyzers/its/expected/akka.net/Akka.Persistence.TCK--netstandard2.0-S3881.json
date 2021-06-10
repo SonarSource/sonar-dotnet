@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\PluginSpec.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  27,
+"endLine":  17,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\PluginSpec.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  69,
+"endLine":  17,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\PluginSpec.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  32,
+"endLine":  80,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

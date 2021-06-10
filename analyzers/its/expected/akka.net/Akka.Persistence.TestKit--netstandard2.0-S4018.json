@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  21,
+"endLine":  94,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  21,
+"endLine":  381,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  21,
+"endLine":  55,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"region":  {
+"startLine":  353,
+"startColumn":  21,
+"endLine":  353,
+"endColumn":  42
+}
+}
+}
+]
+}

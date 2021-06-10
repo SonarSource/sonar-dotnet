@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'm.Persistent.PersistenceId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  55,
+"endLine":  389,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'm.Persistent.WriterGuid.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  391,
+"startColumn":  55,
+"endLine":  391,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'm.Persistent.PersistenceId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  56,
+"endLine":  394,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'm.Persistent.WriterGuid.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  396,
+"startColumn":  56,
+"endLine":  396,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'm.Persistent.PersistenceId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  55,
+"endLine":  399,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'm.Persistent.WriterGuid.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  55,
+"endLine":  401,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 's.Persistent.Payload.AsInstanceOf<TestJournal.MyPayload>().Data.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  20,
+"endLine":  62,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 's.Persistent.Payload.AsInstanceOf<TestJournal.MyPayload2>().Data.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  20,
+"endLine":  84,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'manifest.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  21,
+"endLine":  208,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'manifest.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  21,
+"endLine":  213,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'p.Data.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  44,
+"endLine":  225,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 's.Snapshot.Snapshot.AsInstanceOf<Test.MySnapshot>().Data.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  20,
+"endLine":  53,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 's.Snapshot.Snapshot.AsInstanceOf<Test.MySnapshot2>().Data.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  20,
+"endLine":  69,
+"endColumn":  91
+}
+}
+}
+]
+}

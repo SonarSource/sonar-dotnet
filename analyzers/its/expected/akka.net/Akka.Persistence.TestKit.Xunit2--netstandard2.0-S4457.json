@@ -1,0 +1,169 @@
+{
+"issues":  [
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  27,
+"endLine":  104,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  49,
+"endLine":  106,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  42,
+"endLine":  107,
+"endColumn":  86
+}
+}
+]
+},
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  27,
+"endLine":  129,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  49,
+"endLine":  131,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  42,
+"endLine":  132,
+"endColumn":  86
+}
+}
+]
+},
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  27,
+"endLine":  190,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  49,
+"endLine":  192,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  42,
+"endLine":  193,
+"endColumn":  86
+}
+}
+]
+},
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  27,
+"endLine":  215,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  49,
+"endLine":  217,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  42,
+"endLine":  218,
+"endColumn":  86
+}
+}
+]
+},
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  27,
+"endLine":  240,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  49,
+"endLine":  242,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  42,
+"endLine":  243,
+"endColumn":  86
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  956,
+"startColumn":  38,
+"endLine":  956,
+"endColumn":  55
+}
+}
+}
+]
+}

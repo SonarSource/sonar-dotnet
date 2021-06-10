@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 252 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  1,
+"endLine":  358,
+"endColumn":  253
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 248 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  1,
+"endLine":  359,
+"endColumn":  249
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 258 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  1,
+"endLine":  366,
+"endColumn":  259
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 254 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  1,
+"endLine":  367,
+"endColumn":  255
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 249 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  1,
+"endLine":  376,
+"endColumn":  250
+}
+}
+}
+]
+}

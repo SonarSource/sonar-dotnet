@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1871",
+"message":  "Either merge this branch with the identical one on line 130 or change one of the implementations.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  13,
+"endLine":  143,
+"endColumn":  14
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  13,
+"endLine":  134,
+"endColumn":  14
+}
+}
+]
+}
+]
+}

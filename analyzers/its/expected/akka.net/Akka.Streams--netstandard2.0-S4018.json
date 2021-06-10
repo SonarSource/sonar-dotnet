@@ -1,0 +1,1070 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  37,
+"endLine":  653,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"region":  {
+"startLine":  305,
+"startColumn":  38,
+"endLine":  305,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  35,
+"endLine":  346,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  22,
+"endLine":  375,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  22,
+"endLine":  384,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  22,
+"endLine":  393,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  63,
+"endLine":  138,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  39,
+"endLine":  205,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  43,
+"endLine":  411,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  419,
+"startColumn":  40,
+"endLine":  419,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  447,
+"startColumn":  43,
+"endLine":  447,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  455,
+"startColumn":  40,
+"endLine":  455,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContext.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  70,
+"endLine":  68,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  602,
+"startColumn":  64,
+"endLine":  602,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1493,
+"startColumn":  71,
+"endLine":  1493,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1686,
+"startColumn":  64,
+"endLine":  1686,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1813,
+"startColumn":  64,
+"endLine":  1813,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  51,
+"endLine":  50,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  51,
+"endLine":  67,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  502,
+"startColumn":  51,
+"endLine":  502,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  523,
+"startColumn":  51,
+"endLine":  523,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  41,
+"endLine":  36,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1929,
+"startColumn":  62,
+"endLine":  1929,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2066,
+"startColumn":  56,
+"endLine":  2066,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2130,
+"startColumn":  59,
+"endLine":  2130,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  2306,
+"startColumn":  59,
+"endLine":  2306,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\IntervalBasedRateLimiter.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  69,
+"endLine":  29,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\One2OneBidiFlow.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  63,
+"endLine":  27,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  36,
+"endLine":  184,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  44,
+"endLine":  216,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  44,
+"endLine":  234,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  44,
+"endLine":  244,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  44,
+"endLine":  255,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  60,
+"endLine":  268,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  50,
+"endLine":  276,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  50,
+"endLine":  285,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  50,
+"endLine":  289,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  39,
+"endLine":  297,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  42,
+"endLine":  438,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  464,
+"startColumn":  42,
+"endLine":  464,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  42,
+"endLine":  487,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  505,
+"startColumn":  44,
+"endLine":  505,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  529,
+"startColumn":  50,
+"endLine":  529,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  580,
+"startColumn":  42,
+"endLine":  580,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  596,
+"startColumn":  50,
+"endLine":  596,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  614,
+"startColumn":  47,
+"endLine":  614,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  36,
+"endLine":  185,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  38,
+"endLine":  438,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  627,
+"startColumn":  42,
+"endLine":  627,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  642,
+"startColumn":  58,
+"endLine":  642,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  655,
+"startColumn":  42,
+"endLine":  655,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  676,
+"startColumn":  49,
+"endLine":  676,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  694,
+"startColumn":  44,
+"endLine":  694,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  740,
+"startColumn":  44,
+"endLine":  740,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  856,
+"startColumn":  62,
+"endLine":  856,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamRefs.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  52,
+"endLine":  35,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamRefs.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  52,
+"endLine":  48,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  28,
+"endLine":  156,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  29,
+"endLine":  166,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  49,
+"endLine":  30,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  34,
+"endLine":  86,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  34,
+"endLine":  96,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  34,
+"endLine":  109,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  42,
+"endLine":  139,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ConstantFunctions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  37,
+"endLine":  22,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  710,
+"startColumn":  29,
+"endLine":  710,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  82,
+"endLine":  322,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  49,
+"endLine":  32,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  80,
+"endLine":  39,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedPublisher.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  37,
+"endLine":  82,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedSubscriber.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  38,
+"endLine":  114,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedVirtualPublisher.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  43,
+"endLine":  92,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\KillSwitch.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  65,
+"endLine":  43,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\KillSwitch.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  75,
+"endLine":  54,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\KillSwitch.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  56,
+"endLine":  70,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\KillSwitch.cs",
+"region":  {
+"startLine":  482,
+"startColumn":  58,
+"endLine":  482,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  32,
+"endLine":  57,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  32,
+"endLine":  100,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  33,
+"endLine":  122,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  33,
+"endLine":  161,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1079,
+"startColumn":  19,
+"endLine":  1079,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1809,
+"startColumn":  35,
+"endLine":  1809,
+"endColumn":  53
+}
+}
+}
+]
+}

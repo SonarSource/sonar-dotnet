@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  16,
+"endLine":  84,
+"endColumn":  23
+}
+}
+}
+]
+}

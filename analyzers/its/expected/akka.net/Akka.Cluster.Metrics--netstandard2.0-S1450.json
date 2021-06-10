@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_config' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Configuration\ClusterMetricsSettings.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  33,
+"endLine":  18,
+"endColumn":  40
+}
+}
+}
+]
+}

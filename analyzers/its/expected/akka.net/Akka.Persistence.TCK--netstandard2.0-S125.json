@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\PluginSpec.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  13,
+"endLine":  82,
+"endColumn":  49
+}
+}
+}
+]
+}

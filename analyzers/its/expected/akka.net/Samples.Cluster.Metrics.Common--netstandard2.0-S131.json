@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.Metrics.Common\MetricListener.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  29,
+"endLine":  40,
+"endColumn":  35
+}
+}
+}
+]
+}

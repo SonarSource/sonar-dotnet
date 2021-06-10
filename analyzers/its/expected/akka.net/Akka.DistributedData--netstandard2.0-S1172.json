@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'gset'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  47,
+"endLine":  487,
+"endColumn":  59
+}
+}
+}
+]
+}

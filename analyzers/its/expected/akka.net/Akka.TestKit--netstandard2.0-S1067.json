@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  20,
+"endLine":  103,
+"endColumn":  106
+}
+}
+}
+]
+}

@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1939",
+"message":  "'IJournalRequest' implements 'INoSerializationVerificationNeeded' so 'INoSerializationVerificationNeeded' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  56,
+"endLine":  201,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'IJournalResponse' implements 'INoSerializationVerificationNeeded' so 'INoSerializationVerificationNeeded' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  64,
+"endLine":  399,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'IJournalResponse' implements 'INoSerializationVerificationNeeded' so 'INoSerializationVerificationNeeded' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  470,
+"startColumn":  63,
+"endLine":  470,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'IJournalResponse' implements 'INoSerializationVerificationNeeded' so 'INoSerializationVerificationNeeded' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  62,
+"endLine":  540,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'IJournalResponse' implements 'INoSerializationVerificationNeeded' so 'INoSerializationVerificationNeeded' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  675,
+"startColumn":  83,
+"endLine":  675,
+"endColumn":  119
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  53,
+"endLine":  85,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  65,
+"endLine":  45,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  85,
+"endLine":  51,
+"endColumn":  89
+}
+}
+}
+]
+}

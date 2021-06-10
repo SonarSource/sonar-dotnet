@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  30,
+"endLine":  29,
+"endColumn":  79
+}
+}
+}
+]
+}

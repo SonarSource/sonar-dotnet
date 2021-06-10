@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_dedicatedThreadPool'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  27,
+"endLine":  239,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_queue'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'm_semaphore'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  528,
+"startColumn":  30,
+"endLine":  528,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_socket'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  19,
+"endLine":  20,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_socket'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  20,
+"endLine":  22,
+"endColumn":  33
+}
+}
+}
+]
+}

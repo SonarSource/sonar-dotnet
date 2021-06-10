@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 14 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1913,
+"startColumn":  17,
+"endLine":  1913,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 12 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  323,
+"startColumn":  21,
+"endLine":  323,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  29,
+"endLine":  327,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 17 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  396,
+"startColumn":  21,
+"endLine":  396,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  301,
+"startColumn":  17,
+"endLine":  301,
+"endColumn":  72
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Delegate'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\DelegatingSupervisorStrategy.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  9,
+"endLine":  51,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private type 'QueueWithAddFirst'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\BlockingQueue.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  9,
+"endLine":  246,
+"endColumn":  10
+}
+}
+}
+]
+}

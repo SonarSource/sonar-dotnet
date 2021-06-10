@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  35,
+"endLine":  111,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  54,
+"endLine":  145,
+"endColumn":  63
+}
+}
+}
+]
+}

@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S2933",
+"message":  "Make '_codec' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  449,
+"startColumn":  30,
+"endLine":  449,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_transportSupervisor' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  27,
+"endLine":  128,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_exceptionSupport' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  34,
+"endLine":  22,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_log' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  33,
+"endLine":  200,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_shouldDebugLog' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  22,
+"endLine":  206,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_throttlingModes' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  89,
+"endLine":  341,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_handleTable' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  344,
+"startColumn":  50,
+"endLine":  344,
+"endColumn":  62
+}
+}
+}
+]
+}

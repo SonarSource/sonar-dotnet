@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2933",
+"message":  "Make 'dataExample' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  28,
+"endLine":  195,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'intExample' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  21,
+"endLine":  196,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'stringExample' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  24,
+"endLine":  197,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_actorSystem' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxMemoryFootprintSpec.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  29,
+"endLine":  23,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'stringExample' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Event\EventStreamThroughputSpec.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  24,
+"endLine":  38,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_bytes' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  24,
+"endLine":  129,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'resetEvent' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpInboundOnlySpec.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  38,
+"endLine":  72,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'cancel' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpInboundOnlySpec.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  41,
+"endLine":  73,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'resetEvent' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpSingleConnectionSpec.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  38,
+"endLine":  132,
+"endColumn":  48
+}
+}
+}
+]
+}

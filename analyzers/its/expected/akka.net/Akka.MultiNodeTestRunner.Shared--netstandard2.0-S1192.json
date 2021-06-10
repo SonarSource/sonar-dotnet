@@ -1,0 +1,55 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'status' 5 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  43,
+"endLine":  120,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  37,
+"endLine":  174,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  91,
+"endLine":  177,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  37,
+"endLine":  190,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  91,
+"endLine":  193,
+"endColumn":  99
+}
+}
+]
+}
+]
+}

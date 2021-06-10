@@ -1,0 +1,580 @@
+{
+"issues":  [
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'log' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1913,
+"startColumn":  163,
+"endLine":  1913,
+"endColumn":  166
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1913,
+"startColumn":  45,
+"endLine":  1913,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'scan' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  663,
+"startColumn":  148,
+"endLine":  663,
+"endColumn":  152
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  663,
+"startColumn":  46,
+"endLine":  663,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'delimiter' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  82,
+"endLine":  38,
+"endColumn":  91
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  61,
+"endLine":  38,
+"endColumn":  70
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'log' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1901,
+"startColumn":  29,
+"endLine":  1901,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  1900,
+"startColumn":  38,
+"endLine":  1900,
+"endColumn":  41
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'scan' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  654,
+"startColumn":  35,
+"endLine":  654,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  41,
+"endLine":  653,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'left' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Keep.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  55,
+"endLine":  27,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Keep.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  29,
+"endLine":  27,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'right' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Keep.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  70,
+"endLine":  37,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Keep.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  30,
+"endLine":  37,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'aggregate' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  99,
+"endLine":  379,
+"endColumn":  108
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  45,
+"endLine":  379,
+"endColumn":  54
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'actorRef' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  464,
+"startColumn":  66,
+"endLine":  464,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  464,
+"startColumn":  42,
+"endLine":  464,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'tick' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  98,
+"endLine":  543,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  46,
+"endLine":  543,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'unfold' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  576,
+"startColumn":  120,
+"endLine":  576,
+"endColumn":  126
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  576,
+"startColumn":  46,
+"endLine":  576,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'unfoldAsync' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  599,
+"startColumn":  131,
+"endLine":  599,
+"endColumn":  142
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  599,
+"startColumn":  46,
+"endLine":  599,
+"endColumn":  57
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'log' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1801,
+"startColumn":  152,
+"endLine":  1801,
+"endColumn":  155
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1801,
+"startColumn":  42,
+"endLine":  1801,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'scan' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  625,
+"startColumn":  137,
+"endLine":  625,
+"endColumn":  141
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  625,
+"startColumn":  43,
+"endLine":  625,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'log' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1619,
+"startColumn":  181,
+"endLine":  1619,
+"endColumn":  184
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1619,
+"startColumn":  52,
+"endLine":  1619,
+"endColumn":  55
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'scan' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  614,
+"startColumn":  166,
+"endLine":  614,
+"endColumn":  170
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  614,
+"startColumn":  53,
+"endLine":  614,
+"endColumn":  57
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'waitForUpstream' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  667,
+"startColumn":  41,
+"endLine":  667,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"region":  {
+"startLine":  667,
+"startColumn":  21,
+"endLine":  667,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'waitForUpstream' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  732,
+"startColumn":  41,
+"endLine":  732,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"region":  {
+"startLine":  732,
+"startColumn":  21,
+"endLine":  732,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'waitForUpstream' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  662,
+"startColumn":  41,
+"endLine":  662,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"region":  {
+"startLine":  662,
+"startColumn":  21,
+"endLine":  662,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'sendResume' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  38,
+"endLine":  400,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  22,
+"endLine":  400,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'create' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  918,
+"startColumn":  90,
+"endLine":  918,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  918,
+"startColumn":  46,
+"endLine":  918,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'waitForUpstream' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  34,
+"endLine":  416,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  14,
+"endLine":  416,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'waitForUpstream' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"region":  {
+"startLine":  488,
+"startColumn":  41,
+"endLine":  488,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"region":  {
+"startLine":  488,
+"startColumn":  21,
+"endLine":  488,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'waitForUpstream' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"region":  {
+"startLine":  578,
+"startColumn":  65,
+"endLine":  578,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"region":  {
+"startLine":  578,
+"startColumn":  28,
+"endLine":  578,
+"endColumn":  43
+}
+}
+]
+}
+]
+}

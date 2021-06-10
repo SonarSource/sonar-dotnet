@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1163",
+"message":  "Refactor this code to not throw exceptions in finally blocks.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1583,
+"startColumn":  21,
+"endLine":  1583,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1163",
+"message":  "Refactor this code to not throw exceptions in finally blocks.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1641,
+"startColumn":  21,
+"endLine":  1641,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1163",
+"message":  "Refactor this code to not throw exceptions in finally blocks.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1752,
+"startColumn":  29,
+"endLine":  1752,
+"endColumn":  38
+}
+}
+}
+]
+}

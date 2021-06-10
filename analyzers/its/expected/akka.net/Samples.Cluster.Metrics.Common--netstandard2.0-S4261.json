@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.Metrics.Common\FactorialBackend.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  47,
+"endLine":  29,
+"endColumn":  56
+}
+}
+}
+]
+}

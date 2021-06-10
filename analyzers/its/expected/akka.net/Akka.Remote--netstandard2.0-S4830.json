@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4830",
+"message":  "Enable server certificate validation on this SSL/TLS connection",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  76,
+"endLine":  341,
+"endColumn":  105
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  109,
+"endLine":  341,
+"endColumn":  113
+}
+}
+]
+}
+]
+}

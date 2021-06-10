@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1006",
+"message":  "Add the default parameter value defined in the overridden method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  54,
+"endLine":  38,
+"endColumn":  58
+}
+}
+}
+]
+}

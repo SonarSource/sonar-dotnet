@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<EventReplaySuccess>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  25,
+"endLine":  251,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<EventReplayFailure>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  25,
+"endLine":  285,
+"endColumn":  43
+}
+}
+}
+]
+}

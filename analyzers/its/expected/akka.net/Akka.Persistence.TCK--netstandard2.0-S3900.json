@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  21,
+"endLine":  121,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\PluginSpec.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  19,
+"endLine":  51,
+"endColumn":  25
+}
+}
+}
+]
+}

@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'repeat'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  585,
+"startColumn":  96,
+"endLine":  585,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'repeat'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  619,
+"startColumn":  148,
+"endLine":  619,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  69,
+"endLine":  119,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  68,
+"endLine":  120,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  73,
+"endLine":  121,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  69,
+"endLine":  122,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  65,
+"endLine":  123,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  82,
+"endLine":  124,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  48,
+"endLine":  135,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  48,
+"endLine":  137,
+"endColumn":  49
+}
+}
+}
+]
+}

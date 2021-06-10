@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3973",
+"message":  "Use curly braces or indentation to denote the code conditionally executed by this 'foreach'",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  17,
+"endLine":  137,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  17,
+"endLine":  138,
+"endColumn":  41
+}
+}
+]
+}
+]
+}

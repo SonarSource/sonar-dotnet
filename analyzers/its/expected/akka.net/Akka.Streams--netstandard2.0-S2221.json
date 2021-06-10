@@ -1,0 +1,719 @@
+{
+"issues":  [
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\JsonFraming.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  27,
+"endLine":  98,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  20,
+"endLine":  356,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  20,
+"endLine":  393,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1370,
+"startColumn":  20,
+"endLine":  1370,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1452,
+"startColumn":  24,
+"endLine":  1452,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  591,
+"startColumn":  24,
+"endLine":  591,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  671,
+"startColumn":  28,
+"endLine":  671,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  711,
+"startColumn":  32,
+"endLine":  711,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  729,
+"startColumn":  32,
+"endLine":  729,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  807,
+"startColumn":  28,
+"endLine":  807,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  976,
+"startColumn":  20,
+"endLine":  976,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  24,
+"endLine":  59,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  24,
+"endLine":  156,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  24,
+"endLine":  239,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  413,
+"startColumn":  20,
+"endLine":  413,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1111,
+"startColumn":  24,
+"endLine":  1111,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1226,
+"startColumn":  24,
+"endLine":  1226,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  1395,
+"startColumn":  24,
+"endLine":  1395,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2201,
+"startColumn":  28,
+"endLine":  2201,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2225,
+"startColumn":  28,
+"endLine":  2225,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2273,
+"startColumn":  32,
+"endLine":  2273,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2314,
+"startColumn":  28,
+"endLine":  2314,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2590,
+"startColumn":  24,
+"endLine":  2590,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2743,
+"startColumn":  24,
+"endLine":  2743,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2894,
+"startColumn":  24,
+"endLine":  2894,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  3520,
+"startColumn":  24,
+"endLine":  3520,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  422,
+"startColumn":  24,
+"endLine":  422,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  811,
+"startColumn":  28,
+"endLine":  811,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  20,
+"endLine":  115,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  24,
+"endLine":  183,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  20,
+"endLine":  205,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  20,
+"endLine":  112,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  32,
+"endLine":  140,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  28,
+"endLine":  147,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  28,
+"endLine":  165,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  28,
+"endLine":  177,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  20,
+"endLine":  198,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamPublisher.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  20,
+"endLine":  92,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamPublisher.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  20,
+"endLine":  131,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\IOSources.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  20,
+"endLine":  172,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  28,
+"endLine":  190,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSubscriber.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  28,
+"endLine":  90,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSubscriber.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  20,
+"endLine":  120,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  981,
+"startColumn":  24,
+"endLine":  981,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  997,
+"startColumn":  24,
+"endLine":  997,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  1029,
+"startColumn":  24,
+"endLine":  1029,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  482,
+"startColumn":  24,
+"endLine":  482,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  597,
+"startColumn":  28,
+"endLine":  597,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  675,
+"startColumn":  24,
+"endLine":  675,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  717,
+"startColumn":  28,
+"endLine":  717,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  852,
+"startColumn":  24,
+"endLine":  852,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1697,
+"startColumn":  20,
+"endLine":  1697,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"region":  {
+"startLine":  644,
+"startColumn":  20,
+"endLine":  644,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  24,
+"endLine":  45,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\IteratorAdapter.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  24,
+"endLine":  65,
+"endColumn":  33
+}
+}
+}
+]
+}

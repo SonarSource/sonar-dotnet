@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  1,
+"endLine":  227,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1223,
+"startColumn":  1,
+"endLine":  1223,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1357,
+"startColumn":  1,
+"endLine":  1357,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  536,
+"startColumn":  1,
+"endLine":  536,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  641,
+"startColumn":  1,
+"endLine":  641,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  785,
+"startColumn":  1,
+"endLine":  785,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  1013,
+"startColumn":  1,
+"endLine":  1013,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  527,
+"startColumn":  10,
+"endLine":  527,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  24
+}
+}
+}
+]
+}

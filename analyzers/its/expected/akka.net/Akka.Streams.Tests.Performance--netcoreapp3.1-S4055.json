@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\InterpreterBenchmark.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  35,
+"endLine":  98,
+"endColumn":  48
+}
+}
+}
+]
+}

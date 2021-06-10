@@ -1,0 +1,329 @@
+{
+"issues":  [
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  41,
+"endLine":  121,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  41,
+"endLine":  173,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  41,
+"endLine":  225,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  41,
+"endLine":  283,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  347,
+"startColumn":  41,
+"endLine":  347,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  41,
+"endLine":  399,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  458,
+"startColumn":  41,
+"endLine":  458,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  41,
+"endLine":  67,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  37,
+"endLine":  112,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  37,
+"endLine":  183,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  262,
+"startColumn":  37,
+"endLine":  262,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  334,
+"startColumn":  37,
+"endLine":  334,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  37,
+"endLine":  400,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  466,
+"startColumn":  37,
+"endLine":  466,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  550,
+"startColumn":  37,
+"endLine":  550,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  626,
+"startColumn":  37,
+"endLine":  626,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  702,
+"startColumn":  37,
+"endLine":  702,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  768,
+"startColumn":  37,
+"endLine":  768,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  834,
+"startColumn":  37,
+"endLine":  834,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  890,
+"startColumn":  37,
+"endLine":  890,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  946,
+"startColumn":  37,
+"endLine":  946,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  1012,
+"startColumn":  37,
+"endLine":  1012,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  1082,
+"startColumn":  37,
+"endLine":  1082,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  41,
+"endLine":  231,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  41,
+"endLine":  289,
+"endColumn":  43
+}
+}
+}
+]
+}

@@ -1,0 +1,550 @@
+{
+"issues":  [
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  21,
+"endLine":  127,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  34,
+"endLine":  268,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  34,
+"endLine":  273,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  34,
+"endLine":  278,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  34,
+"endLine":  293,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  34,
+"endLine":  298,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  34,
+"endLine":  303,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  34,
+"endLine":  309,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1236,
+"startColumn":  29,
+"endLine":  1236,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1364,
+"startColumn":  21,
+"endLine":  1364,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1503,
+"startColumn":  21,
+"endLine":  1503,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  26,
+"endLine":  89,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  570,
+"startColumn":  61,
+"endLine":  570,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  950,
+"startColumn":  13,
+"endLine":  950,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  951,
+"startColumn":  13,
+"endLine":  951,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  952,
+"startColumn":  38,
+"endLine":  952,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  953,
+"startColumn":  13,
+"endLine":  953,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  954,
+"startColumn":  38,
+"endLine":  954,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  26,
+"endLine":  544,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  26,
+"endLine":  555,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  650,
+"startColumn":  17,
+"endLine":  650,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  751,
+"startColumn":  26,
+"endLine":  751,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  796,
+"startColumn":  30,
+"endLine":  796,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  845,
+"startColumn":  30,
+"endLine":  845,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  856,
+"startColumn":  34,
+"endLine":  856,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  1021,
+"startColumn":  26,
+"endLine":  1021,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  1045,
+"startColumn":  26,
+"endLine":  1045,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  1073,
+"startColumn":  26,
+"endLine":  1073,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  1100,
+"startColumn":  36,
+"endLine":  1100,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2215,
+"startColumn":  17,
+"endLine":  2215,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2240,
+"startColumn":  17,
+"endLine":  2240,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2265,
+"startColumn":  17,
+"endLine":  2265,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2335,
+"startColumn":  26,
+"endLine":  2335,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2355,
+"startColumn":  17,
+"endLine":  2355,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2379,
+"startColumn":  17,
+"endLine":  2379,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2380,
+"startColumn":  17,
+"endLine":  2380,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2381,
+"startColumn":  17,
+"endLine":  2381,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2389,
+"startColumn":  21,
+"endLine":  2389,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2393,
+"startColumn":  17,
+"endLine":  2393,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2421,
+"startColumn":  17,
+"endLine":  2421,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2443,
+"startColumn":  17,
+"endLine":  2443,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  2448,
+"startColumn":  21,
+"endLine":  2448,
+"endColumn":  38
+}
+}
+}
+]
+}

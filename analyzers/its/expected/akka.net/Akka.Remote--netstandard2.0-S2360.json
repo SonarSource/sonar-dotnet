@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  87,
+"endLine":  33,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  25,
+"endLine":  57,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  185,
+"endLine":  64,
+"endColumn":  191
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  73,
+"endLine":  130,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  118,
+"endLine":  332,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  170,
+"endLine":  332,
+"endColumn":  176
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  70,
+"endLine":  64,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  107,
+"endLine":  85,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  37,
+"endLine":  86,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  76,
+"endLine":  97,
+"endColumn":  82
+}
+}
+}
+]
+}

@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  25,
+"endLine":  58,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  25,
+"endLine":  76,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  450,
+"startColumn":  33,
+"endLine":  450,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  31,
+"endLine":  483,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  556,
+"startColumn":  31,
+"endLine":  556,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  631,
+"startColumn":  31,
+"endLine":  631,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  654,
+"startColumn":  31,
+"endLine":  654,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"region":  {
+"startLine":  984,
+"startColumn":  25,
+"endLine":  984,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  27,
+"endLine":  26,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  25,
+"endLine":  215,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  25,
+"endLine":  318,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  25,
+"endLine":  171,
+"endColumn":  35
+}
+}
+}
+]
+}

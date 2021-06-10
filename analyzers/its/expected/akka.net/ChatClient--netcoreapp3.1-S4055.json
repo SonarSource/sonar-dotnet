@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  47,
+"endLine":  60,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  35,
+"endLine":  87,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  35,
+"endLine":  93,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  35,
+"endLine":  100,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  35,
+"endLine":  107,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  35,
+"endLine":  118,
+"endColumn":  45
+}
+}
+}
+]
+}

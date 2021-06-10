@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'AckIdleTimerName'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1839,
+"startColumn":  9,
+"endLine":  1839,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'ResolveNameAsync'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  9,
+"endLine":  408,
+"endColumn":  10
+}
+}
+}
+]
+}

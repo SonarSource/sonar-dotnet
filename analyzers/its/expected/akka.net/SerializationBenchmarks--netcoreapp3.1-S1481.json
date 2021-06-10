@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'res'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\SerializationBenchmarks\Program.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  17,
+"endLine":  60,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'res'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\SerializationBenchmarks\Program.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  17,
+"endLine":  72,
+"endColumn":  20
+}
+}
+}
+]
+}

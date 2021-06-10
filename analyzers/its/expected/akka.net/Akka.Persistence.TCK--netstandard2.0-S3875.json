@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  37,
+"endLine":  43,
+"endColumn":  39
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\AbstractLeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  16,
+"endLine":  112,
+"endColumn":  21
+}
+}
+}
+]
+}

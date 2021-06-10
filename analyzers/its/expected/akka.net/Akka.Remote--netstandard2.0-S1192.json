@@ -1,0 +1,64 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'remote' 6 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  64,
+"endLine":  143,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  38,
+"endLine":  144,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  49,
+"endLine":  366,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  60,
+"endLine":  405,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  432,
+"startColumn":  33,
+"endLine":  432,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  608,
+"startColumn":  92,
+"endLine":  608,
+"endColumn":  100
+}
+}
+]
+}
+]
+}

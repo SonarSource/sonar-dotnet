@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  1,
+"endLine":  167,
+"endColumn":  209
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  1,
+"endLine":  236,
+"endColumn":  229
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  642,
+"startColumn":  18,
+"endLine":  642,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  39
+}
+}
+}
+]
+}

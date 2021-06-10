@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'key'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  17,
+"endLine":  59,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'cKey'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  21,
+"endLine":  102,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'key'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  21,
+"endLine":  49,
+"endColumn":  24
+}
+}
+}
+]
+}

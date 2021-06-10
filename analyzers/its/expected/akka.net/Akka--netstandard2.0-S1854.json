@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'sender'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  353,
+"startColumn":  20,
+"endLine":  353,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'actor'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  587,
+"startColumn":  23,
+"endLine":  587,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'actor'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  655,
+"startColumn":  23,
+"endLine":  655,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'actor'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  679,
+"startColumn":  23,
+"endLine":  679,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'actor'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  702,
+"startColumn":  23,
+"endLine":  702,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'diff'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  42,
+"endLine":  231,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'actor'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Resolver.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  19,
+"endLine":  63,
+"endColumn":  25
+}
+}
+}
+]
+}

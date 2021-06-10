@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'config' with 'nameof(config)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\PersistenceQuery.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  45,
+"endLine":  47,
+"endColumn":  116
+}
+}
+}
+]
+}

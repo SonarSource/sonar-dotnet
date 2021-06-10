@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "The parameter name 'discoveryMethods' is not declared in the argument list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Discovery\Aggregate\AggregateServiceDiscovery.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  23,
+"endLine":  29,
+"endColumn":  133
+}
+}
+}
+]
+}

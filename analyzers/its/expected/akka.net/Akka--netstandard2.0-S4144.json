@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Become'.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  28,
+"endLine":  359,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
+"region":  {
+"startLine":  344,
+"startColumn":  28,
+"endLine":  344,
+"endColumn":  34
+}
+}
+]
+}
+]
+}

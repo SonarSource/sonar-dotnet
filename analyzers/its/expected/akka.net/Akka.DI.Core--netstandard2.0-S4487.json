@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'system' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorSystemAdapter.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  30,
+"endLine":  20,
+"endColumn":  36
+}
+}
+}
+]
+}

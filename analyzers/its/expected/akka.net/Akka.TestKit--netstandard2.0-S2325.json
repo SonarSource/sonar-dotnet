@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'AwaitConditionNoThrow' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  21,
+"endLine":  254,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AwaitConditionNoThrowAsync' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  27,
+"endLine":  272,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FormatWrongSenderMessage' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  24,
+"endLine":  108,
+"endColumn":  48
+}
+}
+}
+]
+}

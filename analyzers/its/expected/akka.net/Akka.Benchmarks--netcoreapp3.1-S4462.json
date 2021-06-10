@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\ActorSelectionBenchmark.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  11,
+"endLine":  51,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\SpawnActorBenchmarks.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  12,
+"endLine":  34,
+"endColumn":  35
+}
+}
+}
+]
+}

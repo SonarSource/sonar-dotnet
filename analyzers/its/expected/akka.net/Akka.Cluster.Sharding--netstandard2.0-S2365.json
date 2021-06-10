@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2365",
+"message":  "Refactor 'CoordinatorSelection' into a method, properties should not copy collections.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  504,
+"startColumn":  24,
+"endLine":  505,
+"endColumn":  112
+}
+}
+}
+]
+}

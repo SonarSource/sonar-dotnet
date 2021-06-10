@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'path.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData.LightningDB\LmdbDurableStore.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  20,
+"endLine":  127,
+"endColumn":  47
+}
+}
+}
+]
+}

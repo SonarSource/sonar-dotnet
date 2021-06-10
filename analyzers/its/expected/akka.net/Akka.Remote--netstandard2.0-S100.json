@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'state' to match pascal case naming rules, consider using 'State'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  24,
+"endLine":  157,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'InitFSM' to match pascal case naming rules, consider using 'InitFsm'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  712,
+"startColumn":  26,
+"endLine":  712,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'logRemoteLifeCycleEvents' to match pascal case naming rules, consider using 'LogRemoteLifeCycleEvents'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  21,
+"endLine":  69,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'DISASSOCIATE' to match pascal case naming rules, consider using 'Disassociate'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"region":  {
+"startLine":  531,
+"startColumn":  28,
+"endLine":  531,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'InitializeFSM' to match pascal case naming rules, consider using 'InitializeFsm'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  832,
+"startColumn":  22,
+"endLine":  832,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'InitializeFSM' to match pascal case naming rules, consider using 'InitializeFsm'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  1102,
+"startColumn":  22,
+"endLine":  1102,
+"endColumn":  35
+}
+}
+}
+]
+}

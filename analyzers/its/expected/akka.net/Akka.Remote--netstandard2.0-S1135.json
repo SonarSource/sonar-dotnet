@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  735,
+"startColumn":  20,
+"endLine":  735,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeployer.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  19,
+"endLine":  75,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  16,
+"endLine":  30,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  69,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  15,
+"endLine":  27,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  16,
+"endLine":  35,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  27,
+"endLine":  283,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  531,
+"startColumn":  16,
+"endLine":  531,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Routing\RemoteRouterConfig.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  12,
+"endLine":  98,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  56,
+"endLine":  143,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  62,
+"endLine":  157,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  55,
+"endLine":  170,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  40,
+"endLine":  179,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  62,
+"endLine":  200,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  66,
+"endLine":  37,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\WrappedPayloadSupport.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  37,
+"endLine":  26,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  84,
+"endLine":  325,
+"endColumn":  88
+}
+}
+}
+]
+}

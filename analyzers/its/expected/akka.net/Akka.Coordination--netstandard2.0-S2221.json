@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseProvider.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  21,
+"endLine":  144,
+"endColumn":  26
+}
+}
+}
+]
+}

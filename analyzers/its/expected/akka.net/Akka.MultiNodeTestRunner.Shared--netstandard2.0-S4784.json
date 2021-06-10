@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  63,
+"endLine":  93,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  66,
+"endLine":  101,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  65,
+"endLine":  107,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  64,
+"endLine":  110,
+"endColumn":  101
+}
+}
+}
+]
+}

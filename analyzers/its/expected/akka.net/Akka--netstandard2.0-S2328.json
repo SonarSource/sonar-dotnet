@@ -1,0 +1,61 @@
+{
+"issues":  [
+{
+"id":  "S2328",
+"message":  "Refactor 'GetHashCode' to not reference mutable fields.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  29,
+"endLine":  332,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  48,
+"endLine":  339,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S2328",
+"message":  "Refactor 'GetHashCode' to not reference mutable fields.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  266,
+"startColumn":  29,
+"endLine":  266,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  43,
+"endLine":  270,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  43,
+"endLine":  274,
+"endColumn":  48
+}
+}
+]
+}
+]
+}

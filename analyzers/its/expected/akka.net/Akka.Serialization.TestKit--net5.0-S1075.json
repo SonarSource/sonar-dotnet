@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  23,
+"endLine":  367,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  23,
+"endLine":  376,
+"endColumn":  65
+}
+}
+}
+]
+}

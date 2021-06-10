@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'alternateIndex'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  33,
+"endLine":  294,
+"endColumn":  47
+}
+}
+}
+]
+}

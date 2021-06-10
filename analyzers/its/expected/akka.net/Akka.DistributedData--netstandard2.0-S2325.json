@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'DeltaEntriesAfter' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  66,
+"endLine":  177,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Cleaned' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  528,
+"startColumn":  33,
+"endLine":  528,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'MergeValue' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  876,
+"startColumn":  24,
+"endLine":  876,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SelectRandomNode' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1093,
+"startColumn":  25,
+"endLine":  1093,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ModifyWithInitial' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  33,
+"endLine":  483,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GSetToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  32,
+"endLine":  487,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  652,
+"startColumn":  32,
+"endLine":  652,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FlagFromProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  659,
+"startColumn":  22,
+"endLine":  659,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'LWWDictionaryDeltaFromProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1213,
+"startColumn":  46,
+"endLine":  1213,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'PNCounterDeltaFromProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1335,
+"startColumn":  52,
+"endLine":  1335,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ORMultiDictionaryDeltaFromProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1472,
+"startColumn":  55,
+"endLine":  1472,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1482,
+"startColumn":  31,
+"endLine":  1482,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'KeyFromBinary' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1553,
+"startColumn":  31,
+"endLine":  1553,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'StatusFromBinary' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  686,
+"startColumn":  24,
+"endLine":  686,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NextOrElse' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  19,
+"endLine":  163,
+"endColumn":  29
+}
+}
+}
+]
+}

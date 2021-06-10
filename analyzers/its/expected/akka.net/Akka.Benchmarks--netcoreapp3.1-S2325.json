@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'AddUnreachable' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  30,
+"endLine":  37,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CheckThunkFor' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  22,
+"endLine":  66,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CheckThunkFor' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  22,
+"endLine":  73,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CheckStatus' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  22,
+"endLine":  84,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CheckAggregatedStatus' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  22,
+"endLine":  90,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AllUnreachableOrTerminated' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  22,
+"endLine":  96,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AllUnreachable' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  22,
+"endLine":  101,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'RecordsFrom' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  22,
+"endLine":  106,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateVectorClockOfSize' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  82,
+"endLine":  23,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CopyVectorClock' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  30,
+"endLine":  35,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CompareTo' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  22,
+"endLine":  87,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NotEqual' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  22,
+"endLine":  92,
+"endColumn":  30
+}
+}
+}
+]
+}

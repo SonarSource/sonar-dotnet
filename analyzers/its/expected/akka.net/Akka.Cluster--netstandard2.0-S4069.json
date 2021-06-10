@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2991,
+"startColumn":  44,
+"endLine":  2991,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Subtract' for the operator '-'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  3006,
+"startColumn":  44,
+"endLine":  3006,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  723,
+"startColumn":  50,
+"endLine":  723,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Subtract' for the operator '-'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  734,
+"startColumn":  50,
+"endLine":  734,
+"endColumn":  51
+}
+}
+}
+]
+}

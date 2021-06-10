@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'graphStageModule' from this expression.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  906,
+"startColumn":  38,
+"endLine":  906,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'stageType' from this expression.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  907,
+"startColumn":  31,
+"endLine":  907,
+"endColumn":  32
+}
+}
+}
+]
+}

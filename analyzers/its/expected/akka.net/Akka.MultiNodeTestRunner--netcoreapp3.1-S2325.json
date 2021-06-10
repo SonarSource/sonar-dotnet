@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'ConfigConstructorParamValues' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  26,
+"endLine":  124,
+"endColumn":  54
+}
+}
+}
+]
+}

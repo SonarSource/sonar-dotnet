@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1264",
+"message":  "Replace this 'for' loop with a 'while' loop.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  13,
+"endLine":  246,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S1264",
+"message":  "Replace this 'for' loop with a 'while' loop.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  17,
+"endLine":  211,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1264",
+"message":  "Replace this 'for' loop with a 'while' loop.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  568,
+"startColumn":  17,
+"endLine":  568,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1264",
+"message":  "Replace this 'for' loop with a 'while' loop.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  585,
+"startColumn":  17,
+"endLine":  585,
+"endColumn":  20
+}
+}
+}
+]
+}

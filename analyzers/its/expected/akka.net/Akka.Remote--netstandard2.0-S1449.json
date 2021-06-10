@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  79,
+"endLine":  62,
+"endColumn":  86
+}
+}
+}
+]
+}

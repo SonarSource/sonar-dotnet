@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  27,
+"endLine":  172,
+"endColumn":  50
+}
+}
+}
+]
+}

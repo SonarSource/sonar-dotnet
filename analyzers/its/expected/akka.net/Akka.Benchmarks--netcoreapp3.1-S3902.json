@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3902",
+"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Program.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  53,
+"endLine":  17,
+"endColumn":  73
+}
+}
+}
+]
+}

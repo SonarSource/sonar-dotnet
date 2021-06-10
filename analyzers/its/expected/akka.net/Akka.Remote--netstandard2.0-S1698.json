@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  37,
+"endLine":  116,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  28,
+"endLine":  250,
+"endColumn":  30
+}
+}
+}
+]
+}

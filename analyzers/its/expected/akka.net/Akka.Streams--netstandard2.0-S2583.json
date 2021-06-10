@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  918,
+"startColumn":  17,
+"endLine":  918,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  918,
+"startColumn":  28,
+"endLine":  918,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  918,
+"startColumn":  61,
+"endLine":  918,
+"endColumn":  145
+}
+}
+]
+}
+]
+}

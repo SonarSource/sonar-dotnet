@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Results' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\UnitTest.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  37,
+"endLine":  33,
+"endColumn":  44
+}
+}
+}
+]
+}

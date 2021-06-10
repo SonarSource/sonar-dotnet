@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  523,
+"startColumn":  138,
+"endLine":  523,
+"endColumn":  140
+}
+}
+}
+]
+}

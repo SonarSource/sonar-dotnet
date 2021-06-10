@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'lookup' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Discovery\Config\ConfigServiceDiscovery.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  54,
+"endLine":  53,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Discovery\Config\ConfigServiceDiscovery.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  40,
+"endLine":  53,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'lookup' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Discovery\ServiceDiscovery.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  54,
+"endLine":  118,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Discovery\ServiceDiscovery.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  40,
+"endLine":  118,
+"endColumn":  46
+}
+}
+]
+}
+]
+}

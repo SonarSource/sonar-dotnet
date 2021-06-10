@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Immutable.IImmutableSet<string>' instead of 'System.Collections.Immutable.ImmutableHashSet<string>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  673,
+"startColumn":  61,
+"endLine":  673,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IEquatable<Akka.Actor.Address>' instead of 'Akka.Actor.Address'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  44,
+"endLine":  287,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IList<Akka.Cluster.UniqueAddress>' instead of 'System.Collections.Generic.List<Akka.Cluster.UniqueAddress>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  142,
+"endLine":  401,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<T, int>' instead of 'System.Collections.Generic.Dictionary<T, int>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"region":  {
+"startLine":  443,
+"startColumn":  70,
+"endLine":  443,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Akka.Cluster.Member>' instead of 'System.Collections.Immutable.ImmutableSortedSet<Akka.Cluster.Member>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  87,
+"endLine":  149,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Akka.Cluster.Member>' instead of 'System.Collections.Immutable.ImmutableSortedSet<Akka.Cluster.Member>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  87,
+"endLine":  196,
+"endColumn":  94
+}
+}
+}
+]
+}

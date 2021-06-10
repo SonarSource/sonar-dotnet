@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  409,
+"startColumn":  17,
+"endLine":  409,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  431,
+"startColumn":  17,
+"endLine":  431,
+"endColumn":  49
+}
+}
+}
+]
+}

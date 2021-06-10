@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_deltaNodeRoundRobinCounter', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  50,
+"endLine":  24,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Ancestor', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\FastMerge.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  40,
+"endLine":  35,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Zero', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GCounter.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  44,
+"endLine":  54,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_allReachableClockTime', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  323,
+"startColumn":  45,
+"endLine":  323,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_statusCount', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  35,
+"endLine":  339,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_statusTotChunks', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  340,
+"startColumn":  38,
+"endLine":  340,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_moved', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  33,
+"endLine":  219,
+"endColumn":  40
+}
+}
+}
+]
+}

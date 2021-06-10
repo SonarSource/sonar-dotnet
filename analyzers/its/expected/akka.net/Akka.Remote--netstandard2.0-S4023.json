@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRef.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  22,
+"endLine":  23,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  26,
+"endLine":  82,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  26,
+"endLine":  134,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  22,
+"endLine":  116,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  22,
+"endLine":  256,
+"endColumn":  39
+}
+}
+}
+]
+}

@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Uid' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\AddressUidExtension.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  29,
+"endLine":  54,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'AssociateBehavior' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  78,
+"endLine":  35,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'DisassociateBehavior' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  79,
+"endLine":  39,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ListenBehavior' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  13,
+"endLine":  48,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LocalAddress' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  33,
+"endLine":  53,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ShutdownBehavior' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  62,
+"endLine":  57,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'WriteBehavior' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  93,
+"endLine":  61,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Inbound' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  770,
+"startColumn":  30,
+"endLine":  770,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Actor' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  35,
+"endLine":  231,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'AddedSchemeIdentifier' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  32,
+"endLine":  145,
+"endColumn":  53
+}
+}
+}
+]
+}

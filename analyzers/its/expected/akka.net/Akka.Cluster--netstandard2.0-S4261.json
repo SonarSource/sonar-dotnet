@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  39,
+"endLine":  150,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  22,
+"endLine":  389,
+"endColumn":  31
+}
+}
+}
+]
+}

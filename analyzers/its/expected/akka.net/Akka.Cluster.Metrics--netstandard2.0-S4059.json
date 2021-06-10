@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'Alpha' or the name of method 'GetAlpha' to make them distinguishable.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessages.g.cs",
+"region":  {
+"startLine":  865,
+"startColumn":  23,
+"endLine":  865,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\EWMA.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  38,
+"endLine":  80,
+"endColumn":  46
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,407 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  38,
+"endLine":  184,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  292,
+"startColumn":  43,
+"endLine":  292,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  701,
+"startColumn":  46,
+"endLine":  701,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  769,
+"startColumn":  46,
+"endLine":  769,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  69,
+"endLine":  32,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  60,
+"endLine":  177,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  306,
+"startColumn":  41,
+"endLine":  306,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  688,
+"startColumn":  41,
+"endLine":  688,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  750,
+"startColumn":  41,
+"endLine":  750,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\RunnableGraph.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  37,
+"endLine":  114,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  32,
+"endLine":  164,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  45,
+"endLine":  399,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  35,
+"endLine":  164,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  28,
+"endLine":  319,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  27,
+"endLine":  349,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  21,
+"endLine":  362,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  599,
+"startColumn":  46,
+"endLine":  599,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  932,
+"startColumn":  42,
+"endLine":  932,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  42,
+"endLine":  280,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  659,
+"startColumn":  43,
+"endLine":  659,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  719,
+"startColumn":  43,
+"endLine":  719,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  52,
+"endLine":  287,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  53,
+"endLine":  649,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  711,
+"startColumn":  52,
+"endLine":  711,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  25,
+"endLine":  60,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  40,
+"endLine":  219,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Valve.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  20,
+"endLine":  33,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Valve.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  26,
+"endLine":  39,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Graph.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  39,
+"endLine":  70,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  29,
+"endLine":  543,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  18,
+"endLine":  114,
+"endColumn":  24
+}
+}
+}
+]
+}

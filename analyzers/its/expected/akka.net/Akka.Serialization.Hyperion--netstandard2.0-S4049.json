@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetKnownTypes' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\IKnownTypesProvider.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  40
+}
+}
+}
+]
+}

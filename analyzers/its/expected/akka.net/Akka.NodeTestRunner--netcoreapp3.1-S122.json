@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  21,
+"endLine":  64,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  21,
+"endLine":  65,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  21,
+"endLine":  66,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  21,
+"endLine":  74,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  21,
+"endLine":  75,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  21,
+"endLine":  76,
+"endColumn":  130
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'j'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  17,
+"endLine":  49,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 's'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  17,
+"endLine":  50,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'l'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  29,
+"endLine":  335,
+"endColumn":  30
+}
+}
+}
+]
+}

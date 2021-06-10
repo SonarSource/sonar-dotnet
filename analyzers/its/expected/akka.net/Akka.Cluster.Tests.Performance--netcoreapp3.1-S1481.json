@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'deserialized'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  21,
+"endLine":  72,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'deserialized'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  21,
+"endLine":  86,
+"endColumn":  33
+}
+}
+}
+]
+}

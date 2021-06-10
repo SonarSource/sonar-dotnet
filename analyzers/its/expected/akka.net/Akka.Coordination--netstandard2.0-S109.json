@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Coordination\TimeoutSettings.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  109,
+"endLine":  33,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Coordination\TimeoutSettings.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  113,
+"endLine":  33,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Coordination\TimeoutSettings.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  94,
+"endLine":  37,
+"endColumn":  95
+}
+}
+}
+]
+}

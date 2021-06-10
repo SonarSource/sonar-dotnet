@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'MakeKey' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  30,
+"endLine":  317,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  30,
+"endLine":  337,
+"endColumn":  37
+}
+}
+]
+}
+]
+}

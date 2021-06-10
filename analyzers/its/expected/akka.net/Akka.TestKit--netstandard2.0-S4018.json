@@ -1,0 +1,316 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  36,
+"endLine":  74,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  36,
+"endLine":  124,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  36,
+"endLine":  270,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\FSMSpecHelpers.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  50,
+"endLine":  24,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\FSMSpecHelpers.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  50,
+"endLine":  40,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"region":  {
+"startLine":  314,
+"startColumn":  21,
+"endLine":  314,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  26,
+"endLine":  48,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  26,
+"endLine":  59,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  37,
+"endLine":  173,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  37,
+"endLine":  186,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  37,
+"endLine":  234,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  37,
+"endLine":  246,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  53,
+"endLine":  264,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  53,
+"endLine":  281,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  53,
+"endLine":  300,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  53,
+"endLine":  317,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  336,
+"startColumn":  53,
+"endLine":  336,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  53,
+"endLine":  354,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  18,
+"endLine":  34,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  18,
+"endLine":  31,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  26,
+"endLine":  179,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  26,
+"endLine":  196,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  26,
+"endLine":  213,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  26,
+"endLine":  229,
+"endColumn":  38
+}
+}
+}
+]
+}

@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 12 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  29,
+"endLine":  249,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  1109,
+"startColumn":  17,
+"endLine":  1109,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  17,
+"endLine":  294,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 17 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  21,
+"endLine":  154,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  312,
+"startColumn":  21,
+"endLine":  312,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 20 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  21,
+"endLine":  332,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  17,
+"endLine":  131,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 18 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  17,
+"endLine":  42,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 16 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  17,
+"endLine":  84,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 12 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisorBase.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  17,
+"endLine":  88,
+"endColumn":  25
+}
+}
+}
+]
+}

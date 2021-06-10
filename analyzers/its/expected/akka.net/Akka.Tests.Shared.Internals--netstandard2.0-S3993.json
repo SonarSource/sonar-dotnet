@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'RepeatAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\RepeatAttribute.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  25,
+"endLine":  33,
+"endColumn":  40
+}
+}
+}
+]
+}

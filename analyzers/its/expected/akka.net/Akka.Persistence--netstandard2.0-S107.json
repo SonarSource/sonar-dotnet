@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  25,
+"endLine":  281,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  44,
+"endLine":  341,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  26,
+"endLine":  315,
+"endColumn":  213
+}
+}
+}
+]
+}

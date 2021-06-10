@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Helpers\AnyNumber.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  19,
+"endLine":  37,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Helpers\AnyNumber.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  19,
+"endLine":  38,
+"endColumn":  42
+}
+}
+}
+]
+}

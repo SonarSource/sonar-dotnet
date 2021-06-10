@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\StandardMetrics.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  29,
+"endLine":  26,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\StandardMetrics.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  29,
+"endLine":  30,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\StandardMetrics.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  29,
+"endLine":  34,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\StandardMetrics.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  29,
+"endLine":  39,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\StandardMetrics.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  29,
+"endLine":  43,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\StandardMetrics.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  29,
+"endLine":  47,
+"endColumn":  42
+}
+}
+}
+]
+}

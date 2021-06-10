@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1367,
+"startColumn":  12,
+"endLine":  1367,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1579,
+"startColumn":  20,
+"endLine":  1579,
+"endColumn":  25
+}
+}
+}
+]
+}

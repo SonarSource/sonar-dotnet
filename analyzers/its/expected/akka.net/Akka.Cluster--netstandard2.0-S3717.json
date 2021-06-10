@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  13,
+"endLine":  438,
+"endColumn":  49
+}
+}
+}
+]
+}

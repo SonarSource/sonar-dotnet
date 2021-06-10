@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  17,
+"endLine":  160,
+"endColumn":  101
+}
+}
+}
+]
+}

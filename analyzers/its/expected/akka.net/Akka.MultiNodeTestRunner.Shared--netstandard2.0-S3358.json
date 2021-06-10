@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\ResultSummary.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  19,
+"endLine":  54,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  19,
+"endLine":  224,
+"endColumn":  47
+}
+}
+}
+]
+}

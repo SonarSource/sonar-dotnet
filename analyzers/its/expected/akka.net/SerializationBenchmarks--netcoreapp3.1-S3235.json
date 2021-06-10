@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\SerializationBenchmarks\Program.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  23,
+"endLine":  47,
+"endColumn":  25
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'CreateKnownTypesProvider' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  37,
+"endLine":  146,
+"endColumn":  61
+}
+}
+}
+]
+}

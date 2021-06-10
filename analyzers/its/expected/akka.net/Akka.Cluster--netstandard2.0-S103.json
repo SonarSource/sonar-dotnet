@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 218 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1490,
+"startColumn":  1,
+"endLine":  1490,
+"endColumn":  219
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1494,
+"startColumn":  1,
+"endLine":  1494,
+"endColumn":  217
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2173,
+"startColumn":  1,
+"endLine":  2173,
+"endColumn":  203
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 230 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2476,
+"startColumn":  1,
+"endLine":  2476,
+"endColumn":  231
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  1,
+"endLine":  555,
+"endColumn":  205
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  659,
+"startColumn":  1,
+"endLine":  659,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 207 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  706,
+"startColumn":  1,
+"endLine":  706,
+"endColumn":  208
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 233 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  1,
+"endLine":  48,
+"endColumn":  234
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  1,
+"endLine":  325,
+"endColumn":  213
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  1,
+"endLine":  373,
+"endColumn":  206
+}
+}
+}
+]
+}

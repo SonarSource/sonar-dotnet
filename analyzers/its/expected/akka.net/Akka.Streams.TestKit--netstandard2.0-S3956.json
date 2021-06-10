@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  55,
+"endLine":  233,
+"endColumn":  62
+}
+}
+}
+]
+}

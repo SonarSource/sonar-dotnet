@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_log'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  828,
+"startColumn":  9,
+"endLine":  828,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'ClearState'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  1113,
+"startColumn":  9,
+"endLine":  1116,
+"endColumn":  10
+}
+}
+}
+]
+}

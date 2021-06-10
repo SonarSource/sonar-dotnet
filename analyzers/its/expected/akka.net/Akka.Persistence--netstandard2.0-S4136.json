@@ -1,0 +1,124 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Equals' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  25,
+"endLine":  264,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  34,
+"endLine":  280,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetAtLeastOnceDeliverySnapshot' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  55,
+"endLine":  102,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  45,
+"endLine":  204,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetStateChangeEvent' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  44,
+"endLine":  121,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  48,
+"endLine":  218,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetPersistentFSMSnapshot' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  39,
+"endLine":  134,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  24,
+"endLine":  229,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetAtomicWrite' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  39,
+"endLine":  92,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  29,
+"endLine":  193,
+"endColumn":  43
+}
+}
+]
+}
+]
+}

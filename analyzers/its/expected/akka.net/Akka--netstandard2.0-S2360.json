@@ -1,0 +1,1668 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  93,
+"endLine":  100,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.ReceiveTimeout.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  57,
+"endLine":  41,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  609,
+"startColumn":  59,
+"endLine":  609,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  47,
+"endLine":  416,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefFactoryExtensions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  92,
+"endLine":  22,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  107,
+"endLine":  342,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  58,
+"endLine":  378,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  98,
+"endLine":  378,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  34,
+"endLine":  379,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  57,
+"endLine":  71,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  81,
+"endLine":  71,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  68,
+"endLine":  75,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  86,
+"endLine":  75,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  45,
+"endLine":  219,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  43,
+"endLine":  232,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildStats.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  84,
+"endLine":  55,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildStats.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  122,
+"endLine":  55,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  63,
+"endLine":  398,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  94,
+"endLine":  71,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  65,
+"endLine":  133,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  110,
+"endLine":  405,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"region":  {
+"startLine":  417,
+"startColumn":  125,
+"endLine":  417,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  65,
+"endLine":  30,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  57,
+"endLine":  123,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  81,
+"endLine":  123,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  94,
+"endLine":  174,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  78,
+"endLine":  243,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  80,
+"endLine":  500,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ExtendedActorSystem.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  74,
+"endLine":  57,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ExtendedActorSystem.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  69,
+"endLine":  67,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  72,
+"endLine":  436,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  98,
+"endLine":  436,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  136,
+"endLine":  436,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  158,
+"endLine":  436,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  705,
+"startColumn":  82,
+"endLine":  705,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  718,
+"startColumn":  84,
+"endLine":  718,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  833,
+"startColumn":  85,
+"endLine":  833,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  94,
+"endLine":  35,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  92,
+"endLine":  73,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\IActorRefFactory.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  52,
+"endLine":  32,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  42,
+"endLine":  80,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  100,
+"endLine":  31,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  132,
+"endLine":  31,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  172,
+"endLine":  31,
+"endColumn":  178
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  94,
+"endLine":  57,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  123,
+"endLine":  57,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  163,
+"endLine":  57,
+"endColumn":  169
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  353,
+"startColumn":  51,
+"endLine":  353,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  88,
+"endLine":  134,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  114,
+"endLine":  166,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  80,
+"endLine":  211,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  105,
+"endLine":  244,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  175,
+"endLine":  27,
+"endColumn":  181
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  214,
+"endLine":  42,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  135,
+"endLine":  124,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  174,
+"endLine":  140,
+"endColumn":  180
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\Internal\AbstractStash.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  69,
+"endLine":  35,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\Internal\BoundedStashImpl.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  69,
+"endLine":  22,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\StashOverflowException.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  71,
+"endLine":  23,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  147,
+"endLine":  290,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  305,
+"startColumn":  120,
+"endLine":  305,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  99,
+"endLine":  327,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  558,
+"startColumn":  147,
+"endLine":  558,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  573,
+"startColumn":  120,
+"endLine":  573,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  47,
+"endLine":  91,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  67,
+"endLine":  126,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  65,
+"endLine":  155,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  61,
+"endLine":  169,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  64,
+"endLine":  185,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  70,
+"endLine":  201,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  67,
+"endLine":  217,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  73,
+"endLine":  233,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  70,
+"endLine":  249,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  417,
+"startColumn":  77,
+"endLine":  417,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  417,
+"startColumn":  104,
+"endLine":  417,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationException.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  79,
+"endLine":  19,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  80,
+"endLine":  39,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  56,
+"endLine":  378,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ExecutorService.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  58,
+"endLine":  73,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ExecutorService.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  82,
+"endLine":  73,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"region":  {
+"startLine":  825,
+"startColumn":  60,
+"endLine":  825,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  118,
+"endLine":  231,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  131,
+"endLine":  244,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  134,
+"endLine":  257,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  39,
+"endLine":  130,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  56,
+"endLine":  131,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  35,
+"endLine":  132,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  31,
+"endLine":  133,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  29,
+"endLine":  187,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  56,
+"endLine":  188,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  31,
+"endLine":  189,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  74,
+"endLine":  237,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  105,
+"endLine":  237,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  1172,
+"startColumn":  89,
+"endLine":  1172,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  1173,
+"startColumn":  35,
+"endLine":  1173,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  1219,
+"startColumn":  52,
+"endLine":  1219,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  1230,
+"startColumn":  72,
+"endLine":  1230,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  106,
+"endLine":  244,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  72,
+"endLine":  304,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  50,
+"endLine":  216,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  67,
+"endLine":  217,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  38,
+"endLine":  128,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  49,
+"endLine":  129,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Broadcast.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  153,
+"endLine":  80,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  386,
+"startColumn":  36,
+"endLine":  386,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  387,
+"startColumn":  36,
+"endLine":  387,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  47,
+"endLine":  388,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Random.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  36,
+"endLine":  79,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  35,
+"endLine":  100,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  31,
+"endLine":  101,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  37,
+"endLine":  102,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  32,
+"endLine":  103,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  35,
+"endLine":  104,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  36,
+"endLine":  126,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  36,
+"endLine":  172,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\SmallestMailbox.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  36,
+"endLine":  149,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  192,
+"endLine":  195,
+"endColumn":  199
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  86,
+"endLine":  444,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  465,
+"startColumn":  95,
+"endLine":  465,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AtomicBoolean.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  48,
+"endLine":  29,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  75,
+"endLine":  14,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  96,
+"endLine":  14,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  80,
+"endLine":  27,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  43,
+"endLine":  28,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  84,
+"endLine":  40,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  43,
+"endLine":  41,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\StringLike.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  86,
+"endLine":  28,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  38,
+"endLine":  24,
+"endColumn":  45
+}
+}
+}
+]
+}

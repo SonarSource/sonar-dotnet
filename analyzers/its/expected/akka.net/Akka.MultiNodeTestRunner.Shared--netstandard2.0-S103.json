@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 309 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  1,
+"endLine":  106,
+"endColumn":  310
+}
+}
+}
+]
+}

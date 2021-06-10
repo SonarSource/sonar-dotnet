@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  464,
+"startColumn":  42,
+"endLine":  472,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  841,
+"startColumn":  60,
+"endLine":  850,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1639,
+"startColumn":  48,
+"endLine":  1641,
+"endColumn":  173
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 10 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  2098,
+"startColumn":  40,
+"endLine":  2108,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  456,
+"startColumn":  47,
+"endLine":  457,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1363,
+"startColumn":  42,
+"endLine":  1365,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 26 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  41,
+"endLine":  251,
+"endColumn":  79
+}
+}
+}
+]
+}

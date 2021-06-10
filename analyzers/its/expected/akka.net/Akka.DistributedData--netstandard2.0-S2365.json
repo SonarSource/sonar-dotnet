@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2365",
+"message":  "Refactor 'OperationsSerialization' into a method, properties should not copy collections.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  759,
+"startColumn":  91,
+"endLine":  759,
+"endColumn":  145
+}
+}
+}
+]
+}

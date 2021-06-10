@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'DiPerRequestActor'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'DiSingletonActor'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'DiParentActor'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  13,
+"endLine":  65,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'DisposableActor'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  13,
+"endLine":  88,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'UnboundedStashActor'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  13,
+"endLine":  173,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'BoundedStashActor'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  13,
+"endLine":  185,
+"endColumn":  14
+}
+}
+}
+]
+}

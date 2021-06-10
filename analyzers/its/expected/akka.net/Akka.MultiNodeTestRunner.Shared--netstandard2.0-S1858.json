@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()', the compiler will do it for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\FileSystemAppenderActor.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  52,
+"endLine":  28,
+"endColumn":  63
+}
+}
+}
+]
+}

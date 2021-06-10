@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  17,
+"endLine":  338,
+"endColumn":  53
+}
+}
+}
+]
+}

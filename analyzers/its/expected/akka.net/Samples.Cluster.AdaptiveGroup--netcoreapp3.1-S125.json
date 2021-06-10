@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.AdaptiveGroup\Program.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  17,
+"endLine":  56,
+"endColumn":  96
+}
+}
+}
+]
+}

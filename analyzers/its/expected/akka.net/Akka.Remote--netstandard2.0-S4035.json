@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4035",
+"message":  "Seal class 'AssociationHandle' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  27,
+"endLine":  331,
+"endColumn":  44
+}
+}
+}
+]
+}

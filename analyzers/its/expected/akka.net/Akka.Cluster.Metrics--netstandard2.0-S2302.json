@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  51,
+"endLine":  112,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'halfLife' with 'nameof(halfLife)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\EWMA.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  71,
+"endLine":  86,
+"endColumn":  95
+}
+}
+}
+]
+}

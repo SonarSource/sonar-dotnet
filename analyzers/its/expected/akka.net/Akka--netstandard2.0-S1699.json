@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1699",
+"message":  "Remove this call from a constructor to the overridable 'NewActorCell' method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  21,
+"endLine":  75,
+"endColumn":  33
+}
+}
+}
+]
+}

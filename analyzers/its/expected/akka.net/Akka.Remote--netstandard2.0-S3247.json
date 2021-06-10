@@ -1,0 +1,292 @@
+{
+"issues":  [
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  21,
+"endLine":  126,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  71,
+"endLine":  126,
+"endColumn":  95
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  22,
+"endLine":  177,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  41,
+"endLine":  179,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  17,
+"endLine":  42,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  53,
+"endLine":  42,
+"endColumn":  64
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  17,
+"endLine":  43,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  57,
+"endLine":  43,
+"endColumn":  70
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  17,
+"endLine":  45,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  53,
+"endLine":  45,
+"endColumn":  64
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  17,
+"endLine":  47,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  59,
+"endLine":  47,
+"endColumn":  73
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  17,
+"endLine":  48,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  51,
+"endLine":  48,
+"endColumn":  61
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  17,
+"endLine":  49,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  55,
+"endLine":  49,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  17,
+"endLine":  50,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  53,
+"endLine":  50,
+"endColumn":  64
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  17,
+"endLine":  51,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  85,
+"endLine":  51,
+"endColumn":  112
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  17,
+"endLine":  141,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  62,
+"endLine":  143,
+"endColumn":  78
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  22,
+"endLine":  145,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  68,
+"endLine":  147,
+"endColumn":  90
+}
+}
+]
+}
+]
+}

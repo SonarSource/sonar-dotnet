@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'Paths' or the name of method 'GetPaths' to make them distinguishable.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  36,
+"endLine":  161,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  45,
+"endLine":  168,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'NrOfInstances' or the name of method 'GetNrOfInstances' to make them distinguishable.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  20,
+"endLine":  255,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  262,
+"startColumn":  29,
+"endLine":  262,
+"endColumn":  45
+}
+}
+]
+}
+]
+}

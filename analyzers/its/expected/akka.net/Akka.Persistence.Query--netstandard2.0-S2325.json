@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'CreateType' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\PersistenceQuery.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  38,
+"endLine":  56,
+"endColumn":  48
+}
+}
+}
+]
+}

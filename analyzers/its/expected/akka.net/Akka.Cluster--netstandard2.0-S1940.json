@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<=') instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  28,
+"endLine":  113,
+"endColumn":  50
+}
+}
+}
+]
+}

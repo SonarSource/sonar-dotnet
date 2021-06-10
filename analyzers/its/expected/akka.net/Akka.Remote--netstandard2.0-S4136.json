@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Equals' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  21,
+"endLine":  98,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  30,
+"endLine":  170,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ResolveActorRef' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  521,
+"startColumn":  26,
+"endLine":  521,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  559,
+"startColumn":  26,
+"endLine":  559,
+"endColumn":  41
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Create' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  49,
+"endLine":  28,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  49,
+"endLine":  57,
+"endColumn":  55
+}
+}
+]
+}
+]
+}

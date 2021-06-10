@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2822,
+"startColumn":  114,
+"endLine":  2822,
+"endColumn":  137
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2822,
+"startColumn":  89,
+"endLine":  2822,
+"endColumn":  112
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  688,
+"startColumn":  175,
+"endLine":  688,
+"endColumn":  199
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  688,
+"startColumn":  48,
+"endLine":  688,
+"endColumn":  72
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  54,
+"endLine":  101,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  39,
+"endLine":  101,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  88,
+"endLine":  345,
+"endColumn":  109
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  65,
+"endLine":  345,
+"endColumn":  86
+}
+}
+]
+}
+]
+}

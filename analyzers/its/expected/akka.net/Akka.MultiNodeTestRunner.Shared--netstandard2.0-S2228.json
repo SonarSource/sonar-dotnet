@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TeamCityLoggerActor.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  21,
+"endLine":  28,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  13,
+"endLine":  143,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  13,
+"endLine":  150,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  13,
+"endLine":  157,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  13,
+"endLine":  164,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  13,
+"endLine":  170,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  13,
+"endLine":  211,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\FileSystemMessageSinkActor.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  17,
+"endLine":  68,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\FileSystemMessageSinkActor.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  21,
+"endLine":  76,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\FileSystemMessageSinkActor.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  17,
+"endLine":  79,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  13,
+"endLine":  114,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  21,
+"endLine":  75,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  29,
+"endLine":  79,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  21,
+"endLine":  81,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxMessageSink.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  13,
+"endLine":  24,
+"endColumn":  30
+}
+}
+}
+]
+}

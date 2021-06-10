@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_systemNumber', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  42,
+"endLine":  51,
+"endColumn":  45
+}
+}
+}
+]
+}

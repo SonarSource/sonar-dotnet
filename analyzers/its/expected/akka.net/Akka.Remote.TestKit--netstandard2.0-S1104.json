@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeFact.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  34,
+"endLine":  29,
+"endColumn":  15
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1939",
+"message":  "'IDateTimeOffsetNowTimeProvider' implements 'ITimeProvider' so 'ITimeProvider' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DateTimeNowTimeProvider.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  50,
+"endLine":  15,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'AllDeadLetters' implements 'IWrappedMessage' so 'IWrappedMessage' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\UnhandledMessage.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  58,
+"endLine":  15,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'ICollection<T>' implements 'IEnumerable<T>' so 'IEnumerable<T>' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ConcurrentSet.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  51,
+"endLine":  19,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'ICollection<T>' implements 'IEnumerable' so 'IEnumerable' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ConcurrentSet.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  67,
+"endLine":  19,
+"endColumn":  80
+}
+}
+}
+]
+}

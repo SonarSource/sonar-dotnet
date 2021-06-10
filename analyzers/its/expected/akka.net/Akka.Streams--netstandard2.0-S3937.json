@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3937",
+"message":  "Review this number; its irregular pattern indicates an error.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  30,
+"endLine":  172,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3937",
+"message":  "Review this number; its irregular pattern indicates an error.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  30,
+"endLine":  173,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3937",
+"message":  "Review this number; its irregular pattern indicates an error.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  30,
+"endLine":  174,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3937",
+"message":  "Review this number; its irregular pattern indicates an error.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\BitOperations.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  30,
+"endLine":  175,
+"endColumn":  52
+}
+}
+}
+]
+}

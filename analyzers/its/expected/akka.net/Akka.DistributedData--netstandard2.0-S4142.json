@@ -1,0 +1,124 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  111,
+"endLine":  373,
+"endColumn":  135
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  85,
+"endLine":  373,
+"endColumn":  109
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  374,
+"startColumn":  122,
+"endLine":  374,
+"endColumn":  157
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  374,
+"startColumn":  85,
+"endLine":  374,
+"endColumn":  120
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  104,
+"endLine":  376,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  77,
+"endLine":  376,
+"endColumn":  102
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  110,
+"endLine":  378,
+"endColumn":  134
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  84,
+"endLine":  378,
+"endColumn":  108
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  121,
+"endLine":  411,
+"endColumn":  145
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  95,
+"endLine":  411,
+"endColumn":  119
+}
+}
+]
+}
+]
+}

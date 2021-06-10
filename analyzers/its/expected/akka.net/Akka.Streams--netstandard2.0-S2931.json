@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_downstream'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\EnumeratorInterpreter.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  27,
+"endLine":  192,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_dataQueue'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  20,
+"endLine":  22,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_cancellation'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  30,
+"endLine":  117,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_continuallyEnumerator'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\EnumeratorEnumerable.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  18,
+"endLine":  41,
+"endColumn":  39
+}
+}
+}
+]
+}

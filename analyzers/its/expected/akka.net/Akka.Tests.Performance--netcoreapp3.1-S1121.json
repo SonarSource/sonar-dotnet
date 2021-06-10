@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'nameCounter' from this expression.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Internal\ChildrenContainerSpec.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  37,
+"endLine":  76,
+"endColumn":  39
+}
+}
+}
+]
+}

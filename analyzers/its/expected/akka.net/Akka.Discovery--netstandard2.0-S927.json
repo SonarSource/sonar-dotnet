@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'query' to 'lookup' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Discovery\Aggregate\AggregateServiceDiscovery.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  54,
+"endLine":  54,
+"endColumn":  59
+}
+}
+}
+]
+}

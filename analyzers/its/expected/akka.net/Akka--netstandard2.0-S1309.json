@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  1,
+"endLine":  362,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  1,
+"endLine":  293,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  1,
+"endLine":  96,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  1,
+"endLine":  104,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  1,
+"endLine":  125,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  1,
+"endLine":  363,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  1,
+"endLine":  362,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"region":  {
+"startLine":  679,
+"startColumn":  1,
+"endLine":  679,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"region":  {
+"startLine":  736,
+"startColumn":  1,
+"endLine":  736,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  566,
+"startColumn":  1,
+"endLine":  566,
+"endColumn":  24
+}
+}
+}
+]
+}

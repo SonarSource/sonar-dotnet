@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  603,
+"startColumn":  19,
+"endLine":  605,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  44,
+"endLine":  99,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Result.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  20,
+"endLine":  76,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Result.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  20,
+"endLine":  77,
+"endColumn":  67
+}
+}
+}
+]
+}

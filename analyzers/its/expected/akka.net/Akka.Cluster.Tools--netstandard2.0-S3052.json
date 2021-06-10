@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'deltaCount', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  33,
+"endLine":  122,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_version', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  636,
+"startColumn":  31,
+"endLine":  636,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'PruneDeadline', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  42,
+"endLine":  44,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_totalBufferSize', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  38,
+"endLine":  21,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_identityCounter', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxy.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  38,
+"endLine":  83,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_singleton', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxy.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  38,
+"endLine":  85,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_identityTimer', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxy.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  44,
+"endLine":  86,
+"endColumn":  50
+}
+}
+}
+]
+}

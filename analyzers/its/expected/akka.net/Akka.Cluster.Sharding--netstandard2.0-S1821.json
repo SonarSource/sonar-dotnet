@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1346,
+"startColumn":  21,
+"endLine":  1346,
+"endColumn":  27
+}
+}
+}
+]
+}

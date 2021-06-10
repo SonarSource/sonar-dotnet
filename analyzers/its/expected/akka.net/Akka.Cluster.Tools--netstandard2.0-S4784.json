@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  74,
+"endLine":  291,
+"endColumn":  139
+}
+}
+}
+]
+}

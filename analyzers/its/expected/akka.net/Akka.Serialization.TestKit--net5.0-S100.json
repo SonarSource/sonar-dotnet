@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'CanSerializeActorRefWithUID' to match pascal case naming rules, consider using 'CanSerializeActorRefWithUid'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"region":  {
+"startLine":  406,
+"startColumn":  21,
+"endLine":  406,
+"endColumn":  48
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  54,
+"endLine":  167,
+"endColumn":  63
+}
+}
+}
+]
+}

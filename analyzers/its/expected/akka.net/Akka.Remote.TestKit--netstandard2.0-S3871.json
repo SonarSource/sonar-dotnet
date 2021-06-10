@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  29,
+"endLine":  138,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  29,
+"endLine":  190,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  29,
+"endLine":  242,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  29,
+"endLine":  300,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  29,
+"endLine":  364,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  29,
+"endLine":  416,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  24,
+"endLine":  309,
+"endColumn":  41
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'seed'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  33,
+"endLine":  69,
+"endColumn":  61
+}
+}
+}
+]
+}

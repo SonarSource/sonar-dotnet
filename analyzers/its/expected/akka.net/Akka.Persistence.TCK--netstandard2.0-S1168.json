@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  17,
+"endLine":  198,
+"endColumn":  29
+}
+}
+}
+]
+}

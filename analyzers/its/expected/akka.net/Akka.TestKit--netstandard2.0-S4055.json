@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  60,
+"endLine":  380,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  73,
+"endLine":  380,
+"endColumn":  91
+}
+}
+}
+]
+}

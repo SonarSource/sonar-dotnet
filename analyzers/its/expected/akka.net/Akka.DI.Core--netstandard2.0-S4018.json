@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorContextAdapter.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  26,
+"endLine":  47,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorContextAdapter.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  22,
+"endLine":  67,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorSystemAdapter.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  22,
+"endLine":  55,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\IDependencyResolver.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  15,
+"endLine":  35,
+"endColumn":  21
+}
+}
+}
+]
+}

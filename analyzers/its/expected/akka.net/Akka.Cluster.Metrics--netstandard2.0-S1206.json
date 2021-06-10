@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\EWMA.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  33,
+"endLine":  12,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  33,
+"endLine":  17,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  41,
+"endLine":  26,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\NodeMetrics.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  33,
+"endLine":  23,
+"endColumn":  44
+}
+}
+}
+]
+}

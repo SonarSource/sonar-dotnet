@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 233, the default parameter value can't be used.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  62,
+"endLine":  243,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 317, the default parameter value can't be used.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  79,
+"endLine":  327,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 141, the default parameter value can't be used.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  55,
+"endLine":  155,
+"endColumn":  71
+}
+}
+}
+]
+}

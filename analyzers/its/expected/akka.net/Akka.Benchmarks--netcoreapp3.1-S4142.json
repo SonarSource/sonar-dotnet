@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  42,
+"endLine":  117,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  27,
+"endLine":  117,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  40,
+"endLine":  100,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  27,
+"endLine":  100,
+"endColumn":  38
+}
+}
+]
+}
+]
+}

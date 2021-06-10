@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename local function 'extractEntityId' to match pascal case naming rules, consider using 'ExtractEntityId'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  1035,
+"startColumn":  37,
+"endLine":  1035,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename local function 'extractEntityId' to match pascal case naming rules, consider using 'ExtractEntityId'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  1062,
+"startColumn":  37,
+"endLine":  1062,
+"endColumn":  52
+}
+}
+}
+]
+}

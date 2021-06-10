@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'bindFlags'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  26,
+"endLine":  31,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'bufferSizeLogKey'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  17,
+"endLine":  36,
+"endColumn":  33
+}
+}
+}
+]
+}

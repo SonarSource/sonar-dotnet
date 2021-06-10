@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlJournalConnectionFailureSpec.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  62,
+"endLine":  21,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlJournalConnectionFailureSpec.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  95,
+"endLine":  21,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlSnapshotConnectionFailureSpec.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  63,
+"endLine":  22,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlSnapshotConnectionFailureSpec.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  96,
+"endLine":  22,
+"endColumn":  102
+}
+}
+}
+]
+}

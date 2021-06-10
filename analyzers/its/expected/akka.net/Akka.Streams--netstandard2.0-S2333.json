@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  29,
+"endLine":  181,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  33,
+"endLine":  330,
+"endColumn":  42
+}
+}
+}
+]
+}

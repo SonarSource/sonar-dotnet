@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3376",
+"message":  "Make this class name end with 'Exception'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"region":  {
+"startLine":  897,
+"startColumn":  25,
+"endLine":  897,
+"endColumn":  36
+}
+}
+}
+]
+}

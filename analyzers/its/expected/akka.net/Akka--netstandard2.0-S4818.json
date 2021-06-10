@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  24,
+"endLine":  80,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  23,
+"endLine":  47,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  26,
+"endLine":  33,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  26,
+"endLine":  34,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  27,
+"endLine":  76,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpSender.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  30,
+"endLine":  39,
+"endColumn":  97
+}
+}
+}
+]
+}

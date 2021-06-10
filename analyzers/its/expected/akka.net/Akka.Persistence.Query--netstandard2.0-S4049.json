@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetReadJournal' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\IReadJournalProvider.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  22,
+"endLine":  19,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDefaultConfig' a property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\PersistenceQuery.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  30,
+"endLine":  70,
+"endColumn":  46
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\JsonFramingBenchmark.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  41,
+"endLine":  33,
+"endColumn":  48
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  25,
+"endLine":  73,
+"endColumn":  31
+}
+}
+}
+]
+}

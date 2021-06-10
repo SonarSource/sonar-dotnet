@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Reachability.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  528,
+"startColumn":  1,
+"endLine":  528,
+"endColumn":  2
+}
+}
+}
+]
+}

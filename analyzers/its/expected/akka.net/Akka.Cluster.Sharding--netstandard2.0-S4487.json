@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'system' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\AbstractLeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  29,
+"endLine":  73,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_typeName' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  1008,
+"startColumn":  33,
+"endLine":  1008,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_shardId' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  1009,
+"startColumn":  34,
+"endLine":  1009,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_ids' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  1010,
+"startColumn":  50,
+"endLine":  1010,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_settings' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  1011,
+"startColumn":  50,
+"endLine":  1011,
+"endColumn":  59
+}
+}
+}
+]
+}

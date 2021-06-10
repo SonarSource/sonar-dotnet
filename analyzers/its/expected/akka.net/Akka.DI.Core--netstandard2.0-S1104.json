@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIExtension.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  35,
+"endLine":  20,
+"endColumn":  74
+}
+}
+}
+]
+}

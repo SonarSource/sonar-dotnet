@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'DeliverSelection' has 91 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  30,
+"endLine":  186,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Run' has 107 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  27,
+"endLine":  398,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Receive' has 108 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  33,
+"endLine":  106,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Parse' has 105 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  28,
+"endLine":  86,
+"endColumn":  33
+}
+}
+}
+]
+}

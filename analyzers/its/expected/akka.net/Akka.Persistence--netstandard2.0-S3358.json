@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  29,
+"endLine":  227,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  32,
+"endLine":  408,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  54,
+"endLine":  71,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  29,
+"endLine":  86,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  37,
+"endLine":  122,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  37,
+"endLine":  162,
+"endColumn":  126
+}
+}
+}
+]
+}

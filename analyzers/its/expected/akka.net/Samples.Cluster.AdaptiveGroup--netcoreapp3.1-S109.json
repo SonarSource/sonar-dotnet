@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.AdaptiveGroup\Program.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  33,
+"endLine":  48,
+"endColumn":  35
+}
+}
+}
+]
+}

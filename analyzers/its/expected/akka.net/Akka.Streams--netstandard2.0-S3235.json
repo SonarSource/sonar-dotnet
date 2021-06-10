@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\SerializationTools.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  31,
+"endLine":  55,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\SerializationTools.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  41,
+"endLine":  58,
+"endColumn":  43
+}
+}
+}
+]
+}

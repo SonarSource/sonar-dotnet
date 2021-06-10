@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'subscriber' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestPublisher.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  38,
+"endLine":  87,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'elems' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  27,
+"endLine":  198,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'elems' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  27,
+"endLine":  222,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'elems' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  21,
+"endLine":  236,
+"endColumn":  26
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Store' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  35,
+"endLine":  75,
+"endColumn":  40
+}
+}
+}
+]
+}

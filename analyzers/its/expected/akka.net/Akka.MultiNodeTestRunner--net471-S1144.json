@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_validNetCorePlatform'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  9,
+"endLine":  46,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'ChangeDllPathPlatform'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  469,
+"startColumn":  9,
+"endLine":  472,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'PublishToAllSinks'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  536,
+"startColumn":  9,
+"endLine":  539,
+"endColumn":  10
+}
+}
+}
+]
+}

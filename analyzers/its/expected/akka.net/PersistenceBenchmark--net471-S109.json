@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  107,
+"endLine":  78,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  158,
+"endLine":  78,
+"endColumn":  164
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  16,
+"endLine":  91,
+"endColumn":  20
+}
+}
+}
+]
+}

@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  26,
+"endLine":  36,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  29,
+"endLine":  146,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  29,
+"endLine":  147,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  29,
+"endLine":  148,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  29,
+"endLine":  149,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  29,
+"endLine":  150,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  29,
+"endLine":  151,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  29,
+"endLine":  152,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  29,
+"endLine":  153,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  29,
+"endLine":  154,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  29,
+"endLine":  155,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  29,
+"endLine":  156,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  29,
+"endLine":  157,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"region":  {
+"startLine":  391,
+"startColumn":  26,
+"endLine":  391,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  679,
+"startColumn":  26,
+"endLine":  679,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  719,
+"startColumn":  26,
+"endLine":  719,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Base64Encoding.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  29,
+"endLine":  20,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  27,
+"endLine":  45,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  27,
+"endLine":  50,
+"endColumn":  38
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  40,
+"endLine":  37,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  40,
+"endLine":  28,
+"endColumn":  59
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'result'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  25,
+"endLine":  140,
+"endColumn":  31
+}
+}
+}
+]
+}

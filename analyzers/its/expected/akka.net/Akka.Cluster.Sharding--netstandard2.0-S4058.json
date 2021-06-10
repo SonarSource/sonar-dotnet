@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'usePassivateIdle.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  17,
+"endLine":  280,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'usePassivateIdle.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  17,
+"endLine":  281,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'usePassivateIdle.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  17,
+"endLine":  282,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  441,
+"startColumn":  24,
+"endLine":  441,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  495,
+"startColumn":  24,
+"endLine":  495,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  546,
+"startColumn":  24,
+"endLine":  546,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  594,
+"startColumn":  24,
+"endLine":  594,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  647,
+"startColumn":  24,
+"endLine":  647,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  695,
+"startColumn":  24,
+"endLine":  695,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  746,
+"startColumn":  24,
+"endLine":  746,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  794,
+"startColumn":  24,
+"endLine":  794,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1153,
+"startColumn":  24,
+"endLine":  1153,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1204,
+"startColumn":  24,
+"endLine":  1204,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'EntityId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  24,
+"endLine":  206,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'ShardId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  24,
+"endLine":  346,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'EntityId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  24,
+"endLine":  122,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'EntityId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  24,
+"endLine":  176,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'ShardId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  24,
+"endLine":  177,
+"endColumn":  53
+}
+}
+}
+]
+}

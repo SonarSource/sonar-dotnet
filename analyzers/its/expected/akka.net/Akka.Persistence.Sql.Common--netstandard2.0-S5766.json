@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  16,
+"endLine":  210,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"region":  {
+"startLine":  365,
+"startColumn":  16,
+"endLine":  365,
+"endColumn":  36
+}
+}
+}
+]
+}

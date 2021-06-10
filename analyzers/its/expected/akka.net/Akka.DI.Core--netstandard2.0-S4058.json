@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 't.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\Extensions.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  42,
+"endLine":  68,
+"endColumn":  65
+}
+}
+}
+]
+}

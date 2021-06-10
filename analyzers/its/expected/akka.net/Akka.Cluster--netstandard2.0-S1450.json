@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_cluster' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2799,
+"startColumn":  34,
+"endLine":  2799,
+"endColumn":  42
+}
+}
+}
+]
+}

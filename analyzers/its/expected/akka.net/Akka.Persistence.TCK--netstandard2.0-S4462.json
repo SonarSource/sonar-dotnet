@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.WaitAll' with 'await Task.WhenAll'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  16,
+"endLine":  299,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.WaitAll' with 'await Task.WhenAll'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  17,
+"endLine":  337,
+"endColumn":  29
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  84,
+"endLine":  278,
+"endColumn":  100
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  686,
+"startColumn":  25,
+"endLine":  686,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  533,
+"startColumn":  25,
+"endLine":  533,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  553,
+"startColumn":  25,
+"endLine":  553,
+"endColumn":  31
+}
+}
+}
+]
+}

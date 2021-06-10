@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseTimeoutException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  25,
+"endLine":  16,
+"endColumn":  46
+}
+}
+}
+]
+}

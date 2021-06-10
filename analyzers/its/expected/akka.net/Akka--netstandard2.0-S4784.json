@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  55,
+"endLine":  24,
+"endColumn":  313
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\TypeExtensions.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  67,
+"endLine":  49,
+"endColumn":  93
+}
+}
+}
+]
+}

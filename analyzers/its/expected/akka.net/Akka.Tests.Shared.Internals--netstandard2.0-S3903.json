@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'ExceptionHelpers' into a named namespace.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\ExceptionHelpers.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  23,
+"endLine":  11,
+"endColumn":  39
+}
+}
+}
+]
+}

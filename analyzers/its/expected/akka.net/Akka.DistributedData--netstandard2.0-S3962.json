@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GCounter.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  39,
+"endLine":  54,
+"endColumn":  43
+}
+}
+}
+]
+}

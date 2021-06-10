@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  54,
+"endLine":  108,
+"endColumn":  56
+}
+}
+}
+]
+}

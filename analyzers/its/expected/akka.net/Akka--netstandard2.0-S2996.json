@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2996",
+"message":  "Remove this initialization of '_threadRunning' or make it lazy.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  44,
+"endLine":  104,
+"endColumn":  51
+}
+}
+}
+]
+}

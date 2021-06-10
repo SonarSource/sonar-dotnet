@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'Parent'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\SpawnActorBenchmarks.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  13,
+"endLine":  91,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'Child'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\SpawnActorBenchmarks.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  13,
+"endLine":  100,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'CheckStatus'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  9,
+"endLine":  88,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'Echo'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Serialization\SerializationBenchmarks.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  13,
+"endLine":  57,
+"endColumn":  14
+}
+}
+}
+]
+}

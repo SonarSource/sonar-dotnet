@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_testElements' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\FusedGraphsBenchmark.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  34,
+"endLine":  144,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_materializerSettings' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\MaterializationBenchmark.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  43,
+"endLine":  20,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_materializerSettings' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\MergeManyBenchmark.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  43,
+"endLine":  22,
+"endColumn":  64
+}
+}
+}
+]
+}

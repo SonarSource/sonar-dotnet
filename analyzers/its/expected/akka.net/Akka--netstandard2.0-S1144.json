@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private type 'FactoryConsumer'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  683,
+"startColumn":  9,
+"endLine":  704,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'FactoryConsumer'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  687,
+"startColumn":  13,
+"endLine":  690,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_stopped'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RootGuardianSupervisor.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  9,
+"endLine":  25,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'ExecuteRunnableWithState'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  596,
+"startColumn":  13,
+"endLine":  596,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'CurrentSynchronizationContextExecutorConfig'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  9,
+"endLine":  523,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_mailboxNonZeroPushTimeoutWarningIssued'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  9,
+"endLine":  153,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'HasTimeLeft'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  13,
+"endLine":  240,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'TimeLeft'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  13,
+"endLine":  255,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'm_padding1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  567,
+"startColumn":  13,
+"endLine":  567,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'm_padding2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  569,
+"startColumn":  13,
+"endLine":  569,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'TotalBufferSize'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  9,
+"endLine":  105,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'UpdatePendingWriteAndThen'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  892,
+"startColumn":  13,
+"endLine":  896,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'WriteFileFailed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  903,
+"startColumn":  13,
+"endLine":  906,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'acceptLimit'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  9,
+"endLine":  30,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'SendAsync'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  9,
+"endLine":  249,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_objectArrayType'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialActionBuilder.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  9,
+"endLine":  23,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'RotateLeft64'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  9,
+"endLine":  158,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'paramNameDictionary'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  9,
+"endLine":  38,
+"endColumn":  71
+}
+}
+}
+]
+}

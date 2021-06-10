@@ -1,0 +1,148 @@
+{
+"issues":  [
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  461,
+"startColumn":  25,
+"endLine":  461,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  37,
+"endLine":  109,
+"endColumn":  64
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  545,
+"startColumn":  21,
+"endLine":  545,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  37,
+"endLine":  109,
+"endColumn":  64
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  13,
+"endLine":  154,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  29,
+"endLine":  104,
+"endColumn":  51
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  17,
+"endLine":  233,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  29,
+"endLine":  103,
+"endColumn":  57
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  21,
+"endLine":  298,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  37,
+"endLine":  109,
+"endColumn":  64
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  413,
+"startColumn":  21,
+"endLine":  413,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  37,
+"endLine":  109,
+"endColumn":  64
+}
+}
+]
+}
+]
+}

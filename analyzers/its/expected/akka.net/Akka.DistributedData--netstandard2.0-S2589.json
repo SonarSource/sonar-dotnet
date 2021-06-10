@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  28,
+"endLine":  99,
+"endColumn":  43
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  41,
+"endLine":  313,
+"endColumn":  61
+}
+}
+}
+]
+}

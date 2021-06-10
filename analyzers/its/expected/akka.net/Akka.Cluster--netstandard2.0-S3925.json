@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  714,
+"startColumn":  18,
+"endLine":  714,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  714,
+"startColumn":  12,
+"endLine":  714,
+"endColumn":  17
+}
+}
+]
+}
+]
+}

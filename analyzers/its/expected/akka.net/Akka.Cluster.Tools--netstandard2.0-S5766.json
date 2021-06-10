@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedMessages.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  16,
+"endLine":  140,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedMessages.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  16,
+"endLine":  214,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedMessages.cs",
+"region":  {
+"startLine":  583,
+"startColumn":  16,
+"endLine":  583,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  16,
+"endLine":  202,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  16,
+"endLine":  265,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManagerSettings.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  16,
+"endLine":  147,
+"endColumn":  47
+}
+}
+}
+]
+}

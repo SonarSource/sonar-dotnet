@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3376",
+"message":  "Make this class name end with 'Exception'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  27,
+"endLine":  213,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3376",
+"message":  "Make this class name end with 'Exception'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  27,
+"endLine":  243,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3376",
+"message":  "Make this class name end with 'Exception'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  27,
+"endLine":  280,
+"endColumn":  46
+}
+}
+}
+]
+}

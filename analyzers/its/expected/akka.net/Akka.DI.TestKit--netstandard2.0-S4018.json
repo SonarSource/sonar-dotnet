@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  33,
+"endLine":  258,
+"endColumn":  37
+}
+}
+}
+]
+}

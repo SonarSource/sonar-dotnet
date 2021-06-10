@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  45,
+"endLine":  215,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  47,
+"endLine":  188,
+"endColumn":  103
+}
+}
+}
+]
+}

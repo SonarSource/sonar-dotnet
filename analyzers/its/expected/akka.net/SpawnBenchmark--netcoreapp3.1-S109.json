@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\SpawnBenchmark\Program.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  46,
+"endLine":  25,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\SpawnBenchmark\RootActor.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  73,
+"endLine":  41,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\SpawnBenchmark\SpawnActor.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  42,
+"endLine":  43,
+"endColumn":  43
+}
+}
+}
+]
+}

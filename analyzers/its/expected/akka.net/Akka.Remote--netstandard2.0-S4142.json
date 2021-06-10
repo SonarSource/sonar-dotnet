@@ -1,0 +1,124 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1136,
+"startColumn":  114,
+"endLine":  1136,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  1136,
+"startColumn":  97,
+"endLine":  1136,
+"endColumn":  112
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  118,
+"endLine":  493,
+"endColumn":  144
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  90,
+"endLine":  493,
+"endColumn":  116
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  508,
+"startColumn":  124,
+"endLine":  508,
+"endColumn":  137
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  508,
+"startColumn":  109,
+"endLine":  508,
+"endColumn":  122
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  361,
+"startColumn":  113,
+"endLine":  361,
+"endColumn":  130
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  361,
+"startColumn":  94,
+"endLine":  361,
+"endColumn":  111
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  133,
+"endLine":  362,
+"endColumn":  158
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  106,
+"endLine":  362,
+"endColumn":  131
+}
+}
+]
+}
+]
+}

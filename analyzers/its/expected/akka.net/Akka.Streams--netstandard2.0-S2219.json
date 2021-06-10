@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2219",
+"message":  "Use a 'null' check instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  56,
+"endLine":  210,
+"endColumn":  78
+}
+}
+}
+]
+}

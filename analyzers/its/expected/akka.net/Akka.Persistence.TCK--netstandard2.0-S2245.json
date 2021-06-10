@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2245",
+"message":  "Make sure that using this pseudorandom number generator is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  13,
+"endLine":  265,
+"endColumn":  25
+}
+}
+}
+]
+}

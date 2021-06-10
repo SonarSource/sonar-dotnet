@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  41,
+"endLine":  179,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  41,
+"endLine":  183,
+"endColumn":  50
+}
+}
+}
+]
+}

@@ -1,0 +1,46 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Starting Shard Region Proxy [{0}] (no actors will be hosted on this node)...' 4 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  43,
+"endLine":  346,
+"endColumn":  121
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  43,
+"endLine":  414,
+"endColumn":  121
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  673,
+"startColumn":  43,
+"endLine":  673,
+"endColumn":  121
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  741,
+"startColumn":  43,
+"endLine":  741,
+"endColumn":  121
+}
+}
+]
+}
+]
+}

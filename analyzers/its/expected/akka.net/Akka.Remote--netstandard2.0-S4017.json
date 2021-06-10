@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  13,
+"endLine":  378,
+"endColumn":  88
+}
+}
+}
+]
+}

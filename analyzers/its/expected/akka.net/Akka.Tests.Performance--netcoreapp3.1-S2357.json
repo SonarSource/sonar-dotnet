@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Timeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  25,
+"endLine":  132,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Timeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpInboundOnlySpec.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  25,
+"endLine":  67,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Timeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpSingleConnectionSpec.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  25,
+"endLine":  125,
+"endColumn":  32
+}
+}
+}
+]
+}

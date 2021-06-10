@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'i'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\FusedGraphsBenchmark.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  29,
+"endLine":  90,
+"endColumn":  30
+}
+}
+}
+]
+}

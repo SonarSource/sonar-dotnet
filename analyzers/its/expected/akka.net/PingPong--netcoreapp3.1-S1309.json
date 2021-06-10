@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\ClientAsyncActor.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  24
+}
+}
+}
+]
+}

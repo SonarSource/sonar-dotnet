@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  87,
+"endLine":  70,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  36,
+"endLine":  63,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  36,
+"endLine":  64,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  36,
+"endLine":  65,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  22,
+"endLine":  104,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  64,
+"endLine":  43,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  44,
+"endLine":  50,
+"endColumn":  60
+}
+}
+}
+]
+}

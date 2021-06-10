@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3459",
+"message":  "Remove unassigned field '_log', or set its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  33,
+"endLine":  60,
+"endColumn":  37
+}
+}
+}
+]
+}

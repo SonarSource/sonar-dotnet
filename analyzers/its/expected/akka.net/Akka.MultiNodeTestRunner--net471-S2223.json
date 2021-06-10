@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'TestRunSystem' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  38,
+"endLine":  48,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'SinkCoordinator' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  36,
+"endLine":  49,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'OutputDirectory' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  33,
+"endLine":  54,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'FailedSpecsDirectory' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  33,
+"endLine":  58,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'TeamCityFormattingOn' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  31,
+"endLine":  60,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'MultiPlatform' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  31,
+"endLine":  61,
+"endColumn":  44
+}
+}
+}
+]
+}

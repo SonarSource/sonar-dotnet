@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (11) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  17,
+"endLine":  628,
+"endColumn":  57
+}
+}
+}
+]
+}

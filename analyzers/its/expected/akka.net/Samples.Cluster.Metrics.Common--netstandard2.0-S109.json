@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.Metrics.Common\FactorialBackend.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  30,
+"endLine":  39,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.Metrics.Common\FactorialFrontend.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  29,
+"endLine":  45,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.Metrics.Common\FactorialFrontend.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  64,
+"endLine":  80,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.Metrics.Common\MetricListener.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  112,
+"endLine":  43,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.Metrics.Common\MetricListener.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  119,
+"endLine":  43,
+"endColumn":  123
+}
+}
+}
+]
+}

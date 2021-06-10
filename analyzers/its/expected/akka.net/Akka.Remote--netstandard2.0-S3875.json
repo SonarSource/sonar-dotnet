@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  756,
+"startColumn":  37,
+"endLine":  756,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  839,
+"startColumn":  37,
+"endLine":  839,
+"endColumn":  39
+}
+}
+}
+]
+}

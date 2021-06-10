@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2245",
+"message":  "Make sure that using this pseudorandom number generator is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  450,
+"startColumn":  50,
+"endLine":  450,
+"endColumn":  62
+}
+}
+}
+]
+}

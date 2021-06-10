@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3604",
+"message":  "Remove the member initializer, all constructors set an initial value for the member.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  39,
+"endLine":  45,
+"endColumn":  53
+}
+}
+}
+]
+}

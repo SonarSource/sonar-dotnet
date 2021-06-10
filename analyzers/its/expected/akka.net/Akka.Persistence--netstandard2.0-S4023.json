@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  22,
+"endLine":  28,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  22,
+"endLine":  153,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Protocol.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  22,
+"endLine":  22,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\IMessage.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  22,
+"endLine":  22,
+"endColumn":  30
+}
+}
+}
+]
+}

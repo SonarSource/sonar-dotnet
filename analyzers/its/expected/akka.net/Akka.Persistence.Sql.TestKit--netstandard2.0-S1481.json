@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'readJournal'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\DefaultConfigSpec.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  17,
+"endLine":  27,
+"endColumn":  28
+}
+}
+}
+]
+}

@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'ExpectEvent' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  37,
+"endLine":  122,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  27,
+"endLine":  434,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ExpectNext' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  22,
+"endLine":  141,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  420,
+"startColumn":  27,
+"endLine":  420,
+"endColumn":  37
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'RequestNext' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  554,
+"startColumn":  29,
+"endLine":  554,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  570,
+"startColumn":  22,
+"endLine":  570,
+"endColumn":  33
+}
+}
+]
+}
+]
+}

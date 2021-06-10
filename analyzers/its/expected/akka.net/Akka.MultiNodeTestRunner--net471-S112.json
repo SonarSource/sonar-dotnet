@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  23,
+"endLine":  207,
+"endColumn":  111
+}
+}
+}
+]
+}

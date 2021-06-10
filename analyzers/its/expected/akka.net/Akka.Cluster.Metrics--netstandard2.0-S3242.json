@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<Akka.Actor.Address, double>>' instead of 'System.Collections.Immutable.IImmutableDictionary<Akka.Actor.Address, double>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\MetricSelectors.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  109,
+"endLine":  77,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Cluster.Metrics.MixMetricsSelectorBase' instead of 'Akka.Cluster.Metrics.MixMetricsSelector'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  78,
+"endLine":  160,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<T, int>' instead of 'System.Collections.Immutable.IImmutableDictionary<T, int>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  73,
+"endLine":  193,
+"endColumn":  77
+}
+}
+}
+]
+}

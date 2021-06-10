@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'SequenceNr' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  30,
+"endLine":  26,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'MessagesCount' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  29,
+"endLine":  37,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'State' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  30,
+"endLine":  33,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Value' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  29,
+"endLine":  43,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Value' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  29,
+"endLine":  53,
+"endColumn":  34
+}
+}
+}
+]
+}

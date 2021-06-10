@@ -1,0 +1,517 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  18,
+"endLine":  116,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  12,
+"endLine":  116,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  18,
+"endLine":  139,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  12,
+"endLine":  139,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  18,
+"endLine":  219,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  12,
+"endLine":  219,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  18,
+"endLine":  263,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  12,
+"endLine":  263,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  18,
+"endLine":  293,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  12,
+"endLine":  293,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  18,
+"endLine":  318,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  12,
+"endLine":  318,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  344,
+"startColumn":  18,
+"endLine":  344,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  344,
+"startColumn":  12,
+"endLine":  344,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  18,
+"endLine":  388,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  12,
+"endLine":  388,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  18,
+"endLine":  434,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  12,
+"endLine":  434,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  475,
+"startColumn":  18,
+"endLine":  475,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  475,
+"startColumn":  12,
+"endLine":  475,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  510,
+"startColumn":  18,
+"endLine":  510,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  510,
+"startColumn":  12,
+"endLine":  510,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  18,
+"endLine":  54,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  12,
+"endLine":  54,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  18,
+"endLine":  89,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  12,
+"endLine":  89,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  25,
+"endLine":  16,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  19,
+"endLine":  16,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerException.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  19,
+"endLine":  29,
+"endColumn":  37
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\StashOverflowException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\StashOverflowException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  12,
+"endLine":  16,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationException.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  18,
+"endLine":  17,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationException.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  12,
+"endLine":  17,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ExecutorService.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  18,
+"endLine":  66,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ExecutorService.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  12,
+"endLine":  66,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  18,
+"endLine":  19,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  12,
+"endLine":  19,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Pattern\IllegalStateException.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  18,
+"endLine":  17,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Pattern\IllegalStateException.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  12,
+"endLine":  17,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Pattern\OpenCircuitException.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  18,
+"endLine":  17,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Pattern\OpenCircuitException.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  12,
+"endLine":  17,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Pattern\UserCalledFailException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Pattern\UserCalledFailException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  12,
+"endLine":  16,
+"endColumn":  17
+}
+}
+]
+}
+]
+}

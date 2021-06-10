@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'numGroup'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  17,
+"endLine":  229,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'numGroup'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  17,
+"endLine":  237,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'numGroup'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  17,
+"endLine":  245,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'numGroup'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  17,
+"endLine":  253,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'numGroup'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  17,
+"endLine":  261,
+"endColumn":  25
+}
+}
+}
+]
+}

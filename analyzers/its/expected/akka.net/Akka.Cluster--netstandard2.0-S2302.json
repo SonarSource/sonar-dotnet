@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'selfAddress' with 'nameof(selfAddress)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  597,
+"startColumn":  81,
+"endLine":  597,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'status' with 'nameof(status)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  55,
+"endLine":  197,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'routeesPaths' with 'nameof(routeesPaths)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  51,
+"endLine":  77,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'maxInstancesPerNode' with 'nameof(maxInstancesPerNode)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  84,
+"endLine":  152,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'useRole' with 'nameof(useRole)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  97,
+"endLine":  227,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'totalInstances' with 'nameof(totalInstances)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  100,
+"endLine":  228,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  51,
+"endLine":  136,
+"endColumn":  69
+}
+}
+}
+]
+}

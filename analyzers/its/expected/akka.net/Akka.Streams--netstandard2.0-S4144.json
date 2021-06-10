@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'OnUpstreamFinish'.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  34,
+"endLine":  333,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  34,
+"endLine":  317,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'OnUpstreamFinish'.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  34,
+"endLine":  460,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  446,
+"startColumn":  34,
+"endLine":  446,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Push'.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  35,
+"endLine":  213,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  37,
+"endLine":  97,
+"endColumn":  41
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Pull'.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  37,
+"endLine":  223,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  35,
+"endLine":  107,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2743",
+"message":  "A static field in a generic type is not shared among instances of different close constructed types.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  690,
+"startColumn":  44,
+"endLine":  690,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2743",
+"message":  "A static field in a generic type is not shared among instances of different close constructed types.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2857,
+"startColumn":  54,
+"endLine":  2857,
+"endColumn":  70
+}
+}
+}
+]
+}

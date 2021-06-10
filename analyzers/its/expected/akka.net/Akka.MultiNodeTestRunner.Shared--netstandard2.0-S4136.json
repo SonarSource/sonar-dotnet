@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'PublishToChildren' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  22,
+"endLine":  165,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  22,
+"endLine":  186,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

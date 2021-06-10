@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'payload' to match pascal case naming rules, consider using 'Payload'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\SerializationBenchmarks\Program.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  30,
+"endLine":  46,
+"endColumn":  37
+}
+}
+}
+]
+}

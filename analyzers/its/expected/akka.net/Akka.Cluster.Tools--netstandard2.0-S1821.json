@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1058,
+"startColumn":  33,
+"endLine":  1058,
+"endColumn":  39
+}
+}
+}
+]
+}

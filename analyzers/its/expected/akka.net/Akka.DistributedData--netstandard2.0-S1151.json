@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 12 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"region":  {
+"startLine":  839,
+"startColumn":  17,
+"endLine":  839,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"region":  {
+"startLine":  682,
+"startColumn":  17,
+"endLine":  682,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  17,
+"endLine":  543,
+"endColumn":  44
+}
+}
+}
+]
+}

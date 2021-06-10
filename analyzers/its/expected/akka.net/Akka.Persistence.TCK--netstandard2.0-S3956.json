@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  19,
+"endLine":  52,
+"endColumn":  41
+}
+}
+}
+]
+}

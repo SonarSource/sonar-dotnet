@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  35,
+"endLine":  77,
+"endColumn":  54
+}
+}
+}
+]
+}

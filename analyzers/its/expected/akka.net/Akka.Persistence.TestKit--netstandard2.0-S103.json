@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\TestJournal.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  1,
+"endLine":  75,
+"endColumn":  202
+}
+}
+}
+]
+}

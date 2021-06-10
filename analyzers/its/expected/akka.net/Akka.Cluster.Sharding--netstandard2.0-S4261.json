@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\EntityRecoveryStrategy.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  47,
+"endLine":  65,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\EntityRecoveryStrategy.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  32,
+"endLine":  77,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardAllocationStrategy.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  25,
+"endLine":  40,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardAllocationStrategy.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  38,
+"endLine":  52,
+"endColumn":  47
+}
+}
+}
+]
+}

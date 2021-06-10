@@ -1,0 +1,61 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  12,
+"endLine":  16,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseTimeoutException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  25,
+"endLine":  16,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseTimeoutException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  19,
+"endLine":  16,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseTimeoutException.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  19,
+"endLine":  36,
+"endColumn":  40
+}
+}
+]
+}
+]
+}

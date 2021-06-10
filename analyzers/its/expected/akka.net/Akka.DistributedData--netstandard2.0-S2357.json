@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Key' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  32,
+"endLine":  23,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Data' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  45,
+"endLine":  24,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Reply' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  36,
+"endLine":  25,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'SuccessMessage' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  32,
+"endLine":  37,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'FailureMessage' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  32,
+"endLine":  38,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ReplyTo' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  35,
+"endLine":  39,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Data' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  74,
+"endLine":  68,
+"endColumn":  78
+}
+}
+}
+]
+}

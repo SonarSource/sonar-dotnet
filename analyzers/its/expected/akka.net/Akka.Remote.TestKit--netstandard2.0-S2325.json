@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'GetDeadline' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  25,
+"endLine":  649,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FailBarrier' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  27,
+"endLine":  271,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ComputeWps' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  20,
+"endLine":  129,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DebugConfig' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  23,
+"endLine":  66,
+"endColumn":  34
+}
+}
+}
+]
+}

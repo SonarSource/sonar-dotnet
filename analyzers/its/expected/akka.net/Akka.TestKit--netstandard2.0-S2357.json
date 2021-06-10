@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make '_props' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActor.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  35,
+"endLine":  128,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make '_name' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActor.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  44,
+"endLine":  130,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make '_supervisorStrategy' private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActor.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  56,
+"endLine":  132,
+"endColumn":  75
+}
+}
+}
+]
+}

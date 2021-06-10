@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'RecoveryStarted' has 92 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  35,
+"endLine":  64,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Recovering' has 93 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  35,
+"endLine":  174,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Receive' has 114 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  33,
+"endLine":  132,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ReceiveSnapshotStore' has 138 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  22,
+"endLine":  53,
+"endColumn":  42
+}
+}
+}
+]
+}

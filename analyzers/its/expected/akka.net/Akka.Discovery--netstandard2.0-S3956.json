@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Discovery\Aggregate\AggregateServiceDiscovery.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  16,
+"endLine":  22,
+"endColumn":  28
+}
+}
+}
+]
+}

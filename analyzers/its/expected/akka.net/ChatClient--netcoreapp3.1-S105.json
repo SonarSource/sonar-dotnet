@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  1
+}
+}
+}
+]
+}

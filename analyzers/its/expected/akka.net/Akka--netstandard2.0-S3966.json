@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3966",
+"message":  "Refactor this code to make sure 'e' is disposed only once.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SocketEventArgsPool.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  17,
+"endLine":  75,
+"endColumn":  18
+}
+}
+}
+]
+}

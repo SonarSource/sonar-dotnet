@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  30,
+"endLine":  42,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  30,
+"endLine":  105,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  30,
+"endLine":  47,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  687,
+"startColumn":  39,
+"endLine":  687,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Proto\ProtobufDecoder.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  30,
+"endLine":  35,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Proto\ProtobufEncoder.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  30,
+"endLine":  28,
+"endColumn":  72
+}
+}
+}
+]
+}

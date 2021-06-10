@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'RARP' to match pascal case naming rules, consider using 'Rarp'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  27,
+"endLine":  45,
+"endColumn":  31
+}
+}
+}
+]
+}

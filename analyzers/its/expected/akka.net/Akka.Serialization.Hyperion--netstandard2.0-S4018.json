@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializerSetup.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  40,
+"endLine":  82,
+"endColumn":  61
+}
+}
+}
+]
+}

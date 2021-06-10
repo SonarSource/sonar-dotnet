@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'Assert' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  511,
+"startColumn":  26,
+"endLine":  511,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Assert' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  516,
+"startColumn":  26,
+"endLine":  516,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertEquals' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  521,
+"startColumn":  26,
+"endLine":  521,
+"endColumn":  38
+}
+}
+}
+]
+}

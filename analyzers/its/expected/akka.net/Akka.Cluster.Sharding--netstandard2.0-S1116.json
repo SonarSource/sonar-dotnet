@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  1040,
+"startColumn":  14,
+"endLine":  1040,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  1067,
+"startColumn":  14,
+"endLine":  1067,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  715,
+"startColumn":  14,
+"endLine":  715,
+"endColumn":  15
+}
+}
+}
+]
+}

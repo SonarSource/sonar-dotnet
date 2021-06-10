@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1227",
+"message":  "Refactor the code in order to remove this break statement.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  29,
+"endLine":  61,
+"endColumn":  35
+}
+}
+}
+]
+}

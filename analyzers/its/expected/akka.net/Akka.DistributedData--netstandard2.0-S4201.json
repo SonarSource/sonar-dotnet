@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  52,
+"endLine":  140,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  20,
+"endLine":  180,
+"endColumn":  31
+}
+}
+}
+]
+}

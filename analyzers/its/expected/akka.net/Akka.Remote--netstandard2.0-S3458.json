@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3458",
+"message":  "Remove this empty 'case' clause.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  2051,
+"startColumn":  17,
+"endLine":  2051,
+"endColumn":  47
+}
+}
+}
+]
+}

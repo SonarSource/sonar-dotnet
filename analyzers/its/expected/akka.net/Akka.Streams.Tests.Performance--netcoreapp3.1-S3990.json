@@ -1,0 +1,9 @@
+{
+"issues":  [
+{
+"id":  "S3990",
+"message":  "Provide a 'CLSCompliant' attribute for assembly 'Akka.Streams.Tests.Performance'.",
+"location":  null
+}
+]
+}

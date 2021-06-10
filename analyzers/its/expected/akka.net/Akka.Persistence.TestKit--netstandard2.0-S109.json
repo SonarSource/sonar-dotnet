@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehaviorSetter.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  38,
+"endLine":  29,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehaviorSetter.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  38,
+"endLine":  29,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreDeleteBehaviorSetter.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  38,
+"endLine":  29,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreLoadBehaviorSetter.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  38,
+"endLine":  29,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehaviorSetter.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  38,
+"endLine":  29,
+"endColumn":  39
+}
+}
+}
+]
+}

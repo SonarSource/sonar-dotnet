@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  28,
+"endLine":  31,
+"endColumn":  36
+}
+}
+}
+]
+}

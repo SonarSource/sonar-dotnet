@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\MetricSelectors.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  27,
+"endLine":  158,
+"endColumn":  49
+}
+}
+}
+]
+}

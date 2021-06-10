@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4041",
+"message":  "Change the name of type 'Timers' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  25,
+"endLine":  28,
+"endColumn":  31
+}
+}
+}
+]
+}

@@ -1,0 +1,745 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  499,
+"startColumn":  1,
+"endLine":  499,
+"endColumn":  204
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  1,
+"endLine":  117,
+"endColumn":  217
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  1,
+"endLine":  140,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  1,
+"endLine":  196,
+"endColumn":  213
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 240 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  1,
+"endLine":  212,
+"endColumn":  241
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 268 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  1,
+"endLine":  229,
+"endColumn":  269
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 296 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  1,
+"endLine":  247,
+"endColumn":  297
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  1,
+"endLine":  120,
+"endColumn":  211
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  1,
+"endLine":  139,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"region":  {
+"startLine":  1466,
+"startColumn":  1,
+"endLine":  1466,
+"endColumn":  211
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  508,
+"startColumn":  1,
+"endLine":  508,
+"endColumn":  205
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  1,
+"endLine":  93,
+"endColumn":  202
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 255 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  1,
+"endLine":  54,
+"endColumn":  256
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 252 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  1,
+"endLine":  86,
+"endColumn":  253
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  1,
+"endLine":  52,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  1,
+"endLine":  69,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  1,
+"endLine":  86,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  1,
+"endLine":  173,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  1,
+"endLine":  193,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  1,
+"endLine":  194,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  1,
+"endLine":  275,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  1,
+"endLine":  294,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  1,
+"endLine":  295,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  1,
+"endLine":  315,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  1,
+"endLine":  335,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  336,
+"startColumn":  1,
+"endLine":  336,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  1,
+"endLine":  337,
+"endColumn":  207
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 211 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  1,
+"endLine":  288,
+"endColumn":  212
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  1,
+"endLine":  290,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  1,
+"endLine":  326,
+"endColumn":  221
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  1,
+"endLine":  375,
+"endColumn":  209
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  759,
+"startColumn":  1,
+"endLine":  759,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  784,
+"startColumn":  1,
+"endLine":  784,
+"endColumn":  263
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  1,
+"endLine":  83,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  1,
+"endLine":  114,
+"endColumn":  203
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2075,
+"startColumn":  1,
+"endLine":  2075,
+"endColumn":  265
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 265 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2087,
+"startColumn":  1,
+"endLine":  2087,
+"endColumn":  266
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  1,
+"endLine":  93,
+"endColumn":  206
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1398,
+"startColumn":  1,
+"endLine":  1398,
+"endColumn":  210
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1479,
+"startColumn":  1,
+"endLine":  1479,
+"endColumn":  213
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1760,
+"startColumn":  1,
+"endLine":  1760,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Timed.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  1,
+"endLine":  63,
+"endColumn":  206
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  1,
+"endLine":  150,
+"endColumn":  202
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 229 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  1,
+"endLine":  258,
+"endColumn":  230
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  467,
+"startColumn":  1,
+"endLine":  467,
+"endColumn":  213
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  519,
+"startColumn":  1,
+"endLine":  519,
+"endColumn":  215
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  211
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  691,
+"startColumn":  1,
+"endLine":  691,
+"endColumn":  218
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  701,
+"startColumn":  1,
+"endLine":  701,
+"endColumn":  218
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 258 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  613,
+"startColumn":  1,
+"endLine":  613,
+"endColumn":  259
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 253 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
+"region":  {
+"startLine":  266,
+"startColumn":  1,
+"endLine":  266,
+"endColumn":  254
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"region":  {
+"startLine":  523,
+"startColumn":  1,
+"endLine":  523,
+"endColumn":  214
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  1,
+"endLine":  70,
+"endColumn":  232
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 211 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  1,
+"endLine":  116,
+"endColumn":  212
+}
+}
+}
+]
+}

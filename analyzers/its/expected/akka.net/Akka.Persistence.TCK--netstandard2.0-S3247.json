@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  21,
+"endLine":  196,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  78,
+"endLine":  197,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  102,
+"endLine":  197,
+"endColumn":  117
+}
+}
+]
+}
+]
+}

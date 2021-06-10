@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  47,
+"endLine":  66,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  59,
+"endLine":  153,
+"endColumn":  60
+}
+}
+}
+]
+}

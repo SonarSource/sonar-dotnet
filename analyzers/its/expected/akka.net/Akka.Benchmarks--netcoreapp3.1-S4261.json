@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\ActorSelectionBenchmark.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  27,
+"endLine":  35,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\PingPongBenchmarks.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  27,
+"endLine":  43,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\SpawnActorBenchmarks.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  27,
+"endLine":  38,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  27,
+"endLine":  59,
+"endColumn":  52
+}
+}
+}
+]
+}

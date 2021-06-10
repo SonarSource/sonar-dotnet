@@ -1,0 +1,589 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'message' with 'nameof(message)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  66,
+"endLine":  50,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'phases' with 'nameof(phases)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  49,
+"endLine":  598,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'timeout' with 'nameof(timeout)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  582,
+"startColumn":  44,
+"endLine":  582,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'scheduler' with 'nameof(scheduler)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  55,
+"endLine":  54,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'scheduler' with 'nameof(scheduler)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  55,
+"endLine":  65,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'scheduler' with 'nameof(scheduler)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  23,
+"endLine":  66,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'typeName' with 'nameof(typeName)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  1034,
+"startColumn":  54,
+"endLine":  1034,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'source' with 'nameof(source)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  65,
+"endLine":  55,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'fallback' with 'nameof(fallback)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  459,
+"startColumn":  45,
+"endLine":  459,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'sender' with 'nameof(sender)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetter.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  81,
+"endLine":  86,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'recipient' with 'nameof(recipient)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetter.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  87,
+"endLine":  87,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'sender' with 'nameof(sender)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetter.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  81,
+"endLine":  108,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'recipient' with 'nameof(recipient)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetter.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  87,
+"endLine":  109,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'subscriber' with 'nameof(subscriber)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStream.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  69,
+"endLine":  56,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'subscriber' with 'nameof(subscriber)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStream.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  69,
+"endLine":  79,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'subscriber' with 'nameof(subscriber)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStream.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  69,
+"endLine":  100,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'system' with 'nameof(system)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggerMailbox.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  60,
+"endLine":  42,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'message' with 'nameof(message)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  66,
+"endLine":  68,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'deadlockTimeout' with 'nameof(deadlockTimeout)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  55,
+"endLine":  57,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'deadlockTimeout' with 'nameof(deadlockTimeout)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  88,
+"endLine":  57,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'numThreads' with 'nameof(numThreads)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  55,
+"endLine":  59,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'numThreads' with 'nameof(numThreads)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  83,
+"endLine":  59,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'message' with 'nameof(message)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpManager.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  43,
+"endLine":  99,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'message' with 'nameof(message)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnectedManager.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  56,
+"endLine":  59,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'message' with 'nameof(message)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpManager.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  43,
+"endLine":  78,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'attempt' with 'nameof(attempt)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  66,
+"endLine":  50,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'minBackoff' with 'nameof(minBackoff)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  74,
+"endLine":  51,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'minBackoff' with 'nameof(minBackoff)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  70,
+"endLine":  52,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'maxAttempts' with 'nameof(maxAttempts)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  62,
+"endLine":  109,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'attempt' with 'nameof(attempt)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  83,
+"endLine":  110,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'delayFunction' with 'nameof(delayFunction)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  69,
+"endLine":  128,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'virtualNodesFactor' with 'nameof(virtualNodesFactor)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  69,
+"endLine":  45,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'mapping' with 'nameof(mapping)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  66,
+"endLine":  249,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'rampupRate' with 'nameof(rampupRate)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  47,
+"endLine":  113,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'backoffThreshold' with 'nameof(backoffThreshold)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  47,
+"endLine":  115,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'backoffRate' with 'nameof(backoffRate)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  47,
+"endLine":  117,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'messagesPerResize' with 'nameof(messagesPerResize)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  47,
+"endLine":  119,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'converters' with 'nameof(converters)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  113,
+"endLine":  102,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  427,
+"startColumn":  27,
+"endLine":  427,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'offset' with 'nameof(offset)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  111,
+"endLine":  70,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'offset' with 'nameof(offset)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  161,
+"endLine":  71,
+"endColumn":  184
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'offset' with 'nameof(offset)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  128,
+"endLine":  135,
+"endColumn":  145
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'offset' with 'nameof(offset)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  161,
+"endLine":  136,
+"endColumn":  175
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'buffer' with 'nameof(buffer)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  486,
+"startColumn":  107,
+"endLine":  486,
+"endColumn":  171
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'buffer' with 'nameof(buffer)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  76,
+"endLine":  487,
+"endColumn":  141
+}
+}
+}
+]
+}

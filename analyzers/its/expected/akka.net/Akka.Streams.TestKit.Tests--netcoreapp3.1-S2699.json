@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit.Tests\StreamTestKitSpec.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  21,
+"endLine":  174,
+"endColumn":  76
+}
+}
+}
+]
+}

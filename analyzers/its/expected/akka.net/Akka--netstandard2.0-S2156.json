@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerException.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  9,
+"endLine":  29,
+"endColumn":  18
+}
+}
+}
+]
+}

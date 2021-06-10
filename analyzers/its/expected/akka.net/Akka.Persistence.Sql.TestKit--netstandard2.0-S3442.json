@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlJournalConnectionFailureSpec.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  9,
+"endLine":  21,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlSnapshotConnectionFailureSpec.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  9,
+"endLine":  22,
+"endColumn":  15
+}
+}
+}
+]
+}

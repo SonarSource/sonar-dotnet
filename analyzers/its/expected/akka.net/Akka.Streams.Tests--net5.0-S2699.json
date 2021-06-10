@@ -1,0 +1,485 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowCollectSpec.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  21,
+"endLine":  33,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowCollectSpec.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  21,
+"endLine":  47,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowCompileSpec.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  21,
+"endLine":  42,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowCompileSpec.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  21,
+"endLine":  45,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowCompileSpec.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  21,
+"endLine":  99,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowCompileSpec.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  21,
+"endLine":  121,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowCompileSpec.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  21,
+"endLine":  147,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowExpandSpec.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  21,
+"endLine":  35,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowGroupedSpec.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  21,
+"endLine":  39,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowGroupedSpec.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  21,
+"endLine":  47,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowGroupedWithinSpec.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  21,
+"endLine":  223,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowGroupedWithinSpec.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  21,
+"endLine":  240,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowSelectManySpec.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  21,
+"endLine":  35,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowSelectSpec.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  21,
+"endLine":  35,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowSkipSpec.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  21,
+"endLine":  32,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowSpec.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  21,
+"endLine":  304,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowStatefulSelectManySpec.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  21,
+"endLine":  34,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowTakeSpec.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  21,
+"endLine":  37,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowWhereSpec.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  21,
+"endLine":  36,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\FlowWhereSpec.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  21,
+"endLine":  90,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\GraphDslCompileSpec.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  21,
+"endLine":  82,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\GraphDslCompileSpec.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  21,
+"endLine":  95,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\GraphDslCompileSpec.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  21,
+"endLine":  108,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\GraphDslCompileSpec.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  21,
+"endLine":  124,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\GraphDslCompileSpec.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  21,
+"endLine":  176,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\GraphDslCompileSpec.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  21,
+"endLine":  197,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\GraphDslCompileSpec.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  21,
+"endLine":  212,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\GraphDslCompileSpec.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  21,
+"endLine":  245,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\GraphDslCompileSpec.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  21,
+"endLine":  261,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\GraphDslCompileSpec.cs",
+"region":  {
+"startLine":  430,
+"startColumn":  21,
+"endLine":  430,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\GraphMatValueSpec.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  21,
+"endLine":  252,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\SourceSpec.cs",
+"region":  {
+"startLine":  445,
+"startColumn":  21,
+"endLine":  445,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Dsl\UnfoldResourceAsyncSourceSpec.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  21,
+"endLine":  352,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Implementation\ResizableMultiReaderRingBufferSpec.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  21,
+"endLine":  137,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\Implementation\RetainingMultiReaderBufferSpec.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  21,
+"endLine":  94,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\IO\InputStreamSourceSpec.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  21,
+"endLine":  170,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests\IO\TcpSpec.cs",
+"region":  {
+"startLine":  502,
+"startColumn":  27,
+"endLine":  502,
+"endColumn":  104
+}
+}
+}
+]
+}

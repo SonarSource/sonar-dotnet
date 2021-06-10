@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Event.AllDeadLetters' instead of 'Akka.Event.DeadLetter'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  50,
+"endLine":  87,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  36,
+"endLine":  47,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  39,
+"endLine":  58,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  39,
+"endLine":  68,
+"endColumn":  44
+}
+}
+}
+]
+}

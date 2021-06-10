@@ -1,0 +1,667 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'MaxNumberOfShards' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  29,
+"endLine":  61,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'CoordinatorFailureBackoff' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  34,
+"endLine":  26,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'RetryInterval' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  34,
+"endLine":  30,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'BufferSize' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  29,
+"endLine":  34,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'HandOffTimeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  34,
+"endLine":  38,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ShardStartTimeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  34,
+"endLine":  42,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ShardFailureBackoff' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  34,
+"endLine":  46,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'EntityRestartBackoff' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  34,
+"endLine":  50,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'RebalanceInterval' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  34,
+"endLine":  54,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'SnapshotAfter' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  29,
+"endLine":  58,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'KeepNrOfBatches' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  29,
+"endLine":  66,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LeastShardAllocationRebalanceThreshold' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  29,
+"endLine":  70,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LeastShardAllocationMaxSimultaneousRebalance' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  29,
+"endLine":  74,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'WaitingForStateTimeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  34,
+"endLine":  76,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'UpdatingStateTimeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  34,
+"endLine":  78,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'EntityRecoveryStrategy' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  32,
+"endLine":  80,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'EntityRecoveryConstantRateStrategyFrequency' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  34,
+"endLine":  81,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'EntityRecoveryConstantRateStrategyNumberOfEntities' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  29,
+"endLine":  82,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LeastShardAllocationAbsoluteLimit' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  29,
+"endLine":  84,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LeastShardAllocationRelativeLimit' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  32,
+"endLine":  85,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Role' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  32,
+"endLine":  179,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'RememberEntities' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  30,
+"endLine":  185,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'JournalPluginId' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  32,
+"endLine":  192,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'SnapshotPluginId' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  32,
+"endLine":  199,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'PassivateIdleEntityAfter' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  34,
+"endLine":  207,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'StateStoreMode' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  40,
+"endLine":  209,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'TuningParameters' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  42,
+"endLine":  214,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'CoordinatorSingletonSettings' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  57,
+"endLine":  219,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LeaseSettings' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  44,
+"endLine":  224,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'KeepAliveInterval' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcessSettings.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  34,
+"endLine":  22,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ShardingSettings' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcessSettings.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  49,
+"endLine":  27,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Role' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcessSettings.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  32,
+"endLine":  32,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ShardId' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  32,
+"endLine":  112,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Regions' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  48,
+"endLine":  165,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Timeout' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  34,
+"endLine":  191,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Regions' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  73,
+"endLine":  227,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Shards' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"region":  {
+"startLine":  305,
+"startColumn":  51,
+"endLine":  305,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Stats' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  59,
+"endLine":  326,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ShardId' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  32,
+"endLine":  363,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'EntityIds' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  47,
+"endLine":  367,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'EntityId' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  38,
+"endLine":  100,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'EntityId' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  38,
+"endLine":  147,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ShardId' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  37,
+"endLine":  152,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'TypeName' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  32,
+"endLine":  337,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'EntityProps' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  45,
+"endLine":  341,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Settings' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  49,
+"endLine":  345,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'CoordinatorPath' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  32,
+"endLine":  349,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ExtractEntityId' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  353,
+"startColumn":  41,
+"endLine":  353,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ExtractShardId' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  357,
+"startColumn":  40,
+"endLine":  357,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'HandOffStopMessage' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  361,
+"startColumn":  32,
+"endLine":  361,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Cluster' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  33,
+"endLine":  369,
+"endColumn":  40
+}
+}
+}
+]
+}

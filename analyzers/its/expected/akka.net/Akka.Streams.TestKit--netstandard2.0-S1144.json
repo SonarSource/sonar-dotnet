@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Assert'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"region":  {
+"startLine":  516,
+"startColumn":  13,
+"endLine":  519,
+"endColumn":  14
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'ticks' in a separate statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  292,
+"startColumn":  34,
+"endLine":  292,
+"endColumn":  39
+}
+}
+}
+]
+}

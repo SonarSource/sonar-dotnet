@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<Akka.Actor.IActorRef, System.Collections.Immutable.IImmutableList<string>>>' instead of 'System.Collections.Immutable.IImmutableDictionary<Akka.Actor.IActorRef, System.Collections.Immutable.IImmutableList<string>>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\AbstractLeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  119,
+"endLine":  128,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Cluster.Sharding.Shard.StateChange' instead of 'Akka.Cluster.Sharding.Shard.EntityStarted'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  89,
+"endLine":  284,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Cluster.Sharding.Shard.StateChange' instead of 'Akka.Cluster.Sharding.Shard.EntityStopped'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  89,
+"endLine":  300,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Cluster.Sharding.Shard.StateChange' instead of 'Akka.Cluster.Sharding.Shard.EntityStopped'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  850,
+"startColumn":  94,
+"endLine":  850,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Cluster.Sharding.Shard.StateChange' instead of 'Akka.Cluster.Sharding.Shard.EntityStarted'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  857,
+"startColumn":  93,
+"endLine":  857,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  926,
+"startColumn":  56,
+"endLine":  926,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  941,
+"startColumn":  56,
+"endLine":  941,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  1132,
+"startColumn":  72,
+"endLine":  1132,
+"endColumn":  80
+}
+}
+}
+]
+}

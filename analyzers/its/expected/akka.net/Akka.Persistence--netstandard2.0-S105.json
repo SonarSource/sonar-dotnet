@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  38,
+"endLine":  352,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  1,
+"endLine":  198,
+"endColumn":  1
+}
+}
+}
+]
+}

@@ -1,0 +1,289 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 30 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  21,
+"endLine":  136,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  21,
+"endLine":  136,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  13,
+"endLine":  140,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  13,
+"endLine":  146,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  13,
+"endLine":  161,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  13,
+"endLine":  172,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  42,
+"endLine":  172,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  17,
+"endLine":  181,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  17,
+"endLine":  185,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  17,
+"endLine":  189,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  13,
+"endLine":  205,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  21,
+"endLine":  252,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  25,
+"endLine":  254,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  29,
+"endLine":  257,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  29,
+"endLine":  263,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  70,
+"endLine":  263,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  29,
+"endLine":  273,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  279,
+"startColumn":  29,
+"endLine":  279,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  29,
+"endLine":  300,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  370,
+"startColumn":  63,
+"endLine":  370,
+"endColumn":  65
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  37,
+"endLine":  377,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  50,
+"endLine":  377,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  41,
+"endLine":  381,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  37,
+"endLine":  390,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  29,
+"endLine":  402,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  57,
+"endLine":  405,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  29,
+"endLine":  412,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  422,
+"startColumn":  33,
+"endLine":  422,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  441,
+"startColumn":  25,
+"endLine":  441,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  443,
+"startColumn":  29,
+"endLine":  443,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  13,
+"endLine":  462,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\FlowSelectBenchmark.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  105,
+"endLine":  288,
+"endColumn":  151
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\MergeManyBenchmark.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  54,
+"endLine":  52,
+"endColumn":  93
+}
+}
+}
+]
+}

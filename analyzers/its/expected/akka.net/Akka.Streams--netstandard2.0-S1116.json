@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"region":  {
+"startLine":  420,
+"startColumn":  60,
+"endLine":  420,
+"endColumn":  61
+}
+}
+}
+]
+}

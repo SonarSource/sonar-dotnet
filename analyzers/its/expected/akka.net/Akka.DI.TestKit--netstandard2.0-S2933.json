@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2933",
+"message":  "Make '_counter' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  27,
+"endLine":  122,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_pid' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  24,
+"endLine":  193,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_disposeCounter' 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  31,
+"endLine":  199,
+"endColumn":  46
+}
+}
+}
+]
+}

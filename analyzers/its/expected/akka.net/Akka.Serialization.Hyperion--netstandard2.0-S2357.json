@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Settings' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  52,
+"endLine":  33,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'PreserveObjectReferences' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  30,
+"endLine":  234,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'VersionTolerance' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  30,
+"endLine":  240,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'KnownTypesProvider' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  30,
+"endLine":  250,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'PackageNameOverrides' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  59,
+"endLine":  256,
+"endColumn":  79
+}
+}
+}
+]
+}

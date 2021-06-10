@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\InterpreterBenchmark.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  48,
+"endLine":  86,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\InterpreterBenchmark.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  47,
+"endLine":  115,
+"endColumn":  69
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3261",
+"message":  "Remove this empty namespace.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\IDispatcherPrerequisites.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  2
+}
+}
+}
+]
+}

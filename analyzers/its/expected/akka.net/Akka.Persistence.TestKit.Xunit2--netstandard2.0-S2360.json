@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  85,
+"endLine":  33,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  118,
+"endLine":  33,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  76,
+"endLine":  52,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  109,
+"endLine":  52,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  61,
+"endLine":  70,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  94,
+"endLine":  70,
+"endColumn":  100
+}
+}
+}
+]
+}

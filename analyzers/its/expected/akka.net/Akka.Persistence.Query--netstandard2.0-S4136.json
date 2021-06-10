@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'CompareTo' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\Offset.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  20,
+"endLine":  62,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\Offset.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  29,
+"endLine":  75,
+"endColumn":  38
+}
+}
+]
+}
+]
+}

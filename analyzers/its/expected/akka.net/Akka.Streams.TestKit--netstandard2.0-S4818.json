@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestUtils.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  33,
+"endLine":  22,
+"endColumn":  59
+}
+}
+}
+]
+}

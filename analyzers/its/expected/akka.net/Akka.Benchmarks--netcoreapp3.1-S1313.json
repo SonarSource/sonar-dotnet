@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1313",
+"message":  "Make sure using this hardcoded IP address '10.62.0.101' is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\AddressBenchmarks.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  56,
+"endLine":  23,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make sure using this hardcoded IP address '10.62.0.101' is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\AddressBenchmarks.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  56,
+"endLine":  24,
+"endColumn":  69
+}
+}
+}
+]
+}

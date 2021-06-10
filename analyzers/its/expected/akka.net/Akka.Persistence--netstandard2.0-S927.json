@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'reason' to 'cause' to match the base class declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  58,
+"endLine":  77,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'newTimestamp' to 'timestamp' to match the interface declaration.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  61,
+"endLine":  352,
+"endColumn":  73
+}
+}
+}
+]
+}

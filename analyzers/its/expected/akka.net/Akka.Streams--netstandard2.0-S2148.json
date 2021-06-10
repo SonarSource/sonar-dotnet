@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  76,
+"endLine":  339,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  70,
+"endLine":  99,
+"endColumn":  80
+}
+}
+}
+]
+}

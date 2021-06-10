@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  104,
+"endLine":  63,
+"endColumn":  105
+}
+}
+}
+]
+}

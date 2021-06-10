@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3168",
+"message":  "Return 'Task' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  30,
+"endLine":  57,
+"endColumn":  34
+}
+}
+}
+]
+}

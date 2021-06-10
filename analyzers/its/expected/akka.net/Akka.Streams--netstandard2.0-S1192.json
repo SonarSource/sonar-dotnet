@@ -1,0 +1,244 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal ']\n  ' 5 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  110,
+"endLine":  264,
+"endColumn":  117
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  89,
+"endLine":  265,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  266,
+"startColumn":  68,
+"endLine":  266,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  267,
+"startColumn":  68,
+"endLine":  267,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  71,
+"endLine":  268,
+"endColumn":  78
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'This stream can only read' 7 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  73,
+"endLine":  283,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  13,
+"endLine":  293,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  301,
+"startColumn":  87,
+"endLine":  301,
+"endColumn":  114
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  312,
+"startColumn":  13,
+"endLine":  312,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  72,
+"endLine":  318,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  52,
+"endLine":  326,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  52,
+"endLine":  327,
+"endColumn":  79
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'This stream can only write' 6 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  102,
+"endLine":  318,
+"endColumn":  130
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  87,
+"endLine":  325,
+"endColumn":  115
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  107,
+"endLine":  335,
+"endColumn":  135
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  72,
+"endLine":  341,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  52,
+"endLine":  349,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  52,
+"endLine":  350,
+"endColumn":  80
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'failed-VirtualProcessor' 6 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1636,
+"startColumn":  62,
+"endLine":  1636,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1723,
+"startColumn":  72,
+"endLine":  1723,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1733,
+"startColumn":  80,
+"endLine":  1733,
+"endColumn":  105
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1764,
+"startColumn":  51,
+"endLine":  1764,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1836,
+"startColumn":  77,
+"endLine":  1836,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1902,
+"startColumn":  51,
+"endLine":  1902,
+"endColumn":  76
+}
+}
+]
+}
+]
+}

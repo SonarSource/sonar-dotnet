@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'adapters' with 'nameof(adapters)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  370,
+"startColumn":  45,
+"endLine":  370,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'windowSize' with 'nameof(windowSize)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  69,
+"endLine":  88,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'maxOldWriters' with 'nameof(maxOldWriters)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  72,
+"endLine":  90,
+"endColumn":  99
+}
+}
+}
+]
+}

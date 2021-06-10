@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2365",
+"message":  "Refactor 'Commands' into a method, properties should not copy collections.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  48,
+"endLine":  53,
+"endColumn":  87
+}
+}
+}
+]
+}

@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconParser.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  23,
+"endLine":  142,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  46,
+"endLine":  133,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\IPExtensions.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  23,
+"endLine":  48,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\IPExtensions.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  23,
+"endLine":  54,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\IPExtensions.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  23,
+"endLine":  75,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  44,
+"endLine":  243,
+"endColumn":  134
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  19,
+"endLine":  349,
+"endColumn":  125
+}
+}
+}
+]
+}

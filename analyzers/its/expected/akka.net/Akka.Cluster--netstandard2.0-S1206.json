@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  24,
+"endLine":  286,
+"endColumn":  32
+}
+}
+}
+]
+}

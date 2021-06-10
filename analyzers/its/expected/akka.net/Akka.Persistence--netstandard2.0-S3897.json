@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<AtomicWrite>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  25,
+"endLine":  90,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Persistent>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  18,
+"endLine":  297,
+"endColumn":  28
+}
+}
+}
+]
+}

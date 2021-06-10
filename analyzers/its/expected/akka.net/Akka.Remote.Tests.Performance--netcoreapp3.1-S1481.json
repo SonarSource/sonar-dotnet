@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'echo'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  21,
+"endLine":  82,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'remoteActor'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  20,
+"endLine":  86,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'system2Address'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  17,
+"endLine":  131,
+"endColumn":  31
+}
+}
+}
+]
+}

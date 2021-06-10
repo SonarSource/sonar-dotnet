@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_correlationId', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  40,
+"endLine":  229,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  266,
+"startColumn":  43,
+"endLine":  266,
+"endColumn":  46
+}
+}
+}
+]
+}

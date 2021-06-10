@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_system' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  38,
+"endLine":  32,
+"endColumn":  45
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  41,
+"endLine":  99,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  41,
+"endLine":  110,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  355,
+"startColumn":  49,
+"endLine":  355,
+"endColumn":  50
+}
+}
+}
+]
+}

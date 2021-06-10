@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'DefaultShardAllocationStrategy' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  1113,
+"startColumn":  41,
+"endLine":  1113,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetReplicatorSettings' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  36,
+"endLine":  252,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'MostSuitableRegion' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\AbstractLeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  70,
+"endLine":  121,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ActorRefMessageToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"region":  {
+"startLine":  387,
+"startColumn":  33,
+"endLine":  387,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ShardIdMessageToProto' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"region":  {
+"startLine":  419,
+"startColumn":  42,
+"endLine":  419,
+"endColumn":  63
+}
+}
+}
+]
+}

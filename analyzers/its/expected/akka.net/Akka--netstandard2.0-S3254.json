@@ -1,0 +1,1408 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  31,
+"endLine":  153,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  31,
+"endLine":  186,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  562,
+"startColumn":  81,
+"endLine":  562,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  573,
+"startColumn":  57,
+"endLine":  573,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  574,
+"startColumn":  56,
+"endLine":  574,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  632,
+"startColumn":  55,
+"endLine":  632,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  688,
+"startColumn":  84,
+"endLine":  688,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  67,
+"endLine":  138,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  423,
+"startColumn":  57,
+"endLine":  423,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  424,
+"startColumn":  65,
+"endLine":  424,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  120,
+"endLine":  250,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  90,
+"endLine":  51,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  92,
+"endLine":  52,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  95,
+"endLine":  68,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  68,
+"endLine":  87,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  62,
+"endLine":  91,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  99,
+"endLine":  101,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  71,
+"endLine":  103,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'allowInfinite'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  77,
+"endLine":  103,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  81,
+"endLine":  104,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  92,
+"endLine":  105,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  87,
+"endLine":  107,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  87,
+"endLine":  108,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  58,
+"endLine":  110,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  71,
+"endLine":  111,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  77,
+"endLine":  113,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  84,
+"endLine":  114,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  77,
+"endLine":  115,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  78,
+"endLine":  118,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  63,
+"endLine":  120,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  77,
+"endLine":  133,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  103,
+"endLine":  136,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  67,
+"endLine":  139,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  79,
+"endLine":  141,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  82,
+"endLine":  142,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  78,
+"endLine":  143,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  71,
+"endLine":  144,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  83,
+"endLine":  145,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  85,
+"endLine":  146,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  105,
+"endLine":  147,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  109,
+"endLine":  149,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  80,
+"endLine":  151,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  94,
+"endLine":  152,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  57,
+"endLine":  315,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CurrentSynchronizationContextDispatcher.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  93,
+"endLine":  80,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CurrentSynchronizationContextDispatcher.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  45,
+"endLine":  81,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CurrentSynchronizationContextDispatcher.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  64,
+"endLine":  82,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CurrentSynchronizationContextDispatcher.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  56,
+"endLine":  84,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  534,
+"startColumn":  42,
+"endLine":  534,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  46,
+"endLine":  535,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  593,
+"startColumn":  84,
+"endLine":  593,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  642,
+"startColumn":  58,
+"endLine":  642,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  777,
+"startColumn":  58,
+"endLine":  777,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  74,
+"endLine":  169,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  78,
+"endLine":  248,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  55,
+"endLine":  265,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  77,
+"endLine":  274,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  83,
+"endLine":  295,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  57,
+"endLine":  331,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  54,
+"endLine":  28,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  106,
+"endLine":  28,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\PinnedDispatcher.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  116,
+"endLine":  37,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\PinnedDispatcher.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  70,
+"endLine":  50,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\PinnedDispatcher.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  45,
+"endLine":  51,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\PinnedDispatcher.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  64,
+"endLine":  52,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\PinnedDispatcher.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  56,
+"endLine":  54,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ThreadPoolBuilder.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  58,
+"endLine":  73,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ThreadPoolBuilder.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  58,
+"endLine":  89,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  61,
+"endLine":  212,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  57,
+"endLine":  213,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  82,
+"endLine":  215,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  70,
+"endLine":  34,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  70,
+"endLine":  35,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  56,
+"endLine":  36,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsManager.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  98,
+"endLine":  40,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  1084,
+"startColumn":  63,
+"endLine":  1084,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  66,
+"endLine":  46,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  66,
+"endLine":  51,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  79,
+"endLine":  54,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  90,
+"endLine":  58,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"region":  {
+"startLine":  538,
+"startColumn":  63,
+"endLine":  538,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"region":  {
+"startLine":  415,
+"startColumn":  63,
+"endLine":  415,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  71,
+"endLine":  41,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  66,
+"endLine":  42,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  71,
+"endLine":  44,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  84,
+"endLine":  45,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  72,
+"endLine":  46,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Broadcast.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  67,
+"endLine":  64,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  67,
+"endLine":  350,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  72,
+"endLine":  356,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  625,
+"startColumn":  72,
+"endLine":  625,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Random.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  67,
+"endLine":  49,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  101,
+"endLine":  59,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  64,
+"endLine":  137,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  55,
+"endLine":  151,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  55,
+"endLine":  152,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  62,
+"endLine":  153,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  63,
+"endLine":  157,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  67,
+"endLine":  82,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  67,
+"endLine":  128,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  56,
+"endLine":  130,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"region":  {
+"startLine":  370,
+"startColumn":  48,
+"endLine":  370,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\SmallestMailbox.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  67,
+"endLine":  118,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  52,
+"endLine":  165,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  48,
+"endLine":  169,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  107,
+"endLine":  169,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  48,
+"endLine":  401,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  71,
+"endLine":  402,
+"endColumn":  75
+}
+}
+}
+]
+}

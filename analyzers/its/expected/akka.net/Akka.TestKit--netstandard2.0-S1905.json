@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1905",
+"message":  "Remove this unnecessary cast to 'ActorSystemImpl'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  39,
+"endLine":  63,
+"endColumn":  54
+}
+}
+}
+]
+}

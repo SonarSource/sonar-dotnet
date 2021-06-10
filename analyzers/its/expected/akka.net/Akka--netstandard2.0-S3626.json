@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3626",
+"message":  "Remove this redundant jump.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  21,
+"endLine":  487,
+"endColumn":  30
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  1,
+"endLine":  63,
+"endColumn":  218
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  1,
+"endLine":  77,
+"endColumn":  216
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  25,
+"endLine":  376,
+"endColumn":  85
+}
+}
+}
+]
+}

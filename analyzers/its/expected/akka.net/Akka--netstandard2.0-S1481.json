@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'defaultDispatcher'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  17,
+"endLine":  397,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'routeeDispatcher'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"region":  {
+"startLine":  586,
+"startColumn":  25,
+"endLine":  586,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'force'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  37,
+"endLine":  460,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'r'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"region":  {
+"startLine":  505,
+"startColumn":  33,
+"endLine":  505,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'original'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  17,
+"endLine":  483,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'level'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  17,
+"endLine":  159,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'sender'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  21,
+"endLine":  188,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'fallbackVal'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  32,
+"endLine":  118,
+"endColumn":  43
+}
+}
+}
+]
+}

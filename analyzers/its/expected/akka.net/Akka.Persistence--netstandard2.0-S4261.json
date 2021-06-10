@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  21,
+"endLine":  369,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  21,
+"endLine":  389,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  429,
+"startColumn":  21,
+"endLine":  429,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  25,
+"endLine":  400,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  533,
+"startColumn":  24,
+"endLine":  533,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  550,
+"startColumn":  24,
+"endLine":  550,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  567,
+"startColumn":  24,
+"endLine":  567,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  584,
+"startColumn":  24,
+"endLine":  584,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  24,
+"endLine":  598,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  25,
+"endLine":  362,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\NoSnapshotStore.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  22,
+"endLine":  114,
+"endColumn":  26
+}
+}
+}
+]
+}

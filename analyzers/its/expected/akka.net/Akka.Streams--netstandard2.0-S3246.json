@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3246",
+"message":  "Add the 'in' keyword to parameter 'T' to make it 'contravariant'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\DelayFlow.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  37,
+"endLine":  20,
+"endColumn":  38
+}
+}
+}
+]
+}

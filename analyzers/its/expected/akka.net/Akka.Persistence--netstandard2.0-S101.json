@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'PersistentFSM' to match pascal case naming rules, consider using 'PersistentFsm'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  27,
+"endLine":  24,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'PersistentFSM' to match pascal case naming rules, consider using 'PersistentFsm'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  25,
+"endLine":  163,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'PersistentFSMSnapshot' to match pascal case naming rules, consider using 'PersistentFsmSnapshot'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  22,
+"endLine":  203,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'PersistentFSMBase' to match pascal case naming rules, consider using 'PersistentFsmBase'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  27,
+"endLine":  25,
+"endColumn":  44
+}
+}
+}
+]
+}

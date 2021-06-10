@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  29,
+"endLine":  17,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  29,
+"endLine":  18,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  29,
+"endLine":  19,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  29,
+"endLine":  20,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  29,
+"endLine":  21,
+"endColumn":  40
+}
+}
+}
+]
+}

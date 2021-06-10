@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'localSeen'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1733,
+"startColumn":  17,
+"endLine":  1733,
+"endColumn":  26
+}
+}
+}
+]
+}

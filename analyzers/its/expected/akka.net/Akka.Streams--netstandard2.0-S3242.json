@@ -1,0 +1,3566 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape1>' instead of 'Akka.Streams.IGraph<TShape1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  102,
+"endLine":  56,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape1>' instead of 'Akka.Streams.IGraph<TShape1, TMat1>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  63,
+"endLine":  84,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape1>' instead of 'Akka.Streams.IGraph<TShape1, TMat1>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  63,
+"endLine":  120,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape2>' instead of 'Akka.Streams.IGraph<TShape2, TMat2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  90,
+"endLine":  120,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape1>' instead of 'Akka.Streams.IGraph<TShape1, TMat1>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  63,
+"endLine":  161,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape2>' instead of 'Akka.Streams.IGraph<TShape2, TMat2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  90,
+"endLine":  161,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape3>' instead of 'Akka.Streams.IGraph<TShape3, TMat3>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  117,
+"endLine":  161,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape1>' instead of 'Akka.Streams.IGraph<TShape1, TMat1>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  63,
+"endLine":  207,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape2>' instead of 'Akka.Streams.IGraph<TShape2, TMat2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  90,
+"endLine":  207,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape3>' instead of 'Akka.Streams.IGraph<TShape3, TMat3>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  117,
+"endLine":  207,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape4>' instead of 'Akka.Streams.IGraph<TShape4, TMat4>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\GraphApply.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  144,
+"endLine":  207,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  149,
+"endLine":  167,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1, TOut2), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1, TOut2>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1, TOut2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  177,
+"endLine":  181,
+"endColumn":  184
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1, TOut2, TOut3), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1, TOut2, TOut3>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1, TOut2, TOut3>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  205,
+"endLine":  196,
+"endColumn":  212
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1, TOut2, TOut3, TOut4), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1, TOut2, TOut3, TOut4>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1, TOut2, TOut3, TOut4>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  233,
+"endLine":  212,
+"endColumn":  240
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1, TOut2, TOut3, TOut4, TOut5), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1, TOut2, TOut3, TOut4, TOut5>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1, TOut2, TOut3, TOut4, TOut5>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  261,
+"endLine":  229,
+"endColumn":  268
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1, TOut2, TOut3, TOut4, TOut5, TOut6), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1, TOut2, TOut3, TOut4, TOut5, TOut6>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1, TOut2, TOut3, TOut4, TOut5, TOut6>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  289,
+"endLine":  247,
+"endColumn":  296
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.BidiShape<TIn1, TOut1, TIn2, TOut2>>' instead of 'Akka.Streams.IGraph<Akka.Streams.BidiShape<TIn1, TOut1, TIn2, TOut2>, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  63,
+"endLine":  31,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TOut2>>' instead of 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TOut2>, TMat2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  115,
+"endLine":  90,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>>' instead of 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>, TMat2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  93,
+"endLine":  265,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.BidiShape<TOut, TOut2, TIn2, TIn>>' instead of 'Akka.Streams.IGraph<Akka.Streams.BidiShape<TOut, TOut2, TIn2, TIn>, TMat2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  138,
+"endLine":  337,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TIn>>' instead of 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TIn>, TMat2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  105,
+"endLine":  359,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TIn, TOut>>' instead of 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TIn, TOut>, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  107,
+"endLine":  476,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  97,
+"endLine":  52,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  108,
+"endLine":  118,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  101,
+"endLine":  146,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.Flow<T, TIn, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  94,
+"endLine":  175,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.Flow<T, TIn, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  98,
+"endLine":  208,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.Flow<T, TIn, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  106,
+"endLine":  248,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.Flow<T, TIn, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  292,
+"startColumn":  99,
+"endLine":  292,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.Flow<T, TIn, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  108,
+"endLine":  337,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  95,
+"endLine":  364,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  391,
+"startColumn":  98,
+"endLine":  391,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  425,
+"startColumn":  99,
+"endLine":  425,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  99,
+"endLine":  448,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  107,
+"endLine":  474,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  501,
+"startColumn":  41,
+"endLine":  501,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  528,
+"startColumn":  110,
+"endLine":  528,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  601,
+"startColumn":  103,
+"endLine":  601,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  629,
+"startColumn":  110,
+"endLine":  629,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  663,
+"startColumn":  104,
+"endLine":  663,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  701,
+"startColumn":  109,
+"endLine":  701,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  734,
+"startColumn":  109,
+"endLine":  734,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  769,
+"startColumn":  114,
+"endLine":  769,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  801,
+"startColumn":  93,
+"endLine":  801,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  833,
+"startColumn":  101,
+"endLine":  833,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  863,
+"startColumn":  101,
+"endLine":  863,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  894,
+"startColumn":  116,
+"endLine":  894,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  928,
+"startColumn":  95,
+"endLine":  928,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  951,
+"startColumn":  94,
+"endLine":  951,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  973,
+"startColumn":  100,
+"endLine":  973,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1001,
+"startColumn":  94,
+"endLine":  1001,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1029,
+"startColumn":  100,
+"endLine":  1029,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1064,
+"startColumn":  114,
+"endLine":  1064,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1097,
+"startColumn":  98,
+"endLine":  1097,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1135,
+"startColumn":  102,
+"endLine":  1135,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1174,
+"startColumn":  111,
+"endLine":  1174,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1207,
+"startColumn":  106,
+"endLine":  1207,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1235,
+"startColumn":  96,
+"endLine":  1235,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1253,
+"startColumn":  109,
+"endLine":  1253,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1278,
+"startColumn":  144,
+"endLine":  1278,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1324,
+"startColumn":  118,
+"endLine":  1324,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1390,
+"startColumn":  114,
+"endLine":  1390,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1461,
+"startColumn":  115,
+"endLine":  1461,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1502,
+"startColumn":  110,
+"endLine":  1502,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1528,
+"startColumn":  109,
+"endLine":  1528,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1546,
+"startColumn":  110,
+"endLine":  1546,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1569,
+"startColumn":  104,
+"endLine":  1569,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1592,
+"startColumn":  107,
+"endLine":  1592,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1616,
+"startColumn":  101,
+"endLine":  1616,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1640,
+"startColumn":  109,
+"endLine":  1640,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1670,
+"startColumn":  115,
+"endLine":  1670,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1710,
+"startColumn":  98,
+"endLine":  1710,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1751,
+"startColumn":  98,
+"endLine":  1751,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1775,
+"startColumn":  40,
+"endLine":  1775,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1799,
+"startColumn":  96,
+"endLine":  1799,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1820,
+"startColumn":  114,
+"endLine":  1820,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1838,
+"startColumn":  105,
+"endLine":  1838,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1861,
+"startColumn":  96,
+"endLine":  1861,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1883,
+"startColumn":  102,
+"endLine":  1883,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1913,
+"startColumn":  93,
+"endLine":  1913,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, T1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1936,
+"startColumn":  97,
+"endLine":  1936,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, T1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1962,
+"startColumn":  99,
+"endLine":  1962,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, T1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  1998,
+"startColumn":  98,
+"endLine":  1998,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, T1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2028,
+"startColumn":  125,
+"endLine":  2028,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2054,
+"startColumn":  105,
+"endLine":  2054,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2078,
+"startColumn":  132,
+"endLine":  2078,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2107,
+"startColumn":  101,
+"endLine":  2107,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2133,
+"startColumn":  100,
+"endLine":  2133,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2161,
+"startColumn":  101,
+"endLine":  2161,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2190,
+"startColumn":  96,
+"endLine":  2190,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2220,
+"startColumn":  107,
+"endLine":  2220,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T, TMat>' instead of 'Akka.Streams.Dsl.Flow<T, T, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2254,
+"startColumn":  78,
+"endLine":  2254,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T, TMat>' instead of 'Akka.Streams.Dsl.Flow<T, T, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2276,
+"startColumn":  105,
+"endLine":  2276,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T, TMat>' instead of 'Akka.Streams.Dsl.Flow<T, T, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2288,
+"startColumn":  77,
+"endLine":  2288,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TIn2, TOut>, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn2, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"region":  {
+"startLine":  2304,
+"startColumn":  41,
+"endLine":  2304,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.OutPort' instead of 'Akka.Streams.Outlet<T1>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  54,
+"endLine":  42,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.InPort' instead of 'Akka.Streams.Inlet<T2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  70,
+"endLine":  42,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape>' instead of 'Akka.Streams.IGraph<TShape, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  75,
+"endLine":  58,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape>' instead of 'Akka.Streams.IGraph<TShape, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  66,
+"endLine":  100,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.FanInShape<TOut>' instead of 'Akka.Streams.UniformFanInShape<TIn, TOut>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  85,
+"endLine":  212,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.FanOutShape<TIn>' instead of 'Akka.Streams.UniformFanOutShape<TIn, TOut>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  83,
+"endLine":  289,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Implementation.Stages.ISymbolicStage<TOut, TOut2>' instead of 'Akka.Streams.Implementation.Stages.SymbolicStage<TOut, TOut2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  40,
+"endLine":  48,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Delegate' instead of 'System.Func<T1, T2, T3>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Keep.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  65,
+"endLine":  69,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Delegate' instead of 'System.Func<T1, T2, T3>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Keep.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  64,
+"endLine":  84,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.ClosedShape>' instead of 'Akka.Streams.IGraph<Akka.Streams.ClosedShape, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\RunnableGraph.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  85,
+"endLine":  162,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TIn>>' instead of 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TIn>, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  84,
+"endLine":  194,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Sink<TOut, Akka.NotUsed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  152,
+"endLine":  326,
+"endColumn":  157
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Sink<TOut, Akka.NotUsed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  179,
+"endLine":  326,
+"endColumn":  185
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TIn>>' instead of 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TIn>, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"region":  {
+"startLine":  561,
+"startColumn":  89,
+"endLine":  561,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>>' instead of 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>, TMat2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  98,
+"endLine":  75,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TOut2>>' instead of 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TOut2>, TMat2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  112,
+"endLine":  228,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Source<T, Akka.NotUsed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  76,
+"endLine":  375,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Source<T, Akka.NotUsed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  102,
+"endLine":  375,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>>' instead of 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  517,
+"startColumn":  87,
+"endLine":  517,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Source<T, Akka.NotUsed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  759,
+"startColumn":  83,
+"endLine":  759,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Source<T, Akka.NotUsed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  759,
+"startColumn":  109,
+"endLine":  759,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, TMat2>' instead of 'Akka.Streams.Dsl.Source<T, TMat2>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"region":  {
+"startLine":  784,
+"startColumn":  140,
+"endLine":  784,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  86,
+"endLine":  51,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  97,
+"endLine":  115,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  90,
+"endLine":  143,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.Source<TIn, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  89,
+"endLine":  168,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  99,
+"endLine":  200,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  107,
+"endLine":  237,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.Source<TIn, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  94,
+"endLine":  280,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.Source<TIn, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  103,
+"endLine":  322,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  84,
+"endLine":  345,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  87,
+"endLine":  368,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  88,
+"endLine":  401,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  423,
+"startColumn":  88,
+"endLine":  423,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  96,
+"endLine":  448,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  38,
+"endLine":  474,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  99,
+"endLine":  500,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T, TMat>' instead of 'Akka.Streams.Dsl.Source<T, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  568,
+"startColumn":  83,
+"endLine":  568,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  595,
+"startColumn":  99,
+"endLine":  595,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  625,
+"startColumn":  93,
+"endLine":  625,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  659,
+"startColumn":  98,
+"endLine":  659,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  688,
+"startColumn":  98,
+"endLine":  688,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  719,
+"startColumn":  103,
+"endLine":  719,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  747,
+"startColumn":  82,
+"endLine":  747,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  778,
+"startColumn":  90,
+"endLine":  778,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  807,
+"startColumn":  90,
+"endLine":  807,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  837,
+"startColumn":  105,
+"endLine":  837,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  870,
+"startColumn":  84,
+"endLine":  870,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  892,
+"startColumn":  83,
+"endLine":  892,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  913,
+"startColumn":  89,
+"endLine":  913,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  940,
+"startColumn":  83,
+"endLine":  940,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  967,
+"startColumn":  89,
+"endLine":  967,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  998,
+"startColumn":  103,
+"endLine":  998,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1027,
+"startColumn":  87,
+"endLine":  1027,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1058,
+"startColumn":  92,
+"endLine":  1058,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1096,
+"startColumn":  100,
+"endLine":  1096,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1128,
+"startColumn":  95,
+"endLine":  1128,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1155,
+"startColumn":  85,
+"endLine":  1155,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1172,
+"startColumn":  98,
+"endLine":  1172,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1196,
+"startColumn":  133,
+"endLine":  1196,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1236,
+"startColumn":  115,
+"endLine":  1236,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1300,
+"startColumn":  111,
+"endLine":  1300,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1368,
+"startColumn":  112,
+"endLine":  1368,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1407,
+"startColumn":  99,
+"endLine":  1407,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1432,
+"startColumn":  98,
+"endLine":  1432,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1451,
+"startColumn":  102,
+"endLine":  1451,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1473,
+"startColumn":  93,
+"endLine":  1473,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1495,
+"startColumn":  96,
+"endLine":  1495,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1518,
+"startColumn":  90,
+"endLine":  1518,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1541,
+"startColumn":  98,
+"endLine":  1541,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1570,
+"startColumn":  104,
+"endLine":  1570,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1609,
+"startColumn":  87,
+"endLine":  1609,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1649,
+"startColumn":  87,
+"endLine":  1649,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1672,
+"startColumn":  37,
+"endLine":  1672,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1695,
+"startColumn":  85,
+"endLine":  1695,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1715,
+"startColumn":  103,
+"endLine":  1715,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1732,
+"startColumn":  94,
+"endLine":  1732,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1754,
+"startColumn":  85,
+"endLine":  1754,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1775,
+"startColumn":  91,
+"endLine":  1775,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1801,
+"startColumn":  82,
+"endLine":  1801,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.Source<T1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1823,
+"startColumn":  86,
+"endLine":  1823,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.Source<T1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1848,
+"startColumn":  88,
+"endLine":  1848,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.Source<T1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1883,
+"startColumn":  87,
+"endLine":  1883,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.Source<T1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1912,
+"startColumn":  114,
+"endLine":  1912,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1937,
+"startColumn":  94,
+"endLine":  1937,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1961,
+"startColumn":  121,
+"endLine":  1961,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  1989,
+"startColumn":  90,
+"endLine":  1989,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2014,
+"startColumn":  90,
+"endLine":  2014,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2041,
+"startColumn":  90,
+"endLine":  2041,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2069,
+"startColumn":  85,
+"endLine":  2069,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.Source<TOut1, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2116,
+"startColumn":  96,
+"endLine":  2116,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T, TMat>' instead of 'Akka.Streams.Dsl.Source<T, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2149,
+"startColumn":  76,
+"endLine":  2149,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T, TMat>' instead of 'Akka.Streams.Dsl.Source<T, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2172,
+"startColumn":  103,
+"endLine":  2172,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T, TMat>' instead of 'Akka.Streams.Dsl.Source<T, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"region":  {
+"startLine":  2198,
+"startColumn":  75,
+"endLine":  2198,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  123,
+"endLine":  52,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  126,
+"endLine":  118,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  119,
+"endLine":  146,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TIn, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  118,
+"endLine":  172,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  128,
+"endLine":  205,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  136,
+"endLine":  243,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TIn, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  123,
+"endLine":  287,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TIn, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  132,
+"endLine":  330,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  113,
+"endLine":  354,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  116,
+"endLine":  378,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  117,
+"endLine":  412,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  435,
+"startColumn":  117,
+"endLine":  435,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  125,
+"endLine":  460,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  485,
+"startColumn":  128,
+"endLine":  485,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<T, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  112,
+"endLine":  555,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  583,
+"startColumn":  128,
+"endLine":  583,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  614,
+"startColumn":  122,
+"endLine":  614,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  127,
+"endLine":  649,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  679,
+"startColumn":  127,
+"endLine":  679,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TIn, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  711,
+"startColumn":  126,
+"endLine":  711,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  740,
+"startColumn":  111,
+"endLine":  740,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  772,
+"startColumn":  119,
+"endLine":  772,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  802,
+"startColumn":  119,
+"endLine":  802,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  833,
+"startColumn":  134,
+"endLine":  833,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  867,
+"startColumn":  113,
+"endLine":  867,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  890,
+"startColumn":  112,
+"endLine":  890,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  912,
+"startColumn":  118,
+"endLine":  912,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  940,
+"startColumn":  112,
+"endLine":  940,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  968,
+"startColumn":  118,
+"endLine":  968,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1000,
+"startColumn":  132,
+"endLine":  1000,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1030,
+"startColumn":  116,
+"endLine":  1030,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1062,
+"startColumn":  121,
+"endLine":  1062,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1101,
+"startColumn":  129,
+"endLine":  1101,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1134,
+"startColumn":  124,
+"endLine":  1134,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1162,
+"startColumn":  114,
+"endLine":  1162,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1180,
+"startColumn":  127,
+"endLine":  1180,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1205,
+"startColumn":  162,
+"endLine":  1205,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1230,
+"startColumn":  128,
+"endLine":  1230,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1256,
+"startColumn":  128,
+"endLine":  1256,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1274,
+"startColumn":  131,
+"endLine":  1274,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1297,
+"startColumn":  122,
+"endLine":  1297,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1320,
+"startColumn":  125,
+"endLine":  1320,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1344,
+"startColumn":  119,
+"endLine":  1344,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1368,
+"startColumn":  127,
+"endLine":  1368,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1398,
+"startColumn":  133,
+"endLine":  1398,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1438,
+"startColumn":  116,
+"endLine":  1438,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1479,
+"startColumn":  116,
+"endLine":  1479,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1503,
+"startColumn":  47,
+"endLine":  1503,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1527,
+"startColumn":  114,
+"endLine":  1527,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1548,
+"startColumn":  132,
+"endLine":  1548,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1570,
+"startColumn":  114,
+"endLine":  1570,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1592,
+"startColumn":  120,
+"endLine":  1592,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1619,
+"startColumn":  111,
+"endLine":  1619,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<T1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1642,
+"startColumn":  115,
+"endLine":  1642,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<T1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1668,
+"startColumn":  117,
+"endLine":  1668,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<T1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1704,
+"startColumn":  116,
+"endLine":  1704,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<T1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1734,
+"startColumn":  143,
+"endLine":  1734,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1760,
+"startColumn":  123,
+"endLine":  1760,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1785,
+"startColumn":  150,
+"endLine":  1785,
+"endColumn":  154
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1814,
+"startColumn":  119,
+"endLine":  1814,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1840,
+"startColumn":  119,
+"endLine":  1840,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1868,
+"startColumn":  119,
+"endLine":  1868,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1897,
+"startColumn":  114,
+"endLine":  1897,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut1, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<TOut1, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1927,
+"startColumn":  125,
+"endLine":  1927,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<T, TMat>' instead of 'Akka.Streams.Dsl.SubFlow<T, TMat, TClosed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"region":  {
+"startLine":  1961,
+"startColumn":  105,
+"endLine":  1961,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<Akka.IO.ByteString, Akka.IO.ByteString>, TMat>' instead of 'Akka.Streams.Dsl.Flow<Akka.IO.ByteString, Akka.IO.ByteString, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  77,
+"endLine":  106,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<Akka.IO.ByteString, Akka.IO.ByteString>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Flow<Akka.IO.ByteString, Akka.IO.ByteString, Akka.NotUsed>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  92,
+"endLine":  219,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.Source<TIn, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Implicits.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  96,
+"endLine":  44,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Implicits.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  110,
+"endLine":  82,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IMaterializer' instead of 'Akka.Streams.Implementation.SubFusingActorMaterializerImpl'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  72,
+"endLine":  202,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape>' instead of 'Akka.Streams.IGraph<TShape, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  109,
+"endLine":  42,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<TShape>' instead of 'Akka.Streams.IGraph<TShape, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  94,
+"endLine":  102,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<Akka.Streams.Implementation.IModule>' instead of 'System.Collections.Generic.ISet<Akka.Streams.Implementation.IModule>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  86,
+"endLine":  153,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Akka.Streams.Stage.IGraphStageWithMaterializedValue<Akka.Streams.Shape, object>>' instead of 'System.Collections.Generic.IList<Akka.Streams.Stage.IGraphStageWithMaterializedValue<Akka.Streams.Shape, object>>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  143,
+"endLine":  64,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TIn>, TMat>' instead of 'Akka.Streams.Dsl.Sink<TIn, TMat>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"region":  {
+"startLine":  1019,
+"startColumn":  61,
+"endLine":  1019,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Implementation.IModule' instead of 'Akka.Streams.Implementation.Module'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"region":  {
+"startLine":  1193,
+"startColumn":  53,
+"endLine":  1193,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.InPort' instead of 'Akka.Streams.Inlet<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  935,
+"startColumn":  53,
+"endLine":  935,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.OutPort' instead of 'Akka.Streams.Outlet'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  985,
+"startColumn":  47,
+"endLine":  985,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.InPort' instead of 'Akka.Streams.Inlet'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  994,
+"startColumn":  48,
+"endLine":  994,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.OutPort' instead of 'Akka.Streams.Outlet'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  996,
+"startColumn":  49,
+"endLine":  996,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Inlet' instead of 'Akka.Streams.Inlet<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1064,
+"startColumn":  43,
+"endLine":  1064,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Outlet' instead of 'Akka.Streams.Outlet<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1256,
+"startColumn":  42,
+"endLine":  1256,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Outlet' instead of 'Akka.Streams.Outlet<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1311,
+"startColumn":  46,
+"endLine":  1311,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Stage.IContext' instead of 'Akka.Streams.Stage.IContext<TOut>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"region":  {
+"startLine":  365,
+"startColumn":  92,
+"endLine":  365,
+"endColumn":  99
+}
+}
+}
+]
+}

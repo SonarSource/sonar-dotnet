@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'Tests' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  51,
+"endLine":  25,
+"endColumn":  56
+}
+}
+}
+]
+}

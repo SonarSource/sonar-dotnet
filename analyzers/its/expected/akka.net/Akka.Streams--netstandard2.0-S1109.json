@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1109",
+"message":  "Move this closing curly brace to the next line.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  1132,
+"startColumn":  113,
+"endLine":  1132,
+"endColumn":  114
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2327",
+"message":  "Combine this 'try' with the one starting on line 149.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData.LightningDB\LmdbDurableStore.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  17,
+"endLine":  150,
+"endColumn":  50
+}
+}
+}
+]
+}

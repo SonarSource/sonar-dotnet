@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\MetricSelectors.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  9,
+"endLine":  138,
+"endColumn":  10
+}
+}
+}
+]
+}

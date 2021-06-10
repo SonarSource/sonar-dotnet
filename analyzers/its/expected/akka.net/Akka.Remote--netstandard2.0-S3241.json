@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3241",
+"message":  "Change return type to 'void'; not a single caller uses the returned value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  1322,
+"startColumn":  17,
+"endLine":  1322,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3241",
+"message":  "Change return type to 'void'; not a single caller uses the returned value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  513,
+"startColumn":  17,
+"endLine":  513,
+"endColumn":  37
+}
+}
+}
+]
+}

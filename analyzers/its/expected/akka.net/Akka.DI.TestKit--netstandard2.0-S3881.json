@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  15,
+"endLine":  136,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  15,
+"endLine":  136,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  25,
+"endLine":  145,
+"endColumn":  32
+}
+}
+]
+}
+]
+}

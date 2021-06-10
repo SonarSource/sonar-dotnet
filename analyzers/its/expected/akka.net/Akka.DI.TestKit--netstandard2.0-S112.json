@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  23,
+"endLine":  92,
+"endColumn":  51
+}
+}
+}
+]
+}

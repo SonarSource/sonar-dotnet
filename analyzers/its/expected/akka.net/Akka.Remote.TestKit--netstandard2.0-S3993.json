@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'MultiNodeFactAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeFact.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  18,
+"endLine":  13,
+"endColumn":  40
+}
+}
+}
+]
+}

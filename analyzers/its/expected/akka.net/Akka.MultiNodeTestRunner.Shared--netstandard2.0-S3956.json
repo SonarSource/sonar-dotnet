@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunCoordinator.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  19,
+"endLine":  101,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this constructor to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  44,
+"endLine":  26,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this constructor to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  44,
+"endLine":  32,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  19,
+"endLine":  83,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  19,
+"endLine":  84,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SpecLog.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  16,
+"endLine":  20,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SpecLog.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  16,
+"endLine":  24,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\Output.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  16,
+"endLine":  18,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\Output.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  16,
+"endLine":  19,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\Output.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  16,
+"endLine":  20,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\Output.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  16,
+"endLine":  22,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\UnitTest.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  16,
+"endLine":  33,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\UnitTestResult.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  16,
+"endLine":  45,
+"endColumn":  36
+}
+}
+}
+]
+}

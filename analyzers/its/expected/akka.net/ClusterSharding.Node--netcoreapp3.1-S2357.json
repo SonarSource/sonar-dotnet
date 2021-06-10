@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'ItemName' private.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Customers.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  36,
+"endLine":  21,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ItemName' private.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Customers.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  36,
+"endLine":  31,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make '_purchasedItems' private.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Customers.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  36,
+"endLine":  43,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'EntityId' private.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\MessageExtractor.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  32,
+"endLine":  14,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Payload' private.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\MessageExtractor.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  32,
+"endLine":  15,
+"endColumn":  39
+}
+}
+}
+]
+}

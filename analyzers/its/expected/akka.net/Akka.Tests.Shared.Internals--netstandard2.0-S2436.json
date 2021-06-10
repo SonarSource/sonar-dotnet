@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'FsharpDelegateHelper.Create' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\Helpers\FSharpDelegateHelper.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  79,
+"endLine":  31,
+"endColumn":  85
+}
+}
+}
+]
+}

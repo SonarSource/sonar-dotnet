@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3241",
+"message":  "Change return type to 'void'; not a single caller uses the returned value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  577,
+"startColumn":  20,
+"endLine":  577,
+"endColumn":  24
+}
+}
+}
+]
+}

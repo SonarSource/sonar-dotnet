@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  17,
+"endLine":  303,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  17,
+"endLine":  351,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  17,
+"endLine":  398,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  447,
+"startColumn":  17,
+"endLine":  447,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  552,
+"startColumn":  17,
+"endLine":  552,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  17,
+"endLine":  600,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  17,
+"endLine":  653,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  701,
+"startColumn":  17,
+"endLine":  701,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  752,
+"startColumn":  17,
+"endLine":  752,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  800,
+"startColumn":  17,
+"endLine":  800,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  908,
+"startColumn":  17,
+"endLine":  908,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  961,
+"startColumn":  17,
+"endLine":  961,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1009,
+"startColumn":  17,
+"endLine":  1009,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1057,
+"startColumn":  17,
+"endLine":  1057,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1105,
+"startColumn":  17,
+"endLine":  1105,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  1210,
+"startColumn":  17,
+"endLine":  1210,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  17,
+"endLine":  212,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'unchecked' is redundant in this context.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  17,
+"endLine":  128,
+"endColumn":  26
+}
+}
+}
+]
+}

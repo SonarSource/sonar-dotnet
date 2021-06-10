@@ -1,0 +1,303 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'ActorBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActor.ActorContext'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  38,
+"endLine":  132,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ActorCell' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActorContext.Child'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  33,
+"endLine":  242,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'FSM' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalSupportsTestFSMRef<TState, TData>.IsStateTimerActive'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  886,
+"startColumn":  57,
+"endLine":  886,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'FSM' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalSupportsTestFSMRef<TState, TData>.ApplyState'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  1213,
+"startColumn":  57,
+"endLine":  1213,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ActorSystemImpl' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ISupportSerializationConfigReload.ReloadSerialization'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  432,
+"startColumn":  48,
+"endLine":  432,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ReceiveActor' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInitializableActor.Init'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  34,
+"endLine":  35,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellOnce'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  29,
+"endLine":  45,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellOnce'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  29,
+"endLine":  51,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellRepeatedly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  29,
+"endLine":  57,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellRepeatedly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  29,
+"endLine":  64,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IScheduler.Advanced'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  39,
+"endLine":  97,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ITimeProvider.Now'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  38,
+"endLine":  98,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'LoggerMailbox' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMessageQueue.HasMessages'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggerMailbox.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  28,
+"endLine":  67,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'LoggerMailbox' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMessageQueue.Count'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggerMailbox.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  27,
+"endLine":  69,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'LoggerMailbox' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMessageQueue.Enqueue'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggerMailbox.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  28,
+"endLine":  71,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'LoggerMailbox' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMessageQueue.TryDequeue'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggerMailbox.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  28,
+"endLine":  76,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'LoggerMailbox' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMessageQueue.CleanUp'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggerMailbox.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  28,
+"endLine":  81,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.Add'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ConcurrentSet.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  29,
+"endLine":  127,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.CopyTo'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ConcurrentSet.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  29,
+"endLine":  132,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.IsReadOnly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ConcurrentSet.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  29,
+"endLine":  138,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.Remove'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ConcurrentSet.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  29,
+"endLine":  143,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEnumerable<T>.GetEnumerator'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ConcurrentSet.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  39,
+"endLine":  148,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEnumerable.GetEnumerator'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ConcurrentSet.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  33,
+"endLine":  153,
+"endColumn":  46
+}
+}
+}
+]
+}

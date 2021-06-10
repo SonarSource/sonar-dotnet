@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'NodesSize' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\HeartbeatNodeRingBenchmarks.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'NodesSize' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Iterations' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  20,
+"endLine":  21,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Address' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  24,
+"endLine":  23,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Node' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  24,
+"endLine":  24,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ClockSize' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Iterations' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  20,
+"endLine":  21,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'fallback1' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  23,
+"endLine":  43,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'fallback2' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  23,
+"endLine":  44,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'fallback3' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  23,
+"endLine":  45,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'PayloadSize' private.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\ByteStringBenchmarks.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  31
+}
+}
+}
+]
+}

@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  440,
+"startColumn":  17,
+"endLine":  440,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  441,
+"startColumn":  13,
+"endLine":  444,
+"endColumn":  14
+}
+}
+]
+}
+]
+}

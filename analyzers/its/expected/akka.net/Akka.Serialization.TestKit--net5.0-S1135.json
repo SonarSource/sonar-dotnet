@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"region":  {
+"startLine":  470,
+"startColumn":  11,
+"endLine":  470,
+"endColumn":  15
+}
+}
+}
+]
+}

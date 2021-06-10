@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Divide' for the operator '/'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  42,
+"endLine":  277,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Divide' for the operator '/'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  42,
+"endLine":  290,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  494,
+"startColumn":  39,
+"endLine":  494,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  506,
+"startColumn":  39,
+"endLine":  506,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  61,
+"endLine":  136,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  63,
+"endLine":  210,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  63,
+"endLine":  229,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  45,
+"endLine":  284,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  45,
+"endLine":  295,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Subtract' for the operator '-'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  50,
+"endLine":  190,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  43,
+"endLine":  598,
+"endColumn":  44
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\IPExtensions.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  84,
+"endLine":  32,
+"endColumn":  106
+}
+}
+}
+]
+}

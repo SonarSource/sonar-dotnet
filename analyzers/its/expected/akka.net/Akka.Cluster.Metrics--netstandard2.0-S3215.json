@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  24,
+"endLine":  375,
+"endColumn":  77
+}
+}
+}
+]
+}

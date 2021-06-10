@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'DefaultJournalConfig' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Extension.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  32,
+"endLine":  44,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'DefaultSnapshotConfig' private.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Extension.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  32,
+"endLine":  49,
+"endColumn":  53
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  40,
+"endLine":  61,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  73,
+"endLine":  62,
+"endColumn":  80
+}
+}
+}
+]
+}

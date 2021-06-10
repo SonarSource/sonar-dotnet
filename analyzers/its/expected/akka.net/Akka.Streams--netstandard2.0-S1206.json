@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  25,
+"endLine":  302,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  29,
+"endLine":  201,
+"endColumn":  42
+}
+}
+}
+]
+}

@@ -1,0 +1,46 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '@addr' 4 times.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  36,
+"endLine":  60,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  32,
+"endLine":  61,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  36,
+"endLine":  75,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  32,
+"endLine":  76,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

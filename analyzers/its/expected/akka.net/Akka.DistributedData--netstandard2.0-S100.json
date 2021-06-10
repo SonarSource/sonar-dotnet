@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'LWWToProto' to match pascal case naming rules, consider using 'LwwToProto'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  682,
+"startColumn":  39,
+"endLine":  682,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'LWWRegisterFromBinary' to match pascal case naming rules, consider using 'LwwRegisterFromBinary'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  693,
+"startColumn":  30,
+"endLine":  693,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'LWWRegisterFromProto' to match pascal case naming rules, consider using 'LwwRegisterFromProto'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  699,
+"startColumn":  30,
+"endLine":  699,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'GenericLWWRegisterFromProto' to match pascal case naming rules, consider using 'GenericLwwRegisterFromProto'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  736,
+"startColumn":  32,
+"endLine":  736,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'LWWDictToProto' to match pascal case naming rules, consider using 'LwwDictToProto'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1106,
+"startColumn":  34,
+"endLine":  1106,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'ToLWWMapEntries' to match pascal case naming rules, consider using 'ToLwwMapEntries'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1116,
+"startColumn":  22,
+"endLine":  1116,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'LWWDictFromProto' to match pascal case naming rules, consider using 'LwwDictFromProto'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1148,
+"startColumn":  32,
+"endLine":  1148,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'GenericLWWDictFromProto' to match pascal case naming rules, consider using 'GenericLwwDictFromProto'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1157,
+"startColumn":  32,
+"endLine":  1157,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'LWWDictionaryFromBinary' to match pascal case naming rules, consider using 'LwwDictionaryFromBinary'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1193,
+"startColumn":  32,
+"endLine":  1193,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'LWWDictionaryDeltaGroupFromBinary' to match pascal case naming rules, consider using 'LwwDictionaryDeltaGroupFromBinary'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1200,
+"startColumn":  24,
+"endLine":  1200,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'LWWDictionaryDeltaFromProto' to match pascal case naming rules, consider using 'LwwDictionaryDeltaFromProto'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1213,
+"startColumn":  46,
+"endLine":  1213,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'LWWRegisterKeyFromBinary' to match pascal case naming rules, consider using 'LwwRegisterKeyFromBinary'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1574,
+"startColumn":  22,
+"endLine":  1574,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'LWWDictionaryKeyFromBinary' to match pascal case naming rules, consider using 'LwwDictionaryKeyFromBinary'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1610,
+"startColumn":  22,
+"endLine":  1610,
+"endColumn":  48
+}
+}
+}
+]
+}

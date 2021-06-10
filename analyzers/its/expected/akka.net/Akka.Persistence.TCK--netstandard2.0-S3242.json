@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.TestKit.TestSubscriber.ManualProbe<Akka.Persistence.Query.EventEnvelope>' instead of 'Akka.Streams.TestKit.TestSubscriber.Probe<Akka.Persistence.Query.EventEnvelope>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  82,
+"endLine":  109,
+"endColumn":  87
+}
+}
+}
+]
+}

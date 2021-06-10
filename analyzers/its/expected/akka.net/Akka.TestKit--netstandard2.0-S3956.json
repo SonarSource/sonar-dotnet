@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\BlockingCollectionTestActorQueue.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  16,
+"endLine":  44,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\BlockingQueue.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  16,
+"endLine":  118,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\ITestActorQueue.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  9,
+"endLine":  33,
+"endColumn":  16
+}
+}
+}
+]
+}

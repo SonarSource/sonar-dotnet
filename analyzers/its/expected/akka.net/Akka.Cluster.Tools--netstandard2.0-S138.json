@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'Receive' has 97 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  33,
+"endLine":  436,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This constructor 'DistributedPubSubMediator' has 230 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  16,
+"endLine":  150,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'InitializeFSM' has 546 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  875,
+"startColumn":  22,
+"endLine":  875,
+"endColumn":  35
+}
+}
+}
+]
+}

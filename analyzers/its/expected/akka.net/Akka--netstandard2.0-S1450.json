@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_worker' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  24,
+"endLine":  117,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_root' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconParser.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  28,
+"endLine":  22,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_ext' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsManager.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  33,
+"endLine":  19,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_serializerDetails' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  62,
+"endLine":  149,
+"endColumn":  80
+}
+}
+}
+]
+}

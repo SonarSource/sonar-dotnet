@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  22,
+"endLine":  60,
+"endColumn":  27
+}
+}
+}
+]
+}

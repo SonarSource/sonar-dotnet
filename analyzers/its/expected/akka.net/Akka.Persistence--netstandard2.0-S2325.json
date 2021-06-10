@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'GetSourceString' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  24,
+"endLine":  342,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TryUnwrapException' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  310,
+"startColumn":  29,
+"endLine":  310,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'StoreNotInitialized' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  25,
+"endLine":  400,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'PersistenceId' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  23,
+"endLine":  145,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Become' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  305,
+"startColumn":  24,
+"endLine":  305,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'BecomeStacked' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  24,
+"endLine":  317,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'BuildNewReceiveHandler' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  39,
+"endLine":  360,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetStateChangeEvent' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  48,
+"endLine":  218,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'WithStream' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  19,
+"endLine":  251,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ExtractSnapshotMetadata' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  34,
+"endLine":  283,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateRangeFilter' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  43,
+"endLine":  81,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Flop' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\NoSnapshotStore.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  22,
+"endLine":  114,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TryUnwrapException' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  27,
+"endLine":  197,
+"endColumn":  45
+}
+}
+}
+]
+}

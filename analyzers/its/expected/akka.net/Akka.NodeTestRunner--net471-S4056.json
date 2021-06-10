@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  40,
+"endLine":  133,
+"endColumn":  55
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4035",
+"message":  "Seal class 'TestRunTree' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'FactData' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  18,
+"endLine":  133,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'NodeData' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  18,
+"endLine":  283,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'NodeInfo' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  22,
+"endLine":  139,
+"endColumn":  30
+}
+}
+}
+]
+}

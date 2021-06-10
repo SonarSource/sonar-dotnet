@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'alternateIndex'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  33,
+"endLine":  294,
+"endColumn":  47
+}
+}
+}
+]
+}

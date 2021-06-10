@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3877",
+"message":  "Remove this 'throw' statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  21,
+"endLine":  78,
+"endColumn":  144
+}
+}
+}
+]
+}

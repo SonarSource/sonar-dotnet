@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_leader', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  32,
+"endLine":  153,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_seedNodeProcessCounter', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1012,
+"startColumn":  45,
+"endLine":  1012,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_leaderActionCounter', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1016,
+"startColumn":  42,
+"endLine":  1016,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_selfDownCounter', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1017,
+"startColumn":  38,
+"endLine":  1017,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_exitingTasksInProgress', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1019,
+"startColumn":  46,
+"endLine":  1019,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_attempts', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2696,
+"startColumn":  31,
+"endLine":  2696,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_selfMember', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  36,
+"endLine":  46,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Zero', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  46,
+"endLine":  179,
+"endColumn":  50
+}
+}
+}
+]
+}

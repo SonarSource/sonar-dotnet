@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\PingPongBenchmarks.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  26,
+"endLine":  22,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  29,
+"endLine":  19,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Serialization\SerializationBenchmarks.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  26,
+"endLine":  19,
+"endColumn":  36
+}
+}
+}
+]
+}

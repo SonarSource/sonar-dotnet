@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_log' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  42,
+"endLine":  293,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_defaultSerializer' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  33,
+"endLine":  41,
+"endColumn":  51
+}
+}
+}
+]
+}
