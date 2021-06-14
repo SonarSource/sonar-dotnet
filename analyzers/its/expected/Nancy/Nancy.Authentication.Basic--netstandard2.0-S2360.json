@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthenticationConfiguration.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  133,
+"endLine":  16,
+"endColumn":  162
+}
+}
+}
+]
+}

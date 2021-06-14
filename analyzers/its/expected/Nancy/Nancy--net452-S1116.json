@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultViewConfigurationProvider.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  46,
+"endLine":  17,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  43,
+"endLine":  333,
+"endColumn":  44
+}
+}
+}
+]
+}

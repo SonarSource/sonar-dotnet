@@ -1,9 +1,0 @@
-{
-"issues":  [
-{
-"id":  "S3904",
-"message":  "Provide an 'AssemblyVersion' attribute for assembly 'Nancy.Demo.Authentication.Basic'.",
-"location":  null
-}
-]
-}

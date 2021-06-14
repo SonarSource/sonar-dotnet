@@ -1,0 +1,303 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'ConfigureDefaultConventions' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultAcceptHeaderCoercionConventions.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  22,
+"endLine":  37,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetDescription' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  24,
+"endLine":  156,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetArguments' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  50,
+"endLine":  162,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'StringReturnValue' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  27,
+"endLine":  63,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SayHello' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  27,
+"endLine":  73,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SayHelloWithAgeTemplate' a static property.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  27,
+"endLine":  82,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SayHelloWithAgeDescription' a static property.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  27,
+"endLine":  94,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SayHelloWithAge' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  27,
+"endLine":  108,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetValue' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  21,
+"endLine":  63,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SerializeDateTime' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  22,
+"endLine":  203,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'BindingValueIsValid' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  22,
+"endLine":  208,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetBindingListInstanceCount' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  21,
+"endLine":  228,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ConvertCollection' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  24,
+"endLine":  64,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'InvokePostRequestHook' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  22,
+"endLine":  304,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetResourceContent' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  24,
+"endLine":  58,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TryParseInt' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  24,
+"endLine":  48,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NoMoreSegments' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  24,
+"endLine":  190,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsIgnoredAssembly' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3350,
+"startColumn":  22,
+"endLine":  3350,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsIgnoredType' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3374,
+"startColumn":  22,
+"endLine":  3374,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetDefaultObjectFactory' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3441,
+"startColumn":  35,
+"endLine":  3441,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsIEnumerableRequest' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3527,
+"startColumn":  22,
+"endLine":  3527,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsAutomaticLazyFactoryRequest' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3540,
+"startColumn":  22,
+"endLine":  3540,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetTypeConstructors' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3834,
+"startColumn":  46,
+"endLine":  3834,
+"endColumn":  65
+}
+}
+}
+]
+}

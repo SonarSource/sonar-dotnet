@@ -110,9 +110,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RequiredValidatorAdapter.cs",
 "region":  {
-"startLine":  40,
+"startLine":  42,
 "startColumn":  52,
-"endLine":  40,
+"endLine":  42,
 "endColumn":  61
 }
 }
@@ -123,9 +123,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RequiredValidatorAdapter.cs",
 "region":  {
-"startLine":  40,
+"startLine":  42,
 "startColumn":  90,
-"endLine":  40,
+"endLine":  42,
 "endColumn":  100
 }
 }

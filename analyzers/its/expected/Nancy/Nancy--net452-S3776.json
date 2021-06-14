@@ -5,84 +5,66 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
 "region":  {
-"startLine":  215,
-"startColumn":  28,
-"endLine":  215,
-"endColumn":  61
+"startLine":  54,
+"startColumn":  46,
+"endLine":  54,
+"endColumn":  76
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
 "region":  {
-"startLine":  217,
+"startLine":  61,
 "startColumn":  13,
-"endLine":  217,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
-"region":  {
-"startLine":  227,
-"startColumn":  13,
-"endLine":  227,
+"endLine":  61,
 "endColumn":  20
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
 "region":  {
-"startLine":  233,
+"startLine":  63,
 "startColumn":  17,
-"endLine":  233,
+"endLine":  63,
 "endColumn":  24
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
 "region":  {
-"startLine":  240,
+"startLine":  67,
 "startColumn":  21,
-"endLine":  240,
-"endColumn":  26
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
-"region":  {
-"startLine":  244,
-"startColumn":  21,
-"endLine":  244,
-"endColumn":  26
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
-"region":  {
-"startLine":  249,
-"startColumn":  21,
-"endLine":  249,
+"endLine":  67,
 "endColumn":  23
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
 "region":  {
-"startLine":  249,
-"startColumn":  51,
-"endLine":  249,
-"endColumn":  53
+"startLine":  72,
+"startColumn":  21,
+"endLine":  72,
+"endColumn":  23
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
 "region":  {
-"startLine":  255,
+"startLine":  74,
 "startColumn":  25,
-"endLine":  255,
-"endColumn":  30
+"endLine":  74,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  29,
+"endLine":  78,
+"endColumn":  31
 }
 }
 ]
@@ -181,132 +163,78 @@
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  229,
+"startLine":  260,
 "startColumn":  30,
-"endLine":  229,
+"endLine":  260,
 "endColumn":  40
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  233,
+"startLine":  264,
 "startColumn":  13,
-"endLine":  233,
+"endLine":  264,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  239,
+"startLine":  270,
 "startColumn":  13,
-"endLine":  239,
+"endLine":  270,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  245,
+"startLine":  276,
 "startColumn":  13,
-"endLine":  245,
+"endLine":  276,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  245,
+"startLine":  276,
 "startColumn":  44,
-"endLine":  245,
+"endLine":  276,
 "endColumn":  46
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  248,
+"startLine":  279,
 "startColumn":  17,
-"endLine":  248,
+"endLine":  279,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  254,
+"startLine":  285,
 "startColumn":  13,
-"endLine":  254,
+"endLine":  285,
 "endColumn":  17
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  254,
+"startLine":  285,
 "startColumn":  53,
-"endLine":  254,
+"endLine":  285,
 "endColumn":  55
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  257,
-"startColumn":  17,
-"endLine":  257,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  263,
-"startColumn":  13,
-"endLine":  263,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  266,
-"startColumn":  17,
-"endLine":  266,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  268,
-"startColumn":  21,
-"endLine":  268,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  278,
-"startColumn":  17,
-"endLine":  278,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  286,
-"startColumn":  13,
-"endLine":  286,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
 "startLine":  288,
 "startColumn":  17,
 "endLine":  288,
@@ -316,37 +244,268 @@
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  288,
-"startColumn":  46,
-"endLine":  288,
-"endColumn":  48
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  295,
-"startColumn":  17,
-"endLine":  295,
-"endColumn":  19
+"startLine":  294,
+"startColumn":  13,
+"endLine":  294,
+"endColumn":  17
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  297,
-"startColumn":  21,
+"startColumn":  17,
 "endLine":  297,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  21,
+"endLine":  299,
 "endColumn":  23
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  302,
+"startLine":  309,
+"startColumn":  17,
+"endLine":  309,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  13,
+"endLine":  317,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  17,
+"endLine":  319,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  60,
+"endLine":  319,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  17,
+"endLine":  326,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  328,
 "startColumn":  21,
-"endLine":  302,
+"endLine":  328,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  21,
+"endLine":  333,
 "endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  32,
+"endLine":  174,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  13,
+"endLine":  176,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  13,
+"endLine":  178,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  13,
+"endLine":  180,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  13,
+"endLine":  182,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  13,
+"endLine":  184,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  13,
+"endLine":  186,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  13,
+"endLine":  188,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  13,
+"endLine":  190,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  13,
+"endLine":  192,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  13,
+"endLine":  194,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  13,
+"endLine":  196,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  13,
+"endLine":  198,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  13,
+"endLine":  200,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  13,
+"endLine":  202,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  13,
+"endLine":  204,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  13,
+"endLine":  206,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  13,
+"endLine":  208,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  32,
+"endLine":  174,
+"endColumn":  43
 }
 }
 ]
@@ -511,144 +670,144 @@
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  482,
+"startLine":  483,
 "startColumn":  25,
-"endLine":  482,
+"endLine":  483,
 "endColumn":  27
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  482,
+"startLine":  483,
 "startColumn":  44,
-"endLine":  482,
+"endLine":  483,
 "endColumn":  46
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  493,
+"startLine":  494,
 "startColumn":  17,
-"endLine":  493,
+"endLine":  494,
 "endColumn":  21
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  495,
+"startLine":  496,
 "startColumn":  21,
-"endLine":  495,
+"endLine":  496,
 "endColumn":  23
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  502,
+"startLine":  503,
 "startColumn":  25,
-"endLine":  502,
+"endLine":  503,
 "endColumn":  27
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  508,
+"startLine":  509,
 "startColumn":  25,
-"endLine":  508,
+"endLine":  509,
 "endColumn":  29
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  519,
+"startLine":  520,
 "startColumn":  21,
-"endLine":  519,
+"endLine":  520,
 "endColumn":  25
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  519,
+"startLine":  520,
 "startColumn":  43,
-"endLine":  519,
+"endLine":  520,
 "endColumn":  45
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  527,
+"startLine":  528,
 "startColumn":  21,
-"endLine":  527,
+"endLine":  528,
 "endColumn":  25
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  535,
+"startLine":  536,
 "startColumn":  21,
-"endLine":  535,
+"endLine":  536,
 "endColumn":  25
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  535,
+"startLine":  536,
 "startColumn":  42,
-"endLine":  535,
+"endLine":  536,
 "endColumn":  44
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  535,
+"startLine":  536,
 "startColumn":  55,
-"endLine":  535,
+"endLine":  536,
 "endColumn":  57
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  542,
+"startLine":  543,
 "startColumn":  21,
-"endLine":  542,
+"endLine":  543,
 "endColumn":  25
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  545,
+"startLine":  546,
 "startColumn":  25,
-"endLine":  545,
+"endLine":  546,
 "endColumn":  27
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  555,
+"startLine":  556,
 "startColumn":  13,
-"endLine":  555,
+"endLine":  556,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
-"startLine":  559,
+"startLine":  560,
 "startColumn":  13,
-"endLine":  559,
+"endLine":  560,
 "endColumn":  17
 }
 }
@@ -661,144 +820,144 @@
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  135,
+"startLine":  139,
 "startColumn":  30,
-"endLine":  135,
+"endLine":  139,
 "endColumn":  39
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  137,
+"startLine":  141,
 "startColumn":  13,
-"endLine":  137,
+"endLine":  141,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  140,
+"startLine":  144,
 "startColumn":  13,
-"endLine":  140,
+"endLine":  144,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  140,
+"startLine":  144,
 "startColumn":  38,
-"endLine":  140,
+"endLine":  144,
 "endColumn":  40
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  143,
+"startLine":  147,
 "startColumn":  13,
-"endLine":  143,
+"endLine":  147,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  151,
+"startLine":  155,
 "startColumn":  13,
-"endLine":  151,
+"endLine":  155,
 "endColumn":  16
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  154,
+"startLine":  158,
 "startColumn":  17,
-"endLine":  154,
+"endLine":  158,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  154,
+"startLine":  158,
 "startColumn":  31,
-"endLine":  154,
+"endLine":  158,
 "endColumn":  33
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  156,
+"startLine":  160,
 "startColumn":  21,
-"endLine":  156,
+"endLine":  160,
 "endColumn":  23
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  156,
+"startLine":  160,
 "startColumn":  41,
-"endLine":  156,
+"endLine":  160,
 "endColumn":  43
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  160,
+"startLine":  164,
 "startColumn":  25,
-"endLine":  160,
+"endLine":  164,
 "endColumn":  27
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  165,
+"startLine":  169,
 "startColumn":  25,
-"endLine":  165,
+"endLine":  169,
 "endColumn":  29
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  168,
+"startLine":  172,
 "startColumn":  21,
-"endLine":  168,
+"endLine":  172,
 "endColumn":  25
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  173,
+"startLine":  177,
 "startColumn":  21,
-"endLine":  173,
+"endLine":  177,
 "endColumn":  25
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  180,
+"startLine":  184,
 "startColumn":  17,
-"endLine":  180,
+"endLine":  184,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  182,
+"startLine":  186,
 "startColumn":  17,
-"endLine":  182,
+"endLine":  186,
 "endColumn":  21
 }
 }
@@ -806,1455 +965,177 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  249,
+"startLine":  253,
 "startColumn":  30,
-"endLine":  249,
+"endLine":  253,
 "endColumn":  39
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  251,
+"startLine":  255,
 "startColumn":  13,
-"endLine":  251,
+"endLine":  255,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  253,
+"startLine":  257,
 "startColumn":  13,
-"endLine":  253,
+"endLine":  257,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  256,
+"startLine":  260,
 "startColumn":  13,
-"endLine":  256,
+"endLine":  260,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  259,
-"startColumn":  13,
-"endLine":  259,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
-"region":  {
-"startLine":  259,
+"startLine":  260,
 "startColumn":  28,
-"endLine":  259,
+"endLine":  260,
 "endColumn":  30
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  262,
+"startLine":  263,
 "startColumn":  13,
-"endLine":  262,
+"endLine":  263,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  262,
+"startLine":  263,
 "startColumn":  27,
-"endLine":  262,
+"endLine":  263,
 "endColumn":  29
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  270,
+"startLine":  271,
 "startColumn":  13,
-"endLine":  270,
+"endLine":  271,
 "endColumn":  16
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  272,
+"startLine":  273,
 "startColumn":  17,
-"endLine":  272,
+"endLine":  273,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  272,
+"startLine":  273,
 "startColumn":  37,
-"endLine":  272,
+"endLine":  273,
 "endColumn":  39
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  274,
+"startLine":  275,
 "startColumn":  21,
-"endLine":  274,
+"endLine":  275,
 "endColumn":  23
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  274,
+"startLine":  275,
 "startColumn":  51,
-"endLine":  274,
+"endLine":  275,
 "endColumn":  53
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  276,
+"startLine":  277,
 "startColumn":  25,
-"endLine":  276,
+"endLine":  277,
 "endColumn":  27
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  282,
+"startLine":  283,
 "startColumn":  25,
-"endLine":  282,
+"endLine":  283,
 "endColumn":  27
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  289,
+"startLine":  290,
 "startColumn":  21,
-"endLine":  289,
+"endLine":  290,
 "endColumn":  25
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  297,
+"startLine":  298,
 "startColumn":  17,
-"endLine":  297,
+"endLine":  298,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  303,
+"startLine":  304,
 "startColumn":  17,
-"endLine":  303,
+"endLine":  304,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  307,
+"startLine":  308,
 "startColumn":  17,
-"endLine":  307,
+"endLine":  308,
 "endColumn":  21
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  313,
+"startLine":  314,
 "startColumn":  13,
-"endLine":  313,
+"endLine":  314,
 "endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  144,
-"startColumn":  25,
-"endLine":  144,
-"endColumn":  38
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  148,
-"startColumn":  13,
-"endLine":  148,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  151,
-"startColumn":  13,
-"endLine":  151,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  154,
-"startColumn":  13,
-"endLine":  154,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  156,
-"startColumn":  17,
-"endLine":  156,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  158,
-"startColumn":  17,
-"endLine":  158,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  161,
-"startColumn":  21,
-"endLine":  161,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  169,
-"startColumn":  13,
-"endLine":  169,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  172,
-"startColumn":  13,
-"endLine":  172,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  176,
-"startColumn":  13,
-"endLine":  176,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  179,
-"startColumn":  13,
-"endLine":  179,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  183,
-"startColumn":  13,
-"endLine":  183,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  185,
-"startColumn":  17,
-"endLine":  185,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  192,
-"startColumn":  13,
-"endLine":  192,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  192,
-"startColumn":  48,
-"endLine":  192,
-"endColumn":  50
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  197,
-"startColumn":  13,
-"endLine":  197,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  197,
-"startColumn":  38,
-"endLine":  197,
-"endColumn":  40
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  205,
-"startColumn":  17,
-"endLine":  205,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  207,
-"startColumn":  21,
-"endLine":  207,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  213,
-"startColumn":  17,
-"endLine":  213,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  317,
-"startColumn":  16,
-"endLine":  317,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  319,
-"startColumn":  13,
-"endLine":  319,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  321,
-"startColumn":  17,
-"endLine":  321,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  329,
-"startColumn":  13,
-"endLine":  329,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  332,
-"startColumn":  17,
-"endLine":  332,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  332,
-"startColumn":  84,
-"endLine":  332,
-"endColumn":  86
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  335,
-"startColumn":  21,
-"endLine":  335,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  335,
-"startColumn":  43,
-"endLine":  335,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  335,
-"startColumn":  103,
-"endLine":  335,
-"endColumn":  105
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  338,
-"startColumn":  21,
-"endLine":  338,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  346,
-"startColumn":  17,
-"endLine":  346,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  349,
-"startColumn":  21,
-"endLine":  349,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  355,
-"startColumn":  13,
-"endLine":  355,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  360,
-"startColumn":  13,
-"endLine":  360,
-"endColumn":  20
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  363,
-"startColumn":  17,
-"endLine":  363,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  366,
-"startColumn":  21,
-"endLine":  366,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  366,
-"startColumn":  39,
-"endLine":  366,
-"endColumn":  41
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  369,
-"startColumn":  21,
-"endLine":  369,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  373,
-"startColumn":  21,
-"endLine":  373,
-"endColumn":  25
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  380,
-"startColumn":  17,
-"endLine":  380,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  380,
-"startColumn":  46,
-"endLine":  380,
-"endColumn":  48
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  389,
-"startColumn":  17,
-"endLine":  389,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  398,
-"startColumn":  17,
-"endLine":  398,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  400,
-"startColumn":  21,
-"endLine":  400,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  402,
-"startColumn":  21,
-"endLine":  402,
-"endColumn":  25
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  405,
-"startColumn":  21,
-"endLine":  405,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  334,
-"startColumn":  17,
-"endLine":  334,
-"endColumn":  28
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  336,
-"startColumn":  4,
-"endLine":  336,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  342,
-"startColumn":  4,
-"endLine":  342,
-"endColumn":  9
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  344,
-"startColumn":  5,
-"endLine":  344,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  348,
-"startColumn":  5,
-"endLine":  348,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  351,
-"startColumn":  5,
-"endLine":  351,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  356,
-"startColumn":  4,
-"endLine":  356,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  359,
-"startColumn":  5,
-"endLine":  359,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  360,
-"startColumn":  6,
-"endLine":  360,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  362,
-"startColumn":  6,
-"endLine":  362,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  367,
-"startColumn":  4,
-"endLine":  367,
-"endColumn":  6
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  484,
-"startColumn":  8,
-"endLine":  484,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  488,
-"startColumn":  4,
-"endLine":  488,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  500,
-"startColumn":  4,
-"endLine":  500,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  505,
-"startColumn":  4,
-"endLine":  505,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  509,
-"startColumn":  6,
-"endLine":  509,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  511,
-"startColumn":  6,
-"endLine":  511,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  513,
-"startColumn":  6,
-"endLine":  513,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  515,
-"startColumn":  6,
-"endLine":  515,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  517,
-"startColumn":  6,
-"endLine":  517,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  522,
-"startColumn":  6,
-"endLine":  522,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  524,
-"startColumn":  6,
-"endLine":  524,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  526,
-"startColumn":  6,
-"endLine":  526,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  531,
-"startColumn":  6,
-"endLine":  531,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  533,
-"startColumn":  6,
-"endLine":  533,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  538,
-"startColumn":  6,
-"endLine":  538,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  540,
-"startColumn":  6,
-"endLine":  540,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  545,
-"startColumn":  6,
-"endLine":  545,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  550,
-"startColumn":  6,
-"endLine":  550,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  550,
-"startColumn":  59,
-"endLine":  550,
-"endColumn":  61
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  553,
-"startColumn":  79,
-"endLine":  553,
-"endColumn":  80
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  555,
-"startColumn":  7,
-"endLine":  555,
-"endColumn":  9
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  561,
-"startColumn":  6,
-"endLine":  561,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  570,
-"startColumn":  4,
-"endLine":  570,
-"endColumn":  6
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 59 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  577,
-"startColumn":  8,
-"endLine":  577,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  581,
-"startColumn":  4,
-"endLine":  581,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  583,
-"startColumn":  4,
-"endLine":  583,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  585,
-"startColumn":  5,
-"endLine":  585,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  589,
-"startColumn":  4,
-"endLine":  589,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  593,
-"startColumn":  5,
-"endLine":  593,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  620,
-"startColumn":  6,
-"endLine":  620,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  620,
-"startColumn":  41,
-"endLine":  620,
-"endColumn":  43
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  620,
-"startColumn":  68,
-"endLine":  620,
-"endColumn":  70
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  624,
-"startColumn":  4,
-"endLine":  624,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  631,
-"startColumn":  4,
-"endLine":  631,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  686,
-"startColumn":  6,
-"endLine":  686,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  713,
-"startColumn":  6,
-"endLine":  713,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  722,
-"startColumn":  6,
-"endLine":  722,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  726,
-"startColumn":  6,
-"endLine":  726,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  737,
-"startColumn":  6,
-"endLine":  737,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  741,
-"startColumn":  6,
-"endLine":  741,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  765,
-"startColumn":  6,
-"endLine":  765,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  768,
-"startColumn":  7,
-"endLine":  768,
-"endColumn":  13
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  770,
-"startColumn":  9,
-"endLine":  770,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  780,
-"startColumn":  9,
-"endLine":  780,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  790,
-"startColumn":  9,
-"endLine":  790,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  807,
-"startColumn":  6,
-"endLine":  807,
-"endColumn":  12
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  809,
-"startColumn":  8,
-"endLine":  809,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  820,
-"startColumn":  8,
-"endLine":  820,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  834,
-"startColumn":  6,
-"endLine":  834,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  845,
-"startColumn":  6,
-"endLine":  845,
-"endColumn":  12
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  848,
-"startColumn":  9,
-"endLine":  848,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  858,
-"startColumn":  9,
-"endLine":  858,
-"endColumn":  11
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  104,
-"startColumn":  8,
-"endLine":  104,
-"endColumn":  26
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  106,
-"startColumn":  4,
-"endLine":  106,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  107,
-"startColumn":  122,
-"endLine":  107,
-"endColumn":  123
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  109,
-"startColumn":  4,
-"endLine":  109,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  109,
-"startColumn":  20,
-"endLine":  109,
-"endColumn":  22
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  115,
-"startColumn":  4,
-"endLine":  115,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  127,
-"startColumn":  4,
-"endLine":  127,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  130,
-"startColumn":  5,
-"endLine":  130,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  135,
-"startColumn":  5,
-"endLine":  135,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  137,
-"startColumn":  6,
-"endLine":  137,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  147,
-"startColumn":  4,
-"endLine":  147,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  150,
-"startColumn":  5,
-"endLine":  150,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  150,
-"startColumn":  21,
-"endLine":  150,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  160,
-"startColumn":  4,
-"endLine":  160,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  181,
-"startColumn":  6,
-"endLine":  181,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  185,
-"startColumn":  6,
-"endLine":  185,
-"endColumn":  10
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  204,
-"startColumn":  4,
-"endLine":  204,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  209,
-"startColumn":  4,
-"endLine":  209,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  214,
-"startColumn":  13,
-"endLine":  214,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  220,
-"startColumn":  4,
-"endLine":  220,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  228,
-"startColumn":  4,
-"endLine":  228,
-"endColumn":  6
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  234,
-"startColumn":  5,
-"endLine":  234,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  239,
-"startColumn":  5,
-"endLine":  239,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  240,
-"startColumn":  6,
-"endLine":  240,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  244,
-"startColumn":  6,
-"endLine":  244,
-"endColumn":  8
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  255,
-"startColumn":  5,
-"endLine":  255,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  261,
-"startColumn":  5,
-"endLine":  261,
-"endColumn":  7
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  104,
-"startColumn":  8,
-"endLine":  104,
-"endColumn":  26
 }
 }
 ]
@@ -2266,108 +1147,108 @@
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  239,
+"startLine":  258,
 "startColumn":  29,
-"endLine":  239,
+"endLine":  258,
 "endColumn":  61
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  243,
+"startLine":  262,
 "startColumn":  13,
-"endLine":  243,
+"endLine":  262,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  249,
+"startLine":  268,
 "startColumn":  13,
-"endLine":  249,
+"endLine":  268,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  249,
+"startLine":  268,
 "startColumn":  58,
-"endLine":  249,
+"endLine":  268,
 "endColumn":  60
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  254,
+"startLine":  273,
 "startColumn":  17,
-"endLine":  254,
+"endLine":  273,
 "endColumn":  24
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  258,
+"startLine":  277,
 "startColumn":  21,
-"endLine":  258,
+"endLine":  277,
 "endColumn":  23
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  258,
-"startColumn":  49,
-"endLine":  258,
-"endColumn":  51
+"startLine":  277,
+"startColumn":  63,
+"endLine":  277,
+"endColumn":  65
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  262,
+"startLine":  281,
 "startColumn":  21,
-"endLine":  262,
+"endLine":  281,
 "endColumn":  25
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  270,
+"startLine":  289,
 "startColumn":  13,
-"endLine":  270,
+"endLine":  289,
 "endColumn":  17
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  272,
+"startLine":  291,
 "startColumn":  17,
-"endLine":  272,
+"endLine":  291,
 "endColumn":  24
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  277,
+"startLine":  296,
 "startColumn":  21,
-"endLine":  277,
+"endLine":  296,
 "endColumn":  23
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  277,
+"startLine":  296,
 "startColumn":  83,
-"endLine":  277,
+"endLine":  296,
 "endColumn":  85
 }
 }
@@ -2380,82 +1261,55 @@
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  68,
+"startLine":  87,
 "startColumn":  23,
-"endLine":  68,
+"endLine":  87,
 "endColumn":  27
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  71,
+"startLine":  90,
 "startColumn":  13,
-"endLine":  71,
+"endLine":  90,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  71,
+"startLine":  90,
 "startColumn":  37,
-"endLine":  71,
+"endLine":  90,
 "endColumn":  39
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  74,
+"startLine":  93,
 "startColumn":  17,
-"endLine":  74,
+"endLine":  93,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  78,
+"startLine":  97,
 "startColumn":  17,
-"endLine":  78,
+"endLine":  97,
 "endColumn":  21
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  83,
+"startLine":  102,
 "startColumn":  55,
-"endLine":  83,
+"endLine":  102,
 "endColumn":  56
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  86,
-"startColumn":  17,
-"endLine":  86,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  98,
-"startColumn":  17,
-"endLine":  98,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  103,
-"startColumn":  13,
-"endLine":  103,
-"endColumn":  18
 }
 },
 {
@@ -2470,145 +1324,526 @@
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  113,
-"startColumn":  13,
-"endLine":  113,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  115,
+"startLine":  117,
 "startColumn":  17,
-"endLine":  115,
+"endLine":  117,
 "endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  115,
-"startColumn":  67,
-"endLine":  115,
-"endColumn":  69
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  119,
-"startColumn":  21,
-"endLine":  119,
-"endColumn":  24
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  122,
-"startColumn":  25,
+"startColumn":  13,
 "endLine":  122,
-"endColumn":  27
+"endColumn":  18
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  126,
-"startColumn":  25,
-"endLine":  126,
-"endColumn":  29
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  132,
-"startColumn":  25,
-"endLine":  132,
-"endColumn":  32
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  138,
-"startColumn":  29,
-"endLine":  138,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  145,
-"startColumn":  33,
-"endLine":  145,
-"endColumn":  38
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  153,
+"startLine":  124,
 "startColumn":  17,
-"endLine":  153,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  155,
-"startColumn":  21,
-"endLine":  155,
-"endColumn":  28
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  161,
-"startColumn":  25,
-"endLine":  161,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  167,
-"startColumn":  29,
-"endLine":  167,
-"endColumn":  34
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  175,
-"startColumn":  17,
-"endLine":  175,
+"endLine":  124,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  175,
+"startLine":  132,
+"startColumn":  13,
+"endLine":  132,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  17,
+"endLine":  134,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  67,
+"endLine":  134,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  21,
+"endLine":  138,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  25,
+"endLine":  141,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  25,
+"endLine":  145,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  25,
+"endLine":  151,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  29,
+"endLine":  157,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  33,
+"endLine":  164,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  17,
+"endLine":  172,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  21,
+"endLine":  174,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  25,
+"endLine":  180,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  29,
+"endLine":  186,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  17,
+"endLine":  194,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  194,
 "startColumn":  45,
-"endLine":  175,
+"endLine":  194,
 "endColumn":  47
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  181,
+"startLine":  200,
 "startColumn":  13,
-"endLine":  181,
+"endLine":  200,
 "endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  22,
+"endLine":  221,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  13,
+"endLine":  223,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  13,
+"endLine":  231,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  17,
+"endLine":  233,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  17,
+"endLine":  238,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  44,
+"endLine":  238,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  17,
+"endLine":  244,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  43,
+"endLine":  244,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  17,
+"endLine":  250,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  46,
+"endLine":  250,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  13,
+"endLine":  258,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  267,
+"startColumn":  13,
+"endLine":  267,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  17,
+"endLine":  269,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 76 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  53,
+"endLine":  298,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  305,
+"startColumn":  17,
+"endLine":  305,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  21,
+"endLine":  313,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  25,
+"endLine":  317,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  51,
+"endLine":  317,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  25,
+"endLine":  322,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  25,
+"endLine":  327,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  29,
+"endLine":  331,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  25,
+"endLine":  337,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  51,
+"endLine":  337,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  29,
+"endLine":  339,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  57,
+"endLine":  339,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  344,
+"startColumn":  29,
+"endLine":  344,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  29,
+"endLine":  348,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  33,
+"endLine":  350,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  25,
+"endLine":  363,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  25,
+"endLine":  368,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  78,
+"endLine":  368,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  52,
+"endLine":  368,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  370,
+"startColumn":  29,
+"endLine":  370,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  25,
+"endLine":  377,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  46,
+"endLine":  377,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  25,
+"endLine":  382,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  51,
+"endLine":  382,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  387,
+"startColumn":  29,
+"endLine":  387,
+"endColumn":  31
 }
 }
 ]
@@ -2620,331 +1855,118 @@
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3085,
+"startLine":  3282,
 "startColumn":  22,
-"endLine":  3085,
+"endLine":  3282,
 "endColumn":  42
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3092,
-"startColumn":  58,
-"endLine":  3092,
-"endColumn":  60
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3092,
-"startColumn":  117,
-"endLine":  3092,
-"endColumn":  119
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3095,
-"startColumn":  17,
-"endLine":  3095,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3101,
-"startColumn":  21,
-"endLine":  3101,
-"endColumn":  26
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3108,
-"startColumn":  95,
-"endLine":  3108,
-"endColumn":  97
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3108,
-"startColumn":  73,
-"endLine":  3108,
-"endColumn":  75
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3111,
-"startColumn":  17,
-"endLine":  3111,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3118,
-"startColumn":  21,
-"endLine":  3118,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3120,
-"startColumn":  25,
-"endLine":  3120,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3123,
-"startColumn":  25,
-"endLine":  3123,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3130,
-"startColumn":  21,
-"endLine":  3130,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3136,
-"startColumn":  25,
-"endLine":  3136,
-"endColumn":  30
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3247,
-"startColumn":  22,
-"endLine":  3247,
-"endColumn":  40
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3249,
-"startColumn":  13,
-"endLine":  3249,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3256,
-"startColumn":  13,
-"endLine":  3256,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3258,
-"startColumn":  17,
-"endLine":  3258,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3261,
-"startColumn":  17,
-"endLine":  3261,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3262,
-"startColumn":  99,
-"endLine":  3262,
-"endColumn":  100
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3263,
-"startColumn":  17,
-"endLine":  3263,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3269,
-"startColumn":  13,
-"endLine":  3269,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3269,
-"startColumn":  45,
-"endLine":  3269,
-"endColumn":  47
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3270,
-"startColumn":  42,
-"endLine":  3270,
-"endColumn":  43
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3273,
-"startColumn":  13,
-"endLine":  3273,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3273,
-"startColumn":  45,
-"endLine":  3273,
-"endColumn":  47
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3275,
-"startColumn":  17,
-"endLine":  3275,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3277,
-"startColumn":  21,
-"endLine":  3277,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3280,
-"startColumn":  99,
-"endLine":  3280,
-"endColumn":  100
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3285,
-"startColumn":  13,
-"endLine":  3285,
-"endColumn":  15
+"startLine":  3289,
+"startColumn":  51,
+"endLine":  3289,
+"endColumn":  53
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3289,
-"startColumn":  13,
+"startColumn":  110,
 "endLine":  3289,
-"endColumn":  15
+"endColumn":  112
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3294,
-"startColumn":  13,
-"endLine":  3294,
-"endColumn":  15
+"startLine":  3292,
+"startColumn":  17,
+"endLine":  3292,
+"endColumn":  24
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3294,
-"startColumn":  104,
-"endLine":  3294,
-"endColumn":  106
+"startLine":  3301,
+"startColumn":  21,
+"endLine":  3301,
+"endColumn":  26
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3294,
-"startColumn":  134,
-"endLine":  3294,
-"endColumn":  136
+"startLine":  3309,
+"startColumn":  95,
+"endLine":  3309,
+"endColumn":  97
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3295,
-"startColumn":  85,
-"endLine":  3295,
-"endColumn":  86
+"startLine":  3309,
+"startColumn":  73,
+"endLine":  3309,
+"endColumn":  75
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3295,
-"startColumn":  112,
-"endLine":  3295,
-"endColumn":  113
+"startLine":  3312,
+"startColumn":  17,
+"endLine":  3312,
+"endColumn":  24
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3298,
-"startColumn":  13,
-"endLine":  3298,
-"endColumn":  15
+"startLine":  3319,
+"startColumn":  21,
+"endLine":  3319,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3321,
+"startColumn":  25,
+"endLine":  3321,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3324,
+"startColumn":  25,
+"endLine":  3324,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3331,
+"startColumn":  21,
+"endLine":  3331,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3340,
+"startColumn":  25,
+"endLine":  3340,
+"endColumn":  30
 }
 }
 ]
@@ -2956,226 +1978,502 @@
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3361,
+"startLine":  3584,
 "startColumn":  24,
-"endLine":  3361,
+"endLine":  3584,
 "endColumn":  39
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3366,
+"startLine":  3589,
 "startColumn":  13,
-"endLine":  3366,
+"endLine":  3589,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3372,
+"startLine":  3595,
 "startColumn":  17,
-"endLine":  3372,
+"endLine":  3595,
 "endColumn":  22
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3376,
+"startLine":  3599,
 "startColumn":  17,
-"endLine":  3376,
+"endLine":  3599,
 "endColumn":  22
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3384,
+"startLine":  3607,
 "startColumn":  13,
-"endLine":  3384,
+"endLine":  3607,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3389,
+"startLine":  3612,
 "startColumn":  17,
-"endLine":  3389,
+"endLine":  3612,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3395,
+"startLine":  3618,
 "startColumn":  21,
-"endLine":  3395,
+"endLine":  3618,
 "endColumn":  26
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3399,
+"startLine":  3622,
 "startColumn":  21,
-"endLine":  3399,
+"endLine":  3622,
 "endColumn":  26
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3409,
+"startLine":  3632,
 "startColumn":  13,
-"endLine":  3409,
+"endLine":  3632,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3415,
+"startLine":  3638,
 "startColumn":  17,
-"endLine":  3415,
+"endLine":  3638,
 "endColumn":  22
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3419,
+"startLine":  3642,
 "startColumn":  17,
-"endLine":  3419,
+"endLine":  3642,
 "endColumn":  22
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3426,
+"startLine":  3649,
 "startColumn":  13,
-"endLine":  3426,
+"endLine":  3649,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3426,
+"startLine":  3649,
 "startColumn":  58,
-"endLine":  3426,
+"endLine":  3649,
 "endColumn":  60
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3430,
+"startLine":  3653,
 "startColumn":  13,
-"endLine":  3430,
+"endLine":  3653,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3430,
+"startLine":  3653,
 "startColumn":  58,
-"endLine":  3430,
+"endLine":  3653,
 "endColumn":  60
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3432,
+"startLine":  3655,
 "startColumn":  17,
-"endLine":  3432,
+"endLine":  3655,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3438,
+"startLine":  3661,
 "startColumn":  21,
-"endLine":  3438,
+"endLine":  3661,
 "endColumn":  26
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3442,
+"startLine":  3665,
 "startColumn":  21,
-"endLine":  3442,
+"endLine":  3665,
 "endColumn":  26
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3451,
+"startLine":  3674,
 "startColumn":  13,
-"endLine":  3451,
+"endLine":  3674,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3454,
+"startLine":  3677,
 "startColumn":  13,
-"endLine":  3454,
+"endLine":  3677,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3458,
+"startLine":  3681,
 "startColumn":  13,
-"endLine":  3458,
+"endLine":  3681,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3458,
+"startLine":  3681,
 "startColumn":  104,
-"endLine":  3458,
+"endLine":  3681,
 "endColumn":  106
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3458,
+"startLine":  3681,
 "startColumn":  142,
-"endLine":  3458,
+"endLine":  3681,
 "endColumn":  144
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3460,
+"startLine":  3683,
 "startColumn":  17,
-"endLine":  3460,
+"endLine":  3683,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3460,
+"startLine":  3683,
 "startColumn":  53,
-"endLine":  3460,
+"endLine":  3683,
 "endColumn":  55
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3453,
+"startColumn":  22,
+"endLine":  3453,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3455,
+"startColumn":  13,
+"endLine":  3455,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3462,
+"startColumn":  13,
+"endLine":  3462,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3464,
+"startColumn":  17,
+"endLine":  3464,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3467,
+"startColumn":  17,
+"endLine":  3467,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3468,
+"startColumn":  99,
+"endLine":  3468,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3469,
+"startColumn":  17,
+"endLine":  3469,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3474,
+"startColumn":  13,
+"endLine":  3474,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3474,
+"startColumn":  41,
+"endLine":  3474,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3477,
+"startColumn":  17,
+"endLine":  3477,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3479,
+"startColumn":  21,
+"endLine":  3479,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3482,
+"startColumn":  21,
+"endLine":  3482,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3483,
+"startColumn":  103,
+"endLine":  3483,
+"endColumn":  104
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3484,
+"startColumn":  21,
+"endLine":  3484,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3492,
+"startColumn":  13,
+"endLine":  3492,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3492,
+"startColumn":  45,
+"endLine":  3492,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3493,
+"startColumn":  42,
+"endLine":  3493,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3496,
+"startColumn":  13,
+"endLine":  3496,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3496,
+"startColumn":  45,
+"endLine":  3496,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3498,
+"startColumn":  17,
+"endLine":  3498,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3500,
+"startColumn":  21,
+"endLine":  3500,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3503,
+"startColumn":  99,
+"endLine":  3503,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3508,
+"startColumn":  13,
+"endLine":  3508,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3512,
+"startColumn":  13,
+"endLine":  3512,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3517,
+"startColumn":  13,
+"endLine":  3517,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3517,
+"startColumn":  104,
+"endLine":  3517,
+"endColumn":  106
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3517,
+"startColumn":  134,
+"endLine":  3517,
+"endColumn":  136
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3518,
+"startColumn":  85,
+"endLine":  3518,
+"endColumn":  86
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3518,
+"startColumn":  112,
+"endLine":  3518,
+"endColumn":  113
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3521,
+"startColumn":  13,
+"endLine":  3521,
+"endColumn":  15
 }
 }
 ]

@@ -6,23 +6,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  128,
+"startLine":  132,
 "startColumn":  51,
-"endLine":  128,
+"endLine":  132,
 "endColumn":  55
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  552,
-"startColumn":  42,
-"endLine":  552,
-"endColumn":  46
 }
 }
 },
@@ -32,9 +19,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Response.cs",
 "region":  {
-"startLine":  171,
+"startLine":  174,
 "startColumn":  47,
-"endLine":  171,
+"endLine":  174,
 "endColumn":  53
 }
 }
@@ -45,9 +32,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3508,
+"startLine":  3731,
 "startColumn":  94,
-"endLine":  3508,
+"endLine":  3731,
 "endColumn":  98
 }
 }
@@ -58,9 +45,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3512,
+"startLine":  3735,
 "startColumn":  63,
-"endLine":  3512,
+"endLine":  3735,
 "endColumn":  82
 }
 }
@@ -71,9 +58,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3535,
+"startLine":  3758,
 "startColumn":  94,
-"endLine":  3535,
+"endLine":  3758,
 "endColumn":  98
 }
 }

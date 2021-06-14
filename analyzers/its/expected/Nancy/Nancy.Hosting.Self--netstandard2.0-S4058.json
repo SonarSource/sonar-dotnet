@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'segment.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\UriExtensions.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  18,
+"endLine":  33,
+"endColumn":  39
+}
+}
+}
+]
+}

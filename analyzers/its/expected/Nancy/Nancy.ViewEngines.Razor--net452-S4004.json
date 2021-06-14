@@ -32,10 +32,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorConfigurationSection.cs",
 "region":  {
-"startLine":  24,
-"startColumn":  42,
-"endLine":  24,
-"endColumn":  52
+"startLine":  18,
+"startColumn":  48,
+"endLine":  18,
+"endColumn":  58
 }
 }
 },
@@ -45,10 +45,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorConfigurationSection.cs",
 "region":  {
-"startLine":  36,
-"startColumn":  43,
-"endLine":  36,
-"endColumn":  53
+"startLine":  25,
+"startColumn":  49,
+"endLine":  25,
+"endColumn":  59
 }
 }
 }

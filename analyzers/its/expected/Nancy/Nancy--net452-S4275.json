@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4275",
+"message":  "Refactor this getter so that it actually refers to the field 'internalConfiguration'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  31,
+"endLine":  117,
+"endColumn":  59
+}
+}
+}
+]
+}

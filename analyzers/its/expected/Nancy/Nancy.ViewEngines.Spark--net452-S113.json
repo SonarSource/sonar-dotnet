@@ -106,19 +106,6 @@
 },
 {
 "id":  "S113",
-"message":  "Add a new line at the end of the file 'NancyViewFolder.cs'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
-"region":  {
-"startLine":  245,
-"startColumn":  1,
-"endLine":  245,
-"endColumn":  2
-}
-}
-},
-{
-"id":  "S113",
 "message":  "Add a new line at the end of the file 'SparkRenderContextWrapper.cs'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkRenderContextWrapper.cs",
@@ -126,19 +113,6 @@
 "startLine":  64,
 "startColumn":  1,
 "endLine":  64,
-"endColumn":  2
-}
-}
-},
-{
-"id":  "S113",
-"message":  "Add a new line at the end of the file 'SparkViewEngine.cs'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngine.cs",
-"region":  {
-"startLine":  137,
-"startColumn":  1,
-"endLine":  137,
 "endColumn":  2
 }
 }

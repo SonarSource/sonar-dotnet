@@ -1,9 +1,0 @@
-{
-"issues":  [
-{
-"id":  "S3990",
-"message":  "Provide a 'CLSCompliant' attribute for assembly 'Nancy.Demo.Authentication.Stateless'.",
-"location":  null
-}
-]
-}

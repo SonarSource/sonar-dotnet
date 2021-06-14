@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  69,
+"endLine":  15,
+"endColumn":  112
+}
+}
+}
+]
+}

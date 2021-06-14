@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NetSh.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  38,
+"endLine":  18,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NetSh.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  46,
+"endLine":  32,
+"endColumn":  52
+}
+}
+}
+]
+}

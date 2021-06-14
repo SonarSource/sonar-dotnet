@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  38,
+"endLine":  55,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  38,
+"endLine":  66,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  38,
+"endLine":  77,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  38,
+"endLine":  88,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  38,
+"endLine":  99,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  38,
+"endLine":  110,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  38,
+"endLine":  121,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  38,
+"endLine":  132,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  38,
+"endLine":  143,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  38,
+"endLine":  154,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  38,
+"endLine":  165,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  38,
+"endLine":  176,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  38,
+"endLine":  187,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  38,
+"endLine":  198,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  44,
+"endLine":  211,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  38,
+"endLine":  236,
+"endColumn":  51
+}
+}
+}
+]
+}

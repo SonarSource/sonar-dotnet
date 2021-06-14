@@ -1,0 +1,485 @@
+{
+"issues":  [
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  49,
+"endLine":  14,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  50,
+"endLine":  24,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  50,
+"endLine":  37,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  49,
+"endLine":  51,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  50,
+"endLine":  60,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  49,
+"endLine":  69,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  50,
+"endLine":  79,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  49,
+"endLine":  94,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  50,
+"endLine":  104,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  50,
+"endLine":  116,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  49,
+"endLine":  128,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  49,
+"endLine":  138,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  50,
+"endLine":  148,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  50,
+"endLine":  163,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  28,
+"endLine":  28,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  28,
+"endLine":  39,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  28,
+"endLine":  54,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  28,
+"endLine":  76,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  28,
+"endLine":  98,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  28,
+"endLine":  112,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  28,
+"endLine":  131,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  28,
+"endLine":  150,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  28,
+"endLine":  161,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  28,
+"endLine":  174,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  28,
+"endLine":  179,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  30,
+"endLine":  21,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  30,
+"endLine":  31,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  35,
+"endLine":  41,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  30,
+"endLine":  56,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  30,
+"endLine":  69,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  30,
+"endLine":  83,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  28,
+"endLine":  20,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  33,
+"endLine":  41,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\TestingViewBrowserResponseExtensions.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  29,
+"endLine":  16,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\TestingViewBrowserResponseExtensions.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  30,
+"endLine":  27,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\TestingViewBrowserResponseExtensions.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  30,
+"endLine":  38,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\TestingViewBrowserResponseExtensions.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  30,
+"endLine":  49,
+"endColumn":  43
+}
+}
+}
+]
+}

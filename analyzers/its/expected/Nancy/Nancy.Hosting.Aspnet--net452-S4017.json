@@ -6,10 +6,23 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHandler.cs",
 "region":  {
-"startLine":  91,
+"startLine":  93,
 "startColumn":  54,
-"endLine":  91,
+"endLine":  93,
 "endColumn":  110
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHandler.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  48,
+"endLine":  122,
+"endColumn":  104
 }
 }
 }

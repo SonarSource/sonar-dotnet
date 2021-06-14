@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'moduleName.LastIndexOf' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleConventions.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  21,
+"endLine":  38,
+"endColumn":  53
+}
+}
+}
+]
+}

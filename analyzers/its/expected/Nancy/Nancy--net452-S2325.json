@@ -2,26 +2,13 @@
 "issues":  [
 {
 "id":  "S2325",
-"message":  "Make 'GetAdditionalTypes' a static method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
-"region":  {
-"startLine":  591,
-"startColumn":  47,
-"endLine":  591,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2325",
 "message":  "Make 'ConfigureDefaultConventions' a static method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\DefaultAcceptHeaderCoercionConventions.cs",
 "region":  {
-"startLine":  26,
+"startLine":  37,
 "startColumn":  22,
-"endLine":  26,
+"endLine":  37,
 "endColumn":  49
 }
 }
@@ -32,9 +19,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
-"startLine":  121,
+"startLine":  156,
 "startColumn":  24,
-"endLine":  121,
+"endLine":  156,
 "endColumn":  38
 }
 }
@@ -45,9 +32,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
-"startLine":  127,
+"startLine":  162,
 "startColumn":  50,
-"endLine":  127,
+"endLine":  162,
 "endColumn":  62
 }
 }
@@ -58,9 +45,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
-"startLine":  46,
+"startLine":  63,
 "startColumn":  27,
-"endLine":  46,
+"endLine":  63,
 "endColumn":  44
 }
 }
@@ -71,9 +58,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
-"startLine":  51,
+"startLine":  73,
 "startColumn":  27,
-"endLine":  51,
+"endLine":  73,
 "endColumn":  35
 }
 }
@@ -84,9 +71,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
-"startLine":  56,
+"startLine":  82,
 "startColumn":  27,
-"endLine":  56,
+"endLine":  82,
 "endColumn":  50
 }
 }
@@ -97,9 +84,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
-"startLine":  64,
+"startLine":  94,
 "startColumn":  27,
-"endLine":  64,
+"endLine":  94,
 "endColumn":  53
 }
 }
@@ -110,10 +97,23 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
-"startLine":  72,
+"startLine":  108,
 "startColumn":  27,
-"endLine":  72,
+"endLine":  108,
 "endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'HasReference' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\ProxyNancyReferenceProber.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  21,
+"endLine":  22,
+"endColumn":  33
 }
 }
 },
@@ -123,88 +123,23 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
 "region":  {
-"startLine":  42,
+"startLine":  63,
 "startColumn":  21,
-"endLine":  42,
+"endLine":  63,
 "endColumn":  29
 }
 }
 },
 {
 "id":  "S2325",
-"message":  "Make 'ConvertToEnum' a static method.",
+"message":  "Make 'SerializeDateTime' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
 "region":  {
-"startLine":  415,
-"startColumn":  16,
-"endLine":  415,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'ResolveGenericInterfaceToType' a static method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  423,
-"startColumn":  14,
-"endLine":  423,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'ResolveInterfaceToType' a static method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  445,
-"startColumn":  14,
-"endLine":  445,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'GetClosedIDictionaryBase' a static method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  272,
-"startColumn":  8,
-"endLine":  272,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'ShouldIgnoreMember' a static method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  284,
-"startColumn":  8,
-"endLine":  284,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'GetMemberValue' a static method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  310,
-"startColumn":  10,
-"endLine":  310,
-"endColumn":  24
+"startLine":  203,
+"startColumn":  22,
+"endLine":  203,
+"endColumn":  39
 }
 }
 },
@@ -214,9 +149,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  189,
+"startLine":  208,
 "startColumn":  22,
-"endLine":  189,
+"endLine":  208,
 "endColumn":  41
 }
 }
@@ -227,9 +162,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  209,
+"startLine":  228,
 "startColumn":  21,
-"endLine":  209,
+"endLine":  228,
 "endColumn":  48
 }
 }
@@ -249,26 +184,13 @@
 },
 {
 "id":  "S2325",
-"message":  "Make 'EnableTracing' a static method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
-"region":  {
-"startLine":  171,
-"startColumn":  22,
-"endLine":  171,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2325",
 "message":  "Make 'InvokePostRequestHook' a static method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
-"startLine":  261,
+"startLine":  304,
 "startColumn":  22,
-"endLine":  261,
+"endLine":  304,
 "endColumn":  43
 }
 }
@@ -279,9 +201,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
 "region":  {
-"startLine":  47,
+"startLine":  58,
 "startColumn":  24,
-"endLine":  47,
+"endLine":  58,
 "endColumn":  42
 }
 }
@@ -292,9 +214,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
 "region":  {
-"startLine":  30,
+"startLine":  48,
 "startColumn":  24,
-"endLine":  30,
+"endLine":  48,
 "endColumn":  35
 }
 }
@@ -318,9 +240,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3145,
+"startLine":  3350,
 "startColumn":  22,
-"endLine":  3145,
+"endLine":  3350,
 "endColumn":  39
 }
 }
@@ -331,9 +253,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3168,
+"startLine":  3374,
 "startColumn":  22,
-"endLine":  3168,
+"endLine":  3374,
 "endColumn":  35
 }
 }
@@ -344,9 +266,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3235,
+"startLine":  3441,
 "startColumn":  35,
-"endLine":  3235,
+"endLine":  3441,
 "endColumn":  58
 }
 }
@@ -357,9 +279,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3304,
+"startLine":  3527,
 "startColumn":  22,
-"endLine":  3304,
+"endLine":  3527,
 "endColumn":  42
 }
 }
@@ -370,9 +292,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3317,
+"startLine":  3540,
 "startColumn":  22,
-"endLine":  3317,
+"endLine":  3540,
 "endColumn":  51
 }
 }
@@ -383,9 +305,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3611,
+"startLine":  3834,
 "startColumn":  46,
-"endLine":  3611,
+"endLine":  3834,
 "endColumn":  65
 }
 }

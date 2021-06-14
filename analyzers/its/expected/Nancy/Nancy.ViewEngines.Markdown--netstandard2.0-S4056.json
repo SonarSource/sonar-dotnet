@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkdownViewEngineHost.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  17,
+"endLine":  68,
+"endColumn":  50
+}
+}
+}
+]
+}

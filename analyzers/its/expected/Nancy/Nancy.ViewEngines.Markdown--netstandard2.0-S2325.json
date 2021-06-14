@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'ConvertMarkdown' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkDownViewEngine.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  23,
+"endLine":  98,
+"endColumn":  38
+}
+}
+}
+]
+}

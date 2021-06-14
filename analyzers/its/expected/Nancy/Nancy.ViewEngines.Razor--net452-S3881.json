@@ -7,27 +7,27 @@
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
 "region":  {
-"startLine":  17,
+"startLine":  12,
 "startColumn":  18,
-"endLine":  17,
+"endLine":  12,
 "endColumn":  41
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
 "region":  {
-"startLine":  17,
+"startLine":  12,
 "startColumn":  18,
-"endLine":  17,
+"endLine":  12,
 "endColumn":  41
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
 "region":  {
-"startLine":  70,
+"startLine":  64,
 "startColumn":  21,
-"endLine":  70,
+"endLine":  64,
 "endColumn":  28
 }
 }
@@ -40,60 +40,27 @@
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
-"startLine":  25,
+"startLine":  23,
 "startColumn":  18,
-"endLine":  25,
+"endLine":  23,
 "endColumn":  33
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
-"startLine":  25,
+"startLine":  23,
 "startColumn":  18,
-"endLine":  25,
+"endLine":  23,
 "endColumn":  33
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
-"startLine":  414,
+"startLine":  384,
 "startColumn":  21,
-"endLine":  414,
-"endColumn":  28
-}
-}
-]
-},
-{
-"id":  "S3881",
-"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
-"region":  {
-"startLine":  14,
-"startColumn":  18,
-"endLine":  14,
-"endColumn":  46
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
-"region":  {
-"startLine":  14,
-"startColumn":  18,
-"endLine":  14,
-"endColumn":  46
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  21,
-"endLine":  62,
+"endLine":  384,
 "endColumn":  28
 }
 }

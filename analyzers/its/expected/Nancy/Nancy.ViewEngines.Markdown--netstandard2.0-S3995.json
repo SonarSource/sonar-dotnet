@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkdownViewEngineHost.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  16,
+"endLine":  88,
+"endColumn":  22
+}
+}
+}
+]
+}

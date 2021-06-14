@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Nancy.Testing.NodeWrapper>' instead of 'Nancy.Testing.QueryWrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  83,
+"endLine":  51,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Nancy.Testing.NodeWrapper>' instead of 'Nancy.Testing.QueryWrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  87,
+"endLine":  60,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, string>>' instead of 'System.Collections.Generic.IDictionary<string, string>'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  99,
+"endLine":  112,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<byte>' instead of 'Nancy.Testing.BrowserResponseBodyWrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  71,
+"endLine":  21,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<byte>' instead of 'Nancy.Testing.BrowserResponseBodyWrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  71,
+"endLine":  31,
+"endColumn":  82
+}
+}
+}
+]
+}

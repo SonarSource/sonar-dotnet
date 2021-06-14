@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\StringExtensions.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  55,
+"endLine":  90,
+"endColumn":  71
+}
+}
+}
+]
+}

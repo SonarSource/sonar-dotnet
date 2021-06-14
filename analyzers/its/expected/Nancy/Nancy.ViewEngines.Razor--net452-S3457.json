@@ -19,35 +19,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\NancyCSharpRazorCodeParser.cs",
 "region":  {
-"startLine":  78,
+"startLine":  77,
 "startColumn":  70,
-"endLine":  78,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S3457",
-"message":  "Remove this formatting call and simply use the input string.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\NancyVisualBasicRazorCodeParser.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  56,
-"endLine":  52,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3457",
-"message":  "Remove this formatting call and simply use the input string.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\NancyVisualBasicRazorCodeParser.cs",
-"region":  {
-"startLine":  104,
-"startColumn":  70,
-"endLine":  104,
+"endLine":  77,
 "endColumn":  83
 }
 }

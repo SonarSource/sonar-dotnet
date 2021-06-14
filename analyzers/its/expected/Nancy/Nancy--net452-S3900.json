@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
-"startLine":  23,
+"startLine":  40,
 "startColumn":  20,
-"endLine":  23,
+"endLine":  40,
 "endColumn":  28
 }
 }
@@ -19,9 +19,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
-"startLine":  35,
+"startLine":  67,
 "startColumn":  13,
-"endLine":  35,
+"endLine":  67,
 "endColumn":  21
 }
 }
@@ -32,9 +32,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
-"startLine":  41,
+"startLine":  81,
 "startColumn":  13,
-"endLine":  41,
+"endLine":  81,
 "endColumn":  21
 }
 }
@@ -45,9 +45,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
-"startLine":  47,
+"startLine":  95,
 "startColumn":  42,
-"endLine":  47,
+"endLine":  95,
 "endColumn":  55
 }
 }
@@ -58,74 +58,61 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
-"startLine":  49,
+"startLine":  97,
 "startColumn":  17,
-"endLine":  49,
+"endLine":  97,
 "endColumn":  32
 }
 }
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'pipelineItem' before using it.",
+"message":  "Refactor this method to add validation of parameter 'item' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  51,
+"endLine":  124,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'item' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  51,
+"endLine":  180,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  20,
+"endLine":  42,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
 "region":  {
 "startLine":  70,
-"startColumn":  32,
-"endLine":  70,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'item' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
-"region":  {
-"startLine":  112,
-"startColumn":  51,
-"endLine":  112,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'item' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
-"region":  {
-"startLine":  168,
-"startColumn":  51,
-"endLine":  168,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
-"region":  {
-"startLine":  20,
-"startColumn":  20,
-"endLine":  20,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
-"region":  {
-"startLine":  32,
 "startColumn":  13,
-"endLine":  32,
+"endLine":  70,
 "endColumn":  21
 }
 }
@@ -136,9 +123,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
 "region":  {
-"startLine":  38,
+"startLine":  85,
 "startColumn":  13,
-"endLine":  38,
+"endLine":  85,
 "endColumn":  21
 }
 }
@@ -149,9 +136,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
 "region":  {
-"startLine":  44,
+"startLine":  100,
 "startColumn":  42,
-"endLine":  44,
+"endLine":  100,
 "endColumn":  55
 }
 }
@@ -162,49 +149,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
 "region":  {
-"startLine":  46,
+"startLine":  102,
 "startColumn":  17,
-"endLine":  46,
+"endLine":  102,
 "endColumn":  32
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'pipelineItem' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
-"region":  {
-"startLine":  73,
-"startColumn":  32,
-"endLine":  73,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'assemblies' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
-"region":  {
-"startLine":  128,
-"startColumn":  38,
-"endLine":  128,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'type' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
-"region":  {
-"startLine":  287,
-"startColumn":  29,
-"endLine":  287,
-"endColumn":  33
 }
 }
 },
@@ -214,23 +162,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
 "region":  {
-"startLine":  151,
+"startLine":  154,
 "startColumn":  13,
-"endLine":  151,
+"endLine":  154,
 "endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'configurationBuilder' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
-"region":  {
-"startLine":  210,
-"startColumn":  13,
-"endLine":  210,
-"endColumn":  33
 }
 }
 },
@@ -253,9 +188,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
 "region":  {
-"startLine":  145,
+"startLine":  158,
 "startColumn":  96,
-"endLine":  145,
+"endLine":  158,
 "endColumn":  124
 }
 }
@@ -331,9 +266,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
 "region":  {
-"startLine":  36,
+"startLine":  25,
 "startColumn":  17,
-"endLine":  36,
+"endLine":  25,
 "endColumn":  24
 }
 }
@@ -344,9 +279,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
 "region":  {
-"startLine":  59,
+"startLine":  49,
 "startColumn":  17,
-"endLine":  59,
+"endLine":  49,
 "endColumn":  24
 }
 }
@@ -357,9 +292,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
 "region":  {
-"startLine":  82,
+"startLine":  73,
 "startColumn":  17,
-"endLine":  82,
+"endLine":  73,
 "endColumn":  24
 }
 }
@@ -370,9 +305,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
 "region":  {
-"startLine":  104,
+"startLine":  96,
 "startColumn":  31,
-"endLine":  104,
+"endLine":  96,
 "endColumn":  38
 }
 }
@@ -383,10 +318,36 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
 "region":  {
-"startLine":  122,
+"startLine":  115,
 "startColumn":  17,
-"endLine":  122,
+"endLine":  115,
 "endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  17,
+"endLine":  135,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  20,
+"endLine":  161,
+"endColumn":  33
 }
 }
 },
@@ -396,9 +357,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\DefaultAcceptHeaderCoercionConventions.cs",
 "region":  {
-"startLine":  18,
+"startLine":  29,
 "startColumn":  17,
-"endLine":  18,
+"endLine":  29,
 "endColumn":  28
 }
 }
@@ -409,9 +370,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\DefaultCultureConventions.cs",
 "region":  {
-"startLine":  25,
+"startLine":  28,
 "startColumn":  17,
-"endLine":  25,
+"endLine":  28,
 "endColumn":  28
 }
 }
@@ -485,6 +446,19 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'keyGenerator' before using it.",
 "location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\AesEncryptionProvider.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  24,
+"endLine":  22,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'keyGenerator' before using it.",
+"location":  {
 "uri":  "sources\Nancy\src\Nancy\Cryptography\DefaultHmacProvider.cs",
 "region":  {
 "startLine":  32,
@@ -500,9 +474,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Cryptography\HmacComparer.cs",
 "region":  {
-"startLine":  20,
+"startLine":  23,
 "startColumn":  17,
-"endLine":  20,
+"endLine":  23,
 "endColumn":  22
 }
 }
@@ -513,9 +487,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Cryptography\HmacComparer.cs",
 "region":  {
-"startLine":  26,
+"startLine":  29,
 "startColumn":  17,
-"endLine":  26,
+"endLine":  29,
 "endColumn":  22
 }
 }
@@ -526,9 +500,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Cryptography\HmacComparer.cs",
 "region":  {
-"startLine":  35,
+"startLine":  38,
 "startColumn":  21,
-"endLine":  35,
+"endLine":  38,
 "endColumn":  26
 }
 }
@@ -539,9 +513,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Cryptography\HmacComparer.cs",
 "region":  {
-"startLine":  35,
+"startLine":  38,
 "startColumn":  33,
-"endLine":  35,
+"endLine":  38,
 "endColumn":  38
 }
 }
@@ -561,26 +535,13 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'keyGenerator' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Cryptography\RijndaelEncryptionProvider.cs",
-"region":  {
-"startLine":  22,
-"startColumn":  24,
-"endLine":  22,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'container' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  86,
+"startLine":  88,
 "startColumn":  13,
-"endLine":  86,
+"endLine":  88,
 "endColumn":  22
 }
 }
@@ -591,9 +552,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  97,
+"startLine":  99,
 "startColumn":  13,
-"endLine":  97,
+"endLine":  99,
 "endColumn":  33
 }
 }
@@ -604,9 +565,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  107,
+"startLine":  109,
 "startColumn":  46,
-"endLine":  107,
+"endLine":  109,
 "endColumn":  63
 }
 }
@@ -617,9 +578,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  112,
+"startLine":  114,
 "startColumn":  25,
-"endLine":  112,
+"endLine":  114,
 "endColumn":  34
 }
 }
@@ -630,9 +591,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  115,
+"startLine":  117,
 "startColumn":  25,
-"endLine":  115,
+"endLine":  117,
 "endColumn":  34
 }
 }
@@ -643,9 +604,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  133,
+"startLine":  135,
 "startColumn":  56,
-"endLine":  133,
+"endLine":  135,
 "endColumn":  83
 }
 }
@@ -656,9 +617,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  138,
+"startLine":  140,
 "startColumn":  25,
-"endLine":  138,
+"endLine":  140,
 "endColumn":  34
 }
 }
@@ -669,9 +630,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  141,
+"startLine":  143,
 "startColumn":  25,
-"endLine":  141,
+"endLine":  143,
 "endColumn":  34
 }
 }
@@ -682,9 +643,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  158,
+"startLine":  160,
 "startColumn":  52,
-"endLine":  158,
+"endLine":  160,
 "endColumn":  75
 }
 }
@@ -695,9 +656,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  160,
+"startLine":  162,
 "startColumn":  17,
-"endLine":  160,
+"endLine":  162,
 "endColumn":  26
 }
 }
@@ -708,9 +669,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  175,
+"startLine":  177,
 "startColumn":  50,
-"endLine":  175,
+"endLine":  177,
 "endColumn":  71
 }
 }
@@ -721,9 +682,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  177,
+"startLine":  179,
 "startColumn":  17,
-"endLine":  177,
+"endLine":  179,
 "endColumn":  26
 }
 }
@@ -734,9 +695,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  226,
+"startLine":  228,
 "startColumn":  13,
-"endLine":  226,
+"endLine":  228,
 "endColumn":  22
 }
 }
@@ -747,9 +708,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  257,
+"startLine":  259,
 "startColumn":  32,
-"endLine":  257,
+"endLine":  259,
 "endColumn":  41
 }
 }
@@ -760,10 +721,23 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
-"startLine":  269,
+"startLine":  271,
 "startColumn":  13,
-"endLine":  269,
+"endLine":  271,
 "endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'strategy' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultTypeCatalog.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  90,
+"endLine":  36,
+"endColumn":  98
 }
 }
 },
@@ -799,9 +773,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
-"startLine":  63,
+"startLine":  66,
 "startColumn":  13,
-"endLine":  63,
+"endLine":  66,
 "endColumn":  22
 }
 }
@@ -812,9 +786,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
-"startLine":  132,
+"startLine":  150,
 "startColumn":  13,
-"endLine":  132,
+"endLine":  150,
 "endColumn":  22
 }
 }
@@ -825,9 +799,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
 "region":  {
-"startLine":  30,
+"startLine":  59,
 "startColumn":  51,
-"endLine":  30,
+"endLine":  59,
 "endColumn":  60
 }
 }
@@ -838,9 +812,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
 "region":  {
-"startLine":  30,
+"startLine":  59,
 "startColumn":  70,
-"endLine":  30,
+"endLine":  59,
 "endColumn":  74
 }
 }
@@ -851,9 +825,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
-"startLine":  47,
+"startLine":  66,
 "startColumn":  91,
-"endLine":  47,
+"endLine":  66,
 "endColumn":  118
 }
 }
@@ -864,9 +838,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
-"startLine":  50,
+"startLine":  69,
 "startColumn":  34,
-"endLine":  50,
+"endLine":  69,
 "endColumn":  61
 }
 }
@@ -877,9 +851,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
-"startLine":  55,
+"startLine":  79,
 "startColumn":  34,
-"endLine":  55,
+"endLine":  79,
 "endColumn":  61
 }
 }
@@ -890,9 +864,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\RequestData.cs",
 "region":  {
-"startLine":  40,
+"startLine":  42,
 "startColumn":  31,
-"endLine":  40,
+"endLine":  42,
 "endColumn":  38
 }
 }
@@ -916,9 +890,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
 "region":  {
-"startLine":  42,
+"startLine":  58,
 "startColumn":  33,
-"endLine":  42,
+"endLine":  58,
 "endColumn":  39
 }
 }
@@ -929,9 +903,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
 "region":  {
-"startLine":  57,
+"startLine":  73,
 "startColumn":  18,
-"endLine":  57,
+"endLine":  73,
 "endColumn":  24
 }
 }
@@ -942,10 +916,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
 "region":  {
-"startLine":  68,
-"startColumn":  41,
-"endLine":  68,
-"endColumn":  47
+"startLine":  84,
+"startColumn":  46,
+"endLine":  84,
+"endColumn":  52
 }
 }
 },
@@ -955,9 +929,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  204,
+"startLine":  235,
 "startColumn":  17,
-"endLine":  204,
+"endLine":  235,
 "endColumn":  23
 }
 }
@@ -968,9 +942,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  210,
+"startLine":  241,
 "startColumn":  56,
-"endLine":  210,
+"endLine":  241,
 "endColumn":  59
 }
 }
@@ -981,9 +955,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  238,
+"startLine":  269,
 "startColumn":  30,
-"endLine":  238,
+"endLine":  269,
 "endColumn":  36
 }
 }
@@ -994,9 +968,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  322,
+"startLine":  371,
 "startColumn":  18,
-"endLine":  322,
+"endLine":  371,
 "endColumn":  30
 }
 }
@@ -1007,9 +981,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  332,
+"startLine":  390,
 "startColumn":  18,
-"endLine":  332,
+"endLine":  390,
 "endColumn":  30
 }
 }
@@ -1020,9 +994,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  353,
+"startLine":  418,
 "startColumn":  20,
-"endLine":  353,
+"endLine":  418,
 "endColumn":  32
 }
 }
@@ -1033,9 +1007,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  360,
+"startLine":  434,
 "startColumn":  18,
-"endLine":  360,
+"endLine":  434,
 "endColumn":  30
 }
 }
@@ -1046,9 +1020,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  370,
+"startLine":  452,
 "startColumn":  18,
-"endLine":  370,
+"endLine":  452,
 "endColumn":  30
 }
 }
@@ -1059,9 +1033,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  385,
+"startLine":  475,
 "startColumn":  18,
-"endLine":  385,
+"endLine":  475,
 "endColumn":  30
 }
 }
@@ -1072,9 +1046,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  395,
+"startLine":  493,
 "startColumn":  18,
-"endLine":  395,
+"endLine":  493,
 "endColumn":  30
 }
 }
@@ -1085,9 +1059,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  410,
+"startLine":  517,
 "startColumn":  18,
-"endLine":  410,
+"endLine":  517,
 "endColumn":  30
 }
 }
@@ -1098,9 +1072,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  420,
+"startLine":  536,
 "startColumn":  18,
-"endLine":  420,
+"endLine":  536,
 "endColumn":  30
 }
 }
@@ -1111,9 +1085,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  435,
+"startLine":  559,
 "startColumn":  18,
-"endLine":  435,
+"endLine":  559,
 "endColumn":  30
 }
 }
@@ -1124,9 +1098,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  445,
+"startLine":  578,
 "startColumn":  18,
-"endLine":  445,
+"endLine":  578,
 "endColumn":  30
 }
 }
@@ -1137,9 +1111,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  460,
+"startLine":  598,
 "startColumn":  18,
-"endLine":  460,
+"endLine":  598,
 "endColumn":  30
 }
 }
@@ -1150,9 +1124,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  470,
+"startLine":  616,
 "startColumn":  18,
-"endLine":  470,
+"endLine":  616,
 "endColumn":  30
 }
 }
@@ -1163,9 +1137,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  485,
+"startLine":  640,
 "startColumn":  18,
-"endLine":  485,
+"endLine":  640,
 "endColumn":  30
 }
 }
@@ -1176,9 +1150,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  495,
+"startLine":  659,
 "startColumn":  18,
-"endLine":  495,
+"endLine":  659,
 "endColumn":  30
 }
 }
@@ -1189,9 +1163,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  510,
+"startLine":  683,
 "startColumn":  18,
-"endLine":  510,
+"endLine":  683,
 "endColumn":  30
 }
 }
@@ -1202,9 +1176,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  520,
+"startLine":  702,
 "startColumn":  18,
-"endLine":  520,
+"endLine":  702,
 "endColumn":  30
 }
 }
@@ -1215,9 +1189,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  535,
+"startLine":  726,
 "startColumn":  18,
-"endLine":  535,
+"endLine":  726,
 "endColumn":  30
 }
 }
@@ -1228,9 +1202,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  545,
+"startLine":  744,
 "startColumn":  18,
-"endLine":  545,
+"endLine":  744,
 "endColumn":  30
 }
 }
@@ -1241,9 +1215,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
 "region":  {
-"startLine":  64,
+"startLine":  69,
 "startColumn":  17,
-"endLine":  64,
+"endLine":  69,
 "endColumn":  24
 }
 }
@@ -1254,9 +1228,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
 "region":  {
-"startLine":  29,
+"startLine":  45,
 "startColumn":  20,
-"endLine":  29,
+"endLine":  45,
 "endColumn":  28
 }
 }
@@ -1267,9 +1241,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
 "region":  {
-"startLine":  41,
+"startLine":  73,
 "startColumn":  13,
-"endLine":  41,
+"endLine":  73,
 "endColumn":  21
 }
 }
@@ -1280,9 +1254,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
 "region":  {
-"startLine":  47,
+"startLine":  88,
 "startColumn":  42,
-"endLine":  47,
+"endLine":  88,
 "endColumn":  55
 }
 }
@@ -1293,9 +1267,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
 "region":  {
-"startLine":  49,
+"startLine":  90,
 "startColumn":  17,
-"endLine":  49,
+"endLine":  90,
 "endColumn":  32
 }
 }
@@ -1310,6 +1284,19 @@
 "startColumn":  25,
 "endLine":  24,
 "endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'assembly' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\AssemblyExtensions.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  57,
+"endLine":  50,
+"endColumn":  65
 }
 }
 },
@@ -1436,9 +1423,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\ModelValidationErrorExtensions.cs",
 "region":  {
-"startLine":  21,
+"startLine":  22,
 "startColumn":  18,
-"endLine":  21,
+"endLine":  22,
 "endColumn":  24
 }
 }
@@ -1449,9 +1436,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
 "region":  {
-"startLine":  30,
+"startLine":  18,
 "startColumn":  28,
-"endLine":  30,
+"endLine":  18,
 "endColumn":  34
 }
 }
@@ -1462,9 +1449,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
 "region":  {
-"startLine":  50,
+"startLine":  38,
 "startColumn":  20,
-"endLine":  50,
+"endLine":  38,
 "endColumn":  26
 }
 }
@@ -1475,9 +1462,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
 "region":  {
-"startLine":  65,
+"startLine":  53,
 "startColumn":  30,
-"endLine":  65,
+"endLine":  53,
 "endColumn":  44
 }
 }
@@ -1488,9 +1475,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
 "region":  {
-"startLine":  65,
+"startLine":  53,
 "startColumn":  52,
-"endLine":  65,
+"endLine":  53,
 "endColumn":  58
 }
 }
@@ -1501,10 +1488,23 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
 "region":  {
-"startLine":  74,
+"startLine":  62,
 "startColumn":  17,
-"endLine":  74,
+"endLine":  62,
 "endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ObjectExtensions.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  38,
+"endLine":  21,
+"endColumn":  43
 }
 }
 },
@@ -1528,9 +1528,9 @@
 "uri":  "sources\Nancy\src\Nancy\Extensions\RequestExtensions.cs",
 "region":  {
 "startLine":  30,
-"startColumn":  38,
+"startColumn":  35,
 "endLine":  30,
-"endColumn":  45
+"endColumn":  42
 }
 }
 },
@@ -1538,12 +1538,12 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'stream' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\RequestStreamExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\StreamExtensions.cs",
 "region":  {
-"startLine":  22,
-"startColumn":  39,
-"endLine":  22,
-"endColumn":  45
+"startLine":  23,
+"startColumn":  21,
+"endLine":  23,
+"endColumn":  27
 }
 }
 },
@@ -1553,10 +1553,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
 "region":  {
-"startLine":  20,
-"startColumn":  25,
-"endLine":  20,
-"endColumn":  31
+"startLine":  87,
+"startColumn":  58,
+"endLine":  87,
+"endColumn":  64
 }
 }
 },
@@ -1566,36 +1566,36 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
 "region":  {
-"startLine":  32,
-"startColumn":  20,
-"endLine":  32,
-"endColumn":  26
+"startLine":  101,
+"startColumn":  58,
+"endLine":  101,
+"endColumn":  64
 }
 }
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'source' before using it.",
+"message":  "Refactor this method to add validation of parameter 'formatter' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
 "region":  {
-"startLine":  64,
-"startColumn":  20,
-"endLine":  64,
-"endColumn":  26
+"startLine":  27,
+"startColumn":  86,
+"endLine":  27,
+"endColumn":  95
 }
 }
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'source' before using it.",
+"message":  "Refactor this method to add validation of parameter 'formatter' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
 "region":  {
-"startLine":  78,
-"startColumn":  20,
-"endLine":  78,
-"endColumn":  26
+"startLine":  39,
+"startColumn":  73,
+"endLine":  39,
+"endColumn":  82
 }
 }
 },
@@ -1670,9 +1670,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\HeadResponse.cs",
 "region":  {
-"startLine":  30,
+"startLine":  31,
 "startColumn":  32,
-"endLine":  30,
+"endLine":  31,
 "endColumn":  40
 }
 }
@@ -1683,9 +1683,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  188,
+"startLine":  192,
 "startColumn":  20,
-"endLine":  188,
+"endLine":  192,
 "endColumn":  21
 }
 }
@@ -1696,9 +1696,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  416,
+"startLine":  417,
 "startColumn":  37,
-"endLine":  416,
+"endLine":  417,
 "endColumn":  40
 }
 }
@@ -1709,9 +1709,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
-"startLine":  456,
+"startLine":  457,
 "startColumn":  28,
-"endLine":  456,
+"endLine":  457,
 "endColumn":  29
 }
 }
@@ -1735,9 +1735,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
 "region":  {
-"startLine":  27,
+"startLine":  42,
 "startColumn":  24,
-"endLine":  27,
+"endLine":  42,
 "endColumn":  28
 }
 }
@@ -1748,10 +1748,114 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
 "region":  {
-"startLine":  28,
+"startLine":  43,
 "startColumn":  43,
-"endLine":  28,
+"endLine":  43,
 "endColumn":  53
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'jsonConfiguration' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  70,
+"endLine":  64,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'jsonConfiguration' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  41,
+"endLine":  79,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'output' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  13,
+"endLine":  170,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'contentType' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  27,
+"endLine":  64,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'contentType' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  20,
+"endLine":  66,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'type' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  36,
+"endLine":  126,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'p' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  24,
+"endLine":  148,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'input' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  29,
+"endLine":  168,
+"endColumn":  34
 }
 }
 },
@@ -1800,9 +1904,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Localization\TextResourceFinder.cs",
 "region":  {
-"startLine":  43,
+"startLine":  44,
 "startColumn":  42,
-"endLine":  43,
+"endLine":  44,
 "endColumn":  48
 }
 }
@@ -1813,9 +1917,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Localization\TextResourceFinder.cs",
 "region":  {
-"startLine":  76,
+"startLine":  94,
 "startColumn":  57,
-"endLine":  76,
+"endLine":  94,
 "endColumn":  63
 }
 }
@@ -1826,9 +1930,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Localization\TextResourceFinder.cs",
 "region":  {
-"startLine":  85,
+"startLine":  112,
 "startColumn":  21,
-"endLine":  85,
+"endLine":  112,
 "endColumn":  27
 }
 }
@@ -1839,9 +1943,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
 "region":  {
-"startLine":  595,
+"startLine":  608,
 "startColumn":  23,
-"endLine":  595,
+"endLine":  608,
 "endColumn":  31
 }
 }
@@ -1865,9 +1969,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  76,
+"startLine":  95,
 "startColumn":  35,
-"endLine":  76,
+"endLine":  95,
 "endColumn":  44
 }
 }
@@ -1878,9 +1982,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
-"startLine":  81,
+"startLine":  100,
 "startColumn":  25,
-"endLine":  81,
+"endLine":  100,
 "endColumn":  34
 }
 }
@@ -1891,10 +1995,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializer.cs",
 "region":  {
-"startLine":  59,
-"startColumn":  13,
-"endLine":  59,
-"endColumn":  23
+"startLine":  53,
+"startColumn":  17,
+"endLine":  53,
+"endColumn":  27
 }
 }
 },
@@ -1904,9 +2008,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializer.cs",
 "region":  {
-"startLine":  66,
+"startLine":  64,
 "startColumn":  85,
-"endLine":  66,
+"endLine":  64,
 "endColumn":  92
 }
 }
@@ -1918,9 +2022,9 @@
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializer.cs",
 "region":  {
 "startLine":  43,
-"startColumn":  13,
+"startColumn":  17,
 "endLine":  43,
-"endColumn":  23
+"endColumn":  27
 }
 }
 },
@@ -1930,9 +2034,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializer.cs",
 "region":  {
-"startLine":  44,
+"startLine":  48,
 "startColumn":  41,
-"endLine":  44,
+"endLine":  48,
 "endColumn":  48
 }
 }
@@ -1995,9 +2099,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
 "region":  {
-"startLine":  45,
+"startLine":  48,
 "startColumn":  50,
-"endLine":  45,
+"endLine":  48,
 "endColumn":  56
 }
 }
@@ -2008,9 +2112,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
 "region":  {
-"startLine":  322,
+"startLine":  325,
 "startColumn":  47,
-"endLine":  322,
+"endLine":  325,
 "endColumn":  53
 }
 }
@@ -2021,9 +2125,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
 "region":  {
-"startLine":  81,
+"startLine":  92,
 "startColumn":  51,
-"endLine":  81,
+"endLine":  92,
 "endColumn":  55
 }
 }
@@ -2034,9 +2138,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
 "region":  {
-"startLine":  114,
+"startLine":  125,
 "startColumn":  51,
-"endLine":  114,
+"endLine":  125,
 "endColumn":  55
 }
 }
@@ -2047,9 +2151,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NancyEngineExtensions.cs",
 "region":  {
-"startLine":  16,
+"startLine":  19,
 "startColumn":  20,
-"endLine":  16,
+"endLine":  19,
 "endColumn":  31
 }
 }
@@ -2060,9 +2164,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  20,
+"startLine":  23,
 "startColumn":  13,
-"endLine":  20,
+"endLine":  23,
 "endColumn":  23
 }
 }
@@ -2073,9 +2177,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  32,
+"startLine":  35,
 "startColumn":  36,
-"endLine":  32,
+"endLine":  35,
 "endColumn":  43
 }
 }
@@ -2086,9 +2190,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  87,
+"startLine":  90,
 "startColumn":  42,
-"endLine":  87,
+"endLine":  90,
 "endColumn":  49
 }
 }
@@ -2099,9 +2203,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  89,
+"startLine":  92,
 "startColumn":  17,
-"endLine":  89,
+"endLine":  92,
 "endColumn":  27
 }
 }
@@ -2112,9 +2216,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  102,
+"startLine":  105,
 "startColumn":  13,
-"endLine":  102,
+"endLine":  105,
 "endColumn":  23
 }
 }
@@ -2125,9 +2229,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  118,
+"startLine":  121,
 "startColumn":  17,
-"endLine":  118,
+"endLine":  121,
 "endColumn":  27
 }
 }
@@ -2138,9 +2242,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  139,
+"startLine":  142,
 "startColumn":  13,
-"endLine":  139,
+"endLine":  142,
 "endColumn":  23
 }
 }
@@ -2151,9 +2255,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  152,
+"startLine":  155,
 "startColumn":  13,
-"endLine":  152,
+"endLine":  155,
 "endColumn":  23
 }
 }
@@ -2164,9 +2268,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  180,
+"startLine":  183,
 "startColumn":  13,
-"endLine":  180,
+"endLine":  183,
 "endColumn":  23
 }
 }
@@ -2177,9 +2281,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  220,
+"startLine":  223,
 "startColumn":  13,
-"endLine":  220,
+"endLine":  223,
 "endColumn":  23
 }
 }
@@ -2190,9 +2294,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  232,
+"startLine":  235,
 "startColumn":  13,
-"endLine":  232,
+"endLine":  235,
 "endColumn":  23
 }
 }
@@ -2203,9 +2307,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
-"startLine":  244,
+"startLine":  247,
 "startColumn":  13,
-"endLine":  244,
+"endLine":  247,
 "endColumn":  23
 }
 }
@@ -2242,9 +2346,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\PipelineItem.cs",
 "region":  {
-"startLine":  22,
+"startLine":  59,
 "startColumn":  20,
-"endLine":  22,
+"endLine":  59,
 "endColumn":  32
 }
 }
@@ -2346,10 +2450,23 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
 "region":  {
-"startLine":  75,
+"startLine":  77,
 "startColumn":  21,
-"endLine":  75,
+"endLine":  77,
 "endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  31,
+"endLine":  44,
+"endColumn":  38
 }
 }
 },
@@ -2359,10 +2476,36 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\MaterialisingResponse.cs",
 "region":  {
-"startLine":  34,
+"startLine":  47,
 "startColumn":  32,
-"endLine":  34,
+"endLine":  47,
 "endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'requestUrl' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  83,
+"endLine":  368,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'linkProcessors' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  43,
+"endLine":  377,
+"endColumn":  57
 }
 }
 },
@@ -2372,9 +2515,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
 "region":  {
-"startLine":  87,
+"startLine":  91,
 "startColumn":  38,
-"endLine":  87,
+"endLine":  91,
 "endColumn":  43
 }
 }
@@ -2385,23 +2528,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
 "region":  {
-"startLine":  97,
+"startLine":  101,
 "startColumn":  67,
-"endLine":  97,
+"endLine":  101,
 "endColumn":  72
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'mediaRange' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
-"region":  {
-"startLine":  107,
-"startColumn":  17,
-"endLine":  107,
-"endColumn":  27
 }
 }
 },
@@ -2411,9 +2541,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
 "region":  {
-"startLine":  66,
+"startLine":  67,
 "startColumn":  70,
-"endLine":  66,
+"endLine":  67,
 "endColumn":  75
 }
 }
@@ -2424,9 +2554,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
 "region":  {
-"startLine":  93,
+"startLine":  102,
 "startColumn":  37,
-"endLine":  93,
+"endLine":  102,
 "endColumn":  57
 }
 }
@@ -2437,9 +2567,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
 "region":  {
-"startLine":  103,
+"startLine":  112,
 "startColumn":  30,
-"endLine":  103,
+"endLine":  112,
 "endColumn":  40
 }
 }
@@ -2450,9 +2580,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaType.cs",
 "region":  {
-"startLine":  41,
+"startLine":  42,
 "startColumn":  20,
-"endLine":  41,
+"endLine":  42,
 "endColumn":  25
 }
 }
@@ -2463,9 +2593,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaType.cs",
 "region":  {
-"startLine":  52,
+"startLine":  67,
 "startColumn":  20,
-"endLine":  52,
+"endLine":  67,
 "endColumn":  34
 }
 }
@@ -2476,9 +2606,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ViewProcessor.cs",
 "region":  {
-"startLine":  44,
+"startLine":  47,
 "startColumn":  17,
-"endLine":  44,
+"endLine":  47,
 "endColumn":  36
 }
 }
@@ -2489,23 +2619,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ViewProcessor.cs",
 "region":  {
-"startLine":  60,
+"startLine":  63,
 "startColumn":  60,
-"endLine":  60,
+"endLine":  63,
 "endColumn":  67
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'rootPathProvider' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\RootPathApplicationStartup.cs",
-"region":  {
-"startLine":  18,
-"startColumn":  47,
-"endLine":  18,
-"endColumn":  63
 }
 }
 },
@@ -2515,9 +2632,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\CustomDateTimeRouteSegmentConstraint.cs",
 "region":  {
-"startLine":  19,
+"startLine":  32,
 "startColumn":  17,
-"endLine":  19,
+"endLine":  32,
 "endColumn":  27
 }
 }
@@ -2528,9 +2645,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\LengthRouteSegmentConstraint.cs",
 "region":  {
-"startLine":  18,
+"startLine":  31,
 "startColumn":  17,
-"endLine":  18,
+"endLine":  31,
 "endColumn":  27
 }
 }
@@ -2541,9 +2658,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\LengthRouteSegmentConstraint.cs",
 "region":  {
-"startLine":  43,
+"startLine":  56,
 "startColumn":  17,
-"endLine":  43,
+"endLine":  56,
 "endColumn":  24
 }
 }
@@ -2554,9 +2671,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxLengthRouteSegmentConstraint.cs",
 "region":  {
-"startLine":  17,
+"startLine":  32,
 "startColumn":  35,
-"endLine":  17,
+"endLine":  32,
 "endColumn":  45
 }
 }
@@ -2567,9 +2684,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxLengthRouteSegmentConstraint.cs",
 "region":  {
-"startLine":  23,
+"startLine":  38,
 "startColumn":  17,
-"endLine":  23,
+"endLine":  38,
 "endColumn":  24
 }
 }
@@ -2580,9 +2697,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxRouteSegmentConstraint.cs",
 "region":  {
-"startLine":  18,
+"startLine":  31,
 "startColumn":  35,
-"endLine":  18,
+"endLine":  31,
 "endColumn":  45
 }
 }
@@ -2593,9 +2710,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinLengthRouteSegmentConstraint.cs",
 "region":  {
-"startLine":  17,
+"startLine":  30,
 "startColumn":  35,
-"endLine":  17,
+"endLine":  30,
 "endColumn":  45
 }
 }
@@ -2606,9 +2723,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinLengthRouteSegmentConstraint.cs",
 "region":  {
-"startLine":  23,
+"startLine":  36,
 "startColumn":  17,
-"endLine":  23,
+"endLine":  36,
 "endColumn":  24
 }
 }
@@ -2619,9 +2736,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinRouteSegmentConstraint.cs",
 "region":  {
-"startLine":  18,
+"startLine":  33,
 "startColumn":  35,
-"endLine":  18,
+"endLine":  33,
 "endColumn":  45
 }
 }
@@ -2632,9 +2749,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
 "region":  {
-"startLine":  14,
+"startLine":  21,
 "startColumn":  89,
-"endLine":  14,
+"endLine":  21,
 "endColumn":  99
 }
 }
@@ -2645,9 +2762,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
 "region":  {
-"startLine":  19,
+"startLine":  35,
 "startColumn":  30,
-"endLine":  19,
+"endLine":  35,
 "endColumn":  40
 }
 }
@@ -2658,9 +2775,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\RangeRouteSegmentConstraint.cs",
 "region":  {
-"startLine":  19,
+"startLine":  34,
 "startColumn":  17,
-"endLine":  19,
+"endLine":  34,
 "endColumn":  27
 }
 }
@@ -2671,9 +2788,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\RouteSegmentConstraintBase.cs",
 "region":  {
-"startLine":  21,
+"startLine":  28,
 "startColumn":  20,
-"endLine":  21,
+"endLine":  28,
 "endColumn":  30
 }
 }
@@ -2710,9 +2827,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteDescriptionProvider.cs",
 "region":  {
-"startLine":  23,
+"startLine":  24,
 "startColumn":  17,
-"endLine":  23,
+"endLine":  24,
 "endColumn":  23
 }
 }
@@ -2723,9 +2840,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteInvoker.cs",
 "region":  {
-"startLine":  42,
+"startLine":  40,
 "startColumn":  32,
-"endLine":  42,
+"endLine":  40,
 "endColumn":  37
 }
 }
@@ -2736,9 +2853,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteResolver.cs",
 "region":  {
-"startLine":  46,
+"startLine":  52,
 "startColumn":  39,
-"endLine":  46,
+"endLine":  52,
 "endColumn":  46
 }
 }
@@ -2801,9 +2918,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
 "region":  {
-"startLine":  62,
+"startLine":  69,
 "startColumn":  36,
-"endLine":  62,
+"endLine":  69,
 "endColumn":  41
 }
 }
@@ -2827,9 +2944,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyCaptureNode.cs",
 "region":  {
-"startLine":  49,
+"startLine":  56,
 "startColumn":  40,
-"endLine":  49,
+"endLine":  56,
 "endColumn":  48
 }
 }
@@ -2840,9 +2957,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RootNode.cs",
 "region":  {
-"startLine":  37,
+"startLine":  42,
 "startColumn":  17,
-"endLine":  37,
+"endLine":  42,
 "endColumn":  25
 }
 }
@@ -2931,10 +3048,23 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
 "region":  {
-"startLine":  31,
+"startLine":  35,
 "startColumn":  39,
-"endLine":  31,
+"endLine":  35,
 "endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'path' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  38,
+"endLine":  76,
+"endColumn":  42
 }
 }
 },
@@ -2944,23 +3074,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
 "region":  {
-"startLine":  34,
+"startLine":  39,
 "startColumn":  25,
-"endLine":  34,
+"endLine":  39,
 "endColumn":  32
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  13,
-"endLine":  62,
-"endColumn":  22
 }
 }
 },
@@ -2979,13 +3096,26 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  13,
+"endLine":  80,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'module' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
 "region":  {
-"startLine":  83,
+"startLine":  92,
 "startColumn":  13,
-"endLine":  83,
+"endLine":  92,
 "endColumn":  19
 }
 }
@@ -2996,9 +3126,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
 "region":  {
-"startLine":  113,
+"startLine":  131,
 "startColumn":  27,
-"endLine":  113,
+"endLine":  131,
 "endColumn":  33
 }
 }
@@ -3009,9 +3139,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
 "region":  {
-"startLine":  21,
+"startLine":  24,
 "startColumn":  20,
-"endLine":  21,
+"endLine":  24,
 "endColumn":  25
 }
 }
@@ -3022,9 +3152,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
 "region":  {
-"startLine":  34,
+"startLine":  37,
 "startColumn":  13,
-"endLine":  34,
+"endLine":  37,
 "endColumn":  18
 }
 }
@@ -3035,9 +3165,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
 "region":  {
-"startLine":  34,
+"startLine":  37,
 "startColumn":  26,
-"endLine":  34,
+"endLine":  37,
 "endColumn":  38
 }
 }
@@ -3048,9 +3178,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
 "region":  {
-"startLine":  47,
+"startLine":  50,
 "startColumn":  13,
-"endLine":  47,
+"endLine":  50,
 "endColumn":  18
 }
 }
@@ -3074,9 +3204,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
 "region":  {
-"startLine":  62,
+"startLine":  84,
 "startColumn":  13,
-"endLine":  62,
+"endLine":  84,
 "endColumn":  19
 }
 }
@@ -3087,9 +3217,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
 "region":  {
-"startLine":  73,
+"startLine":  95,
 "startColumn":  13,
-"endLine":  73,
+"endLine":  95,
 "endColumn":  19
 }
 }
@@ -3113,9 +3243,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessions.cs",
 "region":  {
-"startLine":  175,
+"startLine":  170,
 "startColumn":  17,
-"endLine":  175,
+"endLine":  170,
 "endColumn":  24
 }
 }
@@ -3139,10 +3269,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  293,
-"startColumn":  18,
-"endLine":  293,
-"endColumn":  26
+"startLine":  334,
+"startColumn":  30,
+"endLine":  334,
+"endColumn":  38
 }
 }
 },
@@ -3152,9 +3282,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  533,
+"startLine":  587,
 "startColumn":  46,
-"endLine":  533,
+"endLine":  587,
 "endColumn":  50
 }
 }
@@ -3165,9 +3295,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  538,
+"startLine":  592,
 "startColumn":  46,
-"endLine":  538,
+"endLine":  592,
 "endColumn":  50
 }
 }
@@ -3178,9 +3308,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  548,
+"startLine":  615,
 "startColumn":  55,
-"endLine":  548,
+"endLine":  615,
 "endColumn":  59
 }
 }
@@ -3191,9 +3321,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  553,
+"startLine":  620,
 "startColumn":  55,
-"endLine":  553,
+"endLine":  620,
 "endColumn":  59
 }
 }
@@ -3204,9 +3334,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  564,
+"startLine":  644,
 "startColumn":  54,
-"endLine":  564,
+"endLine":  644,
 "endColumn":  58
 }
 }
@@ -3217,9 +3347,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  569,
+"startLine":  649,
 "startColumn":  54,
-"endLine":  569,
+"endLine":  649,
 "endColumn":  58
 }
 }
@@ -3230,9 +3360,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  574,
+"startLine":  654,
 "startColumn":  65,
-"endLine":  574,
+"endLine":  654,
 "endColumn":  77
 }
 }
@@ -3243,9 +3373,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  574,
+"startLine":  654,
 "startColumn":  88,
-"endLine":  574,
+"endLine":  654,
 "endColumn":  106
 }
 }
@@ -3256,9 +3386,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  579,
+"startLine":  659,
 "startColumn":  65,
-"endLine":  579,
+"endLine":  659,
 "endColumn":  77
 }
 }
@@ -3269,9 +3399,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  579,
+"startLine":  659,
 "startColumn":  88,
-"endLine":  579,
+"endLine":  659,
 "endColumn":  106
 }
 }
@@ -3282,9 +3412,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  589,
+"startLine":  682,
 "startColumn":  46,
-"endLine":  589,
+"endLine":  682,
 "endColumn":  50
 }
 }
@@ -3295,9 +3425,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  594,
+"startLine":  687,
 "startColumn":  46,
-"endLine":  594,
+"endLine":  687,
 "endColumn":  50
 }
 }
@@ -3308,9 +3438,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  604,
+"startLine":  710,
 "startColumn":  46,
-"endLine":  604,
+"endLine":  710,
 "endColumn":  50
 }
 }
@@ -3321,9 +3451,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  609,
+"startLine":  715,
 "startColumn":  46,
-"endLine":  609,
+"endLine":  715,
 "endColumn":  50
 }
 }
@@ -3334,9 +3464,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  1448,
+"startLine":  1603,
 "startColumn":  22,
-"endLine":  1448,
+"endLine":  1603,
 "endColumn":  38
 }
 }
@@ -3347,140 +3477,49 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  1461,
+"startLine":  1616,
 "startColumn":  145,
-"endLine":  1461,
+"endLine":  1616,
 "endColumn":  161
 }
 }
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'type' before using it.",
+"message":  "Refactor this method to add validation of parameter 'typeCatalog' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TypeCatalogExtensions.cs",
 "region":  {
-"startLine":  3859,
+"startLine":  19,
 "startColumn":  20,
-"endLine":  3859,
-"endColumn":  24
+"endLine":  19,
+"endColumn":  31
 }
 }
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'type' before using it.",
+"message":  "Refactor this method to add validation of parameter 'typeCatalog' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TypeCatalogExtensions.cs",
 "region":  {
-"startLine":  3864,
+"startLine":  30,
 "startColumn":  20,
-"endLine":  3864,
-"endColumn":  24
+"endLine":  30,
+"endColumn":  31
 }
 }
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'type' before using it.",
+"message":  "Refactor this method to add validation of parameter 'typeCatalog' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TypeCatalogExtensions.cs",
 "region":  {
-"startLine":  3869,
+"startLine":  42,
 "startColumn":  20,
-"endLine":  3869,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'type' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3874,
-"startColumn":  20,
-"endLine":  3874,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'type' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3879,
-"startColumn":  20,
-"endLine":  3879,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'type' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3884,
-"startColumn":  20,
-"endLine":  3884,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'type' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3889,
-"startColumn":  20,
-"endLine":  3889,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'type' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3894,
-"startColumn":  20,
-"endLine":  3894,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'type' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3899,
-"startColumn":  20,
-"endLine":  3899,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'type' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3904,
-"startColumn":  20,
-"endLine":  3904,
-"endColumn":  24
+"endLine":  42,
+"endColumn":  31
 }
 }
 },
@@ -3490,9 +3529,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Url.cs",
 "region":  {
-"startLine":  158,
+"startLine":  157,
 "startColumn":  20,
-"endLine":  158,
+"endLine":  157,
 "endColumn":  23
 }
 }
@@ -3503,9 +3542,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Url.cs",
 "region":  {
-"startLine":  178,
+"startLine":  177,
 "startColumn":  28,
-"endLine":  178,
+"endLine":  177,
 "endColumn":  31
 }
 }
@@ -3516,9 +3555,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Url.cs",
 "region":  {
-"startLine":  188,
+"startLine":  187,
 "startColumn":  17,
-"endLine":  188,
+"endLine":  187,
 "endColumn":  20
 }
 }
@@ -3568,9 +3607,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewCache.cs",
 "region":  {
-"startLine":  32,
+"startLine":  36,
 "startColumn":  21,
-"endLine":  32,
+"endLine":  36,
 "endColumn":  39
 }
 }
@@ -3581,9 +3620,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\FileSystemViewLocationProvider.cs",
 "region":  {
-"startLine":  33,
+"startLine":  35,
 "startColumn":  29,
-"endLine":  33,
+"endLine":  35,
 "endColumn":  45
 }
 }

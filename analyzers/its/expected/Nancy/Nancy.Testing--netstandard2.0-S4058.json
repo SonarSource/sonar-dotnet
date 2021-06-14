@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'Asserts.Equal' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  71,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  66,
+"endLine":  188,
+"endColumn":  81
+}
+}
+}
+]
+}

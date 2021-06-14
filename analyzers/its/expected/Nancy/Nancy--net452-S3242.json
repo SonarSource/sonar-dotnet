@@ -45,9 +45,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
-"startLine":  191,
+"startLine":  200,
 "startColumn":  177,
-"endLine":  191,
+"endLine":  200,
 "endColumn":  187
 }
 }
@@ -58,9 +58,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
-"startLine":  176,
+"startLine":  211,
 "startColumn":  112,
-"endLine":  176,
+"endLine":  211,
 "endColumn":  122
 }
 }
@@ -71,36 +71,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
 "region":  {
-"startLine":  62,
+"startLine":  68,
 "startColumn":  59,
-"endLine":  62,
+"endLine":  68,
 "endColumn":  67
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.IO.Stream' instead of 'Nancy.IO.RequestStream'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\RequestStreamExtensions.cs",
-"region":  {
-"startLine":  18,
-"startColumn":  58,
-"endLine":  18,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Reflection.ICustomAttributeProvider' instead of 'System.Reflection.MemberInfo'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  284,
-"startColumn":  39,
-"endLine":  284,
-"endColumn":  41
 }
 }
 },
@@ -110,9 +84,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteResolver.cs",
 "region":  {
-"startLine":  138,
+"startLine":  144,
 "startColumn":  89,
-"endLine":  138,
+"endLine":  144,
 "endColumn":  95
 }
 }
@@ -153,6 +127,45 @@
 "startColumn":  65,
 "endLine":  18,
 "endColumn":  69
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Security.Principal.IPrincipal' instead of 'System.Security.Claims.ClaimsPrincipal'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  59,
+"endLine":  66,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Security.Principal.IPrincipal' instead of 'System.Security.Claims.ClaimsPrincipal'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  61,
+"endLine":  77,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, string>' instead of 'System.Collections.Generic.Dictionary<string, string>'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  70,
+"endLine":  175,
+"endColumn":  80
 }
 }
 }

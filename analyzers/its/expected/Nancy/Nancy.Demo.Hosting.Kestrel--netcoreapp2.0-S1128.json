@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\samples\Nancy.Demo.Hosting.Kestrel\DemoBootstrapper.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  17
+}
+}
+}
+]
+}

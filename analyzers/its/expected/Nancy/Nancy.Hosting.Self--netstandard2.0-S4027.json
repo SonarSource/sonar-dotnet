@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\AutomaticUrlReservationCreationFailureException.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  65
+}
+}
+}
+]
+}

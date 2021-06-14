@@ -1,0 +1,3631 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  20,
+"endLine":  40,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  13,
+"endLine":  67,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  13,
+"endLine":  81,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelineToAdd' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  42,
+"endLine":  95,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelineToAddTo' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  17,
+"endLine":  97,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'item' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  51,
+"endLine":  124,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'item' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  51,
+"endLine":  180,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  20,
+"endLine":  42,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  13,
+"endLine":  70,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  13,
+"endLine":  85,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelineToAdd' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  42,
+"endLine":  100,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelineToAddTo' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  17,
+"endLine":  102,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  13,
+"endLine":  154,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Pipelines.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  35,
+"endLine":  27,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'defaultImplementationFactory' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  96,
+"endLine":  158,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironmentConfigurator.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  13,
+"endLine":  35,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'environment' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'environment' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  24,
+"endLine":  41,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'environment' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  20,
+"endLine":  55,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'environment' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  20,
+"endLine":  70,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  17,
+"endLine":  25,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  17,
+"endLine":  49,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  17,
+"endLine":  73,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  31,
+"endLine":  96,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  17,
+"endLine":  115,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  17,
+"endLine":  135,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  20,
+"endLine":  161,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'conventions' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultAcceptHeaderCoercionConventions.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  17,
+"endLine":  29,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'conventions' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultCultureConventions.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  17,
+"endLine":  28,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'conventions' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultStaticContentsConventions.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'conventions' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultStaticContentsConventions.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  17,
+"endLine":  30,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'conventions' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  17,
+"endLine":  29,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'conventions' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  13,
+"endLine":  20,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'conventions' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'keyGenerator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\AesEncryptionProvider.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  24,
+"endLine":  22,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'keyGenerator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\DefaultHmacProvider.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  24,
+"endLine":  32,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'hmac1' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\HmacComparer.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  17,
+"endLine":  23,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'hmac2' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\HmacComparer.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  17,
+"endLine":  29,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'hmac1' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\HmacComparer.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  21,
+"endLine":  38,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'hmac2' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\HmacComparer.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  33,
+"endLine":  38,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'salt' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\PassphraseKeyGenerator.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  17,
+"endLine":  26,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  13,
+"endLine":  88,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'applicationContainer' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  13,
+"endLine":  99,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeRegistrations' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  46,
+"endLine":  109,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  25,
+"endLine":  114,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  25,
+"endLine":  117,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'collectionTypeRegistrations' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  56,
+"endLine":  135,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  25,
+"endLine":  140,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  25,
+"endLine":  143,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'moduleRegistrationTypes' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  52,
+"endLine":  160,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  17,
+"endLine":  162,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'instanceRegistrations' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  50,
+"endLine":  177,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  17,
+"endLine":  179,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  13,
+"endLine":  228,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  32,
+"endLine":  259,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  13,
+"endLine":  271,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'strategy' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultTypeCatalog.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  90,
+"endLine":  36,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTracing.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  37,
+"endLine":  30,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'logDelegate' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultTraceLog.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  17,
+"endLine":  29,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  13,
+"endLine":  66,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  13,
+"endLine":  150,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'plainText' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  51,
+"endLine":  59,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'salt' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  70,
+"endLine":  59,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'interactiveDiagnosticMethod' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  91,
+"endLine":  66,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'interactiveDiagnosticMethod' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  34,
+"endLine":  69,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'interactiveDiagnosticMethod' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  34,
+"endLine":  79,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'request' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\RequestData.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  31,
+"endLine":  42,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\ResponseData.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  31,
+"endLine":  43,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'values' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  33,
+"endLine":  58,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'binder' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  18,
+"endLine":  73,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'binder' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  46,
+"endLine":  84,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'binder' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  17,
+"endLine":  235,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'arg' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  56,
+"endLine":  241,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'binder' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  30,
+"endLine":  269,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  371,
+"startColumn":  18,
+"endLine":  371,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  18,
+"endLine":  390,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  418,
+"startColumn":  20,
+"endLine":  418,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  18,
+"endLine":  434,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  18,
+"endLine":  452,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  475,
+"startColumn":  18,
+"endLine":  475,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  18,
+"endLine":  493,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  517,
+"startColumn":  18,
+"endLine":  517,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  536,
+"startColumn":  18,
+"endLine":  536,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  559,
+"startColumn":  18,
+"endLine":  559,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  578,
+"startColumn":  18,
+"endLine":  578,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  18,
+"endLine":  598,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  616,
+"startColumn":  18,
+"endLine":  616,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  640,
+"startColumn":  18,
+"endLine":  640,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  659,
+"startColumn":  18,
+"endLine":  659,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  683,
+"startColumn":  18,
+"endLine":  683,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  702,
+"startColumn":  18,
+"endLine":  702,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  726,
+"startColumn":  18,
+"endLine":  726,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  744,
+"startColumn":  18,
+"endLine":  744,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  17,
+"endLine":  69,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  20,
+"endLine":  45,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  13,
+"endLine":  73,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelineToAdd' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  42,
+"endLine":  88,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelineToAddTo' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  17,
+"endLine":  90,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'assembly' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\AssemblyExtensions.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  25,
+"endLine":  24,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'source' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  20,
+"endLine":  20,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'source' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  33,
+"endLine":  32,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'source' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  41,
+"endLine":  79,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  20,
+"endLine":  20,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  17,
+"endLine":  36,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  13,
+"endLine":  74,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  17,
+"endLine":  122,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  13,
+"endLine":  139,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  39,
+"endLine":  163,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'stream' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\MemoryStreamExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  17,
+"endLine":  20,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'errors' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ModelValidationErrorExtensions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  18,
+"endLine":  22,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  28,
+"endLine":  18,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  20,
+"endLine":  38,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'beforeDelegate' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  30,
+"endLine":  53,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  52,
+"endLine":  53,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  17,
+"endLine":  62,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ObjectExtensions.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  38,
+"endLine":  21,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'request' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\RequestExtensions.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  20,
+"endLine":  21,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'request' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\RequestExtensions.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  35,
+"endLine":  30,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'stream' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\StreamExtensions.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  21,
+"endLine":  23,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'source' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  58,
+"endLine":  87,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'source' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  58,
+"endLine":  101,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'formatter' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  86,
+"endLine":  27,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'formatter' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  73,
+"endLine":  39,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'formatter' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  66,
+"endLine":  101,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'formatter' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  64,
+"endLine":  103,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'formatter' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  41,
+"endLine":  117,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'formatter' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  64,
+"endLine":  130,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'formatter' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  63,
+"endLine":  132,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HeadResponse.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  32,
+"endLine":  31,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'e' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  20,
+"endLine":  192,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Enc' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  417,
+"startColumn":  37,
+"endLine":  417,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'e' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  457,
+"startColumn":  28,
+"endLine":  457,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'boundary' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpFile.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  20,
+"endLine":  16,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'type' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  24,
+"endLine":  42,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dictionary' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  43,
+"endLine":  43,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'jsonConfiguration' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  70,
+"endLine":  64,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'jsonConfiguration' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  41,
+"endLine":  79,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'output' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  13,
+"endLine":  170,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'contentType' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  27,
+"endLine":  64,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'contentType' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  20,
+"endLine":  66,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'type' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  36,
+"endLine":  126,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'p' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  24,
+"endLine":  148,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'input' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  29,
+"endLine":  168,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Jsonp.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  32,
+"endLine":  36,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Jsonp.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  13,
+"endLine":  51,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  87,
+"endLine":  78,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'binder' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Localization\TextResourceFinder.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  42,
+"endLine":  44,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'binder' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Localization\TextResourceFinder.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  57,
+"endLine":  94,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'binder' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Localization\TextResourceFinder.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  21,
+"endLine":  112,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'fileName' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"region":  {
+"startLine":  608,
+"startColumn":  23,
+"endLine":  608,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'type' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  34,
+"endLine":  168,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'modelType' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  35,
+"endLine":  95,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'modelType' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  25,
+"endLine":  100,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'bodyStream' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializer.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  17,
+"endLine":  53,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializer.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  85,
+"endLine":  64,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'bodyStream' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializer.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  17,
+"endLine":  43,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializer.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  41,
+"endLine":  48,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\DateTimeConverter.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  70,
+"endLine":  35,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\NumericConverter.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  70,
+"endLine":  38,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'binder' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DynamicModelBinderAdapter.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  51,
+"endLine":  58,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'expression' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ExpressionExtensions.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  21,
+"endLine":  18,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  50,
+"endLine":  48,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  47,
+"endLine":  325,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'item' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  51,
+"endLine":  92,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'item' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  51,
+"endLine":  125,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'nancyEngine' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngineExtensions.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  20,
+"endLine":  19,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'negotiator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  13,
+"endLine":  23,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'cookies' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  36,
+"endLine":  35,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'headers' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  42,
+"endLine":  90,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'negotiator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  17,
+"endLine":  92,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'negotiator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  13,
+"endLine":  105,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'negotiator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  17,
+"endLine":  121,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'negotiator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  13,
+"endLine":  142,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'negotiator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  13,
+"endLine":  155,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'negotiator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  13,
+"endLine":  183,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'negotiator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  13,
+"endLine":  223,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'negotiator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  13,
+"endLine":  235,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'negotiator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  13,
+"endLine":  247,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyContextExtensions.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  17,
+"endLine":  18,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'nancyOptions' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyOptionsExtensions.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelineItem' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\PipelineItem.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  20,
+"endLine":  59,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  17,
+"endLine":  38,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  13,
+"endLine":  92,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  17,
+"endLine":  133,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'headers' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  42,
+"endLine":  138,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  13,
+"endLine":  154,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  13,
+"endLine":  166,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  13,
+"endLine":  178,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'outputStream' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  21,
+"endLine":  77,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  31,
+"endLine":  44,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceResponse' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\MaterialisingResponse.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  32,
+"endLine":  47,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'requestUrl' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  83,
+"endLine":  368,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'linkProcessors' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  43,
+"endLine":  377,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  38,
+"endLine":  91,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  67,
+"endLine":  101,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  70,
+"endLine":  67,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'mediaRangeParameters' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  37,
+"endLine":  102,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'parameters' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  30,
+"endLine":  112,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaType.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  20,
+"endLine":  42,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'inputMediaType' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaType.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  20,
+"endLine":  67,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'requestedMediaRange' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ViewProcessor.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  17,
+"endLine":  47,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ViewProcessor.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  60,
+"endLine":  63,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'parameters' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\CustomDateTimeRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  17,
+"endLine":  32,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'parameters' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\LengthRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  17,
+"endLine":  31,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'segment' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\LengthRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  17,
+"endLine":  56,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'parameters' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxLengthRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  35,
+"endLine":  32,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'segment' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxLengthRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  17,
+"endLine":  38,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'parameters' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  35,
+"endLine":  31,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'parameters' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinLengthRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  35,
+"endLine":  30,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'segment' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinLengthRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  17,
+"endLine":  36,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'parameters' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  35,
+"endLine":  33,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'constraint' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  89,
+"endLine":  21,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'constraint' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  30,
+"endLine":  35,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'parameters' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\RangeRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  17,
+"endLine":  34,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'constraint' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\RouteSegmentConstraintBase.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  20,
+"endLine":  28,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultNancyModuleBuilder.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  13,
+"endLine":  51,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteDescriptionProvider.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  17,
+"endLine":  24,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'route' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteInvoker.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  32,
+"endLine":  40,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteResolver.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  39,
+"endLine":  52,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'path' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteSegmentExtractor.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  41,
+"endLine":  20,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'contextFactory' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  34,
+"endLine":  41,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'moduleCatalog' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  33,
+"endLine":  43,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'cache' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteCacheExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  20,
+"endLine":  20,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  36,
+"endLine":  69,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'data' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\NodeDataExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  30,
+"endLine":  20,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'segments' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyCaptureNode.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  40,
+"endLine":  56,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'segments' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RootNode.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  17,
+"endLine":  42,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'segments' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  44,
+"endLine":  96,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'segments' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  43,
+"endLine":  126,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'routeDescription' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  37,
+"endLine":  175,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'segments' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  36,
+"endLine":  192,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'localCaptures' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  46,
+"endLine":  224,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'localCaptures' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  48,
+"endLine":  249,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'cache' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  39,
+"endLine":  35,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'path' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  38,
+"endLine":  76,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'segment' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  25,
+"endLine":  39,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  71,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  13,
+"endLine":  80,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  13,
+"endLine":  92,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  27,
+"endLine":  131,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'token' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  20,
+"endLine":  24,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'token' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  13,
+"endLine":  37,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'hmacProvider' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  26,
+"endLine":  37,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'token' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  13,
+"endLine":  50,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'cryptoConfig' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\DefaultCsrfTokenValidator.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  33,
+"endLine":  22,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  13,
+"endLine":  84,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  13,
+"endLine":  95,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\SSLProxy.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  13,
+"endLine":  19,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'request' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessions.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  17,
+"endLine":  170,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  13,
+"endLine":  51,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'assembly' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  334,
+"startColumn":  30,
+"endLine":  334,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  587,
+"startColumn":  46,
+"endLine":  587,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  592,
+"startColumn":  46,
+"endLine":  592,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  615,
+"startColumn":  55,
+"endLine":  615,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  620,
+"startColumn":  55,
+"endLine":  620,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  644,
+"startColumn":  54,
+"endLine":  644,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  54,
+"endLine":  649,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'registerType' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  654,
+"startColumn":  65,
+"endLine":  654,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'implementationType' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  654,
+"startColumn":  88,
+"endLine":  654,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'registerType' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  659,
+"startColumn":  65,
+"endLine":  659,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'implementationType' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  659,
+"startColumn":  88,
+"endLine":  659,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  682,
+"startColumn":  46,
+"endLine":  682,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  687,
+"startColumn":  46,
+"endLine":  687,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  710,
+"startColumn":  46,
+"endLine":  710,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  715,
+"startColumn":  46,
+"endLine":  715,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'registrationType' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  1603,
+"startColumn":  22,
+"endLine":  1603,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'registrationType' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  1616,
+"startColumn":  145,
+"endLine":  1616,
+"endColumn":  161
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeCatalog' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TypeCatalogExtensions.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  20,
+"endLine":  19,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeCatalog' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TypeCatalogExtensions.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  20,
+"endLine":  30,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeCatalog' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TypeCatalogExtensions.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  20,
+"endLine":  42,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'url' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Url.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  20,
+"endLine":  157,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'url' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Url.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  28,
+"endLine":  177,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'uri' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Url.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  17,
+"endLine":  187,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'error' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationError.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  20,
+"endLine":  49,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\ModuleExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  17,
+"endLine":  20,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'viewLocationContext' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultRenderContext.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  76,
+"endLine":  38,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'viewLocationResult' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewCache.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  21,
+"endLine":  36,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'rootPathProvider' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\FileSystemViewLocationProvider.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  29,
+"endLine":  35,
+"endColumn":  45
+}
+}
+}
+]
+}

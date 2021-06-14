@@ -2,27 +2,27 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove the unused private property 'RootPath'.",
+"message":  "Remove the unused private method 'IsNancyReferencing'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
 "region":  {
-"startLine":  246,
-"startColumn":  13,
-"endLine":  249,
-"endColumn":  14
+"startLine":  66,
+"startColumn":  9,
+"endLine":  82,
+"endColumn":  10
 }
 }
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private method 'SerializeGenericDictionary'.",
+"message":  "Remove the unused private property 'RootPath'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
-"startLine":  408,
-"startColumn":  3,
-"endLine":  422,
-"endColumn":  4
+"startLine":  277,
+"startColumn":  13,
+"endLine":  280,
+"endColumn":  14
 }
 }
 },
@@ -32,23 +32,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
 "region":  {
-"startLine":  73,
+"startLine":  76,
 "startColumn":  13,
-"endLine":  88,
+"endLine":  93,
 "endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private method 'RemoveRegistration'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3230,
-"startColumn":  9,
-"endLine":  3233,
-"endColumn":  10
 }
 }
 },
@@ -58,9 +45,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3620,
+"startLine":  3843,
 "startColumn":  9,
-"endLine":  3623,
+"endLine":  3846,
 "endColumn":  10
 }
 }

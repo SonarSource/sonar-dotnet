@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2933",
+"message":  "Make 'source' 'readonly'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AndConnector.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  25,
+"endLine":  5,
+"endColumn":  31
+}
+}
+}
+]
+}

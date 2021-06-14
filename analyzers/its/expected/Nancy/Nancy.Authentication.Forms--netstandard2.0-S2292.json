@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2292",
+"message":  "Make this an auto-implemented property and remove its backing field.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  30,
+"endLine":  24,
+"endColumn":  59
+}
+}
+}
+]
+}

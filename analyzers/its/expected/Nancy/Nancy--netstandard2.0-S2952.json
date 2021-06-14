@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2952",
+"message":  "Move this 'Dispose' call into this class' own 'Dispose' method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  29,
+"endLine":  487,
+"endColumn":  36
+}
+}
+}
+]
+}

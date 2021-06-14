@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4047",
+"message":  "Make this method generic and replace the 'object' parameter with a type parameter.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  22,
+"endLine":  216,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  78,
+"endLine":  216,
+"endColumn":  84
+}
+}
+]
+}
+]
+}
