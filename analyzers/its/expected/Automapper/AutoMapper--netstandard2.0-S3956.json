@@ -4,12 +4,12 @@
 "id":  "S3956",
 "message":  "Refactor this property to use a generic collection designed for inheritance.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\AdvancedConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
 "region":  {
-"startLine":  36,
-"startColumn":  16,
-"endLine":  36,
-"endColumn":  48
+"startLine":  14,
+"startColumn":  9,
+"endLine":  14,
+"endColumn":  45
 }
 }
 },
@@ -17,12 +17,25 @@
 "id":  "S3956",
 "message":  "Refactor this property to use a generic collection designed for inheritance.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\AdvancedConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  16,
+"endLine":  23,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  16,
 "endLine":  38,
-"endColumn":  39
+"endColumn":  28
 }
 }
 },
@@ -30,12 +43,220 @@
 "id":  "S3956",
 "message":  "Refactor this property to use a generic collection designed for inheritance.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
 "region":  {
-"startLine":  170,
-"startColumn":  19,
-"endLine":  170,
+"startLine":  39,
+"startColumn":  16,
+"endLine":  39,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  16,
+"endLine":  40,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  16,
+"endLine":  41,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  9,
+"endLine":  15,
 "endColumn":  40
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  146,
+"endLine":  23,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  146,
+"endLine":  28,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  160,
+"endLine":  35,
+"endColumn":  176
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  16,
+"endLine":  51,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  153,
+"endLine":  86,
+"endColumn":  169
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  153,
+"endLine":  104,
+"endColumn":  169
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMappingExpressionBase.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IProfileExpression.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  9,
+"endLine":  149,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  16,
+"endLine":  50,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  19,
+"endLine":  52,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  19,
+"endLine":  53,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  19,
+"endLine":  54,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  19,
+"endLine":  55,
+"endColumn":  52
 }
 }
 },
@@ -45,9 +266,9 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  17,
+"startLine":  22,
 "startColumn":  19,
-"endLine":  17,
+"endLine":  22,
 "endColumn":  44
 }
 }
@@ -58,10 +279,127 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\PathConfigurationExpression.cs",
 "region":  {
-"startLine":  14,
+"startLine":  50,
 "startColumn":  19,
-"endLine":  14,
+"endLine":  50,
 "endColumn":  40
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  16,
+"endLine":  119,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\InternalApi.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  9,
+"endLine":  33,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\InternalApi.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  9,
+"endLine":  50,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  76,
+"endLine":  73,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  99,
+"endLine":  73,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  45,
+"endLine":  104,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  16,
+"endLine":  115,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  16,
+"endLine":  116,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  142,
+"endLine":  263,
+"endColumn":  158
 }
 }
 }

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeExtensions.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  97,
+"endLine":  11,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeExtensions.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  93,
+"endLine":  12,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeExtensions.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  110,
+"endLine":  16,
+"endColumn":  132
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  18,
+"endLine":  283,
+"endColumn":  32
+}
+}
+}
+]
+}

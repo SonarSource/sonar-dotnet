@@ -4,11 +4,11 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\IMemberConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
 "region":  {
-"startLine":  10,
+"startLine":  16,
 "startColumn":  89,
-"endLine":  10,
+"endLine":  16,
 "endColumn":  95
 }
 }
@@ -17,11 +17,11 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\IMemberConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
 "region":  {
-"startLine":  13,
+"startLine":  19,
 "startColumn":  83,
-"endLine":  13,
+"endLine":  19,
 "endColumn":  89
 }
 }
@@ -30,37 +30,11 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
 "region":  {
-"startLine":  27,
-"startColumn":  37,
-"endLine":  27,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
-"region":  {
-"startLine":  27,
-"startColumn":  77,
-"endLine":  27,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\PropertyDescription.cs",
-"region":  {
-"startLine":  12,
-"startColumn":  74,
-"endLine":  12,
+"startLine":  149,
+"startColumn":  73,
+"endLine":  149,
 "endColumn":  80
 }
 }
@@ -69,12 +43,12 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
 "region":  {
-"startLine":  142,
-"startColumn":  147,
-"endLine":  142,
-"endColumn":  153
+"startLine":  276,
+"startColumn":  95,
+"endLine":  276,
+"endColumn":  101
 }
 }
 },
@@ -82,12 +56,12 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
 "region":  {
-"startLine":  123,
-"startColumn":  144,
-"endLine":  123,
-"endColumn":  150
+"startLine":  39,
+"startColumn":  35,
+"endLine":  39,
+"endColumn":  41
 }
 }
 },
@@ -95,12 +69,12 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
 "region":  {
-"startLine":  124,
-"startColumn":  141,
-"endLine":  124,
-"endColumn":  147
+"startLine":  39,
+"startColumn":  75,
+"endLine":  39,
+"endColumn":  81
 }
 }
 },
@@ -108,12 +82,64 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
 "region":  {
-"startLine":  161,
-"startColumn":  102,
-"endLine":  161,
-"endColumn":  108
+"startLine":  326,
+"startColumn":  93,
+"endLine":  326,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  125,
+"endLine":  326,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  74,
+"endLine":  210,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\LockingConcurrentDictionary.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  90,
+"endLine":  9,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\LockingConcurrentDictionary.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  90,
+"endLine":  17,
+"endColumn":  94
 }
 }
 },
@@ -123,10 +149,10 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
 "region":  {
-"startLine":  31,
-"startColumn":  119,
-"endLine":  31,
-"endColumn":  125
+"startLine":  20,
+"startColumn":  125,
+"endLine":  20,
+"endColumn":  131
 }
 }
 },
@@ -134,12 +160,90 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypePair.cs",
 "region":  {
-"startLine":  14,
+"startLine":  11,
+"startColumn":  101,
+"endLine":  11,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  95,
+"endLine":  116,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  110,
+"endLine":  134,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  103,
+"endLine":  25,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  72,
+"endLine":  278,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  279,
+"startColumn":  66,
+"endLine":  279,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"region":  {
+"startLine":  349,
 "startColumn":  90,
-"endLine":  14,
-"endColumn":  113
+"endLine":  349,
+"endColumn":  96
 }
 }
 },
@@ -147,12 +251,12 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
 "region":  {
-"startLine":  20,
-"startColumn":  36,
-"endLine":  20,
-"endColumn":  59
+"startLine":  35,
+"startColumn":  101,
+"endLine":  35,
+"endColumn":  108
 }
 }
 },
@@ -160,90 +264,12 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
 "region":  {
-"startLine":  573,
-"startColumn":  69,
-"endLine":  573,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
-"region":  {
-"startLine":  573,
-"startColumn":  113,
-"endLine":  573,
-"endColumn":  119
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IProjectionExpression.cs",
-"region":  {
-"startLine":  20,
-"startColumn":  59,
-"endLine":  20,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IProjectionExpression.cs",
-"region":  {
-"startLine":  37,
-"startColumn":  59,
-"endLine":  37,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IProjectionExpression.cs",
-"region":  {
-"startLine":  55,
-"startColumn":  59,
-"endLine":  55,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
-"region":  {
-"startLine":  18,
-"startColumn":  99,
-"endLine":  18,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
-"region":  {
-"startLine":  23,
-"startColumn":  135,
-"endLine":  23,
-"endColumn":  141
+"startLine":  262,
+"startColumn":  100,
+"endLine":  262,
+"endColumn":  106
 }
 }
 }

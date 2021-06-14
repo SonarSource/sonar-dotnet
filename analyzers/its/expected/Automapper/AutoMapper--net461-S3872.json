@@ -2,48 +2,192 @@
 "issues":  [
 {
 "id":  "S3872",
-"message":  "Rename the parameter 'validator' so that it does not duplicate the method name.",
+"message":  "Rename the parameter 'condition' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\AdvancedConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
 "region":  {
-"startLine":  24,
-"startColumn":  41,
-"endLine":  24,
-"endColumn":  50
+"startLine":  101,
+"startColumn":  76,
+"endLine":  101,
+"endColumn":  85
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AdvancedConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
 "region":  {
-"startLine":  24,
-"startColumn":  21,
-"endLine":  24,
-"endColumn":  30
+"startLine":  101,
+"startColumn":  14,
+"endLine":  101,
+"endColumn":  23
 }
 }
 ]
 },
 {
 "id":  "S3872",
-"message":  "Rename the parameter 'postfixes' so that it does not duplicate the method name.",
+"message":  "Rename the parameter 'condition' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\PrePostfixName.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
 "region":  {
-"startLine":  57,
+"startLine":  106,
 "startColumn":  67,
-"endLine":  57,
+"endLine":  106,
 "endColumn":  76
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\PrePostfixName.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
 "region":  {
-"startLine":  57,
-"startColumn":  37,
-"endLine":  57,
-"endColumn":  46
+"startLine":  106,
+"startColumn":  14,
+"endLine":  106,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'condition' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  58,
+"endLine":  111,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  14,
+"endLine":  111,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'condition' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  44,
+"endLine":  116,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  14,
+"endLine":  116,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'nullSubstitute' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  36,
+"endLine":  275,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  14,
+"endLine":  275,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'condition' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  95,
+"endLine":  96,
+"endColumn":  104
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  14,
+"endLine":  96,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'validator' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  65,
+"endLine":  107,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  45,
+"endLine":  107,
+"endColumn":  54
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'globalIgnores' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  81,
+"endLine":  152,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  22,
+"endLine":  152,
+"endColumn":  35
 }
 }
 ]
@@ -55,18 +199,18 @@
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  146,
+"startLine":  136,
 "startColumn":  102,
-"endLine":  146,
+"endLine":  136,
 "endColumn":  111
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  146,
+"startLine":  136,
 "startColumn":  21,
-"endLine":  146,
+"endLine":  136,
 "endColumn":  30
 }
 }
@@ -79,18 +223,18 @@
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  157,
+"startLine":  147,
 "startColumn":  83,
-"endLine":  157,
+"endLine":  147,
 "endColumn":  92
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  157,
+"startLine":  147,
 "startColumn":  21,
-"endLine":  157,
+"endLine":  147,
 "endColumn":  30
 }
 }
@@ -103,18 +247,18 @@
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  168,
+"startLine":  158,
 "startColumn":  74,
-"endLine":  168,
+"endLine":  158,
 "endColumn":  83
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  168,
+"startLine":  158,
 "startColumn":  21,
-"endLine":  168,
+"endLine":  158,
 "endColumn":  30
 }
 }
@@ -127,18 +271,18 @@
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  179,
+"startLine":  169,
 "startColumn":  65,
-"endLine":  179,
+"endLine":  169,
 "endColumn":  74
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  179,
+"startLine":  169,
 "startColumn":  21,
-"endLine":  179,
+"endLine":  169,
 "endColumn":  30
 }
 }
@@ -151,18 +295,18 @@
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  190,
+"startLine":  180,
 "startColumn":  51,
-"endLine":  190,
+"endLine":  180,
 "endColumn":  60
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  190,
+"startLine":  180,
 "startColumn":  21,
-"endLine":  190,
+"endLine":  180,
 "endColumn":  30
 }
 }
@@ -175,18 +319,18 @@
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  32,
+"startLine":  37,
 "startColumn":  43,
-"endLine":  32,
+"endLine":  37,
 "endColumn":  57
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  32,
+"startLine":  37,
 "startColumn":  21,
-"endLine":  32,
+"endLine":  37,
 "endColumn":  35
 }
 }
@@ -199,18 +343,18 @@
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\PathConfigurationExpression.cs",
 "region":  {
-"startLine":  83,
+"startLine":  100,
 "startColumn":  95,
-"endLine":  83,
+"endLine":  100,
 "endColumn":  104
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\PathConfigurationExpression.cs",
 "region":  {
-"startLine":  83,
+"startLine":  100,
 "startColumn":  21,
-"endLine":  83,
+"endLine":  100,
 "endColumn":  30
 }
 }
@@ -218,250 +362,10 @@
 },
 {
 "id":  "S3872",
-"message":  "Rename the parameter 'replace' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\ExpressionExtensions.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  90,
-"endLine":  47,
-"endColumn":  97
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\ExpressionExtensions.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  34,
-"endLine":  47,
-"endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'concat' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\ExpressionExtensions.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  92,
-"endLine":  50,
-"endColumn":  98
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\ExpressionExtensions.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  40,
-"endLine":  50,
-"endColumn":  46
-}
-}
-]
-},
-{
-"id":  "S3872",
 "message":  "Rename the parameter 'condition' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  149,
-"startColumn":  95,
-"endLine":  149,
-"endColumn":  104
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  149,
-"startColumn":  14,
-"endLine":  149,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'condition' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  155,
-"startColumn":  76,
-"endLine":  155,
-"endColumn":  85
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  155,
-"startColumn":  14,
-"endLine":  155,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'condition' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  161,
-"startColumn":  67,
-"endLine":  161,
-"endColumn":  76
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  161,
-"startColumn":  14,
-"endLine":  161,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'condition' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  167,
-"startColumn":  58,
-"endLine":  167,
-"endColumn":  67
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  167,
-"startColumn":  14,
-"endLine":  167,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'condition' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  173,
-"startColumn":  44,
-"endLine":  173,
-"endColumn":  53
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  173,
-"startColumn":  14,
-"endLine":  173,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'nullSubstitute' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  25,
-"startColumn":  36,
-"endLine":  25,
-"endColumn":  50
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  25,
-"startColumn":  14,
-"endLine":  25,
-"endColumn":  28
-}
-}
-]
-},
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'replace' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
-"region":  {
-"startLine":  119,
-"startColumn":  85,
-"endLine":  119,
-"endColumn":  92
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
-"region":  {
-"startLine":  119,
-"startColumn":  34,
-"endLine":  119,
-"endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'concat' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
-"region":  {
-"startLine":  121,
-"startColumn":  87,
-"endLine":  121,
-"endColumn":  93
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
-"region":  {
-"startLine":  121,
-"startColumn":  40,
-"endLine":  121,
-"endColumn":  46
-}
-}
-]
-},
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'condition' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\IPathConfigurationExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\PathConfigurationExpression.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  88,
@@ -470,7 +374,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\IPathConfigurationExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\PathConfigurationExpression.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  14,
@@ -482,72 +386,48 @@
 },
 {
 "id":  "S3872",
-"message":  "Rename the parameter 'expressionResolutionResult' so that it does not duplicate the method name.",
+"message":  "Rename the parameter 'replace' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberGetterExpressionResultConverter.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
 "region":  {
-"startLine":  18,
-"startColumn":  40,
-"endLine":  18,
-"endColumn":  66
+"startLine":  325,
+"startColumn":  90,
+"endLine":  325,
+"endColumn":  97
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberGetterExpressionResultConverter.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
 "region":  {
-"startLine":  17,
-"startColumn":  51,
-"endLine":  17,
-"endColumn":  77
+"startLine":  325,
+"startColumn":  34,
+"endLine":  325,
+"endColumn":  41
 }
 }
 ]
 },
 {
 "id":  "S3872",
-"message":  "Rename the parameter 'expressionResolutionResult' so that it does not duplicate the method name.",
+"message":  "Rename the parameter 'validator' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberGetterExpressionResultConverter.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\InternalApi.cs",
 "region":  {
-"startLine":  22,
-"startColumn":  40,
-"endLine":  22,
-"endColumn":  66
+"startLine":  38,
+"startColumn":  34,
+"endLine":  38,
+"endColumn":  43
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberGetterExpressionResultConverter.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\InternalApi.cs",
 "region":  {
-"startLine":  21,
-"startColumn":  51,
-"endLine":  21,
-"endColumn":  77
-}
-}
-]
-},
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'expressionResolutionResult' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberResolverExpressionResultConverter.cs",
-"region":  {
-"startLine":  19,
-"startColumn":  40,
-"endLine":  19,
-"endColumn":  66
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberResolverExpressionResultConverter.cs",
-"region":  {
-"startLine":  18,
-"startColumn":  51,
-"endLine":  18,
-"endColumn":  77
+"startLine":  38,
+"startColumn":  14,
+"endLine":  38,
+"endColumn":  23
 }
 }
 ]
@@ -557,20 +437,20 @@
 "message":  "Rename the parameter 'postfixes' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeDetails.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
 "region":  {
-"startLine":  55,
-"startColumn":  74,
-"endLine":  55,
-"endColumn":  83
+"startLine":  93,
+"startColumn":  67,
+"endLine":  93,
+"endColumn":  76
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeDetails.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
 "region":  {
-"startLine":  55,
+"startLine":  93,
 "startColumn":  44,
-"endLine":  55,
+"endLine":  93,
 "endColumn":  53
 }
 }

@@ -6,9 +6,87 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
 "region":  {
-"startLine":  72,
+"startLine":  109,
 "startColumn":  24,
-"endLine":  75,
+"endLine":  112,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  24,
+"endLine":  266,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  28,
+"endLine":  281,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  35,
+"endLine":  299,
+"endColumn":  179
+}
+}
+},
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1)'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  340,
+"startColumn":  64,
+"endLine":  340,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  26,
+"endLine":  282,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3, Expression arg4)'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  24,
+"endLine":  188,
 "endColumn":  33
 }
 }
@@ -17,12 +95,12 @@
 "id":  "S3220",
 "message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3)'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
 "region":  {
-"startLine":  202,
-"startColumn":  35,
-"endLine":  202,
-"endColumn":  101
+"startLine":  198,
+"startColumn":  28,
+"endLine":  201,
+"endColumn":  37
 }
 }
 },
@@ -30,116 +108,12 @@
 "id":  "S3220",
 "message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1)'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToEnumMapper.cs",
 "region":  {
-"startLine":  308,
+"startLine":  20,
 "startColumn":  20,
-"endLine":  308,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  379,
-"startColumn":  20,
-"endLine":  381,
-"endColumn":  166
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
-"region":  {
-"startLine":  45,
-"startColumn":  66,
-"endLine":  45,
-"endColumn":  131
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
-"region":  {
-"startLine":  58,
-"startColumn":  24,
-"endLine":  70,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
-"region":  {
-"startLine":  63,
-"startColumn":  25,
-"endLine":  66,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
-"region":  {
-"startLine":  86,
-"startColumn":  24,
-"endLine":  95,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3, Expression arg4)'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
-"region":  {
-"startLine":  49,
-"startColumn":  27,
-"endLine":  55,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3, Expression arg4)'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
-"region":  {
-"startLine":  46,
-"startColumn":  17,
-"endLine":  51,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\ReadOnlyCollectionMapper.cs",
-"region":  {
-"startLine":  31,
-"startColumn":  20,
-"endLine":  31,
-"endColumn":  203
+"endLine":  20,
+"endColumn":  116
 }
 }
 }

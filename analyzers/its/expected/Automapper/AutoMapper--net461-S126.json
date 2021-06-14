@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
 "region":  {
-"startLine":  555,
+"startLine":  324,
 "startColumn":  13,
-"endLine":  555,
+"endLine":  324,
 "endColumn":  20
 }
 }
@@ -17,12 +17,38 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
 "region":  {
-"startLine":  120,
+"startLine":  401,
 "startColumn":  13,
-"endLine":  120,
+"endLine":  401,
 "endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypePair.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  13,
+"endLine":  48,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  17,
+"endLine":  85,
+"endColumn":  24
 }
 }
 }

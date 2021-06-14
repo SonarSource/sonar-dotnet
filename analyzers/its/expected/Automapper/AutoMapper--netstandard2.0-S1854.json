@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'destinationType'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  37,
+"endLine":  49,
+"endColumn":  58
+}
+}
+}
+]
+}

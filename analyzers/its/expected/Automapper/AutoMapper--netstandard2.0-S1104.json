@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  25,
+"endLine":  75,
+"endColumn":  30
+}
+}
+}
+]
+}

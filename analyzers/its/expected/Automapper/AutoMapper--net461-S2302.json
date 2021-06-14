@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'source' with 'nameof(source)'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  60,
+"endLine":  36,
+"endColumn":  142
+}
+}
+}
+]
+}

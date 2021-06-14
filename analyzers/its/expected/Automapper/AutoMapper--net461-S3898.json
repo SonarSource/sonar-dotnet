@@ -2,14 +2,14 @@
 "issues":  [
 {
 "id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'SourceMember'.",
+"message":  "Implement 'IEquatable<T>' in value type 'ValidationContext'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\SourceToDestinationNameMapperAttributesMember.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\ConfigurationValidator.cs",
 "region":  {
-"startLine":  23,
-"startColumn":  16,
-"endLine":  23,
-"endColumn":  28
+"startLine":  158,
+"startColumn":  28,
+"endLine":  158,
+"endColumn":  45
 }
 }
 },
@@ -17,12 +17,25 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ConditionParameters'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IPathConfigurationExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\PathConfigurationExpression.cs",
 "region":  {
-"startLine":  31,
-"startColumn":  19,
-"endLine":  31,
-"endColumn":  38
+"startLine":  30,
+"startColumn":  28,
+"endLine":  30,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Member'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  28,
+"endLine":  392,
+"endColumn":  34
 }
 }
 },
@@ -30,77 +43,51 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'LockingConcurrentDictionary'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\LockingConcurrentDictionary.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\LockingConcurrentDictionary.cs",
 "region":  {
-"startLine":  7,
-"startColumn":  21,
-"endLine":  7,
-"endColumn":  48
+"startLine":  6,
+"startColumn":  28,
+"endLine":  6,
+"endColumn":  55
 }
 }
 },
 {
 "id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'MapperFuncs'.",
+"message":  "Implement 'IEquatable<T>' in value type 'ConcurrentDictionaryWrapper'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\LockingConcurrentDictionary.cs",
 "region":  {
-"startLine":  452,
-"startColumn":  25,
-"endLine":  452,
-"endColumn":  36
+"startLine":  13,
+"startColumn":  28,
+"endLine":  13,
+"endColumn":  55
 }
 }
 },
 {
 "id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'ValidationContext'.",
+"message":  "Implement 'IEquatable<T>' in value type 'ConstructorParameters'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
 "region":  {
-"startLine":  499,
-"startColumn":  19,
-"endLine":  499,
-"endColumn":  36
+"startLine":  173,
+"startColumn":  28,
+"endLine":  173,
+"endColumn":  49
 }
 }
 },
 {
 "id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'PropertyPath'.",
+"message":  "Implement 'IEquatable<T>' in value type 'Match'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
 "region":  {
-"startLine":  558,
-"startColumn":  23,
-"endLine":  558,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'QueryExpressions'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
-"region":  {
-"startLine":  571,
-"startColumn":  19,
-"endLine":  571,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'DestinationMemberName'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypeDetails.cs",
-"region":  {
-"startLine":  80,
-"startColumn":  23,
-"endLine":  80,
-"endColumn":  44
+"startLine":  18,
+"startColumn":  16,
+"endLine":  18,
+"endColumn":  21
 }
 }
 },
@@ -108,12 +95,51 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ValueTransformerConfiguration'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ValueTransformerConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
 "region":  {
-"startLine":  7,
-"startColumn":  19,
-"endLine":  7,
-"endColumn":  48
+"startLine":  84,
+"startColumn":  28,
+"endLine":  84,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ProjectionExpression'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Extensions.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  25,
+"endLine":  85,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'SubQueryPath'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  29,
+"endLine":  259,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'QueryExpressions'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"region":  {
+"startLine":  344,
+"startColumn":  28,
+"endLine":  344,
+"endColumn":  44
 }
 }
 }

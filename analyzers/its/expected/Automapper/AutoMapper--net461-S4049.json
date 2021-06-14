@@ -2,27 +2,79 @@
 "issues":  [
 {
 "id":  "S4049",
+"message":  "Consider making method 'GetDestinationExpression' a property.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  26,
+"endLine":  15,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllTypeMaps' a property.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\InternalApi.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  38,
+"endLine":  65,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4049",
 "message":  "Consider making method 'GetMappers' a property.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\InternalApi.cs",
 "region":  {
-"startLine":  101,
+"startLine":  118,
 "startColumn":  36,
-"endLine":  101,
+"endLine":  118,
 "endColumn":  46
 }
 }
 },
 {
 "id":  "S4049",
-"message":  "Consider making method 'GetSubQueryMarker' a property.",
+"message":  "Consider making method 'GetCurrentPath' a property.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
 "region":  {
-"startLine":  545,
+"startLine":  335,
 "startColumn":  35,
-"endLine":  545,
-"endColumn":  52
+"endLine":  335,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllIncludedMembers' a property.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  46,
+"endLine":  147,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAsPair' a property.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  25,
+"endLine":  218,
+"endColumn":  34
 }
 }
 }

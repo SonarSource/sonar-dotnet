@@ -4,12 +4,12 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\LowerUnderscoreNamingConvention.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\INamingConvention.cs",
 "region":  {
-"startLine":  7,
-"startColumn":  53,
-"endLine":  7,
-"endColumn":  91
+"startLine":  25,
+"startColumn":  52,
+"endLine":  25,
+"endColumn":  118
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\PascalCaseNamingConvention.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\INamingConvention.cs",
 "region":  {
-"startLine":  7,
-"startColumn":  53,
-"endLine":  7,
-"endColumn":  119
+"startLine":  33,
+"startColumn":  57,
+"endLine":  33,
+"endColumn":  95
 }
 }
 }

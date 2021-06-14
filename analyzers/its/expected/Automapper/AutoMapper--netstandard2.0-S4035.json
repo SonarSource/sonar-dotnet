@@ -2,14 +2,14 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Seal class 'ExpressionRequest' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'IncludedMember' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
 "region":  {
-"startLine":  12,
+"startLine":  283,
 "startColumn":  18,
-"endLine":  12,
-"endColumn":  35
+"endLine":  283,
+"endColumn":  32
 }
 }
 }

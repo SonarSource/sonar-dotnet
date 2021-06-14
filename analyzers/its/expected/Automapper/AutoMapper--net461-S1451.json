@@ -4,33 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\AdvancedConfiguration.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
 "uri":  "sources\Automapper\src\AutoMapper\AssemblyInfo.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\AllMemberInfo.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Annotations\AutoMapAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\CaseInsensitiveName.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Annotations\IgnoreAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\CaseSensitiveName.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Annotations\MapAtRuntimeAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\DefaultMember.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Annotations\MappingOrderAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -108,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\DefaultName.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Annotations\NullSubstituteAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -121,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\IChildMemberConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Annotations\SourceMemberAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -134,7 +108,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\IGetTypeInfoMembers.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Annotations\UseExistingValueAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -147,7 +121,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\IMemberConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Annotations\ValueConverterAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -160,7 +134,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\IParentSourceToDestinationNameMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Annotations\ValueResolverAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -173,7 +147,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\ISourceToDestinationNameMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\ConfigurationValidator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -186,7 +160,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MapToAttribute.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -212,7 +186,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberNameReplacer.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\CtorParamConfigurationExpression.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -225,7 +199,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\NameSplitMember.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMappingExpression.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -238,7 +212,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\ParentSourceToDestinationNameMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMappingExpressionBase.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -251,7 +225,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\PrePostfixName.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMappingOperationOptions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -264,7 +238,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\ReplaceName.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -277,7 +251,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\SourceToDestinationMapperAttribute.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -290,7 +264,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\SourceToDestinationNameMapperAttributesMember.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\INamingConvention.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -303,7 +277,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\IConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IProfileExpression.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -316,46 +290,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Internal\PrimitiveHelper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\IProfileConfiguration.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\IPropertyMapConfiguration.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\ITypeMapConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -394,7 +329,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -407,7 +342,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberPath.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -433,20 +368,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\PrimitiveExtensions.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\ResolutionExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -472,72 +394,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\SourceMemberConfig.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
 "uri":  "sources\Automapper\src\AutoMapper\ConstructorMap.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ConstructorParameterMap.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\DuplicateTypeMapConfigurationException.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\DelegateFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -563,33 +420,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\PropertyDescription.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\PropertyEmitter.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyBase.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ObjectFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -615,19 +446,6 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeDescription.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
 "region":  {
 "startLine":  1,
@@ -641,7 +459,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ExpressionExtensions.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Features.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -654,7 +472,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\InternalApi.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -667,7 +485,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ICtorParamConfigurationExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\LockingConcurrentDictionary.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -680,7 +498,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IgnoreMapAttribute.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\MemberPath.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -693,111 +511,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMapperConfigurationExpression.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingAction.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingOperationOptions.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\INamingConvention.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\MemberVisitor.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\PrimitiveHelper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -823,7 +537,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IObjectMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -836,7 +550,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IObjectMapperInfo.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -849,111 +563,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IPathConfigurationExpression.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IProfileExpression.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IResolutionExpression.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IResolverConfigurationExpression.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ISourceMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ITypeConverter.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IValueResolver.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\LockingConcurrentDictionary.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\LowerUnderscoreNamingConvention.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypePair.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -967,58 +577,6 @@
 "message":  "Add or update the header of this file.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfigurationExpressionValidator.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1057,6 +615,32 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ConstructorMapper.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ConversionOperatorMapper.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Mappers\ConvertMapper.cs",
 "region":  {
 "startLine":  1,
@@ -1070,124 +654,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CreateMapBasedOnCriteriaMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\DictionaryMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumerableMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumerableToDictionaryMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToEnumMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToStringMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToUnderlyingTypeMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\ExplicitConversionOperatorMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FlagsEnumMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1226,7 +693,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\HashSetMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\IObjectMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1239,33 +706,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\ImplicitConversionOperatorMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\KeyValueMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1279,32 +720,6 @@
 "message":  "Add or update the header of this file.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Mappers\MapperRegistry.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\MultidimensionalArrayMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\NameValueCollectionMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1343,20 +758,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\ReadOnlyCollectionMapper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\StringMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ParseStringMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1408,7 +810,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\TypeConverterMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ToStringMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1421,7 +823,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\UnderlyingTypeToEnumMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\UnderlyingEnumTypeMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1434,33 +836,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MappingOperationOptions.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MemberList.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\PascalCaseNamingConvention.cs",
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1474,19 +850,6 @@
 "message":  "Add or update the header of this file.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\PathMap.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1525,7 +888,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\AssignableProjectionMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1538,7 +901,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\CustomProjectionMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1551,7 +914,20 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionResolutionResult.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\EnumerableProjectionMapper.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\EnumProjectionMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1577,7 +953,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IExpressionBinder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\MappedTypeProjectionMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1590,176 +966,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IExpressionResultConverter.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\AssignableExpressionBinder.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\CustomProjectionExpressionBinder.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\EnumerableExpressionBinder.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MappedTypeExpressionBinder.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberAccessQueryMapperVisitor.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberGetterExpressionResultConverter.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberResolverExpressionResultConverter.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\NullableDestinationExpressionBinder.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\NullableSourceExpressionBinder.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperHelper.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\StringExpressionBinder.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IProjectionExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\NullableSourceProjectionMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1785,7 +992,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1798,7 +1005,20 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ReflectionExtensions.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\StringProjectionMapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1824,85 +1044,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypeDetails.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
 "uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMapFactory.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ValueResolverConfiguration.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ValueTransformerConfiguration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

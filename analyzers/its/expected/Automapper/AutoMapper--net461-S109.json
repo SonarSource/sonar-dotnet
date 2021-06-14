@@ -4,12 +4,12 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
 "region":  {
-"startLine":  158,
-"startColumn":  50,
-"endLine":  158,
-"endColumn":  51
+"startLine":  103,
+"startColumn":  33,
+"endLine":  103,
+"endColumn":  34
 }
 }
 },
@@ -17,38 +17,25 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
 "region":  {
-"startLine":  159,
-"startColumn":  27,
-"endLine":  159,
-"endColumn":  28
+"startLine":  42,
+"startColumn":  51,
+"endLine":  42,
+"endColumn":  52
 }
 }
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
 "region":  {
-"startLine":  159,
-"startColumn":  64,
-"endLine":  159,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
-"region":  {
-"startLine":  159,
-"startColumn":  68,
-"endLine":  159,
-"endColumn":  70
+"startLine":  43,
+"startColumn":  53,
+"endLine":  43,
+"endColumn":  54
 }
 }
 },
@@ -58,10 +45,10 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
 "region":  {
-"startLine":  113,
-"startColumn":  56,
-"endLine":  113,
-"endColumn":  58
+"startLine":  102,
+"startColumn":  54,
+"endLine":  102,
+"endColumn":  56
 }
 }
 },
@@ -69,12 +56,12 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
 "region":  {
-"startLine":  478,
-"startColumn":  80,
-"endLine":  478,
-"endColumn":  81
+"startLine":  60,
+"startColumn":  32,
+"endLine":  60,
+"endColumn":  33
 }
 }
 },
@@ -82,12 +69,12 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
 "region":  {
-"startLine":  479,
-"startColumn":  73,
-"endLine":  479,
-"endColumn":  74
+"startLine":  97,
+"startColumn":  59,
+"endLine":  97,
+"endColumn":  60
 }
 }
 },
@@ -95,25 +82,12 @@
 "id":  "S109",
 "message":  "Assign this magic number '10000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\QueryMapperVisitor.cs",
 "region":  {
-"startLine":  43,
+"startLine":  46,
 "startColumn":  55,
-"endLine":  43,
+"endLine":  46,
 "endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
-"region":  {
-"startLine":  203,
-"startColumn":  67,
-"endLine":  203,
-"endColumn":  68
 }
 }
 }

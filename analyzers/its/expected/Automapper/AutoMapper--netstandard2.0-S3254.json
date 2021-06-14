@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'typeMapsPath'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  44,
+"endLine":  258,
+"endColumn":  48
+}
+}
+}
+]
+}
