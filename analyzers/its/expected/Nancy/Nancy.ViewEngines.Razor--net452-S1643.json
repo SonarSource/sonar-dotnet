@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
 "region":  {
-"startLine":  167,
+"startLine":  171,
 "startColumn":  17,
-"endLine":  167,
+"endLine":  171,
 "endColumn":  33
 }
 }
@@ -19,9 +19,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
 "region":  {
-"startLine":  171,
+"startLine":  175,
 "startColumn":  21,
-"endLine":  171,
+"endLine":  175,
 "endColumn":  64
 }
 }
@@ -32,9 +32,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
 "region":  {
-"startLine":  174,
+"startLine":  178,
 "startColumn":  17,
-"endLine":  174,
+"endLine":  178,
 "endColumn":  33
 }
 }

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'GetSafePathExtension'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  9,
+"endLine":  192,
+"endColumn":  10
+}
+}
+}
+]
+}

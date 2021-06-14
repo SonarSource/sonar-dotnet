@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  69,
+"endLine":  15,
+"endColumn":  112
+}
+}
+}
+]
+}

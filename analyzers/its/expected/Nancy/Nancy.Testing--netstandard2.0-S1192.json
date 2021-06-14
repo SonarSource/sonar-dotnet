@@ -1,0 +1,55 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'accept' 5 times.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  51,
+"endLine":  184,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  43,
+"endLine":  186,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  47,
+"endLine":  188,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  54,
+"endLine":  190,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  35,
+"endLine":  198,
+"endColumn":  43
+}
+}
+]
+}
+]
+}

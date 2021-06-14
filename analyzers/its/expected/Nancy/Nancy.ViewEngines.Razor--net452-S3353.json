@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'referencingAssembly'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  22,
+"endLine":  85,
+"endColumn":  41
+}
+}
+}
+]
+}

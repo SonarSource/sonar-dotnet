@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3963",
+"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  9,
+"endLine":  21,
+"endColumn":  10
+}
+}
+}
+]
+}

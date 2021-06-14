@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '422' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\samples\Nancy.Demo.Hosting.Kestrel\HomeModule.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  28,
+"endLine":  30,
+"endColumn":  31
+}
+}
+}
+]
+}

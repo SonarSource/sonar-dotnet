@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  25,
+"endLine":  115,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  25,
+"endLine":  127,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  25,
+"endLine":  462,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  25,
+"endLine":  483,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  503,
+"startColumn":  25,
+"endLine":  503,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  546,
+"startColumn":  25,
+"endLine":  546,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  25,
+"endLine":  164,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  25,
+"endLine":  277,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  25,
+"endLine":  283,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  25,
+"endLine":  141,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  25,
+"endLine":  151,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  25,
+"endLine":  180,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  29,
+"endLine":  331,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  339,
+"startColumn":  29,
+"endLine":  339,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  344,
+"startColumn":  29,
+"endLine":  344,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  370,
+"startColumn":  29,
+"endLine":  370,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  387,
+"startColumn":  29,
+"endLine":  387,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  25,
+"endLine":  348,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  25,
+"endLine":  91,
+"endColumn":  27
+}
+}
+}
+]
+}

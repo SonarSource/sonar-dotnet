@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S104",
-"message":  "This file has 2096 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"message":  "This file has 2170 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {

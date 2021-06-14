@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this expression which always evaluates to 'null'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  329,
+"startColumn":  64,
+"endLine":  329,
+"endColumn":  68
+}
+}
+}
+]
+}

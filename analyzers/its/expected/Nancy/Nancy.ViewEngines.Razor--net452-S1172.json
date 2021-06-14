@@ -12,6 +12,19 @@
 "endColumn":  50
 }
 }
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'referencingAssembly'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  88,
+"endLine":  134,
+"endColumn":  116
+}
+}
 }
 ]
 }

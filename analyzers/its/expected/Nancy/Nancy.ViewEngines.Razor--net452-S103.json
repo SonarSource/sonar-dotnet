@@ -2,14 +2,53 @@
 "issues":  [
 {
 "id":  "S103",
-"message":  "Split this 288 characters long line (which is greater than 200 authorized).",
+"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  1,
+"endLine":  45,
+"endColumn":  211
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 235 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CodeParserHelper.cs",
 "region":  {
-"startLine":  19,
+"startLine":  16,
 "startColumn":  1,
-"endLine":  19,
-"endColumn":  289
+"endLine":  16,
+"endColumn":  236
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpClrTypeResolver.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  1,
+"endLine":  13,
+"endColumn":  209
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 396 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorErrorView.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  1,
+"endLine":  13,
+"endColumn":  397
 }
 }
 },
@@ -23,32 +62,6 @@
 "startColumn":  1,
 "endLine":  421,
 "endColumn":  214
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
-"region":  {
-"startLine":  209,
-"startColumn":  1,
-"endLine":  209,
-"endColumn":  217
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
-"region":  {
-"startLine":  276,
-"startColumn":  1,
-"endLine":  276,
-"endColumn":  202
 }
 }
 }

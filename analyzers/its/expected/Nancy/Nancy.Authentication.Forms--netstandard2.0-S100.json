@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'RequiresSSL' to match pascal case naming rules, consider using 'RequiresSsl'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthenticationConfiguration.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  21,
+"endLine":  49,
+"endColumn":  32
+}
+}
+}
+]
+}

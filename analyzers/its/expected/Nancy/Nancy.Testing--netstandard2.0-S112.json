@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\PassThroughStatusHandler.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  19,
+"endLine":  23,
+"endColumn":  94
+}
+}
+}
+]
+}

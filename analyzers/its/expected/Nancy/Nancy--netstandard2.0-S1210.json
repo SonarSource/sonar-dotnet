@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1210",
+"message":  "When implementing IComparable<T>, you should also override Equals, <, >, <=, >=, ==, !=.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+}
+]
+}

@@ -25,6 +25,19 @@
 "endColumn":  49
 }
 }
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAssemblies' a property.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorAssemblyProvider.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  46,
+"endLine":  42,
+"endColumn":  59
+}
+}
 }
 ]
 }

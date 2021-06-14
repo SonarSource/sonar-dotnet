@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  63,
+"endLine":  221,
+"endColumn":  99
+}
+}
+}
+]
+}

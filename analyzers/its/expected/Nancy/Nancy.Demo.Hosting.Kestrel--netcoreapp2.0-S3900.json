@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\samples\Nancy.Demo.Hosting.Kestrel\DemoBootstrapper.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  13,
+"endLine":  23,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'env' before using it.",
+"location":  {
+"uri":  "sources\Nancy\samples\Nancy.Demo.Hosting.Kestrel\Startup.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  44,
+"endLine":  16,
+"endColumn":  47
+}
+}
+}
+]
+}

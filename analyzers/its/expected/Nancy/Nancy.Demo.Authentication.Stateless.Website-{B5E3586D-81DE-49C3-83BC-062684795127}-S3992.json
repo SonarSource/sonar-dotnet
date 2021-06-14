@@ -1,9 +1,0 @@
-{
-"issues":  [
-{
-"id":  "S3992",
-"message":  "Provide a 'ComVisible' attribute for assembly 'Nancy.Demo.Authentication.Stateless.Website'.",
-"location":  null
-}
-]
-}

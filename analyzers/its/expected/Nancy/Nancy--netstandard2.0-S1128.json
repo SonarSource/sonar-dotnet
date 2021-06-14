@@ -1,0 +1,316 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  5,
+"endLine":  7,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  5,
+"endLine":  7,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  5,
+"endLine":  8,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultRootPathProvider.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultRuntimeEnvironmentInformation.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultRuntimeEnvironmentInformation.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  5,
+"endLine":  8,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  5,
+"endLine":  7,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  5,
+"endLine":  36,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\MaterialisingResponse.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  5,
+"endLine":  7,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultNancyModuleBuilder.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultNancyModuleBuilder.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  5,
+"endLine":  4,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  5,
+"endLine":  8,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  5,
+"endLine":  4,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\StaticContentConfigurationExtensions.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  5,
+"endLine":  97,
+"endColumn":  42
+}
+}
+}
+]
+}

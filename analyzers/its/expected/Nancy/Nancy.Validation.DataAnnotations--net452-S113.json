@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S113",
-"message":  "Add a new line at the end of the file 'DataAnnotationsRegistrations.cs'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsRegistrations.cs",
-"region":  {
-"startLine":  21,
-"startColumn":  1,
-"endLine":  21,
-"endColumn":  2
-}
-}
-},
-{
-"id":  "S113",
 "message":  "Add a new line at the end of the file 'DataAnnotationsValidator.cs'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidator.cs",
@@ -152,19 +139,6 @@
 "startLine":  45,
 "startColumn":  1,
 "endLine":  45,
-"endColumn":  2
-}
-}
-},
-{
-"id":  "S113",
-"message":  "Add a new line at the end of the file 'RequiredValidatorAdapter.cs'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RequiredValidatorAdapter.cs",
-"region":  {
-"startLine":  44,
-"startColumn":  1,
-"endLine":  44,
 "endColumn":  2
 }
 }

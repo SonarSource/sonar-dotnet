@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  133,
+"endLine":  30,
+"endColumn":  139
+}
+}
+}
+]
+}

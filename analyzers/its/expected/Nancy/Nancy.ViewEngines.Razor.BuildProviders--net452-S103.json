@@ -6,22 +6,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyCSharpRazorBuildProvider.cs",
 "region":  {
-"startLine":  32,
+"startLine":  33,
 "startColumn":  1,
-"endLine":  32,
-"endColumn":  242
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 241 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyVisualBasicRazorBuildProvider.cs",
-"region":  {
-"startLine":  32,
-"startColumn":  1,
-"endLine":  32,
+"endLine":  33,
 "endColumn":  242
 }
 }

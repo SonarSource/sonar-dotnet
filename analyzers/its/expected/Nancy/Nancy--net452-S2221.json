@@ -4,12 +4,12 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
 "region":  {
-"startLine":  78,
-"startColumn":  24,
-"endLine":  78,
-"endColumn":  33
+"startLine":  130,
+"startColumn":  13,
+"endLine":  130,
+"endColumn":  18
 }
 }
 },
@@ -17,25 +17,12 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
 "region":  {
-"startLine":  82,
-"startColumn":  24,
-"endLine":  82,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
-"region":  {
-"startLine":  255,
-"startColumn":  25,
-"endLine":  255,
-"endColumn":  30
+"startLine":  142,
+"startColumn":  13,
+"endLine":  142,
+"endColumn":  18
 }
 }
 },
@@ -45,9 +32,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
 "region":  {
-"startLine":  82,
+"startLine":  88,
 "startColumn":  20,
-"endLine":  82,
+"endLine":  88,
 "endColumn":  29
 }
 }
@@ -58,22 +45,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
 "region":  {
-"startLine":  109,
+"startLine":  115,
 "startColumn":  20,
-"endLine":  109,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironmentConfigurator.cs",
-"region":  {
-"startLine":  67,
-"startColumn":  20,
-"endLine":  67,
+"endLine":  115,
 "endColumn":  29
 }
 }
@@ -95,11 +69,24 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  20,
+"endLine":  122,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultRuntimeEnvironmentInformation.cs",
 "region":  {
-"startLine":  35,
+"startLine":  39,
 "startColumn":  13,
-"endLine":  35,
+"endLine":  39,
 "endColumn":  18
 }
 }
@@ -110,9 +97,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultSerializerFactory.cs",
 "region":  {
-"startLine":  59,
+"startLine":  61,
 "startColumn":  13,
-"endLine":  59,
+"endLine":  61,
 "endColumn":  18
 }
 }
@@ -123,9 +110,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultSerializerFactory.cs",
 "region":  {
-"startLine":  79,
+"startLine":  81,
 "startColumn":  13,
-"endLine":  79,
+"endLine":  81,
 "endColumn":  18
 }
 }
@@ -136,36 +123,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
-"startLine":  120,
+"startLine":  139,
 "startColumn":  17,
-"endLine":  120,
+"endLine":  139,
 "endColumn":  22
-}
-}
-},
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\StreamExtensions.cs",
-"region":  {
-"startLine":  57,
-"startColumn":  32,
-"endLine":  57,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\StreamExtensions.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  24,
-"endLine":  64,
-"endColumn":  33
 }
 }
 },
@@ -175,9 +136,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
 "region":  {
-"startLine":  389,
+"startLine":  445,
 "startColumn":  13,
-"endLine":  389,
+"endLine":  445,
 "endColumn":  18
 }
 }
@@ -188,10 +149,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
-"startLine":  248,
-"startColumn":  19,
-"endLine":  248,
-"endColumn":  28
+"startLine":  267,
+"startColumn":  20,
+"endLine":  267,
+"endColumn":  29
 }
 }
 },
@@ -201,9 +162,22 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
-"startLine":  284,
+"startLine":  291,
 "startColumn":  20,
-"endLine":  284,
+"endLine":  291,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  20,
+"endLine":  327,
 "endColumn":  29
 }
 }
@@ -214,9 +188,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
 "region":  {
-"startLine":  98,
+"startLine":  71,
 "startColumn":  24,
-"endLine":  98,
+"endLine":  71,
 "endColumn":  33
 }
 }
@@ -227,9 +201,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
 "region":  {
-"startLine":  70,
+"startLine":  72,
 "startColumn":  20,
-"endLine":  70,
+"endLine":  72,
 "endColumn":  29
 }
 }
@@ -238,38 +212,12 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
 "region":  {
-"startLine":  85,
+"startLine":  226,
 "startColumn":  13,
-"endLine":  85,
+"endLine":  226,
 "endColumn":  18
-}
-}
-},
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Route.cs",
-"region":  {
-"startLine":  133,
-"startColumn":  28,
-"endLine":  133,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
-"region":  {
-"startLine":  92,
-"startColumn":  20,
-"endLine":  92,
-"endColumn":  29
 }
 }
 },
@@ -292,9 +240,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
 "region":  {
-"startLine":  172,
+"startLine":  173,
 "startColumn":  20,
-"endLine":  172,
+"endLine":  173,
 "endColumn":  29
 }
 }

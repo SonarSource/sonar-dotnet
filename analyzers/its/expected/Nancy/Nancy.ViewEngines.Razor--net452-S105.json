@@ -25,19 +25,6 @@
 "endColumn":  13
 }
 }
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorConfigurationSection.cs",
-"region":  {
-"startLine":  9,
-"startColumn":  1,
-"endLine":  9,
-"endColumn":  1
-}
-}
 }
 ]
 }

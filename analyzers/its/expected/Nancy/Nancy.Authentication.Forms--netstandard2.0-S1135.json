@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  12,
+"endLine":  18,
+"endColumn":  16
+}
+}
+}
+]
+}

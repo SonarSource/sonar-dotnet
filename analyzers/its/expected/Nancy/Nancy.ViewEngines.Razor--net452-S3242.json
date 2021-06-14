@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
 "region":  {
-"startLine":  57,
+"startLine":  61,
 "startColumn":  43,
-"endLine":  57,
+"endLine":  61,
 "endColumn":  50
 }
 }

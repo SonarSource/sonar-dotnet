@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1117",
+"message":  "Rename 'parameters' which hides the field with the same name.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpLink.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  17,
+"endLine":  230,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1117",
+"message":  "Rename 'prefix' which hides the field with the same name.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  21,
+"endLine":  152,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1117",
+"message":  "Rename 'value' which hides the field with the same name.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  21,
+"endLine":  153,
+"endColumn":  26
+}
+}
+}
+]
+}

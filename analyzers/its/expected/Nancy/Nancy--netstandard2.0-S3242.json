@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, object>' instead of 'Nancy.Configuration.INancyEnvironment'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  60,
+"endLine":  39,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<System.Func<Nancy.NancyContext, string, Nancy.Response>>' instead of 'System.Collections.Generic.IList<System.Func<Nancy.NancyContext, string, Nancy.Response>>'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  90,
+"endLine":  18,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<System.Func<Nancy.NancyContext, string, Nancy.Response>>' instead of 'System.Collections.Generic.IList<System.Func<Nancy.NancyContext, string, Nancy.Response>>'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  85,
+"endLine":  29,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Nancy.IObjectSerializer' instead of 'Nancy.DefaultObjectSerializer'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  177,
+"endLine":  200,
+"endColumn":  187
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.MethodBase' instead of 'System.Reflection.MethodInfo'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  74,
+"endLine":  162,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Reflection.MethodInfo'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  111,
+"endLine":  198,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Reflection.MethodInfo'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  112,
+"endLine":  211,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.ICustomAttributeProvider' instead of 'System.Reflection.PropertyInfo'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  59,
+"endLine":  68,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.IReflect' instead of 'System.Type'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  336,
+"startColumn":  75,
+"endLine":  336,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.IReflect' instead of 'System.Type'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  67,
+"endLine":  166,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Nancy.Routing.Trie.NodeData' instead of 'Nancy.Routing.Trie.MatchResult'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteResolver.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  89,
+"endLine":  144,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>' instead of 'System.Collections.Generic.IDictionary<string, object>'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  133,
+"endLine":  202,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>' instead of 'System.Collections.Generic.IDictionary<string, object>'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  177,
+"endLine":  242,
+"endColumn":  190
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Security.Principal.IPrincipal' instead of 'System.Security.Claims.ClaimsPrincipal'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  65,
+"endLine":  18,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Security.Principal.IPrincipal' instead of 'System.Security.Claims.ClaimsPrincipal'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  59,
+"endLine":  66,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Security.Principal.IPrincipal' instead of 'System.Security.Claims.ClaimsPrincipal'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  61,
+"endLine":  77,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, string>' instead of 'System.Collections.Generic.Dictionary<string, string>'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  70,
+"endLine":  175,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.IReflect' instead of 'System.Type'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  50,
+"endLine":  444,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.MethodBase' instead of 'System.Reflection.ConstructorInfo'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3783,
+"startColumn":  51,
+"endLine":  3783,
+"endColumn":  55
+}
+}
+}
+]
+}

@@ -6,22 +6,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyCSharpRazorBuildProvider.cs",
 "region":  {
-"startLine":  81,
+"startLine":  82,
 "startColumn":  1,
-"endLine":  81,
-"endColumn":  2
-}
-}
-},
-{
-"id":  "S113",
-"message":  "Add a new line at the end of the file 'NancyVisualBasicRazorBuildProvider.cs'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyVisualBasicRazorBuildProvider.cs",
-"region":  {
-"startLine":  81,
-"startColumn":  1,
-"endLine":  81,
+"endLine":  82,
 "endColumn":  2
 }
 }

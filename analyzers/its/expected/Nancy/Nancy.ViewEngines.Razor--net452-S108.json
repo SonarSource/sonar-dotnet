@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorAssemblyProvider.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  17,
+"endLine":  71,
+"endColumn":  18
+}
+}
+}
+]
+}

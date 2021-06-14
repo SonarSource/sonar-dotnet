@@ -5,45 +5,45 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
 "region":  {
-"startLine":  88,
-"startColumn":  17,
-"endLine":  88,
-"endColumn":  19
+"startLine":  74,
+"startColumn":  25,
+"endLine":  74,
+"endColumn":  27
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
 "region":  {
-"startLine":  86,
-"startColumn":  13,
-"endLine":  86,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  207,
+"startLine":  72,
 "startColumn":  21,
-"endLine":  207,
+"endLine":  72,
 "endColumn":  23
 }
+}
+]
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
-"startLine":  205,
+"startLine":  107,
 "startColumn":  17,
-"endLine":  205,
+"endLine":  107,
 "endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  13,
+"endLine":  105,
+"endColumn":  15
 }
 }
 ]
@@ -53,21 +53,21 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
 "region":  {
-"startLine":  321,
-"startColumn":  17,
-"endLine":  321,
-"endColumn":  19
+"startLine":  370,
+"startColumn":  29,
+"endLine":  370,
+"endColumn":  31
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
 "region":  {
-"startLine":  319,
-"startColumn":  13,
-"endLine":  319,
-"endColumn":  15
+"startLine":  368,
+"startColumn":  25,
+"endLine":  368,
+"endColumn":  27
 }
 }
 ]
@@ -103,18 +103,18 @@
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3275,
+"startLine":  3477,
 "startColumn":  17,
-"endLine":  3275,
+"endLine":  3477,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3273,
+"startLine":  3474,
 "startColumn":  13,
-"endLine":  3273,
+"endLine":  3474,
 "endColumn":  15
 }
 }
@@ -127,18 +127,18 @@
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3432,
+"startLine":  3498,
 "startColumn":  17,
-"endLine":  3432,
+"endLine":  3498,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3430,
+"startLine":  3496,
 "startColumn":  13,
-"endLine":  3430,
+"endLine":  3496,
 "endColumn":  15
 }
 }
@@ -151,18 +151,42 @@
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3460,
+"startLine":  3655,
 "startColumn":  17,
-"endLine":  3460,
+"endLine":  3655,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  3458,
+"startLine":  3653,
 "startColumn":  13,
-"endLine":  3458,
+"endLine":  3653,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3683,
+"startColumn":  17,
+"endLine":  3683,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3681,
+"startColumn":  13,
+"endLine":  3681,
 "endColumn":  15
 }
 }
@@ -175,18 +199,18 @@
 {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewCache.cs",
 "region":  {
-"startLine":  32,
+"startLine":  36,
 "startColumn":  17,
-"endLine":  32,
+"endLine":  36,
 "endColumn":  19
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewCache.cs",
 "region":  {
-"startLine":  30,
+"startLine":  34,
 "startColumn":  13,
-"endLine":  30,
+"endLine":  34,
 "endColumn":  15
 }
 }

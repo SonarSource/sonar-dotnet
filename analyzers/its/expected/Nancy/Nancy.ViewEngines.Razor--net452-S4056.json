@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
 "region":  {
-"startLine":  222,
+"startLine":  230,
 "startColumn":  51,
-"endLine":  222,
+"endLine":  230,
 "endColumn":  124
 }
 }
@@ -19,10 +19,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CodeParserHelper.cs",
 "region":  {
-"startLine":  18,
+"startLine":  15,
 "startColumn":  45,
-"endLine":  23,
-"endColumn":  86
+"endLine":  18,
+"endColumn":  119
 }
 }
 },
@@ -58,9 +58,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorErrorView.cs",
 "region":  {
-"startLine":  49,
+"startLine":  54,
 "startColumn":  97,
-"endLine":  49,
+"endLine":  54,
 "endColumn":  161
 }
 }
@@ -84,10 +84,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
-"startLine":  212,
-"startColumn":  50,
-"endLine":  212,
-"endColumn":  109
+"startLine":  221,
+"startColumn":  31,
+"endLine":  221,
+"endColumn":  90
 }
 }
 },
@@ -97,10 +97,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
-"startLine":  212,
-"startColumn":  80,
-"endLine":  212,
-"endColumn":  108
+"startLine":  221,
+"startColumn":  61,
+"endLine":  221,
+"endColumn":  89
 }
 }
 },
@@ -110,10 +110,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
-"startLine":  275,
-"startColumn":  36,
-"endLine":  280,
-"endColumn":  128
+"startLine":  255,
+"startColumn":  32,
+"endLine":  260,
+"endColumn":  178
 }
 }
 },
@@ -123,10 +123,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
-"startLine":  295,
-"startColumn":  29,
-"endLine":  295,
-"endColumn":  121
+"startLine":  289,
+"startColumn":  28,
+"endLine":  289,
+"endColumn":  64
 }
 }
 },
@@ -136,10 +136,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
-"startLine":  323,
-"startColumn":  43,
-"endLine":  328,
-"endColumn":  33
+"startLine":  305,
+"startColumn":  53,
+"endLine":  305,
+"endColumn":  161
 }
 }
 },
@@ -149,10 +149,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
-"startLine":  338,
-"startColumn":  48,
-"endLine":  338,
-"endColumn":  157
+"startLine":  307,
+"startColumn":  28,
+"endLine":  312,
+"endColumn":  44
 }
 }
 }

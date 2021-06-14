@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Nancy\samples\Nancy.Demo.Hosting.Kestrel\HomeModule.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  53,
+"endLine":  11,
+"endColumn":  55
+}
+}
+}
+]
+}

@@ -7,7 +7,7 @@
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
 "region":  {
 "startLine":  103,
-"startColumn":  39,
+"startColumn":  36,
 "endLine":  105,
 "endColumn":  45
 }
@@ -32,10 +32,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
 "region":  {
-"startLine":  126,
-"startColumn":  39,
-"endLine":  126,
-"endColumn":  78
+"startLine":  128,
+"startColumn":  36,
+"endLine":  128,
+"endColumn":  75
 }
 }
 },
@@ -45,10 +45,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
 "region":  {
-"startLine":  157,
-"startColumn":  97,
-"endLine":  157,
-"endColumn":  165
+"startLine":  161,
+"startColumn":  102,
+"endLine":  161,
+"endColumn":  170
 }
 }
 }

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'XMLBody' to match pascal case naming rules, consider using 'XmlBody'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  28,
+"endLine":  76,
+"endColumn":  35
+}
+}
+}
+]
+}

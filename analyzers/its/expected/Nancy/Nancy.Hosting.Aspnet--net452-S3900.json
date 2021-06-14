@@ -227,9 +227,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHandler.cs",
 "region":  {
-"startLine":  124,
+"startLine":  137,
 "startColumn":  17,
-"endLine":  124,
+"endLine":  137,
 "endColumn":  25
 }
 }
@@ -240,9 +240,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHandler.cs",
 "region":  {
-"startLine":  126,
+"startLine":  139,
 "startColumn":  17,
-"endLine":  126,
+"endLine":  139,
 "endColumn":  24
 }
 }
@@ -253,9 +253,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHandler.cs",
 "region":  {
-"startLine":  131,
+"startLine":  144,
 "startColumn":  17,
-"endLine":  131,
+"endLine":  144,
 "endColumn":  24
 }
 }
@@ -266,9 +266,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHandler.cs",
 "region":  {
-"startLine":  134,
+"startLine":  147,
 "startColumn":  13,
-"endLine":  134,
+"endLine":  147,
 "endColumn":  20
 }
 }

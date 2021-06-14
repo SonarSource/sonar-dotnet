@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  62,
+"endLine":  96,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  97,
+"endLine":  127,
+"endColumn":  98
+}
+}
+}
+]
+}

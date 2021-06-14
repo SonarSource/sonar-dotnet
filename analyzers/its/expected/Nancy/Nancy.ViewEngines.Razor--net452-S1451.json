@@ -264,6 +264,19 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorAssemblyProvider.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorConfigurationSection.cs",
 "region":  {
 "startLine":  1,
@@ -304,58 +317,6 @@
 "message":  "Add or update the header of this file.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\UrlHelpers.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\NancyVisualBasicRazorCodeParser.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicClrTypeResolver.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

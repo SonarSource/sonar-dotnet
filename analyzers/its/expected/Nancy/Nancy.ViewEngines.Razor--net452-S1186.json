@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
-"startLine":  65,
+"startLine":  59,
 "startColumn":  21,
-"endLine":  65,
+"endLine":  59,
 "endColumn":  31
 }
 }

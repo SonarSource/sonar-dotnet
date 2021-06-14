@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyCSharpRazorBuildProvider.cs",
 "region":  {
-"startLine":  44,
+"startLine":  45,
 "startColumn":  13,
-"endLine":  44,
+"endLine":  45,
 "endColumn":  28
 }
 }
@@ -19,35 +19,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyCSharpRazorBuildProvider.cs",
 "region":  {
-"startLine":  56,
+"startLine":  57,
 "startColumn":  20,
-"endLine":  56,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'assemblyBuilder' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyVisualBasicRazorBuildProvider.cs",
-"region":  {
-"startLine":  44,
-"startColumn":  13,
-"endLine":  44,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'results' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyVisualBasicRazorBuildProvider.cs",
-"region":  {
-"startLine":  56,
-"startColumn":  20,
-"endLine":  56,
+"endLine":  57,
 "endColumn":  27
 }
 }

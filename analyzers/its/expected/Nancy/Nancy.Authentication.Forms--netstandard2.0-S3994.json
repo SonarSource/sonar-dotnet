@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  135,
+"endLine":  105,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  80,
+"endLine":  163,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  116,
+"endLine":  20,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  127,
+"endLine":  35,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  65,
+"endLine":  58,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  76,
+"endLine":  71,
+"endColumn":  82
+}
+}
+}
+]
+}

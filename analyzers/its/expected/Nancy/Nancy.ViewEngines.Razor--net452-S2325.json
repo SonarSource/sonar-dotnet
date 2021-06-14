@@ -38,19 +38,6 @@
 "endColumn":  38
 }
 }
-},
-{
-"id":  "S2325",
-"message":  "Make 'GetCompilationSource' a static method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
-"region":  {
-"startLine":  308,
-"startColumn":  26,
-"endLine":  308,
-"endColumn":  46
-}
-}
 }
 ]
 }

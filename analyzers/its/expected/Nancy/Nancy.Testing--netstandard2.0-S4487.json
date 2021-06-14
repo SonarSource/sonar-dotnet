@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'hostBrowser' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponse.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  34,
+"endLine":  12,
+"endColumn":  45
+}
+}
+}
+]
+}

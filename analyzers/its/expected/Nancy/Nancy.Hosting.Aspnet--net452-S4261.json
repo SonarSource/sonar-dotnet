@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHandler.cs",
 "region":  {
-"startLine":  33,
+"startLine":  35,
 "startColumn":  27,
-"endLine":  33,
+"endLine":  35,
 "endColumn":  41
 }
 }

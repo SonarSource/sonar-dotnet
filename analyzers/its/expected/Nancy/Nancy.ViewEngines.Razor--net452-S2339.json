@@ -6,10 +6,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorConfigurationSection.cs",
 "region":  {
-"startLine":  54,
-"startColumn":  23,
-"endLine":  54,
-"endColumn":  43
+"startLine":  37,
+"startColumn":  29,
+"endLine":  37,
+"endColumn":  49
 }
 }
 },
@@ -19,10 +19,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorConfigurationSection.cs",
 "region":  {
-"startLine":  73,
-"startColumn":  23,
-"endLine":  73,
-"endColumn":  44
+"startLine":  49,
+"startColumn":  29,
+"endLine":  49,
+"endColumn":  47
 }
 }
 },
@@ -32,10 +32,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorConfigurationSection.cs",
 "region":  {
-"startLine":  91,
-"startColumn":  23,
-"endLine":  91,
-"endColumn":  41
+"startLine":  86,
+"startColumn":  29,
+"endLine":  86,
+"endColumn":  50
 }
 }
 },
@@ -45,10 +45,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorConfigurationSection.cs",
 "region":  {
-"startLine":  128,
-"startColumn":  22,
-"endLine":  128,
-"endColumn":  40
+"startLine":  98,
+"startColumn":  29,
+"endLine":  98,
+"endColumn":  47
 }
 }
 }

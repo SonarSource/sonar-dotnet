@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'ConfigureMetadataModuleConventions' a static method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleConventions.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  96,
+"endLine":  42,
+"endColumn":  130
+}
+}
+}
+]
+}
