@@ -6,8 +6,6 @@
     <Nullable>enable</Nullable>
     <LangVersion>latestmajor</LangVersion>
     <SonarQubeExclude>true</SonarQubeExclude>
-    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
 
   <ItemGroup>

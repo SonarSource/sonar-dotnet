@@ -9,8 +9,6 @@
     <TargetFrameworks>net46;netcoreapp3.1</TargetFrameworks>
     <ProjectGuid>{07e31f39-7419-4b4e-998e-c2bf1a6bb91c}</ProjectGuid>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
-    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
 
   <ItemGroup>
