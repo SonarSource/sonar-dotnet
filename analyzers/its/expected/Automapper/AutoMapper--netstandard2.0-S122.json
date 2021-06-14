@@ -4,63 +4,11 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberPath.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
 "region":  {
-"startLine":  27,
-"startColumn":  13,
-"endLine":  27,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
-"region":  {
-"startLine":  103,
+"startLine":  134,
 "startColumn":  17,
-"endLine":  103,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
-"region":  {
-"startLine":  107,
-"startColumn":  17,
-"endLine":  107,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
-"region":  {
-"startLine":  216,
-"startColumn":  13,
-"endLine":  216,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
-"region":  {
-"startLine":  99,
-"startColumn":  17,
-"endLine":  99,
+"endLine":  134,
 "endColumn":  59
 }
 }
@@ -69,64 +17,12 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\MemberPath.cs",
 "region":  {
-"startLine":  39,
+"startLine":  31,
 "startColumn":  13,
-"endLine":  39,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
-"region":  {
-"startLine":  40,
-"startColumn":  13,
-"endLine":  40,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  13,
-"endLine":  47,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
-"region":  {
-"startLine":  48,
-"startColumn":  13,
-"endLine":  48,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
-"region":  {
-"startLine":  49,
-"startColumn":  13,
-"endLine":  49,
-"endColumn":  58
+"endLine":  31,
+"endColumn":  42
 }
 }
 },
@@ -136,9 +32,9 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
 "region":  {
-"startLine":  197,
+"startLine":  211,
 "startColumn":  13,
-"endLine":  197,
+"endLine":  211,
 "endColumn":  57
 }
 }
@@ -149,23 +45,10 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
 "region":  {
-"startLine":  333,
+"startLine":  338,
 "startColumn":  13,
-"endLine":  333,
+"endLine":  338,
 "endColumn":  47
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
-"region":  {
-"startLine":  36,
-"startColumn":  13,
-"endLine":  36,
-"endColumn":  58
 }
 }
 }

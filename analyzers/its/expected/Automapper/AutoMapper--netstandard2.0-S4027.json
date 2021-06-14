@@ -4,12 +4,12 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
 "region":  {
-"startLine":  7,
+"startLine":  11,
 "startColumn":  18,
-"endLine":  7,
-"endColumn":  50
+"endLine":  11,
+"endColumn":  44
 }
 }
 },
@@ -19,10 +19,10 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
 "region":  {
-"startLine":  8,
+"startLine":  79,
 "startColumn":  18,
-"endLine":  8,
-"endColumn":  44
+"endLine":  79,
+"endColumn":  56
 }
 }
 },
@@ -30,12 +30,12 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\DuplicateTypeMapConfigurationException.cs",
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
 "region":  {
-"startLine":  6,
+"startLine":  113,
 "startColumn":  18,
-"endLine":  6,
-"endColumn":  56
+"endLine":  113,
+"endColumn":  50
 }
 }
 }

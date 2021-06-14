@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3217",
+"message":  "Either change the type of 'foundMethod' to 'MemberInfo' or iterate on a generic collection of type 'MethodInfo'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeExtensions.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  22,
+"endLine":  16,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3217",
+"message":  "Either change the type of 'sourceMethod' to 'MemberInfo' or iterate on a generic collection of type 'MethodInfo'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ConversionOperatorMapper.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  22,
+"endLine":  13,
+"endColumn":  32
+}
+}
+}
+]
+}

@@ -4,11 +4,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
 "region":  {
-"startLine":  97,
+"startLine":  199,
 "startColumn":  29,
-"endLine":  97,
+"endLine":  199,
 "endColumn":  36
 }
 }
@@ -17,11 +17,24 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
 "region":  {
-"startLine":  111,
+"startLine":  203,
 "startColumn":  25,
-"endLine":  111,
+"endLine":  203,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  25,
+"endLine":  178,
 "endColumn":  27
 }
 }
@@ -32,10 +45,10 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
 "region":  {
-"startLine":  121,
+"startLine":  100,
 "startColumn":  25,
-"endLine":  121,
-"endColumn":  32
+"endLine":  100,
+"endColumn":  27
 }
 }
 }

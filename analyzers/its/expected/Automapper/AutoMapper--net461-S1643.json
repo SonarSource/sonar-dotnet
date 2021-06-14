@@ -4,12 +4,12 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
 "region":  {
-"startLine":  60,
+"startLine":  166,
 "startColumn":  29,
-"endLine":  62,
-"endColumn":  199
+"endLine":  168,
+"endColumn":  196
 }
 }
 }

@@ -4,12 +4,38 @@
 "id":  "S3626",
 "message":  "Remove this redundant jump.",
 "location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  13,
+"endLine":  196,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3626",
+"message":  "Remove this redundant jump.",
+"location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
 "region":  {
-"startLine":  130,
+"startLine":  118,
 "startColumn":  13,
-"endLine":  130,
+"endLine":  118,
 "endColumn":  20
+}
+}
+},
+{
+"id":  "S3626",
+"message":  "Remove this redundant jump.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  17,
+"endLine":  75,
+"endColumn":  24
 }
 }
 }

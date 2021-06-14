@@ -2,23 +2,119 @@
 "issues":  [
 {
 "id":  "S4136",
+"message":  "All 'CreateMap' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IProfileExpression.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  51,
+"endLine":  22,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IProfileExpression.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  28,
+"endLine":  59,
+"endColumn":  37
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ForMember' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  58,
+"endLine":  173,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  58,
+"endLine":  202,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'AfterMap' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  35,
+"endLine":  341,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  35,
+"endLine":  346,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ConvertUsing' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  450,
+"startColumn":  21,
+"endLine":  450,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  516,
+"startColumn":  21,
+"endLine":  516,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S4136",
 "message":  "All 'MapFrom' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  124,
+"startLine":  42,
 "startColumn":  21,
-"endLine":  124,
+"endLine":  42,
 "endColumn":  28
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  135,
+"startLine":  130,
 "startColumn":  21,
-"endLine":  135,
+"endLine":  130,
 "endColumn":  28
 }
 }
@@ -26,47 +122,71 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'GenerateConstructorExpression' method overloads should be adjacent.",
+"message":  "All 'CreateMap' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\DelegateFactory.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
 "region":  {
-"startLine":  27,
-"startColumn":  34,
-"endLine":  27,
-"endColumn":  63
+"startLine":  141,
+"startColumn":  58,
+"endLine":  141,
+"endColumn":  67
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\DelegateFactory.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
 "region":  {
-"startLine":  39,
-"startColumn":  34,
-"endLine":  39,
-"endColumn":  63
+"startLine":  152,
+"startColumn":  35,
+"endLine":  152,
+"endColumn":  44
 }
 }
 ]
 },
 {
 "id":  "S4136",
-"message":  "All 'GetMapperFunc' method overloads should be adjacent.",
+"message":  "All 'Configure' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Features.cs",
 "region":  {
-"startLine":  142,
-"startColumn":  70,
-"endLine":  142,
-"endColumn":  83
+"startLine":  57,
+"startColumn":  30,
+"endLine":  57,
+"endColumn":  39
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Features.cs",
 "region":  {
-"startLine":  151,
-"startColumn":  18,
-"endLine":  151,
+"startLine":  83,
+"startColumn":  30,
+"endLine":  83,
+"endColumn":  39
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Configure' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  22,
+"endLine":  161,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  22,
+"endLine":  180,
 "endColumn":  31
 }
 }
@@ -74,249 +194,24 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Include' method overloads should be adjacent.",
+"message":  "All 'Chain' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
 "region":  {
-"startLine":  266,
-"startColumn":  51,
-"endLine":  266,
-"endColumn":  58
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  284,
-"startColumn":  51,
-"endLine":  284,
-"endColumn":  58
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ConstructUsing' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  371,
-"startColumn":  51,
-"endLine":  371,
-"endColumn":  65
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  385,
-"startColumn":  51,
-"endLine":  385,
-"endColumn":  65
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'GetMapperFunc' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
-"region":  {
-"startLine":  88,
-"startColumn":  77,
-"endLine":  88,
-"endColumn":  90
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
-"region":  {
-"startLine":  106,
-"startColumn":  25,
-"endLine":  106,
-"endColumn":  38
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'GetElementType' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
-"region":  {
-"startLine":  12,
-"startColumn":  28,
-"endLine":  12,
-"endColumn":  42
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
-"region":  {
-"startLine":  17,
-"startColumn":  28,
-"endLine":  17,
-"endColumn":  42
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'GetElementTypes' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
-"region":  {
-"startLine":  14,
-"startColumn":  30,
-"endLine":  14,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
-"region":  {
-"startLine":  19,
-"startColumn":  30,
-"endLine":  19,
-"endColumn":  45
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'GetExpressionResolutionResult' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberResolverExpressionResultConverter.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  43,
-"endLine":  7,
-"endColumn":  72
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberResolverExpressionResultConverter.cs",
-"region":  {
-"startLine":  27,
-"startColumn":  43,
-"endLine":  27,
-"endColumn":  72
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'To' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
-"region":  {
-"startLine":  33,
-"startColumn":  36,
-"endLine":  33,
-"endColumn":  38
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
-"region":  {
-"startLine":  48,
-"startColumn":  36,
-"endLine":  48,
-"endColumn":  38
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
-"region":  {
-"startLine":  71,
-"startColumn":  36,
-"endLine":  71,
-"endColumn":  38
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'GetGetMethod' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
-"region":  {
-"startLine":  130,
-"startColumn":  34,
-"endLine":  130,
-"endColumn":  46
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
-"region":  {
-"startLine":  134,
-"startColumn":  34,
-"endLine":  134,
-"endColumn":  46
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'GetSetMethod' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
-"region":  {
-"startLine":  132,
-"startColumn":  34,
-"endLine":  132,
-"endColumn":  46
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
-"region":  {
-"startLine":  136,
-"startColumn":  34,
-"endLine":  136,
-"endColumn":  46
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'IsPublic' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
-"region":  {
-"startLine":  79,
-"startColumn":  28,
-"endLine":  79,
+"startLine":  296,
+"startColumn":  31,
+"endLine":  296,
 "endColumn":  36
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
 "region":  {
-"startLine":  93,
-"startColumn":  28,
-"endLine":  93,
-"endColumn":  36
+"startLine":  310,
+"startColumn":  33,
+"endLine":  310,
+"endColumn":  38
 }
 }
 ]

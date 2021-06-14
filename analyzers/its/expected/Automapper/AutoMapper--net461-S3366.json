@@ -4,12 +4,12 @@
 "id":  "S3366",
 "message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
 "region":  {
-"startLine":  51,
-"startColumn":  42,
-"endLine":  51,
-"endColumn":  46
+"startLine":  104,
+"startColumn":  46,
+"endLine":  104,
+"endColumn":  50
 }
 }
 }

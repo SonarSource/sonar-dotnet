@@ -6,10 +6,23 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
 "region":  {
-"startLine":  13,
+"startLine":  101,
 "startColumn":  48,
-"endLine":  13,
+"endLine":  101,
 "endColumn":  56
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  9,
+"endLine":  171,
+"endColumn":  31
 }
 }
 }

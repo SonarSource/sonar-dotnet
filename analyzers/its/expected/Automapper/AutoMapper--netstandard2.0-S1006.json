@@ -4,12 +4,25 @@
 "id":  "S1006",
 "message":  "Remove the default parameter value to match the signature of overridden method.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\DefaultMember.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
 "region":  {
-"startLine":  13,
-"startColumn":  215,
-"endLine":  13,
-"endColumn":  221
+"startLine":  35,
+"startColumn":  216,
+"endLine":  35,
+"endColumn":  222
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  242,
+"endLine":  35,
+"endColumn":  249
 }
 }
 },
@@ -17,12 +30,12 @@
 "id":  "S1006",
 "message":  "Add the default parameter value defined in the overridden method.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
 "region":  {
-"startLine":  88,
-"startColumn":  142,
-"endLine":  88,
-"endColumn":  153
+"startLine":  172,
+"startColumn":  91,
+"endLine":  172,
+"endColumn":  101
 }
 }
 },
@@ -30,12 +43,12 @@
 "id":  "S1006",
 "message":  "Add the default parameter value defined in the overridden method.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
 "region":  {
-"startLine":  56,
-"startColumn":  55,
-"endLine":  56,
-"endColumn":  65
+"startLine":  176,
+"startColumn":  106,
+"endLine":  176,
+"endColumn":  116
 }
 }
 }

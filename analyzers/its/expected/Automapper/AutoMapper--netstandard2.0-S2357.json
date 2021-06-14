@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Types' private.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  25,
+"endLine":  75,
+"endColumn":  30
+}
+}
+}
+]
+}

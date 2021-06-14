@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
 "region":  {
-"startLine":  30,
+"startLine":  67,
 "startColumn":  17,
-"endLine":  30,
+"endLine":  67,
 "endColumn":  30
 }
 }

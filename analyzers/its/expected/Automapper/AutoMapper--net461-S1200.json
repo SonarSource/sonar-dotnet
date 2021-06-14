@@ -2,39 +2,13 @@
 "issues":  [
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 34 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 40 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
 "region":  {
-"startLine":  137,
+"startLine":  51,
 "startColumn":  18,
-"endLine":  137,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 37 to the maximum authorized 30 or less.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  14,
-"startColumn":  18,
-"endLine":  14,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 43 to the maximum authorized 30 or less.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
-"region":  {
-"startLine":  19,
-"startColumn":  18,
-"endLine":  19,
+"endLine":  51,
 "endColumn":  37
 }
 }
@@ -43,12 +17,38 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 31 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\MapperRegistry.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
 "region":  {
-"startLine":  5,
+"startLine":  64,
 "startColumn":  27,
-"endLine":  5,
-"endColumn":  41
+"endLine":  64,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 41 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  25,
+"endLine":  15,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 35 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  18,
+"endLine":  12,
+"endColumn":  36
 }
 }
 },
@@ -56,25 +56,38 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 31 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
 "region":  {
-"startLine":  16,
-"startColumn":  27,
-"endLine":  16,
-"endColumn":  34
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  28
 }
 }
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 42 to the maximum authorized 30 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 36 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
 "region":  {
-"startLine":  27,
+"startLine":  31,
 "startColumn":  18,
-"endLine":  27,
+"endLine":  31,
 "endColumn":  35
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 31 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  18,
+"endLine":  20,
+"endColumn":  25
 }
 }
 }

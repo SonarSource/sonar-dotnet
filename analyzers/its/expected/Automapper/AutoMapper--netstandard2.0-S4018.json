@@ -4,11 +4,271 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMappingExpression.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  51,
+"endLine":  81,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMappingExpression.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  51,
+"endLine":  88,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMappingExpression.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  14,
+"endLine":  107,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMappingExpressionBase.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  28,
+"endLine":  98,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMappingExpressionBase.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  28,
+"endLine":  119,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMappingExpressionBase.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  14,
+"endLine":  201,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  14,
+"endLine":  25,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  14,
+"endLine":  32,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  14,
+"endLine":  41,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  14,
+"endLine":  150,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  14,
+"endLine":  161,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  14,
+"endLine":  172,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IProfileExpression.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  51,
+"endLine":  22,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IProfileExpression.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  51,
+"endLine":  32,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IProfileExpression.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  54,
+"endLine":  40,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IProfileExpression.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  54,
+"endLine":  50,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  91,
+"endLine":  160,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  38,
+"endLine":  238,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"region":  {
+"startLine":  479,
+"startColumn":  35,
+"endLine":  479,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
 "region":  {
-"startLine":  42,
+"startLine":  25,
+"startColumn":  14,
+"endLine":  25,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"region":  {
+"startLine":  155,
 "startColumn":  21,
-"endLine":  42,
+"endLine":  155,
 "endColumn":  31
 }
 }
@@ -19,74 +279,9 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
 "region":  {
-"startLine":  31,
-"startColumn":  33,
-"endLine":  31,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
-"region":  {
-"startLine":  61,
-"startColumn":  39,
-"endLine":  61,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
-"region":  {
-"startLine":  67,
-"startColumn":  39,
-"endLine":  67,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
-"region":  {
-"startLine":  94,
-"startColumn":  54,
-"endLine":  94,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
-"region":  {
-"startLine":  179,
-"startColumn":  53,
-"endLine":  179,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
-"region":  {
-"startLine":  251,
+"startLine":  219,
 "startColumn":  58,
-"endLine":  251,
+"endLine":  219,
 "endColumn":  65
 }
 }
@@ -97,9 +292,9 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
 "region":  {
-"startLine":  269,
+"startLine":  228,
 "startColumn":  58,
-"endLine":  269,
+"endLine":  228,
 "endColumn":  69
 }
 }
@@ -110,48 +305,9 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
 "region":  {
-"startLine":  382,
+"startLine":  244,
 "startColumn":  21,
-"endLine":  382,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
-"region":  {
-"startLine":  413,
-"startColumn":  58,
-"endLine":  413,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
-"region":  {
-"startLine":  447,
-"startColumn":  58,
-"endLine":  447,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
-"region":  {
-"startLine":  507,
-"startColumn":  21,
-"endLine":  507,
+"endLine":  244,
 "endColumn":  23
 }
 }
@@ -160,11 +316,50 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
 "region":  {
-"startLine":  37,
+"startLine":  339,
+"startColumn":  35,
+"endLine":  339,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  35,
+"endLine":  341,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  29,
+"endLine":  343,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  480,
 "startColumn":  21,
-"endLine":  37,
+"endLine":  480,
 "endColumn":  33
 }
 }
@@ -175,9 +370,48 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  45,
+"startLine":  42,
 "startColumn":  21,
-"endLine":  45,
+"endLine":  42,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  21,
+"endLine":  50,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  21,
+"endLine":  61,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  21,
+"endLine":  270,
 "endColumn":  33
 }
 }
@@ -188,9 +422,9 @@
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  56,
+"startLine":  274,
 "startColumn":  21,
-"endLine":  56,
+"endLine":  274,
 "endColumn":  33
 }
 }
@@ -199,11 +433,115 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
 "region":  {
-"startLine":  40,
+"startLine":  278,
+"startColumn":  21,
+"endLine":  278,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  29,
+"endLine":  291,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  61,
+"endLine":  137,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  61,
+"endLine":  139,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  58,
+"endLine":  141,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  58,
+"endLine":  143,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  59,
+"endLine":  145,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Features.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  31,
+"endLine":  30,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\InternalApi.cs",
+"region":  {
+"startLine":  85,
 "startColumn":  17,
-"endLine":  40,
+"endLine":  85,
 "endColumn":  31
 }
 }
@@ -212,11 +550,11 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\InternalApi.cs",
 "region":  {
-"startLine":  95,
+"startLine":  113,
 "startColumn":  14,
-"endLine":  95,
+"endLine":  113,
 "endColumn":  40
 }
 }
@@ -225,12 +563,12 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\InternalApi.cs",
 "region":  {
-"startLine":  142,
+"startLine":  131,
 "startColumn":  70,
-"endLine":  142,
-"endColumn":  83
+"endLine":  131,
+"endColumn":  86
 }
 }
 },
@@ -238,415 +576,12 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
-"region":  {
-"startLine":  143,
-"startColumn":  70,
-"endLine":  143,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMapper.cs",
-"region":  {
-"startLine":  14,
-"startColumn":  22,
-"endLine":  14,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMapper.cs",
-"region":  {
-"startLine":  23,
-"startColumn":  22,
-"endLine":  23,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMapper.cs",
-"region":  {
-"startLine":  32,
-"startColumn":  22,
-"endLine":  32,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMapperConfigurationExpression.cs",
-"region":  {
-"startLine":  24,
-"startColumn":  14,
-"endLine":  24,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  105,
-"startColumn":  14,
-"endLine":  105,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  168,
-"startColumn":  28,
-"endLine":  168,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  183,
-"startColumn":  28,
-"endLine":  183,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  266,
-"startColumn":  51,
-"endLine":  266,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  276,
-"startColumn":  51,
-"endLine":  276,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  320,
-"startColumn":  14,
-"endLine":  320,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  341,
-"startColumn":  51,
-"endLine":  341,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  363,
-"startColumn":  51,
-"endLine":  363,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
-"region":  {
-"startLine":  391,
-"startColumn":  14,
-"endLine":  391,
-"endColumn":  16
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMappingOperationOptions.cs",
-"region":  {
-"startLine":  11,
-"startColumn":  11,
-"endLine":  11,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  32,
-"startColumn":  14,
-"endLine":  32,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  41,
-"startColumn":  14,
-"endLine":  41,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
-"region":  {
-"startLine":  51,
-"startColumn":  14,
-"endLine":  51,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IProfileExpression.cs",
-"region":  {
-"startLine":  26,
-"startColumn":  51,
-"endLine":  26,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\IProfileExpression.cs",
-"region":  {
-"startLine":  36,
-"startColumn":  51,
-"endLine":  36,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
-"region":  {
-"startLine":  72,
-"startColumn":  36,
-"endLine":  72,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
-"region":  {
-"startLine":  81,
-"startColumn":  36,
-"endLine":  81,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
-"region":  {
-"startLine":  91,
-"startColumn":  36,
-"endLine":  91,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
-"region":  {
-"startLine":  200,
-"startColumn":  30,
-"endLine":  200,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
-"region":  {
-"startLine":  212,
-"startColumn":  30,
-"endLine":  212,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
-"region":  {
-"startLine":  225,
-"startColumn":  30,
-"endLine":  225,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
-"region":  {
-"startLine":  88,
-"startColumn":  77,
-"endLine":  88,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
-"region":  {
-"startLine":  95,
-"startColumn":  77,
-"endLine":  95,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
-"region":  {
-"startLine":  189,
-"startColumn":  24,
-"endLine":  189,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
-"region":  {
-"startLine":  284,
-"startColumn":  21,
-"endLine":  284,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToEnumMapper.cs",
-"region":  {
-"startLine":  12,
-"startColumn":  36,
-"endLine":  12,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\MultidimensionalArrayMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
 "region":  {
 "startLine":  16,
-"startColumn":  30,
+"startColumn":  28,
 "endLine":  16,
-"endColumn":  33
+"endColumn":  31
 }
 }
 },
@@ -654,12 +589,12 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\TypeConverterMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
 "region":  {
-"startLine":  12,
-"startColumn":  37,
-"endLine":  12,
-"endColumn":  40
+"startLine":  19,
+"startColumn":  22,
+"endLine":  19,
+"endColumn":  25
 }
 }
 },
@@ -667,11 +602,37 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MappingOperationOptions.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
 "region":  {
-"startLine":  42,
-"startColumn":  18,
-"endLine":  42,
+"startLine":  27,
+"startColumn":  22,
+"endLine":  27,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  34,
+"endLine":  125,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  29,
+"endLine":  156,
 "endColumn":  32
 }
 }
@@ -680,12 +641,12 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
 "region":  {
-"startLine":  103,
-"startColumn":  58,
-"endLine":  103,
-"endColumn":  67
+"startLine":  158,
+"startColumn":  29,
+"endLine":  158,
+"endColumn":  32
 }
 }
 },
@@ -693,12 +654,12 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
 "region":  {
-"startLine":  106,
-"startColumn":  58,
-"endLine":  106,
-"endColumn":  67
+"startLine":  174,
+"startColumn":  41,
+"endLine":  174,
+"endColumn":  50
 }
 }
 },
@@ -706,12 +667,12 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Extensions.cs",
 "region":  {
-"startLine":  190,
-"startColumn":  59,
-"endLine":  190,
-"endColumn":  82
+"startLine":  62,
+"startColumn":  48,
+"endLine":  62,
+"endColumn":  57
 }
 }
 },
@@ -719,11 +680,37 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Extensions.cs",
 "region":  {
-"startLine":  586,
+"startLine":  95,
+"startColumn":  40,
+"endLine":  95,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Extensions.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  41,
+"endLine":  101,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"region":  {
+"startLine":  369,
 "startColumn":  63,
-"endLine":  586,
+"endLine":  369,
 "endColumn":  79
 }
 }
@@ -732,12 +719,12 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Extensions.cs",
+"uri":  "sources\Automapper\src\AutoMapper\ResolutionContext.cs",
 "region":  {
-"startLine":  100,
-"startColumn":  48,
-"endLine":  100,
-"endColumn":  57
+"startLine":  62,
+"startColumn":  34,
+"endLine":  62,
+"endColumn":  37
 }
 }
 },
@@ -745,155 +732,12 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Extensions.cs",
+"uri":  "sources\Automapper\src\AutoMapper\ResolutionContext.cs",
 "region":  {
-"startLine":  113,
-"startColumn":  48,
-"endLine":  113,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IProjectionExpression.cs",
-"region":  {
-"startLine":  20,
-"startColumn":  29,
-"endLine":  20,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IProjectionExpression.cs",
-"region":  {
-"startLine":  28,
-"startColumn":  29,
-"endLine":  28,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IProjectionExpression.cs",
-"region":  {
-"startLine":  37,
-"startColumn":  29,
-"endLine":  37,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IProjectionExpression.cs",
-"region":  {
-"startLine":  46,
-"startColumn":  29,
-"endLine":  46,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IProjectionExpression.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  29,
-"endLine":  66,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
-"region":  {
-"startLine":  33,
-"startColumn":  36,
-"endLine":  33,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  36,
-"endLine":  35,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
-"region":  {
-"startLine":  48,
-"startColumn":  36,
-"endLine":  48,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  36,
-"endLine":  50,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
-"region":  {
-"startLine":  77,
-"startColumn":  36,
-"endLine":  77,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to have parameters matching all the type parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
-"region":  {
-"startLine":  14,
-"startColumn":  28,
-"endLine":  14,
-"endColumn":  31
+"startLine":  63,
+"startColumn":  34,
+"endLine":  63,
+"endColumn":  37
 }
 }
 }

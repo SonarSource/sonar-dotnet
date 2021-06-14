@@ -1,0 +1,186 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  72,
+"endLine":  21,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  77,
+"endLine":  25,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  67,
+"endLine":  27,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  59,
+"endLine":  29,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  55,
+"endLine":  30,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  59,
+"endLine":  31,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  72,
+"endLine":  33,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  68,
+"endLine":  34,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  76,
+"endLine":  35,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  73,
+"endLine":  36,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  83,
+"endLine":  37,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  81,
+"endLine":  38,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  93,
+"endLine":  39,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  94,
+"endLine":  40,
+"endColumn":  97
+}
+}
+}
+]
+}

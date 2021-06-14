@@ -4,24 +4,24 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  21,
+"endLine":  31,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1227",
+"message":  "Refactor the code in order to remove this break statement.",
+"location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
 "region":  {
-"startLine":  56,
-"startColumn":  21,
-"endLine":  56,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\NameSplitMember.cs",
-"region":  {
-"startLine":  44,
+"startLine":  142,
 "startColumn":  25,
-"endLine":  44,
+"endLine":  142,
 "endColumn":  31
 }
 }
@@ -30,11 +30,11 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\ParentSourceToDestinationNameMapper.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
 "region":  {
-"startLine":  21,
+"startLine":  193,
 "startColumn":  21,
-"endLine":  21,
+"endLine":  193,
 "endColumn":  27
 }
 }
@@ -43,12 +43,12 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMapFactory.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
 "region":  {
-"startLine":  33,
-"startColumn":  25,
-"endLine":  33,
-"endColumn":  31
+"startLine":  213,
+"startColumn":  21,
+"endLine":  213,
+"endColumn":  27
 }
 }
 }

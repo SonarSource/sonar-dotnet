@@ -4,12 +4,25 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\ConfigurationValidator.cs",
 "region":  {
-"startLine":  498,
-"startColumn":  30,
-"endLine":  498,
-"endColumn":  171
+"startLine":  36,
+"startColumn":  83,
+"endLine":  36,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  45,
+"endLine":  199,
+"endColumn":  133
 }
 }
 }

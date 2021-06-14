@@ -4,12 +4,12 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyBase.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
 "region":  {
-"startLine":  5,
+"startLine":  64,
 "startColumn":  27,
-"endLine":  5,
-"endColumn":  36
+"endLine":  64,
+"endColumn":  34
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
 "region":  {
-"startLine":  16,
+"startLine":  169,
 "startColumn":  27,
-"endLine":  16,
-"endColumn":  34
+"endLine":  169,
+"endColumn":  36
 }
 }
 }

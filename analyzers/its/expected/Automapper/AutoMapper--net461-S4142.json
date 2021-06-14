@@ -7,18 +7,18 @@
 {
 "uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
 "region":  {
-"startLine":  166,
+"startLine":  197,
 "startColumn":  36,
-"endLine":  166,
+"endLine":  197,
 "endColumn":  43
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
 "region":  {
-"startLine":  166,
+"startLine":  197,
 "startColumn":  27,
-"endLine":  166,
+"endLine":  197,
 "endColumn":  34
 }
 }
@@ -31,18 +31,18 @@
 {
 "uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
 "region":  {
-"startLine":  167,
+"startLine":  198,
 "startColumn":  39,
-"endLine":  167,
+"endLine":  198,
 "endColumn":  46
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
 "region":  {
-"startLine":  167,
+"startLine":  198,
 "startColumn":  30,
-"endLine":  167,
+"endLine":  198,
 "endColumn":  37
 }
 }

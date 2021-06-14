@@ -5,62 +5,29 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  18,
-"endLine":  7,
-"endColumn":  50
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  12,
-"endLine":  7,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  12,
-"endLine":  7,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
 "uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
 "region":  {
-"startLine":  8,
+"startLine":  11,
 "startColumn":  18,
-"endLine":  8,
+"endLine":  11,
 "endColumn":  44
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
 "region":  {
-"startLine":  8,
+"startLine":  11,
 "startColumn":  12,
-"endLine":  8,
+"endLine":  11,
 "endColumn":  17
 }
 },
 {
 "uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
 "region":  {
-"startLine":  8,
+"startLine":  11,
 "startColumn":  12,
-"endLine":  8,
+"endLine":  11,
 "endColumn":  17
 }
 }
@@ -71,29 +38,62 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\DuplicateTypeMapConfigurationException.cs",
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
 "region":  {
-"startLine":  6,
+"startLine":  113,
 "startColumn":  18,
-"endLine":  6,
-"endColumn":  56
+"endLine":  113,
+"endColumn":  50
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\DuplicateTypeMapConfigurationException.cs",
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
 "region":  {
-"startLine":  6,
+"startLine":  113,
 "startColumn":  12,
-"endLine":  6,
+"endLine":  113,
 "endColumn":  17
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\DuplicateTypeMapConfigurationException.cs",
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
 "region":  {
-"startLine":  6,
+"startLine":  113,
 "startColumn":  12,
-"endLine":  6,
+"endLine":  113,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  18,
+"endLine":  79,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  12,
+"endLine":  79,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  12,
+"endLine":  79,
 "endColumn":  17
 }
 }
