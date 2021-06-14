@@ -17,6 +17,8 @@
       -->
     <AssetTargetFallback>$(AssetTargetFallback);net40-client;portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <ProjectGuid>{e11606ca-a186-4fee-ba30-b1688747cd1a}</ProjectGuid>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -123,7 +125,7 @@
       <Aliases>global,vbnet</Aliases>
     </ProjectReference>
   </ItemGroup>
-  
+
   <Import Project="..\..\StyleCopAnalyzers.targets" />
 
 </Project>

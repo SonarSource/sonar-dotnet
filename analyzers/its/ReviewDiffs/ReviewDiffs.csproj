@@ -7,6 +7,8 @@
     <SonarQubeExclude>true</SonarQubeExclude>
     <ProjectGuid>{7e3adcd6-01d7-44e2-b12f-c485c35c8a9c}</ProjectGuid>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
 
   <ItemGroup>

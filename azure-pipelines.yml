@@ -39,12 +39,7 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
-      - task: NuGetCommand@2
-        displayName: "Restore NuGet packages"
-        inputs:
-          restoreSolution: '$(solution)'
-          feedsToUse: 'config'
-          nugetConfigPath: 'analyzers\NuGet.Config'
+      - script: nuget restore -LockedMode -ConfigFile "analyzers\NuGet.Config" $(solution)
 
       - powershell: .\scripts\build\set-azp-project-version-variable.ps1
 
@@ -197,6 +192,8 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
           cd analyzers
+
+          nuget restore -LockedMode -ConfigFile "NuGet.Config" $(solution)
 
           $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
 

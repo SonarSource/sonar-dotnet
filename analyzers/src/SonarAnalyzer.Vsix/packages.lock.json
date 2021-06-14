@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETFramework,Version=v4.6": {
+      "Google.Protobuf": {
+        "type": "Direct",
+        "requested": "[3.6.1, 3.6.1]",
+        "resolved": "3.6.1",
+        "contentHash": "741fGeDQjixBJaU2j+0CbrmZXsNJkTn/hWbOh4fLVXndHsCclJmWznCPWrJmPoZKvajBvAz3e8ECJOUvRtwjNQ=="
+      },
+      "Microsoft.VisualStudio.SDK.Analyzers": {
+        "type": "Direct",
+        "requested": "[15.8.36, 15.8.36]",
+        "resolved": "15.8.36",
+        "contentHash": "bsPf9+WP1/eqxGRR7pfgOJWrHU4DUEy0hg8sTPH2npH74D5b5R2WmzT4TgZCOzMIFrr0lKY7QLhBGJp5tEQNfA=="
+      },
+      "Microsoft.VisualStudio.Threading.Analyzers": {
+        "type": "Direct",
+        "requested": "[15.8.192, 15.8.192]",
+        "resolved": "15.8.192",
+        "contentHash": "hok2oGcyCvgwUYhE3CisLYxtFSm2E9iJAs9vrqSQqBE0IbYRDDwq5S251VmXDIc8w0o2TJuXPwN7nLREDcOShQ=="
+      },
+      "Microsoft.VSSDK.BuildTools": {
+        "type": "Direct",
+        "requested": "[15.9.3032, 15.9.3032]",
+        "resolved": "15.9.3032",
+        "contentHash": "Gn+amfA2mKIvVRr8Zo4Nu6mNYIwdFBTzs8DhFftsgeyAoKdIu1dV4gq06h/lRSbuWWoz6m/eS+fQyJ0O8C8Wng=="
+      }
+    }
+  }
+}
