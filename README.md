@@ -46,6 +46,7 @@ languages in [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarc
 
 * [Building, testing and debugging the Java plugin](./docs/contributing-plugin.md)
 * [Building, testing and debugging the .NET analyzer](./docs/contributing-analyzer.md)
+* [How to re-generate NuGet lock files](./docs/regenerate-lock-files.md)
 * [Using the rspec.ps1 script](./scripts/rspec/README.md)
 
 ## How to contribute
