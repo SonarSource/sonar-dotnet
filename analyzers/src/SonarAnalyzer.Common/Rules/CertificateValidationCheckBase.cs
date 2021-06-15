@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules
                 var paramSymbol = containingMethod?.Parameters.Single(x => x.Name == identText);
                 if (paramSymbol is {IsParams: false})  // Validation for TryGetNonParamsSyntax, ParamArray/params and therefore array arguments are not inspected
                 {
-                    foreach (var invocation in FindInvocationList(c.Context, FindRootClassOrRecordOrModule(param), containingMethod))
+                    foreach (var invocation in FindInvocationList(c.Context, FindRootTypeDeclaration(param), containingMethod))
                     {
                         var methodParamLookup = CreateParameterLookup(invocation, containingMethod);
                         if (methodParamLookup.TryGetNonParamsSyntax(paramSymbol, out var expression))
@@ -141,19 +141,19 @@ namespace SonarAnalyzer.Rules
             return ret.ToImmutable();
         }
 
-        protected virtual SyntaxNode FindRootClassOrRecordOrModule(SyntaxNode node)
+        protected virtual SyntaxNode FindRootTypeDeclaration(SyntaxNode node)
         {
             SyntaxNode candidate;
-            var current = node.FirstAncestorOrSelf<SyntaxNode>(IsClassOrRecordDeclaration);
-            while (current != null && (candidate = current.Parent.FirstAncestorOrSelf<SyntaxNode>(IsClassOrRecordDeclaration)) != null)  // Search for parent of nested class/record
+            var current = node.FirstAncestorOrSelf<SyntaxNode>(IsTypeDeclaration);
+            while (current != null && (candidate = current.Parent.FirstAncestorOrSelf<SyntaxNode>(IsTypeDeclaration)) != null)  // Search for parent of nested class/record
             {
                 current = candidate;
             }
             return current;
         }
 
-        private bool IsClassOrRecordDeclaration(SyntaxNode expression) =>
-            Language.Syntax.IsAnyKind(expression, Language.SyntaxKind.ClassAndRecordDeclaration);
+        private bool IsTypeDeclaration(SyntaxNode expression) =>
+            Language.Syntax.IsAnyKind(expression, Language.SyntaxKind.TypeDeclaration);
 
         private void TryReportLocations(InspectionContext c, Location primaryLocation, SyntaxNode expression)
         {
@@ -314,7 +314,7 @@ namespace SonarAnalyzer.Rules
             return ret.ToImmutable();
         }
 
-        protected struct InspectionContext
+        protected readonly struct InspectionContext
         {
             public readonly SyntaxNodeAnalysisContext Context;
             public readonly HashSet<SyntaxNode> VisitedMethods;

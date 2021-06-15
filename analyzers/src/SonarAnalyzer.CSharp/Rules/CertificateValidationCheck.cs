@@ -71,8 +71,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
         }
 
-        protected override SyntaxNode FindRootClassOrRecordOrModule(SyntaxNode node) =>
-            base.FindRootClassOrRecordOrModule(node) ?? node.FirstAncestorOrSelf<GlobalStatementSyntax>()?.Parent;
+        protected override SyntaxNode FindRootTypeDeclaration(SyntaxNode node) =>
+            base.FindRootTypeDeclaration(node) ?? node.FirstAncestorOrSelf<GlobalStatementSyntax>()?.Parent;
 
         protected override Location ExpressionLocation(SyntaxNode expression) =>
             // For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
