@@ -77,5 +77,24 @@ namespace SonarAnalyzer.Extensions
                 _ => false
             };
         }
+
+        public static string GetDeclarationTypeName(this SyntaxNode node) =>
+            node.Kind() switch
+            {
+                SyntaxKind.ClassDeclaration => "class",
+                SyntaxKind.StructDeclaration => "struct",
+                SyntaxKind.InterfaceDeclaration => "interface",
+                SyntaxKindEx.RecordDeclaration => "record",
+                _ => GetUnknownType(node.Kind())
+            };
+
+        private static string GetUnknownType(SyntaxKind kind)
+        {
+#if DEBUG
+            throw new System.ArgumentException($"Unexpected type {kind}", nameof(kind));
+#else
+            return "type";
+#endif
+        }
     }
 }

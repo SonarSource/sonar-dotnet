@@ -19,6 +19,7 @@
  */
 
 extern alias csharp;
+using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -78,6 +79,14 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var parent = aToken.GetBindableParent();
             SyntaxNodeExtensions.GetPreviousStatementsCurrentBlock(parent).Should().BeEmpty();
         }
+
+        [TestMethod]
+        public void GetDeclarationTypeName_UnknownType() =>
+#if DEBUG
+            Assert.ThrowsException<ArgumentException>(() => SyntaxNodeExtensions.GetDeclarationTypeName(SyntaxFactory.Block()), "Unexpected type Block\r\nParameter name: kind");
+#else
+            SyntaxNodeExtensions.GetDeclarationTypeName(SyntaxFactory.Block()).Should().Be("type");
+#endif
 
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
             syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(kind));

@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var checker = new DisposableChecker(typeDeclarationSyntax.BaseList,
                                                         declarationIdentifier,
                                                         c.SemanticModel.GetDeclaredSymbol(typeDeclarationSyntax),
-                                                        c.Node.IsKind(SyntaxKind.ClassDeclaration) ? "class" : "record",
+                                                        c.Node.GetDeclarationTypeName(),
                                                         c.SemanticModel);
 
                     var locations = checker.GetIssueLocations();
