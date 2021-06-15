@@ -159,6 +159,8 @@ namespace SonarAnalyzer.Rules.CSharp
                                                                                                               KnownType.Microsoft_Web_XmlTransform_XmlFileInfoDocument,
                                                                                                               KnownType.Microsoft_Web_XmlTransform_XmlTransformableDocument);
 
+            private static readonly ImmutableArray<string> XmlDocumentUnsafeMethods = ImmutableArray.Create("Load", "LoadXml");
+
             private static readonly ISet<string> XmlTextReaderTrackedProperties = ImmutableHashSet.Create("XmlResolver", // should be null
                                                                                                           "DtdProcessing", // should not be Parse
                                                                                                           "ProhibitDtd"); // should be true in .NET 3.5
@@ -168,12 +170,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 var xmlDocumentTracker = new CSharpObjectInitializationTracker(isAllowedConstantValue: constantValue => false, // we do not expect any constant values for XmlResolver
                                                                                trackedTypes: XmlDocumentTrackedTypes,
                                                                                isTrackedPropertyName: propertyName => propertyName == "XmlResolver",
-                                                                               isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol));
+                                                                               isAllowedObject: (symbol, expression, __) => IsAllowedObject(symbol, expression),
+                                                                               trackedMethods: XmlDocumentUnsafeMethods);
 
                 var xmlTextReaderTracker = new CSharpObjectInitializationTracker(isAllowedConstantValue: IsAllowedValueForXmlTextReader,
                                                                                  trackedTypes: ImmutableArray.Create(KnownType.System_Xml_XmlTextReader),
                                                                                  isTrackedPropertyName: XmlTextReaderTrackedProperties.Contains,
-                                                                                 isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol));
+                                                                                 isAllowedObject: (symbol, expression, __) => IsAllowedObject(symbol, expression));
 
                 return new TrackersHolder(xmlDocumentTracker, xmlTextReaderTracker);
             }
@@ -190,7 +193,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     symbol.Kind == SymbolKind.Method
                     && symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
 
-            private static bool IsAllowedObject(ISymbol symbol) =>
+            private static bool IsAllowedObject(ISymbol symbol, ExpressionSyntax expressionSyntax) =>
                 !IsUnsafeXmlResolverConstructor(symbol)
                 && !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers)
                 && !IsUnsafeXmlResolverReturnType(symbol);

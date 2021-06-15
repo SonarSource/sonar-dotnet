@@ -70,23 +70,30 @@ namespace SonarAnalyzer.Helpers.Trackers
         /// </summary>
         private readonly int trackedConstructorArgumentIndex;
 
+        /// <summary>
+        /// A list of methods which need to be invoked on the object.
+        /// </summary>
+        private readonly ImmutableArray<string> trackedMethods;
+
         internal CSharpObjectInitializationTracker(Predicate<object> isAllowedConstantValue,
             ImmutableArray<KnownType> trackedTypes,
             Predicate<string> isTrackedPropertyName,
             Func<ISymbol, ExpressionSyntax, SemanticModel, bool> isAllowedObject = null,
-            int trackedConstructorArgumentIndex = DefaultTrackedConstructorArgumentIndex)
+            int trackedConstructorArgumentIndex = DefaultTrackedConstructorArgumentIndex,
+            ImmutableArray<string> trackedMethods = default)
         {
             this.isAllowedConstantValue = isAllowedConstantValue;
             this.trackedTypes = trackedTypes;
             this.isTrackedPropertyName = isTrackedPropertyName;
             this.isAllowedObject = isAllowedObject ?? DefaultIsAllowedObject;
             this.trackedConstructorArgumentIndex = trackedConstructorArgumentIndex;
+            this.trackedMethods = trackedMethods;
         }
 
         internal bool ShouldBeReported(IObjectCreation objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe) =>
             IsTrackedType(objectCreation.Expression, semanticModel)
             && !ObjectCreatedWithAllowedValue(objectCreation, semanticModel, isDefaultConstructorSafe)
-            && !IsLaterAssignedWithAllowedValue(objectCreation, semanticModel);
+            && !IsLaterAssignedWithAllowedValueOrHasTrackedMethodInvoked(objectCreation, semanticModel);
 
         internal bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
             // Ignore assignments within object initializers, they are reported in the ObjectCreationExpression handler
@@ -185,11 +192,10 @@ namespace SonarAnalyzer.Helpers.Trackers
         /// Returns true if the provided expression is a member of a tracked type.
         /// </summary>
         private bool IsPropertyOnTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression is MemberAccessExpressionSyntax memberAccess
-            && memberAccess.Expression != null
-            && IsTrackedType(memberAccess.Expression, semanticModel);
+            expression is MemberAccessExpressionSyntax {Expression: { } memberAccessExpression}
+            && IsTrackedType(memberAccessExpression, semanticModel);
 
-        private bool IsLaterAssignedWithAllowedValue(IObjectCreation objectCreation, SemanticModel semanticModel)
+        private bool IsLaterAssignedWithAllowedValueOrHasTrackedMethodInvoked(IObjectCreation objectCreation, SemanticModel semanticModel)
         {
             var statement = objectCreation.Expression.FirstAncestorOrSelf<StatementSyntax>();
             if (statement == null)
@@ -198,15 +204,21 @@ namespace SonarAnalyzer.Helpers.Trackers
             }
 
             var variableSymbol = GetAssignedVariableSymbol(objectCreation, semanticModel);
+            if (variableSymbol == null)
+            {
+                return false;
+            }
+
             var nextStatements = GetNextStatements(statement);
             var innerStatements = GetInnerStatements(statement);
 
-            return variableSymbol != null
-                && nextStatements.Union(innerStatements)
-                    .OfType<ExpressionStatementSyntax>()
-                    .Select(x => x.Expression)
-                    .OfType<AssignmentExpressionSyntax>()
-                    .Any(TrackedPropertySetWithAllowedValue);
+            var expressions = nextStatements.Union(innerStatements)
+                                            .OfType<ExpressionStatementSyntax>()
+                                            .Select(x => x.Expression)
+                                            .ToList();
+
+            return expressions.OfType<AssignmentExpressionSyntax>().Any(TrackedPropertySetWithAllowedValue)
+                   || expressions.OfType<InvocationExpressionSyntax>().Any(invocation => trackedMethods.Contains(invocation.GetName()));
 
             bool TrackedPropertySetWithAllowedValue(AssignmentExpressionSyntax assignment) =>
                 variableSymbol.Equals(GetAssignedVariableSymbol(assignment, semanticModel))
