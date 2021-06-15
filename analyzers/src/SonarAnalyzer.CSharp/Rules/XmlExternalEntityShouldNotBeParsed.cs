@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!IsXPathDocumentSecureByDefault(this.versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
+            if (!IsXPathDocumentSecureByDefault(versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
             {
                 context.ReportDiagnostic(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation()));
             }
@@ -150,41 +150,30 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static class TrackerFactory
         {
-            private static ImmutableArray<KnownType> UnsafeXmlResolvers { get; } = ImmutableArray.Create(
-                KnownType.System_Xml_XmlUrlResolver,
-                KnownType.System_Xml_Resolvers_XmlPreloadedResolver
-            );
+            private static ImmutableArray<KnownType> UnsafeXmlResolvers { get; } = ImmutableArray.Create(KnownType.System_Xml_XmlUrlResolver,
+                                                                                                         KnownType.System_Xml_Resolvers_XmlPreloadedResolver);
 
-            private static readonly ImmutableArray<KnownType> XmlDocumentTrackedTypes = ImmutableArray.Create(
-                KnownType.System_Xml_XmlDocument,
-                KnownType.System_Xml_XmlDataDocument,
-                KnownType.System_Configuration_ConfigXmlDocument,
-                KnownType.Microsoft_Web_XmlTransform_XmlFileInfoDocument,
-                KnownType.Microsoft_Web_XmlTransform_XmlTransformableDocument
-            );
+            private static readonly ImmutableArray<KnownType> XmlDocumentTrackedTypes = ImmutableArray.Create(KnownType.System_Xml_XmlDocument,
+                                                                                                              KnownType.System_Xml_XmlDataDocument,
+                                                                                                              KnownType.System_Configuration_ConfigXmlDocument,
+                                                                                                              KnownType.Microsoft_Web_XmlTransform_XmlFileInfoDocument,
+                                                                                                              KnownType.Microsoft_Web_XmlTransform_XmlTransformableDocument);
 
-            private static readonly ISet<string> XmlTextReaderTrackedProperties = ImmutableHashSet.Create(
-                "XmlResolver", // should be null
-                "DtdProcessing", // should not be Parse
-                "ProhibitDtd" // should be true in .NET 3.5
-            );
+            private static readonly ISet<string> XmlTextReaderTrackedProperties = ImmutableHashSet.Create("XmlResolver", // should be null
+                                                                                                          "DtdProcessing", // should not be Parse
+                                                                                                          "ProhibitDtd"); // should be true in .NET 3.5
 
             public static TrackersHolder Create()
             {
-                var xmlDocumentTracker = new CSharpObjectInitializationTracker(
-                    // we do not expect any constant values for XmlResolver
-                    isAllowedConstantValue: constantValue => false,
-                    trackedTypes: XmlDocumentTrackedTypes,
-                    isTrackedPropertyName: propertyName => "XmlResolver" == propertyName,
-                    isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol)
-                );
+                var xmlDocumentTracker = new CSharpObjectInitializationTracker(isAllowedConstantValue: constantValue => false, // we do not expect any constant values for XmlResolver
+                                                                               trackedTypes: XmlDocumentTrackedTypes,
+                                                                               isTrackedPropertyName: propertyName => propertyName == "XmlResolver",
+                                                                               isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol));
 
-                var xmlTextReaderTracker = new CSharpObjectInitializationTracker(
-                    isAllowedConstantValue: IsAllowedValueForXmlTextReader,
-                    trackedTypes: ImmutableArray.Create(KnownType.System_Xml_XmlTextReader),
-                    isTrackedPropertyName: XmlTextReaderTrackedProperties.Contains,
-                    isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol)
-                );
+                var xmlTextReaderTracker = new CSharpObjectInitializationTracker(isAllowedConstantValue: IsAllowedValueForXmlTextReader,
+                                                                                 trackedTypes: ImmutableArray.Create(KnownType.System_Xml_XmlTextReader),
+                                                                                 isTrackedPropertyName: XmlTextReaderTrackedProperties.Contains,
+                                                                                 isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol));
 
                 return new TrackersHolder(xmlDocumentTracker, xmlTextReaderTracker);
             }
@@ -204,17 +193,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private static bool IsUnsafeXmlResolverConstructor(ISymbol symbol) =>
-                    symbol.Kind == SymbolKind.Method &&
-                    symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
+                    symbol.Kind == SymbolKind.Method
+                    && symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
 
             private static bool IsAllowedObject(ISymbol symbol) =>
-                !IsUnsafeXmlResolverConstructor(symbol) &&
-                !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers) &&
-                !IsUnsafeXmlResolverReturnType(symbol);
+                !IsUnsafeXmlResolverConstructor(symbol)
+                && !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers)
+                && !IsUnsafeXmlResolverReturnType(symbol);
 
             private static bool IsUnsafeXmlResolverReturnType(ISymbol symbol) =>
-                symbol is IMethodSymbol methodSymbol &&
-                methodSymbol.ReturnType.IsAny(UnsafeXmlResolvers);
+                symbol is IMethodSymbol methodSymbol
+                && methodSymbol.ReturnType.IsAny(UnsafeXmlResolvers);
         }
 
         private readonly struct TrackersHolder
