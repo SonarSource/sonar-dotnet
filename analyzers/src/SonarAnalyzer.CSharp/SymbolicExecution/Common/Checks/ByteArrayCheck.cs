@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Common.Constraints;
@@ -32,10 +33,19 @@ namespace SonarAnalyzer.SymbolicExecution.Common.Checks
         public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
             programPoint.CurrentInstruction switch
             {
+                InitializerExpressionSyntax initializerExpression => ImplicitlyTypedArrayPostProcess(initializerExpression, programState),
                 ArrayCreationExpressionSyntax arrayCreation => ArrayCreationPostProcess(arrayCreation, programState),
                 InvocationExpressionSyntax invocation => InvocationExpressionPostProcess(invocation, programState),
                 _ => programState
             };
+
+        private ProgramState ImplicitlyTypedArrayPostProcess(InitializerExpressionSyntax initializerExpression, ProgramState programState) =>
+            !initializerExpression.Parent.IsKind(SyntaxKind.ArrayCreationExpression)
+            && initializerExpression.FirstAncestorOrSelf<VariableDeclarationSyntax>() is VariableDeclarationSyntax variableDeclaration
+            && semanticModel.GetTypeInfo(variableDeclaration.Type).Type.Is(KnownType.System_Byte_Array)
+            && programState.HasValue
+                ? programState.SetConstraint(programState.PeekValue(), ByteArraySymbolicValueConstraint.Constant)
+                : programState;
 
         private ProgramState ArrayCreationPostProcess(ArrayCreationExpressionSyntax arrayCreation, ProgramState programState) =>
             semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array) && programState.HasValue

@@ -222,6 +222,44 @@ namespace Tests.Diagnostics
             aes3.CreateEncryptor(); // Noncompliant
         }
 
+        // https://github.com/SonarSource/sonar-dotnet/issues/4274
+        public void ImplicitlyTypedArrayWithoutNew()
+        {
+            byte[] initializationVector =
+            {
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+            };
+            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+            {
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVector); //Noncompliant
+            }
+        }
+
+        public void ImplicitlyTypedArrayWithNew()
+        {
+            var initializationVector = new byte[]
+            {
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+            };
+            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+            {
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVector); //Noncompliant
+            }
+        }
+
+        public void ImplicitlyTypedArrayNonByte()
+        {
+            int[] intArray = { 1, 2, 3 };
+            byte[] byteArray = new byte[intArray.Length * sizeof(int)];
+            Buffer.BlockCopy(intArray, 0, byteArray, 0, byteArray.Length);
+            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+            {
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, byteArray); // Noncompliant
+            }
+        }
+
         public void DifferentCases()
         {
             var alg = new CustomAlg();
