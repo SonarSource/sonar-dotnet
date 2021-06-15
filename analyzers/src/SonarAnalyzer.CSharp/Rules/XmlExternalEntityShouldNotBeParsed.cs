@@ -178,19 +178,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return new TrackersHolder(xmlDocumentTracker, xmlTextReaderTracker);
             }
 
-            private static bool IsAllowedValueForXmlTextReader(object constantValue)
-            {
-                if (constantValue == null)
+            private static bool IsAllowedValueForXmlTextReader(object constantValue) =>
+                constantValue switch
                 {
-                    return true;
-                }
-                if (constantValue is int integerValue)
-                {
-                    return integerValue != (int)DtdProcessing.Parse;
-                }
-                // treat the ProhibitDtd property
-                return constantValue is bool value && value;
-            }
+                    null => true,
+                    int integerValue => integerValue != (int)DtdProcessing.Parse,
+                    _ => constantValue is bool value && value
+                };
 
             private static bool IsUnsafeXmlResolverConstructor(ISymbol symbol) =>
                     symbol.Kind == SymbolKind.Method
