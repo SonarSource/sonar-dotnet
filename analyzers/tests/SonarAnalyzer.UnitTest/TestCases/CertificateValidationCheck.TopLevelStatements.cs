@@ -16,7 +16,7 @@ static HttpWebRequest CreateRQ() // static local function
 // See https://github.com/SonarSource/sonar-dotnet/issues/4405
 void InitAsArgument(RemoteCertificateValidationCallback callback)
 {
-    CreateRQ().ServerCertificateValidationCallback += callback; // FN, should be Non-compliant
+    CreateRQ().ServerCertificateValidationCallback += callback; // Noncompliant
 }
 
-InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //should be a secondary location
+InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // Secondary

@@ -29,7 +29,6 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class CertificateValidationCheckBase<
         TSyntaxKind,
-        TMethodSyntax,
         TArgumentSyntax,
         TExpressionSyntax,
         TIdentifierNameSyntax,
@@ -41,7 +40,6 @@ namespace SonarAnalyzer.Rules
         TMemberAccessSyntax
         > : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
-        where TMethodSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
         where TIdentifierNameSyntax : SyntaxNode
@@ -59,6 +57,7 @@ namespace SonarAnalyzer.Rules
 
         internal /* for testing */ abstract MethodParameterLookupBase<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract TSyntaxKind[] MethodDeclarationKinds { get; }
         protected abstract Location ExpressionLocation(SyntaxNode expression);
         protected abstract void SplitAssignment(TAssignmentExpressionSyntax assignment, out TIdentifierNameSyntax leftIdentifier, out TExpressionSyntax right);
         protected abstract IEqualityComparer<TExpressionSyntax> CreateNodeEqualityComparer();
@@ -105,7 +104,7 @@ namespace SonarAnalyzer.Rules
         protected ImmutableArray<Location> ParamLocations(InspectionContext c, TParameterSyntax param)
         {
             var ret = ImmutableArray.CreateBuilder<Location>();
-            var containingMethodDeclaration = param.FirstAncestorOrSelf<TMethodSyntax>();
+            var containingMethodDeclaration = param.FirstAncestorOrSelf((SyntaxNode x) => Language.Syntax.IsAnyKind(x, MethodDeclarationKinds));
             if (containingMethodDeclaration != null && !c.VisitedMethods.Contains(containingMethodDeclaration))
             {
                 c.VisitedMethods.Add(containingMethodDeclaration);
@@ -201,7 +200,7 @@ namespace SonarAnalyzer.Rules
                     return LambdaLocations(c, lambda);
                 case TInvocationExpressionSyntax invocation:
                     if (c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol is {DeclaringSyntaxReferences: {Length: 1}} invSymbol
-                        && SyntaxFromReference(invSymbol.DeclaringSyntaxReferences.Single()) is TMethodSyntax syntax)
+                        && SyntaxFromReference(invSymbol.DeclaringSyntaxReferences.Single()) is { } syntax)
                     {
                         c.VisitedMethods.Add(syntax);
                         return InvocationLocations(c, syntax);
@@ -222,10 +221,11 @@ namespace SonarAnalyzer.Rules
         private ImmutableArray<Location> IdentifierLocations(InspectionContext c, SyntaxNode syntax) =>
             syntax switch
             {
-                TMethodSyntax method => BlockLocations(c, method),          // Direct delegate name
                 TParameterSyntax parameter => ParamLocations(c, parameter), // Value arrived as a parameter
                 TVariableSyntax variable => VariableLocations(c, variable), // Value passed as variable
-                _ => ImmutableArray<Location>.Empty,
+                _ => Language.Syntax.IsAnyKind(syntax, MethodDeclarationKinds)
+                    ? BlockLocations(c, syntax)
+                    : ImmutableArray<Location>.Empty,
             };
 
         private ImmutableArray<Location> VariableLocations(InspectionContext c, TVariableSyntax variable)
@@ -252,7 +252,7 @@ namespace SonarAnalyzer.Rules
             return MultiExpressionSublocations(c, allAssignedExpressions);
         }
 
-        private ImmutableArray<Location> InvocationLocations(InspectionContext c, TMethodSyntax method)
+        private ImmutableArray<Location> InvocationLocations(InspectionContext c, SyntaxNode method)
         {
             // Ignore all return statements with recursive call. Result depends on returns that could return compliant validator.
             var returnExpressionSublocationsList = FindReturnAndThrowExpressions(c, method).Where(x => !IsVisited(c, x));
@@ -317,12 +317,12 @@ namespace SonarAnalyzer.Rules
         protected struct InspectionContext
         {
             public readonly SyntaxNodeAnalysisContext Context;
-            public readonly HashSet<TMethodSyntax> VisitedMethods;
+            public readonly HashSet<SyntaxNode> VisitedMethods;
 
             public InspectionContext(SyntaxNodeAnalysisContext context)
             {
                 Context = context;
-                VisitedMethods = new HashSet<TMethodSyntax>();
+                VisitedMethods = new HashSet<SyntaxNode>();
             }
         }
     }
