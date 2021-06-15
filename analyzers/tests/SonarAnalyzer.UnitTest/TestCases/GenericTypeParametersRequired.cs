@@ -24,7 +24,6 @@ namespace MyLibrary
 
         public void MyMethod_05<TValue, TKey>(TKey foo) { } // Noncompliant
         public void MyMethod_06<TValue, TKey>(TValue foo) { } // Noncompliant
-        public TKey MyMethod_08<TKey>() { return default(TKey); } // Noncompliant
 
         public void MyMethod_09() { }
         public void MyMethod_10(int i) { }
@@ -45,5 +44,13 @@ namespace MyLibrary
         public void MyMethod_20<V>(List<MyClass[]> p) { } // Noncompliant
         public void MyMethod_21<V>(List<V>[] p) { }
         public void MyMethod_22<V>(List<T>[] p) { } // Noncompliant // Error [CS0246]
+
+        // See https://github.com/SonarSource/sonar-dotnet/issues/4548
+        public TKey MyMethod_08<TKey>() { return default(TKey); } // Noncompliant FP
+
+        public static T MyMethod_23<T>(string value) // Noncompliant FP
+        {
+            return (T) Convert.ChangeType(value, typeof(T));
+        }
     }
 }
