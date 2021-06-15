@@ -28,6 +28,8 @@ jobs:
                     assignees: [login]
                 });
             }
+            // Temporary log:
+            console.log(`Payload: ${JSON.stringify(context.payload, undefined, 2)}`);
             //
             const matches = context.payload.pull_request.body.match(/(close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s*#\d+/gi);
             if(matches) {
