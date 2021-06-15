@@ -93,6 +93,7 @@ namespace Tests.Diagnostics
 
         void Foo6(int a)
         {
+            throw new ArgumentNullException(nameof(a));
             throw new ArgumentNullException(nameof(Foo5)); // Noncompliant
             throw new ArgumentOutOfRangeException(nameof(Foo5)); // Noncompliant
             throw new DuplicateWaitObjectException(nameof(Foo5)); // Noncompliant
@@ -172,7 +173,19 @@ namespace Tests.Diagnostics
         void Bar2(int a)
         {
             // See https://github.com/SonarSource/sonar-dotnet/issues/1867
-            throw new ArgumentNullException(null, string.Empty); // Noncompliant
+            throw new ArgumentNullException(null, string.Empty); // Noncompliant {{The parameter name '' is not declared in the argument list.}}
+        }
+
+        void Bar3(int a)
+        {
+            // See https://github.com/SonarSource/sonar-dotnet/issues/1867
+            throw new ArgumentNullException("", string.Empty); // Noncompliant {{The parameter name '' is not declared in the argument list.}}
+        }
+
+        void Bar4(int a)
+        {
+            // See https://github.com/SonarSource/sonar-dotnet/issues/1867
+            throw new ArgumentNullException("   ", string.Empty); // Noncompliant {{The parameter name '   ' is not declared in the argument list.}}
         }
     }
 
@@ -200,10 +213,14 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/4180
     public class Repro_4180
     {
+        private string field = null;
         public void Method(MissingType argument) // Error [CS0246]
         {
             var str = "xxx";
-            throw new ArgumentNullException(nameof(argument)); // Noncompliant {{The parameter name '' is not declared in the argument list.}} FP with wrong message
+            // The below FP got fixed in VS 16.10.1
+            throw new ArgumentNullException(nameof(argument)); // Noncompliant {{The parameter name '' is not declared in the argument list.}}
+            throw new ArgumentNullException(nameof(str)); // Noncompliant {{The parameter name 'str' is not declared in the argument list.}}
+            throw new ArgumentNullException(nameof(field)); // Noncompliant {{The parameter name 'field' is not declared in the argument list.}}
             throw new ArgumentNullException(nameof(argument.argument)); // Compliant
             throw new ArgumentNullException(nameof(str.argument)); // Error [CS1061] Compliant, argument is missing member without a symbol
         }
