@@ -8,8 +8,12 @@ jobs:
   assign_and_create_card:
     name: Assign issue to sender and create Kanban card
     runs-on: ubuntu-latest
+    # Single quotes must be used here https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#literals
     # PRs from forks don't have required token authorization
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    # Dependabot works directly under our repository, but doesn't have enough priviledges to create project card
+    if: |
+        github.event.pull_request.head.repo.full_name == github.repository
+        && github.event.sender.type != 'Bot'
 
     steps:
       # https://github.com/actions/github-script
