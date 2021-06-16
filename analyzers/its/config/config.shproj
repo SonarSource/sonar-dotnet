@@ -4,5 +4,6 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
   <ItemGroup>
     <None Include="*\**" />
+    <None Include="*" />
   </ItemGroup>
 </Project>
