@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 
 var constantIV = new byte[16];
@@ -47,6 +48,15 @@ public class Sample
             aes.CreateEncryptor();
         }
     }
+
+    // for code coverage
+    public void CollectionInitializer()
+    {
+        Dictionary<int, string> students = new()
+        {
+            { 111, "a" },
+        };
+    }
 }
 
 public record Record
@@ -74,7 +84,7 @@ public partial class Partial
     }
 }
 
-namespace TartetTypedConditional
+namespace TargetTypedConditional
 {
     public class Sample
     {

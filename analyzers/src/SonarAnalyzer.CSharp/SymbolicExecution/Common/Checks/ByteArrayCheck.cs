@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Common.Constraints;
@@ -33,12 +34,23 @@ namespace SonarAnalyzer.SymbolicExecution.Common.Checks
             programPoint.CurrentInstruction switch
             {
                 ArrayCreationExpressionSyntax arrayCreation => ArrayCreationPostProcess(arrayCreation, programState),
+                InitializerExpressionSyntax initializerExpression => ImplicitlyTypedArrayPostProcess(initializerExpression, programState),
                 InvocationExpressionSyntax invocation => InvocationExpressionPostProcess(invocation, programState),
                 _ => programState
             };
 
         private ProgramState ArrayCreationPostProcess(ArrayCreationExpressionSyntax arrayCreation, ProgramState programState) =>
             semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array) && programState.HasValue
+                ? programState.SetConstraint(programState.PeekValue(), ByteArraySymbolicValueConstraint.Constant)
+                : programState;
+
+        private ProgramState ImplicitlyTypedArrayPostProcess(InitializerExpressionSyntax initializerExpression, ProgramState programState) =>
+            initializerExpression.IsKind(SyntaxKind.ArrayInitializerExpression)
+            // when the initializer is in a typed array creation, it is handled by ArrayCreationPostProcess()
+            && !initializerExpression.Parent.IsKind(SyntaxKind.ArrayCreationExpression)
+            && initializerExpression.FirstAncestorOrSelf<VariableDeclarationSyntax>() is VariableDeclarationSyntax variableDeclaration
+            && semanticModel.GetTypeInfo(variableDeclaration.Type).Type.Is(KnownType.System_Byte_Array)
+            && programState.HasValue
                 ? programState.SetConstraint(programState.PeekValue(), ByteArraySymbolicValueConstraint.Constant)
                 : programState;
 

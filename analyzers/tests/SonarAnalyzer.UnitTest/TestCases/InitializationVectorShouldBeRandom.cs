@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 
 namespace Tests.Diagnostics
@@ -222,11 +223,85 @@ namespace Tests.Diagnostics
             aes3.CreateEncryptor(); // Noncompliant
         }
 
+        // https://github.com/SonarSource/sonar-dotnet/issues/4274
+        public void ImplicitlyTypedArrayWithoutNew()
+        {
+            byte[] initializationVectorConstants = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+            byte[] initializationVector = { Rnd(), Rnd(), Rnd() };
+            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+            {
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants); // Noncompliant
+                encryptor = aes.CreateEncryptor(aes.Key, initializationVector); // Noncompliant FP
+            }
+        }
+
+        public void ImplicitlyTypedArrayWithNewWithConstantsInside()
+        {
+            var initializationVectorConstants = new byte[] { 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 };
+            var initializationVector = new byte[] { Rnd() };
+            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+            {
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants); // Noncompliant
+                encryptor = aes.CreateEncryptor(aes.Key, initializationVector); // Noncompliant FP
+            }
+        }
+
+        public void ImplicitlyTypedArrayNonByte()
+        {
+            int[] intArray = { 1, 2, 3 };
+            byte[] byteArray = new byte[intArray.Length * sizeof(int)];
+            Buffer.BlockCopy(intArray, 0, byteArray, 0, byteArray.Length);
+            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+            {
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, byteArray); // Noncompliant
+            }
+        }
+
+        public void CollectionInitializer()
+        {
+            List<byte> listWithConstant = new List<byte> { 0x00 };
+            List<byte> list = new List<byte> { Rnd() };
+            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+            {
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, listWithConstant.ToArray()); // FN
+                encryptor = aes.CreateEncryptor(aes.Key, list.ToArray()); // FN
+            }
+        }
+
+        public void InsideObjectInitializer()
+        {
+            var anonymous = new
+            {
+                IV = new byte[] { 0x00 },
+                Key = new byte[] { 0x00 }
+            };
+            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+            {
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, anonymous.IV); // FN https://github.com/SonarSource/sonar-dotnet/issues/4555
+            }
+        }
+
         public void DifferentCases()
         {
             var alg = new CustomAlg();
             alg.IV = new byte[16];
         }
+
+        private byte Rnd()
+        {
+            var rand = new Random();
+            var bytes = new byte[1];
+            rand.NextBytes(bytes);
+            return bytes[0];
+        }
+
+        private void ForCoverage()
+        {
+            FooBar(new List<byte> { 0x00 }.ToArray());
+            FooBar(new byte[] { Rnd() });
+        }
+
+        private void FooBar(byte[] x) { }
     }
 
     public class CodeWhichDoesNotCompile
