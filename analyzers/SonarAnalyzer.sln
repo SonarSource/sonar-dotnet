@@ -67,6 +67,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "expected", "its\expected\ex
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "orchestration", "its\orchestration.shproj", "{5F6BB309-5A6B-4191-B9FC-203B8D0F384A}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "sources", "its\sources\sources.shproj", "{61967FBA-C05E-4F5E-8189-C825FA02ED90}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{7cfa8fa5-8842-4e89-bb90-39d5c0f20ba8}*SharedItemsImports = 5
@@ -150,6 +152,7 @@ Global
 		{5D6668F5-61B7-488E-9B8A-958FCEF05E71} = {314A0C27-4768-4F15-B7FA-DC3C33C08180}
 		{7C78FC74-2BD0-46DD-869E-ECA31381E8CA} = {314A0C27-4768-4F15-B7FA-DC3C33C08180}
 		{5F6BB309-5A6B-4191-B9FC-203B8D0F384A} = {314A0C27-4768-4F15-B7FA-DC3C33C08180}
+		{61967FBA-C05E-4F5E-8189-C825FA02ED90} = {314A0C27-4768-4F15-B7FA-DC3C33C08180}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4259CA71-C565-42DD-8D58-F59819A11065}
