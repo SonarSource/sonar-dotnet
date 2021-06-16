@@ -294,6 +294,14 @@ namespace Tests.Diagnostics
             rand.NextBytes(bytes);
             return bytes[0];
         }
+
+        private void ForCoverage()
+        {
+            FooBar(new List<byte> { 0x00 }.ToArray());
+            FooBar(new byte[] { Rnd() });
+        }
+
+        private void FooBar(byte[] x) { }
     }
 
     public class CodeWhichDoesNotCompile
