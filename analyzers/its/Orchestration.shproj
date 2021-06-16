@@ -3,6 +3,7 @@
   <!-- This is a minimal Shared project to show the directory structure in Solution Explorer. This project should not be built nor referenced. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
   <ItemGroup>
-    <None Include="**\*" />
+    <!-- only includes files, not folders -->
+    <None Include="*" />
   </ItemGroup>
 </Project>
