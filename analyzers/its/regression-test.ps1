@@ -32,20 +32,25 @@ function Prepare-Project([string]$ProjectName){
     $Output = ".\output\$ProjectName"
     New-Item -ItemType directory -Path $Output | out-null
 
-    $sourcePath = ".\config\$ProjectName\SonarLint.xml"
-    if(-Not (Test-Path $sourcePath)){
-        $sourcePath = ".\config\SonarLint.xml"
+    $SourcePath = ".\config\$ProjectName\SonarLint.xml"
+    if(-Not (Test-Path $SourcePath)){
+        $SourcePath = ".\config\SonarLint.xml"
     }
-    $content = Get-Content -Path $sourcePath -Raw
+    $Content = Get-Content -Path $SourcePath -Raw
 
     if($ruleId){
-        $ruleFragment = "<Rule><Key>$ruleId</Key></Rule>"
+        $RuleFragment = "    <Rule><Key>$ruleId</Key></Rule>"
     } else {
-        $ruleFragment = Get-Content -Path .\SonarLint.xml.template -Raw
+        $HotspotFiles = Get-ChildItem ..\rspec -Filter *.json -Recurse | Select-String "SECURITY_HOTSPOT" | Select-Object -ExpandProperty FileName
+        $HotspotIDs = $files -Replace "_c#.json", "" -Replace "_vb.net.json", "" | Select-Object -Unique
+        $RuleFragment = ""
+        foreach($HotspotID in $HotspotIDs){
+            $RuleFragment = $RuleFragment + "    <Rule><Key>$HotspotID</Key></Rule>`n"
+        }
     }
 
-    $content = $content -replace "<Rules>", "<Rules>`n$ruleFragment"
-    Set-Content -Path "$Output\SonarLint.xml" -Value $content
+    $Content = $Content -Replace "<Rules>", "<Rules>`n$RuleFragment"
+    Set-Content -Path "$Output\SonarLint.xml" -Value $Content
 
     Write-Host "Using $Output\SonarLint.xml"
 }

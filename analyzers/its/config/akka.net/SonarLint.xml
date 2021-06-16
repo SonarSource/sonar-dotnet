@@ -11,7 +11,7 @@
     </Setting>
   </Settings>
   <Rules>
-    <!-- Security Hotspots are injected here from ../SonarLint.xml.template and content is saved in ./output/<Project> directory -->
+    <!-- Security Hotspots are injected here by regression-test.ps1 and content is saved in ./output/<Project>/SonarLint.xml -->
     <Rule>
       <Key>S1451</Key>
       <Parameters>
