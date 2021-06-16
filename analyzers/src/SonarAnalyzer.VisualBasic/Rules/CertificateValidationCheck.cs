@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class CertificateValidationCheck : CertificateValidationCheckBase<
         SyntaxKind,
-        MethodBlockSyntax,
         ArgumentSyntax,
         ExpressionSyntax,
         IdentifierNameSyntax,
@@ -47,6 +46,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         MemberAccessExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
+        protected override SyntaxKind[] MethodDeclarationKinds { get; } = { SyntaxKind.FunctionBlock, SyntaxKind.SubBlock };
 
         internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
             argumentListNode switch

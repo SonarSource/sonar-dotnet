@@ -526,6 +526,24 @@ namespace Tests.Diagnostics
 
     }
 
+    class LocalFunctionCase
+    {
+        public void Foo()
+        {
+            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // Secondary
+
+            HttpWebRequest CreateRQ()
+            {
+                return (HttpWebRequest)System.Net.HttpWebRequest.Create("http://localhost");
+            }
+
+            void InitAsArgument(RemoteCertificateValidationCallback callback)
+            {
+                CreateRQ().ServerCertificateValidationCallback += callback; // Noncompliant
+            }
+        }
+    }
+
     // See https://github.com/SonarSource/sonar-dotnet/issues/4404
     struct AssignmentStruct
     {

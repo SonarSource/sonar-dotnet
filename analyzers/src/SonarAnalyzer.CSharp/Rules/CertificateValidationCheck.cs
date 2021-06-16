@@ -37,7 +37,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class CertificateValidationCheck : CertificateValidationCheckBase<
         SyntaxKind,
-        MethodDeclarationSyntax,
         ArgumentSyntax,
         ExpressionSyntax,
         IdentifierNameSyntax,
@@ -49,6 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
         MemberAccessExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
+        protected override SyntaxKind[] MethodDeclarationKinds { get; } = { SyntaxKind.MethodDeclaration, SyntaxKindEx.LocalFunctionStatement };
 
         internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
             argumentListNode switch
@@ -70,6 +70,9 @@ namespace SonarAnalyzer.Rules.CSharp
             // Handling of constructor parameter syntax (SslStream)
             context.RegisterSyntaxNodeActionInNonGenerated(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
         }
+
+        protected override SyntaxNode FindRootClassOrRecordOrModule(SyntaxNode node) =>
+            base.FindRootClassOrRecordOrModule(node) ?? node.FirstAncestorOrSelf<GlobalStatementSyntax>()?.Parent;
 
         protected override Location ExpressionLocation(SyntaxNode expression) =>
             // For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
