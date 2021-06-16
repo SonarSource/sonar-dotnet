@@ -59,7 +59,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GitHub", "..\.github\GitHub
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.ShimLayer.CodeGeneration", "src\SonarAnalyzer.ShimLayer.CodeGeneration\SonarAnalyzer.ShimLayer.CodeGeneration.csproj", "{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "its", "its\its.shproj", "{AF787E26-7AB1-4B08-AF05-07CB0ECDE4E5}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "IntegrationTests", "its\IntegrationTests.shproj", "{AF787E26-7AB1-4B08-AF05-07CB0ECDE4E5}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
