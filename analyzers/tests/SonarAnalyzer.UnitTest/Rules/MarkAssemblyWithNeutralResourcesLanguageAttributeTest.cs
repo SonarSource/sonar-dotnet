@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"ResourceTests\SomeResources.Designer.cs"
                 }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
-                "CSharp*: Unexpected primary issue on line 1, span (0,0)-(0,0) with message 'Mark this assembly with 'System.Resources.NeutralResourcesLanguageAttribute'.'." + Environment.NewLine +
+                "CSharp*: Unexpected primary issue on line 1, span (0,0)-(0,0) with message 'Provide a 'System.Resources.NeutralResourcesLanguageAttribute' attribute for assembly 'project0'.'." + Environment.NewLine +
                 "See output to see all actual diagnostics raised on the file");
         }
     }

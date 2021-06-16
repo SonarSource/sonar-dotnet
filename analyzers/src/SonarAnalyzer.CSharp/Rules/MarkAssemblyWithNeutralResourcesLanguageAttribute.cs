@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class MarkAssemblyWithNeutralResourcesLanguageAttribute : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4026";
-        private const string MessageFormat = "Mark this assembly with 'System.Resources.NeutralResourcesLanguageAttribute'.";
+        private const string MessageFormat = "Provide a 'System.Resources.NeutralResourcesLanguageAttribute' attribute for assembly '{0}'.";
 
         private const string StronglyTypedResourceBuilder = "System.Resources.Tools.StronglyTypedResourceBuilder";
 
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 return;
                             }
 
-                            cc.ReportDiagnosticWhenActive(Diagnostic.Create(rule, null));
+                            cc.ReportDiagnosticWhenActive(Diagnostic.Create(rule, null, cc.Compilation.AssemblyName));
                         });
                 });
         }
