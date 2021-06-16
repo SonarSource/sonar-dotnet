@@ -224,7 +224,7 @@ namespace SonarAnalyzer.Rules
                 TParameterSyntax parameter => ParamLocations(c, parameter), // Value arrived as a parameter
                 TVariableSyntax variable => VariableLocations(c, variable), // Value passed as variable
                 _ => Language.Syntax.IsAnyKind(syntax, MethodDeclarationKinds)
-                    ? BlockLocations(c, syntax)
+                    ? BlockLocations(c, syntax)                             // Direct delegate name
                     : ImmutableArray<Location>.Empty,
             };
 
