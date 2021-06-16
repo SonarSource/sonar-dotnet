@@ -31,35 +31,41 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenResxAndAttribute_DoesntThrow() =>
+        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasAttribute_Compliant() =>
             Verifier.VerifyAnalyzer(
                 new[]
                 {
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
-                    @"ResourceTests\SomeResources.Designer.cs"
+                    @"ResourceTests\SomeResources.Designer.cs",
+                    @"ResourceTests\AnotherResources.Designer.cs",
                 },
                 new MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenAttributeButNoResx_DoesntThrow() =>
+        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_NoResx_HasAttribute_Compliant() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
                 new MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenResxButNoAttribute_Throws()
-        {
-            Action action = () => Verifier.VerifyAnalyzer(
-                 new[]
+        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasInvalidAttribute_Noncompliant() =>
+            Verifier.VerifyAnalyzer(
+                new[]
+                {
+                    @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.Invalid.cs",
+                    @"ResourceTests\SomeResources.Designer.cs"
+                }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_NoAttribute_Noncompliant() =>
+            Verifier.VerifyAnalyzer(
+                new[]
                 {
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs",
                     @"ResourceTests\SomeResources.Designer.cs"
                 }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
-@"CSharp*: Unexpected primary issue on line 1, span (0,0)-(0,0) with message 'Provide a 'System.Resources.NeutralResourcesLanguageAttribute' attribute for assembly 'project0'.'.
-See output to see all actual diagnostics raised on the file");
-        }
     }
 }

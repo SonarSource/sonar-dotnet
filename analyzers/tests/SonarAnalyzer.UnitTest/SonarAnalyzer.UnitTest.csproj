@@ -69,6 +69,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SomeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Compile Update="ResourceTests\AnotherResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AnotherResources.resx</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Update="ResourceTests\SomeResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -97,6 +103,7 @@
     <Content Include="ResourceTests\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Remove="ResourceTests\AnotherResources.resx" />
     <None Include="Common\Resources\input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -123,7 +130,19 @@
       <Aliases>global,vbnet</Aliases>
     </ProjectReference>
   </ItemGroup>
-  
+
+  <ItemGroup>
+    <Content Update="ResourceTests\AnotherResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AnotherResources.resx</DependentUpon>
+    </Content>
+    <Content Update="ResourceTests\AnotherResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AnotherResources.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+
   <Import Project="..\..\StyleCopAnalyzers.targets" />
 
 </Project>
