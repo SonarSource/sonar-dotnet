@@ -2,13 +2,6 @@
   <Target Name="OverrideRoslynCodeAnalysisPropertiesWithSonarAnalyzer"
           AfterTargets="ResolveCodeAnalysisRuleSet"
           BeforeTargets="CoreCompile">
-
-    <!-- Copy project-specific SonarLint.xml to enable project-specific settings, such as file headers -->
-    <PropertyGroup>
-      <ProjectSpecificSonarLintXml Condition="Exists('$(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml')">$(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml</ProjectSpecificSonarLintXml>
-      <ProjectSpecificSonarLintXml Condition="!Exists('$(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml')">$(MSBuildStartupDirectory)\config\SonarLint.xml</ProjectSpecificSonarLintXml>
-    </PropertyGroup>
-
     <PropertyGroup>
       <SonarAnalyzerRegressionTestRunning Condition="Exists('$(MSBuildStartupDirectory)\binaries\SonarAnalyzer.dll')">true</SonarAnalyzerRegressionTestRunning>
       <SonarAnalyzerRegressionTestRunning Condition="$(SonarAnalyzerRegressionTestRunning) == ''">false</SonarAnalyzerRegressionTestRunning>
@@ -51,8 +44,8 @@
 
       <!-- Add the SonarAnalyzer analyzer DLLs -->
       <Analyzer Include="$(MSBuildStartupDirectory)\binaries\SonarAnalyzer*.dll" />
-	    <Analyzer Include="$(MSBuildStartupDirectory)\binaries\Newtonsoft.Json.dll" />
-      <AdditionalFiles Include="$(ProjectSpecificSonarLintXml)" />
+	  <Analyzer Include="$(MSBuildStartupDirectory)\binaries\Newtonsoft.Json.dll" />
+      <AdditionalFiles Include="$(MSBuildStartupDirectory)\output\$(PROJECT)\SonarLint.xml" />
       <AdditionalFiles Include="$(SonarProjectConfigFilePath)" />
     </ItemGroup>
 

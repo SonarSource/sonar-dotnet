@@ -28,13 +28,35 @@ if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
 }
 
+function Prepare-Project([string]$ProjectName){
+    $Output = ".\output\$ProjectName"
+    New-Item -ItemType directory -Path $Output | out-null
+
+    $sourcePath = ".\config\$ProjectName\SonarLint.xml"
+    if(-Not (Test-Path $sourcePath)){
+        $sourcePath = ".\config\SonarLint.xml"
+    }
+    $content = Get-Content -Path $sourcePath -Raw
+
+    if($ruleId){
+        $ruleFragment = "<Rule><Key>$ruleId</Key></Rule>"
+    } else {
+        $ruleFragment = Get-Content -Path .\SonarLint.xml.template -Raw
+    }
+
+    $content = $content -replace "<Rules>", "<Rules>`n$ruleFragment"
+    Set-Content -Path "$Output\SonarLint.xml" -Value $content
+
+    Write-Host "Using $Output\SonarLint.xml"
+}
+
 function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePath, [int]$CpuCount = 4) {
     if ($project -And -Not ($ProjectName -eq $project)) {
         Write-Host "Build skipped: $ProjectName"
         return
     }
 
-    New-Item -ItemType directory -Path .\output\$ProjectName | out-null
+    Prepare-Project($ProjectName)
 
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
 
@@ -63,7 +85,7 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
     $globalJsonContent = $(Get-Content $projectGlobalJsonPath)
     Write-Host "Will build dotnet project: '${ProjectName}' (with ${projectGlobalJsonPath}) with dotnet version '${globalJsonContent}'."
 
-    New-Item -ItemType directory -Path .\output\$ProjectName | out-null
+    Prepare-Project($ProjectName)
 
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
 

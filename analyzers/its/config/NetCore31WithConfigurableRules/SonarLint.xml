@@ -1,43 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <AnalysisInput>
-    <Rules>
-    <!-- Temporary workaround to enable security hotspot rules so that we could get issues -->
-    <Rule><Key>S1313</Key></Rule>
-    <Rule><Key>S2068</Key></Rule>
-    <Rule><Key>S2077</Key></Rule>
-    <Rule><Key>S2092</Key></Rule>
-    <Rule><Key>S2245</Key></Rule>
-    <Rule><Key>S2255</Key></Rule>
-    <Rule><Key>S2257</Key></Rule>
-    <Rule><Key>S2612</Key></Rule>
-    <Rule><Key>S3011</Key></Rule>
-    <Rule><Key>S3330</Key></Rule>
-    <Rule><Key>S4502</Key></Rule>
-    <Rule><Key>S4507</Key></Rule>
-    <Rule><Key>S4784</Key></Rule>
-    <Rule><Key>S4787</Key></Rule>
-    <Rule><Key>S4790</Key></Rule>
-    <Rule><Key>S4792</Key></Rule>
-    <Rule><Key>S4818</Key></Rule>
-    <Rule><Key>S4823</Key></Rule>
-    <Rule><Key>S4829</Key></Rule>
-    <Rule><Key>S4834</Key></Rule>
-    <Rule><Key>S5042</Key></Rule>
-    <Rule><Key>S5122</Key></Rule>
-    <Rule><Key>S5332</Key></Rule>
-    <Rule><Key>S5443</Key></Rule>
+  <Rules>
+    <!-- Security Hotspots are injected here from ../SonarLint.xml.template and content is saved in ./output/<Project> directory -->
     <Rule>
-        <Key>S5693</Key>
-            <Parameters>
-            <Parameter>
-                <Key>fileUploadSizeLimit</Key>
-                <Value>42</Value>
-            </Parameter>
-        </Parameters>
+      <Key>S5693</Key>
+      <Parameters>
+        <Parameter>
+          <Key>fileUploadSizeLimit</Key>
+          <Value>42</Value>
+        </Parameter>
+      </Parameters>
     </Rule>
-    <Rule><Key>S5753</Key></Rule>
-    <Rule><Key>S5766</Key></Rule>
-    <!-- End of workaround -->
   </Rules>
   <Settings>
     <Setting>
