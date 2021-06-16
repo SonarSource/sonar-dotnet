@@ -39,6 +39,8 @@
     <WriteLinesToFile Condition="$(SonarAnalyzerRegressionTestRunning)"
             File="$(SonarProjectConfigFilePath)"
             Lines="@(SonarProjectConfigLine)"
+            WriteOnlyWhenDifferent="true"
+            ContinueOnError="WarnAndContinue"
             Overwrite="true" />
 
     <Error Text="Could not find '$(MSBuildStartupDirectory)\binaries\SonarAnalyzer.dll'" Condition="!$(SonarAnalyzerRegressionTestRunning)" />
