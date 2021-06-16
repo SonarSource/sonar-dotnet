@@ -94,21 +94,24 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             foreach (var fullPath in context.GetAppSettings(c))
             {
-                var appSettings = File.ReadAllText(fullPath);
-                if (appSettings.Contains("\"ConnectionStrings\""))
+                CheckAppSettingJson(c, fullPath);
+            }
+        }
+
+        private void CheckAppSettingJson(CompilationAnalysisContext c, string fullPath)
+        {
+            var appSettings = File.ReadAllText(fullPath);
+            if (appSettings.Contains("\"ConnectionStrings\""))
+            {
+                using var jsonReader = new JsonTextReader(new StringReader(appSettings));
+                try
                 {
-                    using var jsonReader = new JsonTextReader(new StringReader(appSettings));
-                    try
-                    {
-                        if (JObject.Load(jsonReader, new JsonLoadSettings {LineInfoHandling = LineInfoHandling.Load, CommentHandling = CommentHandling.Ignore}) is { } doc)
-                        {
-                            ReportEmptyPassword(doc, fullPath, c);
-                        }
-                    }
-                    catch (JsonReaderException)
-                    {
-                        // Happens when JSON file is malformed
-                    }
+                    var json = JObject.Load(jsonReader, new JsonLoadSettings {LineInfoHandling = LineInfoHandling.Load, CommentHandling = CommentHandling.Ignore});
+                    ReportEmptyPassword(json, fullPath, c);
+                }
+                catch (JsonReaderException)
+                {
+                    // Happens when JSON file is malformed
                 }
             }
         }

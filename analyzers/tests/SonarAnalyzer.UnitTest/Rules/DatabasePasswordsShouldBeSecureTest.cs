@@ -104,7 +104,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\Values")]
-        [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent")]
+        [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\EmptyArray")]
+        [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\EmptyFile")]
+        [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\WrongStructure")]
         [TestCategory("Rule")]
         public void DatabasePasswordsShouldBeSecure_CS_AppSettings(string root)
         {
