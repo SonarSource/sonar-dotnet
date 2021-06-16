@@ -147,6 +147,9 @@ namespace SonarAnalyzer.Helpers
             static bool ShouldProcess(string path) => !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
         }
 
+        internal IEnumerable<string> GetAppSettings(CompilationAnalysisContext c) =>
+            ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles("appsettings.json");
+
         /// <summary>
         /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
         /// </summary>

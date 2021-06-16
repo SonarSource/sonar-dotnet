@@ -102,7 +102,38 @@ namespace SonarAnalyzer.UnitTest.Rules
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
         }
 
+        [DataTestMethod]
+        [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\Values")]
+        [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent")]
+        [TestCategory("Rule")]
+        public void DatabasePasswordsShouldBeSecure_CS_AppSettings(string root)
+        {
+            var appSettingsPath = GetAppSettingsPath(root);
+            DiagnosticVerifier.VerifyExternalFile(
+                CreateCompilation(),
+                new DatabasePasswordsShouldBeSecure(),
+                File.ReadAllText(appSettingsPath),
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, appSettingsPath)));
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DatabasePasswordsShouldBeSecure_CS_CorruptAndNonExistingAppSettings_ShouldNotFail()
+        {
+            var root = @"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\Corrupt";
+            var missingDirectory = @"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\NonExistingDirectory";
+            var corruptFilePath = GetAppSettingsPath(root);
+            var nonExistingFilePath = GetAppSettingsPath(missingDirectory);
+            DiagnosticVerifier.VerifyExternalFile(
+                CreateCompilation(),
+                new DatabasePasswordsShouldBeSecure(),
+                File.ReadAllText(corruptFilePath),
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
+        }
+
         private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");
+
+        private static string GetAppSettingsPath(string rootFolder) => Path.Combine(rootFolder, "appsettings.json");
 
         private static Compilation CreateCompilation() => SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
 

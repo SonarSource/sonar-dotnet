@@ -27,6 +27,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -72,6 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             base.Initialize(context);
             context.RegisterCompilationAction(c => CheckWebConfig(context, c));
+            context.RegisterCompilationAction(c => CheckAppSettings(context, c));
         }
 
         private void CheckWebConfig(SonarAnalysisContext context, CompilationAnalysisContext c)
@@ -82,6 +86,29 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (webConfig.Contains("<connectionStrings>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
                 {
                     ReportEmptyPassword(doc, fullPath, c);
+                }
+            }
+        }
+
+        private void CheckAppSettings(SonarAnalysisContext context, CompilationAnalysisContext c)
+        {
+            foreach (var fullPath in context.GetAppSettings(c))
+            {
+                var appSettings = File.ReadAllText(fullPath);
+                if (appSettings.Contains("\"ConnectionStrings\""))
+                {
+                    using var jsonReader = new JsonTextReader(new StringReader(appSettings));
+                    try
+                    {
+                        if (JObject.Load(jsonReader, new JsonLoadSettings {LineInfoHandling = LineInfoHandling.Load, CommentHandling = CommentHandling.Ignore}) is { } doc)
+                        {
+                            ReportEmptyPassword(doc, fullPath, c);
+                        }
+                    }
+                    catch (JsonReaderException)
+                    {
+                        // Happens when JSON file is malformed
+                    }
                 }
             }
         }
@@ -98,6 +125,24 @@ namespace SonarAnalyzer.Rules.CSharp
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
                 }
             }
+        }
+
+        private void ReportEmptyPassword(JObject doc, string appSettingsPath, CompilationAnalysisContext c)
+        {
+            foreach (var connectionStringToken in doc.SelectToken("ConnectionStrings").Children())
+            {
+                if (connectionStringToken is JProperty connectionStringProperty && IsVulnerable(connectionStringProperty.Value.ToString()))
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, CreateLocation(connectionStringProperty.Value, connectionStringProperty.Value.ToString().Length, appSettingsPath)));
+                }
+            }
+        }
+
+        private static Location CreateLocation(IJsonLineInfo lineInfo, int length, string path)
+        {
+            var start = new LinePosition(lineInfo.LineNumber - 1, lineInfo.LinePosition - 1 - length);
+            var end = new LinePosition(lineInfo.LineNumber - 1, lineInfo.LinePosition - 1);
+            return Location.Create(path, new TextSpan(start.Line, length), new LinePositionSpan(start, end));
         }
 
         private static TrackerBase<SyntaxKind, InvocationContext>.Condition HasEmptyPasswordArgument() =>
