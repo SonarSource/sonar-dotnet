@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 
 namespace Tests.Diagnostics
@@ -225,27 +226,23 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/4274
         public void ImplicitlyTypedArrayWithoutNew()
         {
-            byte[] initializationVector =
-            {
-                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
-            };
+            byte[] initializationVectorConstants = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+            byte[] initializationVector = { Rnd(), Rnd(), Rnd() };
             using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
             {
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVector); //Noncompliant
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants); // Noncompliant
+                encryptor = aes.CreateEncryptor(aes.Key, initializationVector); // Noncompliant FP
             }
         }
 
-        public void ImplicitlyTypedArrayWithNew()
+        public void ImplicitlyTypedArrayWithNewWithConstantsInside()
         {
-            var initializationVector = new byte[]
-            {
-                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
-            };
+            var initializationVectorConstants = new byte[] { 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 };
+            var initializationVector = new byte[] { Rnd() };
             using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
             {
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVector); //Noncompliant
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants); // Noncompliant
+                encryptor = aes.CreateEncryptor(aes.Key, initializationVector); // Noncompliant FP
             }
         }
 
@@ -257,6 +254,17 @@ namespace Tests.Diagnostics
             using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
             {
                 ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, byteArray); // Noncompliant
+            }
+        }
+
+        public void CollectionInitializer()
+        {
+            List<byte> listWithConstant = new List<byte> { 0x00 };
+            List<byte> list = new List<byte> { Rnd() };
+            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+            {
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, listWithConstant.ToArray()); // FN
+                encryptor = aes.CreateEncryptor(aes.Key, list.ToArray()); // FN
             }
         }
 
@@ -277,6 +285,14 @@ namespace Tests.Diagnostics
         {
             var alg = new CustomAlg();
             alg.IV = new byte[16];
+        }
+
+        private byte Rnd()
+        {
+            var rand = new Random();
+            var bytes = new byte[1];
+            rand.NextBytes(bytes);
+            return bytes[0];
         }
     }
 
