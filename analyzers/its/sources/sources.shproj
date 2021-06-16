@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- This is a minimal Shared project to show directory structure in Solution Explorer. This project should not be build nor referenced. -->
+  <!-- This is a minimal Shared project to show the directory structure in Solution Explorer. This project should not be built nor referenced. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
   <ItemGroup>
     <!--We only include the top-level files and not all folders - adding all the integration tests projects to the overall solution will end up making the file search more cumbersome. We can open individual projects when needed -->
