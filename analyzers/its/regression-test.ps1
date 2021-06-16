@@ -42,7 +42,7 @@ function Prepare-Project([string]$ProjectName){
         $RuleFragment = "    <Rule><Key>$ruleId</Key></Rule>"
     } else {
         $HotspotFiles = Get-ChildItem ..\rspec -Filter *.json -Recurse | Select-String "SECURITY_HOTSPOT" | Select-Object -ExpandProperty FileName
-        $HotspotIDs = $files -Replace "_c#.json", "" -Replace "_vb.net.json", "" | Select-Object -Unique
+        $HotspotIDs = $HotspotFiles -Replace "_c#.json", "" -Replace "_vb.net.json", "" | Select-Object -Unique
         $RuleFragment = ""
         foreach($HotspotID in $HotspotIDs){
             $RuleFragment = $RuleFragment + "    <Rule><Key>$HotspotID</Key></Rule>`n"
