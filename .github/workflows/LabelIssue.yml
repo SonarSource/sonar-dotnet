@@ -1,0 +1,67 @@
+name: Issue Labeled
+
+on:
+  issues:
+    types: ["labeled"]
+
+jobs:
+  add_to_backlog:
+    name: Log
+    runs-on: ubuntu-latest
+    # Single quotes must be used here https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#literals
+    # Only limited global functions are available in this context https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#functions
+    if: |
+        github.event.issue.state == 'Open'
+        && startsWith(github.event.label.name, 'Type: ')
+
+    steps:
+      # https://github.com/actions/github-script
+      - uses: actions/github-script@v4.0.2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const BACKLOG_PROJECT = 3897364;
+            const mediaType = { previews: ['inertia'] }; // Column related APIs are in Alpha Preview. We need to set this HTTP Header to gain access.
+            //
+            async function loadColumnMap() {
+                const columns = await github.projects.listColumns({ project_id: BACKLOG_PROJECT, mediaType });
+                const ret = new Map();
+                for (let column of columns.data) {
+                    ret.set(column.name, column);
+                }
+                return ret;
+            }
+            //
+            const columnMap = await loadColumnMap();
+            //
+            async function findCard(content_url) {
+                for (let column of columnMap.values()) {
+                    let cards = await github.projects.listCards({ column_id: column.id });
+                    let card = cards.data.find(x => x.content_url.endsWith(content_url)); // "https://" is missing from event payload
+                    if (card) {
+                        return card;
+                    }
+                }
+                console.log("Card not found for: " + content_url);
+                return null;
+            }
+            //
+            let labelName = context.payload.label.name;
+            if (labelName.startsWith("Type: ")) {
+                const columnName = labelName.substring(6);
+                if (columnMap.has(columnName)) {
+                    const newColumn = columnMap.get(columnName);
+                    const card = await findCard(context.payload.issue.url);
+                    if (card) {
+                        console.log("Moving card to column: " + columnName);
+                        github.projects.moveCard({ card_id: card.id, position: "bottom", column_id: newColumn.id });
+                    } else {
+                        console.log("Creating card in column: " + columnName);
+                        github.projects.createCard({ column_id: newColumn.id, content_id: context.payload.issue.id, content_type: "Issue" });
+                    }
+                } else {
+                    console.log("Backlog column doesn't exist: " + columnName);
+                }
+            } else {
+                console.log("Unexpected label name: " + labelName);
+            }
