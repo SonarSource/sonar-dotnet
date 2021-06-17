@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETFramework,Version=v4.8": {
+      "Microsoft.AspNet.Cors": {
+        "type": "Direct",
+        "requested": "[5.2.7, 5.2.7]",
+        "resolved": "5.2.7",
+        "contentHash": "r7qTj8SKzHT32F2mbB3qgE+6VUd2xILkGaq4LtMW+KP3dDAQmI//j+8Ku01I3D1GKZvB9PU8HTJPkaw7sxSLtQ=="
+      },
+      "Microsoft.AspNet.Mvc": {
+        "type": "Direct",
+        "requested": "[5.2.7, 5.2.7]",
+        "resolved": "5.2.7",
+        "contentHash": "m3hUsn48k6Qb5El9A8naTwGTLCdSQKGSpGweqIfiVKltGJzAJJxuXvhhaQQtLCGg3i5V88iGjz0JG72/tlFKlg=="
+      },
+      "Microsoft.AspNet.Razor": {
+        "type": "Direct",
+        "requested": "[3.2.7, 3.2.7]",
+        "resolved": "3.2.7",
+        "contentHash": "BpWEZ+Ys7g9VAkbAfpG5jr5A1fKcmadCCXv3fYfps5YfTVABJIGV4uc9yvmXKxsNsjL+BzDld2gs+xtgT2gg1g=="
+      },
+      "Microsoft.AspNet.WebApi.Client": {
+        "type": "Direct",
+        "requested": "[5.2.7, 5.2.7]",
+        "resolved": "5.2.7",
+        "contentHash": "/76fAHknzvFqbznS6Uj2sOyE9rJB3PltY+f53TH8dX9RiGhk02EhuFCWljSj5nnqKaTsmma8DFR50OGyQ4yJ1g=="
+      },
+      "Microsoft.AspNet.WebApi.Core": {
+        "type": "Direct",
+        "requested": "[5.2.7, 5.2.7]",
+        "resolved": "5.2.7",
+        "contentHash": "gM2QzApnHdy1FbKUJ/ROGJSm69P2G+HMoVd/t5Vq1O/zZ5TI4IKC9PX6nUfRt/NHgebZOIWHpB4/4K4inuy4yQ=="
+      },
+      "Microsoft.AspNet.WebApi.Cors": {
+        "type": "Direct",
+        "requested": "[5.2.7, 5.2.7]",
+        "resolved": "5.2.7",
+        "contentHash": "LUY5ufoiYLHKZXdrrNe7GlAwmu9WlyrX5iUtBSLwFZ31/tvPobyU7j1E31OWVdGZMBvRCxKbfyB7unxgrjTRpA=="
+      },
+      "Microsoft.AspNet.WebPages": {
+        "type": "Direct",
+        "requested": "[3.2.7, 3.2.7]",
+        "resolved": "3.2.7",
+        "contentHash": "2jwZFB7PvY+tbdz0ZP4iEo7gMrJxkCQUzoGLh6swUc6ZXl6DoKyDslmGcC/j9PFmJXCRMVIqtRorlPSMU2DuRA=="
+      },
+      "Microsoft.Extensions.Primitives": {
+        "type": "Direct",
+        "requested": "[2.2.0, 2.2.0]",
+        "resolved": "2.2.0",
+        "contentHash": "azyQtqbm4fSaDzZHD/J+V6oWMFaf2tWP4WEGIYePLCMw3+b2RQdj9ybgbQyjCshcitQKQ4lEDOZjmSlTTrHxUg=="
+      },
+      "Microsoft.Net.Http.Headers": {
+        "type": "Direct",
+        "requested": "[2.2.8, 2.2.8]",
+        "resolved": "2.2.8",
+        "contentHash": "wHdwMv0QDDG2NWDSwax9cjkeQceGC1Qq53a31+31XpvTXVljKXRjWISlMoS/wZYKiqdqzuEvKFKwGHl+mt2jCA=="
+      },
+      "Microsoft.Web.Infrastructure": {
+        "type": "Direct",
+        "requested": "[1.0.0, 1.0.0]",
+        "resolved": "1.0.0",
+        "contentHash": "FNmvLn5m2LTU/Rs2KWVo0SIIh9Ek+U0ojex7xeDaSHw/zgEP77A8vY5cVWgUtBGS8MJfDGNn8rpXJWEIQaPwTg=="
+      },
+      "Newtonsoft.Json": {
+        "type": "Direct",
+        "requested": "[6.0.4, 6.0.4]",
+        "resolved": "6.0.4",
+        "contentHash": "FyQLmEpjsCrEP+znauLDGAi+h6i9YnaMkITlfIoiM4RYyX3nki306bTHsr/0okiIvIc7BJhQTbOAIZVocccFUw=="
+      },
+      "System.Buffers": {
+        "type": "Direct",
+        "requested": "[4.5.0, 4.5.0]",
+        "resolved": "4.5.0",
+        "contentHash": "pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A=="
+      },
+      "System.Memory": {
+        "type": "Direct",
+        "requested": "[4.5.1, 4.5.1]",
+        "resolved": "4.5.1",
+        "contentHash": "sDJYJpGtTgx+23Ayu5euxG5mAXWdkDb4+b0rD0Cab0M1oQS9H0HXGPriKcqpXuiJDTV7fTp/d+fMDJmnr6sNvA=="
+      },
+      "System.Numerics.Vectors": {
+        "type": "Direct",
+        "requested": "[4.4.0, 4.4.0]",
+        "resolved": "4.4.0",
+        "contentHash": "UiLzLW+Lw6HLed1Hcg+8jSRttrbuXv7DANVj0DkL9g6EnnzbL75EB7EWsw5uRbhxd/4YdG8li5XizGWepmG3PQ=="
+      },
+      "System.Runtime.CompilerServices.Unsafe": {
+        "type": "Direct",
+        "requested": "[4.5.1, 4.5.1]",
+        "resolved": "4.5.1",
+        "contentHash": "Zh8t8oqolRaFa9vmOZfdQm/qKejdqz0J9kr7o2Fu0vPeoH3BL1EOXipKWwkWtLT1JPzjByrF19fGuFlNbmPpiw=="
+      }
+    }
+  }
+}

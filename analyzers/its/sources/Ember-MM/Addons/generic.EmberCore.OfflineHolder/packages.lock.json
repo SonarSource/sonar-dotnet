@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETFramework,Version=v4.5.2": {
+      "System.Data.SQLite": {
+        "type": "Direct",
+        "requested": "[1.0.84, 1.0.84]",
+        "resolved": "1.0.84",
+        "contentHash": "MvMpBY+lj7lBZjT66tMDbvL+g1dUIgR1R62L6/BU4w8JxpxN72W+KkLYaAZH2Xc6Ueg41fCb4EY6omG1rLYKpg=="
+      }
+    }
+  }
+}
