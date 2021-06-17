@@ -37,32 +37,38 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs",
-                new CS.CertificateValidationCheck(),
-                GetAdditionalReferences());
+            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs", new CS.CertificateValidationCheck(), GetAdditionalReferences());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
+        public void CertificateValidationCheck_CSharp8() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.CSharp8.cs",
+                                    new CS.CertificateValidationCheck(),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    GetAdditionalReferences());
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CertificateValidationCheck.CSharp9.cs",
-                new CS.CertificateValidationCheck(),
-                GetAdditionalReferences());
+                                                      new CS.CertificateValidationCheck(),
+                                                      GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
-                new CS.CertificateValidationCheck(),
-                GetAdditionalReferences());
+                                                      new CS.CertificateValidationCheck(),
+                                                      GetAdditionalReferences());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
-                new VB.CertificateValidationCheck(),
-                GetAdditionalReferences());
+                                    new VB.CertificateValidationCheck(),
+                                    GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -84,7 +90,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemNetHttp
-                .Concat(MetadataReferenceFacade.SystemSecurityCryptography)
-                .Concat(NetStandardMetadataReference.Netstandard);
+                                   .Concat(MetadataReferenceFacade.SystemSecurityCryptography)
+                                   .Concat(NetStandardMetadataReference.Netstandard);
     }
 }

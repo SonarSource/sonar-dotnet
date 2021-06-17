@@ -82,13 +82,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override IEqualityComparer<ExpressionSyntax> CreateNodeEqualityComparer() =>
             new VisualBasicSyntaxNodeEqualityComparer<ExpressionSyntax>();
 
-        protected override SyntaxNode FindRootClassOrRecordOrModule(SyntaxNode node)
+        protected override SyntaxNode FindRootTypeDeclaration(SyntaxNode node)
         {
             if (node.FirstAncestorOrSelf<ModuleBlockSyntax>() is { } module)
             {
                 return module; // Modules can't be nested. If there's one, it's the Root
             }
-            return base.FindRootClassOrRecordOrModule(node);
+            return base.FindRootTypeDeclaration(node);
         }
 
         protected override ExpressionSyntax[] FindReturnAndThrowExpressions(InspectionContext c, SyntaxNode block)

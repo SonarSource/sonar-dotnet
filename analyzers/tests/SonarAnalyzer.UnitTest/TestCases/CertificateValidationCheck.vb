@@ -526,6 +526,24 @@ Namespace Tests.TestCases
 
         End Class
 
+        Public Structure S
+            Private Sub DelegateReturnedByFunction(Handler As HttpClientHandler)
+                CreateRQ.ServerCertificateValidationCallback = FindInvalid() 'Noncompliant
+            End Sub
+
+            Private Shared Function CreateRQ() As HttpWebRequest
+                Return DirectCast(HttpWebRequest.Create("http:'localhost"), HttpWebRequest)
+            End Function
+
+            Private Function FindInvalid() As RemoteCertificateValidationCallback
+                Return AddressOf InvalidValidation 'Secondary
+            End Function
+
+            Private Function InvalidValidation(Sender As Object, Certificate As X509Certificate, Chain As X509Chain, PolicyErrors As SslPolicyErrors) As Boolean
+                Return True 'Secondary
+            End Function
+        End Structure
+
     End Module
 
 End Namespace

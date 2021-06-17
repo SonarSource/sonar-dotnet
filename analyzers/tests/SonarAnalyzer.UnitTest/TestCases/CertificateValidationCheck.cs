@@ -554,12 +554,13 @@ namespace Tests.Diagnostics
 
         public void InitAsArgument(RemoteCertificateValidationCallback callback)
         {
-            CreateRQ().ServerCertificateValidationCallback += callback;  //FN, should be Non-compliant
+            CreateRQ().ServerCertificateValidationCallback += callback; // Noncompliant
         }
 
         static void Execute()
         {
-            new AssignmentStruct().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //should be a secondary location
+            new AssignmentStruct().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);
+//                                                                                                 ^^^^ Secondary
         }
     }
 }
