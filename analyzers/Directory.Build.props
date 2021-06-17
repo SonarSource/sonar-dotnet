@@ -6,6 +6,15 @@
              If a setting should only apply to certain projects then add it at a
              lower level.
    -->
+   
+  <PropertyGroup>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(SignAssembly)' == 'true' ">
+    <DefineConstants>$(DefineConstants);SignAssembly</DefineConstants>
+  </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <DebugType>full</DebugType>
@@ -17,19 +26,12 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <DefineConstants Condition=" '$(SignAssembly)' == 'true' ">$(DefineConstants);SignAssembly</DefineConstants>
-
-    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TF_BUILD)' == 'true'">
     <SourceRoot Include="$(MSBuildThisFileDirectory)/"/>
   </ItemGroup>
 
