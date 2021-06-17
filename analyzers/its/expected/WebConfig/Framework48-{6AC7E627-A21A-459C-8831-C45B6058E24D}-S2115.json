@@ -4,6 +4,19 @@
 "id":  "S2115",
 "message":  "Use a secure password when connecting to this database.",
 "location":  {
+"uri":  "sources\WebConfig\Views\appsettings.json",
+"region":  {
+"startLine":  3,
+"startColumn":  27,
+"endLine":  3,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2115",
+"message":  "Use a secure password when connecting to this database.",
+"location":  {
 "uri":  "sources\WebConfig\Views\Web.config",
 "region":  {
 "startLine":  39,

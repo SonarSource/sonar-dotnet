@@ -116,6 +116,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\appsettings.json" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
+    <Content Include="appsettings.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

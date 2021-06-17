@@ -1,5 +1,6 @@
 ﻿<Project>
   <ItemGroup>
     <Content Include="..\PathOutsideProjectRoot\Web.config" />
+    <Content Include="..\PathOutsideProjectRoot\appsettings.json" />
   </ItemGroup>
 </Project>

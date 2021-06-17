@@ -23,9 +23,9 @@ import com.sonar.it.shared.TestUtils;
 import com.sonar.it.shared.WebConfigBase;
 import java.util.List;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
+import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,5 +47,12 @@ public class WebConfigTest extends WebConfigBase {
     assertThat(hotspots.size()).isEqualTo(2);
     assertHotspot(hotspots.get(0), 6, "PathOutsideProjectRoot/Web.config");
     assertHotspot(hotspots.get(1), 4, "WebConfig.CSharp/Web.config");
+
+    List<Issues.Issue> issues = Tests.getIssues(projectName);
+    assertThat(issues.size()).isEqualTo(6);
+    assertIssue(issues.get(1), 9, "PathOutsideProjectRoot/Web.config");
+    assertIssue(issues.get(2), 3, "PathOutsideProjectRoot/appsettings.json");
+    assertIssue(issues.get(4), 9, "WebConfig.CSharp/Web.config");
+    assertIssue(issues.get(5), 3, "WebConfig.CSharp/appsettings.json");
   }
 }
