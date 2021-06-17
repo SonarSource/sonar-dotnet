@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
 
-  <!-- Import the higher level common properties -->
-  <Import Project="..\Directory.Build.props" />
-
   <PropertyGroup>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\..\.sonarlint\sonaranalyzer-dotnetCSharp.ruleset</CodeAnalysisRuleSet>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(SignAssembly)' == 'true' ">
+    <DefineConstants >$(DefineConstants);SignAssembly</DefineConstants>
+  </PropertyGroup>
+
+  <!-- The following settings apply only on CI pipeline (TF_BUILD == true)
+       and are needed for generating deterministic builds.
+       Activating them on local machine will cause debugger issues. -->
+  <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TF_BUILD)' == 'true'">
+    <SourceRoot Include="$(MSBuildThisFileDirectory)/"/>
+  </ItemGroup>
 
 </Project>
