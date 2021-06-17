@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4036",
+"message":  "Make sure the "PATH" used to find this command includes only what you intend.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  33,
+"endLine":  362,
+"endColumn":  59
+}
+}
+}
+]
+}
