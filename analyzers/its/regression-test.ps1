@@ -76,7 +76,7 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
     Copy-Item $projectGlobalJsonPath $tempGlobalJsonPath
 
     dotnet --version
-    dotnet restore --locked-mode
+    dotnet restore --locked-mode $solutionPath
 
     # To change the verbosity, comment out the '-clp' parameter and add the '-v' parameter.
     Exec { & dotnet build $solutionPath `
