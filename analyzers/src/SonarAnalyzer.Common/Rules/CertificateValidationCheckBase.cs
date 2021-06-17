@@ -147,7 +147,7 @@ namespace SonarAnalyzer.Rules
         {
             SyntaxNode candidate;
             var current = node.FirstAncestorOrSelf<SyntaxNode>(IsTypeDeclaration);
-            while (current != null && (candidate = current.Parent.FirstAncestorOrSelf<SyntaxNode>(IsTypeDeclaration)) != null)  // Search for parent of nested class/record
+            while (current != null && (candidate = current.Parent.FirstAncestorOrSelf<SyntaxNode>(IsTypeDeclaration)) != null)  // Search for parent of nested type
             {
                 current = candidate;
             }
