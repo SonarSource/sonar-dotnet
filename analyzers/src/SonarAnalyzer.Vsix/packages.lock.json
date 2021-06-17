@@ -25,6 +25,12 @@
         "requested": "[15.9.3032, 15.9.3032]",
         "resolved": "15.9.3032",
         "contentHash": "Gn+amfA2mKIvVRr8Zo4Nu6mNYIwdFBTzs8DhFftsgeyAoKdIu1dV4gq06h/lRSbuWWoz6m/eS+fQyJ0O8C8Wng=="
+      },
+      "Newtonsoft.Json": {
+        "type": "Direct",
+        "requested": "[11.0.2, 11.0.2]",
+        "resolved": "11.0.2",
+        "contentHash": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ=="
       }
     }
   }

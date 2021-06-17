@@ -51,6 +51,7 @@
 
       <!-- Add the SonarAnalyzer analyzer DLLs -->
       <Analyzer Include="$(MSBuildStartupDirectory)\binaries\SonarAnalyzer*.dll" />
+	    <Analyzer Include="$(MSBuildStartupDirectory)\binaries\Newtonsoft.Json.dll" />
       <AdditionalFiles Include="$(ProjectSpecificSonarLintXml)" />
       <AdditionalFiles Include="$(SonarProjectConfigFilePath)" />
     </ItemGroup>

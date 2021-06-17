@@ -22,18 +22,26 @@ package com.sonar.it.shared;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
+import org.sonarqube.ws.Issues;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WebConfigBase {
-  static final String ERROR_MESSAGE = "Make sure disabling ASP.NET Request Validation feature is safe here.";
+  static final String HOTSPOT_ERROR_MESSAGE = "Make sure disabling ASP.NET Request Validation feature is safe here.";
+  static final String ISSUE_ERROR_MESSAGE = "Use a secure password when connecting to this database.";
 
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
   protected void assertHotspot(Hotspot hotspot, int line, String fileName){
     assertThat(hotspot.getLine()).isEqualTo(line);
-    assertThat(hotspot.getMessage()).isEqualTo(ERROR_MESSAGE);
+    assertThat(hotspot.getMessage()).isEqualTo(HOTSPOT_ERROR_MESSAGE);
     assertThat(hotspot.getComponent()).endsWith(fileName);
+  }
+
+  protected void assertIssue(Issues.Issue issue, int line, String fileName){
+    assertThat(issue.getLine()).isEqualTo(line);
+    assertThat(issue.getMessage()).isEqualTo(ISSUE_ERROR_MESSAGE);
+    assertThat(issue.getComponent()).endsWith(fileName);
   }
 }
