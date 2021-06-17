@@ -34,72 +34,46 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class MarkAssemblyWithNeutralResourcesLanguageAttribute : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4026";
-        private const string MessageFormat = "Mark this assembly with 'System.Resources.NeutralResourcesLanguageAttribute'.";
-
+        private const string DiagnosticId = "S4026";
+        private const string MessageFormat = "Provide a 'System.Resources.NeutralResourcesLanguageAttribute' attribute for assembly '{0}'.";
         private const string StronglyTypedResourceBuilder = "System.Resources.Tools.StronglyTypedResourceBuilder";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterCompilationStartAction(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterCompilationStartAction(c =>
                 {
                     var hasResx = false;
 
-                    c.RegisterSyntaxNodeAction(
-                        cc =>
-                        {
-                            if (IsResxGeneratedFile(cc.SemanticModel, (ClassDeclarationSyntax)cc.Node))
-                            {
-                                hasResx = true;
-                            }
-                        }, SyntaxKind.ClassDeclaration);
+                    c.RegisterSyntaxNodeAction(cc =>
+                        hasResx = hasResx || IsResxGeneratedFile(cc.SemanticModel, (ClassDeclarationSyntax)cc.Node),
+                        SyntaxKind.ClassDeclaration);
 
-                    c.RegisterCompilationEndAction(
-                        cc =>
+                    c.RegisterCompilationEndAction(cc =>
                         {
-                            if (!hasResx || HasNeutralResourcesLanguageAttribute(cc.Compilation.Assembly))
+                            if (hasResx && !HasNeutralResourcesLanguageAttribute(cc.Compilation.Assembly))
                             {
-                                return;
+                                cc.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, null, cc.Compilation.AssemblyName));
                             }
-
-                            cc.ReportDiagnosticWhenActive(Diagnostic.Create(rule, null));
                         });
                 });
-        }
 
         private static bool IsDesignerFile(SyntaxTree tree) =>
             tree.FilePath?.IndexOf(".Designer.", StringComparison.OrdinalIgnoreCase) > 0;
 
-        private static bool HasGeneratedCodeAttributeWithStronglyTypedResourceBuilderValue(SemanticModel semanticModel,
-            ClassDeclarationSyntax classSyntax) =>
+        private static bool HasGeneratedCodeAttributeWithStronglyTypedResourceBuilderValue(SemanticModel semanticModel, ClassDeclarationSyntax classSyntax) =>
             classSyntax.AttributeLists
                 .GetAttributes(KnownType.System_CodeDom_Compiler_GeneratedCodeAttribute, semanticModel)
-                .Where(a => a.ArgumentList.Arguments.Count > 0)
-                .Select(a => semanticModel.GetConstantValue(a.ArgumentList.Arguments[0].Expression))
-                .Select(constantValue => constantValue.Value as string)
-                .Any(stringValue => string.Equals(stringValue, StronglyTypedResourceBuilder, StringComparison.OrdinalIgnoreCase));
+                .Where(x => x.ArgumentList.Arguments.Count > 0)
+                .Select(x => semanticModel.GetConstantValue(x.ArgumentList.Arguments[0].Expression))
+                .Any(constant => string.Equals(constant.Value as string, StronglyTypedResourceBuilder, StringComparison.OrdinalIgnoreCase));
 
-        private static bool IsResxGeneratedFile(SemanticModel semanticModel, ClassDeclarationSyntax classSyntax)
-        {
-            if (!IsDesignerFile(semanticModel.SyntaxTree))
-            {
-                return false;
-            }
+        private static bool IsResxGeneratedFile(SemanticModel semanticModel, ClassDeclarationSyntax classSyntax) =>
+            IsDesignerFile(semanticModel.SyntaxTree) && HasGeneratedCodeAttributeWithStronglyTypedResourceBuilderValue(semanticModel, classSyntax);
 
-            return HasGeneratedCodeAttributeWithStronglyTypedResourceBuilderValue(semanticModel, classSyntax);
-        }
-
-        private static bool HasNeutralResourcesLanguageAttribute(IAssemblySymbol assemblySymbol)
-        {
-            return assemblySymbol.GetAttributes(KnownType.System_Resources_NeutralResourcesLanguageAttribute)
-                .Any(attribute => attribute.ConstructorArguments.Any(
-                    constructorArg => constructorArg.Type.Is(KnownType.System_String)
-                                      && !string.IsNullOrWhiteSpace((string)constructorArg.Value)));
-        }
+        private static bool HasNeutralResourcesLanguageAttribute(IAssemblySymbol assemblySymbol) =>
+            assemblySymbol.GetAttributes(KnownType.System_Resources_NeutralResourcesLanguageAttribute)
+                .Any(attribute => attribute.ConstructorArguments.Any(arg => arg.Type.Is(KnownType.System_String) && !string.IsNullOrWhiteSpace((string)arg.Value)));
     }
 }
