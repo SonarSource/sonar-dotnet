@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (triviaContent.EndsWith("*/", StringComparison.Ordinal))
                 {
-                    triviaContent = triviaContent.Substring(0, triviaContent.Length-2);
+                    triviaContent = triviaContent.Substring(0, triviaContent.Length - 2);
                 }
                 return triviaContent;
             }
@@ -185,10 +185,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool EndsWithCode(string checkedLine)
         {
-            return CodeEndings.Any(ending => checkedLine.EndsWith(ending, StringComparison.Ordinal));
+            return checkedLine == "}" || CodeEndings.Any(ending => checkedLine.EndsWith(ending, StringComparison.Ordinal));
         }
 
-        private static readonly string[] CodeEndings = { ";", "{", "}" };
+        private static readonly string[] CodeEndings = { ";", "{", ";}" };
         private static readonly string[] CodeParts = { "++", "catch(", "switch(", "try{", "else{" };
         private static readonly string[] CodePartsWithRelationalOperator = { "for(", "if(", "while(" };
         private static readonly string[] RelationalOperators = { "<", ">", "<=", ">=", "==", "!=" };

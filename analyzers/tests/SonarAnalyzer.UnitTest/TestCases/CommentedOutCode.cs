@@ -12,6 +12,12 @@ using System;
 // Noncompliant@+1
 // }
 using System;
+// Noncompliant@+1
+// ;}
+using System;
+// Noncompliant@+1
+// ; }
+using System;
 // foo ; {} bar
 using System;
 // ; {} foo
@@ -128,14 +134,22 @@ namespace Tests.Diagnostics
         // this should be compliant:
         // does *not* overwrite file if (still) exists
 
-        // FP https://github.com/SonarSource/sonar-dotnet/issues/2772
+        //  https://github.com/SonarSource/sonar-dotnet/issues/2772
         int c;
-        // Noncompliant@+1 - False positive, it's just a URL and it is not an interpolated string
+        // It's just a URL and it is not an interpolated string
         // http://localhost:7071/runtime/webhooks/EventGrid?functionName={functionname}
 
         int d;
-        // Noncompliant@+1
         // {this, is, a ,set}
+        int e;
+        // Noncompliant@+1
+        // {this, is, a ,set; }
+        int f;
+        // Noncompliant@+1
+        // {Command();}
+        int g;
+        // Noncompliant@+1
+        // {Command(); }
     }
 
     /**
