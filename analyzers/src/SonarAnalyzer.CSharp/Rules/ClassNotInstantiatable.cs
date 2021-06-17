@@ -25,8 +25,8 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -40,10 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, compilation).TypeDeclarations;
 
-            return typeDeclarations.Select(x => new ConstructorContext(x, Diagnostic.Create(rule, x.SyntaxNode.Identifier.GetLocation(), DeclarationKind(x.SyntaxNode), messageArg)));
+            return typeDeclarations.Select(x => new ConstructorContext(x, Diagnostic.Create(rule, x.SyntaxNode.Identifier.GetLocation(), x.SyntaxNode.GetDeclarationTypeName(), messageArg)));
         }
-
-        private static string DeclarationKind(SyntaxNode node) =>
-            node.IsKind(SyntaxKindEx.RecordDeclaration) ? "record" : "class";
     }
 }

@@ -19,12 +19,12 @@
  */
 
 using System.Collections.Immutable;
-using System.Diagnostics;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(),
-                        typeDeclaration.Identifier.ValueText, GetTypeKeyword(typeDeclaration), MaxNumberOfGenericParametersInClass));
+                        typeDeclaration.Identifier.ValueText, typeDeclaration.GetDeclarationTypeName(), MaxNumberOfGenericParametersInClass));
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
@@ -87,22 +87,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         MaxNumberOfGenericParametersInMethod));
                 },
                 SyntaxKind.MethodDeclaration);
-        }
-
-        private static string GetTypeKeyword(TypeDeclarationSyntax typeDeclaration) =>
-            typeDeclaration.Kind() switch
-            {
-                SyntaxKind.ClassDeclaration => "class",
-                SyntaxKind.StructDeclaration => "struct",
-                SyntaxKind.InterfaceDeclaration => "interface",
-                SyntaxKindEx.RecordDeclaration => "record",
-                _ => GetUnknownType(typeDeclaration)
-            };
-
-        private static string GetUnknownType(TypeDeclarationSyntax typeDeclaration)
-        {
-            Debug.Fail($"Unexpected type: {typeDeclaration}");
-            return "type";
         }
 
         private static string GetEnclosingTypeName(MethodDeclarationSyntax methodDeclaration)
