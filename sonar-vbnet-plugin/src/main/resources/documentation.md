@@ -24,7 +24,7 @@ To analyze VB.NET code, you need to use the [SonarScanner for .NET](/analysis/sc
 
 ## Exclusions
 
-Files excluded from analysis should be set in the project configuration. Excluded files are still going to be analyzed during the compilation and the results will be filtered according to the exclusion settings.
+Files to be excluded should be set in the project configuration. Excluded files are still going to be analyzed during the compilation and the results will be filtered according to the exclusion settings.
 
 As an alternative, an `.editorconfig` file can be used to disable the analysis for a specific rule on a file or directory. This can solve performance problems on large files.
 
