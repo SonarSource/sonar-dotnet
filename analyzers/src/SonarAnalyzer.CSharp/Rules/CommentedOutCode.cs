@@ -34,13 +34,17 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S125";
+        private const string DiagnosticId = "S125";
         private const string MessageFormat = "Remove this commented out code.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly string[] CodeEndings = { ";", "{", ";}" };
+        private static readonly string[] CodeParts = { "++", "catch(", "switch(", "try{", "else{" };
+        private static readonly string[] CodePartsWithRelationalOperator = { "for(", "if(", "while(" };
+        private static readonly string[] RelationalOperators = { "<", ">", "<=", ">=", "==", "!=" };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -80,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         continue;
                     }
 
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, trivia.GetLocation()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, trivia.GetLocation()));
                     shouldReport = false;
                 }
             }
@@ -104,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var commentLineSpan = lineSpan.Intersection(comment.GetLocation().SourceSpan);
 
                 var location = Location.Create(context.Tree, commentLineSpan ?? lineSpan);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
                 return;
             }
         }
@@ -187,10 +191,5 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return checkedLine == "}" || CodeEndings.Any(ending => checkedLine.EndsWith(ending, StringComparison.Ordinal));
         }
-
-        private static readonly string[] CodeEndings = { ";", "{", ";}" };
-        private static readonly string[] CodeParts = { "++", "catch(", "switch(", "try{", "else{" };
-        private static readonly string[] CodePartsWithRelationalOperator = { "for(", "if(", "while(" };
-        private static readonly string[] RelationalOperators = { "<", ">", "<=", ">=", "==", "!=" };
     }
 }
