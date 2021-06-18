@@ -3,7 +3,6 @@
   <PropertyGroup>
     <AssemblyName>SonarAnalyzer.CFG</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
-    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <ProjectGuid>{F766F556-CB91-408A-9149-EB963DE1B817}</ProjectGuid>
     <LangVersion>8</LangVersion>
     <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
