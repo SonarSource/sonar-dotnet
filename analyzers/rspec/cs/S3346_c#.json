@@ -6,11 +6,14 @@
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
-  "tags": [
-    
-  ],
+  "tags": [],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-3346",
   "sqKey": "S3346",
-  "scope": "Main"
+  "scope": "Main",
+  "securityStandards": {
+    "CERT": [
+      "EXP06-J."
+    ]
+  }
 }

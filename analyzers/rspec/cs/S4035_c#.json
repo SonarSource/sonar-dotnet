@@ -1,5 +1,5 @@
 {
-  "title": "Classes implementing \"IEquatable<T>\" should be sealed",
+  "title": "Classes implementing \"IEquatable\u003cT\u003e\" should be sealed",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

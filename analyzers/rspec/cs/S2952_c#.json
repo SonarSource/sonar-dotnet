@@ -1,5 +1,5 @@
 {
-  "title": "Classes should \"Dispose\" of members from the classes' own \"Dispose\" methods",
+  "title": "Classes should \"Dispose\" of members from the classes\u0027 own \"Dispose\" methods",
   "type": "BUG",
   "status": "ready",
   "remediation": {

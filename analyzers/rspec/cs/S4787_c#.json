@@ -2,9 +2,7 @@
   "title": "Encrypting data is security-sensitive",
   "type": "SECURITY_HOTSPOT",
   "status": "deprecated",
-  "tags": [
-    
-  ],
+  "tags": [],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-4787",
   "sqKey": "S4787",

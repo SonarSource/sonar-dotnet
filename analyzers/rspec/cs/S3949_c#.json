@@ -13,5 +13,10 @@
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-3949",
   "sqKey": "S3949",
-  "scope": "All"
+  "scope": "All",
+  "securityStandards": {
+    "CERT": [
+      "INT30-C."
+    ]
+  }
 }

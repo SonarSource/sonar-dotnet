@@ -12,5 +12,10 @@
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-927",
   "sqKey": "S927",
-  "scope": "All"
+  "scope": "All",
+  "securityStandards": {
+    "CERT": [
+      "DCL40-C."
+    ]
+  }
 }

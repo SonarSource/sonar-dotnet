@@ -1,5 +1,5 @@
 {
-  "title": "\"==\" should not be used when \"Equals\" is overridden",
+  "title": "\"\u003d\u003d\" should not be used when \"Equals\" is overridden",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -18,6 +18,10 @@
     "CWE": [
       595,
       597
+    ],
+    "CERT": [
+      "EXP03-J.",
+      "EXP50-J."
     ]
   }
 }

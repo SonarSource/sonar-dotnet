@@ -6,11 +6,15 @@
     "func": "Constant\/Issue",
     "constantCost": "10min"
   },
-  "tags": [
-    
-  ],
+  "tags": [],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-2201",
   "sqKey": "S2201",
-  "scope": "Main"
+  "scope": "Main",
+  "securityStandards": {
+    "CERT": [
+      "EXP12-C.",
+      "EXP00-J."
+    ]
+  }
 }

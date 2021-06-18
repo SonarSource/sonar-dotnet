@@ -13,5 +13,10 @@
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-3218",
   "sqKey": "S3218",
-  "scope": "All"
+  "scope": "All",
+  "securityStandards": {
+    "CERT": [
+      "DCL51-J."
+    ]
+  }
 }
