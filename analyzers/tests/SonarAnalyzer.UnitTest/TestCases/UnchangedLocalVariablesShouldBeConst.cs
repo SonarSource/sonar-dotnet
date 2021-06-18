@@ -441,4 +441,27 @@ public class Repro_4015
     {
         expression();
     }
+
+    public void UndefinedInvocationSymbol()
+    {
+        string localVariable = null;        // Noncompliant
+        Undefined(() => localVariable);     // Error [CS0103]: The name 'Undefined' does not exist in the current context
+        undefined = () => localVariable;    // Error [CS0103]: The name 'undefined' does not exist in the current context
+    }
+
+    public void IndexerIndexedByLambda_CrazyCoverage()
+    {
+        string localVariable = null;        // Noncompliant
+        this[() => localVariable] = 42;     // Case with lambda on the left side of an assignment
+    }
+
+    public int this[Func<string> key]
+    {
+        get
+        {
+            var k = key();
+            return 42;
+        }
+        set { }
+    }
 }
