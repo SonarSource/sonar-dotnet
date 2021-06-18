@@ -172,12 +172,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsUsedAsLambdaExpression(SemanticModel semanticModel, IdentifierNameSyntax identifier)
         {
-            if (identifier.FirstAncestorOrSelf<LambdaExpressionSyntax>() is { } lambda
-                && lambda.GetSelfOrTopParenthesizedExpression().Parent is ArgumentSyntax argument
-                && lambda.FirstAncestorOrSelf<InvocationExpressionSyntax>() is { } invocation)
+            if (identifier.FirstAncestorOrSelf<LambdaExpressionSyntax>().GetSelfOrTopParenthesizedExpression() is { } lambda)
             {
-                var lookup = new CSharpMethodParameterLookup(invocation, semanticModel);
-                return lookup.TryGetSymbol(argument, out var parameter) && parameter.IsType(KnownType.System_Linq_Expressions_Expression_T);
+                if (lambda.Parent is ArgumentSyntax argument
+                    && argument.FirstAncestorOrSelf<InvocationExpressionSyntax>() is { } invocation)
+                {
+                    var lookup = new CSharpMethodParameterLookup(invocation, semanticModel);
+                    return lookup.TryGetSymbol(argument, out var parameter) && parameter.IsType(KnownType.System_Linq_Expressions_Expression_T);
+                }
+                else if (lambda.Parent is AssignmentExpressionSyntax assignment
+                    && assignment.Right == lambda
+                    && semanticModel.GetSymbolInfo(assignment.Left).Symbol is { } assignmentTargetSymbol)
+                {
+                    return assignmentTargetSymbol.GetSymbolType().Is(KnownType.System_Linq_Expressions_Expression_T);
+                }
             }
             return false;
         }
