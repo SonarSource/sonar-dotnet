@@ -139,6 +139,8 @@ namespace Tests.Diagnostics
         // It's just a URL and it is not an interpolated string
         // http://localhost:7071/runtime/webhooks/EventGrid?functionName={functionname}
 
+        int rx;
+        // regex{2,5}
         int d;
         // {this, is, a ,set}
         int e;
