@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -385,7 +385,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S1066_Description" xml:space="preserve">
-    <value>Merging collapsible if statements increases the code's readability.</value>
+    <value>Merging collapsible if statements increases the code’s readability.</value>
   </data>
   <data name="S1066_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -484,7 +484,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S1075_Description" xml:space="preserve">
-    <value>Hardcoding a URI makes it difficult to test a program: path literals are not always portable across operating systems, a given absolute path may not exist on a specific test environment, a specified Internet URL may not be available when executing the tests, production environment filesystems usually differ from the development environment, ...etc. For all those reasons, a URI should never be hardcoded. Instead, it should be replaced by customizable parameter.</value>
+    <value>Hardcoding a URI makes it difficult to test a program: path literals are not always portable across operating systems, a given absolute path may not exist on a specific test environment, a specified Internet URL may not be available when executing the tests, production environment filesystems usually differ from the development environment, …​etc. For all those reasons, a URI should never be hardcoded. Instead, it should be replaced by customizable parameter.</value>
   </data>
   <data name="S1075_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -583,7 +583,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S110_Description" xml:space="preserve">
-    <value>Inheritance is certainly one of the most valuable concepts in object-oriented programming. It's a way to compartmentalize and reuse code by creating collections of attributes and behaviors called classes which can be based on previously created classes. But abusing this concept by creating a deep inheritance tree can lead to very complex and unmaintainable source code. Most of the time a too deep inheritance tree is due to bad object oriented design which has led to systematically use 'inheritance' when for instance 'composition' would suit better.</value>
+    <value>Inheritance is certainly one of the most valuable concepts in object-oriented programming. It’s a way to compartmentalize and reuse code by creating collections of attributes and behaviors called classes which can be based on previously created classes. But abusing this concept by creating a deep inheritance tree can lead to very complex and unmaintainable source code. Most of the time a too deep inheritance tree is due to bad object oriented design which has led to systematically use 'inheritance' when for instance 'composition' would suit better.</value>
   </data>
   <data name="S110_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -682,7 +682,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S1110_Description" xml:space="preserve">
-    <value>The use of parentheses, even those not required to enforce a desired order of operations, can clarify the intent behind a piece of code. But redundant pairs of parentheses could be misleading, and should be removed. </value>
+    <value>The use of parentheses, even those not required to enforce a desired order of operations, can clarify the intent behind a piece of code. But redundant pairs of parentheses could be misleading, and should be removed.</value>
   </data>
   <data name="S1110_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -748,7 +748,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S1117_Description" xml:space="preserve">
-    <value>Overriding or shadowing a variable declared in an outer scope can strongly impact the readability, and therefore the maintainability, of a piece of code. Further, it could lead maintainers to introduce bugs because they think they're using one variable but are really using another.</value>
+    <value>Overriding or shadowing a variable declared in an outer scope can strongly impact the readability, and therefore the maintainability, of a piece of code. Further, it could lead maintainers to introduce bugs because they think they’re using one variable but are really using another.</value>
   </data>
   <data name="S1117_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -814,7 +814,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S112_Description" xml:space="preserve">
-    <value>Throwing such general exceptions as Exception, SystemException, ApplicationException, IndexOutOfRangeException, NullReferenceException, OutOfMemoryException and ExecutionEngineException prevents calling methods from handling true, system-generated exceptions differently than application-generated errors. </value>
+    <value>Throwing such general exceptions as Exception, SystemException, ApplicationException, IndexOutOfRangeException, NullReferenceException, OutOfMemoryException and ExecutionEngineException prevents calling methods from handling true, system-generated exceptions differently than application-generated errors.</value>
   </data>
   <data name="S112_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -880,7 +880,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S1123_Description" xml:space="preserve">
-    <value>The Obsolete attribute can be applied with or without arguments, but marking something Obsolete without including advice as to why it's obsolete or on what to use instead will lead maintainers to waste time trying to figure those things out - every single time the warning is encountered.</value>
+    <value>The Obsolete attribute can be applied with or without arguments, but marking something Obsolete without including advice as to why it’s obsolete or on what to use instead will lead maintainers to waste time trying to figure those things out - every single time the warning is encountered.</value>
   </data>
   <data name="S1123_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -946,7 +946,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S1128_Description" xml:space="preserve">
-    <value>Although unnecessary using won't change anything to the produced application, removing them:</value>
+    <value>Although unnecessary using won’t change anything to the produced application, removing them:</value>
   </data>
   <data name="S1128_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -1243,7 +1243,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S1163_Description" xml:space="preserve">
-    <value>Throwing an exception from within a finally block will mask any exception which was previously thrown in the try or catch block, and the masked's exception message and stack trace will be lost.</value>
+    <value>Throwing an exception from within a finally block will mask any exception which was previously thrown in the try or catch block, and the masked’s exception message and stack trace will be lost.</value>
   </data>
   <data name="S1163_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -1507,7 +1507,7 @@
     <value>Minor Bug</value>
   </data>
   <data name="S1206_Description" xml:space="preserve">
-    <value>There is a contract between Equals(object) and GetHashCode(): If two objects are equal according to the Equals(object) method, then calling GetHashCode() on each of them must yield the same result. If this is not the case, many collections won't handle class instances correctly.</value>
+    <value>There is a contract between Equals(object) and GetHashCode(): If two objects are equal according to the Equals(object) method, then calling GetHashCode() on each of them must yield the same result. If this is not the case, many collections won’t handle class instances correctly.</value>
   </data>
   <data name="S1206_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -1573,7 +1573,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S1210_Description" xml:space="preserve">
-    <value>When you implement IComparable or IComparable&lt;T&gt; on a class you should also override Equals(object) and overload the comparison operators (==, !=, &lt;, &lt;=, &gt;, &gt;=). That's because the CLR cannot automatically call your CompareTo implementation from Equals(object) or from the base comparison operator implementations. Additionally, it is best practice to override GetHashCode along with Equals.</value>
+    <value>When you implement IComparable or IComparable&lt;T&gt; on a class you should also override Equals(object) and overload the comparison operators (==, !=, &lt;, &lt;=, &gt;, &gt;=). That’s because the CLR cannot automatically call your CompareTo implementation from Equals(object) or from the base comparison operator implementations. Additionally, it is best practice to override GetHashCode along with Equals.</value>
   </data>
   <data name="S1210_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -1606,7 +1606,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S1215_Description" xml:space="preserve">
-    <value>Calling GC.Collect is rarely necessary, and can significantly affect application performance. That's because it triggers a blocking operation that examines every object in memory for cleanup. Further, you don't have control over when this blocking cleanup will actually run.</value>
+    <value>Calling GC.Collect is rarely necessary, and can significantly affect application performance. That’s because it triggers a blocking operation that examines every object in memory for cleanup. Further, you don’t have control over when this blocking cleanup will actually run.</value>
   </data>
   <data name="S1215_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -1837,7 +1837,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S1264_Description" xml:space="preserve">
-    <value>When only the condition expression is defined in a for loop, and the initialization and increment expressions are missing, a while loop should be used instead to increase readability. </value>
+    <value>When only the condition expression is defined in a for loop, and the initialization and increment expressions are missing, a while loop should be used instead to increase readability.</value>
   </data>
   <data name="S1264_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -1870,7 +1870,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S127_Description" xml:space="preserve">
-    <value>A for loop stop condition should test the loop counter against an invariant value (i.e. one that is true at both the beginning and ending of every loop iteration). Ideally, this means that the stop condition is set to a local variable just before the loop begins. </value>
+    <value>A for loop stop condition should test the loop counter against an invariant value (i.e. one that is true at both the beginning and ending of every loop iteration). Ideally, this means that the stop condition is set to a local variable just before the loop begins.</value>
   </data>
   <data name="S127_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -1969,7 +1969,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S131_Description" xml:space="preserve">
-    <value>The requirement for a final default clause is defensive programming. The clause should either take appropriate action, or contain a suitable comment as to why no action is taken. Even when the switch covers all current values of an enum, a default case should still be used because there is no guarantee that the enum won't be extended.</value>
+    <value>The requirement for a final default clause is defensive programming. The clause should either take appropriate action, or contain a suitable comment as to why no action is taken. Even when the switch covers all current values of an enum, a default case should still be used because there is no guarantee that the enum won’t be extended.</value>
   </data>
   <data name="S131_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -2035,7 +2035,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S134_Description" xml:space="preserve">
-    <value>Nested if, switch, for, foreach, while, do, and try statements are key ingredients for making what's known as "Spaghetti code".</value>
+    <value>Nested if, switch, for, foreach, while, do, and try statements are key ingredients for making what’s known as "Spaghetti code".</value>
   </data>
   <data name="S134_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -2167,7 +2167,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S1451_Description" xml:space="preserve">
-    <value>Each source file should start with a header stating file ownership and the license which must be used to distribute the application. </value>
+    <value>Each source file should start with a header stating file ownership and the license which must be used to distribute the application.</value>
   </data>
   <data name="S1451_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -2728,7 +2728,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S1854_Description" xml:space="preserve">
-    <value>A dead store happens when a local variable is assigned a value that is not read by any subsequent instruction. Calculating or retrieving a value only to then overwrite it or throw it away, could indicate a serious error in the code. Even if it's not an error, it is at best a waste of resources. Therefore all calculated values should be used.</value>
+    <value>A dead store happens when a local variable is assigned a value that is not read by any subsequent instruction. Calculating or retrieving a value only to then overwrite it or throw it away, could indicate a serious error in the code. Even if it’s not an error, it is at best a waste of resources. Therefore all calculated values should be used.</value>
   </data>
   <data name="S1854_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -2794,7 +2794,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S1862_Description" xml:space="preserve">
-    <value>A chain of if/else if statements is evaluated from top to bottom. At most, only one branch will be executed: the first one with a condition that evaluates to true. </value>
+    <value>A chain of if/else if statements is evaluated from top to bottom. At most, only one branch will be executed: the first one with a condition that evaluates to true.</value>
   </data>
   <data name="S1862_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -2992,7 +2992,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S1994_Description" xml:space="preserve">
-    <value>It can be extremely confusing when a for loop's counter is incremented outside of its increment clause. In such cases, the increment should be moved to the loop's increment clause if at all possible.</value>
+    <value>It can be extremely confusing when a for loop’s counter is incremented outside of its increment clause. In such cases, the increment should be moved to the loop’s increment clause if at all possible.</value>
   </data>
   <data name="S1994_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -3124,7 +3124,7 @@
     <value>Major Security Hotspot</value>
   </data>
   <data name="S2077_Description" xml:space="preserve">
-    <value>Formatted SQL queries can be difficult to maintain, debug and can increase the risk of SQL injection when concatenating untrusted values into the query. However, this rule doesn't detect SQL injections (unlike rule s3649), the goal is only to highlight complex/formatted queries.</value>
+    <value>Formatted SQL queries can be difficult to maintain, debug and can increase the risk of SQL injection when concatenating untrusted values into the query. However, this rule doesn’t detect SQL injections (unlike rule {rule:csharpsquid:S3649}), the goal is only to highlight complex/formatted queries.</value>
   </data>
   <data name="S2077_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3157,7 +3157,7 @@
     <value>Minor Security Hotspot</value>
   </data>
   <data name="S2092_Description" xml:space="preserve">
-    <value>When a cookie is protected with the secure attribute set to true it will not be send by the browser over an unencrypted HTTP request and thus cannot be observed by an unauthorized person during a man-in-the-middle attack. </value>
+    <value>When a cookie is protected with the secure attribute set to true it will not be send by the browser over an unencrypted HTTP request and thus cannot be observed by an unauthorized person during a man-in-the-middle attack.</value>
   </data>
   <data name="S2092_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3190,7 +3190,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S2114_Description" xml:space="preserve">
-    <value>Passing a collection as an argument to the collection's own method is either an error - some other argument was intended - or simply nonsensical code. </value>
+    <value>Passing a collection as an argument to the collection’s own method is either an error - some other argument was intended - or simply nonsensical code.</value>
   </data>
   <data name="S2114_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3355,7 +3355,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S2178_Description" xml:space="preserve">
-    <value>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are evaluated under the wrong circumstances. </value>
+    <value>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are evaluated under the wrong circumstances.</value>
   </data>
   <data name="S2178_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3454,7 +3454,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S2187_Description" xml:space="preserve">
-    <value>There's no point in having a test class without any test methods.This could lead a maintainer to assume a class is covered by tests even though it is not.</value>
+    <value>There’s no point in having a test class without any test methods.This could lead a maintainer to assume a class is covered by tests even though it is not.</value>
   </data>
   <data name="S2187_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3520,7 +3520,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S2197_Description" xml:space="preserve">
-    <value>When the modulus of a negative number is calculated, the result will either be negative or zero. Thus, comparing the modulus of a variable for equality with a positive number (or a negative one) could result in unexpected results. </value>
+    <value>When the modulus of a negative number is calculated, the result will either be negative or zero. Thus, comparing the modulus of a variable for equality with a positive number (or a negative one) could result in unexpected results.</value>
   </data>
   <data name="S2197_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -3553,7 +3553,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S2201_Description" xml:space="preserve">
-    <value>When the call to a function doesn't have any side effects, what is the point of making the call if the results are ignored? In such case, either the function call is useless and should be dropped or the source code doesn't behave as expected.</value>
+    <value>When the call to a function doesn’t have any side effects, what is the point of making the call if the results are ignored? In such case, either the function call is useless and should be dropped or the source code doesn’t behave as expected.</value>
   </data>
   <data name="S2201_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3685,7 +3685,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S2225_Description" xml:space="preserve">
-    <value>Calling ToString() on an object should always return a string. Returning null instead contravenes the method's implicit contract.</value>
+    <value>Calling ToString() on an object should always return a string. Returning null instead contravenes the method’s implicit contract.</value>
   </data>
   <data name="S2225_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3805,7 +3805,7 @@
     <value>ready</value>
   </data>
   <data name="S2245_Tags" xml:space="preserve">
-    <value>cwe,owasp-a3</value>
+    <value>cwe,owasp-a3,owasp-m5</value>
   </data>
   <data name="S2245_Title" xml:space="preserve">
     <value>Using pseudorandom number generators (PRNGs) is security-sensitive</value>
@@ -3817,7 +3817,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S2251_Description" xml:space="preserve">
-    <value>A for loop with a counter that moves in the wrong direction is not an infinite loop. Because of wraparound, the loop will eventually reach its stop condition, but in doing so, it will run many, many more times than anticipated, potentially causing unexpected behavior. </value>
+    <value>A for loop with a counter that moves in the wrong direction is not an infinite loop. Because of wraparound, the loop will eventually reach its stop condition, but in doing so, it will run many, many more times than anticipated, potentially causing unexpected behavior.</value>
   </data>
   <data name="S2251_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3850,7 +3850,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S2252_Description" xml:space="preserve">
-    <value>If a for loop's condition is false before the first loop iteration, the loop will never be executed. Such loops are almost always bugs, particularly when the initial value and stop conditions are hard-coded.</value>
+    <value>If a for loop’s condition is false before the first loop iteration, the loop will never be executed. Such loops are almost always bugs, particularly when the initial value and stop conditions are hard-coded.</value>
   </data>
   <data name="S2252_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3916,7 +3916,7 @@
     <value>Critical Security Hotspot</value>
   </data>
   <data name="S2257_Description" xml:space="preserve">
-    <value>The use of a non-standard algorithm is dangerous because a determined attacker may be able to break the algorithm and compromise whatever data has been protected. Standard algorithms like AES, RSA, SHA, ... should be used instead.</value>
+    <value>The use of a non-standard algorithm is dangerous because a determined attacker may be able to break the algorithm and compromise whatever data has been protected. Standard algorithms like AES, RSA, SHA, …​ should be used instead.</value>
   </data>
   <data name="S2257_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3982,7 +3982,7 @@
     <value>Blocker Bug</value>
   </data>
   <data name="S2275_Description" xml:space="preserve">
-    <value>Because composite format strings are interpreted at runtime, rather than validated by the compiler, they can contain errors that lead to unexpected behaviors or runtime errors. This rule statically validates the good behavior of composite formats when calling the methods of String.Format, StringBuilder.AppendFormat, Console.Write, Console.WriteLine, TextWriter.Write, TextWriter.WriteLine, Debug.WriteLine(String, Object[]), Trace.TraceError(String, Object[]), Trace.TraceInformation(String, Object[]), Trace.TraceWarning(String, Object[]) and TraceSource.TraceInformation(String, Object[]). </value>
+    <value>Because composite format strings are interpreted at runtime, rather than validated by the compiler, they can contain errors that lead to unexpected behaviors or runtime errors. This rule statically validates the good behavior of composite formats when calling the methods of String.Format, StringBuilder.AppendFormat, Console.Write, Console.WriteLine, TextWriter.Write, TextWriter.WriteLine, Debug.WriteLine(String, Object[]), Trace.TraceError(String, Object[]), Trace.TraceInformation(String, Object[]), Trace.TraceWarning(String, Object[]) and TraceSource.TraceInformation(String, Object[]).</value>
   </data>
   <data name="S2275_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -4147,7 +4147,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S2302_Description" xml:space="preserve">
-    <value>Because parameter names could be changed during refactoring, they should not be spelled out literally in strings. Instead, use nameof(), and the string that's output will always be correct.</value>
+    <value>Because parameter names could be changed during refactoring, they should not be spelled out literally in strings. Instead, use nameof(), and the string that’s output will always be correct.</value>
   </data>
   <data name="S2302_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -4213,7 +4213,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S2325_Description" xml:space="preserve">
-    <value>Methods and properties that don't access instance data can be static to prevent any misunderstanding about the contract of the method. </value>
+    <value>Methods and properties that don’t access instance data can be static to prevent any misunderstanding about the contract of the method.</value>
   </data>
   <data name="S2325_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -4246,7 +4246,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S2326_Description" xml:space="preserve">
-    <value>Type parameters that aren't used are dead code, which can only distract and possibly confuse developers during maintenance. Therefore, unused type parameters should be removed.</value>
+    <value>Type parameters that aren’t used are dead code, which can only distract and possibly confuse developers during maintenance. Therefore, unused type parameters should be removed.</value>
   </data>
   <data name="S2326_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -4642,7 +4642,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S2365_Description" xml:space="preserve">
-    <value>Most developers expect property access to be as efficient as field access. However, if a property returns a copy of an array or collection, it will be much slower than simple field access, contrary to the caller's likely expectations. Therefore, such properties should be refactored into methods so that callers are not surprised by the unexpectedly poor performance.</value>
+    <value>Most developers expect property access to be as efficient as field access. However, if a property returns a copy of an array or collection, it will be much slower than simple field access, contrary to the caller’s likely expectations. Therefore, such properties should be refactored into methods so that callers are not surprised by the unexpectedly poor performance.</value>
   </data>
   <data name="S2365_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -4708,7 +4708,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S2372_Description" xml:space="preserve">
-    <value>Property getters should be simple operations that are always safe to call. If exceptions need to be thrown, it is best to convert the property to a method. </value>
+    <value>Property getters should be simple operations that are always safe to call. If exceptions need to be thrown, it is best to convert the property to a method.</value>
   </data>
   <data name="S2372_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -4807,7 +4807,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S2387_Description" xml:space="preserve">
-    <value>Having a variable with the same name in two unrelated classes is fine, but do the same thing within a class hierarchy and you'll get confusion at best, chaos at worst. </value>
+    <value>Having a variable with the same name in two unrelated classes is fine, but do the same thing within a class hierarchy and you’ll get confusion at best, chaos at worst.</value>
   </data>
   <data name="S2387_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -4906,8 +4906,8 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S2479_Description" xml:space="preserve">
-    <value>Non-encoded control characters and whitespace characters are often injected in the source code because of a bad manipulation. They are either invisible or difficult to recognize, which can result in bugs when the string is not what the developer expects. If you actually need to use a control character use their encoded version (ex: ASCII 
-,	,... or Unicode U+000D, U+0009,...).</value>
+    <value>Non-encoded control characters and whitespace characters are often injected in the source code because of a bad manipulation. They are either invisible or difficult to recognize, which can result in bugs when the string is not what the developer expects. If you actually need to use a control character use their encoded version (ex: ASCII
+,	,…​ or Unicode U+000D, U+0009,…​).</value>
   </data>
   <data name="S2479_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -4973,7 +4973,7 @@
     <value>Critical Bug</value>
   </data>
   <data name="S2551_Description" xml:space="preserve">
-    <value>Shared resources should not be used for locking as it increases the chance of deadlocks. Any other thread could acquire (or attempt to acquire) the same lock for another unrelated purpose. </value>
+    <value>Shared resources should not be used for locking as it increases the chance of deadlocks. Any other thread could acquire (or attempt to acquire) the same lock for another unrelated purpose.</value>
   </data>
   <data name="S2551_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5039,7 +5039,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S2589_Description" xml:space="preserve">
-    <value>If a boolean expression doesn't change the evaluation of the condition, then it is entirely unnecessary, and can be removed. If it is gratuitous because it does not match the programmer's intent, then it's a bug and the expression should be fixed.</value>
+    <value>If a boolean expression doesn’t change the evaluation of the condition, then it is entirely unnecessary, and can be removed. If it is gratuitous because it does not match the programmer’s intent, then it’s a bug and the expression should be fixed.</value>
   </data>
   <data name="S2589_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5072,7 +5072,7 @@
     <value>Major Security Hotspot</value>
   </data>
   <data name="S2612_Description" xml:space="preserve">
-    <value>In Unix, "others" class refers to all users except the owner of the file and the members of the group assigned to this file. </value>
+    <value>In Unix, "others" class refers to all users except the owner of the file and the members of the group assigned to this file.</value>
   </data>
   <data name="S2612_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5171,7 +5171,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S2688_Description" xml:space="preserve">
-    <value>NaN is not equal to anything, even itself. Testing for equality or inequality against NaN will yield predictable results, but probably not the ones you want. </value>
+    <value>NaN is not equal to anything, even itself. Testing for equality or inequality against NaN will yield predictable results, but probably not the ones you want.</value>
   </data>
   <data name="S2688_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5237,7 +5237,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S2696_Description" xml:space="preserve">
-    <value>Correctly updating a static field from a non-static method is tricky to get right and could easily lead to bugs if there are multiple class instances and/or multiple threads in play. </value>
+    <value>Correctly updating a static field from a non-static method is tricky to get right and could easily lead to bugs if there are multiple class instances and/or multiple threads in play.</value>
   </data>
   <data name="S2696_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5303,7 +5303,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S2701_Description" xml:space="preserve">
-    <value>There's no reason to use literal boolean values in assertions. Doing so is at best confusing for maintainers, and at worst a bug.</value>
+    <value>There’s no reason to use literal boolean values in assertions. Doing so is at best confusing for maintainers, and at worst a bug.</value>
   </data>
   <data name="S2701_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -5336,7 +5336,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S2737_Description" xml:space="preserve">
-    <value>A catch clause that only rethrows the caught exception has the same effect as omitting the catch altogether and letting it bubble up automatically, but with more code and the additional detriment of leaving maintainers scratching their heads. </value>
+    <value>A catch clause that only rethrows the caught exception has the same effect as omitting the catch altogether and letting it bubble up automatically, but with more code and the additional detriment of leaving maintainers scratching their heads.</value>
   </data>
   <data name="S2737_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5402,7 +5402,7 @@
     <value>Blocker Vulnerability</value>
   </data>
   <data name="S2755_Description" xml:space="preserve">
-    <value>XML specification allows the use of entities that can be internal or external (file system / network access ...) which could lead to vulnerabilities such as confidential file disclosures or SSRFs.</value>
+    <value>XML specification allows the use of entities that can be internal or external (file system / network access …​) which could lead to vulnerabilities such as confidential file disclosures or SSRFs.</value>
   </data>
   <data name="S2755_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5468,7 +5468,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S2758_Description" xml:space="preserve">
-    <value>When the second and third operands of a ternary operator are the same, the operator will always return the same value regardless of the condition. Either the operator itself is pointless, or a mistake was made in coding it. </value>
+    <value>When the second and third operands of a ternary operator are the same, the operator will always return the same value regardless of the condition. Either the operator itself is pointless, or a mistake was made in coding it.</value>
   </data>
   <data name="S2758_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -5600,7 +5600,7 @@
     <value>Blocker Bug</value>
   </data>
   <data name="S2930_Description" xml:space="preserve">
-    <value>When writing managed code, you don't need to worry about allocating or freeing memory: The garbage collector takes care of it. For efficiency reasons, some objects such as Bitmap use unmanaged memory, enabling for example the use of pointer arithmetic. Such objects have potentially huge unmanaged memory footprints, but will have tiny managed ones. Unfortunately, the garbage collector only sees the tiny managed footprint, and fails to reclaim the unmanaged memory (by calling Bitmap's finalizer method) in a timely fashion. </value>
+    <value>When writing managed code, you don’t need to worry about allocating or freeing memory: The garbage collector takes care of it. For efficiency reasons, some objects such as Bitmap use unmanaged memory, enabling for example the use of pointer arithmetic. Such objects have potentially huge unmanaged memory footprints, but will have tiny managed ones. Unfortunately, the garbage collector only sees the tiny managed footprint, and fails to reclaim the unmanaged memory (by calling Bitmap's finalizer method) in a timely fashion.</value>
   </data>
   <data name="S2930_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5666,7 +5666,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S2933_Description" xml:space="preserve">
-    <value>readonly fields can only be assigned in a class constructor. If a class has a field that's not marked readonly but is only set in the constructor, it could cause confusion about the field's intended use. To avoid confusion, such fields should be marked readonly to make their intended use explicit, and to prevent future maintainers from inadvertently changing their use.</value>
+    <value>readonly fields can only be assigned in a class constructor. If a class has a field that’s not marked readonly but is only set in the constructor, it could cause confusion about the field’s intended use. To avoid confusion, such fields should be marked readonly to make their intended use explicit, and to prevent future maintainers from inadvertently changing their use.</value>
   </data>
   <data name="S2933_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5699,7 +5699,7 @@
     <value>Minor Bug</value>
   </data>
   <data name="S2934_Description" xml:space="preserve">
-    <value>While the properties of a readonly reference type field can still be changed after initialization, those of a readonly value field, such as a struct, cannot. </value>
+    <value>While the properties of a readonly reference type field can still be changed after initialization, those of a readonly value field, such as a struct, cannot.</value>
   </data>
   <data name="S2934_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5798,7 +5798,7 @@
     <value>Minor Bug</value>
   </data>
   <data name="S2955_Description" xml:space="preserve">
-    <value>When constraints have not been applied to restrict a generic type parameter to be a reference type, then a value type, such as a struct, could also be passed. In such cases, comparing the type parameter to null would always be false, because a struct can be empty, but never null. If a value type is truly what's expected, then the comparison should use default(). If it's not, then constraints should be added so that no value type can be passed.</value>
+    <value>When constraints have not been applied to restrict a generic type parameter to be a reference type, then a value type, such as a struct, could also be passed. In such cases, comparing the type parameter to null would always be false, because a struct can be empty, but never null. If a value type is truly what’s expected, then the comparison should use default(). If it’s not, then constraints should be added so that no value type can be passed.</value>
   </data>
   <data name="S2955_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -5864,7 +5864,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S2995_Description" xml:space="preserve">
-    <value>Using Object.ReferenceEquals to compare the references of two value types simply won't return the expected results most of the time because such types are passed by value, not by reference.</value>
+    <value>Using Object.ReferenceEquals to compare the references of two value types simply won’t return the expected results most of the time because such types are passed by value, not by reference.</value>
   </data>
   <data name="S2995_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5930,7 +5930,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S2997_Description" xml:space="preserve">
-    <value>Typically you want to use using to create a local IDisposable variable; it will trigger disposal of the object when control passes out of the block's scope. The exception to this rule is when your method returns that IDisposable. In that case using disposes of the object before the caller can make use of it, likely causing exceptions at runtime. So you should either remove using or avoid returning the IDisposable.</value>
+    <value>Typically you want to use using to create a local IDisposable variable; it will trigger disposal of the object when control passes out of the block’s scope. The exception to this rule is when your method returns that IDisposable. In that case using disposes of the object before the caller can make use of it, likely causing exceptions at runtime. So you should either remove using or avoid returning the IDisposable.</value>
   </data>
   <data name="S2997_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5963,7 +5963,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3005_Description" xml:space="preserve">
-    <value>When a non-static class field is annotated with ThreadStatic, the code seems to show that the field can have different values for different calling threads, but that's not the case, since the ThreadStatic attribute is simply ignored on non-static fields. </value>
+    <value>When a non-static class field is annotated with ThreadStatic, the code seems to show that the field can have different values for different calling threads, but that’s not the case, since the ThreadStatic attribute is simply ignored on non-static fields.</value>
   </data>
   <data name="S3005_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -6062,7 +6062,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3052_Description" xml:space="preserve">
-    <value>The compiler automatically initializes class fields, auto-properties and events to their default values before setting them with any initialization values, so there is no need to explicitly set a member to its default value. Further, under the logic that cleaner code is better code, it's considered poor style to do so.</value>
+    <value>The compiler automatically initializes class fields, auto-properties and events to their default values before setting them with any initialization values, so there is no need to explicitly set a member to its default value. Further, under the logic that cleaner code is better code, it’s considered poor style to do so.</value>
   </data>
   <data name="S3052_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -6095,7 +6095,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S3060_Description" xml:space="preserve">
-    <value>There's no valid reason to test this with is. The only plausible explanation for such a test is that you're executing code in a parent class conditionally based on the kind of child class this is. But code that's specific to a child class should be in that child class, not in the parent.</value>
+    <value>There’s no valid reason to test this with is. The only plausible explanation for such a test is that you’re executing code in a parent class conditionally based on the kind of child class this is. But code that’s specific to a child class should be in that child class, not in the parent.</value>
   </data>
   <data name="S3060_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -6128,7 +6128,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3168_Description" xml:space="preserve">
-    <value>An async method with a void return type is a "fire and forget" method best reserved for event handlers because there's no way to wait for the method's execution to complete and respond accordingly. There's also no way to catch exceptions thrown from the method.</value>
+    <value>An async method with a void return type is a "fire and forget" method best reserved for event handlers because there’s no way to wait for the method’s execution to complete and respond accordingly. There’s also no way to catch exceptions thrown from the method.</value>
   </data>
   <data name="S3168_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -6161,7 +6161,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3169_Description" xml:space="preserve">
-    <value>There's no point in chaining multiple OrderBy calls in a LINQ; only the last one will be reflected in the result because each subsequent call completely reorders the list. Thus, calling OrderBy multiple times is a performance issue as well, because all of the sorting will be executed, but only the result of the last sort will be kept.</value>
+    <value>There’s no point in chaining multiple OrderBy calls in a LINQ; only the last one will be reflected in the result because each subsequent call completely reorders the list. Thus, calling OrderBy multiple times is a performance issue as well, because all of the sorting will be executed, but only the result of the last sort will be kept.</value>
   </data>
   <data name="S3169_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -6326,7 +6326,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S3218_Description" xml:space="preserve">
-    <value>It's possible to name the members of an inner class the same as the static members of its enclosing class - possible, but a bad idea. That's because maintainers may be confused about which members are being used where. Instead the inner class' members should be renamed and all the references updated.</value>
+    <value>It’s possible to name the members of an inner class the same as the static members of its enclosing class - possible, but a bad idea. That’s because maintainers may be confused about which members are being used where. Instead the inner class' members should be renamed and all the references updated.</value>
   </data>
   <data name="S3218_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -6392,7 +6392,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3234_Description" xml:space="preserve">
-    <value>GC.SuppressFinalize asks the Common Language Runtime not to call the finalizer of an object. This is useful when implementing the dispose pattern where object finalization is already handled in IDisposable.Dispose. However, it has no effect if there is no finalizer defined in the object's type, so using it in such cases is just confusing.</value>
+    <value>GC.SuppressFinalize asks the Common Language Runtime not to call the finalizer of an object. This is useful when implementing the dispose pattern where object finalization is already handled in IDisposable.Dispose. However, it has no effect if there is no finalizer defined in the object’s type, so using it in such cases is just confusing.</value>
   </data>
   <data name="S3234_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -6491,7 +6491,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S3237_Description" xml:space="preserve">
-    <value>In property and indexer set methods, and in event add and remove methods, the implicit value parameter holds the value the accessor was called with. Not using the value means that the accessor ignores the caller's intent which could cause unexpected results at runtime.</value>
+    <value>In property and indexer set methods, and in event add and remove methods, the implicit value parameter holds the value the accessor was called with. Not using the value means that the accessor ignores the caller’s intent which could cause unexpected results at runtime.</value>
   </data>
   <data name="S3237_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -6524,7 +6524,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3240_Description" xml:space="preserve">
-    <value>In the interests of keeping code clean, the simplest possible conditional syntax should be used. That means </value>
+    <value>In the interests of keeping code clean, the simplest possible conditional syntax should be used. That means</value>
   </data>
   <data name="S3240_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -6557,7 +6557,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3241_Description" xml:space="preserve">
-    <value>Private methods are clearly intended for use only within their own scope. When such methods return values that are never used by any of their callers, then clearly there is no need to actually make the return, and it should be removed in the interests of efficiency and clarity. </value>
+    <value>Private methods are clearly intended for use only within their own scope. When such methods return values that are never used by any of their callers, then clearly there is no need to actually make the return, and it should be removed in the interests of efficiency and clarity.</value>
   </data>
   <data name="S3241_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -6590,7 +6590,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3242_Description" xml:space="preserve">
-    <value>When a derived type is used as a parameter instead of the base type, it limits the uses of the method. If the additional functionality that is provided in the derived type is not requires then that limitation isn't required, and should be removed.</value>
+    <value>When a derived type is used as a parameter instead of the base type, it limits the uses of the method. If the additional functionality that is provided in the derived type is not requires then that limitation isn’t required, and should be removed.</value>
   </data>
   <data name="S3242_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -6623,7 +6623,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3244_Description" xml:space="preserve">
-    <value>It is possible to subscribe to events with anonymous delegates, but having done so, it is impossible to unsubscribe from them. That's because the process of subscribing adds the delegate to a list. The process of unsubscribing essentially says: remove this item from the subscription list. But because an anonymous delegate was used in both cases, the unsubscribe attempt tries to remove a different item from the list than was added. The result: NOOP.</value>
+    <value>It is possible to subscribe to events with anonymous delegates, but having done so, it is impossible to unsubscribe from them. That’s because the process of subscribing adds the delegate to a list. The process of unsubscribing essentially says: remove this item from the subscription list. But because an anonymous delegate was used in both cases, the unsubscribe attempt tries to remove a different item from the list than was added. The result: NOOP.</value>
   </data>
   <data name="S3244_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -6788,7 +6788,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3253_Description" xml:space="preserve">
-    <value>Since the compiler will automatically invoke the base type's no-argument constructor, there's no need to specify its invocation explicitly. Also, when only a single public parameterless constructor is defined in a class, then that constructor can be removed because the compiler would generate it automatically. Similarly, empty static constructors and empty destructors are also wasted keystrokes.</value>
+    <value>Since the compiler will automatically invoke the base type’s no-argument constructor, there’s no need to specify its invocation explicitly. Also, when only a single public parameterless constructor is defined in a class, then that constructor can be removed because the compiler would generate it automatically. Similarly, empty static constructors and empty destructors are also wasted keystrokes.</value>
   </data>
   <data name="S3253_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -6920,7 +6920,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3261_Description" xml:space="preserve">
-    <value>Namespaces with no lines of code clutter a project and should be removed. </value>
+    <value>Namespaces with no lines of code clutter a project and should be removed.</value>
   </data>
   <data name="S3261_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7019,7 +7019,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3264_Description" xml:space="preserve">
-    <value>Events that are not invoked anywhere are dead code, and there's no good reason to keep them in the source.</value>
+    <value>Events that are not invoked anywhere are dead code, and there’s no good reason to keep them in the source.</value>
   </data>
   <data name="S3264_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7085,7 +7085,7 @@
     <value>Critical Vulnerability</value>
   </data>
   <data name="S3329_Description" xml:space="preserve">
-    <value>When encrypting data with the Cipher Block Chaining (CBC) mode an Initialization Vector (IV) is used to randomize the encryption, ie under a given key the same plaintext doesn't always produce the same ciphertext. The IV doesn't need to be secret but should be unpredictable to avoid "Chosen-Plaintext Attack".</value>
+    <value>When encrypting data with the Cipher Block Chaining (CBC) mode an Initialization Vector (IV) is used to randomize the encryption, ie under a given key the same plaintext doesn’t always produce the same ciphertext. The IV doesn’t need to be secret but should be unpredictable to avoid "Chosen-Plaintext Attack".</value>
   </data>
   <data name="S3329_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7106,7 +7106,7 @@
     <value>ready</value>
   </data>
   <data name="S3329_Tags" xml:space="preserve">
-    <value>cwe,owasp-a6</value>
+    <value>cwe,owasp-a6,owasp-m5</value>
   </data>
   <data name="S3329_Title" xml:space="preserve">
     <value>Cipher Block Chaining IV's should be unpredictable</value>
@@ -7118,7 +7118,7 @@
     <value>Minor Security Hotspot</value>
   </data>
   <data name="S3330_Description" xml:space="preserve">
-    <value>When a cookie is configured with the HttpOnly attribute set to true, the browser guaranties that no client-side script will be able to read it. In most cases, when a cookie is created, the default value of HttpOnly is false and it's up to the developer to decide whether or not the content of the cookie can be read by the client-side script. As a majority of Cross-Site Scripting (XSS) attacks target the theft of session-cookies, the HttpOnly attribute can help to reduce their impact as it won't be possible to exploit the XSS vulnerability to steal session-cookies.</value>
+    <value>When a cookie is configured with the HttpOnly attribute set to true, the browser guaranties that no client-side script will be able to read it. In most cases, when a cookie is created, the default value of HttpOnly is false and it’s up to the developer to decide whether or not the content of the cookie can be read by the client-side script. As a majority of Cross-Site Scripting (XSS) attacks target the theft of session-cookies, the HttpOnly attribute can help to reduce their impact as it won’t be possible to exploit the XSS vulnerability to steal session-cookies.</value>
   </data>
   <data name="S3330_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7151,7 +7151,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3343_Description" xml:space="preserve">
-    <value>Caller information attributes (CallerFilePathAttribute, CallerLineNumberAttribute, and CallerMemberNameAttribute) provide a way to get information about the caller of a method through optional parameters. But they only work right if their values aren't provided explicitly. So if you define a method with caller info attributes in the middle of the parameter list, you put your callers in a bad position: they are forced to use named arguments if they want to use the method properly.</value>
+    <value>Caller information attributes (CallerFilePathAttribute, CallerLineNumberAttribute, and CallerMemberNameAttribute) provide a way to get information about the caller of a method through optional parameters. But they only work right if their values aren’t provided explicitly. So if you define a method with caller info attributes in the middle of the parameter list, you put your callers in a bad position: they are forced to use named arguments if they want to use the method properly.</value>
   </data>
   <data name="S3343_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7184,7 +7184,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3346_Description" xml:space="preserve">
-    <value>An assertion is a piece of code that's used during development when the compilation debug mode is activated. It allows a program to check itself as it runs. When an assertion is true, that means everything is operating as expected. </value>
+    <value>An assertion is a piece of code that’s used during development when the compilation debug mode is activated. It allows a program to check itself as it runs. When an assertion is true, that means everything is operating as expected.</value>
   </data>
   <data name="S3346_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7217,7 +7217,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S3353_Description" xml:space="preserve">
-    <value>Marking a variable that is unchanged after initialization const is an indication to future maintainers that "no this isn't updated, and it's not supposed to be". const should be used in these situations in the interests of code clarity.</value>
+    <value>Marking a variable that is unchanged after initialization const is an indication to future maintainers that "no this isn’t updated, and it’s not supposed to be". const should be used in these situations in the interests of code clarity.</value>
   </data>
   <data name="S3353_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -7250,7 +7250,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3358_Description" xml:space="preserve">
-    <value>Just because you can do something, doesn't mean you should, and that's the case with nested ternary operations. Nesting ternary operators results in the kind of code that may seem clear as day when you write it, but six months later will leave maintainers (or worse - future you) scratching their heads and cursing.</value>
+    <value>Just because you can do something, doesn’t mean you should, and that’s the case with nested ternary operations. Nesting ternary operators results in the kind of code that may seem clear as day when you write it, but six months later will leave maintainers (or worse - future you) scratching their heads and cursing.</value>
   </data>
   <data name="S3358_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7382,7 +7382,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3400_Description" xml:space="preserve">
-    <value>There's no point in forcing the overhead of a method call for a method that always returns the same constant value. Even worse, the fact that a method call must be made will likely mislead developers who call the method thinking that something more is done. Declare a constant instead. </value>
+    <value>There’s no point in forcing the overhead of a method call for a method that always returns the same constant value. Even worse, the fact that a method call must be made will likely mislead developers who call the method thinking that something more is done. Declare a constant instead.</value>
   </data>
   <data name="S3400_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7448,7 +7448,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S3427_Description" xml:space="preserve">
-    <value>The rules for method resolution are complex and perhaps not properly understood by all coders. Having overloads with optional parameter values makes the matter even harder to understand. </value>
+    <value>The rules for method resolution are complex and perhaps not properly understood by all coders. Having overloads with optional parameter values makes the matter even harder to understand.</value>
   </data>
   <data name="S3427_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7481,7 +7481,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3431_Description" xml:space="preserve">
-    <value>It should be clear to a casual reader what code a test is testing and what results are expected. Unfortunately, that's not usually the case with the [ExpectedException] attribute since an exception could be thrown from almost any line in the method.</value>
+    <value>It should be clear to a casual reader what code a test is testing and what results are expected. Unfortunately, that’s not usually the case with the [ExpectedException] attribute since an exception could be thrown from almost any line in the method.</value>
   </data>
   <data name="S3431_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -7514,7 +7514,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S3433_Description" xml:space="preserve">
-    <value>A method is detected as test method if marked with one of the following attributes [TestMethod] or [DataTestMethod] (for mstest), [Fact] or [Theory] (for xunit) or [Test], [TestCase], [TestCaseSource] or [Theory] (for nunit). However, whether or not they have a test attribute, non-public methods are not recognized as tests, and therefore not executed. Neither are async void methods, or methods with generics anywhere in their signatures. </value>
+    <value>A method is detected as test method if marked with one of the following attributes [TestMethod] or [DataTestMethod] (for mstest), [Fact] or [Theory] (for xunit) or [Test], [TestCase], [TestCaseSource] or [Theory] (for nunit). However, whether or not they have a test attribute, non-public methods are not recognized as tests, and therefore not executed. Neither are async void methods, or methods with generics anywhere in their signatures.</value>
   </data>
   <data name="S3433_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7547,7 +7547,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3440_Description" xml:space="preserve">
-    <value>There's no point in checking a variable against the value you're about to assign it. Save the cycles and lines of code, and simply perform the assignment.</value>
+    <value>There’s no point in checking a variable against the value you’re about to assign it. Save the cycles and lines of code, and simply perform the assignment.</value>
   </data>
   <data name="S3440_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7580,7 +7580,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3441_Description" xml:space="preserve">
-    <value>When an anonymous type's properties are copied from properties or variables with the same names, it yields cleaner code to omit the new type's property name and the assignment operator.</value>
+    <value>When an anonymous type’s properties are copied from properties or variables with the same names, it yields cleaner code to omit the new type’s property name and the assignment operator.</value>
   </data>
   <data name="S3441_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -7613,7 +7613,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3442_Description" xml:space="preserve">
-    <value>Since abstract classes can't be instantiated, there's no point in their having public or internal constructors. If there is basic initialization logic that should run when an extending class instance is created, you can by all means put it in a constructor, but make that constructor private or protected.</value>
+    <value>Since abstract classes can’t be instantiated, there’s no point in their having public or internal constructors. If there is basic initialization logic that should run when an extending class instance is created, you can by all means put it in a constructor, but make that constructor private or protected.</value>
   </data>
   <data name="S3442_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7646,7 +7646,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S3443_Description" xml:space="preserve">
-    <value>If you call GetType() on a Type variable, the return value will always be typeof(System.Type). So there's no real point in making that call. The same applies to passing a type argument to IsInstanceOfType. In both cases the results are entirely predictable.</value>
+    <value>If you call GetType() on a Type variable, the return value will always be typeof(System.Type). So there’s no real point in making that call. The same applies to passing a type argument to IsInstanceOfType. In both cases the results are entirely predictable.</value>
   </data>
   <data name="S3443_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7745,7 +7745,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S3447_Description" xml:space="preserve">
-    <value>The use of ref or out in combination with [Optional] is both confusing and contradictory. [Optional] indicates that the parameter doesn't have to be provided, while out and ref mean that the parameter will be used to return data to the caller (ref additionally indicates that the parameter may also be used to pass data into the method).</value>
+    <value>The use of ref or out in combination with [Optional] is both confusing and contradictory. [Optional] indicates that the parameter doesn’t have to be provided, while out and ref mean that the parameter will be used to return data to the caller (ref additionally indicates that the parameter may also be used to pass data into the method).</value>
   </data>
   <data name="S3447_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7778,7 +7778,7 @@
     <value>Critical Bug</value>
   </data>
   <data name="S3449_Description" xml:space="preserve">
-    <value>Numbers can be shifted with the &lt;&lt; and &gt;&gt; operators, but the right operand of the operation needs to be an int or a type that has an implicit conversion to int. However, with dynamic, the compiler's type checking is turned off, so you can pass anything to a shift operator and have it compile. And if the argument can't be converted to int at runtime, then a RuntimeBinderException will be raised.</value>
+    <value>Numbers can be shifted with the &lt;&lt; and &gt;&gt; operators, but the right operand of the operation needs to be an int or a type that has an implicit conversion to int. However, with dynamic, the compiler’s type checking is turned off, so you can pass anything to a shift operator and have it compile. And if the argument can’t be converted to int at runtime, then a RuntimeBinderException will be raised.</value>
   </data>
   <data name="S3449_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7844,7 +7844,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S3451_Description" xml:space="preserve">
-    <value>The use of [DefaultValue] with [Optional] has no more effect than [Optional] alone. That's because [DefaultValue] doesn't actually do anything; it merely indicates the intent for the value. More than likely, [DefaultValue] was used in confusion instead of [DefaultParameterValue].</value>
+    <value>The use of [DefaultValue] with [Optional] has no more effect than [Optional] alone. That’s because [DefaultValue] doesn’t actually do anything; it merely indicates the intent for the value. More than likely, [DefaultValue] was used in confusion instead of [DefaultParameterValue].</value>
   </data>
   <data name="S3451_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7877,7 +7877,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3453_Description" xml:space="preserve">
-    <value>A class with only private constructors can't be instantiated, thus, it seems to be pointless code.</value>
+    <value>A class with only private constructors can’t be instantiated, thus, it seems to be pointless code.</value>
   </data>
   <data name="S3453_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7943,7 +7943,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3457_Description" xml:space="preserve">
-    <value>Because composite format strings are interpreted at runtime, rather than validated by the compiler, they can contain errors that lead to unexpected behaviors or runtime errors. This rule statically validates the good behavior of composite formats when calling the methods of String.Format, StringBuilder.AppendFormat, Console.Write, Console.WriteLine, TextWriter.Write, TextWriter.WriteLine, Debug.WriteLine(String, Object[]), Trace.TraceError(String, Object[]), Trace.TraceInformation(String, Object[]), Trace.TraceWarning(String, Object[]) and TraceSource.TraceInformation(String, Object[]). </value>
+    <value>Because composite format strings are interpreted at runtime, rather than validated by the compiler, they can contain errors that lead to unexpected behaviors or runtime errors. This rule statically validates the good behavior of composite formats when calling the methods of String.Format, StringBuilder.AppendFormat, Console.Write, Console.WriteLine, TextWriter.Write, TextWriter.WriteLine, Debug.WriteLine(String, Object[]), Trace.TraceError(String, Object[]), Trace.TraceInformation(String, Object[]), Trace.TraceWarning(String, Object[]) and TraceSource.TraceInformation(String, Object[]).</value>
   </data>
   <data name="S3457_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8009,7 +8009,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3459_Description" xml:space="preserve">
-    <value>Fields and auto-properties that are never assigned to hold the default values for their types. They are either pointless code or, more likely, mistakes. </value>
+    <value>Fields and auto-properties that are never assigned to hold the default values for their types. They are either pointless code or, more likely, mistakes.</value>
   </data>
   <data name="S3459_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8075,7 +8075,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3466_Description" xml:space="preserve">
-    <value>Generally, writing the least code that will readably do the job is a good thing, so omitting default parameter values seems to make sense. Unfortunately, when you omit them from the base call in an override, you're not actually getting the job done thoroughly, because you're ignoring the value the caller passed in. The result will likely not be what the caller expected.</value>
+    <value>Generally, writing the least code that will readably do the job is a good thing, so omitting default parameter values seems to make sense. Unfortunately, when you omit them from the base call in an override, you’re not actually getting the job done thoroughly, because you’re ignoring the value the caller passed in. The result will likely not be what the caller expected.</value>
   </data>
   <data name="S3466_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8141,7 +8141,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3597_Description" xml:space="preserve">
-    <value>The ServiceContract attribute specifies that a class or interface defines the communication contract of a Windows Communication Foundation (WCF) service. The service operations of this class or interface are defined by OperationContract attributes added to methods. It doesn't make sense to define a contract without any service operations; thus, in a ServiceContract class or interface at least one method should be annotated with OperationContract. Similarly, WCF only serves OperationContract methods that are defined inside ServiceContract classes or interfaces; thus, this rule also checks that ServiceContract is added to the containing type of OperationContract methods.</value>
+    <value>The ServiceContract attribute specifies that a class or interface defines the communication contract of a Windows Communication Foundation (WCF) service. The service operations of this class or interface are defined by OperationContract attributes added to methods. It doesn’t make sense to define a contract without any service operations; thus, in a ServiceContract class or interface at least one method should be annotated with OperationContract. Similarly, WCF only serves OperationContract methods that are defined inside ServiceContract classes or interfaces; thus, this rule also checks that ServiceContract is added to the containing type of OperationContract methods.</value>
   </data>
   <data name="S3597_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8174,7 +8174,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3598_Description" xml:space="preserve">
-    <value>When declaring a Windows Communication Foundation (WCF) OperationContract method one-way, that service method won't return any result, not even an underlying empty confirmation message. These are fire-and-forget methods that are useful in event-like communication. Specifying a return type therefore does not make sense.</value>
+    <value>When declaring a Windows Communication Foundation (WCF) OperationContract method one-way, that service method won’t return any result, not even an underlying empty confirmation message. These are fire-and-forget methods that are useful in event-like communication. Specifying a return type therefore does not make sense.</value>
   </data>
   <data name="S3598_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8207,7 +8207,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S3600_Description" xml:space="preserve">
-    <value>Adding params to a method override has no effect. The compiler accepts it, but the callers won't be able to benefit from the added modifier.</value>
+    <value>Adding params to a method override has no effect. The compiler accepts it, but the callers won’t be able to benefit from the added modifier.</value>
   </data>
   <data name="S3600_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8240,7 +8240,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3603_Description" xml:space="preserve">
-    <value>Marking a method with the Pure attribute specifies that the method doesn't make any visible changes; thus, the method should return a result, otherwise the call to the method should be equal to no-operation. So Pure on a void method is either a mistake, or the method doesn't do any meaningful task.</value>
+    <value>Marking a method with the Pure attribute specifies that the method doesn’t make any visible changes; thus, the method should return a result, otherwise the call to the method should be equal to no-operation. So Pure on a void method is either a mistake, or the method doesn’t do any meaningful task.</value>
   </data>
   <data name="S3603_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8306,7 +8306,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3610_Description" xml:space="preserve">
-    <value>Calling GetType() on a nullable object returns the underlying value type. Thus, comparing the returned Type object to typeof(Nullable&lt;SomeType&gt;) doesn't make sense. The comparison either throws an exception or the result can be known at compile time.</value>
+    <value>Calling GetType() on a nullable object returns the underlying value type. Thus, comparing the returned Type object to typeof(Nullable&lt;SomeType&gt;) doesn’t make sense. The comparison either throws an exception or the result can be known at compile time.</value>
   </data>
   <data name="S3610_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8405,7 +8405,7 @@
     <value>Blocker Bug</value>
   </data>
   <data name="S3693_Description" xml:space="preserve">
-    <value>It may be a good idea to raise an exception in a constructor if you're unable to fully flesh the object in question, but not in an exception constructor. If you do, you'll interfere with the exception that was originally being thrown. Further, it is highly unlikely that an exception raised in the creation of an exception will be properly handled in the calling code, and the unexpected, unhandled exception will lead to program termination.</value>
+    <value>It may be a good idea to raise an exception in a constructor if you’re unable to fully flesh the object in question, but not in an exception constructor. If you do, you’ll interfere with the exception that was originally being thrown. Further, it is highly unlikely that an exception raised in the creation of an exception will be properly handled in the calling code, and the unexpected, unhandled exception will lead to program termination.</value>
   </data>
   <data name="S3693_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -8438,7 +8438,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3717_Description" xml:space="preserve">
-    <value>NotImplementedException is often used to mark methods which must be implemented for the overall functionality to be complete, but which the developer wants to implement later. That's as opposed to the NotSupportedException which is thrown by methods which are required by base classes or interfaces, but which are not appropriate to the current class.</value>
+    <value>NotImplementedException is often used to mark methods which must be implemented for the overall functionality to be complete, but which the developer wants to implement later. That’s as opposed to the NotSupportedException which is thrown by methods which are required by base classes or interfaces, but which are not appropriate to the current class.</value>
   </data>
   <data name="S3717_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -8504,7 +8504,7 @@
     <value>Blocker Bug</value>
   </data>
   <data name="S3869_Description" xml:space="preserve">
-    <value>Not surprisingly, the SafeHandle.DangerousGetHandle method is dangerous. That's because it may not return a valid handle. Using it can lead to leaks and vulnerabilities. While it is possible to use the method successfully, it's extremely difficult to do correctly, so the method should simply be avoided altogether.</value>
+    <value>Not surprisingly, the SafeHandle.DangerousGetHandle method is dangerous. That’s because it may not return a valid handle. Using it can lead to leaks and vulnerabilities. While it is possible to use the method successfully, it’s extremely difficult to do correctly, so the method should simply be avoided altogether.</value>
   </data>
   <data name="S3869_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8537,7 +8537,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S3871_Description" xml:space="preserve">
-    <value>The point of having custom exception types is to convey more information than is available in standard types. But custom exception types must be public for that to work. </value>
+    <value>The point of having custom exception types is to convey more information than is available in standard types. But custom exception types must be public for that to work.</value>
   </data>
   <data name="S3871_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8570,7 +8570,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3872_Description" xml:space="preserve">
-    <value>The name of a method should communicate what it does, and the names of its parameters should indicate how they're used. If a method and its parameter have the same name it is an indication that one of these rules of thumb has been broken, if not both. Even if by some trick of language that's not the case, it is still likely to confuse callers and maintainers.</value>
+    <value>The name of a method should communicate what it does, and the names of its parameters should indicate how they’re used. If a method and its parameter have the same name it is an indication that one of these rules of thumb has been broken, if not both. Even if by some trick of language that’s not the case, it is still likely to confuse callers and maintainers.</value>
   </data>
   <data name="S3872_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -8603,7 +8603,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S3874_Description" xml:space="preserve">
-    <value>Passing a parameter by reference, which is what happens when you use the out or ref parameter modifiers, means that the method will receive a pointer to the argument, rather than the argument itself. If the argument was a value type, the method will be able to change the argument's values. If it was a reference type, then the method receives a pointer to a pointer, which is usually not what was intended. Even when it is what was intended, this is the sort of thing that's difficult to get right, and should be used with caution.</value>
+    <value>Passing a parameter by reference, which is what happens when you use the out or ref parameter modifiers, means that the method will receive a pointer to the argument, rather than the argument itself. If the argument was a value type, the method will be able to change the argument’s values. If it was a reference type, then the method receives a pointer to a pointer, which is usually not what was intended. Even when it is what was intended, this is the sort of thing that’s difficult to get right, and should be used with caution.</value>
   </data>
   <data name="S3874_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -8636,7 +8636,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S3875_Description" xml:space="preserve">
-    <value>The use of == to compare two objects is expected to do a reference comparison. That is, it is expected to return true if and only if they are the same object instance. Overloading the operator to do anything else will inevitably lead to the introduction of bugs by callers. On the other hand, overloading it to do exactly that is pointless; that's what == does by default.</value>
+    <value>The use of == to compare two objects is expected to do a reference comparison. That is, it is expected to return true if and only if they are the same object instance. Overloading the operator to do anything else will inevitably lead to the introduction of bugs by callers. On the other hand, overloading it to do exactly that is pointless; that’s what == does by default.</value>
   </data>
   <data name="S3875_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8801,7 +8801,7 @@
     <value>Blocker Vulnerability</value>
   </data>
   <data name="S3884_Description" xml:space="preserve">
-    <value>CoSetProxyBlanket and CoInitializeSecurity both work to set the permissions context in which the process invoked immediately after is executed. Calling them from within that process is useless because it's too late at that point; the permissions context has already been set.</value>
+    <value>CoSetProxyBlanket and CoInitializeSecurity both work to set the permissions context in which the process invoked immediately after is executed. Calling them from within that process is useless because it’s too late at that point; the permissions context has already been set.</value>
   </data>
   <data name="S3884_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8834,7 +8834,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3885_Description" xml:space="preserve">
-    <value>The parameter to Assembly.Load includes the full specification of the dll to be loaded. Use another method, and you might end up with a dll other than the one you expected. </value>
+    <value>The parameter to Assembly.Load includes the full specification of the dll to be loaded. Use another method, and you might end up with a dll other than the one you expected.</value>
   </data>
   <data name="S3885_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8867,7 +8867,7 @@
     <value>Minor Bug</value>
   </data>
   <data name="S3887_Description" xml:space="preserve">
-    <value>Using the readonly keyword on a field means that it can't be changed after initialization. However, when applied to collections or arrays, that's only partly true. readonly enforces that another instance can't be assigned to the field, but it cannot keep the contents from being updated. That means that in practice, the field value really can be changed, and the use of readonly on such a field is misleading, and you're likely to not be getting the behavior you expect.</value>
+    <value>Using the readonly keyword on a field means that it can’t be changed after initialization. However, when applied to collections or arrays, that’s only partly true. readonly enforces that another instance can’t be assigned to the field, but it cannot keep the contents from being updated. That means that in practice, the field value really can be changed, and the use of readonly on such a field is misleading, and you’re likely to not be getting the behavior you expect.</value>
   </data>
   <data name="S3887_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8933,7 +8933,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3897_Description" xml:space="preserve">
-    <value>The IEquatable&lt;T&gt; interface has only one method in it: Equals(&lt;T&gt;). If you've already written Equals(T), there's no reason not to explicitly implement IEquatable&lt;T&gt;. Doing so expands the utility of your class by allowing it to be used where an IEquatable is called for.</value>
+    <value>The IEquatable&lt;T&gt; interface has only one method in it: Equals(&lt;T&gt;). If you’ve already written Equals(T), there’s no reason not to explicitly implement IEquatable&lt;T&gt;. Doing so expands the utility of your class by allowing it to be used where an IEquatable is called for.</value>
   </data>
   <data name="S3897_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8966,7 +8966,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3898_Description" xml:space="preserve">
-    <value>If you're using a struct, it is likely because you're interested in performance. But by failing to implement IEquatable&lt;T&gt; you're loosing performance when comparisons are made because without IEquatable&lt;T&gt;, boxing and reflection are used to make comparisons. </value>
+    <value>If you’re using a struct, it is likely because you’re interested in performance. But by failing to implement IEquatable&lt;T&gt; you’re loosing performance when comparisons are made because without IEquatable&lt;T&gt;, boxing and reflection are used to make comparisons.</value>
   </data>
   <data name="S3898_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -9032,7 +9032,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3902_Description" xml:space="preserve">
-    <value>Using Type.Assembly to get the current assembly is nearly free in terms of performance; it's a simple property access. On the other hand, Assembly.GetExecutingAssembly() can take up to 30 times as long because it walks up the call stack to find the assembly.</value>
+    <value>Using Type.Assembly to get the current assembly is nearly free in terms of performance; it’s a simple property access. On the other hand, Assembly.GetExecutingAssembly() can take up to 30 times as long because it walks up the call stack to find the assembly.</value>
   </data>
   <data name="S3902_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -9230,7 +9230,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3923_Description" xml:space="preserve">
-    <value>Having all branches in a switch or if chain with the same implementation is an error. Either a copy-paste error was made and something different should be executed, or there shouldn't be a switch/if chain at all.</value>
+    <value>Having all branches in a switch or if chain with the same implementation is an error. Either a copy-paste error was made and something different should be executed, or there shouldn’t be a switch/if chain at all.</value>
   </data>
   <data name="S3923_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -9329,7 +9329,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3927_Description" xml:space="preserve">
-    <value>Serialization event handlers that don't have the correct signature will simply not be called, thus bypassing any attempts to augment the automated de/serialization.</value>
+    <value>Serialization event handlers that don’t have the correct signature will simply not be called, thus bypassing any attempts to augment the automated de/serialization.</value>
   </data>
   <data name="S3927_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -9395,7 +9395,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S3937_Description" xml:space="preserve">
-    <value>The use of punctuation characters to separate subgroups in a number can make the number more readable. For instance consider 1,000,000,000 versus 1000000000. But when the grouping is irregular, such as 1,000,00,000; it indicates an error. </value>
+    <value>The use of punctuation characters to separate subgroups in a number can make the number more readable. For instance consider 1,000,000,000 versus 1000000000. But when the grouping is irregular, such as 1,000,00,000; it indicates an error.</value>
   </data>
   <data name="S3937_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -9461,7 +9461,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3956_Description" xml:space="preserve">
-    <value>System.Collections.Generic.List&lt;T&gt; is a generic collection that is designed for performance and not inheritance. For example, it does not contain virtual members that make it easier to change the behavior of an inherited class. That means that future attempts to expand the behavior will be spoiled because the extension points simply aren't there. Instead, one of the following generic collections should be used:</value>
+    <value>System.Collections.Generic.List&lt;T&gt; is a generic collection that is designed for performance and not inheritance. For example, it does not contain virtual members that make it easier to change the behavior of an inherited class. That means that future attempts to expand the behavior will be spoiled because the extension points simply aren’t there. Instead, one of the following generic collections should be used:</value>
   </data>
   <data name="S3956_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -9725,7 +9725,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3981_Description" xml:space="preserve">
-    <value>The size of a collection and the length of an array are always greater than or equal to zero. So testing that a size or length is greater than or equal to zero doesn't make sense, since the result is always true. Similarly testing that it is less than zero will always return false. Perhaps the intent was to check the non-emptiness of the collection or array instead. </value>
+    <value>The size of a collection and the length of an array are always greater than or equal to zero. So testing that a size or length is greater than or equal to zero doesn’t make sense, since the result is always true. Similarly testing that it is less than zero will always return false. Perhaps the intent was to check the non-emptiness of the collection or array instead.</value>
   </data>
   <data name="S3981_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -10220,7 +10220,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S4016_Description" xml:space="preserve">
-    <value>If an enum member's name contains the word "reserved" it implies it is not currently used and will be change in the future. However changing an enum member is a breaking change and can create significant problems. There is no need to reserve an enum member since a new member can be added in the future, and such an addition will usually not be a breaking change.</value>
+    <value>If an enum member’s name contains the word "reserved" it implies it is not currently used and will be change in the future. However changing an enum member is a breaking change and can create significant problems. There is no need to reserve an enum member since a new member can be added in the future, and such an addition will usually not be a breaking change.</value>
   </data>
   <data name="S4016_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -10451,7 +10451,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S4026_Description" xml:space="preserve">
-    <value>It is important to inform the ResourceManager of the language used to display the resources of the neutral culture for an assembly. This improves lookup performance for the first resource loaded. </value>
+    <value>It is important to inform the ResourceManager of the language used to display the resources of the neutral culture for an assembly. This improves lookup performance for the first resource loaded.</value>
   </data>
   <data name="S4026_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -10550,7 +10550,7 @@
     <value>Minor Security Hotspot</value>
   </data>
   <data name="S4036_Description" xml:space="preserve">
-    <value>When executing an OS command and unless you specify the full path to the executable, then the locations in your application's PATH environment variable will be searched for the executable. That search could leave an opening for an attacker if one of the elements in PATH is a directory under his control. </value>
+    <value>When executing an OS command and unless you specify the full path to the executable, then the locations in your application’s PATH environment variable will be searched for the executable. That search could leave an opening for an attacker if one of the elements in PATH is a directory under his control.</value>
   </data>
   <data name="S4036_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -11243,7 +11243,7 @@
     <value>Minor Bug</value>
   </data>
   <data name="S4158_Description" xml:space="preserve">
-    <value>When a collection is empty it makes no sense to access or iterate it. Doing so anyway is surely an error; either population was accidentally omitted or the developer doesn't understand the situation.</value>
+    <value>When a collection is empty it makes no sense to access or iterate it. Doing so anyway is surely an error; either population was accidentally omitted or the developer doesn’t understand the situation.</value>
   </data>
   <data name="S4158_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -11342,7 +11342,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S4201_Description" xml:space="preserve">
-    <value>There's no need to null test in conjunction with an is test. null is not an instance of anything, so a null check is redundant.</value>
+    <value>There’s no need to null test in conjunction with an is test. null is not an instance of anything, so a null check is redundant.</value>
   </data>
   <data name="S4201_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -11705,7 +11705,7 @@
     <value>Critical Bug</value>
   </data>
   <data name="S4277_Description" xml:space="preserve">
-    <value>Marking a class with PartCreationPolicy(CreationPolicy.Shared), which is part of Managed Extensibility Framework (MEF), means that a single, shared instance of the exported object will be created. Therefore it doesn't make sense to create new instances using the constructor and it will most likely result in unexpected behaviours.</value>
+    <value>Marking a class with PartCreationPolicy(CreationPolicy.Shared), which is part of Managed Extensibility Framework (MEF), means that a single, shared instance of the exported object will be created. Therefore it doesn’t make sense to create new instances using the constructor and it will most likely result in unexpected behaviours.</value>
   </data>
   <data name="S4277_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -11759,7 +11759,7 @@
     <value>ready</value>
   </data>
   <data name="S4423_Tags" xml:space="preserve">
-    <value>cwe,privacy,owasp-a6,sans-top25-porous,owasp-a3</value>
+    <value>cwe,privacy,owasp-a6,sans-top25-porous,owasp-a3,owasp-m3</value>
   </data>
   <data name="S4423_Title" xml:space="preserve">
     <value>Weak SSL/TLS protocols should not be used</value>
@@ -11792,7 +11792,7 @@
     <value>ready</value>
   </data>
   <data name="S4426_Tags" xml:space="preserve">
-    <value>cwe,privacy,owasp-a6,owasp-a3</value>
+    <value>cwe,privacy,owasp-a6,owasp-a3,owasp-m5</value>
   </data>
   <data name="S4426_Title" xml:space="preserve">
     <value>Cryptographic keys should be robust</value>
@@ -11804,7 +11804,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S4428_Description" xml:space="preserve">
-    <value>The PartCreationPolicyAttribute attribute, which is part of the Managed Extensibility Framework (MEF), is used to specify how the exported object will be created. Therefore it doesn't make sense not to export this a class with this attribute using the ExportAttribute attribute.</value>
+    <value>The PartCreationPolicyAttribute attribute, which is part of the Managed Extensibility Framework (MEF), is used to specify how the exported object will be created. Therefore it doesn’t make sense not to export this a class with this attribute using the ExportAttribute attribute.</value>
   </data>
   <data name="S4428_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -12035,7 +12035,7 @@
     <value>Critical Security Hotspot</value>
   </data>
   <data name="S4502_Description" xml:space="preserve">
-    <value>A cross-site request forgery (CSRF) attack occurs when a trusted user of a web application can be forced, by an attacker, to perform sensitive actions that he didn't intend, such as updating his profile or sending a message, more generally anything that can change the state of the application.</value>
+    <value>A cross-site request forgery (CSRF) attack occurs when a trusted user of a web application can be forced, by an attacker, to perform sensitive actions that he didn’t intend, such as updating his profile or sending a message, more generally anything that can change the state of the application.</value>
   </data>
   <data name="S4502_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -12311,7 +12311,7 @@
     <value>Critical</value>
   </data>
   <data name="S4784_Status" xml:space="preserve">
-    <value>deprecated</value>
+    <value>ready</value>
   </data>
   <data name="S4784_Tags" xml:space="preserve">
     <value />
@@ -12368,7 +12368,7 @@
     <value>ready</value>
   </data>
   <data name="S4790_Tags" xml:space="preserve">
-    <value>cwe,spring,owasp-a6,sans-top25-porous,owasp-a3</value>
+    <value>cwe,spring,owasp-a6,sans-top25-porous,owasp-a3,owasp-m5</value>
   </data>
   <data name="S4790_Title" xml:space="preserve">
     <value>Using weak hashing algorithms is security-sensitive</value>
@@ -12488,7 +12488,7 @@
     <value>Critical Vulnerability</value>
   </data>
   <data name="S4830_Description" xml:space="preserve">
-    <value>Validation of X.509 certificates is essential to create secure SSL/TLS sessions not vulnerable to man-in-the-middle attacks. </value>
+    <value>Validation of X.509 certificates is essential to create secure SSL/TLS sessions not vulnerable to man-in-the-middle attacks.</value>
   </data>
   <data name="S4830_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -12509,7 +12509,7 @@
     <value>ready</value>
   </data>
   <data name="S4830_Tags" xml:space="preserve">
-    <value>cwe,privacy,owasp-a6,ssl,owasp-a3</value>
+    <value>cwe,privacy,owasp-a6,ssl,owasp-a3,owasp-m3</value>
   </data>
   <data name="S4830_Title" xml:space="preserve">
     <value>Server certificates should be verified during SSL/TLS connections</value>
@@ -12581,7 +12581,7 @@
     <value>Critical Security Hotspot</value>
   </data>
   <data name="S5042_Description" xml:space="preserve">
-    <value>Successful Zip Bomb attacks occur when an application expands untrusted archive files without controlling the size of the expanded data, which can lead to denial of service. A Zip bomb is usually a malicious archive file of a few kilobytes of compressed data but turned into gigabytes of uncompressed data. To achieve this extreme compression ratio, attackers will compress irrelevant data (eg: a long string of repeated bytes). </value>
+    <value>Successful Zip Bomb attacks occur when an application expands untrusted archive files without controlling the size of the expanded data, which can lead to denial of service. A Zip bomb is usually a malicious archive file of a few kilobytes of compressed data but turned into gigabytes of uncompressed data. To achieve this extreme compression ratio, attackers will compress irrelevant data (eg: a long string of repeated bytes).</value>
   </data>
   <data name="S5042_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -12656,7 +12656,7 @@
     <value>ready</value>
   </data>
   <data name="S5332_Tags" xml:space="preserve">
-    <value>cwe,owasp-a3</value>
+    <value>cwe,owasp-a3,owasp-m3</value>
   </data>
   <data name="S5332_Title" xml:space="preserve">
     <value>Using clear-text protocols is security-sensitive</value>
@@ -12749,7 +12749,7 @@
     <value>ready</value>
   </data>
   <data name="S5542_Tags" xml:space="preserve">
-    <value>cwe,privacy,owasp-a6,sans-top25-porous,owasp-a3</value>
+    <value>cwe,privacy,owasp-a6,sans-top25-porous,owasp-a3,owasp-m5</value>
   </data>
   <data name="S5542_Title" xml:space="preserve">
     <value>Encryption algorithms should be used with secure mode and padding scheme</value>
@@ -12782,7 +12782,7 @@
     <value>ready</value>
   </data>
   <data name="S5547_Tags" xml:space="preserve">
-    <value>cwe,privacy,owasp-a6,sans-top25-porous,owasp-a3</value>
+    <value>cwe,privacy,owasp-a6,sans-top25-porous,owasp-a3,owasp-m5</value>
   </data>
   <data name="S5547_Title" xml:space="preserve">
     <value>Cipher algorithms should be robust</value>
@@ -12914,7 +12914,7 @@
     <value>Major Vulnerability</value>
   </data>
   <data name="S5773_Description" xml:space="preserve">
-    <value>During the deserialization process, the state of an object will be reconstructed from the serialized data stream which can contain dangerous operations. </value>
+    <value>During the deserialization process, the state of an object will be reconstructed from the serialized data stream which can contain dangerous operations.</value>
   </data>
   <data name="S5773_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
