@@ -139,6 +139,4 @@
     </Content>
   </ItemGroup>
 
-  <Import Project="..\..\StyleCopAnalyzers.targets" />
-
 </Project>
