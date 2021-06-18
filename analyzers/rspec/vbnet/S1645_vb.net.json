@@ -1,5 +1,5 @@
 {
-  "title": "The \"&\" operator should be used to concatenate strings",
+  "title": "The \"\u0026\" operator should be used to concatenate strings",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

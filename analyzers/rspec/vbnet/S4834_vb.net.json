@@ -2,9 +2,7 @@
   "title": "Controlling permissions is security-sensitive",
   "type": "SECURITY_HOTSPOT",
   "status": "deprecated",
-  "tags": [
-    
-  ],
+  "tags": [],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-4834",
   "sqKey": "S4834",

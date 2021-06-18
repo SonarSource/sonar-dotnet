@@ -1,5 +1,5 @@
 {
-  "title": "Strings should not be concatenated using \"+\" or \"&\" in a loop",
+  "title": "Strings should not be concatenated using \"+\" or \"\u0026\" in a loop",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

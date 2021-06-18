@@ -6,11 +6,14 @@
     "func": "Constant\/Issue",
     "constantCost": "20min"
   },
-  "tags": [
-    
-  ],
+  "tags": [],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-1075",
   "sqKey": "S1075",
-  "scope": "Main"
+  "scope": "Main",
+  "securityStandards": {
+    "CERT": [
+      "MSC03-J."
+    ]
+  }
 }
