@@ -3,6 +3,7 @@
 
   <!-- Import the higher level common properties -->
   <Import Project="..\Directory.Build.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\StyleCopAnalyzers.targets" />
 
   <PropertyGroup>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\..\.sonarlint\sonaranalyzer-dotnetCSharp.ruleset</CodeAnalysisRuleSet>
