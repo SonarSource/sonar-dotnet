@@ -352,11 +352,28 @@ namespace Tests.Diagnostics
 // https://github.com/SonarSource/sonar-dotnet/issues/4015
 public class Repro_4015
 {
-    public void Method()
+    public void Compliant_SimpleLambda()
     {
-        string localVariable = null;    // Noncompliant FP, changing the Expression<Func<T>> below changes the behavior of the code
+        string localVariable = null;    // Compliant, changing the Expression<Func<T>> below changes the behavior of the code
+        WithExpressionArgument(x => localVariable);
+    }
 
+    public void Compliant_ParenthesizedLambda()
+    {
+        string localVariable = null;    // Compliant, changing the Expression<Func<T>> below changes the behavior of the code
         WithExpressionArgument(() => localVariable);
+    }
+
+    public void Compliant_ParenthesizedExpression()
+    {
+        string localVariable = null;
+        WithExpressionArgument(((() => localVariable)));
+    }
+
+    public void Noncompliant_Func()
+    {
+        string localVariable = null;    // Noncompliant, this can be const
+        WithFuncArgument(() => localVariable);
     }
 
     private void WithExpressionArgument(Expression<Func<string>> expression)
@@ -367,4 +384,16 @@ public class Repro_4015
         }
     }
 
+    private void WithExpressionArgument(Expression<Func<string, string>> expression)
+    {
+        if (!(expression.Body is MemberExpression))
+        {
+            throw new InvalidOperationException($"The expression body is a {expression.Body.GetType().Name}, but MemberExpression is expected.");
+        }
+    }
+
+    private void WithFuncArgument(Func<string> expression)
+    {
+        expression();
+    }
 }

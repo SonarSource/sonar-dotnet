@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Where(MatchesIdentifier)
-                .Any(IsMutatingUse);
+                .Any(x => IsMutatingUse(semanticModel, x));
 
             static bool IsMethodLike(SyntaxNode arg) =>
                 arg is BaseMethodDeclarationSyntax
@@ -154,15 +154,27 @@ namespace SonarAnalyzer.Rules.CSharp
                 Equals(variableSymbol, semanticModel.GetSymbolInfo(id).Symbol);
         }
 
-        private static bool IsMutatingUse(IdentifierNameSyntax identifier) =>
+        private static bool IsMutatingUse(SemanticModel semanticModel, IdentifierNameSyntax identifier) =>
             identifier.Parent switch
             {
                 AssignmentExpressionSyntax assignmentExpression => Equals(identifier, assignmentExpression?.Left),
                 ArgumentSyntax argumentSyntax => argumentSyntax.IsInTupleAssignmentTarget() || !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None),
                 PostfixUnaryExpressionSyntax _ => true,
                 PrefixUnaryExpressionSyntax _ => true,
-                _ => false
+                _ => IsUsedAsLambdaExpression(semanticModel, identifier)
             };
+
+        private static bool IsUsedAsLambdaExpression(SemanticModel semanticModel, IdentifierNameSyntax identifier)
+        {
+            if (identifier.FirstAncestorOrSelf<LambdaExpressionSyntax>() is { } lambda
+                && lambda.GetSelfOrTopParenthesizedExpression().Parent is ArgumentSyntax argument
+                && lambda.FirstAncestorOrSelf<InvocationExpressionSyntax>() is { } invocation)
+            {
+                var lookup = new CSharpMethodParameterLookup(invocation, semanticModel);
+                return lookup.TryGetSymbol(argument, out var parameter) && parameter.IsType(KnownType.System_Linq_Expressions_Expression_T);
+            }
+            return false;
+        }
 
         private static void Report(VariableDeclaratorSyntax declaratorSyntax, SyntaxNodeAnalysisContext c) =>
             c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
