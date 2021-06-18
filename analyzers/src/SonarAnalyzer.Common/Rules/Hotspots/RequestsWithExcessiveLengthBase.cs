@@ -21,7 +21,11 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Data;
+using System.IO;
 using System.Linq;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -35,12 +39,12 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S5693";
         protected const string MultipartBodyLengthLimit = "MultipartBodyLengthLimit";
-        protected const string RequestSizeLimit = "RequestSizeLimit";
-        protected const string RequestSizeLimitAttribute = RequestSizeLimit + Attribute;
-        protected const string DisableRequestSizeLimit = "DisableRequestSizeLimit";
-        protected const string DisableRequestSizeLimitAttribute = DisableRequestSizeLimit + Attribute;
-        protected const string RequestFormLimits = "RequestFormLimits";
-        protected const string RequestFormLimitsAttribute = RequestFormLimits + Attribute;
+        private const string RequestSizeLimit = "RequestSizeLimit";
+        private const string RequestSizeLimitAttribute = RequestSizeLimit + Attribute;
+        private const string DisableRequestSizeLimit = "DisableRequestSizeLimit";
+        private const string DisableRequestSizeLimitAttribute = DisableRequestSizeLimit + Attribute;
+        private const string RequestFormLimits = "RequestFormLimits";
+        private const string RequestFormLimitsAttribute = RequestFormLimits + Attribute;
         private const string MessageFormat = "Make sure the content length limit is safe here.";
         private const string Attribute = "Attribute";
         private const int DefaultFileUploadSizeLimit = 8_000_000;
@@ -65,7 +69,8 @@ namespace SonarAnalyzer.Rules
             this.analyzerConfiguration = analyzerConfiguration;
         }
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        {
             context.RegisterCompilationStartAction(
                 c =>
                 {
@@ -77,6 +82,8 @@ namespace SonarAnalyzer.Rules
 
                     c.RegisterCompilationEndAction(cc => ReportOnCollectedAttributes(cc, attributesOverTheLimit));
                 });
+            context.GetInnerContext().RegisterCompilationAction(c => CheckWebConfig(context.GetInnerContext(), c));
+        }
 
         protected bool IsRequestFormLimits(string attributeName) =>
             attributeName.Equals(RequestFormLimits, Language.NameComparison)
@@ -135,6 +142,43 @@ namespace SonarAnalyzer.Rules
             analyzerConfiguration.Initialize(options);
             return SupportedDiagnostics.Any(d => analyzerConfiguration.IsEnabled(d.Id));
         }
+
+        private void CheckWebConfig(SonarAnalysisContext context, CompilationAnalysisContext c)
+        {
+            foreach (var fullPath in context.GetWebConfig(c))
+            {
+                var webConfig = File.ReadAllText(fullPath);
+                if (webConfig.Contains("<system.web") && XmlHelper.ParseXDocument(webConfig) is { } doc)
+                {
+                    ReportRequestLengthViolation(doc, fullPath, c);
+                }
+            }
+        }
+
+        private void ReportRequestLengthViolation(XDocument doc, string webConfigPath, CompilationAnalysisContext c)
+        {
+            foreach (var httpRuntime in doc.XPathSelectElements("configuration/system.web/httpRuntime"))
+            {
+                if (httpRuntime.Attribute("maxRequestLength") is { } maxRequestLength
+                    && IsVulnerable(maxRequestLength.Value, 8192)
+                    && maxRequestLength.CreateLocation(webConfigPath) is { } location)
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                }
+            }
+            foreach (var requestLimit in doc.XPathSelectElements("configuration/system.webServer/security/requestFiltering/requestLimits"))
+            {
+                if (requestLimit.Attribute("maxAllowedContentLength") is { } maxAllowedContentLength
+                    && IsVulnerable(maxAllowedContentLength.Value, 8_388_608)
+                    && maxAllowedContentLength.CreateLocation(webConfigPath) is { } location)
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                }
+            }
+        }
+
+        private bool IsVulnerable(string value, int limit) =>
+            !(int.TryParse(value, out var val) && val <= limit);
 
         // This struct is used as the same attributes can not be applied multiple times to the same declaration.
         private struct Attributes
