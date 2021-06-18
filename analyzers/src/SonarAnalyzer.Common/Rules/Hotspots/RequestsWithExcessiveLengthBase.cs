@@ -178,8 +178,14 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private static bool IsVulnerable(string value, int limit) =>
-            !(int.TryParse(value, out var val) && val <= limit);
+        private static bool IsVulnerable(string value, int limit)
+        {
+            if (int.TryParse(value, out var val))
+            {
+                return val > limit;
+            }
+            return false;
+        }
 
         // This struct is used as the same attributes can not be applied multiple times to the same declaration.
         private struct Attributes
