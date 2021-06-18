@@ -483,7 +483,6 @@ try {
     # Do not forget to update ValidateSet of -project parameter when new project is added.
     Build-Project-MSBuild "AnalyzeGenerated.CS" "AnalyzeGenerated.CS.sln"
     Build-Project-MSBuild "AnalyzeGenerated.VB" "AnalyzeGenerated.VB.sln"
-    Build-Project-MSBuild "Automapper" "Automapper.sln" -CpuCount 1
     Build-Project-MSBuild "Ember-MM" "Ember Media Manager.sln"
     Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.CS" "ManuallyAddedNoncompliantIssues.CS.sln"
     Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.VB" "ManuallyAddedNoncompliantIssues.VB.sln"
@@ -496,6 +495,7 @@ try {
     Build-Project-DotnetTool "Net5" "Net5.sln"
     Build-Project-DotnetTool "NetCore31WithConfigurableRules" "NetCore31WithConfigurableRules.sln"
     Build-Project-DotnetTool "akka.net" "src\Akka.sln"
+    Build-Project-DotnetTool "Automapper" "Automapper.sln"
 
     Write-Header "Processing analyzer results"
 
