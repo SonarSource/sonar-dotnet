@@ -36,6 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S125";
         private const string MessageFormat = "Remove this commented out code.";
+        private const int CommentMarkLength = 2;
 
         private static readonly string[] CodeEndings = { ";", "{", ";}", "{}" };
         private static readonly string[] CodeParts = { "++", "catch(", "switch(", "try{", "else{" };
@@ -70,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 else if (shouldReport
                     && trivia.IsKind(SyntaxKind.SingleLineCommentTrivia)
                     && !trivia.ToFullString().TrimStart().StartsWith("///", StringComparison.Ordinal)
-                    && IsCode(GetTriviaContent(trivia)))
+                    && IsCode(trivia.ToString().Substring(CommentMarkLength)))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, trivia.GetLocation()));
                     shouldReport = false;
@@ -78,49 +79,36 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckMultilineComment(SyntaxTreeAnalysisContext context, SyntaxTrivia comment)
+        private static void CheckMultilineComment(SyntaxTreeAnalysisContext context, SyntaxTrivia trivia)
         {
-            var triviaContent = GetTriviaContent(comment);
-            var triviaLines = triviaContent.Split(MetricsBase.LineTerminators, StringSplitOptions.None);
+            var triviaLines = TriviaContent().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
 
             for (var triviaLineNumber = 0; triviaLineNumber < triviaLines.Length; triviaLineNumber++)
             {
                 if (IsCode(triviaLines[triviaLineNumber]))
                 {
-                    var triviaStartingLineNumber = comment.GetLocation().GetLineSpan().StartLinePosition.Line;
+                    var triviaStartingLineNumber = trivia.GetLocation().GetLineSpan().StartLinePosition.Line;
                     var lineNumber = triviaStartingLineNumber + triviaLineNumber;
                     var lineSpan = context.Tree.GetText().Lines[lineNumber].Span;
-                    var commentLineSpan = lineSpan.Intersection(comment.GetLocation().SourceSpan);
+                    var commentLineSpan = lineSpan.Intersection(trivia.GetLocation().SourceSpan);
                     var location = Location.Create(context.Tree, commentLineSpan ?? lineSpan);
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
                     return;
                 }
             }
-        }
 
-        private static string GetTriviaContent(SyntaxTrivia trivia)
-        {
-            const int commentLength = 2;
-            var content = trivia.ToString();
-            if (trivia.IsKind(SyntaxKind.MultiLineCommentTrivia))
+            string TriviaContent()
             {
-                if (content.StartsWith("/*", StringComparison.Ordinal))
+                var ret = trivia.ToString();
+                if (ret.StartsWith("/*", StringComparison.Ordinal))
                 {
-                    content = content.Substring(commentLength);
+                    ret = ret.Substring(CommentMarkLength);
                 }
-                if (content.EndsWith("*/", StringComparison.Ordinal))
+                if (ret.EndsWith("*/", StringComparison.Ordinal))
                 {
-                    content = content.Substring(0, content.Length - commentLength);
+                    ret = ret.Substring(0, ret.Length - CommentMarkLength);
                 }
-                return content;
-            }
-            else if (trivia.IsKind(SyntaxKind.SingleLineCommentTrivia))
-            {
-                return content.StartsWith("//", StringComparison.Ordinal) ? content.Substring(commentLength) : content;
-            }
-            else
-            {
-                return string.Empty;
+                return ret;
             }
         }
 
