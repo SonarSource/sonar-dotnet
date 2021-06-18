@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETFramework,Version=v4.5.2": {
+      "SharpZipLib": {
+        "type": "Direct",
+        "requested": "[0.86.0, 0.86.0]",
+        "resolved": "0.86.0",
+        "contentHash": "5DbS1SlKLMi+WG00Cm0ueYf2oyXJrowETQk8nx96rmdjTuHsA3laPykGV7Sxi0R5Xxfx0Kh/EfacAZ1f6M7y/g=="
+      },
+      "System.Data.SQLite": {
+        "type": "Direct",
+        "requested": "[1.0.84, 1.0.84]",
+        "resolved": "1.0.84",
+        "contentHash": "MvMpBY+lj7lBZjT66tMDbvL+g1dUIgR1R62L6/BU4w8JxpxN72W+KkLYaAZH2Xc6Ueg41fCb4EY6omG1rLYKpg=="
+      }
+    }
+  }
+}

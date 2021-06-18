@@ -96,11 +96,11 @@ function Restore-Packages (
     $msbuildBinDir = Split-Path -Parent (Get-MsBuildPath $msbuildVersion)
 
     if (Test-Debug) {
-        Exec { & (Get-NuGetPath) restore $solutionPath -MSBuildPath $msbuildBinDir -Verbosity detailed `
+        Exec { & (Get-NuGetPath) restore -LockedMode -MSBuildPath $msbuildBinDir -Verbosity detailed $solutionPath`
         } -errorMessage "ERROR: Restoring NuGet packages FAILED."
     }
     else {
-        Exec { & (Get-NuGetPath) restore $solutionPath -MSBuildPath $msbuildBinDir `
+        Exec { & (Get-NuGetPath) restore -LockedMode -MSBuildPath $msbuildBinDir $solutionPath`
         } -errorMessage "ERROR: Restoring NuGet packages FAILED."
     }
 }
