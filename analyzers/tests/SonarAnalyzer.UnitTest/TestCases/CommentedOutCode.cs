@@ -156,6 +156,9 @@ namespace Tests.Diagnostics
         int i;
         // Noncompliant@+1
         // int Method() {}
+        int j;
+        // Compliant, not a C# code, but a data sample
+        // { "json": "fragment" }
     }
 
     /**
