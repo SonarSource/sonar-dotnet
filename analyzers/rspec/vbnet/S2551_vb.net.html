@@ -1,5 +1,5 @@
 <p>Shared resources should not be used for locking as it increases the chance of deadlocks. Any other thread could acquire (or attempt to acquire) the
-same lock for another unrelated purpose. </p>
+same lock for another unrelated purpose.</p>
 <p>Instead, a dedicated <code>object</code> instance should be used for each shared resource, to avoid deadlocks or lock contention.</p>
 <p>The following objects are considered as shared resources:</p>
 <ul>

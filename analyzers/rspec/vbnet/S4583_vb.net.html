@@ -4,7 +4,7 @@ called. This is why you should always pair <code>BeginInvoke</code> with an <cod
 <ul>
   <li> the <code>BeginInvoke</code> method is called without any callback and it is not paired with a call to <code>EndInvoke</code> in the same
   block. </li>
-  <li> a callback with a single parameter of type <code>IAsyncResult</code> doesn't contain a call to <code>EndInvoke</code>. </li>
+  <li> a callback with a single parameter of type <code>IAsyncResult</code> doesn’t contain a call to <code>EndInvoke</code>. </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <p>BeginInvoke without callback</p>
