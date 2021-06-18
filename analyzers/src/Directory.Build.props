@@ -8,6 +8,9 @@
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\..\.sonarlint\sonaranalyzer-dotnetCSharp.ruleset</CodeAnalysisRuleSet>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-
+  
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\..\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
+  </ItemGroup>
 
 </Project>

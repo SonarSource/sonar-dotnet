@@ -47,10 +47,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="..\..\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
-  </ItemGroup>
-  
-    <ItemGroup>
     <AdditionalFiles Include="ShimLayer\OperationInterfaces.xml" />
     <AdditionalFiles Include="ShimLayer\Syntax.xml" />
   </ItemGroup>

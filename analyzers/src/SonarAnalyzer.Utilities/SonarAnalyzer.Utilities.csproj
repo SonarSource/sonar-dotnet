@@ -37,10 +37,6 @@
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
-  </ItemGroup>
-
   <Import Project="..\..\StyleCopAnalyzers.targets" />
 
 </Project>
