@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -71,6 +73,41 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionEvaluatesToConstant_FromCSharp9_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs", GetAnalyzer());
 #endif
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/4573
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ConditionEvaluatesToConstant_UncaughtException()
+        {
+            Action action = () => Verifier.VerifyCSharpAnalyzer(@"
+using System;
+public class Reproducer
+{
+    private DateTime? foo;
+
+    public virtual DateTime? Foo
+    {
+        get { return foo; }
+
+        set
+        {
+            if (value.HasValue)
+            {
+                value = DateTime.SpecifyKind(value.Value, DateTimeKind.Unspecified);
+            }
+
+            if (foo != value || (foo.HasValue && value.HasValue && foo.Value.Kind != value.Value.Kind))
+            {
+                foo = value;
+                Bar(""x"");
+            }
+        }
+    }
+    public void Bar(string x) { }
+}", GetAnalyzer(), CompilationErrorBehavior.Ignore);
+
+            action.Should().Throw<AssertFailedException>().WithMessage("*AD0001*SymbolicExecutionException*TrySetObjectConstraint");
+        }
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             new SymbolicExecutionRunner(new ConditionEvaluatesToConstant());
