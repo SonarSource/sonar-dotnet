@@ -86,7 +86,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\EmptySystemWeb")]
         [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\EmptySystemWebServer")]
         [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\SmallValues")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\WrongPath")]
+        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\InvalidConfig")]
+        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\NoSystemWeb")]
+        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\NoSystemWebServer")]
         [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\UnexpectedContent")]
         [TestCategory("Rule")]
         public void RequestsWithExcessiveLength_CS_WebConfig(string root)
