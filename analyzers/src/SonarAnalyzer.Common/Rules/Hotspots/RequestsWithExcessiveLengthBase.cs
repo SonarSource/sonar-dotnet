@@ -21,7 +21,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -48,6 +47,8 @@ namespace SonarAnalyzer.Rules
         private const string MessageFormat = "Make sure the content length limit is safe here.";
         private const string Attribute = "Attribute";
         private const int DefaultFileUploadSizeLimit = 8_000_000;
+        private const int MaxAllowedRequestLength = 8192;
+        private const int MaxAllowedContentLength = 8_388_608;
         private readonly IAnalyzerConfiguration analyzerConfiguration;
         private readonly DiagnosticDescriptor rule;
 
@@ -160,7 +161,7 @@ namespace SonarAnalyzer.Rules
             foreach (var httpRuntime in doc.XPathSelectElements("configuration/system.web/httpRuntime"))
             {
                 if (httpRuntime.Attribute("maxRequestLength") is { } maxRequestLength
-                    && IsVulnerable(maxRequestLength.Value, 8192)
+                    && IsVulnerable(maxRequestLength.Value, MaxAllowedRequestLength)
                     && maxRequestLength.CreateLocation(webConfigPath) is { } location)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
@@ -169,7 +170,7 @@ namespace SonarAnalyzer.Rules
             foreach (var requestLimit in doc.XPathSelectElements("configuration/system.webServer/security/requestFiltering/requestLimits"))
             {
                 if (requestLimit.Attribute("maxAllowedContentLength") is { } maxAllowedContentLength
-                    && IsVulnerable(maxAllowedContentLength.Value, 8_388_608)
+                    && IsVulnerable(maxAllowedContentLength.Value, MaxAllowedContentLength)
                     && maxAllowedContentLength.CreateLocation(webConfigPath) is { } location)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
@@ -177,7 +178,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private bool IsVulnerable(string value, int limit) =>
+        private static bool IsVulnerable(string value, int limit) =>
             !(int.TryParse(value, out var val) && val <= limit);
 
         // This struct is used as the same attributes can not be applied multiple times to the same declaration.
