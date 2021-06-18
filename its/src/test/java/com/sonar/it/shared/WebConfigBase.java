@@ -27,21 +27,30 @@ import org.sonarqube.ws.Issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WebConfigBase {
-  static final String HOTSPOT_ERROR_MESSAGE = "Make sure disabling ASP.NET Request Validation feature is safe here.";
+  static final String HOTSPOT_REQUEST_VALIDATION_ERROR_MESSAGE = "Make sure disabling ASP.NET Request Validation feature is safe here.";
+  static final String HOTSPOT_CONTENT_LIMIT_ERROR_MESSAGE = "Make sure the content length limit is safe here.";
   static final String ISSUE_ERROR_MESSAGE = "Use a secure password when connecting to this database.";
 
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  protected void assertHotspot(Hotspot hotspot, int line, String fileName){
-    assertThat(hotspot.getLine()).isEqualTo(line);
-    assertThat(hotspot.getMessage()).isEqualTo(HOTSPOT_ERROR_MESSAGE);
-    assertThat(hotspot.getComponent()).endsWith(fileName);
+  protected void assertRequestValidationHotspot(Hotspot hotspot, int line, String fileName){
+    assertHotspot(hotspot, line, fileName, HOTSPOT_REQUEST_VALIDATION_ERROR_MESSAGE);
+  }
+
+  protected void assertContentLengthHotspot(Hotspot hotspot, int line, String fileName){
+    assertHotspot(hotspot, line, fileName, HOTSPOT_CONTENT_LIMIT_ERROR_MESSAGE);
   }
 
   protected void assertIssue(Issues.Issue issue, int line, String fileName){
     assertThat(issue.getLine()).isEqualTo(line);
     assertThat(issue.getMessage()).isEqualTo(ISSUE_ERROR_MESSAGE);
     assertThat(issue.getComponent()).endsWith(fileName);
+  }
+
+  private void assertHotspot(Hotspot hotspot, int line, String fileName, String errorMessage){
+    assertThat(hotspot.getLine()).isEqualTo(line);
+    assertThat(hotspot.getMessage()).isEqualTo(errorMessage);
+    assertThat(hotspot.getComponent()).endsWith(fileName);
   }
 }
