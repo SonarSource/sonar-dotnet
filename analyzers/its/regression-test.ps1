@@ -28,13 +28,40 @@ if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
 }
 
+function Prepare-Project([string]$ProjectName){
+    $Output = ".\output\$ProjectName"
+    New-Item -ItemType directory -Path $Output | out-null
+
+    $SourcePath = ".\config\$ProjectName\SonarLint.xml"
+    if(-Not (Test-Path $SourcePath)){
+        $SourcePath = ".\config\SonarLint.xml"
+    }
+    $Content = Get-Content -Path $SourcePath -Raw
+
+    if($ruleId){
+        $RuleFragment = "    <Rule><Key>$ruleId</Key></Rule>"
+    } else {
+        $HotspotFiles = Get-ChildItem ..\rspec -Filter *.json -Recurse | Select-String "SECURITY_HOTSPOT" | Select-Object -ExpandProperty FileName
+        $HotspotIDs = $HotspotFiles -Replace "_c#.json", "" -Replace "_vb.net.json", "" | Select-Object -Unique
+        $RuleFragment = ""
+        foreach($HotspotID in $HotspotIDs){
+            $RuleFragment = $RuleFragment + "    <Rule><Key>$HotspotID</Key></Rule>`n"
+        }
+    }
+
+    $Content = $Content -Replace "<Rules>", "<Rules>`n$RuleFragment"
+    Set-Content -Path "$Output\SonarLint.xml" -Value $Content
+
+    Write-Host "Using $Output\SonarLint.xml"
+}
+
 function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePath, [int]$CpuCount = 4) {
     if ($project -And -Not ($ProjectName -eq $project)) {
         Write-Host "Build skipped: $ProjectName"
         return
     }
 
-    New-Item -ItemType directory -Path .\output\$ProjectName | out-null
+    Prepare-Project($ProjectName)
 
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
 
@@ -63,7 +90,7 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
     $globalJsonContent = $(Get-Content $projectGlobalJsonPath)
     Write-Host "Will build dotnet project: '${ProjectName}' (with ${projectGlobalJsonPath}) with dotnet version '${globalJsonContent}'."
 
-    New-Item -ItemType directory -Path .\output\$ProjectName | out-null
+    Prepare-Project($ProjectName)
 
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
 
