@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
 
+  <!-- Import the higher level common properties -->
+  <Import Project="..\Directory.Build.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\StyleCopAnalyzers.targets" />
+
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)\..\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
   </ItemGroup>

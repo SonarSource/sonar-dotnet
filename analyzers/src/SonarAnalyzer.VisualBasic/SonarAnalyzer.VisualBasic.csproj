@@ -44,6 +44,4 @@
 
   <Import Project="..\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems" Label="Shared" />
 
-  <Import Project="..\..\StyleCopAnalyzers.targets" />
-
 </Project>

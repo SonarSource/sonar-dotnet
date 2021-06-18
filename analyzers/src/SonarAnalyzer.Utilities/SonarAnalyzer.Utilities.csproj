@@ -37,6 +37,4 @@
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
-  <Import Project="..\..\StyleCopAnalyzers.targets" />
-
 </Project>
