@@ -29,10 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="$(dotnet_symbolic_execution_windows)" />
 
     <Content Include="$(dotnet_symbolic_execution_windows)">
