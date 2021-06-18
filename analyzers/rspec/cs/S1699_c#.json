@@ -14,9 +14,5 @@
   "sqKey": "S1699",
   "scope": "Main",
   "securityStandards": {
-    "CERT": [
-      "MET05-J.",
-      "OOP50-CPP."
-    ]
   }
 }

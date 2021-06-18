@@ -15,8 +15,5 @@
   "sqKey": "S3218",
   "scope": "All",
   "securityStandards": {
-    "CERT": [
-      "DCL51-J."
-    ]
   }
 }

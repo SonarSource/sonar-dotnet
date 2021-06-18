@@ -12,9 +12,5 @@
   "sqKey": "S126",
   "scope": "All",
   "securityStandards": {
-    "CERT": [
-      "MSC01-C.",
-      "MSC57-J."
-    ]
   }
 }

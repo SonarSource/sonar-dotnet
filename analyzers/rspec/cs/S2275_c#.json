@@ -12,8 +12,5 @@
   "sqKey": "S2275",
   "scope": "All",
   "securityStandards": {
-    "CERT": [
-      "FIO47-C."
-    ]
   }
 }

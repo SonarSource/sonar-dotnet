@@ -12,8 +12,5 @@
   "sqKey": "S2251",
   "scope": "All",
   "securityStandards": {
-    "CERT": [
-      "MSC54-J."
-    ]
   }
 }

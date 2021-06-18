@@ -12,8 +12,5 @@
   "sqKey": "S3011",
   "scope": "Main",
   "securityStandards": {
-    "CERT": [
-      "SEC05-J."
-    ]
   }
 }

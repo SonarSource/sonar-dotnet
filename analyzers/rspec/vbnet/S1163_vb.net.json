@@ -15,8 +15,5 @@
   "sqKey": "S1163",
   "scope": "Main",
   "securityStandards": {
-    "CERT": [
-      "ERR05-J."
-    ]
   }
 }

@@ -14,10 +14,5 @@
   "sqKey": "S1116",
   "scope": "All",
   "securityStandards": {
-    "CERT": [
-      "MSC12-C.",
-      "MSC51-J.",
-      "EXP15-C."
-    ]
   }
 }

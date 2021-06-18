@@ -15,9 +15,5 @@
   "sqKey": "S3366",
   "scope": "Main",
   "securityStandards": {
-    "CERT": [
-      "TSM01-J.",
-      "TSM03-J."
-    ]
   }
 }

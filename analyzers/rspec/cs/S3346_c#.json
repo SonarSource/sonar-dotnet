@@ -12,8 +12,5 @@
   "sqKey": "S3346",
   "scope": "Main",
   "securityStandards": {
-    "CERT": [
-      "EXP06-J."
-    ]
   }
 }

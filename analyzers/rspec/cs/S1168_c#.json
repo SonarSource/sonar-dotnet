@@ -12,9 +12,5 @@
   "sqKey": "S1168",
   "scope": "Main",
   "securityStandards": {
-    "CERT": [
-      "MSC19-C.",
-      "MET55-J."
-    ]
   }
 }

@@ -17,11 +17,6 @@
   "securityStandards": {
     "CWE": [
       481
-    ],
-    "CERT": [
-      "EXP45-C.",
-      "EXP51-J.",
-      "EXP19-CPP."
     ]
   }
 }

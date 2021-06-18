@@ -12,8 +12,5 @@
   "sqKey": "S1075",
   "scope": "Main",
   "securityStandards": {
-    "CERT": [
-      "MSC03-J."
-    ]
   }
 }

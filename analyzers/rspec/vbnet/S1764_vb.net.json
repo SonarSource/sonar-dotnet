@@ -12,8 +12,5 @@
   "sqKey": "S1764",
   "scope": "All",
   "securityStandards": {
-    "CERT": [
-      "MSC12-C."
-    ]
   }
 }

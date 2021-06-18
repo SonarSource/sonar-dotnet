@@ -16,9 +16,6 @@
   "securityStandards": {
     "CWE": [
       476
-    ],
-    "CERT": [
-      "EXP01-J."
     ]
   }
 }

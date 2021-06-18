@@ -12,8 +12,5 @@
   "sqKey": "S2688",
   "scope": "All",
   "securityStandards": {
-    "CERT": [
-      "NUM07-J."
-    ]
   }
 }

@@ -16,9 +16,6 @@
   "securityStandards": {
     "CWE": [
       478
-    ],
-    "CERT": [
-      "MSC01-C."
     ]
   }
 }

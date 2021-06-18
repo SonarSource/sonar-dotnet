@@ -15,8 +15,5 @@
   "sqKey": "S3949",
   "scope": "All",
   "securityStandards": {
-    "CERT": [
-      "INT30-C."
-    ]
   }
 }

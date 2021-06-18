@@ -14,9 +14,5 @@
   "sqKey": "S1659",
   "scope": "All",
   "securityStandards": {
-    "CERT": [
-      "DCL52-J.",
-      "DCL04-C."
-    ]
   }
 }

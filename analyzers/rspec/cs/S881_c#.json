@@ -12,10 +12,5 @@
   "sqKey": "S881",
   "scope": "All",
   "securityStandards": {
-    "CERT": [
-      "EXP30-C.",
-      "EXP50-CPP.",
-      "EXP05-J."
-    ]
   }
 }
