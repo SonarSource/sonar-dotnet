@@ -1,7 +1,7 @@
-<p>The <code>IEquatable&lt;T&gt;</code> interface has only one method in it: <code>Equals(&lt;T&gt;)</code>. If you've already written
-<code>Equals(T)</code>, there's no reason not to explicitly implement <code>IEquatable&lt;T&gt;</code>. Doing so expands the utility of your class by
+<p>The <code>IEquatable&lt;T&gt;</code> interface has only one method in it: <code>Equals(&lt;T&gt;)</code>. If you’ve already written
+<code>Equals(T)</code>, there’s no reason not to explicitly implement <code>IEquatable&lt;T&gt;</code>. Doing so expands the utility of your class by
 allowing it to be used where an <code>IEquatable</code> is called for.</p>
-<p><strong></strong>Note**: Classes that implement <code>IEquatable&lt;T&gt;</code> should also be <code>sealed</code>.</p>
+<p><strong>Note</strong>: Classes that implement <code>IEquatable&lt;T&gt;</code> should also be <code>sealed</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 class MyClass  // Noncompliant

@@ -1,11 +1,11 @@
-<p>When the call to a function doesn't have any side effects, what is the point of making the call if the results are ignored? In such case, either
-the function call is useless and should be dropped or the source code doesn't behave as expected.</p>
+<p>When the call to a function doesn’t have any side effects, what is the point of making the call if the results are ignored? In such case, either
+the function call is useless and should be dropped or the source code doesn’t behave as expected.</p>
 <p>This rule raises an issue when the results of the following methods are ignored:</p>
 <ul>
   <li> LINQ method, </li>
   <li> <code>[Pure]</code> method, </li>
-  <li> any method on <code>string</code>, <code>int</code>, ..., <code>System.Collections.Immutable.ImmutableArray&lt;T&gt;</code>,
-  <code>ImmutableHashSet&lt;T&gt;</code>, ... </li>
+  <li> any method on <code>string</code>, <code>int</code>, …​, <code>System.Collections.Immutable.ImmutableArray&lt;T&gt;</code>,
+  <code>ImmutableHashSet&lt;T&gt;</code>, …​ </li>
 </ul>
 <p>Notes:</p>
 <ul>
@@ -28,7 +28,7 @@ var res = coll.Where(i =&gt; i &gt; 5).Select(i =&gt; i*i);
 var isEqual = "this string".Equals("other string");
 </pre>
 <h2>Exceptions</h2>
-<p>This rule doesn't report issues on method calls with <code>out</code> or <code>ref</code> arguments.</p>
+<p>This rule doesn’t report issues on method calls with <code>out</code> or <code>ref</code> arguments.</p>
 <h2>See</h2>
 <ul>
   <li> <a href="https://wiki.sei.cmu.edu/confluence/x/mtYxBQ">CERT, EXP12-C.</a> - Do not ignore values returned by functions </li>

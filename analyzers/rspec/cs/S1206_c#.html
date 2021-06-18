@@ -1,6 +1,6 @@
 <p>There is a contract between <code>Equals(object)</code> and <code>GetHashCode()</code>: If two objects are equal according to the
 <code>Equals(object)</code> method, then calling <code>GetHashCode()</code> on each of them must yield the same result. If this is not the case, many
-collections won't handle class instances correctly.</p>
+collections won’t handle class instances correctly.</p>
 <p>In order to comply with the contract, <code>Equals(object)</code> and <code>GetHashCode()</code> should be either both inherited, or both
 overridden.</p>
 <h2>Noncompliant Code Example</h2>

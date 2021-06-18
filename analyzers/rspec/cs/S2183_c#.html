@@ -1,7 +1,7 @@
 <p>Shifting an integral number by 0 is equivalent to doing nothing but makes the code confusing for maintainers.</p>
 <p>If the first operand is an <code>int</code> or <code>uint</code> (32-bit quantity), the shift count is given by the low-order five bits of the
 second operand. That is, the actual shift count is 0 to 31 bits.</p>
-<p>Note that integral number with a less than 32-bit quantity (e.g. <code>short</code>, <code>ushort</code>...) are implicitly converted to
+<p>Note that integral number with a less than 32-bit quantity (e.g. <code>short</code>, <code>ushort</code>…​) are implicitly converted to
 <code>int</code> before the shifting operation and so the rule for <code>int</code>/<code>uint</code> applies.</p>
 <p>If the first operand is a <code>long</code> or <code>ulong</code> (64-bit quantity), the shift count is given by the low-order six bits of the
 second operand. That is, the actual shift count is 0 to 63 bits.</p>
@@ -42,7 +42,7 @@ public void Main()
 }
 </pre>
 <h2>Exceptions</h2>
-<p>This rule doesn't raise an issue when the shift by zero is obviously for cosmetic reasons:</p>
+<p>This rule doesn’t raise an issue when the shift by zero is obviously for cosmetic reasons:</p>
 <ul>
   <li> When the value shifted is a literal. </li>
   <li> When there is a similar shift at the same position on line before or after. E.g.: </li>

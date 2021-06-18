@@ -1,7 +1,7 @@
-<p>Calling <code>GC.Collect</code> is rarely necessary, and can significantly affect application performance. That's because it triggers a blocking
-operation that examines <em>every object in memory</em> for cleanup. Further, you don't have control over when this blocking cleanup will actually
+<p>Calling <code>GC.Collect</code> is rarely necessary, and can significantly affect application performance. That’s because it triggers a blocking
+operation that examines <em>every object in memory</em> for cleanup. Further, you don’t have control over when this blocking cleanup will actually
 run.</p>
-<p>As a general rule, the consequences of calling this method far outweigh the benefits unless perhaps you've just triggered some event that is unique
+<p>As a general rule, the consequences of calling this method far outweigh the benefits unless perhaps you’ve just triggered some event that is unique
 in the run of your program that caused a lot of long-lived objects to die.</p>
 <p>This rule raises an issue when <code>GC.Collect</code> is invoked.</p>
 <h2>Noncompliant Code Example</h2>

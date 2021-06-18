@@ -5,12 +5,12 @@
       <li> The GCM (Galois Counter Mode) mode which <a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode#Mathematical_basis">works
       internally</a> with zero/no padding scheme, is recommended, as it is designed to provide both data authenticity (integrity) and confidentiality.
       Other similar modes are CCM, CWC, EAX, IAPM and OCB. </li>
-      <li> The CBC (Cipher Block Chaining) mode by itself provides only data confidentiality, it's recommended to use it along with Message
+      <li> The CBC (Cipher Block Chaining) mode by itself provides only data confidentiality, it’s recommended to use it along with Message
       Authentication Code or similar to achieve data authenticity (integrity) too and thus to <a
       href="https://en.wikipedia.org/wiki/Padding_oracle_attack">prevent padding oracle attacks</a>. </li>
-      <li> The ECB (Electronic Codebook) mode doesn't provide serious message confidentiality: under a given key any given plaintext block always gets
+      <li> The ECB (Electronic Codebook) mode doesn’t provide serious message confidentiality: under a given key any given plaintext block always gets
       encrypted to the same ciphertext block. This mode should not be used. </li>
-    </ul> </li>
+    </ul>  </li>
   <li> For RSA encryption algorithm, the recommended padding scheme is OAEP. </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
@@ -33,19 +33,19 @@ RSACryptoServiceProvider RSA1 = new RSACryptoServiceProvider();
 encryptedData = RSA1.Encrypt(dataToEncrypt, false); // Noncompliant: OAEP Padding is not used (second parameter set to false)
 </pre>
 <h2>Compliant Solution</h2>
-<p>AES with GCM mode with <a href="https://www.bouncycastle.org/">bouncycastle</a> library: </p>
+<p>AES with GCM mode with <a href="https://www.bouncycastle.org/">bouncycastle</a> library:</p>
 <pre>
 GcmBlockCipher blockCipher = new GcmBlockCipher(new AesEngine()); // Compliant
 blockCipher.Init(true, new AeadParameters(new KeyParameter(secretKey), 128, iv, null));
 </pre>
 <p>AES with GCM mode with <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.aesgcm?view=netcore-3.0">AesGcm</a>
-object: </p>
+object:</p>
 <pre>
 var aesGcm = new AesGcm(key); // Compliant
 </pre>
 <p>RSA with OAEP padding with <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider?view=netframework-4.8">RSACryptoServiceProvider</a>
-object: </p>
+object:</p>
 <pre>
 RSACryptoServiceProvider RSA2 = new RSACryptoServiceProvider();
 encryptedData = RSA2.Encrypt(dataToEncrypt, true); // Compliant: OAEP Padding is used (second parameter set to true)

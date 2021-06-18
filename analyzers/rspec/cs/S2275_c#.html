@@ -3,7 +3,7 @@ behaviors or runtime errors. This rule statically validates the good behavior of
 <code>String.Format</code>, <code>StringBuilder.AppendFormat</code>, <code>Console.Write</code>, <code>Console.WriteLine</code>,
 <code>TextWriter.Write</code>, <code>TextWriter.WriteLine</code>, <code>Debug.WriteLine(String, Object[])</code>,
 <code>Trace.TraceError(String, Object[])</code>, <code>Trace.TraceInformation(String, Object[])</code>,
-<code>Trace.TraceWarning(String, Object[])</code> and <code>TraceSource.TraceInformation(String, Object[])</code>. </p>
+<code>Trace.TraceWarning(String, Object[])</code> and <code>TraceSource.TraceInformation(String, Object[])</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 s = string.Format("[0}", arg0);
@@ -37,7 +37,7 @@ var array = new int[] {};
 var res = string.Format("{0} {1}", array); // Compliant we don't know the size of the array
 </pre>
 <ul>
-  <li> This rule doesn't check whether the format specifier (defined after the <code>:</code>) is actually valid. </li>
+  <li> This rule doesn’t check whether the format specifier (defined after the <code>:</code>) is actually valid. </li>
 </ul>
 <h2>See</h2>
 <ul>

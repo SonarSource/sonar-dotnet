@@ -8,7 +8,7 @@ a race condition:</p>
   another operation. This differs from <code>Task / Task&lt;TResult&gt;</code>, on which you can await multiple times and always get the same result.
   </li>
   <li> Calling <code>await</code> concurrently on a <code>ValueTask / ValueTask&lt;TResult&gt;</code>*. The underlying object is not thread safe.
-  What's more, it has the same effect as awaiting multiple times a <code>ValueTask / ValueTask&lt;TResult&gt;</code>. This again differs from
+  What’s more, it has the same effect as awaiting multiple times a <code>ValueTask / ValueTask&lt;TResult&gt;</code>. This again differs from
   <code>Task / Task&lt;TResult&gt;</code>, which support concurrent <code>await</code>. </li>
   <li> Using <code>.Result</code> or <code>.GetAwaiter().GetResult()</code> without checking if the operation completed*. <code>IValueTaskSource /
   IValueTaskSource&lt;TResult&gt;</code> implementations are not required to block until the operation completes. On the other hand, <code>Task /
