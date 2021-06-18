@@ -99,16 +99,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             string TriviaContent()
             {
-                var ret = trivia.ToString();
-                if (ret.StartsWith("/*", StringComparison.Ordinal))
-                {
-                    ret = ret.Substring(CommentMarkLength);
-                }
-                if (ret.EndsWith("*/", StringComparison.Ordinal))
-                {
-                    ret = ret.Substring(0, ret.Length - CommentMarkLength);
-                }
-                return ret;
+                var content = trivia.ToString().Substring(CommentMarkLength);
+                return content.EndsWith("*/", StringComparison.Ordinal) ? content.Substring(0, content.Length - CommentMarkLength) : content;
             }
         }
 
