@@ -466,7 +466,7 @@ try {
     Build-Project-DotnetTool "Net5" "Net5.sln"
     Build-Project-DotnetTool "NetCore31WithConfigurableRules" "NetCore31WithConfigurableRules.sln"
     Build-Project-DotnetTool "akka.net" "src\Akka.sln"
-	Build-Project-DotnetTool "Automapper" "Automapper.sln"
+    Build-Project-DotnetTool "Automapper" "Automapper.sln"
 
     Write-Header "Processing analyzer results"
 
