@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S125";
         private const string MessageFormat = "Remove this commented out code.";
 
-        private static readonly string[] CodeEndings = { ";", "{", ";}" };
+        private static readonly string[] CodeEndings = { ";", "{", ";}", "{}" };
         private static readonly string[] CodeParts = { "++", "catch(", "switch(", "try{", "else{" };
         private static readonly string[] CodePartsWithRelationalOperator = { "for(", "if(", "while(" };
         private static readonly string[] RelationalOperators = { "<", ">", "<=", ">=", "==", "!=" };

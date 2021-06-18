@@ -150,6 +150,12 @@ namespace Tests.Diagnostics
         int g;
         // Noncompliant@+1
         // {Command(); }
+        int h;
+        // Noncompliant@+1
+        // int Method() { }
+        int i;
+        // Noncompliant@+1
+        // int Method() {}
     }
 
     /**
