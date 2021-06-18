@@ -76,7 +76,7 @@ class Program
 </pre>
 <h2>Exceptions</h2>
 <p>Calling <code>GetType</code> on an object of <code>Nullable&lt;T&gt;</code> type returns the underlying generic type parameter <code>T</code>, thus
-a comparison with <code>typeof(Nullable&lt;T&gt;)</code> can't be simplified to use the <code>is</code> operator, which doesn't make difference
+a comparison with <code>typeof(Nullable&lt;T&gt;)</code> can’t be simplified to use the <code>is</code> operator, which doesn’t make difference
 between <code>T</code> and <code>T?</code>.</p>
 <pre>
 int? i = 42;

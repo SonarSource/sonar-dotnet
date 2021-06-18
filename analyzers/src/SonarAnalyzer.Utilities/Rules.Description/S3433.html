@@ -1,7 +1,7 @@
 <p>A method is detected as test method if marked with one of the following attributes <code>[TestMethod]</code> or <code>[DataTestMethod]</code> (for
 mstest), <code>[Fact]</code> or <code>[Theory]</code> (for xunit) or <code>[Test]</code>, <code>[TestCase]</code>, <code>[TestCaseSource]</code> or
 <code>[Theory]</code> (for nunit). However, whether or not they have a test attribute, non-<code>public</code> methods are not recognized as tests,
-and therefore not executed. Neither are <code>async</code> <code>void</code> methods, or methods with generics anywhere in their signatures. </p>
+and therefore not executed. Neither are <code>async</code> <code>void</code> methods, or methods with generics anywhere in their signatures.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 [TestMethod]

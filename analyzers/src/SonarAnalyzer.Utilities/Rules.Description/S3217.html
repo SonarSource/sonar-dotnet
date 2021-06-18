@@ -2,7 +2,7 @@
 available at that time such as <code>ArrayList</code>. The <code>foreach</code> statements allows you to downcast elements of a collection of
 <code>Object</code>s to any other type. The problem is that to achieve the cast, the <code>foreach</code> statements silently performs
 <code>explicit</code> type conversion, which at runtime can result in an <code>InvalidCastException</code>.</p>
-<p>C# code iterating on generic collections or arrays should not rely on <code>foreach</code> statement's silent <code>explicit</code>
+<p>C# code iterating on generic collections or arrays should not rely on <code>foreach</code> statement’s silent <code>explicit</code>
 conversions.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
@@ -58,5 +58,5 @@ foreach (Orange orange in fruitBasket.OfType&lt;Orange&gt;())
 </pre>
 <h2>Exceptions</h2>
 <p>The rule ignores iterations on collections of <code>object</code>s. This includes legacy code that uses <code>ArrayList</code>. Furthermore, the
-rule does not report on cases when user defined conversions are being called. </p>
+rule does not report on cases when user defined conversions are being called.</p>
 

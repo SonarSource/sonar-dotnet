@@ -1,5 +1,5 @@
 <p>In property and indexer <code>set</code> methods, and in event <code>add</code> and <code>remove</code> methods, the implicit <code>value</code>
-parameter holds the value the accessor was called with. Not using the <code>value</code> means that the accessor ignores the caller's intent which
+parameter holds the value the accessor was called with. Not using the <code>value</code> means that the accessor ignores the caller’s intent which
 could cause unexpected results at runtime.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
@@ -28,6 +28,6 @@ public int Count
 }
 </pre>
 <h2>Exceptions</h2>
-<p>This rule doesn't raise an issue when the setter is empty and part of the implementation of an <code>interface</code> . The assumption is that this
+<p>This rule doesn’t raise an issue when the setter is empty and part of the implementation of an <code>interface</code> . The assumption is that this
 part of the interface is not meaningful to that particular implementation. A good example of that would be a "sink" logger that discards any logs.</p>
 

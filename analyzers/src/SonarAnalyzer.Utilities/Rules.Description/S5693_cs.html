@@ -13,7 +13,7 @@ order to prevents DoS attacks.</p>
     <ul>
       <li> lower or equal to 8mb for file uploads. </li>
       <li> lower or equal to 2mb for other requests. </li>
-    </ul> </li>
+    </ul>  </li>
 </ul>
 <p>It is recommended to customize the rule with the limit values that correspond to the web application.</p>
 <h2>Sensitive Code Example</h2>
@@ -38,6 +38,23 @@ public class MyController : Controller
     }
 }
 </pre>
+<p>In <a href="https://docs.microsoft.com/en-us/troubleshoot/aspnet/create-web-config">Web.config</a>:</p>
+<pre>
+&lt;configuration&gt;
+    &lt;system.web&gt;
+        &lt;httpRuntime maxRequestLength="81920" executionTimeout="3600" /&gt;
+        &lt;!-- Sensitive: maxRequestLength is exprimed in KB, so 81920KB = 80MB  --&gt;
+    &lt;/system.web&gt;
+    &lt;system.webServer&gt;
+        &lt;security&gt;
+            &lt;requestFiltering&gt;
+                &lt;requestLimits maxAllowedContentLength="83886080" /&gt;
+                &lt;!-- Sensitive: maxAllowedContentLength is exprimed in bytes, so 83886080B = 80MB  --&gt;
+            &lt;/requestFiltering&gt;
+        &lt;/security&gt;
+    &lt;/system.webServer&gt;
+&lt;/configuration&gt;
+</pre>
 <h2>Compliant Solution</h2>
 <pre>
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +75,23 @@ public class MyController : Controller
     // ...
     }
 }
+</pre>
+<p>In <a href="https://docs.microsoft.com/en-us/troubleshoot/aspnet/create-web-config">Web.config</a>:</p>
+<pre>
+&lt;configuration&gt;
+    &lt;system.web&gt;
+        &lt;httpRuntime maxRequestLength="8192" executionTimeout="3600" /&gt;
+        &lt;!-- Compliant: maxRequestLength is exprimed in KB, so 8192KB = 8MB  --&gt;
+    &lt;/system.web&gt;
+    &lt;system.webServer&gt;
+        &lt;security&gt;
+            &lt;requestFiltering&gt;
+                &lt;requestLimits maxAllowedContentLength="8388608" /&gt;
+                &lt;!-- Comliant: maxAllowedContentLength is exprimed in bytes, so 8388608B = 8MB  --&gt;
+            &lt;/requestFiltering&gt;
+        &lt;/security&gt;
+    &lt;/system.webServer&gt;
+&lt;/configuration&gt;
 </pre>
 <h2>See</h2>
 <ul>

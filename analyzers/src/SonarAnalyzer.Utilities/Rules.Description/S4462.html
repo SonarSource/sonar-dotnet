@@ -10,31 +10,38 @@ can cause deadlocks and unexpected blocking of context threads.</p>
   (synchronously) waiting for the <code>async</code> method to complete. They’re each waiting for the other, causing a deadlock.</p>
 </blockquote>
 <table>
-  <tbody>
+  <colgroup>
+    <col style="width: 33.3333%;">
+    <col style="width: 33.3333%;">
+    <col style="width: 33.3334%;">
+  </colgroup>
+  <thead>
     <tr>
       <th>To Do This …</th>
       <th>Instead of This …</th>
       <th>Use This</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
-      <td>Retrieve the result of a background task</td>
-      <td><code>Task.Wait</code>, <code>Task.Result</code> or <code>Task.GetAwaiter.GetResult</code></td>
-      <td><code>await</code></td>
+      <td><p>Retrieve the result of a background task</p></td>
+      <td><p><code>Task.Wait</code>, <code>Task.Result</code> or <code>Task.GetAwaiter.GetResult</code></p></td>
+      <td><p><code>await</code></p></td>
     </tr>
     <tr>
-      <td>Wait for any task to complete</td>
-      <td><code>Task.WaitAny</code></td>
-      <td><code>await Task.WhenAny</code></td>
+      <td><p>Wait for any task to complete</p></td>
+      <td><p><code>Task.WaitAny</code></p></td>
+      <td><p><code>await Task.WhenAny</code></p></td>
     </tr>
     <tr>
-      <td>Retrieve the results of multiple tasks</td>
-      <td><code>Task.WaitAll</code></td>
-      <td><code>await Task.WhenAll</code></td>
+      <td><p>Retrieve the results of multiple tasks</p></td>
+      <td><p><code>Task.WaitAll</code></p></td>
+      <td><p><code>await Task.WhenAll</code></p></td>
     </tr>
     <tr>
-      <td>Wait a period of time</td>
-      <td><code>Thread.Sleep</code></td>
-      <td><code>await Task.Delay</code></td>
+      <td><p>Wait a period of time</p></td>
+      <td><p><code>Thread.Sleep</code></p></td>
+      <td><p><code>await Task.Delay</code></p></td>
     </tr>
   </tbody>
 </table>
@@ -79,7 +86,7 @@ public static class DeadlockDemo
 <ul>
   <li> Main methods of Console Applications are not subject to this deadlock issue and so are ignored by this rule. </li>
   <li> <code>Thread.Sleep</code> is also ignored when it is used in a non-<code>async</code> method. </li>
-  <li> Calls chained after <code>Task.Run</code> or <code>Task.Factory.StartNew</code> are ignored because they don't suffer from this deadlock issue
+  <li> Calls chained after <code>Task.Run</code> or <code>Task.Factory.StartNew</code> are ignored because they don’t suffer from this deadlock issue
   </li>
 </ul>
 <h2>See</h2>

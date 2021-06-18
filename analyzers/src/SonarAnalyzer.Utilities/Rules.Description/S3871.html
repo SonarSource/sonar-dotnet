@@ -1,7 +1,7 @@
 <p>The point of having custom exception types is to convey more information than is available in standard types. But custom exception types must be
-<code>public</code> for that to work. </p>
-<p>If a method throws a non-public exception, the best you can do on the caller's side is to <code>catch</code> the closest <code>public</code> base
-of the class. That is, you lose all that custom information you created the exception type to pass. </p>
+<code>public</code> for that to work.</p>
+<p>If a method throws a non-public exception, the best you can do on the caller’s side is to <code>catch</code> the closest <code>public</code> base
+of the class. That is, you lose all that custom information you created the exception type to pass.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 internal class MyException : Exception   // Noncompliant

@@ -3,7 +3,7 @@ Thus, data validation implemented in constructors can be bypassed if serialized 
 <h2>Ask Yourself Whether</h2>
 <ul>
   <li> The data validation implemented in constructors enforces a relevant security check. </li>
-  <li> Objects instantiated via deserialization don't run the same security checks as the ones executed when objects are created through constructors.
+  <li> Objects instantiated via deserialization don’t run the same security checks as the ones executed when objects are created through constructors.
   </li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
@@ -13,7 +13,7 @@ Thus, data validation implemented in constructors can be bypassed if serialized 
   especially when the serialized object can be controlled by an attacker. </li>
 </ul>
 <h2>Sensitive Code Example</h2>
-<p>When a <code>serializable</code> class doesn't inherit from <a
+<p>When a <code>serializable</code> class doesn’t inherit from <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable?view=netframework-4.8">ISerializable</a> or <a
 href="https://docs.microsoft.com/fr-fr/dotnet/api/system.runtime.serialization.ideserializationcallback?view=netframework-4.8">IDeserializationCallback</a>
 types and has a constructor using its parameters in conditions:</p>
@@ -38,7 +38,7 @@ public class InternalUrl
 </pre>
 <p>When a class inherit from <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable?view=netframework-4.8">ISerializable</a> type, has a
-regular constructor using its parameters in conditions, but doesn't perform the same validation after deserialization:</p>
+regular constructor using its parameters in conditions, but doesn’t perform the same validation after deserialization:</p>
 <pre>
 [Serializable]
 public class InternalUrl : ISerializable
@@ -72,7 +72,7 @@ public class InternalUrl : ISerializable
 </pre>
 <p>When a class inherit from <a
 href="https://docs.microsoft.com/fr-fr/dotnet/api/system.runtime.serialization.ideserializationcallback?view=netframework-4.8">IDeserializationCallback</a>
-type, has a constructor using its parameters in conditions but the <code>IDeserializationCallback.OnDeserialization</code> method doesn't perform any
+type, has a constructor using its parameters in conditions but the <code>IDeserializationCallback.OnDeserialization</code> method doesn’t perform any
 conditional checks:</p>
 <pre>
 [Serializable]
