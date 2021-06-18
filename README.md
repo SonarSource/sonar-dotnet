@@ -96,4 +96,6 @@ your Roslyn analyzer in a SonarQube plugin, if you want to manage your rules fro
 
 Copyright 2014-2021 SonarSource.
 
-Licensed under the [GNU Lesser General Public License, Version 3.0](http://www.gnu.org/licenses/lgpl.txt)
+Licensed under the [GNU Lesser General Public License, Version 3.0](http://www.gnu.org/licenses/lgpl.txt) 
+
+Tpo
