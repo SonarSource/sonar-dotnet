@@ -13,7 +13,7 @@ namespace Tests.Diagnostics
         public void Foo(Object x, Object y)
         {
             var fruit = x as Fruit;
-            if (fruit is not Fruit) // FN
+            if (fruit is not Fruit) // Compliant, redundant condition, not related for the current rule
             {
             }
 
@@ -37,9 +37,14 @@ namespace Tests.Diagnostics
                 var vv = (Vegetable)v; // FN
             }
 
-            if (x is Fruit f2)
+            if (x is Fruit f2)       // Secondary
             {
-                var ff = (Fruit)f2; // FN
+                var ff = (Fruit)f2;  // Noncompliant {{Remove this redundant cast.}}
+            }
+
+            if (x is Fruit f3)       // Noncompliant {{Replace this type-check-and-cast sequence with an 'as' and a null check.}}
+            {
+                var ff2 = (Fruit)x;  // Secondary
             }
 
             var message = x switch
