@@ -5,6 +5,10 @@
   <Import Project="..\Directory.Build.props" />
   <Import Project="$(MSBuildThisFileDirectory)\..\StyleCopAnalyzers.targets" />
 
+  <PropertyGroup>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+  </PropertyGroup>
+  
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)\..\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
   </ItemGroup>

@@ -55,7 +55,6 @@
   <PropertyGroup>
     <WarningsAsErrors />
     <NoWarn>NU1605</NoWarn>
-    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DefineConstants>TRACE;CS</DefineConstants>
