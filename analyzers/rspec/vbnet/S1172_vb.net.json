@@ -12,7 +12,5 @@
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-1172",
   "sqKey": "S1172",
-  "scope": "All",
-  "securityStandards": {
-  }
+  "scope": "All"
 }

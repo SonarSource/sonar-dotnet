@@ -12,7 +12,5 @@
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-1116",
   "sqKey": "S1116",
-  "scope": "All",
-  "securityStandards": {
-  }
+  "scope": "All"
 }

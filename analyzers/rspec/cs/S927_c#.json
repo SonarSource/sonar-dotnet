@@ -12,7 +12,5 @@
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-927",
   "sqKey": "S927",
-  "scope": "All",
-  "securityStandards": {
-  }
+  "scope": "All"
 }
