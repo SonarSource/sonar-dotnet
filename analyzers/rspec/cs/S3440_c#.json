@@ -1,5 +1,5 @@
 {
-  "title": "Variables should not be checked against the values they're about to be assigned",
+  "title": "Variables should not be checked against the values they\u0027re about to be assigned",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

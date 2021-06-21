@@ -10,7 +10,8 @@
     "cwe",
     "privacy",
     "owasp-a6",
-    "owasp-a3"
+    "owasp-a3",
+    "owasp-m5"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-4426",
@@ -23,6 +24,12 @@
     "OWASP": [
       "A3",
       "A6"
+    ],
+    "OWASP Mobile": [
+      "M5"
+    ],
+    "MASVS": [
+      "MSTG-CRYPTO-3"
     ]
   }
 }

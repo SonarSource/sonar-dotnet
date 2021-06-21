@@ -6,9 +6,7 @@
     "func": "Constant\/Issue",
     "constantCost": "30min"
   },
-  "tags": [
-    
-  ],
+  "tags": [],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-2070",
   "sqKey": "S2070",

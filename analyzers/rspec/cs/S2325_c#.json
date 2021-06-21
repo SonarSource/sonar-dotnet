@@ -1,5 +1,5 @@
 {
-  "title": "Methods and properties that don't access instance data should be static",
+  "title": "Methods and properties that don\u0027t access instance data should be static",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

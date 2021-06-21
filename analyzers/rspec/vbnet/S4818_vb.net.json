@@ -2,9 +2,7 @@
   "title": "Using Sockets is security-sensitive",
   "type": "SECURITY_HOTSPOT",
   "status": "deprecated",
-  "tags": [
-    
-  ],
+  "tags": [],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-4818",
   "sqKey": "S4818",

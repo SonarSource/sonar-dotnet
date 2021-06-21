@@ -1,5 +1,5 @@
 {
-  "title": "Arrays should be initialized using the \"... = {}\" syntax",
+  "title": "Arrays should be initialized using the \"... \u003d {}\" syntax",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

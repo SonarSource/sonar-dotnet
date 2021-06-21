@@ -2,8 +2,8 @@
 <code>private</code> <code>delegate</code> field to back the event, as well as generating the implicit <code>add</code> and <code>remove</code>
 methods.</p>
 <p>When a <code>virtual</code> field-like <code>event</code> is overridden by another field-like <code>event</code>, the behavior of the C# compiler
-is to generate a new <code>private</code> <code>delegate</code> field in the derived class, separate from the parent's field. This results in multiple
-and separate events being created, which is rarely what's actually intended.</p>
+is to generate a new <code>private</code> <code>delegate</code> field in the derived class, separate from the parent’s field. This results in multiple
+and separate events being created, which is rarely what’s actually intended.</p>
 <p>To prevent this, remove the <code>virtual</code> designation from the parent class event.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>

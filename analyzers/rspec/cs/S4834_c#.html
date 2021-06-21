@@ -7,12 +7,12 @@ could lead to vulnerabilities:</p>
 </ul>
 <p>Granting correct permissions to users, applications, groups or roles and defining required permissions that allow access to a resource is
 sensitive, must therefore be done with care. For instance, it is obvious that only users with administrator privilege should be authorized to
-add/remove the administrator permission of another user. </p>
+add/remove the administrator permission of another user.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
   <li> Granted permission to an entity (user, application) allow access to information or functionalities not needed by this entity. </li>
   <li> Privileges are easily acquired (eg: based on the location of the user, type of device used, defined by third parties, does not require approval
-  ...). </li>
+  …​). </li>
   <li> Inherited permission, default permission, no privileges (eg: anonymous user) is authorized to access to a protected resource. </li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
@@ -22,8 +22,8 @@ add/remove the administrator permission of another user. </p>
   <li> Use a well-defined access control model like <a href="https://en.wikipedia.org/wiki/Role-based_access_control">RBAC</a> or <a
   href="https://en.wikipedia.org/wiki/Access-control_list">ACL</a>. </li>
   <li> Entities' permissions should be reviewed regularly to remove permissions that are no longer needed. </li>
-  <li> Respect <a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege">the principle of least privilege</a> ("_an entity has access only
-  the information and resources that are necessary for its legitimate purpose_"). </li>
+  <li> Respect <a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege">the principle of least privilege</a> ("<em>an entity has access
+  only the information and resources that are necessary for its legitimate purpose</em>"). </li>
 </ul>
 <h2>Sensitive Code Example</h2>
 <pre>

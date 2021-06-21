@@ -1,6 +1,6 @@
 <p>When you implement <code>IComparable</code> or <code>IComparable&lt;T&gt;</code> on a class you should also override <code>Equals(object)</code>
 and overload the comparison operators (<code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>,
-<code>&gt;=</code>). That's because the CLR cannot automatically call your <code>CompareTo</code> implementation from <code>Equals(object)</code> or
+<code>&gt;=</code>). That’s because the CLR cannot automatically call your <code>CompareTo</code> implementation from <code>Equals(object)</code> or
 from the base comparison operator implementations. Additionally, it is best practice to override <code>GetHashCode</code> along with
 <code>Equals</code>.</p>
 <p>This rule raises an issue when a class implements <code>IComparable</code> without also overriding <code>Equals(object)</code> and the comparison

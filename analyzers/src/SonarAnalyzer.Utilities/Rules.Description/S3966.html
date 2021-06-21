@@ -6,7 +6,7 @@ already-disposed object.</p>
 implementation still do it. Thus it is safer to not dispose an object twice when possible.</p>
 <p>This rule raises an issue when, in the same method, the <code>Dispose</code> method is explicitly called twice on the same object, or when
 <code>using</code> is used with a direct call to <code>Dispose()</code>.</p>
-<h2>Noncompliant Code Examples</h2>
+<h2>Noncompliant Code Example</h2>
 <pre>
 using (var d = new Disposable()) // Noncompliant
 {

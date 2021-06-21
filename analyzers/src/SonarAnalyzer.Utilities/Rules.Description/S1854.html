@@ -1,5 +1,5 @@
 <p>A dead store happens when a local variable is assigned a value that is not read by any subsequent instruction. Calculating or retrieving a value
-only to then overwrite it or throw it away, could indicate a serious error in the code. Even if it's not an error, it is at best a waste of resources.
+only to then overwrite it or throw it away, could indicate a serious error in the code. Even if it’s not an error, it is at best a waste of resources.
 Therefore all calculated values should be used.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
@@ -12,11 +12,11 @@ i = a + b;
 i += compute();
 </pre>
 <h2>Exceptions</h2>
-<p>No issue is reported when </p>
+<p>No issue is reported when</p>
 <ul>
   <li> the analyzed method body contains <code>try</code> blocks, </li>
   <li> a lambda expression captures the local variables, or </li>
-  <li> the variable is unused (case covered by Rule S1481) </li>
+  <li> the variable is unused (case covered by Rule {rule:csharpsquid:S1481}) </li>
   <li> initializations to <code>-1</code>, <code>0</code>, <code>1</code>, <code>null</code>, <code>true</code>, <code>false</code>, <code>""</code>
   and <code>string.Empty</code>. </li>
 </ul>

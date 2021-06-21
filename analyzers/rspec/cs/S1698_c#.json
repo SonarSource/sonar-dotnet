@@ -1,5 +1,5 @@
 {
-  "title": "\"==\" should not be used when \"Equals\" is overridden",
+  "title": "\"\u003d\u003d\" should not be used when \"Equals\" is overridden",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

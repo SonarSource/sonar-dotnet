@@ -1,6 +1,6 @@
 <p>When a non-<code>static</code> class field is annotated with <code>ThreadStatic</code>, the code seems to show that the field can have different
-values for different calling threads, but that's not the case, since the <code>ThreadStatic</code> attribute is simply ignored on
-non-<code>static</code> fields. </p>
+values for different calling threads, but that’s not the case, since the <code>ThreadStatic</code> attribute is simply ignored on
+non-<code>static</code> fields.</p>
 <p>So <code>ThreadStatic</code> should either be removed or replaced with a use of the <code>ThreadLocal&lt;T&gt;</code> class, which gives a similar
 behavior for non-<code>static</code> fields.</p>
 <h2>Noncompliant Code Example</h2>

@@ -2,7 +2,7 @@
 class is a safe alternative and should be preferred. At minimum, an overload of the method taking a <code>System.Uri</code> as a parameter should be
 provided in each class that contains a method with an apparent Uri passed as a <code>string</code>.</p>
 <p>This rule raises issues when a method has a string parameter with a name containing "uri", "Uri", "urn", "Urn", "url" or "Url", and the type
-doesn't declare a corresponding overload taking an <code>System.Uri</code> parameter instead.</p>
+doesn’t declare a corresponding overload taking an <code>System.Uri</code> parameter instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 using System;

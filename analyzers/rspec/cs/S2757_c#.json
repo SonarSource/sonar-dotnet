@@ -1,14 +1,12 @@
 {
-  "title": "\"=+\" should not be used instead of \"+=\"",
+  "title": "\"\u003d+\" should not be used instead of \"+\u003d\"",
   "type": "BUG",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "2min"
   },
-  "tags": [
-    
-  ],
+  "tags": [],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-2757",
   "sqKey": "S2757",

@@ -1,14 +1,12 @@
 {
-  "title": "'Not' boolean operator should not be repeated",
+  "title": "\u0027Not\u0027 boolean operator should not be repeated",
   "type": "BUG",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
-  "tags": [
-    
-  ],
+  "tags": [],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-2761",
   "sqKey": "S2761",

@@ -1,5 +1,5 @@
 <p>Because parameter names could be changed during refactoring, they should not be spelled out literally in strings. Instead, use
-<code>nameof()</code>, and the string that's output will always be correct.</p>
+<code>nameof()</code>, and the string that’s output will always be correct.</p>
 <p>This rule raises an issue when a string in the <code>throw</code> statement contains the name of one of the method parameters.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
@@ -31,7 +31,7 @@ void DoSomething(int someParameter)
 </pre>
 <h2>Exceptions</h2>
 <ul>
-  <li> The rule doesn't raise any issue when using C# &lt; 6.0. </li>
+  <li> The rule doesn’t raise any issue when using C# &lt; 6.0. </li>
   <li> When the parameter name is contained in a sentence inside the <code>throw</code> statement string, the rule will raise an issue only if the
   parameter name is at least 5 characters long. This is to avoid false positives. </li>
 </ul>

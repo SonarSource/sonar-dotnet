@@ -1,5 +1,5 @@
 <p>During the deserialization process, the state of an object will be reconstructed from the serialized data stream which can contain dangerous
-operations. </p>
+operations.</p>
 <p>For example, a well-known attack vector consists in serializing an object of type <code><a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.codedom.compiler.tempfilecollection.-ctor?view=netframework-4.8#System_CodeDom_Compiler_TempFileCollection__ctor">TempFileCollection</a></code>
 with arbitrary files (defined by an attacker) which will be deleted on the application deserializing this object (when the <a
@@ -8,7 +8,7 @@ the TempFileCollection object is called). This kind of types are called "<a href
 <p>Instead of using <code>BinaryFormatter</code> and similar serializers, it is recommended to use safer alternatives in most of the cases, such as <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.xml.serialization.xmlserializer?view=net-5.0">XmlSerializer</a> or <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.datacontractserializer?view=net-5.0">DataContractSerializer</a>. If
-it's not possible then try to mitigate the risk by restricting the types allowed to be deserialized:</p>
+it’s not possible then try to mitigate the risk by restricting the types allowed to be deserialized:</p>
 <ul>
   <li> by implementing an "allow-list" of types, but keep in mind that novel dangerous types are regularly discovered and this protection could be
   insufficient over time. </li>

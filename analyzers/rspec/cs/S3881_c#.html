@@ -2,11 +2,11 @@
 leaks or more severe bugs.</p>
 <p>This rule raises an issue when the recommended dispose pattern, as defined by Microsoft, is not adhered to. See the <strong>Compliant
 Solution</strong> section for examples.</p>
-<p>Satisfying the rule's conditions will enable potential derived classes to correctly dispose the members of your class:</p>
+<p>Satisfying the rule’s conditions will enable potential derived classes to correctly dispose the members of your class:</p>
 <ul>
   <li> <code>sealed</code> classes are not checked. </li>
   <li> If a base class implements <code>IDisposable</code> your class should not have <code>IDisposable</code> in the list of its interfaces. In such
-  cases it is recommended to override the base class's <code>protected virtual void Dispose(bool)</code> method or its equivalent. </li>
+  cases it is recommended to override the base class’s <code>protected virtual void Dispose(bool)</code> method or its equivalent. </li>
   <li> The class should not implement <code>IDisposable</code> explicitly, e.g. the <code>Dispose()</code> method should be public. </li>
   <li> The class should contain <code>protected virtual void Dispose(bool)</code> method. This method allows the derived classes to correctly dispose
   the resources of this class. </li>
@@ -119,7 +119,7 @@ public class Foo4 : DisposableBase
 }
 </pre>
 <h2>See</h2>
-<p>Refer to </p>
+<p>Refer to</p>
 <ul>
   <li> <a href="https://msdn.microsoft.com/en-us/library/498928w2.aspx">MSDN</a> for complete documentation on the dispose pattern. </li>
   <li> <a href="https://blog.stephencleary.com/2009/08/how-to-implement-idisposable-and.html">Stephen Cleary</a> for excellent Q&amp;A about

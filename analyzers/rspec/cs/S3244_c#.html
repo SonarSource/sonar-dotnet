@@ -1,4 +1,4 @@
-<p>It is possible to subscribe to events with anonymous delegates, but having done so, it is impossible to unsubscribe from them. That's because the
+<p>It is possible to subscribe to events with anonymous delegates, but having done so, it is impossible to unsubscribe from them. That’s because the
 process of subscribing adds the delegate to a list. The process of unsubscribing essentially says: remove <em>this item</em> from the subscription
 list. But because an anonymous delegate was used in both cases, the unsubscribe attempt tries to remove a different item from the list than was added.
 The result: <code>NOOP</code>.</p>

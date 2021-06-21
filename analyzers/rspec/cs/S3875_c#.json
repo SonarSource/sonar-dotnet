@@ -1,5 +1,5 @@
 {
-  "title": "\"operator==\" should not be overloaded on reference types",
+  "title": "\"operator\u003d\u003d\" should not be overloaded on reference types",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

@@ -1,5 +1,5 @@
-<p>An <code>async</code> method with a <code>void</code> return type is a "fire and forget" method best reserved for event handlers because there's no
-way to wait for the method's execution to complete and respond accordingly. There's also no way to <code>catch</code> exceptions thrown from the
+<p>An <code>async</code> method with a <code>void</code> return type is a "fire and forget" method best reserved for event handlers because there’s no
+way to wait for the method’s execution to complete and respond accordingly. There’s also no way to <code>catch</code> exceptions thrown from the
 method.</p>
 <p>Having an <code>async void</code> method that is not an event handler could mean your program works some times and not others because of timing
 issues. Instead, <code>async</code> methods should return <code>Task</code>.</p>

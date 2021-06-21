@@ -1,9 +1,9 @@
 <p>Passing a parameter by reference, which is what happens when you use the <code>out</code> or <code>ref</code> parameter modifiers, means that the
 method will receive a pointer to the argument, rather than the argument itself. If the argument was a value type, the method will be able to change
-the argument's values. If it was a reference type, then the method receives a pointer to a pointer, which is usually not what was intended. Even when
-it is what was intended, this is the sort of thing that's difficult to get right, and should be used with caution.</p>
+the argument’s values. If it was a reference type, then the method receives a pointer to a pointer, which is usually not what was intended. Even when
+it is what was intended, this is the sort of thing that’s difficult to get right, and should be used with caution.</p>
 <p>This rule raises an issue when <code>out</code> or <code>ref</code> is used on a non-<code>Optional</code> parameter in a public method.
-<code>Optional</code> parameters are covered by S3447.</p>
+<code>Optional</code> parameters are covered by {rule:csharpsquid:S3447}.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public void GetReply(

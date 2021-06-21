@@ -1,6 +1,6 @@
-<p>If you're using a <code>struct</code>, it is likely because you're interested in performance. But by failing to implement
-<code>IEquatable&lt;T&gt;</code> you're loosing performance when comparisons are made because without <code>IEquatable&lt;T&gt;</code>, boxing and
-reflection are used to make comparisons. </p>
+<p>If you’re using a <code>struct</code>, it is likely because you’re interested in performance. But by failing to implement
+<code>IEquatable&lt;T&gt;</code> you’re loosing performance when comparisons are made because without <code>IEquatable&lt;T&gt;</code>, boxing and
+reflection are used to make comparisons.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 struct MyStruct  // Noncompliant

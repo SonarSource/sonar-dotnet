@@ -1,7 +1,7 @@
 <p>Some constructors of the <code>ArgumentException</code>, <code>ArgumentNullException</code>, <code>ArgumentOutOfRangeException</code> and
 <code>DuplicateWaitObjectException</code> classes must be fed with a valid parameter name. This rule raises an issue in two cases:</p>
 <ul>
-  <li> When this parameter name doesn't match any existing ones. </li>
+  <li> When this parameter name doesn’t match any existing ones. </li>
   <li> When a call is made to the default (parameterless) constructor </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
@@ -35,5 +35,5 @@ public void Foo(Bar a, Bar b)
 }
 </pre>
 <h2>Exceptions</h2>
-<p>The rule won't raise an issue if the parameter name is not a constant value (inline declaration, nameof() or const variable).</p>
+<p>The rule won’t raise an issue if the parameter name is not a constant value (inline declaration, nameof() or const variable).</p>
 
