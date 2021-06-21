@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="SonarAnalyzer.99d84a73-1512-4999-adcc-29d37452719a" Version="8.25.0.0" Language="en-US" Publisher="SonarSource SA" />
+        <Identity Id="SonarAnalyzer.99d84a73-1512-4999-adcc-29d37452719a" Version="8.26.0.0" Language="en-US" Publisher="SonarSource SA" />
         <DisplayName>SonarAnalyzer for CSharp and VB.NET</DisplayName>
         <Description xml:space="preserve">This extension provides on-the-fly feedback to developers on new bugs and quality issues injected into C# and VB.Net code.</Description>
         <MoreInfo>http://vs.sonarlint.org</MoreInfo>
