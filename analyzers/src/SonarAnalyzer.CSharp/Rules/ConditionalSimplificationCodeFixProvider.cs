@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class ConditionalSimplificationCodeFixProvider : SonarCodeFixProvider
     {
-        internal const string Title = "Simplify condition";
+        private const string Title = "Simplify condition";
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(ConditionalSimplification.DiagnosticId);
         public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
@@ -45,19 +45,23 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostic = context.Diagnostics.First();
             var oldNode = root.FindNode(diagnostic.Location.SourceSpan);
+            if (oldNode is GlobalStatementSyntax globalStatementSyntax)
+            {
+                oldNode = globalStatementSyntax.Statement;
+            }
+
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
             var newNode = Simplify(diagnostic, semanticModel, oldNode, out var annotation);
             if (newNode != null)
             {
                 context.RegisterCodeFix(CodeAction.Create(Title, c =>
-                    {
-                        var nodeToAddWithoutAnnotation = RemoveAnnotation(newNode, annotation);
+                {
+                    var replacement = RemoveAnnotation(newNode, annotation).WithTriviaFrom(oldNode).WithAdditionalAnnotations(Formatter.Annotation);
 
-                        var newRoot = root.ReplaceNode(
-                            oldNode,
-                            nodeToAddWithoutAnnotation.WithTriviaFrom(oldNode).WithAdditionalAnnotations(Formatter.Annotation));
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }), context.Diagnostics);
+                    var newRoot = root.ReplaceNode(oldNode, replacement);
+
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                }), context.Diagnostics);
             }
         }
 
@@ -275,4 +279,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

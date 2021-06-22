@@ -72,6 +72,24 @@ namespace SonarAnalyzer.Rules.CSharp
                     return true;
                 }
             }
+
+            if (IsPatternExpressionSyntaxWrapper.IsInstance(expression.RemoveParentheses()))
+            {
+                var isPatternWrapper = (IsPatternExpressionSyntaxWrapper)expression.RemoveParentheses();
+                if (isPatternWrapper.IsNotNull())
+                {
+                    comparedIsNullInTrue = false;
+                    compared = isPatternWrapper.Expression;
+                    return true;
+                }
+                else if (isPatternWrapper.IsNull())
+                {
+                    comparedIsNullInTrue = true;
+                    compared = isPatternWrapper.Expression;
+                    return true;
+                }
+            }
+
             return false;
         }
 
@@ -148,7 +166,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && ExpressionCanBeNull(comparedToNull, context.SemanticModel)
                 && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
             {
-                if(IsCoalesceAssignmentSupported(context) && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
+                if (IsCoalesceAssignmentSupported(context) && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), "??="));
                 }

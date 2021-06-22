@@ -3,10 +3,11 @@
 Apple a = null, b = null;
 bool condition = false;
 
-a = a is not null ? (a) : b; // FN
+a = a is not null ? (a) : b; // Noncompliant a ??= b;
+a = a is null ? (b) : a; // Noncompliant a ??= b;
 
 Apple x;
-if (a is not null) // Noncompliant {{Use the '?:' operator here.}}
+if (a is not null) // Noncompliant {{Use the '??' operator here.}}
 {
     x = a;
 }
@@ -15,13 +16,13 @@ else
     x = b;
 }
 
-if (a is null) // FN
+if (a is null) // Noncompliant {{Use the '??=' operator here.}}
 {
     a = b;
 }
 
-a = (a is not null) ? a : Identity(new()); // FN ??=
-b = (a is not null) ? Identity(a) : Identity(new()); // FN ??
+a = (a is not null) ? a : Identity(new()); // Noncompliant {{Use the '??=' operator here.}}
+b = (a is not null) ? Identity(a) : Identity(new()); // Noncompliant {{Use the '??' operator here.}}
 a = a ?? new(); // Noncompliant {{Use the '??=' operator here.}}
 
 Fruit elem;

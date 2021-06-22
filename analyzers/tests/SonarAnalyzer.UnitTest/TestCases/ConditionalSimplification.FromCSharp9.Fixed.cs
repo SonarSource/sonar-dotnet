@@ -3,25 +3,16 @@
 Apple a = null, b = null;
 bool condition = false;
 
-a = a is not null ? (a) : b; // FN
+a ??= b; // Fixed
+a ??= b; // Fixed
 
 Apple x;
-if (a is not null) // Fixed
-{
-    x = a;
-}
-else
-{
-    x = b;
-}
+x = a ?? b;
 
-if (a is null) // FN
-{
-    a = b;
-}
+a ??= b;
 
-a = (a is not null) ? a : Identity(new()); // FN ??=
-b = (a is not null) ? Identity(a) : Identity(new()); // FN ??
+a ??= Identity(new()); // Fixed
+b = Identity(a ?? new()); // Fixed
 a ??= new(); // Fixed
 
 Fruit elem;
