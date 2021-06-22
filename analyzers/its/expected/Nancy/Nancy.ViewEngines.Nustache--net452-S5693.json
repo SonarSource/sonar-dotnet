@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S5693",
+"message":  "Make sure the content length limit is safe here.",
+"location":  {
+"uri":  "sources\Nancy\samples\Nancy.Demo.Hosting.Owin\Web.config",
+"region":  {
+"startLine":  20,
+"startColumn":  18,
+"endLine":  20,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S5693",
+"message":  "Make sure the content length limit is safe here.",
+"location":  {
+"uri":  "sources\Nancy\samples\Nancy.Demo.Hosting.Owin\Web.config",
+"region":  {
+"startLine":  26,
+"startColumn":  24,
+"endLine":  26,
+"endColumn":  47
+}
+}
+}
+]
+}

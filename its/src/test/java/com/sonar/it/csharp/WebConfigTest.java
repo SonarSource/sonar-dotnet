@@ -44,9 +44,13 @@ public class WebConfigTest extends WebConfigBase {
     Tests.analyzeProject(temp, projectName, null);
     List<Hotspot> hotspots = Tests.getHotspots(projectName);
     // One from project directory, one from PathOutsideProjectRoot added with Directory.Build.props
-    assertThat(hotspots.size()).isEqualTo(2);
-    assertHotspot(hotspots.get(0), 6, "PathOutsideProjectRoot/Web.config");
-    assertHotspot(hotspots.get(1), 4, "WebConfig.CSharp/Web.config");
+    assertThat(hotspots.size()).isEqualTo(6);
+    assertRequestValidationHotspot(hotspots.get(0), 6, "PathOutsideProjectRoot/Web.config");
+    assertRequestValidationHotspot(hotspots.get(1), 4, "WebConfig.CSharp/Web.config");
+    assertContentLengthHotspot(hotspots.get(2), 5, "PathOutsideProjectRoot/Web.config");
+    assertContentLengthHotspot(hotspots.get(3), 14, "PathOutsideProjectRoot/Web.config");
+    assertContentLengthHotspot(hotspots.get(4), 6, "WebConfig.CSharp/Web.config");
+    assertContentLengthHotspot(hotspots.get(5), 14, "WebConfig.CSharp/Web.config");
 
     List<Issues.Issue> issues = Tests.getIssues(projectName);
     assertThat(issues.size()).isEqualTo(6);

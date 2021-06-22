@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S5693",
+"message":  "Make sure the content length limit is safe here.",
+"location":  {
+"uri":  "sources\WebConfig\Views\Web.config",
+"region":  {
+"startLine":  35,
+"startColumn":  24,
+"endLine":  35,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S5693",
+"message":  "Make sure the content length limit is safe here.",
+"location":  {
+"uri":  "sources\WebConfig\Views\Web.config",
+"region":  {
+"startLine":  41,
+"startColumn":  46,
+"endLine":  41,
+"endColumn":  62
+}
+}
+}
+]
+}
