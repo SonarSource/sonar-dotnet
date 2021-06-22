@@ -352,11 +352,72 @@ namespace Tests.Diagnostics
 // https://github.com/SonarSource/sonar-dotnet/issues/4015
 public class Repro_4015
 {
-    public void Method()
-    {
-        string localVariable = null;    // Noncompliant FP, changing the Expression<Func<T>> below changes the behavior of the code
+    Expression<Func<string>> fieldExpression;
+    Func<string> fieldFunc;
 
+    public void Compliant_SimpleLambda()
+    {
+        string localVariable = null;    // Compliant, changing the Expression<Func<T>> below changes the behavior of the code
+        WithExpressionArgument(x => localVariable);
+    }
+
+    public void Compliant_ParenthesizedLambda()
+    {
+        string localVariable = null;    // Compliant, changing the Expression<Func<T>> below changes the behavior of the code
         WithExpressionArgument(() => localVariable);
+    }
+
+    public void Compliant_ParenthesizedExpression()
+    {
+        string localVariable = null;
+        WithExpressionArgument(((() => localVariable)));
+    }
+
+    public void Noncompliant_Func()
+    {
+        string localVariable = null;    // Noncompliant, this can be const
+        WithFuncArgument(() => localVariable);
+    }
+
+    public void Compliant_Assignment()
+    {
+        string a = null;
+        string b = null;
+        string c = null;
+        string d = null;
+        var repro = new Repro_4015();
+        Expression<Func<string>> variableExpression;
+
+        // Compliant cases, changing the Expression<Func<T>> below changes the behavior of the code
+        fieldExpression = () => a;
+        WithExpressionArgument(fieldExpression);
+
+        repro.fieldExpression = () => b;
+        WithExpressionArgument(repro.fieldExpression);
+
+        variableExpression = () => c;
+        WithExpressionArgument(variableExpression);
+
+        variableExpression = ((() => d));
+        WithExpressionArgument(variableExpression);
+    }
+
+    public void Noncompliant_Assignment()
+    {
+        string a = null;    // Noncompliant
+        string b = null;    // Noncompliant
+        string c = null;    // Noncompliant
+        var repro = new Repro_4015();
+        Func<string> variableFunc;
+
+        fieldFunc = () => a;
+        WithFuncArgument(fieldFunc);
+
+        repro.fieldFunc = () => b;
+        WithFuncArgument(repro.fieldFunc);
+
+        variableFunc = () => c;
+        WithFuncArgument(variableFunc);
     }
 
     private void WithExpressionArgument(Expression<Func<string>> expression)
@@ -367,4 +428,39 @@ public class Repro_4015
         }
     }
 
+    private void WithExpressionArgument(Expression<Func<string, string>> expression)
+    {
+        if (!(expression.Body is MemberExpression))
+        {
+            throw new InvalidOperationException($"The expression body is a {expression.Body.GetType().Name}, but MemberExpression is expected.");
+        }
+    }
+
+    private void WithFuncArgument(Func<string> expression)
+    {
+        expression();
+    }
+
+    public void UndefinedInvocationSymbol()
+    {
+        string localVariable = null;        // Noncompliant
+        Undefined(() => localVariable);     // Error [CS0103]: The name 'Undefined' does not exist in the current context
+        undefined = () => localVariable;    // Error [CS0103]: The name 'undefined' does not exist in the current context
+    }
+
+    public void IndexerIndexedByLambda_CrazyCoverage()
+    {
+        string localVariable = null;        // Noncompliant
+        this[() => localVariable] = 42;     // Case with lambda on the left side of an assignment
+    }
+
+    public int this[Func<string> key]
+    {
+        get
+        {
+            var k = key();
+            return 42;
+        }
+        set { }
+    }
 }

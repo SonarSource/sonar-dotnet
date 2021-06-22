@@ -41,7 +41,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private enum DeclarationType { CannotBeConst, Value, Reference, String };
+        private enum DeclarationType
+        {
+            CannotBeConst,
+            Value,
+            Reference,
+            String
+        }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
@@ -142,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Where(MatchesIdentifier)
-                .Any(IsMutatingUse);
+                .Any(x => IsMutatingUse(semanticModel, x));
 
             static bool IsMethodLike(SyntaxNode arg) =>
                 arg is BaseMethodDeclarationSyntax
@@ -154,15 +160,34 @@ namespace SonarAnalyzer.Rules.CSharp
                 Equals(variableSymbol, semanticModel.GetSymbolInfo(id).Symbol);
         }
 
-        private static bool IsMutatingUse(IdentifierNameSyntax identifier) =>
+        private static bool IsMutatingUse(SemanticModel semanticModel, IdentifierNameSyntax identifier) =>
             identifier.Parent switch
             {
                 AssignmentExpressionSyntax assignmentExpression => Equals(identifier, assignmentExpression?.Left),
                 ArgumentSyntax argumentSyntax => argumentSyntax.IsInTupleAssignmentTarget() || !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None),
                 PostfixUnaryExpressionSyntax _ => true,
                 PrefixUnaryExpressionSyntax _ => true,
-                _ => false
+                _ => IsUsedAsLambdaExpression(semanticModel, identifier)
             };
+
+        private static bool IsUsedAsLambdaExpression(SemanticModel semanticModel, IdentifierNameSyntax identifier)
+        {
+            if (identifier.FirstAncestorOrSelf<LambdaExpressionSyntax>().GetSelfOrTopParenthesizedExpression() is { } lambda)
+            {
+                if (lambda.Parent is ArgumentSyntax argument
+                    && argument.FirstAncestorOrSelf<InvocationExpressionSyntax>() is { } invocation)
+                {
+                    var lookup = new CSharpMethodParameterLookup(invocation, semanticModel);
+                    return lookup.TryGetSymbol(argument, out var parameter) && parameter.IsType(KnownType.System_Linq_Expressions_Expression_T);
+                }
+                else if (lambda.Parent is AssignmentExpressionSyntax assignment)
+                {
+                    // Lambda cannot be on the left side, we don't need to check it
+                    return assignment.Left.IsKnownType(KnownType.System_Linq_Expressions_Expression_T, semanticModel);
+                }
+            }
+            return false;
+        }
 
         private static void Report(VariableDeclaratorSyntax declaratorSyntax, SyntaxNodeAnalysisContext c) =>
             c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
