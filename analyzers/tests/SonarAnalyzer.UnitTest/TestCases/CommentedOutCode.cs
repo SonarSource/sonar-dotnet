@@ -12,6 +12,12 @@ using System;
 // Noncompliant@+1
 // }
 using System;
+// Noncompliant@+1
+// ;}
+using System;
+// Noncompliant@+1
+// ; }
+using System;
 // foo ; {} bar
 using System;
 // ; {} foo
@@ -128,14 +134,33 @@ namespace Tests.Diagnostics
         // this should be compliant:
         // does *not* overwrite file if (still) exists
 
-        // FP https://github.com/SonarSource/sonar-dotnet/issues/2772
+        //  https://github.com/SonarSource/sonar-dotnet/issues/2772
         int c;
-        // Noncompliant@+1 - False positive, it's just a URL and it is not an interpolated string
+        // It's just a URL and it is not an interpolated string
         // http://localhost:7071/runtime/webhooks/EventGrid?functionName={functionname}
 
+        int rx;
+        // regex{2,5}
         int d;
-        // Noncompliant@+1
         // {this, is, a ,set}
+        int e;
+        // Noncompliant@+1
+        // {this, is, a ,set; }
+        int f;
+        // Noncompliant@+1
+        // {Command();}
+        int g;
+        // Noncompliant@+1
+        // {Command(); }
+        int h;
+        // Noncompliant@+1
+        // int Method() { }
+        int i;
+        // Noncompliant@+1
+        // int Method() {}
+        int j;
+        // Compliant, not a C# code, but a data sample
+        // { "json": "fragment" }
     }
 
     /**
@@ -157,3 +182,10 @@ namespace Tests.Diagnostics
     // Somec++ reference
     class Z { }
 }
+
+// While editing, it is possible to have a multiline comment trivia that does not contain the closing '*/' yet.
+public class A { }
+// Noncompliant@+3
+// Error@+1 [CS1035]: End-of-file found, '*/' expected
+/*
+ * { DoSomething(); }

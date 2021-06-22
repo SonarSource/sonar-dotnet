@@ -34,163 +34,115 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S125";
+        private const string DiagnosticId = "S125";
         private const string MessageFormat = "Remove this commented out code.";
+        private const int CommentMarkLength = 2;
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly string[] CodeEndings = { ";", "{", ";}", "{}" };
+        private static readonly string[] CodeParts = { "++", "catch(", "switch(", "try{", "else{" };
+        private static readonly string[] CodePartsWithRelationalOperator = { "for(", "if(", "while(" };
+        private static readonly string[] RelationalOperators = { "<", ">", "<=", ">=", "==", "!=" };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxTreeActionInNonGenerated(
-                c =>
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxTreeActionInNonGenerated(c =>
                 {
                     foreach (var token in c.Tree.GetRoot().DescendantTokens())
                     {
-                        CheckTrivias(token.LeadingTrivia, c);
-                        CheckTrivias(token.TrailingTrivia, c);
+                        CheckTrivias(c, token.LeadingTrivia);
+                        CheckTrivias(c, token.TrailingTrivia);
                     }
                 });
-        }
 
-        private static void CheckTrivias(IEnumerable<SyntaxTrivia> trivias, SyntaxTreeAnalysisContext context)
+        private static void CheckTrivias(SyntaxTreeAnalysisContext context, IEnumerable<SyntaxTrivia> trivias)
         {
             var shouldReport = true;
             foreach (var trivia in trivias)
             {
                 // comment start is checked because of  https://github.com/dotnet/roslyn/issues/10003
-
-                if (!trivia.ToFullString().TrimStart().StartsWith("/**", StringComparison.Ordinal) &&
-                    trivia.IsKind(SyntaxKind.MultiLineCommentTrivia))
+                if (trivia.IsKind(SyntaxKind.MultiLineCommentTrivia) && !trivia.ToFullString().TrimStart().StartsWith("/**", StringComparison.Ordinal))
                 {
                     CheckMultilineComment(context, trivia);
                     shouldReport = true;
-                    continue;
                 }
-
-                if (!trivia.ToFullString().TrimStart().StartsWith("///", StringComparison.Ordinal) &&
-                    trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) &&
-                    shouldReport)
+                else if (shouldReport
+                    && trivia.IsKind(SyntaxKind.SingleLineCommentTrivia)
+                    && !trivia.ToFullString().TrimStart().StartsWith("///", StringComparison.Ordinal)
+                    && IsCode(trivia.ToString().Substring(CommentMarkLength)))
                 {
-                    var triviaContent = GetTriviaContent(trivia);
-                    if (!IsCode(triviaContent))
-                    {
-                        continue;
-                    }
-
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, trivia.GetLocation()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, trivia.GetLocation()));
                     shouldReport = false;
                 }
             }
         }
 
-        private static void CheckMultilineComment(SyntaxTreeAnalysisContext context, SyntaxTrivia comment)
+        private static void CheckMultilineComment(SyntaxTreeAnalysisContext context, SyntaxTrivia trivia)
         {
-            var triviaContent = GetTriviaContent(comment);
-            var triviaLines = triviaContent.Split(MetricsBase.LineTerminators, StringSplitOptions.None);
+            var triviaLines = TriviaContent().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
 
             for (var triviaLineNumber = 0; triviaLineNumber < triviaLines.Length; triviaLineNumber++)
             {
-                if (!IsCode(triviaLines[triviaLineNumber]))
+                if (IsCode(triviaLines[triviaLineNumber]))
                 {
-                    continue;
+                    var triviaStartingLineNumber = trivia.GetLocation().GetLineSpan().StartLinePosition.Line;
+                    var lineNumber = triviaStartingLineNumber + triviaLineNumber;
+                    var lineSpan = context.Tree.GetText().Lines[lineNumber].Span;
+                    var commentLineSpan = lineSpan.Intersection(trivia.GetLocation().SourceSpan);
+                    var location = Location.Create(context.Tree, commentLineSpan ?? lineSpan);
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+                    return;
                 }
-
-                var triviaStartingLineNumber = comment.GetLocation().GetLineSpan().StartLinePosition.Line;
-                var lineNumber = triviaStartingLineNumber + triviaLineNumber;
-                var lineSpan = context.Tree.GetText().Lines[lineNumber].Span;
-                var commentLineSpan = lineSpan.Intersection(comment.GetLocation().SourceSpan);
-
-                var location = Location.Create(context.Tree, commentLineSpan ?? lineSpan);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
-                return;
             }
-        }
 
-        private static string GetTriviaContent(SyntaxTrivia trivia)
-        {
-            var triviaContent = trivia.ToString();
-            if (trivia.IsKind(SyntaxKind.MultiLineCommentTrivia))
+            string TriviaContent()
             {
-                if (triviaContent.StartsWith("/*", StringComparison.Ordinal))
-                {
-                    triviaContent = triviaContent.Substring(2);
-                }
-
-                if (triviaContent.EndsWith("*/", StringComparison.Ordinal))
-                {
-                    triviaContent = triviaContent.Substring(0, triviaContent.Length-2);
-                }
-                return triviaContent;
+                var content = trivia.ToString().Substring(CommentMarkLength);
+                return content.EndsWith("*/", StringComparison.Ordinal) ? content.Substring(0, content.Length - CommentMarkLength) : content;
             }
-
-            if (trivia.IsKind(SyntaxKind.SingleLineCommentTrivia))
-            {
-                if (triviaContent.StartsWith("//", StringComparison.Ordinal))
-                {
-                    triviaContent = triviaContent.Substring(2);
-                }
-
-                return triviaContent;
-            }
-
-            return string.Empty;
         }
 
         private static bool IsCode(string line)
         {
-            var checkedLine = line
-                .Replace(" ", string.Empty)
-                .Replace("\t", string.Empty);
+            var checkedLine = line.Replace(" ", string.Empty).Replace("\t", string.Empty);
 
-            var isPossiblyCode = EndsWithCode(checkedLine) ||
-                    ContainsCodeParts(checkedLine) ||
-                    ContainsMultipleLogicalOperators(checkedLine) ||
-                    ContainsCodePartsWithRelationalOperator(checkedLine);
+            var isPossiblyCode = EndsWithCode(checkedLine)
+                || ContainsCodeParts(checkedLine)
+                || ContainsMultipleLogicalOperators(checkedLine)
+                || ContainsCodePartsWithRelationalOperator(checkedLine);
 
-            return isPossiblyCode &&
-                !checkedLine.Contains("License") &&
-                !checkedLine.Contains("c++") &&
-                !checkedLine.Contains("C++");
+            return isPossiblyCode
+                && !checkedLine.Contains("License")
+                && !checkedLine.Contains("c++")
+                && !checkedLine.Contains("C++");
         }
 
         private static bool ContainsMultipleLogicalOperators(string checkedLine)
         {
-            var lineLength = checkedLine.Length;
-            var lineLengthWithoutLogicalOperators = checkedLine
-                .Replace("&&", string.Empty)
-                .Replace("||", string.Empty)
-                .Length;
-
             const int lengthOfOperator = 2;
+            const int operatorCountLimit = 3;
+            var lineLengthWithoutLogicalOperators = checkedLine.Replace("&&", string.Empty).Replace("||", string.Empty).Length;
 
-            return lineLength - lineLengthWithoutLogicalOperators >= 3 * lengthOfOperator;
+            return checkedLine.Length - lineLengthWithoutLogicalOperators >= operatorCountLimit * lengthOfOperator;
         }
 
-        private static bool ContainsCodeParts(string checkedLine)
-        {
-            return CodeParts.Any(checkedLine.Contains);
-        }
+        private static bool ContainsCodeParts(string checkedLine) =>
+            CodeParts.Any(checkedLine.Contains);
 
         private static bool ContainsCodePartsWithRelationalOperator(string checkedLine)
         {
-            return CodePartsWithRelationalOperator.Any(codePart =>
+            return CodePartsWithRelationalOperator.Any(ContainsRelationalOperator);
+
+            bool ContainsRelationalOperator(string codePart)
             {
                 var index = checkedLine.IndexOf(codePart, StringComparison.Ordinal);
                 return index >= 0 && RelationalOperators.Any(op => checkedLine.IndexOf(op, index, StringComparison.Ordinal) >= 0);
-            });
+            }
         }
 
-        private static bool EndsWithCode(string checkedLine)
-        {
-            return CodeEndings.Any(ending => checkedLine.EndsWith(ending, StringComparison.Ordinal));
-        }
-
-        private static readonly string[] CodeEndings = { ";", "{", "}" };
-        private static readonly string[] CodeParts = { "++", "catch(", "switch(", "try{", "else{" };
-        private static readonly string[] CodePartsWithRelationalOperator = { "for(", "if(", "while(" };
-        private static readonly string[] RelationalOperators = { "<", ">", "<=", ">=", "==", "!=" };
+        private static bool EndsWithCode(string checkedLine) =>
+            checkedLine == "}" || CodeEndings.Any(ending => checkedLine.EndsWith(ending, StringComparison.Ordinal));
     }
 }
