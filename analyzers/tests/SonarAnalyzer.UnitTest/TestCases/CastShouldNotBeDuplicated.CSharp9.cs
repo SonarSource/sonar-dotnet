@@ -5,6 +5,7 @@ namespace Tests.Diagnostics
 {
     class Fruit { }
     class Vegetable { }
+    struct Water { }
 
     class Program
     {
@@ -31,28 +32,64 @@ namespace Tests.Diagnostics
                     break;
             }
 
-            if ((x, y) is (Fruit f, Vegetable v))
+            if ((x, y) is (Fruit f1, Vegetable v1))   // Secondary
             {
-                var ff = (Fruit)f; // FN
-                var vv = (Vegetable)v; // FN
+                var ff1 = (Fruit)f1;                  // Noncompliant
             }
 
-            if (x is Fruit f2)       // Secondary
+            if ((x, y) is (Fruit f2, Vegetable v2))   // Secondary
             {
-                var ff = (Fruit)f2;  // Noncompliant {{Remove this redundant cast.}}
+                var ff2 = (Vegetable)v2;              // Noncompliant
             }
 
-            if (x is Fruit f21)       // Noncompliant {{Replace this type-check-and-cast sequence with an 'as' and a null check.}}
+            if ((x, y) is (Fruit f3, Vegetable v3))   // Noncompliant
             {
-                var ff2 = (Fruit)x;  // Secondary
+                var ff3 = (Fruit)x;                   // Secondary
             }
+
+            if ((x, y) is (Fruit f4, Vegetable v4))   // Noncompliant
+            {
+                var ff4 = (Vegetable)y;               // Secondary
+            }
+
+            if ((x,y) is (Fruit f5, Vegetable v5, Vegetable v51)) // Error [CS8502]
+            {
+                var ff5 = (Fruit)x;
+            }
+
+            if (x is Fruit f6)          // Secondary
+            {
+                var ff6 = (Fruit)f6;    // Noncompliant {{Remove this redundant cast.}}
+            }
+
+            if (x is Fruit f7)          // Noncompliant {{Replace this type-check-and-cast sequence with an 'as' and a null check.}}
+            {
+                var ff7 = (Fruit)x;     // Secondary
+            }
+
+            if (x is UnknownFruit f8)   // Error [CS0246]
+            {
+                var ff8 = (Fruit)x;
+            }
+
+            if (x is Water f9)
+            {
+                var ff9 = (Fruit)x;
+            }
+
+            x is Fruit f0; // Error [CS0201]
 
             var message = x switch
             {
-                Fruit f3 => ((Fruit)f3).ToString(), // FN
-                Vegetable v3 => ((Vegetable)v3).ToString(), // FN
+                Fruit f10 => ((Fruit)f10).ToString(), // FN
+                Vegetable v11 => ((Vegetable)v11).ToString(), // FN
                 _ => "More than 10"
             };
+
+            if ((x) is (Fruit f12, Vegetable v12))
+            {
+                var ff12 = (Vegetable)x;               // FN
+            }
         }
 
         public void Bar(object x)
