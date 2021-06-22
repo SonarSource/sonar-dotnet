@@ -41,24 +41,24 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3240";
         private const string MessageFormat = "Use the '{0}' operator here.";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly ISet<SyntaxKind> equalsOrNotEquals = new HashSet<SyntaxKind>
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly ISet<SyntaxKind> EqualsOrNotEquals = new HashSet<SyntaxKind>
         {
             SyntaxKind.EqualsExpression,
             SyntaxKind.NotEqualsExpression
         };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         internal static bool IsCoalesceAssignmentCandidate(SyntaxNode conditional, ExpressionSyntax comparedToNull) =>
             conditional?.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax parentAssignment
-                && CSharpEquivalenceChecker.AreEquivalent(parentAssignment.Left, comparedToNull);
+            && CSharpEquivalenceChecker.AreEquivalent(parentAssignment.Left, comparedToNull);
 
         internal static bool TryGetExpressionComparedToNull(ExpressionSyntax expression, out ExpressionSyntax compared, out bool comparedIsNullInTrue)
         {
             compared = null;
             comparedIsNullInTrue = false;
-            if (expression.RemoveParentheses() is BinaryExpressionSyntax binary && equalsOrNotEquals.Contains(binary.Kind()))
+            if (expression.RemoveParentheses() is BinaryExpressionSyntax binary && EqualsOrNotEquals.Contains(binary.Kind()))
             {
                 comparedIsNullInTrue = binary.IsKind(SyntaxKind.EqualsExpression);
                 if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.NullLiteralExpression))
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var left = ((BinaryExpressionSyntax)context.Node).Left.RemoveParentheses();
                 if (CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), left))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation(), BuildCodeFixProperties(context), "??="));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.GetLocation(), BuildCodeFixProperties(context), "??="));
                 }
             }
         }
@@ -126,7 +126,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (CanBeSimplified(context, whenTrue, whenFalse, possiblyCoalescing ? comparedToNull : null, context.SemanticModel, comparedIsNullInTrue, out var simplifiedOperator))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ifStatement.IfKeyword.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ifStatement.IfKeyword.GetLocation(),
                     BuildCodeFixProperties(context, simplifiedOperator),
                     simplifiedOperator));
             }
@@ -150,11 +150,11 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if(IsCoalesceAssignmentSupported(context) && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), "??="));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), "??="));
                 }
                 else
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, conditional.GetLocation(), BuildCodeFixProperties(context), "??"));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, conditional.GetLocation(), BuildCodeFixProperties(context), "??"));
                 }
             }
         }
@@ -189,7 +189,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool CheckNullAndValueType(ITypeSymbol typeNull, ITypeSymbol typeValue) =>
-            typeNull == null && typeValue != null && typeValue.IsValueType;
+            typeNull == null && typeValue is {IsValueType: true};
 
         private static bool CanBeSimplified(SyntaxNodeAnalysisContext context, StatementSyntax statement1, StatementSyntax statement2,
                                             SyntaxNode comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
@@ -280,16 +280,16 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodSymbol1 = semanticModel.GetSymbolInfo(methodCall1).Symbol;
             var methodSymbol2 = semanticModel.GetSymbolInfo(methodCall2).Symbol;
 
-            if (methodSymbol1 == null ||
-                methodSymbol2 == null ||
-                !methodSymbol1.Equals(methodSymbol2))
+            if (methodSymbol1 == null
+                || methodSymbol2 == null
+                || !methodSymbol1.Equals(methodSymbol2))
             {
                 return false;
             }
 
-            if (methodCall1.ArgumentList == null ||
-                methodCall2.ArgumentList == null ||
-                methodCall1.ArgumentList.Arguments.Count != methodCall2.ArgumentList.Arguments.Count)
+            if (methodCall1.ArgumentList == null
+                || methodCall2.ArgumentList == null
+                || methodCall1.ArgumentList.Arguments.Count != methodCall2.ArgumentList.Arguments.Count)
             {
                 return false;
             }
@@ -351,9 +351,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ExpressionCanBeNull(ExpressionSyntax expression, SemanticModel semanticModel)
         {
             var expressionType = semanticModel.GetTypeInfo(expression).Type;
-            return expressionType != null &&
-                   (expressionType.IsReferenceType ||
-                    expressionType.Is(KnownType.System_Nullable_T));
+            return expressionType != null
+                   && (expressionType.IsReferenceType || expressionType.Is(KnownType.System_Nullable_T));
         }
 
         private static bool IsCoalesceAssignmentSupported(SyntaxNodeAnalysisContext c) =>
