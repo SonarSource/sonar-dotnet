@@ -42,7 +42,7 @@ namespace Tests.Diagnostics
                 var ff = (Fruit)f2;  // Noncompliant {{Remove this redundant cast.}}
             }
 
-            if (x is Fruit f3)       // Noncompliant {{Replace this type-check-and-cast sequence with an 'as' and a null check.}}
+            if (x is Fruit f21)       // Noncompliant {{Replace this type-check-and-cast sequence with an 'as' and a null check.}}
             {
                 var ff2 = (Fruit)x;  // Secondary
             }
