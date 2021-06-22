@@ -120,8 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return parentIfStatement.Statement
                 .DescendantNodes()
                 .OfType<CastExpressionSyntax>()
-                .Where(x => x.Type is IdentifierNameSyntax identifierNameSyntax
-                            && identifierNameSyntax.Identifier.ValueText == castType.GetName()
+                .Where(x => x.Type.WithoutTrivia().IsEquivalentTo(castType.WithoutTrivia())
                             && IsCastOnSameSymbol(x))
                 .Select(x => x.GetLocation()).ToList();
 

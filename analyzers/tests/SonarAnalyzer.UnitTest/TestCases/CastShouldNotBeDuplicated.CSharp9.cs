@@ -132,12 +132,11 @@ namespace Tests.Diagnostics
 
         public void Baz(object x, object y)
         {
-            if ((x, y) is ((int a, int b), string v))
+            if ((x, y) is ((int a, int b), string v)) // Secondary
             {
-                var a1 = (int)a;      // FN
-                var b1 = (int)b;      // FN
-                var v1 = (string)v;   // FN
-                var y1 = (string)y;   // FN
+                var a1 = (int)a;                      // FN
+                var b1 = (int)b;                      // FN
+                var v1 = (string)v;                   // Noncompliant
             }
         }
 
