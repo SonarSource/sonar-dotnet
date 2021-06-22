@@ -273,7 +273,6 @@ function AppendVbTestCase($ruleTestsFolder) {
     $namespaceToken = "namespace SonarAnalyzer.UnitTest.Rules"
     $token = "    }"
     $usingTokenIdx = $existingClassText.IndexOf($usingToken)
-    $csObjectCreation = "new ${csClassName}"
 
     $newText = $existingClassText
     if ($usingTokenIdx -gt -1) {
@@ -295,7 +294,7 @@ function AppendVbTestCase($ruleTestsFolder) {
         $newText = $newText.Insert($namespaceTokenIdx - 1, "${csUsingToken}`r`n${vbNetUsingToken}`r`n")
     }
 
-    $newText = $newText.Replace($csObjectCreation, "new CS.${csClassName}")
+    $newText = $newText.Replace("new ${csClassName}", "new CS.${csClassName}")
 
     $replaced = ReplaceTokens -text $newText
 
