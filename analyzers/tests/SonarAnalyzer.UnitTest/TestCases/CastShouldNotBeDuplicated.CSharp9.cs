@@ -6,6 +6,7 @@ namespace Tests.Diagnostics
     class Fruit { }
     class Vegetable { }
     struct Water { }
+    class Foo { public int x; }
 
     class Program
     {
@@ -89,6 +90,11 @@ namespace Tests.Diagnostics
             if ((x) is (Fruit f12, Vegetable v12))
             {
                 var ff12 = (Vegetable)x;               // FN
+            }
+
+            Foo k = null;
+            if (k is { x : 0 })
+            {
             }
         }
 

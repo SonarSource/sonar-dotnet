@@ -58,9 +58,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
             var isPatternLocation = isPatternExpression.SyntaxNode.GetLocation();
-            if (isPatternExpression.Pattern.SyntaxNode.IsKind(SyntaxKindEx.RecursivePattern))
+            if (isPatternExpression.Pattern.SyntaxNode.IsKind(SyntaxKindEx.RecursivePattern)
+                && (RecursivePatternSyntaxWrapper)isPatternExpression.Pattern.SyntaxNode is {PositionalPatternClause: {SyntaxNode: { }}} recursivePattern)
             {
-                var recursivePattern = (RecursivePatternSyntaxWrapper)isPatternExpression.Pattern.SyntaxNode;
                 for (var i = 0; i < recursivePattern.PositionalPatternClause.Subpatterns.Count; i++)
                 {
                     var pattern = recursivePattern.PositionalPatternClause.Subpatterns[i].Pattern;
@@ -128,7 +128,6 @@ namespace SonarAnalyzer.Rules.CSharp
             bool IsCastOnSameSymbol(CastExpressionSyntax castExpression) =>
                 Equals(analysisContext.SemanticModel.GetSymbolInfo(castExpression.Expression).Symbol, typeExpressionSymbol);
         }
-
 
         private static TypeSyntax ProcessPattern(SyntaxNodeAnalysisContext analysisContext, SyntaxNode isPatternExpression, SyntaxNode pattern, IfStatementSyntax parentIfStatement)
         {
