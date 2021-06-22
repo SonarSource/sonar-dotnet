@@ -70,10 +70,8 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
         private protected abstract KnownType GenericDelegateType();
 
-        protected CertificateValidationCheckBase()
-        {
+        protected CertificateValidationCheckBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
-        }
 
         protected void CheckAssignmentSyntax(SyntaxNodeAnalysisContext c)
         {
