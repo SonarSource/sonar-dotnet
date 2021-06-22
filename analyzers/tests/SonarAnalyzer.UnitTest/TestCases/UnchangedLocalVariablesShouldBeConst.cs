@@ -410,7 +410,6 @@ public class Repro_4015
         var repro = new Repro_4015();
         Func<string> variableFunc;
 
-        // Compliant cases, changing the Expression<Func<T>> below changes the behavior of the code
         fieldFunc = () => a;
         WithFuncArgument(fieldFunc);
 

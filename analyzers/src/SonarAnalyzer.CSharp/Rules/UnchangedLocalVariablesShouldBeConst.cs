@@ -180,10 +180,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     var lookup = new CSharpMethodParameterLookup(invocation, semanticModel);
                     return lookup.TryGetSymbol(argument, out var parameter) && parameter.IsType(KnownType.System_Linq_Expressions_Expression_T);
                 }
-                else if (lambda.Parent is AssignmentExpressionSyntax assignment // Lambda cannot be on the left side
-                    && semanticModel.GetSymbolInfo(assignment.Left).Symbol is { } assignmentTargetSymbol)
+                else if (lambda.Parent is AssignmentExpressionSyntax assignment)
                 {
-                    return assignmentTargetSymbol.GetSymbolType().Is(KnownType.System_Linq_Expressions_Expression_T);
+                    // Lambda cannot be on the left side, we don't need to check it
+                    return assignment.Left.IsKnownType(KnownType.System_Linq_Expressions_Expression_T, semanticModel);
                 }
             }
             return false;
