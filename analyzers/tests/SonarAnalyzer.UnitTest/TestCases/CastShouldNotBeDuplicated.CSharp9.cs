@@ -61,11 +61,13 @@ namespace Tests.Diagnostics
             if (x is Fruit f6)          // Secondary
             {
                 var ff6 = (Fruit)f6;    // Noncompliant {{Remove this redundant cast.}}
+                var fff6 = (Vegetable)x;
             }
 
             if (x is Fruit f7)          // Noncompliant {{Replace this type-check-and-cast sequence with an 'as' and a null check.}}
             {
                 var ff7 = (Fruit)x;     // Secondary
+                var fff7 = (Vegetable)x;
             }
 
             if (x is UnknownFruit f8)   // Error [CS0246]
@@ -80,10 +82,20 @@ namespace Tests.Diagnostics
 
             x is Fruit f0; // Error [CS0201]
 
+            if (x is not Water)
+            {
+                var xWater = (Water)x;
+            }
+            else if (x is not Fruit)
+            {
+                var xFruit = (Fruit)x;
+            }
+
             var message = x switch
             {
                 Fruit f10 => ((Fruit)f10).ToString(), // FN
                 Vegetable v11 => ((Vegetable)v11).ToString(), // FN
+                (string left, string right) => (string) left + (string) right, // FN 2 times
                 _ => "More than 10"
             };
 
@@ -115,6 +127,17 @@ namespace Tests.Diagnostics
             if (x is nuint)
             {
                 var res = (nuint)x; // Compliant because we are casting to a ValueType
+            }
+        }
+
+        public void Baz(object x, object y)
+        {
+            if ((x, y) is ((int a, int b), string v))
+            {
+                var a1 = (int)a;      // FN
+                var b1 = (int)b;      // FN
+                var v1 = (string)v;   // FN
+                var y1 = (string)y;   // FN
             }
         }
 
