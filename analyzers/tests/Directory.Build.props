@@ -11,6 +11,9 @@
   
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)\..\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
+    <Compile Include="$(MSBuildThisFileDirectory)\..\src/AssemblyInfo.Shared.cs">
+      <Link>Properties\AssemblyInfo.Shared.cs</Link>
+    </Compile>
   </ItemGroup>
 
 </Project>

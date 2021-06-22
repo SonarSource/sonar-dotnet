@@ -64,9 +64,6 @@
     <None Include="SonarAnalyzer.VisualBasic.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <Compile Include="..\AssemblyInfo.Shared.cs">
-      <Link>Properties\AssemblyInfo.Shared.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="tools-cs\install.ps1" />
     <None Include="tools-cs\uninstall.ps1" />

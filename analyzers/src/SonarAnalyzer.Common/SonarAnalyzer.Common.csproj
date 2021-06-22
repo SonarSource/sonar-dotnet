@@ -28,7 +28,6 @@
     <Compile Include="Protobuf\AnalyzerReport.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
-    <Compile Include="..\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
     <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
   </ItemGroup>
 
