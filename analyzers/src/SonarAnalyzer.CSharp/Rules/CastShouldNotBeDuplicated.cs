@@ -126,7 +126,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(x => x.GetLocation()).ToList();
 
             bool IsCastOnSameSymbol(CastExpressionSyntax castExpression) =>
-                analysisContext.SemanticModel.GetSymbolInfo(castExpression.Expression).Symbol == typeExpressionSymbol;
+                Equals(analysisContext.SemanticModel.GetSymbolInfo(castExpression.Expression).Symbol, typeExpressionSymbol);
         }
 
 
