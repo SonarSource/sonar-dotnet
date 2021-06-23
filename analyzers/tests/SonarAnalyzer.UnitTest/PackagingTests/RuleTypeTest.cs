@@ -20,6 +20,7 @@
 
 extern alias csharp;
 extern alias vbnet;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Resources;
@@ -32,29 +33,39 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
     [TestClass]
     public class RuleTypeTest
     {
+        // Rules that have been deprecated and deleted.
+        // When changing this please do not forget to notify the product teams (SQ, SC, SL).
+        private readonly HashSet<string> deletedRules = new () {"S1145"};
+
         [TestMethod]
         public void DetectRuleTypeChanges_CS() =>
             DetectTypeChanges(csharp::SonarAnalyzer.RspecStrings.ResourceManager,
-                CsRuleTypeMapping.RuleTypesCs, nameof(CsRuleTypeMapping.RuleTypesCs));
+                              CsRuleTypeMapping.RuleTypesCs,
+                              nameof(CsRuleTypeMapping.RuleTypesCs),
+                              deletedRules);
 
         [TestMethod]
         public void DetectRuleTypeChanges_VB() =>
             DetectTypeChanges(vbnet::SonarAnalyzer.RspecStrings.ResourceManager,
-                VbRuleTypeMapping.RuleTypesVb, nameof(VbRuleTypeMapping.RuleTypesVb));
+                              VbRuleTypeMapping.RuleTypesVb,
+                              nameof(VbRuleTypeMapping.RuleTypesVb),
+                              deletedRules);
 
         [AssertionMethod]
-        private static void DetectTypeChanges(ResourceManager resourceManager, IImmutableDictionary<string, string> expectedTypes, string expectedTypesName)
+        private static void DetectTypeChanges(ResourceManager resourceManager,
+                                              IImmutableDictionary<string, string> expectedTypes,
+                                              string expectedTypesName,
+                                              ICollection<string> deletedRules)
         {
-            var items = Enumerable
-                .Range(1, 10000)
-                .Select(i => new
-                {
-                    ExpectedType = expectedTypes.GetValueOrDefault(i.ToString()),
-                    ActualType = resourceManager.GetString($"S{i}_Type"),
-                    RuleId = i,
-                })
-                .Where(x => x.ActualType != x.ExpectedType)
-                .ToList();
+            var items = Enumerable.Range(1, 10000)
+                                  .Select(i => new
+                                  {
+                                      ExpectedType = expectedTypes.GetValueOrDefault(i.ToString()),
+                                      ActualType = resourceManager.GetString($"S{i}_Type"),
+                                      RuleId = i
+                                  })
+                                  .Where(x => x.ActualType != x.ExpectedType)
+                                  .ToList();
 
             // IMPORTANT: If this test fails, you should add the types of the new rules
             // in the dictionaries above. It is a manual task, sorry.
@@ -62,9 +73,8 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             newRules.Should().BeEmpty($"you need to add the rules in {expectedTypesName}");
 
             // IMPORTANT: Rules should not be deleted without careful consideration and prior
-            // deprecation. We need to notify the platform team as well.
-            var deletedRules = items.Where(x => x.ActualType == null);
-            deletedRules.Should().BeEmpty($"YOU SHOULD NEVER DELETE RULES!");
+            // deprecation. We need to notify the product teams (SQ, SC, SL) as well.
+            items.Should().NotContain(x => x.ActualType == null && !deletedRules.Contains($"S{x.RuleId}"), "YOU SHOULD NEVER DELETE RULES!");
 
             // IMPORTANT: If this test fails, you should update the types of the changed rules
             // in the dictionaries above. Also add a GitHub issue specifying the change of type
