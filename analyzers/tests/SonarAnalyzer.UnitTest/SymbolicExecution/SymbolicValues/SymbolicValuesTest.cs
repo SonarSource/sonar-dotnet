@@ -21,6 +21,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.SymbolicValues
 {
@@ -28,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.SymbolicValues
     public class SymbolicValuesTest
     {
         [TestMethod]
-        public void Test_Prebuilt_StringRepresentation()
+        public void Prebuilt_StringRepresentation()
         {
             SymbolicValue.This.ToString().Should().Be("SV_THIS");
             SymbolicValue.Base.ToString().Should().Be("SV_BASE");
@@ -36,10 +37,30 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.SymbolicValues
         }
 
         [TestMethod]
-        public void Test_Custom_StringRepresentation()
+        public void Custom_StringRepresentation()
         {
             var sv = new SymbolicValue();
             sv.ToString().Should().StartWith("SV_");
         }
+
+        [TestMethod]
+        public void AndConstraint_ToString() =>
+            new AndSymbolicValue(SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("SV_True & SV_False");
+
+        [TestMethod]
+        public void OrConstraint_ToString() =>
+            new OrSymbolicValue(SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("SV_True | SV_False");
+
+        [TestMethod]
+        public void XorConstraint_ToString() =>
+            new XorSymbolicValue(SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("SV_True ^ SV_False");
+
+        [TestMethod]
+        public void ComparisonConstraint_ToString_Less() =>
+            new ComparisonSymbolicValue(ComparisonKind.Less, SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("<(SV_True, SV_False)");
+
+        [TestMethod]
+        public void ComparisonConstraint_ToString_LessOrEqual() =>
+            new ComparisonSymbolicValue(ComparisonKind.LessOrEqual, SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("<=(SV_True, SV_False)");
     }
 }

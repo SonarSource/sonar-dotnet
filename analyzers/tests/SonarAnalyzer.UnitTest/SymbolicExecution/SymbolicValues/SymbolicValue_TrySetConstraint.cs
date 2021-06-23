@@ -613,6 +613,16 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             }
         }
 
+        [TestMethod]
+        public void WithNonBoolConstraint_ForBoolBinarySymbolicValue_ReturnsInputProgramState()
+        {
+            var sv = new AndSymbolicValue(SymbolicValue.True, SymbolicValue.False);
+            var inputProgramState = SetupProgramState(sv, new[] { BoolConstraint.True });
+            var newProgramStates = sv.TrySetConstraint(ObjectConstraint.NotNull, inputProgramState);
+
+            newProgramStates.Should().ContainSingle().And.BeEquivalentTo(inputProgramState);
+        }
+
         private static IList<IList<SymbolicValueConstraint>> ProgramStateList(params IList<SymbolicValueConstraint>[] programStates) => programStates;
 
         private static IList<SymbolicValueConstraint> ConstraintList(params SymbolicValueConstraint[] constraints) => constraints;
