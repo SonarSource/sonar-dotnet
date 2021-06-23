@@ -22,6 +22,12 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 {
     public class BinarySymbolicValue : SymbolicValue
     {
+        // NestedSize:  8, Created ProgramStates:   8, TrySetConstraint visits:    11, Time:  0.03s
+        // NestedSize: 16, Created ProgramStates: 128, TrySetConstraint visits:   247, Time:  0.2s
+        // NestedSize: 24, Created ProgramStates: 256, TrySetConstraint visits:  4083, Time:  3.0s
+        // NestedSize: 32, Created ProgramStates: 256, TrySetConstraint visits: 65519, Time: 46.2s
+        private const int NestedSizeLimit = 16;
+
         public SymbolicValue LeftOperand { get; }
         public SymbolicValue RightOperand { get; }
 
@@ -30,5 +36,17 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             LeftOperand = leftOperand;
             RightOperand = rightOperand;
         }
+
+        protected void ThrowIfTooNested()
+        {
+            if (NestedSize() > NestedSizeLimit)
+            {
+                throw new TooManyInternalStatesException();
+            }
+        }
+
+        private int NestedSize() =>
+            (LeftOperand is BinarySymbolicValue leftBinary ? leftBinary.NestedSize() : 1)
+            + (RightOperand is BinarySymbolicValue rightBinary ? rightBinary.NestedSize() : 1);
     }
 }

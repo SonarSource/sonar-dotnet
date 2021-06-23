@@ -32,6 +32,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         {
             if (constraint is BoolConstraint boolConstraint)
             {
+                ThrowIfTooNested();
                 var ret = constraint == BoolConstraint.False
                     ? LeftOperand.TrySetConstraint(BoolConstraint.False, programState).SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.False, ps))
                     : LeftOperand.TrySetConstraint(BoolConstraint.True, programState).SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.False, ps))
