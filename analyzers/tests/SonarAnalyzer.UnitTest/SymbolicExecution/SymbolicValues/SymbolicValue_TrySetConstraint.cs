@@ -30,49 +30,6 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
     [TestClass]
     public class SymbolicValue_TrySetConstraint
     {
-        [TestMethod]
-        [DynamicData(nameof(TrueConstraintData))]
-        [DynamicData(nameof(FalseConstraintData))]
-        [DynamicData(nameof(NullConstraintData))]
-        [DynamicData(nameof(NotNullConstraintData))]
-        [DynamicData(nameof(NoValueConstraintData))]
-        [DynamicData(nameof(HasValueConstraintData))]
-        [DynamicData(nameof(EmptyStringConstraintData))]
-        [DynamicData(nameof(FullStringConstraintData))]
-        [DynamicData(nameof(FullOrNullStringConstraintData))]
-        [DynamicData(nameof(WhiteSpaceStringConstraintData))]
-        [DynamicData(nameof(FullNotWhiteSpaceStringConstraintData))]
-        [DynamicData(nameof(NotWhiteSpaceStringConstraintData))]
-        [DynamicData(nameof(ByteArraySymbolicValueConstraintData))]
-        [DynamicData(nameof(CryptographyIVSymbolicValueConstraintData))]
-        [DynamicData(nameof(SaltSizeSymbolicValueConstraintData))]
-        public void TrySetConstraint(SymbolicValueConstraint constraint,
-                                     IList<SymbolicValueConstraint> existingConstraints,
-                                     IList<IList<SymbolicValueConstraint>> expectedConstraintsPerProgramState)
-        {
-            // Arrange
-            var sv = new SymbolicValue();
-            var ps = SetupProgramState(sv, existingConstraints);
-
-            // Act
-            var programStates = sv.TrySetConstraint(constraint, ps).ToList();
-
-            // Assert
-            programStates.Should().HaveCount(expectedConstraintsPerProgramState.Count);
-
-            for (var i = 0; i < programStates.Count; i++)
-            {
-                var programState = programStates[i];
-                var expectedConstraints = expectedConstraintsPerProgramState[i];
-
-                foreach (var expectedConstraint in expectedConstraints)
-                {
-                    programState.HasConstraint(sv, expectedConstraint).Should().BeTrue(
-                        $"{expectedConstraint} should be present in returned ProgramState.");
-                }
-            }
-        }
-
         public static IEnumerable<object[]> TrueConstraintData { get; } = new[]
         {
             new object[]
@@ -321,7 +278,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 ConstraintList(ObjectConstraint.NotNull), // existing
                 ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.EmptyString)) // Expected
             },
-             new object[]
+            new object[]
             {
                 StringConstraint.EmptyString, // constraint to set
                 ConstraintList(StringConstraint.WhiteSpaceString), // existing
@@ -612,6 +569,49 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 ProgramStateList(ConstraintList(SaltSizeSymbolicValueConstraint.Short)) // Expected
             }
         };
+
+        [TestMethod]
+        [DynamicData(nameof(TrueConstraintData))]
+        [DynamicData(nameof(FalseConstraintData))]
+        [DynamicData(nameof(NullConstraintData))]
+        [DynamicData(nameof(NotNullConstraintData))]
+        [DynamicData(nameof(NoValueConstraintData))]
+        [DynamicData(nameof(HasValueConstraintData))]
+        [DynamicData(nameof(EmptyStringConstraintData))]
+        [DynamicData(nameof(FullStringConstraintData))]
+        [DynamicData(nameof(FullOrNullStringConstraintData))]
+        [DynamicData(nameof(WhiteSpaceStringConstraintData))]
+        [DynamicData(nameof(FullNotWhiteSpaceStringConstraintData))]
+        [DynamicData(nameof(NotWhiteSpaceStringConstraintData))]
+        [DynamicData(nameof(ByteArraySymbolicValueConstraintData))]
+        [DynamicData(nameof(CryptographyIVSymbolicValueConstraintData))]
+        [DynamicData(nameof(SaltSizeSymbolicValueConstraintData))]
+        public void TrySetConstraint(SymbolicValueConstraint constraint,
+                                     IList<SymbolicValueConstraint> existingConstraints,
+                                     IList<IList<SymbolicValueConstraint>> expectedConstraintsPerProgramState)
+        {
+            // Arrange
+            var sv = new SymbolicValue();
+            var ps = SetupProgramState(sv, existingConstraints);
+
+            // Act
+            var programStates = sv.TrySetConstraint(constraint, ps).ToList();
+
+            // Assert
+            programStates.Should().HaveCount(expectedConstraintsPerProgramState.Count);
+
+            for (var i = 0; i < programStates.Count; i++)
+            {
+                var programState = programStates[i];
+                var expectedConstraints = expectedConstraintsPerProgramState[i];
+
+                foreach (var expectedConstraint in expectedConstraints)
+                {
+                    programState.HasConstraint(sv, expectedConstraint).Should().BeTrue(
+                        $"{expectedConstraint} should be present in returned ProgramState.");
+                }
+            }
+        }
 
         private static IList<IList<SymbolicValueConstraint>> ProgramStateList(params IList<SymbolicValueConstraint>[] programStates) => programStates;
 
