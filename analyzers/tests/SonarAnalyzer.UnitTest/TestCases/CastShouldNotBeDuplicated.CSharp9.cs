@@ -20,13 +20,16 @@ namespace Tests.Diagnostics
             }
 
             object o;
-            switch (x)
+            switch (x)                            // Noncompliant [switch-st-0]
             {
-                case Fruit m:
-                    o = (Fruit)m; // FN
+                case Fruit m:                     // Secondary [switch-st-1]
+                    o = (Fruit)m;                 // Noncompliant [switch-st-1]
                     break;
-                case Vegetable t when t != null:
-                    o = (Vegetable)t; // FN
+                case Vegetable t when t != null:  // Secondary [switch-st-2]
+                    o = (Vegetable)t;             // Noncompliant [switch-st-2]
+                    break;
+                case Water u:
+                    o = (Water)x;                 // Secondary [switch-st-0]
                     break;
                 default:
                     o = null;
@@ -91,11 +94,17 @@ namespace Tests.Diagnostics
                 var xFruit = (Fruit)x;
             }
 
-            var message = x switch
+            var message = x switch                 // Noncompliant [1]
             {
-                Fruit f10 => ((Fruit)f10).ToString(), // FN
-                Vegetable v11 => ((Vegetable)v11).ToString(), // FN
-                (string left, string right) => (string) left + (string) right, // FN 2 times
+                Fruit f10 =>                       // Secondary [2]
+                    ((Fruit)f10).ToString(),       // Noncompliant [2]
+                Vegetable v11 =>                   // Secondary [3]
+                    ((Vegetable)v11).ToString(),   // Noncompliant [3]
+                (string left, string right) =>     // Secondary [4, 5]
+                    (string) left + (string) right,// Noncompliant [4]
+                                                   // Noncompliant@-1 [5]
+                Water w12 =>
+                    ((Water)x).ToString(),         // Secondary [1]
                 _ => "More than 10"
             };
 
