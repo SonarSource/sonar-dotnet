@@ -57,6 +57,29 @@ namespace SonarAnalyzer.Metrics.CSharp
                     State.IncreaseComplexityByNestingPlusOne(switchExpression.SwitchKeyword);
                     State.VisitWithNesting(node, base.Visit);
                 }
+                else if (BinaryPatternSyntaxWrapper.IsInstance(node))
+                {
+                    var nodeKind = node.Kind();
+                    var binaryPatternNode = (BinaryPatternSyntaxWrapper)node;
+                    if (!State.LogicalOperationsToIgnore.Contains(binaryPatternNode) &&
+                        (nodeKind == SyntaxKindEx.AndPattern ||
+                         nodeKind == SyntaxKindEx.OrPattern))
+                    {
+                        var left = ((ExpressionOrPatternSyntaxWrapper)binaryPatternNode.Left).RemoveParentheses();
+                        if (!((SyntaxNode)left).IsKind(nodeKind))
+                        {
+                            State.IncreaseComplexityByOne(binaryPatternNode.OperatorToken);
+                        }
+
+                        var right = ((ExpressionOrPatternSyntaxWrapper)binaryPatternNode.Right).RemoveParentheses();
+                        if (((SyntaxNode)right).IsKind(nodeKind))
+                        {
+                            State.LogicalOperationsToIgnore.Add(right);
+                        }
+                    }
+
+                    base.Visit(node);
+                }
                 else
                 {
                     base.Visit(node);
