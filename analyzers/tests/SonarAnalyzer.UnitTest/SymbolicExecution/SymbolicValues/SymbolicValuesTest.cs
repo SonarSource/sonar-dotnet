@@ -48,12 +48,24 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.SymbolicValues
             new AndSymbolicValue(SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("SV_True & SV_False");
 
         [TestMethod]
+        public void AndConstraint_ForNull_ToString() =>
+            new AndSymbolicValue(null, null).ToString().Should().Be(" & ");
+
+        [TestMethod]
         public void OrConstraint_ToString() =>
             new OrSymbolicValue(SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("SV_True | SV_False");
 
         [TestMethod]
+        public void OrConstraint_ForNull_ToString() =>
+            new OrSymbolicValue(null, null).ToString().Should().Be(" | ");
+
+        [TestMethod]
         public void XorConstraint_ToString() =>
             new XorSymbolicValue(SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("SV_True ^ SV_False");
+
+        [TestMethod]
+        public void XorConstraint_ForNull_ToString() =>
+            new XorSymbolicValue(null, null).ToString().Should().Be(" ^ ");
 
         [TestMethod]
         public void ComparisonConstraint_ToString_Less() =>
