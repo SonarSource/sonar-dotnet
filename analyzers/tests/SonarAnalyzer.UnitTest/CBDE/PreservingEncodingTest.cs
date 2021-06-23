@@ -18,11 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using System;
 using System.Text;
-using csharp::SonarAnalyzer.CBDE;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.CBDE;
 
 namespace SonarAnalyzer.UnitTest.CBDE
 {
@@ -33,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
 
         public string Encode(string name)
         {
-            Byte[] encodedBytes = encoder.GetBytes(name);
+            var encodedBytes = encoder.GetBytes(name);
             return encoder.GetString(encodedBytes);
         }
 
