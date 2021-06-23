@@ -108,21 +108,39 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            ReportLeftPartOfPatternExpression(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType, ReplaceWithAsAndNullCheckMessage);
+            ReportPatternAtMainVariable(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType, ReplaceWithAsAndNullCheckMessage);
         }
 
-        private static void ReportLeftPartOfPatternExpression(SyntaxNodeAnalysisContext analysisContext,
-                                                                    SyntaxNode leftExpression,
+        private static void ReportPatternAtMainVariable(SyntaxNodeAnalysisContext analysisContext,
+                                                                    SyntaxNode variableExpression,
                                                                     Location mainLocation,
                                                                     SyntaxNode parentStatement,
                                                                     TypeSyntax castType,
                                                                     string message)
         {
-            var duplicatedCastLocations = GetDuplicatedCastLocations(analysisContext, parentStatement, castType, leftExpression);
+            var duplicatedCastLocations = GetDuplicatedCastLocations(analysisContext, parentStatement, castType, variableExpression);
 
             if (duplicatedCastLocations.Any())
             {
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, mainLocation, duplicatedCastLocations, message));
+            }
+        }
+
+        private static void ReportPatternAtCastLocation(SyntaxNodeAnalysisContext analysisContext,
+                                                        SyntaxNode variableExpression,
+                                                        Location patternLocation,
+                                                        SyntaxNode parentStatement,
+                                                        TypeSyntax castType,
+                                                        string message)
+        {
+            if (analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol
+                && castTypeSymbol.TypeKind != TypeKind.Struct)
+            {
+                var duplicatedCastLocations = GetDuplicatedCastLocations(analysisContext, parentStatement, castType, variableExpression);
+                foreach (var castLocation in duplicatedCastLocations)
+                {
+                    analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, castLocation, new[] { patternLocation }, message));
+                }
             }
         }
 
@@ -148,52 +166,52 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ProcessPatternExpression(SyntaxNodeAnalysisContext analysisContext,
             SyntaxNode isPattern,
-            SyntaxNode isPatternExpression,
+            SyntaxNode mainVariableExpression,
             Location mainVariableLocation,
             SyntaxNode parentStatement,
             string message)
         {
             var isPatternLocation = isPattern.GetLocation();
-            if (isPattern.IsKind(SyntaxKindEx.RecursivePattern)
-                && (RecursivePatternSyntaxWrapper)isPattern is {PositionalPatternClause: {SyntaxNode: { }}} recursivePattern)
+            if (isPattern.IsKind(SyntaxKindEx.RecursivePattern) && (RecursivePatternSyntaxWrapper)isPattern is var recursivePattern)
             {
-                for (var i = 0; i < recursivePattern.PositionalPatternClause.Subpatterns.Count; i++)
+                switch (recursivePattern)
                 {
-                    var pattern = recursivePattern.PositionalPatternClause.Subpatterns[i].Pattern;
-                    if (ProcessPattern(analysisContext, isPatternLocation, pattern, parentStatement) is { } patternType
-                        && isPatternExpression.IsKind(SyntaxKindEx.TupleExpression)
-                        && (TupleExpressionSyntaxWrapper)isPatternExpression is var tupleExpression
-                        && tupleExpression.Arguments.Count == recursivePattern.PositionalPatternClause.Subpatterns.Count)
-                    {
-                        ReportLeftPartOfPatternExpression(analysisContext, tupleExpression.Arguments[i].Expression, mainVariableLocation, parentStatement, patternType, message);
-                    }
+                    case {Type: {}}:
+                        ReportPatternAtCastLocation(analysisContext, recursivePattern.Designation, isPatternLocation, parentStatement, recursivePattern.Type, message);
+                        ReportPatternAtMainVariable(analysisContext, mainVariableExpression, mainVariableLocation, parentStatement, recursivePattern.Type, RemoveRedundantCaseMessage);
+                        break;
+                    case {PositionalPatternClause: {SyntaxNode: { }}} recursivePositionalPattern:
+                        {
+                            for (var i = 0; i < recursivePositionalPattern.PositionalPatternClause.Subpatterns.Count; i++)
+                            {
+                                var pattern = recursivePositionalPattern.PositionalPatternClause.Subpatterns[i].Pattern;
+                                if (ReportDeclarationPatternAndReturnType(analysisContext, isPatternLocation, pattern, parentStatement) is { } patternType
+                                    && mainVariableExpression.IsKind(SyntaxKindEx.TupleExpression)
+                                    && (TupleExpressionSyntaxWrapper)mainVariableExpression is var tupleExpression
+                                    && tupleExpression.Arguments.Count == recursivePositionalPattern.PositionalPatternClause.Subpatterns.Count)
+                                {
+                                    ReportPatternAtMainVariable(analysisContext, tupleExpression.Arguments[i].Expression, mainVariableLocation, parentStatement, patternType, message);
+                                }
+                            }
+
+                            break;
+                        }
                 }
             }
-            else if (ProcessPattern(analysisContext, isPatternLocation, isPattern, parentStatement) is { } patternType)
+            else if (ReportDeclarationPatternAndReturnType(analysisContext, isPatternLocation, isPattern, parentStatement) is { } patternType)
             {
-                ReportLeftPartOfPatternExpression(analysisContext, isPatternExpression, mainVariableLocation, parentStatement, patternType, message);
+                ReportPatternAtMainVariable(analysisContext, mainVariableExpression, mainVariableLocation, parentStatement, patternType, message);
             }
         }
 
-        private static TypeSyntax ProcessPattern(SyntaxNodeAnalysisContext analysisContext, Location isPatternLocation, SyntaxNode pattern, SyntaxNode parentIfStatement)
+        private static TypeSyntax ReportDeclarationPatternAndReturnType(SyntaxNodeAnalysisContext analysisContext, Location isPatternLocation, SyntaxNode pattern, SyntaxNode parentIfStatement)
         {
             if (pattern.IsKind(SyntaxKindEx.DeclarationPattern)
                 && (DeclarationPatternSyntaxWrapper)pattern is var declarationPattern
                 && declarationPattern.Designation.SyntaxNode.IsKind(SyntaxKindEx.SingleVariableDesignation)
                 && (SingleVariableDesignationSyntaxWrapper)declarationPattern.Designation.SyntaxNode is var singleVariableDesignation)
             {
-                if (!(analysisContext.SemanticModel.GetSymbolInfo(declarationPattern.Type).Symbol is INamedTypeSymbol castTypeSymbol)
-                    || castTypeSymbol.TypeKind == TypeKind.Struct)
-                {
-                    return declarationPattern.Type;
-                }
-
-                var duplicatedCastLocations = GetDuplicatedCastLocations(analysisContext, parentIfStatement, declarationPattern.Type, singleVariableDesignation.SyntaxNode);
-                foreach (var castLocation in duplicatedCastLocations)
-                {
-                    analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, castLocation, new[] { isPatternLocation }, RemoveRedundantCaseMessage));
-                }
-
+                ReportPatternAtCastLocation(analysisContext, singleVariableDesignation.SyntaxNode, isPatternLocation, parentIfStatement, declarationPattern.Type, RemoveRedundantCaseMessage);
                 return declarationPattern.Type;
             }
             return null;

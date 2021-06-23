@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
-    class Fruit { }
+    class Fruit { public int Prop; }
     class Vegetable { }
     struct Water { }
     class Foo { public int x; }
@@ -94,17 +94,17 @@ namespace Tests.Diagnostics
                 var xFruit = (Fruit)x;
             }
 
-            var message = x switch                 // Noncompliant [1] {{Remove this cast and use the appropriate variable.}}
+            var message = x switch                 // Noncompliant [switch-expression-1] {{Remove this cast and use the appropriate variable.}}
             {
-                Fruit f10 =>                       // Secondary [2]
-                    ((Fruit)f10).ToString(),       // Noncompliant [2] {{Remove this cast and use the appropriate variable.}}
-                Vegetable v11 =>                   // Secondary [3]
-                    ((Vegetable)v11).ToString(),   // Noncompliant [3]
-                (string left, string right) =>     // Secondary [4, 5]
-                    (string) left + (string) right,// Noncompliant [4]
-                                                   // Noncompliant@-1 [5]
+                Fruit f10 =>                       // Secondary [switch-expression-2]
+                    ((Fruit)f10).ToString(),       // Noncompliant [switch-expression-2] {{Remove this cast and use the appropriate variable.}}
+                Vegetable v11 =>                   // Secondary [switch-expression-3]
+                    ((Vegetable)v11).ToString(),   // Noncompliant [switch-expression-3]
+                (string left, string right) =>     // Secondary [switch-expression-4, switch-expression-5]
+                    (string) left + (string) right,// Noncompliant [switch-expression-4]
+                                                   // Noncompliant@-1 [switch-expression-5]
                 Water w12 =>
-                    ((Water)x).ToString(),         // Secondary [1]
+                    ((Water)x).ToString(),         // Secondary [switch-expression-1]
                 _ => "More than 10"
             };
 
@@ -129,6 +129,13 @@ namespace Tests.Diagnostics
             {
                 var f2 = (Fruit)x; // Compliant
             }
+
+            if (x is Fruit { Prop: 1 } tuttyFrutty)    // Secondary [property-pattern-1]
+                                                       // Noncompliant@-1 [property-pattern-2] {{Remove this cast and use the appropriate variable.}}
+            {
+                var aRealFruit = (Fruit)tuttyFrutty;   // Noncompliant [property-pattern-1] {{Replace this type-check-and-cast sequence with an 'as' and a null check.}}
+                var anotherFruit = (Fruit)x;           // Secondary [property-pattern-2]
+            }
         }
 
         public void FooBar(object x)
@@ -146,6 +153,12 @@ namespace Tests.Diagnostics
                 var a1 = (int)a;                      // FN
                 var b1 = (int)b;                      // FN
                 var v1 = (string)v;                   // Noncompliant
+            }
+
+            if (x is (Fruit or Vegetable))
+            {
+                var fruit = (Fruit)x;                 // FN
+                var vegetable = (Vegetable)x;         // FN
             }
         }
 
