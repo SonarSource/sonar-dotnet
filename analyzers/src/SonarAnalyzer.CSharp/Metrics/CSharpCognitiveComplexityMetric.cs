@@ -61,9 +61,9 @@ namespace SonarAnalyzer.Metrics.CSharp
                 {
                     var nodeKind = node.Kind();
                     var binaryPatternNode = (BinaryPatternSyntaxWrapper)node;
-                    if (!State.LogicalOperationsToIgnore.Contains(binaryPatternNode) &&
-                        (nodeKind == SyntaxKindEx.AndPattern ||
-                         nodeKind == SyntaxKindEx.OrPattern))
+                    if (!State.LogicalOperationsToIgnore.Contains(binaryPatternNode)
+                        && (nodeKind == SyntaxKindEx.AndPattern
+                            || nodeKind == SyntaxKindEx.OrPattern))
                     {
                         var left = ((ExpressionOrPatternSyntaxWrapper)binaryPatternNode.Left).RemoveParentheses();
                         if (!((SyntaxNode)left).IsKind(nodeKind))
@@ -162,11 +162,10 @@ namespace SonarAnalyzer.Metrics.CSharp
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
                 var identifierNameSyntax = node.Expression as IdentifierNameSyntax;
-                if (State.CurrentMethod != null &&
-                    identifierNameSyntax != null &&
-                    node.HasExactlyNArguments(State.CurrentMethod.ParameterList.Parameters.Count) &&
-                    string.Equals(identifierNameSyntax.Identifier.ValueText,
-                        State.CurrentMethod.Identifier.ValueText, StringComparison.Ordinal))
+                if (State.CurrentMethod != null
+                    && identifierNameSyntax != null
+                    && node.HasExactlyNArguments(State.CurrentMethod.ParameterList.Parameters.Count)
+                    && string.Equals(identifierNameSyntax.Identifier.ValueText, State.CurrentMethod.Identifier.ValueText, StringComparison.Ordinal))
                 {
                     State.HasDirectRecursiveCall = true;
                 }
@@ -177,9 +176,9 @@ namespace SonarAnalyzer.Metrics.CSharp
             public override void VisitBinaryExpression(BinaryExpressionSyntax node)
             {
                 var nodeKind = node.Kind();
-                if (!State.LogicalOperationsToIgnore.Contains(node) &&
-                    (nodeKind == SyntaxKind.LogicalAndExpression ||
-                     nodeKind == SyntaxKind.LogicalOrExpression))
+                if (!State.LogicalOperationsToIgnore.Contains(node)
+                    && (nodeKind == SyntaxKind.LogicalAndExpression
+                        || nodeKind == SyntaxKind.LogicalOrExpression))
                 {
                     var left = node.Left.RemoveParentheses();
                     if (!left.IsKind(nodeKind))

@@ -52,11 +52,11 @@ namespace SonarAnalyzer.Metrics.VisualBasic
             public override void VisitBinaryExpression(BinaryExpressionSyntax node)
             {
                 var nodeKind = node.Kind();
-                if (!State.LogicalOperationsToIgnore.Contains(node) &&
-                    (nodeKind == SyntaxKind.AndExpression ||
-                     nodeKind == SyntaxKind.AndAlsoExpression ||
-                     nodeKind == SyntaxKind.OrExpression ||
-                     nodeKind == SyntaxKind.OrElseExpression))
+                if (!State.LogicalOperationsToIgnore.Contains(node)
+                    && (nodeKind == SyntaxKind.AndExpression
+                        || nodeKind == SyntaxKind.AndAlsoExpression
+                        || nodeKind == SyntaxKind.OrExpression
+                        || nodeKind == SyntaxKind.OrElseExpression))
                 {
                     var left = node.Left.RemoveParentheses();
                     if (!left.IsKind(nodeKind))
@@ -118,19 +118,17 @@ namespace SonarAnalyzer.Metrics.VisualBasic
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                if (node.Expression == null ||
-                    node.ArgumentList == null ||
-                    State.CurrentMethod == null ||
-                    node.ArgumentList.Arguments.Count != State.CurrentMethod.ParameterList?.Parameters.Count)
+                if (node.Expression == null
+                    || node.ArgumentList == null
+                    || State.CurrentMethod == null
+                    || node.ArgumentList.Arguments.Count != State.CurrentMethod.ParameterList?.Parameters.Count)
                 {
                     return;
                 }
-                State.HasDirectRecursiveCall = string.Equals(GetIdentifierName(node.Expression),
-                    State.CurrentMethod.Identifier.ValueText,
-                    StringComparison.Ordinal);
+                State.HasDirectRecursiveCall = string.Equals(GetIdentifierName(node.Expression), State.CurrentMethod.Identifier.ValueText, StringComparison.Ordinal);
                 base.VisitInvocationExpression(node);
 
-                string GetIdentifierName(ExpressionSyntax expression)
+                static string GetIdentifierName(ExpressionSyntax expression)
                 {
                     if (expression.IsKind(SyntaxKind.IdentifierName))
                     {
@@ -165,10 +163,8 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                 State.VisitWithNesting(node, base.VisitMultiLineIfBlock);
             }
 
-            public override void VisitMultiLineLambdaExpression(MultiLineLambdaExpressionSyntax node)
-            {
+            public override void VisitMultiLineLambdaExpression(MultiLineLambdaExpressionSyntax node) =>
                 State.VisitWithNesting(node, base.VisitMultiLineLambdaExpression);
-            }
 
             public override void VisitSelectBlock(SelectBlockSyntax node)
             {
@@ -182,10 +178,8 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                 State.VisitWithNesting(node, base.VisitSingleLineIfStatement);
             }
 
-            public override void VisitSingleLineLambdaExpression(SingleLineLambdaExpressionSyntax node)
-            {
+            public override void VisitSingleLineLambdaExpression(SingleLineLambdaExpressionSyntax node) =>
                 State.VisitWithNesting(node, base.VisitSingleLineLambdaExpression);
-            }
 
             public override void VisitTernaryConditionalExpression(TernaryConditionalExpressionSyntax node)
             {

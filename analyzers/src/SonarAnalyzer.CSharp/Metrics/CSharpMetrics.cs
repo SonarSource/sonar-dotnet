@@ -33,8 +33,10 @@ namespace SonarAnalyzer.Metrics.CSharp
     {
         private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
 
-        public CSharpMetrics(SyntaxTree tree, SemanticModel semanticModel)
-            : base(tree)
+        public override ImmutableArray<int> ExecutableLines =>
+            lazyExecutableLines.Value;
+
+        public CSharpMetrics(SyntaxTree tree, SemanticModel semanticModel) : base(tree)
         {
             var root = tree.GetRoot();
             if (root.Language != LanguageNames.CSharp)
@@ -42,11 +44,8 @@ namespace SonarAnalyzer.Metrics.CSharp
                 throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
             }
 
-            this.lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => CSharpExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
+            lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => CSharpExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
         }
-
-        public override ImmutableArray<int> ExecutableLines =>
-            this.lazyExecutableLines.Value;
 
         public override int GetCognitiveComplexity(SyntaxNode node) =>
             CSharpCognitiveComplexityMetric.GetComplexity(node).Complexity;
@@ -86,8 +85,8 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.MethodDeclaration:
                 case SyntaxKind.OperatorDeclaration:
                     var methodDeclaration = (BaseMethodDeclarationSyntax)node;
-                    return methodDeclaration.ExpressionBody() != null ||
-                        methodDeclaration.Body != null; // Non-abstract, non-interface methods
+                    return methodDeclaration.ExpressionBody() != null
+                           || methodDeclaration.Body != null; // Non-abstract, non-interface methods
 
                 case SyntaxKind.AddAccessorDeclaration:
                 case SyntaxKind.GetAccessorDeclaration:
@@ -99,8 +98,8 @@ namespace SonarAnalyzer.Metrics.CSharp
                         return true;
                     }
 
-                    if (!accessor.Parent.Parent.IsKind(SyntaxKind.PropertyDeclaration) &&
-                        !accessor.Parent.Parent.IsKind(SyntaxKind.EventDeclaration))
+                    if (!accessor.Parent.Parent.IsKind(SyntaxKind.PropertyDeclaration)
+                        && !accessor.Parent.Parent.IsKind(SyntaxKind.EventDeclaration))
                     {
                         // Unexpected
                         return false;
@@ -121,7 +120,7 @@ namespace SonarAnalyzer.Metrics.CSharp
         }
 
         protected override bool IsNoneToken(SyntaxToken token) =>
-                    token.IsKind(SyntaxKind.None);
+            token.IsKind(SyntaxKind.None);
 
         protected override bool IsStatement(SyntaxNode node)
         {

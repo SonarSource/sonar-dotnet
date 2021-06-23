@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -26,12 +27,17 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class CognitiveComplexityBase : ParameterLoadingDiagnosticAnalyzer
+    public abstract class CognitiveComplexityBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S3776";
-        protected const string MessageFormat = "Refactor this {0} to reduce its Cognitive Complexity from {1} to the {2} allowed.";
-        protected const int DefaultThreshold = 15;
-        protected const int DefaultPropertyThreshold = 3;
+        private const string MessageFormat = "Refactor this {0} to reduce its Cognitive Complexity from {1} to the {2} allowed.";
+        private const int DefaultThreshold = 15;
+        private const int DefaultPropertyThreshold = 3;
+
+        private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         [RuleParameter("threshold", PropertyType.Integer, "The maximum authorized complexity.", DefaultThreshold)]
         public int Threshold { get; set; } = DefaultThreshold;
@@ -39,11 +45,17 @@ namespace SonarAnalyzer.Rules
         [RuleParameter("propertyThreshold ", PropertyType.Integer, "The maximum authorized complexity in a property.", DefaultPropertyThreshold)]
         public int PropertyThreshold { get; set; } = DefaultPropertyThreshold;
 
-        public abstract DiagnosticDescriptor Rule { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, SyntaxNode> nodeSelector,
-                Func<TSyntax, Location> getLocationToReport, Func<SyntaxNode, CognitiveComplexity> getComplexity,
-                string declarationType, int threshold)
+        protected CognitiveComplexityBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources, isEnabledByDefault: false);
+
+        protected void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context,
+                                                Func<TSyntax, SyntaxNode> nodeSelector,
+                                                Func<TSyntax, Location> getLocationToReport,
+                                                Func<SyntaxNode, CognitiveComplexity> getComplexity,
+                                                string declarationType,
+                                                int threshold)
             where TSyntax : SyntaxNode
         {
             var syntax = (TSyntax)context.Node;
@@ -58,12 +70,11 @@ namespace SonarAnalyzer.Rules
             if (metric.Complexity > Threshold)
             {
                 context.ReportDiagnosticWhenActive(
-                    Diagnostic.Create(
-                        Rule,
-                        getLocationToReport(syntax),
-                        metric.Locations.ToAdditionalLocations(),
-                        metric.Locations.ToProperties(),
-                        new object[] { declarationType, metric.Complexity, threshold }));
+                    Diagnostic.Create(rule,
+                                      getLocationToReport(syntax),
+                                      metric.Locations.ToAdditionalLocations(),
+                                      metric.Locations.ToProperties(),
+                                      new object[] { declarationType, metric.Complexity, threshold }));
             }
         }
     }

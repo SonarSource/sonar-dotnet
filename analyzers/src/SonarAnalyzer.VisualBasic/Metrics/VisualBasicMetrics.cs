@@ -62,6 +62,9 @@ namespace SonarAnalyzer.Metrics.VisualBasic
 
         private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
 
+        public override ImmutableArray<int> ExecutableLines =>
+            lazyExecutableLines.Value;
+
         public VisualBasicMetrics(SyntaxTree tree, SemanticModel semanticModel)
             : base(tree)
         {
@@ -71,20 +74,14 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                 throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
             }
 
-            this.lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => VisualBasicExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
+            lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => VisualBasicExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
         }
-
-        public override ImmutableArray<int> ExecutableLines =>
-            this.lazyExecutableLines.Value;
 
         public override int GetCognitiveComplexity(SyntaxNode node) =>
             VisualBasicCognitiveComplexityMetric.GetComplexity(node).Complexity;
 
         public override int GetCyclomaticComplexity(SyntaxNode node) =>
-            node.DescendantNodesAndSelf()
-                .Count(n =>
-                    IsComplexityIncreasingKind(n) ||
-                    IsFunction(n));
+            node.DescendantNodesAndSelf().Count(n => IsComplexityIncreasingKind(n) || IsFunction(n));
 
         protected override bool IsClass(SyntaxNode node)
         {
@@ -108,9 +105,9 @@ namespace SonarAnalyzer.Metrics.VisualBasic
 
         protected override bool IsFunction(SyntaxNode node)
         {
-            if (!FunctionKinds.Contains(node.Kind()) ||
-                !MethodBlocks.Contains(node.Parent.Kind()) ||
-                node.Parent.Parent.IsKind(SyntaxKind.InterfaceBlock))
+            if (!FunctionKinds.Contains(node.Kind())
+                || !MethodBlocks.Contains(node.Parent.Kind())
+                || node.Parent.Parent.IsKind(SyntaxKind.InterfaceBlock))
             {
                 return false;
             }
@@ -129,7 +126,7 @@ namespace SonarAnalyzer.Metrics.VisualBasic
         protected override bool IsStatement(SyntaxNode node) =>
             node is ExecutableStatementSyntax;
 
-        private bool IsComplexityIncreasingKind(SyntaxNode node)
+        private static bool IsComplexityIncreasingKind(SyntaxNode node)
         {
             switch (node.Kind())
             {
