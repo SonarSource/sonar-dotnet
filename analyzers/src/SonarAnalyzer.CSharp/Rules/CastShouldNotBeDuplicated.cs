@@ -83,10 +83,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var isExpression = (BinaryExpressionSyntax)analysisContext.Node;
 
-            if (!(isExpression.Right is TypeSyntax castType) ||
-                !(isExpression.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement) ||
-                !(analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol) ||
-                castTypeSymbol.TypeKind == TypeKind.Struct)
+            if (!(isExpression.Right is TypeSyntax castType)
+                || !(isExpression.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement)
+                || !(analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol)
+                || castTypeSymbol.TypeKind == TypeKind.Struct)
             {
                 return;
             }

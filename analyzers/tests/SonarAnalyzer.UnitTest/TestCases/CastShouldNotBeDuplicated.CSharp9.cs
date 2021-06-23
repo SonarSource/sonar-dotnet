@@ -140,6 +140,14 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void NonExistingType(notObject x)    // Error [CS0246]
+        {
+            if (x is Fruit f)                       // Secondary
+            {
+                var ff = (Fruit)f;                  // Noncompliant {{Remove this redundant cast.}}
+            }
+        }
+
         // See https://github.com/SonarSource/sonar-dotnet/issues/2314
         public void TakeIdentifierIntoAccount(object x)
         {
