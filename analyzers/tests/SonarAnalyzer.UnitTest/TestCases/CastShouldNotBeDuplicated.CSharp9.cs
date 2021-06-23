@@ -7,6 +7,7 @@ namespace Tests.Diagnostics
     class Vegetable { }
     struct Water { }
     class Foo { public int x; }
+    class Complex { public object x; }
 
     class Program
     {
@@ -105,6 +106,7 @@ namespace Tests.Diagnostics
                                                    // Noncompliant@-1 [switch-expression-5]
                 Water w12 =>
                     ((Water)x).ToString(),         // Secondary [switch-expression-1]
+                Complex { x : Fruit apple } => "apple",
                 _ => "More than 10"
             };
 
