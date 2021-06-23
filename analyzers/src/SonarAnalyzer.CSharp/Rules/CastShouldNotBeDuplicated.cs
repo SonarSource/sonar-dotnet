@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3247";
         private const string MessageFormat = "{0}";
         private const string ReplaceWithAsAndNullCheckMessage = "Replace this type-check-and-cast sequence with an 'as' and a null check.";
-        private const string RemoveRedundantCaseMessage = "Remove this redundant cast.";
+        private const string RemoveRedundantCaseMessage = "Remove this cast and use the appropriate variable.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -59,8 +59,14 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return;
             }
-            ProcessPatternExpression(analysisContext, casePatternSwitch.Pattern, parentSwitchStatement.Expression, parentSwitchStatement.Expression.GetLocation(), parentSwitchStatement);
+            ProcessPatternExpression(analysisContext,
+                                     casePatternSwitch.Pattern,
+                                     parentSwitchStatement.Expression,
+                                     parentSwitchStatement.Expression.GetLocation(),
+                                     parentSwitchStatement,
+                                     RemoveRedundantCaseMessage);
         }
+
         private static void SwitchExpressionArm(SyntaxNodeAnalysisContext analysisContext)
         {
             var isSwitchExpression = (SwitchExpressionArmSyntaxWrapper)analysisContext.Node;
@@ -71,7 +77,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
             var switchExpression = (SwitchExpressionSyntaxWrapper)parent;
-            ProcessPatternExpression(analysisContext, isSwitchExpression.Pattern, switchExpression.GoverningExpression, switchExpression.GoverningExpression.GetLocation(), isSwitchExpression);
+            ProcessPatternExpression(analysisContext,
+                                     isSwitchExpression.Pattern,
+                                     switchExpression.GoverningExpression,
+                                     switchExpression.GoverningExpression.GetLocation(),
+                                     isSwitchExpression,
+                                     RemoveRedundantCaseMessage);
         }
 
         private static void IsPatternExpression(SyntaxNodeAnalysisContext analysisContext)
@@ -81,7 +92,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return;
             }
-            ProcessPatternExpression(analysisContext, isPatternExpression.Pattern, isPatternExpression.Expression, isPatternExpression.SyntaxNode.GetLocation(), parentIfStatement.Statement);
+            ProcessPatternExpression(analysisContext,
+                    isPatternExpression.Pattern, isPatternExpression.Expression, isPatternExpression.SyntaxNode.GetLocation(), parentIfStatement.Statement, ReplaceWithAsAndNullCheckMessage);
         }
 
         private static void IsExpression(SyntaxNodeAnalysisContext analysisContext)
@@ -96,20 +108,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            ReportIsExpressionLeftPartDuplicateCast(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType);
+            ReportLeftPartOfPatternExpression(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType, ReplaceWithAsAndNullCheckMessage);
         }
 
-        private static void ReportIsExpressionLeftPartDuplicateCast(SyntaxNodeAnalysisContext analysisContext,
+        private static void ReportLeftPartOfPatternExpression(SyntaxNodeAnalysisContext analysisContext,
                                                                     SyntaxNode leftExpression,
                                                                     Location mainLocation,
                                                                     SyntaxNode parentStatement,
-                                                                    TypeSyntax castType)
+                                                                    TypeSyntax castType,
+                                                                    string message)
         {
             var duplicatedCastLocations = GetDuplicatedCastLocations(analysisContext, parentStatement, castType, leftExpression);
 
             if (duplicatedCastLocations.Any())
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, mainLocation, duplicatedCastLocations, ReplaceWithAsAndNullCheckMessage));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, mainLocation, duplicatedCastLocations, message));
             }
         }
 
@@ -137,7 +150,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxNode isPattern,
             SyntaxNode isPatternExpression,
             Location mainVariableLocation,
-            SyntaxNode parentStatement)
+            SyntaxNode parentStatement,
+            string message)
         {
             var isPatternLocation = isPattern.GetLocation();
             if (isPattern.IsKind(SyntaxKindEx.RecursivePattern)
@@ -151,13 +165,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         && (TupleExpressionSyntaxWrapper)isPatternExpression is var tupleExpression
                         && tupleExpression.Arguments.Count == recursivePattern.PositionalPatternClause.Subpatterns.Count)
                     {
-                        ReportIsExpressionLeftPartDuplicateCast(analysisContext, tupleExpression.Arguments[i].Expression, mainVariableLocation, parentStatement, patternType);
+                        ReportLeftPartOfPatternExpression(analysisContext, tupleExpression.Arguments[i].Expression, mainVariableLocation, parentStatement, patternType, message);
                     }
                 }
             }
             else if (ProcessPattern(analysisContext, isPatternLocation, isPattern, parentStatement) is { } patternType)
             {
-                ReportIsExpressionLeftPartDuplicateCast(analysisContext, isPatternExpression, mainVariableLocation, parentStatement, patternType);
+                ReportLeftPartOfPatternExpression(analysisContext, isPatternExpression, mainVariableLocation, parentStatement, patternType, message);
             }
         }
 

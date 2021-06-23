@@ -20,13 +20,13 @@ namespace Tests.Diagnostics
             }
 
             object o;
-            switch (x)                            // Noncompliant [switch-st-0]
+            switch (x)                            // Noncompliant [switch-st-0] {{Remove this cast and use the appropriate variable.}}
             {
                 case Fruit m:                     // Secondary [switch-st-1]
-                    o = (Fruit)m;                 // Noncompliant [switch-st-1]
+                    o = (Fruit)m;                 // Noncompliant [switch-st-1] {{Remove this cast and use the appropriate variable.}}
                     break;
                 case Vegetable t when t != null:  // Secondary [switch-st-2]
-                    o = (Vegetable)t;             // Noncompliant [switch-st-2]
+                    o = (Vegetable)t;             // Noncompliant [switch-st-2] {{Remove this cast and use the appropriate variable.}}
                     break;
                 case Water u:
                     o = (Water)x;                 // Secondary [switch-st-0]
@@ -63,7 +63,7 @@ namespace Tests.Diagnostics
 
             if (x is Fruit f6)          // Secondary
             {
-                var ff6 = (Fruit)f6;    // Noncompliant {{Remove this redundant cast.}}
+                var ff6 = (Fruit)f6;    // Noncompliant {{Remove this cast and use the appropriate variable.}}
                 var fff6 = (Vegetable)x;
             }
 
@@ -94,10 +94,10 @@ namespace Tests.Diagnostics
                 var xFruit = (Fruit)x;
             }
 
-            var message = x switch                 // Noncompliant [1]
+            var message = x switch                 // Noncompliant [1] {{Remove this cast and use the appropriate variable.}}
             {
                 Fruit f10 =>                       // Secondary [2]
-                    ((Fruit)f10).ToString(),       // Noncompliant [2]
+                    ((Fruit)f10).ToString(),       // Noncompliant [2] {{Remove this cast and use the appropriate variable.}}
                 Vegetable v11 =>                   // Secondary [3]
                     ((Vegetable)v11).ToString(),   // Noncompliant [3]
                 (string left, string right) =>     // Secondary [4, 5]
@@ -149,11 +149,12 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void NonExistingType(notObject x)    // Error [CS0246]
+        public void NonExistingType()
         {
-            if (x is Fruit f)                       // Secondary
+            if (x is Fruit f)                       // Error [CS0103]
+                                                    // Secondary@-1
             {
-                var ff = (Fruit)f;                  // Noncompliant {{Remove this redundant cast.}}
+                var ff = (Fruit)f;                  // Noncompliant {{Remove this cast and use the appropriate variable.}}
             }
         }
 
