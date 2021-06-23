@@ -69,6 +69,10 @@ class AndOrConditionsComplexity
         number is 1 or 2 or 4 or 5;
 //                  ^^ Secondary {{+1}}
 
+    bool ChainedConditionsWithParentheses(int number) => // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+        number is 1 or 2 or 4 or (5 or 6);
+//                  ^^ Secondary {{+1}}
+
     bool ChainedSimilarConditionsWithParentheses(int one, int two) => // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
         (one is 1 or 2 or 4 or 5) || (two is 3 or 5);
 //                ^^ Secondary {{+1}}

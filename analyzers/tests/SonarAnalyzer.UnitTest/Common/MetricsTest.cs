@@ -520,10 +520,20 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
 
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
-        public void ExecutableLinesMetricsIsPopulated() =>
+        public void ExecutableLinesMetricsIsPopulated_CSharp() =>
             ExecutableLines(AnalyzerLanguage.CSharp,
                 @"public void Foo(int x) { int i = 0; if (i == 0) {i++;i--;} else { while(true){i--;} } }")
                 .Should().BeEquivalentTo(new[] { 1 });
+
+        [TestMethod]
+        [TestCategory(MetricsTestCategoryName)]
+        public void ExecutableLinesMetricsIsPopulated_VB() =>
+            ExecutableLines(AnalyzerLanguage.VisualBasic,
+                @"Private Sub Foo(x As Integer)
+                    If x = 42
+                    End If
+                  End Sub")
+                .Should().BeEquivalentTo(new[] { 2 });
 
         private static int Lines(AnalyzerLanguage language, string text) =>
             MetricsFor(language, text).LineCount;

@@ -67,9 +67,16 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
             var currentExpression = expression;
-            while (currentExpression?.IsKind(SyntaxKind.ParenthesizedExpression) ?? false)
+            while (currentExpression?.IsAnyKind(SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern) ?? false)
             {
-                currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
+                if (currentExpression.IsKind(SyntaxKind.ParenthesizedExpression))
+                {
+                    currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
+                }
+                else
+                {
+                    currentExpression = ((ParenthesizedPatternSyntaxWrapper)currentExpression).Pattern;
+                }
             }
             return currentExpression;
         }
