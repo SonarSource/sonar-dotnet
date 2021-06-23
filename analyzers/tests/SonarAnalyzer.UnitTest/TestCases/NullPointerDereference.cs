@@ -821,3 +821,58 @@ namespace Tests.Diagnostics
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/3395s
+namespace Repro_3395
+{
+    public enum Helper
+    {
+        A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
+    }
+    public static class Test
+    {
+        public static void OrConstraint()
+        {
+            var helper = Helper.A;
+            if (helper == Helper.A | helper == Helper.B | helper == Helper.C | helper == Helper.D |
+               helper == Helper.E | helper == Helper.F | helper == Helper.G | helper == Helper.H |
+               helper == Helper.I | helper == Helper.A | helper == Helper.B | helper == Helper.C |
+               helper == Helper.D | helper == Helper.E | helper == Helper.F | helper == Helper.G |
+               helper == Helper.H | helper == Helper.I | helper == Helper.A | helper == Helper.B |
+               helper == Helper.C | helper == Helper.D | helper == Helper.E | helper == Helper.F |
+               helper == Helper.G | helper == Helper.H | helper == Helper.I)
+            {
+                System.Console.WriteLine("");
+            }
+        }
+
+        public static void AndConstraint()
+        {
+            var helper = Helper.A;
+            if (helper == Helper.A & helper == Helper.B & helper == Helper.C & helper == Helper.D |
+               helper == Helper.E & helper == Helper.F & helper == Helper.G & helper == Helper.H |
+               helper == Helper.I & helper == Helper.A & helper == Helper.B & helper == Helper.C |
+               helper == Helper.D & helper == Helper.E & helper == Helper.F & helper == Helper.G |
+               helper == Helper.H & helper == Helper.I & helper == Helper.A & helper == Helper.B |
+               helper == Helper.C & helper == Helper.D & helper == Helper.E & helper == Helper.F |
+               helper == Helper.G & helper == Helper.H & helper == Helper.I)
+            {
+                System.Console.WriteLine("");
+            }
+        }
+
+        public static void MixedConstraints()
+        {
+            var helper = Helper.A;
+            if (helper == Helper.A & helper == Helper.B | helper == Helper.C & helper == Helper.D |
+               helper == Helper.E & helper == Helper.F | helper == Helper.G & helper == Helper.H |
+               helper == Helper.I & helper == Helper.A | helper == Helper.B & helper == Helper.C |
+               helper == Helper.D & helper == Helper.E | helper == Helper.F & helper == Helper.G |
+               helper == Helper.H & helper == Helper.I | helper == Helper.A & helper == Helper.B |
+               helper == Helper.C & helper == Helper.D | helper == Helper.E & helper == Helper.F |
+               helper == Helper.G & helper == Helper.H | helper == Helper.I)
+            {
+                System.Console.WriteLine("");
+            }
+        }
+    }
+}
