@@ -18,12 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using csharp::SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
@@ -35,6 +33,7 @@ using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.LiveVariableAnalysis;
+using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.ControlFlowGraph;
