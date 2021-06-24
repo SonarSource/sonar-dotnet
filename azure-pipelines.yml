@@ -45,6 +45,10 @@ stages:
       - powershell: .\scripts\build\store-azp-variables.ps1
         displayName: "Store AZP Variables"
 
+      - publish: $(Agent.BuildDirectory)/variables
+        artifact: Azp-Variables
+        displayName: "Publish AZP Variables as pipeline artifact"
+
       - powershell: .\scripts\build\set-azp-variables.ps1
         displayName: "Set AZP Variables"
 
@@ -150,6 +154,10 @@ stages:
       steps:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
+
+      - download: current
+        artifact: Azp-Variables
+        displayName: "Download AZP Variables pipeline artifact"
 
       - powershell: .\scripts\build\set-azp-variables.ps1
         displayName: "Set AZP Variables"
@@ -431,6 +439,10 @@ stages:
     - job: promoteRepox
       displayName: 'SonarAnalyzer.CFG.CSharp'
       steps:
+        - download: current
+          artifact: Azp-Variables
+          displayName: "Download AZP Variables pipeline artifact"
+
         - powershell: .\scripts\build\set-azp-variables.ps1
           displayName: "Set AZP Variables"
 
