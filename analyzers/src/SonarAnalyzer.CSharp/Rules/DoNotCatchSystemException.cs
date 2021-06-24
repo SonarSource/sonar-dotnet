@@ -34,29 +34,26 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotCatchSystemException : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2221";
+        private const string DiagnosticId = "S2221";
         private const string MessageFormat = "Catch a list of specific exception subtype or use exception filters instead.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var catchClause = (CatchClauseSyntax)c.Node;
-
-                if (IsSystemException(catchClause.Declaration, c.SemanticModel) &&
-                    IsCatchClauseEmptyOrNotPattern(catchClause)
-                     &&
-                    !IsThrowTheLastStatementInTheBlock(catchClause?.Block))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(catchClause)));
-                }
-            },
-            SyntaxKind.CatchClause);
-        }
+                    var catchClause = (CatchClauseSyntax)c.Node;
+
+                    if (IsSystemException(catchClause.Declaration, c.SemanticModel)
+                        && IsCatchClauseEmptyOrNotPattern(catchClause)
+                        && !IsThrowTheLastStatementInTheBlock(catchClause?.Block))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, GetLocation(catchClause)));
+                    }
+                },
+                SyntaxKind.CatchClause);
 
         private static bool IsCatchClauseEmptyOrNotPattern(CatchClauseSyntax catchClause) =>
             catchClause?.Filter?.FilterExpression == null
@@ -67,8 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsSystemException(CatchDeclarationSyntax catchDeclaration, SemanticModel semanticModel)
         {
             var caughtTypeSyntax = catchDeclaration?.Type;
-            return caughtTypeSyntax == null ||
-                   semanticModel.GetTypeInfo(caughtTypeSyntax).Type.Is(KnownType.System_Exception);
+            return caughtTypeSyntax == null || semanticModel.GetTypeInfo(caughtTypeSyntax).Type.Is(KnownType.System_Exception);
         }
 
         private static bool IsThrowTheLastStatementInTheBlock(BlockSyntax block)
@@ -88,11 +84,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return false;
         }
 
-        private static Location GetLocation(CatchClauseSyntax catchClause)
-        {
-            return catchClause.Declaration?.Type != null
+        private static Location GetLocation(CatchClauseSyntax catchClause) =>
+            catchClause.Declaration?.Type != null
                 ? catchClause.Declaration?.Type?.GetLocation()
                 : catchClause.CatchKeyword.GetLocation();
-        }
     }
 }
