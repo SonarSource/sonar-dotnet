@@ -152,7 +152,7 @@ stages:
         displayName: "Install NuGet"
 
       - powershell: .\scripts\build\set-azp-variables.ps1
-        displayName: "Store AZP Variables"
+        displayName: "Set AZP Variables"
 
       - task: VSBuild@1
         displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
