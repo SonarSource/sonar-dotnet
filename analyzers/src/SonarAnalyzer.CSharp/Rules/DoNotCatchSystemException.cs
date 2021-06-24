@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.CatchClause);
 
         private static bool IsCatchClauseEmptyOrNotPattern(CatchClauseSyntax catchClause) =>
-            catchClause?.Filter?.FilterExpression == null
+            catchClause.Filter?.FilterExpression == null
              || (catchClause.Filter.FilterExpression.IsKind(SyntaxKindEx.IsPatternExpression)
                  && (IsPatternExpressionSyntaxWrapper)catchClause.Filter.FilterExpression is var patternExpression
                  && patternExpression.SyntaxNode.DescendantNodes().AnyOfKind(SyntaxKindEx.NotPattern));
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static Location GetLocation(CatchClauseSyntax catchClause) =>
-            catchClause.Declaration?.Type != null
+            catchClause.Declaration.Type != null
                 ? catchClause.Declaration?.Type?.GetLocation()
                 : catchClause.CatchKeyword.GetLocation();
     }
