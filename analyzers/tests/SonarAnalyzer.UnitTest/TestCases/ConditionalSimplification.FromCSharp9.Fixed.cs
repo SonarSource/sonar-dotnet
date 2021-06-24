@@ -15,6 +15,28 @@ a ??= Identity(new()); // Fixed
 b = Identity(a ?? new()); // Fixed
 a ??= new(); // Fixed
 
+var p = a is null; // Fixed
+var q = a is not null; // Fixed
+var r = a is not null; // Fixed
+var s = a is null; // Fixed
+if (a is null) // Fixed
+{
+}
+
+switch (a)
+{
+    case not null:
+        break;
+    case null: // Fixed
+        break;
+}
+
+var y = a switch
+{
+    not null => 1,
+    null => 0 // Fixed
+};
+
 Fruit elem;
 if (condition) // FN, C# 9 has target typed conditionals
 {

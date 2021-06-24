@@ -25,6 +25,6 @@ namespace SonarAnalyzer.Extensions
     public static class UnaryPatternSyntaxWrapperExtensions
     {
         public static bool IsNot(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
-            unaryPatternSyntaxWrapper.OperatorToken.ValueText == "not";
+            unaryPatternSyntaxWrapper.SyntaxNode.Kind() == SyntaxKindEx.NotPattern;
     }
 }

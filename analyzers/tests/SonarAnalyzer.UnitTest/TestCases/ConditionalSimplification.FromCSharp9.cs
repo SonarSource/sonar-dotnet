@@ -25,6 +25,33 @@ a = (a is not null) ? a : Identity(new()); // Noncompliant {{Use the '??=' opera
 b = (a is not null) ? Identity(a) : Identity(new()); // Noncompliant {{Use the '??' operator here.}}
 a = a ?? new(); // Noncompliant {{Use the '??=' operator here.}}
 
+var p = a is not not null; // Noncompliant {{Simplify negation here.}}
+//           ^^^^^^^^^^^^
+var q = a is not not not null; // Noncompliant {{Simplify negation here.}}
+//           ^^^^^^^^^^^^^^^^
+var r = a is not not not not not null; // Noncompliant {{Simplify negation here.}}
+var s = a is not not not not not not null; // Noncompliant {{Simplify negation here.}}
+if (a is not not null) // Noncompliant {{Simplify negation here.}}
+//       ^^^^^^^^^^^^
+{
+}
+
+switch (a)
+{
+    case not null:
+        break;
+    case not not null: // Noncompliant {{Simplify negation here.}}
+//       ^^^^^^^^^^^^
+        break;
+}
+
+var y = a switch
+{
+    not null => 1,
+    not not null => 0 // Noncompliant {{Simplify negation here.}}
+//  ^^^^^^^^^^^^
+};
+
 Fruit elem;
 if (condition) // FN, C# 9 has target typed conditionals
 {

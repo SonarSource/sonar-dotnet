@@ -29,5 +29,8 @@ namespace SonarAnalyzer.Extensions
             ConstantPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper.SyntaxNode)
             && (ConstantPatternSyntaxWrapper)patternSyntaxWrapper.SyntaxNode is var constantPattern
             && constantPattern.Expression.Kind() == SyntaxKind.NullLiteralExpression;
+
+        public static bool IsNot(this PatternSyntaxWrapper patternSyntaxWrapper) =>
+            patternSyntaxWrapper.SyntaxNode.Kind() == SyntaxKindEx.NotPattern;
     }
 }

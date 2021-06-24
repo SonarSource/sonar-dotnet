@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -40,8 +41,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string IsCoalesceAssignmentSupportedKey = "IsNullCoalesceAssignmentSupported";
         internal const string DiagnosticId = "S3240";
         private const string MessageFormat = "Use the '{0}' operator here.";
+        private const string MessageMultipleNegation = "Simplify negation here.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor RuleMultipleNegation = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageMultipleNegation, RspecStrings.ResourceManager);
+
         private static readonly ISet<SyntaxKind> EqualsOrNotEquals = new HashSet<SyntaxKind>
         {
             SyntaxKind.EqualsExpression,
@@ -107,6 +111,27 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(CheckConditionalExpression, SyntaxKind.ConditionalExpression);
             context.RegisterSyntaxNodeActionInNonGenerated(CheckIfStatement, SyntaxKind.IfStatement);
             context.RegisterSyntaxNodeActionInNonGenerated(CheckCoalesceExpression, SyntaxKind.CoalesceExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckNotPattern, SyntaxKindEx.NotPattern);
+        }
+
+        private static void CheckNotPattern(SyntaxNodeAnalysisContext context)
+        {
+            var wrapper = (UnaryPatternSyntaxWrapper)context.Node;
+            if (wrapper.Pattern.IsNot()
+                && GetNegationRoot(context.Node) is var negationRoot
+                && negationRoot == context.Node)
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleMultipleNegation, negationRoot.GetLocation()));
+            }
+
+            static SyntaxNode GetNegationRoot(SyntaxNode node)
+            {
+                while (node.Parent.Kind() == SyntaxKindEx.NotPattern)
+                {
+                    node = node.Parent;
+                }
+                return node;
+            }
         }
 
         private static void CheckCoalesceExpression(SyntaxNodeAnalysisContext context)

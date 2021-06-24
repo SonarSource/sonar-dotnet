@@ -101,9 +101,28 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                     }
                     break;
+                case var s when UnaryPatternSyntaxWrapper.IsInstance(s):
+                    annotation = new SyntaxAnnotation();
+                    return ReduceDoubleNegation(s);
             }
             annotation = null;
             return null;
+        }
+
+        private static SyntaxNode ReduceDoubleNegation(SyntaxNode node)
+        {
+            if (!UnaryPatternSyntaxWrapper.IsInstance(node))
+            {
+                return node;
+            }
+
+            var parent = (UnaryPatternSyntaxWrapper)node;
+            if (parent.IsNot() && parent.Pattern.IsNot())
+            {
+                return ReduceDoubleNegation(((UnaryPatternSyntaxWrapper)parent.Pattern).Pattern);
+            }
+
+            return node;
         }
 
         private static T RemoveAnnotation<T>(T node, SyntaxAnnotation annotation) where T : SyntaxNode
@@ -262,6 +281,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public readonly SemanticModel SemanticModel;
             public readonly SyntaxAnnotation Annotation;
             public readonly bool IsCoalesceAssignmentSupported;
+
             /// <summary>
             /// Value is set only for IfStatement checks.
             /// </summary>
@@ -269,12 +289,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public ComparedContext(Diagnostic diagnostic, SemanticModel semanticModel, ExpressionSyntax compared, out SyntaxAnnotation annotation)
             {
-                this.Compared = compared;
-                this.SemanticModel = semanticModel;
-                this.Annotation = new SyntaxAnnotation();
-                this.IsCoalesceAssignmentSupported = bool.Parse(diagnostic.Properties[ConditionalSimplification.IsCoalesceAssignmentSupportedKey]);
-                diagnostic.Properties.TryGetValue(ConditionalSimplification.SimplifiedOperatorKey, out this.SimplifiedOperator);
-                annotation = this.Annotation;
+                Compared = compared;
+                SemanticModel = semanticModel;
+                Annotation = new SyntaxAnnotation();
+                IsCoalesceAssignmentSupported = bool.Parse(diagnostic.Properties[ConditionalSimplification.IsCoalesceAssignmentSupportedKey]);
+                diagnostic.Properties.TryGetValue(ConditionalSimplification.SimplifiedOperatorKey, out SimplifiedOperator);
+                annotation = Annotation;
             }
         }
     }
