@@ -1,5 +1,5 @@
 # Read variables shared between stages and tasks
-$Dir = "$env:AGENT_BUILDDIRECTORY\azp-variables"
+$Dir = "$env:AGENT_BUILDDIRECTORY\Azp-Variables"
 
 $Version = Get-Content "${Dir}\SONAR_PROJECT_VERSION"
 Write-Host "Sonar project version is '${Version}'"

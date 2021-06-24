@@ -45,7 +45,7 @@ stages:
       - powershell: .\scripts\build\store-azp-variables.ps1
         displayName: "Store AZP Variables"
 
-      - publish: $(Agent.BuildDirectory)/variables
+      - publish: $(Agent.BuildDirectory)/Azp-Variables
         artifact: Azp-Variables
         displayName: "Publish AZP Variables as pipeline artifact"
 
