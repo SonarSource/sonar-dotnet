@@ -85,8 +85,8 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static Location GetLocation(CatchClauseSyntax catchClause) =>
-            catchClause.Declaration.Type != null
-                ? catchClause.Declaration?.Type?.GetLocation()
+            catchClause.Declaration?.Type != null
+                ? catchClause.Declaration.Type.GetLocation()
                 : catchClause.CatchKeyword.GetLocation();
     }
 }
