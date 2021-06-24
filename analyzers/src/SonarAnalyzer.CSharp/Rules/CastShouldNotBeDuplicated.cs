@@ -136,11 +136,11 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void ProcessPatternExpression(SyntaxNodeAnalysisContext analysisContext,
-            SyntaxNode isPattern,
-            SyntaxNode mainVariableExpression,
-            Location mainVariableLocation,
-            SyntaxNode parentStatement,
-            string message)
+                                                     SyntaxNode isPattern,
+                                                     SyntaxNode mainVariableExpression,
+                                                     Location mainVariableLocation,
+                                                     SyntaxNode parentStatement,
+                                                     string message)
         {
             var isPatternLocation = isPattern.GetLocation();
             if (isPattern.IsKind(SyntaxKindEx.RecursivePattern) && (RecursivePatternSyntaxWrapper)isPattern is var recursivePattern)
@@ -196,11 +196,11 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void ReportPatternAtMainVariable(SyntaxNodeAnalysisContext analysisContext,
-            SyntaxNode variableExpression,
-            Location mainLocation,
-            SyntaxNode parentStatement,
-            TypeSyntax castType,
-            string message)
+                                                        SyntaxNode variableExpression,
+                                                        Location mainLocation,
+                                                        SyntaxNode parentStatement,
+                                                        TypeSyntax castType,
+                                                        string message)
         {
             var duplicatedCastLocations = GetDuplicatedCastLocations(analysisContext, parentStatement, castType, variableExpression);
 
@@ -211,11 +211,11 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void ReportPatternAtCastLocation(SyntaxNodeAnalysisContext analysisContext,
-            SyntaxNode variableExpression,
-            Location patternLocation,
-            SyntaxNode parentStatement,
-            TypeSyntax castType,
-            string message)
+                                                        SyntaxNode variableExpression,
+                                                        Location patternLocation,
+                                                        SyntaxNode parentStatement,
+                                                        TypeSyntax castType,
+                                                        string message)
         {
             if (analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol
                 && castTypeSymbol.TypeKind != TypeKind.Struct)
