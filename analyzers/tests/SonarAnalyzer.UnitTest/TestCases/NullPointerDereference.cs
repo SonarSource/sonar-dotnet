@@ -819,5 +819,19 @@ namespace Tests.Diagnostics
             return item.ToString(); // False Negative, item could be null here
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4537
+    class Repro_4537
+    {
+        private void ConditionalAccess_NullCoalescing()
+        {
+            string someString = null;
+
+            if (!someString?.Contains("a") ?? true)
+                Console.WriteLine("It's null or doesn't contain 'a'");
+            else
+                Console.WriteLine(someString.Length); // Noncompliant FP, this path is unreachable
+        }
+    }
 }
 
