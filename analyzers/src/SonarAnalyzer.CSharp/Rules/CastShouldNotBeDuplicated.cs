@@ -153,8 +153,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ProcessRecursivePattern(SyntaxNodeAnalysisContext analysisContext, SyntaxNode mainVariableExpression, Location mainVariableLocation, SyntaxNode parentStatement, string message,
-            RecursivePatternSyntaxWrapper recursivePattern, Location isPatternLocation)
+        private static void ProcessRecursivePattern(SyntaxNodeAnalysisContext analysisContext,
+                                                    SyntaxNode mainVariableExpression,
+                                                    Location mainVariableLocation,
+                                                    SyntaxNode parentStatement,
+                                                    string message,
+                                                    RecursivePatternSyntaxWrapper recursivePattern,
+                                                    Location isPatternLocation)
         {
             if (recursivePattern is {Type: { }, Designation: {SyntaxNode: { }}})
             {
@@ -168,7 +173,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var pattern = recursivePositionalPattern.PositionalPatternClause.Subpatterns[i].Pattern;
                     if (ReportDeclarationPatternAndReturnType(analysisContext, isPatternLocation, pattern, parentStatement) is { } patternType
                         && mainVariableExpression.IsKind(SyntaxKindEx.TupleExpression)
-                        && (TupleExpressionSyntaxWrapper) mainVariableExpression is var tupleExpression
+                        && (TupleExpressionSyntaxWrapper)mainVariableExpression is var tupleExpression
                         && tupleExpression.Arguments.Count == recursivePositionalPattern.PositionalPatternClause.Subpatterns.Count)
                     {
                         ReportPatternAtMainVariable(analysisContext, tupleExpression.Arguments[i].Expression, mainVariableLocation, parentStatement, patternType, message);
