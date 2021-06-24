@@ -8,7 +8,7 @@ Write-Host "Sonar project version is '${Version}'"
 
 # Save variables to files so they can be used by other tasks and stages
 $Dir = "$env:AGENT_BUILDDIRECTORY\Azp-Variables"
-New-Item -ItemType Directory -Path $Dir | Out-Null
+New-Item -ItemType Directory -Path $Dir -Force | Out-Null
 
 $File = "${Dir}\SONAR_PROJECT_VERSION"
 Write-Host "Writing '${Version}' to ${File}"
