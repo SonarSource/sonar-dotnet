@@ -71,4 +71,17 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public class Bar<T> { }
+
+    public class Foo<T>
+    {
+        public void Process(object message)
+        {
+            if (message is Bar<T>/*comment*/)     // Noncompliant
+            {
+                var sub = (Bar<T>/**/) message;   // Secondary
+            }
+        }
+    }
 }
