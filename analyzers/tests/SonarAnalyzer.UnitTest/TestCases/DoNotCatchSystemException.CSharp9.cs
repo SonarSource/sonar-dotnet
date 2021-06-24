@@ -10,7 +10,19 @@ catch (Exception e) when (e is FileNotFoundException or is IOException)
 }
 
 try { }
-catch (Exception e) when (e is not FileNotFoundException) // FN
+catch (Exception e) when (e is not FileNotFoundException)                     // Noncompliant
+{
+    // do something
+}
+
+try { }
+catch (Exception e) when (e is not FileNotFoundException and not IOException) // Noncompliant
+{
+    // do something
+}
+
+try { }
+catch (Exception e) when (e is FileNotFoundException {})
 {
     // do something
 }

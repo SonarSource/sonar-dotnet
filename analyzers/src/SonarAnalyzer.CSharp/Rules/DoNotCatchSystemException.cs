@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -47,7 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var catchClause = (CatchClauseSyntax)c.Node;
 
                 if (IsSystemException(catchClause.Declaration, c.SemanticModel) &&
-                    catchClause?.Filter?.FilterExpression == null &&
+                    IsCatchClauseEmptyOrNotPattern(catchClause)
+                     &&
                     !IsThrowTheLastStatementInTheBlock(catchClause?.Block))
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(catchClause)));
@@ -55,6 +57,12 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             SyntaxKind.CatchClause);
         }
+
+        private static bool IsCatchClauseEmptyOrNotPattern(CatchClauseSyntax catchClause) =>
+            catchClause?.Filter?.FilterExpression == null
+             || (catchClause.Filter.FilterExpression.IsKind(SyntaxKindEx.IsPatternExpression)
+                 && (IsPatternExpressionSyntaxWrapper)catchClause.Filter.FilterExpression is var patternExpression
+                 && patternExpression.SyntaxNode.DescendantNodes().AnyOfKind(SyntaxKindEx.NotPattern));
 
         private static bool IsSystemException(CatchDeclarationSyntax catchDeclaration, SemanticModel semanticModel)
         {
