@@ -119,6 +119,11 @@ namespace Tests.Diagnostics
             if (k is { x : 0 })
             {
             }
+
+            if (x is (Water f13))
+            {
+                var ff13 = (Water)x;                   // FN
+            }
         }
 
         public void Bar(object x)
