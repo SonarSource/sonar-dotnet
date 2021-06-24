@@ -274,6 +274,10 @@ stages:
           artifact: RuleDescriptorBin
           targetPath: analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin
 
+      - download: current
+        artifact: Azp-Variables
+        displayName: "Download AZP Variables pipeline artifact"
+
       - powershell: .\scripts\build\set-azp-variables.ps1
         displayName: "Set AZP Variables"
 
@@ -322,6 +326,10 @@ stages:
         name: mavenSettings
         inputs:
           secureFile: 'maven-settings.xml'
+
+      - download: current
+        artifact: Azp-Variables
+        displayName: "Download AZP Variables pipeline artifact"
 
       - powershell: .\scripts\build\set-azp-variables.ps1
         displayName: "Set AZP Variables"
@@ -395,6 +403,10 @@ stages:
         inputs:
           artifact: RuleDescriptorBin
           targetPath: 'analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
+
+      - download: current
+        artifact: Azp-Variables
+        displayName: "Download AZP Variables pipeline artifact"
 
       - powershell: .\scripts\build\set-azp-variables.ps1
         displayName: "Set AZP Variables"
