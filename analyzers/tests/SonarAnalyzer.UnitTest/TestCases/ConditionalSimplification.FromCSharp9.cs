@@ -24,6 +24,9 @@ if (a is null) // Noncompliant {{Use the '??=' operator here.}}
 a = (a is not null) ? a : Identity(new()); // Noncompliant {{Use the '??=' operator here.}}
 b = (a is not null) ? Identity(a) : Identity(new()); // Noncompliant {{Use the '??' operator here.}}
 a = a ?? new(); // Noncompliant {{Use the '??=' operator here.}}
+a = a is not null ? Wrong(a, b) : Identity(new()); // Error [CS1501]
+a = a is not null ? Identity(new()) : Wrong(a, b); // Error [CS1501]
+a = a is not null ? Identity(a) : IdentityOther(a, b);
 
 var p = a is not not null; // Noncompliant {{Simplify negation here.}}
 //           ^^^^^^^^^^^^
@@ -69,6 +72,7 @@ else
 }
 
 Apple Identity(Apple o) => o;
+Apple IdentityOther(Apple first, Apple second) => second;
 
 // we ignore lambdas because of type resolution for conditional expressions, see CS0173
 Action<int, int> LambdasAreIgnored(bool condition)

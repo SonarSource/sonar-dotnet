@@ -14,6 +14,9 @@ a ??= b;
 a ??= Identity(new()); // Fixed
 b = Identity(a ?? new()); // Fixed
 a ??= new(); // Fixed
+a = a is not null ? Wrong(a, b) : Identity(new()); // Error [CS1501]
+a = a is not null ? Identity(new()) : Wrong(a, b); // Error [CS1501]
+a = a is not null ? Identity(a) : IdentityOther(a, b);
 
 var p = a is null; // Fixed
 var q = a is not null; // Fixed
@@ -47,6 +50,7 @@ Fruit elem;
 elem = condition ? new Apple() : new Orange();
 
 Apple Identity(Apple o) => o;
+Apple IdentityOther(Apple first, Apple second) => second;
 
 // we ignore lambdas because of type resolution for conditional expressions, see CS0173
 Action<int, int> LambdasAreIgnored(bool condition)
