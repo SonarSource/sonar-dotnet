@@ -36,6 +36,12 @@ if (a is not not null) // Noncompliant {{Simplify negation here.}}
 {
 }
 
+int v = 0;
+if (v is not 1)
+{
+    v = 1;
+}
+
 switch (a)
 {
     case not null:

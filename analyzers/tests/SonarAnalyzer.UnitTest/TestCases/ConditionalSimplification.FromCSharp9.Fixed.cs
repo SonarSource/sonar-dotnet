@@ -23,6 +23,12 @@ if (a is null) // Fixed
 {
 }
 
+int v = 0;
+if (v is not 1)
+{
+    v = 1;
+}
+
 switch (a)
 {
     case not null:
