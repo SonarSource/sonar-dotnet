@@ -5398,39 +5398,6 @@
   <data name="S2757_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
-  <data name="S2758_Category" xml:space="preserve">
-    <value>Major Bug</value>
-  </data>
-  <data name="S2758_Description" xml:space="preserve">
-    <value>When the second and third operands of a ternary operator are the same, the operator will always return the same value regardless of the condition. Either the operator itself is pointless, or a mistake was made in coding it.</value>
-  </data>
-  <data name="S2758_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
-  </data>
-  <data name="S2758_Remediation" xml:space="preserve">
-    <value>Constant/Issue</value>
-  </data>
-  <data name="S2758_RemediationCost" xml:space="preserve">
-    <value>5min</value>
-  </data>
-  <data name="S2758_Scope" xml:space="preserve">
-    <value>All</value>
-  </data>
-  <data name="S2758_Severity" xml:space="preserve">
-    <value>Major</value>
-  </data>
-  <data name="S2758_Status" xml:space="preserve">
-    <value>deprecated</value>
-  </data>
-  <data name="S2758_Tags" xml:space="preserve">
-    <value />
-  </data>
-  <data name="S2758_Title" xml:space="preserve">
-    <value>The ternary operator should not return the same value regardless of the condition</value>
-  </data>
-  <data name="S2758_Type" xml:space="preserve">
-    <value>BUG</value>
-  </data>
   <data name="S2760_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>
