@@ -44,14 +44,7 @@ var y = a switch
 };
 
 Fruit elem;
-if (condition) // FN, C# 9 has target typed conditionals
-{
-    elem = new Apple();
-}
-else
-{
-    elem = new Orange();
-}
+elem = condition ? new Apple() : new Orange();
 
 Apple Identity(Apple o) => o;
 

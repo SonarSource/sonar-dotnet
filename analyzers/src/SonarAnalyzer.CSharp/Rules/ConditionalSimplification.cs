@@ -204,37 +204,40 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool AreTypesCompatible(ExpressionSyntax expression1, ExpressionSyntax expression2, SemanticModel semanticModel)
+        private static bool AreTypesCompatible(ExpressionSyntax first, ExpressionSyntax second, SemanticModel semanticModel, ITypeSymbol targetType = null)
         {
-            if (expression1 is AnonymousFunctionExpressionSyntax
-                || expression2 is AnonymousFunctionExpressionSyntax)
+            if (first is AnonymousFunctionExpressionSyntax || second is AnonymousFunctionExpressionSyntax)
             {
                 return false;
             }
 
-            var type1 = semanticModel.GetTypeInfo(expression1).Type;
-            var type2 = semanticModel.GetTypeInfo(expression2).Type;
+            var firstType = semanticModel.GetTypeInfo(first).Type;
+            var secondType = semanticModel.GetTypeInfo(second).Type;
 
-            if (type1 is IErrorTypeSymbol || type2 is IErrorTypeSymbol)
+            if (firstType is IErrorTypeSymbol || secondType is IErrorTypeSymbol)
             {
                 return false;
             }
 
-            if (CheckNullAndValueType(type1, type2)
-                || CheckNullAndValueType(type2, type1))
+            if (IsNullAndValueType(firstType, secondType) || IsNullAndValueType(secondType, firstType))
             {
                 return false;
             }
 
-            if (type2 == null || type1 == null)
+            if (firstType == null || secondType == null)
             {
                 return true;
             }
 
-            return type1.Equals(type2);
+            if (targetType != null && semanticModel.Compilation.IsTargetTypeConditionalSupported())
+            {
+                return firstType.DerivesFrom(targetType) && secondType.DerivesFrom(targetType);
+            }
+
+            return firstType.Equals(secondType);
         }
 
-        private static bool CheckNullAndValueType(ITypeSymbol typeNull, ITypeSymbol typeValue) =>
+        private static bool IsNullAndValueType(ITypeSymbol typeNull, ITypeSymbol typeValue) =>
             typeNull == null && typeValue is {IsValueType: true};
 
         private static bool CanBeSimplified(SyntaxNodeAnalysisContext context,
@@ -313,7 +316,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                   && CSharpEquivalenceChecker.AreEquivalent(assignment1.Left, assignment2.Left)
                                   && assignment1.Kind() == assignment2.Kind();
 
-            if (!canBeSimplified || !AreTypesCompatible(assignment1.Right, assignment2.Right, semanticModel))
+            if (!canBeSimplified || !AreTypesCompatible(assignment1.Right, assignment2.Right, semanticModel, semanticModel.GetTypeInfo(assignment1.Left).Type))
             {
                 return false;
             }

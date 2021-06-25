@@ -59,7 +59,7 @@ var y = a switch
 };
 
 Fruit elem;
-if (condition) // FN, C# 9 has target typed conditionals
+if (condition) // Noncompliant {{Use the '?:' operator here.}}
 {
     elem = new Apple();
 }
