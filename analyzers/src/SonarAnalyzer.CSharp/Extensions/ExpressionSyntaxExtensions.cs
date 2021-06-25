@@ -28,5 +28,9 @@ namespace SonarAnalyzer.Extensions
     {
         public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
             (ExpressionSyntax)((SyntaxNode)expression).RemoveParentheses();
+
+        public static bool CanBeNull(this ExpressionSyntax expression, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(expression).Type is { } expressionType
+            && (expressionType.IsReferenceType || expressionType.Is(KnownType.System_Nullable_T));
     }
 }

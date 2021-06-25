@@ -162,9 +162,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Equivalence handled by S1871, <see cref="ConditionalStructureSameImplementation"/>
                 return;
             }
-            var possiblyCoalescing =
-                TryGetExpressionComparedToNull(ifStatement.Condition, out var comparedToNull, out var comparedIsNullInTrue) &&
-                ExpressionCanBeNull(comparedToNull, context.SemanticModel);
+
+            var possiblyCoalescing = TryGetExpressionComparedToNull(ifStatement.Condition, out var comparedToNull, out var comparedIsNullInTrue)
+                                     && comparedToNull.CanBeNull(context.SemanticModel);
 
             if (CanBeSimplified(context, whenTrue, whenFalse, possiblyCoalescing ? comparedToNull : null, context.SemanticModel, comparedIsNullInTrue, out var simplifiedOperator))
             {
@@ -186,8 +186,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 // handled by S2758, <see cref="TernaryOperatorPointless"/>
                 return;
             }
+
             if (TryGetExpressionComparedToNull(condition, out var comparedToNull, out var comparedIsNullInTrue)
-                && ExpressionCanBeNull(comparedToNull, context.SemanticModel)
+                && comparedToNull.CanBeNull(context.SemanticModel)
                 && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
             {
                 if (IsCoalesceAssignmentSupported(context) && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
@@ -216,8 +217,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            if (CheckNullAndValueType(type1, type2) ||
-                CheckNullAndValueType(type2, type1))
+            if (CheckNullAndValueType(type1, type2)
+                || CheckNullAndValueType(type2, type1))
             {
                 return false;
             }
@@ -322,9 +323,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodSymbol1 = semanticModel.GetSymbolInfo(methodCall1).Symbol;
             var methodSymbol2 = semanticModel.GetSymbolInfo(methodCall2).Symbol;
 
-            if (methodSymbol1 == null
-                || methodSymbol2 == null
-                || !methodSymbol1.Equals(methodSymbol2))
+            if (methodSymbol1 == null || methodSymbol2 == null || !methodSymbol1.Equals(methodSymbol2))
             {
                 return false;
             }
@@ -388,13 +387,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return AreCandidateInvocations(whenTrue, whenFalse, comparedToNull, semanticModel, comparedIsNullInTrue);
             }
-        }
-
-        private static bool ExpressionCanBeNull(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            var expressionType = semanticModel.GetTypeInfo(expression).Type;
-            return expressionType != null
-                   && (expressionType.IsReferenceType || expressionType.Is(KnownType.System_Nullable_T));
         }
 
         private static bool IsCoalesceAssignmentSupported(SyntaxNodeAnalysisContext c) =>
