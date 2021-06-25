@@ -59,16 +59,6 @@ namespace Tests.TestCases
             else
                 return 3;
 
-            X o = null;
-            if (o == null) //Non-compliant, but not handled because of the type difference, and there is no fix for it
-            {
-                x = new Y();
-            }
-            else
-            {
-                x = o;
-            }
-
             //This will be CodeFix-ed
             a ??= b;
 
@@ -91,18 +81,9 @@ namespace Tests.TestCases
 
             Identity(yyy ?? new Y());
 
-            Base elem;
-            if (condition) // Non-compliant, but not handled because of the type difference
-            {
-                elem = new A();
-            }
-            else
-            {
-                elem = new B();
-            }
-
             x = condition ? Identity(new Y()) : Identity(yyy);
 
+            Base elem;
             elem = condition ? new A() : null;
             if (condition) // Non-compliant, but not handled because of the type difference
             {
