@@ -18,15 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
-    public static class ExpressionOrPatternSyntaxExtensions
+    public static class ExpressionOrPatternSyntaxWrapperExtensions
     {
         public static ExpressionOrPatternSyntaxWrapper RemoveParentheses(this ExpressionOrPatternSyntaxWrapper expression) =>
-            (ExpressionOrPatternSyntaxWrapper)((SyntaxNode)expression).RemoveParentheses();
+            (ExpressionOrPatternSyntaxWrapper)expression.SyntaxNode.RemoveParentheses();
     }
 }

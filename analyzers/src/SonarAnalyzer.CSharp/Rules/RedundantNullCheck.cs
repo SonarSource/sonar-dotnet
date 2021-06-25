@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -56,7 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.RemoveParentheses();
 
         private SyntaxNode GetNullCheckVariableForKind(SyntaxNode node, SyntaxKind kind) {
-            if (RemoveParentheses(node) is BinaryExpressionSyntax binaryExpression && binaryExpression.IsKind(kind)) {
+            if (node.RemoveParentheses() is BinaryExpressionSyntax binaryExpression && binaryExpression.IsKind(kind))
+            {
                 var leftNode = GetLeftNode(binaryExpression);
                 var rightNode = GetRightNode(binaryExpression);
 
@@ -77,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxNode GetIsOperatorCheckVariable(SyntaxNode node)
         {
-            var innerExpression = RemoveParentheses(node);
+            var innerExpression = node.RemoveParentheses();
             if (innerExpression is BinaryExpressionSyntax binaryExpression && binaryExpression.IsKind(SyntaxKind.IsExpression))
             {
                 return GetLeftNode(binaryExpression);
@@ -92,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxNode GetInvertedIsOperatorCheckVariable(SyntaxNode node)
         {
-            if (RemoveParentheses(node) is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
+            if (node.RemoveParentheses() is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
             {
                 return GetIsOperatorCheckVariable(prefixUnary.Operand);
             }
@@ -100,7 +102,5 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) => CSharpEquivalenceChecker.AreEquivalent(node1, node2);
-
-        private SyntaxNode RemoveParentheses(SyntaxNode syntaxNode) => syntaxNode.RemoveParentheses();
     }
 }

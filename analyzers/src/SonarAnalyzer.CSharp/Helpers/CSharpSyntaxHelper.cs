@@ -64,23 +64,6 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxNode GetTopMostContainingMethod(this SyntaxNode node) =>
             node.AncestorsAndSelf().LastOrDefault(ancestor => ancestor is BaseMethodDeclarationSyntax || ancestor is PropertyDeclarationSyntax);
 
-        public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
-        {
-            var currentExpression = expression;
-            while (currentExpression?.IsAnyKind(SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern) ?? false)
-            {
-                if (currentExpression.IsKind(SyntaxKind.ParenthesizedExpression))
-                {
-                    currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
-                }
-                else
-                {
-                    currentExpression = ((ParenthesizedPatternSyntaxWrapper)currentExpression).Pattern;
-                }
-            }
-            return currentExpression;
-        }
-
         public static SyntaxNode GetSelfOrTopParenthesizedExpression(this SyntaxNode node)
         {
             var current = node;

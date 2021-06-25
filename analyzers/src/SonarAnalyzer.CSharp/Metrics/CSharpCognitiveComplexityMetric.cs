@@ -61,18 +61,17 @@ namespace SonarAnalyzer.Metrics.CSharp
                 {
                     var nodeKind = node.Kind();
                     var binaryPatternNode = (BinaryPatternSyntaxWrapper)node;
-                    if (!State.LogicalOperationsToIgnore.Contains(binaryPatternNode)
-                        && (nodeKind == SyntaxKindEx.AndPattern
-                            || nodeKind == SyntaxKindEx.OrPattern))
+                    if ((nodeKind == SyntaxKindEx.AndPattern || nodeKind == SyntaxKindEx.OrPattern)
+                        && !State.LogicalOperationsToIgnore.Contains(binaryPatternNode))
                     {
-                        var left = ((ExpressionOrPatternSyntaxWrapper)binaryPatternNode.Left).RemoveParentheses();
-                        if (!((SyntaxNode)left).IsKind(nodeKind))
+                        var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
+                        if (!left.IsKind(nodeKind))
                         {
                             State.IncreaseComplexityByOne(binaryPatternNode.OperatorToken);
                         }
 
-                        var right = ((ExpressionOrPatternSyntaxWrapper)binaryPatternNode.Right).RemoveParentheses();
-                        if (((SyntaxNode)right).IsKind(nodeKind))
+                        var right = binaryPatternNode.Right.SyntaxNode.RemoveParentheses();
+                        if (right.IsKind(nodeKind))
                         {
                             State.LogicalOperationsToIgnore.Add(right);
                         }
@@ -161,9 +160,8 @@ namespace SonarAnalyzer.Metrics.CSharp
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                var identifierNameSyntax = node.Expression as IdentifierNameSyntax;
                 if (State.CurrentMethod != null
-                    && identifierNameSyntax != null
+                    && node.Expression is IdentifierNameSyntax identifierNameSyntax
                     && node.HasExactlyNArguments(State.CurrentMethod.ParameterList.Parameters.Count)
                     && string.Equals(identifierNameSyntax.Identifier.ValueText, State.CurrentMethod.Identifier.ValueText, StringComparison.Ordinal))
                 {
@@ -176,9 +174,8 @@ namespace SonarAnalyzer.Metrics.CSharp
             public override void VisitBinaryExpression(BinaryExpressionSyntax node)
             {
                 var nodeKind = node.Kind();
-                if (!State.LogicalOperationsToIgnore.Contains(node)
-                    && (nodeKind == SyntaxKind.LogicalAndExpression
-                        || nodeKind == SyntaxKind.LogicalOrExpression))
+                if ((nodeKind == SyntaxKind.LogicalAndExpression || nodeKind == SyntaxKind.LogicalOrExpression)
+                    && !State.LogicalOperationsToIgnore.Contains(node))
                 {
                     var left = node.Left.RemoveParentheses();
                     if (!left.IsKind(nodeKind))

@@ -88,6 +88,23 @@ namespace SonarAnalyzer.Extensions
                 _ => GetUnknownType(node.Kind())
             };
 
+        public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
+        {
+            var currentExpression = expression;
+            while (currentExpression?.IsAnyKind(SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern) ?? false)
+            {
+                if (currentExpression.IsKind(SyntaxKind.ParenthesizedExpression))
+                {
+                    currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
+                }
+                else
+                {
+                    currentExpression = ((ParenthesizedPatternSyntaxWrapper)currentExpression).Pattern;
+                }
+            }
+            return currentExpression;
+        }
+
         private static string GetUnknownType(SyntaxKind kind)
         {
 #if DEBUG
