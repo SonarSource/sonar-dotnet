@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionalSimplification_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.CSharp8.cs",
                                     new ConditionalSimplification(),
-                                    new[] {new CSharpParseOptions(LanguageVersion.CSharp8)});
+                                    new[] { new CSharpParseOptions(LanguageVersion.CSharp8) });
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    @"TestCases\ConditionalSimplification.CSharp8.Fixed.cs",
                                    new ConditionalSimplification(),
                                    new ConditionalSimplificationCodeFixProvider(),
-                                   new[] {new CSharpParseOptions(LanguageVersion.CSharp8)});
+                                   new[] { new CSharpParseOptions(LanguageVersion.CSharp8) });
 
         [TestMethod]
         [TestCategory("Rule")]

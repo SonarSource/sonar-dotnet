@@ -193,14 +193,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 && comparedToNull.CanBeNull(context.SemanticModel)
                 && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
             {
-                if (context.Compilation.IsCoalesceAssignmentSupported() && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), "??="));
-                }
-                else
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, conditional.GetLocation(), BuildCodeFixProperties(context), "??"));
-                }
+                var diagnostic = context.Compilation.IsCoalesceAssignmentSupported() && IsCoalesceAssignmentCandidate(conditional, comparedToNull)
+                    ? Diagnostic.Create(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), "??=")
+                    : Diagnostic.Create(Rule, conditional.GetLocation(), BuildCodeFixProperties(context), "??");
+
+                context.ReportDiagnosticWhenActive(diagnostic);
             }
         }
 
@@ -411,7 +408,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ImmutableDictionary<string, string> BuildCodeFixProperties(SyntaxNodeAnalysisContext c, string simplifiedOperator = null)
         {
-            var ret = new Dictionary<string, string> {{IsCoalesceAssignmentSupportedKey, c.Compilation.IsCoalesceAssignmentSupported().ToString()}};
+            var ret = new Dictionary<string, string> { {IsCoalesceAssignmentSupportedKey, c.Compilation.IsCoalesceAssignmentSupported().ToString() }};
             if (simplifiedOperator != null)
             {
                 ret.Add(SimplifiedOperatorKey, simplifiedOperator);
