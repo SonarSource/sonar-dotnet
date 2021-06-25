@@ -135,7 +135,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckCoalesceExpression(SyntaxNodeAnalysisContext context)
         {
-            if (context.Node.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax assignment && IsCoalesceAssignmentSupported(context))
+            if (context.Node.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax assignment
+                && context.Compilation.IsCoalesceAssignmentSupported())
             {
                 var left = ((BinaryExpressionSyntax)context.Node).Left.RemoveParentheses();
                 if (CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), left))
@@ -168,9 +169,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (CanBeSimplified(context, whenTrue, whenFalse, possiblyCoalescing ? comparedToNull : null, context.SemanticModel, comparedIsNullInTrue, out var simplifiedOperator))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ifStatement.IfKeyword.GetLocation(),
-                    BuildCodeFixProperties(context, simplifiedOperator),
-                    simplifiedOperator));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                                                                     ifStatement.IfKeyword.GetLocation(),
+                                                                     BuildCodeFixProperties(context, simplifiedOperator),
+                                                                     simplifiedOperator));
             }
         }
 
@@ -191,7 +193,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && comparedToNull.CanBeNull(context.SemanticModel)
                 && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
             {
-                if (IsCoalesceAssignmentSupported(context) && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
+                if (context.Compilation.IsCoalesceAssignmentSupported() && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), "??="));
                 }
@@ -204,7 +206,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool AreTypesCompatible(ExpressionSyntax expression1, ExpressionSyntax expression2, SemanticModel semanticModel)
         {
-            if (expression1 is AnonymousFunctionExpressionSyntax || expression2 is AnonymousFunctionExpressionSyntax)
+            if (expression1 is AnonymousFunctionExpressionSyntax
+                || expression2 is AnonymousFunctionExpressionSyntax)
             {
                 return false;
             }
@@ -234,13 +237,18 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool CheckNullAndValueType(ITypeSymbol typeNull, ITypeSymbol typeValue) =>
             typeNull == null && typeValue is {IsValueType: true};
 
-        private static bool CanBeSimplified(SyntaxNodeAnalysisContext context, StatementSyntax statement1, StatementSyntax statement2,
-                                            SyntaxNode comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
+        private static bool CanBeSimplified(SyntaxNodeAnalysisContext context,
+                                            StatementSyntax statement1,
+                                            StatementSyntax statement2,
+                                            SyntaxNode comparedToNull,
+                                            SemanticModel semanticModel,
+                                            bool comparedIsNullInTrue,
+                                            out string simplifiedOperator)
         {
             simplifiedOperator = "?:";
 
-            if (statement1 is ReturnStatementSyntax return1 &&
-                statement2 is ReturnStatementSyntax return2)
+            if (statement1 is ReturnStatementSyntax return1
+                && statement2 is ReturnStatementSyntax return2)
             {
                 var retExpr1 = return1.Expression.RemoveParentheses();
                 var retExpr2 = return2.Expression.RemoveParentheses();
@@ -267,7 +275,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var expression1 = expressionStatement1.Expression.RemoveParentheses();
             if (statement2 == null)
             {
-                simplifiedOperator = IsCoalesceAssignmentSupported(context) ? "??=" : "??";
+                simplifiedOperator = context.Compilation.IsCoalesceAssignmentSupported() ? "??=" : "??";
                 return expression1 is AssignmentExpressionSyntax assignment
                     && comparedIsNullInTrue
                     && comparedToNull != null
@@ -290,30 +298,39 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool AreCandidateAssignments(ExpressionSyntax expression1, ExpressionSyntax expression2,
-            SyntaxNode compared, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
+        private static bool AreCandidateAssignments(ExpressionSyntax expression1,
+                                                    ExpressionSyntax expression2,
+                                                    SyntaxNode compared,
+                                                    SemanticModel semanticModel,
+                                                    bool comparedIsNullInTrue,
+                                                    out string simplifiedOperator)
         {
             simplifiedOperator = "?:";
             var assignment1 = expression1 as AssignmentExpressionSyntax;
             var assignment2 = expression2 as AssignmentExpressionSyntax;
-            var canBeSimplified =
-                assignment1 != null &&
-                assignment2 != null &&
-                CSharpEquivalenceChecker.AreEquivalent(assignment1.Left, assignment2.Left) &&
-                assignment1.Kind() == assignment2.Kind();
+            var canBeSimplified = assignment1 != null
+                                  && assignment2 != null
+                                  && CSharpEquivalenceChecker.AreEquivalent(assignment1.Left, assignment2.Left)
+                                  && assignment1.Kind() == assignment2.Kind();
 
             if (!canBeSimplified || !AreTypesCompatible(assignment1.Right, assignment2.Right, semanticModel))
             {
                 return false;
             }
+
             if (compared != null && CanExpressionBeCoalescing(assignment1.Right, assignment2.Right, compared, semanticModel, comparedIsNullInTrue))
             {
                 simplifiedOperator = "??";
             }
+
             return true;
         }
 
-        private static bool AreCandidateInvocations(ExpressionSyntax expression1, ExpressionSyntax expression2, SyntaxNode comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue)
+        private static bool AreCandidateInvocations(ExpressionSyntax expression1,
+                                                    ExpressionSyntax expression2,
+                                                    SyntaxNode comparedToNull,
+                                                    SemanticModel semanticModel,
+                                                    bool comparedIsNullInTrue)
         {
             if (!(expression1 is InvocationExpressionSyntax methodCall1) || !(expression2 is InvocationExpressionSyntax methodCall2))
             {
@@ -389,12 +406,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsCoalesceAssignmentSupported(SyntaxNodeAnalysisContext c) =>
-            c.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp8);
-
         private static ImmutableDictionary<string, string> BuildCodeFixProperties(SyntaxNodeAnalysisContext c, string simplifiedOperator = null)
         {
-            var ret = new Dictionary<string, string> {{IsCoalesceAssignmentSupportedKey, IsCoalesceAssignmentSupported(c).ToString()}};
+            var ret = new Dictionary<string, string> {{IsCoalesceAssignmentSupportedKey, c.Compilation.IsCoalesceAssignmentSupported().ToString()}};
             if (simplifiedOperator != null)
             {
                 ret.Add(SimplifiedOperatorKey, simplifiedOperator);
