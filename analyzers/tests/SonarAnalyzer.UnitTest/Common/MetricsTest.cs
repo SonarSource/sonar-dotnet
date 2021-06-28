@@ -199,6 +199,8 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Classes(AnalyzerLanguage.CSharp, "").Should().Be(0);
             Classes(AnalyzerLanguage.CSharp, "class MyClass {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "interface IMyInterface {}").Should().Be(1);
+            Classes(AnalyzerLanguage.CSharp, "record MyRecord {}").Should().Be(1);
+            Classes(AnalyzerLanguage.CSharp, "record MyPositionalRecord(int Prop) {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "struct MyClass {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "enum MyEnum {}").Should().Be(0);
             Classes(AnalyzerLanguage.CSharp, "class MyClass1 {} namespace MyNamespace { class MyClass2 {} }").Should().Be(2);
@@ -224,6 +226,9 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty { get; set; } }").Should().Be(2);
             Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty { get { return 0; } set { } } }").Should().Be(2);
             Functions(AnalyzerLanguage.CSharp, "class MyClass { public event EventHandler OnSomething { add { } remove {} }").Should().Be(2);
+            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyMethod() { return 1; } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyMethod() => 1; }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyMethod() }").Should().Be(0);
 
             Functions(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
             Functions(AnalyzerLanguage.VisualBasic,

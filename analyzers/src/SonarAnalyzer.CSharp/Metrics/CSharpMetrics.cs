@@ -58,6 +58,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             switch (node.Kind())
             {
                 case SyntaxKind.ClassDeclaration:
+                case SyntaxKindEx.RecordDeclaration:
                 case SyntaxKind.StructDeclaration:
                 case SyntaxKind.InterfaceDeclaration:
                     return true;
@@ -98,8 +99,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                         return true;
                     }
 
-                    if (!accessor.Parent.Parent.IsKind(SyntaxKind.PropertyDeclaration)
-                        && !accessor.Parent.Parent.IsKind(SyntaxKind.EventDeclaration))
+                    if (!accessor.Parent.Parent.IsAnyKind(SyntaxKind.PropertyDeclaration, SyntaxKind.EventDeclaration))
                     {
                         // Unexpected
                         return false;
