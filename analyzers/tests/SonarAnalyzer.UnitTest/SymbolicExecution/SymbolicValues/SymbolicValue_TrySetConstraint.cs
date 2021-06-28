@@ -30,7 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
     [TestClass]
     public class SymbolicValue_TrySetConstraint
     {
-        public static IEnumerable<object[]> TrueConstraintData { get; } = new[]
+        private static IEnumerable<object[]> TrueConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> FalseConstraintData { get; } = new[]
+        private static IEnumerable<object[]> FalseConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> NullConstraintData { get; } = new[]
+        private static IEnumerable<object[]> NullConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -156,7 +156,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> NotNullConstraintData { get; } = new[]
+        private static IEnumerable<object[]> NotNullConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -214,7 +214,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> NoValueConstraintData { get; } = new[]
+        private static IEnumerable<object[]> NoValueConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -230,7 +230,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> HasValueConstraintData { get; } = new[]
+        private static IEnumerable<object[]> HasValueConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -246,7 +246,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> EmptyStringConstraintData { get; } = new[]
+        private static IEnumerable<object[]> EmptyStringConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -292,7 +292,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> FullStringConstraintData { get; } = new[]
+        private static IEnumerable<object[]> FullStringConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -338,7 +338,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> FullNotWhiteSpaceStringConstraintData { get; } = new[]
+        private static IEnumerable<object[]> FullNotWhiteSpaceStringConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -384,7 +384,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> WhiteSpaceStringConstraintData { get; } = new[]
+        private static IEnumerable<object[]> WhiteSpaceStringConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -430,7 +430,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> FullOrNullStringConstraintData { get; } = new[]
+        private static IEnumerable<object[]> FullOrNullStringConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -476,7 +476,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> NotWhiteSpaceStringConstraintData { get; } = new[]
+        private static IEnumerable<object[]> NotWhiteSpaceStringConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -522,7 +522,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> ByteArraySymbolicValueConstraintData { get; } = new[]
+        private static IEnumerable<object[]> ByteArraySymbolicValueConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -538,7 +538,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             }
         };
 
-        public static IEnumerable<object[]> CryptographyIVSymbolicValueConstraintData { get; } = new[]
+        private static IEnumerable<object[]> CryptographyIVSymbolicValueConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -554,7 +554,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             }
         };
 
-        public static IEnumerable<object[]> SaltSizeSymbolicValueConstraintData { get; } = new[]
+        private static IEnumerable<object[]> SaltSizeSymbolicValueConstraintData { get; } = new[]
         {
             new object[]
             {

@@ -821,7 +821,7 @@ namespace Tests.Diagnostics
     }
 }
 
-// https://github.com/SonarSource/sonar-dotnet/issues/3395s
+// https://github.com/SonarSource/sonar-dotnet/issues/3395
 namespace Repro_3395
 {
     public enum Helper
