@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -34,23 +32,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CognitiveComplexity_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.cs",
-                new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 },
-                ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 }, ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CognitiveComplexity_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CognitiveComplexity.CSharp9.cs",
-                new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CognitiveComplexity.CSharp9.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CognitiveComplexity_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.vb",
-                new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+            Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.vb", new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -58,8 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test throws OOM on Azure DevOps
             {
-                Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs",
-                    new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+                Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
             }
         }
 
@@ -69,8 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDO: Test throws OOM on Azure DevOps
             {
-                Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.vb",
-                    new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+                Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.vb", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
             }
         }
     }

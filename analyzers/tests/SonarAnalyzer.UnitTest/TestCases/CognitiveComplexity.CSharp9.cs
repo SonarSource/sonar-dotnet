@@ -52,30 +52,44 @@ class AndOrConditionsComplexity
     bool SimpleNot(object o) => // should be 0
         o is not string;
 
-    void And(object o) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+    void And(int o) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
     {
-        // FN, inner AND boolean expression should count as + 1, just like it would be '&&'
         if (o is > 0 and <= 10)
 //      ^^ Secondary {{+1}}
+//                   ^^^ Secondary@-1 {{+1}}
             Console.WriteLine("More than 0 but less than or equal to 10");
     }
 
-    bool AndOr(int o) => // should be 2
+    bool AndOr(int o) => // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
         o is < 500 and > 300 or 1;
+//                 ^^^ Secondary {{+1}}
+//                           ^^ Secondary@-1 {{+1}}
 
-    bool ChainedConditions(int number) => // should be 1
+    bool ChainedConditions(int number) => // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
         number is 1 or 2 or 4 or 5;
+//                  ^^ Secondary {{+1}}
 
-    // Below, the fact that we are using both 'or' and '||' should increase the cognitive complexity
-    bool ChainedSimilarConditionsWithParentheses(int one, int two) => // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+    bool ChainedConditionsWithParentheses(int number) => // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+        number is 1 or 2 or 4 or (5 or 6);
+//                  ^^ Secondary {{+1}}
+
+    bool ChainedSimilarConditionsWithParentheses(int one, int two) => // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
         (one is 1 or 2 or 4 or 5) || (two is 3 or 5);
-//                                ^^ Secondary {{+1}}
+//                ^^ Secondary {{+1}}
+//                                ^^ Secondary@-1 {{+1}}
+//                                             ^^ Secondary@-2 {{+1}}
 
-    // FN below
-    bool ChainedDifferentConditionsWithParentheses(int one, int? two) => // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+    bool ChainedDifferentConditionsWithParentheses(int one, int? two) => // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
         (one is 1 or 2 or 4 or 5) || (two is not null and 5);
-//                                ^^ Secondary {{+1}}
+//                ^^ Secondary {{+1}}
+//                                ^^ Secondary@-1 {{+1}}
+//                                                    ^^^ Secondary@-2 {{+1}}
 
+    bool AndOrNot(object o) => // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
+        o is < 500 and > 300 or not (string or double);
+//                 ^^^ Secondary {{+1}}
+//                           ^^ Secondary@-1 {{+1}}
+//                                          ^^ Secondary@-2 {{+1}}
 }
 
 class StaticLambda

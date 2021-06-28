@@ -27,14 +27,14 @@ namespace SonarAnalyzer.Common
 {
     public class CognitiveComplexity
     {
+        public int Complexity { get; }
+        public ImmutableArray<SecondaryLocation> Locations { get; }
+
         public CognitiveComplexity(int complexity, ImmutableArray<SecondaryLocation> locations)
         {
             Complexity = complexity;
             Locations = locations;
         }
-
-        public int Complexity { get; }
-        public ImmutableArray<SecondaryLocation> Locations { get; }
     }
 
     public class CognitiveComplexityWalkerState<TMethodSyntax>
@@ -42,12 +42,10 @@ namespace SonarAnalyzer.Common
     {
         public TMethodSyntax CurrentMethod { get; set; }
 
-        public List<SecondaryLocation> IncrementLocations { get; }
-            = new List<SecondaryLocation>();
+        public IList<SecondaryLocation> IncrementLocations { get; } = new List<SecondaryLocation>();
 
         // used to track logical operations inside parentheses
-        public List<SyntaxNode> LogicalOperationsToIgnore { get; }
-            = new List<SyntaxNode>();
+        public IList<SyntaxNode> LogicalOperationsToIgnore { get; } = new List<SyntaxNode>();
 
         public bool HasDirectRecursiveCall { get; set; }
 
@@ -62,10 +60,8 @@ namespace SonarAnalyzer.Common
             NestingLevel--;
         }
 
-        public void IncreaseComplexityByOne(SyntaxToken token)
-        {
+        public void IncreaseComplexityByOne(SyntaxToken token) =>
             IncreaseComplexity(token, 1, "+1");
-        }
 
         public void IncreaseComplexityByNestingPlusOne(SyntaxToken token)
         {
