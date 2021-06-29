@@ -26,25 +26,22 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExpressionComplexityBase : ParameterLoadingDiagnosticAnalyzer
+    public abstract class ExpressionComplexityBase<TExpression> : ParameterLoadingDiagnosticAnalyzer
+        where TExpression : SyntaxNode
     {
         protected const string DiagnosticId = "S1067";
         protected const string MessageFormat = "Reduce the number of conditional operators ({1}) used in the expression (maximum allowed {0}).";
 
         private const int DefaultValueMaximum = 3;
 
-        [RuleParameter("max", PropertyType.Integer, "Maximum number of allowed conditional operators in an expression", DefaultValueMaximum)]
-        public int Maximum { get; set; } = DefaultValueMaximum;
-    }
-
-    public abstract class ExpressionComplexityBase<TExpression> : ExpressionComplexityBase
-        where TExpression : SyntaxNode
-    {
         private readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade Language { get; }
         protected abstract bool IsComplexityIncreasingKind(SyntaxNode node);
         protected abstract bool IsCompoundExpression(SyntaxNode node);
+
+        [RuleParameter("max", PropertyType.Integer, "Maximum number of allowed conditional operators in an expression", DefaultValueMaximum)]
+        public int Maximum { get; set; } = DefaultValueMaximum;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
