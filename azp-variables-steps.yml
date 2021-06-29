@@ -1,0 +1,8 @@
+# Reusable steps for azure-pipelines.yml
+steps:
+- download: current
+  artifact: Azp-Variables
+  displayName: "Download AZP Variables pipeline artifact"
+
+- powershell: .\scripts\build\set-azp-variables.ps1
+  displayName: "Set AZP Variables"

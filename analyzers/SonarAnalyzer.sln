@@ -6,6 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Solution Items", "Co
 	ProjectSection(SolutionItems) = preProject
 		..\.editorconfig = ..\.editorconfig
 		src\AssemblyInfo.Shared.cs = src\AssemblyInfo.Shared.cs
+		..\azp-variables-steps.yml = ..\azp-variables-steps.yml
 		..\azure-pipelines-external.yml = ..\azure-pipelines-external.yml
 		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		..\scripts\build\build-utils.ps1 = ..\scripts\build\build-utils.ps1

@@ -155,12 +155,7 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
-      - download: current
-        artifact: Azp-Variables
-        displayName: "Download AZP Variables pipeline artifact"
-
-      - powershell: .\scripts\build\set-azp-variables.ps1
-        displayName: "Set AZP Variables"
+      - template: azp-variables-steps.yml
 
       - task: VSBuild@1
         displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
@@ -274,12 +269,7 @@ stages:
           artifact: RuleDescriptorBin
           targetPath: analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin
 
-      - download: current
-        artifact: Azp-Variables
-        displayName: "Download AZP Variables pipeline artifact"
-
-      - powershell: .\scripts\build\set-azp-variables.ps1
-        displayName: "Set AZP Variables"
+      - template: azp-variables-steps.yml
 
       - task: DownloadSecureFile@1
         displayName: 'Download Maven settings'
@@ -327,12 +317,7 @@ stages:
         inputs:
           secureFile: 'maven-settings.xml'
 
-      - download: current
-        artifact: Azp-Variables
-        displayName: "Download AZP Variables pipeline artifact"
-
-      - powershell: .\scripts\build\set-azp-variables.ps1
-        displayName: "Set AZP Variables"
+      - template: azp-variables-steps.yml
 
       - template: update-maven-version-steps.yml
         parameters:
@@ -404,12 +389,7 @@ stages:
           artifact: RuleDescriptorBin
           targetPath: 'analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
 
-      - download: current
-        artifact: Azp-Variables
-        displayName: "Download AZP Variables pipeline artifact"
-
-      - powershell: .\scripts\build\set-azp-variables.ps1
-        displayName: "Set AZP Variables"
+      - template: azp-variables-steps.yml
 
       - task: Maven@3
         displayName: 'Maven install'
@@ -451,12 +431,7 @@ stages:
     - job: promoteRepox
       displayName: 'SonarAnalyzer.CFG.CSharp'
       steps:
-        - download: current
-          artifact: Azp-Variables
-          displayName: "Download AZP Variables pipeline artifact"
-
-        - powershell: .\scripts\build\set-azp-variables.ps1
-          displayName: "Set AZP Variables"
+        - template: azp-variables-steps.yml
 
         - task: UsePythonVersion@0
           inputs:

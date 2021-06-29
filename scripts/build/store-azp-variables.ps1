@@ -7,6 +7,8 @@ $Version = $VersionProps.Project.PropertyGroup.MainVersion
 Write-Host "Sonar project version is '${Version}'"
 
 # Save variables to files so they can be used by other tasks and stages
+# -Force to suppress the error message when it exists on reused agent
+# | Out-Null to suppress noisy output report
 $Dir = "$env:AGENT_BUILDDIRECTORY\Azp-Variables"
 New-Item -ItemType Directory -Path $Dir -Force | Out-Null
 
