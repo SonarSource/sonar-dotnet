@@ -45,20 +45,21 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckMatchingExpressionsInSucceedingStatements((IfStatementSyntax)c.Node, syntax => syntax.Condition, c),
+                c => CheckMatchingExpressionsInSucceedingStatements<IfStatementSyntax>(c, x => x.Condition),
                 SyntaxKind.IfStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckMatchingExpressionsInSucceedingStatements((SwitchStatementSyntax)c.Node, syntax => syntax.Expression, c),
+                c => CheckMatchingExpressionsInSucceedingStatements<SwitchStatementSyntax>(c, x => x.Expression),
                 SyntaxKind.SwitchStatement);
         }
 
-        private static void CheckMatchingExpressionsInSucceedingStatements<T>(T statement, Func<T, ExpressionSyntax> expressionSelector, SyntaxNodeAnalysisContext context) where T : StatementSyntax
+        private static void CheckMatchingExpressionsInSucceedingStatements<T>(SyntaxNodeAnalysisContext context, Func<T, ExpressionSyntax> expression) where T : StatementSyntax
         {
-            if (statement.GetPrecedingStatement() is T previousStatement)
+            var currentStatement = (T)context.Node;
+            if (currentStatement.GetPrecedingStatement() is T previousStatement)
             {
-                var currentExpression = expressionSelector(statement);
-                var previousExpression = expressionSelector(previousStatement);
+                var currentExpression = expression(currentStatement);
+                var previousExpression = expression(previousStatement);
                 if (CSharpEquivalenceChecker.AreEquivalent(currentExpression, previousExpression) && !ContainsPossibleUpdate(previousStatement, currentExpression, context.SemanticModel))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, currentExpression.GetLocation(), previousExpression.GetLineNumberToReport()));
@@ -70,9 +71,12 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var checkedSymbols = expression.DescendantNodesAndSelf().Select(x => semanticModel.GetSymbolInfo(x).Symbol).WhereNotNull().ToHashSet();
             var statementDescendents = statement.DescendantNodesAndSelf().ToArray();
-            return statementDescendents.OfType<AssignmentExpressionSyntax>().Any(x => semanticModel.GetSymbolInfo(x.Left).Symbol is { } symbol && checkedSymbols.Contains(symbol))
-                || statementDescendents.OfType<PostfixUnaryExpressionSyntax>().Any(x => semanticModel.GetSymbolInfo(x.Operand).Symbol is { } symbol && checkedSymbols.Contains(symbol))
-                || statementDescendents.OfType<PrefixUnaryExpressionSyntax>().Any(x => semanticModel.GetSymbolInfo(x.Operand).Symbol is { } symbol && checkedSymbols.Contains(symbol));
+            return statementDescendents.OfType<AssignmentExpressionSyntax>().Any(x => HasCheckedSymbol(x.Left))
+                || statementDescendents.OfType<PostfixUnaryExpressionSyntax>().Any(x => HasCheckedSymbol(x.Operand))
+                || statementDescendents.OfType<PrefixUnaryExpressionSyntax>().Any(x => HasCheckedSymbol(x.Operand));
+
+            bool HasCheckedSymbol(SyntaxNode node) =>
+                semanticModel.GetSymbolInfo(node).Symbol is { } symbol && checkedSymbols.Contains(symbol);
         }
     }
 }
