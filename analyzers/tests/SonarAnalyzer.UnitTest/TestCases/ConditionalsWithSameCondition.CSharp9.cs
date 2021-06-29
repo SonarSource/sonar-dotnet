@@ -62,10 +62,10 @@
 
 
             if (f is not null) { }
-            if (f != null) { } // FN, same as above
+            if (f != null) { } // Compliant, even when the semantics is the same
 
             if (f is null) { }
-            if (f == null) { } // FN, same as above
+            if (f == null) { } // Compliant, even when the semantics is the same
         }
 
         void doTheThing(object o) { }
