@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -30,8 +31,7 @@ namespace SonarAnalyzer.Rules
         where TExpression : SyntaxNode
     {
         protected const string DiagnosticId = "S1067";
-        protected const string MessageFormat = "Reduce the number of conditional operators ({1}) used in the expression (maximum allowed {0}).";
-
+        private const string MessageFormat = "Reduce the number of conditional operators ({1}) used in the expression (maximum allowed {0}).";
         private const int DefaultValueMaximum = 3;
 
         private readonly DiagnosticDescriptor rule;
@@ -52,22 +52,20 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxTreeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
                     var root = c.Tree.GetRoot();
-                    var rootExpressions = root.DescendantNodes(x => !(x is TExpression)).OfType<TExpression>().Where(x => !IsCompoundExpression(x));
-
-                    var compoundExpressionsDescendants = root.DescendantNodes().Where(IsCompoundExpression).SelectMany(
-                            compoundExpression => compoundExpression
-                                .DescendantNodes(node => compoundExpression == node || !(node is TExpression))
-                                .OfType<TExpression>()
-                                .Where(expression => !IsCompoundExpression(expression)));
+                    var rootExpressions = NoncompoundSubexpressions(root);
+                    var compoundExpressionsDescendants = root.DescendantNodes().Where(IsCompoundExpression).SelectMany(NoncompoundSubexpressions);
 
                     foreach (var expression in rootExpressions.Concat(compoundExpressionsDescendants))
                     {
-                        var complexity = expression.DescendantNodesAndSelf(e2 => !IsCompoundExpression(e2)).Count(IsComplexityIncreasingKind);
+                        var complexity = expression.DescendantNodesAndSelf(x => !IsCompoundExpression(x)).Count(IsComplexityIncreasingKind);
                         if (complexity > Maximum)
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, expression.GetLocation(), Maximum, complexity));
                         }
                     }
                 });
+
+        private IEnumerable<SyntaxNode> NoncompoundSubexpressions(SyntaxNode node) =>
+            node.DescendantNodes(x => !(x is TExpression) || x == node).OfType<TExpression>().Where(x => !IsCompoundExpression(x));
     }
 }
