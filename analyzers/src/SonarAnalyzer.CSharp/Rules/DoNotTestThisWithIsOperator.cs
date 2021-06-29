@@ -32,25 +32,22 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotTestThisWithIsOperator : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3060";
+        private const string DiagnosticId = "S3060";
         private const string MessageFormat = "Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var expression = (BinaryExpressionSyntax)c.Node;
+                if (expression.Left is ThisExpressionSyntax)
                 {
-                    var expression = (BinaryExpressionSyntax)c.Node;
-                    if (expression.Left is ThisExpressionSyntax)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, expression.GetLocation()));
-                    }
-                },
-                SyntaxKind.IsExpression);
-        }
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, expression.GetLocation()));
+                }
+            },
+            SyntaxKind.IsExpression);
     }
 }
