@@ -41,12 +41,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             SyntaxKind.SimpleLambdaExpression,
             SyntaxKind.AnonymousMethodExpression,
-
             SyntaxKind.ArrayInitializerExpression,
             SyntaxKind.CollectionInitializerExpression,
             SyntaxKind.ComplexElementInitializerExpression,
             SyntaxKind.ObjectInitializerExpression,
-
             SyntaxKind.InvocationExpression
         };
 
@@ -55,7 +53,9 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ConditionalExpression,
             SyntaxKind.LogicalAndExpression,
             SyntaxKind.LogicalOrExpression,
-            SyntaxKindEx.CoalesceAssignmentExpression
+            SyntaxKindEx.CoalesceAssignmentExpression,
+            SyntaxKindEx.AndPattern,
+            SyntaxKindEx.OrPattern
         };
 
         protected override bool IsComplexityIncreasingKind(SyntaxNode node) =>
