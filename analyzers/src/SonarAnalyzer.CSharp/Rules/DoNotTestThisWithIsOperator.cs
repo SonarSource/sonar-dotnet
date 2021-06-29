@@ -18,13 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,15 +42,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(c => Analyze(c, x => ((BinaryExpressionSyntax)x).Left), SyntaxKind.IsExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => Analyze(c, x => ((SwitchStatementSyntax)x).Expression), SyntaxKind.SwitchStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => Analyze(c, x => ((IsPatternExpressionSyntaxWrapper)x).Expression), SyntaxKindEx.IsPatternExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => Analyze(c, x => ((SwitchExpressionSyntaxWrapper)x).GoverningExpression), SyntaxKindEx.SwitchExpression);
+        }
+
+        private static void Analyze(SyntaxNodeAnalysisContext context, Func<SyntaxNode, ExpressionSyntax> retrieveExpression)
+        {
+            if (retrieveExpression(context.Node).RemoveParentheses() is ThisExpressionSyntax)
             {
-                var expression = (BinaryExpressionSyntax)c.Node;
-                if (expression.Left is ThisExpressionSyntax)
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, expression.GetLocation()));
-                }
-            },
-            SyntaxKind.IsExpression);
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.Node.GetLocation()));
+            }
+        }
     }
 }
