@@ -311,6 +311,21 @@ namespace Tests.Diagnostics
 
             }
 
+            void B()
+            {
+                int? i = GetNullableInt();
+
+                if (i == null && i == 3) // FN
+                {
+
+                }
+            }
+
+            int? GetNullableInt() => 42;
+        }
+
+        public void DoWorkStatic()
+        {
             static void B()
             {
                 int? i = GetNullableInt();
