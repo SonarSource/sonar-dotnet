@@ -6,10 +6,62 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
 "region":  {
+"startLine":  107,
+"startColumn":  17,
+"endLine":  107,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3060",
+"message":  "Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  21,
+"endLine":  164,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3060",
+"message":  "Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"region":  {
 "startLine":  177,
 "startColumn":  33,
 "endLine":  177,
 "endColumn":  52
+}
+}
+},
+{
+"id":  "S3060",
+"message":  "Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.Lifecycle.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  17,
+"endLine":  21,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3060",
+"message":  "Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.Lifecycle.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  17,
+"endLine":  89,
+"endColumn":  47
 }
 }
 },
