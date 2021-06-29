@@ -70,13 +70,16 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ContainsPossibleUpdate(StatementSyntax statement, ExpressionSyntax expression, SemanticModel semanticModel)
         {
             var checkedSymbols = expression.DescendantNodesAndSelf().Select(x => semanticModel.GetSymbolInfo(x).Symbol).WhereNotNull().ToHashSet();
+            var checkedSymbolNames = checkedSymbols.Select(x => x.Name).ToArray();
             var statementDescendents = statement.DescendantNodesAndSelf().ToArray();
             return statementDescendents.OfType<AssignmentExpressionSyntax>().Any(x => HasCheckedSymbol(x.Left))
                 || statementDescendents.OfType<PostfixUnaryExpressionSyntax>().Any(x => HasCheckedSymbol(x.Operand))
                 || statementDescendents.OfType<PrefixUnaryExpressionSyntax>().Any(x => HasCheckedSymbol(x.Operand));
 
             bool HasCheckedSymbol(SyntaxNode node) =>
-                semanticModel.GetSymbolInfo(node).Symbol is { } symbol && checkedSymbols.Contains(symbol);
+                checkedSymbolNames.Any(x => node.ToStringContains(x))
+                && semanticModel.GetSymbolInfo(node).Symbol is { } symbol
+                && checkedSymbols.Contains(symbol);
         }
     }
 }
