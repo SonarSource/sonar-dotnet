@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -37,6 +38,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GetTypeWithIsAssignableFrom_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs", new GetTypeWithIsAssignableFrom());
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void GetTypeWithIsAssignableFrom_CSharp9_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs",
+                                   @"TestCases\GetTypeWithIsAssignableFrom.CSharp9.Fixed.cs",
+                                   new GetTypeWithIsAssignableFrom(),
+                                   new GetTypeWithIsAssignableFromCodeFixProvider(),
+                                   ParseOptionsHelper.FromCSharp9,
+                                   OutputKind.ConsoleApplication);
 #endif
 
         [TestMethod]
