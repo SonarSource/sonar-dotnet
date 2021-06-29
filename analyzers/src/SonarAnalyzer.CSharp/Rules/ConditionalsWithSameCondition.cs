@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 || statementDescendents.OfType<PrefixUnaryExpressionSyntax>().Any(x => HasCheckedSymbol(x.Operand));
 
             bool HasCheckedSymbol(SyntaxNode node) =>
-                checkedSymbolNames.Any(x => node.ToStringContains(x))
+                checkedSymbolNames.Any(node.ToStringContains)
                 && semanticModel.GetSymbolInfo(node).Symbol is { } symbol
                 && checkedSymbols.Contains(symbol);
         }
