@@ -48,6 +48,9 @@ namespace Tests.TestCases
                 ++c;
             }
 
+            if (a == b && a == c) { }
+            if (a == b && a == c) { } // Noncompliant
+            if (a == c && a == b) { } // Compliant, even when the semantics is the same as the previous one. Properties or invocations can have side effects on the result.
         }
         public void TestSw()
         {
@@ -56,7 +59,7 @@ namespace Tests.TestCases
                 case 1:
                     break;
             }
-            switch (a) // Noncompliant {{This condition was just checked on line 54.}}
+            switch (a) // Noncompliant {{This condition was just checked on line 57.}}
             {
                 case 2:
                     break;

@@ -58,6 +58,8 @@
             char ch = 'x';
             if (ch is >= 'a' and <= 'z') { }
             if (ch is >= 'a' and <= 'z') { } // Noncompliant
+            if (ch is <= 'z' and >= 'a') { } // Compliant, even when the semantics is the same
+
 
             if (f is not null) { }
             if (f != null) { } // FN, same as above
