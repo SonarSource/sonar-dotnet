@@ -38,93 +38,41 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2760";
         private const string MessageFormat = "This condition was just checked on line {0}.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    CheckMatchingExpressionsInSucceedingStatements((IfStatementSyntax)c.Node, syntax => syntax.Condition, c);
-                },
+                c => CheckMatchingExpressionsInSucceedingStatements((IfStatementSyntax)c.Node, syntax => syntax.Condition, c),
                 SyntaxKind.IfStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    CheckMatchingExpressionsInSucceedingStatements((SwitchStatementSyntax)c.Node, syntax => syntax.Expression, c);
-                },
+                c => CheckMatchingExpressionsInSucceedingStatements((SwitchStatementSyntax)c.Node, syntax => syntax.Expression, c),
                 SyntaxKind.SwitchStatement);
         }
 
-        private static void CheckMatchingExpressionsInSucceedingStatements<T>(T statement,
-            Func<T, ExpressionSyntax> expressionSelector, SyntaxNodeAnalysisContext context) where T : StatementSyntax
+        private static void CheckMatchingExpressionsInSucceedingStatements<T>(T statement, Func<T, ExpressionSyntax> expressionSelector, SyntaxNodeAnalysisContext context) where T : StatementSyntax
         {
-            if (!(statement.GetPrecedingStatement() is T previousStatement))
+            if (statement.GetPrecedingStatement() is T previousStatement)
             {
-                return;
-            }
-
-            var currentExpression = expressionSelector(statement);
-            var previousExpression = expressionSelector(previousStatement);
-
-            if (CSharpEquivalenceChecker.AreEquivalent(currentExpression, previousExpression) &&
-                !ContainsPossibleUpdate(previousStatement, currentExpression, context.SemanticModel))
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, currentExpression.GetLocation(),
-                    previousExpression.GetLineNumberToReport()));
+                var currentExpression = expressionSelector(statement);
+                var previousExpression = expressionSelector(previousStatement);
+                if (CSharpEquivalenceChecker.AreEquivalent(currentExpression, previousExpression) && !ContainsPossibleUpdate(previousStatement, currentExpression, context.SemanticModel))
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, currentExpression.GetLocation(), previousExpression.GetLineNumberToReport()));
+                }
             }
         }
 
-        private static bool ContainsPossibleUpdate(StatementSyntax statement, ExpressionSyntax expression,
-            SemanticModel semanticModel)
+        private static bool ContainsPossibleUpdate(StatementSyntax statement, ExpressionSyntax expression, SemanticModel semanticModel)
         {
-            var checkedSymbols = expression.DescendantNodesAndSelf()
-                .Select(node => semanticModel.GetSymbolInfo(node).Symbol)
-                .WhereNotNull()
-                .ToHashSet();
-
-            var statementDescendents = statement.DescendantNodesAndSelf().ToList();
-            var isAnyCheckedSymbolUpdated = statementDescendents
-                .OfType<AssignmentExpressionSyntax>()
-                .Any(assignment => IsCheckedSymbolUpdated(assignment.Left, checkedSymbols, semanticModel));
-
-            if (isAnyCheckedSymbolUpdated)
-            {
-                return true;
-            }
-
-            var postfixUnaryExpression = statementDescendents
-                .OfType<PostfixUnaryExpressionSyntax>()
-                .Any(expressionSyntax =>
-                {
-                    var symbol = semanticModel.GetSymbolInfo(expressionSyntax.Operand).Symbol;
-                    return symbol != null && checkedSymbols.Contains(symbol);
-                });
-
-            if (postfixUnaryExpression)
-            {
-                return true;
-            }
-
-            var prefixUnaryExpression = statementDescendents
-                .OfType<PrefixUnaryExpressionSyntax>()
-                .Any(expressionSyntax =>
-                {
-                    var symbol = semanticModel.GetSymbolInfo(expressionSyntax.Operand).Symbol;
-                    return symbol != null && checkedSymbols.Contains(symbol);
-                });
-
-            return prefixUnaryExpression;
-        }
-
-        private static bool IsCheckedSymbolUpdated(ExpressionSyntax expression, ISet<ISymbol> checkedSymbols, SemanticModel semanticModel)
-        {
-            var symbol = semanticModel.GetSymbolInfo(expression).Symbol;
-            return symbol != null && checkedSymbols.Contains(symbol);
+            var checkedSymbols = expression.DescendantNodesAndSelf().Select(x => semanticModel.GetSymbolInfo(x).Symbol).WhereNotNull().ToHashSet();
+            var statementDescendents = statement.DescendantNodesAndSelf().ToArray();
+            return statementDescendents.OfType<AssignmentExpressionSyntax>().Any(x => semanticModel.GetSymbolInfo(x.Left).Symbol is { } symbol && checkedSymbols.Contains(symbol))
+                || statementDescendents.OfType<PostfixUnaryExpressionSyntax>().Any(x => semanticModel.GetSymbolInfo(x.Operand).Symbol is { } symbol && checkedSymbols.Contains(symbol))
+                || statementDescendents.OfType<PrefixUnaryExpressionSyntax>().Any(x => semanticModel.GetSymbolInfo(x.Operand).Symbol is { } symbol && checkedSymbols.Contains(symbol));
         }
     }
 }
