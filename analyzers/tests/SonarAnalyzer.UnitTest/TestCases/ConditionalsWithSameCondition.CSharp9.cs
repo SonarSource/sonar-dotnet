@@ -52,6 +52,13 @@
                 f = cond ? new Apple() : new Orange();
             }
 
+            if (f is null) { }
+            if (f is null) { }  // Noncompliant
+
+            char ch = 'x';
+            if (ch is >= 'a' and <= 'z') { }
+            if (ch is >= 'a' and <= 'z') { } // Noncompliant
+
             if (f is not null) { }
             if (f != null) { } // FN, same as above
 
