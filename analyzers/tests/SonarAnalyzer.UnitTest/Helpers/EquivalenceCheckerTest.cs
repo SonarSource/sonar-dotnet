@@ -24,6 +24,7 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.Common;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
@@ -221,6 +222,10 @@ End Namespace";
             hashSet.Should().Contain(vbMethods.Method1);
             hashSet.Should().NotContain(vbMethods.Method4);
         }
+
+        [TestMethod]
+        public void EqualityComparer_Node_CrossLangauge() =>
+            EquivalenceChecker.AreEquivalent(vbMethods.Method1.First(), csMethods.Method1, null).Should().BeFalse();
 
         private class CSharpMethods
         {

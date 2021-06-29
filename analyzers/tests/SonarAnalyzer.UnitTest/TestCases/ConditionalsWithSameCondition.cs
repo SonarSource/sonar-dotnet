@@ -66,4 +66,36 @@ namespace Tests.TestCases
             }
         }
     }
+
+    public class Coverage
+    {
+        private string name;
+
+        public void AssignedToFieldWithSameName(string name)
+        {
+            if (name == name)
+            {
+                this.name = null;
+            }
+            if (name == name) { } // Noncompliant
+        }
+
+        public void Undefined(string sameAsUndefinedField)
+        {
+            if (sameAsUndefinedField == sameAsUndefinedField)
+            {
+                this.sameAsUndefinedField = null; // Error [CS0103]: The name 'unresolvedSymbol' does not exist in the current context
+            }
+            if (sameAsUndefinedField == sameAsUndefinedField) { } // Noncompliant
+        }
+
+        public void NameMismatch(string otherName)
+        {
+            if (otherName == otherName)
+            {
+                this.name = null;
+            }
+            if (otherName == otherName) { } // Noncompliant
+        }
+    }
 }
