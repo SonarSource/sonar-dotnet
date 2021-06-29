@@ -28,13 +28,12 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class ExpressionComplexityBase : ParameterLoadingDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1067";
-        internal const string MessageFormat = "Reduce the number of conditional operators ({1}) used in the expression (maximum allowed {0}).";
+        protected const string DiagnosticId = "S1067";
+        protected const string MessageFormat = "Reduce the number of conditional operators ({1}) used in the expression (maximum allowed {0}).";
 
         private const int DefaultValueMaximum = 3;
 
-        [RuleParameter("max", PropertyType.Integer,
-            "Maximum number of allowed conditional operators in an expression", DefaultValueMaximum)]
+        [RuleParameter("max", PropertyType.Integer, "Maximum number of allowed conditional operators in an expression", DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
     }
 
@@ -42,62 +41,36 @@ namespace SonarAnalyzer.Rules
         where TExpression : SyntaxNode
     {
         private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade Language { get; }
+        protected abstract bool IsComplexityIncreasingKind(SyntaxNode node);
+        protected abstract bool IsCompoundExpression(SyntaxNode node);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected ExpressionComplexityBase(System.Resources.ResourceManager rspecResources)
-        {
-            this.rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources, isEnabledByDefault: false);
-        }
+        protected ExpressionComplexityBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources, isEnabledByDefault: false);
 
-        public abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
-        {
-            context.RegisterSyntaxTreeActionInNonGenerated(
-                GeneratedCodeRecognizer,
-                c =>
+        protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
+            context.RegisterSyntaxTreeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
                     var root = c.Tree.GetRoot();
+                    var rootExpressions = root.DescendantNodes(x => !(x is TExpression)).OfType<TExpression>().Where(x => !IsCompoundExpression(x));
 
-                    var rootExpressions = root
-                        .DescendantNodes(node => !(node is TExpression))
-                        .OfType<TExpression>()
-                        .Where(expression => !IsCompoundExpression(expression));
-
-                    var compoundExpressionsDescendants = root
-                        .DescendantNodes()
-                        .Where(IsCompoundExpression)
-                        .SelectMany(
+                    var compoundExpressionsDescendants = root.DescendantNodes().Where(IsCompoundExpression).SelectMany(
                             compoundExpression => compoundExpression
                                 .DescendantNodes(node => compoundExpression == node || !(node is TExpression))
                                 .OfType<TExpression>()
                                 .Where(expression => !IsCompoundExpression(expression)));
 
-                    var expressionsToCheck = rootExpressions.Concat(compoundExpressionsDescendants);
-
-                    var complexExpressions = expressionsToCheck
-                        .Select(expression =>
-                            new
-                            {
-                                Expression = expression,
-                                Complexity = expression
-                                    .DescendantNodesAndSelf(e2 => !IsCompoundExpression(e2))
-                                    .Count(IsComplexityIncreasingKind)
-                            })
-                        .Where(e => e.Complexity > Maximum);
-
-                    foreach (var complexExpression in complexExpressions)
+                    foreach (var expression in rootExpressions.Concat(compoundExpressionsDescendants))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0],
-                            complexExpression.Expression.GetLocation(),
-                            Maximum,
-                            complexExpression.Complexity));
+                        var complexity = expression.DescendantNodesAndSelf(e2 => !IsCompoundExpression(e2)).Count(IsComplexityIncreasingKind);
+                        if (complexity > Maximum)
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, expression.GetLocation(), Maximum, complexity));
+                        }
                     }
                 });
-        }
-
-        protected abstract bool IsComplexityIncreasingKind(SyntaxNode node);
-
-        protected abstract bool IsCompoundExpression(SyntaxNode node);
     }
 }
