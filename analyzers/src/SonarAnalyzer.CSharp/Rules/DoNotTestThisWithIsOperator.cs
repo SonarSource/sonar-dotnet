@@ -50,9 +50,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c => Analyze(c, x => ((SwitchExpressionSyntaxWrapper)x).GoverningExpression), SyntaxKindEx.SwitchExpression);
         }
 
-        private static void Analyze(SyntaxNodeAnalysisContext context, Func<SyntaxNode, ExpressionSyntax> retrieveExpression)
+        private static void Analyze(SyntaxNodeAnalysisContext context, Func<SyntaxNode, ExpressionSyntax> expression)
         {
-            if (retrieveExpression(context.Node).RemoveParentheses() is ThisExpressionSyntax)
+            if (expression(context.Node).RemoveParentheses() is ThisExpressionSyntax)
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.Node.GetLocation()));
             }

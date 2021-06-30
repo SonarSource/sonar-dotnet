@@ -7,8 +7,6 @@ namespace Tests.Diagnostics
     {
         public int MyProperty { get; set; }
 
-        public int MyProperty2 { get; set; }
-
         public Program(object o)
         {
             if (this is not IDisposable) // Noncompliant {{Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.}}
@@ -20,6 +18,14 @@ namespace Tests.Diagnostics
             }
 
             if (this is Program p) // Noncompliant
+            {
+            }
+
+            if (this is Program or IDisposable) // Noncompliant
+            {
+            }
+
+            if (this is Program and IDisposable) // Noncompliant
             {
             }
 
@@ -51,7 +57,7 @@ namespace Tests.Diagnostics
                     break;
             }
 
-            var result = (this) switch // Noncompliant
+            var result = (((this))) switch // Noncompliant
             {
                 IDisposable => 1,
                 IEnumerable => 2,
