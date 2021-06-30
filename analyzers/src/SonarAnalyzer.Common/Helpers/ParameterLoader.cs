@@ -27,6 +27,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 
@@ -57,7 +58,7 @@ namespace SonarAnalyzer.Helpers
                 return;
             }
 
-            var parameters = ParseParameters(sonarLintXml.Path);
+            var parameters = ParseParameters(sonarLintXml);
             if (parameters.IsEmpty)
             {
                 return;
@@ -90,12 +91,11 @@ namespace SonarAnalyzer.Helpers
         internal static bool ConfigurationFilePathMatchesExpected(string path, string fileName) =>
             Path.GetFileName(path).Equals(fileName, StringComparison.OrdinalIgnoreCase);
 
-        private static ImmutableList<RuleParameterValues> ParseParameters(string path)
+        private static ImmutableList<RuleParameterValues> ParseParameters(AdditionalText sonarLintXml)
         {
             try
             {
-                using var xtr = XmlReader.Create(path);
-                var xml = XDocument.Load(xtr);
+                var xml = XDocument.Parse(sonarLintXml.GetText().ToString());
                 return ParseParameters(xml);
             }
             catch (Exception ex) when (ex is IOException || ex is XmlException)
