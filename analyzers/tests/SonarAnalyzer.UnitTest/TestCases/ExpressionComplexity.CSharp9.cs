@@ -12,7 +12,7 @@ if (x is < 10 or < 20 or < 30 and (40 or 50 or 60)) { } // Noncompliant
 
 switch (x)
 {
-    case true and true and true and true and true and true: // FN
+    case true and true and true and true and true and true: // Noncompliant
         break;
     case false:
         break;
@@ -22,7 +22,7 @@ switch (x)
 
 var y = x switch
 {
-    true and true and true and true and true and true => 1, // FN
+    true and true and true and true and true and true => 1, // Noncompliant
     false => 2,
 };
 

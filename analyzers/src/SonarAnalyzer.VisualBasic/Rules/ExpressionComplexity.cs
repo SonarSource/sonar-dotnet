@@ -61,5 +61,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsCompoundExpression(SyntaxNode node) =>
             CompoundExpressionKinds.Contains(node.Kind());
+
+        protected override bool IsPatternRoot(SyntaxNode node) =>
+            false;
     }
 }

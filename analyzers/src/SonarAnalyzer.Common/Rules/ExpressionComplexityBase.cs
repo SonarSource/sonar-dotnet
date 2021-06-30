@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Rules
         protected abstract ILanguageFacade Language { get; }
         protected abstract bool IsComplexityIncreasingKind(SyntaxNode node);
         protected abstract bool IsCompoundExpression(SyntaxNode node);
+        protected abstract bool IsPatternRoot(SyntaxNode node);
 
         [RuleParameter("max", PropertyType.Integer, "Maximum number of allowed conditional operators in an expression", DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
@@ -66,6 +67,9 @@ namespace SonarAnalyzer.Rules
                 });
 
         private IEnumerable<SyntaxNode> NoncompoundSubexpressions(SyntaxNode node) =>
-            node.DescendantNodes(x => !(x is TExpression) || x == node).OfType<TExpression>().Where(x => !IsCompoundExpression(x));
+            node.DescendantNodes(x => !IsExpressionOrPatternRoot(x) || x == node).Where(x => IsExpressionOrPatternRoot(x) && !IsCompoundExpression(x));
+
+        private bool IsExpressionOrPatternRoot(SyntaxNode node) =>
+            node is TExpression|| IsPatternRoot(node);
     }
 }

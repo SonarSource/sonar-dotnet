@@ -62,5 +62,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsCompoundExpression(SyntaxNode node) =>
             CompoundExpressionKinds.Contains(node.Kind());
+
+        protected override bool IsPatternRoot(SyntaxNode node) =>
+            node.Parent.IsAnyKind(SyntaxKindEx.CasePatternSwitchLabel, SyntaxKindEx.SwitchExpressionArm);
     }
 }
