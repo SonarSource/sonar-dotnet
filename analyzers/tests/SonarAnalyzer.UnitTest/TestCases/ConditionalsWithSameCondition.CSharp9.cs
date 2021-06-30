@@ -64,7 +64,10 @@
             if (f != null) { } // Compliant, even when the semantics is the same
 
             if (f is null) { }
-            if (f == null) { } // Compliant, even when the semantics is the same
+            if (f == null) { } // Noncompliant, same meaning
+
+            if (!(f is null)) { }
+            if (f != null) { } // Noncompliant, same meaning
         }
 
         void doTheThing(object o) { }

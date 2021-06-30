@@ -57,6 +57,11 @@ namespace SonarAnalyzer.Helpers
                 }
                 return NullCheckExpression(binary) is { } expression ? new NullCheck(expression, positive) : null;
             }
+            else if (node.IsKind(SyntaxKindEx.IsPatternExpression))
+            {
+                var isPattern = (IsPatternExpressionSyntaxWrapper)node;
+                return NullCheckPattern(isPattern.Expression, isPattern.Pattern.SyntaxNode, positive);
+            }
             else
             {
                 return null;
@@ -72,6 +77,18 @@ namespace SonarAnalyzer.Helpers
             else if (binary.Right.IsKind(SyntaxKind.NullLiteralExpression))
             {
                 return binary.Left;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private static NullCheck NullCheckPattern(SyntaxNode expression, SyntaxNode pattern, bool positive)
+        {
+            if (pattern.IsKind(SyntaxKindEx.ConstantPattern) && ((ConstantPatternSyntaxWrapper)pattern).Expression.IsKind(SyntaxKind.NullLiteralExpression))
+            {
+                return new NullCheck(expression, positive);
             }
             else
             {
