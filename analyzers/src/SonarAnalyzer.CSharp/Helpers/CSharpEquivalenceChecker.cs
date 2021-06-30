@@ -22,16 +22,74 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Extensions;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers
 {
     internal static class CSharpEquivalenceChecker
     {
         public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
-            Common.EquivalenceChecker.AreEquivalent(node1, node2, (n1, n2) => SyntaxFactory.AreEquivalent(n1, n2));
+            Common.EquivalenceChecker.AreEquivalent(node1, node2, NodeComparator);
 
         public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2) =>
-            Common.EquivalenceChecker.AreEquivalent(nodeList1, nodeList2, (n1, n2) => SyntaxFactory.AreEquivalent(n1, n2));
+            Common.EquivalenceChecker.AreEquivalent(nodeList1, nodeList2, NodeComparator);
+
+        private static bool NodeComparator(SyntaxNode node1, SyntaxNode node2) =>
+            NullCheckState(node1) is { } nullCheck1
+            && NullCheckState(node2) is { } nullCheck2
+            && nullCheck1.Positive == nullCheck2.Positive
+                ? SyntaxFactory.AreEquivalent(nullCheck1.Expression, nullCheck2.Expression)
+                : SyntaxFactory.AreEquivalent(node1, node2);
+
+        private static NullCheck NullCheckState(SyntaxNode node, bool positive = true)
+        {
+            if (node is PrefixUnaryExpressionSyntax unary && unary.IsKind(SyntaxKind.LogicalNotExpression))
+            {
+                return NullCheckState(unary.Operand.RemoveParentheses(), !positive);
+            }
+            else if (node is BinaryExpressionSyntax binary && binary.IsAnyKind(SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression))
+            {
+                if (binary.IsKind(SyntaxKind.NotEqualsExpression))
+                {
+                    positive = !positive;
+                }
+                return NullCheckExpression(binary) is { } expression ? new NullCheck(expression, positive) : null;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private static SyntaxNode NullCheckExpression(BinaryExpressionSyntax binary)
+        {
+            if (binary.Left.IsKind(SyntaxKind.NullLiteralExpression))
+            {
+                return binary.Right;
+            }
+            else if (binary.Right.IsKind(SyntaxKind.NullLiteralExpression))
+            {
+                return binary.Left;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private class NullCheck
+        {
+            public readonly SyntaxNode Expression;
+            public readonly bool Positive;
+
+            public NullCheck(SyntaxNode expression, bool positive)
+            {
+                Expression = expression;
+                Positive = positive;
+            }
+        }
     }
 
     internal class CSharpSyntaxNodeEqualityComparer<T> : IEqualityComparer<T>, IEqualityComparer<SyntaxList<T>>

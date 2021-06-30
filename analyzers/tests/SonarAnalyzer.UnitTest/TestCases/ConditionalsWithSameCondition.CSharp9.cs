@@ -60,7 +60,6 @@
             if (ch is >= 'a' and <= 'z') { } // Noncompliant
             if (ch is <= 'z' and >= 'a') { } // Compliant, even when the semantics is the same
 
-
             if (f is not null) { }
             if (f != null) { } // Compliant, even when the semantics is the same
 
