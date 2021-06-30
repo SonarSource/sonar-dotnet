@@ -43,7 +43,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.CollectionInitializerExpression,
             SyntaxKind.ComplexElementInitializerExpression,
             SyntaxKind.ObjectInitializerExpression,
-            SyntaxKind.InvocationExpression
+            SyntaxKind.InvocationExpression,
+            SyntaxKindEx.SwitchExpressionArm
         };
 
         private static readonly ISet<SyntaxKind> ComplexityIncreasingKinds = new HashSet<SyntaxKind>

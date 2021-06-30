@@ -20,7 +20,7 @@ switch (x)
         break;
 }
 
-var y = x switch // Noncompliant FP
+var y = x switch
 {
     true and true and true and true and true and true => 1, // FN
     false => 2,
