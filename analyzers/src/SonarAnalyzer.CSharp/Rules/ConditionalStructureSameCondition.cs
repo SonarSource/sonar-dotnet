@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -33,34 +32,18 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ConditionalStructureSameCondition : ConditionalStructureSameConditionBase
     {
-        internal static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var ifStatement = (IfStatementSyntax)c.Node;
                     var currentCondition = ifStatement.Condition;
-
-                    var precedingCondition = ifStatement
-                        .GetPrecedingConditionsInConditionChain()
-                        .FirstOrDefault(
-                            preceding => CSharpEquivalenceChecker.AreEquivalent(currentCondition, preceding));
-
-                    if (precedingCondition != null)
+                    if (ifStatement.GetPrecedingConditionsInConditionChain().FirstOrDefault(x => CSharpEquivalenceChecker.AreEquivalent(currentCondition, x)) is { } precedingCondition)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
-                            rule,
-                            currentCondition.GetLocation(),
-                            additionalLocations: new[] { precedingCondition.GetLocation() },
-                            messageArgs: precedingCondition.GetLineNumberToReport()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, currentCondition.GetLocation(), new[] { precedingCondition.GetLocation() }, precedingCondition.GetLineNumberToReport()));
                     }
                 },
                 SyntaxKind.IfStatement);
-        }
     }
 }
