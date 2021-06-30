@@ -49,10 +49,10 @@ void Test(Apple a, Orange b, bool cond)
 void AnotherTest(object o)
 {
     if (o is not null) { }
-    else if (o != null) { } // FN, same as above
+    else if (o != null) { } // Noncompliant
 
     if (o is null) { }
-    else if (o == null) { } // FN, same as above
+    else if (o == null) { } // Noncompliant
 }
 
 abstract class Fruit { }
