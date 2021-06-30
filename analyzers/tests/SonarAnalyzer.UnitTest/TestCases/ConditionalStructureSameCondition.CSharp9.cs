@@ -48,10 +48,10 @@ void Test(Apple a, Orange b, bool cond)
 
 void AnotherTest(object o)
 {
-    if (o is not null) { }
+    if (o is not null) { }  // Secondary
     else if (o != null) { } // Noncompliant
 
-    if (o is null) { }
+    if (o is null) { }      // Secondary
     else if (o == null) { } // Noncompliant
 }
 
