@@ -70,6 +70,6 @@ namespace SonarAnalyzer.Rules
             node.DescendantNodes(x => !IsExpressionOrPatternRoot(x) || x == node).Where(x => IsExpressionOrPatternRoot(x) && !IsCompoundExpression(x));
 
         private bool IsExpressionOrPatternRoot(SyntaxNode node) =>
-            node is TExpression|| IsPatternRoot(node);
+            node is TExpression || IsPatternRoot(node);
     }
 }
