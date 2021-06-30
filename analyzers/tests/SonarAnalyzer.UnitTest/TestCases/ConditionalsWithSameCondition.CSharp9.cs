@@ -70,6 +70,7 @@
 
             if (!(f is null)) { }
             if (f != null) { }          // Noncompliant, same meaning
+            if (f is not not null) { }  // Compliant, equal to f == null
         }
 
         void doTheThing(object o) { }
