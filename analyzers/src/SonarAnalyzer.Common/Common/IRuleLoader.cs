@@ -24,6 +24,6 @@ namespace SonarAnalyzer.Common
 {
     public interface IRuleLoader
     {
-        ISet<string> GetEnabledRules(string path);
+        ISet<string> GetEnabledRules(string content);
     }
 }

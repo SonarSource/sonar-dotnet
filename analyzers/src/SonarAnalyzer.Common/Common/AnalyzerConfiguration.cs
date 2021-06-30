@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
@@ -84,20 +85,20 @@ namespace SonarAnalyzer.Common
 
             public void Initialize(AnalyzerOptions options)
             {
-                var currentSonarLintXmlPath = GetSonarLintXmlPath(options);
-                if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXmlPath)
+                var currentSonarLintXml = GetSonarLintXml(options);
+                if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXml?.Path)
                 {
                     return;
                 }
 
                 lock (IsInitializedGate)
                 {
-                    if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXmlPath)
+                    if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXml?.Path)
                     {
                         return;
                     }
 
-                    loadedSonarLintXmlPath = currentSonarLintXmlPath;
+                    loadedSonarLintXmlPath = currentSonarLintXml?.Path;
 
                     if (loadedSonarLintXmlPath == null)
                     {
@@ -106,13 +107,14 @@ namespace SonarAnalyzer.Common
                     }
 
                     // we assume the returned set is not null
-                    enabledRules = ruleLoader.GetEnabledRules(loadedSonarLintXmlPath);
+                    var sonarLintXml = currentSonarLintXml.GetText().ToString();
+                    enabledRules = ruleLoader.GetEnabledRules(sonarLintXml);
                     isInitialized = true;
                 }
             }
 
-            private static string GetSonarLintXmlPath(AnalyzerOptions options) =>
-                options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path))?.Path;
+            private static AdditionalText GetSonarLintXml(AnalyzerOptions options) =>
+                options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
         }
     }
 }
