@@ -35,10 +35,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class GetTypeWithIsAssignableFromCodeFixProvider : SonarCodeFixProvider
     {
-        internal const string Title = "Simplify type checking";
+        private const string Title = "Simplify type checking";
 
-        public override ImmutableArray<string> FixableDiagnosticIds =>
-            ImmutableArray.Create(GetTypeWithIsAssignableFrom.DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(GetTypeWithIsAssignableFrom.DiagnosticId);
 
         public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
@@ -54,24 +53,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 return TaskHelper.CompletedTask;
             }
 
-            if (!TryGetNewRoot(root, diagnostic, invocation, binary, out var newRoot))
+            if (TryGetNewRoot(root, diagnostic, invocation, binary, out var newRoot))
             {
-                return TaskHelper.CompletedTask;
+                context.RegisterCodeFix(CodeAction.Create(Title, c => Task.FromResult(context.Document.WithSyntaxRoot(newRoot))), context.Diagnostics);
             }
-
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c => Task.FromResult(context.Document.WithSyntaxRoot(newRoot))),
-                context.Diagnostics);
 
             return TaskHelper.CompletedTask;
         }
 
-        private static bool TryGetNewRoot(SyntaxNode root, Diagnostic diagnostic, InvocationExpressionSyntax invocation,
-            BinaryExpressionSyntax binary, out SyntaxNode newRoot)
+        private static bool TryGetNewRoot(SyntaxNode root, Diagnostic diagnostic, InvocationExpressionSyntax invocation, BinaryExpressionSyntax binary, out SyntaxNode newRoot)
         {
-            newRoot = null;
             if (invocation != null)
             {
                 newRoot = ChangeInvocation(root, diagnostic, invocation);
@@ -80,12 +71,13 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 newRoot = ChangeIsExpressionToNullCheck(root, binary);
             }
+            else if (RefactoredExpression(binary) is { } expression)
+            {
+                newRoot = root.ReplaceNode(binary, expression.WithAdditionalAnnotations(Formatter.Annotation));
+            }
             else
             {
-                if (TryGetRefactoredExpression(binary, out var expression))
-                {
-                    newRoot = root.ReplaceNode(binary, expression.WithAdditionalAnnotations(Formatter.Annotation));
-                }
+                newRoot = null;
             }
 
             return newRoot != null;
@@ -93,79 +85,66 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxNode ChangeIsExpressionToNullCheck(SyntaxNode root, BinaryExpressionSyntax binary)
         {
-            var newNode = GetExpressionWithParensIfNeeded(GetNullCheck(binary), binary.Parent);
+            var newNode = ExpressionWithParensIfNeeded(GetNullCheck(binary), binary.Parent);
             return root.ReplaceNode(binary, newNode.WithAdditionalAnnotations(Formatter.Annotation));
         }
 
-        private static ExpressionSyntax GetNullCheck(BinaryExpressionSyntax binary)
-        {
-            return SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression,
-                binary.Left.RemoveParentheses(),
-                CSharpSyntaxHelper.NullLiteralExpression);
-        }
+        private static ExpressionSyntax GetNullCheck(BinaryExpressionSyntax binary) =>
+            SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, binary.Left.RemoveParentheses(), CSharpSyntaxHelper.NullLiteralExpression);
 
-        private static SyntaxNode ChangeInvocation(SyntaxNode root, Diagnostic diagnostic,
-            InvocationExpressionSyntax invocation)
+        private static SyntaxNode ChangeInvocation(SyntaxNode root, Diagnostic diagnostic, InvocationExpressionSyntax invocation)
         {
             var useIsOperator = bool.Parse(diagnostic.Properties[GetTypeWithIsAssignableFrom.UseIsOperatorKey]);
-            var shouldRemoveGetType = bool.Parse(diagnostic.Properties[GetTypeWithIsAssignableFrom.ShouldRemoveGetType]);
-
-            var newNode = GetRefactoredExpression(invocation, useIsOperator, shouldRemoveGetType);
+            var shouldRemoveGetType = bool.Parse(diagnostic.Properties[GetTypeWithIsAssignableFrom.ShouldRemoveGetTypeKey]);
+            var newNode = RefactoredExpression(invocation, useIsOperator, shouldRemoveGetType);
             return root.ReplaceNode(invocation, newNode.WithAdditionalAnnotations(Formatter.Annotation));
         }
 
-        private static bool TryGetRefactoredExpression(BinaryExpressionSyntax binary, out ExpressionSyntax expression)
+        private static ExpressionSyntax RefactoredExpression(BinaryExpressionSyntax binary)
         {
-
-            var noNegationRequired = binary.IsKind(SyntaxKind.EqualsExpression);
             ExpressionSyntax newExpression;
+            var noNegationRequired = binary.IsKind(SyntaxKind.EqualsExpression);
 
             if (TryGetTypeOfComparison(binary, out var typeofExpression, out var getTypeSide))
             {
-                newExpression = GetIsExpression(typeofExpression, getTypeSide, shouldRemoveGetType: true);
+                newExpression = CreateIsExpression(typeofExpression, getTypeSide, shouldRemoveGetType: true);
             }
-            else if (TryGetAsOperatorComparisonToNull(binary, out var asExpression))
+            else if (AsOperatorComparisonToNull(binary) is { } asExpression)
             {
                 newExpression = GetIsExpression(asExpression);
                 noNegationRequired = !noNegationRequired;
             }
             else
             {
-                expression = null;
-                return false;
+                return null;
             }
 
-            expression = noNegationRequired
-                ? GetExpressionWithParensIfNeeded(newExpression, binary.Parent)
-                : SyntaxFactory.PrefixUnaryExpression(
-                    SyntaxKind.LogicalNotExpression,
-                    SyntaxFactory.ParenthesizedExpression(newExpression));
-            return true;
+            return noNegationRequired
+                ? ExpressionWithParensIfNeeded(newExpression, binary.Parent)
+                : SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, SyntaxFactory.ParenthesizedExpression(newExpression));
         }
 
-        private static ExpressionSyntax GetIsExpression(BinaryExpressionSyntax asExpression)
+        private static ExpressionSyntax RefactoredExpression(InvocationExpressionSyntax invocation, bool useIsOperator, bool shouldRemoveGetType)
         {
-            return SyntaxFactory.BinaryExpression(
-                SyntaxKind.IsExpression,
-                asExpression.Left,
-                asExpression.Right)
-                .WithAdditionalAnnotations(Formatter.Annotation);
+            var typeInstance = ((MemberAccessExpressionSyntax)invocation.Expression).Expression;
+            var getTypeCallInArgument = invocation.ArgumentList.Arguments.First();
+            return useIsOperator
+                ? ExpressionWithParensIfNeeded(CreateIsExpression(typeInstance, getTypeCallInArgument.Expression, shouldRemoveGetType), invocation.Parent)
+                : IsInstanceOfTypeCall(invocation, typeInstance, getTypeCallInArgument);
         }
 
-        private static bool TryGetAsOperatorComparisonToNull(BinaryExpressionSyntax binary,
-            out BinaryExpressionSyntax asExpression)
+        private static ExpressionSyntax GetIsExpression(BinaryExpressionSyntax asExpression) =>
+            SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, asExpression.Left, asExpression.Right).WithAdditionalAnnotations(Formatter.Annotation);
+
+        private static BinaryExpressionSyntax AsOperatorComparisonToNull(BinaryExpressionSyntax binary)
         {
             var left = binary.Left.RemoveParentheses();
-
-            asExpression = left.IsKind(SyntaxKind.AsExpression)
+            return left.IsKind(SyntaxKind.AsExpression)
                 ? left as BinaryExpressionSyntax
                 : binary.Right.RemoveParentheses() as BinaryExpressionSyntax;
-
-            return asExpression != null;
         }
 
-        private static bool TryGetTypeOfComparison(BinaryExpressionSyntax binary,
-            out TypeOfExpressionSyntax typeofExpression, out ExpressionSyntax getTypeSide)
+        private static bool TryGetTypeOfComparison(BinaryExpressionSyntax binary, out TypeOfExpressionSyntax typeofExpression, out ExpressionSyntax getTypeSide)
         {
             typeofExpression = binary.Left as TypeOfExpressionSyntax;
             getTypeSide = binary.Right;
@@ -174,64 +153,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 typeofExpression = binary.Right as TypeOfExpressionSyntax;
                 getTypeSide = binary.Left;
             }
-
             return typeofExpression != null;
         }
 
-        private static ExpressionSyntax GetRefactoredExpression(InvocationExpressionSyntax invocation,
-            bool useIsOperator, bool shouldRemoveGetType)
-        {
-            var typeInstance = ((MemberAccessExpressionSyntax)invocation.Expression).Expression;
-            var getTypeCallInArgument = invocation.ArgumentList.Arguments.First();
-
-            return useIsOperator
-                ? GetExpressionWithParensIfNeeded(
-                    GetIsExpression(typeInstance, getTypeCallInArgument.Expression, shouldRemoveGetType),
-                    invocation.Parent)
-                : GetIsInstanceOfTypeCall(invocation, typeInstance, getTypeCallInArgument);
-        }
-
-        private static InvocationExpressionSyntax GetIsInstanceOfTypeCall(InvocationExpressionSyntax invocation,
-            ExpressionSyntax typeInstance, ArgumentSyntax getTypeCallInArgument)
-        {
-            return SyntaxFactory.InvocationExpression(
-                SyntaxFactory.MemberAccessExpression(
-                    SyntaxKind.SimpleMemberAccessExpression,
-                    typeInstance,
-                    SyntaxFactory.IdentifierName("IsInstanceOfType")).WithTriviaFrom(invocation.Expression),
-                SyntaxFactory.ArgumentList(
-                    SyntaxFactory.SeparatedList(new[]
-                    {
-                        SyntaxFactory.Argument(
-                            GetExpressionFromGetType(getTypeCallInArgument.Expression)).WithTriviaFrom(getTypeCallInArgument)
-                    }))
-                    .WithTriviaFrom(invocation.ArgumentList))
+        private static InvocationExpressionSyntax IsInstanceOfTypeCall(InvocationExpressionSyntax invocation, ExpressionSyntax typeInstance, ArgumentSyntax getTypeCallInArgument) =>
+            SyntaxFactory.InvocationExpression(
+                SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, typeInstance, SyntaxFactory.IdentifierName("IsInstanceOfType")).WithTriviaFrom(invocation.Expression),
+                SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(ExpressionFromGetType(getTypeCallInArgument.Expression)).WithTriviaFrom(getTypeCallInArgument) }))
+                                           .WithTriviaFrom(invocation.ArgumentList))
                 .WithTriviaFrom(invocation);
-        }
 
-        private static ExpressionSyntax GetExpressionWithParensIfNeeded(ExpressionSyntax expression, SyntaxNode parent)
-        {
-            return (parent is ExpressionSyntax && !(parent is AssignmentExpressionSyntax) && !(parent is ParenthesizedExpressionSyntax))
+        private static ExpressionSyntax ExpressionWithParensIfNeeded(ExpressionSyntax expression, SyntaxNode parent) =>
+            (parent is ExpressionSyntax && !(parent is AssignmentExpressionSyntax) && !(parent is ParenthesizedExpressionSyntax))
                 ? SyntaxFactory.ParenthesizedExpression(expression)
                 : expression;
-        }
 
-        private static ExpressionSyntax GetIsExpression(ExpressionSyntax typeInstance,
-            ExpressionSyntax getTypeCall, bool shouldRemoveGetType)
-        {
-            var expression = shouldRemoveGetType
-                    ? GetExpressionFromGetType(getTypeCall)
-                    : getTypeCall;
+        private static ExpressionSyntax CreateIsExpression(ExpressionSyntax typeInstance, ExpressionSyntax getTypeCall, bool shouldRemoveGetType) =>
+            SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, shouldRemoveGetType ? ExpressionFromGetType(getTypeCall) : getTypeCall, ((TypeOfExpressionSyntax)typeInstance).Type);
 
-            return SyntaxFactory.BinaryExpression(
-                SyntaxKind.IsExpression,
-                expression,
-                ((TypeOfExpressionSyntax)typeInstance).Type);
-        }
-
-        private static ExpressionSyntax GetExpressionFromGetType(ExpressionSyntax getTypeCall)
-        {
-            return ((MemberAccessExpressionSyntax)((InvocationExpressionSyntax)getTypeCall).Expression).Expression;
-        }
+        private static ExpressionSyntax ExpressionFromGetType(ExpressionSyntax getTypeCall) =>
+            ((MemberAccessExpressionSyntax)((InvocationExpressionSyntax)getTypeCall).Expression).Expression;
     }
 }

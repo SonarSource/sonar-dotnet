@@ -35,39 +35,31 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2219";
-        private const string MessageFormat = "Use {0} instead.";
-        internal const string MessageIsOperator = "the 'is' operator";
-        internal const string MessageIsInstanceOfType = "the 'IsInstanceOfType()' method";
-        internal const string MessageNullCheck = "a 'null' check";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         internal const string UseIsOperatorKey = "UseIsOperator";
-        internal const string ShouldRemoveGetType = "ShouldRemoveGetType";
+        internal const string ShouldRemoveGetTypeKey = "ShouldRemoveGetType";
+        private const string MessageFormat = "Use {0} instead.";
+        private const string MessageIsOperator = "the 'is' operator";
+        private const string MessageIsInstanceOfType = "the 'IsInstanceOfType()' method";
+        private const string MessageNullCheck = "a 'null' check";
+
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess) ||
-                        !invocation.HasExactlyNArguments(1))
+                    if (invocation.Expression is MemberAccessExpressionSyntax memberAccess
+                        && invocation.HasExactlyNArguments(1)
+                        && memberAccess.Name.Identifier.ValueText is var methodName
+                        && (methodName == "IsInstanceOfType" || methodName == "IsAssignableFrom")
+                        && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                        && methodSymbol.IsInType(KnownType.System_Type))
                     {
-                        return;
-                    }
-
-                    var methodName = memberAccess.Name.Identifier.ValueText;
-                    if ((methodName == "IsInstanceOfType" || methodName == "IsAssignableFrom") &&
-                        c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
-                        methodSymbol.IsInType(KnownType.System_Type))
-                    {
-                        var argument = invocation.ArgumentList.Arguments.First().Expression;
-                        CheckForIsAssignableFrom(c, invocation, memberAccess, methodSymbol, argument);
-                        CheckForIsInstanceOfType(c, invocation, memberAccess, methodSymbol);
+                        CheckForIsAssignableFrom(c, memberAccess, methodSymbol, invocation.ArgumentList.Arguments.First().Expression);
+                        CheckForIsInstanceOfType(c, memberAccess, methodSymbol);
                     }
                 },
                 SyntaxKind.InvocationExpression);
@@ -76,105 +68,82 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckGetTypeAndTypeOfEquality(binary.Left, binary.Right, binary.GetLocation(), c);
-                    CheckGetTypeAndTypeOfEquality(binary.Right, binary.Left, binary.GetLocation(), c);
+                    CheckGetTypeAndTypeOfEquality(c, binary.Left, binary.Right);
+                    CheckGetTypeAndTypeOfEquality(c, binary.Right, binary.Left);
 
-                    CheckAsOperatorComparedToNull(binary.Left, binary.Right, binary.GetLocation(), c);
-                    CheckAsOperatorComparedToNull(binary.Right, binary.Left, binary.GetLocation(), c);
+                    CheckAsOperatorComparedToNull(c, binary.Left, binary.Right);
+                    CheckAsOperatorComparedToNull(c, binary.Right, binary.Left);
                 },
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckIfIsExpressionCanBeReplacedByNullCheck,
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var isExpression = (BinaryExpressionSyntax)c.Node;
+                    if (c.SemanticModel.GetTypeInfo(isExpression.Left).Type is { } objectToCast
+                        && objectToCast.IsClass()
+                        && c.SemanticModel.GetTypeInfo(isExpression.Right).Type is { } typeCastTo
+                        && typeCastTo.IsClass()
+                        && !typeCastTo.Is(KnownType.System_Object)
+                        && objectToCast.DerivesOrImplements(typeCastTo))
+                    {
+                        ReportDiagnostic(c, MessageNullCheck);
+                    }
+                },
                 SyntaxKind.IsExpression);
         }
 
-        private static void CheckIfIsExpressionCanBeReplacedByNullCheck(SyntaxNodeAnalysisContext context)
+        private static void CheckAsOperatorComparedToNull(SyntaxNodeAnalysisContext context, ExpressionSyntax sideA, ExpressionSyntax sideB)
         {
-            var isExpression = (BinaryExpressionSyntax)context.Node;
-            if (context.SemanticModel.GetTypeInfo(isExpression.Left).Type is { } objectToCast &&
-                objectToCast.IsClass() &&
-                context.SemanticModel.GetTypeInfo(isExpression.Right).Type is { } typeCastTo &&
-                typeCastTo.IsClass() &&
-                !typeCastTo.Is(KnownType.System_Object) &&
-                objectToCast.DerivesOrImplements(typeCastTo))
+            if (sideA.RemoveParentheses().IsKind(SyntaxKind.NullLiteralExpression) && sideB.RemoveParentheses().IsKind(SyntaxKind.AsExpression))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, isExpression.GetLocation(), MessageNullCheck));
+                ReportDiagnostic(context, MessageIsOperator);
             }
         }
 
-        private static void CheckAsOperatorComparedToNull(ExpressionSyntax sideA, ExpressionSyntax sideB, Location location,
-            SyntaxNodeAnalysisContext context)
+        private static void CheckGetTypeAndTypeOfEquality(SyntaxNodeAnalysisContext context, ExpressionSyntax sideA, ExpressionSyntax sideB)
         {
-            if (!CSharpEquivalenceChecker.AreEquivalent(sideA.RemoveParentheses(), CSharpSyntaxHelper.NullLiteralExpression))
+            if (sideA.ToStringContains("GetType")
+                && sideB is TypeOfExpressionSyntax sideBeTypeOf
+                && sideBeTypeOf.Type is { } typeSyntax
+                && (sideA as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel)
+                && context.SemanticModel.GetTypeInfo(typeSyntax).Type is { } typeSymbol
+                && typeSymbol.IsSealed
+                && !typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
             {
-                return;
-            }
-
-            if (!sideB.RemoveParentheses().IsKind(SyntaxKind.AsExpression))
-            {
-                return;
-            }
-
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageIsOperator));
-        }
-
-        private static void CheckGetTypeAndTypeOfEquality(ExpressionSyntax sideA, ExpressionSyntax sideB, Location location,
-            SyntaxNodeAnalysisContext context)
-        {
-            if (sideA.ToStringContains("GetType") &&
-                sideB is TypeOfExpressionSyntax sideBeTypeOf &&
-                sideBeTypeOf.Type is { } typeSyntax &&
-                (sideA as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel) &&
-                context.SemanticModel.GetTypeInfo(typeSyntax).Type is { } typeSymbol &&
-                typeSymbol.IsSealed &&
-                !typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageIsOperator));
+                ReportDiagnostic(context, MessageIsOperator);
             }
         }
 
-        private static void CheckForIsInstanceOfType(SyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation,
-            MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol)
+        private static void CheckForIsInstanceOfType(SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol)
         {
-            if (methodSymbol.Name != "IsInstanceOfType")
+            if (methodSymbol.Name == "IsInstanceOfType" && memberAccess.Expression is TypeOfExpressionSyntax)
             {
-                return;
-            }
-
-            if (memberAccess.Expression is TypeOfExpressionSyntax)
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(),
-                    ImmutableDictionary<string, string>.Empty
-                        .Add(UseIsOperatorKey, true.ToString())
-                        .Add(ShouldRemoveGetType, false.ToString()),
-                    MessageIsOperator));
+                ReportDiagnostic(context, MessageIsOperator, true, false);
             }
         }
 
-        private static void CheckForIsAssignableFrom(SyntaxNodeAnalysisContext context,
-                                                     InvocationExpressionSyntax invocation,
-                                                     MemberAccessExpressionSyntax memberAccess,
-                                                     IMethodSymbol methodSymbol,
-                                                     ExpressionSyntax argument)
+        private static void CheckForIsAssignableFrom(SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol, ExpressionSyntax argument)
         {
-            if (methodSymbol.Name != nameof(Type.IsAssignableFrom) || !(argument as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel))
+            if (methodSymbol.Name == nameof(Type.IsAssignableFrom) && (argument as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel))
             {
-                return;
+                if (memberAccess.Expression is TypeOfExpressionSyntax)
+                {
+                    ReportDiagnostic(context, MessageIsOperator, true, true);
+                }
+                else
+                {
+                    ReportDiagnostic(context, MessageIsInstanceOfType, false, true);
+                }
             }
+        }
 
-            context.ReportDiagnosticWhenActive(memberAccess.Expression is TypeOfExpressionSyntax
-                ? Diagnostic.Create(rule, invocation.GetLocation(),
-                    ImmutableDictionary<string, string>.Empty
-                        .Add(UseIsOperatorKey, true.ToString())
-                        .Add(ShouldRemoveGetType, true.ToString()),
-                    MessageIsOperator)
-                : Diagnostic.Create(rule, invocation.GetLocation(),
-                    ImmutableDictionary<string, string>.Empty
-                        .Add(UseIsOperatorKey, false.ToString())
-                        .Add(ShouldRemoveGetType, true.ToString()),
-                    MessageIsInstanceOfType));
+        private static void ReportDiagnostic(SyntaxNodeAnalysisContext context, string messageArg, bool useIsOperator = false, bool shouldRemoveGetType = false)
+        {
+            var properties = ImmutableDictionary<string, string>.Empty
+            .Add(UseIsOperatorKey, useIsOperator.ToString())
+            .Add(ShouldRemoveGetTypeKey, shouldRemoveGetType.ToString());
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.Node.GetLocation(), properties, messageArg));
         }
     }
 }
