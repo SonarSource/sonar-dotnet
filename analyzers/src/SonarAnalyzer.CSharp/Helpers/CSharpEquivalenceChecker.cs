@@ -90,6 +90,10 @@ namespace SonarAnalyzer.Helpers
             {
                 return new NullCheck(expression, positive);
             }
+            else if (pattern.IsKind(SyntaxKindEx.NotPattern))
+            {
+                return NullCheckPattern(expression, ((UnaryPatternSyntaxWrapper)pattern).Pattern.SyntaxNode, !positive);
+            }
             else
             {
                 return null;
