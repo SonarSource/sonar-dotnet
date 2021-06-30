@@ -26,28 +26,25 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotCheckZeroSizeCollectionBase<TLanguageKindEnum,
-            TBinaryExpressionSyntax,
-            TExpressionSyntax> : SonarDiagnosticAnalyzer
-        where TLanguageKindEnum : struct
+    public abstract class DoNotCheckZeroSizeCollectionBase<TSyntaxKind, TBinaryExpressionSyntax, TExpressionSyntax> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
         where TBinaryExpressionSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S3981";
-        private const string MessageFormat =
-            "The {0} of '{1}' is always '>=0', so fix this test to get the real expected behavior.";
+        private const string MessageFormat = "The {0} of '{1}' is always '>=0', so fix this test to get the real expected behavior.";
 
         private readonly DiagnosticDescriptor rule;
 
-        protected abstract TLanguageKindEnum GreaterThanOrEqualExpression { get; }
-        protected abstract TLanguageKindEnum LessThanOrEqualExpression { get; }
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract TSyntaxKind GreaterThanOrEqualExpression { get; }
+        protected abstract TSyntaxKind LessThanOrEqualExpression { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string IEnumerableTString { get; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected DoNotCheckZeroSizeCollectionBase(System.Resources.ResourceManager rspecStrings) =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings);
+        protected DoNotCheckZeroSizeCollectionBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
         protected abstract TExpressionSyntax GetLeftNode(TBinaryExpressionSyntax binaryExpression);
 
@@ -59,19 +56,21 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var binaryExpression = (TBinaryExpressionSyntax)c.Node;
                     CheckCondition(c, GetLeftNode(binaryExpression), GetRightNode(binaryExpression));
-                }, GreaterThanOrEqualExpression);
+                },
+                GreaterThanOrEqualExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var binaryExpression = (TBinaryExpressionSyntax)c.Node;
                     CheckCondition(c, GetRightNode(binaryExpression), GetLeftNode(binaryExpression));
-                }, LessThanOrEqualExpression);
+                },
+                LessThanOrEqualExpression);
         }
 
         private void CheckCondition(SyntaxNodeAnalysisContext context, TExpressionSyntax expressionValueNode, TExpressionSyntax constantValueNode)

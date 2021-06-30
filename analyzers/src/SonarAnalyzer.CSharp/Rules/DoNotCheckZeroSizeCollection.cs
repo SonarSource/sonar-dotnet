@@ -32,12 +32,10 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionBase<SyntaxKind, BinaryExpressionSyntax, ExpressionSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind GreaterThanOrEqualExpression => SyntaxKind.GreaterThanOrEqualExpression;
         protected override SyntaxKind LessThanOrEqualExpression => SyntaxKind.LessThanOrEqualExpression;
         protected override string IEnumerableTString { get; } = "IEnumerable<T>";
-
-        public DoNotCheckZeroSizeCollection() : base(RspecStrings.ResourceManager) { }
 
         protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) =>
             binaryExpression.Left;
