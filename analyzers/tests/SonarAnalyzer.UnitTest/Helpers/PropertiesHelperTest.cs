@@ -19,9 +19,11 @@
  */
 
 using System.Collections.Immutable;
+using System.IO;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.Helpers;
@@ -51,15 +53,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void ShouldAnalyzeGeneratedCode_WithNotBooleanValue_ReturnsFalse() =>
             GetSetting("ResourceTests\\NotBoolean\\SonarLint.xml").Should().BeFalse();
 
-        [TestMethod]
-        public void ShouldAnalyzeGeneratedCode_WithNotExistingPath_ReturnsFalse() =>
-            GetSetting("ResourceTests\\NotExistingFolder\\SonarLint.xml").Should().BeFalse();
-
         private static bool GetSetting(string filePath)
         {
             // Arrange
+            var content = SourceText.From(File.ReadAllText(filePath));
             var additionalText = new Mock<AdditionalText>();
-            additionalText.Setup(x => x.Path).Returns(filePath);
+            additionalText.Setup(x => x.Path).Returns("fakePath\\SonarLint.xml"); // use in-memory additional file
+            additionalText.Setup(x => x.GetText(default)).Returns(content);
+
             var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
 
             // Act

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Helpers
 
             try
             {
-                var xml = XDocument.Load(sonarLintAdditionalFile.Path);
+                var xml = XDocument.Parse(sonarLintAdditionalFile.GetText().ToString());
                 return xml.Descendants("Setting");
             }
             catch
