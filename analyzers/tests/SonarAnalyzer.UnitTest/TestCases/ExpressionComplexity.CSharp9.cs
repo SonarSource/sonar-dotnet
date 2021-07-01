@@ -1,4 +1,6 @@
-﻿var d1 = true && false && true && false && true && true; // Noncompliant
+﻿using System;
+
+var d1 = true && false && true && false && true && true; // Noncompliant
 
 object x = null;
 
@@ -34,3 +36,11 @@ y = x switch
     true => 1,
     false => 0
 };
+
+try
+{
+}
+catch (Exception e) when (e is ArgumentNullException or ArgumentOutOfRangeException or DuplicateWaitObjectException or DivideByZeroException or NotFiniteNumberException or OverflowException) // Noncompliant
+{
+    throw;
+}
