@@ -137,13 +137,15 @@ namespace SonarAnalyzer.UnitTest
                 ? NuGetMetadataReference.MSTestTestFrameworkV1  // Any reference to detect a test project
                 : Enumerable.Empty<MetadataReference>();
 
-        public static AnalyzerOptions CreateOptions(string relativePath, SourceText text = null)
+        public static AnalyzerOptions CreateOptions(string relativePath)
         {
-            if (File.Exists(relativePath))
-            {
-                text = SourceText.From(File.ReadAllText(relativePath));
-            }
+            var text = File.Exists(relativePath) ? SourceText.From(File.ReadAllText(relativePath)) : null;
 
+            return CreateOptions(relativePath, text);
+        }
+
+        public static AnalyzerOptions CreateOptions(string relativePath, SourceText text)
+        {
             var additionalText = new Mock<AdditionalText>();
             additionalText.Setup(x => x.Path).Returns(relativePath);
             additionalText.Setup(x => x.GetText(default)).Returns(text);

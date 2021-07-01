@@ -101,11 +101,29 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void SetParameterValues_WithNonExistingPath_UsesInMemoryText()
+        public void SetParameterValues_WithNonExistentPath_UsesInMemoryText()
         {
             // Arrange
-            var inMemoryText = SourceText.From(File.ReadAllText("ResourceTests\\ToChange\\SonarLint.xml"));
-            var options = TestHelper.CreateOptions("ResourceTests\\ThisPathDoesNotExist\\SonarLint.xml", inMemoryText);
+            const string fakeSonarLintXmlFilePath = "ThisPathDoesNotExist\\SonarLint.xml";
+            const string sonarLintXmlContent = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+<AnalysisInput>
+  <Settings />
+  <Rules>
+    <Rule>
+      <Key>S1067</Key>
+      <Parameters>
+        <Parameter>
+          <Key>max</Key>
+          <Value>1</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+  </Rules>
+  <Files>
+  </Files>
+</AnalysisInput>";
+
+            var options = TestHelper.CreateOptions(fakeSonarLintXmlFilePath, SourceText.From(sonarLintXmlContent));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -119,18 +137,35 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_CalledTwiceAfterChangeInConfigFile_UpdatesProperties()
         {
             // Arrange
-            var inMemoryText = SourceText.From(File.ReadAllText("ResourceTests\\ToChange\\SonarLint.xml"));
-            var sonarLintXmlRelativePath = "ResourceTests\\ThisPathDoesNotExist\\SonarLint.xml";
-            var options = TestHelper.CreateOptions(sonarLintXmlRelativePath, inMemoryText);
+            const string fakeSonarLintXmlFilePath = "ThisPathDoesNotExist\\SonarLint.xml";
+            const string originalSonarLintXmlContent = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+<AnalysisInput>
+  <Settings />
+  <Rules>
+    <Rule>
+      <Key>S1067</Key>
+      <Parameters>
+        <Parameter>
+          <Key>max</Key>
+          <Value>1</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+  </Rules>
+  <Files>
+  </Files>
+</AnalysisInput>";
+
+            var options = TestHelper.CreateOptions(fakeSonarLintXmlFilePath, SourceText.From(originalSonarLintXmlContent));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
             ParameterLoader.SetParameterValues(analyzer, options);
-            analyzer.Maximum.Should().Be(1); // In-memory value
+            analyzer.Maximum.Should().Be(1);
 
             // Modify the in-memory additional file
-            var modifiedSourceText = SourceText.From(inMemoryText.ToString().Replace("<Value>1</Value>", "<Value>42</Value>"));
-            var modifiedOptions = TestHelper.CreateOptions("fake\\SonarLint.xml", modifiedSourceText);
+            var modifiedSonarLintXmlContent = originalSonarLintXmlContent.Replace("<Value>1</Value>", "<Value>42</Value>");
+            var modifiedOptions = TestHelper.CreateOptions(fakeSonarLintXmlFilePath, SourceText.From(modifiedSonarLintXmlContent));
 
             ParameterLoader.SetParameterValues(analyzer, modifiedOptions);
             analyzer.Maximum.Should().Be(42);

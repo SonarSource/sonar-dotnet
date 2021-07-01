@@ -85,20 +85,20 @@ namespace SonarAnalyzer.Common
 
             public void Initialize(AnalyzerOptions options)
             {
-                var currentSonarLintXml = GetSonarLintXml(options);
-                if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXml?.Path)
+                var currentSonarLintXmlFile = GetSonarLintXmlFile(options);
+                if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXmlFile?.Path)
                 {
                     return;
                 }
 
                 lock (IsInitializedGate)
                 {
-                    if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXml?.Path)
+                    if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXmlFile?.Path)
                     {
                         return;
                     }
 
-                    loadedSonarLintXmlPath = currentSonarLintXml?.Path;
+                    loadedSonarLintXmlPath = currentSonarLintXmlFile?.Path;
 
                     if (loadedSonarLintXmlPath == null)
                     {
@@ -107,13 +107,13 @@ namespace SonarAnalyzer.Common
                     }
 
                     // we assume the returned set is not null
-                    var sonarLintXml = currentSonarLintXml.GetText().ToString();
+                    var sonarLintXml = currentSonarLintXmlFile.GetText().ToString();
                     enabledRules = ruleLoader.GetEnabledRules(sonarLintXml);
                     isInitialized = true;
                 }
             }
 
-            private static AdditionalText GetSonarLintXml(AnalyzerOptions options) =>
+            private static AdditionalText GetSonarLintXmlFile(AnalyzerOptions options) =>
                 options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
         }
     }
