@@ -10,10 +10,10 @@ All C# and VB.NET code analyzers present in SonarLint for Visual Studio, SonarQu
 
 In general, it is best to run commands from the Visual Studio Developer Command Prompt (if you're using ConEmu, you can setup a console task like `-new_console:C:\Workspace\sonar-dotnet cmd /k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"` - it starts the Developer Console inside the folder `C:\Workspace\sonar-dotnet`)
 
-## Developing with Visual Studio 2019
+## Developing with Visual Studio 2019 or Rider
 
-1. [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)
-1. Ensure to install Workloads:
+1. [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) or [Rider](https://www.jetbrains.com/rider/download)
+1. When using Visual Studio, ensure to install the following Workloads:
     - ASP.NET and web development
     - .NET desktop development
     - Visual Studio extension development
@@ -23,10 +23,11 @@ In general, it is best to run commands from the Visual Studio Developer Command 
     - .NET Framework 4.8 SDK
     - .NET Framework 4.8 Targeting pack
     - .NET 3.5 SDK (SP1)
+    - .NET 5 SDK
     - .NET Compiler Platform SDK
 1. The following environment variables must be set:
     - **JAVA_HOME**
-    - **MSBUILD_PATH** - path to the MSBuild.exe executable from the Visual Studio installation folder - to MSBuild 16
+    - **MSBUILD_PATH** - path to the MSBuild.exe executable (MSBuild 16)
     - **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-plugin.md#integration-tests))
     - **ORCHESTRATOR_CONFIG_URL** - url to orchestrator.properties file (for integration tests) in uri form (i.e. file:///c:/something/orchestrator.properties)
     - **RULE_API_PATH** - path to folder containing the rule api jar
@@ -92,7 +93,7 @@ You can visualize the differences using:
 
 
 #### Semi-automated differences review
-If you run the project `ReviewDiffs` in debug mode from Visual Studio, it will print in the output windows all places where a difference has been found. From there you can easily navigate between differences (double-click, F4...).
+If you run the project `ReviewDiffs` in debug mode, it will print in the output windows all places where a difference has been found. From there you can easily navigate between differences (double-click, F4...).
 
 *Disclaimer*: This program is still very new and the paint is still very wet. It may not work in all situations, but it's easy to update it ??.
 
