@@ -821,3 +821,116 @@ namespace Tests.Diagnostics
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/3395
+namespace Repro_3395
+{
+    public enum Helper
+    {
+        A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
+    }
+    public static class Test
+    {
+        public static void SupportedSize()
+        {
+            var helper = Helper.A;
+            object o = null;
+            if (helper == Helper.A | helper == Helper.B | helper == Helper.C | helper == Helper.D
+                | helper == Helper.E | helper == Helper.F | helper == Helper.G | helper == Helper.H)
+            {
+                o.ToString(); // Noncompliant, this condition size is within the limit
+            }
+        }
+
+        public static void UnsupportedSize()
+        {
+            var helper = Helper.A;
+            object o = null;
+            if (helper == Helper.A | helper == Helper.B | helper == Helper.C | helper == Helper.D
+                | helper == Helper.E | helper == Helper.F | helper == Helper.G | helper == Helper.H
+                | helper == Helper.I)
+            {
+                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+            }
+        }
+
+        public static void OrConstraint()
+        {
+            var helper = Helper.A;
+            object o = null;
+            if (helper == Helper.A | helper == Helper.B | helper == Helper.C | helper == Helper.D
+                | helper == Helper.E | helper == Helper.F | helper == Helper.G | helper == Helper.H
+                | helper == Helper.I | helper == Helper.A | helper == Helper.B | helper == Helper.C
+                | helper == Helper.D | helper == Helper.E | helper == Helper.F | helper == Helper.G
+                | helper == Helper.H | helper == Helper.I | helper == Helper.A | helper == Helper.B
+                | helper == Helper.C | helper == Helper.D | helper == Helper.E | helper == Helper.F
+                | helper == Helper.G | helper == Helper.H | helper == Helper.I | helper == Helper.J)
+            {
+                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+            }
+        }
+
+        public static void AndConstraint()
+        {
+            var helper = Helper.A;
+            object o = null;
+            if (helper == Helper.A & helper == Helper.B & helper == Helper.C & helper == Helper.D
+                & helper == Helper.E & helper == Helper.F & helper == Helper.G & helper == Helper.H
+                & helper == Helper.I & helper == Helper.A & helper == Helper.B & helper == Helper.C
+                & helper == Helper.D & helper == Helper.E & helper == Helper.F & helper == Helper.G
+                & helper == Helper.H & helper == Helper.I & helper == Helper.A & helper == Helper.B
+                & helper == Helper.C & helper == Helper.D & helper == Helper.E & helper == Helper.F
+                & helper == Helper.G & helper == Helper.H & helper == Helper.I & helper == Helper.J)
+            {
+                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+            }
+        }
+
+        public static void XorConstraint()
+        {
+            var helper = Helper.A;
+            object o = null;
+            if (helper == Helper.A ^ helper == Helper.B ^ helper == Helper.C ^ helper == Helper.D
+                ^ helper == Helper.E ^ helper == Helper.F ^ helper == Helper.G ^ helper == Helper.H
+                ^ helper == Helper.I ^ helper == Helper.A ^ helper == Helper.B ^ helper == Helper.C
+                ^ helper == Helper.D ^ helper == Helper.E ^ helper == Helper.F ^ helper == Helper.G
+                ^ helper == Helper.H ^ helper == Helper.I ^ helper == Helper.A ^ helper == Helper.B
+                ^ helper == Helper.C ^ helper == Helper.D ^ helper == Helper.E ^ helper == Helper.F
+                ^ helper == Helper.G ^ helper == Helper.H ^ helper == Helper.I ^ helper == Helper.J)
+            {
+                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+            }
+        }
+
+        public static void ComparisonConstraint()
+        {
+            var helper = Helper.A;
+            object o = null;
+            if (helper > Helper.A | helper > Helper.B | helper > Helper.C | helper > Helper.D
+                | helper >= Helper.E | helper >= Helper.F | helper >= Helper.G | helper >= Helper.H
+                | helper == Helper.I | helper == Helper.A | helper == Helper.B | helper == Helper.C
+                | helper < Helper.D | helper < Helper.E | helper < Helper.F | helper < Helper.G
+                | helper >= Helper.H | helper >= Helper.I | helper >= Helper.A | helper >= Helper.B
+                | helper != Helper.C | helper != Helper.D | helper != Helper.E | helper != Helper.F
+                | helper == Helper.G | helper == Helper.H | helper == Helper.I | helper == Helper.J)
+            {
+                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+            }
+        }
+
+        public static void MixedConstraints()
+        {
+            var helper = Helper.A;
+            object o = null;
+            if (helper == Helper.A & helper == Helper.B ^ helper == Helper.C & helper == Helper.D
+                | helper == Helper.E & helper == Helper.F ^ helper == Helper.G & helper == Helper.H
+                | helper == Helper.I & helper == Helper.A ^ helper == Helper.B & helper == Helper.C
+                | helper == Helper.D & helper == Helper.E ^ helper == Helper.F & helper == Helper.G
+                | helper == Helper.H & helper == Helper.I ^ helper == Helper.A & helper == Helper.B
+                | helper == Helper.C & helper == Helper.D ^ helper == Helper.E & helper == Helper.F
+                | helper == Helper.G & helper == Helper.H ^ helper == Helper.I & helper == Helper.J)
+            {
+                o.ToString(); // FN, the condition state generation is too big to explore all constraint combinations
+            }
+        }
+    }
+}

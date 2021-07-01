@@ -22,9 +22,6 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 {
     public class RelationalSymbolicValue : BinarySymbolicValue
     {
-        protected RelationalSymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand)
-            : base(leftOperand, rightOperand)
-        {
-        }
+        protected RelationalSymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand) : base(leftOperand, rightOperand) { }
     }
 }
