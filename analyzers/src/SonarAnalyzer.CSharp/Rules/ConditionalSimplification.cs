@@ -41,6 +41,9 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3240";
         private const string MessageFormat = "Use the '{0}' operator here.";
         private const string MessageMultipleNegation = "Simplify negation here.";
+        private const string CoalesceAssignmentOp = "??=";
+        private const string CoalesceOp = "??";
+        private const string TernaryOp = "?:";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         private static readonly DiagnosticDescriptor RuleMultipleNegation = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageMultipleNegation, RspecStrings.ResourceManager);
@@ -51,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.NotEqualsExpression
         };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule, RuleMultipleNegation);
 
         internal static bool IsCoalesceAssignmentCandidate(SyntaxNode conditional, ExpressionSyntax comparedToNull) =>
             conditional?.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax parentAssignment
@@ -141,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var left = ((BinaryExpressionSyntax)context.Node).Left.RemoveParentheses();
                 if (CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), left))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.GetLocation(), BuildCodeFixProperties(context), "??="));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp));
                 }
             }
         }
@@ -194,8 +197,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
             {
                 var diagnostic = context.Compilation.IsCoalesceAssignmentSupported() && IsCoalesceAssignmentCandidate(conditional, comparedToNull)
-                    ? Diagnostic.Create(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), "??=")
-                    : Diagnostic.Create(Rule, conditional.GetLocation(), BuildCodeFixProperties(context), "??");
+                    ? Diagnostic.Create(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp)
+                    : Diagnostic.Create(Rule, conditional.GetLocation(), BuildCodeFixProperties(context), CoalesceOp);
 
                 context.ReportDiagnosticWhenActive(diagnostic);
             }
@@ -245,7 +248,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                             bool comparedIsNullInTrue,
                                             out string simplifiedOperator)
         {
-            simplifiedOperator = "?:";
+            simplifiedOperator = TernaryOp;
 
             if (statement1 is ReturnStatementSyntax return1
                 && statement2 is ReturnStatementSyntax return2)
@@ -261,7 +264,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 if (comparedToNull != null && CanExpressionBeCoalescing(retExpr1, retExpr2, comparedToNull, semanticModel, comparedIsNullInTrue))
                 {
-                    simplifiedOperator = "??";
+                    simplifiedOperator = CoalesceOp;
                 }
                 return true;
             }
@@ -275,7 +278,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var expression1 = expressionStatement1.Expression.RemoveParentheses();
             if (statement2 == null)
             {
-                simplifiedOperator = context.Compilation.IsCoalesceAssignmentSupported() ? "??=" : "??";
+                simplifiedOperator = context.Compilation.IsCoalesceAssignmentSupported() ? CoalesceAssignmentOp : CoalesceOp;
                 return expression1 is AssignmentExpressionSyntax assignment
                     && comparedIsNullInTrue
                     && comparedToNull != null
@@ -289,7 +292,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (comparedToNull != null && CanExpressionBeCoalescing(expression1, expression2, comparedToNull, semanticModel, comparedIsNullInTrue))
             {
-                simplifiedOperator = "??";
+                simplifiedOperator = CoalesceOp;
                 return true;
             }
             else
@@ -305,7 +308,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                                     bool comparedIsNullInTrue,
                                                     out string simplifiedOperator)
         {
-            simplifiedOperator = "?:";
+            simplifiedOperator = TernaryOp;
             var assignment1 = expression1 as AssignmentExpressionSyntax;
             var assignment2 = expression2 as AssignmentExpressionSyntax;
             var canBeSimplified = assignment1 != null
@@ -320,7 +323,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (compared != null && CanExpressionBeCoalescing(assignment1.Right, assignment2.Right, compared, semanticModel, comparedIsNullInTrue))
             {
-                simplifiedOperator = "??";
+                simplifiedOperator = CoalesceOp;
             }
 
             return true;

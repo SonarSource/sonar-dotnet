@@ -28,8 +28,9 @@ namespace SonarAnalyzer.Extensions
             isPatternWrapper.Pattern.IsNull();
 
         public static bool IsNotNull(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
-            UnaryPatternSyntaxWrapper.IsInstance(isPatternWrapper.Pattern)
-            && ((UnaryPatternSyntaxWrapper)isPatternWrapper.Pattern) is var unaryPatternSyntaxWrapper
+            isPatternWrapper.Pattern.RemoveParentheses() is var syntaxNode
+            && UnaryPatternSyntaxWrapper.IsInstance(syntaxNode)
+            && ((UnaryPatternSyntaxWrapper)syntaxNode) is var unaryPatternSyntaxWrapper
             && unaryPatternSyntaxWrapper.IsNot()
             && unaryPatternSyntaxWrapper.Pattern.IsNull();
     }

@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.CFG.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
@@ -25,6 +27,6 @@ namespace SonarAnalyzer.Extensions
     public static class UnaryPatternSyntaxWrapperExtensions
     {
         public static bool IsNot(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
-            unaryPatternSyntaxWrapper.SyntaxNode.Kind() == SyntaxKindEx.NotPattern;
+            unaryPatternSyntaxWrapper.SyntaxNode.RemoveParentheses().Kind() == SyntaxKindEx.NotPattern;
     }
 }

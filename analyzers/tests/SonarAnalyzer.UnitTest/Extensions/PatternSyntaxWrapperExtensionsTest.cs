@@ -30,7 +30,14 @@ namespace SonarAnalyzer.UnitTest.Extensions
     public class PatternSyntaxWrapperExtensionsTest
     {
         [TestMethod]
-        public void IsNull_WithDifferentPatternThanConstant_ReturnsFalse()
+        public void IsNull_ForNullPattern_ReturnsTrue()
+        {
+            var isPattern = (IsPatternExpressionSyntaxWrapper)SyntaxFactory.ParseExpression("is null");
+            isPattern.Pattern.IsNull().Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void IsNull_ForDifferentPattern_ReturnsFalse()
         {
             var isPattern = (IsPatternExpressionSyntaxWrapper)SyntaxFactory.ParseExpression("is not 1");
             isPattern.Pattern.IsNull().Should().BeFalse();

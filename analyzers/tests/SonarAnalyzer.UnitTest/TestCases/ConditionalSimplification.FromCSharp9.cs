@@ -16,6 +16,15 @@ else
     x = b;
 }
 
+if (a is (not null)) // Noncompliant {{Use the '??' operator here.}}
+{
+    x = a;
+}
+else
+{
+    x = b;
+}
+
 if (a is null) // Noncompliant {{Use the '??=' operator here.}}
 {
     a = b;

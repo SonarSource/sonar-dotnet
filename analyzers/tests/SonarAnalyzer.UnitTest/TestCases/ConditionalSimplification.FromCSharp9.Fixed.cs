@@ -9,6 +9,8 @@ a ??= b; // Fixed
 Apple x;
 x = a ?? b;
 
+x = a ?? b;
+
 a ??= b;
 
 a ??= Identity(new()); // Fixed

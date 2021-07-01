@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.CFG.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
@@ -26,11 +28,15 @@ namespace SonarAnalyzer.Extensions
     public static class PatternSyntaxWrapperExtensions
     {
         public static bool IsNull(this PatternSyntaxWrapper patternSyntaxWrapper) =>
-            ConstantPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper.SyntaxNode)
-            && (ConstantPatternSyntaxWrapper)patternSyntaxWrapper.SyntaxNode is var constantPattern
+            patternSyntaxWrapper.RemoveParentheses() is var syntaxNode
+            && ConstantPatternSyntaxWrapper.IsInstance(syntaxNode)
+            && (ConstantPatternSyntaxWrapper)syntaxNode is var constantPattern
             && constantPattern.Expression.Kind() == SyntaxKind.NullLiteralExpression;
 
         public static bool IsNot(this PatternSyntaxWrapper patternSyntaxWrapper) =>
-            patternSyntaxWrapper.SyntaxNode.Kind() == SyntaxKindEx.NotPattern;
+            patternSyntaxWrapper.RemoveParentheses().Kind() == SyntaxKindEx.NotPattern;
+
+        public static SyntaxNode RemoveParentheses(this PatternSyntaxWrapper patternSyntaxWrapper) =>
+            patternSyntaxWrapper.SyntaxNode.RemoveParentheses();
     }
 }
