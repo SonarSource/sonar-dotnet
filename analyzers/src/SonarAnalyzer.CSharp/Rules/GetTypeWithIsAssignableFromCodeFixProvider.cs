@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -58,6 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             node switch {
                 InvocationExpressionSyntax invocation => ChangeInvocation(root, diagnostic, invocation),
                 BinaryExpressionSyntax binary => ChangeBinary(root, binary),
+                var _ when node.IsKind(SyntaxKindEx.IsPatternExpression) => ChangeIsPattern(root, (IsPatternExpressionSyntaxWrapper)node),
                 _ => null
             };
 
@@ -78,6 +80,26 @@ namespace SonarAnalyzer.Rules.CSharp
             else if (RefactoredExpression(binary) is { } expression)
             {
                 return root.ReplaceNode(binary, expression.WithAdditionalAnnotations(Formatter.Annotation));
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private static SyntaxNode ChangeIsPattern(SyntaxNode root, IsPatternExpressionSyntaxWrapper isPattern)
+        {
+            if (isPattern.Expression is BinaryExpressionSyntax binary)
+            {
+                var negationRequired = true;
+                var current = isPattern.Pattern;
+                while (current.SyntaxNode.IsKind(SyntaxKindEx.NotPattern))
+                {
+                    negationRequired = !negationRequired;
+                    current = ((UnaryPatternSyntaxWrapper)current).Pattern;
+                }
+                var newExpression = NegatedExpression(negationRequired, isPattern.SyntaxNode.Parent, GetIsExpression(binary));
+                return root.ReplaceNode(isPattern, newExpression.WithAdditionalAnnotations(Formatter.Annotation));
             }
             else
             {
@@ -113,10 +135,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            return negationRequired
-                ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, SyntaxFactory.ParenthesizedExpression(newExpression))
-                : ExpressionWithParensIfNeeded(newExpression, binary.Parent);
+            return NegatedExpression(negationRequired, binary.Parent, newExpression);
         }
+
+        private static ExpressionSyntax NegatedExpression(bool negationRequired, SyntaxNode parent, ExpressionSyntax expression) =>
+            negationRequired
+                ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, SyntaxFactory.ParenthesizedExpression(expression))
+                : ExpressionWithParensIfNeeded(expression, parent);
 
         private static ExpressionSyntax RefactoredExpression(InvocationExpressionSyntax invocation, bool useIsOperator, bool shouldRemoveGetType)
         {

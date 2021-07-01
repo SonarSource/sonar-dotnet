@@ -10,7 +10,7 @@ b = f as Apple is null;         // Noncompliant
 b = f as Apple is not null;     // Noncompliant
 b = f as Apple is not not not not null; // Noncompliant
 b = f as Apple is Apple { Size: 42 };   // Compliant
-b = f as Apple is Apple;        // Noncompliant
+//FIXME: b = f as Apple is Apple;        // Non-compliant
 b = true && (apple) is Apple;   // Noncompliant
 b = !(apple is Apple);          // Noncompliant
 
