@@ -298,4 +298,45 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4515
+    public class Repro_4515
+    {
+        public void DoWork()
+        {
+            int? i = GetNullableInt();
+
+            if (i == null && i == 3) // Noncompliant
+            { // Secondary
+
+            }
+
+            void B()
+            {
+                int? i = GetNullableInt();
+
+                if (i == null && i == 3) // FN
+                {
+
+                }
+            }
+
+            int? GetNullableInt() => 42;
+        }
+
+        public void DoWorkStatic()
+        {
+            static void B()
+            {
+                int? i = GetNullableInt();
+
+                if (i == null && i == 3) // FN
+                {
+
+                }
+            }
+
+            static int? GetNullableInt() => 42;
+        }
+    }
 }
