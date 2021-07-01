@@ -37,30 +37,31 @@ namespace SonarAnalyzer.Helpers
             Common.EquivalenceChecker.AreEquivalent(nodeList1, nodeList2, NodeComparator);
 
         private static bool NodeComparator(SyntaxNode node1, SyntaxNode node2) =>
-            NullCheckState(node1) is { } nullCheck1
-            && NullCheckState(node2) is { } nullCheck2
-            && nullCheck1.Positive == nullCheck2.Positive
+            NullCheckState(node1, true) is { } nullCheck1
+            && NullCheckState(node2, true) is { } nullCheck2
+            && nullCheck1.IsPositive == nullCheck2.IsPositive
                 ? SyntaxFactory.AreEquivalent(nullCheck1.Expression, nullCheck2.Expression)
                 : SyntaxFactory.AreEquivalent(node1, node2);
 
-        private static NullCheck NullCheckState(SyntaxNode node, bool positive = true)
+        /// <param name="isPositive">Flag indicating that current chain of null checks is positive '== null'. It's flipped for each `!` operator. '!(x != null)' is equal to 'x == null'.</param>
+        private static NullCheck NullCheckState(SyntaxNode node, bool isPositive)
         {
             if (node is PrefixUnaryExpressionSyntax unary && unary.IsKind(SyntaxKind.LogicalNotExpression))
             {
-                return NullCheckState(unary.Operand.RemoveParentheses(), !positive);
+                return NullCheckState(unary.Operand.RemoveParentheses(), !isPositive);
             }
             else if (node is BinaryExpressionSyntax binary && binary.IsAnyKind(SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression))
             {
                 if (binary.IsKind(SyntaxKind.NotEqualsExpression))
                 {
-                    positive = !positive;
+                    isPositive = !isPositive;
                 }
-                return NullCheckExpression(binary) is { } expression ? new NullCheck(expression, positive) : null;
+                return NullCheckExpression(binary) is { } expression ? new NullCheck(expression, isPositive) : null;
             }
             else if (node.IsKind(SyntaxKindEx.IsPatternExpression))
             {
                 var isPattern = (IsPatternExpressionSyntaxWrapper)node;
-                return NullCheckPattern(isPattern.Expression, isPattern.Pattern.SyntaxNode, positive);
+                return NullCheckPattern(isPattern.Expression, isPattern.Pattern.SyntaxNode, isPositive);
             }
             else
             {
@@ -84,15 +85,16 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private static NullCheck NullCheckPattern(SyntaxNode expression, SyntaxNode pattern, bool positive)
+        /// <param name="isPositive">Flag indicating that current chain of null checks is positive 'is null'. It's flipped for each `not` operator. 'is not not null' is equal to 'is null'.</param>
+        private static NullCheck NullCheckPattern(SyntaxNode expression, SyntaxNode pattern, bool isPositive)
         {
             if (pattern.IsKind(SyntaxKindEx.ConstantPattern) && ((ConstantPatternSyntaxWrapper)pattern).Expression.IsKind(SyntaxKind.NullLiteralExpression))
             {
-                return new NullCheck(expression, positive);
+                return new NullCheck(expression, isPositive);
             }
             else if (pattern.IsKind(SyntaxKindEx.NotPattern))
             {
-                return NullCheckPattern(expression, ((UnaryPatternSyntaxWrapper)pattern).Pattern.SyntaxNode, !positive);
+                return NullCheckPattern(expression, ((UnaryPatternSyntaxWrapper)pattern).Pattern.SyntaxNode, !isPositive);
             }
             else
             {
@@ -103,12 +105,12 @@ namespace SonarAnalyzer.Helpers
         private class NullCheck
         {
             public readonly SyntaxNode Expression;
-            public readonly bool Positive;
+            public readonly bool IsPositive;
 
-            public NullCheck(SyntaxNode expression, bool positive)
+            public NullCheck(SyntaxNode expression, bool isPositive)
             {
                 Expression = expression;
-                Positive = positive;
+                IsPositive = isPositive;
             }
         }
     }

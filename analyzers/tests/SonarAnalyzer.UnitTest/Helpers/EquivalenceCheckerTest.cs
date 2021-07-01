@@ -224,7 +224,7 @@ End Namespace";
         }
 
         [TestMethod]
-        public void EqualityComparer_Node_CrossLangauge() =>
+        public void EqualityComparer_Node_CrossLanguage() =>
             EquivalenceChecker.AreEquivalent(vbMethods.Method1.First(), csMethods.Method1, null).Should().BeFalse();
 
         private class CSharpMethods

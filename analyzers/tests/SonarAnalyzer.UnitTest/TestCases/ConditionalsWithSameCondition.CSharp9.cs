@@ -60,6 +60,11 @@
             if (ch is >= 'a' and <= 'z') { } // Noncompliant
             if (ch is <= 'z' and >= 'a') { } // Compliant, even when the semantics is the same
 
+            if (ch is (>= 'a' and <= 'z') or (>= 'A' and <= 'Z') or '.' or '?') { }
+            if (ch is (>= 'a' and <= 'z') or (>= 'A' and <= 'Z') or '.' or '?') { } // Noncompliant
+            if (ch is (>= 'a' and <= 'z') or (>= 'A' and <= 'Z') or '?' or '.') { } // Compliant, even when the semantics is the same
+            if (ch is (>= 'A' and <= 'Z') or (>= 'a' and <= 'z') or '?' or '.') { } // Compliant, even when the semantics is the same
+
             if (f is not null) { }
             if (f is not not not null) { }  // Noncompliant, same meaning
             if (f != null) { }              // Noncompliant, same meaning
@@ -71,12 +76,33 @@
             if (!(f is null)) { }
             if (f != null) { }          // Noncompliant, same meaning
             if (f is not not null) { }  // Compliant, equal to f == null
+
+            if (f is Apple) { }
+            if (f is Apple) { }   // Noncompliant
+
+            if (f is Apple or Orange) { }
+            if (f is Apple or Orange) { }   // Noncompliant
+            if (f is Orange or Apple) { }   // Compliant, even when the semantics is the same
+
+            if (f is not Apple) { }
+            if (f is not Apple) { } // Noncompliant
+
+            if (f is { Size: >= 5, Value: 0 }) { }
+            if (f is { Size: >= 5, Value: 0 }) { } // Noncompliant
+            if (f is { Value: 0, Size: >= 5 }) { } // Compliant, even when the semantics is the same
+
+            if (f is { Size: >= 5 }) { }
+            if (f is not { Size: < 5 }) { } // Compliant, even when the semantics is the same
         }
 
         void doTheThing(object o) { }
     }
 
-    abstract class Fruit { }
+    abstract class Fruit
+    {
+        public int Size { get; }
+        public int Value { get; }
+    }
     class Apple : Fruit { }
     class Orange : Fruit { }
 }
