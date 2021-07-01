@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ExpressionSyntax RefactoredExpression(BinaryExpressionSyntax binary)
         {
             ExpressionSyntax newExpression;
-            var noNegationRequired = binary.IsKind(SyntaxKind.EqualsExpression);
+            var negationRequired = binary.IsKind(SyntaxKind.NotEqualsExpression);
 
             if (TryGetTypeOfComparison(binary, out var typeofExpression, out var getTypeSide))
             {
@@ -112,16 +112,16 @@ namespace SonarAnalyzer.Rules.CSharp
             else if (AsOperatorComparisonToNull(binary) is { } asExpression)
             {
                 newExpression = GetIsExpression(asExpression);
-                noNegationRequired = !noNegationRequired;
+                negationRequired = !negationRequired;
             }
             else
             {
                 return null;
             }
 
-            return noNegationRequired
-                ? ExpressionWithParensIfNeeded(newExpression, binary.Parent)
-                : SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, SyntaxFactory.ParenthesizedExpression(newExpression));
+            return negationRequired
+                ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, SyntaxFactory.ParenthesizedExpression(newExpression))
+                : ExpressionWithParensIfNeeded(newExpression, binary.Parent);
         }
 
         private static ExpressionSyntax RefactoredExpression(InvocationExpressionSyntax invocation, bool useIsOperator, bool shouldRemoveGetType)
