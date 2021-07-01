@@ -29,18 +29,10 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(S2278DiagnosticId)]
     [Rule(DiagnosticId)]
     public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
     {
-        // S2278 was deprecated in favor of S5547. Technically, there is no difference in the C# analyzer between
-        // the 2 rules, but to be coherent with all the other languages, we still replace it with the new one
-        private const string S2278DiagnosticId = "S2278";
-        private const string S2278MessageFormat = "Use the recommended AES (Advanced Encryption Standard) instead.";
-
-        private static readonly DiagnosticDescriptor S2278 = DiagnosticDescriptorBuilder.GetDescriptor(S2278DiagnosticId, S2278MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S2278, Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 

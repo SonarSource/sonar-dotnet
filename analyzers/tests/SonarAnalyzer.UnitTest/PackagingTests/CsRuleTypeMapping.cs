@@ -2275,7 +2275,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             ["2275"] = "BUG",
             //["2276"],
             //["2277"],
-            ["2278"] = "VULNERABILITY",
+            //["2278"],
             //["2279"],
             //["2280"],
             //["2281"],
