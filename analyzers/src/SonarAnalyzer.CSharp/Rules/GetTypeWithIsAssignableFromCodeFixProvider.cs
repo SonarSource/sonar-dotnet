@@ -46,14 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var syntaxNode = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
-            var invocation = syntaxNode as InvocationExpressionSyntax;
-            var binary = syntaxNode as BinaryExpressionSyntax;
-            if (invocation == null && binary == null)
-            {
-                return TaskHelper.CompletedTask;
-            }
-
-            if (TryGetNewRoot(root, diagnostic, invocation, binary, out var newRoot))
+            if (NewRoot(root, diagnostic, syntaxNode) is { } newRoot)
             {
                 context.RegisterCodeFix(CodeAction.Create(Title, c => Task.FromResult(context.Document.WithSyntaxRoot(newRoot))), context.Diagnostics);
             }
@@ -61,26 +54,35 @@ namespace SonarAnalyzer.Rules.CSharp
             return TaskHelper.CompletedTask;
         }
 
-        private static bool TryGetNewRoot(SyntaxNode root, Diagnostic diagnostic, InvocationExpressionSyntax invocation, BinaryExpressionSyntax binary, out SyntaxNode newRoot)
+        private static SyntaxNode NewRoot(SyntaxNode root, Diagnostic diagnostic, SyntaxNode node) =>
+            node switch {
+                InvocationExpressionSyntax invocation => ChangeInvocation(root, diagnostic, invocation),
+                BinaryExpressionSyntax binary => ChangeBinary(root, binary),
+                _ => null
+            };
+
+        private static SyntaxNode ChangeInvocation(SyntaxNode root, Diagnostic diagnostic, InvocationExpressionSyntax invocation)
         {
-            if (invocation != null)
+            var useIsOperator = bool.Parse(diagnostic.Properties[GetTypeWithIsAssignableFrom.UseIsOperatorKey]);
+            var shouldRemoveGetType = bool.Parse(diagnostic.Properties[GetTypeWithIsAssignableFrom.ShouldRemoveGetTypeKey]);
+            var newNode = RefactoredExpression(invocation, useIsOperator, shouldRemoveGetType);
+            return root.ReplaceNode(invocation, newNode.WithAdditionalAnnotations(Formatter.Annotation));
+        }
+
+        private static SyntaxNode ChangeBinary(SyntaxNode root, BinaryExpressionSyntax binary)
+        {
+            if (binary.IsKind(SyntaxKind.IsExpression))
             {
-                newRoot = ChangeInvocation(root, diagnostic, invocation);
-            }
-            else if (binary.IsKind(SyntaxKind.IsExpression))
-            {
-                newRoot = ChangeIsExpressionToNullCheck(root, binary);
+                return ChangeIsExpressionToNullCheck(root, binary);
             }
             else if (RefactoredExpression(binary) is { } expression)
             {
-                newRoot = root.ReplaceNode(binary, expression.WithAdditionalAnnotations(Formatter.Annotation));
+                return root.ReplaceNode(binary, expression.WithAdditionalAnnotations(Formatter.Annotation));
             }
             else
             {
-                newRoot = null;
+                return null;
             }
-
-            return newRoot != null;
         }
 
         private static SyntaxNode ChangeIsExpressionToNullCheck(SyntaxNode root, BinaryExpressionSyntax binary)
@@ -91,14 +93,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ExpressionSyntax GetNullCheck(BinaryExpressionSyntax binary) =>
             SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, binary.Left.RemoveParentheses(), CSharpSyntaxHelper.NullLiteralExpression);
-
-        private static SyntaxNode ChangeInvocation(SyntaxNode root, Diagnostic diagnostic, InvocationExpressionSyntax invocation)
-        {
-            var useIsOperator = bool.Parse(diagnostic.Properties[GetTypeWithIsAssignableFrom.UseIsOperatorKey]);
-            var shouldRemoveGetType = bool.Parse(diagnostic.Properties[GetTypeWithIsAssignableFrom.ShouldRemoveGetTypeKey]);
-            var newNode = RefactoredExpression(invocation, useIsOperator, shouldRemoveGetType);
-            return root.ReplaceNode(invocation, newNode.WithAdditionalAnnotations(Formatter.Annotation));
-        }
 
         private static ExpressionSyntax RefactoredExpression(BinaryExpressionSyntax binary)
         {
