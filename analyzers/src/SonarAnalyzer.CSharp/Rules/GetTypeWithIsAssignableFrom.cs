@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -91,11 +92,21 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.IsExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var isPattern = (IsPatternExpressionSyntaxWrapper)c.Node;
+                if (ConstantPatternExpression(isPattern.Pattern) is { } constantExpression)
+                {
+                    CheckAsOperatorComparedToNull(c, isPattern.Expression, constantExpression);
+                }
+            },
+            SyntaxKindEx.IsPatternExpression);
         }
 
         private static void CheckAsOperatorComparedToNull(SyntaxNodeAnalysisContext context, ExpressionSyntax sideA, ExpressionSyntax sideB)
         {
-            if (sideA.RemoveParentheses().IsKind(SyntaxKind.NullLiteralExpression) && sideB.RemoveParentheses().IsKind(SyntaxKind.AsExpression))
+            if (sideA.RemoveParentheses().IsKind(SyntaxKind.AsExpression) && sideB.RemoveParentheses().IsKind(SyntaxKind.NullLiteralExpression))
             {
                 ReportDiagnostic(context, MessageIsOperator);
             }
@@ -137,6 +148,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
         }
+
+        private static ExpressionSyntax ConstantPatternExpression(SyntaxNode node) =>
+            node.Kind() switch
+            {
+                SyntaxKindEx.ConstantPattern => ((ConstantPatternSyntaxWrapper)node).Expression,
+                SyntaxKindEx.NotPattern => ConstantPatternExpression(((UnaryPatternSyntaxWrapper)node).Pattern),
+                _ => null
+            };
 
         private static void ReportDiagnostic(SyntaxNodeAnalysisContext context, string messageArg, bool useIsOperator = false, bool shouldRemoveGetType = false)
         {
