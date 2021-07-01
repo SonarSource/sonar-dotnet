@@ -21,7 +21,7 @@ resources:
     - repository: commonTemplates
       type: git
       name: pipelines-yaml-templates
-      #FIXME: ref:  refs/tags/v1.0.11
+      ref:  refs/tags/v1.0.13
 
 stages:
 - template: stage-with-burgr-notifications.yml@commonTemplates
