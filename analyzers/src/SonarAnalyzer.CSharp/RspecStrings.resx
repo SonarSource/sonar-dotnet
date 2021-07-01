@@ -3021,39 +3021,6 @@
   <data name="S2068_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>
   </data>
-  <data name="S2070_Category" xml:space="preserve">
-    <value>Critical Vulnerability</value>
-  </data>
-  <data name="S2070_Description" xml:space="preserve">
-    <value>The MD5 algorithm and its successor, SHA-1, are no longer considered secure, because it is too easy to create hash collisions with them. That is, it takes too little computational effort to come up with a different input that produces the same MD5 or SHA-1 hash, and using the new, same-hash value gives an attacker the same access as if he had the originally-hashed value. This applies as well to the other Message-Digest algorithms: MD2, MD4, MD6.</value>
-  </data>
-  <data name="S2070_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
-  </data>
-  <data name="S2070_Remediation" xml:space="preserve">
-    <value>Constant/Issue</value>
-  </data>
-  <data name="S2070_RemediationCost" xml:space="preserve">
-    <value>30min</value>
-  </data>
-  <data name="S2070_Scope" xml:space="preserve">
-    <value>Main</value>
-  </data>
-  <data name="S2070_Severity" xml:space="preserve">
-    <value>Critical</value>
-  </data>
-  <data name="S2070_Status" xml:space="preserve">
-    <value>deprecated</value>
-  </data>
-  <data name="S2070_Tags" xml:space="preserve">
-    <value />
-  </data>
-  <data name="S2070_Title" xml:space="preserve">
-    <value>SHA-1 and Message-Digest hash algorithms should not be used in secure contexts</value>
-  </data>
-  <data name="S2070_Type" xml:space="preserve">
-    <value>VULNERABILITY</value>
-  </data>
   <data name="S2077_Category" xml:space="preserve">
     <value>Major Security Hotspot</value>
   </data>
