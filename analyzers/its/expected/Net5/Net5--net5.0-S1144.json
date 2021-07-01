@@ -236,19 +236,6 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private field 'foo'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S4432.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  9,
-"endLine":  7,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private field 'field'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S4433.cs",

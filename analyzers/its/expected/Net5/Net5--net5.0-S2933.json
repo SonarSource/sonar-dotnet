@@ -171,19 +171,6 @@
 },
 {
 "id":  "S2933",
-"message":  "Make 'foo' 'readonly'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S4432.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  20,
-"endLine":  7,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2933",
 "message":  "Make 'field' 'readonly'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S4433.cs",
