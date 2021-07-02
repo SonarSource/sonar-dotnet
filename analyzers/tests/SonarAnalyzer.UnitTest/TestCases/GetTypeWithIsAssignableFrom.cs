@@ -47,28 +47,31 @@ namespace Tests.Diagnostics
     }
     class Fruit { }
     sealed class Apple : Fruit { }
+    class NonsealedBerry : Fruit { }
 
     class Program
     {
         static void Main()
         {
             var apple = new Apple();
-            var b = apple.GetType() == typeof(Apple); // Noncompliant
-            b = typeof(Apple).IsInstanceOfType(apple); // Noncompliant
+            var berry = new NonsealedBerry();
+            var b = apple.GetType() == typeof(Apple);       // Noncompliant
+            b = berry.GetType() == typeof(NonsealedBerry);  // Compliant, nonsealed class
+            b = typeof(Apple).IsInstanceOfType(apple);      // Noncompliant
             b = typeof(Apple).IsAssignableFrom(apple.GetType()); // Noncompliant
-            b = typeof(Apple).IsInstanceOfType(apple); // Noncompliant
+            b = typeof(Apple).IsInstanceOfType(apple);      // Noncompliant
             var appleType = typeof(Apple);
-            b = appleType.IsAssignableFrom(apple.GetType()); // Noncompliant
+            b = appleType.IsAssignableFrom(apple.GetType());    // Noncompliant
 
-            b = apple.GetType() == typeof(int?); // Compliant
+            b = apple.GetType() == typeof(int?);    // Compliant
 
             Fruit f = apple;
-            b = true && (((f as Apple)) != null); // Noncompliant
-            b = f as Apple == null; // Noncompliant
+            b = true && (((f as Apple)) != null);   // Noncompliant
+            b = f as Apple == null;                 // Noncompliant
             b = f as Apple == new Apple();
 
             b = true && ((apple)) is Apple; // Noncompliant
-            b = !(apple is Apple); // Noncompliant
+            b = !(apple is Apple);          // Noncompliant
             b = f is Apple;
 
             var num = 5;
@@ -105,5 +108,21 @@ namespace Tests.Diagnostics
         public bool IsAssignableFrom(string x) => true;
         public bool GetType(object x) => true;
         public Type GetType() => null;
+    }
+
+    public class CoverageWithErrors
+    {
+        public void Go(CoverageWithErrors arg)
+        {
+            bool b;
+            this.IsInstanceOfType("x");                 // Error [CS1061]: 'Coverage2' does not contain a definition for 'IsInstanceOfType'
+            b = arg is UndefinedType;                   // Error [CS0246]: The type or namespace name 'UndefinedType' could not be found
+            b = undefined is CoverageWithErrors;        // Error [CS0103]: The name 'undefined' does not exist in the current context
+            b = arg.GetType() == typeof(UndefinedType); // Error [CS0246]: The type or namespace name 'UndefinedType' could not be found
+            b = arg.GetType() == typeof();              // Error [CS1031]: Type expected
+            b = arg.GetType() == typeof;                // Error [CS1031]: Type expected
+                                                        // Error@-1 [CS1003]: Syntax error, '(' expected
+                                                        // Error@-2 [CS1026]: ) expected
+        }
     }
 }

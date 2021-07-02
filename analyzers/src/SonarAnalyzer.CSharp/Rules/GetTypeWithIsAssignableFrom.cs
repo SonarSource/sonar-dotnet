@@ -81,9 +81,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var isExpression = (BinaryExpressionSyntax)c.Node;
-                    if (c.SemanticModel.GetTypeInfo(isExpression.Left).Type is { } objectToCast
+                    if (c.SemanticModel.GetTypeInfo(isExpression.Left).Type is var objectToCast
                         && objectToCast.IsClass()
-                        && c.SemanticModel.GetTypeInfo(isExpression.Right).Type is { } typeCastTo
+                        && c.SemanticModel.GetTypeInfo(isExpression.Right).Type is var typeCastTo
                         && typeCastTo.IsClass()
                         && !typeCastTo.Is(KnownType.System_Object)
                         && objectToCast.DerivesOrImplements(typeCastTo))
@@ -116,9 +116,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (sideA.ToStringContains("GetType")
                 && sideB is TypeOfExpressionSyntax sideBeTypeOf
-                && sideBeTypeOf.Type is { } typeSyntax
                 && (sideA as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel)
-                && context.SemanticModel.GetTypeInfo(typeSyntax).Type is { } typeSymbol
+                && context.SemanticModel.GetTypeInfo(sideBeTypeOf.Type).Type is { } typeSymbol // Can be null for empty identifier from 'typeof' unfinished syntax
                 && typeSymbol.IsSealed
                 && !typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
             {
