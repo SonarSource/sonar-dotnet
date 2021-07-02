@@ -45,9 +45,8 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var syntaxNode = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
-            if (NewRoot(root, diagnostic, syntaxNode) is { } newRoot)
+            var node = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+            if (NewRoot(root, diagnostic, node) is { } newRoot)
             {
                 context.RegisterCodeFix(CodeAction.Create(Title, c => Task.FromResult(context.Document.WithSyntaxRoot(newRoot))), context.Diagnostics);
             }
@@ -109,11 +108,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxNode ChangeIsExpressionToNullCheck(SyntaxNode root, BinaryExpressionSyntax binary)
         {
-            var newNode = ExpressionWithParensIfNeeded(GetNullCheck(binary), binary.Parent);
-            return root.ReplaceNode(binary, newNode.WithAdditionalAnnotations(Formatter.Annotation));
+            var newNullCheck = NullCheck(binary);
+            var newExpression = RefactoredExpression(newNullCheck) ?? newNullCheck; // Try to improve nested cases
+            return root.ReplaceNode(binary, ExpressionWithParensIfNeeded(newExpression, binary.Parent).WithAdditionalAnnotations(Formatter.Annotation));
         }
 
-        private static ExpressionSyntax GetNullCheck(BinaryExpressionSyntax binary) =>
+        private static BinaryExpressionSyntax NullCheck(BinaryExpressionSyntax binary) =>
             SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, binary.Left.RemoveParentheses(), CSharpSyntaxHelper.NullLiteralExpression);
 
         private static ExpressionSyntax RefactoredExpression(BinaryExpressionSyntax binary)
@@ -138,11 +138,6 @@ namespace SonarAnalyzer.Rules.CSharp
             return NegatedExpression(negationRequired, binary.Parent, newExpression);
         }
 
-        private static ExpressionSyntax NegatedExpression(bool negationRequired, SyntaxNode parent, ExpressionSyntax expression) =>
-            negationRequired
-                ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, SyntaxFactory.ParenthesizedExpression(expression))
-                : ExpressionWithParensIfNeeded(expression, parent);
-
         private static ExpressionSyntax RefactoredExpression(InvocationExpressionSyntax invocation, bool useIsOperator, bool shouldRemoveGetType)
         {
             var typeInstance = ((MemberAccessExpressionSyntax)invocation.Expression).Expression;
@@ -151,6 +146,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? ExpressionWithParensIfNeeded(CreateIsExpression(typeInstance, getTypeCallInArgument.Expression, shouldRemoveGetType), invocation.Parent)
                 : IsInstanceOfTypeCall(invocation, typeInstance, getTypeCallInArgument);
         }
+
+        private static ExpressionSyntax NegatedExpression(bool negationRequired, SyntaxNode parent, ExpressionSyntax expression) =>
+            negationRequired
+                ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, SyntaxFactory.ParenthesizedExpression(expression))
+                : ExpressionWithParensIfNeeded(expression, parent);
 
         private static ExpressionSyntax GetIsExpression(BinaryExpressionSyntax asExpression) =>
             SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, asExpression.Left, asExpression.Right).WithAdditionalAnnotations(Formatter.Annotation);
