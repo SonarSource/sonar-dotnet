@@ -2,6 +2,7 @@
 
 namespace Tests.Diagnostics
 {
+    using System.Runtime.Caching;
     public class ValidUseCases
     {
         private const int MAGIC = 42;
@@ -27,10 +28,20 @@ namespace Tests.Diagnostics
             }
 
             const int VAL = 15;
-
+            
             Console.Write("test");
         }
 
+        /// <summary>
+        ///     A five minute sliding expiration 
+        /// </summary>
+        public static CacheItemPolicy FiveMinSlide => new CacheItemPolicy {SlidingExpiration = new TimeSpan(0, 5, 0)};
+
+        /// <summary>
+        ///     A five minute absolute expiration
+        /// </summary>
+        public static CacheItemPolicy FiveMinAbs => new CacheItemPolicy {AbsoluteExpiration = DateTime.Now.AddMinutes(5)};
+        
         public override int GetHashCode()
         {
             return MY_VALUE * 397;
