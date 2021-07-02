@@ -15,19 +15,6 @@
 },
 {
 "id":  "S2933",
-"message":  "Make 'md5' 'readonly'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S2070.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  34,
-"endLine":  7,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S2933",
 "message":  "Make 'cookie' 'readonly'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2092.cs",

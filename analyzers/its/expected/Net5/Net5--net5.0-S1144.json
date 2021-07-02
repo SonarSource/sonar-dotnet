@@ -54,19 +54,6 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private field 'md5'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S2070.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  9,
-"endLine":  7,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private method 'Foo'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2077.cs",
