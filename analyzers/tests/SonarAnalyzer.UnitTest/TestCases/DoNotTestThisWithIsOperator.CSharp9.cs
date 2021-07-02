@@ -8,7 +8,7 @@ namespace Tests.Diagnostics
         public int MyProperty { get; set; }
         public object MyProperty2 { get; set; }
 
-        public Program(object o)
+        public Program(object o, object i)
         {
             if (this is Program and { MyProperty: 2 }) // Noncompliant
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -177,6 +177,18 @@ namespace Tests.Diagnostics
                 IEnumerable => 2,
                 _ => 3
             };
+
+            if ((o, (this, i)) is (Program, (Program, Program))) // FN
+            {
+            }
+
+            switch ((this, o, i)) // FN
+            {
+                case (Program, Program, Program):
+                    break;
+                default:
+                    break;
+            }
         }
 
         public bool SomeMethod(object o)
