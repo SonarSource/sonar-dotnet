@@ -140,9 +140,16 @@ namespace SonarAnalyzer.UnitTest
         public static AnalyzerOptions CreateOptions(string relativePath)
         {
             var text = File.Exists(relativePath) ? SourceText.From(File.ReadAllText(relativePath)) : null;
+
+            return CreateOptions(relativePath, text);
+        }
+
+        public static AnalyzerOptions CreateOptions(string relativePath, SourceText text)
+        {
             var additionalText = new Mock<AdditionalText>();
             additionalText.Setup(x => x.Path).Returns(relativePath);
             additionalText.Setup(x => x.GetText(default)).Returns(text);
+
             return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
 

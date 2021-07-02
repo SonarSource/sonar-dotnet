@@ -27,11 +27,11 @@ namespace SonarAnalyzer.Common
 {
     public class RuleLoader : IRuleLoader
     {
-        public ISet<string> GetEnabledRules(string path) =>
-            XDocument.Load(path)
-                     .Descendants("Rule")
-                     .Select(r => r.Element("Key")?.Value)
-                     .WhereNotNull()
-                     .ToHashSet();
+        public ISet<string> GetEnabledRules(string content) =>
+            XDocument.Parse(content)
+                .Descendants("Rule")
+                .Select(r => r.Element("Key")?.Value)
+                .WhereNotNull()
+                .ToHashSet();
     }
 }
