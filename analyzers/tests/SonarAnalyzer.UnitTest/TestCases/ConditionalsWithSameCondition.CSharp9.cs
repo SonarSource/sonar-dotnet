@@ -58,12 +58,12 @@
             char ch = 'x';
             if (ch is >= 'a' and <= 'z') { }
             if (ch is >= 'a' and <= 'z') { } // Noncompliant
-            if (ch is <= 'z' and >= 'a') { } // Compliant, even when the semantics is the same
+            if (ch is <= 'z' and >= 'a') { } // FN, only syntax checks are currently supported
 
             if (ch is (>= 'a' and <= 'z') or (>= 'A' and <= 'Z') or '.' or '?') { }
             if (ch is (>= 'a' and <= 'z') or (>= 'A' and <= 'Z') or '.' or '?') { } // Noncompliant
-            if (ch is (>= 'a' and <= 'z') or (>= 'A' and <= 'Z') or '?' or '.') { } // Compliant, even when the semantics is the same
-            if (ch is (>= 'A' and <= 'Z') or (>= 'a' and <= 'z') or '?' or '.') { } // Compliant, even when the semantics is the same
+            if (ch is (>= 'a' and <= 'z') or (>= 'A' and <= 'Z') or '?' or '.') { } // FN, only syntax checks are currently supported
+            if (ch is (>= 'A' and <= 'Z') or (>= 'a' and <= 'z') or '?' or '.') { } // FN, only syntax checks are currently supported
 
             if (f is not null) { }
             if (f is not not not null) { }  // Noncompliant, same meaning
@@ -82,17 +82,17 @@
 
             if (f is Apple or Orange) { }
             if (f is Apple or Orange) { }   // Noncompliant
-            if (f is Orange or Apple) { }   // Compliant, even when the semantics is the same
+            if (f is Orange or Apple) { }   // FN, only syntax checks are currently supported
 
             if (f is not Apple) { }
             if (f is not Apple) { } // Noncompliant
 
             if (f is { Size: >= 5, Value: 0 }) { }
             if (f is { Size: >= 5, Value: 0 }) { } // Noncompliant
-            if (f is { Value: 0, Size: >= 5 }) { } // Compliant, even when the semantics is the same
+            if (f is { Value: 0, Size: >= 5 }) { } // FN, only syntax checks are currently supported
 
             if (f is { Size: >= 5 }) { }
-            if (f is not { Size: < 5 }) { } // Compliant, even when the semantics is the same
+            if (f is not { Size: < 5 }) { } // FN, only syntax checks are currently supported
         }
 
         void doTheThing(object o) { }
