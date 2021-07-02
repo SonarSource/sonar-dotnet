@@ -40,26 +40,26 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
-                GetAnalyzer(),
-                NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)));
+                                    GetAnalyzer(),
+                                    NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp7.cs",
-                GetAnalyzer(),
-                ParseOptionsHelper.FromCSharp7);
+                                    GetAnalyzer(),
+                                    ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
-                GetAnalyzer(),
+                                    GetAnalyzer(),
 #if NETFRAMEWORK
-                ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
+                                    ParseOptionsHelper.FromCSharp8,
+                                    NuGetMetadataReference.NETStandardV2_1_0);
 #else
-                ParseOptionsHelper.FromCSharp8);
+                                    ParseOptionsHelper.FromCSharp8);
 #endif
 
 #if NET
