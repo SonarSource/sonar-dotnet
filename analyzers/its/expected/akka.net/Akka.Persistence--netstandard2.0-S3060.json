@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3060",
-"message":  "Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.",
+"message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
