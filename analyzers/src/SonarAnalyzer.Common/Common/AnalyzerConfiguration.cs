@@ -32,8 +32,10 @@ namespace SonarAnalyzer.Common
         /// <summary>
         /// Hotspot rules are not configurable (from ruleset) to prevent them from appearing in SonarLint.
         /// They are enabled by default and we check if SonarLint.xml contains the rule key on CompilationStart
-        /// to determine whether to run the analysis or not. SonarLint.xml is added by SonarScanner for .NET
-        /// and not by SonarLint, hence the hotspots run only when run through the CLI.
+        /// to determine whether to run the analysis or not.
+        /// SonarLint.xml is added by both SonarScanner for .NET and by SonarLint, however there are differences:
+        /// - SonarLint only uses it to pass parameters to rules
+        /// - SonarScanner uses it to pass parameters and to enable security hotspots (which should only run in batch mode)
         /// </summary>
         public static IAnalyzerConfiguration Hotspot { get; } =
             new HotspotConfiguration(new RuleLoader());
