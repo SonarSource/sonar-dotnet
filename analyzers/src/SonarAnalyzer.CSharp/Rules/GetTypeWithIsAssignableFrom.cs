@@ -130,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (methodSymbol.Name == "IsInstanceOfType" && memberAccess.Expression is TypeOfExpressionSyntax)
             {
-                ReportDiagnostic(context, MessageIsOperator, true, false);
+                ReportDiagnostic(context, MessageIsOperator, true);
             }
         }
 
