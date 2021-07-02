@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Tests.Diagnostics
 {
@@ -80,6 +81,14 @@ namespace Tests.Diagnostics
 
         void F2()
         {
+        }
+
+        // See: https://github.com/SonarSource/sonar-dotnet/issues/4540
+        public void ConditionalCompilation(object obj)
+        {
+#if DEBUG
+            Trace.WriteLine("message");
+#endif
         }
     }
 
