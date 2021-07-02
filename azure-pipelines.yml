@@ -21,7 +21,7 @@ resources:
     - repository: commonTemplates
       type: git
       name: pipelines-yaml-templates
-      ref:  refs/tags/v1.0.11
+      ref:  refs/tags/v1.0.13
 
 stages:
 - template: stage-with-burgr-notifications.yml@commonTemplates
@@ -40,8 +40,16 @@ stages:
         displayName: "Install NuGet"
 
       - script: nuget restore -LockedMode -ConfigFile "analyzers\NuGet.Config" $(solution)
+        displayName: "NuGet Restore"
 
-      - powershell: .\scripts\build\set-azp-project-version-variable.ps1
+      - powershell: .\scripts\build\store-azp-variables.ps1
+        displayName: "Store AZP Variables"
+
+      - publish: $(Agent.BuildDirectory)/Azp-Variables
+        artifact: Azp-Variables
+        displayName: "Publish AZP Variables as pipeline artifact"
+
+      - template: set-azp-variables-steps.yml@commonTemplates
 
       - powershell: |
           cd analyzers
@@ -146,7 +154,7 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
-      - powershell: .\scripts\build\set-azp-project-version-variable.ps1
+      - template: set-azp-variables-steps.yml@commonTemplates
 
       - task: VSBuild@1
         displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
@@ -260,7 +268,7 @@ stages:
           artifact: RuleDescriptorBin
           targetPath: analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin
 
-      - powershell: .\scripts\build\set-azp-project-version-variable.ps1
+      - template: set-azp-variables-steps.yml@commonTemplates
 
       - task: DownloadSecureFile@1
         displayName: 'Download Maven settings'
@@ -308,7 +316,7 @@ stages:
         inputs:
           secureFile: 'maven-settings.xml'
 
-      - powershell: .\scripts\build\set-azp-project-version-variable.ps1
+      - template: set-azp-variables-steps.yml@commonTemplates
 
       - template: update-maven-version-steps.yml
         parameters:
@@ -380,7 +388,7 @@ stages:
           artifact: RuleDescriptorBin
           targetPath: 'analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
 
-      - powershell: .\scripts\build\set-azp-project-version-variable.ps1
+      - template: set-azp-variables-steps.yml@commonTemplates
 
       - task: Maven@3
         displayName: 'Maven install'
@@ -422,7 +430,7 @@ stages:
     - job: promoteRepox
       displayName: 'SonarAnalyzer.CFG.CSharp'
       steps:
-        - powershell: .\scripts\build\set-azp-project-version-variable.ps1
+        - template: set-azp-variables-steps.yml@commonTemplates
 
         - task: UsePythonVersion@0
           inputs:
