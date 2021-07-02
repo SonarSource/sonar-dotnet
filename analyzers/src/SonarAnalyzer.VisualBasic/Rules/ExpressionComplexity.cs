@@ -32,9 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax>
     {
-        public override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
-
-        public ExpressionComplexity() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade Language { get; } = VisualBasicFacade.Instance;
 
         private static readonly ISet<SyntaxKind> CompoundExpressionKinds = new HashSet<SyntaxKind>
         {
@@ -63,5 +61,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsCompoundExpression(SyntaxNode node) =>
             CompoundExpressionKinds.Contains(node.Kind());
+
+        protected override bool IsPatternRoot(SyntaxNode node) =>
+            false;
     }
 }

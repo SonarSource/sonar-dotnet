@@ -33,21 +33,18 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax>
     {
-        public override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-
-        public ExpressionComplexity() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade Language { get; } = CSharpFacade.Instance;
 
         private static readonly ISet<SyntaxKind> CompoundExpressionKinds = new HashSet<SyntaxKind>
         {
             SyntaxKind.SimpleLambdaExpression,
             SyntaxKind.AnonymousMethodExpression,
-
             SyntaxKind.ArrayInitializerExpression,
             SyntaxKind.CollectionInitializerExpression,
             SyntaxKind.ComplexElementInitializerExpression,
             SyntaxKind.ObjectInitializerExpression,
-
-            SyntaxKind.InvocationExpression
+            SyntaxKind.InvocationExpression,
+            SyntaxKindEx.SwitchExpressionArm
         };
 
         private static readonly ISet<SyntaxKind> ComplexityIncreasingKinds = new HashSet<SyntaxKind>
@@ -55,7 +52,9 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ConditionalExpression,
             SyntaxKind.LogicalAndExpression,
             SyntaxKind.LogicalOrExpression,
-            SyntaxKindEx.CoalesceAssignmentExpression
+            SyntaxKindEx.CoalesceAssignmentExpression,
+            SyntaxKindEx.AndPattern,
+            SyntaxKindEx.OrPattern
         };
 
         protected override bool IsComplexityIncreasingKind(SyntaxNode node) =>
@@ -63,5 +62,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsCompoundExpression(SyntaxNode node) =>
             CompoundExpressionKinds.Contains(node.Kind());
+
+        protected override bool IsPatternRoot(SyntaxNode node) =>
+            node.Parent.IsAnyKind(SyntaxKindEx.CasePatternSwitchLabel, SyntaxKindEx.SwitchExpressionArm);
     }
 }
