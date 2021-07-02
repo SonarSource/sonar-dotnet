@@ -3956,7 +3956,7 @@
     <Rule Id="S3946" Action="Warning" />
     <Rule Id="S3947" Action="Warning" />
     <Rule Id="S3948" Action="Warning" />
-    <Rule Id="S3949" Action="Warning" />
+    <Rule Id="S3949" Action="None" />
     <Rule Id="S3950" Action="Warning" />
     <Rule Id="S3951" Action="Warning" />
     <Rule Id="S3952" Action="Warning" />
@@ -13958,7 +13958,7 @@
     <Rule Id="S3946" Action="Warning" />
     <Rule Id="S3947" Action="Warning" />
     <Rule Id="S3948" Action="Warning" />
-    <Rule Id="S3949" Action="Warning" />
+    <Rule Id="S3949" Action="None" />
     <Rule Id="S3950" Action="Warning" />
     <Rule Id="S3951" Action="Warning" />
     <Rule Id="S3952" Action="Warning" />
