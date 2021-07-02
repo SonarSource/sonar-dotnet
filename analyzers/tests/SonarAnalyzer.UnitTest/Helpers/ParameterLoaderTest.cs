@@ -31,10 +31,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
     public class ParameterLoaderTest
     {
         [TestMethod]
-        public void SetParameterValues_WhenNoSonarLintIsGiven_DoesNotPopulateParameters()
+        [DataRow("path//aSonarLint.xml")] // different name
+        [DataRow("path//SonarLint.xmla")] // different extension
+        public void SetParameterValues_WhenNoSonarLintIsGiven_DoesNotPopulateParameters(string filePath)
         {
             // Arrange
-            var options = TestHelper.CreateOptions("ResourceTests\\MyFile.xml");
+            var options = TestHelper.CreateOptions(filePath, SourceText.From(File.ReadAllText("ResourceTests\\SonarLint.xml")));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -42,6 +44,22 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             // Assert
             analyzer.Maximum.Should().Be(3); // Default value
+        }
+
+        [TestMethod]
+        [DataRow("a/SonarLint.xml")] // unix path
+        [DataRow("a\\SonarLint.xml")]
+        public void SetParameterValues_WhenGivenValidSonarLintFilePath_PopulatesProperties(string filePath)
+        {
+            // Arrange
+            var options = TestHelper.CreateOptions(filePath, SourceText.From(File.ReadAllText("ResourceTests\\SonarLint.xml")));
+            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.Maximum.Should().Be(1); // Value from the xml file
         }
 
         [TestMethod]
@@ -172,10 +190,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void SetParameterValues_WithMalformedXml_DoesNotPopulateProperties()
+        [DataRow("")]
+        [DataRow("this is not an xml")]
+        [DataRow(@"<?xml version=""1.0"" encoding=""UTF - 8""?><AnalysisInput><Settings>")]
+        public void SetParameterValues_WithMalformedXml_DoesNotPopulateProperties(string sonarLintXmlContent)
         {
             // Arrange
-            var options = TestHelper.CreateOptions("ResourceTests\\Malformed\\SonarLint.xml");
+            var options = TestHelper.CreateOptions("fakePath\\SonarLint.xml", SourceText.From(sonarLintXmlContent));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act

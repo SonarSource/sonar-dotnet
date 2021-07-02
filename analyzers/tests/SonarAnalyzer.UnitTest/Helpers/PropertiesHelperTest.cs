@@ -34,31 +34,41 @@ namespace SonarAnalyzer.UnitTest.Helpers
     public class PropertiesHelperTest
     {
         [TestMethod]
-        public void ShouldAnalyzeGeneratedCode_WithTrueSetting_ReturnsTrue() =>
-            GetSetting("ResourceTests\\AnalyzeGeneratedTrue\\SonarLint.xml").Should().BeTrue();
+        [DataRow("a/SonarLint.xml")] // unix path
+        [DataRow("a\\SonarLint.xml")]
+        public void ShouldAnalyzeGeneratedCode_WithTrueSetting_ReturnsTrue(string filePath) =>
+            GetSetting(SourceText.From(File.ReadAllText("ResourceTests\\AnalyzeGeneratedTrue\\SonarLint.xml")), filePath).Should().BeTrue();
 
         [TestMethod]
         public void ShouldAnalyzeGeneratedCode_WithFalseSetting_ReturnsFalse() =>
-            GetSetting("ResourceTests\\AnalyzeGeneratedFalse\\SonarLint.xml").Should().BeFalse();
+            GetSetting(SourceText.From(File.ReadAllText("ResourceTests\\AnalyzeGeneratedFalse\\SonarLint.xml"))).Should().BeFalse();
 
         [TestMethod]
         public void ShouldAnalyzeGeneratedCode_WithNoSetting_ReturnsFalse() =>
-            GetSetting("ResourceTests\\NoSettings\\SonarLint.xml").Should().BeFalse();
+            GetSetting(SourceText.From(File.ReadAllText("ResourceTests\\NoSettings\\SonarLint.xml"))).Should().BeFalse();
 
         [TestMethod]
-        public void ShouldAnalyzeGeneratedCode_WithMalformedXml_ReturnsFalse() =>
-            GetSetting("ResourceTests\\Malformed\\SonarLint.xml").Should().BeFalse();
+        [DataRow("")]
+        [DataRow("this is not an xml")]
+        [DataRow(@"<?xml version=""1.0"" encoding=""UTF - 8""?><AnalysisInput><Settings>")]
+        public void ShouldAnalyzeGeneratedCode_WithMalformedXml_ReturnsFalse(string sonarLintXmlContent) =>
+            GetSetting(SourceText.From(sonarLintXmlContent)).Should().BeFalse();
 
         [TestMethod]
         public void ShouldAnalyzeGeneratedCode_WithNotBooleanValue_ReturnsFalse() =>
-            GetSetting("ResourceTests\\NotBoolean\\SonarLint.xml").Should().BeFalse();
+            GetSetting(SourceText.From(File.ReadAllText("ResourceTests\\NotBoolean\\SonarLint.xml"))).Should().BeFalse();
 
-        private static bool GetSetting(string filePath)
+        [TestMethod]
+        [DataRow("path//aSonarLint.xml")] // different name
+        [DataRow("path//SonarLint.xmla")] // different extension
+        public void ShouldAnalyzeGeneratedCode_NonSonarLintXmlPath_ReturnsFalse(string filePath) =>
+            GetSetting(SourceText.From(File.ReadAllText("ResourceTests\\AnalyzeGeneratedTrue\\SonarLint.xml")), filePath).Should().BeFalse();
+
+        private static bool GetSetting(SourceText content, string filePath = "fakePath\\SonarLint.xml")
         {
             // Arrange
-            var content = SourceText.From(File.ReadAllText(filePath));
             var additionalText = new Mock<AdditionalText>();
-            additionalText.Setup(x => x.Path).Returns("fakePath\\SonarLint.xml"); // use in-memory additional file
+            additionalText.Setup(x => x.Path).Returns(filePath); // use in-memory additional file
             additionalText.Setup(x => x.GetText(default)).Returns(content);
 
             var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
