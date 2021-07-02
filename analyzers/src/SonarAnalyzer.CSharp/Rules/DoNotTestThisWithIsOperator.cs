@@ -72,21 +72,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void AnalyzeSwitchStatement(SyntaxNodeAnalysisContext context)
         {
             var switchStatement = (SwitchStatementSyntax)context.Node;
-            var secondaryLocations = new List<SecondaryLocation>();
             if (IsThisExpressionSyntax(switchStatement.Expression))
             {
-                foreach (var section in switchStatement.Sections)
-                {
-                    foreach (var label in section.Labels)
-                    {
-                        if (ContainsTypeCheckInPattern(label)
-                            || ContainsTypeCheckInCaseSwitchLabel(label))
-                        {
-                            secondaryLocations.Add(new SecondaryLocation(GetTypeMatchLocation(label), string.Empty));
-                        }
-                    }
-                }
-
+                var secondaryLocations = CollectSecondaryLocations(switchStatement);
                 if (secondaryLocations.Any())
                 {
                     ReportDiagnosticWithSecondaryLocation(context, switchStatement.Expression, secondaryLocations);
@@ -97,22 +85,46 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void AnalyzeSwitchExpression(SyntaxNodeAnalysisContext context)
         {
             var switchExpression = (SwitchExpressionSyntaxWrapper)context.Node;
-            var secondaryLocations = new List<SecondaryLocation>();
             if (IsThisExpressionSyntax(switchExpression.GoverningExpression))
             {
-                foreach (var arm in switchExpression.Arms)
-                {
-                    if (ContainsTypeCheckInPattern(arm.Pattern.SyntaxNode))
-                    {
-                        secondaryLocations.Add(new SecondaryLocation(arm.Pattern.SyntaxNode.GetLocation(), string.Empty));
-                    }
-                }
-
+                var secondaryLocations = CollectSecondaryLocations(switchExpression);
                 if (secondaryLocations.Any())
                 {
                     ReportDiagnosticWithSecondaryLocation(context, switchExpression.GoverningExpression, secondaryLocations);
                 }
             }
+        }
+
+        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchStatementSyntax switchStatement)
+        {
+            var secondaryLocations = new List<SecondaryLocation>();
+            foreach (var section in switchStatement.Sections)
+            {
+                foreach (var label in section.Labels)
+                {
+                    if (ContainsTypeCheckInPattern(label)
+                        || ContainsTypeCheckInCaseSwitchLabel(label))
+                    {
+                        secondaryLocations.Add(new SecondaryLocation(GetTypeMatchLocation(label), string.Empty));
+                    }
+                }
+            }
+
+            return secondaryLocations;
+        }
+
+        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchExpressionSyntaxWrapper switchExpression)
+        {
+            var secondaryLocations = new List<SecondaryLocation>();
+            foreach (var arm in switchExpression.Arms)
+            {
+                if (ContainsTypeCheckInPattern(arm.Pattern.SyntaxNode))
+                {
+                    secondaryLocations.Add(new SecondaryLocation(arm.Pattern.SyntaxNode.GetLocation(), string.Empty));
+                }
+            }
+
+            return secondaryLocations;
         }
 
         private static bool ContainsTypeCheckInCaseSwitchLabel(SwitchLabelSyntax switchLabel) =>
