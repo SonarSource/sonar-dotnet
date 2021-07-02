@@ -18,19 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
+using FluentAssertions;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Extensions;
+using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.UnitTest.Extensions
 {
-    public static class ExpressionSyntaxExtensions
+    [TestClass]
+    public class PatternSyntaxWrapperExtensionsTest
     {
-        public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
-            (ExpressionSyntax)((SyntaxNode)expression).RemoveParentheses();
+        [TestMethod]
+        public void IsNull_ForNullPattern_ReturnsTrue()
+        {
+            var isPattern = (IsPatternExpressionSyntaxWrapper)SyntaxFactory.ParseExpression("is null");
+            isPattern.Pattern.IsNull().Should().BeTrue();
+        }
 
-        public static bool CanBeNull(this ExpressionSyntax expression, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(expression).Type is { } expressionType
-            && (expressionType.IsReferenceType || expressionType.Is(KnownType.System_Nullable_T));
+        [TestMethod]
+        public void IsNull_ForDifferentPattern_ReturnsFalse()
+        {
+            var isPattern = (IsPatternExpressionSyntaxWrapper)SyntaxFactory.ParseExpression("is not 1");
+            isPattern.Pattern.IsNull().Should().BeFalse();
+        }
     }
 }

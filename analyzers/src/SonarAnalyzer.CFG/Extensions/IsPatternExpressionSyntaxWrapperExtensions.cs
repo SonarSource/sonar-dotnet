@@ -18,19 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
-    public static class ExpressionSyntaxExtensions
+    public static class IsPatternExpressionSyntaxWrapperExtensions
     {
-        public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
-            (ExpressionSyntax)((SyntaxNode)expression).RemoveParentheses();
+        public static bool IsNull(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
+            isPatternWrapper.Pattern.IsNull();
 
-        public static bool CanBeNull(this ExpressionSyntax expression, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(expression).Type is { } expressionType
-            && (expressionType.IsReferenceType || expressionType.Is(KnownType.System_Nullable_T));
+        public static bool IsNotNull(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
+            isPatternWrapper.Pattern.RemoveParentheses() is var syntaxNode
+            && UnaryPatternSyntaxWrapper.IsInstance(syntaxNode)
+            && ((UnaryPatternSyntaxWrapper)syntaxNode) is var unaryPatternSyntaxWrapper
+            && unaryPatternSyntaxWrapper.IsNot()
+            && unaryPatternSyntaxWrapper.Pattern.IsNull();
     }
 }

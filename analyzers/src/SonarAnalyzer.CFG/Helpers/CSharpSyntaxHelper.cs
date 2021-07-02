@@ -18,25 +18,32 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.CFG.Helpers
 {
     internal static class CSharpSyntaxHelper
     {
-        public static readonly string NameOfKeywordText =
-            SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
+        private static readonly string NameOfKeywordText = SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
+        private static readonly ISet<SyntaxKind> ParenthesizedExpressionKinds = new HashSet<SyntaxKind> {SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern};
 
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
             var currentExpression = expression;
-            var parentheses = expression as ParenthesizedExpressionSyntax;
-            while (parentheses != null)
+            while (currentExpression != null && ParenthesizedExpressionKinds.Contains(currentExpression.Kind()))
             {
-                currentExpression = parentheses.Expression;
-                parentheses = currentExpression as ParenthesizedExpressionSyntax;
+                if (currentExpression.IsKind(SyntaxKind.ParenthesizedExpression))
+                {
+                    currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
+                }
+                else
+                {
+                    currentExpression = ((ParenthesizedPatternSyntaxWrapper)currentExpression).Pattern;
+                }
             }
             return currentExpression;
         }

@@ -19,18 +19,24 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
+using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.CFG.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
-    public static class ExpressionSyntaxExtensions
+    public static class PatternSyntaxWrapperExtensions
     {
-        public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
-            (ExpressionSyntax)((SyntaxNode)expression).RemoveParentheses();
+        public static bool IsNull(this PatternSyntaxWrapper patternSyntaxWrapper) =>
+            patternSyntaxWrapper.RemoveParentheses() is var syntaxNode
+            && ConstantPatternSyntaxWrapper.IsInstance(syntaxNode)
+            && (ConstantPatternSyntaxWrapper)syntaxNode is var constantPattern
+            && constantPattern.Expression.Kind() == SyntaxKind.NullLiteralExpression;
 
-        public static bool CanBeNull(this ExpressionSyntax expression, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(expression).Type is { } expressionType
-            && (expressionType.IsReferenceType || expressionType.Is(KnownType.System_Nullable_T));
+        public static bool IsNot(this PatternSyntaxWrapper patternSyntaxWrapper) =>
+            patternSyntaxWrapper.RemoveParentheses().Kind() == SyntaxKindEx.NotPattern;
+
+        public static SyntaxNode RemoveParentheses(this PatternSyntaxWrapper patternSyntaxWrapper) =>
+            patternSyntaxWrapper.SyntaxNode.RemoveParentheses();
     }
 }

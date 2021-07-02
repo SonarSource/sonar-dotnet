@@ -20,11 +20,18 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
     internal static class CSharpCompilationExtensions
     {
+        internal static bool IsCoalesceAssignmentSupported(this Compilation compilation) =>
+            compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp8);
+
+        internal static bool IsTargetTypeConditionalSupported(this Compilation compilation) =>
+            compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp9);
+
         internal static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
             compilation.GetLanguageVersion().IsAtLeast(languageVersion);
 

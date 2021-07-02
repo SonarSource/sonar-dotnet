@@ -40,25 +40,31 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string IsCoalesceAssignmentSupportedKey = "IsNullCoalesceAssignmentSupported";
         internal const string DiagnosticId = "S3240";
         private const string MessageFormat = "Use the '{0}' operator here.";
+        private const string MessageMultipleNegation = "Simplify negation here.";
+        private const string CoalesceAssignmentOp = "??=";
+        private const string CoalesceOp = "??";
+        private const string TernaryOp = "?:";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly ISet<SyntaxKind> equalsOrNotEquals = new HashSet<SyntaxKind>
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor RuleMultipleNegation = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageMultipleNegation, RspecStrings.ResourceManager);
+
+        private static readonly ISet<SyntaxKind> EqualsOrNotEquals = new HashSet<SyntaxKind>
         {
             SyntaxKind.EqualsExpression,
             SyntaxKind.NotEqualsExpression
         };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule, RuleMultipleNegation);
 
         internal static bool IsCoalesceAssignmentCandidate(SyntaxNode conditional, ExpressionSyntax comparedToNull) =>
             conditional?.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax parentAssignment
-                && CSharpEquivalenceChecker.AreEquivalent(parentAssignment.Left, comparedToNull);
+            && CSharpEquivalenceChecker.AreEquivalent(parentAssignment.Left, comparedToNull);
 
         internal static bool TryGetExpressionComparedToNull(ExpressionSyntax expression, out ExpressionSyntax compared, out bool comparedIsNullInTrue)
         {
             compared = null;
             comparedIsNullInTrue = false;
-            if (expression.RemoveParentheses() is BinaryExpressionSyntax binary && equalsOrNotEquals.Contains(binary.Kind()))
+            if (expression.RemoveParentheses() is BinaryExpressionSyntax binary && EqualsOrNotEquals.Contains(binary.Kind()))
             {
                 comparedIsNullInTrue = binary.IsKind(SyntaxKind.EqualsExpression);
                 if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.NullLiteralExpression))
@@ -72,6 +78,24 @@ namespace SonarAnalyzer.Rules.CSharp
                     return true;
                 }
             }
+
+            if (IsPatternExpressionSyntaxWrapper.IsInstance(expression.RemoveParentheses()))
+            {
+                var isPatternWrapper = (IsPatternExpressionSyntaxWrapper)expression.RemoveParentheses();
+                if (isPatternWrapper.IsNotNull())
+                {
+                    comparedIsNullInTrue = false;
+                    compared = isPatternWrapper.Expression;
+                    return true;
+                }
+                else if (isPatternWrapper.IsNull())
+                {
+                    comparedIsNullInTrue = true;
+                    compared = isPatternWrapper.Expression;
+                    return true;
+                }
+            }
+
             return false;
         }
 
@@ -89,16 +113,38 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(CheckConditionalExpression, SyntaxKind.ConditionalExpression);
             context.RegisterSyntaxNodeActionInNonGenerated(CheckIfStatement, SyntaxKind.IfStatement);
             context.RegisterSyntaxNodeActionInNonGenerated(CheckCoalesceExpression, SyntaxKind.CoalesceExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckNotPattern, SyntaxKindEx.NotPattern);
+        }
+
+        private static void CheckNotPattern(SyntaxNodeAnalysisContext context)
+        {
+            var wrapper = (UnaryPatternSyntaxWrapper)context.Node;
+            if (wrapper.Pattern.IsNot()
+                && GetNegationRoot(context.Node) is var negationRoot
+                && negationRoot == context.Node)
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleMultipleNegation, negationRoot.GetLocation()));
+            }
+
+            static SyntaxNode GetNegationRoot(SyntaxNode node)
+            {
+                while (node.Parent.Kind() == SyntaxKindEx.NotPattern)
+                {
+                    node = node.Parent;
+                }
+                return node;
+            }
         }
 
         private static void CheckCoalesceExpression(SyntaxNodeAnalysisContext context)
         {
-            if (context.Node.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax assignment && IsCoalesceAssignmentSupported(context))
+            if (context.Node.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax assignment
+                && context.Compilation.IsCoalesceAssignmentSupported())
             {
                 var left = ((BinaryExpressionSyntax)context.Node).Left.RemoveParentheses();
                 if (CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), left))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation(), BuildCodeFixProperties(context), "??="));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp));
                 }
             }
         }
@@ -120,15 +166,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Equivalence handled by S1871, <see cref="ConditionalStructureSameImplementation"/>
                 return;
             }
-            var possiblyCoalescing =
-                TryGetExpressionComparedToNull(ifStatement.Condition, out var comparedToNull, out var comparedIsNullInTrue) &&
-                ExpressionCanBeNull(comparedToNull, context.SemanticModel);
+
+            var possiblyCoalescing = TryGetExpressionComparedToNull(ifStatement.Condition, out var comparedToNull, out var comparedIsNullInTrue)
+                                     && comparedToNull.CanBeNull(context.SemanticModel);
 
             if (CanBeSimplified(context, whenTrue, whenFalse, possiblyCoalescing ? comparedToNull : null, context.SemanticModel, comparedIsNullInTrue, out var simplifiedOperator))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ifStatement.IfKeyword.GetLocation(),
-                    BuildCodeFixProperties(context, simplifiedOperator),
-                    simplifiedOperator));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                                                                     ifStatement.IfKeyword.GetLocation(),
+                                                                     BuildCodeFixProperties(context, simplifiedOperator),
+                                                                     simplifiedOperator));
             }
         }
 
@@ -144,60 +191,67 @@ namespace SonarAnalyzer.Rules.CSharp
                 // handled by S2758, <see cref="TernaryOperatorPointless"/>
                 return;
             }
+
             if (TryGetExpressionComparedToNull(condition, out var comparedToNull, out var comparedIsNullInTrue)
-                && ExpressionCanBeNull(comparedToNull, context.SemanticModel)
+                && comparedToNull.CanBeNull(context.SemanticModel)
                 && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
             {
-                if(IsCoalesceAssignmentSupported(context) && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), "??="));
-                }
-                else
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, conditional.GetLocation(), BuildCodeFixProperties(context), "??"));
-                }
+                var diagnostic = context.Compilation.IsCoalesceAssignmentSupported() && IsCoalesceAssignmentCandidate(conditional, comparedToNull)
+                    ? Diagnostic.Create(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp)
+                    : Diagnostic.Create(Rule, conditional.GetLocation(), BuildCodeFixProperties(context), CoalesceOp);
+
+                context.ReportDiagnosticWhenActive(diagnostic);
             }
         }
 
-        private static bool AreTypesCompatible(ExpressionSyntax expression1, ExpressionSyntax expression2, SemanticModel semanticModel)
+        private static bool AreTypesCompatible(ExpressionSyntax first, ExpressionSyntax second, SemanticModel semanticModel, ITypeSymbol targetType = null)
         {
-            if (expression1 is AnonymousFunctionExpressionSyntax || expression2 is AnonymousFunctionExpressionSyntax)
+            if (first is AnonymousFunctionExpressionSyntax || second is AnonymousFunctionExpressionSyntax)
             {
                 return false;
             }
 
-            var type1 = semanticModel.GetTypeInfo(expression1).Type;
-            var type2 = semanticModel.GetTypeInfo(expression2).Type;
+            var firstType = semanticModel.GetTypeInfo(first).Type;
+            var secondType = semanticModel.GetTypeInfo(second).Type;
 
-            if (type1 is IErrorTypeSymbol || type2 is IErrorTypeSymbol)
+            if (firstType is IErrorTypeSymbol || secondType is IErrorTypeSymbol)
             {
                 return false;
             }
 
-            if (CheckNullAndValueType(type1, type2) ||
-                CheckNullAndValueType(type2, type1))
+            if (IsNullAndValueType(firstType, secondType) || IsNullAndValueType(secondType, firstType))
             {
                 return false;
             }
 
-            if (type2 == null || type1 == null)
+            if (firstType == null || secondType == null)
             {
                 return true;
             }
 
-            return type1.Equals(type2);
+            if (targetType != null && semanticModel.Compilation.IsTargetTypeConditionalSupported())
+            {
+                return firstType.DerivesFrom(targetType) && secondType.DerivesFrom(targetType);
+            }
+
+            return firstType.Equals(secondType);
         }
 
-        private static bool CheckNullAndValueType(ITypeSymbol typeNull, ITypeSymbol typeValue) =>
-            typeNull == null && typeValue != null && typeValue.IsValueType;
+        private static bool IsNullAndValueType(ITypeSymbol typeNull, ITypeSymbol typeValue) =>
+            typeNull == null && typeValue is {IsValueType: true};
 
-        private static bool CanBeSimplified(SyntaxNodeAnalysisContext context, StatementSyntax statement1, StatementSyntax statement2,
-                                            SyntaxNode comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
+        private static bool CanBeSimplified(SyntaxNodeAnalysisContext context,
+                                            StatementSyntax statement1,
+                                            StatementSyntax statement2,
+                                            SyntaxNode comparedToNull,
+                                            SemanticModel semanticModel,
+                                            bool comparedIsNullInTrue,
+                                            out string simplifiedOperator)
         {
-            simplifiedOperator = "?:";
+            simplifiedOperator = TernaryOp;
 
-            if (statement1 is ReturnStatementSyntax return1 &&
-                statement2 is ReturnStatementSyntax return2)
+            if (statement1 is ReturnStatementSyntax return1
+                && statement2 is ReturnStatementSyntax return2)
             {
                 var retExpr1 = return1.Expression.RemoveParentheses();
                 var retExpr2 = return2.Expression.RemoveParentheses();
@@ -210,7 +264,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 if (comparedToNull != null && CanExpressionBeCoalescing(retExpr1, retExpr2, comparedToNull, semanticModel, comparedIsNullInTrue))
                 {
-                    simplifiedOperator = "??";
+                    simplifiedOperator = CoalesceOp;
                 }
                 return true;
             }
@@ -224,7 +278,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var expression1 = expressionStatement1.Expression.RemoveParentheses();
             if (statement2 == null)
             {
-                simplifiedOperator = IsCoalesceAssignmentSupported(context) ? "??=" : "??";
+                simplifiedOperator = context.Compilation.IsCoalesceAssignmentSupported() ? CoalesceAssignmentOp : CoalesceOp;
                 return expression1 is AssignmentExpressionSyntax assignment
                     && comparedIsNullInTrue
                     && comparedToNull != null
@@ -238,7 +292,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (comparedToNull != null && CanExpressionBeCoalescing(expression1, expression2, comparedToNull, semanticModel, comparedIsNullInTrue))
             {
-                simplifiedOperator = "??";
+                simplifiedOperator = CoalesceOp;
                 return true;
             }
             else
@@ -247,30 +301,39 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool AreCandidateAssignments(ExpressionSyntax expression1, ExpressionSyntax expression2,
-            SyntaxNode compared, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
+        private static bool AreCandidateAssignments(ExpressionSyntax expression1,
+                                                    ExpressionSyntax expression2,
+                                                    SyntaxNode compared,
+                                                    SemanticModel semanticModel,
+                                                    bool comparedIsNullInTrue,
+                                                    out string simplifiedOperator)
         {
-            simplifiedOperator = "?:";
+            simplifiedOperator = TernaryOp;
             var assignment1 = expression1 as AssignmentExpressionSyntax;
             var assignment2 = expression2 as AssignmentExpressionSyntax;
-            var canBeSimplified =
-                assignment1 != null &&
-                assignment2 != null &&
-                CSharpEquivalenceChecker.AreEquivalent(assignment1.Left, assignment2.Left) &&
-                assignment1.Kind() == assignment2.Kind();
+            var canBeSimplified = assignment1 != null
+                                  && assignment2 != null
+                                  && CSharpEquivalenceChecker.AreEquivalent(assignment1.Left, assignment2.Left)
+                                  && assignment1.Kind() == assignment2.Kind();
 
-            if (!canBeSimplified || !AreTypesCompatible(assignment1.Right, assignment2.Right, semanticModel))
+            if (!canBeSimplified || !AreTypesCompatible(assignment1.Right, assignment2.Right, semanticModel, semanticModel.GetTypeInfo(assignment1.Left).Type))
             {
                 return false;
             }
+
             if (compared != null && CanExpressionBeCoalescing(assignment1.Right, assignment2.Right, compared, semanticModel, comparedIsNullInTrue))
             {
-                simplifiedOperator = "??";
+                simplifiedOperator = CoalesceOp;
             }
+
             return true;
         }
 
-        private static bool AreCandidateInvocations(ExpressionSyntax expression1, ExpressionSyntax expression2, SyntaxNode comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue)
+        private static bool AreCandidateInvocations(ExpressionSyntax expression1,
+                                                    ExpressionSyntax expression2,
+                                                    SyntaxNode comparedToNull,
+                                                    SemanticModel semanticModel,
+                                                    bool comparedIsNullInTrue)
         {
             if (!(expression1 is InvocationExpressionSyntax methodCall1) || !(expression2 is InvocationExpressionSyntax methodCall2))
             {
@@ -280,16 +343,14 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodSymbol1 = semanticModel.GetSymbolInfo(methodCall1).Symbol;
             var methodSymbol2 = semanticModel.GetSymbolInfo(methodCall2).Symbol;
 
-            if (methodSymbol1 == null ||
-                methodSymbol2 == null ||
-                !methodSymbol1.Equals(methodSymbol2))
+            if (methodSymbol1 == null || methodSymbol2 == null || !methodSymbol1.Equals(methodSymbol2))
             {
                 return false;
             }
 
-            if (methodCall1.ArgumentList == null ||
-                methodCall2.ArgumentList == null ||
-                methodCall1.ArgumentList.Arguments.Count != methodCall2.ArgumentList.Arguments.Count)
+            if (methodCall1.ArgumentList == null
+                || methodCall2.ArgumentList == null
+                || methodCall1.ArgumentList.Arguments.Count != methodCall2.ArgumentList.Arguments.Count)
             {
                 return false;
             }
@@ -348,20 +409,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool ExpressionCanBeNull(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            var expressionType = semanticModel.GetTypeInfo(expression).Type;
-            return expressionType != null &&
-                   (expressionType.IsReferenceType ||
-                    expressionType.Is(KnownType.System_Nullable_T));
-        }
-
-        private static bool IsCoalesceAssignmentSupported(SyntaxNodeAnalysisContext c) =>
-            c.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp8);
-
         private static ImmutableDictionary<string, string> BuildCodeFixProperties(SyntaxNodeAnalysisContext c, string simplifiedOperator = null)
         {
-            var ret = new Dictionary<string, string> {{IsCoalesceAssignmentSupportedKey, IsCoalesceAssignmentSupported(c).ToString()}};
+            var ret = new Dictionary<string, string> { {IsCoalesceAssignmentSupportedKey, c.Compilation.IsCoalesceAssignmentSupported().ToString() }};
             if (simplifiedOperator != null)
             {
                 ret.Add(SimplifiedOperatorKey, simplifiedOperator);

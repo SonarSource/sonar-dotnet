@@ -21,6 +21,7 @@
 #if NET
 using Microsoft.CodeAnalysis;
 #endif
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -36,6 +37,22 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
                                     new ConditionalSimplification(),
                                     ParseOptionsHelper.BeforeCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ConditionalSimplification_CSharp8() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.CSharp8.cs",
+                                    new ConditionalSimplification(),
+                                    new[] { new CSharpParseOptions(LanguageVersion.CSharp8) });
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void ConditionalSimplification_CSharp8_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.CSharp8.cs",
+                                   @"TestCases\ConditionalSimplification.CSharp8.Fixed.cs",
+                                   new ConditionalSimplification(),
+                                   new ConditionalSimplificationCodeFixProvider(),
+                                   new[] { new CSharpParseOptions(LanguageVersion.CSharp8) });
 
         [TestMethod]
         [TestCategory("Rule")]
