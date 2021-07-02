@@ -10,7 +10,7 @@ b = !(f is Apple);         // Fixed
 b = f is Apple;     // Fixed
 b = !(f is Apple); // Fixed
 b = f as Apple is Apple { Size: 42 };   // Compliant
-//FIXME: b = f as Apple is Apple;        // Non-compliant
+b = f is Apple;        // Fixed
 b = true && (apple != null);   // Fixed
 b = !(apple != null);          // Fixed
 
