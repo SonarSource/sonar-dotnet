@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -34,40 +32,32 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ConditionalStructureSameCondition : ConditionalStructureSameConditionBase
     {
-        internal static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var ifBlock = (MultiLineIfBlockSyntax)c.Node;
-
                     var conditions = new[] { ifBlock.IfStatement?.Condition }
-                        .Concat(ifBlock.ElseIfBlocks.Select(elseIf => elseIf.ElseIfStatement?.Condition))
+                        .Concat(ifBlock.ElseIfBlocks.Select(x => x.ElseIfStatement?.Condition))
                         .WhereNotNull()
-                        .Select(cond => cond.RemoveParentheses())
-                        .ToList();
+                        .Select(x => x.RemoveParentheses())
+                        .ToArray();
 
-                    for (var i = 1; i < conditions.Count; i++)
+                    for (var i = 1; i < conditions.Length; i++)
                     {
                         CheckConditionAt(i, conditions, c);
                     }
                 },
                 SyntaxKind.MultiLineIfBlock);
-        }
 
-        private static void CheckConditionAt(int currentIndex, List<ExpressionSyntax> conditions, SyntaxNodeAnalysisContext context)
+        private void CheckConditionAt(int currentIndex, ExpressionSyntax[] conditions, SyntaxNodeAnalysisContext context)
         {
-            for (var j = 0; j < currentIndex; j++)
+            for (var i = 0; i < currentIndex; i++)
             {
-                if (VisualBasicEquivalenceChecker.AreEquivalent(conditions[currentIndex], conditions[j]))
+                if (VisualBasicEquivalenceChecker.AreEquivalent(conditions[currentIndex], conditions[i]))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, conditions[currentIndex].GetLocation(),
-                        conditions[j].GetLineNumberToReport()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, conditions[currentIndex].GetLocation(), conditions[i].GetLineNumberToReport()));
                     return;
                 }
             }

@@ -25,14 +25,10 @@ namespace SonarAnalyzer.Helpers.Common
 {
     internal static class EquivalenceChecker
     {
-        public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2, Func<SyntaxNode, SyntaxNode, bool> nodeComparator)
-        {
-            return node1.Language == node2.Language &&
-                nodeComparator(node1, node2);
-        }
+        public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2, Func<SyntaxNode, SyntaxNode, bool> nodeComparator) =>
+            node1.Language == node2.Language && nodeComparator(node1, node2);
 
-        public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2,
-            Func<SyntaxNode, SyntaxNode, bool> nodeComparator)
+        public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2, Func<SyntaxNode, SyntaxNode, bool> nodeComparator)
         {
             if (nodeList1.Count != nodeList2.Count)
             {
