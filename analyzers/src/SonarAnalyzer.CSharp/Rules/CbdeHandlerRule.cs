@@ -30,7 +30,9 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(S3949DiagnosticId)]
-    // Note: For now, this rule actually runs only under windows and outside of SonarLint
+    // Note (1): For now, this rule actually runs only under windows and outside of SonarLint
+    // Note (2): This rule is disabled for integration tests due to inconsistent behavior.
+    // After removing the CBDE and rewriting the rule please don't forget to enable it in `AllSonarAnalyzerRules.ruleset`
     public sealed class CbdeHandlerRule : SonarDiagnosticAnalyzer
     {
         private const string S3949DiagnosticId = "S3949";

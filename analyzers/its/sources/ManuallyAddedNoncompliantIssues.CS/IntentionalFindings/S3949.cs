@@ -10,16 +10,16 @@ namespace IntentionalFindings
 {
     public class S3949
     {
-        public void PositiveOverflow()
+        public void PositiveOverflow() // Noncompliant (S2325)
         {
             int i = 2147483600;
-            i += 100; // Noncompliant (S3949) {{There is a path on which this operation always overflows}}
+            i += 100; // Disabled rule (S3949) {{There is a path on which this operation always overflows}}
         }
 
-        public void NegativeOverflow()
+        public void NegativeOverflow() // Noncompliant
         {
             int i = -2147483600;
-            i -= 100; // Noncompliant (S3949) {{There is a path on which this operation always overflows}}
+            i -= 100; // Disabled rule (S3949) {{There is a path on which this operation always overflows}}
         }
     }
 }
