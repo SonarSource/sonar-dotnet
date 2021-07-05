@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
     {
         // Rules that have been deprecated and deleted.
         // When changing this please do not forget to notify the product teams (SQ, SC, SL).
-        private readonly HashSet<string> deletedRules = new () {"S1145", "S1697", "S4142", "S2758", "S2070"};
+        private readonly HashSet<string> deletedRules = new () {"S1145", "S1697", "S4142", "S2758", "S2070", "S3693"};
 
         [TestMethod]
         public void DetectRuleTypeChanges_CS() =>

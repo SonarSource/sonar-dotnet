@@ -3681,39 +3681,6 @@
   <data name="S3603_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
-  <data name="S3693_Category" xml:space="preserve">
-    <value>Blocker Bug</value>
-  </data>
-  <data name="S3693_Description" xml:space="preserve">
-    <value>It may be a good idea to raise an exception in a constructor if you’re unable to fully flesh the object in question, but not in an exception constructor. If you do, you’ll interfere with the exception that was originally being thrown. Further, it is highly unlikely that an exception raised in the creation of an exception will be properly handled in the calling code, and the unexpected, unhandled exception will lead to program termination.</value>
-  </data>
-  <data name="S3693_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
-  </data>
-  <data name="S3693_Remediation" xml:space="preserve">
-    <value>Constant/Issue</value>
-  </data>
-  <data name="S3693_RemediationCost" xml:space="preserve">
-    <value>15min</value>
-  </data>
-  <data name="S3693_Scope" xml:space="preserve">
-    <value>All</value>
-  </data>
-  <data name="S3693_Severity" xml:space="preserve">
-    <value>Blocker</value>
-  </data>
-  <data name="S3693_Status" xml:space="preserve">
-    <value>deprecated</value>
-  </data>
-  <data name="S3693_Tags" xml:space="preserve">
-    <value />
-  </data>
-  <data name="S3693_Title" xml:space="preserve">
-    <value>Exception constructors should not throw exceptions</value>
-  </data>
-  <data name="S3693_Type" xml:space="preserve">
-    <value>BUG</value>
-  </data>
   <data name="S3776_Category" xml:space="preserve">
     <value>Critical Code Smell</value>
   </data>
