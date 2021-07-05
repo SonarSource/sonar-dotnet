@@ -3912,39 +3912,6 @@
   <data name="S2275_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
-  <data name="S2278_Category" xml:space="preserve">
-    <value>Blocker Vulnerability</value>
-  </data>
-  <data name="S2278_Description" xml:space="preserve">
-    <value>According to the US National Institute of Standards and Technology (NIST), the Data Encryption Standard (DES) is no longer considered secure:</value>
-  </data>
-  <data name="S2278_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
-  </data>
-  <data name="S2278_Remediation" xml:space="preserve">
-    <value>Constant/Issue</value>
-  </data>
-  <data name="S2278_RemediationCost" xml:space="preserve">
-    <value>20min</value>
-  </data>
-  <data name="S2278_Scope" xml:space="preserve">
-    <value>Main</value>
-  </data>
-  <data name="S2278_Severity" xml:space="preserve">
-    <value>Blocker</value>
-  </data>
-  <data name="S2278_Status" xml:space="preserve">
-    <value>deprecated</value>
-  </data>
-  <data name="S2278_Tags" xml:space="preserve">
-    <value>cwe,owasp-a6,sans-top25-porous</value>
-  </data>
-  <data name="S2278_Title" xml:space="preserve">
-    <value>Neither DES (Data Encryption Standard) nor DESede (3DES) should be used</value>
-  </data>
-  <data name="S2278_Type" xml:space="preserve">
-    <value>VULNERABILITY</value>
-  </data>
   <data name="S2290_Category" xml:space="preserve">
     <value>Critical Code Smell</value>
   </data>
