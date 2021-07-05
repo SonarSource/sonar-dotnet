@@ -407,4 +407,32 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // See: https://github.com/SonarSource/sonar-dotnet/issues/4559
+    public class ImplicitOperator
+    {
+        public class MyClass
+        {
+            public static implicit operator string(MyClass value) => null;
+
+            public static implicit operator bool?(MyClass value) => null;
+        }
+
+        public void Foo()
+        {
+            var value = new MyClass();
+            string str = value;
+
+            if (str == null) // Noncompliant FP: Nullability has changed (implicit conversion)
+            {                // Secondary
+                Console.WriteLine("null");
+            }
+
+            bool? b = value;
+            if (b == null) // Noncompliant FP: Nullability changed (implicit conversion)
+            {              // Secondary
+                Console.WriteLine("null");
+            }
+        }
+    }
 }
