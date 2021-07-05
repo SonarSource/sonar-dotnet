@@ -62,8 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void AnalyzeIsPatternExpression(SyntaxNodeAnalysisContext context)
         {
-            if (IsThisExpressionSyntax(((IsPatternExpressionSyntaxWrapper)context.Node).Expression)
-                && ContainsTypeCheckInPattern(context.Node))
+            if (IsThisExpressionSyntax(((IsPatternExpressionSyntaxWrapper)context.Node).Expression) && ContainsTypeCheckInPattern(context.Node))
             {
                 ReportDiagnostic(context, context.Node);
             }
@@ -74,11 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var switchStatement = (SwitchStatementSyntax)context.Node;
             if (IsThisExpressionSyntax(switchStatement.Expression))
             {
-                var secondaryLocations = CollectSecondaryLocations(switchStatement);
-                if (secondaryLocations.Any())
-                {
-                    ReportDiagnosticWithSecondaryLocation(context, switchStatement.Expression, secondaryLocations);
-                }
+                ReportDiagnostic(context, switchStatement.Expression, CollectSecondaryLocations(switchStatement));
             }
         }
 
@@ -87,45 +82,19 @@ namespace SonarAnalyzer.Rules.CSharp
             var switchExpression = (SwitchExpressionSyntaxWrapper)context.Node;
             if (IsThisExpressionSyntax(switchExpression.GoverningExpression))
             {
-                var secondaryLocations = CollectSecondaryLocations(switchExpression);
-                if (secondaryLocations.Any())
-                {
-                    ReportDiagnosticWithSecondaryLocation(context, switchExpression.GoverningExpression, secondaryLocations);
-                }
+                 ReportDiagnostic(context, switchExpression.GoverningExpression, CollectSecondaryLocations(switchExpression));
             }
         }
 
-        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchStatementSyntax switchStatement)
-        {
-            var secondaryLocations = new List<SecondaryLocation>();
-            foreach (var section in switchStatement.Sections)
-            {
-                foreach (var label in section.Labels)
-                {
-                    if (ContainsTypeCheckInPattern(label)
-                        || ContainsTypeCheckInCaseSwitchLabel(label))
-                    {
-                        secondaryLocations.Add(new SecondaryLocation(GetTypeMatchLocation(label), string.Empty));
-                    }
-                }
-            }
+        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchStatementSyntax switchStatement) =>
+            switchStatement.Sections
+                           .SelectMany(section => section.Labels)
+                           .Where(label => ContainsTypeCheckInPattern(label) || ContainsTypeCheckInCaseSwitchLabel(label))
+                           .Select(label => new SecondaryLocation(TypeMatchLocation(label), string.Empty))
+                           .ToList();
 
-            return secondaryLocations;
-        }
-
-        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchExpressionSyntaxWrapper switchExpression)
-        {
-            var secondaryLocations = new List<SecondaryLocation>();
-            foreach (var arm in switchExpression.Arms)
-            {
-                if (ContainsTypeCheckInPattern(arm.Pattern.SyntaxNode))
-                {
-                    secondaryLocations.Add(new SecondaryLocation(arm.Pattern.SyntaxNode.GetLocation(), string.Empty));
-                }
-            }
-
-            return secondaryLocations;
-        }
+        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchExpressionSyntaxWrapper switchExpression) =>
+            switchExpression.Arms.Where(x => ContainsTypeCheckInPattern(x.Pattern.SyntaxNode)).Select(arm => new SecondaryLocation(arm.Pattern.SyntaxNode.GetLocation(), string.Empty)).ToList();
 
         private static bool ContainsTypeCheckInCaseSwitchLabel(SwitchLabelSyntax switchLabel) =>
               switchLabel is CaseSwitchLabelSyntax caseSwitchLabel && caseSwitchLabel.Value.IsKind(SyntaxKind.IdentifierName);
@@ -138,8 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (ConstantPatternSyntaxWrapper.IsInstance(pattern))
             {
-                return ((ConstantPatternSyntaxWrapper)pattern).Expression.IsKind(SyntaxKind.IdentifierName)
-                       && IsNotInSubPattern(pattern);
+                return ((ConstantPatternSyntaxWrapper)pattern).Expression.IsKind(SyntaxKind.IdentifierName) && IsNotInSubPattern(pattern);
             }
             else if (DeclarationPatternSyntaxWrapper.IsInstance(pattern))
             {
@@ -149,8 +117,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return ((RecursivePatternSyntaxWrapper)pattern).Type != null && IsNotInSubPattern(pattern);
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         private static bool IsNotInSubPattern(SyntaxNode node) =>
@@ -163,13 +133,15 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportDiagnostic(SyntaxNodeAnalysisContext context, SyntaxNode node) =>
             context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
 
-        private static void ReportDiagnosticWithSecondaryLocation(SyntaxNodeAnalysisContext context, SyntaxNode node, IList<SecondaryLocation> secondaryLocations) =>
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
-                                                                 node.GetLocation(),
-                                                                 additionalLocations: secondaryLocations.ToAdditionalLocations(),
-                                                                 properties: secondaryLocations.ToProperties()));
+        private static void ReportDiagnostic(SyntaxNodeAnalysisContext context, SyntaxNode node, IList<SecondaryLocation> secondaryLocations)
+        {
+            if (secondaryLocations.Any())
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation(), secondaryLocations.ToAdditionalLocations(), secondaryLocations.ToProperties()));
+            }
+        }
 
-        private static Location GetTypeMatchLocation(SwitchLabelSyntax label)
+        private static Location TypeMatchLocation(SwitchLabelSyntax label)
         {
             if (label is CaseSwitchLabelSyntax caseSwitchLabel)
             {
@@ -179,8 +151,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return ((CasePatternSwitchLabelSyntaxWrapper)label).Pattern.SyntaxNode.GetLocation();
             }
-
-            return Location.None;
+            else
+            {
+                return Location.None;
+            }
         }
 
         private static bool IsThisExpressionSyntax(SyntaxNode syntaxNode) =>

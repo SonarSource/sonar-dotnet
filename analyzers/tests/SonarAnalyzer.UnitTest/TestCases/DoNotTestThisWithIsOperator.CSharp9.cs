@@ -24,6 +24,10 @@ namespace Tests.Diagnostics
             {
             }
 
+            if (o is Program)
+            {
+            }
+
             if (this is null) // Compliant as it does not check the type.
             {
 
