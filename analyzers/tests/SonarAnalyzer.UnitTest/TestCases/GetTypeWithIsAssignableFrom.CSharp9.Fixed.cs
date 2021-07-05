@@ -5,14 +5,14 @@ var b = f is Apple;     // Compliant
 b = f is not Apple;     // Compliant
 b = apple.GetType() == typeof(int?);                // Compliant
 b = apple.GetType().IsInstanceOfType(f.GetType());  // Compliant
-b = f as Apple == null;         // Noncompliant
-b = f as Apple is null;         // Noncompliant
-b = f as Apple is not null;     // Noncompliant
-b = f as Apple is not not not not null; // Noncompliant
+b = !(f is Apple);         // Fixed
+b = !(f is Apple);         // Fixed
+b = f is Apple;     // Fixed
+b = !(f is Apple); // Fixed
 b = f as Apple is Apple { Size: 42 };   // Compliant
-b = f as Apple is Apple;        // Noncompliant
-b = true && (apple) is Apple;   // Noncompliant
-b = !(apple is Apple);          // Noncompliant
+b = f is Apple;        // Fixed
+b = true && (apple != null);   // Fixed
+b = !(apple != null);          // Fixed
 
 if (apple is { }) { }           // Compliant
 
