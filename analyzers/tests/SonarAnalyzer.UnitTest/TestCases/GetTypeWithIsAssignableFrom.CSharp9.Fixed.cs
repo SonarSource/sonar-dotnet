@@ -16,5 +16,13 @@ b = !(apple != null);          // Fixed
 
 if (apple is { }) { }           // Compliant
 
+b = apple is ("Sweet", "Red");
+b = apple is { Taste: "Sweet", Color: "Red" };
+
 record Fruit { public int Size { get; } }
-sealed record Apple : Fruit { }
+sealed record Apple : Fruit
+{
+    public string Taste;
+    public string Color;
+    public void Deconstruct(out string x, out string y) => (x, y) = (Taste, Color);
+}

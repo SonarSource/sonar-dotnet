@@ -115,9 +115,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckGetTypeAndTypeOfEquality(SyntaxNodeAnalysisContext context, ExpressionSyntax sideA, ExpressionSyntax sideB)
         {
             if (sideA.ToStringContains("GetType")
-                && sideB is TypeOfExpressionSyntax sideBeTypeOf
+                && sideB is TypeOfExpressionSyntax sideBTypeOf
                 && (sideA as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel)
-                && context.SemanticModel.GetTypeInfo(sideBeTypeOf.Type).Type is { } typeSymbol // Can be null for empty identifier from 'typeof' unfinished syntax
+                && context.SemanticModel.GetTypeInfo(sideBTypeOf.Type).Type is { } typeSymbol // Can be null for empty identifier from 'typeof' unfinished syntax
                 && typeSymbol.IsSealed
                 && !typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
             {
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (methodSymbol.Name == "IsInstanceOfType" && memberAccess.Expression is TypeOfExpressionSyntax)
             {
-                ReportDiagnostic(context, MessageIsOperator, true);
+                ReportDiagnostic(context, MessageIsOperator, useIsOperator: true);
             }
         }
 
@@ -139,11 +139,11 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (memberAccess.Expression is TypeOfExpressionSyntax)
                 {
-                    ReportDiagnostic(context, MessageIsOperator, true, true);
+                    ReportDiagnostic(context, MessageIsOperator, useIsOperator: true, shouldRemoveGetType: true);
                 }
                 else
                 {
-                    ReportDiagnostic(context, MessageIsInstanceOfType, false, true);
+                    ReportDiagnostic(context, MessageIsInstanceOfType, shouldRemoveGetType: true);
                 }
             }
         }
@@ -159,8 +159,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportDiagnostic(SyntaxNodeAnalysisContext context, string messageArg, bool useIsOperator = false, bool shouldRemoveGetType = false)
         {
             var properties = ImmutableDictionary<string, string>.Empty
-            .Add(UseIsOperatorKey, useIsOperator.ToString())
-            .Add(ShouldRemoveGetTypeKey, shouldRemoveGetType.ToString());
+                .Add(UseIsOperatorKey, useIsOperator.ToString())
+                .Add(ShouldRemoveGetTypeKey, shouldRemoveGetType.ToString());
             context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.Node.GetLocation(), properties, messageArg));
         }
     }
