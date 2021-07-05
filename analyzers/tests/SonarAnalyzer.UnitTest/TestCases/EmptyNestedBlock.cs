@@ -86,9 +86,11 @@ namespace Tests.Diagnostics
         // See: https://github.com/SonarSource/sonar-dotnet/issues/4540
         public void ConditionalCompilation(object obj)
         {
+            {
 #if DEBUG
-            Trace.WriteLine("message");
+                Trace.WriteLine("message");
 #endif
+            } // Noncompliant@-4 FP: the block is not empty
         }
     }
 
