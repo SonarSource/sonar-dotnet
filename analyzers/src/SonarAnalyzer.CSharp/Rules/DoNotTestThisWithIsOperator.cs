@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -86,15 +85,37 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchStatementSyntax switchStatement) =>
-            switchStatement.Sections
-                           .SelectMany(section => section.Labels)
-                           .Where(label => ContainsTypeCheckInPattern(label) || ContainsTypeCheckInCaseSwitchLabel(label))
-                           .Select(label => new SecondaryLocation(TypeMatchLocation(label), string.Empty))
-                           .ToList();
+        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchStatementSyntax switchStatement)
+        {
+            var secondaryLocations = new List<SecondaryLocation>();
+            foreach (var section in switchStatement.Sections)
+            {
+                foreach (var label in section.Labels)
+                {
+                    if (ContainsTypeCheckInPattern(label)
+                        || ContainsTypeCheckInCaseSwitchLabel(label))
+                    {
+                        secondaryLocations.Add(new SecondaryLocation(TypeMatchLocation(label), string.Empty));
+                    }
+                }
+            }
 
-        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchExpressionSyntaxWrapper switchExpression) =>
-            switchExpression.Arms.Where(x => ContainsTypeCheckInPattern(x.Pattern.SyntaxNode)).Select(arm => new SecondaryLocation(arm.Pattern.SyntaxNode.GetLocation(), string.Empty)).ToList();
+            return secondaryLocations;
+        }
+
+        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchExpressionSyntaxWrapper switchExpression)
+        {
+            var secondaryLocations = new List<SecondaryLocation>();
+            foreach (var arm in switchExpression.Arms)
+            {
+                if (ContainsTypeCheckInPattern(arm.Pattern.SyntaxNode))
+                {
+                    secondaryLocations.Add(new SecondaryLocation(arm.Pattern.SyntaxNode.GetLocation(), string.Empty));
+                }
+            }
+
+            return secondaryLocations;
+        }
 
         private static bool ContainsTypeCheckInCaseSwitchLabel(SwitchLabelSyntax switchLabel) =>
               switchLabel is CaseSwitchLabelSyntax caseSwitchLabel && caseSwitchLabel.Value.IsKind(SyntaxKind.IdentifierName);
