@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -46,11 +47,24 @@ namespace SonarAnalyzer.Rules.CSharp
             var condition = root.FindNode(diagnosticSpan) as ExpressionSyntax;
             var ifStatement = condition?.FirstAncestorOrSelf<IfStatementSyntax>();
 
-            if (ifStatement == null)
+            if (ifStatement != null)
+            {
+                return HandleIfStatement(root, context, ifStatement);
+            }
+
+            var switchExpression = root.FindNode(diagnosticSpan).FirstAncestorOrSelf((SyntaxNode x) => x.IsKind(SyntaxKindEx.SwitchExpression));
+            if (switchExpression != null)
+            {
+                return HandleSwitchExpression(root, context, switchExpression);
+            }
+            else
             {
                 return TaskHelper.CompletedTask;
             }
+        }
 
+        private static Task HandleIfStatement(SyntaxNode root, CodeFixContext context, IfStatementSyntax ifStatement)
+        {
             var statement = ifStatement.Statement;
             if (statement is BlockSyntax block)
             {
@@ -76,6 +90,30 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return TaskHelper.CompletedTask;
         }
+
+        private static Task HandleSwitchExpression(SyntaxNode root, CodeFixContext context, SyntaxNode switchExpression)
+        {
+            var switchArm = ((SwitchExpressionSyntaxWrapper)switchExpression).Arms.FirstOrDefault();
+            if (switchArm.SyntaxNode == null)
+            {
+                return Task.CompletedTask;
+            }
+
+            var switchCondition = switchArm.Pattern.SyntaxNode;
+            var constantPattern = switchCondition.DescendantNodesAndSelf().FirstOrDefault(x => x.IsKind(SyntaxKindEx.ConstantPattern));
+            context.RegisterCodeFix(
+                CodeAction.Create(
+                    Title,
+                    c =>
+                    {
+                        var newRoot = root.ReplaceNode(
+                            switchExpression,
+                            ((ConstantPatternSyntaxWrapper)constantPattern).Expression.WithTriviaFrom(switchExpression));
+                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                    }),
+                context.Diagnostics);
+
+            return TaskHelper.CompletedTask;
+        }
     }
 }
-
