@@ -18,13 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -32,25 +36,149 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotTestThisWithIsOperator : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3060";
-        private const string MessageFormat = "Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.";
+        private const string DiagnosticId = "S3060";
+        private const string MessageFormat = "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var expression = (BinaryExpressionSyntax)c.Node;
-                    if (expression.Left is ThisExpressionSyntax)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, expression.GetLocation()));
-                    }
-                },
-                SyntaxKind.IsExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeIsExpression, SyntaxKind.IsExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeIsPatternExpression, SyntaxKindEx.IsPatternExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeSwitchExpression, SyntaxKindEx.SwitchExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeSwitchStatement, SyntaxKind.SwitchStatement);
         }
+
+        private static void AnalyzeIsExpression(SyntaxNodeAnalysisContext context)
+        {
+            if (IsThisExpressionSyntax(((BinaryExpressionSyntax)context.Node).Left))
+            {
+                ReportDiagnostic(context, context.Node);
+            }
+        }
+
+        private static void AnalyzeIsPatternExpression(SyntaxNodeAnalysisContext context)
+        {
+            if (IsThisExpressionSyntax(((IsPatternExpressionSyntaxWrapper)context.Node).Expression) && ContainsTypeCheckInPattern(context.Node))
+            {
+                ReportDiagnostic(context, context.Node);
+            }
+        }
+
+        private static void AnalyzeSwitchStatement(SyntaxNodeAnalysisContext context)
+        {
+            var switchStatement = (SwitchStatementSyntax)context.Node;
+            if (IsThisExpressionSyntax(switchStatement.Expression))
+            {
+                ReportDiagnostic(context, switchStatement.Expression, CollectSecondaryLocations(switchStatement));
+            }
+        }
+
+        private static void AnalyzeSwitchExpression(SyntaxNodeAnalysisContext context)
+        {
+            var switchExpression = (SwitchExpressionSyntaxWrapper)context.Node;
+            if (IsThisExpressionSyntax(switchExpression.GoverningExpression))
+            {
+                 ReportDiagnostic(context, switchExpression.GoverningExpression, CollectSecondaryLocations(switchExpression));
+            }
+        }
+
+        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchStatementSyntax switchStatement)
+        {
+            var secondaryLocations = new List<SecondaryLocation>();
+            foreach (var section in switchStatement.Sections)
+            {
+                foreach (var label in section.Labels)
+                {
+                    if (ContainsTypeCheckInPattern(label)
+                        || ContainsTypeCheckInCaseSwitchLabel(label))
+                    {
+                        secondaryLocations.Add(new SecondaryLocation(TypeMatchLocation(label), string.Empty));
+                    }
+                }
+            }
+
+            return secondaryLocations;
+        }
+
+        private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchExpressionSyntaxWrapper switchExpression)
+        {
+            var secondaryLocations = new List<SecondaryLocation>();
+            foreach (var arm in switchExpression.Arms)
+            {
+                if (ContainsTypeCheckInPattern(arm.Pattern.SyntaxNode))
+                {
+                    secondaryLocations.Add(new SecondaryLocation(arm.Pattern.SyntaxNode.GetLocation(), string.Empty));
+                }
+            }
+
+            return secondaryLocations;
+        }
+
+        private static bool ContainsTypeCheckInCaseSwitchLabel(SwitchLabelSyntax switchLabel) =>
+              switchLabel is CaseSwitchLabelSyntax caseSwitchLabel && caseSwitchLabel.Value.IsKind(SyntaxKind.IdentifierName);
+
+        private static bool ContainsTypeCheckInPattern(SyntaxNode syntaxNode) =>
+            syntaxNode.DescendantNodesAndSelf()
+                      .Any(x => x.IsAnyKind(SyntaxKindEx.ConstantPattern, SyntaxKindEx.DeclarationPattern, SyntaxKindEx.RecursivePattern) && IsTypeCheckOnThis(x));
+
+        private static bool IsTypeCheckOnThis(SyntaxNode pattern)
+        {
+            if (ConstantPatternSyntaxWrapper.IsInstance(pattern))
+            {
+                return ((ConstantPatternSyntaxWrapper)pattern).Expression.IsKind(SyntaxKind.IdentifierName) && IsNotInSubPattern(pattern);
+            }
+            else if (DeclarationPatternSyntaxWrapper.IsInstance(pattern))
+            {
+                return IsNotInSubPattern(pattern);
+            }
+            else if (RecursivePatternSyntaxWrapper.IsInstance(pattern))
+            {
+                return ((RecursivePatternSyntaxWrapper)pattern).Type != null && IsNotInSubPattern(pattern);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private static bool IsNotInSubPattern(SyntaxNode node) =>
+            !node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IsPatternExpression,
+                                                                  SyntaxKindEx.SwitchExpression,
+                                                                  SyntaxKind.SwitchStatement,
+                                                                  SyntaxKindEx.Subpattern))
+                                                 .IsKind(SyntaxKindEx.Subpattern);
+
+        private static void ReportDiagnostic(SyntaxNodeAnalysisContext context, SyntaxNode node) =>
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
+
+        private static void ReportDiagnostic(SyntaxNodeAnalysisContext context, SyntaxNode node, IList<SecondaryLocation> secondaryLocations)
+        {
+            if (secondaryLocations.Any())
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation(), secondaryLocations.ToAdditionalLocations(), secondaryLocations.ToProperties()));
+            }
+        }
+
+        private static Location TypeMatchLocation(SwitchLabelSyntax label)
+        {
+            if (label is CaseSwitchLabelSyntax caseSwitchLabel)
+            {
+                return caseSwitchLabel.Value.GetLocation();
+            }
+            else if (CasePatternSwitchLabelSyntaxWrapper.IsInstance(label))
+            {
+                return ((CasePatternSwitchLabelSyntaxWrapper)label).Pattern.SyntaxNode.GetLocation();
+            }
+            else
+            {
+                return Location.None;
+            }
+        }
+
+        private static bool IsThisExpressionSyntax(SyntaxNode syntaxNode) =>
+            syntaxNode.RemoveParentheses() is ThisExpressionSyntax;
     }
 }
