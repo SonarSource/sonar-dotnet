@@ -72,6 +72,11 @@
                 x = "";
             }
 
+            if (null != x)
+            {
+                Test();
+            }
+
             if (null == x)
             {
                 x = null;
