@@ -48,6 +48,12 @@ int z = y switch
     not 5 => 5
 };
 
+if ((x,y) is (1,2))   // Compliant FN
+{
+    x = 1;
+    y = 2;
+}
+
 record Record
 {
     string x;
