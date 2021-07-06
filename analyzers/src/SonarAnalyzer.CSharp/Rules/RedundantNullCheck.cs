@@ -36,10 +36,10 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string MessageFormat = "Remove this unnecessary null check; 'is' returns false for nulls.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -62,7 +62,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var leftNode = GetLeftNode(binaryExpression);
                 var rightNode = GetRightNode(binaryExpression);
 
-                if (leftNode.IsNullLiteral()) {
+                if (leftNode.IsNullLiteral())
+                {
                     return rightNode;
                 }
                 if (rightNode.IsNullLiteral())
@@ -92,14 +93,10 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        protected override SyntaxNode GetInvertedIsOperatorCheckVariable(SyntaxNode node)
-        {
-            if (node.RemoveParentheses() is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
-            {
-                return GetIsOperatorCheckVariable(prefixUnary.Operand);
-            }
-            return null;
-        }
+        protected override SyntaxNode GetInvertedIsOperatorCheckVariable(SyntaxNode node) =>
+            node.RemoveParentheses() is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression)
+                ? GetIsOperatorCheckVariable(prefixUnary.Operand)
+                : null;
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) => CSharpEquivalenceChecker.AreEquivalent(node1, node2);
     }
