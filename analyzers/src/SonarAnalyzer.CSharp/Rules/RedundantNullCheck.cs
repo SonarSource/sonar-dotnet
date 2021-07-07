@@ -65,9 +65,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.RemoveParentheses();
 
-        protected override SyntaxNode GetNullCheckVariable(SyntaxNode node) => GetNullCheckVariableForKind(node, true);
+        protected override SyntaxNode GetNullCheckVariable(SyntaxNode node) => GetNullCheckVariable(node, true);
 
-        protected override SyntaxNode GetNonNullCheckVariable(SyntaxNode node) => GetNullCheckVariableForKind(node, false);
+        protected override SyntaxNode GetNonNullCheckVariable(SyntaxNode node) => GetNullCheckVariable(node, false);
 
         protected override SyntaxNode GetIsOperatorCheckVariable(SyntaxNode node)
         {
@@ -106,31 +106,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) => CSharpEquivalenceChecker.AreEquivalent(node1, node2);
-
-        // expectedAffirmative
-        // - true for "is null" and "== null"
-        // - false for "is not null" and "!= null"
-        private SyntaxNode GetNullCheckVariableForKind(SyntaxNode node, bool expectedAffirmative)
-        {
-            var innerExpression = node.RemoveParentheses();
-            if (innerExpression is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
-            {
-                innerExpression = prefixUnary.Operand;
-                expectedAffirmative = !expectedAffirmative;
-            }
-            if (((ExpressionSyntax)innerExpression).TryGetExpressionComparedToNull(out var compared, out var actualAffirmative))
-            {
-                if (actualAffirmative && expectedAffirmative)
-                {
-                    return compared;
-                }
-                if (!actualAffirmative && !expectedAffirmative)
-                {
-                    return compared;
-                }
-            }
-            return null;
-        }
 
         private void CheckAndPattern(SyntaxNodeAnalysisContext context)
         {
@@ -182,6 +157,25 @@ namespace SonarAnalyzer.Rules.CSharp
             // Verifies if the given pattern syntax is like "foo is not Bar" - where Bar can be constant pattern (except 'null'), Declaration pattern, recursive pattern
             static bool IsNegativePatternMatch(PatternSyntaxWrapper patternSyntaxWrapper) =>
                 patternSyntaxWrapper.IsNot() && !patternSyntaxWrapper.IsNull();
+        }
+
+        // expectedAffirmative
+        // - true for "is null" and "== null"
+        // - false for "is not null" and "!= null"
+        private static SyntaxNode GetNullCheckVariable(SyntaxNode node, bool expectedAffirmative)
+        {
+            var innerExpression = node.RemoveParentheses();
+            if (innerExpression is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
+            {
+                innerExpression = prefixUnary.Operand;
+                expectedAffirmative = !expectedAffirmative;
+            }
+            if (((ExpressionSyntax)innerExpression).TryGetExpressionComparedToNull(out var compared, out var actualAffirmative)
+                && actualAffirmative == expectedAffirmative)
+            {
+                return compared;
+            }
+            return null;
         }
     }
 }
