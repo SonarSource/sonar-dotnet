@@ -56,30 +56,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.RemoveParentheses();
 
-        private SyntaxNode GetNullCheckVariableForKind(SyntaxNode node, SyntaxKind kind) {
-            if (node.RemoveParentheses() is BinaryExpressionSyntax binaryExpression && binaryExpression.IsKind(kind))
-            {
-                var leftNode = GetLeftNode(binaryExpression);
-                var rightNode = GetRightNode(binaryExpression);
-
-                if (leftNode.IsNullLiteral())
-                {
-                    return rightNode;
-                }
-                if (rightNode.IsNullLiteral())
-                {
-                    return leftNode;
-                }
-            }
-            return null;
-        }
-
         protected override SyntaxNode GetNullCheckVariable(SyntaxNode node) => GetNullCheckVariableForKind(node, SyntaxKind.EqualsExpression);
 
         protected override SyntaxNode GetNonNullCheckVariable(SyntaxNode node) => GetNullCheckVariableForKind(node, SyntaxKind.NotEqualsExpression);
 
         protected override SyntaxNode GetIsOperatorCheckVariable(SyntaxNode node)
         {
+            // FIXME use ConditionalSimplification.TryGetExpressionComparedToNull - duplicate the method and keep what makes sense
             var innerExpression = node.RemoveParentheses();
             if (innerExpression is BinaryExpressionSyntax binaryExpression && binaryExpression.IsKind(SyntaxKind.IsExpression))
             {
@@ -99,5 +82,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 : null;
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) => CSharpEquivalenceChecker.AreEquivalent(node1, node2);
+
+        private SyntaxNode GetNullCheckVariableForKind(SyntaxNode node, SyntaxKind kind)
+        {
+            // FIXME use ConditionalSimplification.TryGetExpressionComparedToNull - duplicate the method and keep what makes sense
+            if (node.RemoveParentheses() is BinaryExpressionSyntax binaryExpression && binaryExpression.IsKind(kind))
+            {
+                var leftNode = GetLeftNode(binaryExpression);
+                var rightNode = GetRightNode(binaryExpression);
+
+                if (leftNode.IsNullLiteral())
+                {
+                    return rightNode;
+                }
+                if (rightNode.IsNullLiteral())
+                {
+                    return leftNode;
+                }
+            }
+            return null;
+        }
     }
 }

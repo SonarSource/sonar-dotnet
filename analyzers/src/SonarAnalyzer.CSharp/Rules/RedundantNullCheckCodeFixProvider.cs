@@ -52,6 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
+            // FIXME: avoid providing a fix for patterns, as it can become messy for non-trivial recursive patterns
             if (!(root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is BinaryExpressionSyntax nullCheckNode))
             {
                 return TaskHelper.CompletedTask;
