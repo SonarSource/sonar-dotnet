@@ -145,6 +145,10 @@ namespace Tests.Diagnostics
                 var anotherFruit = (Fruit)x;           // Secondary [property-pattern-2]
             }
 
+            if ((x, y) is (1))                                 // Error[CS0029]
+            {
+            }
+
             if ((x, y) is (R { SomeProperty: { Count: 5 } }))  // Error[CS8121]
             {
             }
