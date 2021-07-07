@@ -51,7 +51,7 @@ namespace Tests.Diagnostics
 
             result = someEnumerable.Count() >= 1;
             result = someEnumerable.Count() >= localVariable;
-            result = someEnumerable.Count() >= -1;
+            result = someEnumerable.Count() >= -1; // Noncompliant {{The 'Count' of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
             result = someEnumerable.Count() <= 0;
             result = someEnumerable.Count() < 0; // FN https://github.com/SonarSource/sonar-dotnet/issues/3735
             result = 0 >= someEnumerable.Count();

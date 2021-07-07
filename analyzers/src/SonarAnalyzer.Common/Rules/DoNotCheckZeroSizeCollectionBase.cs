@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules
 
         protected void CheckCondition(SyntaxNodeAnalysisContext context, SyntaxNode issueLocation, TExpressionSyntax expressionValueNode, TExpressionSyntax constantValueNode)
         {
-            if (IsConstantZero(context, constantValueNode)
+            if (IsZeroOrNegativeConstantValue(context, constantValueNode)
                 && GetSymbol(context, expressionValueNode) is { } symbol
                 && GetDeclaringTypeName(symbol) is { } symbolType)
             {
@@ -108,11 +108,11 @@ namespace SonarAnalyzer.Rules
             return null;
         }
 
-        private bool IsConstantZero(SyntaxNodeAnalysisContext context, TExpressionSyntax expression)
+        private bool IsZeroOrNegativeConstantValue(SyntaxNodeAnalysisContext context, TExpressionSyntax expression)
         {
             var constantExpressionNode = RemoveParentheses(expression);
             var constant = context.SemanticModel.GetConstantValue(constantExpressionNode);
-            return constant.HasValue && (constant.Value is int intValue) && intValue == 0;
+            return constant.HasValue && (constant.Value is int intValue) && intValue <= 0;
         }
 
         private static bool IsEnumerableCountMethod(ISymbol symbol) =>
