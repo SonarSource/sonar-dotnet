@@ -59,10 +59,12 @@ result = a is null || !(a is Apple aTyped1); // Noncompliant
 result = !(a is Apple aTyped2) || a == null; // Noncompliant
 result = ((!((a) is Apple))) || ((a) == (null)); // Noncompliant
 
-if (apple == null || apple is not { Taste: "Sweet", Color: "Red" }) { } // FN
+if (apple == null || apple is not { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
+if (apple is null || apple is not { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
 if (apple == null || !(apple is { Taste: "Sweet", Color: "Red" })) { } // Noncompliant
-if (apple == null || apple is not ("Sweet", "Red")) { } // FN
+if (apple == null || apple is not ("Sweet", "Red")) { } // Noncompliant
 if (apple == null || !(apple is ("Sweet", "Red"))) { } // Noncompliant
+if (apple is null || !(apple is ("Sweet", "Red"))) { } // Noncompliant
 
 x = a switch
 {

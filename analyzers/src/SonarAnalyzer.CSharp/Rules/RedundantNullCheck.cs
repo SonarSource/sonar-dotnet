@@ -65,13 +65,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.RemoveParentheses();
 
-        protected override SyntaxNode GetNullCheckVariable(SyntaxNode node) => GetNullCheckVariableForKind(node, SyntaxKind.EqualsExpression);
+        protected override SyntaxNode GetNullCheckVariable(SyntaxNode node) => GetNullCheckVariableForKind(node, true);
 
-        protected override SyntaxNode GetNonNullCheckVariable(SyntaxNode node) => GetNullCheckVariableForKind(node, SyntaxKind.NotEqualsExpression);
+        protected override SyntaxNode GetNonNullCheckVariable(SyntaxNode node) => GetNullCheckVariableForKind(node, false);
 
         protected override SyntaxNode GetIsOperatorCheckVariable(SyntaxNode node)
         {
-            // FIXME use ConditionalSimplification.TryGetExpressionComparedToNull - duplicate the method and keep what makes sense
             var innerExpression = node.RemoveParentheses();
             if (innerExpression is BinaryExpressionSyntax binaryExpression && binaryExpression.IsKind(SyntaxKind.IsExpression))
             {
@@ -88,22 +87,38 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        protected override SyntaxNode GetInvertedIsOperatorCheckVariable(SyntaxNode node) =>
-            node.RemoveParentheses() is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression)
-                ? GetIsOperatorCheckVariable(prefixUnary.Operand)
-                : null;
+        protected override SyntaxNode GetInvertedIsOperatorCheckVariable(SyntaxNode node)
+        {
+            var innerExpression = node.RemoveParentheses();
+            if (innerExpression is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
+            {
+                return GetIsOperatorCheckVariable(prefixUnary.Operand);
+            }
+            else if (innerExpression.IsKind(SyntaxKindEx.IsPatternExpression))
+            {
+                var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression.RemoveParentheses();
+                if (isPatternExpression.IsNot() && !isPatternExpression.IsNotNull())
+                {
+                    return isPatternExpression.Expression.RemoveParentheses();
+                }
+            }
+            return null;
+        }
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) => CSharpEquivalenceChecker.AreEquivalent(node1, node2);
 
-        private SyntaxNode GetNullCheckVariableForKind(SyntaxNode node, SyntaxKind kind)
+        // expectedAffirmative
+        // - true for "is null" and "== null"
+        // - false for "is not null" and "!= null"
+        private SyntaxNode GetNullCheckVariableForKind(SyntaxNode node, bool expectedAffirmative)
         {
-            if (TryGetExpressionComparedToNull((ExpressionSyntax)node, out var compared, out var isAffirmative))
+            if (TryGetExpressionComparedToNull((ExpressionSyntax)node, out var compared, out var actualAffirmative))
             {
-                if (isAffirmative && kind == SyntaxKind.EqualsExpression)
+                if (actualAffirmative && expectedAffirmative)
                 {
                     return compared;
                 }
-                if (!isAffirmative && kind == SyntaxKind.NotEqualsExpression)
+                if (!actualAffirmative && !expectedAffirmative)
                 {
                     return compared;
                 }
