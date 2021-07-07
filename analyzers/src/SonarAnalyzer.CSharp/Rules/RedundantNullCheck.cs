@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 innerExpression = prefixUnary.Operand;
                 expectedAffirmative = !expectedAffirmative;
             }
-            if (TryGetExpressionComparedToNull((ExpressionSyntax)innerExpression, out var compared, out var actualAffirmative))
+            if (((ExpressionSyntax)innerExpression).TryGetExpressionComparedToNull(out var compared, out var actualAffirmative))
             {
                 if (actualAffirmative && expectedAffirmative)
                 {
@@ -130,52 +130,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
             return null;
-        }
-        private static readonly ISet<SyntaxKind> EqualsOrNotEquals = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.EqualsExpression,
-            SyntaxKind.NotEqualsExpression
-        };
-
-        internal static bool TryGetExpressionComparedToNull(ExpressionSyntax expression, out ExpressionSyntax compared, out bool isAffirmative)
-        {
-            compared = null;
-            isAffirmative = false;
-            if (expression.RemoveParentheses() is BinaryExpressionSyntax binary && EqualsOrNotEquals.Contains(binary.Kind()))
-            {
-                isAffirmative = binary.IsKind(SyntaxKind.EqualsExpression);
-                var binaryLeft = binary.Left.RemoveParentheses();
-                var binaryRight = binary.Right.RemoveParentheses();
-                if (CSharpEquivalenceChecker.AreEquivalent(binaryLeft, CSharpSyntaxHelper.NullLiteralExpression))
-                {
-                    compared = binaryRight;
-                    return true;
-                }
-                else if (CSharpEquivalenceChecker.AreEquivalent(binaryRight, CSharpSyntaxHelper.NullLiteralExpression))
-                {
-                    compared = binaryLeft;
-                    return true;
-                }
-            }
-
-            if (IsPatternExpressionSyntaxWrapper.IsInstance(expression.RemoveParentheses()))
-            {
-                var isPatternWrapper = (IsPatternExpressionSyntaxWrapper)expression.RemoveParentheses();
-                if (isPatternWrapper.IsNotNull())
-                {
-                    isAffirmative = false;
-                    compared = isPatternWrapper.Expression;
-                    return true;
-                }
-                else if (isPatternWrapper.IsNull())
-                {
-                    isAffirmative = true;
-                    compared = isPatternWrapper.Expression;
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         private void CheckAndPattern(SyntaxNodeAnalysisContext context)

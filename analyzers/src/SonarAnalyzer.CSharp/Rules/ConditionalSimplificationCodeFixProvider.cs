@@ -74,13 +74,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     var condition = conditional.Condition.RemoveParentheses();
                     var whenTrue = conditional.WhenTrue.RemoveParentheses();
                     var whenFalse = conditional.WhenFalse.RemoveParentheses();
-                    ConditionalSimplification.TryGetExpressionComparedToNull(condition, out compared, out _);
+                    condition.TryGetExpressionComparedToNull(out compared, out _);
                     return SimplifyCoalesceExpression(new ComparedContext(diagnostic, semanticModel, compared), whenTrue, whenFalse);
 
                 case IfStatementSyntax ifStatement:
                     var ifPart = ConditionalSimplification.ExtractSingleStatement(ifStatement.Statement);
                     var elsePart = ConditionalSimplification.ExtractSingleStatement(ifStatement.Else?.Statement);
-                    ConditionalSimplification.TryGetExpressionComparedToNull(ifStatement.Condition, out compared, out var _);
+                    ifStatement.Condition.TryGetExpressionComparedToNull(out compared, out var _);
                     return SimplifyIfStatement(new ComparedContext(diagnostic, semanticModel, compared), ifPart, elsePart, ifStatement.Condition.RemoveParentheses());
 
                 case AssignmentExpressionSyntax assignment:
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else if (right is ConditionalExpressionSyntax conditional)
                     {
-                        ConditionalSimplification.TryGetExpressionComparedToNull(conditional.Condition, out compared, out var comparedIsNullInTrue);
+                        conditional.Condition.TryGetExpressionComparedToNull(out compared, out var comparedIsNullInTrue);
                         if (context.IsCoalesceAssignmentSupported && ConditionalSimplification.IsCoalesceAssignmentCandidate(conditional, compared))
                         {
                             return CoalesceAssignmentExpression(context,
