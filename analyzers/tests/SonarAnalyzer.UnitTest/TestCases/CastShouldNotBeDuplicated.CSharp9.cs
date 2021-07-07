@@ -24,10 +24,10 @@ namespace Tests.Diagnostics
             switch (x)                            // Noncompliant [switch-st-0] {{Remove this cast and use the appropriate variable.}}
             {
                 case Fruit m:                     // Secondary [switch-st-1]
-                    o = (Fruit)m;                 // Noncompliant [switch-st-1] {{Remove this cast and use the appropriate variable.}}
+                    o = (Fruit)m;                 // Noncompliant [switch-st-1] {{Remove this redundant cast.}}
                     break;
                 case Vegetable t when t != null:  // Secondary [switch-st-2]
-                    o = (Vegetable)t;             // Noncompliant [switch-st-2] {{Remove this cast and use the appropriate variable.}}
+                    o = (Vegetable)t;             // Noncompliant [switch-st-2] {{Remove this redundant cast.}}
                     break;
                 case Water u:
                     o = (Water)x;                 // Secondary [switch-st-0]
@@ -58,17 +58,18 @@ namespace Tests.Diagnostics
             }
 
             if ((x,y) is (Fruit f5, Vegetable v5, Vegetable v51)) // Error [CS8502]
+                                                                  // Noncompliant@-1
             {
-                var ff5 = (Fruit)x;
+                var ff5 = (Fruit)x;                               // Secondary
             }
 
             if (x is Fruit f6)          // Secondary
             {
-                var ff6 = (Fruit)f6;    // Noncompliant {{Remove this cast and use the appropriate variable.}}
+                var ff6 = (Fruit)f6;    // Noncompliant {{Remove this redundant cast.}}
                 var fff6 = (Vegetable)x;
             }
 
-            if (x is Fruit f7)          // Noncompliant {{Replace this type-check-and-cast sequence with an 'as' and a null check.}}
+            if (x is Fruit f7)          // Noncompliant {{Remove this cast and use the appropriate variable.}}
             {
                 var ff7 = (Fruit)x;     // Secondary
                 var fff7 = (Vegetable)x;
@@ -98,7 +99,7 @@ namespace Tests.Diagnostics
             var message = x switch                 // Noncompliant [switch-expression-1] {{Remove this cast and use the appropriate variable.}}
             {
                 Fruit f10 =>                       // Secondary [switch-expression-2]
-                    ((Fruit)f10).ToString(),       // Noncompliant [switch-expression-2] {{Remove this cast and use the appropriate variable.}}
+                    ((Fruit)f10).ToString(),       // Noncompliant [switch-expression-2] {{Remove this redundant cast.}}
                 Vegetable v11 =>                   // Secondary [switch-expression-3]
                     ((Vegetable)v11).ToString(),   // Noncompliant [switch-expression-3]
                 (string left, string right) =>     // Secondary [switch-expression-4, switch-expression-5]
@@ -110,9 +111,9 @@ namespace Tests.Diagnostics
                 _ => "More than 10"
             };
 
-            if ((x) is (Fruit f12, Vegetable v12))
+            if ((x) is (Fruit f12, Vegetable v12))     // Noncompliant
             {
-                var ff12 = (Vegetable)x;               // FN
+                var ff12 = (Vegetable)x;               // Secondary
             }
 
             Foo k = null;
@@ -120,9 +121,9 @@ namespace Tests.Diagnostics
             {
             }
 
-            if (x is (Water f13))
+            if (x is (Water f13))                      // Noncompliant
             {
-                var ff13 = (Water)x;                   // FN
+                var ff13 = (Water)x;                   // Secondary
             }
         }
 
@@ -140,7 +141,7 @@ namespace Tests.Diagnostics
             if (x is Fruit { Prop: 1 } tuttyFrutty)    // Secondary [property-pattern-1]
                                                        // Noncompliant@-1 [property-pattern-2] {{Remove this cast and use the appropriate variable.}}
             {
-                var aRealFruit = (Fruit)tuttyFrutty;   // Noncompliant [property-pattern-1] {{Replace this type-check-and-cast sequence with an 'as' and a null check.}}
+                var aRealFruit = (Fruit)tuttyFrutty;   // Noncompliant [property-pattern-1] {{Remove this redundant cast.}}
                 var anotherFruit = (Fruit)x;           // Secondary [property-pattern-2]
             }
         }
@@ -155,17 +156,23 @@ namespace Tests.Diagnostics
 
         public void Baz(object x, object y)
         {
-            if ((x, y) is ((int a, int b), string v)) // Secondary
+            if ((x, y) is ((Fruit a, Fruit b), string v)) // Secondary
+                                                          // Secondary@-1
+                                                          // Secondary@-2
             {
-                var a1 = (int)a;                      // FN
-                var b1 = (int)b;                      // FN
-                var v1 = (string)v;                   // Noncompliant
+                var a1 = (Fruit)a;                        // Noncompliant
+                var b1 = (Fruit)b;                        // Noncompliant
+                var v1 = (string)v;                       // Noncompliant
             }
 
-            if (x is (Fruit or Vegetable))
+            if (x is (Fruit or Vegetable))            // Noncompliant
             {
-                var fruit = (Fruit)x;                 // FN
-                var vegetable = (Vegetable)x;         // FN
+                var fruit = (Fruit)x;                 // Secondary
+            }
+
+            if (x is (Fruit or Vegetable))            // Noncompliant
+            {
+                var vegetable = (Vegetable)x;         // Secondary
             }
         }
 
@@ -174,7 +181,7 @@ namespace Tests.Diagnostics
             if (x is Fruit f)                       // Error [CS0103]
                                                     // Secondary@-1
             {
-                var ff = (Fruit)f;                  // Noncompliant {{Remove this cast and use the appropriate variable.}}
+                var ff = (Fruit)f;                  // Noncompliant {{Remove this redundant cast.}}
             }
         }
 
