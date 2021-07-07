@@ -51,6 +51,12 @@ x = apple switch
     _ => ""
 };
 
+x = apple switch
+{
+    { Taste: "Sweet" } and not null and { Color: "Red" }  => "", // Noncompliant
+    _ => ""
+};
+
 
 // OR, inverted
 result = n is null || !(n is Apple); // Noncompliant {{Remove this unnecessary null check; 'is' returns false for nulls.}}
@@ -74,7 +80,7 @@ x = a switch
 
 x = a switch
 {
-    null or not Apple => "", // Noncompliant
+    not Apple or null => "", // Noncompliant
     _ => ""
 };
 
@@ -86,7 +92,13 @@ x = apple switch
 
 x = apple switch
 {
-    null or not { Taste: "Sweet", Color: "Red" } => "", // Noncompliant
+    null or not { Taste: "Sweet" } or not { Color: "Red" } => "", // Noncompliant
+    _ => ""
+};
+
+x = apple switch
+{
+    not { Taste: "Sweet" } or null or not { Color: "Red" } => "", // Noncompliant
     _ => ""
 };
 
@@ -130,7 +142,8 @@ x = m switch
 
 x = m switch
 {
-    null or string or 5 or 7 or 8 or Apple => "", // Compliant
+    null or 5 or 7 or 8 or Apple => "", // Compliant
+    string or 6 or 10 or null => "", // Compliant
     _ => ""
 };
 

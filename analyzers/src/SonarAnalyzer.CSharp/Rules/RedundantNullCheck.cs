@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
             else if (innerExpression.IsKind(SyntaxKindEx.IsPatternExpression))
             {
                 var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression.RemoveParentheses();
-                if (!isPatternExpression.IsNull() && !isPatternExpression.IsNotNull() && !isPatternExpression.IsNot())
+                if (!isPatternExpression.IsNull() && !isPatternExpression.IsNot())
                 {
                     return isPatternExpression.Expression.RemoveParentheses();
                 }
