@@ -86,6 +86,24 @@ if (r is R { SomeProperty: {  Rank: >= 0 } })
 {
 }
 
+int a = 1, b = 2, c = 3;
+
+if ((a, b) is (1)) // Error[CS0029]
+{
+}
+
+if ((a, b) is (R { SomeProperty: { Count: 5 } })) // Error[CS8121]
+{
+}
+
+if ((a, b, c) is (1, 2)) // Error[CS8502]
+{
+}
+
+if ((a, b, c) is (1, 2, 3, 4)) // Error[CS8502]
+{
+}
+
 record R
 {
     public string[] SomeProperty { get; set; }
