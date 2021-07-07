@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -79,12 +78,16 @@ namespace SonarAnalyzer.Rules.CSharp
             else if (innerExpression.IsKind(SyntaxKindEx.IsPatternExpression))
             {
                 var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression.RemoveParentheses();
-                if (!isPatternExpression.IsNull() && !isPatternExpression.IsNot())
+                if (IsAffirmativePatternMatch(isPatternExpression))
                 {
                     return isPatternExpression.Expression.RemoveParentheses();
                 }
             }
             return null;
+
+            // Verifies the given pattern is like "foo is Bar" - where Bar can be various Patterns, except 'null'.
+            static bool IsAffirmativePatternMatch(IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
+                !isPatternWrapper.IsNull() && !isPatternWrapper.IsNot();
         }
 
         protected override SyntaxNode GetInvertedIsOperatorCheckVariable(SyntaxNode node)
@@ -97,12 +100,16 @@ namespace SonarAnalyzer.Rules.CSharp
             else if (innerExpression.IsKind(SyntaxKindEx.IsPatternExpression))
             {
                 var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression.RemoveParentheses();
-                if (isPatternExpression.IsNot() && !isPatternExpression.IsNotNull())
+                if (IsNegativePatternMatch(isPatternExpression))
                 {
                     return isPatternExpression.Expression.RemoveParentheses();
                 }
             }
             return null;
+
+            // Verifies the pattern is like "foo is not Bar" - where Bar can be various Patterns, except 'null'.
+            static bool IsNegativePatternMatch(IsPatternExpressionSyntaxWrapper patternSyntaxWrapper) =>
+                patternSyntaxWrapper.IsNot() && !patternSyntaxWrapper.IsNotNull();
         }
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) => CSharpEquivalenceChecker.AreEquivalent(node1, node2);
@@ -127,7 +134,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 && ((UnaryPatternSyntaxWrapper)node) is var unaryPatternSyntaxWrapper
                 && unaryPatternSyntaxWrapper.IsNotNull();
 
-            // Verifies the given pattern is like "foo is Bar" - where Bar can be constant pattern (except 'null'), Declaration pattern, recursive pattern
+            // Verifies the given pattern is an affirmative pattern - constant pattern (except 'null'), Declaration pattern, Recursive pattern.
+            // The PatternSyntax appears e.g. in switch arms and is different from IsPatternSyntax.
             static bool IsAffirmativePatternMatch(SyntaxNode node) =>
                 PatternSyntaxWrapper.IsInstance(node)
                 && ((PatternSyntaxWrapper)node) is var isPatternWrapper
@@ -154,7 +162,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            // Verifies if the given pattern syntax is like "foo is not Bar" - where Bar can be constant pattern (except 'null'), Declaration pattern, recursive pattern
+            // Verifies if the given pattern syntax is like "not X" - where X can be constant pattern (except 'null'), Declaration pattern, Recursive pattern.
+            // The PatternSyntax appears e.g. in switch arms and is different from IsPatternSyntax.
             static bool IsNegativePatternMatch(PatternSyntaxWrapper patternSyntaxWrapper) =>
                 patternSyntaxWrapper.IsNot() && !patternSyntaxWrapper.IsNull();
         }
