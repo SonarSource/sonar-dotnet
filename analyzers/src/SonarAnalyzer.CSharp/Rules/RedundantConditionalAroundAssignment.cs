@@ -82,22 +82,24 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var switchExpression = (SwitchExpressionSyntaxWrapper)c.Node;
 
-            if (switchExpression.Arms.Count != 1
-                || !(switchExpression.SyntaxNode.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax parentExpression)
+            if (!(switchExpression.SyntaxNode.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax parentExpression)
                 || !CSharpEquivalenceChecker.AreEquivalent(parentExpression.Left, switchExpression.GoverningExpression))
             {
                 return;
             }
 
-            var switchArm = switchExpression.Arms.First();
-            var condition = switchArm.Pattern.SyntaxNode;
-            var constantPattern = condition.DescendantNodesAndSelf().FirstOrDefault(x => x.IsKind(SyntaxKindEx.ConstantPattern));
-            var expression = switchArm.Expression;
-            if (constantPattern != null
-                && !(condition.IsKind(SyntaxKindEx.NotPattern) && switchArm.WhenClause.SyntaxNode != null)
-                && CSharpEquivalenceChecker.AreEquivalent(expression, ((ConstantPatternSyntaxWrapper)constantPattern).Expression))
+            foreach (var switchArm in switchExpression.Arms)
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, condition.GetLocation()));
+                var condition = switchArm.Pattern.SyntaxNode;
+                var constantPattern = condition.DescendantNodesAndSelf().FirstOrDefault(x => x.IsKind(SyntaxKindEx.ConstantPattern));
+                var expression = switchArm.Expression;
+                if ((constantPattern != null
+                    && !(condition.IsKind(SyntaxKindEx.NotPattern) && (switchArm.WhenClause.SyntaxNode != null || switchExpression.Arms.Count != 1))
+                    && CSharpEquivalenceChecker.AreEquivalent(expression, ((ConstantPatternSyntaxWrapper)constantPattern).Expression))
+                    || (condition.IsKind(SyntaxKindEx.DiscardPattern) && switchExpression.Arms.Count == 1))
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, condition.GetLocation()));
+                }
             }
         }
 

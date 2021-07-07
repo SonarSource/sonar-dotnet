@@ -18,6 +18,12 @@ y = y switch
 
 y = y switch
 {
+    5 => 5, // Noncompliant
+    6 => 6  // Noncompliant
+};
+
+y = y switch
+{
     not 5 when x == 5 => 5
 };
 
@@ -33,13 +39,24 @@ x = y switch
 
 y = y switch
 {
-    4 => 4,
+    4 => 4,      // Noncompliant
     not 5 => 5,
 };
 
 y = y switch
 {
-    4 => 4,
+    5 => 6,
+    _ => y
+};
+
+y = y switch
+{
+    _ => y       // Noncompliant
+};
+
+y = y switch
+{
+    4 => 4,      // Noncompliant
     not x => 5,  // Error [CS0150]
 };
 

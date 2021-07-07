@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return HandleIfStatement(root, context, ifStatement);
             }
 
-            var switchExpression = root.FindNode(diagnosticSpan).FirstAncestorOrSelf((SyntaxNode x) => x.IsKind(SyntaxKindEx.SwitchExpression));
+            var switchExpression = root.FindNode(diagnosticSpan).FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(SyntaxKindEx.SwitchExpression));
             if (switchExpression != null)
             {
                 return HandleSwitchExpression(root, context, switchExpression);
@@ -94,13 +94,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static Task HandleSwitchExpression(SyntaxNode root, CodeFixContext context, SyntaxNode switchExpression)
         {
             var switchArm = ((SwitchExpressionSyntaxWrapper)switchExpression).Arms.FirstOrDefault();
-            if (switchArm.SyntaxNode == null)
+            if (switchArm.SyntaxNode == null || switchArm.SyntaxNode.Parent.ChildNodes().Count(x => x.IsKind(SyntaxKindEx.SwitchExpressionArm)) != 1)
             {
                 return Task.CompletedTask;
             }
 
-            var switchCondition = switchArm.Pattern.SyntaxNode;
-            var constantPattern = switchCondition.DescendantNodesAndSelf().FirstOrDefault(x => x.IsKind(SyntaxKindEx.ConstantPattern));
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
@@ -108,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var newRoot = root.ReplaceNode(
                             switchExpression,
-                            ((ConstantPatternSyntaxWrapper)constantPattern).Expression.WithTriviaFrom(switchExpression));
+                            switchArm.Expression.WithTriviaFrom(switchExpression));
                         return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                     }),
                 context.Diagnostics);

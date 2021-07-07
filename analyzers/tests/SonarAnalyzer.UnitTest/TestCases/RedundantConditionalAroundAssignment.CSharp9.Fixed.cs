@@ -9,6 +9,12 @@ y = 5;
 
 y = y switch
 {
+    5 => 5, // Fixed
+    6 => 6  // Fixed
+};
+
+y = y switch
+{
     not 5 when x == 5 => 5
 };
 
@@ -24,13 +30,21 @@ x = y switch
 
 y = y switch
 {
-    4 => 4,
+    4 => 4,      // Fixed
     not 5 => 5,
 };
 
 y = y switch
 {
-    4 => 4,
+    5 => 6,
+    _ => y
+};
+
+y = y;
+
+y = y switch
+{
+    4 => 4,      // Fixed
     not x => 5,  // Error [CS0150]
 };
 
