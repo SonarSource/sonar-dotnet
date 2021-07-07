@@ -8,14 +8,14 @@ var anotherEnumerable = new List<string>();
 var result = someEnumerable.Count() >= 0; // Noncompliant {{The count of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
 
 if (someEnumerable.Count() is >= 0) // Noncompliant {{The count of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
-//  ^^^^^^^^^^^^^^^^^^^^^^
+//                            ^^^^
 {
 }
 
-if (((someEnumerable.Count()), // Noncompliant
-//    ^^^^^^^^^^^^^^^^^^^^^^
-    anotherEnumerable.Count()) is (>= 0, >= 0)) // Noncompliant
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^
+if (((someEnumerable.Count()), anotherEnumerable.Count()) is (>= 0, // Noncompliant
+//                                                            ^^^^
+    >= 0)) // Noncompliant
+//  ^^^^
 {
 }
 
@@ -23,17 +23,27 @@ if (someEnumerable.Count() is < 0) { } // FN
 if (someEnumerable.Count() is >= 0 or 1) { } // Noncompliant
 if (someEnumerable.Count() is not >= 0) { } // Noncompliant
 
+int variable = 42;
+
 var x = args.Length switch
 {
-    >= 0 => 1, // FN
+    >= 0 => 1, // Noncompliant
+//  ^^^^
     < 0 => 2 // FN
+};
+
+x = (args.Length, variable) switch
+{
+    (>= 0, 4) => 1, // Noncompliant
+//   ^^^^
+    (>= 0, 2) => 2 // Noncompliant
 };
 
 var y = someEnumerable.Count() switch
 {
     1 => 1,
     2 => 2,
-    >= 0 => 3, // FN
+    >= 0 => 3, // Noncompliant
     < 0 => 4 // FN
 };
 
@@ -41,9 +51,20 @@ List<string> list = new();
 var z = list.Count switch
 {
     1 => 1,
-    not >= 0 => 2, // FN, it means it's <0
+    not >= 0 => 2, // Noncompliant
     not < 0 => 3 // FN, it means it's >=0
 };
+
+switch (list.Count)
+{
+    case >= 0: // Noncompliant
+//       ^^^^
+        break;
+    case -42:
+        break;
+    default:
+        break;
+}
 
 record R
 {
