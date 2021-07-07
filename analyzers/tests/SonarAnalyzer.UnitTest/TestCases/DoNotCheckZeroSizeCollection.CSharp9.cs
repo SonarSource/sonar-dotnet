@@ -66,8 +66,30 @@ switch (list.Count)
         break;
 }
 
+var r = new R();
+
+if (r is R {SomeProperty: { Length: >= 0} }) // Noncompliant
+//                                  ^^^^
+{
+}
+
+if (r is R { SomeProperty: { Length: not >= 0 } }) // Noncompliant
+//                                       ^^^^
+{
+}
+
+if (r is R { SomeProperty: { Length: >= 42 } })
+{
+}
+
+if (r is R { SomeProperty: {  Rank: >= 0 } })
+{
+}
+
 record R
 {
+    public string[] SomeProperty { get; set; }
+
     List<string> Prop
     {
         init
