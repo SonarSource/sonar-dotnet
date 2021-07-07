@@ -112,7 +112,13 @@ namespace SonarAnalyzer.Rules.CSharp
         // - false for "is not null" and "!= null"
         private SyntaxNode GetNullCheckVariableForKind(SyntaxNode node, bool expectedAffirmative)
         {
-            if (TryGetExpressionComparedToNull((ExpressionSyntax)node, out var compared, out var actualAffirmative))
+            var innerExpression = node.RemoveParentheses();
+            if (innerExpression is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
+            {
+                innerExpression = prefixUnary.Operand;
+                expectedAffirmative = !expectedAffirmative;
+            }
+            if (TryGetExpressionComparedToNull((ExpressionSyntax)innerExpression, out var compared, out var actualAffirmative))
             {
                 if (actualAffirmative && expectedAffirmative)
                 {

@@ -13,7 +13,7 @@ if (n is not null && n is nint nintValue) // Noncompliant
 {
 }
 
-if (!(n is null) && n is Apple) // FN
+if (!(n is null) && n is Apple) // Noncompliant
 {
 }
 
@@ -24,7 +24,7 @@ result = n is ("a" or "b" or "c") && n is not null; // Noncompliant
 
 if (apple != null && apple is ("Sweet", "Red")) { } // Noncompliant
 if (apple != null && apple is { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
-if (!(apple is null) && apple is { Taste: "Sweet", Color: "Red" }) { } // FN
+if (!(apple is null) && apple is { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
 if (apple is not null && apple is ("Sweet", "Red")) { } // Noncompliant
 
 var x = a switch
