@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
         where TExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S3981";
-        private const string MessageFormat = "The {0} of '{1}' is always '>=0', so fix this test to get the real expected behavior.";
+        private const string MessageFormat = "The '{0}' of '{1}' is always '>=0', so fix this test to get the real expected behavior.";
 
         private readonly DiagnosticDescriptor rule;
 
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules
                 && GetSymbol(context, expressionValueNode) is { } symbol
                 && GetDeclaringTypeName(symbol) is { } symbolType)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], issueLocation.GetLocation(), symbol.Name.ToLowerInvariant(), symbolType));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], issueLocation.GetLocation(), symbol.Name, symbolType));
             }
         }
 

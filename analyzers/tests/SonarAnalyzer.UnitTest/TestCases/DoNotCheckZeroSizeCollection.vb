@@ -57,9 +57,9 @@ Namespace Tests.Diagnostics
 
             Dim SomeEnumerable As IEnumerable(Of String) = New List(Of String)()
 
-            Result = Enumerable.Count(SomeEnumerable) >= 0 ' Noncompliant {{The count of 'IEnumerable(Of T)' is always '>=0', so fix this test to get the real expected behavior.}}
+            Result = Enumerable.Count(SomeEnumerable) >= 0 ' Noncompliant {{The 'Count' of 'IEnumerable(Of T)' is always '>=0', so fix this test to get the real expected behavior.}}
 '                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            Result = SomeEnumerable.Count(Function(foo) True) >= 0 ' Noncompliant
+            Result = SomeEnumerable.CoUnT(Function(foo) True) >= 0 ' Noncompliant {{The 'Count' of 'IEnumerable(Of T)' is always '>=0', so fix this test to get the real expected behavior.}}
             Result = SomeEnumerable?.Count() >= 0 ' Noncompliant
             Result = SomeEnumerable.Count() >= 1
             Result = SomeEnumerable.Count() >= localVariable
@@ -97,7 +97,7 @@ Namespace Tests.Diagnostics
 
         Public Sub TestCountProperty()
             Dim SomeCollection = New List(Of String)()
-            Dim Result As Boolean = SomeCollection.Count >= 0 ' Noncompliant {{The count of 'ICollection' is always '>=0', so fix this test to get the real expected behavior.}}
+            Dim Result As Boolean = SomeCollection.Count >= 0 ' Noncompliant {{The 'Count' of 'ICollection' is always '>=0', so fix this test to get the real expected behavior.}}
 '                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
             Dim NonCollection = New FooProperty()
             Result = NonCollection.Count >= 0
@@ -107,9 +107,9 @@ Namespace Tests.Diagnostics
             Dim SomeArray = New String(-1) {}
             Dim Result As Boolean
 
-            Result = SomeArray.Length >= 0 ' Noncompliant {{The length of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
+            Result = SomeArray.Length >= 0 ' Noncompliant {{The 'Length' of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
 '                    ^^^^^^^^^^^^^^^^^^^^^
-            Result = SomeArray.LongLength >= 0 ' Noncompliant {{The longlength of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
+            Result = SomeArray.LongLength >= 0 ' Noncompliant {{The 'LongLength' of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
 '                    ^^^^^^^^^^^^^^^^^^^^^^^^^
             Dim NonArray = New FooProperty()
             Result = NonArray.Length >= 0
