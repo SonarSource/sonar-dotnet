@@ -142,10 +142,22 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation()));
             }
-            if (IsNotNullPattern(right) && IsAffirmativePatternMatch(left))
+            else if (IsNotNullPattern(right) && IsAffirmativePatternMatch(left))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], right.GetLocation()));
             }
+
+            static bool IsNotNullPattern(SyntaxNode node) =>
+                UnaryPatternSyntaxWrapper.IsInstance(node)
+                && ((UnaryPatternSyntaxWrapper)node) is var unaryPatternSyntaxWrapper
+                && unaryPatternSyntaxWrapper.IsNotNull();
+
+            // Verifies the given pattern is like "foo is Bar" - where Bar can be constant pattern (except 'null'), Declaration pattern, recursive pattern
+            static bool IsAffirmativePatternMatch(SyntaxNode node) =>
+                PatternSyntaxWrapper.IsInstance(node)
+                && ((PatternSyntaxWrapper)node) is var isPatternWrapper
+                && !isPatternWrapper.IsNot()
+                && !isPatternWrapper.IsNull();
         }
 
         private void CheckOrPattern(SyntaxNodeAnalysisContext context)
@@ -153,38 +165,23 @@ namespace SonarAnalyzer.Rules.CSharp
             var binaryPatternNode = (BinaryPatternSyntaxWrapper)context.Node;
             var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
             var right = binaryPatternNode.Right.SyntaxNode.RemoveParentheses();
+            if (PatternSyntaxWrapper.IsInstance(left) && PatternSyntaxWrapper.IsInstance(right))
+            {
+                var leftPattern = (PatternSyntaxWrapper)left;
+                var rightPattern = (PatternSyntaxWrapper)right;
+                if (leftPattern.IsNull() && IsNegativePatternMatch(rightPattern))
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation()));
+                }
+                else if (rightPattern.IsNull() && IsNegativePatternMatch(leftPattern))
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], right.GetLocation()));
+                }
+            }
 
-            if (IsNullPattern(left) && IsNegativePatternMatch(right))
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation()));
-            }
-            if (IsNullPattern(right) && IsNegativePatternMatch(left))
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], right.GetLocation()));
-            }
+            // Verifies if the given pattern syntax is like "foo is not Bar" - where Bar can be constant pattern (except 'null'), Declaration pattern, recursive pattern
+            static bool IsNegativePatternMatch(PatternSyntaxWrapper patternSyntaxWrapper) =>
+                patternSyntaxWrapper.IsNot() && !patternSyntaxWrapper.IsNull();
         }
-
-        private bool IsNotNullPattern(SyntaxNode node) =>
-            UnaryPatternSyntaxWrapper.IsInstance(node)
-            && ((UnaryPatternSyntaxWrapper)node) is var unaryPatternSyntaxWrapper
-            && unaryPatternSyntaxWrapper.IsNotNull();
-
-        private bool IsNullPattern(SyntaxNode node) =>
-            PatternSyntaxWrapper.IsInstance(node)
-            && ((PatternSyntaxWrapper)node) is var isPatternWrapper
-            && isPatternWrapper.IsNull();
-
-        // Constant pattern (except null), Declaration pattern, recursive pattern - all are afirmative type checks and implicitly make a null check redundant
-        private bool IsAffirmativePatternMatch(SyntaxNode node) =>
-            PatternSyntaxWrapper.IsInstance(node)
-            && ((PatternSyntaxWrapper)node) is var isPatternWrapper
-            && !isPatternWrapper.IsNull()
-            && !isPatternWrapper.IsNot();
-
-        private bool IsNegativePatternMatch(SyntaxNode node) =>
-            PatternSyntaxWrapper.IsInstance(node)
-            && ((PatternSyntaxWrapper)node) is var isPatternWrapper
-            && isPatternWrapper.IsNot()
-            && !isPatternWrapper.IsNull();
     }
 }
