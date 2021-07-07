@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -78,8 +79,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (innerExpression.IsKind(SyntaxKindEx.IsPatternExpression))
             {
-                var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression;
-                return isPatternExpression.Expression.RemoveParentheses();
+                var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression.RemoveParentheses();
+                if (!isPatternExpression.IsNull() && !isPatternExpression.IsNotNull() && !isPatternExpression.IsNot())
+                {
+                    return isPatternExpression.Expression.RemoveParentheses();
+                }
             }
             return null;
         }
@@ -93,22 +97,64 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private SyntaxNode GetNullCheckVariableForKind(SyntaxNode node, SyntaxKind kind)
         {
-            // FIXME use ConditionalSimplification.TryGetExpressionComparedToNull - duplicate the method and keep what makes sense
-            if (node.RemoveParentheses() is BinaryExpressionSyntax binaryExpression && binaryExpression.IsKind(kind))
+            if (TryGetExpressionComparedToNull((ExpressionSyntax)node, out var compared, out var isAffirmative))
             {
-                var leftNode = GetLeftNode(binaryExpression);
-                var rightNode = GetRightNode(binaryExpression);
-
-                if (leftNode.IsNullLiteral())
+                if (isAffirmative && kind == SyntaxKind.EqualsExpression)
                 {
-                    return rightNode;
+                    return compared;
                 }
-                if (rightNode.IsNullLiteral())
+                if (!isAffirmative && kind == SyntaxKind.NotEqualsExpression)
                 {
-                    return leftNode;
+                    return compared;
                 }
             }
             return null;
+        }
+        private static readonly ISet<SyntaxKind> EqualsOrNotEquals = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.EqualsExpression,
+            SyntaxKind.NotEqualsExpression
+        };
+
+        internal static bool TryGetExpressionComparedToNull(ExpressionSyntax expression, out ExpressionSyntax compared, out bool isAffirmative)
+        {
+            compared = null;
+            isAffirmative = false;
+            if (expression.RemoveParentheses() is BinaryExpressionSyntax binary && EqualsOrNotEquals.Contains(binary.Kind()))
+            {
+                isAffirmative = binary.IsKind(SyntaxKind.EqualsExpression);
+                var binaryLeft = binary.Left.RemoveParentheses();
+                var binaryRight = binary.Right.RemoveParentheses();
+                if (CSharpEquivalenceChecker.AreEquivalent(binaryLeft, CSharpSyntaxHelper.NullLiteralExpression))
+                {
+                    compared = binaryRight;
+                    return true;
+                }
+                else if (CSharpEquivalenceChecker.AreEquivalent(binaryRight, CSharpSyntaxHelper.NullLiteralExpression))
+                {
+                    compared = binaryLeft;
+                    return true;
+                }
+            }
+
+            if (IsPatternExpressionSyntaxWrapper.IsInstance(expression.RemoveParentheses()))
+            {
+                var isPatternWrapper = (IsPatternExpressionSyntaxWrapper)expression.RemoveParentheses();
+                if (isPatternWrapper.IsNotNull())
+                {
+                    isAffirmative = false;
+                    compared = isPatternWrapper.Expression;
+                    return true;
+                }
+                else if (isPatternWrapper.IsNull())
+                {
+                    isAffirmative = true;
+                    compared = isPatternWrapper.Expression;
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void CheckAndPattern(SyntaxNodeAnalysisContext context)

@@ -9,7 +9,7 @@ if (n != null && n is nint) // Noncompliant
 {
 }
 
-if (n is not null && n is nint nintValue) // FN
+if (n is not null && n is nint nintValue) // Noncompliant
 {
 }
 
@@ -17,15 +17,15 @@ if (!(n is null) && n is Apple) // FN
 {
 }
 
-var result = (n is string && n is not null); // FN
-result = (n is string && n is not null && m is not null); // FN
+var result = (n is string && n is not null); // Noncompliant
+result = (n is string && n is not null && m is not null); // Noncompliant
 // parenthesized pattern
-result = n is ("a" or "b" or "c") && n is not null; // FN
+result = n is ("a" or "b" or "c") && n is not null; // Noncompliant
 
 if (apple != null && apple is ("Sweet", "Red")) { } // Noncompliant
 if (apple != null && apple is { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
 if (!(apple is null) && apple is { Taste: "Sweet", Color: "Red" }) { } // FN
-if (apple is not null && apple is ("Sweet", "Red")) { } // FN
+if (apple is not null && apple is ("Sweet", "Red")) { } // Noncompliant
 
 var x = a switch
     {
@@ -53,9 +53,9 @@ x = apple switch
 
 
 // OR, inverted
-result = n is null || !(n is Apple); // FN {{Remove this unnecessary null check; 'is' returns false for nulls.}}
-result = !(n is Apple) || n is null; // FN
-result = a is null || !(a is Apple aTyped1); // FN
+result = n is null || !(n is Apple); // Noncompliant {{Remove this unnecessary null check; 'is' returns false for nulls.}}
+result = !(n is Apple) || n is null; // Noncompliant
+result = a is null || !(a is Apple aTyped1); // Noncompliant
 result = !(a is Apple aTyped2) || a == null; // Noncompliant
 result = ((!((a) is Apple))) || ((a) == (null)); // Noncompliant
 
@@ -89,8 +89,8 @@ x = apple switch
 };
 
 // Compliant
-if (apple != null && apple is not { Taste: "Sweet", Color: "Red" }) { } // Noncompliant FP
-if (apple != null && apple is not ("Sweet", "Red")) { } // Noncompliant FP
+if (apple != null && apple is not { Taste: "Sweet", Color: "Red" }) { } // Compliant
+if (apple != null && apple is not ("Sweet", "Red")) { } // Compliant
 if (apple is not null || apple is ("Sweet", "Red")) { } // Compliant
 if (apple is not null || apple is { Taste: "Sweet", Color: "Red" }) { } // Compliant
 
@@ -98,10 +98,10 @@ if (apple is not null || apple is { Taste: "Sweet", Color: "Red" }) { } // Compl
 if (n is not null && n is not null) // Compliant (not related to this rule)
 {
 }
-if (n is not null && n != null) // Noncompliant FP (not related to this rule)
+if (n is not null && n != null) // Compliant (not related to this rule)
 {
 }
-result = (n is not Apple && n != null); // Noncompliant FP
+result = (n is not Apple && n != null); // Compliant
 result = (a is null || a is not null); // Compliant - not related to this rule
 result = (a is null || !(b is Apple)); // Compliant - a is not b
 result = b is null || !(a is Apple); // Compliant - b is not a
