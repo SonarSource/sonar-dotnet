@@ -66,25 +66,25 @@ if (apple == null || !(apple is ("Sweet", "Red"))) { } // Noncompliant
 
 x = a switch
 {
-    null or not "a" => "", // FN
+    null or not "a" => "", // Noncompliant
     _ => ""
 };
 
 x = a switch
 {
-    null or not Apple => "", // FN
+    null or not Apple => "", // Noncompliant
     _ => ""
 };
 
 x = apple switch
 {
-    null or not ("Sweet", "Red")  => "", // FN
+    null or not ("Sweet", "Red")  => "", // Noncompliant
     _ => ""
 };
 
 x = apple switch
 {
-    null or not { Taste: "Sweet", Color: "Red" } => "", // FN
+    null or not { Taste: "Sweet", Color: "Red" } => "", // Noncompliant
     _ => ""
 };
 

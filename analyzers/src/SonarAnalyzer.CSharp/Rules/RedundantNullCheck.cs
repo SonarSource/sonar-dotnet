@@ -54,6 +54,10 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckAndPattern,
                 SyntaxKindEx.AndPattern);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                CheckOrPattern,
+                SyntaxKindEx.OrPattern);
         }
 
         protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
@@ -123,10 +127,31 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
+        private void CheckOrPattern(SyntaxNodeAnalysisContext context)
+        {
+            var binaryPatternNode = (BinaryPatternSyntaxWrapper)context.Node;
+            var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
+            var right = binaryPatternNode.Right.SyntaxNode.RemoveParentheses();
+
+            if (IsNullPattern(left) && IsNegativePatternMatch(right))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation()));
+            }
+            if (IsNullPattern(right) && IsNegativePatternMatch(left))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], right.GetLocation()));
+            }
+        }
+
         private bool IsNotNullPattern(SyntaxNode node) =>
             UnaryPatternSyntaxWrapper.IsInstance(node)
             && ((UnaryPatternSyntaxWrapper)node) is var unaryPatternSyntaxWrapper
             && unaryPatternSyntaxWrapper.IsNotNull();
+
+        private bool IsNullPattern(SyntaxNode node) =>
+            PatternSyntaxWrapper.IsInstance(node)
+            && ((PatternSyntaxWrapper)node) is var isPatternWrapper
+            && isPatternWrapper.IsNull();
 
         // Constant pattern (except null), Declaration pattern, recursive pattern - all are afirmative type checks and implicitly make a null check redundant
         private bool IsAffirmativePatternMatch(SyntaxNode node) =>
@@ -134,5 +159,11 @@ namespace SonarAnalyzer.Rules.CSharp
             && ((PatternSyntaxWrapper)node) is var isPatternWrapper
             && !isPatternWrapper.IsNull()
             && !isPatternWrapper.IsNot();
+
+        private bool IsNegativePatternMatch(SyntaxNode node) =>
+            PatternSyntaxWrapper.IsInstance(node)
+            && ((PatternSyntaxWrapper)node) is var isPatternWrapper
+            && isPatternWrapper.IsNot()
+            && !isPatternWrapper.IsNull();
     }
 }
