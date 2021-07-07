@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var binaryExpression = (TBinaryExpressionSyntax)c.Node;
-                    CheckCondition(c, GetLeftNode(binaryExpression), GetRightNode(binaryExpression));
+                    CheckCondition(c, c.Node, GetLeftNode(binaryExpression), GetRightNode(binaryExpression));
                 },
                 GreaterThanOrEqualExpression);
 
@@ -68,22 +68,22 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var binaryExpression = (TBinaryExpressionSyntax)c.Node;
-                    CheckCondition(c, GetRightNode(binaryExpression), GetLeftNode(binaryExpression));
+                    CheckCondition(c, c.Node, GetRightNode(binaryExpression), GetLeftNode(binaryExpression));
                 },
                 LessThanOrEqualExpression);
         }
 
-        private void CheckCondition(SyntaxNodeAnalysisContext context, TExpressionSyntax expressionValueNode, TExpressionSyntax constantValueNode)
+        protected void CheckCondition(SyntaxNodeAnalysisContext context, SyntaxNode issueLocation, TExpressionSyntax expressionValueNode, TExpressionSyntax constantValueNode)
         {
             if (IsConstantZero(context, constantValueNode)
                 && GetSymbol(context, expressionValueNode) is { } symbol
                 && GetDeclaringTypeName(symbol) is { } symbolType)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], context.Node.GetLocation(), symbol.Name.ToLowerInvariant(), symbolType));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], issueLocation.GetLocation(), symbol.Name.ToLowerInvariant(), symbolType));
             }
         }
 
-        private string GetDeclaringTypeName(ISymbol symbol)
+        protected string GetDeclaringTypeName(ISymbol symbol)
         {
             if (IsArrayLengthProperty(symbol))
             {

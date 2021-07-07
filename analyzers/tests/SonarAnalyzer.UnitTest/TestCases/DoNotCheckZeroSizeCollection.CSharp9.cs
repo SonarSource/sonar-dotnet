@@ -3,13 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 
 var someEnumerable = new List<string>();
+var anotherEnumerable = new List<string>();
 
 var result = someEnumerable.Count() >= 0; // Noncompliant {{The count of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
 
-if (someEnumerable.Count() is >= 0) { } // FN
+if (someEnumerable.Count() is >= 0) // Noncompliant {{The count of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^
+{
+}
+
+if (((someEnumerable.Count()), // Noncompliant
+//    ^^^^^^^^^^^^^^^^^^^^^^
+    anotherEnumerable.Count()) is (>= 0, >= 0)) // Noncompliant
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^
+{
+}
+
 if (someEnumerable.Count() is < 0) { } // FN
-if (someEnumerable.Count() is >= 0 or 1) { } // FN
-if (someEnumerable.Count() is not >= 0) { } // Compliant
+if (someEnumerable.Count() is >= 0 or 1) { } // Noncompliant
+if (someEnumerable.Count() is not >= 0) { } // Noncompliant
 
 var x = args.Length switch
 {
