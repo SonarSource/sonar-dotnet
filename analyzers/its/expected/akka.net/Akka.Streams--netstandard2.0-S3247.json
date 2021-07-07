@@ -458,6 +458,30 @@
 },
 {
 "id":  "S3247",
+"message":  "Remove this cast and use the appropriate variable.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1473,
+"startColumn":  21,
+"endLine":  1473,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1477,
+"startColumn":  34,
+"endLine":  1477,
+"endColumn":  57
+}
+}
+]
+},
+{
+"id":  "S3247",
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
