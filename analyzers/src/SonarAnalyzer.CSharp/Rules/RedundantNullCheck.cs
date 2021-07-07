@@ -50,6 +50,10 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckOrExpression,
                 SyntaxKind.LogicalOrExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                CheckAndPattern,
+                SyntaxKindEx.AndPattern);
         }
 
         protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
@@ -102,5 +106,33 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return null;
         }
+
+        private void CheckAndPattern(SyntaxNodeAnalysisContext context)
+        {
+            var binaryPatternNode = (BinaryPatternSyntaxWrapper)context.Node;
+            var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
+            var right = binaryPatternNode.Right.SyntaxNode.RemoveParentheses();
+
+            if (IsNotNullPattern(left) && IsAffirmativePatternMatch(right))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation()));
+            }
+            if (IsNotNullPattern(right) && IsAffirmativePatternMatch(left))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], right.GetLocation()));
+            }
+        }
+
+        private bool IsNotNullPattern(SyntaxNode node) =>
+            UnaryPatternSyntaxWrapper.IsInstance(node)
+            && ((UnaryPatternSyntaxWrapper)node) is var unaryPatternSyntaxWrapper
+            && unaryPatternSyntaxWrapper.IsNotNull();
+
+        // Constant pattern (except null), Declaration pattern, recursive pattern - all are afirmative type checks and implicitly make a null check redundant
+        private bool IsAffirmativePatternMatch(SyntaxNode node) =>
+            PatternSyntaxWrapper.IsInstance(node)
+            && ((PatternSyntaxWrapper)node) is var isPatternWrapper
+            && !isPatternWrapper.IsNull()
+            && !isPatternWrapper.IsNot();
     }
 }

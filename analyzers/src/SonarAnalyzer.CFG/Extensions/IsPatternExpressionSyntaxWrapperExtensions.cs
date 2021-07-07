@@ -31,7 +31,6 @@ namespace SonarAnalyzer.Extensions
             isPatternWrapper.Pattern.RemoveParentheses() is var syntaxNode
             && UnaryPatternSyntaxWrapper.IsInstance(syntaxNode)
             && ((UnaryPatternSyntaxWrapper)syntaxNode) is var unaryPatternSyntaxWrapper
-            && unaryPatternSyntaxWrapper.IsNot()
-            && unaryPatternSyntaxWrapper.Pattern.IsNull();
+            && unaryPatternSyntaxWrapper.IsNotNull();
     }
 }

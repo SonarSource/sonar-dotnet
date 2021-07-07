@@ -29,7 +29,7 @@ if (apple is not null && apple is ("Sweet", "Red")) { } // FN
 
 var x = a switch
     {
-        Apple appleInside and not null => "", // FN
+        Apple appleInside and not null => "", // Noncompliant
         _ => ""
     };
 
@@ -41,13 +41,13 @@ x = a switch
 
 x = apple switch
 {
-    not null and ("Sweet", "Red") => "", // FN
+    not null and ("Sweet", "Red") => "", // Noncompliant
     _ => ""
 };
 
 x = apple switch
 {
-    { Taste: "Sweet", Color: "Red" } and not null => "", // FN
+    { Taste: "Sweet", Color: "Red" } and not null => "", // Noncompliant
     _ => ""
 };
 
@@ -134,7 +134,7 @@ x = m switch
 
 static int GetTax(object id) => id switch
 {
-    not null and 1 => 0, // FN
+    not null and 1 => 0, // Noncompliant
     not null and not 5 => 5, // Compliant
     5 => 15,
     _ => 10
