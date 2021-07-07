@@ -38,6 +38,8 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind GreaterThanOrEqualExpression => SyntaxKind.GreaterThanOrEqualExpression;
         protected override SyntaxKind LessThanOrEqualExpression => SyntaxKind.LessThanOrEqualExpression;
+        protected override SyntaxKind GreaterThanExpression => SyntaxKind.GreaterThanExpression;
+        protected override SyntaxKind LessThanExpression => SyntaxKind.LessThanExpression;
         protected override string IEnumerableTString { get; } = "IEnumerable<T>";
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -47,6 +49,25 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeSwitchExpression, SyntaxKindEx.SwitchExpression);
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeSwitchStatement, SyntaxKind.SwitchStatement);
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzePropertyPatternClause, SyntaxKindEx.PropertyPatternClause);
+        }
+
+        protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) =>
+            binaryExpression.Left;
+
+        protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) =>
+            binaryExpression.Right;
+
+        protected override ExpressionSyntax RemoveParentheses(ExpressionSyntax expression) =>
+            expression.RemoveParentheses();
+
+        protected override ISymbol GetSymbol(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
+        {
+            while (expression is ConditionalAccessExpressionSyntax conditionalAccess)
+            {
+                expression = conditionalAccess.WhenNotNull;
+            }
+
+            return context.SemanticModel.GetSymbolInfo(expression).Symbol;
         }
 
         private void AnalyzePropertyPatternClause(SyntaxNodeAnalysisContext c)
@@ -100,33 +121,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckPatternCondition(SyntaxNodeAnalysisContext context, ExpressionSyntax expression, SyntaxNode pattern)
         {
-            var relationalOrSubPattern =  pattern.DescendantNodesAndSelf().FirstOrDefault(x => x.IsAnyKind(SyntaxKindEx.RelationalPattern, SyntaxKindEx.Subpattern));
+            var relationalOrSubPattern = pattern.DescendantNodesAndSelf().FirstOrDefault(x => x.IsAnyKind(SyntaxKindEx.RelationalPattern, SyntaxKindEx.Subpattern));
             if (RelationalPatternSyntaxWrapper.IsInstance(relationalOrSubPattern)
                 && ((RelationalPatternSyntaxWrapper)relationalOrSubPattern) is var relationalPattern
-                && relationalPattern.OperatorToken.ValueText.Equals(">="))
+                && IsOperatorOfInterest(relationalPattern.OperatorToken))
             {
                 CheckCondition(context, relationalPattern, expression, relationalPattern.Expression);
             }
         }
 
-        protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) =>
-            binaryExpression.Left;
-
-        protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) =>
-            binaryExpression.Right;
-
-        protected override ExpressionSyntax RemoveParentheses(ExpressionSyntax expression) =>
-            expression.RemoveParentheses();
-
-        protected override ISymbol GetSymbol(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
-        {
-            while (expression is ConditionalAccessExpressionSyntax conditionalAccess)
-            {
-                expression = conditionalAccess.WhenNotNull;
-            }
-
-            return context.SemanticModel.GetSymbolInfo(expression).Symbol;
-        }
+        private bool IsOperatorOfInterest(SyntaxToken syntaxToken) =>
+            syntaxToken.ValueText.Equals(">=") || syntaxToken.ValueText.Equals("<");
 
         private void MapObjectToPattern(ExpressionSyntax expression, SyntaxNode pattern, IDictionary<ExpressionSyntax, SyntaxNode> objectToPatternMap)
         {
