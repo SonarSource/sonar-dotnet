@@ -127,7 +127,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void Bar(object x)
+        public void Bar(object x, object y)
         {
             if (x is not Fruit)
             {
@@ -143,6 +143,10 @@ namespace Tests.Diagnostics
             {
                 var aRealFruit = (Fruit)tuttyFrutty;   // Noncompliant [property-pattern-1] {{Remove this redundant cast.}}
                 var anotherFruit = (Fruit)x;           // Secondary [property-pattern-2]
+            }
+
+            if ((x, y) is (R { SomeProperty: { Count: 5 } }))  // Error[CS8121]
+            {
             }
         }
 

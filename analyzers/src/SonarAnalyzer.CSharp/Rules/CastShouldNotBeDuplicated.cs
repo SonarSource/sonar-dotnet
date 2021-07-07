@@ -137,7 +137,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                                       SyntaxNode parentStatement)
         {
             var objectToPattern = new Dictionary<ExpressionSyntax, SyntaxNode>();
-            MapObjectToPattern((ExpressionSyntax)mainVariableExpression.RemoveParentheses(), isPattern, objectToPattern);
+            MapObjectToPattern((ExpressionSyntax)mainVariableExpression.RemoveParentheses(), isPattern.RemoveParentheses(), objectToPattern);
             foreach (var expressionPatternPair in objectToPattern)
             {
                 var pattern = expressionPatternPair.Value.RemoveParentheses();
