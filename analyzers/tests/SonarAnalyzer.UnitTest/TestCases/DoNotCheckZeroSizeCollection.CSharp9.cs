@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+const int localConst_Zero = 0;
 var someEnumerable = new List<string>();
 var anotherEnumerable = new List<string>();
 
@@ -9,6 +10,10 @@ var result = someEnumerable.Count() >= 0; // Noncompliant {{The 'Count' of 'IEnu
 
 if (someEnumerable.Count() is >= 0) // Noncompliant {{The 'Count' of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
 //                            ^^^^
+{
+}
+
+if (someEnumerable.Count() is  >= localConst_Zero) // Noncompliant
 {
 }
 
