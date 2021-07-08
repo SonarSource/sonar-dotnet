@@ -165,7 +165,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // Verifies if the given pattern syntax is like "not X" - where X can be constant pattern (except 'null'), Declaration pattern, Recursive pattern.
             // The PatternSyntax appears e.g. in switch arms and is different from IsPatternSyntax.
             static bool IsNegativePatternMatch(PatternSyntaxWrapper patternSyntaxWrapper) =>
-                patternSyntaxWrapper.IsNot() && !patternSyntaxWrapper.IsNull();
+                patternSyntaxWrapper.IsNot();
         }
 
         // expectedAffirmative

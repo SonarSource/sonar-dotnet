@@ -17,19 +17,25 @@ if (!(n is null) && n is Apple) // Noncompliant
 {
 }
 
-var result = (n is string && n is not null); // Noncompliant
+var result = (n is string && n is not null); // Noncompliant {{Remove this unnecessary null check; 'is' returns false for nulls.}}
+//                           ^^^^^^^^^^^^^
 result = (n is string && n is not null && m is not null); // Noncompliant
+//                       ^^^^^^^^^^^^^
+
 // parenthesized pattern
 result = n is ("a" or "b" or "c") && n is not null; // Noncompliant
+//                                   ^^^^^^^^^^^^^
 
 if (apple != null && apple is ("Sweet", "Red")) { } // Noncompliant
 if (apple != null && apple is { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
 if (!(apple is null) && apple is { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
+//  ^^^^^^^^^^^^^^^^
 if (apple is not null && apple is ("Sweet", "Red")) { } // Noncompliant
 
 var x = a switch
     {
-        Apple appleInside and not null => "", // Noncompliant
+        Apple appleInside and not null => "", // Noncompliant {{Remove this unnecessary null check; 'is' returns false for nulls.}}
+//                            ^^^^^^^^
         _ => ""
     };
 
@@ -54,6 +60,7 @@ x = apple switch
 x = apple switch
 {
     { Taste: "Sweet" } and not null and { Color: "Red" }  => "", // Noncompliant
+//                         ^^^^^^^^
     _ => ""
 };
 
@@ -64,9 +71,12 @@ result = !(n is Apple) || n is null; // Noncompliant
 result = a is null || !(a is Apple aTyped1); // Noncompliant
 result = !(a is Apple aTyped2) || a == null; // Noncompliant
 result = ((!((a) is Apple))) || ((a) == (null)); // Noncompliant
+//                               ^^^^^^^^^^^^^
 
 if (apple == null || apple is not { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
+//  ^^^^^^^^^^^^^
 if (apple is null || apple is not { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
+//  ^^^^^^^^^^^^^
 if (apple == null || !(apple is { Taste: "Sweet", Color: "Red" })) { } // Noncompliant
 if (apple == null || apple is not ("Sweet", "Red")) { } // Noncompliant
 if (apple == null || !(apple is ("Sweet", "Red"))) { } // Noncompliant
@@ -74,7 +84,8 @@ if (apple is null || !(apple is ("Sweet", "Red"))) { } // Noncompliant
 
 x = a switch
 {
-    null or not "a" => "", // Noncompliant
+    null or not "a" => "", // Noncompliant {{Remove this unnecessary null check; 'is' returns false for nulls.}}
+//  ^^^^
     _ => ""
 };
 

@@ -24,9 +24,11 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,53 +36,77 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class RedundantNullCheckCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Remove this unnecessary null check";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(RedundantNullCheck.DiagnosticId);
-            }
-        }
 
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return WellKnownFixAllProviders.BatchFixer;
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(RedundantNullCheck.DiagnosticId);
+
+        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
+            var diagnosticNode = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
 
-            // FIXME: avoid providing a fix for patterns, as it can become messy for non-trivial recursive patterns
-            if (!(root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is BinaryExpressionSyntax nullCheckNode))
+            if (diagnosticNode is BinaryExpressionSyntax nullCheckNode)
             {
-                return TaskHelper.CompletedTask;
+                RegisterBinaryExpressionCodeFix(context, root, nullCheckNode);
+            }
+            else if (diagnosticNode is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
+            {
+                RegisterBinaryExpressionCodeFix(context, root, prefixUnary);
+            }
+            else if (IsPatternExpressionSyntaxWrapper.IsInstance(diagnosticNode))
+            {
+                var isPatternExpression = (IsPatternExpressionSyntaxWrapper)diagnosticNode.RemoveParentheses();
+                if (isPatternExpression.IsNull() || isPatternExpression.IsNotNull())
+                {
+                    RegisterBinaryExpressionCodeFix(context, root, isPatternExpression.SyntaxNode);
+                }
+            }
+            else if (PatternSyntaxWrapper.IsInstance(diagnosticNode))
+            {
+                RegisterBinaryPatternCodeFix(context, root, ((PatternSyntaxWrapper)diagnosticNode).SyntaxNode);
             }
 
+            return TaskHelper.CompletedTask;
+        }
+
+        private static void RegisterBinaryExpressionCodeFix(CodeFixContext context, SyntaxNode root, SyntaxNode mustBeReplaced) =>
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
                     c =>
                     {
-                        var binaryExpression = nullCheckNode.Parent.FirstAncestorOrSelf<BinaryExpressionSyntax>();
+                        var binaryExpression = mustBeReplaced.Parent.FirstAncestorOrSelf<BinaryExpressionSyntax>();
                         var newRoot = root;
                         if (binaryExpression != null)
                         {
-                            if (binaryExpression.Left.RemoveParentheses() == nullCheckNode)
-                            {
-                                newRoot = root.ReplaceNode(binaryExpression, binaryExpression.Right.WithTriviaFrom(binaryExpression));
-                            }
-                            else
-                            {
-                                newRoot = root.ReplaceNode(binaryExpression, binaryExpression.Left.WithTriviaFrom(binaryExpression));
-                            }
+                            newRoot = ReplaceNode(root, binaryExpression, binaryExpression.Left, binaryExpression.Right, mustBeReplaced);
                         }
                         return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                     }),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
-        }
+        private static void RegisterBinaryPatternCodeFix(CodeFixContext context, SyntaxNode root, SyntaxNode mustBeReplaced) =>
+            context.RegisterCodeFix(
+                CodeAction.Create(
+                    Title,
+                    c =>
+                    {
+                        var binaryExpression = mustBeReplaced.Parent.FirstAncestorOrSelf<SyntaxNode>(n => BinaryPatternSyntaxWrapper.IsInstance(n));
+                        var newRoot = root;
+                        if (binaryExpression != null)
+                        {
+                            var binaryPatternNode = (BinaryPatternSyntaxWrapper)binaryExpression;
+                            newRoot = ReplaceNode(root, binaryExpression, binaryPatternNode.Left.SyntaxNode, binaryPatternNode.Right.SyntaxNode, mustBeReplaced);
+                        }
+                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                    }),
+                context.Diagnostics);
+
+        private static SyntaxNode ReplaceNode(SyntaxNode root, SyntaxNode binaryExpression, SyntaxNode binaryLeft, SyntaxNode binaryRight, SyntaxNode mustBeReplaced) =>
+            binaryLeft.RemoveParentheses() == mustBeReplaced
+                ? root.ReplaceNode(binaryExpression, binaryRight.WithTriviaFrom(binaryExpression))
+                : root.ReplaceNode(binaryExpression, binaryLeft.WithTriviaFrom(binaryExpression));
     }
 }

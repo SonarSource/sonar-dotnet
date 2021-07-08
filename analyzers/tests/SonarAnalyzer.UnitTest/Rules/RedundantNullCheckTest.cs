@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -48,6 +49,18 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    @"TestCases\RedundantNullCheck.Fixed.Batch.cs",
                                    new CS.RedundantNullCheck(),
                                    new CS.RedundantNullCheckCodeFixProvider());
+
+#if NET
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RedundantNullCheck_CSharp9_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundantNullCheck.CSharp9.cs",
+                                   @"TestCases\RedundantNullCheck.CSharp9.Fixed.cs",
+                                   new CS.RedundantNullCheck(),
+                                   new CS.RedundantNullCheckCodeFixProvider(),
+                                   ParseOptionsHelper.FromCSharp9,
+                                   OutputKind.ConsoleApplication);
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
