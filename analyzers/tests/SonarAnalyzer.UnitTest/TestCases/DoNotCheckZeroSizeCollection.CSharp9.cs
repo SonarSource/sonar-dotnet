@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+const int localConst_Zero = 0;
 var someEnumerable = new List<string>();
 var anotherEnumerable = new List<string>();
 
@@ -12,6 +13,10 @@ if (someEnumerable.Count() is >= 0) // Noncompliant {{The 'Count' of 'IEnumerabl
 {
 }
 
+if (someEnumerable.Count() is  >= localConst_Zero) // Noncompliant
+{
+}
+
 if (((someEnumerable.Count()), anotherEnumerable.Count()) is (>= 0, // Noncompliant
 //                                                            ^^^^
     >= 0)) // Noncompliant
@@ -19,7 +24,8 @@ if (((someEnumerable.Count()), anotherEnumerable.Count()) is (>= 0, // Noncompli
 {
 }
 
-if (someEnumerable.Count() is < 0) { } // FN
+if (someEnumerable.Count() is < 0) { } // Noncompliant
+if (someEnumerable.Count() is < localConst_Zero) { } // Noncompliant
 if (someEnumerable.Count() is >= 0 or 1) { } // Noncompliant
 if (someEnumerable.Count() is not >= 0) { } // Noncompliant
 
@@ -29,7 +35,7 @@ var x = args.Length switch
 {
     >= 0 => 1, // Noncompliant
 //  ^^^^
-    < 0 => 2 // FN
+    < 0 => 2 // Noncompliant
 };
 
 x = (args.Length, variable) switch
@@ -44,7 +50,7 @@ var y = someEnumerable.Count() switch
     1 => 1,
     2 => 2,
     >= 0 => 3, // Noncompliant
-    < 0 => 4 // FN
+    < -2 => 4 // Noncompliant
 };
 
 List<string> list = new();
@@ -52,7 +58,7 @@ var z = list.Count switch
 {
     1 => 1,
     not >= 0 => 2, // Noncompliant
-    not < 0 => 3 // FN, it means it's >=0
+    not < 0 => 3 // Noncompliant
 };
 
 switch (list.Count)
@@ -112,7 +118,10 @@ record R
     {
         init
         {
-            if (value.Count < 0) { } // FN https://github.com/SonarSource/sonar-dotnet/issues/3735
+            if (value.Count < 0) { } // Noncompliant
+            if (value.Count < -1) { } // Noncompliant
+            if (0 > value.Count) { } // Noncompliant
+            if (-42 > value.Count) { } // Noncompliant
             if (value.Count >= 0) { } // Noncompliant {{The 'Count' of 'ICollection' is always '>=0', so fix this test to get the real expected behavior.}}
             if (value.Count == 0) { }
             if (value.Count == 1) { }

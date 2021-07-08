@@ -38,6 +38,9 @@ namespace SonarAnalyzer.Rules
 
         protected abstract TSyntaxKind GreaterThanOrEqualExpression { get; }
         protected abstract TSyntaxKind LessThanOrEqualExpression { get; }
+        protected abstract TSyntaxKind GreaterThanExpression { get; }
+        protected abstract TSyntaxKind LessThanExpression { get; }
+
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string IEnumerableTString { get; }
 
@@ -62,7 +65,8 @@ namespace SonarAnalyzer.Rules
                     var binaryExpression = (TBinaryExpressionSyntax)c.Node;
                     CheckCondition(c, c.Node, GetLeftNode(binaryExpression), GetRightNode(binaryExpression));
                 },
-                GreaterThanOrEqualExpression);
+                GreaterThanOrEqualExpression,
+                LessThanExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
@@ -70,12 +74,13 @@ namespace SonarAnalyzer.Rules
                     var binaryExpression = (TBinaryExpressionSyntax)c.Node;
                     CheckCondition(c, c.Node, GetRightNode(binaryExpression), GetLeftNode(binaryExpression));
                 },
-                LessThanOrEqualExpression);
+                LessThanOrEqualExpression,
+                GreaterThanExpression);
         }
 
         protected void CheckCondition(SyntaxNodeAnalysisContext context, SyntaxNode issueLocation, TExpressionSyntax expressionValueNode, TExpressionSyntax constantValueNode)
         {
-            if (IsConstantZero(context, constantValueNode)
+            if (IsZeroOrNegativeConstantValue(context, constantValueNode)
                 && GetSymbol(context, expressionValueNode) is { } symbol
                 && GetDeclaringTypeName(symbol) is { } symbolType)
             {
@@ -108,11 +113,11 @@ namespace SonarAnalyzer.Rules
             return null;
         }
 
-        private bool IsConstantZero(SyntaxNodeAnalysisContext context, TExpressionSyntax expression)
+        private bool IsZeroOrNegativeConstantValue(SyntaxNodeAnalysisContext context, TExpressionSyntax expression)
         {
             var constantExpressionNode = RemoveParentheses(expression);
             var constant = context.SemanticModel.GetConstantValue(constantExpressionNode);
-            return constant.HasValue && (constant.Value is int intValue) && intValue == 0;
+            return constant.HasValue && (constant.Value is int intValue) && intValue <= 0;
         }
 
         private static bool IsEnumerableCountMethod(ISymbol symbol) =>
