@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -26,6 +27,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -36,58 +38,81 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3440";
         private const string MessageFormat = "Remove this useless conditional.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(UselessConditionIfStatement, SyntaxKind.IfStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(UselessConditionSwitchExpression, SyntaxKindEx.SwitchExpression);
+        }
+
+        private static void UselessConditionIfStatement(SyntaxNodeAnalysisContext c)
+        {
+            var ifStatement = (IfStatementSyntax)c.Node;
+
+            if (ifStatement.Else != null
+                || ifStatement.Parent is ElseClauseSyntax
+                || (ifStatement.FirstAncestorOrSelf<AccessorDeclarationSyntax>()?.IsKind(SyntaxKind.SetAccessorDeclaration) ?? false)
+                || !TryGetNotEqualsCondition(ifStatement, out var condition)
+                || !TryGetSingleAssignment(ifStatement, out var assignment))
+            {
+                return;
+            }
+
+            var expression1Condition = condition.Left?.RemoveParentheses();
+            var expression2Condition = condition.Right?.RemoveParentheses();
+            var expression1Assignment = assignment.Left?.RemoveParentheses();
+            var expression2Assignment = assignment.Right?.RemoveParentheses();
+
+            if (!AreMatchingExpressions(expression1Condition, expression2Condition, expression2Assignment, expression1Assignment)
+                && !AreMatchingExpressions(expression1Condition, expression2Condition, expression1Assignment, expression2Assignment))
+            {
+                return;
+            }
+
+            if (!(c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IPropertySymbol))
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, condition.GetLocation()));
+            }
+        }
+
+        private static void UselessConditionSwitchExpression(SyntaxNodeAnalysisContext c)
+        {
+            var switchExpression = (SwitchExpressionSyntaxWrapper)c.Node;
+
+            if (!(switchExpression.SyntaxNode.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax))
+            {
+                return;
+            }
+
+            foreach (var switchArm in switchExpression.Arms)
+            {
+                var condition = switchArm.Pattern.SyntaxNode;
+                var constantPattern = condition.DescendantNodesAndSelf().FirstOrDefault(x => x.IsKind(SyntaxKindEx.ConstantPattern));
+                var expression = switchArm.Expression;
+                if ((constantPattern != null
+                    && !(condition.IsKind(SyntaxKindEx.NotPattern) && (switchArm.WhenClause.SyntaxNode != null || switchExpression.Arms.Count != 1))
+                    && CSharpEquivalenceChecker.AreEquivalent(expression, ((ConstantPatternSyntaxWrapper)constantPattern).Expression))
+                    || (condition.IsKind(SyntaxKindEx.DiscardPattern) && switchExpression.Arms.Count == 1))
                 {
-                    var ifStatement = (IfStatementSyntax)c.Node;
-
-                    if (ifStatement.Else != null ||
-                        ifStatement.Parent is ElseClauseSyntax ||
-                        (ifStatement.FirstAncestorOrSelf<AccessorDeclarationSyntax>()?.IsKind(SyntaxKind.SetAccessorDeclaration) ?? false) ||
-                        !TryGetNotEqualsCondition(ifStatement, out var condition) ||
-                        !TryGetSingleAssignment(ifStatement, out var assignment))
-                    {
-                        return;
-                    }
-
-                    var expression1Condition = condition.Left?.RemoveParentheses();
-                    var expression2Condition = condition.Right?.RemoveParentheses();
-                    var expression1Assignment = assignment.Left?.RemoveParentheses();
-                    var expression2Assignment = assignment.Right?.RemoveParentheses();
-
-                    if (!AreMatchingExpressions(expression1Condition, expression2Condition, expression2Assignment, expression1Assignment) &&
-                        !AreMatchingExpressions(expression1Condition, expression2Condition, expression1Assignment, expression2Assignment))
-                    {
-                        return;
-                    }
-
-                    if (!(c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IPropertySymbol))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, condition.GetLocation()));
-                    }
-                },
-                SyntaxKind.IfStatement);
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, condition.GetLocation()));
+                }
+            }
         }
 
         private static bool TryGetNotEqualsCondition(IfStatementSyntax ifStatement, out BinaryExpressionSyntax condition)
         {
             condition = ifStatement.Condition?.RemoveParentheses() as BinaryExpressionSyntax;
-            return condition != null &&
-                condition.IsKind(SyntaxKind.NotEqualsExpression);
+            return condition != null && condition.IsKind(SyntaxKind.NotEqualsExpression);
         }
 
         private static bool TryGetSingleAssignment(IfStatementSyntax ifStatement, out AssignmentExpressionSyntax assignment)
         {
             var statement = ifStatement.Statement;
 
-            if (!(statement is BlockSyntax block) ||
-                block.Statements.Count != 1)
+            if (!(statement is BlockSyntax block) || block.Statements.Count != 1)
             {
                 assignment = null;
                 return false;
@@ -96,13 +121,10 @@ namespace SonarAnalyzer.Rules.CSharp
             statement = block.Statements.First();
             assignment = (statement as ExpressionStatementSyntax)?.Expression as AssignmentExpressionSyntax;
 
-            return assignment != null &&
-                assignment.IsKind(SyntaxKind.SimpleAssignmentExpression);
+            return assignment != null && assignment.IsKind(SyntaxKind.SimpleAssignmentExpression);
         }
 
-        private static bool AreMatchingExpressions(ExpressionSyntax condition1, ExpressionSyntax condition2,
-            ExpressionSyntax assignment1, ExpressionSyntax assignment2) =>
-            CSharpEquivalenceChecker.AreEquivalent(condition1, assignment1)
-            && CSharpEquivalenceChecker.AreEquivalent(condition2, assignment2);
+        private static bool AreMatchingExpressions(SyntaxNode condition1, SyntaxNode condition2, SyntaxNode assignment1, SyntaxNode assignment2) =>
+            CSharpEquivalenceChecker.AreEquivalent(condition1, assignment1) && CSharpEquivalenceChecker.AreEquivalent(condition2, assignment2);
     }
 }

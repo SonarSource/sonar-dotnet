@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -37,6 +38,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RedundantConditionalAroundAssignment_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new RedundantConditionalAroundAssignment());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RedundantConditionalAroundAssignment_CSharp9_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs",
+                                   @"TestCases\RedundantConditionalAroundAssignment.CSharp9.Fixed.cs",
+                                   new RedundantConditionalAroundAssignment(),
+                                   new RedundantConditionalAroundAssignmentCodeFixProvider(),
+                                   ParseOptionsHelper.FromCSharp9,
+                                   OutputKind.ConsoleApplication);
 #endif
 
         [TestMethod]

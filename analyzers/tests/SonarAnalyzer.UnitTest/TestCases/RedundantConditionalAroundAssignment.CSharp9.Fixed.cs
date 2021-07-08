@@ -1,25 +1,16 @@
 ﻿int x = 5;
 int y = 6;
 
-y = y switch
-{
-    not 5 => 5 // Noncompliant
-};
+y = 5;
+
+y = 5;
+
+y = 5;
 
 y = y switch
 {
-    5 => 5 // Noncompliant
-};
-
-y = y switch
-{
-    5 when x == 5 => 5 // Noncompliant
-};
-
-y = y switch
-{
-    5 => 5, // Noncompliant
-    6 => 6  // Noncompliant
+    5 => 5, // Fixed
+    6 => 6  // Fixed
 };
 
 y = y switch
@@ -39,14 +30,11 @@ x = y switch
 
 y = y switch
 {
-    4 => 4,      // Noncompliant
+    4 => 4,      // Fixed
     not 5 => 5,
 };
 
-y = x switch
-{
-    _ => 5       // Noncompliant
-};
+y = 5;
 
 y = y switch
 {
@@ -54,14 +42,11 @@ y = y switch
     _ => y
 };
 
-y = y switch
-{
-    _ => y       // Noncompliant
-};
+y = y;
 
 y = y switch
 {
-    4 => 4,      // Noncompliant
+    4 => 4,      // Fixed
     not x => 5,  // Error [CS0150]
 };
 
@@ -84,10 +69,7 @@ record Record
     {
         init
         {
-            if (x != value) // Noncompliant
-            {
-                x = value;
-            }
+            x = value;
         }
     }
 

@@ -12,6 +12,9 @@
                 x = null;
             }
 
+            if (x != null) // Compliant FN
+                x = null;
+
             if (null != x) // Noncompliant {{Remove this useless conditional.}}
             {
                 x = null;
@@ -25,6 +28,29 @@
             if ((null != x)) // Noncompliant
             {
                 x = (null);
+            }
+
+            object a = null;
+            switch (a)
+            {
+                case null:   // Compliant FN
+                    {
+                        a = null;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            if (null != x)
+            {
+                x = null;
+                x = "";
+            }
+
+            if (null != x)
+            {
+                x += "";
             }
 
             if ((null != x))
@@ -46,6 +72,11 @@
                 x = "";
             }
 
+            if (null != x)
+            {
+                Test();
+            }
+
             if (null == x)
             {
                 x = null;
@@ -60,6 +91,12 @@
             if (Property != 42)
             {
                 Property = 42;
+            }
+
+            int i = 0;
+            if (i++)   // Error [CS0029]
+            {
+                i = 0;
             }
         }
 
