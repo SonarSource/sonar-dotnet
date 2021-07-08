@@ -112,4 +112,9 @@ namespace Tests.Diagnostics
     {
         public static StringUtils7 Field;
     }
+
+    public abstract class AbstractClass
+    {
+        public static int Answer() => 42;
+    }
 }

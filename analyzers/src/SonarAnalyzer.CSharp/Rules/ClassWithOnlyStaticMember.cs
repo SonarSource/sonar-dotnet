@@ -110,6 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ClassQualifiesForIssue(INamedTypeSymbol @class) =>
             !@class.IsStatic
+            && !@class.IsAbstract
             && !@class.AllInterfaces.Any()
             && @class.BaseType.Is(KnownType.System_Object);
 
