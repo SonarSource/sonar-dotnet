@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -26,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -38,7 +40,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3247";
         private const string MessageFormat = "{0}";
         private const string ReplaceWithAsAndNullCheckMessage = "Replace this type-check-and-cast sequence with an 'as' and a null check.";
-        private const string RemoveRedundantCaseMessage = "Remove this cast and use the appropriate variable.";
+        private const string RemoveRedundantCastAnotherVariableMessage = "Remove this cast and use the appropriate variable.";
+        private const string RemoveRedundantCastMessage = "Remove this redundant cast.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -62,9 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ProcessPatternExpression(analysisContext,
                                      casePatternSwitch.Pattern,
                                      parentSwitchStatement.Expression,
-                                     parentSwitchStatement.Expression.GetLocation(),
-                                     parentSwitchStatement,
-                                     RemoveRedundantCaseMessage);
+                                     parentSwitchStatement);
         }
 
         private static void SwitchExpressionArm(SyntaxNodeAnalysisContext analysisContext)
@@ -80,9 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ProcessPatternExpression(analysisContext,
                                      isSwitchExpression.Pattern,
                                      switchExpression.GoverningExpression,
-                                     switchExpression.GoverningExpression.GetLocation(),
-                                     isSwitchExpression,
-                                     RemoveRedundantCaseMessage);
+                                     isSwitchExpression);
         }
 
         private static void IsPatternExpression(SyntaxNodeAnalysisContext analysisContext)
@@ -95,9 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ProcessPatternExpression(analysisContext,
                                      isPatternExpression.Pattern,
                                      isPatternExpression.Expression,
-                                     isPatternExpression.SyntaxNode.GetLocation(),
-                                     parentIfStatement.Statement,
-                                     ReplaceWithAsAndNullCheckMessage);
+                                     parentIfStatement.Statement);
         }
 
         private static void IsExpression(SyntaxNodeAnalysisContext analysisContext)
@@ -138,59 +135,86 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ProcessPatternExpression(SyntaxNodeAnalysisContext analysisContext,
                                                      SyntaxNode isPattern,
                                                      SyntaxNode mainVariableExpression,
-                                                     Location mainVariableLocation,
-                                                     SyntaxNode parentStatement,
-                                                     string message)
+                                                     SyntaxNode parentStatement)
         {
-            var isPatternLocation = isPattern.GetLocation();
-            if (isPattern.IsKind(SyntaxKindEx.RecursivePattern) && (RecursivePatternSyntaxWrapper)isPattern is var recursivePattern)
+            var objectToPattern = new Dictionary<ExpressionSyntax, SyntaxNode>();
+            PatternExpressionObjectToPatternMapping.MapObjectToPattern((ExpressionSyntax)mainVariableExpression.RemoveParentheses(), isPattern.RemoveParentheses(), objectToPattern);
+            foreach (var expressionPatternPair in objectToPattern)
             {
-                ProcessRecursivePattern(analysisContext, mainVariableExpression, mainVariableLocation, parentStatement, message, recursivePattern, isPatternLocation);
-            }
-            else if (ReportDeclarationPatternAndReturnType(analysisContext, isPatternLocation, isPattern, parentStatement) is { } patternType)
-            {
-                ReportPatternAtMainVariable(analysisContext, mainVariableExpression, mainVariableLocation, parentStatement, patternType, message);
-            }
-        }
-
-        private static void ProcessRecursivePattern(SyntaxNodeAnalysisContext analysisContext,
-                                                    SyntaxNode mainVariableExpression,
-                                                    Location mainVariableLocation,
-                                                    SyntaxNode parentStatement,
-                                                    string message,
-                                                    RecursivePatternSyntaxWrapper recursivePattern,
-                                                    Location isPatternLocation)
-        {
-            if (recursivePattern is {Type: { }, Designation: {SyntaxNode: { }}})
-            {
-                ReportPatternAtCastLocation(analysisContext, recursivePattern.Designation.SyntaxNode, isPatternLocation, parentStatement, recursivePattern.Type, message);
-                ReportPatternAtMainVariable(analysisContext, mainVariableExpression, mainVariableLocation, parentStatement, recursivePattern.Type, RemoveRedundantCaseMessage);
-            }
-            else if (recursivePattern is {PositionalPatternClause: {SyntaxNode: { }}} recursivePositionalPattern)
-            {
-                for (var i = 0; i < recursivePositionalPattern.PositionalPatternClause.Subpatterns.Count; i++)
+                var pattern = expressionPatternPair.Value;
+                var leftVariable = expressionPatternPair.Key;
+                var targetTypes = GetTypesFromPattern(pattern);
+                var rightPartsToCheck = new Dictionary<SyntaxNode, Tuple<TypeSyntax, Location>>();
+                foreach (var subPattern in pattern.DescendantNodesAndSelf().Where(x => x.IsAnyKind(SyntaxKindEx.DeclarationPattern, SyntaxKindEx.RecursivePattern)))
                 {
-                    var pattern = recursivePositionalPattern.PositionalPatternClause.Subpatterns[i].Pattern;
-                    if (ReportDeclarationPatternAndReturnType(analysisContext, isPatternLocation, pattern, parentStatement) is { } patternType
-                        && mainVariableExpression.IsKind(SyntaxKindEx.TupleExpression)
-                        && (TupleExpressionSyntaxWrapper)mainVariableExpression is var tupleExpression
-                        && tupleExpression.Arguments.Count == recursivePositionalPattern.PositionalPatternClause.Subpatterns.Count)
+                    if (DeclarationPatternSyntaxWrapper.IsInstance(subPattern) && (DeclarationPatternSyntaxWrapper)subPattern is var declarationPattern)
                     {
-                        ReportPatternAtMainVariable(analysisContext, tupleExpression.Arguments[i].Expression, mainVariableLocation, parentStatement, patternType, message);
+                        rightPartsToCheck.Add(declarationPattern.Designation.SyntaxNode, new Tuple<TypeSyntax, Location>(declarationPattern.Type, subPattern.GetLocation()));
                     }
+                    else if ((RecursivePatternSyntaxWrapper)subPattern is {Designation: {SyntaxNode: { }}, Type: { }} recursivePattern)
+                    {
+                        rightPartsToCheck.Add(recursivePattern.Designation.SyntaxNode, new Tuple<TypeSyntax, Location>(recursivePattern.Type, subPattern.GetLocation()));
+                    }
+                }
+
+                var mainVarMsg = rightPartsToCheck.Any()
+                                 ? RemoveRedundantCastAnotherVariableMessage
+                                 : RemoveRedundantCastMessage;
+                foreach (var targetType in targetTypes)
+                {
+                    ReportPatternAtMainVariable(analysisContext, leftVariable, leftVariable.GetLocation(), parentStatement, targetType, mainVarMsg);
+                }
+
+                foreach (var variableTypePair in rightPartsToCheck)
+                {
+                    ReportPatternAtCastLocation(analysisContext, variableTypePair.Key, variableTypePair.Value.Item2, parentStatement, variableTypePair.Value.Item1, RemoveRedundantCastMessage);
                 }
             }
         }
 
-        private static TypeSyntax ReportDeclarationPatternAndReturnType(SyntaxNodeAnalysisContext analysisContext, Location isPatternLocation, SyntaxNode pattern, SyntaxNode parentIfStatement)
+        private static IEnumerable<TypeSyntax> GetTypesFromPattern(SyntaxNode pattern)
         {
-            if (pattern.IsKind(SyntaxKindEx.DeclarationPattern)
-                && (DeclarationPatternSyntaxWrapper)pattern is var declarationPattern
-                && declarationPattern.Designation.SyntaxNode.IsKind(SyntaxKindEx.SingleVariableDesignation)
-                && (SingleVariableDesignationSyntaxWrapper)declarationPattern.Designation.SyntaxNode is var singleVariableDesignation)
+            var targetTypes = new HashSet<TypeSyntax>();
+            if (RecursivePatternSyntaxWrapper.IsInstance(pattern) && ((RecursivePatternSyntaxWrapper)pattern is {PositionalPatternClause: {SyntaxNode: {}}} recursivePattern))
             {
-                ReportPatternAtCastLocation(analysisContext, singleVariableDesignation.SyntaxNode, isPatternLocation, parentIfStatement, declarationPattern.Type, RemoveRedundantCaseMessage);
-                return declarationPattern.Type;
+                foreach (var subpattern in recursivePattern.PositionalPatternClause.Subpatterns)
+                {
+                    AddPatternType(subpattern.Pattern, targetTypes);
+                }
+            }
+            else if (BinaryPatternSyntaxWrapper.IsInstance(pattern) && (BinaryPatternSyntaxWrapper)pattern is {} binaryPattern)
+            {
+                AddPatternType(binaryPattern.Left, targetTypes);
+                AddPatternType(binaryPattern.Right, targetTypes);
+            }
+            else
+            {
+                AddPatternType(pattern, targetTypes);
+            }
+            return targetTypes;
+
+            static void AddPatternType(SyntaxNode pattern, ISet<TypeSyntax> targetTypes)
+            {
+                if (GetType(pattern) is { } patternType)
+                {
+                    targetTypes.Add(patternType);
+                }
+            }
+        }
+
+        private static TypeSyntax GetType(SyntaxNode pattern)
+        {
+            if (ConstantPatternSyntaxWrapper.IsInstance(pattern))
+            {
+                return ((ConstantPatternSyntaxWrapper)pattern).Expression as TypeSyntax;
+            }
+            else if (DeclarationPatternSyntaxWrapper.IsInstance(pattern))
+            {
+                return ((DeclarationPatternSyntaxWrapper)pattern).Type;
+            }
+            else if (RecursivePatternSyntaxWrapper.IsInstance(pattern))
+            {
+                return ((RecursivePatternSyntaxWrapper)pattern).Type;
             }
             return null;
         }

@@ -95,6 +95,30 @@
 }
 }
 ]
+},
+{
+"id":  "S3247",
+"message":  "Remove this cast and use the appropriate variable.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  21,
+"endLine":  87,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  36,
+"endLine":  96,
+"endColumn":  60
+}
+}
+]
 }
 ]
 }
