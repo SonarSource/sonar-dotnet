@@ -58,9 +58,8 @@ namespace Tests.Diagnostics
             }
 
             if ((x,y) is (Fruit f5, Vegetable v5, Vegetable v51)) // Error [CS8502]
-                                                                  // Noncompliant@-1
             {
-                var ff5 = (Fruit)x;                               // Secondary
+                var ff5 = (Fruit)x;
             }
 
             if (x is Fruit f6)          // Secondary

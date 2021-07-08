@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private void AnalyzePatterns(SyntaxNodeAnalysisContext c, ExpressionSyntax expression, SyntaxNode pattern)
         {
             var objectToPatternMap = new Dictionary<ExpressionSyntax, SyntaxNode>();
-            MapObjectToPattern(expression, pattern, objectToPatternMap);
+            PatternExpressionObjectToPatternMapping.MapObjectToPattern(expression, pattern, objectToPatternMap);
 
             foreach (var exp in objectToPatternMap.Keys)
             {
@@ -126,37 +126,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return context.SemanticModel.GetSymbolInfo(expression).Symbol;
-        }
-
-        private void MapObjectToPattern(ExpressionSyntax expression, SyntaxNode pattern, IDictionary<ExpressionSyntax, SyntaxNode> objectToPatternMap)
-        {
-            var expressionWithoutParenthesis = expression.RemoveParentheses();
-            var patternWithoutParenthesis = pattern.RemoveParentheses();
-
-            if (TupleExpressionSyntaxWrapper.IsInstance(expressionWithoutParenthesis)
-                && ((TupleExpressionSyntaxWrapper)expressionWithoutParenthesis) is var tupleExpression)
-            {
-                if (!RecursivePatternSyntaxWrapper.IsInstance(patternWithoutParenthesis)
-                    || ((RecursivePatternSyntaxWrapper)patternWithoutParenthesis is { } recursivePattern
-                        && recursivePattern.PositionalPatternClause.SyntaxNode == null))
-                {
-                    return;
-                }
-
-                if (recursivePattern.PositionalPatternClause.Subpatterns.Count != tupleExpression.Arguments.Count)
-                {
-                    return;
-                }
-
-                for (var i = 0; i < tupleExpression.Arguments.Count; i++)
-                {
-                    MapObjectToPattern(tupleExpression.Arguments[i].Expression, recursivePattern.PositionalPatternClause.Subpatterns[i].Pattern, objectToPatternMap);
-                }
-            }
-            else
-            {
-                objectToPatternMap.Add(expressionWithoutParenthesis, patternWithoutParenthesis);
-            }
         }
     }
 }

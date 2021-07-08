@@ -132,15 +132,15 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void ProcessPatternExpression(SyntaxNodeAnalysisContext analysisContext,
-                                                      SyntaxNode isPattern,
-                                                      SyntaxNode mainVariableExpression,
-                                                      SyntaxNode parentStatement)
+                                                     SyntaxNode isPattern,
+                                                     SyntaxNode mainVariableExpression,
+                                                     SyntaxNode parentStatement)
         {
             var objectToPattern = new Dictionary<ExpressionSyntax, SyntaxNode>();
-            MapObjectToPattern((ExpressionSyntax)mainVariableExpression.RemoveParentheses(), isPattern.RemoveParentheses(), objectToPattern);
+            PatternExpressionObjectToPatternMapping.MapObjectToPattern((ExpressionSyntax)mainVariableExpression.RemoveParentheses(), isPattern.RemoveParentheses(), objectToPattern);
             foreach (var expressionPatternPair in objectToPattern)
             {
-                var pattern = expressionPatternPair.Value.RemoveParentheses();
+                var pattern = expressionPatternPair.Value;
                 var leftVariable = expressionPatternPair.Key;
                 var targetTypes = GetTypesFromPattern(pattern);
                 var rightPartsToCheck = new Dictionary<SyntaxNode, TypeSyntax>();
@@ -216,28 +216,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 return ((RecursivePatternSyntaxWrapper)pattern).Type;
             }
             return null;
-        }
-
-        private static void MapObjectToPattern(ExpressionSyntax expression, SyntaxNode pattern, IDictionary<ExpressionSyntax, SyntaxNode> objectToPatternMap)
-        {
-            if (TupleExpressionSyntaxWrapper.IsInstance(expression) && ((TupleExpressionSyntaxWrapper)expression) is var tupleExpression)
-            {
-                if (!RecursivePatternSyntaxWrapper.IsInstance(pattern) || ((RecursivePatternSyntaxWrapper)pattern is {PositionalPatternClause: {SyntaxNode: null}} recursivePattern))
-                {
-                    return;
-                }
-
-                for (var i = 0; i < tupleExpression.Arguments.Count; i++)
-                {
-                    MapObjectToPattern(tupleExpression.Arguments[i].Expression.RemoveParentheses(),
-                                       recursivePattern.PositionalPatternClause.Subpatterns[i].Pattern.RemoveParentheses(),
-                                       objectToPatternMap);
-                }
-            }
-            else
-            {
-                objectToPatternMap.Add(expression, pattern);
-            }
         }
 
         private static void ReportPatternAtMainVariable(SyntaxNodeAnalysisContext analysisContext,
