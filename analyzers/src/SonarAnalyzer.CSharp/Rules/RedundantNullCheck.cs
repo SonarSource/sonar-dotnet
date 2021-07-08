@@ -35,11 +35,14 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class RedundantNullCheck : RedundantNullCheckBase<BinaryExpressionSyntax>
     {
         private const string MessageFormat = "Remove this unnecessary null check; 'is' returns false for nulls.";
+        private const string MessageFormatForPatterns = "Remove this unnecessary null check; it is already done by the pattern match.";
 
-        private static readonly DiagnosticDescriptor Rule =
+        private static readonly DiagnosticDescriptor RuleForIs =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor RuleForPatternSyntax =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormatForPatterns, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleForIs, RuleForPatternSyntax);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -122,11 +125,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (IsNotNullPattern(left) && IsAffirmativePatternMatch(right))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, left.GetLocation()));
             }
             else if (IsNotNullPattern(right) && IsAffirmativePatternMatch(left))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], right.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, right.GetLocation()));
             }
 
             static bool IsNotNullPattern(SyntaxNode node) =>
@@ -154,11 +157,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 var rightPattern = (PatternSyntaxWrapper)right;
                 if (leftPattern.IsNull() && IsNegativePatternMatch(rightPattern))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, left.GetLocation()));
                 }
                 else if (rightPattern.IsNull() && IsNegativePatternMatch(leftPattern))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], right.GetLocation()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, right.GetLocation()));
                 }
             }
 

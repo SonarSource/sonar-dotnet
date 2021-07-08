@@ -34,7 +34,7 @@ if (apple is not null && apple is ("Sweet", "Red")) { } // Noncompliant
 
 var x = a switch
 {
-    Apple appleInside and not null => "", // Noncompliant {{Remove this unnecessary null check; 'is' returns false for nulls.}}
+    Apple appleInside and not null => "", // Noncompliant {{Remove this unnecessary null check; it is already done by the pattern match.}}
 //                        ^^^^^^^^
     _ => ""
 };
@@ -83,7 +83,7 @@ if (apple is null || !(apple is ("Sweet", "Red"))) { } // Noncompliant
 
 x = a switch
 {
-    null or not "a" => "", // Noncompliant {{Remove this unnecessary null check; 'is' returns false for nulls.}}
+    null or not "a" => "", // Noncompliant {{Remove this unnecessary null check; it is already done by the pattern match.}}
 //  ^^^^
     _ => ""
 };
