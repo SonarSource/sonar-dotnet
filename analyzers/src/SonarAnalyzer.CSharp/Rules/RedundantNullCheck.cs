@@ -168,9 +168,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 patternSyntaxWrapper.IsNot();
         }
 
-        // expectedAffirmative
-        // - true for "is null" and "== null"
-        // - false for "is not null" and "!= null"
+        /// <summary>
+        /// Retrieves the variable that gets null-checked only if the null-check respects the expectation of the caller (it is either an affirmative or a negative check).
+        /// For example:
+        /// - if the node is "foo is null" / "foo == null" and expectedAffirmative is "true", the method will return "foo".
+        /// - if the node is "foo is null" / "foo == null" and expectedAffirmative is "false", the method will return null.
+        /// - if the node is "foo is not null" / "foo != null" / "!(foo is null)" and expectedAffirmative is "true", the method will return null.
+        /// - if the node is "foo is not null" / "foo != null" / "!(foo is null)" and expectedAffirmative is "false", the method will return "foo".
+        /// </summary>
         private static SyntaxNode GetNullCheckVariable(SyntaxNode node, bool expectedAffirmative)
         {
             var innerExpression = node.RemoveParentheses();

@@ -29,10 +29,10 @@ if (apple is { Taste: "Sweet", Color: "Red" }) { } // Fixed
 if (apple is ("Sweet", "Red")) { } // Fixed
 
 var x = a switch
-    {
-        Apple appleInside => "", // Fixed
-        _ => ""
-    };
+{
+    Apple appleInside => "", // Fixed
+    _ => ""
+};
 
 x = a switch
 {
@@ -57,7 +57,6 @@ x = apple switch
     { Taste: "Sweet" } and { Color: "Red" }  => "", // Fixed
     _ => ""
 };
-
 
 // OR, inverted
 result = !(n is Apple); // Fixed
@@ -103,6 +102,34 @@ x = apple switch
     _ => ""
 };
 
+switch (n)
+{
+    case "sweet": // Fixed
+        break;
+    case null or not "sweet": // Fixed
+        break;
+    default:
+        break;
+}
+
+switch (n)
+{
+    case Apple appleSwitch1: // Fixed
+        break;
+    case null or not ("Sweet", "Red"): // Fixed
+        break;
+    default:
+        break;
+}
+
+switch (n)
+{
+    case null or not Apple: // Fixed
+        break;
+    default:
+        break;
+}
+
 // Compliant
 if (apple != null && apple is not { Taste: "Sweet", Color: "Red" }) { } // Compliant
 if (apple != null && apple is not ("Sweet", "Red")) { } // Compliant
@@ -124,22 +151,22 @@ result = (n is string s && s is not null); // Compliant, s can be null
 result = (n is not Apple && n is not null); // Compliant
 result = (a is null && a is string); // Compliant - rule ConditionEvaluatesToConstant should raise issue here (to be consistent with the non-C#9 tests)
 x = m switch
-    {
-        string s2 and null => s2, // // Compliant - rule ConditionEvaluatesToConstant will raise issue here
-        _ => ""
-    };
+{
+    string s2 and null => s2, // Compliant - rule ConditionEvaluatesToConstant will raise issue here
+    _ => ""
+};
 
 x = m switch
-    {
-        string or null => "", // Compliant
-        _ => ""
-    };
+{
+    string or null => "", // Compliant
+    _ => ""
+};
 
 x = m switch
-    {
-        null or string => "", // Compliant
-        not null or 5 => "", // Compliant
-    };
+{
+    null or string => "", // Compliant
+    not null or 5 => "", // Compliant
+};
 
 x = m switch
 {
@@ -147,6 +174,32 @@ x = m switch
     string or 6 or 10 or null => "", // Compliant
     _ => ""
 };
+
+switch (n)
+{
+    case not null or "sweet": // Compliant
+        break;
+    case not null or not "sweet": // Compliant
+        break;
+    default:
+        break;
+}
+
+switch (n)
+{
+    case not null or Apple: // Compliant
+        break;
+    default:
+        break;
+}
+
+switch (n)
+{
+    case null or Apple: // Compliant
+        break;
+    default:
+        break;
+}
 
 static int GetTax(object id) => id switch
 {
