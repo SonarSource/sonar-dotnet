@@ -130,9 +130,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private bool IsOperatorOfInterest(SyntaxToken syntaxToken) =>
-            syntaxToken.ValueText.Equals(">=") || syntaxToken.ValueText.Equals("<");
-
         }
+
+        private static bool IsOperatorOfInterest(SyntaxToken syntaxToken) =>
+            syntaxToken.ValueText.Equals(">=") || syntaxToken.ValueText.Equals("<");
     }
 }
