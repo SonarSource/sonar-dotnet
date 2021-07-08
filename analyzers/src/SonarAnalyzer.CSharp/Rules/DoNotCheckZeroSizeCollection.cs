@@ -130,9 +130,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private bool IsOperatorOfInterest(SyntaxToken syntaxToken) =>
-            syntaxToken.ValueText.Equals(">=") || syntaxToken.ValueText.Equals("<");
-
         private void MapObjectToPattern(ExpressionSyntax expression, SyntaxNode pattern, IDictionary<ExpressionSyntax, SyntaxNode> objectToPatternMap)
         {
             var expressionWithoutParenthesis = expression.RemoveParentheses();
@@ -163,5 +160,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 objectToPatternMap.Add(expressionWithoutParenthesis, patternWithoutParenthesis);
             }
         }
+
+        private static bool IsOperatorOfInterest(SyntaxToken syntaxToken) =>
+            syntaxToken.ValueText.Equals(">=") || syntaxToken.ValueText.Equals("<");
     }
 }
