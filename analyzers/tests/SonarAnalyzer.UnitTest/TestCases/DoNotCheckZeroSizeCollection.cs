@@ -44,7 +44,7 @@ namespace Tests.Diagnostics
 
             var someEnumerable = new List<string>();
 
-            result = someEnumerable.Count() >= 0; // Noncompliant {{The count of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
+            result = someEnumerable.Count() >= 0; // Noncompliant {{The 'Count' of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
             result = someEnumerable.Count(foo => true) >= 0; // Noncompliant
             result = someEnumerable?.Count() >= 0; // Noncompliant
@@ -88,7 +88,7 @@ namespace Tests.Diagnostics
         public void TestCountProperty()
         {
             var someCollection = new List<string>();
-            bool result = someCollection.Count >= 0; // Noncompliant {{The count of 'ICollection' is always '>=0', so fix this test to get the real expected behavior.}}
+            bool result = someCollection.Count >= 0; // Noncompliant {{The 'Count' of 'ICollection' is always '>=0', so fix this test to get the real expected behavior.}}
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^
 
             var nonCollection = new FooProperty();
@@ -100,10 +100,10 @@ namespace Tests.Diagnostics
             var someArray = new string[0];
             bool result;
 
-            result = someArray.Length >= 0; // Noncompliant {{The length of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
+            result = someArray.Length >= 0; // Noncompliant {{The 'Length' of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
 //                   ^^^^^^^^^^^^^^^^^^^^^
 
-            result = someArray.LongLength >= 0; // Noncompliant {{The longlength of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
+            result = someArray.LongLength >= 0; // Noncompliant {{The 'LongLength' of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^
 
             var nonArray = new FooProperty();

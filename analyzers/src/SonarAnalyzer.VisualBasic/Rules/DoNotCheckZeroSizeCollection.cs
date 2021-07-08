@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionBase<SyntaxKind, BinaryExpressionSyntax, ExpressionSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind GreaterThanOrEqualExpression => SyntaxKind.GreaterThanOrEqualExpression;
         protected override SyntaxKind LessThanOrEqualExpression => SyntaxKind.LessThanOrEqualExpression;
         protected override string IEnumerableTString { get; } = "IEnumerable(Of T)";
@@ -45,11 +45,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ExpressionSyntax RemoveParentheses(ExpressionSyntax expression) =>
             expression.RemoveParentheses();
 
-        public DoNotCheckZeroSizeCollection() : base(RspecStrings.ResourceManager) { }
-
         protected override ISymbol GetSymbol(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
         {
-            while ((RemoveParentheses(expression) is ConditionalAccessExpressionSyntax conditionalAccess))
+            while (RemoveParentheses(expression) is ConditionalAccessExpressionSyntax conditionalAccess)
             {
                 expression = conditionalAccess.WhenNotNull;
             }
