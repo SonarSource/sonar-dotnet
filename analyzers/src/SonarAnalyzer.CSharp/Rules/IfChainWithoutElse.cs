@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -62,8 +63,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsElseIfWithoutElse(IfStatementSyntax node)
         {
-            return node.Parent.IsKind(SyntaxKind.ElseClause) &&
-                node.Else == null;
+            return node.Parent.IsKind(SyntaxKind.ElseClause)
+                   && (node.Else == null || IsEmptyBlock(node.Else));
+        }
+
+        private static bool IsEmptyBlock(ElseClauseSyntax elseClause)
+        {
+            if (elseClause.Statement is BlockSyntax blockSyntax
+                && !(blockSyntax.Statements.Count > 0
+                    || blockSyntax.DescendantTrivia().Any(x => x.IsComment() || x.IsKind(SyntaxKind.DisabledTextTrivia))))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
