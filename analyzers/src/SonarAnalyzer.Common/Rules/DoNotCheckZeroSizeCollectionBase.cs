@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected string GetDeclaringTypeName(ISymbol symbol)
+        private string GetDeclaringTypeName(ISymbol symbol)
         {
             if (IsArrayLengthProperty(symbol))
             {
