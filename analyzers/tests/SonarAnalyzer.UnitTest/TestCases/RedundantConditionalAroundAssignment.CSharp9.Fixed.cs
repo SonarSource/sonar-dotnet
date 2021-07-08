@@ -34,6 +34,8 @@ y = y switch
     not 5 => 5,
 };
 
+y = 5;
+
 y = y switch
 {
     5 => 6,

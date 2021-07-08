@@ -43,6 +43,11 @@ y = y switch
     not 5 => 5,
 };
 
+y = x switch
+{
+    _ => 5       // Noncompliant
+};
+
 y = y switch
 {
     5 => 6,

@@ -82,8 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var switchExpression = (SwitchExpressionSyntaxWrapper)c.Node;
 
-            if (!(switchExpression.SyntaxNode.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax parentExpression)
-                || !CSharpEquivalenceChecker.AreEquivalent(parentExpression.Left, switchExpression.GoverningExpression))
+            if (!(switchExpression.SyntaxNode.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax))
             {
                 return;
             }
