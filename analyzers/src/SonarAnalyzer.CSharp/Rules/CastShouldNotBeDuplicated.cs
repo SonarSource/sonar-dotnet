@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -143,16 +144,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 var pattern = expressionPatternPair.Value;
                 var leftVariable = expressionPatternPair.Key;
                 var targetTypes = GetTypesFromPattern(pattern);
-                var rightPartsToCheck = new Dictionary<SyntaxNode, TypeSyntax>();
+                var rightPartsToCheck = new Dictionary<SyntaxNode, Tuple<TypeSyntax, Location>>();
                 foreach (var subPattern in pattern.DescendantNodesAndSelf().Where(x => x.IsAnyKind(SyntaxKindEx.DeclarationPattern, SyntaxKindEx.RecursivePattern)))
                 {
                     if (DeclarationPatternSyntaxWrapper.IsInstance(subPattern) && (DeclarationPatternSyntaxWrapper)subPattern is var declarationPattern)
                     {
-                        rightPartsToCheck.Add(declarationPattern.Designation.SyntaxNode, declarationPattern.Type);
+                        rightPartsToCheck.Add(declarationPattern.Designation.SyntaxNode, new Tuple<TypeSyntax, Location>(declarationPattern.Type, subPattern.GetLocation()));
                     }
                     else if ((RecursivePatternSyntaxWrapper)subPattern is {Designation: {SyntaxNode: { }}, Type: { }} recursivePattern)
                     {
-                        rightPartsToCheck.Add(recursivePattern.Designation.SyntaxNode, recursivePattern.Type);
+                        rightPartsToCheck.Add(recursivePattern.Designation.SyntaxNode, new Tuple<TypeSyntax, Location>(recursivePattern.Type, subPattern.GetLocation()));
                     }
                 }
 
@@ -166,7 +167,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var variableTypePair in rightPartsToCheck)
                 {
-                    ReportPatternAtCastLocation(analysisContext, variableTypePair.Key, pattern.GetLocation(), parentStatement, variableTypePair.Value, RemoveRedundantCastMessage);
+                    ReportPatternAtCastLocation(analysisContext, variableTypePair.Key, variableTypePair.Value.Item2, parentStatement, variableTypePair.Value.Item1, RemoveRedundantCastMessage);
                 }
             }
         }

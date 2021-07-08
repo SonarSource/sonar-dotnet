@@ -22,8 +22,10 @@ namespace Tests.Diagnostics
 
             object o;
             switch (x)                            // Noncompliant [switch-st-0] {{Remove this cast and use the appropriate variable.}}
+            //      ^
             {
                 case Fruit m:                     // Secondary [switch-st-1]
+            //       ^^^^^^^
                     o = (Fruit)m;                 // Noncompliant [switch-st-1] {{Remove this redundant cast.}}
                     break;
                 case Vegetable t when t != null:  // Secondary [switch-st-2]
@@ -38,8 +40,10 @@ namespace Tests.Diagnostics
             }
 
             if ((x, y) is (Fruit f1, Vegetable v1))   // Secondary
+            //             ^^^^^^^^
             {
                 var ff1 = (Fruit)f1;                  // Noncompliant
+                //        ^^^^^^^^^
             }
 
             if ((x, y) is (Fruit f2, Vegetable v2))   // Secondary
@@ -98,7 +102,9 @@ namespace Tests.Diagnostics
             var message = x switch                 // Noncompliant [switch-expression-1] {{Remove this cast and use the appropriate variable.}}
             {
                 Fruit f10 =>                       // Secondary [switch-expression-2]
+            //  ^^^^^^^^^
                     ((Fruit)f10).ToString(),       // Noncompliant [switch-expression-2] {{Remove this redundant cast.}}
+            //       ^^^^^^^^^^
                 Vegetable v11 =>                   // Secondary [switch-expression-3]
                     ((Vegetable)v11).ToString(),   // Noncompliant [switch-expression-3]
                 (string left, string right) =>     // Secondary [switch-expression-4, switch-expression-5]
@@ -142,6 +148,14 @@ namespace Tests.Diagnostics
             {
                 var aRealFruit = (Fruit)tuttyFrutty;   // Noncompliant [property-pattern-1] {{Remove this redundant cast.}}
                 var anotherFruit = (Fruit)x;           // Secondary [property-pattern-2]
+            }
+
+            var foo = new Complex();
+            if (foo is {x: Fruit f })                  // Secondary
+            //             ^^^^^^^
+            {
+                var something = (Fruit)f;              // Noncompliant
+                //              ^^^^^^^^
             }
 
             if ((x, y) is (1))                                 // Error[CS0029]
