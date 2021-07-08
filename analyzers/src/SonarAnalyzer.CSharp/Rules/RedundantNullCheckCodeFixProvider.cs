@@ -69,11 +69,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             if (binaryExpression.Left.RemoveParentheses() == nullCheckNode)
                             {
-                                newRoot = root.ReplaceNode(binaryExpression, binaryExpression.Right);
+                                newRoot = root.ReplaceNode(binaryExpression, binaryExpression.Right.WithTriviaFrom(binaryExpression));
                             }
                             else
                             {
-                                newRoot = root.ReplaceNode(binaryExpression, binaryExpression.Left);
+                                newRoot = root.ReplaceNode(binaryExpression, binaryExpression.Left.WithTriviaFrom(binaryExpression));
                             }
                         }
                         return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));

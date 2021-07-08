@@ -8,13 +8,13 @@ namespace Tests.Diagnostics
         {
 
             if (a != null && a is RedundantNullCheck) // Noncompliant {{Remove this unnecessary null check; 'is' returns false for nulls.}}
-//              ^^^^^^^^^    
+//              ^^^^^^^^^
             {
 
             }
 
             if (null != a && a is RedundantNullCheck) // Noncompliant
-//              ^^^^^^^^^    
+//              ^^^^^^^^^
             {
 
             }
@@ -76,7 +76,7 @@ namespace Tests.Diagnostics
 
             }
 
-            if (a != null && a != null) // Compliant - not related to this rule 
+            if (a != null && a != null) // Compliant - not related to this rule
             {
 
             }
@@ -112,17 +112,17 @@ namespace Tests.Diagnostics
 
             }
 
-            if (a == null || !(b is RedundantNullCheck)) // Compliant 
+            if (a == null || !(b is RedundantNullCheck)) // Compliant
             {
 
             }
 
-            if (b == null || !(a is RedundantNullCheck)) // Compliant 
+            if (b == null || !(a is RedundantNullCheck)) // Compliant
             {
 
             }
 
-            if (a == null || a != null) // Compliant - not related to this rule 
+            if (a == null || a != null) // Compliant - not related to this rule
             {
 
             }
