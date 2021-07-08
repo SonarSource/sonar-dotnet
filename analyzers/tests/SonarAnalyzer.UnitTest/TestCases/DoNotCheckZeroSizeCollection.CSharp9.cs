@@ -25,6 +25,7 @@ if (((someEnumerable.Count()), anotherEnumerable.Count()) is (>= 0, // Noncompli
 }
 
 if (someEnumerable.Count() is < 0) { } // Noncompliant
+if (someEnumerable.Count() is < localConst_Zero) { } // Noncompliant
 if (someEnumerable.Count() is >= 0 or 1) { } // Noncompliant
 if (someEnumerable.Count() is not >= 0) { } // Noncompliant
 
