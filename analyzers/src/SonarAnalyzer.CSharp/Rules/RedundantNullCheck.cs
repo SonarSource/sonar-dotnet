@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) => CSharpEquivalenceChecker.AreEquivalent(node1, node2);
 
-        private void CheckAndPattern(SyntaxNodeAnalysisContext context)
+        private static void CheckAndPattern(SyntaxNodeAnalysisContext context)
         {
             var binaryPatternNode = (BinaryPatternSyntaxWrapper)context.Node;
             var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && !isPatternWrapper.IsNull();
         }
 
-        private void CheckOrPattern(SyntaxNodeAnalysisContext context)
+        private static void CheckOrPattern(SyntaxNodeAnalysisContext context)
         {
             var binaryPatternNode = (BinaryPatternSyntaxWrapper)context.Node;
             var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
@@ -155,20 +155,15 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var leftPattern = (PatternSyntaxWrapper)left;
                 var rightPattern = (PatternSyntaxWrapper)right;
-                if (leftPattern.IsNull() && IsNegativePatternMatch(rightPattern))
+                if (leftPattern.IsNull() && rightPattern.IsNot())
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, left.GetLocation()));
                 }
-                else if (rightPattern.IsNull() && IsNegativePatternMatch(leftPattern))
+                else if (rightPattern.IsNull() && leftPattern.IsNot())
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, right.GetLocation()));
                 }
             }
-
-            // Verifies if the given pattern syntax is like "not X" - where X can be constant pattern (except 'null'), Declaration pattern, Recursive pattern.
-            // The PatternSyntax appears e.g. in switch arms and is different from IsPatternSyntax.
-            static bool IsNegativePatternMatch(PatternSyntaxWrapper patternSyntaxWrapper) =>
-                patternSyntaxWrapper.IsNot();
         }
 
         /// <summary>
