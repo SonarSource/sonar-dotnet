@@ -38,6 +38,9 @@ namespace SonarAnalyzer.Rules
 
         protected abstract TSyntaxKind GreaterThanOrEqualExpression { get; }
         protected abstract TSyntaxKind LessThanOrEqualExpression { get; }
+        protected abstract TSyntaxKind GreaterThanExpression { get; }
+        protected abstract TSyntaxKind LessThanExpression { get; }
+
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string IEnumerableTString { get; }
 
@@ -62,7 +65,8 @@ namespace SonarAnalyzer.Rules
                     var binaryExpression = (TBinaryExpressionSyntax)c.Node;
                     CheckCondition(c, c.Node, GetLeftNode(binaryExpression), GetRightNode(binaryExpression));
                 },
-                GreaterThanOrEqualExpression);
+                GreaterThanOrEqualExpression,
+                LessThanExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
@@ -70,7 +74,8 @@ namespace SonarAnalyzer.Rules
                     var binaryExpression = (TBinaryExpressionSyntax)c.Node;
                     CheckCondition(c, c.Node, GetRightNode(binaryExpression), GetLeftNode(binaryExpression));
                 },
-                LessThanOrEqualExpression);
+                LessThanOrEqualExpression,
+                GreaterThanExpression);
         }
 
         protected void CheckCondition(SyntaxNodeAnalysisContext context, SyntaxNode issueLocation, TExpressionSyntax expressionValueNode, TExpressionSyntax constantValueNode)

@@ -34,6 +34,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind GreaterThanOrEqualExpression => SyntaxKind.GreaterThanOrEqualExpression;
         protected override SyntaxKind LessThanOrEqualExpression => SyntaxKind.LessThanOrEqualExpression;
+        protected override SyntaxKind GreaterThanExpression => SyntaxKind.GreaterThanExpression;
+        protected override SyntaxKind LessThanExpression => SyntaxKind.LessThanExpression;
         protected override string IEnumerableTString { get; } = "IEnumerable(Of T)";
 
         protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) =>

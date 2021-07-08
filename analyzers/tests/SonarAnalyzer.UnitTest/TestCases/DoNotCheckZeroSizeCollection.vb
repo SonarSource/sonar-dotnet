@@ -65,7 +65,7 @@ Namespace Tests.Diagnostics
             Result = SomeEnumerable.Count() >= localVariable
             Result = SomeEnumerable.Count() >= -1 ' Noncompliant {{The 'Count' of 'IEnumerable(Of T)' is always '>=0', so fix this test to get the real expected behavior.}}
             Result = SomeEnumerable.Count() <= 0
-            Result = SomeEnumerable.Count() < 0
+            Result = SomeEnumerable.Count() < 0 ' Noncompliant
             Result = 0 >= SomeEnumerable.Count()
 
             Result = SomeEnumerable.Count() >= LocalConst_Zero ' Noncompliant
