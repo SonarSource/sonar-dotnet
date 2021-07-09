@@ -26,7 +26,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules
 {
     public abstract class EmptyNestedBlockBase<TSyntaxKind> : SonarDiagnosticAnalyzer
-        where TSyntaxKind: struct
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S108";
         private const string MessageFormat = "Either remove or fill this block of code.";
