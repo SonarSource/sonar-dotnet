@@ -29,29 +29,29 @@ namespace SonarAnalyzer.Helpers
         // This list is duplicated in sonar-scanner-msbuild and sonar-security and should be manually synchronized after each change.
         public /* for testing */ static readonly ISet<string> TestAssemblyNames = new HashSet<string>
         {
-            "DOTMEMORY.UNIT",
-            "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
-            "MICROSOFT.VISUALSTUDIO.QUALITYTOOLS.UNITTESTFRAMEWORK",
-            "MACHINE.SPECIFICATIONS",
-            "NUNIT.FRAMEWORK",
-            "NUNITLITE",
-            "TECHTALK.SPECFLOW",
-            "XUNIT", // Legacy Xunit (v1.x)
-            "XUNIT.CORE",
+            "dotMemory.Unit",
+            "Microsoft.VisualStudio.TestPlatform.TestFramework",
+            "Microsoft.VisualStudio.QualityTools.UnitTestFramework",
+            "Machine.Specifications",
+            "nunit.framework",
+            "nunitlite",
+            "TechTalk.SpecFlow",
+            "xunit", // Legacy Xunit (v1.x)
+            "xunit.core",
             // Assertion
-            "FLUENTASSERTIONS",
-            "SHOULDLY",
+            "FluentAssertions",
+            "Shouldly",
             // Mock
-            "FAKEITEASY",
-            "MOQ",
-            "NSUBSTITUTE",
-            "RHINO.MOCKS",
-            "TELERIK.JUSTMOCK"
+            "FakeItEasy",
+            "Moq",
+            "NSubstitute",
+            "Rhino.Mocks",
+            "Telerik.JustMock"
         };
 
         // should only be used by SonarAnalysisContext
         public static bool IsTest(this Compilation compilation) =>
             compilation != null // We can't detect references => it's MAIN
-            && compilation.ReferencedAssemblyNames.Any(assembly => TestAssemblyNames.Contains(assembly.Name.ToUpperInvariant()));
+            && compilation.ReferencedAssemblyNames.Any(assembly => TestAssemblyNames.Contains(assembly.Name));
     }
 }
