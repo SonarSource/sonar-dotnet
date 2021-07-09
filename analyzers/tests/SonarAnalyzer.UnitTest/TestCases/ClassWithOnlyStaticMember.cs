@@ -47,6 +47,17 @@ namespace Tests.Diagnostics
         public static string Prop { get; set; }
     }
 
+    public sealed class SealedStringUtilsAsBase
+    {
+        public SealedStringUtilsAsBase() //Noncompliant {{Hide this public constructor by making it 'private'.}}
+        { }
+        public static string Concatenate(string s1, string s2)
+        {
+            return s1 + s2;
+        }
+        public static string Prop { get; set; }
+    }
+
 
     public class BaseClass //Compliant, has no methods at all
     { }
