@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\IncludeManager.vb",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
 "region":  {

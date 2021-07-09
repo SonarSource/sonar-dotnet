@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -249,7 +249,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -262,7 +262,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -275,7 +275,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -288,7 +288,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -301,7 +301,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -314,7 +314,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -327,7 +327,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -340,7 +340,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -353,7 +353,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
@@ -366,7 +366,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'Else' clause.",
+"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {

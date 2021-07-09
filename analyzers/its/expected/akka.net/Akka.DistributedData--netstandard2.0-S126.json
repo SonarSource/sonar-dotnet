@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S126",
-"message":  "Add the missing 'else' clause.",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
 "region":  {
