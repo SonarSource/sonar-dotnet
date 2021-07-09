@@ -90,7 +90,13 @@ namespace Tests.Diagnostics
 #if DEBUG
                 Trace.WriteLine("message");
 #endif
-            } // Noncompliant@-4 FP: the block is not empty
+            }
+
+            if (true)
+            {
+#if DEBUG
+#endif
+            } // Noncompliant@-3
         }
     }
 

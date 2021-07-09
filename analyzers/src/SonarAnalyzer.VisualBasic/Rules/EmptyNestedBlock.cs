@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VisitDoLoopBlock(DoLoopBlockSyntax node)
         {
-            if (!node.Statements.Any() && NoCommentsBefore(node.LoopStatement))
+            if (!node.Statements.Any() && NoCommentsOrConditionalCompilationBefore(node.LoopStatement))
             {
                 yield return node.DoStatement;
             }
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VisitForBlock(ForBlockSyntax node)
         {
-            if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
+            if (!node.Statements.Any() && NoCommentsOrConditionalCompilationBefore(node.NextStatement))
             {
                 yield return node.ForStatement;
             }
@@ -127,7 +127,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VisitForEachBlock(ForEachBlockSyntax node)
         {
-            if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
+            if (!node.Statements.Any() && NoCommentsOrConditionalCompilationBefore(node.NextStatement))
             {
                 yield return node.ForEachStatement;
             }
@@ -201,7 +201,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VisitUsingBlock(UsingBlockSyntax node)
         {
-            if (!node.Statements.Any() && NoCommentsBefore(node.EndUsingStatement))
+            if (!node.Statements.Any() && NoCommentsOrConditionalCompilationBefore(node.EndUsingStatement))
             {
                 yield return node.UsingStatement;
             }
@@ -209,7 +209,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VisitWhileBlock(WhileBlockSyntax node)
         {
-            if (!node.Statements.Any() && NoCommentsBefore(node.EndWhileStatement))
+            if (!node.Statements.Any() && NoCommentsOrConditionalCompilationBefore(node.EndWhileStatement))
             {
                 yield return node.WhileStatement;
             }
@@ -217,7 +217,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VisitWithBlock(WithBlockSyntax node)
         {
-            if (!node.Statements.Any() && NoCommentsBefore(node.EndWithStatement))
+            if (!node.Statements.Any() && NoCommentsOrConditionalCompilationBefore(node.EndWithStatement))
             {
                 yield return node.WithStatement;
             }
@@ -237,7 +237,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VerifyIfBlock(MultiLineIfBlockSyntax ifBlock, SyntaxNode node)
         {
-            if (!ifBlock.Statements.Any() && NoCommentsBefore(node))
+            if (!ifBlock.Statements.Any() && NoCommentsOrConditionalCompilationBefore(node))
             {
                 yield return ifBlock.IfStatement;
             }
@@ -245,7 +245,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VerifyElseIfBlock(ElseIfBlockSyntax elseIfBlock, SyntaxNode node)
         {
-            if (!elseIfBlock.Statements.Any() && NoCommentsBefore(node))
+            if (!elseIfBlock.Statements.Any() && NoCommentsOrConditionalCompilationBefore(node))
             {
                 yield return elseIfBlock.ElseIfStatement;
             }
@@ -253,7 +253,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VerifyElseBlock(ElseBlockSyntax elseBlock, SyntaxNode node)
         {
-            if (!elseBlock.Statements.Any() && NoCommentsBefore(node))
+            if (!elseBlock.Statements.Any() && NoCommentsOrConditionalCompilationBefore(node))
             {
                 yield return elseBlock.ElseStatement;
             }
@@ -273,7 +273,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VerifyTryBlock(TryBlockSyntax node, SyntaxNode nextBlock)
         {
-            if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
+            if (!node.Statements.Any() && NoCommentsOrConditionalCompilationBefore(nextBlock))
             {
                 yield return node.TryStatement;
             }
@@ -281,7 +281,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VerifyCatchBlock(CatchBlockSyntax node, SyntaxNode nextBlock)
         {
-            if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
+            if (!node.Statements.Any() && NoCommentsOrConditionalCompilationBefore(nextBlock))
             {
                 yield return node.CatchStatement;
             }
@@ -289,12 +289,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static IEnumerable<SyntaxNode> VerifyFinallyBlock(FinallyBlockSyntax node, SyntaxNode nextBlock)
         {
-            if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
+            if (!node.Statements.Any() && NoCommentsOrConditionalCompilationBefore(nextBlock))
             {
                 yield return node.FinallyStatement;
             }
         }
 
-        private static bool NoCommentsBefore(SyntaxNode node) => !node.GetLeadingTrivia().Any(t => t.IsComment());
+        private static bool NoCommentsOrConditionalCompilationBefore(SyntaxNode node) =>
+            !node.GetLeadingTrivia().Any(t => t.IsComment() || t.IsKind(SyntaxKind.DisabledTextTrivia));
     }
 }

@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
             !node.Sections.Any();
 
         private static bool IsEmpty(BlockSyntax node) =>
-            !node.Statements.Any() && !ContainsComment(node);
+            !node.Statements.Any() && !ContainsCommentOrConditionalCompilation(node);
 
         private static bool IsNestedAndEmpty(BlockSyntax node) =>
             IsNested(node) && IsEmpty(node);
@@ -74,10 +74,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsNested(BlockSyntax node) =>
             !AllowedContainerKinds.Contains(node.Parent.Kind());
 
-        private static bool ContainsComment(BlockSyntax node) =>
-            ContainsComment(node.OpenBraceToken.TrailingTrivia) || ContainsComment(node.CloseBraceToken.LeadingTrivia);
+        private static bool ContainsCommentOrConditionalCompilation(BlockSyntax node) =>
+            ContainsCommentOrConditionalCompilation(node.OpenBraceToken.TrailingTrivia) || ContainsCommentOrConditionalCompilation(node.CloseBraceToken.LeadingTrivia);
 
-        private static bool ContainsComment(SyntaxTriviaList trivias) =>
-            trivias.Any(trivia => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) || trivia.IsKind(SyntaxKind.MultiLineCommentTrivia));
+        private static bool ContainsCommentOrConditionalCompilation(SyntaxTriviaList trivias) =>
+            trivias.Any(trivia => trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia, SyntaxKind.DisabledTextTrivia));
     }
 }
