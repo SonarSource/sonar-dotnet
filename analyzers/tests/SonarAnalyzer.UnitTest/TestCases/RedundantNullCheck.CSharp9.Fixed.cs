@@ -168,6 +168,11 @@ x = m switch
     not null or 5 => "", // Compliant
 };
 
+x = a switch
+{
+    null or not null => "" // Compliant
+};
+
 x = m switch
 {
     null or 5 or 7 or 8 or Apple => "", // Compliant

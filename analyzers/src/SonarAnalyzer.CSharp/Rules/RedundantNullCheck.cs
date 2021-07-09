@@ -155,15 +155,22 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var leftPattern = (PatternSyntaxWrapper)left;
                 var rightPattern = (PatternSyntaxWrapper)right;
-                if (leftPattern.IsNull() && rightPattern.IsNot())
+                if (leftPattern.IsNull() && IsNegativePatternMatch(rightPattern))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, left.GetLocation()));
                 }
-                else if (rightPattern.IsNull() && leftPattern.IsNot())
+                else if (rightPattern.IsNull() && IsNegativePatternMatch(leftPattern))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, right.GetLocation()));
                 }
             }
+
+            // Verifies that it's like a negative pattern except 'not null' e.g. 'not Apple', 'not (5 or 6)'.
+            // The PatternSyntax appears e.g. in switch arms and is different from IsPatternSyntax.
+            static bool IsNegativePatternMatch(PatternSyntaxWrapper node) =>
+                node.IsNot()
+                && ((UnaryPatternSyntaxWrapper)node) is var unaryPatternSyntaxWrapper
+                && !unaryPatternSyntaxWrapper.Pattern.IsNull();
         }
 
         /// <summary>
