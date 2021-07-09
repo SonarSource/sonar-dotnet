@@ -45,8 +45,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static bool IsEmptyBlock(MultiLineIfBlockSyntax multiLineIfBlock) =>
             !(multiLineIfBlock.ElseBlock.Statements.Count > 0
-            || multiLineIfBlock.ElseBlock.DescendantTrivia().Any(elseBlockTrivia => IsCommentOrDisabledText(elseBlockTrivia))
-            || multiLineIfBlock.EndIfStatement.DescendantTrivia().Any(endIfTrivia => IsCommentOrDisabledText(endIfTrivia)));
+            || multiLineIfBlock.ElseBlock.GetTrailingTrivia().Any(elseBlockTrivia => IsCommentOrDisabledText(elseBlockTrivia))
+            || multiLineIfBlock.EndIfStatement.GetLeadingTrivia().Any(endIfTrivia => IsCommentOrDisabledText(endIfTrivia)));
 
         private static bool IsCommentOrDisabledText(SyntaxTrivia trivia) =>
             trivia.IsComment() || trivia.IsKind(SyntaxKind.DisabledTextTrivia);

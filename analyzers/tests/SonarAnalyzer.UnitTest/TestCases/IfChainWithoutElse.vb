@@ -73,7 +73,7 @@ Namespace Tests.TestCases
 
             If a Then
             ElseIf a Then
-            ElseIf a Then
+            ElseIf a Then ' Noncompliant
             Else
             End If ' Single line comment
 
