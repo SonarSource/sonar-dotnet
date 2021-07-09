@@ -26,6 +26,8 @@ result = (n is string && n is not null && m is not null); // Noncompliant
 result = n is ("a" or "b" or "c") && n is not null; // Noncompliant
 //                                   ^^^^^^^^^^^^^
 
+if (n is null && apple != null && m is null && apple is ("Sweet", "Red")) { } // FN
+if (n is null && apple != null && apple is ("Sweet", "Red")) { } // FN
 if (apple != null && apple is ("Sweet", "Red")) { } // Noncompliant
 if (apple != null && apple is { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
 if (!(apple is null) && apple is { Taste: "Sweet", Color: "Red" }) { } // Noncompliant

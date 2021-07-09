@@ -23,6 +23,8 @@ result = (n is string && m is not null); // Fixed
 // parenthesized pattern
 result = n is ("a" or "b" or "c"); // Fixed
 
+if (n is null && apple != null && m is null && apple is ("Sweet", "Red")) { } // FN
+if (n is null && apple != null && apple is ("Sweet", "Red")) { } // FN
 if (apple is ("Sweet", "Red")) { } // Fixed
 if (apple is { Taste: "Sweet", Color: "Red" }) { } // Fixed
 if (apple is { Taste: "Sweet", Color: "Red" }) { } // Fixed

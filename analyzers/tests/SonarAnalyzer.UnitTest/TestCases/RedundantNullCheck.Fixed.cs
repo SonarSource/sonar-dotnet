@@ -47,6 +47,11 @@ namespace Tests.Diagnostics
 
             }
 
+            if (a != null && b != null && b is RedundantNullCheck) // FN
+            {
+
+            }
+
             if (a != null || a is RedundantNullCheck) // Compliant - not AND operator
             {
 
