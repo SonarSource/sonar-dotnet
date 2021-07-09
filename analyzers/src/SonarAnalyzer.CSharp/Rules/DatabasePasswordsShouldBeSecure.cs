@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 using var jsonReader = new JsonTextReader(new StringReader(appSettings));
                 try
                 {
-                    var json = JObject.Load(jsonReader, new JsonLoadSettings {LineInfoHandling = LineInfoHandling.Load, CommentHandling = CommentHandling.Ignore});
+                    var json = JObject.Load(jsonReader);
                     ReportEmptyPassword(json, fullPath, c);
                 }
                 catch (JsonReaderException)
