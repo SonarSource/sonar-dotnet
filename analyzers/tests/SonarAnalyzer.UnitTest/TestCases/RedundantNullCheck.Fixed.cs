@@ -17,7 +17,7 @@ namespace Tests.Diagnostics
 
             }
 
-            if (a is RedundantNullCheck ) // Fixed
+            if (a is RedundantNullCheck) // Fixed
             {
 
             }
@@ -37,12 +37,17 @@ namespace Tests.Diagnostics
 
             }
 
-            if (a is RedundantNullCheck aTyped2 ) // Fixed
+            if (a is RedundantNullCheck aTyped2) // Fixed
             {
 
             }
 
             if (((a) is RedundantNullCheck aTyped3)) // Fixed
+            {
+
+            }
+
+            if (a != null && b != null && b is RedundantNullCheck) // FN
             {
 
             }
@@ -72,7 +77,7 @@ namespace Tests.Diagnostics
 
             }
 
-            if (a != null && a != null) // Compliant - not related to this rule 
+            if (a != null && a != null) // Compliant - not related to this rule
             {
 
             }
@@ -86,7 +91,7 @@ namespace Tests.Diagnostics
 
             }
 
-            if (!(a is RedundantNullCheck) ) // Fixed
+            if (!(a is RedundantNullCheck)) // Fixed
             {
 
             }
@@ -96,27 +101,27 @@ namespace Tests.Diagnostics
 
             }
 
-            if (!(a is RedundantNullCheck aTyped2) ) // Fixed
+            if (!(a is RedundantNullCheck aTyped2)) // Fixed
             {
 
             }
 
-            if (((!((a) is RedundantNullCheck))) ) // Fixed
+            if (((!((a) is RedundantNullCheck)))) // Fixed
             {
 
             }
 
-            if (a == null || !(b is RedundantNullCheck)) // Compliant 
+            if (a == null || !(b is RedundantNullCheck)) // Compliant
             {
 
             }
 
-            if (b == null || !(a is RedundantNullCheck)) // Compliant 
+            if (b == null || !(a is RedundantNullCheck)) // Compliant
             {
 
             }
 
-            if (a == null || a != null) // Compliant - not related to this rule 
+            if (a == null || a != null) // Compliant - not related to this rule
             {
 
             }

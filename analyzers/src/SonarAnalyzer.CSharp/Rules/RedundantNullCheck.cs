@@ -35,11 +35,14 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class RedundantNullCheck : RedundantNullCheckBase<BinaryExpressionSyntax>
     {
         private const string MessageFormat = "Remove this unnecessary null check; 'is' returns false for nulls.";
+        private const string MessageFormatForPatterns = "Remove this unnecessary null check; it is already done by the pattern match.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor RuleForIs =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor RuleForPatternSyntax =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormatForPatterns, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleForIs, RuleForPatternSyntax);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -50,32 +53,23 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckOrExpression,
                 SyntaxKind.LogicalOrExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                CheckAndPattern,
+                SyntaxKindEx.AndPattern);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                CheckOrPattern,
+                SyntaxKindEx.OrPattern);
         }
 
         protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
 
         protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.RemoveParentheses();
 
-        private SyntaxNode GetNullCheckVariableForKind(SyntaxNode node, SyntaxKind kind) {
-            if (node.RemoveParentheses() is BinaryExpressionSyntax binaryExpression && binaryExpression.IsKind(kind))
-            {
-                var leftNode = GetLeftNode(binaryExpression);
-                var rightNode = GetRightNode(binaryExpression);
+        protected override SyntaxNode GetNullCheckVariable(SyntaxNode node) => GetNullCheckVariable(node, true);
 
-                if (leftNode.IsNullLiteral()) {
-                    return rightNode;
-                }
-                if (rightNode.IsNullLiteral())
-                {
-                    return leftNode;
-                }
-            }
-            return null;
-        }
-
-        protected override SyntaxNode GetNullCheckVariable(SyntaxNode node) => GetNullCheckVariableForKind(node, SyntaxKind.EqualsExpression);
-
-        protected override SyntaxNode GetNonNullCheckVariable(SyntaxNode node) => GetNullCheckVariableForKind(node, SyntaxKind.NotEqualsExpression);
+        protected override SyntaxNode GetNonNullCheckVariable(SyntaxNode node) => GetNullCheckVariable(node, false);
 
         protected override SyntaxNode GetIsOperatorCheckVariable(SyntaxNode node)
         {
@@ -86,21 +80,121 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (innerExpression.IsKind(SyntaxKindEx.IsPatternExpression))
             {
-                var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression;
-                return isPatternExpression.Expression.RemoveParentheses();
+                var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression.RemoveParentheses();
+                if (IsAffirmativePatternMatch(isPatternExpression))
+                {
+                    return isPatternExpression.Expression.RemoveParentheses();
+                }
             }
             return null;
+
+            // Verifies the given pattern is like "foo is Bar" - where Bar can be various Patterns, except 'null'.
+            static bool IsAffirmativePatternMatch(IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
+                !isPatternWrapper.IsNull() && !isPatternWrapper.IsNot();
         }
 
         protected override SyntaxNode GetInvertedIsOperatorCheckVariable(SyntaxNode node)
         {
-            if (node.RemoveParentheses() is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
+            var innerExpression = node.RemoveParentheses();
+            if (innerExpression is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
             {
                 return GetIsOperatorCheckVariable(prefixUnary.Operand);
             }
+            else if (innerExpression.IsKind(SyntaxKindEx.IsPatternExpression))
+            {
+                var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression.RemoveParentheses();
+                if (IsNegativePatternMatch(isPatternExpression))
+                {
+                    return isPatternExpression.Expression.RemoveParentheses();
+                }
+            }
             return null;
+
+            // Verifies the pattern is like "foo is not Bar" - where Bar can be various Patterns, except 'null'.
+            static bool IsNegativePatternMatch(IsPatternExpressionSyntaxWrapper patternSyntaxWrapper) =>
+                patternSyntaxWrapper.IsNot() && !patternSyntaxWrapper.IsNotNull();
         }
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) => CSharpEquivalenceChecker.AreEquivalent(node1, node2);
+
+        private static void CheckAndPattern(SyntaxNodeAnalysisContext context)
+        {
+            var binaryPatternNode = (BinaryPatternSyntaxWrapper)context.Node;
+            var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
+            var right = binaryPatternNode.Right.SyntaxNode.RemoveParentheses();
+
+            if (IsNotNullPattern(left) && IsAffirmativePatternMatch(right))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, left.GetLocation()));
+            }
+            else if (IsNotNullPattern(right) && IsAffirmativePatternMatch(left))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, right.GetLocation()));
+            }
+
+            static bool IsNotNullPattern(SyntaxNode node) =>
+                UnaryPatternSyntaxWrapper.IsInstance(node)
+                && ((UnaryPatternSyntaxWrapper)node) is var unaryPatternSyntaxWrapper
+                && unaryPatternSyntaxWrapper.IsNotNull();
+
+            // Verifies the given pattern is an affirmative pattern - constant pattern (except 'null'), Declaration pattern, Recursive pattern.
+            // The PatternSyntax appears e.g. in switch arms and is different from IsPatternSyntax.
+            static bool IsAffirmativePatternMatch(SyntaxNode node) =>
+                PatternSyntaxWrapper.IsInstance(node)
+                && ((PatternSyntaxWrapper)node) is var isPatternWrapper
+                && !isPatternWrapper.IsNot()
+                && !isPatternWrapper.IsNull();
+        }
+
+        private static void CheckOrPattern(SyntaxNodeAnalysisContext context)
+        {
+            var binaryPatternNode = (BinaryPatternSyntaxWrapper)context.Node;
+            var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
+            var right = binaryPatternNode.Right.SyntaxNode.RemoveParentheses();
+            if (PatternSyntaxWrapper.IsInstance(left) && PatternSyntaxWrapper.IsInstance(right))
+            {
+                var leftPattern = (PatternSyntaxWrapper)left;
+                var rightPattern = (PatternSyntaxWrapper)right;
+                if (leftPattern.IsNull() && IsNegativePatternMatch(rightPattern))
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, left.GetLocation()));
+                }
+                else if (rightPattern.IsNull() && IsNegativePatternMatch(leftPattern))
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleForPatternSyntax, right.GetLocation()));
+                }
+            }
+
+            // Verifies that it's like a negative pattern except 'not null' e.g. 'not Apple', 'not (5 or 6)'.
+            // The PatternSyntax appears e.g. in switch arms and is different from IsPatternSyntax.
+            static bool IsNegativePatternMatch(PatternSyntaxWrapper node) =>
+                node.IsNot()
+                && ((UnaryPatternSyntaxWrapper)node) is var unaryPatternSyntaxWrapper
+                && !unaryPatternSyntaxWrapper.Pattern.IsNull();
+        }
+
+        /// <summary>
+        /// Retrieves the variable that gets null-checked only if the null-check respects the expectation of the caller (it is either an affirmative or a negative check).
+        /// For example:
+        /// - if the node is "foo is null" / "foo == null" and expectedAffirmative is "true", the method will return "foo".
+        /// - if the node is "foo is null" / "foo == null" and expectedAffirmative is "false", the method will return null.
+        /// - if the node is "foo is not null" / "foo != null" / "!(foo is null)" and expectedAffirmative is "true", the method will return null.
+        /// - if the node is "foo is not null" / "foo != null" / "!(foo is null)" and expectedAffirmative is "false", the method will return "foo".
+        /// </summary>
+        private static SyntaxNode GetNullCheckVariable(SyntaxNode node, bool expectedAffirmative)
+        {
+            var innerExpression = node.RemoveParentheses();
+            if (innerExpression is PrefixUnaryExpressionSyntax prefixUnary && prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
+            {
+                innerExpression = prefixUnary.Operand;
+                expectedAffirmative = !expectedAffirmative;
+            }
+            if (((ExpressionSyntax)innerExpression).TryGetExpressionComparedToNull(out var compared, out var actualAffirmative)
+                && actualAffirmative == expectedAffirmative)
+            {
+                return compared;
+            }
+            return null;
+        }
     }
 }

@@ -4,6 +4,19 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
+"uri":  "sources\Net5\Net5\Apple.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
 "uri":  "sources\Net5\Net5\AttributesOnLocalFunctions.cs",
 "region":  {
 "startLine":  1,
@@ -356,6 +369,19 @@
 "message":  "Add or update the header of this file.",
 "location":  {
 "uri":  "sources\Net5\Net5\S4057.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4201.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

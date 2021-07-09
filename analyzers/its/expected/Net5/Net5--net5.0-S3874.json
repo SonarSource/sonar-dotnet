@@ -4,6 +4,32 @@
 "id":  "S3874",
 "message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
 "location":  {
+"uri":  "sources\Net5\Net5\Apple.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  33,
+"endLine":  7,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\Net5\Net5\Apple.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  47,
+"endLine":  7,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
 "uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  48,

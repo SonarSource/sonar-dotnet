@@ -48,56 +48,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         private static readonly DiagnosticDescriptor RuleMultipleNegation = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageMultipleNegation, RspecStrings.ResourceManager);
 
-        private static readonly ISet<SyntaxKind> EqualsOrNotEquals = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.EqualsExpression,
-            SyntaxKind.NotEqualsExpression
-        };
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule, RuleMultipleNegation);
 
         internal static bool IsCoalesceAssignmentCandidate(SyntaxNode conditional, ExpressionSyntax comparedToNull) =>
             conditional?.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax parentAssignment
             && CSharpEquivalenceChecker.AreEquivalent(parentAssignment.Left, comparedToNull);
-
-        internal static bool TryGetExpressionComparedToNull(ExpressionSyntax expression, out ExpressionSyntax compared, out bool comparedIsNullInTrue)
-        {
-            compared = null;
-            comparedIsNullInTrue = false;
-            if (expression.RemoveParentheses() is BinaryExpressionSyntax binary && EqualsOrNotEquals.Contains(binary.Kind()))
-            {
-                comparedIsNullInTrue = binary.IsKind(SyntaxKind.EqualsExpression);
-                if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.NullLiteralExpression))
-                {
-                    compared = binary.Right;
-                    return true;
-                }
-                else if (CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.NullLiteralExpression))
-                {
-                    compared = binary.Left;
-                    return true;
-                }
-            }
-
-            if (IsPatternExpressionSyntaxWrapper.IsInstance(expression.RemoveParentheses()))
-            {
-                var isPatternWrapper = (IsPatternExpressionSyntaxWrapper)expression.RemoveParentheses();
-                if (isPatternWrapper.IsNotNull())
-                {
-                    comparedIsNullInTrue = false;
-                    compared = isPatternWrapper.Expression;
-                    return true;
-                }
-                else if (isPatternWrapper.IsNull())
-                {
-                    comparedIsNullInTrue = true;
-                    compared = isPatternWrapper.Expression;
-                    return true;
-                }
-            }
-
-            return false;
-        }
 
         internal static StatementSyntax ExtractSingleStatement(StatementSyntax statement)
         {
@@ -167,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var possiblyCoalescing = TryGetExpressionComparedToNull(ifStatement.Condition, out var comparedToNull, out var comparedIsNullInTrue)
+            var possiblyCoalescing = ifStatement.Condition.TryGetExpressionComparedToNull(out var comparedToNull, out var comparedIsNullInTrue)
                                      && comparedToNull.CanBeNull(context.SemanticModel);
 
             if (CanBeSimplified(context, whenTrue, whenFalse, possiblyCoalescing ? comparedToNull : null, context.SemanticModel, comparedIsNullInTrue, out var simplifiedOperator))
@@ -192,7 +147,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (TryGetExpressionComparedToNull(condition, out var comparedToNull, out var comparedIsNullInTrue)
+            if (condition.TryGetExpressionComparedToNull(out var comparedToNull, out var comparedIsNullInTrue)
                 && comparedToNull.CanBeNull(context.SemanticModel)
                 && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
             {

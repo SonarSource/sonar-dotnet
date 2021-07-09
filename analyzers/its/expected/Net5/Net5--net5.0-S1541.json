@@ -1,0 +1,154 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  21,
+"endLine":  11,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  21,
+"endLine":  11,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  35,
+"endLine":  14,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  48,
+"endLine":  17,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  19,
+"endLine":  18,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  32,
+"endLine":  20,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  33,
+"endLine":  23,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  19,
+"endLine":  24,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  36,
+"endLine":  28,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  36,
+"endLine":  31,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  19,
+"endLine":  32,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  47,
+"endLine":  42,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  41,
+"endLine":  42,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  35,
+"endLine":  42,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  29,
+"endLine":  42,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  23,
+"endLine":  42,
+"endColumn":  25
+}
+}
+]
+}
+]
+}

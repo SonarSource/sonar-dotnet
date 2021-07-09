@@ -28,5 +28,8 @@ namespace SonarAnalyzer.Extensions
     {
         public static bool IsNot(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
             unaryPatternSyntaxWrapper.SyntaxNode.RemoveParentheses().Kind() == SyntaxKindEx.NotPattern;
+
+        public static bool IsNotNull(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
+            unaryPatternSyntaxWrapper.IsNot() && unaryPatternSyntaxWrapper.Pattern.IsNull();
     }
 }

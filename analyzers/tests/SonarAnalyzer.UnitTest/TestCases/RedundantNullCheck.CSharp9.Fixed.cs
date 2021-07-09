@@ -5,39 +5,34 @@ object m = 5;
 Apple apple = new();
 
 // AND
-if (n != null && n is nint) // Noncompliant
+if (n is nint) // Fixed
 {
 }
 
-if (n is not null && n is nint nintValue) // Noncompliant
+if (n is nint nintValue) // Fixed
 {
 }
 
-if (!(n is null) && n is Apple) // Noncompliant
+if (n is Apple) // Fixed
 {
 }
 
-var result = (n is string && n is not null); // Noncompliant {{Remove this unnecessary null check; 'is' returns false for nulls.}}
-//                           ^^^^^^^^^^^^^
-result = (n is string && n is not null && m is not null); // Noncompliant
-//                       ^^^^^^^^^^^^^
+var result = (n is string); // Fixed
+result = (n is string && m is not null); // Fixed
 
 // parenthesized pattern
-result = n is ("a" or "b" or "c") && n is not null; // Noncompliant
-//                                   ^^^^^^^^^^^^^
+result = n is ("a" or "b" or "c"); // Fixed
 
 if (n is null && apple != null && m is null && apple is ("Sweet", "Red")) { } // FN
 if (n is null && apple != null && apple is ("Sweet", "Red")) { } // FN
-if (apple != null && apple is ("Sweet", "Red")) { } // Noncompliant
-if (apple != null && apple is { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
-if (!(apple is null) && apple is { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
-//  ^^^^^^^^^^^^^^^^
-if (apple is not null && apple is ("Sweet", "Red")) { } // Noncompliant
+if (apple is ("Sweet", "Red")) { } // Fixed
+if (apple is { Taste: "Sweet", Color: "Red" }) { } // Fixed
+if (apple is { Taste: "Sweet", Color: "Red" }) { } // Fixed
+if (apple is ("Sweet", "Red")) { } // Fixed
 
 var x = a switch
 {
-    Apple appleInside and not null => "", // Noncompliant {{Remove this unnecessary null check; it is already done by the pattern match.}}
-//                        ^^^^^^^^
+    Apple appleInside => "", // Fixed
     _ => ""
 };
 
@@ -49,76 +44,71 @@ x = a switch
 
 x = apple switch
 {
-    not null and ("Sweet", "Red") => "", // Noncompliant
+    ("Sweet", "Red") => "", // Fixed
     _ => ""
 };
 
 x = apple switch
 {
-    { Taste: "Sweet", Color: "Red" } and not null => "", // Noncompliant
+    { Taste: "Sweet", Color: "Red" } => "", // Fixed
     _ => ""
 };
 
 x = apple switch
 {
-    { Taste: "Sweet" } and not null and { Color: "Red" }  => "", // Noncompliant
-//                         ^^^^^^^^
+    { Taste: "Sweet" } and { Color: "Red" }  => "", // Fixed
     _ => ""
 };
 
 // OR, inverted
-result = n is null || !(n is Apple); // Noncompliant {{Remove this unnecessary null check; 'is' returns false for nulls.}}
-result = !(n is Apple) || n is null; // Noncompliant
-result = a is null || !(a is Apple aTyped1); // Noncompliant
-result = !(a is Apple aTyped2) || a == null; // Noncompliant
-result = ((!((a) is Apple))) || ((a) == (null)); // Noncompliant
-//                               ^^^^^^^^^^^^^
+result = !(n is Apple); // Fixed
+result = !(n is Apple); // Fixed
+result = !(a is Apple aTyped1); // Fixed
+result = !(a is Apple aTyped2); // Fixed
+result = ((!((a) is Apple))); // Fixed
 
-if (apple == null || apple is not { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
-//  ^^^^^^^^^^^^^
-if (apple is null || apple is not { Taste: "Sweet", Color: "Red" }) { } // Noncompliant
-//  ^^^^^^^^^^^^^
-if (apple == null || !(apple is { Taste: "Sweet", Color: "Red" })) { } // Noncompliant
-if (apple == null || apple is not ("Sweet", "Red")) { } // Noncompliant
-if (apple == null || !(apple is ("Sweet", "Red"))) { } // Noncompliant
-if (apple is null || !(apple is ("Sweet", "Red"))) { } // Noncompliant
+if (apple is not { Taste: "Sweet", Color: "Red" }) { } // Fixed
+if (apple is not { Taste: "Sweet", Color: "Red" }) { } // Fixed
+if (!(apple is { Taste: "Sweet", Color: "Red" })) { } // Fixed
+if (apple is not ("Sweet", "Red")) { } // Fixed
+if (!(apple is ("Sweet", "Red"))) { } // Fixed
+if (!(apple is ("Sweet", "Red"))) { } // Fixed
 
 x = a switch
 {
-    null or not "a" => "not a", // Noncompliant {{Remove this unnecessary null check; it is already done by the pattern match.}}
-//  ^^^^
+    not "a" => "not a", // Fixed
     _ => "default"
 };
 
 x = a switch
 {
-    not Apple or null => "", // Noncompliant
+    not Apple => "", // Fixed
     _ => ""
 };
 
 x = apple switch
 {
-    null or not ("Sweet", "Red")  => "", // Noncompliant
+    not ("Sweet", "Red")  => "", // Fixed
     _ => ""
 };
 
 x = apple switch
 {
-    null or not { Taste: "Sweet" } or not { Color: "Red" } => "", // Noncompliant
+    not { Taste: "Sweet" } or not { Color: "Red" } => "", // Fixed
     _ => ""
 };
 
 x = apple switch
 {
-    not { Taste: "Sweet" } or null or not { Color: "Red" } => "", // Noncompliant
+    not { Taste: "Sweet" } or not { Color: "Red" } => "", // Fixed
     _ => ""
 };
 
 switch (n)
 {
-    case not null and "sweet": // Noncompliant
+    case "sweet": // Fixed
         break;
-    case null or not "sweet": // Noncompliant
+    case not "sweet": // Fixed
         break;
     default:
         break;
@@ -126,9 +116,9 @@ switch (n)
 
 switch (n)
 {
-    case not null and Apple appleSwitch1: // Noncompliant
+    case Apple appleSwitch1: // Fixed
         break;
-    case null or not ("Sweet", "Red"): // Noncompliant
+    case not ("Sweet", "Red"): // Fixed
         break;
     default:
         break;
@@ -136,7 +126,7 @@ switch (n)
 
 switch (n)
 {
-    case null or not Apple: // Noncompliant
+    case not Apple: // Fixed
         break;
     default:
         break;
@@ -221,7 +211,7 @@ switch (n)
 
 static int GetTax(object id) => id switch
 {
-    not null and 1 => 0, // Noncompliant
+    1 => 0, // Fixed
     not null and not 5 => 5, // Compliant
     5 => 15,
     _ => 10
