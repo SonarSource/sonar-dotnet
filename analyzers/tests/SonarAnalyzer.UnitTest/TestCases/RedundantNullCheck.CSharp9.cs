@@ -145,7 +145,8 @@ if (apple != null && apple is not { Taste: "Sweet", Color: "Red" }) { } // Compl
 if (apple != null && apple is not ("Sweet", "Red")) { } // Compliant
 if (apple is not null || apple is ("Sweet", "Red")) { } // Compliant
 if (apple is not null || apple is { Taste: "Sweet", Color: "Red" }) { } // Compliant
-
+if (apple == null || apple is { Taste: "Sweet", Color: "Red" }) { } // Compliant
+if (apple is { Taste: "Sweet", Color: "Red" } || apple is null) { } // Compliant
 
 if (n is not null && n is not null) // Compliant (not related to this rule)
 {

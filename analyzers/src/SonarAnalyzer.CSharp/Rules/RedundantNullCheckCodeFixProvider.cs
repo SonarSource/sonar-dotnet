@@ -114,13 +114,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return root.ReplaceNode(binaryExpression, binaryRight.WithTriviaFrom(binaryExpression));
             }
-            else if (binaryRight.RemoveParentheses() == mustBeReplaced)
-            {
-                return root.ReplaceNode(binaryExpression, binaryLeft.WithTriviaFrom(binaryExpression));
-            }
             else
             {
-                return root;
+                return root.ReplaceNode(binaryExpression, binaryLeft.WithTriviaFrom(binaryExpression));
             }
         }
     }
