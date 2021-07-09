@@ -93,7 +93,7 @@ namespace Tests.Diagnostics
             else
             {
 #if DEBUG
-            Trace.WriteLine( "Something to log only in debug", obj);
+            Trace.WriteLine("Something to log only in debug", a.ToString());
 #endif
             }
 

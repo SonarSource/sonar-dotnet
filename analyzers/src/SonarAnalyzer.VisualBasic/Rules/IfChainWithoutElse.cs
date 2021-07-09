@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -44,7 +45,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var ifNode = (MultiLineIfBlockSyntax)c.Node;
-                    if (ifNode.ElseBlock != null || !ifNode.ElseIfBlocks.Any())
+                    if (!IsElseIfWithoutElse(ifNode))
                     {
                         return;
                     }
@@ -54,5 +55,19 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 },
                 SyntaxKind.MultiLineIfBlock);
         }
+
+        private static bool IsElseIfWithoutElse(MultiLineIfBlockSyntax node)
+        {
+            return node.ElseIfBlocks.Any()
+                   && (node.ElseBlock == null || IsEmptyBlock(node));
+        }
+
+        private static bool IsEmptyBlock(MultiLineIfBlockSyntax multiLineIfBlock) =>
+            !(multiLineIfBlock.ElseBlock.Statements.Count > 0
+            || multiLineIfBlock.ElseBlock.DescendantTrivia().Any(elseBlockTrivia => IsCommentOrDisabledText(elseBlockTrivia))
+            || multiLineIfBlock.EndIfStatement.DescendantTrivia().Any(endIfTrivia => IsCommentOrDisabledText(endIfTrivia)));
+
+        private static bool IsCommentOrDisabledText(SyntaxTrivia trivia) =>
+            trivia.IsComment() || trivia.IsKind(SyntaxKind.DisabledTextTrivia);
     }
 }

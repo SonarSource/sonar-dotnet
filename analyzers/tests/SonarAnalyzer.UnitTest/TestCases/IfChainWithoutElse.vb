@@ -1,5 +1,6 @@
 ﻿Imports System
 Imports System.Collections.Generic
+Imports System.Diagnostics
 Imports System.Linq
 Imports System.Text
 
@@ -33,7 +34,7 @@ Namespace Tests.TestCases
 
             If a Then
             ElseIf a Then
-            ElseIf a Then
+            ElseIf a Then ' Noncompliant
             Else
             End If
 
@@ -46,8 +47,51 @@ Namespace Tests.TestCases
             ElseIf a Then
             ElseIf a Then
             ElseIf a Then
+            ElseIf a Then ' Noncompliant
+            Else
+            End If
+
+            If a Then
+            ElseIf a Then
             ElseIf a Then
             Else
+                Console.WriteLine()
+            End If
+
+            If a Then
+            ElseIf a Then
+            ElseIf a Then
+            Else
+                ' Single line comment
+            End If
+
+            If a Then
+            ElseIf a Then
+            ElseIf a Then
+            Else ' Single line comment
+            End If
+
+            If a Then
+            ElseIf a Then
+            ElseIf a Then
+            Else
+            End If ' Single line comment
+
+            If a Then
+            ElseIf a Then
+            ElseIf a Then
+            Else
+#If DEBUG
+                Trace.WriteLine("Something to log only in debug", a.ToString())
+#End If
+            End If
+
+            If a Then
+            ElseIf a Then
+            ElseIf a Then ' Noncompliant
+            Else
+#If DEBUG
+#End If
             End If
 
             If a Then
