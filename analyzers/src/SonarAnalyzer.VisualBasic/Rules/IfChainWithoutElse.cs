@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -31,36 +30,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class IfChainWithoutElse : IfChainWithoutElseBase
+    public sealed class IfChainWithoutElse : IfChainWithoutElseBase<SyntaxKind, MultiLineIfBlockSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+        protected override SyntaxKind SyntaxKind => SyntaxKind.MultiLineIfBlock;
+        protected override string ElseClause => "Else";
 
-        private const string MessageFormat = "Add the missing 'Else' clause.";
+        protected override bool IsElseIfWithoutElse(MultiLineIfBlockSyntax ifSyntax) =>
+            ifSyntax.ElseIfBlocks.Any()
+            && (ifSyntax.ElseBlock == null || IsEmptyBlock(ifSyntax));
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var ifNode = (MultiLineIfBlockSyntax)c.Node;
-                    if (!IsElseIfWithoutElse(ifNode))
-                    {
-                        return;
-                    }
-
-                    var lastElseIf = ifNode.ElseIfBlocks.Last();
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lastElseIf.ElseIfStatement.ElseIfKeyword.GetLocation()));
-                },
-                SyntaxKind.MultiLineIfBlock);
-        }
-
-        private static bool IsElseIfWithoutElse(MultiLineIfBlockSyntax node)
-        {
-            return node.ElseIfBlocks.Any()
-                   && (node.ElseBlock == null || IsEmptyBlock(node));
-        }
+        protected override Location IssueLocation(SyntaxNodeAnalysisContext context, MultiLineIfBlockSyntax ifSyntax) =>
+            ifSyntax.ElseIfBlocks.Last().ElseIfStatement.ElseIfKeyword.GetLocation();
 
         private static bool IsEmptyBlock(MultiLineIfBlockSyntax multiLineIfBlock) =>
             !(multiLineIfBlock.ElseBlock.Statements.Count > 0
