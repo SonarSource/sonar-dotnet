@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -33,39 +32,28 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class EmptyNestedBlock : EmptyNestedBlockBase
+    public sealed class EmptyNestedBlock : EmptyNestedBlockBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override SyntaxKind[] SyntaxKinds { get; } = new[]
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    foreach (var node in VerifyEmptyBlocks(c.Node))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
-                    }
-                },
-                SyntaxKind.SimpleDoLoopBlock,
-                SyntaxKind.DoLoopUntilBlock,
-                SyntaxKind.DoLoopWhileBlock,
-                SyntaxKind.DoUntilLoopBlock,
-                SyntaxKind.DoWhileLoopBlock,
-                SyntaxKind.ForBlock,
-                SyntaxKind.ForEachBlock,
-                // The Else and ElseIf blocks are inside the MultiLineIfBlock
-                SyntaxKind.MultiLineIfBlock,
-                SyntaxKind.SelectBlock,
-                // The CatchBlock and FinallyBlock are inside the TryBlock
-                SyntaxKind.TryBlock,
-                SyntaxKind.UsingBlock,
-                SyntaxKind.WhileBlock,
-                SyntaxKind.WithBlock);
-        }
+            SyntaxKind.SimpleDoLoopBlock,
+            SyntaxKind.DoLoopUntilBlock,
+            SyntaxKind.DoLoopWhileBlock,
+            SyntaxKind.DoUntilLoopBlock,
+            SyntaxKind.DoWhileLoopBlock,
+            SyntaxKind.ForBlock,
+            SyntaxKind.ForEachBlock,
+            // The Else and ElseIf blocks are inside the MultiLineIfBlock
+            SyntaxKind.MultiLineIfBlock,
+            SyntaxKind.SelectBlock,
+            // The CatchBlock and FinallyBlock are inside the TryBlock
+            SyntaxKind.TryBlock,
+            SyntaxKind.UsingBlock,
+            SyntaxKind.WhileBlock,
+            SyntaxKind.WithBlock
+        };
 
         /**
          * Verify that the given block has no statements and no comments inside
@@ -80,7 +68,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
          * End Try
          */
 
-        private IEnumerable<SyntaxNode> VerifyEmptyBlocks(SyntaxNode node)
+        protected override IEnumerable<SyntaxNode> EmptyBlocks(SyntaxNode node)
         {
             switch (node.Kind())
             {
@@ -121,7 +109,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VisitDoLoopBlock(DoLoopBlockSyntax node)
+        private static IEnumerable<SyntaxNode> VisitDoLoopBlock(DoLoopBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.LoopStatement))
             {
@@ -129,7 +117,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VisitForBlock(ForBlockSyntax node)
+        private static IEnumerable<SyntaxNode> VisitForBlock(ForBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
             {
@@ -137,7 +125,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VisitForEachBlock(ForEachBlockSyntax node)
+        private static IEnumerable<SyntaxNode> VisitForEachBlock(ForEachBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
             {
@@ -145,7 +133,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VisitMultiLineIfBlock(MultiLineIfBlockSyntax node)
+        private static IEnumerable<SyntaxNode> VisitMultiLineIfBlock(MultiLineIfBlockSyntax node)
         {
             var result = new List<SyntaxNode>();
             if (node.ElseBlock == null)
@@ -177,7 +165,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return result;
         }
 
-        private IEnumerable<SyntaxNode> VisitSelectBlock(SelectBlockSyntax node)
+        private static IEnumerable<SyntaxNode> VisitSelectBlock(SelectBlockSyntax node)
         {
             if (!node.CaseBlocks.Any())
             {
@@ -185,7 +173,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VisitTryBlock(TryBlockSyntax node)
+        private static IEnumerable<SyntaxNode> VisitTryBlock(TryBlockSyntax node)
         {
             var result = new List<SyntaxNode>();
             if (node.CatchBlocks.Any() && node.FinallyBlock != null)
@@ -211,7 +199,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return result;
         }
 
-        private IEnumerable<SyntaxNode> VisitUsingBlock(UsingBlockSyntax node)
+        private static IEnumerable<SyntaxNode> VisitUsingBlock(UsingBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.EndUsingStatement))
             {
@@ -219,7 +207,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VisitWhileBlock(WhileBlockSyntax node)
+        private static IEnumerable<SyntaxNode> VisitWhileBlock(WhileBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.EndWhileStatement))
             {
@@ -227,7 +215,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VisitWithBlock(WithBlockSyntax node)
+        private static IEnumerable<SyntaxNode> VisitWithBlock(WithBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.EndWithStatement))
             {
@@ -235,7 +223,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VerifyIfAndMostElseIfBlocks(MultiLineIfBlockSyntax ifBlock)
+        private static IEnumerable<SyntaxNode> VerifyIfAndMostElseIfBlocks(MultiLineIfBlockSyntax ifBlock)
         {
             var result = new List<SyntaxNode>();
             result.AddRange(VerifyIfBlock(ifBlock, ifBlock.ElseIfBlocks[0]));
@@ -247,7 +235,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return result;
         }
 
-        private IEnumerable<SyntaxNode> VerifyIfBlock(MultiLineIfBlockSyntax ifBlock, SyntaxNode node)
+        private static IEnumerable<SyntaxNode> VerifyIfBlock(MultiLineIfBlockSyntax ifBlock, SyntaxNode node)
         {
             if (!ifBlock.Statements.Any() && NoCommentsBefore(node))
             {
@@ -255,7 +243,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VerifyElseIfBlock(ElseIfBlockSyntax elseIfBlock, SyntaxNode node)
+        private static IEnumerable<SyntaxNode> VerifyElseIfBlock(ElseIfBlockSyntax elseIfBlock, SyntaxNode node)
         {
             if (!elseIfBlock.Statements.Any() && NoCommentsBefore(node))
             {
@@ -263,7 +251,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VerifyElseBlock(ElseBlockSyntax elseBlock, SyntaxNode node)
+        private static IEnumerable<SyntaxNode> VerifyElseBlock(ElseBlockSyntax elseBlock, SyntaxNode node)
         {
             if (!elseBlock.Statements.Any() && NoCommentsBefore(node))
             {
@@ -271,7 +259,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VerifyTryAndMostCatches(TryBlockSyntax node)
+        private static IEnumerable<SyntaxNode> VerifyTryAndMostCatches(TryBlockSyntax node)
         {
             var result = new List<SyntaxNode>();
             result.AddRange(VerifyTryBlock(node, node.CatchBlocks[0]));
@@ -283,7 +271,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return result;
         }
 
-        private IEnumerable<SyntaxNode> VerifyTryBlock(TryBlockSyntax node, SyntaxNode nextBlock)
+        private static IEnumerable<SyntaxNode> VerifyTryBlock(TryBlockSyntax node, SyntaxNode nextBlock)
         {
             if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
             {
@@ -291,7 +279,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VerifyCatchBlock(CatchBlockSyntax node, SyntaxNode nextBlock)
+        private static IEnumerable<SyntaxNode> VerifyCatchBlock(CatchBlockSyntax node, SyntaxNode nextBlock)
         {
             if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
             {
@@ -299,7 +287,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private IEnumerable<SyntaxNode> VerifyFinallyBlock(FinallyBlockSyntax node, SyntaxNode nextBlock)
+        private static IEnumerable<SyntaxNode> VerifyFinallyBlock(FinallyBlockSyntax node, SyntaxNode nextBlock)
         {
             if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
             {
