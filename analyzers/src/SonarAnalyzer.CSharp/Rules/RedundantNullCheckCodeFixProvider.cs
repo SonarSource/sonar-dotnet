@@ -58,10 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             else if (IsPatternExpressionSyntaxWrapper.IsInstance(diagnosticNode))
             {
                 var isPatternExpression = (IsPatternExpressionSyntaxWrapper)diagnosticNode.RemoveParentheses();
-                if (isPatternExpression.IsNull() || isPatternExpression.IsNotNull())
-                {
-                    RegisterBinaryExpressionCodeFix(context, root, isPatternExpression.SyntaxNode);
-                }
+                RegisterBinaryExpressionCodeFix(context, root, isPatternExpression.SyntaxNode);
             }
             else if (PatternSyntaxWrapper.IsInstance(diagnosticNode))
             {
