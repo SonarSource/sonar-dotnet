@@ -25,7 +25,7 @@ namespace Tests.Diagnostics
             else if (a)
             {
             }
-            else if (a) // Noncompliant {{Add the missing 'else' clause.}}
+            else if (a) // Noncompliant {{Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.}}
 //          ^^^^^^^
             {
             }
@@ -36,7 +36,7 @@ namespace Tests.Diagnostics
             else if (a) { }
             else if (a) { }
             else if (a) { }
-            else if (a) // Noncompliant {{Add the missing 'else' clause.}}
+            else if (a) // Noncompliant {{Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.}}
 //          ^^^^^^^
             {
             }

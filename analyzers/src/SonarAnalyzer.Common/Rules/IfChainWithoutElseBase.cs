@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules
         where TIfSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S126";
-        private const string MessageFormat = "Add the missing '{0}' clause.";
+        private const string MessageFormat = "Add the missing '{0}' clause with either the appropriate action or a suitable comment as to why no action is taken.";
         private readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }

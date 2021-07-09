@@ -16,7 +16,7 @@ Namespace Tests.TestCases
 
             If a Then
             ElseIf a Then
-            ElseIf a Then ' Noncompliant {{Add the missing 'Else' clause.}}
+            ElseIf a Then ' Noncompliant {{Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.}}
 '           ^^^^^^
             End If
 
