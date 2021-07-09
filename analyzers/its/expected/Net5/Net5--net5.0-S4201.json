@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  38,
+"endLine":  14,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; it is already done by the pattern match.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  39,
+"endLine":  17,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  22,
+"endLine":  20,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; it is already done by the pattern match.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  17,
+"endLine":  23,
+"endColumn":  21
+}
+}
+}
+]
+}

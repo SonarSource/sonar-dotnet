@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3532",
+"message":  "Remove this empty 'default' clause.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  17,
+"endLine":  39,
+"endColumn":  27
+}
+}
+}
+]
+}
