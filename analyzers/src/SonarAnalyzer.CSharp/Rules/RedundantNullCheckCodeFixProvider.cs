@@ -67,6 +67,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 RegisterBinaryPatternCodeFix(context, root, ((PatternSyntaxWrapper)diagnosticNode).SyntaxNode);
             }
+            else if (diagnosticNode.IsNullLiteral() && diagnosticNode.Parent.IsKind(SyntaxKindEx.ConstantPattern))
+            {
+                RegisterBinaryPatternCodeFix(context, root, diagnosticNode.Parent);
+            }
 
             return TaskHelper.CompletedTask;
         }
@@ -104,9 +108,20 @@ namespace SonarAnalyzer.Rules.CSharp
                     }),
                 context.Diagnostics);
 
-        private static SyntaxNode ReplaceNode(SyntaxNode root, SyntaxNode binaryExpression, SyntaxNode binaryLeft, SyntaxNode binaryRight, SyntaxNode mustBeReplaced) =>
-            binaryLeft.RemoveParentheses() == mustBeReplaced
-                ? root.ReplaceNode(binaryExpression, binaryRight.WithTriviaFrom(binaryExpression))
-                : root.ReplaceNode(binaryExpression, binaryLeft.WithTriviaFrom(binaryExpression));
+        private static SyntaxNode ReplaceNode(SyntaxNode root, SyntaxNode binaryExpression, SyntaxNode binaryLeft, SyntaxNode binaryRight, SyntaxNode mustBeReplaced)
+        {
+            if (binaryLeft.RemoveParentheses() == mustBeReplaced)
+            {
+                return root.ReplaceNode(binaryExpression, binaryRight.WithTriviaFrom(binaryExpression));
+            }
+            else if (binaryRight.RemoveParentheses() == mustBeReplaced)
+            {
+                return root.ReplaceNode(binaryExpression, binaryLeft.WithTriviaFrom(binaryExpression));
+            }
+            else
+            {
+                return root;
+            }
+        }
     }
 }

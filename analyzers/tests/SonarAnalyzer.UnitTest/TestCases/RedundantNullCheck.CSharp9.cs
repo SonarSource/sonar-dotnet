@@ -83,9 +83,9 @@ if (apple is null || !(apple is ("Sweet", "Red"))) { } // Noncompliant
 
 x = a switch
 {
-    null or not "a" => "", // Noncompliant {{Remove this unnecessary null check; it is already done by the pattern match.}}
+    null or not "a" => "not a", // Noncompliant {{Remove this unnecessary null check; it is already done by the pattern match.}}
 //  ^^^^
-    _ => ""
+    _ => "default"
 };
 
 x = a switch

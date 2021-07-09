@@ -74,31 +74,31 @@ if (!(apple is ("Sweet", "Red"))) { } // Fixed
 
 x = a switch
 {
-    null or not "a" => "", // Fixed
-    _ => ""
+    not "a" => "not a", // Fixed
+    _ => "default"
 };
 
 x = a switch
 {
-    not Apple or null => "", // Fixed
+    not Apple => "", // Fixed
     _ => ""
 };
 
 x = apple switch
 {
-    null or not ("Sweet", "Red")  => "", // Fixed
+    not ("Sweet", "Red")  => "", // Fixed
     _ => ""
 };
 
 x = apple switch
 {
-    null or not { Taste: "Sweet" } or not { Color: "Red" } => "", // Fixed
+    not { Taste: "Sweet" } or not { Color: "Red" } => "", // Fixed
     _ => ""
 };
 
 x = apple switch
 {
-    not { Taste: "Sweet" } or null or not { Color: "Red" } => "", // Fixed
+    not { Taste: "Sweet" } or not { Color: "Red" } => "", // Fixed
     _ => ""
 };
 
@@ -106,7 +106,7 @@ switch (n)
 {
     case "sweet": // Fixed
         break;
-    case null or not "sweet": // Fixed
+    case not "sweet": // Fixed
         break;
     default:
         break;
@@ -116,7 +116,7 @@ switch (n)
 {
     case Apple appleSwitch1: // Fixed
         break;
-    case null or not ("Sweet", "Red"): // Fixed
+    case not ("Sweet", "Red"): // Fixed
         break;
     default:
         break;
@@ -124,7 +124,7 @@ switch (n)
 
 switch (n)
 {
-    case null or not Apple: // Fixed
+    case not Apple: // Fixed
         break;
     default:
         break;
