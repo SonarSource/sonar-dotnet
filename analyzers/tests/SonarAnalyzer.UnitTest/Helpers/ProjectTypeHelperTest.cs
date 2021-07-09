@@ -38,22 +38,22 @@ namespace SonarAnalyzer.UnitTest.Helpers
             // Purpose of this test is to remind us, that we need to synchronize this list with sonar-scanner-msbuild and sonar-security.
             var synchronizedSortedReferences = new[]
             {
-                "DOTMEMORY.UNIT",
-                "FAKEITEASY",
-                "FLUENTASSERTIONS",
-                "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
-                "MICROSOFT.VISUALSTUDIO.QUALITYTOOLS.UNITTESTFRAMEWORK",
-                "MACHINE.SPECIFICATIONS",
-                "MOQ",
-                "NSUBSTITUTE",
-                "NUNIT.FRAMEWORK",
-                "NUNITLITE",
-                "RHINO.MOCKS",
-                "SHOULDLY",
-                "TECHTALK.SPECFLOW",
-                "TELERIK.JUSTMOCK",
-                "XUNIT",
-                "XUNIT.CORE"
+                "dotMemory.Unit",
+                "Microsoft.VisualStudio.TestPlatform.TestFramework",
+                "Microsoft.VisualStudio.QualityTools.UnitTestFramework",
+                "Machine.Specifications",
+                "nunit.framework",
+                "nunitlite",
+                "TechTalk.SpecFlow",
+                "xunit",
+                "xunit.core",
+                "FluentAssertions",
+                "Shouldly",
+                "FakeItEasy",
+                "Moq",
+                "NSubstitute",
+                "Rhino.Mocks",
+                "Telerik.JustMock"
             };
             ProjectTypeHelper.TestAssemblyNames.OrderBy(x => x).Should().BeEquivalentTo(synchronizedSortedReferences);
         }
