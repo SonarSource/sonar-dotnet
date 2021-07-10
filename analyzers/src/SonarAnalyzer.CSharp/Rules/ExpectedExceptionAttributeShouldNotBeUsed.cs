@@ -18,11 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -31,27 +28,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ExpectedExceptionAttributeShouldNotBeUsed : SonarDiagnosticAnalyzer
+    public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptionShouldNotBeUsedAttributeBase<SyntaxKind>
     {
-        private const string DiagnosticId = "S3431";
-        private const string MessageFormat = "Replace the 'ExpectedException' attribute with a throw assertion or a try/catch block.";
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    if (methodDeclaration.ExpressionBody == null
-                        && methodDeclaration.Body?.Statements.Count > 1
-                        && c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
-                        && methodSymbol.GetAttributes(UnitTestHelper.KnownExpectedExceptionAttributes).FirstOrDefault() is { } firstExpectedExceptionAttributeOrDefault)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, firstExpectedExceptionAttributeOrDefault.ApplicationSyntaxReference.GetSyntax().GetLocation()));
-                    }
-                },
-                SyntaxKind.MethodDeclaration);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
     }
 }

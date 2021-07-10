@@ -20,37 +20,35 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExpectedExceptionAttributeBase<TAttributeSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer
-        where TAttributeSyntax : SyntaxNode
+    public abstract class ExpectedExceptionShouldNotBeUsedAttributeBase<TSyntaxKind> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S907"; // TODO: update ID.
-        internal const string MessageFormat = "Use an Assert method to test the thrown exception.";
+        internal const string DiagnosticId = "S3431";
+        private const string MessageFormat = "Replace the 'ExpectedException' attribute with a throw assertion or a try/catch block.";
 
         private readonly DiagnosticDescriptor rule;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        protected ExpectedExceptionAttributeBase() =>
+        protected ExpectedExceptionShouldNotBeUsedAttributeBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
             {
-                if (c.Node is TAttributeSyntax attribute
-                    && NameOf(attribute).StartsWith("ExpectedException", StringComparison.OrdinalIgnoreCase))
+                if (c.SemanticModel.GetDeclaredSymbol(c.Node) is { } methodSymbol
+                    && methodSymbol.GetAttributes(UnitTestHelper.KnownExpectedExceptionAttributes).FirstOrDefault() is { } attribute)
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                 }
             },
-            Language.SyntaxKind.Attribute);
-
-        protected abstract string NameOf(TAttributeSyntax attribute);
+            Language.SyntaxKind.MethodDeclarations);
     }
 }

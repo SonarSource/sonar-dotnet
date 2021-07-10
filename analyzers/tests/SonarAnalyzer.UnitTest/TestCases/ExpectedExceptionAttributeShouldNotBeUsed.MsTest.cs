@@ -14,14 +14,14 @@ namespace Tests.Diagnostics
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]  // Compliant - one line
+        [ExpectedException(typeof(ArgumentNullException))]  // Noncompliant
         public void TestFoo3()
         {
             new object().ToString();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]  // Compliant - one line
+        [ExpectedException(typeof(ArgumentNullException))]  // Noncompliant
         public string TestFoo5() => new object().ToString();
 
         [TestMethod]
