@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Relationships;
 
@@ -43,10 +44,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             return boolConstraint == BoolConstraint.True ? relationship : relationship.Negate();
         }
 
-        public override string ToString()
-        {
-            var op = comparisonKind == ComparisonKind.Less ? "<" : "<=";
-            return $"{op}({LeftOperand}, {RightOperand})";
-        }
+        public override string ToString() =>
+            $"{comparisonKind.CSharp()}({LeftOperand}, {RightOperand})";
     }
 }

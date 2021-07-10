@@ -18,11 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
+namespace SonarAnalyzer.Helpers
 {
-    public enum ComparisonKind
+    public enum CountComparisonKind
     {
-        Less,
-        LessOrEqual
+        None,
+        SizeDepedendent,
+        NotAny,
+        Any,
+        AlwaysFalse,
+        AlwaysTrue,
     }
 }

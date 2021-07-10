@@ -28,6 +28,8 @@ namespace SonarAnalyzer.Helpers.Facade
         where TSyntaxKind : struct
     {
         public abstract TSyntaxKind Kind(SyntaxNode node);
+        public abstract ComparisonKind ComparisonKind(SyntaxNode node);
+
         public abstract bool IsNullLiteral(SyntaxNode node);
         public abstract bool IsKind(SyntaxNode node, TSyntaxKind kind);
         public abstract bool IsKind(SyntaxToken token, TSyntaxKind kind);

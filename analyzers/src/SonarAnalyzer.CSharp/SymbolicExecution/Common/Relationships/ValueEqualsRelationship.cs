@@ -20,7 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using SonarAnalyzer.SymbolicExecution.SymbolicValues;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.Relationships
 {
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 
             var isComparisonContradicting = relationships
                 .OfType<ComparisonRelationship>()
-                .Where(c => c.ComparisonKind == ComparisonKind.Less)
+                .Where(c => c.ComparisonKind == ComparisonKind.LessThan)
                 .Any(c => AreOperandsMatching(c));
 
             return isComparisonContradicting;
