@@ -14,7 +14,7 @@ public record Program
     protected ICollection<string> GenericCollectionProtected { get; set; } // Noncompliant
 
     public ICollection<string> GenericCollectionNoSetAuto { get; }
-    public ICollection<string> GenericCollectionInit { get; init; } // Noncompliant FP
+    public ICollection<string> GenericCollectionInit { get; init; }
 }
 
 // Ignore collections marked with DataMember attribute: https://github.com/SonarSource/sonar-dotnet/issues/795
