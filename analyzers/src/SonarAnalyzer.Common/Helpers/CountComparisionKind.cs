@@ -24,8 +24,8 @@ namespace SonarAnalyzer.Helpers
     {
         None,
         SizeDepedendent,
-        NotAny,
         Any,
+        NotAny,
         AlwaysFalse,
         AlwaysTrue,
     }
