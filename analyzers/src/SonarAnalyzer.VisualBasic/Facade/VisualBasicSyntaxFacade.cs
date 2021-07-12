@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
         public override ComparisonKind ComparisonKind(SyntaxNode node) =>
-           Kind(node) switch
+           node.Kind() switch
            {
                SyntaxKind.EqualsExpression => Helpers.ComparisonKind.Equals,
                SyntaxKind.NotEqualsExpression => Helpers.ComparisonKind.NotEquals,
