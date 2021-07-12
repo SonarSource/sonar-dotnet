@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
@@ -48,17 +48,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
-                    var left = Language.ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out var l_out) ? (int?)l_out : null;
-                    var right = Language.ExpressionNumericConverter.TryGetConstantIntValue(binary.Right, out var r_out) ? (int?)r_out : null;
+                    var left = ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out var l_out) ? (int?)l_out : null;
+                    var right = ExpressionNumericConverter.TryGetConstantIntValue(binary.Right, out var r_out) ? (int?)r_out : null;
 
                     if ((left ?? right) is int constant)
                     {
-                        var comparision = left is null
-                            ? Language.Syntax.ComparisonKind(binary)
-                            : Language.Syntax.ComparisonKind(binary).Mirror();
+                        var comparison = left is null
+                            ? CSharpFacade.Instance.Syntax.ComparisonKind(binary)
+                            : CSharpFacade.Instance.Syntax.ComparisonKind(binary).Mirror();
                         var expression = left is null ? binary.Left : binary.Right;
 
-                        if (comparision.Count(constant).AnyOrNotAny()
+                        if (comparison.Count(constant).EmptyOrNotEmpty()
                             && TryGetCountCall(expression, c.SemanticModel, out var location, out var typeArgument))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, typeArgument));
