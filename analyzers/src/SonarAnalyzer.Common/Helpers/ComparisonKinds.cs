@@ -18,44 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using System.Collections.Generic;
 
 namespace SonarAnalyzer.Helpers
 {
     public static class ComparisonKinds
     {
-        public static ComparisonKind OperatorName(string name) =>
-            name switch
-            {
-                "op_Equality" => ComparisonKind.Equals,
-                "op_Inequality" => ComparisonKind.NotEquals,
-                "op_LessThan" => ComparisonKind.LessThan,
-                "op_LessThanOrEqual" => ComparisonKind.LessThanOrEqual,
-                "op_GreaterThan" => ComparisonKind.GreaterThan,
-                "op_GreaterThanOrEqual" => ComparisonKind.GreaterThanOrEqual,
-                _ => throw new InvalidOperationException(),
-            };
-
-        public static ComparisonKind Mirror(this ComparisonKind comparison) =>
-           comparison switch
-           {
-               ComparisonKind.GreaterThan => ComparisonKind.LessThan,
-               ComparisonKind.GreaterThanOrEqual => ComparisonKind.LessThanOrEqual,
-               ComparisonKind.LessThan => ComparisonKind.GreaterThan,
-               ComparisonKind.LessThanOrEqual => ComparisonKind.GreaterThanOrEqual,
-               _ => comparison,
-           };
-
-        public static string CSharp(this ComparisonKind kind) =>
-            kind switch
-            {
-                ComparisonKind.Equals => "==",
-                ComparisonKind.NotEquals => "!=",
-                ComparisonKind.LessThan => "<",
-                ComparisonKind.LessThanOrEqual => "<=",
-                ComparisonKind.GreaterThan => ">",
-                ComparisonKind.GreaterThanOrEqual => ">=",
-                _ => throw new InvalidOperationException(),
-            };
+        public static IReadOnlyCollection<ComparisonKind> All => new[]
+        {
+            ComparisonKind.Equals,
+            ComparisonKind.NotEquals,
+            ComparisonKind.LessThan,
+            ComparisonKind.LessThanOrEqual,
+            ComparisonKind.GreaterThan,
+            ComparisonKind.GreaterThanOrEqual,
+        };
     }
 }
