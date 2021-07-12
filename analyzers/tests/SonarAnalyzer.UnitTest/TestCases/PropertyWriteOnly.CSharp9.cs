@@ -1,23 +1,25 @@
 ﻿record PropertyWriteOnly
 {
-    public int Foo1  // Compliant - FN
+    public int Foo1  // Noncompliant {{Provide a getter for 'Foo1' or replace the property with a 'SetFoo1' method.}}
     {
         init { }
     }
 
-    public int Foo2 { set { } } //Noncompliant {{Provide a getter for 'Foo2' or replace the property with a 'SetFoo2' method.}}
+    public int Foo2 { set { } } // Noncompliant {{Provide a getter for 'Foo2' or replace the property with a 'SetFoo2' method.}}
 
     public int Foo3 { get { return 1; } set { } }
 }
 
 record PropertyWriteOnlyInPositionalRecord(int Parameter)
 {
-    public int Foo1  // Compliant - FN
+    private int foo1 = 5;
+
+    public int Foo1  // Noncompliant
     {
-        init { }
+        init { foo1 = value; }
     }
 
-    public int Foo2 { set { } } //Noncompliant {{Provide a getter for 'Foo2' or replace the property with a 'SetFoo2' method.}}
+    public int Foo2 { set { } } // Noncompliant {{Provide a getter for 'Foo2' or replace the property with a 'SetFoo2' method.}}
 
     public int Foo3 { get { return 1; } set { } }
 }
@@ -30,14 +32,14 @@ namespace ReproIssue2390
         public virtual int M
         {
             get { return m; }
-            set { m = value; }
+            init { m = value; }
         }
     }
     public record B : A
     {
         public override int M // Compliant, getter is in base class
         {
-            set { m = value + 1; }
+            init { m = value + 1; }
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class PropertyWriteOnly
     {
-        public int Foo  //Noncompliant {{Provide a getter for 'Foo' or replace the property with a 'SetFoo' method.}}
+        public int Foo  // Noncompliant {{Provide a getter for 'Foo' or replace the property with a 'SetFoo' method.}}
 //                 ^^^
         {
             set
@@ -25,7 +25,7 @@
 
     public struct PropertyWriteOnlyStruct
     {
-        public int Foo  //Noncompliant {{Provide a getter for 'Foo' or replace the property with a 'SetFoo' method.}}
+        public int Foo  // Noncompliant {{Provide a getter for 'Foo' or replace the property with a 'SetFoo' method.}}
 //                 ^^^
         {
             set
