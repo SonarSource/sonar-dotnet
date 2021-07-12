@@ -5270,7 +5270,7 @@
     <value>Blocker Vulnerability</value>
   </data>
   <data name="S2755_Description" xml:space="preserve">
-    <value>XML specification allows the use of entities that can be internal or external (file system / network access …​) which could lead to vulnerabilities such as confidential file disclosures or SSRFs.</value>
+    <value>XML standard allows the use of entities, declared in the DOCTYPE of the document, which can be internal or external.</value>
   </data>
   <data name="S2755_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
