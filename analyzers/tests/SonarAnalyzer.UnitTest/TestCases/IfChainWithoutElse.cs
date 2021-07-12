@@ -43,7 +43,7 @@ namespace Tests.Diagnostics
 
             if (a) { }
             else if (a) { }
-            else if (a) { }// Noncompliant
+            else if (a) { } // Noncompliant
             else { }
 
             if (a) { }
