@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -31,39 +31,25 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class IfChainWithoutElse : IfChainWithoutElseBase
+    public sealed class IfChainWithoutElse : IfChainWithoutElseBase<SyntaxKind, IfStatementSyntax>
     {
-        private const string MessageFormat = "Add the missing 'else' clause.";
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override SyntaxKind SyntaxKind => SyntaxKind.IfStatement;
+        protected override string ElseClause => "else";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override bool IsElseIfWithoutElse(IfStatementSyntax ifSyntax) =>
+           ifSyntax.Parent.IsKind(SyntaxKind.ElseClause)
+           && (ifSyntax.Else == null || IsEmptyBlock(ifSyntax.Else));
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override Location IssueLocation(SyntaxNodeAnalysisContext context, IfStatementSyntax ifSyntax)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var ifNode = (IfStatementSyntax)c.Node;
-                    if (!IsElseIfWithoutElse(ifNode))
-                    {
-                        return;
-                    }
-
-                    var parentElse = (ElseClauseSyntax)ifNode.Parent;
-                    var diff = ifNode.IfKeyword.Span.End - parentElse.ElseKeyword.SpanStart;
-                    var location = Location.Create(c.Node.SyntaxTree, new TextSpan(parentElse.ElseKeyword.SpanStart, diff));
-
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
-                },
-                SyntaxKind.IfStatement);
+            var parentElse = (ElseClauseSyntax)ifSyntax.Parent;
+            var diff = ifSyntax.IfKeyword.Span.End - parentElse.ElseKeyword.SpanStart;
+            return Location.Create(context.Node.SyntaxTree, new TextSpan(parentElse.ElseKeyword.SpanStart, diff));
         }
 
-        private static bool IsElseIfWithoutElse(IfStatementSyntax node)
-        {
-            return node.Parent.IsKind(SyntaxKind.ElseClause) &&
-                node.Else == null;
-        }
+        private static bool IsEmptyBlock(ElseClauseSyntax elseClause) =>
+            elseClause.Statement is BlockSyntax blockSyntax
+            && !(blockSyntax.Statements.Count > 0 || blockSyntax.DescendantTrivia().Any(x => x.IsComment() || x.IsKind(SyntaxKind.DisabledTextTrivia)));
     }
 }

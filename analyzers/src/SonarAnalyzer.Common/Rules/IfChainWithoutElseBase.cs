@@ -18,12 +18,45 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class IfChainWithoutElseBase : SonarDiagnosticAnalyzer
+    public abstract class IfChainWithoutElseBase<TSyntaxKind, TIfSyntax> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
+        where TIfSyntax : SyntaxNode
     {
-        internal const string DiagnosticId = "S126";
+        protected const string DiagnosticId = "S126";
+        private const string MessageFormat = "Add the missing '{0}' clause with either the appropriate action or a suitable comment as to why no action is taken.";
+        private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract TSyntaxKind SyntaxKind { get; }
+        protected abstract string ElseClause { get; }
+
+        protected abstract bool IsElseIfWithoutElse(TIfSyntax ifSyntax);
+        protected abstract Location IssueLocation(SyntaxNodeAnalysisContext context, TIfSyntax ifSyntax);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected IfChainWithoutElseBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
+                c =>
+                {
+                    var ifNode = (TIfSyntax)c.Node;
+                    if (!IsElseIfWithoutElse(ifNode))
+                    {
+                        return;
+                    }
+
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, IssueLocation(c, ifNode), ElseClause));
+                },
+                SyntaxKind);
     }
 }
