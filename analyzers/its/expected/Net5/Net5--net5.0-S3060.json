@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3060",
+"message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3060.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  17,
+"endLine":  9,
+"endColumn":  52
+}
+}
+}
+]
+}

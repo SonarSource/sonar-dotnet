@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'y'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3440.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  15,
+"endLine":  8,
+"endColumn":  25
+}
+}
+}
+]
+}

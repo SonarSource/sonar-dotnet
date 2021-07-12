@@ -2,6 +2,32 @@
 "issues":  [
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Net5\Net5\S1067.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  17,
+"endLine":  8,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (39) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  13,
+"endLine":  10,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Net5\Net5\S4201.cs",

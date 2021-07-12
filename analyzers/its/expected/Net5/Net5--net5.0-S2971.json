@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3981.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  32,
+"endLine":  12,
+"endColumn":  37
+}
+}
+}
+]
+}

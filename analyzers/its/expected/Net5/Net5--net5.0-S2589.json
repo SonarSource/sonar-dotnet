@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2760.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  17,
+"endLine":  8,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2760.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  17,
+"endLine":  9,
+"endColumn":  26
+}
+}
+}
+]
+}

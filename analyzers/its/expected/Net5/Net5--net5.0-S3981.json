@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3981",
+"message":  "The 'Count' of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3981.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  44,
+"endLine":  12,
+"endColumn":  62
+}
+}
+}
+]
+}

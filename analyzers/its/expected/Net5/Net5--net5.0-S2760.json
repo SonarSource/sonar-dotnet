@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 8.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2760.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  17,
+"endLine":  9,
+"endColumn":  26
+}
+}
+}
+]
+}

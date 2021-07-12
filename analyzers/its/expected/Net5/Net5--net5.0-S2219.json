@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2219",
+"message":  "Use the 'is' operator instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2219.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  17,
+"endLine":  13,
+"endColumn":  35
+}
+}
+}
+]
+}

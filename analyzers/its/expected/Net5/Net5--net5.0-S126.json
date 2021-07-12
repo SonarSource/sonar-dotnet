@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1862.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  13,
+"endLine":  8,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1862.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  13,
+"endLine":  11,
+"endColumn":  20
+}
+}
+}
+]
+}
