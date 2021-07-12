@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3240.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  13,
+"endLine":  11,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3240.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  36
+}
+}
+}
+]
+}

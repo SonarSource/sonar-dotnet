@@ -106,6 +106,58 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'vegetable'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  21,
+"endLine":  14,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'fruit'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  21,
+"endLine":  15,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'vegetableY'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  21,
+"endLine":  16,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'fruitX'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  21,
+"endLine":  17,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'i'.",
 "location":  {
 "uri":  "sources\Net5\Net5\SkipLocalsInit.cs",

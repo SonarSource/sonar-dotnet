@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'b' in a separate statement.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3240.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  29,
+"endLine":  10,
+"endColumn":  30
+}
+}
+}
+]
+}

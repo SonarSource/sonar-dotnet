@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S1862",
+"message":  "This branch duplicates the one on line 10.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S1862.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  22,
+"endLine":  11,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Net5\Net5\S1862.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  17,
+"endLine":  10,
+"endColumn":  26
+}
+}
+]
+},
+{
+"id":  "S1862",
+"message":  "This branch duplicates the one on line 7.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S1862.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  22,
+"endLine":  8,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Net5\Net5\S1862.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  17,
+"endLine":  7,
+"endColumn":  30
+}
+}
+]
+}
+]
+}

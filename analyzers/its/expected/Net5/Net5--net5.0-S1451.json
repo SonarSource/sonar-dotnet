@@ -199,7 +199,33 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
+"uri":  "sources\Net5\Net5\S1067.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
 "uri":  "sources\Net5\Net5\S1144.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1862.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -251,6 +277,32 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
+"uri":  "sources\Net5\Net5\S2219.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2221.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
 "uri":  "sources\Net5\Net5\S2612.cs",
 "region":  {
 "startLine":  1,
@@ -277,7 +329,59 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
+"uri":  "sources\Net5\Net5\S2760.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
 "uri":  "sources\Net5\Net5\S2930.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3060.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3240.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3247.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -329,6 +433,19 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
+"uri":  "sources\Net5\Net5\S3440.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
 "uri":  "sources\Net5\Net5\S3453.cs",
 "region":  {
 "startLine":  1,
@@ -342,7 +459,33 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
 "uri":  "sources\Net5\Net5\S3928.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3981.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

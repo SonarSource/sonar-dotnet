@@ -132,6 +132,19 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private field 'Prop'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  23,
+"endLine":  7,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field 'r'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3254.cs",
@@ -166,6 +179,19 @@
 "startColumn":  9,
 "endLine":  7,
 "endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'ChainedSimilarConditionsWithParentheses'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  10,
+"endColumn":  89
 }
 }
 },

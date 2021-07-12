@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S3247",
+"message":  "Remove this cast and use the appropriate variable.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  21,
+"endLine":  12,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  34,
+"endLine":  16,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Remove this cast and use the appropriate variable.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  18,
+"endLine":  12,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  30,
+"endLine":  17,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Remove this redundant cast.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  33,
+"endLine":  14,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  37,
+"endLine":  12,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Remove this redundant cast.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  29,
+"endLine":  15,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  28,
+"endLine":  12,
+"endColumn":  35
+}
+}
+]
+}
+]
+}

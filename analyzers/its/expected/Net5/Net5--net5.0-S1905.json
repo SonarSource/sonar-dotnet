@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1905",
+"message":  "Remove this unnecessary cast to 'Vegetable'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  34,
+"endLine":  14,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1905",
+"message":  "Remove this unnecessary cast to 'Fruit'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3247.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  30,
+"endLine":  15,
+"endColumn":  35
+}
+}
+}
+]
+}
