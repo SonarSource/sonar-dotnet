@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.Common;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var accessors = prop.AccessorList;
             return accessors is {Accessors: {Count: 1}}
-                   && accessors.Accessors.First().IsKind(SyntaxKind.SetAccessorDeclaration)
+                   && accessors.Accessors.First().IsAnyKind(SyntaxKind.SetAccessorDeclaration, SyntaxKindEx.InitAccessorDeclaration)
                    && !prop.Modifiers.Any(SyntaxKind.OverrideKeyword); // the get may be in the base class
         }
     }

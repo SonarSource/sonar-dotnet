@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'Prop' or replace the property with a 'SetProp' method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2930.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  27,
+"endLine":  8,
+"endColumn":  31
+}
+}
+}
+]
+}
