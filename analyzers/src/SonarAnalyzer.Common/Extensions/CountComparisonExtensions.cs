@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Helpers
 {
-    public static class CountComparisonKinds
+    public static class CountComparisonExtensions
     {
         public static bool AnyOrNotAny(this CountComparisonKind comparison) =>
             comparison == CountComparisonKind.Any || comparison == CountComparisonKind.NotAny;
