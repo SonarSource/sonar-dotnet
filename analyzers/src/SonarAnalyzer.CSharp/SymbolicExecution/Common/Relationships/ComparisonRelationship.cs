@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SonarAnalyzer.Helpers;
+using ComparisonKind = SonarAnalyzer.SymbolicExecution.SymbolicValues.ComparisonKind;
 
 namespace SonarAnalyzer.SymbolicExecution.Relationships
 {
@@ -47,9 +48,9 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 
         public override BinaryRelationship Negate()
         {
-            var otherComparisonKind = ComparisonKind == ComparisonKind.LessThan
-                ? ComparisonKind.LessThanOrEqual
-                : ComparisonKind.LessThan;
+            var otherComparisonKind = ComparisonKind == ComparisonKind.Less
+                ? ComparisonKind.LessOrEqual
+                : ComparisonKind.Less;
 
             return new ComparisonRelationship(otherComparisonKind, RightOperand, LeftOperand);
         }
@@ -59,7 +60,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             // a < b and a <= b contradicts b < a
             var isLessOpContradicting = relationships
                 .OfType<ComparisonRelationship>()
-                .Where(c => c.ComparisonKind == ComparisonKind.LessThan)
+                .Where(c => c.ComparisonKind == ComparisonKind.Less)
                 .Any(rel => AreOperandsSwapped(rel));
 
             if (isLessOpContradicting)
@@ -67,12 +68,12 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
                 return true;
             }
 
-            if (ComparisonKind == ComparisonKind.LessThan)
+            if (ComparisonKind == ComparisonKind.Less)
             {
                 // a < b contradicts b <= a
                 var isLessEqualOpContradicting = relationships
                     .OfType<ComparisonRelationship>()
-                    .Where(c => c.ComparisonKind == ComparisonKind.LessThanOrEqual)
+                    .Where(c => c.ComparisonKind == ComparisonKind.LessOrEqual)
                     .Any(rel => AreOperandsSwapped(rel));
 
                 if (isLessEqualOpContradicting)
@@ -91,12 +92,12 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
                 }
             }
 
-            if (ComparisonKind == ComparisonKind.LessThanOrEqual)
+            if (ComparisonKind == ComparisonKind.LessOrEqual)
             {
                 // a <= b contradicts a >= b && a != b
                 var isLessEqualOp = relationships
                     .OfType<ComparisonRelationship>()
-                    .Where(c => c.ComparisonKind == ComparisonKind.LessThanOrEqual)
+                    .Where(c => c.ComparisonKind == ComparisonKind.LessOrEqual)
                     .Any(rel => AreOperandsSwapped(rel));
 
                 var isNotEqualOpContradicting = relationships
@@ -138,9 +139,9 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 
         private ComparisonRelationship GetTransitiveRelationship(ComparisonRelationship other)
         {
-            var comparisonKind = ComparisonKind == ComparisonKind.LessThanOrEqual && other.ComparisonKind == ComparisonKind.LessThanOrEqual
-                    ? ComparisonKind.LessThanOrEqual
-                    : ComparisonKind.LessThan;
+            var comparisonKind = ComparisonKind == ComparisonKind.LessOrEqual && other.ComparisonKind == ComparisonKind.LessOrEqual
+                    ? ComparisonKind.LessOrEqual
+                    : ComparisonKind.Less;
 
             if (RightOperand.Equals(other.LeftOperand))
             {
@@ -186,7 +187,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
         }
 
         public override string ToString()
-            => $"{ComparisonKind.CSharp()}({LeftOperand}, {RightOperand})";
+            => $"{(ComparisonKind == ComparisonKind.Less ? "<" : "<=")}({LeftOperand}, {RightOperand})";
 
         public override bool Equals(object obj)
         {

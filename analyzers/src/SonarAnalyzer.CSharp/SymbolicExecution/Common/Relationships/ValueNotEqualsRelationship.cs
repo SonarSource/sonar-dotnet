@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
+using ComparisonKind = SonarAnalyzer.SymbolicExecution.SymbolicValues.ComparisonKind;
 
 namespace SonarAnalyzer.SymbolicExecution.Relationships
 {
@@ -45,7 +46,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 
             var comparisons = relationships
                 .OfType<ComparisonRelationship>()
-                .Where(c => c.ComparisonKind == ComparisonKind.LessThanOrEqual)
+                .Where(c => c.ComparisonKind == ComparisonKind.LessOrEqual)
                 .Where(c => AreOperandsMatching(c));
 
             return comparisons.Count() == 2;

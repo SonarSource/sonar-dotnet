@@ -45,6 +45,6 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         }
 
         public override string ToString() =>
-            $"{comparisonKind.CSharp()}({LeftOperand}, {RightOperand})";
+            $"{(comparisonKind == ComparisonKind.Less ? "<" : "<=")}({LeftOperand}, {RightOperand})";
     }
 }
