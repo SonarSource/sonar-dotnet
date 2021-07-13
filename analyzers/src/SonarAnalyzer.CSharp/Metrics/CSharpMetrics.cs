@@ -93,6 +93,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.GetAccessorDeclaration:
                 case SyntaxKind.RemoveAccessorDeclaration:
                 case SyntaxKind.SetAccessorDeclaration:
+                case SyntaxKindEx.InitAccessorDeclaration:
                     var accessor = (AccessorDeclarationSyntax)node;
                     if (accessor.HasBodyOrExpressionBody())
                     {
