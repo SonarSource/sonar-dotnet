@@ -36,28 +36,22 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public sealed class DeadStores : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1854";
+        private const string DiagnosticId = "S1854";
         private const string MessageFormat = "Remove this useless assignment to local variable '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             // No need to check for ExpressionBody as it can't contain variable assignment
-
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var declaration = (BaseMethodDeclarationSyntax)c.Node;
-                    CheckForDeadStores(declaration.Body, c.SemanticModel.GetDeclaredSymbol(declaration), c);
-                },
+                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), ((BaseMethodDeclarationSyntax)c.Node).Body),
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
@@ -65,11 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.OperatorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var declaration = (AccessorDeclarationSyntax)c.Node;
-                    CheckForDeadStores(declaration.Body, c.SemanticModel.GetDeclaredSymbol(declaration), c);
-                },
+                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), ((AccessorDeclarationSyntax)c.Node).Body),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
@@ -77,82 +67,64 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.RemoveAccessorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
-                    CheckForDeadStores(declaration.Body, c.SemanticModel.GetSymbolInfo(declaration).Symbol, c);
-                },
+                c => CheckForDeadStores(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol, ((AnonymousFunctionExpressionSyntax)c.Node).Body),
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var declaration = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                    CheckForDeadStores(declaration.Body, c.SemanticModel.GetDeclaredSymbol(declaration), c);
-                },
+                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), ((LocalFunctionStatementSyntaxWrapper)c.Node).Body),
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static void CheckForDeadStores(CSharpSyntaxNode node, ISymbol declaration, SyntaxNodeAnalysisContext context)
+        private static void CheckForDeadStores(SyntaxNodeAnalysisContext context, ISymbol symbol, CSharpSyntaxNode node)
         {
-            if (declaration == null ||
-                node == null ||
+            if (symbol != null
+                && node != null
                 // Currently the tuple expressions are not supported and this is known to cause false positives.
                 // Please check:
                 // - community feedback: https://github.com/SonarSource/sonar-dotnet/issues/3094
                 // - implementation ticket: https://github.com/SonarSource/sonar-dotnet/issues/2933
-                node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) ||
-                !CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
+                && !node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression)
+                && CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
             {
-                return;
+                var lva = CSharpLiveVariableAnalysis.Analyze(cfg, symbol, context.SemanticModel);
+                foreach (var block in cfg.Blocks)
+                {
+                    var blockLva = new InBlockLivenessAnalysis(context, symbol, node, block, lva.GetLiveOut(block), lva.CapturedVariables);
+                    blockLva.Analyze();
+                }
             }
-
-            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, declaration, context.SemanticModel);
-
-            foreach (var block in cfg.Blocks)
-            {
-                CheckCfgBlockForDeadStores(block, lva.GetLiveOut(block), lva.CapturedVariables, node, declaration, context);
-            }
-        }
-
-        private static void CheckCfgBlockForDeadStores(Block block, IEnumerable<ISymbol> blockOutState, IEnumerable<ISymbol> excludedLocals, CSharpSyntaxNode node,
-            ISymbol declaration, SyntaxNodeAnalysisContext context)
-        {
-            var lva = new InBlockLivenessAnalysis(block, blockOutState, excludedLocals, node, declaration, context);
-            lva.Analyze();
         }
 
         private class InBlockLivenessAnalysis
         {
-            private readonly Block block;
-            private readonly IEnumerable<ISymbol> blockOutState;
             private readonly SyntaxNodeAnalysisContext context;
-            private readonly ISymbol declaration;
+            private readonly ISymbol nodeSymbol;
+            private readonly SyntaxNode node;
+            private readonly Block block;
+            private readonly IEnumerable<ISymbol> blockLiveOut;
             private readonly IEnumerable<ISymbol> excludedLocals;
-            private readonly CSharpSyntaxNode node;
 
             private static readonly ISet<string> AllowedNumericValues = new HashSet<string> { "-1", "0", "1" };
-            private static readonly ISet<string> AllowedStringValues = new HashSet<string> { "" };
+            private static readonly ISet<string> AllowedStringValues = new HashSet<string> { string.Empty };
 
-            public InBlockLivenessAnalysis(Block block, IEnumerable<ISymbol> blockOutState, IEnumerable<ISymbol> excludedLocals, CSharpSyntaxNode node, ISymbol declaration,
-                SyntaxNodeAnalysisContext context)
+            public InBlockLivenessAnalysis(SyntaxNodeAnalysisContext context, ISymbol nodeSymbol, SyntaxNode node, Block block, IEnumerable<ISymbol> blockLiveOut, IEnumerable<ISymbol> excludedLocals)
             {
-                this.block = block;
-                this.blockOutState = blockOutState;
-                this.node = node;
-                this.declaration = declaration;
                 this.context = context;
+                this.nodeSymbol = nodeSymbol;
+                this.node = node;
+                this.block = block;
+                this.blockLiveOut = blockLiveOut;
                 this.excludedLocals = excludedLocals;
             }
 
             public void Analyze()
             {
                 var assignmentLhs = new HashSet<SyntaxNode>();
-                var liveOut = new HashSet<ISymbol>(this.blockOutState);
+                var liveOut = new HashSet<ISymbol>(blockLiveOut);
 
-                foreach (var instruction in this.block.Instructions.Reverse())
+                foreach (var instruction in block.Instructions.Reverse())
                 {
                     switch (instruction.Kind())
                     {
@@ -198,25 +170,18 @@ namespace SonarAnalyzer.Rules.CSharp
             private void ProcessIdentifier(SyntaxNode instruction, HashSet<SyntaxNode> assignmentLhs, HashSet<ISymbol> liveOut)
             {
                 var identifier = (IdentifierNameSyntax)instruction;
-                var symbol = this.context.SemanticModel.GetSymbolInfo(identifier).Symbol;
-                if (!IsSymbolRelevant(symbol))
-                {
-                    return;
-                }
-
-                if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(this.context.SemanticModel) &&
-                    CSharpLiveVariableAnalysis.IsLocalScoped(symbol, this.declaration))
+                var symbol = context.SemanticModel.GetSymbolInfo(identifier).Symbol;
+                if (IsSymbolRelevant(symbol)
+                    && !identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(context.SemanticModel)
+                    && CSharpLiveVariableAnalysis.IsLocalScoped(symbol, nodeSymbol))
                 {
                     if (CSharpLiveVariableAnalysis.IsOutArgument(identifier))
                     {
                         liveOut.Remove(symbol);
                     }
-                    else
+                    else if (!assignmentLhs.Contains(identifier))
                     {
-                        if (!assignmentLhs.Contains(identifier))
-                        {
-                            liveOut.Add(symbol);
-                        }
+                        liveOut.Add(symbol);
                     }
                 }
             }
@@ -225,14 +190,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var assignment = (AssignmentExpressionSyntax)instruction;
                 var left = assignment.Left.RemoveParentheses();
-                if (left.IsKind(SyntaxKind.IdentifierName))
+                if (left.IsKind(SyntaxKind.IdentifierName)
+                    && context.SemanticModel.GetSymbolInfo(left).Symbol is { } symbol
+                    && IsSymbolRelevant(symbol))
                 {
-                    var symbol = this.context.SemanticModel.GetSymbolInfo(left).Symbol;
-                    if (!IsSymbolRelevant(symbol))
-                    {
-                        return;
-                    }
-
                     ReportOnAssignment(assignment, left, symbol, assignmentLhs, liveOut);
                 }
             }
@@ -241,14 +202,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var assignment = (AssignmentExpressionSyntax)instruction;
                 var left = assignment.Left.RemoveParentheses();
-                if (left.IsKind(SyntaxKind.IdentifierName))
+                if (left.IsKind(SyntaxKind.IdentifierName)
+                    && context.SemanticModel.GetSymbolInfo(left).Symbol is { } symbol
+                    && IsSymbolRelevant(symbol))
                 {
-                    var symbol = this.context.SemanticModel.GetSymbolInfo(left).Symbol;
-                    if (!IsSymbolRelevant(symbol))
-                    {
-                        return;
-                    }
-
                     ReportOnAssignment(assignment, left, symbol, assignmentLhs, liveOut);
                     liveOut.Remove(symbol);
                 }
@@ -268,7 +225,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && !new MutedSyntaxWalker(context.SemanticModel, declarator, symbol).IsMuted())
                     {
                         var location = GetFirstLineLocationFromToken(declarator.Initializer.EqualsToken, declarator.Initializer);
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, symbol.Name));
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, symbol.Name));
                     }
                     liveOut.Remove(symbol);
                 }
@@ -286,26 +243,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 expression.IsNullLiteral();
 
             private static bool IsAllowedBooleanInitialization(ExpressionSyntax expression) =>
-                expression.IsKind(SyntaxKind.TrueLiteralExpression) || expression.IsKind(SyntaxKind.FalseLiteralExpression);
+                expression.IsAnyKind(SyntaxKind.TrueLiteralExpression, SyntaxKind.FalseLiteralExpression);
 
             private static bool IsAllowedNumericInitialization(ExpressionSyntax expression) =>
-                expression.IsKind(SyntaxKind.NumericLiteralExpression) && AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText);  // 0 or 1
+                expression.IsKind(SyntaxKind.NumericLiteralExpression) && AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText);  // -1, 0 or 1
 
             private static bool IsAllowedUnaryNumericInitialization(ExpressionSyntax expression) =>
-                expression.IsAnyKind(SyntaxKind.UnaryPlusExpression, SyntaxKind.UnaryMinusExpression)
-                && IsAllowedNumericInitialization(((PrefixUnaryExpressionSyntax)expression).Operand); // +1 or -1
+                expression.IsAnyKind(SyntaxKind.UnaryPlusExpression, SyntaxKind.UnaryMinusExpression) && IsAllowedNumericInitialization(((PrefixUnaryExpressionSyntax)expression).Operand);
 
             private bool IsAllowedStringInitialization(ExpressionSyntax expression) =>
                 (expression.IsKind(SyntaxKind.StringLiteralExpression) && AllowedStringValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText))
                 || expression.IsStringEmpty(context.SemanticModel);
 
-            private bool IsUnusedLocal(ISymbol declaredSymbol)
-            {
-                return this.node.DescendantNodes()
+            private bool IsUnusedLocal(ISymbol declaredSymbol) =>
+                node.DescendantNodes()
                     .OfType<IdentifierNameSyntax>()
-                    .SelectMany(identifier => VariableUnused.GetUsedSymbols(identifier, this.context.SemanticModel))
-                    .All(s => !s.Equals(declaredSymbol));
-            }
+                    .SelectMany(x => VariableUnusedBase.GetUsedSymbols(x, context.SemanticModel))
+                    .All(x => !x.Equals(declaredSymbol));
 
             private void ProcessPrefixExpression(SyntaxNode instruction, HashSet<ISymbol> liveOut)
             {
@@ -316,11 +270,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     && operand.IsKind(SyntaxKind.IdentifierName)
                     && context.SemanticModel.GetSymbolInfo(operand).Symbol is { } symbol
                     && IsSymbolRelevant(symbol)
-                    && CSharpLiveVariableAnalysis.IsLocalScoped(symbol, declaration)
+                    && CSharpLiveVariableAnalysis.IsLocalScoped(symbol, nodeSymbol)
                     && !liveOut.Contains(symbol)
                     && !IsMuted(operand))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, prefixExpression.GetLocation(), symbol.Name));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, prefixExpression.GetLocation(), symbol.Name));
                 }
             }
 
@@ -331,22 +285,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (operand.IsKind(SyntaxKind.IdentifierName)
                     && context.SemanticModel.GetSymbolInfo(operand).Symbol is { } symbol
                     && IsSymbolRelevant(symbol)
-                    && CSharpLiveVariableAnalysis.IsLocalScoped(symbol, declaration)
+                    && CSharpLiveVariableAnalysis.IsLocalScoped(symbol, nodeSymbol)
                     && !liveOut.Contains(symbol)
                     && !IsMuted(operand))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, postfixExpression.GetLocation(), symbol.Name));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, postfixExpression.GetLocation(), symbol.Name));
                 }
             }
 
             private void ReportOnAssignment(AssignmentExpressionSyntax assignment, ExpressionSyntax left, ISymbol symbol, HashSet<SyntaxNode> assignmentLhs, HashSet<ISymbol> outState)
             {
-                if (CSharpLiveVariableAnalysis.IsLocalScoped(symbol, declaration)
+                if (CSharpLiveVariableAnalysis.IsLocalScoped(symbol, this.nodeSymbol)
                     && !outState.Contains(symbol)
                     && !IsMuted(left))
                 {
                     var location = GetFirstLineLocationFromToken(assignment.OperatorToken, assignment.Right);
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, symbol.Name));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, symbol.Name));
                 }
 
                 assignmentLhs.Add(left);
@@ -357,26 +311,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static Location GetFirstLineLocationFromToken(SyntaxToken issueStartToken, SyntaxNode wholeIssue)
             {
-                var line = GetLineOfToken(issueStartToken, wholeIssue.SyntaxTree);
-                var rightSingleLine = line.Span.Intersection(
-                    TextSpan.FromBounds(issueStartToken.SpanStart, wholeIssue.Span.End));
-
-                return Location.Create(wholeIssue.SyntaxTree,
-                    TextSpan.FromBounds(
-                        issueStartToken.SpanStart,
-                        rightSingleLine.HasValue ? rightSingleLine.Value.End : issueStartToken.Span.End));
+                var line = wholeIssue.SyntaxTree.GetText().Lines[issueStartToken.GetLocation().GetLineSpan().StartLinePosition.Line];
+                var rightSingleLine = line.Span.Intersection(TextSpan.FromBounds(issueStartToken.SpanStart, wholeIssue.Span.End));
+                return Location.Create(wholeIssue.SyntaxTree, TextSpan.FromBounds(issueStartToken.SpanStart, rightSingleLine.HasValue ? rightSingleLine.Value.End : issueStartToken.Span.End));
             }
 
-            private bool IsSymbolRelevant(ISymbol symbol)
-            {
-                return symbol != null &&
-                    !this.excludedLocals.Contains(symbol);
-            }
-
-            private static TextLine GetLineOfToken(SyntaxToken token, SyntaxTree tree)
-            {
-                return tree.GetText().Lines[token.GetLocation().GetLineSpan().StartLinePosition.Line];
-            }
+            private bool IsSymbolRelevant(ISymbol symbol) =>
+                symbol != null && !excludedLocals.Contains(symbol);
         }
     }
 }
