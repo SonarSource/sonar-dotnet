@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Metrics.CSharp
 {
@@ -110,6 +111,7 @@ namespace SonarAnalyzer.Metrics.CSharp
 
                     case SyntaxKind.StructDeclaration:
                     case SyntaxKind.ClassDeclaration:
+                    case SyntaxKindEx.RecordDeclaration:
                         return !HasExcludedCodeAttribute((BaseTypeDeclarationSyntax)node, btdc => btdc.AttributeLists,
                             canBePartial: true);
 
@@ -126,6 +128,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                     case SyntaxKind.RemoveAccessorDeclaration:
                     case SyntaxKind.SetAccessorDeclaration:
                     case SyntaxKind.GetAccessorDeclaration:
+                    case SyntaxKindEx.InitAccessorDeclaration:
                         return !HasExcludedCodeAttribute((AccessorDeclarationSyntax)node, ads => ads.AttributeLists);
 
                     default:
