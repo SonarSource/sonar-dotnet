@@ -122,7 +122,7 @@ public class Sample
         init
         {
             object o = null;
-            field = o.ToString();
+            field = o.ToString();   // Noncompliant
         }
     }
 
@@ -133,7 +133,7 @@ public class Sample
         {
             if (value == null)
             {
-                field = value.ToString();   // FN
+                field = value.ToString();   // Noncompliant
             }
         }
     }

@@ -56,7 +56,7 @@ public class Sample
         get => 42;
         init
         {
-            new BinaryFormatter().Deserialize(null);    // FN
+            new BinaryFormatter().Deserialize(null);    // Noncompliant
         }
     }
 }

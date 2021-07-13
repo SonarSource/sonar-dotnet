@@ -85,7 +85,7 @@ public class Sample
             var i = (int)nullable;
 
             nullable = null;
-            i = (int)nullable; // FN, SE doesn't inspect property init
+            i = (int)nullable;  // Noncompliant
         }
     }
 }

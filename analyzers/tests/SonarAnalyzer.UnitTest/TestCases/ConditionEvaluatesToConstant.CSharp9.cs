@@ -96,12 +96,12 @@ namespace Tests.Diagnostics
             init
             {
                 value = null;
-                if (value == null)
+                if (value == null)  // Noncompliant
                 {
                     o = value;
                 }
                 else
-                {
+                {                   // Secondary
                     o = "";
                 }
             }
