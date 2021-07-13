@@ -21,7 +21,7 @@ public record Record
         set { field1 = value; }
     }
 
-    public string PropWithGetAndInit // Compliant - FN
+    public string PropWithGetAndInit // Noncompliant
     {
         get { return field2; }
         init { field2 = value; }

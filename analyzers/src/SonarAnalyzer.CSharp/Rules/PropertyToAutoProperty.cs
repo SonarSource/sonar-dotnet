@@ -35,56 +35,52 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class PropertyToAutoProperty : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2292";
+        private const string DiagnosticId = "S2292";
         private const string MessageFormat = "Make this an auto-implemented property and remove its backing field.";
+        private const int ReadWriteAccessorCount = 2;
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
                     var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
-                    if (propertyDeclaration.AccessorList == null ||
-                        propertyDeclaration.AccessorList.Accessors.Count != 2 ||
-                        propertySymbol == null ||
-                        HasDifferentModifiers(propertyDeclaration.AccessorList.Accessors) ||
-                        HasAttributes(propertyDeclaration.AccessorList.Accessors))
+                    if (propertyDeclaration.AccessorList == null
+                        || propertyDeclaration.AccessorList.Accessors.Count != ReadWriteAccessorCount
+                        || propertySymbol == null
+                        || HasDifferentModifiers(propertyDeclaration.AccessorList.Accessors)
+                        || HasAttributes(propertyDeclaration.AccessorList.Accessors))
                     {
                         return;
                     }
 
                     var accessors = propertyDeclaration.AccessorList.Accessors;
                     var getter = accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
-                    var setter = accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.SetAccessorDeclaration));
+                    var setter = accessors.FirstOrDefault(a => a.IsAnyKind(SyntaxKind.SetAccessorDeclaration, SyntaxKindEx.InitAccessorDeclaration));
 
                     if (getter == null || setter == null)
                     {
                         return;
                     }
-                    if (TryGetFieldFromGetter(getter, c.SemanticModel, out var getterField) &&
-                        TryGetFieldFromSetter(setter, c.SemanticModel, out var setterField) &&
-                        getterField.Equals(setterField) &&
-                        !getterField.GetAttributes().Any() &&
-                        !getterField.IsVolatile &&
-                        getterField.IsStatic == propertySymbol.IsStatic &&
-                        getterField.Type.Equals(propertySymbol.Type))
+                    if (TryGetFieldFromGetter(getter, c.SemanticModel, out var getterField)
+                        && TryGetFieldFromSetter(setter, c.SemanticModel, out var setterField)
+                        && getterField.Equals(setterField)
+                        && !getterField.GetAttributes().Any()
+                        && !getterField.IsVolatile
+                        && getterField.IsStatic == propertySymbol.IsStatic
+                        && getterField.Type.Equals(propertySymbol.Type))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, propertyDeclaration.Identifier.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, propertyDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.PropertyDeclaration);
-        }
 
-        private static bool HasAttributes(SyntaxList<AccessorDeclarationSyntax> accessors)
-        {
-            return accessors.Any(a => a.AttributeLists.Any());
-        }
+        private static bool HasAttributes(SyntaxList<AccessorDeclarationSyntax> accessors) =>
+            accessors.Any(a => a.AttributeLists.Any());
 
         private static bool HasDifferentModifiers(SyntaxList<AccessorDeclarationSyntax> accessors)
         {
@@ -94,27 +90,21 @@ namespace SonarAnalyzer.Rules.CSharp
             return accessors.Skip(1).Any(a => !modifiers.SetEquals(GetModifierKinds(a)));
         }
 
-        private static IEnumerable<SyntaxKind> GetModifierKinds(AccessorDeclarationSyntax accessor)
-        {
-            return accessor.Modifiers.Select(m => m.Kind());
-        }
+        private static IEnumerable<SyntaxKind> GetModifierKinds(AccessorDeclarationSyntax accessor) =>
+            accessor.Modifiers.Select(m => m.Kind());
 
         private static bool TryGetFieldFromSetter(AccessorDeclarationSyntax setter, SemanticModel semanticModel, out IFieldSymbol setterField)
         {
             setterField = null;
 
-            var assignment = GetAssignmentFromBody(setter.Body)
-                ?? GetAssignmentFromExpressionBody(setter.ExpressionBody());
+            var assignment = GetAssignmentFromBody(setter.Body) ?? GetAssignmentFromExpressionBody(setter.ExpressionBody());
 
-            if (assignment != null &&
-                assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
-                assignment.Right != null &&
-                semanticModel.GetSymbolInfo(assignment.Right).Symbol is IParameterSymbol parameter &&
-                parameter.Name == "value" &&
-                parameter.IsImplicitlyDeclared)
+            if (assignment != null
+                && assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
+                && assignment.Right != null
+                && semanticModel.GetSymbolInfo(assignment.Right).Symbol is IParameterSymbol {Name: "value", IsImplicitlyDeclared: true})
             {
-                return TryGetField(assignment.Left, semanticModel.GetDeclaredSymbol(setter).ContainingType,
-                    semanticModel, out setterField);
+                return TryGetField(assignment.Left, semanticModel.GetDeclaredSymbol(setter).ContainingType, semanticModel, out setterField);
             }
             return false;
 
@@ -139,8 +129,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return field != null;
             }
 
-            if (!(expression is MemberAccessExpressionSyntax memberAccess) ||
-                !memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+            if (!(expression is MemberAccessExpressionSyntax memberAccess)
+                || !memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
             {
                 field = null;
                 return false;
@@ -158,8 +148,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            if (!(semanticModel.GetSymbolInfo(identifier).Symbol is INamedTypeSymbol type) ||
-                !type.Equals(declaringType))
+            if (!(semanticModel.GetSymbolInfo(identifier).Symbol is INamedTypeSymbol type)
+                || !type.Equals(declaringType))
             {
                 field = null;
                 return false;
@@ -173,8 +163,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             getterField = null;
 
-            var returnedExpression = GetReturnExpressionFromBody(getter.Body)
-                ?? GetReturnExpressionFromExpressionBody(getter.ExpressionBody());
+            var returnedExpression = GetReturnExpressionFromBody(getter.Body) ?? GetReturnExpressionFromExpressionBody(getter.ExpressionBody());
 
             if (returnedExpression == null)
             {
@@ -185,8 +174,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 semanticModel, out getterField);
 
             ExpressionSyntax GetReturnExpressionFromBody(BlockSyntax body) =>
-                body?.Statements.Count == 1 &&
-                body.Statements[0] is ReturnStatementSyntax returnStatement
+                body?.Statements.Count == 1
+                && body.Statements[0] is ReturnStatementSyntax returnStatement
                 ? returnStatement.Expression
                 : null;
 
