@@ -49,9 +49,9 @@ namespace Tests.Diagnostics
 
     class Derived : Base
     {
-        public override int MyProperty { get { return base.MyProperty; } set { base.MyProperty = value; } } //Noncompliant
-        public override int MyProperty1 { get { return base.MyProperty1; } } //Noncompliant
-        public override int MyProperty2 => base.MyProperty2; //Noncompliant {{Remove this property 'MyProperty2' to simply inherit its behavior.}}
+        public override int MyProperty { get { return base.MyProperty; } set { base.MyProperty = value; } } // Noncompliant
+        public override int MyProperty1 { get { return base.MyProperty1; } } // Noncompliant
+        public override int MyProperty2 => base.MyProperty2; // Noncompliant {{Remove this property 'MyProperty2' to simply inherit its behavior.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public override int MyProperty3 => 42;
         public override int MyProperty4 // Noncompliant
