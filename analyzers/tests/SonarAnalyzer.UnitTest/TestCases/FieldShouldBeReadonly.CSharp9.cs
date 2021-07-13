@@ -5,7 +5,7 @@
 
     int legSize1 = 3;
     int legSize2 = 3;
-    bool usedInInit = false;    // FN, only written in property init
+    bool usedInInit = false;
 
     Person(int birthYear)
     {
