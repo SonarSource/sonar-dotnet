@@ -34,46 +34,42 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class UseValueParameter : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3237";
+        private const string DiagnosticId = "S3237";
         private const string MessageFormat = "Use the 'value' parameter in this {0} accessor declaration.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var accessor = (AccessorDeclarationSyntax)c.Node;
 
-                    if ((accessor.Body == null && accessor.ExpressionBody() == null) ||
-                        OnlyThrows(accessor) ||
-                        accessor.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => IsAccessorValue(x, c.SemanticModel)))
+                    if ((accessor.Body == null && accessor.ExpressionBody() == null)
+                        || OnlyThrows(accessor)
+                        || accessor.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => IsAccessorValue(x, c.SemanticModel)))
                     {
                         return;
                     }
 
                     var interfaceMember = c.SemanticModel.GetDeclaredSymbol(accessor).GetInterfaceMember();
-                    if (interfaceMember != null &&
-                        accessor.Body?.Statements.Count == 0) // No need to check ExpressionBody, it can't be empty
+                    if (interfaceMember != null && accessor.Body?.Statements.Count == 0) // No need to check ExpressionBody, it can't be empty
                     {
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, accessor.Keyword.GetLocation(),
-                        GetAccessorType(accessor)));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, accessor.Keyword.GetLocation(), GetAccessorType(accessor)));
                 },
                 SyntaxKind.SetAccessorDeclaration,
+                SyntaxKindEx.InitAccessorDeclaration,
                 SyntaxKind.RemoveAccessorDeclaration,
                 SyntaxKind.AddAccessorDeclaration);
-        }
 
         private static bool OnlyThrows(AccessorDeclarationSyntax accessor) =>
-            (accessor.Body?.Statements.Count == 1 &&
-            accessor.Body.Statements[0] is ThrowStatementSyntax) ||
-            ThrowExpressionSyntaxWrapper.IsInstance(accessor.ExpressionBody()?.Expression);
+            (accessor.Body?.Statements.Count == 1 && accessor.Body.Statements[0] is ThrowStatementSyntax)
+            || ThrowExpressionSyntaxWrapper.IsInstance(accessor.ExpressionBody()?.Expression);
 
         private static bool IsAccessorValue(IdentifierNameSyntax identifier, SemanticModel semanticModel)
         {
@@ -82,37 +78,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            return semanticModel.GetSymbolInfo(identifier).Symbol is IParameterSymbol parameter &&
-                parameter.IsImplicitlyDeclared;
+            return semanticModel.GetSymbolInfo(identifier).Symbol is IParameterSymbol { IsImplicitlyDeclared: true };
         }
 
         private static string GetAccessorType(AccessorDeclarationSyntax accessorDeclaration)
         {
-            if (accessorDeclaration.IsKind(SyntaxKind.AddAccessorDeclaration) ||
-                accessorDeclaration.IsKind(SyntaxKind.RemoveAccessorDeclaration))
+            if (accessorDeclaration.IsAnyKind(SyntaxKind.AddAccessorDeclaration, SyntaxKind.RemoveAccessorDeclaration))
             {
                 return "event";
             }
 
-            var accessorList = accessorDeclaration.Parent;
-            if (accessorList == null)
+            return accessorDeclaration.Parent?.Parent switch
             {
-                return null;
-            }
-
-            var indexerOrProperty = accessorList.Parent;
-            if (indexerOrProperty is IndexerDeclarationSyntax)
-            {
-                return "indexer set";
-            }
-            else if (indexerOrProperty is PropertyDeclarationSyntax)
-            {
-                return "property set";
-            }
-            else
-            {
-                return null;
-            }
+                IndexerDeclarationSyntax _ => "indexer set",
+                PropertyDeclarationSyntax _ => "property set",
+                _ => null
+            };
         }
     }
 }
