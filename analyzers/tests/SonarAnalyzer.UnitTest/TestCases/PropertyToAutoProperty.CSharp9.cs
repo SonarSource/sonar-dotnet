@@ -2,10 +2,13 @@
 
 public class MyAttribute : Attribute { }
 
-public record Record
+public unsafe record Record
 {
     private string field1;
     private string field2;
+    private int prop;
+    private Coord* coord;
+    private Record r;
 
     [My()]
     private int fieldWithAttribute;
@@ -28,4 +31,48 @@ public record Record
     }
 
     public string AutoPropWithGetAndInit { get; init; } // Compliant
+
+    public int Prop1 { get; get; } // Error [CS1007]
+
+    public int Prop2
+    {
+        get
+        {
+            return prop;
+        }
+
+        set
+        {
+            prop += 1;
+        }
+    }
+
+    public int Prop3
+    {
+        get
+        {
+            return coord->X;
+        }
+        set
+        {
+            prop += 1;
+        }
+    }
+
+    public int Prop
+    {
+        get
+        {
+            return r.coord->X;
+        }
+        set
+        {
+            prop = value;
+        }
+    }
+}
+
+public struct Coord
+{
+    public int X;
 }
