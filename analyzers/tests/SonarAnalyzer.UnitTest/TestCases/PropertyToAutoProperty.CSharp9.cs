@@ -7,7 +7,8 @@ public unsafe record Record
     private string field1;
     private string field2;
     private int prop;
-    private Coord* coord;
+    private Coord* coord1;
+    private Coord coord2;
     private Record r;
 
     [My()]
@@ -51,7 +52,7 @@ public unsafe record Record
     {
         get
         {
-            return coord->X;
+            return coord1->X;
         }
         set
         {
@@ -59,11 +60,11 @@ public unsafe record Record
         }
     }
 
-    public int Prop
+    public int Prop4
     {
         get
         {
-            return r.coord->X;
+            return r.coord2.X;
         }
         set
         {
