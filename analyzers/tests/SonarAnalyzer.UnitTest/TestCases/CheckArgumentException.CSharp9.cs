@@ -30,7 +30,7 @@ using System.Collections.Generic;
         {
             init
             {
-                throw new ArgumentNullException("value"); // Noncompliant FP
+                throw new ArgumentNullException("value");
                 throw new ArgumentNullException("foo"); // Noncompliant
             }
         }
@@ -40,7 +40,7 @@ using System.Collections.Generic;
             init
             {
                 throw new ArgumentNullException("a");
-                throw new ArgumentNullException("value"); // Noncompliant FP
+                throw new ArgumentNullException("value");
             }
         }
 
@@ -62,7 +62,7 @@ using System.Collections.Generic;
         public string Response
         {
             get => "";
-            init => this.input = value ?? throw new ArgumentNullException(nameof(value)); // Noncompliant FP
+            init => this.input = value ?? throw new ArgumentNullException(nameof(value));
         }
         public string Request
         {
