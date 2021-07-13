@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Metrics.CSharp;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,19 +35,16 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public class FunctionComplexity : ParameterLoadingDiagnosticAnalyzer
     {
-        protected const string DiagnosticId = "S1541";
-        protected const string MessageFormat = "The Cyclomatic Complexity of this {2} is {1} which is greater than {0} authorized.";
+        private const string DiagnosticId = "S1541";
+        private const string MessageFormat = "The Cyclomatic Complexity of this {2} is {1} which is greater than {0} authorized.";
+        private const int DefaultValueMaximum = 10;
 
-        protected const int DefaultValueMaximum = 10;
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
 
         [RuleParameter("maximumFunctionComplexityThreshold", PropertyType.Integer, "The maximum authorized complexity.", DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
@@ -75,7 +73,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKind.AddAccessorDeclaration,
-                SyntaxKind.RemoveAccessorDeclaration);
+                SyntaxKind.RemoveAccessorDeclaration,
+                SyntaxKindEx.InitAccessorDeclaration);
         }
 
         private void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, string declarationType)
@@ -97,14 +96,13 @@ namespace SonarAnalyzer.Rules.CSharp
             if (complexityMetric.Complexity > Maximum)
             {
                 context.ReportDiagnosticWhenActive(
-                    Diagnostic.Create(
-                        rule,
-                        getLocation(node),
-                        complexityMetric.Locations.ToAdditionalLocations(),
-                        complexityMetric.Locations.ToProperties(),
-                        Maximum,
-                        complexityMetric.Complexity,
-                        declarationType));
+                    Diagnostic.Create(Rule,
+                                      getLocation(node),
+                                      complexityMetric.Locations.ToAdditionalLocations(),
+                                      complexityMetric.Locations.ToProperties(),
+                                      Maximum,
+                                      complexityMetric.Complexity,
+                                      declarationType));
             }
         }
     }
