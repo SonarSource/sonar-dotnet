@@ -14,7 +14,7 @@ public record Program
     protected ICollection<string> GenericCollectionProtected { get; set; } // Noncompliant
 
     public ICollection<string> GenericCollectionNoSetAuto { get; }
-    public ICollection<string> GenericCollectionInit { get; init; } // Noncompliant FP
+    public ICollection<string> GenericCollectionInit { get; init; }
 }
 
 // Ignore collections marked with DataMember attribute: https://github.com/SonarSource/sonar-dotnet/issues/795
@@ -45,9 +45,13 @@ public record S4004Abstract : S4004Base
 public interface IS4004
 {
     IDictionary<object, object> Items { get; set; } // Noncompliant
+
+    ICollection<string> CollectionInit { get; init; }
 }
 
 public record S4004InterfaceImplicit : IS4004
 {
     public IDictionary<object, object> Items { get; set; }  // Compliant enforced by interface (https://github.com/SonarSource/sonar-dotnet/issues/2606)
+
+    public ICollection<string> CollectionInit { get; init; }
 }
