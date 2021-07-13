@@ -35,8 +35,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public class FunctionNestingDepth : FunctionNestingDepthBase
     {
-        private static readonly SyntaxKind[] FunctionKinds =
-        {
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
+
+        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var walker = new NestingDepthWalker(Maximum, token => c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, token.GetLocation(), Maximum)));
+                walker.SafeVisit(c.Node);
+            },
             SyntaxKind.MethodDeclaration,
             SyntaxKind.OperatorDeclaration,
             SyntaxKind.ConstructorDeclaration,
@@ -45,19 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.SetAccessorDeclaration,
             SyntaxKindEx.InitAccessorDeclaration,
             SyntaxKind.AddAccessorDeclaration,
-            SyntaxKind.RemoveAccessorDeclaration
-        };
-
-        protected override ILanguageFacade Language => CSharpFacade.Instance;
-
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckFunctionNestingDepth, FunctionKinds);
-
-        private void CheckFunctionNestingDepth(SyntaxNodeAnalysisContext context)
-        {
-            var walker = new NestingDepthWalker(Maximum, token => context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, token.GetLocation(), Maximum)));
-            walker.SafeVisit(context.Node);
-        }
+            SyntaxKind.RemoveAccessorDeclaration);
 
         private class NestingDepthWalker : CSharpSyntaxWalker
         {

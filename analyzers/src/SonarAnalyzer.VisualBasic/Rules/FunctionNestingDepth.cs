@@ -32,8 +32,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class FunctionNestingDepth : FunctionNestingDepthBase
     {
-        private static readonly SyntaxKind[] FunctionKinds =
-        {
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
+
+        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var walker = new NestingDepthWalker(Maximum, token => c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, token.GetLocation(), Maximum)));
+                walker.SafeVisit(c.Node);
+            },
             SyntaxKind.SubBlock,
             SyntaxKind.FunctionBlock,
             SyntaxKind.OperatorBlock,
@@ -41,19 +47,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.GetAccessorBlock,
             SyntaxKind.SetAccessorBlock,
             SyntaxKind.AddHandlerAccessorBlock,
-            SyntaxKind.RemoveHandlerAccessorBlock
-        };
-
-        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
-
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckFunctionNestingDepth, FunctionKinds);
-
-        private void CheckFunctionNestingDepth(SyntaxNodeAnalysisContext context)
-        {
-            var walker = new NestingDepthWalker(Maximum, token => context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, token.GetLocation(), Maximum)));
-            walker.SafeVisit(context.Node);
-        }
+            SyntaxKind.RemoveHandlerAccessorBlock);
 
         private class NestingDepthWalker : VisualBasicSyntaxWalker
         {
