@@ -87,6 +87,34 @@ Namespace Tests.Diagnostics
                                          End Function))()
         End Function
 
+        Public Sub SelectCase()
+            If True Then
+                Select Case 42
+                    Case 0 To 41
+                    Case 42
+                        Select Case 42
+                            Case 1
+                            Case Else
+                        End Select
+                End Select
+            End If
+
+            If True Then
+                Select Case 42
+                    Case 0 To 41
+                    Case 42
+                        Select Case 42
+                            Case 1
+                                If True Then    ' Noncompliant
+                                End If
+                            Case Else
+                                If True Then    ' Noncompliant
+                                End If
+                        End Select
+                End Select
+            End If
+        End Sub
+
 
         Public Property MyProperty As Integer
             Get
