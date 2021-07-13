@@ -20,9 +20,9 @@ record Record
     {
         init
         {
-            goto A; // Compliant - FN
+            goto A; // Noncompliant
 A:
-            return; // Compliant - FN
+            return; // Noncompliant
         }
     }
 }
