@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class EmptyNestedBlock : EmptyNestedBlockBase<SyntaxKind>
     {
-        private static readonly ISet<SyntaxKind> AllowedContainerKinds = new HashSet<SyntaxKind>
+        private static readonly SyntaxKind[] AllowedContainerKinds =
         {
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.DestructorDeclaration,
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
             IsNested(node) && IsEmpty(node);
 
         private static bool IsNested(BlockSyntax node) =>
-            !AllowedContainerKinds.Contains(node.Parent.Kind());
+            !node.Parent.IsAnyKind(AllowedContainerKinds);
 
         private static bool ContainsCommentOrConditionalCompilation(BlockSyntax node) =>
             ContainsCommentOrConditionalCompilation(node.OpenBraceToken.TrailingTrivia) || ContainsCommentOrConditionalCompilation(node.CloseBraceToken.LeadingTrivia);

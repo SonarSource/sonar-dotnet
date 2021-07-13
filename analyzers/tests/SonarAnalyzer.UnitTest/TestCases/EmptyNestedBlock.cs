@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define MY_VAL
+
+using System;
 using System.Diagnostics;
 
 namespace Tests.Diagnostics
@@ -88,6 +90,12 @@ namespace Tests.Diagnostics
         {
             {
 #if DEBUG
+                Trace.WriteLine("message");
+#endif
+            }
+
+            {
+#if MY_VAL
                 Trace.WriteLine("message");
 #endif
             }
