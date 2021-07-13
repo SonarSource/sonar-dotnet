@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -32,51 +31,9 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class EmptyNestedBlock : EmptyNestedBlockBase
+    public sealed class EmptyNestedBlock : EmptyNestedBlockBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    if (IsEmpty(c.Node))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
-                    }
-                },
-                SyntaxKind.Block,
-                SyntaxKind.SwitchStatement);
-        }
-
-        private static bool IsEmpty(SyntaxNode node)
-        {
-            var blockNode = node as BlockSyntax;
-
-            return (node is SwitchStatementSyntax switchNode && IsEmpty(switchNode)) ||
-                (blockNode != null && IsNestedAndEmpty(blockNode));
-        }
-
-        private static bool IsEmpty(SwitchStatementSyntax node)
-        {
-            return !node.Sections.Any();
-        }
-
-        private static bool IsNestedAndEmpty(BlockSyntax node)
-        {
-            return IsNested(node) && IsEmpty(node);
-        }
-
-        private static bool IsNested(BlockSyntax node)
-        {
-            return !AllowedContainerKinds.Contains(node.Parent.Kind());
-        }
-
-        private static readonly ISet<SyntaxKind> AllowedContainerKinds = new HashSet<SyntaxKind>
+        private static readonly SyntaxKind[] AllowedContainerKinds =
         {
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.DestructorDeclaration,
@@ -86,19 +43,41 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.AnonymousMethodExpression
         };
 
-        private static bool IsEmpty(BlockSyntax node)
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+        protected override SyntaxKind[] SyntaxKinds { get; } = new[]
         {
-            return !node.Statements.Any() && !ContainsComment(node);
+                SyntaxKind.Block,
+                SyntaxKind.SwitchStatement
+        };
+
+        protected override IEnumerable<SyntaxNode> EmptyBlocks(SyntaxNode node)
+        {
+            if ((node is SwitchStatementSyntax switchNode && IsEmpty(switchNode))
+                || (node is BlockSyntax blockNode && IsNestedAndEmpty(blockNode)))
+            {
+                return new[] { node };
+            }
+
+            return Enumerable.Empty<SyntaxNode>();
         }
 
-        private static bool ContainsComment(BlockSyntax node)
-        {
-            return ContainsComment(node.OpenBraceToken.TrailingTrivia) || ContainsComment(node.CloseBraceToken.LeadingTrivia);
-        }
+        private static bool IsEmpty(SwitchStatementSyntax node) =>
+            !node.Sections.Any();
 
-        private static bool ContainsComment(SyntaxTriviaList trivias)
-        {
-            return trivias.Any(trivia => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) || trivia.IsKind(SyntaxKind.MultiLineCommentTrivia));
-        }
+        private static bool IsEmpty(BlockSyntax node) =>
+            !node.Statements.Any() && !ContainsCommentOrConditionalCompilation(node);
+
+        private static bool IsNestedAndEmpty(BlockSyntax node) =>
+            IsNested(node) && IsEmpty(node);
+
+        private static bool IsNested(BlockSyntax node) =>
+            !node.Parent.IsAnyKind(AllowedContainerKinds);
+
+        private static bool ContainsCommentOrConditionalCompilation(BlockSyntax node) =>
+            ContainsCommentOrConditionalCompilation(node.OpenBraceToken.TrailingTrivia) || ContainsCommentOrConditionalCompilation(node.CloseBraceToken.LeadingTrivia);
+
+        private static bool ContainsCommentOrConditionalCompilation(SyntaxTriviaList trivias) =>
+            trivias.Any(trivia => trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia, SyntaxKind.DisabledTextTrivia));
     }
 }

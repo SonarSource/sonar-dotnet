@@ -18,13 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class EmptyNestedBlockBase : SonarDiagnosticAnalyzer
+    public abstract class EmptyNestedBlockBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S108";
-        protected const string MessageFormat = "Either remove or fill this block of code.";
+        private const string MessageFormat = "Either remove or fill this block of code.";
+
+        private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract TSyntaxKind[] SyntaxKinds { get; }
+
+        protected abstract IEnumerable<SyntaxNode> EmptyBlocks(SyntaxNode node);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected EmptyNestedBlockBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                Language.GeneratedCodeRecognizer,
+                c =>
+                {
+                    foreach (var node in EmptyBlocks(c.Node))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                    }
+                },
+                SyntaxKinds);
     }
 }
