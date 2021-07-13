@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly ISet<string> IgnoredMethodNames = new HashSet<string> { "Equals", "GetHashCode" };
+        private static readonly HashSet<string> IgnoredMethodNames = new HashSet<string> { "Equals", "GetHashCode" };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -105,8 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
                    && CheckSetAccessorIfAny(propertySyntax, propertySymbol, semanticModel);
         }
 
-        private static bool CheckGetAccessorIfAny(PropertyDeclarationSyntax propertySyntax, IPropertySymbol propertySymbol,
-            SemanticModel semanticModel)
+        private static bool CheckGetAccessorIfAny(PropertyDeclarationSyntax propertySyntax, IPropertySymbol propertySymbol, SemanticModel semanticModel)
         {
             var getAccessor = propertySyntax.AccessorList?.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
 
@@ -134,8 +133,7 @@ namespace SonarAnalyzer.Rules.CSharp
             semanticModel.GetSymbolInfo(memberAccess).Symbol is IPropertySymbol invokedPropertySymbol
             && invokedPropertySymbol.Equals(propertySymbol.OverriddenProperty);
 
-        private static bool CheckSetAccessorIfAny(PropertyDeclarationSyntax propertySyntax, IPropertySymbol propertySymbol,
-            SemanticModel semanticModel)
+        private static bool CheckSetAccessorIfAny(PropertyDeclarationSyntax propertySyntax, IPropertySymbol propertySymbol, SemanticModel semanticModel)
         {
             var setAccessor = propertySyntax.AccessorList?.Accessors.FirstOrDefault(a => a.IsAnyKind(SyntaxKind.SetAccessorDeclaration, SyntaxKindEx.InitAccessorDeclaration));
             if (setAccessor == null)
@@ -217,8 +215,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Any(t => t.IsKind(SyntaxKind.SingleLineDocumentationCommentTrivia)
                           || t.IsKind(SyntaxKind.MultiLineDocumentationCommentTrivia));
 
-        private static bool AreArgumentsMatchParameters(IMethodSymbol methodSymbol, SemanticModel semanticModel,
-            InvocationExpressionSyntax expressionToCheck, IMethodSymbol invokedMethod)
+        private static bool AreArgumentsMatchParameters(IMethodSymbol methodSymbol, SemanticModel semanticModel, InvocationExpressionSyntax expressionToCheck, IMethodSymbol invokedMethod)
         {
             if (!invokedMethod.Parameters.Any())
             {
