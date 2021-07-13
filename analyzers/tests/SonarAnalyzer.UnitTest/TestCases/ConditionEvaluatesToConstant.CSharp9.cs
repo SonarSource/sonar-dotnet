@@ -96,14 +96,28 @@ namespace Tests.Diagnostics
             init
             {
                 value = null;
-                if (value == null)
+                if (value == null)  // Noncompliant
                 {
                     o = value;
                 }
                 else
-                {
+                {                   // Secondary
                     o = "";
                 }
+            }
+        }
+
+        public object InitWithTupleAssignment
+        {
+            init
+            {
+                var tmp = 0;
+                var flag = true;
+                while (flag) // Compliant, muted by presence of tuple assignment
+                {
+                    (flag, tmp) = (false, 5);
+                }
+                o = value;
             }
         }
     }

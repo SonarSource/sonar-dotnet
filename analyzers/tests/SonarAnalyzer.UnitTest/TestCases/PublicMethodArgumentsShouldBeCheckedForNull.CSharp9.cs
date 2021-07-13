@@ -71,7 +71,7 @@ public class Sample
         get => null;
         init
         {
-            field = value.ToString();   // FN
+            field = value.ToString();   // Noncompliant
         }
     }
 }

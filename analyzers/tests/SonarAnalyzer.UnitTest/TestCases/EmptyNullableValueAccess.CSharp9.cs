@@ -86,7 +86,7 @@ public class Sample
         init
         {
             int? nullable = null;
-            field = nullable.Value;    // FN
+            field = nullable.Value;    // Noncompliant
         }
     }
 

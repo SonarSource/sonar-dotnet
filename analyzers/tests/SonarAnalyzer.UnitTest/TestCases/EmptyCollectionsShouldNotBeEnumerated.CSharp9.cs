@@ -55,7 +55,7 @@ public class Sample
         init
         {
             var list = new List<int>();
-            list.Clear();       // FN
+            list.Clear();       // Noncompliant
         }
     }
 }

@@ -52,7 +52,7 @@ public class Sample
         get => new byte[0];
         init
         {
-            new PasswordDeriveBytes(value, new byte[15]); // FN
+            new PasswordDeriveBytes(value, new byte[15]);   // Noncompliant
 
             var safeSalt = new byte[16];
             RandomNumberGenerator.Create().GetNonZeroBytes(safeSalt);

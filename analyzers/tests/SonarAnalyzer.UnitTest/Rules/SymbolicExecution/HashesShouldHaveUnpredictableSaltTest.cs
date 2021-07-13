@@ -49,12 +49,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                  ParseOptionsHelper.FromCSharp8,
                                                  MetadataReferenceFacade.SystemSecurityCryptography);
 
+#if NET
+
         [TestMethod]
         [TestCategory("Rule")]
         public void HashesShouldHaveUnpredictableSalt_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\HashesShouldHaveUnpredictableSalt.CSharp9.cs",
                                                       GetAnalyzer(),
                                                       MetadataReferenceFacade.SystemSecurityCryptography);
+
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
