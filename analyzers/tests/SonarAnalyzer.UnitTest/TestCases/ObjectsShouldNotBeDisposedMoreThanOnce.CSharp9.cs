@@ -41,7 +41,7 @@ public class Sample
         {
             var ms = new MemoryStream();
             ms.Dispose();
-            ms.Dispose();    // FN
+            ms.Dispose();    // Noncompliant
         }
     }
 }
