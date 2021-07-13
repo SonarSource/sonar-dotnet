@@ -72,6 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
+                SyntaxKindEx.InitAccessorDeclaration,
                 SyntaxKind.AddAccessorDeclaration,
                 SyntaxKind.RemoveAccessorDeclaration);
 
