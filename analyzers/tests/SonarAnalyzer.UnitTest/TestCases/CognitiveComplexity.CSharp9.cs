@@ -37,14 +37,18 @@ record MyRecord
     string field;
     string IfInProperty
     {
-        init // FN
+        init // Noncompliant {{Refactor this accessor to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
         {
             if (true)
+//          ^^ Secondary {{+1}}
             {
                 field = "";
             }
         }
     }
+
+    bool Prop => field == null || field is { Length: 5 }; // Noncompliant {{Refactor this property to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+//                                                           Secondary@-1 {{+1}}
 }
 
 class AndOrConditionsComplexity
