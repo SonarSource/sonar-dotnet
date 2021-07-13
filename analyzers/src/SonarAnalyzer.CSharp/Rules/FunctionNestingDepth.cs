@@ -35,18 +35,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public class FunctionNestingDepth : FunctionNestingDepthBase
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private const int DefaultValueMaximum = 3;
-
-        [RuleParameter("max", PropertyType.Integer,
-            "Maximum allowed control flow statement nesting depth.", DefaultValueMaximum)]
-        public int Maximum { get; set; } = DefaultValueMaximum;
-
         private static readonly SyntaxKind[] FunctionKinds =
         {
             SyntaxKind.MethodDeclaration,
@@ -59,6 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.AddAccessorDeclaration,
             SyntaxKind.RemoveAccessorDeclaration
         };
+
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
         protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(CheckFunctionNestingDepth, FunctionKinds);
@@ -73,10 +63,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly NestingDepthCounter counter;
 
-            public NestingDepthWalker(int maximumNestingDepth, Action<SyntaxToken> actionMaximumExceeded)
-            {
-                this.counter = new NestingDepthCounter(maximumNestingDepth, actionMaximumExceeded);
-            }
+            public NestingDepthWalker(int maximumNestingDepth, Action<SyntaxToken> actionMaximumExceeded) =>
+                counter = new NestingDepthCounter(maximumNestingDepth, actionMaximumExceeded);
 
             public override void VisitIfStatement(IfStatementSyntax node)
             {
@@ -87,21 +75,27 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 else
                 {
-                    this.counter.CheckNesting(node.IfKeyword, () => base.VisitIfStatement(node));
+                    counter.CheckNesting(node.IfKeyword, () => base.VisitIfStatement(node));
                 }
             }
 
-            public override void VisitForStatement(ForStatementSyntax node) => this.counter.CheckNesting(node.ForKeyword, () => base.VisitForStatement(node));
+            public override void VisitForStatement(ForStatementSyntax node) =>
+                counter.CheckNesting(node.ForKeyword, () => base.VisitForStatement(node));
 
-            public override void VisitForEachStatement(ForEachStatementSyntax node) => this.counter.CheckNesting(node.ForEachKeyword, () => base.VisitForEachStatement(node));
+            public override void VisitForEachStatement(ForEachStatementSyntax node) =>
+                counter.CheckNesting(node.ForEachKeyword, () => base.VisitForEachStatement(node));
 
-            public override void VisitWhileStatement(WhileStatementSyntax node) => this.counter.CheckNesting(node.WhileKeyword, () => base.VisitWhileStatement(node));
+            public override void VisitWhileStatement(WhileStatementSyntax node) =>
+                counter.CheckNesting(node.WhileKeyword, () => base.VisitWhileStatement(node));
 
-            public override void VisitDoStatement(DoStatementSyntax node) => this.counter.CheckNesting(node.DoKeyword, () => base.VisitDoStatement(node));
+            public override void VisitDoStatement(DoStatementSyntax node) =>
+                counter.CheckNesting(node.DoKeyword, () => base.VisitDoStatement(node));
 
-            public override void VisitSwitchStatement(SwitchStatementSyntax node) => this.counter.CheckNesting(node.SwitchKeyword, () => base.VisitSwitchStatement(node));
+            public override void VisitSwitchStatement(SwitchStatementSyntax node) =>
+                counter.CheckNesting(node.SwitchKeyword, () => base.VisitSwitchStatement(node));
 
-            public override void VisitTryStatement(TryStatementSyntax node) => this.counter.CheckNesting(node.TryKeyword, () => base.VisitTryStatement(node));
+            public override void VisitTryStatement(TryStatementSyntax node) =>
+                counter.CheckNesting(node.TryKeyword, () => base.VisitTryStatement(node));
         }
     }
 }
