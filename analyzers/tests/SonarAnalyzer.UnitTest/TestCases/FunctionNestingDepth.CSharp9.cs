@@ -61,7 +61,7 @@ public record FunctionNestingDepth
                 {
                     if (true)
                     {
-                        if (true) { } // FN
+                        if (true) { } // Noncompliant
                     }
                 }
             }
