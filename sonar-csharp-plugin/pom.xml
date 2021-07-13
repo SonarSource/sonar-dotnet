@@ -252,6 +252,9 @@
                         <include name="Google.Protobuf.dll"/>
                         <include name="Newtonsoft.Json.dll"/>
                       </fileset>
+                      <fileset dir="${project.build.directory}/../..">
+                        <include name="THIRD-PARTY-NOTICES.txt"/>
+                      </fileset>
                     </copy>
                     <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                          basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
