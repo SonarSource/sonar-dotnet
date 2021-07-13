@@ -19,17 +19,32 @@
  */
 
 using System;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
     public abstract class FunctionNestingDepthBase : ParameterLoadingDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S134";
-        internal const string MessageFormat = "Refactor this code to not nest more than {0} control flow statements.";
+        protected const string DiagnosticId = "S134";
+        private const string MessageFormat = "Refactor this code to not nest more than {0} control flow statements.";
+        private const int DefaultValueMaximum = 3;
 
-        internal class NestingDepthCounter
+        protected readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade Language { get; }
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        [RuleParameter("maximumNestingLevel", PropertyType.Integer, "Maximum allowed control flow statement nesting depth.", DefaultValueMaximum)]
+        public int Maximum { get; set; } = DefaultValueMaximum;
+
+        protected FunctionNestingDepthBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources, isEnabledByDefault: false);
+
+        protected class NestingDepthCounter
         {
             private readonly int maximumNestingDepth;
             private readonly Action<SyntaxToken> actionMaximumExceeded;
@@ -43,18 +58,16 @@ namespace SonarAnalyzer.Rules
 
             public void CheckNesting(SyntaxToken keyword, Action visitAction)
             {
-                this.currentDepth++;
-
-                if (this.currentDepth <= this.maximumNestingDepth)
+                currentDepth++;
+                if (currentDepth <= maximumNestingDepth)
                 {
                     visitAction();
                 }
                 else
                 {
-                    this.actionMaximumExceeded(keyword);
+                    actionMaximumExceeded(keyword);
                 }
-
-                this.currentDepth--;
+                currentDepth--;
             }
         }
     }

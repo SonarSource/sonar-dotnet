@@ -75,7 +75,7 @@ namespace Tests.Diagnostics
                 {
                     if (true)
                     {
-                        for (;;) // Noncompliant
+                        for (; ; ) // Noncompliant
                         {
                         }
                     }
@@ -101,6 +101,44 @@ namespace Tests.Diagnostics
                         return 0;
             return 42;
         }))();
+
+        public void SwitchStatement()
+        {
+            if (true)
+            {
+                switch (42)
+                {
+                    case 1:
+                        break;
+                    case 2:
+                        switch (42)
+                        {
+                            case 0:
+                                break;
+                            default:
+                                break;
+                        }
+                }
+            }
+            if (true)
+            {
+                switch (42)
+                {
+                    case 1:
+                        break;
+                    case 2:
+                        switch (42)
+                        {
+                            case 0:
+                                if (true) { }   // Noncompliant
+                                break;
+                            default:
+                                if (true) { }   // Noncompliant
+                                break;
+                        }
+                }
+            }
+        }
 
         public int MyProperty
         {
@@ -188,7 +226,7 @@ namespace Tests.Diagnostics
                     {
                         if (true)  // Noncompliant
                         {
-                            if(true) // Compliant
+                            if (true) // Compliant
                             {
 
                             }
