@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Diagnostics
 
 Namespace Tests.Diagnostics
 
@@ -241,6 +242,19 @@ Namespace Tests.Diagnostics
           Next
         End Try
       End If
+    End Sub
+
+    Public Sub ConditionalCompilation(a As Boolean)
+        If a Then
+#If DEBUG
+            Trace.WriteLine("message")
+#End If
+        End If
+
+        If a Then
+#If DEBUG
+#End If
+        End If ' Noncompliant@-3
     End Sub
 
   End Class
