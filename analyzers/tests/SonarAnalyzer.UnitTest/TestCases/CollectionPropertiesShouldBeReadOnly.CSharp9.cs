@@ -45,9 +45,13 @@ public record S4004Abstract : S4004Base
 public interface IS4004
 {
     IDictionary<object, object> Items { get; set; } // Noncompliant
+
+    ICollection<string> CollectionInit { get; init; }
 }
 
 public record S4004InterfaceImplicit : IS4004
 {
     public IDictionary<object, object> Items { get; set; }  // Compliant enforced by interface (https://github.com/SonarSource/sonar-dotnet/issues/2606)
+
+    public ICollection<string> CollectionInit { get; init; }
 }
