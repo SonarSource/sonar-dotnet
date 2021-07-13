@@ -77,6 +77,7 @@ namespace SonarAnalyzer.Helpers.Trackers
                     return ((EventDeclarationSyntax)methodDeclaration.Parent.Parent).Identifier;
                 case SyntaxKind.GetAccessorDeclaration:
                 case SyntaxKind.SetAccessorDeclaration:
+                case SyntaxKindEx.InitAccessorDeclaration:
                     return ((PropertyDeclarationSyntax)methodDeclaration.Parent.Parent).Identifier;
                 case SyntaxKind.OperatorDeclaration:
                     return ((OperatorDeclarationSyntax)methodDeclaration).OperatorToken;
