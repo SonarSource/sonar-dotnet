@@ -36,13 +36,12 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class RedundantJumpStatement : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3626";
+        private const string DiagnosticId = "S3626";
         private const string MessageFormat = "Remove this redundant jump.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -74,6 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
+                SyntaxKindEx.InitAccessorDeclaration,
                 SyntaxKind.AddAccessorDeclaration,
                 SyntaxKind.RemoveAccessorDeclaration);
 
@@ -98,61 +98,47 @@ namespace SonarAnalyzer.Rules.CSharp
             var yieldStatementCount = node.DescendantNodes().OfType<YieldStatementSyntax>().Count();
 
             var removableJumps = cfg.Blocks
-                .OfType<JumpBlock>()
-                .Where(jumpBlock => IsJumpRemovable(jumpBlock, yieldStatementCount));
+                                    .OfType<JumpBlock>()
+                                    .Where(jumpBlock => IsJumpRemovable(jumpBlock, yieldStatementCount));
 
             foreach (var jumpBlock in removableJumps)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, jumpBlock.JumpNode.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, jumpBlock.JumpNode.GetLocation()));
             }
         }
 
-        private static bool IsJumpRemovable(JumpBlock jumpBlock, int yieldStatementCount)
-        {
-            return !IsInsideSwitch(jumpBlock) &&
-                   !IsReturnWithExpression(jumpBlock) &&
-                   !IsThrow(jumpBlock) &&
-                   !IsYieldReturn(jumpBlock) &&
-                   !IsOnlyYieldBreak(jumpBlock, yieldStatementCount) &&
-                   !IsValidJumpInsideTryCatch(jumpBlock) &&
-                   jumpBlock.SuccessorBlock == jumpBlock.WouldBeSuccessor;
-        }
+        private static bool IsJumpRemovable(JumpBlock jumpBlock, int yieldStatementCount) =>
+            !IsInsideSwitch(jumpBlock)
+            && !IsReturnWithExpression(jumpBlock)
+            && !IsThrow(jumpBlock)
+            && !IsYieldReturn(jumpBlock)
+            && !IsOnlyYieldBreak(jumpBlock, yieldStatementCount)
+            && !IsValidJumpInsideTryCatch(jumpBlock)
+            && jumpBlock.SuccessorBlock == jumpBlock.WouldBeSuccessor;
 
-        private static bool IsValidJumpInsideTryCatch(JumpBlock jumpBlock)
-        {
-            return jumpBlock.WouldBeSuccessor is BranchBlock branchBlock &&
-                branchBlock.BranchingNode is FinallyClauseSyntax &&
-                branchBlock.AllSuccessorBlocks.Count > 1;
-        }
+        private static bool IsValidJumpInsideTryCatch(JumpBlock jumpBlock) =>
+            jumpBlock.WouldBeSuccessor is BranchBlock branchBlock
+            && branchBlock.BranchingNode is FinallyClauseSyntax
+            && branchBlock.AllSuccessorBlocks.Count > 1;
 
-        private static bool IsInsideSwitch(JumpBlock jumpBlock)
-        {
+        private static bool IsInsideSwitch(JumpBlock jumpBlock) =>
             // Not reporting inside switch, as the jumps might not be removable
-            return jumpBlock.JumpNode.AncestorsAndSelf().OfType<SwitchStatementSyntax>().Any();
-        }
+            jumpBlock.JumpNode.AncestorsAndSelf().OfType<SwitchStatementSyntax>().Any();
 
-        private static bool IsYieldReturn(JumpBlock jumpBlock)
-        {
+        private static bool IsYieldReturn(JumpBlock jumpBlock) =>
             // yield return cannot be redundant
-            return jumpBlock.JumpNode is YieldStatementSyntax yieldStatement &&
-                yieldStatement.IsKind(SyntaxKind.YieldReturnStatement);
-        }
+            jumpBlock.JumpNode is YieldStatementSyntax yieldStatement
+            && yieldStatement.IsKind(SyntaxKind.YieldReturnStatement);
 
-        private static bool IsOnlyYieldBreak(JumpBlock jumpBlock, int yieldStatementCount)
-        {
-            return jumpBlock.JumpNode is YieldStatementSyntax yieldStatement &&
-                yieldStatement.IsKind(SyntaxKind.YieldBreakStatement) &&
-                yieldStatementCount == 1;
-        }
+        private static bool IsOnlyYieldBreak(JumpBlock jumpBlock, int yieldStatementCount) =>
+            jumpBlock.JumpNode is YieldStatementSyntax yieldStatement
+            && yieldStatement.IsKind(SyntaxKind.YieldBreakStatement)
+            && yieldStatementCount == 1;
 
-        private static bool IsThrow(JumpBlock jumpBlock)
-        {
-            return jumpBlock.JumpNode.IsAnyKind(SyntaxKind.ThrowStatement, SyntaxKindEx.ThrowExpression);
-        }
+        private static bool IsThrow(JumpBlock jumpBlock) =>
+            jumpBlock.JumpNode.IsAnyKind(SyntaxKind.ThrowStatement, SyntaxKindEx.ThrowExpression);
 
-        private static bool IsReturnWithExpression(JumpBlock jumpBlock)
-        {
-            return jumpBlock.JumpNode is ReturnStatementSyntax returnStatement && returnStatement.Expression != null;
-        }
+        private static bool IsReturnWithExpression(JumpBlock jumpBlock) =>
+            jumpBlock.JumpNode is ReturnStatementSyntax { Expression: { } };
     }
 }
