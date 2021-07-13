@@ -43,6 +43,7 @@ namespace SonarAnalyzer.Helpers
             SyntaxKind.PropertyDeclaration,
             SyntaxKind.GetAccessorDeclaration,
             SyntaxKind.SetAccessorDeclaration,
+            SyntaxKindEx.InitAccessorDeclaration,
             SyntaxKind.AddAccessorDeclaration,
             SyntaxKind.RemoveAccessorDeclaration,
             SyntaxKind.AnonymousMethodExpression,
