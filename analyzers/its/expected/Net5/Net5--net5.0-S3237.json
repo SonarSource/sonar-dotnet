@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3237",
+"message":  "Use the 'value' parameter in this property init accessor declaration.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2930.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  13,
+"endLine":  10,
+"endColumn":  17
+}
+}
+}
+]
+}
