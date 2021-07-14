@@ -65,7 +65,12 @@ namespace SonarAnalyzer.Helpers.Trackers
                 SubNewStatementSyntax constructor => constructor.NewKeyword,
                 MethodStatementSyntax method => method.Identifier,
                 OperatorStatementSyntax op => op.OperatorToken,
-                _ => null
+                _ => methodDeclaration?.Parent.Parent switch
+                {
+                    EventBlockSyntax e => e.EventStatement.Identifier,
+                    PropertyBlockSyntax p => p.PropertyStatement.Identifier,
+                    _ => null
+                }
             };
 
         private static bool HasImplementation(MethodBlockSyntax methodBlock) =>

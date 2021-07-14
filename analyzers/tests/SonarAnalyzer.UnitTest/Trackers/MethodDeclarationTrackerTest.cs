@@ -118,21 +118,28 @@ Public Class Sample
         MyBase.Finalize()
     End Sub
 
-    Public Property Prop As Integer     'FIXME - doesn't work
+    Public Property Prop As Integer
+        '           ^^^^
+        '           ^^^^ @-1
         Get
         End Get
         Set(value As Integer)
         End Set
     End Property
 
-    Default Public Property Indexer(x As Integer, y As Integer) As Integer  'FIXME - doesn't work
+    Default Public Property Indexer(x As Integer, y As Integer) As Integer
+        '                   ^^^^^^^
+        '                   ^^^^^^^ @-1
         Get
         End Get
         Set(value As Integer)
         End Set
     End Property
 
-    Public Custom Event Changed As System.EventHandler      'FIXME - doesn't work
+    Public Custom Event Changed As System.EventHandler
+        '               ^^^^^^^
+        '               ^^^^^^^ @-1
+        '               ^^^^^^^ @-2
         AddHandler(value As System.EventHandler)
         End AddHandler
         RemoveHandler(value As System.EventHandler)
