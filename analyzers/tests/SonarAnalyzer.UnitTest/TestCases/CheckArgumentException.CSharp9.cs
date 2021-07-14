@@ -31,7 +31,8 @@ using System.Collections.Generic;
             init
             {
                 throw new ArgumentNullException("value");
-                throw new ArgumentNullException("foo"); // Noncompliant
+                throw new ArgumentNullException("foo");   // Noncompliant
+                throw new ArgumentNullException("Foo9");
             }
         }
 
@@ -67,7 +68,13 @@ using System.Collections.Generic;
         public string Request
         {
             get => this.input;
-            init => this.input = value ?? throw new ArgumentNullException(nameof(this.Request)); // Noncompliant
+            init => this.input = value ?? throw new ArgumentNullException(nameof(this.Request));
+        }
+
+        public string Request2
+        {
+            get => this.input;
+            init => this.input = value ?? throw new ArgumentNullException(nameof(Request2));
         }
     }
 }
