@@ -62,16 +62,20 @@ namespace SonarAnalyzer.Helpers.Trackers
                         && parameterSymbol.Equals(semanticModel.GetSymbolInfo(node).Symbol));
             };
 
-        protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration)
+        protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration) =>
+            methodDeclaration switch
+            {
+                MethodDeclarationSyntax method => method.Identifier,
+                ConstructorDeclarationSyntax constructor => constructor.Identifier,
+                DestructorDeclarationSyntax destructor => destructor.Identifier,
+                OperatorDeclarationSyntax op => op.OperatorToken,
+                _ => AccessorIdentifier(methodDeclaration)
+            };
+
+        private static SyntaxToken? AccessorIdentifier(SyntaxNode methodDeclaration)
         {
             switch (methodDeclaration?.Kind())
             {
-                case SyntaxKind.MethodDeclaration:
-                    return ((MethodDeclarationSyntax)methodDeclaration).Identifier;
-                case SyntaxKind.ConstructorDeclaration:
-                    return ((ConstructorDeclarationSyntax)methodDeclaration).Identifier;
-                case SyntaxKind.DestructorDeclaration:
-                    return ((DestructorDeclarationSyntax)methodDeclaration).Identifier;
                 case SyntaxKind.AddAccessorDeclaration:
                 case SyntaxKind.RemoveAccessorDeclaration:
                     return ((EventDeclarationSyntax)methodDeclaration.Parent.Parent).Identifier;
@@ -79,8 +83,6 @@ namespace SonarAnalyzer.Helpers.Trackers
                 case SyntaxKind.SetAccessorDeclaration:
                 case SyntaxKindEx.InitAccessorDeclaration:
                     return ((PropertyDeclarationSyntax)methodDeclaration.Parent.Parent).Identifier;
-                case SyntaxKind.OperatorDeclaration:
-                    return ((OperatorDeclarationSyntax)methodDeclaration).OperatorToken;
                 default:
                     return null;
             }
