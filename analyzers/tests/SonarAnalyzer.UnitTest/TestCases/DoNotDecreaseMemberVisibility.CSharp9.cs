@@ -59,6 +59,8 @@ namespace MyLibrary
         public virtual int Property_09 { get; init; }
 
         public int Property_10 { get; init; }
+
+        public int Property_11 { get; init; }
     }
 
     record B : A
@@ -124,6 +126,8 @@ namespace MyLibrary
         public override int Property_09 { get; } // Error [CS8080].
 
         private string Property_10 { get; init; } // Noncompliant, return type is irrelevant for method resolution
+
+        public int Property_11 { get; protected init; } // Noncompliant
     }
 
     record Foo
