@@ -74,6 +74,8 @@ namespace Tests.Diagnostics
 
     public class DeadStores
     {
+        public int Property { get; set; }
+
         int doSomething() => 1;
         int doSomethingElse() => 1;
 
@@ -167,6 +169,22 @@ namespace Tests.Diagnostics
             }
             return a;
         }
+
+        public void Assignment(DeadStores sender)
+        {
+            // Compliant cases
+            sender.Property += 42;
+            sender.Property = 42;
+            Property += 42;
+            Property = 42;
+            undefined += 42;    // Error [CS0103]: The name 'undefined' does not exist in the current context
+            undefined = 42;     // Error [CS0103]: The name 'undefined' does not exist in the current context
+
+            var captured = 10;
+            Action a = () => { Console.WriteLine(captured); };
+            captured += 11;     // Not reporting on captured local variables
+        }
+
         public void Switch()
         {
             const int c = 5; // Compliant
@@ -335,7 +353,7 @@ namespace Tests.Diagnostics
         {
             var i = 10;
             Action a = () => { Console.WriteLine(i); };
-            i = 11; // Not reporting on captured local variables
+            i = 11;     // Not reporting on captured local variables
             a();
 
             return null;
