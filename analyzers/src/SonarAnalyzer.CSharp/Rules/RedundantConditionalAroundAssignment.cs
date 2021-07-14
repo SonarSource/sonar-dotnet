@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (ifStatement.Else != null
                 || ifStatement.Parent is ElseClauseSyntax
-                || (ifStatement.FirstAncestorOrSelf<AccessorDeclarationSyntax>()?.IsKind(SyntaxKind.SetAccessorDeclaration) ?? false)
+                || (ifStatement.FirstAncestorOrSelf<AccessorDeclarationSyntax>()?.IsAnyKind(SyntaxKind.SetAccessorDeclaration, SyntaxKindEx.InitAccessorDeclaration) ?? false)
                 || !TryGetNotEqualsCondition(ifStatement, out var condition)
                 || !TryGetSingleAssignment(ifStatement, out var assignment))
             {
