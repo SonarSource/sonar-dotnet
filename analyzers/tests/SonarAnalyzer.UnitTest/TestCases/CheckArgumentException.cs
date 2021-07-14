@@ -139,8 +139,9 @@ namespace Tests.Diagnostics
             }
             set
             {
-                throw new ArgumentNullException("value"); // Compliant - value exists in property setters
+                throw new ArgumentNullException("value"); // Noncompliant
                 throw new ArgumentNullException("foo"); // Noncompliant
+                throw new ArgumentNullException("Foo9"); // Compliant since it's a property name
             }
         }
 
@@ -154,7 +155,7 @@ namespace Tests.Diagnostics
             set
             {
                 throw new ArgumentNullException("a");
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException("value"); // Noncompliant
             }
         }
 
@@ -195,12 +196,18 @@ namespace Tests.Diagnostics
         public string Response
         {
             get => "";
-            set => this.input = value ?? throw new ArgumentNullException(nameof(value));
+            set => this.input = value ?? throw new ArgumentNullException(nameof(value)); // Noncompliant
         }
         public string Request
         {
             get => this.input;
-            set => this.input = value ?? throw new ArgumentNullException(nameof(this.Request)); // Noncompliant
+            set => this.input = value ?? throw new ArgumentNullException(nameof(this.Request));
+        }
+
+        public string Request2
+        {
+            get => this.input;
+            set => this.input = value ?? throw new ArgumentNullException(nameof(Request2));
         }
     }
 
