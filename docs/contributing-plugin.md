@@ -22,10 +22,6 @@
             1. `msbuild /t:rebuild .\analyzers\SonarAnalyzer.sln`
             1. `mvn clean install -P local-analyzer -D analyzer.configuration=Debug`
 
-    * To build the plugin while relying on a released analyzer run `mvn clean install -P download-analyzer -D analyzer.version=<VERSION>`
-        * SonarSource developers can reference any built version
-        * External users can rely only on public versions hosted in maven [org.sonarsource.dotnet:SonarAnalyzer.CSharp](https://mvnrepository.com/artifact/org.sonarsource.dotnet/SonarAnalyzer.CSharp)
-
 ## Developing with Eclipse or IntelliJ
 
 When working with Eclipse or IntelliJ please follow the [sonar guidelines](https://github.com/SonarSource/sonar-developer-toolset)
