@@ -65,15 +65,18 @@ record Record
 {
     string x;
 
-    string NoncompliantProperty
+    string CompliantProperty1
     {
         init
         {
-            x = value;
+            if (x != value)
+            {
+                x = value;
+            }
         }
     }
 
-    string CompliantProperty
+    string CompliantProperty2
     {
         init { x = value; }
     }
