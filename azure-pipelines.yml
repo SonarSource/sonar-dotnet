@@ -196,6 +196,8 @@ stages:
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(Build.SourceVersion)
             sonar.analysis.repository=$(Build.Repository.ID)
+            # needed for SonarCloud main branch decoration for unbound projects - see SC-3469
+            sonar.pullrequest.github.repository=$(Build.Repository.Name)
 
       - powershell: |
           . .\scripts\utils.ps1
