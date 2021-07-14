@@ -74,6 +74,13 @@ public class Sample
         get => 42;
         init { }
     }
+    public int this[int index]
+//             ^^^^
+//             ^^^^ @-1
+    {
+        get => 42;
+        set { }
+    }
     public event System.EventHandler Event
 //                                   ^^^^^
 //                                   ^^^^^ @-1

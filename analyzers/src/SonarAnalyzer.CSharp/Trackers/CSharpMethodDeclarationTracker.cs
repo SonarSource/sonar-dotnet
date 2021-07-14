@@ -69,23 +69,13 @@ namespace SonarAnalyzer.Helpers.Trackers
                 ConstructorDeclarationSyntax constructor => constructor.Identifier,
                 DestructorDeclarationSyntax destructor => destructor.Identifier,
                 OperatorDeclarationSyntax op => op.OperatorToken,
-                _ => AccessorIdentifier(methodDeclaration)
+                _ => methodDeclaration?.Parent.Parent switch // Accessors
+                {
+                    EventDeclarationSyntax e => e.Identifier,
+                    PropertyDeclarationSyntax p => p.Identifier,
+                    IndexerDeclarationSyntax i => i.ThisKeyword,
+                    _ => null
+                }
             };
-
-        private static SyntaxToken? AccessorIdentifier(SyntaxNode methodDeclaration)
-        {
-            switch (methodDeclaration?.Kind())
-            {
-                case SyntaxKind.AddAccessorDeclaration:
-                case SyntaxKind.RemoveAccessorDeclaration:
-                    return ((EventDeclarationSyntax)methodDeclaration.Parent.Parent).Identifier;
-                case SyntaxKind.GetAccessorDeclaration:
-                case SyntaxKind.SetAccessorDeclaration:
-                case SyntaxKindEx.InitAccessorDeclaration:
-                    return ((PropertyDeclarationSyntax)methodDeclaration.Parent.Parent).Identifier;
-                default:
-                    return null;
-            }
-        }
     }
 }
