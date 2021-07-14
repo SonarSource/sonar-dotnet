@@ -55,12 +55,17 @@ public class Sample
         public void Track_VerifyMethodIdentifierLocations_CS()
         {
             const string code = @"
+abstract record AbstractRecordHasMethodSymbol(string Y); //For Coverage
+
 public class Sample
 {
     public Sample() {}
 //         ^^^^^^
-    public void Method() {}
+    public void Method()
 //              ^^^^^^
+    {
+        void LocalFunction() { } // Tracking of local functions is not supported
+    }
     ~Sample() {}
 //   ^^^^^^
     public int Property
@@ -155,6 +160,8 @@ Public Class Sample
     Public Shared Operator +(A As Sample, B As Sample) As Integer
         '                  ^
     End Operator
+
+    Declare Function ExternalMethod Lib ""foo.dll""(lpBuffer As String) As Integer
 
 End Class";
             Verifier.VerifyVisualBasicAnalyzer(code, new TestRule_VB());
