@@ -11,7 +11,7 @@
     public int Count2
     {
         get { return count; }
-        set {
+        set {  // Noncompliant
             void Foo(int value) {
                 count = value;
             }
