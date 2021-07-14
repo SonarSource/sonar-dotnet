@@ -114,9 +114,9 @@ record R
     {
         init
         {
-            value = 1; // FN
-            int a = 100;
-            a = 2; // FN
+            value = 1;      // Noncompliant
+            int a = 100;    // Noncompliant
+            a = 2;          // Noncompliant
         }
     }
 }
