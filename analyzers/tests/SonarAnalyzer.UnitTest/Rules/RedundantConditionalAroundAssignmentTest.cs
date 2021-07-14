@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new RedundantConditionalAroundAssignment());
 
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("CodeFix")]
         public void RedundantConditionalAroundAssignment_CSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs",
                                    @"TestCases\RedundantConditionalAroundAssignment.CSharp9.Fixed.cs",
