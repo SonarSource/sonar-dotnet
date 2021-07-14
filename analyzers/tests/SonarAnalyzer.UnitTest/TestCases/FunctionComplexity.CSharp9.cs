@@ -18,12 +18,12 @@ public record FunctionComplexity
         if (false) { }
     }
 
-    public void M2() // Noncompliant [3]
-                     // Secondary@-1 [3] {{+1}}
+    public void M2() // Noncompliant [1]
+                     // Secondary@-1 [1] {{+1}}
     {
-        if (false) { } // Secondary [3] {{+1}}
-        if (false) { } // Secondary [3] {{+1}}
-        if (false) { } // Secondary [3] {{+1}}
+        if (false) { } // Secondary [1] {{+1}}
+        if (false) { } // Secondary [1] {{+1}}
+        if (false) { } // Secondary [1] {{+1}}
     }
 
     public bool PatternMatchingAnd(object arg) =>
@@ -38,11 +38,12 @@ public record FunctionComplexity
         {
             return 0;
         }
-        init    // FN
+        init               // Noncompliant [2]
+                           // Secondary@-1 [2] {{+1}}
         {
-            if (false) { }
-            if (false) { }
-            if (false) { }
+            if (false) { } // Secondary [2] {{+1}}
+            if (false) { } // Secondary [2] {{+1}}
+            if (false) { } // Secondary [2] {{+1}}
         }
     }
 }
