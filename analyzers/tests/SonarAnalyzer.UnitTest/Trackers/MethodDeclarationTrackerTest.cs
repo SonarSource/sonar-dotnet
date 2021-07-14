@@ -49,6 +49,8 @@ public class Sample
             tracker.MatchMethodName("Something")(context).Should().BeFalse();
         }
 
+#if NET
+
         [TestMethod]
         public void Track_VerifyMethodIdentifierLocations_CS()
         {
@@ -94,6 +96,8 @@ public class Sample
 }";
             Verifier.VerifyCSharpAnalyzer(code, new TestRule_CS(), ParseOptionsHelper.FromCSharp9);
         }
+
+#endif
 
         [TestMethod]
         public void Track_VerifyMethodIdentifierLocations_VB()
