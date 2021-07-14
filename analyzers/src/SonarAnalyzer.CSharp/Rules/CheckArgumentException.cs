@@ -139,6 +139,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 if (accessor.IsAnyKind(SyntaxKind.SetAccessorDeclaration, SyntaxKindEx.InitAccessorDeclaration))
                 {
+                    if (accessor.Parent.Parent is PropertyDeclarationSyntax propertyDeclaration)
+                    {
+                        arguments.Add(propertyDeclaration.Identifier.Text);
+                    }
                     arguments.Add("value");
                 }
                 return arguments;
