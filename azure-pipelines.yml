@@ -174,7 +174,7 @@ stages:
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
             sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.**.xml"
-            sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/**/**.trx"
+            sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/**/tests/SonarAnalyzer.UnitTest/TestResults/*.trx"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
@@ -193,7 +193,7 @@ stages:
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
             sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.**.xml"
-            sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/**/**.trx"
+            sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/**/tests/SonarAnalyzer.UnitTest/TestResults/*.trx"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(Build.SourceVersion)
