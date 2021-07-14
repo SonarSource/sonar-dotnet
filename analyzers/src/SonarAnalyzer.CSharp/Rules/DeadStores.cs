@@ -190,9 +190,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var assignment = (AssignmentExpressionSyntax)instruction;
                 var left = assignment.Left.RemoveParentheses();
-                if (left.IsKind(SyntaxKind.IdentifierName)
-                    && context.SemanticModel.GetSymbolInfo(left).Symbol is { } symbol
-                    && IsSymbolRelevant(symbol))
+                if (IdentifierRelevantSymbol(left) is { } symbol)
                 {
                     ReportOnAssignment(assignment, left, symbol, assignmentLhs, liveOut);
                 }
@@ -202,9 +200,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var assignment = (AssignmentExpressionSyntax)instruction;
                 var left = assignment.Left.RemoveParentheses();
-                if (left.IsKind(SyntaxKind.IdentifierName)
-                    && context.SemanticModel.GetSymbolInfo(left).Symbol is { } symbol
-                    && IsSymbolRelevant(symbol))
+                if (IdentifierRelevantSymbol(left) is { } symbol)
                 {
                     ReportOnAssignment(assignment, left, symbol, assignmentLhs, liveOut);
                     liveOut.Remove(symbol);
@@ -267,9 +263,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var parent = prefixExpression.GetSelfOrTopParenthesizedExpression();
                 var operand = prefixExpression.Operand.RemoveParentheses();
                 if (parent.Parent is ExpressionStatementSyntax
-                    && operand.IsKind(SyntaxKind.IdentifierName)
-                    && context.SemanticModel.GetSymbolInfo(operand).Symbol is { } symbol
-                    && IsSymbolRelevant(symbol)
+                    && IdentifierRelevantSymbol(operand) is { } symbol
                     && CSharpLiveVariableAnalysis.IsLocalScoped(symbol, nodeSymbol)
                     && !liveOut.Contains(symbol)
                     && !IsMuted(operand))
@@ -282,9 +276,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var postfixExpression = (PostfixUnaryExpressionSyntax)instruction;
                 var operand = postfixExpression.Operand.RemoveParentheses();
-                if (operand.IsKind(SyntaxKind.IdentifierName)
-                    && context.SemanticModel.GetSymbolInfo(operand).Symbol is { } symbol
-                    && IsSymbolRelevant(symbol)
+                if (IdentifierRelevantSymbol(operand) is { } symbol
                     && CSharpLiveVariableAnalysis.IsLocalScoped(symbol, nodeSymbol)
                     && !liveOut.Contains(symbol)
                     && !IsMuted(operand))
@@ -295,7 +287,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void ReportOnAssignment(AssignmentExpressionSyntax assignment, ExpressionSyntax left, ISymbol symbol, HashSet<SyntaxNode> assignmentLhs, HashSet<ISymbol> outState)
             {
-                if (CSharpLiveVariableAnalysis.IsLocalScoped(symbol, this.nodeSymbol)
+                if (CSharpLiveVariableAnalysis.IsLocalScoped(symbol, nodeSymbol)
                     && !outState.Contains(symbol)
                     && !IsMuted(left))
                 {
@@ -315,6 +307,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 var rightSingleLine = line.Span.Intersection(TextSpan.FromBounds(issueStartToken.SpanStart, wholeIssue.Span.End));
                 return Location.Create(wholeIssue.SyntaxTree, TextSpan.FromBounds(issueStartToken.SpanStart, rightSingleLine.HasValue ? rightSingleLine.Value.End : issueStartToken.Span.End));
             }
+
+            private ISymbol IdentifierRelevantSymbol(SyntaxNode node) =>
+                node.IsKind(SyntaxKind.IdentifierName)
+                && context.SemanticModel.GetSymbolInfo(node).Symbol is { } symbol
+                && IsSymbolRelevant(symbol)
+                ? symbol
+                : null;
 
             private bool IsSymbolRelevant(ISymbol symbol) =>
                 symbol != null && !excludedLocals.Contains(symbol);
