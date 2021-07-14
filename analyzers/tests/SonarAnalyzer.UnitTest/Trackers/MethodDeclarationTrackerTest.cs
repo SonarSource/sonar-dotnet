@@ -19,6 +19,9 @@
  */
 
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -45,11 +48,61 @@ public class Sample
             tracker.MatchMethodName("Something")(context).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void Track_VerifyMethodIdentifierLocations()
+        {
+            const string code = @"
+public class Sample
+{
+    public Sample() {}
+//         ^^^^^^
+    public void Method() {}
+//              ^^^^^^
+    ~Sample() {}
+//   ^^^^^^
+    public int Property
+//             ^^^^^^^^
+//             ^^^^^^^^ @-1
+    {
+        get => 42;
+        set { }
+    }
+    public int InitProperty
+//             ^^^^^^^^^^^^
+//             ^^^^^^^^^^^^ @-1
+    {
+        get => 42;
+        init { }
+    }
+    public event System.EventHandler Event
+//                                   ^^^^^
+//                                   ^^^^^ @-1
+    {
+        add {}
+        remove {}
+    }
+    public static int operator +(Sample a, Sample b) => 42;
+//                             ^
+}";
+            Verifier.VerifyCSharpAnalyzer(code, new TestRule(), ParseOptionsHelper.FromCSharp9);
+        }
+
         private static MethodDeclarationContext CreateContext(string testInput, AnalyzerLanguage language, string methodName)
         {
             var testCode = new SnippetCompiler(testInput, false, language);
             var symbol = testCode.GetMethodSymbol("Sample." + methodName);
             return new MethodDeclarationContext(symbol, testCode.SemanticModel.Compilation);
+        }
+
+        [DiagnosticAnalyzer(LanguageNames.CSharp)]
+        private class TestRule : TrackerHotspotDiagnosticAnalyzer<SyntaxKind>
+        {
+            protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+            public TestRule() : base(AnalyzerConfiguration.AlwaysEnabled, "S100", "Message") { } // Any existing rule ID
+
+            protected override void Initialize(TrackerInput input) =>
+                Language.Tracker.MethodDeclaration.Track(input);
         }
     }
 }
