@@ -8,6 +8,16 @@
         init { count = 3; } // Noncompliant
     }
 
+    public int Count2
+    {
+        get { return count; }
+        set {
+            void Foo(int value) {
+                count = value;
+            }
+        }
+    }
+
     public string FirstName { get; init; } = "Foo";
 
     public string LastName { get => string.Empty; init { } } // Noncompliant
