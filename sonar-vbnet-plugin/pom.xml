@@ -253,6 +253,9 @@
                         <include name="SonarAnalyzer.VisualBasic.dll"/>
                         <include name="Google.Protobuf.dll"/>
                       </fileset>
+                      <fileset dir="${project.build.directory}/../..">
+                        <include name="THIRD-PARTY-NOTICES.txt"/>
+                      </fileset>
                     </copy>
                     <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                          basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
