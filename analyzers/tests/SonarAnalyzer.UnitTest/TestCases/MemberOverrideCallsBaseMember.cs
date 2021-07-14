@@ -35,6 +35,15 @@ namespace Tests.Diagnostics
         public virtual void Method(int i, int[] numbers)
         {
         }
+        public virtual void Method3(string s1, string s2)
+        {
+        }
+        public virtual void Method4(string s1, params string[] s2)
+        {
+        }
+        public virtual void Method5(string s1, string s2)
+        {
+        }
 
         public override bool Equals(object obj)
         {
@@ -82,6 +91,18 @@ namespace Tests.Diagnostics
         public override sealed void Method(int i, int[] numbers)
         {
             base.Method(i, numbers);
+        }
+        public override void Method3(string s1, string s2)
+        {
+            base.Method(s1, s2);
+        }
+        public override void Method4(string s1, params string[] s2)
+        {
+            base.Method4(s1);
+        }
+        public override void Method5(string s1, string s2)
+        {
+            base.Method5(s1, null);
         }
     }
 
