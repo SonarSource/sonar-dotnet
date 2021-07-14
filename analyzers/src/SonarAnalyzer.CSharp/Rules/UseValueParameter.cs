@@ -81,19 +81,16 @@ namespace SonarAnalyzer.Rules.CSharp
             return semanticModel.GetSymbolInfo(identifier).Symbol is IParameterSymbol { IsImplicitlyDeclared: true };
         }
 
-        private static string GetAccessorType(AccessorDeclarationSyntax accessorDeclaration)
-        {
-            if (accessorDeclaration.IsAnyKind(SyntaxKind.AddAccessorDeclaration, SyntaxKind.RemoveAccessorDeclaration))
-            {
-                return "event";
-            }
-
-            return accessorDeclaration.Parent?.Parent switch
+        private static string GetAccessorType(AccessorDeclarationSyntax accessorDeclaration) =>
+            accessorDeclaration.Parent.Parent switch
             {
                 IndexerDeclarationSyntax _ => "indexer set",
-                PropertyDeclarationSyntax _ => "property set",
+                PropertyDeclarationSyntax _ => GetPropertyAccessorKind(accessorDeclaration),
+                EventDeclarationSyntax _ => "event",
                 _ => null
             };
-        }
+
+        private static string GetPropertyAccessorKind(AccessorDeclarationSyntax accessorDeclaration) =>
+            accessorDeclaration.IsKind(SyntaxKind.SetAccessorDeclaration) ? "property set" : "property init";
     }
 }

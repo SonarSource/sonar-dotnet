@@ -5,16 +5,26 @@
     public int Count
     {
         get { return count; }
-        init { count = 3; } // Noncompliant
+        init { count = 3; } // Noncompliant {{Use the 'value' parameter in this property init accessor declaration.}}
     }
 
     public int Count2
     {
         get { return count; }
-        set {  // Noncompliant
+        set  // Noncompliant
+        {
             void Foo(int value) {
                 count = value;
             }
+        }
+    }
+
+    public int Count3
+    {
+        get => 42;
+        set  // Noncompliant
+        {
+            System.Func<int, int> f = value => value;
         }
     }
 
