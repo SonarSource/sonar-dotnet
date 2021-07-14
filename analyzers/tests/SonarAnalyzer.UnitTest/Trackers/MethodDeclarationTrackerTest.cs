@@ -20,13 +20,14 @@
 
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.Trackers;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = Microsoft.CodeAnalysis.CSharp;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -49,7 +50,7 @@ public class Sample
         }
 
         [TestMethod]
-        public void Track_VerifyMethodIdentifierLocations()
+        public void Track_VerifyMethodIdentifierLocations_CS()
         {
             const string code = @"
 public class Sample
@@ -91,7 +92,61 @@ public class Sample
     public static int operator +(Sample a, Sample b) => 42;
 //                             ^
 }";
-            Verifier.VerifyCSharpAnalyzer(code, new TestRule(), ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyCSharpAnalyzer(code, new TestRule_CS(), ParseOptionsHelper.FromCSharp9);
+        }
+
+        [TestMethod]
+        public void Track_VerifyMethodIdentifierLocations_VB()
+        {
+            const string code = @"
+Public Class Sample
+
+    Public Sub New()
+        '      ^^^
+    End Sub
+
+    Public Sub Procedure()
+        '      ^^^^^^^^^
+    End Sub
+
+    Public Function SomeFunction() As Integer
+        '           ^^^^^^^^^^^^
+    End Function
+
+    Protected Overrides Sub Finalize()
+        '                   ^^^^^^^^
+        MyBase.Finalize()
+    End Sub
+
+    Public Property Prop As Integer     'FIXME - doesn't work
+        Get
+        End Get
+        Set(value As Integer)
+        End Set
+    End Property
+
+    Default Public Property Indexer(x As Integer, y As Integer) As Integer  'FIXME - doesn't work
+        Get
+        End Get
+        Set(value As Integer)
+        End Set
+    End Property
+
+    Public Custom Event Changed As System.EventHandler      'FIXME - doesn't work
+        AddHandler(value As System.EventHandler)
+        End AddHandler
+        RemoveHandler(value As System.EventHandler)
+        End RemoveHandler
+        RaiseEvent(sender As Object, e As System.EventArgs)
+        End RaiseEvent
+    End Event
+
+    Public Shared Operator +(A As Sample, B As Sample) As Integer
+        '                  ^
+    End Operator
+
+End Class";
+            Verifier.VerifyVisualBasicAnalyzer(code, new TestRule_VB());
         }
 
         private static MethodDeclarationContext CreateContext(string testInput, AnalyzerLanguage language, string methodName)
@@ -102,11 +157,22 @@ public class Sample
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
-        private class TestRule : TrackerHotspotDiagnosticAnalyzer<SyntaxKind>
+        private class TestRule_CS : TrackerHotspotDiagnosticAnalyzer<CS.SyntaxKind>
         {
-            protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+            protected override ILanguageFacade<CS.SyntaxKind> Language => CSharpFacade.Instance;
 
-            public TestRule() : base(AnalyzerConfiguration.AlwaysEnabled, "S100", "Message") { } // Any existing rule ID
+            public TestRule_CS() : base(AnalyzerConfiguration.AlwaysEnabled, "S104", "Message") { } // Any existing rule ID
+
+            protected override void Initialize(TrackerInput input) =>
+                Language.Tracker.MethodDeclaration.Track(input);
+        }
+
+        [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+        private class TestRule_VB : TrackerHotspotDiagnosticAnalyzer<VB.SyntaxKind>
+        {
+            protected override ILanguageFacade<VB.SyntaxKind> Language => VisualBasicFacade.Instance;
+
+            public TestRule_VB() : base(AnalyzerConfiguration.AlwaysEnabled, "S104", "Message") { } // Any existing rule ID
 
             protected override void Initialize(TrackerInput input) =>
                 Language.Tracker.MethodDeclaration.Track(input);
