@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new DoNotUseByVal());
 
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("CodeFix")]
         public void DoNotUseByValCodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\DoNotUseByVal.vb",

@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("CodeFix")]
         public void RedundantNullCheck_CSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantNullCheck.CSharp9.cs",
                                    @"TestCases\RedundantNullCheck.CSharp9.Fixed.cs",

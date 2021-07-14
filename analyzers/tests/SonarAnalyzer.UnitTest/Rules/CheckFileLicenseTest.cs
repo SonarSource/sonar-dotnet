@@ -205,17 +205,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                new CS.CheckFileLicense { HeaderFormat = @"// <copyright file=""ProgramHeader2.cs"" company=""My Company Name"">\r\n// Copyright (c) 2012 All Rights Reserved\r\n// </copyright>\r\n// <author>Name of the Authour</author>\r\n// <date>08/22/2017 12:39:58 AM </date>\r\n// <summary>Class representing a Sample entity</summary>\r\n", IsRegularExpression = false });
 
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("CodeFix")]
         public void CheckFileLicenseCodeFix_WhenNoLicenseStartWithNamespaceAndUsesDefaultValues_ShouldBeNoncompliant_CS() =>
-            Verifier.VerifyCodeFix(
-                @"TestCases\CheckFileLicense_DefaultValues.cs",
-                @"TestCases\CheckFileLicense_DefaultValues.Fixed.cs",
-                new CS.CheckFileLicense(),
-                new CS.CheckFileLicenseCodeFixProvider());
+            Verifier.VerifyCodeFix(@"TestCases\CheckFileLicense_DefaultValues.cs",
+                                   @"TestCases\CheckFileLicense_DefaultValues.Fixed.cs",
+                                   new CS.CheckFileLicense(),
+                                   new CS.CheckFileLicenseCodeFixProvider());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("CodeFix")]
         public void CheckFileLicenseCodeFix_CSharp9_ShouldBeNoncompliant_CS() =>
             Verifier.VerifyCodeFix(@"TestCases\CheckFileLicense_CSharp9.cs",
                                    @"TestCases\CheckFileLicense_CSharp9.Fixed.cs",

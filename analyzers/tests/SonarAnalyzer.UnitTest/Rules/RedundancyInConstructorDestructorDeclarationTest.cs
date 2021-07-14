@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs", new RedundancyInConstructorDestructorDeclaration());
 
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("CodeFix")]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp9() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs",
                                    @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.Fixed.cs",
