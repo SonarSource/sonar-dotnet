@@ -26,14 +26,19 @@ namespace SonarAnalyzer.Common
         where TSyntaxNode : SyntaxNode
         where TSymbol : ISymbol
     {
-        public TSyntaxNode Syntax { get; }
+        public TSyntaxNode Node { get; }
         public TSymbol Symbol { get; }
 
-        public NodeAndSymbol(TSyntaxNode syntax, TSymbol symbol)
+        public NodeAndSymbol(TSyntaxNode node, TSymbol symbol)
         {
-            Syntax = syntax;
+            Node = node;
             Symbol = symbol;
         }
+    }
+
+    public class NodeAndSymbol : NodeAndSymbol<SyntaxNode, ISymbol>
+    {
+        public NodeAndSymbol(SyntaxNode node, ISymbol symbol) : base(node, symbol) { }
     }
 
     public static class NodeAndSymbolHelper

@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var argumentsCanBeRemovedWithoutNamed = new List<ArgumentSyntax>();
             var canBeRemovedWithoutNamed = true;
 
-            var reversedMappings = new List<NodeSymbolAndSemanticModel<ArgumentSyntax, IParameterSymbol>>(argumentMappings);
+            var reversedMappings = new List<NodeAndSymbol<ArgumentSyntax, IParameterSymbol>>(argumentMappings);
             reversedMappings.Reverse();
             foreach (var argumentMapping in reversedMappings)
             {

@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .FirstOrDefault(tuple => tuple.Symbol != null &&
                     !tuple.Symbol.ContainingType.IsAny(allowedTypes) &&
                     !tuple.Symbol.ContainingType.DerivesFromAny(allowedTypes))
-                ?.Syntax;
+                ?.Node;
 
             if (throwToReportOn != null)
             {

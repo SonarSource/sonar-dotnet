@@ -188,20 +188,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var unused in unusedSymbolSyntaxPairs)
             {
-                var syntaxForLocation = unused.Syntax;
+                var syntaxForLocation = unused.Node;
 
                 var isFieldOrEvent = unused.Symbol.Kind == SymbolKind.Field || unused.Symbol.Kind == SymbolKind.Event;
-                if (isFieldOrEvent && unused.Syntax.IsKind(SyntaxKind.VariableDeclarator))
+                if (isFieldOrEvent && unused.Node.IsKind(SyntaxKind.VariableDeclarator))
                 {
                     if (alreadyReportedFieldLikeSymbols.Contains(unused.Symbol))
                     {
                         continue;
                     }
 
-                    var declarations = GetSiblingDeclarators(unused.Syntax).Select(fieldLikeSymbols.GetByB).ToList();
+                    var declarations = GetSiblingDeclarators(unused.Node).Select(fieldLikeSymbols.GetByB).ToList();
                     if (declarations.All(unusedSymbols.Contains))
                     {
-                        syntaxForLocation = unused.Syntax.Parent.Parent;
+                        syntaxForLocation = unused.Node.Parent.Parent;
                         alreadyReportedFieldLikeSymbols.UnionWith(declarations);
                     }
                 }

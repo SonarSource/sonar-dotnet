@@ -201,7 +201,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var enclosingSymbol = semanticModel.GetEnclosingSymbol(memberReference.Syntax.SpanStart);
+                var enclosingSymbol = semanticModel.GetEnclosingSymbol(memberReference.Node.SpanStart);
 
                 if (memberReference.Symbol is IFieldSymbol fieldSymbol
                     && privateFields.ContainsKey(fieldSymbol))
@@ -220,14 +220,14 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             // A PseudoStatement is a Statement or an ArrowExpressionClauseSyntax (which denotes an expression-bodied member).
-            private static SyntaxNode GetParentPseudoStatement(SyntaxNodeWithSymbol<SyntaxNode, ISymbol> memberReference) =>
-                memberReference.Syntax.Ancestors().FirstOrDefault(a => a is StatementSyntax || a is ArrowExpressionClauseSyntax);
+            private static SyntaxNode GetParentPseudoStatement(NodeAndSymbol memberReference) =>
+                memberReference.Node.Ancestors().FirstOrDefault(a => a is StatementSyntax || a is ArrowExpressionClauseSyntax);
 
             /// <summary>
             /// Stores the statement that contains the provided field reference in one of the "reads" or "writes" collections,
             /// first grouped by field symbol, then by containing method.
             /// </summary>
-            private void ClassifyFieldReference(ISymbol enclosingSymbol, SyntaxNodeWithSymbol<SyntaxNode, ISymbol> fieldReference)
+            private void ClassifyFieldReference(ISymbol enclosingSymbol, NodeAndSymbol fieldReference)
             {
                 // It is important to create the field access HashSet regardless of the statement (see the local var below)
                 // being null or not, because the rule will not be able to detect field reads from inline property
@@ -243,18 +243,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private static bool IsWrite(SyntaxNodeWithSymbol<SyntaxNode, ISymbol> fieldReference)
+            private static bool IsWrite(NodeAndSymbol fieldReference)
             {
                 // If the field is not static and is not from the current instance we
                 // consider the reference as read.
                 if (!fieldReference.Symbol.IsStatic
-                    && !(fieldReference.Syntax as ExpressionSyntax).RemoveParentheses().IsOnThis())
+                    && !(fieldReference.Node as ExpressionSyntax).RemoveParentheses().IsOnThis())
                 {
                     return false;
                 }
 
-                return IsLeftSideOfAssignment(fieldReference.Syntax)
-                    || IsOutArgument(fieldReference.Syntax);
+                return IsLeftSideOfAssignment(fieldReference.Node)
+                    || IsOutArgument(fieldReference.Node);
 
                 bool IsOutArgument(SyntaxNode syntaxNode) =>
                     syntaxNode.Parent is ArgumentSyntax argument
@@ -266,26 +266,20 @@ namespace SonarAnalyzer.Rules.CSharp
                     && assignmentExpression.Left == syntaxNode;
             }
 
-            private SyntaxNodeWithSymbol<SyntaxNode, ISymbol> GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
+            private NodeAndSymbol GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
             {
                 // All of the cases below could be parts of invocation or other expressions
                 switch (identifier.Parent)
                 {
                     case MemberAccessExpressionSyntax memberAccess when memberAccess.Name == identifier:
                         // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
-                        return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
-                            memberAccess.GetSelfOrTopParenthesizedExpression(),
-                            semanticModel.GetSymbolInfo(memberAccess).Symbol);
+                        return new NodeAndSymbol(memberAccess.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(memberAccess).Symbol);
                     case MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier:
                         // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
-                        return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
-                            memberBinding.Parent.GetSelfOrTopParenthesizedExpression(),
-                            semanticModel.GetSymbolInfo(memberBinding).Symbol);
+                        return new NodeAndSymbol(memberBinding.Parent.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(memberBinding).Symbol);
                     default:
                         // identifier or ((identifier))
-                        return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
-                            identifier.GetSelfOrTopParenthesizedExpression(),
-                            semanticModel.GetSymbolInfo(identifier).Symbol);
+                        return new NodeAndSymbol(identifier.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(identifier).Symbol);
                 }
             }
         }
