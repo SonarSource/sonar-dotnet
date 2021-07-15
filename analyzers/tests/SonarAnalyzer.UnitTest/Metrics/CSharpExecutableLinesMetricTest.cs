@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         }
                     }
                 }",
-                4, 6);
+              4, 6);
 
         [TestMethod]
         public void Blocks() =>
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     unsafe { } // +1
                     using ((IDisposable)obj) { } // +1
                 }",
-                4, 5, 6, 7);
+              4, 5, 6, 7);
 
         [TestMethod]
         public void Statements() =>
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     ; // +1
                     i++; // +1
                 }",
-                4, 5);
+              4, 5);
 
         [TestMethod]
         public void Loops() =>
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     while // +1
                         (true) { }
                 }",
-                4, 6, 7, 8);
+              4, 6, 7, 8);
 
         [TestMethod]
         public void Conditionals() =>
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     var x = s?.Length; // +1
                     var xx = i == 1 ? 1 : 1; // +1
                 }",
-                4, 5, 6, 11, 13, 14);
+              4, 5, 6, 11, 13, 14);
 
         [TestMethod]
         public void Conditionals2() =>
@@ -141,7 +141,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     }
                     return; // +1
                 }",
-                4, 5, 6, 8, 10, 11, 13);
+              4, 5, 6, 8, 10, 11, 13);
 
         [TestMethod]
         public void Yields() =>
@@ -162,7 +162,7 @@ namespace SonarAnalyzer.UnitTest.Common
                        }
                    }
                }",
-               12, 13);
+              12, 13);
 
         [TestMethod]
         public void AccessAndInvocation() =>
@@ -173,7 +173,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     var x = args.Length; // +1
                     args.ToString(); // +1
                 }",
-                4, 5);
+              4, 5);
 
         [TestMethod]
         public void Initialization() =>
@@ -192,7 +192,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         HelpLink = ""
                     };
                 }",
-                7, 11);
+              7, 11);
 
         [TestMethod]
         public void Property_Set() =>
@@ -207,7 +207,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         Prop = 1; // + 1
                     }
                 }",
-                8);
+              8);
 
         [TestMethod]
         public void Property_Get() =>
@@ -240,7 +240,7 @@ namespace SonarAnalyzer.UnitTest.Common
                             .ToList();
                     }
                 }",
-                9, 10, 11);
+              9, 10, 11);
 
         [TestMethod]
         public void TryCatch() =>
@@ -266,7 +266,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         }
                     }
                 }",
-                9, 14);
+              9, 14);
 
         [TestMethod]
         public void Test_16() =>
@@ -276,7 +276,7 @@ namespace SonarAnalyzer.UnitTest.Common
                int i = 0; if (i == 0) {i++;i--;} else // +1
                { while(true){i--;} } // +1
                }",
-               3, 4);
+             3, 4);
 
         [TestMethod]
         public void Test_17() =>
@@ -295,7 +295,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     )
                     ;
                 }",
-                4);
+             4);
 
         [TestMethod]
         public void ExcludeFromTestCoverage() =>
@@ -325,7 +325,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         }
                     }
                 }",
-                19, 22);
+              19, 22);
 
         [TestMethod]
         public void ExcludeFromTestCoverage_AttributeOnLocalFunction() =>
@@ -347,7 +347,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         }
                     }
                 }",
-                8, 14);
+              8, 14);
 
         [TestMethod]
         public void ExcludeFromTestCoverage_Variants()
@@ -386,6 +386,20 @@ namespace SonarAnalyzer.UnitTest.Common
                 using System;
                 [ExcludeFromCodeCoverage]
                 class Program
+                {
+                    static void Main(string[] args)
+                    {
+                        Main(null);
+                    }
+                }");
+
+        [TestMethod]
+        public void ExcludeRecordFromTestCoverage() =>
+            AssertLinesOfCode(
+              @"
+                using System;
+                [ExcludeFromCodeCoverage]
+                record Program
                 {
                     static void Main(string[] args)
                     {
@@ -442,7 +456,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         count = initialCount;   // +1
                     }
                 }",
-                14);
+              14);
 
         [TestMethod]
         public void Property_ExcludeFromCodeCoverage() =>
@@ -471,8 +485,21 @@ namespace SonarAnalyzer.UnitTest.Common
                         get { return _value; }      // +1
                         set { _value = value; }     // +1
                     }
+
+                    public int Value4
+                    {
+                        get { return _value; }      // +1
+                        init { _value = value; }     // +1
+                    }
+
+                    public int Value5
+                    {
+                        get { return _value; }      // +1
+                        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+                        init { _value = value; }     // Excluded
+                    }
                 }",
-                15, 22, 23);
+              15, 22, 23, 28, 29, 34);
 
         [TestMethod]
         public void Event_ExcludeFromCodeCoverage() =>
@@ -502,7 +529,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         remove { _explicitEvent -= value; }     // +1
                     }
                 }",
-                15, 22, 23);
+              15, 22, 23);
 
         [TestMethod]
         public void PartialClasses_ExcludeFromCodeCoverage() =>
@@ -529,7 +556,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         System.Console.WriteLine();         // +1
                     }
                 } ",
-                20);
+              20);
 
         [TestMethod]
         public void PartialMethods_ExcludeFromCodeCoverage() =>
@@ -599,6 +626,243 @@ namespace SonarAnalyzer.UnitTest.Common
                     }
                 }",
                 4, 6);
+
+        [TestMethod]
+        public void MultiLineLoop() =>
+            AssertLinesOfCode(
+              @"
+                        void Foo(int[] arr)
+                        {
+                            for         // +1
+                              (         // +0
+                               int i=0; // +0
+                               i < 10;  // +0
+                               i++      // +0
+                              )         // +0
+                            {           // +0
+                            }
+                        }",
+              4);
+
+        [TestMethod]
+        public void SwitchStatementWithMultipleCases() =>
+            AssertLinesOfCode(
+              @"
+                        void Foo(int? i)
+                        {
+                            switch (i) // +1
+                            {
+                                case 1:
+                                    Console.WriteLine(4); // +1
+                                    break; // +1
+                                case 2:
+                                    Console.WriteLine(4); // +1
+                                    break; // +1
+                                default:
+                                    break; // +1
+                            }
+                        }",
+              4, 7, 8, 10, 11, 13);
+
+        [TestMethod]
+        public void SwitchExpressionWithMultipleCases() =>
+            AssertLinesOfCode(
+              @"
+                        void Foo(int? i, string s)
+                        {
+                            var x = s switch
+                            {
+                                    ""a"" => true,
+                                    ""b"" => false,
+                                    _ => true
+                            };
+                            var y = s switch
+                            {
+                                ""a"" => Foo(""b""), // +1
+                                ""b"" => Foo(""a""), // +1
+                                _ => false
+                            };
+                        }
+                        bool Foo(string s) => true;
+                ",
+              12, 13);
+
+        [TestMethod]
+        public void MultiLineInterpolatedString() =>
+            AssertLinesOfCode(
+              @"
+                        void Foo(int? i, string s)
+                        {
+                            string x = ""someString"";
+                            x += @$""This is a Multi
+                                                  Line
+                                                  interpolated
+                                                  string {i} {s}"";
+                        }
+                ",
+              5);
+
+        [TestMethod]
+        public void MultiLineInterpolatedStringWithMultipleLineExpressions() =>
+            AssertLinesOfCode(
+              @"
+                    public class C
+                    {
+                        public string M(int i)
+                        {
+                            return @$""
+                            {(i == 1 ? Bar(1) : Bar(2))}
+                            {(i == 2 ? Bar(2) : Bar(3))}
+                            { Bar(5)}
+                                     "";
+                        }
+
+                        public string Bar(int i) => ""y"" + i;
+                    }
+
+               ",
+              6, 7, 8, 9);
+
+        [TestMethod]
+        public void UsingDeclaration() =>
+            AssertLinesOfCode(
+              @"
+                        void Foo(int? i, string s)
+                        {
+                            using var file = new System.IO.StreamWriter(""WriteLines2.txt"");
+                        }
+               ");
+
+        [TestMethod]
+        public void LocalFunctions() =>
+            AssertLinesOfCode(
+              @"
+                       int M1()
+                       {
+                           int y;
+                           LocalFunction();
+                           return y;
+
+                            void LocalFunction() => y = 0;
+                       }
+
+                       int M2()
+                       {
+                           int y = 5;
+                           int x = 7;
+                           return Add(x, y);
+
+                           static int Add(int left, int right) => left + right;
+                       }
+                ",
+              5, 6, 15);
+
+        [TestMethod]
+        public void IndicesAndRanges() =>
+            AssertLinesOfCode(
+                @"
+                    int M()
+                    {
+                        string s = null;
+                        string[] subArray;
+                        var words = new string[]
+                            {
+                                ""The"",
+                                ""quick"",
+                                ""brown"",
+                                ""fox"",
+                                ""jumped"",
+                                ""over"",
+                                ""the"",
+                                ""lazy"",
+                                ""dog""
+                            };
+                        s = words[^1];
+                        subArray = words[1..4]
+                    }
+                ",
+                7, 18, 19);
+
+        [TestMethod]
+        public void NullCoalescingAsignment() =>
+            AssertLinesOfCode(
+                @"
+                using System;
+                using System.Collections.Generic;
+
+                            int M()
+                            {
+                                List<int> numbers = null;
+                                int? i = null;
+
+                                numbers ??= new List<int>();
+                            }
+                        ",
+                10);
+
+        [TestMethod]
+        public void NullCoalescingOperator() =>
+            AssertLinesOfCode(
+                @"
+                        using System;
+                        using System.Collections.Generic;
+
+                            double SumNumbers(List<double[]> setsOfNumbers, int indexOfSetToSum)
+                            {
+                                return setsOfNumbers?[indexOfSetToSum]?.Sum() // +1
+                                       ?? double.NaN; // +1
+                            }
+                 ",
+                7, 8);
+
+        [TestMethod]
+        public void SingleLinePatternMatching() =>
+            AssertLinesOfCode(
+                @"
+                        using System;
+                        using System.Collections.Generic;
+
+                            public static bool IsLetter(this char c) =>
+                                c is >= 'a' and <= 'z' or >= 'A' and <= 'Z';
+                 ");
+
+        [TestMethod]
+        public void MultiLinePatternMatching() =>
+            AssertLinesOfCode(
+                @"
+                        using System;
+                        using System.Collections.Generic;
+
+                            public static bool IsLetter(char c)
+                            {
+                                if (c is >= 'a'
+                                        and <= 'z'
+                                                or >= 'A'
+                                                    and <= 'Z')
+                                {
+                                    return true;
+                                }
+                                return false;
+                            }
+                 ",
+                7, 12, 14);
+
+        [TestMethod]
+        public void MultiLineInvocation() =>
+            AssertLinesOfCode(
+                @"
+                        using System;
+                        using System.Collections.Generic;
+
+                            public static bool Foo(int a, int b)
+                            {
+                               return Foo(1,
+                                          Bar());
+                            }
+
+                            public static int Bar() => 42;
+                 ",
+                7, 8);
 
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
