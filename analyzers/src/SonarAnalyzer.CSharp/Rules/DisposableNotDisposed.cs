@@ -39,20 +39,16 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2930";
         private const string MessageFormat = "Dispose '{0}' when it is no longer needed.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         private static readonly ImmutableArray<KnownType> TrackedTypes =
             ImmutableArray.Create(
                 KnownType.System_IO_FileStream,
                 KnownType.System_IO_StreamReader,
                 KnownType.System_IO_StreamWriter,
-
                 KnownType.System_Net_WebClient,
-
                 KnownType.System_Net_Sockets_TcpClient,
                 KnownType.System_Net_Sockets_UdpClient,
-
                 KnownType.System_Drawing_Image,
                 KnownType.System_Drawing_Bitmap);
 
@@ -67,12 +63,6 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        private class NodeAndSymbol
-        {
-            public SyntaxNode Node { get; set; }
-            public ISymbol Symbol { get; set; }
-        }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
@@ -122,23 +112,21 @@ namespace SonarAnalyzer.Rules.CSharp
             var localVariableDeclarations = typeDeclaration
                 .DescendantNodes()
                 .OfType<LocalDeclarationStatementSyntax>()
-                .Where(localDeclaration => !localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
-                .Select(localDeclaration => localDeclaration.Declaration);
+                .Where(x => !x.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
+                .Select(x => x.Declaration);
 
             var fieldVariableDeclarations = typeDeclaration
                 .DescendantNodes()
                 .OfType<FieldDeclarationSyntax>()
-                .Where(fieldDeclaration => !fieldDeclaration.Modifiers.Any() || fieldDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword))
-                .Select(fieldDeclaration => fieldDeclaration.Declaration);
+                .Where(x => !x.Modifiers.Any() || x.Modifiers.Any(SyntaxKind.PrivateKeyword))
+                .Select(x => x.Declaration);
 
-            var variableDeclarations = localVariableDeclarations.Concat(fieldVariableDeclarations);
-
-            foreach (var declaration in variableDeclarations)
+            foreach (var declaration in localVariableDeclarations.Concat(fieldVariableDeclarations))
             {
-                var trackedVariables = declaration.Variables.Where(v => v.Initializer != null && IsInstantiation(v.Initializer.Value, semanticModel));
+                var trackedVariables = declaration.Variables.Where(x => x.Initializer != null && IsInstantiation(x.Initializer.Value, semanticModel));
                 foreach (var variableNode in trackedVariables)
                 {
-                    trackedNodesAndSymbols.Add(new NodeAndSymbol { Node = variableNode, Symbol = semanticModel.GetDeclaredSymbol(variableNode) });
+                    trackedNodesAndSymbols.Add(new NodeAndSymbol(variableNode, semanticModel.GetDeclaredSymbol(variableNode)));
                 }
             }
         }
@@ -152,20 +140,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var simpleAssignment in simpleAssignments)
             {
-                if (simpleAssignment.Parent.IsKind(SyntaxKind.UsingStatement))
+                if (!simpleAssignment.Parent.IsKind(SyntaxKind.UsingStatement)
+                    && IsInstantiation(simpleAssignment.Right, semanticModel)
+                    && semanticModel.GetSymbolInfo(simpleAssignment.Left).Symbol is { } referencedSymbol
+                    && IsLocalOrPrivateField(referencedSymbol))
                 {
-                    continue;
-                }
-
-                if (!IsInstantiation(simpleAssignment.Right, semanticModel))
-                {
-                    continue;
-                }
-
-                var referencedSymbol = semanticModel.GetSymbolInfo(simpleAssignment.Left).Symbol;
-                if (referencedSymbol != null && IsLocalOrPrivateField(referencedSymbol))
-                {
-                    trackedNodesAndSymbols.Add(new NodeAndSymbol { Node = simpleAssignment, Symbol = referencedSymbol });
+                    trackedNodesAndSymbols.Add(new NodeAndSymbol(simpleAssignment, referencedSymbol));
                 }
             }
         }
@@ -176,34 +156,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ExcludeDisposedAndClosedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> excludedSymbols)
         {
-            var invocationsAndConditionalAccesses = typeDeclaration
-                .DescendantNodes()
-                .Where(n => n.IsKind(SyntaxKind.InvocationExpression) || n.IsKind(SyntaxKind.ConditionalAccessExpression));
-
+            var invocationsAndConditionalAccesses = typeDeclaration.DescendantNodes().Where(n => n.IsAnyKind(SyntaxKind.InvocationExpression, SyntaxKind.ConditionalAccessExpression));
             foreach (var invocationOrConditionalAccess in invocationsAndConditionalAccesses)
             {
                 SimpleNameSyntax name;
                 ExpressionSyntax expression;
-
-                if (invocationOrConditionalAccess.IsKind(SyntaxKind.InvocationExpression))
+                if (invocationOrConditionalAccess is InvocationExpressionSyntax invocation)
                 {
-                    var invocation = (InvocationExpressionSyntax)invocationOrConditionalAccess;
                     var memberAccessNode = invocation.Expression as MemberAccessExpressionSyntax;
-
                     name = memberAccessNode?.Name;
                     expression = memberAccessNode?.Expression;
                 }
-                else if (invocationOrConditionalAccess.IsKind(SyntaxKind.ConditionalAccessExpression))
+                else if (invocationOrConditionalAccess is ConditionalAccessExpressionSyntax conditionalAccess)
                 {
-                    var conditionalAccess = (ConditionalAccessExpressionSyntax)invocationOrConditionalAccess;
-                    if (!(conditionalAccess.WhenNotNull is InvocationExpressionSyntax invocation))
-                    {
-                        continue;
-                    }
-
-                    var memberBindingNode = invocation.Expression as MemberBindingExpressionSyntax;
-
-                    name = memberBindingNode?.Name;
+                    name = ((conditionalAccess.WhenNotNull as InvocationExpressionSyntax)?.Expression as MemberBindingExpressionSyntax)?.Name;
                     expression = conditionalAccess.Expression;
                 }
                 else
@@ -211,13 +177,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     throw new NotSupportedException("Syntax node should be either an invocation or a conditional access expression");
                 }
 
-                if (name == null || !DisposeMethods.Contains(name.Identifier.Text))
-                {
-                    continue;
-                }
-
-                var referencedSymbol = semanticModel.GetSymbolInfo(expression).Symbol;
-                if (referencedSymbol != null && IsLocalOrPrivateField(referencedSymbol))
+                if (name != null
+                    && DisposeMethods.Contains(name.Identifier.Text)
+                    && semanticModel.GetSymbolInfo(expression).Symbol is { } referencedSymbol
+                    && IsLocalOrPrivateField(referencedSymbol))
                 {
                     excludedSymbols.Add(referencedSymbol);
                 }
@@ -240,24 +203,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 else if (identifierOrSimpleMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
                 {
                     var memberAccess = (MemberAccessExpressionSyntax)identifierOrSimpleMemberAccess;
-                    if (!memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+                    if (memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+                    {
+                        expression = memberAccess;
+                    }
+                    else
                     {
                         continue;
                     }
-                    expression = memberAccess;
                 }
                 else
                 {
                     throw new NotSupportedException("Syntax node should be either an identifier or a simple member access expression");
                 }
 
-                if (!IsStandaloneExpression(expression))
-                {
-                    continue;
-                }
-
-                var referencedSymbol = semanticModel.GetSymbolInfo(identifierOrSimpleMemberAccess).Symbol;
-                if (referencedSymbol != null && IsLocalOrPrivateField(referencedSymbol))
+                if (IsStandaloneExpression(expression)
+                    && semanticModel.GetSymbolInfo(identifierOrSimpleMemberAccess).Symbol is { } referencedSymbol
+                    && IsLocalOrPrivateField(referencedSymbol))
                 {
                     excludedSymbols.Add(referencedSymbol);
                 }
@@ -273,49 +235,35 @@ namespace SonarAnalyzer.Rules.CSharp
             || IsDisposableRefStructCreation(expression, semanticModel)
             || IsFactoryMethodInvocation(expression, semanticModel);
 
-        private static bool IsNewTrackedTypeObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel)
+        private static bool IsNewTrackedTypeObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
+            && semanticModel.GetTypeInfo(expression).Type is var type
+            && type.IsAny(TrackedTypes)
+            && semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol constructor
+            && !constructor.Parameters.Any(x => x.Type.Implements(KnownType.System_IDisposable));
+
+        private static bool IsDisposableRefStructCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
+            && semanticModel.GetTypeInfo(expression).Type is var type
+            && type.IsStruct()
+            && type.IsRefLikeType()
+            && type.GetMembers().OfType<IMethodSymbol>().Any(x => x.Name == "Dispose");
+
+        private static bool IsFactoryMethodInvocation(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression is InvocationExpressionSyntax invocation
+            && semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+            && FactoryMethods.Contains(methodSymbol.ContainingType.ToDisplayString() + "." + methodSymbol.Name);
+
+        private class NodeAndSymbol
         {
-            if (!expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
+            public SyntaxNode Node { get; set; }
+            public ISymbol Symbol { get; set; }
+
+            public NodeAndSymbol(SyntaxNode node, ISymbol symbol)
             {
-                return false;
+                Node = node;
+                Symbol = symbol;
             }
-
-            var type = semanticModel.GetTypeInfo(expression).Type;
-            if (!type.IsAny(TrackedTypes))
-            {
-                return false;
-            }
-
-            return semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol constructor && !constructor.Parameters.Any(p => p.Type.Implements(KnownType.System_IDisposable));
-        }
-
-        private static bool IsDisposableRefStructCreation(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            if (!expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
-            {
-                return false;
-            }
-
-            var type = semanticModel.GetTypeInfo(expression).Type;
-            return type.IsStruct()
-                && type.IsRefLikeType()
-                && type.GetMembers().OfType<IMethodSymbol>().Any(methodSymbol => methodSymbol.Name == "Dispose");
-        }
-
-        private static bool IsFactoryMethodInvocation(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            if (!(expression is InvocationExpressionSyntax invocation))
-            {
-                return false;
-            }
-
-            if (!(semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol))
-            {
-                return false;
-            }
-
-            var methodQualifiedName = methodSymbol.ContainingType.ToDisplayString() + "." + methodSymbol.Name;
-            return FactoryMethods.Contains(methodQualifiedName);
         }
     }
 }
