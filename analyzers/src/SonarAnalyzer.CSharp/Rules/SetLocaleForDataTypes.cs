@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
                     if (variableSymbol != null)
                     {
-                        symbolsWhereTypeIsCreated.Add(variableSymbol.ToSymbolWithSyntax(c.Node));
+                        symbolsWhereTypeIsCreated.Add(new NodeAndSymbol(c.Node, variableSymbol));
                     }
                 }
             };

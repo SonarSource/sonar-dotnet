@@ -30,7 +30,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Helpers;
-using NodeSymbolAndSemanticModel = SonarAnalyzer.Helpers.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax, Microsoft.CodeAnalysis.IParameterSymbol>;
+using NodeAndSymbol = SonarAnalyzer.Common.NodeAndSymbol<Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax, Microsoft.CodeAnalysis.IParameterSymbol>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -63,8 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
             var methodParameterLookup = new CSharpMethodParameterLookup(invocation, semanticModel);
-            var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings()
-                .ToList();
+            var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings().ToList();
 
             var methodSymbol = methodParameterLookup.MethodSymbol;
             if (methodSymbol == null)
@@ -76,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var argumentsCanBeRemovedWithoutNamed = new List<ArgumentSyntax>();
             var canBeRemovedWithoutNamed = true;
 
-            var reversedMappings = new List<NodeAndSymbol<ArgumentSyntax, IParameterSymbol>>(argumentMappings);
+            var reversedMappings = new List<NodeAndSymbol>(argumentMappings);
             reversedMappings.Reverse();
             foreach (var argumentMapping in reversedMappings)
             {
@@ -116,15 +115,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.RegisterCodeFix(
                     CodeAction.Create(
                         TitleRemoveWithNameAdditions,
-                        c => RemoveArgumentsAndAddNecessaryNamesAsync(context.Document, invocation.ArgumentList,
-                                argumentMappings, argumentsWithDefaultValues, semanticModel, c),
+                        c => RemoveArgumentsAndAddNecessaryNamesAsync(context.Document, invocation.ArgumentList, argumentMappings, argumentsWithDefaultValues, semanticModel, c),
                         TitleRemoveWithNameAdditions),
                     context.Diagnostics);
             }
         }
 
         private static async Task<Document> RemoveArgumentsAndAddNecessaryNamesAsync(Document document, ArgumentListSyntax argumentList,
-            IEnumerable<NodeSymbolAndSemanticModel> argumentMappings, List<ArgumentSyntax> argumentsToRemove,
+            IEnumerable<NodeAndSymbol> argumentMappings, List<ArgumentSyntax> argumentsToRemove,
             SemanticModel semanticModel, CancellationToken cancellationToken)
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -169,8 +167,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 : argumentList.AddArguments(argument);
         }
 
-        private static ArgumentListSyntax AddParamsArguments(SemanticModel semanticModel,
-            IEnumerable<NodeSymbolAndSemanticModel> paramsArguments, ArgumentListSyntax argumentList)
+        private static ArgumentListSyntax AddParamsArguments(SemanticModel semanticModel, IEnumerable<NodeAndSymbol> paramsArguments, ArgumentListSyntax argumentList)
         {
             var firstParamsMapping = paramsArguments.First();
             var firstParamsArgument = firstParamsMapping.Node;

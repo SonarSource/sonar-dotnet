@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -120,7 +121,7 @@ namespace SonarAnalyzer.Helpers
             return false;
         }
 
-        internal IEnumerable<NodeSymbolAndSemanticModel<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings()
+        internal IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings()
         {
             if (argumentList.HasValue)
             {
@@ -128,8 +129,7 @@ namespace SonarAnalyzer.Helpers
                 {
                     if (TryGetSymbol(argument, out var parameter))
                     {
-                        //FIXME: Wrong type used
-                        yield return new NodeSymbolAndSemanticModel<TArgumentSyntax, IParameterSymbol>(null, argument, parameter);
+                        yield return new NodeAndSymbol<TArgumentSyntax, IParameterSymbol>(argument, parameter);
                     }
                 }
             }

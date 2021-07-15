@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.InvocationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-        internal static bool ArgumentHasDefaultValue(NodeSymbolAndSemanticModel<ArgumentSyntax, IParameterSymbol> argumentMapping, SemanticModel semanticModel)
+        internal static bool ArgumentHasDefaultValue(NodeAndSymbol<ArgumentSyntax, IParameterSymbol> argumentMapping, SemanticModel semanticModel)
         {
             var argument = argumentMapping.Node;
             var parameter = argumentMapping.Symbol;
