@@ -2,6 +2,32 @@
 "issues":  [
 {
 "id":  "S2376",
+"message":  "Provide a getter for 'InitProperty' or replace the property with a 'SetInitProperty' method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1854.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  20,
+"endLine":  5,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'Foo1' or replace the property with a 'SetFoo1' method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2376.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  20,
+"endLine":  7,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2376",
 "message":  "Provide a getter for 'Prop' or replace the property with a 'SetProp' method.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2930.cs",
@@ -10,6 +36,45 @@
 "startColumn":  27,
 "endLine":  8,
 "endColumn":  31
+}
+}
+},
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'Prop' or replace the property with a 'SetProp' method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3626.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  13,
+"endLine":  5,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'Property' or replace the property with a 'SetProperty' method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  16,
+"endLine":  7,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'Foo9' or replace the property with a 'SetFoo9' method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3928.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  20,
+"endLine":  8,
+"endColumn":  24
 }
 }
 }

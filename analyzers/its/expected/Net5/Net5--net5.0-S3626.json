@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3626",
+"message":  "Remove this redundant jump.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3626.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  17,
+"endLine":  9,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3626",
+"message":  "Remove this redundant jump.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3626.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  17,
+"endLine":  11,
+"endColumn":  24
+}
+}
+}
+]
+}

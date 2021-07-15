@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "sources\Net5\Net5\S134.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  29,
+"endLine":  16,
+"endColumn":  31
+}
+}
+}
+]
+}

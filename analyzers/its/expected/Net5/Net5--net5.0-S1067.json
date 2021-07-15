@@ -19,9 +19,22 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  6,
+"startLine":  11,
+"startColumn":  21,
+"endLine":  15,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (39) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  22,
 "startColumn":  13,
-"endLine":  10,
+"endLine":  26,
 "endColumn":  88
 }
 }

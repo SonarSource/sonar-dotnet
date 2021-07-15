@@ -7,199 +7,412 @@
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  5,
+"startLine":  21,
 "startColumn":  14,
-"endLine":  5,
+"endLine":  21,
 "endColumn":  53
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  6,
+"startLine":  22,
 "startColumn":  29,
-"endLine":  6,
+"endLine":  22,
 "endColumn":  31
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  6,
+"startLine":  22,
 "startColumn":  23,
-"endLine":  6,
+"endLine":  22,
 "endColumn":  25
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  6,
+"startLine":  22,
 "startColumn":  42,
-"endLine":  6,
+"endLine":  22,
 "endColumn":  44
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  6,
+"startLine":  22,
 "startColumn":  61,
-"endLine":  6,
+"endLine":  22,
 "endColumn":  63
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  6,
+"startLine":  22,
 "startColumn":  80,
-"endLine":  6,
+"endLine":  22,
 "endColumn":  82
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  7,
+"startLine":  23,
 "startColumn":  26,
-"endLine":  7,
+"endLine":  23,
 "endColumn":  28
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  7,
+"startLine":  23,
 "startColumn":  45,
-"endLine":  7,
+"endLine":  23,
 "endColumn":  47
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  7,
+"startLine":  23,
 "startColumn":  64,
-"endLine":  7,
+"endLine":  23,
 "endColumn":  66
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  7,
+"startLine":  23,
 "startColumn":  83,
-"endLine":  7,
+"endLine":  23,
 "endColumn":  85
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  8,
+"startLine":  24,
 "startColumn":  26,
-"endLine":  8,
+"endLine":  24,
 "endColumn":  28
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  8,
+"startLine":  24,
 "startColumn":  45,
-"endLine":  8,
+"endLine":  24,
 "endColumn":  47
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  8,
+"startLine":  24,
 "startColumn":  64,
-"endLine":  8,
+"endLine":  24,
 "endColumn":  66
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  8,
+"startLine":  24,
 "startColumn":  83,
-"endLine":  8,
+"endLine":  24,
 "endColumn":  85
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  9,
+"startLine":  25,
 "startColumn":  26,
-"endLine":  9,
+"endLine":  25,
 "endColumn":  28
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  9,
+"startLine":  25,
 "startColumn":  45,
-"endLine":  9,
+"endLine":  25,
 "endColumn":  47
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  9,
+"startLine":  25,
 "startColumn":  64,
-"endLine":  9,
+"endLine":  25,
 "endColumn":  66
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  9,
+"startLine":  25,
 "startColumn":  83,
-"endLine":  9,
+"endLine":  25,
 "endColumn":  85
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  10,
+"startLine":  26,
 "startColumn":  26,
-"endLine":  10,
+"endLine":  26,
 "endColumn":  28
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  10,
+"startLine":  26,
 "startColumn":  45,
-"endLine":  10,
+"endLine":  26,
 "endColumn":  47
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  10,
+"startLine":  26,
 "startColumn":  64,
-"endLine":  10,
+"endLine":  26,
 "endColumn":  66
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  10,
+"startLine":  26,
 "startColumn":  83,
-"endLine":  10,
+"endLine":  26,
 "endColumn":  85
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this accessor to reduce its Cognitive Complexity from 22 to the 3 allowed.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  13,
+"endLine":  9,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  17,
+"endLine":  11,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  37,
+"endLine":  11,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  31,
+"endLine":  11,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  50,
+"endLine":  11,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  69,
+"endLine":  11,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  88,
+"endLine":  11,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  34,
+"endLine":  12,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  53,
+"endLine":  12,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  72,
+"endLine":  12,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  91,
+"endLine":  12,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  34,
+"endLine":  13,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  53,
+"endLine":  13,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  72,
+"endLine":  13,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  91,
+"endLine":  13,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  34,
+"endLine":  14,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  53,
+"endLine":  14,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  72,
+"endLine":  14,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  91,
+"endLine":  14,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  34,
+"endLine":  15,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  53,
+"endLine":  15,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  72,
+"endLine":  15,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  91,
+"endLine":  15,
+"endColumn":  93
 }
 }
 ]

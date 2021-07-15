@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'NonGenericList' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4004.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  26,
+"endLine":  8,
+"endColumn":  40
+}
+}
+}
+]
+}

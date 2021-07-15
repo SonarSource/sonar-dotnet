@@ -25,6 +25,19 @@
 "endColumn":  18
 }
 }
+},
+{
+"id":  "S3440",
+"message":  "Remove this useless conditional.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3440.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  21,
+"endLine":  20,
+"endColumn":  30
+}
+}
 }
 ]
 }

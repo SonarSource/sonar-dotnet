@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S907",
+"message":  "Remove this use of 'goto'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3626.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  17,
+"endLine":  9,
+"endColumn":  21
+}
+}
+}
+]
+}

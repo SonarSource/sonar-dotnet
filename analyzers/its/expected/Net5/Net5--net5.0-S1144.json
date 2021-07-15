@@ -54,6 +54,19 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private type 'Derived'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1185.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private method 'Foo'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2077.cs",
@@ -184,13 +197,39 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private property 'Prop'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3626.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Property'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  20,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private method 'ChainedSimilarConditionsWithParentheses'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  5,
+"startLine":  21,
 "startColumn":  9,
-"endLine":  10,
+"endLine":  26,
 "endColumn":  89
 }
 }
@@ -218,6 +257,45 @@
 "startColumn":  9,
 "endLine":  7,
 "endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Property'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4015.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  13,
+"endLine":  7,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private type 'B'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4015.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Property'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4015.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  55
 }
 }
 },

@@ -12,6 +12,32 @@
 "endColumn":  22
 }
 }
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned field 'one', or set its value.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  21,
+"endLine":  6,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned field 'two', or set its value.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  26,
+"endLine":  6,
+"endColumn":  29
+}
+}
 }
 ]
 }

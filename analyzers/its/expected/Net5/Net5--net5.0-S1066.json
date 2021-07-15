@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S134.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  21,
+"endLine":  12,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Net5\Net5\S134.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  17,
+"endLine":  10,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S134.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  25,
+"endLine":  14,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Net5\Net5\S134.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  21,
+"endLine":  12,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S134.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  29,
+"endLine":  16,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Net5\Net5\S134.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  25,
+"endLine":  14,
+"endColumn":  27
+}
+}
+]
+}
+]
+}
