@@ -22,9 +22,15 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class SyntaxNodeAndSemanticModel<TSyntax> where TSyntax : SyntaxNode
+    public class NodeAndSemanticModel<TSyntax> where TSyntax : SyntaxNode
     {
-        public TSyntax SyntaxNode { get; set; }
         public SemanticModel SemanticModel { get; set; }
+        public TSyntax Node { get; set; }
+
+        public NodeAndSemanticModel(SemanticModel semanticModel, TSyntax node)
+        {
+            SemanticModel = semanticModel;
+            Node = node;
+        }
     }
 }
