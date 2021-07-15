@@ -192,7 +192,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         HelpLink = ""
                     };
                 }",
-              7, 11);
+                2, 7, 11);
 
         [TestMethod]
         public void Property_Set() =>
@@ -298,6 +298,21 @@ namespace SonarAnalyzer.UnitTest.Common
              4);
 
         [TestMethod]
+        public void Test_18() =>
+            AssertLinesOfCode(
+                @"static bool Foo(string s) =>
+                      s switch             // +1
+                      {
+                          ""a"" =>
+                                    true,  // +1
+                          ""b"" =>
+                                    false, // +1
+                          _ =>
+                                    true   // +1
+                      };",
+                2, 5, 7, 9);
+
+        [TestMethod]
         public void ExcludeFromTestCoverage() =>
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
@@ -343,11 +358,11 @@ namespace SonarAnalyzer.UnitTest.Common
                         string ComplexFoo()
                         {
                             string text = null;
-                            return text.ToLower(); // +1 , FP
+                            return text.ToLower();
                         }
                     }
                 }",
-              8, 14);
+                8);
 
         [TestMethod]
         public void ExcludeFromTestCoverage_Variants()
@@ -672,20 +687,20 @@ namespace SonarAnalyzer.UnitTest.Common
                         {
                             var x = s switch
                             {
-                                    ""a"" => true, // FN
-                                    ""b"" => false, // FN
-                                    _ => true // FN
+                                    ""a"" => true,  // +1
+                                    ""b"" => false, // +1
+                                    _ => true       // +1
                             };
                             var y = s switch
                             {
                                 ""a"" => Foo(""b""), // +1
                                 ""b"" => Foo(""a""), // +1
-                                _ => false // FN
+                                _ => false           // +1
                             };
                         }
-                        bool Foo(string s) => true;
+                        bool Foo(string s) => true;  // +1
                 ",
-              12, 13);
+              6, 7, 8, 12, 13, 14, 17);
 
         [TestMethod]
         public void MultiLineInterpolatedString() =>
@@ -734,7 +749,7 @@ namespace SonarAnalyzer.UnitTest.Common
                            static int Add(int left, int right) => left + right;
                        }
                 ",
-              5, 6, 15);
+              5, 6, 8, 15, 17);
 
         [TestMethod]
         public void IndicesAndRanges() =>
@@ -798,12 +813,10 @@ namespace SonarAnalyzer.UnitTest.Common
         public void SingleLinePatternMatching() =>
             AssertLinesOfCode(
                 @"
-                        using System;
-                        using System.Collections.Generic;
-
-                            public static bool IsLetter(this char c) =>
-                                c is >= 'a' and <= 'z' or >= 'A' and <= 'Z'; // FN
-                 ");
+                          public static bool IsLetter(this char c) =>
+                              c is >= 'a' and <= 'z' or >= 'A' and <= 'Z'; // FN
+                 ",
+                3);
 
         [TestMethod]
         public void MultiLinePatternMatching() =>

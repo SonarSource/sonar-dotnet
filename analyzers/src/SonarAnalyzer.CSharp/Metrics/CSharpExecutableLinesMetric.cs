@@ -109,6 +109,14 @@ namespace SonarAnalyzer.Metrics.CSharp
                         ExecutableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
                         return true;
 
+                    case SyntaxKindEx.SwitchExpressionArm:
+                        ExecutableLineNumbers.Add(((SwitchExpressionArmSyntaxWrapper)node).Expression.GetLocation().GetLineNumberToReport());
+                        return true;
+
+                    case SyntaxKind.ArrowExpressionClause:
+                        ExecutableLineNumbers.Add(((ArrowExpressionClauseSyntax)node).Expression.GetLocation().GetLineNumberToReport());
+                        return true;
+
                     case SyntaxKind.StructDeclaration:
                     case SyntaxKind.ClassDeclaration:
                     case SyntaxKindEx.RecordDeclaration:
@@ -118,6 +126,10 @@ namespace SonarAnalyzer.Metrics.CSharp
                     case SyntaxKind.MethodDeclaration:
                     case SyntaxKind.ConstructorDeclaration:
                         return !HasExcludedCodeAttribute((BaseMethodDeclarationSyntax)node, bmds => bmds.AttributeLists,
+                            canBePartial: true);
+
+                    case SyntaxKindEx.LocalFunctionStatement:
+                        return !HasExcludedCodeAttribute(node, lfs => ((LocalFunctionStatementSyntaxWrapper)lfs).AttributeLists,
                             canBePartial: true);
 
                     case SyntaxKind.PropertyDeclaration:
