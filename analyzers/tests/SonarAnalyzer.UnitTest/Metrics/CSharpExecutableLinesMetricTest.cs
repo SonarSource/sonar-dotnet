@@ -648,7 +648,7 @@ namespace SonarAnalyzer.UnitTest.Common
         public void SwitchStatementWithMultipleCases() =>
             AssertLinesOfCode(
               @"
-                        void Foo(int? i, string s)
+                        void Foo(int? i)
                         {
                             switch (i) // +1
                             {
@@ -672,15 +672,15 @@ namespace SonarAnalyzer.UnitTest.Common
                         {
                             var x = s switch
                             {
-                                    ""a"" => true, // FN
-                                    ""b"" => false, // FN
-                                    _ => true // FN
+                                    ""a"" => true,
+                                    ""b"" => false,
+                                    _ => true
                             };
                             var y = s switch
                             {
                                 ""a"" => Foo(""b""), // +1
                                 ""b"" => Foo(""a""), // +1
-                                _ => false // FN
+                                _ => false
                             };
                         }
                         bool Foo(string s) => true;
@@ -703,12 +703,33 @@ namespace SonarAnalyzer.UnitTest.Common
               5);
 
         [TestMethod]
+        public void MultiLineInterpolatedStringWithMultipleLineExpressions() =>
+            AssertLinesOfCode(
+              @"
+                    public class C
+                    {
+                        public string M(int i)
+                        {
+                            return @$""
+                            {(i == 1 ? Bar(1) : Bar(2))}
+                            {(i == 2 ? Bar(2) : Bar(3))}
+                            { Bar(5)}
+                                     "";
+                        }
+
+                        public string Bar(int i) => ""y"" + i;
+                    }
+
+               ",
+              6, 7, 8, 9);
+
+        [TestMethod]
         public void UsingDeclaration() =>
             AssertLinesOfCode(
               @"
                         void Foo(int? i, string s)
                         {
-                            using var file = new System.IO.StreamWriter(""WriteLines2.txt""); // FN
+                            using var file = new System.IO.StreamWriter(""WriteLines2.txt"");
                         }
                ");
 
@@ -802,7 +823,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         using System.Collections.Generic;
 
                             public static bool IsLetter(this char c) =>
-                                c is >= 'a' and <= 'z' or >= 'A' and <= 'Z'; // FN
+                                c is >= 'a' and <= 'z' or >= 'A' and <= 'Z';
                  ");
 
         [TestMethod]
@@ -825,6 +846,23 @@ namespace SonarAnalyzer.UnitTest.Common
                             }
                  ",
                 7, 12, 14);
+
+        [TestMethod]
+        public void MultiLineInvocation() =>
+            AssertLinesOfCode(
+                @"
+                        using System;
+                        using System.Collections.Generic;
+
+                            public static bool Foo(int a, int b)
+                            {
+                               return Foo(1,
+                                          Bar());
+                            }
+
+                            public static int Bar() => 42;
+                 ",
+                7, 8);
 
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
