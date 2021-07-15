@@ -82,9 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasDifferentModifiers(SyntaxList<AccessorDeclarationSyntax> accessors)
         {
-            var accessor1 = accessors.First();
-            var modifiers = ModifierKinds(accessor1).ToHashSet();
-
+            var modifiers = ModifierKinds(accessors.First()).ToHashSet();
             return accessors.Skip(1).Any(a => !modifiers.SetEquals(ModifierKinds(a)));
         }
 
@@ -109,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             AssignmentExpressionSyntax AssignmentFromExpressionBody(ArrowExpressionClauseSyntax expressionBody) =>
                 expressionBody?.ChildNodes().Count() == 1
-                ? expressionBody.ChildNodes().ElementAt(0) as AssignmentExpressionSyntax
+                ? expressionBody.ChildNodes().Single() as AssignmentExpressionSyntax
                 : null;
         }
 
@@ -119,32 +117,22 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return semanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
             }
-
-            if (!(expression is MemberAccessExpressionSyntax memberAccess)
-                || !memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+            else if (expression is MemberAccessExpressionSyntax memberAccess && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+            {
+                return memberAccess.Expression is ThisExpressionSyntax
+                       || (memberAccess.Expression is IdentifierNameSyntax identifier && semanticModel.GetSymbolInfo(identifier).Symbol is INamedTypeSymbol type && type.Equals(declaringType))
+                       ? semanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol
+                       : null;
+            }
+            else
             {
                 return null;
             }
-            else if (memberAccess.Expression is ThisExpressionSyntax)
-            {
-                return semanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
-            }
-            else if (!(memberAccess.Expression is IdentifierNameSyntax identifier))
-            {
-                return null;
-            }
-            else if (!(semanticModel.GetSymbolInfo(identifier).Symbol is INamedTypeSymbol type)
-                     || !type.Equals(declaringType))
-            {
-                return null;
-            }
-
-            return semanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
         }
 
         private static IFieldSymbol FieldFromGetter(AccessorDeclarationSyntax getter, SemanticModel semanticModel)
         {
-            var returnedExpression = GetReturnExpressionFromBody(getter.Body) ?? GetReturnExpressionFromExpressionBody(getter.ExpressionBody());
+            var returnedExpression = GetReturnExpressionFromBody(getter.Body) ?? getter.ExpressionBody()?.Expression;
 
             return returnedExpression == null
                    ? null
@@ -154,9 +142,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 body != null && body.Statements.Count == 1 && body.Statements[0] is ReturnStatementSyntax returnStatement
                 ? returnStatement.Expression
                 : null;
-
-            ExpressionSyntax GetReturnExpressionFromExpressionBody(ArrowExpressionClauseSyntax expressionBody) =>
-                expressionBody?.Expression;
         }
     }
 }
