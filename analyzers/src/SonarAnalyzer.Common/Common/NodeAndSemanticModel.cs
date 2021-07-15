@@ -24,8 +24,8 @@ namespace SonarAnalyzer.Common
 {
     public class NodeAndSemanticModel<TSyntax> where TSyntax : SyntaxNode
     {
-        public SemanticModel SemanticModel { get; set; }
-        public TSyntax Node { get; set; }
+        public SemanticModel SemanticModel { get; }
+        public TSyntax Node { get; }
 
         public NodeAndSemanticModel(SemanticModel semanticModel, TSyntax node)
         {

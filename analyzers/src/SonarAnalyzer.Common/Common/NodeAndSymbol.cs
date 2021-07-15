@@ -40,15 +40,4 @@ namespace SonarAnalyzer.Common
     {
         public NodeAndSymbol(SyntaxNode node, ISymbol symbol) : base(node, symbol) { }
     }
-
-    public static class NodeAndSymbolHelper
-    {
-        public static NodeAndSymbol<TSyntaxNode, TSymbol> ToSyntaxWithSymbol<TSyntaxNode, TSymbol>(
-            this TSyntaxNode syntax, TSymbol symbol)
-            where TSyntaxNode : SyntaxNode
-            where TSymbol : ISymbol
-        {
-            return new NodeAndSymbol<TSyntaxNode, TSymbol>(syntax, symbol);
-        }
-    }
 }

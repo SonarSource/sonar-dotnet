@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Common
         where TSyntax : SyntaxNode
         where TSymbol : ISymbol
     {
-        public TSymbol Symbol { get; set; }
+        public TSymbol Symbol { get; }
 
         public NodeSymbolAndSemanticModel(SemanticModel semanticModel, TSyntax node, TSymbol symbol) : base(semanticModel, node) =>
             Symbol = symbol;

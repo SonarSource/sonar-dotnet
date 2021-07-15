@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var throwToReportOn = node.DescendantNodes()
                 .OfType<ThrowStatementSyntax>()
                 .Where(tss => tss.Expression != null)
-                .Select(tss => tss.ToSyntaxWithSymbol(analysisContext.SemanticModel.GetSymbolInfo(tss.Expression).Symbol))
+                .Select(tss => new NodeAndSymbol(tss, analysisContext.SemanticModel.GetSymbolInfo(tss.Expression).Symbol))
                 .FirstOrDefault(tuple => tuple.Symbol != null &&
                     !tuple.Symbol.ContainingType.IsAny(allowedTypes) &&
                     !tuple.Symbol.ContainingType.DerivesFromAny(allowedTypes))

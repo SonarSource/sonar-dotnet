@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var attributeSymbols = methodDeclaration.AttributeLists
                         .SelectMany(list => list.Attributes)
-                        .Select(a => a.ToSyntaxWithSymbol(c.SemanticModel.GetSymbolInfo(a).Symbol as IMethodSymbol))
+                        .Select(a => new NodeAndSymbol<AttributeSyntax, IMethodSymbol>(a, c.SemanticModel.GetSymbolInfo(a).Symbol as IMethodSymbol))
                         .Where(tuple => tuple.Symbol != null)
                         .ToList();
 

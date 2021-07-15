@@ -62,9 +62,9 @@ namespace SonarAnalyzer.Helpers
                 return false;
             }
 
-            if (GetNameColonArgumentIdentifier(argument) is { } nameColonArgumentIdenfitier)
+            if (GetNameColonArgumentIdentifier(argument) is { } nameColonArgumentIdentifier)
             {
-                parameter = MethodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdenfitier.ValueText);
+                parameter = MethodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdentifier.ValueText);
                 return parameter != null;
             }
 

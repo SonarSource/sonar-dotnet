@@ -184,7 +184,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostics = new List<Diagnostic>();
             var alreadyReportedFieldLikeSymbols = new HashSet<ISymbol>();
-            var unusedSymbolSyntaxPairs = unusedSymbols.SelectMany(symbol => symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax().ToSyntaxWithSymbol(symbol)));
+            var unusedSymbolSyntaxPairs = unusedSymbols.SelectMany(symbol => symbol.DeclaringSyntaxReferences.Select(x => new NodeAndSymbol(x.GetSyntax(), symbol)));
 
             foreach (var unused in unusedSymbolSyntaxPairs)
             {

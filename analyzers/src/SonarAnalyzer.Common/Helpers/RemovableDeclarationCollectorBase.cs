@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Helpers
             && !methodSymbol.IsEventHandler()
             && !methodSymbol.IsSerializationConstructor();
 
-        public static bool IsRemovable(ISymbol symbol, Accessibility maxAccessibility) =>
+        protected static bool IsRemovable(ISymbol symbol, Accessibility maxAccessibility) =>
             symbol != null
             && symbol.GetEffectiveAccessibility() <= maxAccessibility
             && !symbol.IsImplicitlyDeclared
