@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2292",
+"message":  "Make this an auto-implemented property and remove its backing field.",
+"location":  {
+"uri":  "sources\Net5\Net5\InitOnlyProperties.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  23,
+"endLine":  16,
+"endColumn":  31
+}
+}
+}
+]
+}

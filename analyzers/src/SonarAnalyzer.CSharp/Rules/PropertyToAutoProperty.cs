@@ -35,163 +35,113 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class PropertyToAutoProperty : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2292";
+        private const string DiagnosticId = "S2292";
         private const string MessageFormat = "Make this an auto-implemented property and remove its backing field.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
+                    const int Count = 2;
                     var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
                     var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
-                    if (propertyDeclaration.AccessorList == null ||
-                        propertyDeclaration.AccessorList.Accessors.Count != 2 ||
-                        propertySymbol == null ||
-                        HasDifferentModifiers(propertyDeclaration.AccessorList.Accessors) ||
-                        HasAttributes(propertyDeclaration.AccessorList.Accessors))
+                    if (propertyDeclaration.AccessorList == null
+                        || propertyDeclaration.AccessorList.Accessors.Count != Count
+                        || propertySymbol == null
+                        || HasDifferentModifiers(propertyDeclaration.AccessorList.Accessors)
+                        || HasAttributes(propertyDeclaration.AccessorList.Accessors))
                     {
                         return;
                     }
 
                     var accessors = propertyDeclaration.AccessorList.Accessors;
                     var getter = accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
-                    var setter = accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.SetAccessorDeclaration));
+                    var setter = accessors.FirstOrDefault(a => a.IsAnyKind(SyntaxKind.SetAccessorDeclaration, SyntaxKindEx.InitAccessorDeclaration));
 
-                    if (getter == null || setter == null)
+                    if (getter != null
+                        && setter != null
+                        && FieldFromGetter(getter, c.SemanticModel) is { } getterField
+                        && FieldFromSetter(setter, c.SemanticModel) is { } setterField
+                        && getterField.Equals(setterField)
+                        && !getterField.GetAttributes().Any()
+                        && !getterField.IsVolatile
+                        && getterField.IsStatic == propertySymbol.IsStatic
+                        && getterField.Type.Equals(propertySymbol.Type))
                     {
-                        return;
-                    }
-                    if (TryGetFieldFromGetter(getter, c.SemanticModel, out var getterField) &&
-                        TryGetFieldFromSetter(setter, c.SemanticModel, out var setterField) &&
-                        getterField.Equals(setterField) &&
-                        !getterField.GetAttributes().Any() &&
-                        !getterField.IsVolatile &&
-                        getterField.IsStatic == propertySymbol.IsStatic &&
-                        getterField.Type.Equals(propertySymbol.Type))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, propertyDeclaration.Identifier.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, propertyDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.PropertyDeclaration);
-        }
 
-        private static bool HasAttributes(SyntaxList<AccessorDeclarationSyntax> accessors)
-        {
-            return accessors.Any(a => a.AttributeLists.Any());
-        }
+        private static bool HasAttributes(SyntaxList<AccessorDeclarationSyntax> accessors) =>
+            accessors.Any(a => a.AttributeLists.Any());
 
         private static bool HasDifferentModifiers(SyntaxList<AccessorDeclarationSyntax> accessors)
         {
-            var accessor1 = accessors.First();
-            var modifiers = GetModifierKinds(accessor1).ToHashSet();
-
-            return accessors.Skip(1).Any(a => !modifiers.SetEquals(GetModifierKinds(a)));
+            var modifiers = ModifierKinds(accessors.First()).ToHashSet();
+            return accessors.Skip(1).Any(a => !modifiers.SetEquals(ModifierKinds(a)));
         }
 
-        private static IEnumerable<SyntaxKind> GetModifierKinds(AccessorDeclarationSyntax accessor)
+        private static IEnumerable<SyntaxKind> ModifierKinds(AccessorDeclarationSyntax accessor) =>
+            accessor.Modifiers.Select(m => m.Kind());
+
+        private static IFieldSymbol FieldFromSetter(AccessorDeclarationSyntax setter, SemanticModel semanticModel)
         {
-            return accessor.Modifiers.Select(m => m.Kind());
-        }
+            var assignment = AssignmentFromBody(setter.Body) ?? AssignmentFromExpressionBody(setter.ExpressionBody());
 
-        private static bool TryGetFieldFromSetter(AccessorDeclarationSyntax setter, SemanticModel semanticModel, out IFieldSymbol setterField)
-        {
-            setterField = null;
+            return assignment != null
+                   && assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
+                   && assignment.Right != null
+                   && semanticModel.GetSymbolInfo(assignment.Right).Symbol is IParameterSymbol {Name: "value", IsImplicitlyDeclared: true}
+                   ? FieldSymbol(assignment.Left, semanticModel.GetDeclaredSymbol(setter).ContainingType, semanticModel)
+                   : null;
 
-            var assignment = GetAssignmentFromBody(setter.Body)
-                ?? GetAssignmentFromExpressionBody(setter.ExpressionBody());
-
-            if (assignment != null &&
-                assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
-                assignment.Right != null &&
-                semanticModel.GetSymbolInfo(assignment.Right).Symbol is IParameterSymbol parameter &&
-                parameter.Name == "value" &&
-                parameter.IsImplicitlyDeclared)
-            {
-                return TryGetField(assignment.Left, semanticModel.GetDeclaredSymbol(setter).ContainingType,
-                    semanticModel, out setterField);
-            }
-            return false;
-
-            AssignmentExpressionSyntax GetAssignmentFromBody(BlockSyntax body) =>
-                body?.Statements.Count == 1 &&
-                body.Statements[0] is ExpressionStatementSyntax statement
+            AssignmentExpressionSyntax AssignmentFromBody(BlockSyntax body) =>
+                body?.Statements.Count == 1 && body.Statements[0] is ExpressionStatementSyntax statement
                 ? statement.Expression as AssignmentExpressionSyntax
                 : null;
 
-            AssignmentExpressionSyntax GetAssignmentFromExpressionBody(ArrowExpressionClauseSyntax expressionBody) =>
+            AssignmentExpressionSyntax AssignmentFromExpressionBody(ArrowExpressionClauseSyntax expressionBody) =>
                 expressionBody?.ChildNodes().Count() == 1
-                ? expressionBody.ChildNodes().ElementAt(0) as AssignmentExpressionSyntax
+                ? expressionBody.ChildNodes().Single() as AssignmentExpressionSyntax
                 : null;
         }
 
-        private static bool TryGetField(ExpressionSyntax expression, INamedTypeSymbol declaringType,
-            SemanticModel semanticModel, out IFieldSymbol field)
+        private static IFieldSymbol FieldSymbol(ExpressionSyntax expression, INamedTypeSymbol declaringType, SemanticModel semanticModel)
         {
             if (expression is IdentifierNameSyntax)
             {
-                field = semanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
-                return field != null;
+                return semanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
             }
-
-            if (!(expression is MemberAccessExpressionSyntax memberAccess) ||
-                !memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+            else if (expression is MemberAccessExpressionSyntax memberAccess && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
             {
-                field = null;
-                return false;
+                return memberAccess.Expression is ThisExpressionSyntax
+                       || (memberAccess.Expression is IdentifierNameSyntax identifier && semanticModel.GetSymbolInfo(identifier).Symbol is INamedTypeSymbol type && type.Equals(declaringType))
+                       ? semanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol
+                       : null;
             }
-
-            if (memberAccess.Expression is ThisExpressionSyntax)
+            else
             {
-                field = semanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
-                return field != null;
+                return null;
             }
-
-            if (!(memberAccess.Expression is IdentifierNameSyntax identifier))
-            {
-                field = null;
-                return false;
-            }
-
-            if (!(semanticModel.GetSymbolInfo(identifier).Symbol is INamedTypeSymbol type) ||
-                !type.Equals(declaringType))
-            {
-                field = null;
-                return false;
-            }
-
-            field = semanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
-            return field != null;
         }
 
-        private static bool TryGetFieldFromGetter(AccessorDeclarationSyntax getter, SemanticModel semanticModel, out IFieldSymbol getterField)
+        private static IFieldSymbol FieldFromGetter(AccessorDeclarationSyntax getter, SemanticModel semanticModel)
         {
-            getterField = null;
+            var returnedExpression = GetReturnExpressionFromBody(getter.Body) ?? getter.ExpressionBody()?.Expression;
 
-            var returnedExpression = GetReturnExpressionFromBody(getter.Body)
-                ?? GetReturnExpressionFromExpressionBody(getter.ExpressionBody());
-
-            if (returnedExpression == null)
-            {
-                return false;
-            }
-
-            return TryGetField(returnedExpression, semanticModel.GetDeclaredSymbol(getter).ContainingType,
-                semanticModel, out getterField);
+            return returnedExpression == null
+                   ? null
+                   : FieldSymbol(returnedExpression, semanticModel.GetDeclaredSymbol(getter).ContainingType, semanticModel);
 
             ExpressionSyntax GetReturnExpressionFromBody(BlockSyntax body) =>
-                body?.Statements.Count == 1 &&
-                body.Statements[0] is ReturnStatementSyntax returnStatement
+                body != null && body.Statements.Count == 1 && body.Statements[0] is ReturnStatementSyntax returnStatement
                 ? returnStatement.Expression
                 : null;
-
-            ExpressionSyntax GetReturnExpressionFromExpressionBody(ArrowExpressionClauseSyntax expressionBody) =>
-                expressionBody?.Expression;
         }
     }
 }
