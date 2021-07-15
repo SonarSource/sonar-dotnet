@@ -547,9 +547,9 @@ namespace SonarAnalyzer.Helpers
 
 #pragma warning restore S103    // Lines should not be too long
 #pragma warning restore SA1310  // FieldNamesMustNotContainUnderscore
-#pragma warning disable SA1311  // Static readonly fields should begin with upper-case letter
-#pragma warning disable SA1307  // Field 'log4net_Config_XmlConfigurator' should begin with upper-case letter
-#pragma warning disable SA1304  // Non-private readonly fields should begin with upper-case letter
+#pragma warning restore SA1311  // Static readonly fields should begin with upper-case letter
+#pragma warning restore SA1307  // Field 'log4net_Config_XmlConfigurator' should begin with upper-case letter
+#pragma warning restore SA1304  // Non-private readonly fields should begin with upper-case letter
 
         private readonly bool isSpecialType;
         private readonly SpecialType specialType;
