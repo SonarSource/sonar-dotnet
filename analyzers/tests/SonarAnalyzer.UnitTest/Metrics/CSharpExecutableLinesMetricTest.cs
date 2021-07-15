@@ -627,6 +627,205 @@ namespace SonarAnalyzer.UnitTest.Common
                 }",
                 4, 6);
 
+        [TestMethod]
+        public void MultiLineLoop() =>
+            AssertLinesOfCode(
+              @"
+                        void Foo(int[] arr)
+                        {
+                            for         // +1
+                              (         // +0
+                               int i=0; // +0
+                               i < 10;  // +0
+                               i++      // +0
+                              )         // +0
+                            {           // +0
+                            }
+                        }",
+              4);
+
+        [TestMethod]
+        public void SwitchStatementWithMultipleCases() =>
+            AssertLinesOfCode(
+              @"
+                        void Foo(int? i, string s)
+                        {
+                            switch (i) // +1
+                            {
+                                case 1:
+                                    Console.WriteLine(4); // +1
+                                    break; // +1
+                                case 2:
+                                    Console.WriteLine(4); // +1
+                                    break; // +1
+                                default:
+                                    break; // +1
+                            }
+                        }",
+              4, 7, 8, 10, 11, 13);
+
+        [TestMethod]
+        public void SwitchExpressionWithMultipleCases() =>
+            AssertLinesOfCode(
+              @"
+                        void Foo(int? i, string s)
+                        {
+                            var x = s switch
+                            {
+                                    ""a"" => true, // FN
+                                    ""b"" => false, // FN
+                                    _ => true // FN
+                            };
+                            var y = s switch
+                            {
+                                ""a"" => Foo(""b""), // +1
+                                ""b"" => Foo(""a""), // +1
+                                _ => false // FN
+                            };
+                        }
+                        bool Foo(string s) => true;
+                ",
+              12, 13);
+
+        [TestMethod]
+        public void MultiLineInterpolatedString() =>
+            AssertLinesOfCode(
+              @"
+                        void Foo(int? i, string s)
+                        {
+                            string x = ""someString"";
+                            x += @$""This is a Multi
+                                                  Line
+                                                  interpolated
+                                                  string {i} {s}"";
+                        }
+                ",
+              5);
+
+        [TestMethod]
+        public void UsingDeclaration() =>
+            AssertLinesOfCode(
+              @"
+                        void Foo(int? i, string s)
+                        {
+                            using var file = new System.IO.StreamWriter(""WriteLines2.txt""); // FN
+                        }
+               ");
+
+        [TestMethod]
+        public void LocalFunctions() =>
+            AssertLinesOfCode(
+              @"
+                       int M1()
+                       {
+                           int y;
+                           LocalFunction();
+                           return y;
+
+                            void LocalFunction() => y = 0;
+                       }
+
+                       int M2()
+                       {
+                           int y = 5;
+                           int x = 7;
+                           return Add(x, y);
+
+                           static int Add(int left, int right) => left + right;
+                       }
+                ",
+              5, 6, 15);
+
+        [TestMethod]
+        public void IndicesAndRanges() =>
+            AssertLinesOfCode(
+                @"
+                    int M()
+                    {
+                        string s = null;
+                        string[] subArray;
+                        var words = new string[]
+                            {
+                                ""The"",
+                                ""quick"",
+                                ""brown"",
+                                ""fox"",
+                                ""jumped"",
+                                ""over"",
+                                ""the"",
+                                ""lazy"",
+                                ""dog""
+                            };
+                        s = words[^1];
+                        subArray = words[1..4]
+                    }
+                ",
+                7, 18, 19);
+
+        [TestMethod]
+        public void NullCoalescingAsignment() =>
+            AssertLinesOfCode(
+                @"
+                using System;
+                using System.Collections.Generic;
+
+                            int M()
+                            {
+                                List<int> numbers = null;
+                                int? i = null;
+
+                                numbers ??= new List<int>();
+                            }
+                        ",
+                10);
+
+        [TestMethod]
+        public void NullCoalescingOperator() =>
+            AssertLinesOfCode(
+                @"
+                        using System;
+                        using System.Collections.Generic;
+
+                            double SumNumbers(List<double[]> setsOfNumbers, int indexOfSetToSum)
+                            {
+                                return setsOfNumbers?[indexOfSetToSum]?.Sum() // +1
+                                       ?? double.NaN; // +1
+                            }
+                 ",
+                7, 8);
+
+        [TestMethod]
+        public void SingleLinePatternMatching() =>
+            AssertLinesOfCode(
+                @"
+                        using System;
+                        using System.Collections.Generic;
+
+                            public static bool IsLetter(this char c) =>
+                                c is >= 'a' and <= 'z' or >= 'A' and <= 'Z'; // FN
+                 ");
+
+        [TestMethod]
+        public void MultiLinePatternMatching() =>
+            AssertLinesOfCode(
+                @"
+                        using System;
+                        using System.Collections.Generic;
+
+                            public static bool IsLetter(char c)
+                            {
+                                if (c is >= 'a'
+                                        and <= 'z'
+                                                or >= 'A'
+                                                    and <= 'Z')
+                                {
+                                    return true;
+                                }
+                                return false;
+                            }
+                 ",
+                7, 12, 14);
+
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
             (var syntaxTree, var semanticModel) = TestHelper.Compile(code);
