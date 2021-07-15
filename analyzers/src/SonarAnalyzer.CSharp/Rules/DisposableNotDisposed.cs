@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
+using SyntaxNodeWithSymbol = SonarAnalyzer.Common.SyntaxNodeWithSymbol<Microsoft.CodeAnalysis.SyntaxNode, Microsoft.CodeAnalysis.ISymbol>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -83,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                  })
                                  .ToList();
 
-                    var trackedNodesAndSymbols = new HashSet<NodeAndSymbol>();
+                    var trackedNodesAndSymbols = new HashSet<SyntaxNodeWithSymbol>();
                     foreach (var typeDeclarationAndSemanticModel in typesDeclarationsAndSemanticModels)
                     {
                         TrackInitializedLocalsAndPrivateFields(typeDeclarationAndSemanticModel.SyntaxNode, typeDeclarationAndSemanticModel.SemanticModel, trackedNodesAndSymbols);
@@ -101,13 +102,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         foreach (var trackedNodeAndSymbol in trackedNodesAndSymbols.Where(x => !excludedSymbols.Contains(x.Symbol)))
                         {
-                            c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name));
+                            c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, trackedNodeAndSymbol.Syntax.GetLocation(), trackedNodeAndSymbol.Symbol.Name));
                         }
                     }
                 },
                 SymbolKind.NamedType);
 
-        private static void TrackInitializedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<NodeAndSymbol> trackedNodesAndSymbols)
+        private static void TrackInitializedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<SyntaxNodeWithSymbol> trackedNodesAndSymbols)
         {
             var localVariableDeclarations = typeDeclaration
                 .DescendantNodes()
@@ -126,12 +127,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 var trackedVariables = declaration.Variables.Where(x => x.Initializer != null && IsInstantiation(x.Initializer.Value, semanticModel));
                 foreach (var variableNode in trackedVariables)
                 {
-                    trackedNodesAndSymbols.Add(new NodeAndSymbol(variableNode, semanticModel.GetDeclaredSymbol(variableNode)));
+                    trackedNodesAndSymbols.Add(new SyntaxNodeWithSymbol(variableNode, semanticModel.GetDeclaredSymbol(variableNode)));
                 }
             }
         }
 
-        private static void TrackAssignmentsToLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<NodeAndSymbol> trackedNodesAndSymbols)
+        private static void TrackAssignmentsToLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<SyntaxNodeWithSymbol> trackedNodesAndSymbols)
         {
             var simpleAssignments = typeDeclaration
                 .DescendantNodes()
@@ -145,7 +146,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && semanticModel.GetSymbolInfo(simpleAssignment.Left).Symbol is { } referencedSymbol
                     && IsLocalOrPrivateField(referencedSymbol))
                 {
-                    trackedNodesAndSymbols.Add(new NodeAndSymbol(simpleAssignment, referencedSymbol));
+                    trackedNodesAndSymbols.Add(new SyntaxNodeWithSymbol(simpleAssignment, referencedSymbol));
                 }
             }
         }
@@ -253,17 +254,5 @@ namespace SonarAnalyzer.Rules.CSharp
             expression is InvocationExpressionSyntax invocation
             && semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
             && FactoryMethods.Contains(methodSymbol.ContainingType.ToDisplayString() + "." + methodSymbol.Name);
-
-        private class NodeAndSymbol
-        {
-            public SyntaxNode Node { get; set; }
-            public ISymbol Symbol { get; set; }
-
-            public NodeAndSymbol(SyntaxNode node, ISymbol symbol)
-            {
-                Node = node;
-                Symbol = symbol;
-            }
-        }
     }
 }
