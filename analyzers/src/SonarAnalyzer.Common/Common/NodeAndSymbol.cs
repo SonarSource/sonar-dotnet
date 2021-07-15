@@ -50,13 +50,5 @@ namespace SonarAnalyzer.Common
         {
             return new NodeAndSymbol<TSyntaxNode, TSymbol>(syntax, symbol);
         }
-
-        public static NodeAndSymbol<TSyntaxNode, TSymbol> ToSymbolWithSyntax<TSymbol, TSyntaxNode>(
-            this TSymbol symbol, TSyntaxNode syntax)
-            where TSyntaxNode : SyntaxNode
-            where TSymbol : ISymbol
-        {
-            return new NodeAndSymbol<TSyntaxNode, TSymbol>(syntax, symbol);
-        }
     }
 }
