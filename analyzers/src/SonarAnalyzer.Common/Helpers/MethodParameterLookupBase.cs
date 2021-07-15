@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Helpers
                 return false;
             }
 
-            if (GetNameColonArgumentIdentifier(argument) is { }  nameColonArgumentIdenfitier)
+            if (GetNameColonArgumentIdentifier(argument) is { } nameColonArgumentIdenfitier)
             {
                 parameter = MethodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdenfitier.ValueText);
                 return parameter != null;
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Helpers
         /// There will be single result for normal parameters.
         public bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions)
         {
-            expressions = GetAllArgumentParameterMappings().Where(x => x.Symbol.Name == parameterName).Select(x => Expression(x.SyntaxNode)).ToImmutableArray();
+            expressions = GetAllArgumentParameterMappings().Where(x => x.Symbol.Name == parameterName).Select(x => Expression(x.Node)).ToImmutableArray();
             return !expressions.IsEmpty;
         }
 
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Helpers
             return false;
         }
 
-        internal IEnumerable<SyntaxNodeSymbolSemanticModelTuple<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings()
+        internal IEnumerable<NodeSymbolAndSemanticModel<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings()
         {
             if (argumentList.HasValue)
             {
@@ -128,7 +128,8 @@ namespace SonarAnalyzer.Helpers
                 {
                     if (TryGetSymbol(argument, out var parameter))
                     {
-                        yield return new SyntaxNodeSymbolSemanticModelTuple<TArgumentSyntax, IParameterSymbol> { SyntaxNode = argument, Symbol = parameter };
+                        //FIXME: Wrong type used
+                        yield return new NodeSymbolAndSemanticModel<TArgumentSyntax, IParameterSymbol>(null, argument, parameter);
                     }
                 }
             }

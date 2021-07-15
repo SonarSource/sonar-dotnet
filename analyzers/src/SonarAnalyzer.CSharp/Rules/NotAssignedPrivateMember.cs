@@ -28,11 +28,10 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
+using MemberUsage = SonarAnalyzer.Helpers.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.SimpleNameSyntax, Microsoft.CodeAnalysis.ISymbol>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    using MemberUsage = SyntaxNodeSymbolSemanticModelTuple<SimpleNameSyntax, ISymbol>;
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
@@ -85,8 +84,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var candidateMember in unassignedUsedMemberSymbols)
                     {
-                        var field = candidateMember.SyntaxNode as VariableDeclaratorSyntax;
-                        var property = candidateMember.SyntaxNode as PropertyDeclarationSyntax;
+                        var field = candidateMember.Node as VariableDeclaratorSyntax;
+                        var property = candidateMember.Node as PropertyDeclarationSyntax;
 
                         var memberType = field == null ? "auto-property" : "field";
 
@@ -99,14 +98,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
 
-        private static List<SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol>> GetCandidateDeclarations(CSharpRemovableDeclarationCollector removableDeclarationCollector)
+        private static List<NodeSymbolAndSemanticModel<SyntaxNode, ISymbol>> GetCandidateDeclarations(CSharpRemovableDeclarationCollector removableDeclarationCollector)
         {
             var candidateFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, MaxAccessibility)
-                                                               .Where(tuple => !IsInitializedOrFixed((VariableDeclaratorSyntax)tuple.SyntaxNode)
+                                                               .Where(tuple => !IsInitializedOrFixed((VariableDeclaratorSyntax)tuple.Node)
                                                                                && !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
 
             var candidateProperties = removableDeclarationCollector.GetRemovableDeclarations(new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, MaxAccessibility)
-                                                                   .Where(tuple => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)tuple.SyntaxNode)
+                                                                   .Where(tuple => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)tuple.Node)
                                                                                    && !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
 
             return candidateFields.Concat(candidateProperties).ToList();
@@ -136,36 +135,23 @@ namespace SonarAnalyzer.Rules.CSharp
             && declaration.AccessorList != null
             && declaration.AccessorList.Accessors.All(acc => acc.Body == null);
 
-        private static IList<MemberUsage> GetMemberUsages(CSharpRemovableDeclarationCollector removableDeclarationCollector,
-                                                          HashSet<ISymbol> declaredPrivateSymbols)
+        private static IList<MemberUsage> GetMemberUsages(CSharpRemovableDeclarationCollector removableDeclarationCollector, HashSet<ISymbol> declaredPrivateSymbols)
         {
             var symbolNames = declaredPrivateSymbols.Select(s => s.Name).ToHashSet();
 
             var identifiers = removableDeclarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes()
+                .SelectMany(container => container.Node.DescendantNodes()
                     .Where(node => node.IsKind(SyntaxKind.IdentifierName))
                     .Cast<IdentifierNameSyntax>()
-                    .Where(node => symbolNames.Contains(node.Identifier.ValueText))
-                    .Select(node =>
-                        new MemberUsage
-                        {
-                            SyntaxNode = node,
-                            SemanticModel = container.SemanticModel,
-                            Symbol = container.SemanticModel.GetSymbolInfo(node).Symbol
-                        }));
+                    .Where(x => symbolNames.Contains(x.Identifier.ValueText))
+                    .Select(x => new MemberUsage(container.SemanticModel, x, container.SemanticModel.GetSymbolInfo(x).Symbol)));
 
             var generic = removableDeclarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes()
+                .SelectMany(container => container.Node.DescendantNodes()
                     .Where(node => node.IsKind(SyntaxKind.GenericName))
                     .Cast<GenericNameSyntax>()
-                    .Where(node => symbolNames.Contains(node.Identifier.ValueText))
-                    .Select(node =>
-                        new MemberUsage
-                        {
-                            SyntaxNode = node,
-                            SemanticModel = container.SemanticModel,
-                            Symbol = container.SemanticModel.GetSymbolInfo(node).Symbol
-                        }));
+                    .Where(x => symbolNames.Contains(x.Identifier.ValueText))
+                    .Select(x => new MemberUsage(container.SemanticModel, x, container.SemanticModel.GetSymbolInfo(x).Symbol)));
 
             return identifiers.Concat(generic)
                 .Where(tuple => tuple.Symbol is IFieldSymbol || tuple.Symbol is IPropertySymbol)
@@ -178,7 +164,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var memberUsage in memberUsages)
             {
-                ExpressionSyntax node = memberUsage.SyntaxNode;
+                ExpressionSyntax node = memberUsage.Node;
                 var memberSymbol = memberUsage.Symbol;
 
                 // Handle "expr.FieldName"

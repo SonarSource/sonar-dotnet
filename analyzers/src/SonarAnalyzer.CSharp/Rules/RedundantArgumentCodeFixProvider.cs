@@ -30,6 +30,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Helpers;
+using NodeSymbolAndSemanticModel = SonarAnalyzer.Helpers.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax, Microsoft.CodeAnalysis.IParameterSymbol>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -75,11 +76,11 @@ namespace SonarAnalyzer.Rules.CSharp
             var argumentsCanBeRemovedWithoutNamed = new List<ArgumentSyntax>();
             var canBeRemovedWithoutNamed = true;
 
-            var reversedMappings = new List<SyntaxNodeSymbolSemanticModelTuple<ArgumentSyntax, IParameterSymbol>>(argumentMappings);
+            var reversedMappings = new List<NodeSymbolAndSemanticModel<ArgumentSyntax, IParameterSymbol>>(argumentMappings);
             reversedMappings.Reverse();
             foreach (var argumentMapping in reversedMappings)
             {
-                var argument = argumentMapping.SyntaxNode;
+                var argument = argumentMapping.Node;
 
                 if (RedundantArgument.ArgumentHasDefaultValue(argumentMapping, semanticModel))
                 {
@@ -123,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static async Task<Document> RemoveArgumentsAndAddNecessaryNamesAsync(Document document, ArgumentListSyntax argumentList,
-            List<SyntaxNodeSymbolSemanticModelTuple<ArgumentSyntax, IParameterSymbol>> argumentMappings, List<ArgumentSyntax> argumentsToRemove,
+            IEnumerable<NodeSymbolAndSemanticModel> argumentMappings, List<ArgumentSyntax> argumentsToRemove,
             SemanticModel semanticModel, CancellationToken cancellationToken)
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -133,7 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var argumentMapping in argumentMappings
                 .Where(argumentMapping => !argumentMapping.Symbol.IsParams))
             {
-                var argument = argumentMapping.SyntaxNode;
+                var argument = argumentMapping.Node;
                 if (argumentsToRemove.Contains(argument))
                 {
                     alreadyRemovedOne = true;
@@ -169,10 +170,10 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static ArgumentListSyntax AddParamsArguments(SemanticModel semanticModel,
-            ICollection<SyntaxNodeSymbolSemanticModelTuple<ArgumentSyntax, IParameterSymbol>> paramsArguments, ArgumentListSyntax argumentList)
+            IEnumerable<NodeSymbolAndSemanticModel> paramsArguments, ArgumentListSyntax argumentList)
         {
             var firstParamsMapping = paramsArguments.First();
-            var firstParamsArgument = firstParamsMapping.SyntaxNode;
+            var firstParamsArgument = firstParamsMapping.Node;
             var paramsParameter = firstParamsMapping.Symbol;
 
             if (firstParamsArgument.NameColon != null)
@@ -180,7 +181,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return argumentList.AddArguments(firstParamsArgument);
             }
 
-            if (paramsArguments.Count == 1 &&
+            if (paramsArguments.Count() == 1 &&
                 paramsParameter.Type.Equals(
                     semanticModel.GetTypeInfo(firstParamsArgument.Expression).Type))
             {
@@ -200,9 +201,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxFactory.ImplicitArrayCreationExpression(
                         SyntaxFactory.InitializerExpression(
                             SyntaxKind.ArrayInitializerExpression,
-                            SyntaxFactory.SeparatedList(
-                                paramsArguments.Select(arg => arg.SyntaxNode.Expression))
-                            ))));
+                            SyntaxFactory.SeparatedList(paramsArguments.Select(arg => arg.Node.Expression))))));
         }
 
         private static async Task<Document> RemoveArgumentsAsync(Document document, IEnumerable<ArgumentSyntax> arguments,

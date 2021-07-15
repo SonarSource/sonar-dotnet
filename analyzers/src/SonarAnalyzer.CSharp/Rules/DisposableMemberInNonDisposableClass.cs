@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, analysisContext.Compilation).TypeDeclarations;
                     foreach (var classDeclaration in typeDeclarations)
                     {
-                        analysisContext.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, classDeclaration.SyntaxNode.Identifier.GetLocation(), message));
+                        analysisContext.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, classDeclaration.Node.Identifier.GetLocation(), message));
                     }
                 },
                 SymbolKind.NamedType);

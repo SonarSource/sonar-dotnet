@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Helpers
     {
         public TSymbol Symbol { get; set; }
 
-        public NodeSymbolAndSemanticModel(SemanticModel semanticModel, TSyntax syntaxNode, TSymbol symbol) : base(semanticModel, syntaxNode) =>
+        public NodeSymbolAndSemanticModel(SemanticModel semanticModel, TSyntax node, TSymbol symbol) : base(semanticModel, node) =>
             Symbol = symbol;
     }
 }

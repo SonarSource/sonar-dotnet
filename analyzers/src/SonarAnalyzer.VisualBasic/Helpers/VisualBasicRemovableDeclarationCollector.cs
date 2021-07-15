@@ -23,18 +23,13 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using NodeSymbolAndSemanticModel = SonarAnalyzer.Helpers.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.SyntaxNode, Microsoft.CodeAnalysis.ISymbol>;
 
 namespace SonarAnalyzer.Helpers
 {
-    using SyntaxNodeSymbolSemanticModelTuple = SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol>;
-
-    internal class VisualBasicRemovableDeclarationCollector :
-        RemovableDeclarationCollectorBase<TypeBlockSyntax, TypeStatementSyntax, SyntaxKind>
+    internal class VisualBasicRemovableDeclarationCollector : RemovableDeclarationCollectorBase<TypeBlockSyntax, TypeStatementSyntax, SyntaxKind>
     {
-        public VisualBasicRemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation)
-            : base(namedType, compilation)
-        {
-        }
+        public VisualBasicRemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation) : base(namedType, compilation) { }
 
         public static bool IsNodeStructOrClassDeclaration(SyntaxNode node) =>
             node.IsKind(SyntaxKind.ClassStatement) || node.IsKind(SyntaxKind.StructureStatement);
@@ -43,23 +38,18 @@ namespace SonarAnalyzer.Helpers
             IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceStatement);
 
         protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(
-            SyntaxNodeAndSemanticModel<TypeBlockSyntax> container, ISet<SyntaxKind> kinds) =>
-            container.SyntaxNode.DescendantNodes(IsNodeContainerTypeDeclaration)
+            NodeAndSemanticModel<TypeBlockSyntax> container, ISet<SyntaxKind> kinds) =>
+            container.Node.DescendantNodes(IsNodeContainerTypeDeclaration)
                 .Where(node => kinds.Contains(node.Kind()));
 
-        public override IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
+        public override IEnumerable<NodeSymbolAndSemanticModel> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
         {
             var fieldLikeNodes = TypeDeclarations
                 .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
-                    .Select(node =>
-                        new SyntaxNodeAndSemanticModel<FieldDeclarationSyntax>
-                        {
-                            SyntaxNode = (FieldDeclarationSyntax)node,
-                            SemanticModel = typeDeclaration.SemanticModel
-                        }));
+                    .Select(x => new NodeAndSemanticModel<FieldDeclarationSyntax>(typeDeclaration.SemanticModel, (FieldDeclarationSyntax)x)));
 
             return fieldLikeNodes
-                .SelectMany(fieldLikeNode => fieldLikeNode.SyntaxNode.Declarators
+                .SelectMany(fieldLikeNode => fieldLikeNode.Node.Declarators
                     .Select(variable => SelectNodeTuple(variable, fieldLikeNode.SemanticModel))
                     .Where(tuple => IsRemovable(tuple.Symbol, maxAccessibility)));
         }

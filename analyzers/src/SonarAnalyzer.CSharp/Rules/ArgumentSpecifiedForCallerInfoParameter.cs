@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     foreach (var argumentMapping in argumentMappings)
                     {
                         var parameter = argumentMapping.Symbol;
-                        var argument = argumentMapping.SyntaxNode;
+                        var argument = argumentMapping.Node;
 
                         var callerInfoAttributeDataOnCall = GetCallerInfoAttribute(parameter);
                         if (callerInfoAttributeDataOnCall == null)

@@ -93,24 +93,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(method => MethodIsDisposeImplementation(method, disposeMethod)))
             {
                 var methodDeclarations = method.DeclaringSyntaxReferences
-                    .Select(r => new SyntaxNodeAndSemanticModel<MethodDeclarationSyntax>
-                    {
-                        SyntaxNode = r.GetSyntax() as MethodDeclarationSyntax,
-                        SemanticModel = compilation.GetSemanticModel(r.SyntaxTree)
-                    })
-                    .Where(m => m.SyntaxNode != null);
+                    .Select(x => new NodeAndSemanticModel<MethodDeclarationSyntax>(compilation.GetSemanticModel(x.SyntaxTree), x.GetSyntax() as MethodDeclarationSyntax))
+                    .Where(x => x.Node != null);
 
-                var methodDeclaration = methodDeclarations
-                    .FirstOrDefault(m => m.SyntaxNode.HasBodyOrExpressionBody());
-
+                var methodDeclaration = methodDeclarations.FirstOrDefault(m => m.Node.HasBodyOrExpressionBody());
                 if (methodDeclaration == null)
                 {
                     continue;
                 }
 
-                var invocations = methodDeclaration.SyntaxNode.DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>();
-
+                var invocations = methodDeclaration.Node.DescendantNodes().OfType<InvocationExpressionSyntax>();
                 foreach (var invocation in invocations)
                 {
                     CollectDisposeMethodsCalledFromDispose(invocation, methodDeclaration.SemanticModel,
