@@ -22,36 +22,36 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Common
 {
-    public class SyntaxNodeWithSymbol<TSyntaxNode, TSymbol>
+    public class NodeAndSymbol<TSyntaxNode, TSymbol>
         where TSyntaxNode : SyntaxNode
         where TSymbol : ISymbol
     {
-        public SyntaxNodeWithSymbol(TSyntaxNode syntax, TSymbol symbol)
+        public TSyntaxNode Syntax { get; }
+        public TSymbol Symbol { get; }
+
+        public NodeAndSymbol(TSyntaxNode syntax, TSymbol symbol)
         {
             Syntax = syntax;
             Symbol = symbol;
         }
-
-        public TSyntaxNode Syntax { get; }
-        public TSymbol Symbol { get; }
     }
 
-    public static class SyntaxNodeWithSymbolHelper
+    public static class NodeAndSymbolHelper
     {
-        public static SyntaxNodeWithSymbol<TSyntaxNode, TSymbol> ToSyntaxWithSymbol<TSyntaxNode, TSymbol>(
+        public static NodeAndSymbol<TSyntaxNode, TSymbol> ToSyntaxWithSymbol<TSyntaxNode, TSymbol>(
             this TSyntaxNode syntax, TSymbol symbol)
             where TSyntaxNode : SyntaxNode
             where TSymbol : ISymbol
         {
-            return new SyntaxNodeWithSymbol<TSyntaxNode, TSymbol>(syntax, symbol);
+            return new NodeAndSymbol<TSyntaxNode, TSymbol>(syntax, symbol);
         }
 
-        public static SyntaxNodeWithSymbol<TSyntaxNode, TSymbol> ToSymbolWithSyntax<TSymbol, TSyntaxNode>(
+        public static NodeAndSymbol<TSyntaxNode, TSymbol> ToSymbolWithSyntax<TSymbol, TSyntaxNode>(
             this TSymbol symbol, TSyntaxNode syntax)
             where TSyntaxNode : SyntaxNode
             where TSymbol : ISymbol
         {
-            return new SyntaxNodeWithSymbol<TSyntaxNode, TSymbol>(syntax, symbol);
+            return new NodeAndSymbol<TSyntaxNode, TSymbol>(syntax, symbol);
         }
     }
 }
