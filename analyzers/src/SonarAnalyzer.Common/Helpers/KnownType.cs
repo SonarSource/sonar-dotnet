@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Helpers
 
         internal static readonly KnownType Void = new KnownType(SpecialType.System_Void, "void");
 
+        internal static readonly KnownType FluentAssertions_Execution_AssertionScope = new KnownType("FluentAssertions.Execution.AssertionScope");
         internal static readonly KnownType JWT_Builder_JwtBuilder = new KnownType("JWT.Builder.JwtBuilder");
         internal static readonly KnownType JWT_IJwtDecoder = new KnownType("JWT.IJwtDecoder");
         internal static readonly KnownType JWT_JwtDecoderExtensions = new KnownType("JWT.JwtDecoderExtensions");

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using FluentAssertions.Execution;
 
 namespace Tests.Diagnostics
 {
@@ -127,6 +128,15 @@ namespace Tests.Diagnostics
         private void Clear()
         {
             using var inner_field_fs1 = new FileStream(@"c:\foo.txt", FileMode.Open);
+        }
+
+        public void FluentAssertionTypes()
+        {
+            var scope = new AssertionScope();                           // Noncompliant
+            var s = new FluentAssertions.Execution.AssertionScope();    // Noncompliant
+
+            using (var disposed = new AssertionScope()) {
+            }
         }
     }
 

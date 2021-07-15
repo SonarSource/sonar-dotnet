@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.cs",
                                     new DisposableNotDisposed(),
                                     ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.SystemNetHttp);
+                                    MetadataReferenceFacade.SystemNetHttp.Concat(NuGetMetadataReference.FluentAssertions("5.9.0")));
 
 #if NET
         [TestMethod]
