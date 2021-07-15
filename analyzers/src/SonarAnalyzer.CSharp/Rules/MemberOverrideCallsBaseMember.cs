@@ -77,7 +77,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var propertySymbol = semanticModel.GetDeclaredSymbol(propertySyntax);
-
             if (propertySymbol == null
                 || !propertySymbol.IsOverride
                 || propertySymbol.IsSealed
@@ -96,9 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool CheckGetAccessorIfAny(PropertyDeclarationSyntax propertySyntax, IPropertySymbol propertySymbol, SemanticModel semanticModel)
         {
             var getAccessor = propertySyntax.AccessorList?.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
-
-            if (getAccessor == null
-                && propertySyntax.ExpressionBody == null)
+            if (getAccessor == null && propertySyntax.ExpressionBody == null)
             {
                 // no getter
                 return true;
@@ -125,8 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            var expression = setAccessor?.ExpressionBody()?.Expression
-                ?? GetSingleStatementExpression(setAccessor?.Body, isVoid: true);
+            var expression = setAccessor?.ExpressionBody()?.Expression ?? GetSingleStatementExpression(setAccessor?.Body, isVoid: true);
 
             return expression is AssignmentExpressionSyntax expressionToCheck
                    && expressionToCheck.IsKind(SyntaxKind.SimpleAssignmentExpression)
@@ -145,14 +141,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var methodSymbol = semanticModel.GetDeclaredSymbol(methodSyntax);
-
             if (IsMethodSymbolExcluded(methodSymbol))
             {
                 return false;
             }
 
-            var expression = methodSyntax.ExpressionBody?.Expression
-                ?? GetSingleStatementExpression(methodSyntax.Body, isVoid: methodSymbol.ReturnsVoid);
+            var expression = methodSyntax.ExpressionBody?.Expression ?? GetSingleStatementExpression(methodSyntax.Body, isVoid: methodSymbol.ReturnsVoid);
             var invocationExpression = expression as InvocationExpressionSyntax;
 
             return invocationExpression?.Expression is MemberAccessExpressionSyntax memberAccess
@@ -183,16 +177,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            if (expressionToCheck.ArgumentList == null
-                || invokedMethod.Parameters.Length != expressionToCheck.ArgumentList.Arguments.Count)
+            if (expressionToCheck.ArgumentList == null || invokedMethod.Parameters.Length != expressionToCheck.ArgumentList.Arguments.Count)
             {
                 return false;
             }
 
-            var argumentExpressions = expressionToCheck.ArgumentList.Arguments
-                .Select(a => a.Expression as IdentifierNameSyntax)
-                .ToList();
-
+            var argumentExpressions = expressionToCheck.ArgumentList.Arguments.Select(a => a.Expression as IdentifierNameSyntax).ToList();
             for (var i = 0; i < argumentExpressions.Count; i++)
             {
                 if (argumentExpressions[i] == null
@@ -213,7 +203,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return null;
             }
-
             return isVoid
                 ? (block.Statements[0] as ExpressionStatementSyntax)?.Expression
                 : (block.Statements[0] as ReturnStatementSyntax)?.Expression;
