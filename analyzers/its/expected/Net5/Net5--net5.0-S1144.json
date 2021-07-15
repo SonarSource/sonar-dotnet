@@ -214,9 +214,9 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  7,
+"startLine":  8,
 "startColumn":  9,
-"endLine":  20,
+"endLine":  21,
 "endColumn":  10
 }
 }
@@ -227,9 +227,9 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  21,
+"startLine":  23,
 "startColumn":  9,
-"endLine":  26,
+"endLine":  28,
 "endColumn":  89
 }
 }
