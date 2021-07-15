@@ -32,7 +32,7 @@ using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
-using CtorDeclarationTuple = SonarAnalyzer.Helpers.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.ConstructorDeclarationSyntax, Microsoft.CodeAnalysis.IMethodSymbol>;
+using CtorDeclarationTuple = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.ConstructorDeclarationSyntax, Microsoft.CodeAnalysis.IMethodSymbol>;
 using SymbolWithInitializer = System.Collections.Generic.KeyValuePair<Microsoft.CodeAnalysis.ISymbol, Microsoft.CodeAnalysis.CSharp.Syntax.EqualsValueClauseSyntax>;
 
 namespace SonarAnalyzer.Rules.CSharp

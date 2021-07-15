@@ -23,7 +23,8 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using NodeSymbolAndSemanticModel = SonarAnalyzer.Helpers.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.SyntaxNode, Microsoft.CodeAnalysis.ISymbol>;
+using SonarAnalyzer.Common;
+using NodeSymbolAndSemanticModel = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.SyntaxNode, Microsoft.CodeAnalysis.ISymbol>;
 
 namespace SonarAnalyzer.Helpers
 {

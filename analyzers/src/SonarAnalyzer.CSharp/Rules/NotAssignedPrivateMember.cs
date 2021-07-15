@@ -28,7 +28,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
-using MemberUsage = SonarAnalyzer.Helpers.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.SimpleNameSyntax, Microsoft.CodeAnalysis.ISymbol>;
+using MemberUsage = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.SimpleNameSyntax, Microsoft.CodeAnalysis.ISymbol>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

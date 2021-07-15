@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Common
 {
     public class NodeSymbolAndSemanticModel<TSyntax, TSymbol> : NodeAndSemanticModel<TSyntax>
         where TSyntax : SyntaxNode

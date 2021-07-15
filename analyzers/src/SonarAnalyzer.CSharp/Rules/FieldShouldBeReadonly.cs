@@ -29,8 +29,8 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
-using FieldTuple = SonarAnalyzer.Helpers.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.VariableDeclaratorSyntax, Microsoft.CodeAnalysis.IFieldSymbol>;
-using TypeDeclarationTuple = SonarAnalyzer.Helpers.NodeAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.TypeDeclarationSyntax>;
+using FieldTuple = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.VariableDeclaratorSyntax, Microsoft.CodeAnalysis.IFieldSymbol>;
+using TypeDeclarationTuple = SonarAnalyzer.Common.NodeAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.TypeDeclarationSyntax>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
