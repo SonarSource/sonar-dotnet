@@ -11,6 +11,8 @@
     public virtual int MyProperty9 { get; init; }
     public virtual int MyProperty10 { get; init; }
     public virtual int MyProperty11 { get; init; }
+    public virtual int MyProperty12 { get; init; }
+    public virtual int MyProperty13 { get; init; }
 }
 
 record Derived : Base
@@ -28,4 +30,7 @@ record Derived : Base
     public override int MyProperty7 { get => base.MyProperty7; init => base.MyProperty7 = value; } // Error [CS0200, CS0200] Property or indexer 'property' cannot be assigned to -- it is read only
     public sealed int MyProperty10 { get => base.MyProperty10; init => base.MyProperty10 = value; } // Error [CS0238] 'member' cannot be sealed because it is not an override
     public override int MyProperty11 { get => base.MyProperty11; init => backingField = value; }
+    public override int MyProperty12 { get => base.MyProperty5; init => base.MyProperty5 = value; }
+    public override int MyProperty13 { get; init => base.MyProperty13 = value; } // Error [CS0501] 'member function' must declare a body because it is not marked abstract, extern, or partial
+    public override int MyProperty14 { get => base.MyProperty14; init => base.MyProperty14 = value; } // Error [CS0115, CS0117, CS0117] no suitable method found to override, 'Base' does not contain a definition for 'MyProperty14'
 }

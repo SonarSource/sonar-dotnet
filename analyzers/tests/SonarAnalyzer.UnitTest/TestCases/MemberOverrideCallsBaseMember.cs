@@ -45,6 +45,15 @@ namespace Tests.Diagnostics
         {
         }
 
+        public virtual int Method6(string s1, string s2)
+        {
+            return 1;
+        }
+
+        public virtual void Method8(string s1, string s2 = null)
+        {
+        }
+
         public override bool Equals(object obj)
         {
             return base.Equals(obj);
@@ -103,6 +112,18 @@ namespace Tests.Diagnostics
         public override void Method5(string s1, string s2)
         {
             base.Method5(s1, null);
+        }
+        public override int Method6(string s1, string s2)
+        {
+            return base.NonExisteng(s1, s2); // Error [CS0117] 'Base' does not contain a definition for 'NonExisteng'
+        }
+        public override void Method7(string s1, string s2) // Error [CS0115] no suitable method found to override
+        {
+            return base.Method7(s1, s2); // Error [CS0117] 'Base' does not contain a definition for 'Method7'
+        }
+        public override void Method8(string s1, string s2)
+        {
+            base.Method8(s1, s2);
         }
     }
 
