@@ -11,5 +11,25 @@
                 6 => 6
             };
         }
+
+        private int? f;
+        public int Property
+        {
+            get
+            {
+                if (f != null)
+                {
+                    f = null;
+                }
+                return 1;
+            }
+            init
+            {
+                if (f != null)
+                {
+                    f = null;
+                }
+            }
+        }
     }
 }
