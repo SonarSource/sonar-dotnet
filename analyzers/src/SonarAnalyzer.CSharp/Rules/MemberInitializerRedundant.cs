@@ -37,7 +37,6 @@ using SymbolWithInitializer = System.Collections.Generic.KeyValuePair<Microsoft.
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public sealed class MemberInitializerRedundant : SonarDiagnosticAnalyzer
