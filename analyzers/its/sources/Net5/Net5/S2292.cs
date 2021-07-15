@@ -5,6 +5,7 @@
         public record Record
         {
             private string field;
+
             public string PropWithGetAndInit
             {
                 get { return field; }
