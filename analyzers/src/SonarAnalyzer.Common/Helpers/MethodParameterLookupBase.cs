@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -61,9 +62,9 @@ namespace SonarAnalyzer.Helpers
                 return false;
             }
 
-            if (GetNameColonArgumentIdentifier(argument) is { }  nameColonArgumentIdenfitier)
+            if (GetNameColonArgumentIdentifier(argument) is { } nameColonArgumentIdentifier)
             {
-                parameter = MethodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdenfitier.ValueText);
+                parameter = MethodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdentifier.ValueText);
                 return parameter != null;
             }
 
@@ -96,7 +97,7 @@ namespace SonarAnalyzer.Helpers
         /// There will be single result for normal parameters.
         public bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions)
         {
-            expressions = GetAllArgumentParameterMappings().Where(x => x.Symbol.Name == parameterName).Select(x => Expression(x.SyntaxNode)).ToImmutableArray();
+            expressions = GetAllArgumentParameterMappings().Where(x => x.Symbol.Name == parameterName).Select(x => Expression(x.Node)).ToImmutableArray();
             return !expressions.IsEmpty;
         }
 
@@ -120,7 +121,7 @@ namespace SonarAnalyzer.Helpers
             return false;
         }
 
-        internal IEnumerable<SyntaxNodeSymbolSemanticModelTuple<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings()
+        internal IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings()
         {
             if (argumentList.HasValue)
             {
@@ -128,7 +129,7 @@ namespace SonarAnalyzer.Helpers
                 {
                     if (TryGetSymbol(argument, out var parameter))
                     {
-                        yield return new SyntaxNodeSymbolSemanticModelTuple<TArgumentSyntax, IParameterSymbol> { SyntaxNode = argument, Symbol = parameter };
+                        yield return new NodeAndSymbol<TArgumentSyntax, IParameterSymbol>(argument, parameter);
                     }
                 }
             }

@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(x => !usedSymbols.Contains(x.Symbol))
                 .ToList()
                 .ForEach(x => context.ReportDiagnosticIfNonGenerated(
-                    Diagnostic.Create(Rule, GetLocation(x.SyntaxNode), x.Symbol.Name)));
+                    Diagnostic.Create(Rule, GetLocation(x.Node), x.Symbol.Name)));
 
             Location GetLocation(SyntaxNode node) =>
                 node is VariableDeclaratorSyntax variableDeclarator
@@ -88,36 +88,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static IEnumerable<ISymbol> GetInvokedEventSymbols(CSharpRemovableDeclarationCollector removableDeclarationCollector)
         {
             var delegateInvocations = removableDeclarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes()
-                    .Where(node => node.IsKind(SyntaxKind.InvocationExpression))
+                .SelectMany(container => container.Node.DescendantNodes()
+                    .Where(x => x.IsKind(SyntaxKind.InvocationExpression))
                     .Cast<InvocationExpressionSyntax>()
-                    .Select(node =>
-                        new SyntaxNodeSymbolSemanticModelTuple<InvocationExpressionSyntax, IMethodSymbol>
-                        {
-                            SyntaxNode = node,
-                            SemanticModel = container.SemanticModel,
-                            Symbol = container.SemanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol
-                        }))
-                 .Where(tuple =>
-                    tuple.Symbol != null
-                    && IsDelegateInvocation(tuple.Symbol));
+                    .Select(x => new NodeSymbolAndSemanticModel<InvocationExpressionSyntax, IMethodSymbol>(container.SemanticModel, x, container.SemanticModel.GetSymbolInfo(x).Symbol as IMethodSymbol)))
+                 .Where(x => x.Symbol != null && IsDelegateInvocation(x.Symbol));
 
             var invokedEventSymbols = delegateInvocations
-                .Select(tuple =>
-                    new SyntaxNodeAndSemanticModel<ExpressionSyntax>
-                    {
-                        SyntaxNode = GetEventExpressionFromInvocation(tuple.SyntaxNode, tuple.Symbol),
-                        SemanticModel = tuple.SemanticModel
-                    })
-                .Select(tuple =>
-                    new SyntaxNodeSymbolSemanticModelTuple<ExpressionSyntax, IEventSymbol>
-                    {
-                        SyntaxNode = tuple.SyntaxNode,
-                        SemanticModel = tuple.SemanticModel,
-                        Symbol = tuple.SemanticModel.GetSymbolInfo(tuple.SyntaxNode).Symbol as IEventSymbol
-                    })
-                .Where(tuple => tuple.Symbol != null)
-                .Select(tuple => tuple.Symbol.OriginalDefinition);
+                .Select(x => new NodeAndSemanticModel<ExpressionSyntax>(x.SemanticModel, GetEventExpressionFromInvocation(x.Node, x.Symbol)))
+                .Select(x => new NodeSymbolAndSemanticModel<ExpressionSyntax, IEventSymbol>(x.SemanticModel, x.Node, x.SemanticModel.GetSymbolInfo(x.Node).Symbol as IEventSymbol))
+                .Where(x => x.Symbol != null)
+                .Select(x => x.Symbol.OriginalDefinition);
 
             return invokedEventSymbols;
         }
@@ -125,43 +106,28 @@ namespace SonarAnalyzer.Rules.CSharp
         private static IEnumerable<ISymbol> GetPossiblyCopiedSymbols(CSharpRemovableDeclarationCollector removableDeclarationCollector)
         {
             var arguments = removableDeclarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes()
-                    .Where(node => node.IsKind(SyntaxKind.Argument))
+                .SelectMany(container => container.Node.DescendantNodes()
+                    .Where(x => x.IsKind(SyntaxKind.Argument))
                     .Cast<ArgumentSyntax>()
-                    .Select(node =>
-                        new SyntaxNodeAndSemanticModel<SyntaxNode>
-                        {
-                            SyntaxNode = node.Expression,
-                            SemanticModel = container.SemanticModel
-                        }));
+                    .Select(x => new NodeAndSemanticModel<SyntaxNode>(container.SemanticModel, x.Expression)));
 
             var equalsValue = removableDeclarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes()
+                .SelectMany(container => container.Node.DescendantNodes()
                     .OfType<EqualsValueClauseSyntax>()
-                    .Select(node =>
-                        new SyntaxNodeAndSemanticModel<SyntaxNode>
-                        {
-                            SyntaxNode = node.Value,
-                            SemanticModel = container.SemanticModel
-                        }));
+                    .Select(x => new NodeAndSemanticModel<SyntaxNode>(container.SemanticModel, x.Value)));
 
             var assignment = removableDeclarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes()
-                    .Where(node => node.IsKind(SyntaxKind.SimpleAssignmentExpression))
+                .SelectMany(container => container.Node.DescendantNodes()
+                    .Where(x => x.IsKind(SyntaxKind.SimpleAssignmentExpression))
                     .Cast<AssignmentExpressionSyntax>()
-                    .Select(node =>
-                        new SyntaxNodeAndSemanticModel<SyntaxNode>
-                        {
-                            SyntaxNode = node.Right,
-                            SemanticModel = container.SemanticModel
-                        }));
+                    .Select(x => new NodeAndSemanticModel<SyntaxNode>(container.SemanticModel, x.Right)));
 
             var allNodes = arguments.Concat(equalsValue).Concat(assignment);
 
             var usedSymbols = new List<ISymbol>();
             foreach (var node in allNodes)
             {
-                if (node.SemanticModel.GetSymbolInfo(node.SyntaxNode).Symbol is IEventSymbol symbol)
+                if (node.SemanticModel.GetSymbolInfo(node.Node).Symbol is IEventSymbol symbol)
                 {
                     usedSymbols.Add(symbol.OriginalDefinition);
                 }

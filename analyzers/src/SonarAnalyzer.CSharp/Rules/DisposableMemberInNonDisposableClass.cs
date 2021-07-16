@@ -38,9 +38,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2931";
         private const string MessageFormat = "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on {0}.";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, analysisContext.Compilation).TypeDeclarations;
                     foreach (var classDeclaration in typeDeclarations)
                     {
-                        analysisContext.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, classDeclaration.SyntaxNode.Identifier.GetLocation(), message));
+                        analysisContext.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, classDeclaration.Node.Identifier.GetLocation(), message));
                     }
                 },
                 SymbolKind.NamedType);

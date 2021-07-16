@@ -60,16 +60,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Where(x => ArgumentHasDefaultValue(x, c.SemanticModel)))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, argumentMapping.SyntaxNode.GetLocation(), argumentMapping.Symbol.Name));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation(), argumentMapping.Symbol.Name));
                         }
                     }
                 },
                 SyntaxKind.InvocationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-        internal static bool ArgumentHasDefaultValue(SyntaxNodeSymbolSemanticModelTuple<ArgumentSyntax, IParameterSymbol> argumentMapping,
-                                                     SemanticModel semanticModel)
+        internal static bool ArgumentHasDefaultValue(NodeAndSymbol<ArgumentSyntax, IParameterSymbol> argumentMapping, SemanticModel semanticModel)
         {
-            var argument = argumentMapping.SyntaxNode;
+            var argument = argumentMapping.Node;
             var parameter = argumentMapping.Symbol;
 
             if (!parameter.HasExplicitDefaultValue)

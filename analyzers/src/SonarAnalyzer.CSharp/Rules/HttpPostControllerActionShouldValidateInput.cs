@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var attributeSymbols = methodDeclaration.AttributeLists
                         .SelectMany(list => list.Attributes)
-                        .Select(a => a.ToSyntaxWithSymbol(c.SemanticModel.GetSymbolInfo(a).Symbol as IMethodSymbol))
+                        .Select(a => new NodeAndSymbol<AttributeSyntax, IMethodSymbol>(a, c.SemanticModel.GetSymbolInfo(a).Symbol as IMethodSymbol))
                         .Where(tuple => tuple.Symbol != null)
                         .ToList();
 
@@ -72,21 +72,21 @@ namespace SonarAnalyzer.Rules.CSharp
                         a.Symbol.ContainingType.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
 
                     if (validateInputAttribute == null ||
-                        validateInputAttribute.Syntax.ArgumentList == null ||
-                        validateInputAttribute.Syntax.ArgumentList.Arguments.Count != 1)
+                        validateInputAttribute.Node.ArgumentList == null ||
+                        validateInputAttribute.Node.ArgumentList.Arguments.Count != 1)
                     {
                         // ValidateInputAttribute not set or has incorrect number of args
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, httpPostAttribute.Syntax.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, httpPostAttribute.Node.GetLocation()));
                         return;
                     }
 
                     var constantValue = c.SemanticModel.GetConstantValue(
-                        validateInputAttribute.Syntax.ArgumentList.Arguments[0].Expression);
+                        validateInputAttribute.Node.ArgumentList.Arguments[0].Expression);
                     if (!constantValue.HasValue ||
                         (constantValue.Value as bool?) != true)
                     {
                         // ValidateInputAttribute is set but with incorrect value
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, httpPostAttribute.Syntax.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, httpPostAttribute.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

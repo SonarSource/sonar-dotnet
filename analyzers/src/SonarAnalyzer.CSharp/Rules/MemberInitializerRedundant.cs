@@ -32,12 +32,11 @@ using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
+using CtorDeclarationTuple = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.ConstructorDeclarationSyntax, Microsoft.CodeAnalysis.IMethodSymbol>;
+using SymbolWithInitializer = System.Collections.Generic.KeyValuePair<Microsoft.CodeAnalysis.ISymbol, Microsoft.CodeAnalysis.CSharp.Syntax.EqualsValueClauseSyntax>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    using CtorDeclarationTuple = SyntaxNodeSymbolSemanticModelTuple<ConstructorDeclarationSyntax, IMethodSymbol>;
-    using SymbolWithInitializer = KeyValuePair<ISymbol, EqualsValueClauseSyntax>;
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public sealed class MemberInitializerRedundant : SonarDiagnosticAnalyzer
@@ -100,25 +99,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.StructDeclaration);
         }
 
-        private static List<CtorDeclarationTuple> GetConstructorTuples(
-            SyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols)
-        {
-            return constructorSymbols
-                .Select(ctor => new SyntaxNodeSymbolSemanticModelTuple<ConstructorDeclarationSyntax, IMethodSymbol>
-                {
-                    SyntaxNode = ctor.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as ConstructorDeclarationSyntax,
-                    Symbol = ctor
-                })
-                .Where(ctor => ctor.SyntaxNode != null)
-                .Select(ctor => new SyntaxNodeSymbolSemanticModelTuple<ConstructorDeclarationSyntax, IMethodSymbol>
-                {
-                    SyntaxNode = ctor.SyntaxNode,
-                    Symbol = ctor.Symbol,
-                    SemanticModel = ctor.SyntaxNode.EnsureCorrectSemanticModelOrDefault(context.SemanticModel)
-                })
-                .Where(ctor => ctor.SemanticModel != null)
+        private static List<CtorDeclarationTuple> GetConstructorTuples(SyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols) =>
+            constructorSymbols
+                .Select(x => new CtorDeclarationTuple(null, x.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as ConstructorDeclarationSyntax, x))
+                .Where(x => x.Node != null)
+                .Select(x => new CtorDeclarationTuple(x.Node.EnsureCorrectSemanticModelOrDefault(context.SemanticModel), x.Node, x.Symbol))
+                .Where(x => x.SemanticModel != null)
                 .ToList();
-        }
 
         private static bool IsExplicitlyDefinedConstructor(ISymbol member)
         {
@@ -129,14 +116,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsSymbolFirstSetInCtor(ISymbol declaredSymbol, CtorDeclarationTuple ctor)
         {
-            if (ctor.SyntaxNode.Initializer != null &&
-                ctor.SyntaxNode.Initializer.ThisOrBaseKeyword.IsKind(SyntaxKind.ThisKeyword))
+            if (ctor.Node.Initializer != null &&
+                ctor.Node.Initializer.ThisOrBaseKeyword.IsKind(SyntaxKind.ThisKeyword))
             {
                 // Calls another ctor, which is also checked.
                 return true;
             }
 
-            var ctorBody = (CSharpSyntaxNode)ctor.SyntaxNode.Body ?? ctor.SyntaxNode.ExpressionBody();
+            var ctorBody = (CSharpSyntaxNode)ctor.Node.Body ?? ctor.Node.ExpressionBody();
             if (!CSharpControlFlowGraph.TryGet(ctorBody, ctor.SemanticModel, out var cfg))
             {
                 return false;

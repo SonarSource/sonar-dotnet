@@ -20,11 +20,24 @@
 
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Common
 {
-    public class SyntaxNodeAndSemanticModel<TSyntax> where TSyntax : SyntaxNode
+    public class NodeAndSymbol<TSyntaxNode, TSymbol>
+        where TSyntaxNode : SyntaxNode
+        where TSymbol : ISymbol
     {
-        public TSyntax SyntaxNode { get; set; }
-        public SemanticModel SemanticModel { get; set; }
+        public TSyntaxNode Node { get; }
+        public TSymbol Symbol { get; }
+
+        public NodeAndSymbol(TSyntaxNode node, TSymbol symbol)
+        {
+            Node = node;
+            Symbol = symbol;
+        }
+    }
+
+    public class NodeAndSymbol : NodeAndSymbol<SyntaxNode, ISymbol>
+    {
+        public NodeAndSymbol(SyntaxNode node, ISymbol symbol) : base(node, symbol) { }
     }
 }

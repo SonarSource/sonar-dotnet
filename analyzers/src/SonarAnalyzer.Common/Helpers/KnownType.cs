@@ -27,8 +27,12 @@ namespace SonarAnalyzer.Helpers
 {
     internal sealed class KnownType
     {
-#pragma warning disable S103 // Lines should not be too long
-#pragma warning disable SA1310 // FieldNamesMustNotContainUnderscore
+#pragma warning disable S103    // Lines should not be too long
+#pragma warning disable SA1310  // FieldNamesMustNotContainUnderscore
+#pragma warning disable SA1311  // Static readonly fields should begin with upper-case letter
+#pragma warning disable SA1307  // Field 'log4net_Config_XmlConfigurator' should begin with upper-case letter
+#pragma warning disable SA1304  // Non-private readonly fields should begin with upper-case letter
+
         #region Known types
 
         internal static readonly KnownType Void = new KnownType(SpecialType.System_Void, "void");
@@ -333,7 +337,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_Serialization_Formatters_Binary_BinaryFormatter = new KnownType("System.Runtime.Serialization.Formatters.Binary.BinaryFormatter");
         internal static readonly KnownType System_Runtime_Serialization_Formatters_Soap_SoapFormatter = new KnownType("System.Runtime.Serialization.Formatters.Soap.SoapFormatter");
         internal static readonly KnownType System_Runtime_Serialization_ISerializable = new KnownType("System.Runtime.Serialization.ISerializable");
-        internal static readonly KnownType System_Runtime_Serialization_IDeserializationCallback  = new KnownType("System.Runtime.Serialization.IDeserializationCallback");
+        internal static readonly KnownType System_Runtime_Serialization_IDeserializationCallback = new KnownType("System.Runtime.Serialization.IDeserializationCallback");
         internal static readonly KnownType System_Runtime_Serialization_NetDataContractSerializer = new KnownType("System.Runtime.Serialization.NetDataContractSerializer");
         internal static readonly KnownType System_Runtime_Serialization_OnDeserializedAttribute = new KnownType("System.Runtime.Serialization.OnDeserializedAttribute");
         internal static readonly KnownType System_Runtime_Serialization_OnDeserializingAttribute = new KnownType("System.Runtime.Serialization.OnDeserializingAttribute");
@@ -468,8 +472,7 @@ namespace SonarAnalyzer.Helpers
                 new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>"),
                 new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>"),
                 new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>"),
-                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>")
-            );
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>"));
         internal static readonly ImmutableArray<KnownType> SystemFuncVariants =
             ImmutableArray.Create(
                 new KnownType("System.Func<TResult>"),
@@ -488,14 +491,12 @@ namespace SonarAnalyzer.Helpers
                 new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>"),
                 new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>"),
                 new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>"),
-                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>")
-            );
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>"));
         internal static readonly ImmutableArray<KnownType> SystemTasks =
             ImmutableArray.Create(
                 System_Threading_Tasks_Task,
                 System_Threading_Tasks_Task_T,
-                System_Threading_Tasks_ValueTask_TResult
-            );
+                System_Threading_Tasks_ValueTask_TResult);
         internal static readonly KnownType Sytem_Resources_ResourceManager = new KnownType("System.Resources.ResourceManager");
         internal static readonly KnownType UnityEditor_AssetModificationProcessor = new KnownType("UnityEditor.AssetModificationProcessor");
         internal static readonly KnownType UnityEditor_AssetPostprocessor = new KnownType("UnityEditor.AssetPostprocessor");
@@ -511,13 +512,11 @@ namespace SonarAnalyzer.Helpers
             ImmutableArray.Create(
                 System_Runtime_CompilerServices_CallerFilePathAttribute,
                 System_Runtime_CompilerServices_CallerLineNumberAttribute,
-                System_Runtime_CompilerServices_CallerMemberNameAttribute
-            );
+                System_Runtime_CompilerServices_CallerMemberNameAttribute);
         internal static readonly ImmutableArray<KnownType> FloatingPointNumbers =
             ImmutableArray.Create(
                 System_Single,
-                System_Double
-            );
+                System_Double);
         internal static readonly ImmutableArray<KnownType> IntegralNumbers =
             ImmutableArray.Create(
                 System_Int16,
@@ -528,52 +527,51 @@ namespace SonarAnalyzer.Helpers
                 System_UInt64,
                 System_Char,
                 System_Byte,
-                System_SByte
-            );
+                System_SByte);
         internal static readonly ImmutableArray<KnownType> NonIntegralNumbers =
             ImmutableArray.Create(
                 System_Single,
                 System_Double,
-                System_Decimal
-            );
+                System_Decimal);
         internal static readonly ImmutableArray<KnownType> PointerTypes =
             ImmutableArray.Create(
                 System_IntPtr,
-                System_UIntPtr
-            );
+                System_UIntPtr);
         internal static readonly ImmutableArray<KnownType> UnsignedIntegers =
             ImmutableArray.Create(
                 System_UInt64,
                 System_UInt32,
-                System_UInt16
-            );
+                System_UInt16);
+
         #endregion Known types
-#pragma warning restore SA1310 // FieldNamesMustNotContainUnderscore
-#pragma warning restore S103 // Lines should not be too long
+
+#pragma warning restore S103    // Lines should not be too long
+#pragma warning restore SA1310  // FieldNamesMustNotContainUnderscore
+#pragma warning restore SA1311  // Static readonly fields should begin with upper-case letter
+#pragma warning restore SA1307  // Field 'log4net_Config_XmlConfigurator' should begin with upper-case letter
+#pragma warning restore SA1304  // Non-private readonly fields should begin with upper-case letter
 
         private readonly bool isSpecialType;
         private readonly SpecialType specialType;
         private readonly Lazy<string> shortName;
 
-        private KnownType(string typeName)
-            : this(SpecialType.None, typeName)
-        {
-        }
+        public string TypeName { get; }
+        public string ShortName => shortName.Value;
+
+        private KnownType(string typeName) : this(SpecialType.None, typeName) { }
 
         private KnownType(SpecialType specialType, string typeName)
         {
+            this.specialType = specialType;
             TypeName = typeName;
             shortName = new Lazy<string>(() => typeName.Split('.').Last());
-            this.specialType = specialType;
             isSpecialType = specialType != SpecialType.None;
         }
 
-        public string TypeName { get; }
+        internal bool Matches(string type) =>
+            !isSpecialType && TypeName == type;
 
-        public string ShortName => shortName.Value;
-
-        internal bool Matches(string type) => !isSpecialType && TypeName == type;
-
-        internal bool Matches(SpecialType type) => isSpecialType && specialType == type;
+        internal bool Matches(SpecialType type) =>
+            isSpecialType && specialType == type;
     }
 }

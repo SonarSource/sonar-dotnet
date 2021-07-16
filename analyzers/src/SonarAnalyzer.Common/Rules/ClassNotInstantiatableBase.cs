@@ -23,6 +23,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -56,7 +57,7 @@ namespace SonarAnalyzer.Rules
                 .Select(typeDeclaration => new
                 {
                     typeDeclaration.NodeAndSemanticModel.SemanticModel,
-                    DescendantNodes = typeDeclaration.NodeAndSemanticModel.SyntaxNode.DescendantNodes().ToList()
+                    DescendantNodes = typeDeclaration.NodeAndSemanticModel.Node.DescendantNodes().ToList()
                 })
                 .Any(descendants =>
                     IsAnyConstructorToCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel)
@@ -131,10 +132,10 @@ namespace SonarAnalyzer.Rules
 
         protected class ConstructorContext
         {
-            public readonly SyntaxNodeAndSemanticModel<TBaseTypeSyntax> NodeAndSemanticModel;
-            public readonly Diagnostic Diagnostic;
+            public NodeAndSemanticModel<TBaseTypeSyntax> NodeAndSemanticModel { get; }
+            public Diagnostic Diagnostic { get; }
 
-            public ConstructorContext(SyntaxNodeAndSemanticModel<TBaseTypeSyntax> nodeAndSemanticModel, Diagnostic diagnostic)
+            public ConstructorContext(NodeAndSemanticModel<TBaseTypeSyntax> nodeAndSemanticModel, Diagnostic diagnostic)
             {
                 NodeAndSemanticModel = nodeAndSemanticModel;
                 Diagnostic = diagnostic;

@@ -29,12 +29,11 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
+using FieldTuple = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.VariableDeclaratorSyntax, Microsoft.CodeAnalysis.IFieldSymbol>;
+using TypeDeclarationTuple = SonarAnalyzer.Common.NodeAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.TypeDeclarationSyntax>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    using FieldTuple = SyntaxNodeSymbolSemanticModelTuple<VariableDeclaratorSyntax, IFieldSymbol>;
-    using TypeDeclarationTuple = SyntaxNodeAndSemanticModel<TypeDeclarationSyntax>;
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
@@ -100,19 +99,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     var partialDeclarations = declaredSymbol.DeclaringSyntaxReferences
                         .Select(reference => reference.GetSyntax())
                         .OfType<TypeDeclarationSyntax>()
-                        .Select(node =>
-                            new SyntaxNodeAndSemanticModel<TypeDeclarationSyntax>
-                            {
-                                SyntaxNode = node,
-                                SemanticModel = c.Compilation.GetSemanticModel(node.SyntaxTree)
-                            })
-                        .Where(n => n.SemanticModel != null);
+                        .Select(x => new TypeDeclarationTuple(c.Compilation.GetSemanticModel(x.SyntaxTree), x))
+                        .Where(x => x.SemanticModel != null);
 
                     var fieldCollector = new ReadonlyFieldCollector(partialDeclarations);
 
                     foreach (var field in fieldCollector.NonCompliantFields)
                     {
-                        var identifier = field.SyntaxNode.Identifier;
+                        var identifier = field.Node.Identifier;
                         c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, identifier.GetLocation(), identifier.ValueText));
                     }
                 },
@@ -168,21 +162,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     this.partialTypeDeclaration = partialTypeDeclaration;
                     this.readonlyFieldCollector = readonlyFieldCollector;
 
-                    AllFields = partialTypeDeclaration.SyntaxNode.DescendantNodes()
+                    AllFields = partialTypeDeclaration.Node.DescendantNodes()
                         .OfType<FieldDeclarationSyntax>()
                         .SelectMany(f => GetAllFields(f));
                 }
 
-                private IEnumerable<FieldTuple> GetAllFields(FieldDeclarationSyntax fieldDeclaration)
-                {
-                    return fieldDeclaration.Declaration.Variables
-                        .Select(variableDeclaratorSyntax => new FieldTuple
-                        {
-                            SyntaxNode = variableDeclaratorSyntax,
-                            Symbol = this.partialTypeDeclaration.SemanticModel.GetDeclaredSymbol(variableDeclaratorSyntax) as IFieldSymbol,
-                            SemanticModel = this.partialTypeDeclaration.SemanticModel
-                        });
-                }
+                private IEnumerable<FieldTuple> GetAllFields(FieldDeclarationSyntax fieldDeclaration) =>
+                    fieldDeclaration.Declaration.Variables
+                        .Select(x => new FieldTuple(partialTypeDeclaration.SemanticModel, x, partialTypeDeclaration.SemanticModel.GetDeclaredSymbol(x) as IFieldSymbol));
 
                 public void CollectFields()
                 {
@@ -197,7 +184,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var fieldDeclarations = AllFields.Where(f =>
                         IsFieldRelevant(f.Symbol) &&
-                        f.SyntaxNode.Initializer != null);
+                        f.Node.Initializer != null);
 
                     foreach (var field in fieldDeclarations)
                     {
@@ -207,7 +194,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void CollectFieldsFromArguments()
                 {
-                    var arguments = this.partialTypeDeclaration.SyntaxNode.DescendantNodes()
+                    var arguments = this.partialTypeDeclaration.Node.DescendantNodes()
                         .OfType<ArgumentSyntax>()
                         .Where(a => !a.RefOrOutKeyword.IsKind(SyntaxKind.None));
 
@@ -220,7 +207,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void CollectFieldsFromPostfixUnaryExpressions()
                 {
-                    var postfixUnaries = this.partialTypeDeclaration.SyntaxNode.DescendantNodes()
+                    var postfixUnaries = this.partialTypeDeclaration.Node.DescendantNodes()
                         .OfType<PostfixUnaryExpressionSyntax>()
                         .Where(a => postfixUnaryKinds.Contains(a.Kind()));
 
@@ -232,7 +219,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void CollectFieldsFromPrefixUnaryExpressions()
                 {
-                    var prefixUnaries = this.partialTypeDeclaration.SyntaxNode.DescendantNodes()
+                    var prefixUnaries = this.partialTypeDeclaration.Node.DescendantNodes()
                         .OfType<PrefixUnaryExpressionSyntax>()
                         .Where(a => prefixUnaryKinds.Contains(a.Kind()));
 
@@ -244,7 +231,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void CollectFieldsFromAssignments()
                 {
-                    var assignments = this.partialTypeDeclaration.SyntaxNode.DescendantNodes()
+                    var assignments = this.partialTypeDeclaration.Node.DescendantNodes()
                         .OfType<AssignmentExpressionSyntax>()
                         .Where(a => assignmentKinds.Contains(a.Kind()));
 

@@ -184,24 +184,24 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostics = new List<Diagnostic>();
             var alreadyReportedFieldLikeSymbols = new HashSet<ISymbol>();
-            var unusedSymbolSyntaxPairs = unusedSymbols.SelectMany(symbol => symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax().ToSyntaxWithSymbol(symbol)));
+            var unusedSymbolSyntaxPairs = unusedSymbols.SelectMany(symbol => symbol.DeclaringSyntaxReferences.Select(x => new NodeAndSymbol(x.GetSyntax(), symbol)));
 
             foreach (var unused in unusedSymbolSyntaxPairs)
             {
-                var syntaxForLocation = unused.Syntax;
+                var syntaxForLocation = unused.Node;
 
                 var isFieldOrEvent = unused.Symbol.Kind == SymbolKind.Field || unused.Symbol.Kind == SymbolKind.Event;
-                if (isFieldOrEvent && unused.Syntax.IsKind(SyntaxKind.VariableDeclarator))
+                if (isFieldOrEvent && unused.Node.IsKind(SyntaxKind.VariableDeclarator))
                 {
                     if (alreadyReportedFieldLikeSymbols.Contains(unused.Symbol))
                     {
                         continue;
                     }
 
-                    var declarations = GetSiblingDeclarators(unused.Syntax).Select(fieldLikeSymbols.GetByB).ToList();
+                    var declarations = GetSiblingDeclarators(unused.Node).Select(fieldLikeSymbols.GetByB).ToList();
                     if (declarations.All(unusedSymbols.Contains))
                     {
-                        syntaxForLocation = unused.Syntax.Parent.Parent;
+                        syntaxForLocation = unused.Node.Parent.Parent;
                         alreadyReportedFieldLikeSymbols.UnionWith(declarations);
                     }
                 }

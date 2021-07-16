@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationStartAction(
                 compilationStartContext =>
                 {
-                    var symbolsWhereTypeIsCreated = new ConcurrentBag<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>>();
+                    var symbolsWhereTypeIsCreated = new ConcurrentBag<NodeAndSymbol>();
                     var symbolsWhereLocaleIsSet = new ConcurrentBag<ISymbol>();
 
                     compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(ProcessObjectCreations(symbolsWhereTypeIsCreated),
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     compilationStartContext.RegisterCompilationEndAction(ProcessCollectedSymbols(symbolsWhereTypeIsCreated, symbolsWhereLocaleIsSet));
                 });
 
-        private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(ConcurrentBag<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>> symbolsWhereTypeIsCreated) =>
+        private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(ConcurrentBag<NodeAndSymbol> symbolsWhereTypeIsCreated) =>
             c =>
             {
                 if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
                     if (variableSymbol != null)
                     {
-                        symbolsWhereTypeIsCreated.Add(variableSymbol.ToSymbolWithSyntax(c.Node));
+                        symbolsWhereTypeIsCreated.Add(new NodeAndSymbol(c.Node, variableSymbol));
                     }
                 }
             };
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             };
 
-        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(ConcurrentBag<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>> symbolsWhereTypeIsCreated,
+        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(ConcurrentBag<NodeAndSymbol> symbolsWhereTypeIsCreated,
                                                                                   ConcurrentBag<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
             {
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (invalidCreation.Symbol.GetSymbolType()?.Name is { }  typeName)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invalidCreation.Syntax.GetLocation(), typeName));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invalidCreation.Node.GetLocation(), typeName));
                     }
                 }
             };

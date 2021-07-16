@@ -32,14 +32,18 @@ namespace Tests.Diagnostics
             private int field2;
             private static int field3; // Noncompliant {{Remove unassigned field 'field3', or set its value.}}
             private static int field4;
-
             private static int field5; //reported by unused member rule
-
             private static int field6 = 42;
+
+            [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+            private int withAttribute; // Compliant
+
             private readonly int field7; // Noncompliant
             private int Property { get; }  // Noncompliant {{Remove unassigned auto-property 'Property', or set its value.}}
             private int Property2 { get; }
             private int Property3 { get; } = 42; // Unused, S1144 reports on it
+            private virtual int VirtualPrivateProperty { get; } // Error [CS0621]: virtual or abstract members cannot be private
+            private Lazy<int> Lazy { get; }
 
             private int Property4 { get; set; }  // Noncompliant
             private int Property5 { get; set; } = 42;

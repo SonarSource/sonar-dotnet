@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules
             Func<Location> getLocationToReport)
         {
             var argumentParameterMappings = methodParameterLookup.GetAllArgumentParameterMappings()
-                .ToDictionary(pair => pair.SyntaxNode, pair => pair.Symbol);
+                .ToDictionary(pair => pair.Node, pair => pair.Symbol);
 
             var methodSymbol = methodParameterLookup.MethodSymbol;
             if (methodSymbol == null)
