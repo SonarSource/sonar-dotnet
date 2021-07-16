@@ -33,15 +33,13 @@ namespace SonarAnalyzer.Helpers
         public VisualBasicRemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation) : base(namedType, compilation) { }
 
         public static bool IsNodeStructOrClassDeclaration(SyntaxNode node) =>
-            node.IsKind(SyntaxKind.ClassStatement) || node.IsKind(SyntaxKind.StructureStatement);
+            node.IsKind(SyntaxKind.ClassBlock) || node.IsKind(SyntaxKind.StructureBlock);
 
         public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
-            IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceStatement);
+            IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceBlock);
 
-        protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(
-            NodeAndSemanticModel<TypeBlockSyntax> container, ISet<SyntaxKind> kinds) =>
-            container.Node.DescendantNodes(IsNodeContainerTypeDeclaration)
-                .Where(node => kinds.Contains(node.Kind()));
+        protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndSemanticModel<TypeBlockSyntax> container, ISet<SyntaxKind> kinds) =>
+            container.Node.DescendantNodes(IsNodeContainerTypeDeclaration).Where(node => kinds.Contains(node.Kind()));
 
         public override IEnumerable<NodeSymbolAndSemanticModel> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
         {
@@ -50,9 +48,9 @@ namespace SonarAnalyzer.Helpers
                     .Select(x => new NodeAndSemanticModel<FieldDeclarationSyntax>(typeDeclaration.SemanticModel, (FieldDeclarationSyntax)x)));
 
             return fieldLikeNodes
-                .SelectMany(fieldLikeNode => fieldLikeNode.Node.Declarators
-                    .Select(variable => SelectNodeTuple(variable, fieldLikeNode.SemanticModel))
-                    .Where(tuple => IsRemovable(tuple.Symbol, maxAccessibility)));
+                .SelectMany(fieldLikeNode => fieldLikeNode.Node.Declarators.SelectMany(x => x.Names)
+                    .Select(name => SelectNodeTuple(name, fieldLikeNode.SemanticModel))
+                    .Where(x => IsRemovable(x.Symbol, maxAccessibility)));
         }
 
         internal override TypeBlockSyntax GetOwnerOfSubnodes(TypeStatementSyntax node) =>
