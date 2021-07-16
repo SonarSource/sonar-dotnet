@@ -36,6 +36,10 @@ stages:
       displayName: 'Build and package'
 
       steps:
+       # Shallow clone to save time. This job doesn't use scanner.
+      - checkout:
+        fetchDepth: 1
+
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
@@ -238,6 +242,10 @@ stages:
       workspace:
         clean: all
       steps:
+      # Shallow clone to save time. This job doesn't use scanner.
+      - checkout:
+        fetchDepth: 1
+
       - task: DownloadPipelineArtifact@2
         displayName: 'Download binaries to test'
         inputs:
@@ -258,6 +266,10 @@ stages:
       workspace:
         clean: all
       steps:
+       # Shallow clone to save time. This job doesn't use scanner.
+      - checkout:
+        fetchDepth: 1
+
       - task: DownloadPipelineArtifact@2
         displayName: 'Download .Net binaries for Maven build'
         inputs:
@@ -368,6 +380,10 @@ stages:
       workspace:
         clean: all
       steps:
+       # Shallow clone to save time. This job doesn't use scanner.
+      - checkout:
+        fetchDepth: 1
+
       - task: DownloadSecureFile@1
         displayName: 'Download Maven settings'
         name: mavenSettings
@@ -433,6 +449,10 @@ stages:
       displayName: 'SonarAnalyzer.CFG.CSharp'
       steps:
         - template: set-azp-variables-steps.yml@pipelines-yaml-templates
+
+         # Shallow clone to save time. This job doesn't use scanner.
+        - checkout:
+          fetchDepth: 1
 
         - task: UsePythonVersion@0
           inputs:
