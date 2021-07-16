@@ -135,6 +135,7 @@ namespace Tests.Diagnostics
             var scope = new AssertionScope();                           // Noncompliant
             var s = new FluentAssertions.Execution.AssertionScope();    // Noncompliant
 
+            using var _ = new AssertionScope();
             using (var disposed = new AssertionScope()) {
             }
         }
