@@ -32,3 +32,19 @@
     class A : Base { }
     class B : Base { }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/4607
+public class Example
+{
+    public string Foo { get; set; }
+    public string Bar { get; set; }
+
+    public Example Fallback(Example other)
+    {
+        return new Example
+        {
+            Foo = Foo ?? other.Foo, // Noncompliant FP
+            Bar = Bar ?? other.Bar // Noncompliant FP
+        };
+    }
+}
