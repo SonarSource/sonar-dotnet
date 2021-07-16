@@ -37,7 +37,7 @@ stages:
 
       steps:
        # Shallow clone to save time. This job doesn't use scanner.
-      - checkout:
+      - checkout: self
         fetchDepth: 1
 
       - task: NuGetToolInstaller@1
@@ -243,7 +243,7 @@ stages:
         clean: all
       steps:
       # Shallow clone to save time. This job doesn't use scanner.
-      - checkout:
+      - checkout: self
         fetchDepth: 1
 
       - task: DownloadPipelineArtifact@2
@@ -267,7 +267,7 @@ stages:
         clean: all
       steps:
        # Shallow clone to save time. This job doesn't use scanner.
-      - checkout:
+      - checkout: self
         fetchDepth: 1
 
       - task: DownloadPipelineArtifact@2
@@ -381,7 +381,7 @@ stages:
         clean: all
       steps:
        # Shallow clone to save time. This job doesn't use scanner.
-      - checkout:
+      - checkout: self
         fetchDepth: 1
 
       - task: DownloadSecureFile@1
@@ -451,7 +451,7 @@ stages:
         - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
          # Shallow clone to save time. This job doesn't use scanner.
-        - checkout:
+        - checkout: self
           fetchDepth: 1
 
         - task: UsePythonVersion@0
