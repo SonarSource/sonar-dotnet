@@ -38,12 +38,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S1185";
         private const string MessageFormat = "Remove this {1} '{0}' to simply inherit its behavior.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly HashSet<string> IgnoredMethodNames = new HashSet<string> { "Equals", "GetHashCode" };
 
-        private static readonly ISet<string> IgnoredMethodNames = new HashSet<string> { "Equals", "GetHashCode" };
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -53,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var method = (MethodDeclarationSyntax)c.Node;
                     if (IsMethodCandidate(method, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, method.GetLocation(), method.Identifier.ValueText, "method"));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, method.GetLocation(), method.Identifier.ValueText, "method"));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
@@ -64,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var property = (PropertyDeclarationSyntax)c.Node;
                     if (IsPropertyCandidate(property, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, property.GetLocation(), property.Identifier.ValueText, "property"));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, property.GetLocation(), property.Identifier.ValueText, "property"));
                     }
                 },
                 SyntaxKind.PropertyDeclaration);
@@ -78,41 +77,25 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var propertySymbol = semanticModel.GetDeclaredSymbol(propertySyntax);
-
-            if (propertySymbol == null ||
-                !propertySymbol.IsOverride ||
-                propertySymbol.IsSealed ||
-                propertySymbol.OverriddenProperty == null)
+            if (propertySymbol == null
+                || !propertySymbol.IsOverride
+                || propertySymbol.IsSealed
+                || propertySymbol.OverriddenProperty == null
+                || (propertySymbol.GetMethod != null && propertySymbol.OverriddenProperty.GetMethod == null)
+                || (propertySymbol.SetMethod != null && propertySymbol.OverriddenProperty.SetMethod == null)
+                || SymbolHelper.IsAnyAttributeInOverridingChain(propertySymbol))
             {
                 return false;
             }
 
-            if (propertySymbol.GetMethod != null && propertySymbol.OverriddenProperty.GetMethod == null)
-            {
-                return false;
-            }
-
-            if (propertySymbol.SetMethod != null && propertySymbol.OverriddenProperty.SetMethod == null)
-            {
-                return false;
-            }
-
-            if (SymbolHelper.IsAnyAttributeInOverridingChain(propertySymbol))
-            {
-                return false;
-            }
-
-            return CheckGetAccessorIfAny(propertySyntax, propertySymbol, semanticModel) &&
-                CheckSetAccessorIfAny(propertySyntax, propertySymbol, semanticModel);
+            return CheckGetAccessorIfAny(propertySyntax, propertySymbol, semanticModel)
+                   && CheckSetAccessorIfAny(propertySyntax, propertySymbol, semanticModel);
         }
 
-        private static bool CheckGetAccessorIfAny(PropertyDeclarationSyntax propertySyntax, IPropertySymbol propertySymbol,
-            SemanticModel semanticModel)
+        private static bool CheckGetAccessorIfAny(PropertyDeclarationSyntax propertySyntax, IPropertySymbol propertySymbol, SemanticModel semanticModel)
         {
             var getAccessor = propertySyntax.AccessorList?.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
-
-            if (getAccessor == null &&
-                propertySyntax.ExpressionBody == null)
+            if (getAccessor == null && propertySyntax.ExpressionBody == null)
             {
                 // no getter
                 return true;
@@ -122,55 +105,32 @@ namespace SonarAnalyzer.Rules.CSharp
                 ?? getAccessor?.ExpressionBody()?.Expression
                 ?? GetSingleStatementExpression(getAccessor?.Body, isVoid: false);
 
-            if (!(expression is MemberAccessExpressionSyntax memberAccess) ||
-                !(memberAccess.Expression is BaseExpressionSyntax))
-            {
-                return false;
-            }
-
-            return IsBaseProperty(propertySymbol, semanticModel, memberAccess);
+            return expression is MemberAccessExpressionSyntax memberAccess
+                   && memberAccess.Expression is BaseExpressionSyntax
+                   && IsBaseProperty(propertySymbol, semanticModel, memberAccess);
         }
 
-        private static bool IsBaseProperty(IPropertySymbol propertySymbol, SemanticModel semanticModel,
-            MemberAccessExpressionSyntax memberAccess)
-        {
-            return semanticModel.GetSymbolInfo(memberAccess).Symbol is IPropertySymbol invokedPropertySymbol &&
-                invokedPropertySymbol.Equals(propertySymbol.OverriddenProperty);
-        }
+        private static bool IsBaseProperty(IPropertySymbol propertySymbol, SemanticModel semanticModel, MemberAccessExpressionSyntax memberAccess) =>
+            semanticModel.GetSymbolInfo(memberAccess).Symbol is IPropertySymbol invokedPropertySymbol
+            && invokedPropertySymbol.Equals(propertySymbol.OverriddenProperty);
 
-        private static bool CheckSetAccessorIfAny(PropertyDeclarationSyntax propertySyntax, IPropertySymbol propertySymbol,
-            SemanticModel semanticModel)
+        private static bool CheckSetAccessorIfAny(PropertyDeclarationSyntax propertySyntax, IPropertySymbol propertySymbol, SemanticModel semanticModel)
         {
-            var setAccessor = propertySyntax.AccessorList?.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.SetAccessorDeclaration));
+            var setAccessor = propertySyntax.AccessorList?.Accessors.FirstOrDefault(a => a.IsAnyKind(SyntaxKind.SetAccessorDeclaration, SyntaxKindEx.InitAccessorDeclaration));
             if (setAccessor == null)
             {
                 return true;
             }
 
-            var expression = setAccessor?.ExpressionBody()?.Expression
-                ?? GetSingleStatementExpression(setAccessor?.Body, isVoid: true);
+            var expression = setAccessor?.ExpressionBody()?.Expression ?? GetSingleStatementExpression(setAccessor?.Body, isVoid: true);
 
-            if (!(expression is AssignmentExpressionSyntax expressionToCheck) ||
-                !expressionToCheck.IsKind(SyntaxKind.SimpleAssignmentExpression))
-            {
-                return false;
-            }
-
-            //check right:
-            if (!(semanticModel.GetSymbolInfo(expressionToCheck.Right).Symbol is IParameterSymbol valueParameter) || valueParameter.Name != "value" || !valueParameter.IsImplicitlyDeclared)
-            {
-                return false;
-            }
-
-            //check left:
-
-            if (!(expressionToCheck.Left is MemberAccessExpressionSyntax memberAccess) ||
-                !(memberAccess.Expression is BaseExpressionSyntax))
-            {
-                return false;
-            }
-
-            return IsBaseProperty(propertySymbol, semanticModel, memberAccess);
+            return expression is AssignmentExpressionSyntax expressionToCheck
+                   && expressionToCheck.IsKind(SyntaxKind.SimpleAssignmentExpression)
+                   && expressionToCheck.Left is MemberAccessExpressionSyntax memberAccess
+                   && memberAccess.Expression is BaseExpressionSyntax
+                   && expressionToCheck.Right is IdentifierNameSyntax { Identifier: { ValueText: "value" } }
+                   && semanticModel.GetSymbolInfo(expressionToCheck.Right).Symbol is IParameterSymbol { IsImplicitlyDeclared: true }
+                   && IsBaseProperty(propertySymbol, semanticModel, memberAccess);
         }
 
         private static bool IsMethodCandidate(MethodDeclarationSyntax methodSyntax, SemanticModel semanticModel)
@@ -181,80 +141,54 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var methodSymbol = semanticModel.GetDeclaredSymbol(methodSyntax);
-
             if (IsMethodSymbolExcluded(methodSymbol))
             {
                 return false;
             }
 
-            var expression = methodSyntax.ExpressionBody?.Expression
-                ?? GetSingleStatementExpression(methodSyntax.Body, isVoid: methodSymbol.ReturnsVoid);
+            var expression = methodSyntax.ExpressionBody?.Expression ?? GetSingleStatementExpression(methodSyntax.Body, isVoid: methodSymbol.ReturnsVoid);
             var invocationExpression = expression as InvocationExpressionSyntax;
 
-            if (!(invocationExpression?.Expression is MemberAccessExpressionSyntax memberAccess) ||
-                !(memberAccess.Expression is BaseExpressionSyntax))
-            {
-                return false;
-            }
-
-            if (!(semanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol invokedMethod) ||
-                !invokedMethod.Equals(methodSymbol.OverriddenMethod))
-            {
-                return false;
-            }
-
-            return AreArgumentsMatchParameters(methodSymbol, semanticModel, invocationExpression, invokedMethod);
+            return invocationExpression?.Expression is MemberAccessExpressionSyntax memberAccess
+                   && memberAccess.Expression is BaseExpressionSyntax
+                   && semanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol invokedMethod
+                   && invokedMethod.Equals(methodSymbol.OverriddenMethod)
+                   && AreArgumentsMatchParameters(methodSymbol, semanticModel, invocationExpression, invokedMethod);
         }
 
-        private static bool IsMethodSymbolExcluded(IMethodSymbol methodSymbol)
-        {
-            return
-                methodSymbol == null ||
-                !methodSymbol.IsOverride ||
-                methodSymbol.IsSealed ||
-                methodSymbol.OverriddenMethod == null ||
-                IgnoredMethodNames.Contains(methodSymbol.Name) ||
-                methodSymbol.Parameters.Any(p => p.HasExplicitDefaultValue) ||
-                methodSymbol.OverriddenMethod.Parameters.Any(p => p.HasExplicitDefaultValue) ||
-                SymbolHelper.IsAnyAttributeInOverridingChain(methodSymbol);
-        }
+        private static bool IsMethodSymbolExcluded(IMethodSymbol methodSymbol) =>
+            methodSymbol == null
+            || !methodSymbol.IsOverride
+            || methodSymbol.IsSealed
+            || methodSymbol.OverriddenMethod == null
+            || IgnoredMethodNames.Contains(methodSymbol.Name)
+            || methodSymbol.Parameters.Any(p => p.HasExplicitDefaultValue)
+            || methodSymbol.OverriddenMethod.Parameters.Any(p => p.HasExplicitDefaultValue)
+            || SymbolHelper.IsAnyAttributeInOverridingChain(methodSymbol);
 
-        private static bool HasDocumentationComment(SyntaxNode node)
-        {
-            return node.GetLeadingTrivia()
-                .Any(t =>
-                    t.IsKind(SyntaxKind.SingleLineDocumentationCommentTrivia) ||
-                    t.IsKind(SyntaxKind.MultiLineDocumentationCommentTrivia));
-        }
+        private static bool HasDocumentationComment(SyntaxNode node) =>
+            node.GetLeadingTrivia()
+                .Any(t => t.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia));
 
-        private static bool AreArgumentsMatchParameters(IMethodSymbol methodSymbol, SemanticModel semanticModel,
-            InvocationExpressionSyntax expressionToCheck, IMethodSymbol invokedMethod)
+        private static bool AreArgumentsMatchParameters(IMethodSymbol methodSymbol, SemanticModel semanticModel, InvocationExpressionSyntax expressionToCheck, IMethodSymbol invokedMethod)
         {
             if (!invokedMethod.Parameters.Any())
             {
                 return true;
             }
 
-            if (expressionToCheck.ArgumentList == null ||
-                invokedMethod.Parameters.Length != expressionToCheck.ArgumentList.Arguments.Count)
+            if (expressionToCheck.ArgumentList == null || invokedMethod.Parameters.Length != expressionToCheck.ArgumentList.Arguments.Count)
             {
                 return false;
             }
 
-            var argumentExpressions = expressionToCheck.ArgumentList.Arguments
-                .Select(a => a.Expression as IdentifierNameSyntax)
-                .ToList();
-
-            if (argumentExpressions.Any(identifier => identifier == null))
-            {
-                return false;
-            }
-
+            var argumentExpressions = expressionToCheck.ArgumentList.Arguments.Select(a => a.Expression as IdentifierNameSyntax).ToList();
             for (var i = 0; i < argumentExpressions.Count; i++)
             {
-                if (!(semanticModel.GetSymbolInfo(argumentExpressions[i]).Symbol is IParameterSymbol parameterSymbol) ||
-                    !parameterSymbol.Equals(methodSymbol.Parameters[i]) ||
-                    parameterSymbol.Name != methodSymbol.OverriddenMethod.Parameters[i].Name)
+                if (argumentExpressions[i] == null
+                    || !(semanticModel.GetSymbolInfo(argumentExpressions[i]).Symbol is IParameterSymbol parameterSymbol)
+                    || !parameterSymbol.Equals(methodSymbol.Parameters[i])
+                    || parameterSymbol.Name != methodSymbol.OverriddenMethod.Parameters[i].Name)
                 {
                     return false;
                 }
@@ -265,12 +199,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ExpressionSyntax GetSingleStatementExpression(BlockSyntax block, bool isVoid)
         {
-            if (block == null ||
-                block.Statements.Count != 1)
+            if (block == null || block.Statements.Count != 1)
             {
                 return null;
             }
-
             return isVoid
                 ? (block.Statements[0] as ExpressionStatementSyntax)?.Expression
                 : (block.Statements[0] as ReturnStatementSyntax)?.Expression;

@@ -19,8 +19,6 @@ record Derived : Base
 {
     bool isInitialized;
     int backingField;
-
-    public override int MyProperty1 { get => base.MyProperty1; init => base.MyProperty1 = value; }      // Noncompliant
     public override int MyProperty2 { get => base.MyProperty2; init => base.MyProperty2 = value + 1; }
     public override int MyProperty3 { get => base.MyProperty3; init { base.MyProperty2 = value; isInitialized = true; } }
     /// <summary>
@@ -30,8 +28,6 @@ record Derived : Base
     public override sealed int MyProperty5 { get => base.MyProperty5; init => base.MyProperty5 = value; }
     public override int MyProperty6 { get => base.MyProperty6; init => base.MyProperty6 = value; } // Error [CS0154, CS0154] The property or indexer 'property' cannot be used in this context because it lacks the get accessor
     public override int MyProperty7 { get => base.MyProperty7; init => base.MyProperty7 = value; } // Error [CS0200, CS0200] Property or indexer 'property' cannot be assigned to -- it is read only
-    public override int MyProperty8 { init => base.MyProperty8 = value; } // Noncompliant
-    public override int MyProperty9 { get => base.MyProperty9; } // Noncompliant
     public sealed int MyProperty10 { get => base.MyProperty10; init => base.MyProperty10 = value; } // Error [CS0238] 'member' cannot be sealed because it is not an override
     public override int MyProperty11 { get => base.MyProperty11; init => backingField = value; }
     public override int MyProperty12 { get => base.MyProperty5; init => base.MyProperty5 = value; }

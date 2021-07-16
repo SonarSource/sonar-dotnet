@@ -35,6 +35,24 @@ namespace Tests.Diagnostics
         public virtual void Method(int i, int[] numbers)
         {
         }
+        public virtual void Method3(string s1, string s2)
+        {
+        }
+        public virtual void Method4(string s1, params string[] s2)
+        {
+        }
+        public virtual void Method5(string s1, string s2)
+        {
+        }
+
+        public virtual int Method6(string s1, string s2)
+        {
+            return 1;
+        }
+
+        public virtual void Method8(string s1, string s2 = null)
+        {
+        }
 
         public override bool Equals(object obj)
         {
@@ -49,9 +67,9 @@ namespace Tests.Diagnostics
 
     class Derived : Base
     {
-        public override int MyProperty { get { return base.MyProperty; } set { base.MyProperty = value; } } //Noncompliant
-        public override int MyProperty1 { get { return base.MyProperty1; } } //Noncompliant
-        public override int MyProperty2 => base.MyProperty2; //Noncompliant {{Remove this property 'MyProperty2' to simply inherit its behavior.}}
+        public override int MyProperty { get { return base.MyProperty; } set { base.MyProperty = value; } } // Noncompliant
+        public override int MyProperty1 { get { return base.MyProperty1; } } // Noncompliant
+        public override int MyProperty2 => base.MyProperty2; // Noncompliant {{Remove this property 'MyProperty2' to simply inherit its behavior.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public override int MyProperty3 => 42;
         public override int MyProperty4 // Noncompliant
@@ -82,6 +100,30 @@ namespace Tests.Diagnostics
         public override sealed void Method(int i, int[] numbers)
         {
             base.Method(i, numbers);
+        }
+        public override void Method3(string s1, string s2)
+        {
+            base.Method(s1, s2);
+        }
+        public override void Method4(string s1, params string[] s2)
+        {
+            base.Method4(s1);
+        }
+        public override void Method5(string s1, string s2)
+        {
+            base.Method5(s1, null);
+        }
+        public override int Method6(string s1, string s2)
+        {
+            return base.NonExisteng(s1, s2); // Error [CS0117] 'Base' does not contain a definition for 'NonExisteng'
+        }
+        public override void Method7(string s1, string s2) // Error [CS0115] no suitable method found to override
+        {
+            return base.Method7(s1, s2); // Error [CS0117] 'Base' does not contain a definition for 'Method7'
+        }
+        public override void Method8(string s1, string s2)
+        {
+            base.Method8(s1, s2);
         }
     }
 

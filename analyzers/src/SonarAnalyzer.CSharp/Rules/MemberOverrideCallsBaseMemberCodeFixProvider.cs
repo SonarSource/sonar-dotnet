@@ -33,23 +33,15 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class MemberOverrideCallsBaseMemberCodeFixProvider : SonarCodeFixProvider
     {
-        internal const string Title = "Remove redundant override";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(MemberOverrideCallsBaseMember.DiagnosticId);
-            }
-        }
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return DocumentBasedFixAllProvider.Instance;
-        }
+        private const string Title = "Remove redundant override";
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(MemberOverrideCallsBaseMember.DiagnosticId);
+        public override FixAllProvider GetFixAllProvider() =>
+            DocumentBasedFixAllProvider.Instance;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
-            var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
+            var diagnosticSpan = context.Diagnostics.First().Location.SourceSpan;
 
             if (!(root.FindNode(diagnosticSpan) is MemberDeclarationSyntax member))
             {
