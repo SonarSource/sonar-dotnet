@@ -145,15 +145,15 @@ Public Class Sample
         End Set
     End Property
 
-    Public Custom Event Changed As System.EventHandler
+    Public Custom Event Changed As EventHandler
         '               ^^^^^^^
         '               ^^^^^^^ @-1
         '               ^^^^^^^ @-2
-        AddHandler(value As System.EventHandler)
+        AddHandler(value As EventHandler)
         End AddHandler
-        RemoveHandler(value As System.EventHandler)
+        RemoveHandler(value As EventHandler)
         End RemoveHandler
-        RaiseEvent(sender As Object, e As System.EventArgs)
+        RaiseEvent(sender As Object, e As EventArgs)
         End RaiseEvent
     End Event
 
@@ -161,7 +161,7 @@ Public Class Sample
         '                  ^
     End Operator
 
-    Declare Function ExternalMethod Lib ""foo.dll""(lpBuffer As String) As Integer
+    Declare Function ExternalMethod Lib ""foo.dll"" (lpBuffer As String) As Integer
 
 End Class";
             Verifier.VerifyVisualBasicAnalyzer(code, new TestRule_VB());
