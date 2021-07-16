@@ -12,6 +12,19 @@
 "endColumn":  31
 }
 }
+},
+{
+"id":  "S2292",
+"message":  "Make this an auto-implemented property and remove its backing field.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2292.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  27,
+"endLine":  9,
+"endColumn":  45
+}
+}
 }
 ]
 }
