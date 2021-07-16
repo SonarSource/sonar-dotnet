@@ -184,6 +184,45 @@
 },
 {
 "id":  "S2325",
+"message":  "Make 'Property' a static property.",
+"location":  {
+"uri":  "sources\Net5\Net5\S134.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  20,
+"endLine":  5,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Property' a static property.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  20,
+"endLine":  5,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'InitProperty' a static property.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1854.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  20,
+"endLine":  5,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
 "uri":  "sources\Net5\Net5\S1862.cs",
@@ -327,14 +366,40 @@
 },
 {
 "id":  "S2325",
+"message":  "Make 'Prop' a static property.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3626.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  13,
+"endLine":  5,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S2325",
 "message":  "Make 'ChainedSimilarConditionsWithParentheses' a static method.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
-"startLine":  5,
+"startLine":  23,
 "startColumn":  14,
-"endLine":  5,
+"endLine":  23,
 "endColumn":  53
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Foo9' a static property.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3928.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  20,
+"endLine":  8,
+"endColumn":  24
 }
 }
 },

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1185",
+"message":  "Remove this property 'MyProperty1' to simply inherit its behavior.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1185.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  107
+}
+}
+}
+]
+}

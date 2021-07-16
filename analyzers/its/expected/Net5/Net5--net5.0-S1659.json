@@ -12,6 +12,19 @@
 "endColumn":  30
 }
 }
+},
+{
+"id":  "S1659",
+"message":  "Declare 'two' in a separate statement.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  26,
+"endLine":  6,
+"endColumn":  29
+}
+}
 }
 ]
 }

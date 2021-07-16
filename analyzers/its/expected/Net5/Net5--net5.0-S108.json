@@ -43,6 +43,175 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
+"uri":  "sources\Net5\Net5\S134.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  39,
+"endLine":  16,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  28,
+"endLine":  13,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  28,
+"endLine":  14,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  28,
+"endLine":  15,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  28,
+"endLine":  16,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  28,
+"endLine":  17,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  28,
+"endLine":  18,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  28,
+"endLine":  19,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  28,
+"endLine":  20,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  28,
+"endLine":  21,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  28,
+"endLine":  22,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  28,
+"endLine":  23,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\S1541.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  28,
+"endLine":  24,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
 "uri":  "sources\Net5\Net5\S1862.cs",
 "region":  {
 "startLine":  7,

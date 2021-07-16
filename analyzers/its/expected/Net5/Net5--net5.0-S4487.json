@@ -2,6 +2,32 @@
 "issues":  [
 {
 "id":  "S4487",
+"message":  "Remove this unread private field 'field' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2259.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  24,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'foo1' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2376.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4487",
 "message":  "Remove this unread private field 'backing_field' or refactor the code to use its value.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2930.cs",
@@ -10,6 +36,19 @@
 "startColumn":  28,
 "endLine":  7,
 "endColumn":  41
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'field' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  16,
+"endLine":  5,
+"endColumn":  21
 }
 }
 },
