@@ -111,7 +111,7 @@ Public Class Sample
 End Class";
             var sut = CreateCollector(code);
             var ret = sut.GetRemovableDeclarations(new[] { SyntaxKind.SubBlock, SyntaxKind.SubStatement }.ToHashSet(), Accessibility.Public);
-            ret.Should().HaveCount(1);
+            ret.Should().ContainSingle();
             ret.Single().Symbol.Name.Should().Be("RemovableMethod");
         }
 
