@@ -59,6 +59,66 @@ End Class";
             ret.Select(x => x.Symbol.Name).Should().BeEquivalentTo("CompliantA", "CompliantB", "CompliantC", "FieldInNestedClass", "FieldInNestedStruct");
         }
 
+        [TestMethod]
+        public void GetRemovableDeclarations_VB()
+        {
+            const string code = @"
+Public Class Base
+
+    Public Overridable Sub OverridableMethod_NotRemovable()
+    End Sub
+
+End Class
+
+Public Interface IBase
+
+    Sub InterfaceMethod_NotRemovable()
+
+End Interface
+
+Public Class Sample
+    Inherits Base
+    Implements IBase
+
+    Public Sub RemovableMethod()
+    End Sub
+
+    Public Overrides Sub OverridableMethod_NotRemovable()
+    End Sub
+
+    Public Sub InterfaceMethod_NotRemovable() Implements IBase.InterfaceMethod_NotRemovable
+    End Sub
+
+    <System.ComponentModel.Browsable(False)>
+    Public Sub WithAttributes_NotRemovable()
+    End Sub
+
+    Public Overridable Sub Overridable_NotRemovable()
+    End Sub
+
+    Public Interface INestedInterface
+
+        Sub NestedInterfaceMethod_NotRemovable()
+
+    End Interface
+
+    Public MustInherit Class AbstractType
+
+        Public MustOverride Sub Abstract_NotRemovable()
+
+    End Class
+
+End Class";
+            var sut = CreateCollector(code);
+            var ret = sut.GetRemovableDeclarations(new[] { SyntaxKind.SubBlock, SyntaxKind.SubStatement }.ToHashSet(), Accessibility.Public);
+            ret.Should().HaveCount(1);
+            ret.Single().Symbol.Name.Should().Be("RemovableMethod");
+        }
+
+        [TestMethod]
+        public void IsRemovable_Null_ReturnsFalse() =>
+            VisualBasicRemovableDeclarationCollector.IsRemovable(null, Accessibility.Public).Should().BeFalse();
+
         private VisualBasicRemovableDeclarationCollector CreateCollector(string code)
         {
             var (tree, semanticModel) = TestHelper.Compile(code, false);
