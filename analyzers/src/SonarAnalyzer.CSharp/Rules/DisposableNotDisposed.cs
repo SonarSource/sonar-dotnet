@@ -43,14 +43,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ImmutableArray<KnownType> TrackedTypes =
             ImmutableArray.Create(
+                KnownType.FluentAssertions_Execution_AssertionScope,
+                KnownType.System_Drawing_Image,
+                KnownType.System_Drawing_Bitmap,
                 KnownType.System_IO_FileStream,
                 KnownType.System_IO_StreamReader,
                 KnownType.System_IO_StreamWriter,
                 KnownType.System_Net_WebClient,
                 KnownType.System_Net_Sockets_TcpClient,
-                KnownType.System_Net_Sockets_UdpClient,
-                KnownType.System_Drawing_Image,
-                KnownType.System_Drawing_Bitmap);
+                KnownType.System_Net_Sockets_UdpClient);
 
         private static readonly ISet<string> DisposeMethods = new HashSet<string> { "Dispose", "Close" };
 

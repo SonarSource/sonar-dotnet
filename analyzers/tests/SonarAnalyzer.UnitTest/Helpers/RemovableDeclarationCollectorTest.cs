@@ -119,7 +119,7 @@ End Class";
         public void IsRemovable_Null_ReturnsFalse() =>
             VisualBasicRemovableDeclarationCollector.IsRemovable(null, Accessibility.Public).Should().BeFalse();
 
-        private VisualBasicRemovableDeclarationCollector CreateCollector(string code)
+        private static VisualBasicRemovableDeclarationCollector CreateCollector(string code)
         {
             var (tree, semanticModel) = TestHelper.Compile(code, false);
             var type = tree.GetRoot().DescendantNodes().OfType<ClassBlockSyntax>().Single(x => x.ClassStatement.Identifier.ValueText == "Sample");
