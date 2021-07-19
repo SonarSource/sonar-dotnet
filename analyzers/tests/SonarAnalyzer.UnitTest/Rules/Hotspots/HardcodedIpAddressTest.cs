@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using FluentAssertions;
+using FluentAssertions.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -34,6 +37,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void HardcodedIpAddress_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.cs", new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void HardcodedIpAddress_CS_StressTest()
+        {
+            Action action = () => Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\DictionaryStressTest.cs", new[] { new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled) });
+            action.ExecutionTime().Should().BeLessThan(1.Minutes());
+        }
 
         [TestMethod]
         [TestCategory("Rule")]
