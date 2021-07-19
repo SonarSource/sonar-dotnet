@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageReviewFormat = "Review this cast; in this project there's no type that {0}.";
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterfaceRuleConstants.Rule);
-        protected override bool EnableConcurrentExecution { get; } = false;
+        protected override bool EnableConcurrentExecution => false;
 
         protected override void Initialize(SonarAnalysisContext context)
         {

@@ -223,7 +223,10 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        private static ValidationFailureWithAdditionalData TryValidateFormatString(ICollection<FormatStringItem> formatStringItems, ArgumentListSyntax argumentList, int formatArgumentIndex, SemanticModel semanticModel)
+        private static ValidationFailureWithAdditionalData TryValidateFormatString(ICollection<FormatStringItem> formatStringItems,
+                                                                                   ArgumentListSyntax argumentList,
+                                                                                   int formatArgumentIndex,
+                                                                                   SemanticModel semanticModel)
         {
             if (formatStringItems.Any(x => x.Index > MaxValueForArgumentIndexAndAlignment))
             {
