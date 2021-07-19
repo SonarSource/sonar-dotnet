@@ -24,6 +24,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 
@@ -34,6 +35,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         // See https://github.com/dotnet/roslyn/issues/45510
         private const string InitSnippet = @"namespace System.Runtime.CompilerServices { public class IsExternalInit { } }";
         private const string GeneratedAssemblyName = "project";
+
+        private static readonly string[] DefaultGlobalImportsVisualBasic = new[]
+        {
+            "Microsoft.VisualBasic",
+            "System",
+            "System.Collections",
+            "System.Collections.Generic",
+            "System.Data",
+            "System.Diagnostics",
+            "System.Linq",
+            "System.Xml.Linq",
+            "System.Threading.Tasks"
+        };
 
         public IReadOnlyList<ProjectId> ProjectIds => Solution.ProjectIds;
 
@@ -108,10 +122,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var project = Solution.AddProject(projectName, projectName, languageName);
 
             var compilationOptions = project.CompilationOptions.WithOutputKind(outputKind);
-            if (languageName == LanguageNames.CSharp)
+            compilationOptions = languageName switch
             {
-                compilationOptions = ((CSharpCompilationOptions)compilationOptions).WithAllowUnsafe(true);
-            }
+                LanguageNames.CSharp => ((CSharpCompilationOptions)compilationOptions).WithAllowUnsafe(true),
+                LanguageNames.VisualBasic => ((VisualBasicCompilationOptions)compilationOptions).WithGlobalImports(GlobalImport.Parse(DefaultGlobalImportsVisualBasic)),
+                _ => throw new InvalidOperationException("Unexpected project language: " + language)
+            };
             project = project.WithCompilationOptions(compilationOptions);
 
             var projectBuilder = ProjectBuilder
