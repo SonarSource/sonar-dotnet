@@ -114,27 +114,27 @@ namespace SonarAnalyzer.Rules.CSharp
             var formatArgumentIndex = methodSymbol.Parameters[0].IsType(KnownType.System_IFormatProvider) ? 1 : 0;
             var formatStringExpression = invocation.ArgumentList.Arguments[formatArgumentIndex].Expression;
             var failure = formatStringExpression.IsNullLiteral()
-                ? ValidationFailure.NullFormatString
+                ? new ValidationFailureWithAdditionalData(ValidationFailure.NullFormatString)
                 : TryParseAndValidate(formatStringExpression.FindStringConstant(analysisContext.SemanticModel), invocation.ArgumentList, formatArgumentIndex, analysisContext.SemanticModel);
             if (failure == null || CanIgnoreFailure(failure, currentMethodSignature.Name, invocation.ArgumentList.Arguments.Count))
             {
                 return;
             }
 
-            if (BugRelatedFailures.Contains(failure))
+            if (BugRelatedFailures.Contains(failure.Failure))
             {
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(BugRule, invocation.Expression.GetLocation(), failure.ToString()));
             }
 
-            if (CodeSmellRelatedFailures.Contains(failure))
+            if (CodeSmellRelatedFailures.Contains(failure.Failure))
             {
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(CodeSmellRule, invocation.Expression.GetLocation(), failure.ToString()));
             }
         }
 
-        private static bool CanIgnoreFailure(ValidationFailure failure, string methodName, int argumentsCount)
+        private static bool CanIgnoreFailure(ValidationFailureWithAdditionalData failure, string methodName, int argumentsCount)
         {
-            if (methodName.EndsWith("Format") || failure == ValidationFailure.UnusedFormatArguments || failure == ValidationFailure.FormatItemIndexBiggerThanArgsCount)
+            if (methodName.EndsWith("Format") || failure.Failure == ValidationFailure.UnusedFormatArguments || failure.Failure == ValidationFailure.FormatItemIndexBiggerThanArgsCount)
             {
                 return false;
             }
@@ -144,12 +144,12 @@ namespace SonarAnalyzer.Rules.CSharp
             return argumentsCount == 1;
         }
 
-        private static ValidationFailure TryParseAndValidate(string formatStringText, ArgumentListSyntax argumentList, int formatArgumentIndex, SemanticModel semanticModel) =>
+        private static ValidationFailureWithAdditionalData TryParseAndValidate(string formatStringText, ArgumentListSyntax argumentList, int formatArgumentIndex, SemanticModel semanticModel) =>
             formatStringText == null
                 ? null
                 : ExtractFormatItems(formatStringText, out var formatStringItems) ?? TryValidateFormatString(formatStringItems, argumentList, formatArgumentIndex, semanticModel);
 
-        private static ValidationFailure ExtractFormatItems(string formatString, out List<FormatStringItem> formatStringItems)
+        private static ValidationFailureWithAdditionalData ExtractFormatItems(string formatString, out List<FormatStringItem> formatStringItems)
         {
             formatStringItems = new List<FormatStringItem>();
             var curlyBraceCount = 0;
@@ -179,7 +179,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (previousChar == '{' && !char.IsDigit(currentChar) && currentFormatItemBuilder != null)
                 {
-                    return ValidationFailure.InvalidCharacterAfterOpenCurlyBrace;
+                    return new ValidationFailureWithAdditionalData(ValidationFailure.InvalidCharacterAfterOpenCurlyBrace);
                 }
 
                 if (currentChar == '}')
@@ -193,7 +193,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (TryParseItem(currentFormatItemBuilder.ToString(), out var formatStringItem) is { } failure)
                         {
-                            return failure;
+                            return new ValidationFailureWithAdditionalData(failure);
                         }
 
                         formatStringItems.Add(formatStringItem);
@@ -205,7 +205,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 currentFormatItemBuilder?.Append(currentChar);
             }
 
-            return curlyBraceCount == 0 ? null : ValidationFailure.UnbalancedCurlyBraceCount;
+            return curlyBraceCount == 0 ? null : new ValidationFailureWithAdditionalData(ValidationFailure.UnbalancedCurlyBraceCount);
         }
 
         private static ValidationFailure TryParseItem(string formatItem, out FormatStringItem formatStringItem)
@@ -219,20 +219,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var index = int.Parse(matchResult.Groups["Index"].Value);
             var alignment = matchResult.Groups["Alignment"].Success ? (int?)int.Parse(matchResult.Groups["Alignment"].Value) : null;
-            var formatString = matchResult.Groups["Format"].Success ? matchResult.Groups["Format"].Value : null;
-            formatStringItem = new FormatStringItem(index, alignment, formatString);
+            formatStringItem = new FormatStringItem(index, alignment);
             return null;
         }
 
-        private static ValidationFailure TryValidateFormatString(ICollection<FormatStringItem> formatStringItems, ArgumentListSyntax argumentList, int formatArgumentIndex, SemanticModel semanticModel)
+        private static ValidationFailureWithAdditionalData TryValidateFormatString(ICollection<FormatStringItem> formatStringItems, ArgumentListSyntax argumentList, int formatArgumentIndex, SemanticModel semanticModel)
         {
             if (formatStringItems.Any(x => x.Index > MaxValueForArgumentIndexAndAlignment))
             {
-                return ValidationFailure.FormatItemIndexBiggerThanMaxValue;
+                return new ValidationFailureWithAdditionalData(ValidationFailure.FormatItemIndexBiggerThanMaxValue);
             }
             if (formatStringItems.Any(x => x.Alignment > MaxValueForArgumentIndexAndAlignment))
             {
-                return ValidationFailure.FormatItemAlignmentBiggerThanMaxValue;
+                return new ValidationFailureWithAdditionalData(ValidationFailure.FormatItemAlignmentBiggerThanMaxValue);
             }
 
             var formatArguments = argumentList.Arguments
@@ -258,17 +257,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 ?? HasUnusedArguments(formatArguments, maxFormatItemIndex);
         }
 
-        private static ValidationFailure HasFormatItemIndexTooBig(int? maxFormatItemIndex, int argumentsCount) =>
+        private static ValidationFailureWithAdditionalData HasFormatItemIndexTooBig(int? maxFormatItemIndex, int argumentsCount) =>
             maxFormatItemIndex.HasValue && maxFormatItemIndex.Value + 1 > argumentsCount
-                ? ValidationFailure.FormatItemIndexBiggerThanArgsCount
+                ? new ValidationFailureWithAdditionalData(ValidationFailure.FormatItemIndexBiggerThanArgsCount)
                 : null;
 
-        private static ValidationFailure IsSimpleString(int formatStringItemsCount, int argumentsCount) =>
+        private static ValidationFailureWithAdditionalData IsSimpleString(int formatStringItemsCount, int argumentsCount) =>
             formatStringItemsCount == 0 && argumentsCount == 0
-                ? ValidationFailure.SimpleString
+                ? new ValidationFailureWithAdditionalData(ValidationFailure.SimpleString)
                 : null;
 
-        private static ValidationFailure HasMissingFormatItemIndex(IEnumerable<FormatStringItem> formatStringItems, int? maxFormatItemIndex)
+        private static ValidationFailureWithAdditionalData HasMissingFormatItemIndex(IEnumerable<FormatStringItem> formatStringItems, int? maxFormatItemIndex)
         {
             if (!maxFormatItemIndex.HasValue)
             {
@@ -281,24 +280,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ToList();
             if (missingFormatItemIndexes.Count > 0)
             {
-                var failure = ValidationFailure.MissingFormatItemIndex;
-                failure.AdditionalData = missingFormatItemIndexes;
-                return failure;
+                return new ValidationFailureWithAdditionalData(ValidationFailure.MissingFormatItemIndex, missingFormatItemIndexes);
             }
 
             return null;
         }
 
-        private static ValidationFailure HasUnusedArguments(List<FormatStringArgument> formatArguments, int? maxFormatItemIndex)
+        private static ValidationFailureWithAdditionalData HasUnusedArguments(List<FormatStringArgument> formatArguments, int? maxFormatItemIndex)
         {
             var unusedArgumentNames = formatArguments.Skip((maxFormatItemIndex ?? -1) + 1)
                 .Select(arg => arg.Name)
                 .ToList();
             if (unusedArgumentNames.Count > 0)
             {
-                var failure = ValidationFailure.UnusedFormatArguments;
-                failure.AdditionalData = unusedArgumentNames;
-                return failure;
+                return new ValidationFailureWithAdditionalData(ValidationFailure.UnusedFormatArguments, unusedArgumentNames);
             }
 
             return null;
@@ -318,28 +313,36 @@ namespace SonarAnalyzer.Rules.CSharp
             public static readonly ValidationFailure MissingFormatItemIndex = new ValidationFailure("The format string might be wrong, the following item indexes are missing: ");
             public static readonly ValidationFailure UnusedFormatArguments = new ValidationFailure("The format string might be wrong, the following arguments are unused: ");
 
-            private readonly string message;
-
-            public IEnumerable<string> AdditionalData { get; set; }
+            public string Message { get; }
 
             private ValidationFailure(string message) =>
-                this.message = message;
+                Message = message;
+        }
+
+        private class ValidationFailureWithAdditionalData
+        {
+            public ValidationFailure Failure { get; }
+            private IEnumerable<string> AdditionalData { get; }
+
+            public ValidationFailureWithAdditionalData(ValidationFailure failure, IEnumerable<string> additionalData = null)
+            {
+                Failure = failure;
+                AdditionalData = additionalData;
+            }
 
             public override string ToString() =>
-                AdditionalData == null ? message : string.Concat(message, AdditionalData.ToSentence(quoteWords: true), ".");
+                AdditionalData == null ? Failure.Message : string.Concat(Failure.Message, AdditionalData.ToSentence(quoteWords: true), ".");
         }
 
         private sealed class FormatStringItem
         {
             public int Index { get; }
             public int? Alignment { get; }
-            public string FormatString { get; }
 
-            public FormatStringItem(int index, int? alignment, string formatString)
+            public FormatStringItem(int index, int? alignment)
             {
                 Index = index;
                 Alignment = alignment;
-                FormatString = formatString;
             }
         }
 
@@ -349,7 +352,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public ITypeSymbol TypeSymbol { get; }
             public int ArraySize { get; }
 
-            public FormatStringArgument(string name, ITypeSymbol typeSymbol, int arraySize = -1)
+            private FormatStringArgument(string name, ITypeSymbol typeSymbol, int arraySize = -1)
             {
                 Name = name;
                 TypeSymbol = typeSymbol;
