@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Tests.TestCases
@@ -117,6 +118,21 @@ namespace Tests.TestCases
         {
             var x = (value, 7);
             return x.value;
+        }
+    }
+
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4704
+    public static  class Repro_4704
+    {
+        private static void ConfigureAndValidateSettings(this int someNumber, string someString) // Noncompliant FP
+        {
+            PrintSomeSum<int>();
+
+            void PrintSomeSum<TOptions>() where TOptions : struct
+            {
+                Console.WriteLine(someNumber + someString.Length);
+            }
         }
     }
 }
