@@ -121,7 +121,6 @@ namespace Tests.TestCases
         }
     }
 
-
     // https://github.com/SonarSource/sonar-dotnet/issues/4704
     public static  class Repro_4704
     {
