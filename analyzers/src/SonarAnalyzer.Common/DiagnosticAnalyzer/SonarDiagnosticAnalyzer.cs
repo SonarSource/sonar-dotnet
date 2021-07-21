@@ -24,7 +24,9 @@ namespace SonarAnalyzer.Helpers
 {
     public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
     {
-        protected virtual bool EnableConcurrentExecution { get; } = true;
+        protected virtual bool EnableConcurrentExecution => true;
+
+        protected abstract void Initialize(SonarAnalysisContext context);
 
         public sealed override void Initialize(AnalysisContext context)
         {
@@ -34,7 +36,5 @@ namespace SonarAnalyzer.Helpers
             }
             Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
         }
-
-        protected abstract void Initialize(SonarAnalysisContext context);
     }
 }
