@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class StaticFieldWrittenFrom : SonarDiagnosticAnalyzer
     {
-        protected override bool EnableConcurrentExecution => false;
+        protected override bool ParallelProcessingDisabled => true;
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {

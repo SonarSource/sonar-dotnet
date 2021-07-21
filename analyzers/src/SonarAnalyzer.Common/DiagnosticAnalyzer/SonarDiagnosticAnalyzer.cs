@@ -18,23 +18,36 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
     public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
     {
-        protected virtual bool EnableConcurrentExecution => true;
+        private const string IsParallelProcessing = "SONAR_DOTNET_ENABLE_PARALLEL_PROCESSING";
+        protected virtual bool ParallelProcessingDisabled => !TryGetBoolEnvironmentVariable(IsParallelProcessing, false);
 
         protected abstract void Initialize(SonarAnalysisContext context);
 
         public sealed override void Initialize(AnalysisContext context)
         {
-            if (EnableConcurrentExecution)
+            if (!ParallelProcessingDisabled)
             {
                 context.EnableConcurrentExecution();
             }
             Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
+        }
+
+        private static bool TryGetBoolEnvironmentVariable(string envVar, bool defaultValue)
+        {
+            var value = Environment.GetEnvironmentVariable(envVar);
+
+            if (value != null && bool.TryParse(value, out var result))
+            {
+                return result;
+            }
+            return defaultValue;
         }
     }
 }

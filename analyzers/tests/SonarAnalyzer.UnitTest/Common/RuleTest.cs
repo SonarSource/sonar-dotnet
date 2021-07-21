@@ -22,6 +22,7 @@ extern alias csharp;
 extern alias vbnet;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
@@ -41,6 +42,8 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class RuleTest
     {
+        private const string IsParallelProcessing = "SONAR_DOTNET_ENABLE_PARALLEL_PROCESSING";
+
         [TestMethod]
         public void DiagnosticAnalyzerHasRuleAttribute()
         {
@@ -111,6 +114,51 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>($"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
             }
+        }
+
+        [TestMethod]
+        public void Verify_ParallelProcessingDisabledByDefault()
+        {
+            var retriever = new ParallelProcessingRetriever();
+            retriever.IsParallelProcessingDisabled.Should().BeNull();
+            Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
+            retriever.IsParallelProcessingDisabled.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Verify_ParallelProcessingGetsEnabled()
+        {
+            var variableValue = Environment.GetEnvironmentVariable(IsParallelProcessing);
+            Environment.SetEnvironmentVariable(IsParallelProcessing, "true");
+            var retriever = new ParallelProcessingRetriever();
+            retriever.IsParallelProcessingDisabled.Should().BeNull();
+            Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
+            retriever.IsParallelProcessingDisabled.Should().BeFalse();
+            Environment.SetEnvironmentVariable(IsParallelProcessing, variableValue);
+        }
+
+        [TestMethod]
+        public void Verify_ParallelProcessingGetsExplicitlyDisabled()
+        {
+            var variableValue = Environment.GetEnvironmentVariable(IsParallelProcessing);
+            Environment.SetEnvironmentVariable(IsParallelProcessing, "false");
+            var retriever = new ParallelProcessingRetriever();
+            retriever.IsParallelProcessingDisabled.Should().BeNull();
+            Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
+            retriever.IsParallelProcessingDisabled.Should().BeTrue();
+            Environment.SetEnvironmentVariable(IsParallelProcessing, variableValue);
+        }
+
+        [TestMethod]
+        public void Verify_ParallelProcessingGetsDisabledOnWrongValue()
+        {
+            var variableValue = Environment.GetEnvironmentVariable(IsParallelProcessing);
+            Environment.SetEnvironmentVariable(IsParallelProcessing, "loremipsum");
+            var retriever = new ParallelProcessingRetriever();
+            retriever.IsParallelProcessingDisabled.Should().BeNull();
+            Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
+            retriever.IsParallelProcessingDisabled.Should().BeTrue();
+            Environment.SetEnvironmentVariable(IsParallelProcessing, variableValue);
         }
 
         [TestMethod]
@@ -277,6 +325,16 @@ namespace SonarAnalyzer.UnitTest.Common
                     throw new InvalidOperationException($"{nameof(AllCSharpRules_HaveCSharpTag)} or {nameof(AllVbNetRules_HaveVbNetTag)} should fail, fix them first.");
                 }
             }
+        }
+
+        private class ParallelProcessingRetriever : SonarDiagnosticAnalyzer
+        {
+            private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor("S9999", "Rule test");
+
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+            public bool? IsParallelProcessingDisabled { get; private set; }
+            protected override void Initialize(SonarAnalysisContext context) =>
+                IsParallelProcessingDisabled = ParallelProcessingDisabled;
         }
     }
 }
