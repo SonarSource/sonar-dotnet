@@ -327,6 +327,7 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
+        [DiagnosticAnalyzer(LanguageNames.CSharp)]
         private class ConcurrentProcessingRetriever : SonarDiagnosticAnalyzer
         {
             private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor("S9999", "Rule test");
