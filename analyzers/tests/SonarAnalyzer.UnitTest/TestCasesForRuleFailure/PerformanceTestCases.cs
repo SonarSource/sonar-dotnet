@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace SonarAnalyzer.UnitTest.TestCasesForRuleFailure
 {
-    class Foo
+    class PerformanceTestCases
     {
         static void Bar()
         {
