@@ -331,8 +331,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                            CompilationErrorBehavior checkMode,
                                            string sonarProjectConfigPath = null)
         {
-            var compiledSolution = solution.Compile(options?.ToArray());
-            foreach (var compilation in compiledSolution)
+            foreach (var compilation in solution.Compile(options?.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath);
             }
