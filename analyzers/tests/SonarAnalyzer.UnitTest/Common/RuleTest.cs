@@ -121,7 +121,7 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var retriever = new ConcurrentProcessingRetriever();
             retriever.IsConcurrentProcessingDisabled.Should().BeNull();
-            Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
+            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
             retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
         }
 
@@ -132,7 +132,7 @@ namespace SonarAnalyzer.UnitTest.Common
             Environment.SetEnvironmentVariable(IsConcurrentProcessing, "true");
             var retriever = new ConcurrentProcessingRetriever();
             retriever.IsConcurrentProcessingDisabled.Should().BeNull();
-            Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
+            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
             retriever.IsConcurrentProcessingDisabled.Should().BeFalse();
             Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
         }
@@ -144,7 +144,7 @@ namespace SonarAnalyzer.UnitTest.Common
             Environment.SetEnvironmentVariable(IsConcurrentProcessing, "false");
             var retriever = new ConcurrentProcessingRetriever();
             retriever.IsConcurrentProcessingDisabled.Should().BeNull();
-            Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
+            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
             retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
             Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
         }
@@ -156,7 +156,7 @@ namespace SonarAnalyzer.UnitTest.Common
             Environment.SetEnvironmentVariable(IsConcurrentProcessing, "loremipsum");
             var retriever = new ConcurrentProcessingRetriever();
             retriever.IsConcurrentProcessingDisabled.Should().BeNull();
-            Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
+            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
             retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
             Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
         }
