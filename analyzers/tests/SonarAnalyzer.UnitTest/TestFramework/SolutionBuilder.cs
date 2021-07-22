@@ -65,7 +65,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static SolutionBuilder CreateSolutionFromPaths(IEnumerable<string> paths,
                                                               OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                                               IEnumerable<MetadataReference> additionalReferences = null,
-                                                              bool isSupportForCSharp9InitNeeded = false)
+                                                              bool isSupportForCSharp9InitNeeded = false,
+                                                              bool duplicateDocumentsNeeded = false)
         {
             if (paths == null || !paths.Any())
             {
@@ -78,10 +79,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 throw new ArgumentException("Please use a collection of paths with the same extension", nameof(paths));
             }
 
-            var project = Create()
-                .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
-                .AddDocuments(paths)
-                .AddReferences(additionalReferences);
+            var project = duplicateDocumentsNeeded switch
+            {
+                true => Create()
+                                .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
+                                .AddDuplicatedDocuments(paths)
+                                .AddReferences(additionalReferences),
+                false => Create()
+                                .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
+                                .AddDocuments(paths)
+                                .AddReferences(additionalReferences),
+            };
+
 
             if (isSupportForCSharp9InitNeeded)
             {

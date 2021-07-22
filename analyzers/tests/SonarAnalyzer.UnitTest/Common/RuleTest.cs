@@ -32,6 +32,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using SonarAnalyzer.Utilities;
 
@@ -42,8 +43,6 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class RuleTest
     {
-        private const string IsConcurrentProcessing = "SONAR_DOTNET_ENABLE_CONCURRENT_PROCESSING";
-
         [TestMethod]
         public void DiagnosticAnalyzerHasRuleAttribute()
         {
@@ -128,37 +127,34 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void Verify_ConcurrentProcessingGetsEnabled()
         {
-            var variableValue = Environment.GetEnvironmentVariable(IsConcurrentProcessing);
-            Environment.SetEnvironmentVariable(IsConcurrentProcessing, "true");
+            using var scope = new EnvironmentVariableScope();
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "true");
             var retriever = new ConcurrentProcessingRetriever();
             retriever.IsConcurrentProcessingDisabled.Should().BeNull();
             Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
             retriever.IsConcurrentProcessingDisabled.Should().BeFalse();
-            Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
         }
 
         [TestMethod]
         public void Verify_ConcurrentProcessingGetsExplicitlyDisabled()
         {
-            var variableValue = Environment.GetEnvironmentVariable(IsConcurrentProcessing);
-            Environment.SetEnvironmentVariable(IsConcurrentProcessing, "false");
+            using var scope = new EnvironmentVariableScope();
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "false");
             var retriever = new ConcurrentProcessingRetriever();
             retriever.IsConcurrentProcessingDisabled.Should().BeNull();
             Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
             retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
-            Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
         }
 
         [TestMethod]
         public void Verify_ConcurrentProcessingGetsDisabledOnWrongValue()
         {
-            var variableValue = Environment.GetEnvironmentVariable(IsConcurrentProcessing);
-            Environment.SetEnvironmentVariable(IsConcurrentProcessing, "loremipsum");
+            using var scope = new EnvironmentVariableScope();
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "loremipsum");
             var retriever = new ConcurrentProcessingRetriever();
             retriever.IsConcurrentProcessingDisabled.Should().BeNull();
             Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
             retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
-            Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
         }
 
         [TestMethod]

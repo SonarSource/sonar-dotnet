@@ -25,7 +25,8 @@ namespace SonarAnalyzer.Helpers
 {
     public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
     {
-        private const string EnableConcurrentProcessing = "SONAR_DOTNET_ENABLE_CONCURRENT_PROCESSING";
+        public static readonly string EnableConcurrentProcessing = "SONAR_DOTNET_ENABLE_CONCURRENT_PROCESSING";
+
         protected virtual bool ConcurrentProcessingDisabled => IsConcurrentProcessingDisabled();
 
         protected abstract void Initialize(SonarAnalysisContext context);

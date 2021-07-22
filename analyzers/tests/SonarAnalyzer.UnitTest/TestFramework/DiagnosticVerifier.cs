@@ -44,24 +44,28 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         };
 
         public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileContent, string sonarProjectConfigPath) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, SourceText.From(fileContent), sonarProjectConfigPath);
+            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, new[] { SourceText.From(fileContent) }, sonarProjectConfigPath);
 
         public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode, string sonarProjectConfigPath = null) =>
             Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, sonarProjectConfigPath);
 
         public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode, string sonarProjectConfigPath = null) =>
-            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).First().GetText(), sonarProjectConfigPath);
+            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).Select(x => x.GetText()), sonarProjectConfigPath);
 
         public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode, SourceText source, string sonarProjectConfigPath = null) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, source);
+            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, new[] { source });
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode, SourceText source, string sonarProjectConfigPath = null)
+        public static void Verify(Compilation compilation,
+                                  DiagnosticAnalyzer[] diagnosticAnalyzers,
+                                  CompilationErrorBehavior checkMode,
+                                  IEnumerable<SourceText> sources,
+                                  string sonarProjectConfigPath = null)
         {
             SuppressionHandler.HookSuppression();
             try
             {
                 var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath: sonarProjectConfigPath);
-                var expectedIssues = IssueLocationCollector.GetExpectedIssueLocations(source.Lines).ToList();
+                var expectedIssues = sources.SelectMany(x => IssueLocationCollector.GetExpectedIssueLocations(x.Lines)).ToList();
                 CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
@@ -193,7 +197,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             var buildErrors = GetBuildErrors(diagnostics);
 
-            var expectedBuildErrors = IssueLocationCollector.GetExpectedBuildErrors(compilation.SyntaxTrees.Skip(1).FirstOrDefault()?.GetText().Lines).ToList();
+            var expectedBuildErrors = compilation.SyntaxTrees.Skip(1).SelectMany(x => IssueLocationCollector.GetExpectedBuildErrors(x.GetText().Lines)).ToList();
             CompareActualToExpected(compilation.LanguageVersionString(), buildErrors, expectedBuildErrors, true);
         }
 

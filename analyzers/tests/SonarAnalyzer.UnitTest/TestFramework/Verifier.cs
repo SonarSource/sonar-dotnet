@@ -30,6 +30,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
@@ -148,22 +149,29 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                           IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, options, checkMode, outputKind, additionalReferences);
 
-        /// <summary>
-        /// This method is checking only the expected issues from the first file path provided. The rest of the paths are added to the project for enabling testing of different scenarios.
-        /// </summary>
         public static void VerifyAnalyzer(IEnumerable<string> paths,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
                                           IEnumerable<MetadataReference> additionalReferences) =>
             VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, null, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
-        /// <summary>
-        /// This method is checking only the expected issues from the first file path provided. The rest of the paths are added to the project for enabling testing of different scenarios.
-        /// </summary>
         public static void VerifyAnalyzer(IEnumerable<string> paths,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
                                           IEnumerable<ParseOptions> options = null,
                                           IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+
+        public static void VerifyConcurrentAnalyzer(string path,
+                                                    DiagnosticAnalyzer diagnosticAnalyzer,
+                                                    IEnumerable<ParseOptions> options,
+                                                    IEnumerable<MetadataReference> additionalReferences,
+                                                    string sonarProjectConfigPath = null) =>
+            VerifyConcurrentAnalyzer(new[] { path },
+                                     new[] { diagnosticAnalyzer },
+                                     options,
+                                     CompilationErrorBehavior.Default,
+                                     OutputKind.DynamicallyLinkedLibrary,
+                                     additionalReferences,
+                                     sonarProjectConfigPath);
 
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths,
                                                            UtilityAnalyzerBase diagnosticAnalyzer,
@@ -291,6 +299,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static void VerifyAnalyzerFromCSharp9InTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, OutputKind outputKind, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, outputKind, AddTestReference(additionalReferences));
 
+        private static void VerifyConcurrentAnalyzer(IEnumerable<string> paths,
+                                                     DiagnosticAnalyzer[] diagnosticAnalyzers,
+                                                     IEnumerable<ParseOptions> options,
+                                                     CompilationErrorBehavior checkMode,
+                                                     OutputKind outputKind,
+                                                     IEnumerable<MetadataReference> additionalReferences,
+                                                     string sonarProjectConfigPath = null)
+        {
+            using var scope = new EnvironmentVariableScope();
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "true");
+            var solution = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences, false, true);
+            VerifyAnalyzer(solution, diagnosticAnalyzers, options, checkMode, sonarProjectConfigPath);
+        }
+
         private static void VerifyAnalyzer(IEnumerable<string> paths,
                                            DiagnosticAnalyzer[] diagnosticAnalyzers,
                                            IEnumerable<ParseOptions> options,
@@ -309,7 +331,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                            CompilationErrorBehavior checkMode,
                                            string sonarProjectConfigPath = null)
         {
-            foreach (var compilation in solution.Compile(options?.ToArray()))
+            var compiledSolution = solution.Compile(options?.ToArray());
+            foreach (var compilation in compiledSolution)
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath);
             }
