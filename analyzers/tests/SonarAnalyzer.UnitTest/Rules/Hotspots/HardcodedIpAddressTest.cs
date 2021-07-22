@@ -41,15 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void HardcodedIpAddress_CS_StressTest()
-        {
-            Action action = () => Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\DictionaryStressTest.cs", new[] { new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled) });
-            action.ExecutionTime().Should().BeLessThan(1.Minutes());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void HardcodedIpAddress_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.vb", new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
     }
