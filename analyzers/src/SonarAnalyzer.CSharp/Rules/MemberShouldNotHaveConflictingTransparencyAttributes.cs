@@ -34,12 +34,13 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class MemberShouldNotHaveConflictingTransparencyAttributes : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4211";
+        private const string DiagnosticId = "S4211";
         private const string MessageFormat = "Change or remove this attribute to be consistent with its container.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        protected override bool ConcurrentProcessingDisabled => true;
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -100,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // itself is marked as 'SecurityCritical'.
                 foreach (var item in nodesWithSecuritySafeCritical)
                 {
-                    compilationContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value.GetLocation(),
+                    compilationContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, item.Value.GetLocation(),
                         additionalLocations: new[] { assemblySecurityLocation }));
                 }
             }
@@ -113,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (nodesWithSecurityCritical.ContainsKey(current))
                         {
-                            compilationContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value.GetLocation(),
+                            compilationContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, item.Value.GetLocation(),
                                 additionalLocations: new[] { nodesWithSecurityCritical[current].GetLocation() }));
                             break;
                         }

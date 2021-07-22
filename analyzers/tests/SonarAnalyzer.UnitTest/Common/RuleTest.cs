@@ -22,6 +22,7 @@ extern alias csharp;
 extern alias vbnet;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
@@ -41,6 +42,8 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class RuleTest
     {
+        private const string IsConcurrentProcessing = "SONAR_DOTNET_ENABLE_CONCURRENT_PROCESSING";
+
         [TestMethod]
         public void DiagnosticAnalyzerHasRuleAttribute()
         {
@@ -111,6 +114,51 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>($"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
             }
+        }
+
+        [TestMethod]
+        public void Verify_ConcurrentProcessingDisabledByDefault()
+        {
+            var retriever = new ConcurrentProcessingRetriever();
+            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
+            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
+            retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Verify_ConcurrentProcessingGetsEnabled()
+        {
+            var variableValue = Environment.GetEnvironmentVariable(IsConcurrentProcessing);
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, "true");
+            var retriever = new ConcurrentProcessingRetriever();
+            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
+            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
+            retriever.IsConcurrentProcessingDisabled.Should().BeFalse();
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
+        }
+
+        [TestMethod]
+        public void Verify_ConcurrentProcessingGetsExplicitlyDisabled()
+        {
+            var variableValue = Environment.GetEnvironmentVariable(IsConcurrentProcessing);
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, "false");
+            var retriever = new ConcurrentProcessingRetriever();
+            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
+            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
+            retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
+        }
+
+        [TestMethod]
+        public void Verify_ConcurrentProcessingGetsDisabledOnWrongValue()
+        {
+            var variableValue = Environment.GetEnvironmentVariable(IsConcurrentProcessing);
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, "loremipsum");
+            var retriever = new ConcurrentProcessingRetriever();
+            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
+            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
+            retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
         }
 
         [TestMethod]
@@ -277,6 +325,17 @@ namespace SonarAnalyzer.UnitTest.Common
                     throw new InvalidOperationException($"{nameof(AllCSharpRules_HaveCSharpTag)} or {nameof(AllVbNetRules_HaveVbNetTag)} should fail, fix them first.");
                 }
             }
+        }
+
+        [DiagnosticAnalyzer(LanguageNames.CSharp)]
+        private class ConcurrentProcessingRetriever : SonarDiagnosticAnalyzer
+        {
+            private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor("S9999", "Rule test");
+
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+            public bool? IsConcurrentProcessingDisabled { get; private set; }
+            protected override void Initialize(SonarAnalysisContext context) =>
+                IsConcurrentProcessingDisabled = ConcurrentProcessingDisabled;
         }
     }
 }
