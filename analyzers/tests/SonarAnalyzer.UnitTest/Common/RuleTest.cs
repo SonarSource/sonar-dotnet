@@ -89,6 +89,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
             Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.cs", analyzers, CompilationErrorBehavior.Ignore);
             Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
+            Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\PerformanceTestCases.cs", analyzers, CompilationErrorBehavior.Ignore);
         }
 
         [TestMethod]

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
         where TLiteralExpression : SyntaxNode
     {
         protected const string DiagnosticId = "S1313";
-        protected const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
+        private const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
         private const int IPv4AddressParts  = 4;
         private const string IPv4Broadcast = "255.255.255.255";
 
@@ -72,27 +72,18 @@ namespace SonarAnalyzer.Rules
             }
 
             var stringLiteral = (TLiteralExpression)context.Node;
-            var variableName = GetAssignedVariableName(stringLiteral);
-
-            if (variableName != null && ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
-            {
-                return;
-            }
-
-            if (HasAttributes(stringLiteral))
-            {
-                return;
-            }
-
             var literalValue = GetValueText(stringLiteral);
 
-            if (!IPAddress.TryParse(literalValue, out var address)
+            if (literalValue == IPv4Broadcast
+                || literalValue.StartsWith("2.5.")                                  // Looks like OID
+                || !IPAddress.TryParse(literalValue, out var address)
                 || IPAddress.IsLoopback(address)
                 || address.GetAddressBytes().All(x => x == 0)                       // Nonroutable 0.0.0.0 or 0::0
-                || literalValue == IPv4Broadcast
-                || literalValue.StartsWith("2.5.")                                  // Looks like OID
                 || (address.AddressFamily == AddressFamily.InterNetwork
-                    && literalValue.Count(x => x == '.') != IPv4AddressParts - 1))
+                    && literalValue.Count(x => x == '.') != IPv4AddressParts - 1)
+                || (GetAssignedVariableName(stringLiteral) is { } variableName
+                    && ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
+                || HasAttributes(stringLiteral))
             {
                 return;
             }
