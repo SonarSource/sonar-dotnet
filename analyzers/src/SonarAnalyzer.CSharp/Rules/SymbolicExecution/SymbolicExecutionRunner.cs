@@ -36,6 +36,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         private readonly SymbolicExecutionAnalyzerFactory symbolicExecutionAnalyzerFactory = new SymbolicExecutionAnalyzerFactory();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
+        protected override bool ConcurrentProcessingDisabled => true;
 
         // This constructor is needed by the Roslyn framework. Please do not delete this.
         public SymbolicExecutionRunner() =>
