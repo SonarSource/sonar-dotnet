@@ -577,6 +577,8 @@ namespace SonarAnalyzer.Helpers
         public string TypeName { get; }
         public string ShortName => shortName.Value;
 
+        public static KnownType Microsoft_Net_Http_Headers_HeaderNames { get; internal set; }
+
         private KnownType(string typeName) : this(SpecialType.None, typeName) { }
 
         private KnownType(SpecialType specialType, string typeName)

@@ -25,10 +25,10 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UseTestableTimeProviderBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class UseTestableTimeProviderBase<TIdentifierNameSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer
          where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "ToBedesided";
+        protected const string DiagnosticId = "ToBeDecided";
         protected const string MessageFormat = "Use a testable (date) time provider instead.";
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
@@ -42,17 +42,17 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
             {
-                if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol identifier
-                    && IsDateTimeProvider(identifier))
+                if (c.Node is TIdentifierNameSyntax identifier
+                    && IsDateTimeProviderProperty(NameOf(identifier))
+                    && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IPropertySymbol property
+                    && property.IsInType(KnownType.System_DateTime))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.Parent.GetLocation()));
                 }
             },
             Language.SyntaxKind.IdentifierName);
 
-        private bool IsDateTimeProvider(IMethodSymbol identifier) =>
-            identifier.IsInType(KnownType.System_DateTime)
-            && IsDateTimeProviderProperty(identifier.Name);
+        protected abstract string NameOf(TIdentifierNameSyntax identifier);
 
         private bool IsDateTimeProviderProperty(string name)
             => nameof(DateTime.Now).Equals(name, Language.NameComparison)
