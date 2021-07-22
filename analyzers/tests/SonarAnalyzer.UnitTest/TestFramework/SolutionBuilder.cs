@@ -91,7 +91,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                 .AddReferences(additionalReferences),
             };
 
-
             if (isSupportForCSharp9InitNeeded)
             {
                 project = project.AddSnippet(InitSnippet);
