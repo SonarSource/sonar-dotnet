@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class RuleTest
     {
-        private const string IsParallelProcessing = "SONAR_DOTNET_ENABLE_PARALLEL_PROCESSING";
+        private const string IsConcurrentProcessing = "SONAR_DOTNET_ENABLE_CONCURRENT_PROCESSING";
 
         [TestMethod]
         public void DiagnosticAnalyzerHasRuleAttribute()
@@ -117,48 +117,48 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Verify_ParallelProcessingDisabledByDefault()
+        public void Verify_ConcurrentProcessingDisabledByDefault()
         {
-            var retriever = new ParallelProcessingRetriever();
-            retriever.IsParallelProcessingDisabled.Should().BeNull();
+            var retriever = new ConcurrentProcessingRetriever();
+            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
             Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
-            retriever.IsParallelProcessingDisabled.Should().BeTrue();
+            retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
         }
 
         [TestMethod]
-        public void Verify_ParallelProcessingGetsEnabled()
+        public void Verify_ConcurrentProcessingGetsEnabled()
         {
-            var variableValue = Environment.GetEnvironmentVariable(IsParallelProcessing);
-            Environment.SetEnvironmentVariable(IsParallelProcessing, "true");
-            var retriever = new ParallelProcessingRetriever();
-            retriever.IsParallelProcessingDisabled.Should().BeNull();
+            var variableValue = Environment.GetEnvironmentVariable(IsConcurrentProcessing);
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, "true");
+            var retriever = new ConcurrentProcessingRetriever();
+            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
             Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
-            retriever.IsParallelProcessingDisabled.Should().BeFalse();
-            Environment.SetEnvironmentVariable(IsParallelProcessing, variableValue);
+            retriever.IsConcurrentProcessingDisabled.Should().BeFalse();
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
         }
 
         [TestMethod]
-        public void Verify_ParallelProcessingGetsExplicitlyDisabled()
+        public void Verify_ConcurrentProcessingGetsExplicitlyDisabled()
         {
-            var variableValue = Environment.GetEnvironmentVariable(IsParallelProcessing);
-            Environment.SetEnvironmentVariable(IsParallelProcessing, "false");
-            var retriever = new ParallelProcessingRetriever();
-            retriever.IsParallelProcessingDisabled.Should().BeNull();
+            var variableValue = Environment.GetEnvironmentVariable(IsConcurrentProcessing);
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, "false");
+            var retriever = new ConcurrentProcessingRetriever();
+            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
             Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
-            retriever.IsParallelProcessingDisabled.Should().BeTrue();
-            Environment.SetEnvironmentVariable(IsParallelProcessing, variableValue);
+            retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
         }
 
         [TestMethod]
-        public void Verify_ParallelProcessingGetsDisabledOnWrongValue()
+        public void Verify_ConcurrentProcessingGetsDisabledOnWrongValue()
         {
-            var variableValue = Environment.GetEnvironmentVariable(IsParallelProcessing);
-            Environment.SetEnvironmentVariable(IsParallelProcessing, "loremipsum");
-            var retriever = new ParallelProcessingRetriever();
-            retriever.IsParallelProcessingDisabled.Should().BeNull();
+            var variableValue = Environment.GetEnvironmentVariable(IsConcurrentProcessing);
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, "loremipsum");
+            var retriever = new ConcurrentProcessingRetriever();
+            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
             Verifier.VerifyAnalyzer(new[] { "TestCasesForRuleFailure\\SpecialCases.cs" }, retriever);
-            retriever.IsParallelProcessingDisabled.Should().BeTrue();
-            Environment.SetEnvironmentVariable(IsParallelProcessing, variableValue);
+            retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
+            Environment.SetEnvironmentVariable(IsConcurrentProcessing, variableValue);
         }
 
         [TestMethod]
@@ -327,14 +327,14 @@ namespace SonarAnalyzer.UnitTest.Common
             }
         }
 
-        private class ParallelProcessingRetriever : SonarDiagnosticAnalyzer
+        private class ConcurrentProcessingRetriever : SonarDiagnosticAnalyzer
         {
             private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor("S9999", "Rule test");
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-            public bool? IsParallelProcessingDisabled { get; private set; }
+            public bool? IsConcurrentProcessingDisabled { get; private set; }
             protected override void Initialize(SonarAnalysisContext context) =>
-                IsParallelProcessingDisabled = ParallelProcessingDisabled;
+                IsConcurrentProcessingDisabled = ConcurrentProcessingDisabled;
         }
     }
 }

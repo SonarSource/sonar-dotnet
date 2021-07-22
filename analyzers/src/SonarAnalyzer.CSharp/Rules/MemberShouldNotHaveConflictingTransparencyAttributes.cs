@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-        protected override bool ParallelProcessingDisabled => true;
+        protected override bool ConcurrentProcessingDisabled => true;
 
         protected override void Initialize(SonarAnalysisContext context)
         {
