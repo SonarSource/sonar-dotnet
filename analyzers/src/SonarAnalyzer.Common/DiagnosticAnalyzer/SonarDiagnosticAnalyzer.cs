@@ -25,8 +25,8 @@ namespace SonarAnalyzer.Helpers
 {
     public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
     {
-        private const string IsParallelProcessing = "SONAR_DOTNET_ENABLE_PARALLEL_PROCESSING";
-        protected virtual bool ParallelProcessingDisabled => !TryGetBoolEnvironmentVariable(IsParallelProcessing, false);
+        private const string EnableParallelProcessing = "SONAR_DOTNET_ENABLE_PARALLEL_PROCESSING";
+        protected virtual bool ParallelProcessingDisabled => IsParallelProcessingDisabled();
 
         protected abstract void Initialize(SonarAnalysisContext context);
 
@@ -39,15 +39,15 @@ namespace SonarAnalyzer.Helpers
             Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
         }
 
-        private static bool TryGetBoolEnvironmentVariable(string envVar, bool defaultValue)
+        private static bool IsParallelProcessingDisabled()
         {
-            var value = Environment.GetEnvironmentVariable(envVar);
+            var value = Environment.GetEnvironmentVariable(EnableParallelProcessing);
 
             if (value != null && bool.TryParse(value, out var result))
             {
-                return result;
+                return !result;
             }
-            return defaultValue;
+            return true;
         }
     }
 }
