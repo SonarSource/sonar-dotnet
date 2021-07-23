@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseValueParameter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new UseValueParameter());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UseValueParameter.cs", new UseValueParameter());
 
 #if NET
         [TestMethod]

@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ReferenceEqualsOnValueType() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReferenceEqualsOnValueType.cs", new ReferenceEqualsOnValueType());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ReferenceEqualsOnValueType.cs", new ReferenceEqualsOnValueType());
     }
 }

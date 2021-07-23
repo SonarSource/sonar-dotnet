@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantJumpStatement() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantJumpStatement.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RedundantJumpStatement.cs",
                                     new RedundantJumpStatement(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,

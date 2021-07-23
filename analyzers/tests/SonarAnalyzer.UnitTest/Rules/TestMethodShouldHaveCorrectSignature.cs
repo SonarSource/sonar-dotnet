@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_MsTest(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.MsTest.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.MsTest.cs",
                                     new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 

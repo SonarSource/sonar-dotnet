@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PublicMethodWithMultidimensionalArray_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PublicMethodWithMultidimensionalArray.cs", new CS.PublicMethodWithMultidimensionalArray());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PublicMethodWithMultidimensionalArray.cs", new CS.PublicMethodWithMultidimensionalArray());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PublicMethodWithMultidimensionalArray_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PublicMethodWithMultidimensionalArray.vb", new VB.PublicMethodWithMultidimensionalArray());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PublicMethodWithMultidimensionalArray.vb", new VB.PublicMethodWithMultidimensionalArray());
     }
 }

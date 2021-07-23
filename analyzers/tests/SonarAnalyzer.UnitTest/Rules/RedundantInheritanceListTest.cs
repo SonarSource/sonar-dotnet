@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantInheritanceList() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.cs", new RedundantInheritanceList());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RedundantInheritanceList.cs", new RedundantInheritanceList());
 
 #if NET
         [TestMethod]

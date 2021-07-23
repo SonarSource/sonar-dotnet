@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RightCurlyBraceStartsLine() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RightCurlyBraceStartsLine.cs", new RightCurlyBraceStartsLine());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RightCurlyBraceStartsLine.cs", new RightCurlyBraceStartsLine());
     }
 }

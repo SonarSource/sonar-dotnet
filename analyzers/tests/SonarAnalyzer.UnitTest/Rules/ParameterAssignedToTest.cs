@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterAssignedTo_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.cs", new CS.ParameterAssignedTo());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParameterAssignedTo.cs", new CS.ParameterAssignedTo());
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterAssignedTo_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.vb", new VB.ParameterAssignedTo());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParameterAssignedTo.vb", new VB.ParameterAssignedTo());
     }
 }

@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SpecifyIFormatProviderOrCultureInfo() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SpecifyIFormatProviderOrCultureInfo.cs", new SpecifyIFormatProviderOrCultureInfo());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SpecifyIFormatProviderOrCultureInfo.cs", new SpecifyIFormatProviderOrCultureInfo());
     }
 }

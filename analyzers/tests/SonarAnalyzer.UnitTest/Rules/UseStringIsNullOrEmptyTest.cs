@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseStringNullOrEmpty() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseStringIsNullOrEmpty.cs", new UseStringIsNullOrEmpty());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UseStringIsNullOrEmpty.cs", new UseStringIsNullOrEmpty());
     }
 }

@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterValidationInYieldShouldBeWrapped() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterValidationInYieldShouldBeWrapped.cs", new ParameterValidationInYieldShouldBeWrapped());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParameterValidationInYieldShouldBeWrapped.cs", new ParameterValidationInYieldShouldBeWrapped());
     }
 }

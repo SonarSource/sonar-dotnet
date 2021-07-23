@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableUnused_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.cs", new CS.VariableUnused(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\VariableUnused.cs", new CS.VariableUnused(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableUnused_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.vb", new VB.VariableUnused());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\VariableUnused.vb", new VB.VariableUnused());
     }
 }

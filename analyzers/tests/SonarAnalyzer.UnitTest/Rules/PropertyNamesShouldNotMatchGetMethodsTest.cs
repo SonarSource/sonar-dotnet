@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyNamesShouldNotMatchGetMethods() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs", new PropertyNamesShouldNotMatchGetMethods());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs", new PropertyNamesShouldNotMatchGetMethods());
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -70,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.NUnit.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\TestMethodShouldContainAssertion.NUnit.cs",
                 new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion, nSubstituteVersion));
 

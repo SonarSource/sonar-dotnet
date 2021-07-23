@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TypeExaminationOnSystemType() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TypeExaminationOnSystemType.cs", new TypeExaminationOnSystemType());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\TypeExaminationOnSystemType.cs", new TypeExaminationOnSystemType());
     }
 }

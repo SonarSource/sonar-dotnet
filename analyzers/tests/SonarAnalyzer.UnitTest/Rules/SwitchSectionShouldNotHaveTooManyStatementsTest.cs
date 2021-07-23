@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.cs",
                 new CS.SwitchSectionShouldNotHaveTooManyStatements());
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.vb",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.vb",
                 new VB.SwitchSectionShouldNotHaveTooManyStatements());
 
         [TestMethod]

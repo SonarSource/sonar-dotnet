@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParametersCorrectOrder_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
                 new CS.ParametersCorrectOrder(),
                 ParseOptionsHelper.FromCSharp8);
 
@@ -52,7 +52,7 @@ public class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void ParametersCorrectOrder_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.vb",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParametersCorrectOrder.vb",
                 new VB.ParametersCorrectOrder());
 
         [TestMethod]
@@ -67,4 +67,3 @@ Public Class Foo
 End Class", new VB.ParametersCorrectOrder(), CompilationErrorBehavior.Ignore);
     }
 }
-

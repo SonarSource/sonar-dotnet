@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ValuesUselesslyIncremented() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ValuesUselesslyIncremented.cs", new ValuesUselesslyIncremented());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ValuesUselesslyIncremented.cs", new ValuesUselesslyIncremented());
 
 #if NET
         [TestMethod]

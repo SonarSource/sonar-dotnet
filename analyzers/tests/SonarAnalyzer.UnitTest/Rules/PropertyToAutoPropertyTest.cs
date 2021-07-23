@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyToAutoProperty() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.cs", new PropertyToAutoProperty());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PropertyToAutoProperty.cs", new PropertyToAutoProperty());
 
         [TestMethod]
         [TestCategory("Rule")]

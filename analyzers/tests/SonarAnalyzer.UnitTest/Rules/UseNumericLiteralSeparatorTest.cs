@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseNumericLiteralSeparator_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseNumericLiteralSeparator.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UseNumericLiteralSeparator.cs",
                                     new UseNumericLiteralSeparator(),
                                     ParseOptionsHelper.FromCSharp7);
 

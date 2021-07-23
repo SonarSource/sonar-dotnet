@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TypeNamesShouldNotMatchNamespaces() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TypeNamesShouldNotMatchNamespaces.cs", new TypeNamesShouldNotMatchNamespaces());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\TypeNamesShouldNotMatchNamespaces.cs", new TypeNamesShouldNotMatchNamespaces());
 
 #if NET
         [TestMethod]

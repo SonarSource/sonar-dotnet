@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ReturnEmptyCollectionInsteadOfNull() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
                                     new ReturnEmptyCollectionInsteadOfNull(),
                                     MetadataReferenceFacade.SystemXml);
 

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnchangedLocalVariablesShouldBeConst() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.cs", new UnchangedLocalVariablesShouldBeConst());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.cs", new UnchangedLocalVariablesShouldBeConst());
 
 #if NET
         [TestMethod]

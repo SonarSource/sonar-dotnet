@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void UseUriInsteadOfString(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
                                     new UseUriInsteadOfString(),
                                     MetadataReferenceFacade.SystemDrawing.Concat(TestHelper.ProjectTypeReference(projectType)));
 

@@ -32,8 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TabCharacter()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TabCharacter.cs", new CS.TabCharacter());
-            Verifier.VerifyAnalyzer(@"TestCases\TabCharacter.vb", new VB.TabCharacter());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\TabCharacter.cs", new CS.TabCharacter());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\TabCharacter.vb", new VB.TabCharacter());
         }
     }
 }

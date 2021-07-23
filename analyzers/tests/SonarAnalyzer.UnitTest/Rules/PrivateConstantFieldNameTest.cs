@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PrivateConstantFieldName() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PrivateConstantFieldName.vb", new PrivateConstantFieldName());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PrivateConstantFieldName.vb", new PrivateConstantFieldName());
     }
 }
