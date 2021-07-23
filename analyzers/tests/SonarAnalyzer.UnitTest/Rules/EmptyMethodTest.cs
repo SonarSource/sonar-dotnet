@@ -35,13 +35,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyMethod() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.cs",
-                new CS.EmptyMethod(),
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EmptyMethod.cs",
+                                              new CS.EmptyMethod(),
 #if NETFRAMEWORK
-                ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
+                                              ParseOptionsHelper.FromCSharp8,
+                                              NuGetMetadataReference.NETStandardV2_1_0);
 #else
-                ParseOptionsHelper.FromCSharp8);
+                                              ParseOptionsHelper.FromCSharp8);
 #endif
 
 #if NET
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyMethod_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.vb", new VB.EmptyMethod());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EmptyMethod.vb", new VB.EmptyMethod());
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_CS() =>

@@ -36,6 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyNestedBlock_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyNestedBlock.vb", new VB.EmptyNestedBlock());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EmptyNestedBlock.vb", new VB.EmptyNestedBlock());
     }
 }

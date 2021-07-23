@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExtensionMethodShouldNotExtendObject() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExtensionMethodShouldNotExtendObject.cs", new ExtensionMethodShouldNotExtendObject());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ExtensionMethodShouldNotExtendObject.cs", new ExtensionMethodShouldNotExtendObject());
     }
 }

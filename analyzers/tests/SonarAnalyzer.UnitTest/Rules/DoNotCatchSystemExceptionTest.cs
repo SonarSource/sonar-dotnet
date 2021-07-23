@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCatchSystemException() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCatchSystemException.cs", new DoNotCatchSystemException());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotCatchSystemException.cs", new DoNotCatchSystemException());
 
 #if NET
         [TestMethod]

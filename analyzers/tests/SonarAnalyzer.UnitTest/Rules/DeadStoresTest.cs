@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DeadStores() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeadStores.cs",
-                                    new DeadStores(),
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DeadStores.cs",
+                                              new DeadStores(),
 #if NETFRAMEWORK
-                                    ParseOptionsHelper.FromCSharp8,
-                                    NuGetMetadataReference.NETStandardV2_1_0);
+                                              ParseOptionsHelper.FromCSharp8,
+                                              NuGetMetadataReference.NETStandardV2_1_0);
 #else
-                                    ParseOptionsHelper.FromCSharp8);
+                                              ParseOptionsHelper.FromCSharp8);
 #endif
 
 #if NET

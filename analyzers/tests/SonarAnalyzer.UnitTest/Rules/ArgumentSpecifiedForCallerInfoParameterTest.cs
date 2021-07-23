@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ArgumentSpecifiedForCallerInfoParameter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ArgumentSpecifiedForCallerInfoParameter.cs", new ArgumentSpecifiedForCallerInfoParameter());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ArgumentSpecifiedForCallerInfoParameter.cs", new ArgumentSpecifiedForCallerInfoParameter());
     }
 }

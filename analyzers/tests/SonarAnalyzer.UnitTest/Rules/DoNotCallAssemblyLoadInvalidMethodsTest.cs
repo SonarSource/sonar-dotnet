@@ -31,9 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallAssemblyLoadInvalidMethods() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.cs",
-                                    new DoNotCallAssemblyLoadInvalidMethods(),
-                                    MetadataReferenceFacade.SystemSecurityPermissions);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.cs",
+                                              new DoNotCallAssemblyLoadInvalidMethods(),
+                                              MetadataReferenceFacade.SystemSecurityPermissions);
 
 #if NET
         [TestMethod]

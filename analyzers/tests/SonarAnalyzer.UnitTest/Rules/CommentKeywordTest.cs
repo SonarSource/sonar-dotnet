@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void CommentTodo_CS(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommentTodo.cs", new CS.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CommentTodo.cs", new CS.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void CommentTodo_VB(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommentTodo.vb", new VB.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CommentTodo.vb", new VB.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]

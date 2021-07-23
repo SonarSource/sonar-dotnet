@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs", new CS.CertificateValidationCheck(), GetAdditionalReferences());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CertificateValidationCheck.cs", new CS.CertificateValidationCheck(), GetAdditionalReferences());
 
 #if NET
         [TestMethod]
@@ -66,9 +66,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
-                                    new VB.CertificateValidationCheck(),
-                                    GetAdditionalReferences());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CertificateValidationCheck.vb",
+                                              new VB.CertificateValidationCheck(),
+                                              GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -30,8 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ControlCharacterInString() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ControlCharacterInString.cs",
-                                    new ControlCharacterInString(),
-                                    ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ControlCharacterInString.cs",
+                                              new ControlCharacterInString(),
+                                              ParseOptionsHelper.FromCSharp8);
     }
 }

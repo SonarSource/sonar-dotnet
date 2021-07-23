@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DelegateSubtraction() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DelegateSubtraction.cs", new DelegateSubtraction());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DelegateSubtraction.cs", new DelegateSubtraction());
 
 #if NET
         [TestMethod]

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConsoleLogging() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging.cs", new ConsoleLogging());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ConsoleLogging.cs", new ConsoleLogging());
 
         [TestMethod]
         [TestCategory("Rule")]

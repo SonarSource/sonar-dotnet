@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyStatement() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyStatement.cs", new EmptyStatement());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EmptyStatement.cs", new EmptyStatement());
 
 #if NET
         [TestMethod]

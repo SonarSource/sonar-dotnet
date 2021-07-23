@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -34,10 +34,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CryptographicKeyShouldNotBeTooShort() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.cs",
-                                    new CryptographicKeyShouldNotBeTooShort(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    GetAdditionalReferences());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.cs",
+                                              new CryptographicKeyShouldNotBeTooShort(),
+                                              ParseOptionsHelper.FromCSharp8,
+                                              GetAdditionalReferences());
 
 #if NET
         [TestMethod]

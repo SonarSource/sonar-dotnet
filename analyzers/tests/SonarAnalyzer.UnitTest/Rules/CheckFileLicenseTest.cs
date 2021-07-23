@@ -85,7 +85,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenUnlicensedFileStartingWithUsing_ShouldBeNoncompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -277,8 +277,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_NonCompliant_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NonCompliant.vb",
-                new VB.CheckFileLicense());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CheckFileLicense_NonCompliant.vb",
+                                              new VB.CheckFileLicense());
 
         [TestMethod]
         [TestCategory("Rule")]

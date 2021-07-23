@@ -34,9 +34,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallExitMethods() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
-                new DoNotCallExitMethods(),
-                MetadataReferenceFacade.SystemWindowsForms);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
+                                              new DoNotCallExitMethods(),
+                                              MetadataReferenceFacade.SystemWindowsForms);
 #endif
 
 #if NET

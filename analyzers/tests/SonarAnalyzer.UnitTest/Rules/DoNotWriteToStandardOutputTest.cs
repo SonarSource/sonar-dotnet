@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotWriteToStandardOutput() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging.cs", new DoNotWriteToStandardOutput());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ConsoleLogging.cs", new DoNotWriteToStandardOutput());
 
         [TestMethod]
         [TestCategory("Rule")]

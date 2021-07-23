@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void BypassingAccessibility_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BypassingAccessibility.cs", new CS.BypassingAccessibility());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\BypassingAccessibility.cs", new CS.BypassingAccessibility());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -41,6 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void BypassingAccessibility_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BypassingAccessibility.vb", new VB.BypassingAccessibility());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\BypassingAccessibility.vb", new VB.BypassingAccessibility());
     }
 }

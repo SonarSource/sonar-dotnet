@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CatchEmpty() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CatchEmpty.cs", new CatchEmpty());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CatchEmpty.cs", new CatchEmpty());
 
         [TestMethod]
         [TestCategory("Rule")]

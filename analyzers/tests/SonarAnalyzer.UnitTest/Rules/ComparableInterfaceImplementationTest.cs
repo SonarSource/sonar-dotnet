@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void IComparableImplementation() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ComparableInterfaceImplementation.cs", new ComparableInterfaceImplementation());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ComparableInterfaceImplementation.cs", new ComparableInterfaceImplementation());
     }
 }

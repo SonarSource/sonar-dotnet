@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassNotInstantiatable_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.cs", new CS.ClassNotInstantiatable());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ClassNotInstantiatable.cs", new CS.ClassNotInstantiatable());
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassNotInstantiatable_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.vb", new VB.ClassNotInstantiatable());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ClassNotInstantiatable.vb", new VB.ClassNotInstantiatable());
     }
 }

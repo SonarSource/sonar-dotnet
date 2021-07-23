@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AsyncVoidMethod() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.cs", new AsyncVoidMethod());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\AsyncVoidMethod.cs", new AsyncVoidMethod());
 
 #if NET
         [TestMethod]

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExceptionRethrow() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExceptionRethrow.cs", new ExceptionRethrow());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ExceptionRethrow.cs", new ExceptionRethrow());
 
         [TestMethod]
         [TestCategory("CodeFix")]

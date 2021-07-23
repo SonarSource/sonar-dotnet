@@ -31,9 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CollectionPropertiesShouldBeReadOnly() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
-                                    new CollectionPropertiesShouldBeReadOnly(),
-                                    MetadataReferenceFacade.SystemRuntimeSerialization);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
+                                              new CollectionPropertiesShouldBeReadOnly(),
+                                              MetadataReferenceFacade.SystemRuntimeSerialization);
 
 #if NET
         [TestMethod]

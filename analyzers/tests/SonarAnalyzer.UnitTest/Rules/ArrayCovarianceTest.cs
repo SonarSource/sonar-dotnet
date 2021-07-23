@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ArrayCovariance() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ArrayCovariance.cs", new ArrayCovariance());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ArrayCovariance.cs", new ArrayCovariance());
 
 #if NET
         [TestMethod]

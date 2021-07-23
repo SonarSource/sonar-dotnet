@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotOverwriteCollectionElements_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.cs",
-                new CS.DoNotOverwriteCollectionElements());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.cs",
+                                              new CS.DoNotOverwriteCollectionElements());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotOverwriteCollectionElements_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.vb",
-                new VB.DoNotOverwriteCollectionElements());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.vb",
+                                              new VB.DoNotOverwriteCollectionElements());
     }
 }

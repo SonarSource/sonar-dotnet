@@ -31,9 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpressionComplexity_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs",
-                new CS.ExpressionComplexity { Maximum = 3},
-                ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ExpressionComplexity.cs",
+                                              new CS.ExpressionComplexity { Maximum = 3},
+                                              ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpressionComplexity_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.vb",
-                new VB.ExpressionComplexity { Maximum = 3 });
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ExpressionComplexity.vb",
+                                              new VB.ExpressionComplexity { Maximum = 3 });
     }
 }

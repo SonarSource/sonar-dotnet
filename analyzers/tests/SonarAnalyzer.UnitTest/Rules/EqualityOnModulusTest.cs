@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EqualityOnModulus() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EqualityOnModulus.cs", new EqualityOnModulus());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EqualityOnModulus.cs", new EqualityOnModulus());
 
 #if NET
         [TestMethod]

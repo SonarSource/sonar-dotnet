@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EventHandlerName() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EventHandlerName.vb", new EventHandlerName());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EventHandlerName.vb", new EventHandlerName());
     }
 }

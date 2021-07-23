@@ -31,8 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.cs",
-                new CS.ConditionalStructureSameCondition());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ConditionalStructureSameCondition.cs",
+                                              new CS.ConditionalStructureSameCondition());
 
 #if NET
         [TestMethod]

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCheckZeroSizeCollection_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs", new CS.DoNotCheckZeroSizeCollection());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs", new CS.DoNotCheckZeroSizeCollection());
 
 #if NET
         [TestMethod]
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCheckZeroSizeCollection_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.vb",
-                new VB.DoNotCheckZeroSizeCollection());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.vb",
+                                              new VB.DoNotCheckZeroSizeCollection());
     }
 }

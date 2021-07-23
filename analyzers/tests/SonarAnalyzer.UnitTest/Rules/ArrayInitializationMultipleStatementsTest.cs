@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ArrayInitializationMultipleStatements() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ArrayInitializationMultipleStatements.vb", new VB.ArrayInitializationMultipleStatements());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ArrayInitializationMultipleStatements.vb", new VB.ArrayInitializationMultipleStatements());
     }
 }

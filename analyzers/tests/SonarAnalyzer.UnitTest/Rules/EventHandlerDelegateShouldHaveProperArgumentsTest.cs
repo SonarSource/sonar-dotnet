@@ -30,8 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EventHandlerDelegateShouldHaveProperArguments() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.cs",
-                new EventHandlerDelegateShouldHaveProperArguments());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.cs",
+                                              new EventHandlerDelegateShouldHaveProperArguments());
 
 #if NET
         [TestMethod]

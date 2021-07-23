@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ArrayDesignatorOnVariable() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ArrayDesignatorOnVariable.vb", new ArrayDesignatorOnVariable());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ArrayDesignatorOnVariable.vb", new ArrayDesignatorOnVariable());
 
         [TestMethod]
         [TestCategory("CodeFix")]
