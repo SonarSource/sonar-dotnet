@@ -67,6 +67,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                webConfigPath,
                 File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
@@ -82,6 +83,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                corruptFilePath,
                 File.ReadAllText(corruptFilePath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
         }
@@ -139,6 +141,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                webConfigPath,
                 File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
@@ -152,6 +155,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                configPath,
                 File.ReadAllText(configPath),
                 TestHelper.CreateSonarProjectConfig(Path.GetDirectoryName(configPath), TestHelper.CreateFilesToAnalyze(Path.GetDirectoryName(configPath), configPath)));
 
@@ -178,6 +182,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                webConfigPath,
                 File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
@@ -186,8 +191,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         private static void VerifyResults(string webConfigPath, IList<Diagnostic> allDiagnostics, string languageVersion)
         {
             var actualIssues = allDiagnostics.Where(d => d.Location.GetLineSpan().Path.EndsWith(webConfigPath));
-            var expectedIssues = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(File.ReadAllText(webConfigPath)).Lines).ToList();
-            DiagnosticVerifier.CompareActualToExpected(languageVersion, actualIssues, expectedIssues, false);
+            var fileNameSourceText = new DiagnosticVerifier.FileNameSourceText(webConfigPath, SourceText.From(File.ReadAllText(webConfigPath)));
+            var expectedIssueLocations = fileNameSourceText.ToIssueLocations();
+            DiagnosticVerifier.CompareActualToExpected(languageVersion, actualIssues, new List<DiagnosticVerifier.FileNameIssueLocations> { expectedIssueLocations }, false);
         }
     }
 }

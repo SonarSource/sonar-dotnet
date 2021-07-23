@@ -43,29 +43,40 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             "BC36716" // VB12 does not support line continuation comments" i.e. a comment at the end of a multi-line statement.
         };
 
-        public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileContent, string sonarProjectConfigPath) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, new[] { SourceText.From(fileContent) }, sonarProjectConfigPath);
+        public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileName, string fileContent, string sonarProjectConfigPath) =>
+            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, new[] { new FileNameSourceText(fileName, SourceText.From(fileContent)) }, sonarProjectConfigPath);
 
         public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode, string sonarProjectConfigPath = null) =>
             Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, sonarProjectConfigPath);
 
         public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode, string sonarProjectConfigPath = null) =>
-            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).Select(x => x.GetText()), sonarProjectConfigPath);
+            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).Select(FileNameSourceText.FromSyntaxTree), sonarProjectConfigPath);
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode, SourceText source, string sonarProjectConfigPath = null) =>
+        public static void Verify(Compilation compilation,
+                                  DiagnosticAnalyzer diagnosticAnalyzer,
+                                  CompilationErrorBehavior checkMode,
+                                  FileNameSourceText source,
+                                  string sonarProjectConfigPath = null) =>
             Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, new[] { source });
+
+        public static void Verify(Compilation compilation,
+                                  DiagnosticAnalyzer diagnosticAnalyzer,
+                                  CompilationErrorBehavior checkMode,
+                                  SyntaxTree syntaxTree,
+                                  string sonarProjectConfigPath = null) =>
+            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, new[] { FileNameSourceText.FromSyntaxTree(syntaxTree), });
 
         public static void Verify(Compilation compilation,
                                   DiagnosticAnalyzer[] diagnosticAnalyzers,
                                   CompilationErrorBehavior checkMode,
-                                  IEnumerable<SourceText> sources,
+                                  IEnumerable<FileNameSourceText> sources,
                                   string sonarProjectConfigPath = null)
         {
             SuppressionHandler.HookSuppression();
             try
             {
                 var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath: sonarProjectConfigPath);
-                var expectedIssues = sources.SelectMany(x => IssueLocationCollector.GetExpectedIssueLocations(x.Lines)).ToList();
+                var expectedIssues = sources.Select(x => x.ToIssueLocations()).ToList();
                 CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
@@ -145,12 +156,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Where(d => ids.Contains(d.Id));
         }
 
-        internal static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, ICollection<IIssueLocation> expectedIssues, bool compareIdToMessage)
+        internal static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, List<FileNameIssueLocations> expectedIssuesPerFile, bool compareIdToMessage)
         {
             DumpActualDiagnostics(languageVersion, diagnostics);
 
             foreach (var diagnostic in diagnostics)
             {
+                var expectedIssues = diagnostic.Location.SourceTree != null
+                    ? expectedIssuesPerFile.First(x => x.FileName == diagnostic.Location.SourceTree.FilePath).IssueLocations
+                    : expectedIssuesPerFile.First().IssueLocations; // FIXME when we will find a better way to match diagnostics for CBDE like analyzers
                 var issueId = VerifyPrimaryIssue(languageVersion,
                     expectedIssues,
                     issue => issue.IsPrimary,
@@ -176,9 +190,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 }
             }
 
-            if (expectedIssues.Count != 0)
+            if (expectedIssuesPerFile.Any(x => x.IssueLocations.Any()))
             {
-                var expectedIssuesDescription = expectedIssues.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
+                var expectedIssuesLeft = expectedIssuesPerFile.SelectMany(x => x.IssueLocations);
+                var expectedIssuesDescription = expectedIssuesLeft.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
                 Execute.Assertion.FailWith($"{languageVersion}: Issue(s) expected but not raised on line(s):{expectedIssuesDescription.JoinStr("")}");
             }
         }
@@ -197,7 +212,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             var buildErrors = GetBuildErrors(diagnostics);
 
-            var expectedBuildErrors = compilation.SyntaxTrees.Skip(1).SelectMany(x => IssueLocationCollector.GetExpectedBuildErrors(x.GetText().Lines)).ToList();
+            var expectedBuildErrors = compilation.SyntaxTrees.Skip(1).Select(FileNameIssueLocations.BuildErrorsFromSyntaxTree).ToList();
             CompareActualToExpected(compilation.LanguageVersionString(), buildErrors, expectedBuildErrors, true);
         }
 
@@ -209,11 +224,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Should().NotContain(d => d.Id == AnalyzerFailedDiagnosticId);
 
-        private static string VerifyPrimaryIssue(string languageVersion, ICollection<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+        private static string VerifyPrimaryIssue(string languageVersion, IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
             Location location, string message, string extraInfo) =>
             VerifyIssue(languageVersion, expectedIssues, issueFilter, location, message, extraInfo, true, null);
 
-        private static void VerifySecondaryIssue(string languageVersion, ICollection<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+        private static void VerifySecondaryIssue(string languageVersion, IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
             Location location, string message, string issueId) =>
             VerifyIssue(languageVersion, expectedIssues, issueFilter, location, message, null, false, issueId);
 
@@ -265,6 +280,36 @@ Actual  : '{message}'");
 
         private static string IssueType(bool isPrimary) => isPrimary ? "primary" : "secondary";
 
+        internal class FileNameSourceText
+        {
+            public string FileName { get; set; }
+            public SourceText SourceText { get; set; }
+            public FileNameSourceText(string fileName, SourceText sourceText)
+            {
+                FileName = fileName;
+                SourceText = sourceText;
+            }
+
+            public FileNameIssueLocations ToIssueLocations() =>
+                new FileNameIssueLocations(FileName, IssueLocationCollector.GetExpectedIssueLocations(SourceText.Lines));
+
+            public static FileNameSourceText FromSyntaxTree(SyntaxTree syntaxTree) =>
+                new FileNameSourceText(syntaxTree.FilePath, syntaxTree.GetText());
+        }
+
+        internal class FileNameIssueLocations
+        {
+            public string FileName { get; set; }
+            public IList<IIssueLocation> IssueLocations { get; set; }
+            public FileNameIssueLocations(string fileName, IList<IIssueLocation> issueLocations)
+            {
+                FileName = fileName;
+                IssueLocations = issueLocations;
+            }
+
+            public static FileNameIssueLocations BuildErrorsFromSyntaxTree(SyntaxTree syntaxTree) =>
+                new FileNameIssueLocations(syntaxTree.FilePath, IssueLocationCollector.GetExpectedBuildErrors(syntaxTree.GetText().Lines).ToList());
+        }
         internal static class SuppressionHandler
         {
             private static bool isHooked;

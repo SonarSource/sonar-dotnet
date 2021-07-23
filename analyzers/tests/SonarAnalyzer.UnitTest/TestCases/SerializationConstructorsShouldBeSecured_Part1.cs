@@ -6,7 +6,7 @@ using System.Security.Permissions;
 namespace MyLibrary
 {
 
-    // Noncompliant - in Part2.cs
+
 
 
 

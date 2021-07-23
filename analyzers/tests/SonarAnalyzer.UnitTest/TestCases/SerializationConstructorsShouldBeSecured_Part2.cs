@@ -6,7 +6,7 @@ namespace MyLibrary
     public partial class PartialFoo
     {
         [FileIOPermission(SecurityAction.Demand, Unrestricted = true)]
-        protected PartialFoo(SerializationInfo info, StreamingContext context) { }
+        protected PartialFoo(SerializationInfo info, StreamingContext context) { }  // Noncompliant
     }
 
     public partial class PartialFoo_ok : ISerializable
