@@ -149,7 +149,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static string InsertNamespaceForVB(string content)
         {
-            var match = Regex.Match(content, @"\s*Imports\s+(\w|\.)*\s*", RegexOptions.RightToLeft);
+            var match = Regex.Match(content, @"\s*Imports\s+(\w|\.|=| )*\s*", RegexOptions.RightToLeft);
             return content.Insert(match.Index + match.Length, "Namespace AppendedNamespaceForConcurrencyTest\n") + "\nEnd Namespace";
         }
 
