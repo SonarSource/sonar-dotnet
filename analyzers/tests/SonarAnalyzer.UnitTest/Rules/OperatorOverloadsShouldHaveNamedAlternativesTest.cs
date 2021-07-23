@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OperatorOverloadsShouldHaveNamedAlternatives() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.cs", new OperatorOverloadsShouldHaveNamedAlternatives());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.cs", new OperatorOverloadsShouldHaveNamedAlternatives());
 
 #if NET
         [TestMethod]

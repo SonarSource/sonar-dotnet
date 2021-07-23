@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalRefOutParameter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OptionalRefOutParameter.cs", new OptionalRefOutParameter());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\OptionalRefOutParameter.cs", new OptionalRefOutParameter());
 
 #if NET
         [TestMethod]
