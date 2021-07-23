@@ -36,12 +36,12 @@ namespace SonarAnalyzer.UnitTest.Rules.Hotspots
         [TestMethod]
         [TestCategory("Rule")]
         public void LooseFilePermissions_Windows_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LooseFilePermissions_Windows_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.vb", new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.vb", new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
 #if NET
         [TestMethod]

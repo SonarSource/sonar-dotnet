@@ -44,17 +44,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ControllingPermissions_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.cs",
-                                    new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferences);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\ControllingPermissions.cs",
+                                              new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
+                                              AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ControllingPermissions_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.vb",
-                                    new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferences);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\ControllingPermissions.vb",
+                                              new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
+                                              AdditionalReferences);
     }
 }
 

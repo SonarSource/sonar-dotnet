@@ -45,9 +45,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.cs",
-                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.cs",
+                                              new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                                              additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -162,9 +162,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.vb",
-                new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.vb",
+                                              new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                                              additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [TestMethod]
         [TestCategory("Rule")]

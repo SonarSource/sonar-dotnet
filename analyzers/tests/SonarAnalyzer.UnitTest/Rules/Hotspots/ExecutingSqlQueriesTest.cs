@@ -39,18 +39,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CS_Net46() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.cs",
-                                    new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                                    GetReferencesNet46(Constants.NuGetLatestVersion));
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.cs",
+                                              new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                                              GetReferencesNet46(Constants.NuGetLatestVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_VB_Net46() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.vb",
-                                    new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                                    ParseOptionsHelper.FromVisualBasic15,
-                                    GetReferencesNet46(Constants.NuGetLatestVersion));
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.vb",
+                                              new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                                              ParseOptionsHelper.FromVisualBasic15,
+                                              GetReferencesNet46(Constants.NuGetLatestVersion));
 
         internal static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
             NetStandardMetadataReference.Netstandard

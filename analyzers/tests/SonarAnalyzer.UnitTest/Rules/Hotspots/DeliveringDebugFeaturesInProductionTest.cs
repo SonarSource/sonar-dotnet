@@ -37,17 +37,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
-                                    new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferencesNetCore2);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
+                                              new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                                              AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
-                                    new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferencesNetCore2);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
+                                              new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                                              AdditionalReferencesNetCore2);
 
 #if NET
 

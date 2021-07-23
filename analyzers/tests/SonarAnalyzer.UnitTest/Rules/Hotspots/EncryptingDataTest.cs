@@ -36,17 +36,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void EncryptingData_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.cs",
-                new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\EncryptingData.cs",
+                                              new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
+                                              GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void EncryptingData_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.vb",
-                new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\EncryptingData.vb",
+                                              new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
+                                              GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography;

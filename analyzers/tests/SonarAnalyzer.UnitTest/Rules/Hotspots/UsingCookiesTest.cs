@@ -41,17 +41,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingCookies_CS_Net46() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.cs",
-                new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferencesForNet46());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.cs",
+                                              new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
+                                              GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingCookies_VB_Net46() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.vb",
-                new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferencesForNet46());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.vb",
+                                              new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
+                                              GetAdditionalReferencesForNet46());
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNet46() =>
             FrameworkMetadataReference.SystemWeb;

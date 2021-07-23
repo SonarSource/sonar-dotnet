@@ -39,9 +39,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_Nancy() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Nancy.cs",
-                                    new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferences);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Nancy.cs",
+                                              new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                                              AdditionalReferences);
 
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
 
