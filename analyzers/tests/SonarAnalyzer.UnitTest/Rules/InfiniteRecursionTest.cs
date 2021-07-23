@@ -31,14 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InfiniteRecursion() =>
-            Verifier.VerifyAnalyzer(
-                @"TestCases\InfiniteRecursion.cs",
-                new InfiniteRecursion(),
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\InfiniteRecursion.cs",
+                                              new InfiniteRecursion(),
 #if NETFRAMEWORK
-                ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
+                                              ParseOptionsHelper.FromCSharp8,
+                                              NuGetMetadataReference.NETStandardV2_1_0);
 #else
-                ParseOptionsHelper.FromCSharp8);
+                                              ParseOptionsHelper.FromCSharp8);
 #endif
     }
 }

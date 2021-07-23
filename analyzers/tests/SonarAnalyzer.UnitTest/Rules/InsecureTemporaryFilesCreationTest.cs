@@ -36,6 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureTemporaryFilesCreation_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InsecureTemporaryFilesCreation.vb", new VB.InsecureTemporaryFilesCreation());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\InsecureTemporaryFilesCreation.vb", new VB.InsecureTemporaryFilesCreation());
     }
 }

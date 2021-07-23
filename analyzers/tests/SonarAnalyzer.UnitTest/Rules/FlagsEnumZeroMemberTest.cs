@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FlagsEnumZeroMember_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FlagsEnumZeroMember.cs", new CS.FlagsEnumZeroMember());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FlagsEnumZeroMember.cs", new CS.FlagsEnumZeroMember());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void FlagsEnumZeroMember_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FlagsEnumZeroMember.vb", new VB.FlagsEnumZeroMember());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FlagsEnumZeroMember.vb", new VB.FlagsEnumZeroMember());
     }
 }

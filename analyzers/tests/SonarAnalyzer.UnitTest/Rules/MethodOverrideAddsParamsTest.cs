@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideAddsParams() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideAddsParams.cs",
-                new MethodOverrideAddsParams(),
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodOverrideAddsParams.cs",
+                                              new MethodOverrideAddsParams(),
 #if NETFRAMEWORK
-                ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
+                                              ParseOptionsHelper.FromCSharp8,
+                                              NuGetMetadataReference.NETStandardV2_1_0);
 #else
-                ParseOptionsHelper.FromCSharp8);
+                                              ParseOptionsHelper.FromCSharp8);
 #endif
 
 #if NET

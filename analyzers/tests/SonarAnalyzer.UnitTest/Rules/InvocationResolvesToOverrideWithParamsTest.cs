@@ -30,8 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InvocationResolvesToOverrideWithParams() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InvocationResolvesToOverrideWithParams.cs",
-                                    new InvocationResolvesToOverrideWithParams(),
-                                    ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\InvocationResolvesToOverrideWithParams.cs",
+                                              new InvocationResolvesToOverrideWithParams(),
+                                              ParseOptionsHelper.FromCSharp8);
     }
 }

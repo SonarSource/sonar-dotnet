@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\JwtSigned.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.vb", new VB.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\JwtSigned.vb", new VB.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
 
         [TestMethod]
         [TestCategory("Rule")]

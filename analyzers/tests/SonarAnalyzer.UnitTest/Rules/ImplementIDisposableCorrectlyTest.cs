@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.cs", new ImplementIDisposableCorrectly(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ImplementIDisposableCorrectly.cs", new ImplementIDisposableCorrectly(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InheritedCollidingInterfaceMembers() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.cs", new InheritedCollidingInterfaceMembers());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.cs", new InheritedCollidingInterfaceMembers());
 
         [TestMethod]
         [TestCategory("Rule")]

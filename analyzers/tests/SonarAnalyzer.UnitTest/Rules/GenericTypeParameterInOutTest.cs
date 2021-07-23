@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericTypeParameterInOut() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.cs", new GenericTypeParameterInOut());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\GenericTypeParameterInOut.cs", new GenericTypeParameterInOut());
 
         [TestMethod]
         [TestCategory("Rule")]

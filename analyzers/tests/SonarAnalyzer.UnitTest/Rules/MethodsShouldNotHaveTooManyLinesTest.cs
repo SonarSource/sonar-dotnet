@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_DefaultValues_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs", new CS.MethodsShouldNotHaveTooManyLines());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs", new CS.MethodsShouldNotHaveTooManyLines());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -82,7 +82,7 @@ public class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_DefaultValues_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb", new VB.MethodsShouldNotHaveTooManyLines());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb", new VB.MethodsShouldNotHaveTooManyLines());
 
         [TestMethod]
         [TestCategory("Rule")]

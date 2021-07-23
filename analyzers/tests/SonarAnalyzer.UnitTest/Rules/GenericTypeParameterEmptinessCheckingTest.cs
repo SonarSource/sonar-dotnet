@@ -31,10 +31,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericTypeParameterEmptinessChecking() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
-                                    new GenericTypeParameterEmptinessChecking(),
-                                    CompilationErrorBehavior.Ignore,
-                                    MetadataReferenceFacade.SystemCollections);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
+                                              new GenericTypeParameterEmptinessChecking(),
+                                              CompilationErrorBehavior.Ignore,
+                                              MetadataReferenceFacade.SystemCollections);
 
 #if NET
         [TestMethod]

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverloadsShouldBeGrouped_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.cs", new CS.MethodOverloadsShouldBeGrouped());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.cs", new CS.MethodOverloadsShouldBeGrouped());
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverloadsShouldBeGrouped_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.vb", new VB.MethodOverloadsShouldBeGrouped());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.vb", new VB.MethodOverloadsShouldBeGrouped());
     }
 }

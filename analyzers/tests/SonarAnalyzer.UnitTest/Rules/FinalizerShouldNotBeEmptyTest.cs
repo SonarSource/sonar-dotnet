@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FinalizerShouldNotBeEmpty() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FinalizerShouldNotBeEmpty.cs", new FinalizerShouldNotBeEmpty());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FinalizerShouldNotBeEmpty.cs", new FinalizerShouldNotBeEmpty());
 
 #if NET
         [TestMethod]

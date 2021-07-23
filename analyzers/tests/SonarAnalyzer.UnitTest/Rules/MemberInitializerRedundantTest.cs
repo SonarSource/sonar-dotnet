@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberInitializerRedundant() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
 

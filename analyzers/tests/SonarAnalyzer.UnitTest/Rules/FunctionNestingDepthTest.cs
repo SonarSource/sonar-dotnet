@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FunctionNestingDepth_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.cs", new CS.FunctionNestingDepth { Maximum = 3 });
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FunctionNestingDepth.cs", new CS.FunctionNestingDepth { Maximum = 3 });
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FunctionNestingDepth_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.vb", new VB.FunctionNestingDepth { Maximum = 3 });
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FunctionNestingDepth.vb", new VB.FunctionNestingDepth { Maximum = 3 });
     }
 }

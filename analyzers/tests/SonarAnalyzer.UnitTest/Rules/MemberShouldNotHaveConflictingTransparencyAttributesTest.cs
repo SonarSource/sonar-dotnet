@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldNotHaveConflictingTransparencyAttributes() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ForLoopCounterChanged() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ForLoopCounterChanged.cs", new ForLoopCounterChanged());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ForLoopCounterChanged.cs", new ForLoopCounterChanged());
     }
 }

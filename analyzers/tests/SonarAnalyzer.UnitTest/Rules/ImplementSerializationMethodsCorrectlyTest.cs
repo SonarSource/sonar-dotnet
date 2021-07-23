@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs", new CS.ImplementSerializationMethodsCorrectly());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs", new CS.ImplementSerializationMethodsCorrectly());
 
 #if NET
         [TestMethod]
@@ -54,6 +54,6 @@ public class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb", new VB.ImplementSerializationMethodsCorrectly());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb", new VB.ImplementSerializationMethodsCorrectly());
     }
 }

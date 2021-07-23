@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GotoStatement_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GotoStatement.cs", new CS.GotoStatement());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\GotoStatement.cs", new CS.GotoStatement());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void GotoStatement_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GotoStatement.vb", new VB.GotoStatement());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\GotoStatement.vb", new VB.GotoStatement());
     }
 }

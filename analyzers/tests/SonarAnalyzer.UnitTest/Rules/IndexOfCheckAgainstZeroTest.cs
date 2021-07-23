@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void IndexOfCheckAgainstZero_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\IndexOfCheckAgainstZero.cs", new CS.IndexOfCheckAgainstZero());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\IndexOfCheckAgainstZero.cs", new CS.IndexOfCheckAgainstZero());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void IndexOfCheckAgainstZero_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\IndexOfCheckAgainstZero.vb", new VB.IndexOfCheckAgainstZero());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\IndexOfCheckAgainstZero.vb", new VB.IndexOfCheckAgainstZero());
     }
 }

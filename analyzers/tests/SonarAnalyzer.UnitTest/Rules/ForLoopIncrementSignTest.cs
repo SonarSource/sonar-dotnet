@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ForLoopIncrementSign() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ForLoopIncrementSign.cs", new ForLoopIncrementSign());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ForLoopIncrementSign.cs", new ForLoopIncrementSign());
     }
 }

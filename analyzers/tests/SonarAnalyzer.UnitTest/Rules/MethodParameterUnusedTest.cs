@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodParameterUnused_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.cs", new CS.MethodParameterUnused());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodParameterUnused.cs", new CS.MethodParameterUnused());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -65,6 +65,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodParameterUnused_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.vb", new VB.MethodParameterUnused());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodParameterUnused.vb", new VB.MethodParameterUnused());
     }
 }

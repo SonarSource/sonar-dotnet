@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void IndexedPropertyName() =>
-            Verifier.VerifyAnalyzer(@"TestCases\IndexedPropertyName.vb", new IndexedPropertyName());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\IndexedPropertyName.vb", new IndexedPropertyName());
     }
 }

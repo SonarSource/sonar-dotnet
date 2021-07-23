@@ -32,8 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MultipleVariableDeclaration()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.cs", new CS.MultipleVariableDeclaration());
-            Verifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.vb", new VB.MultipleVariableDeclaration());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MultipleVariableDeclaration.cs", new CS.MultipleVariableDeclaration());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MultipleVariableDeclaration.vb", new VB.MultipleVariableDeclaration());
         }
 
         [TestMethod]

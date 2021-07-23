@@ -32,12 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShadowsParentField_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShadowsParentField_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
 
         [TestMethod]
         [TestCategory("Rule")]

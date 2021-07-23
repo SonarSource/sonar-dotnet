@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InterfaceMethodsShouldBeCallableByChildTypes() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InterfaceMethodsShouldBeCallableByChildTypes.cs", new InterfaceMethodsShouldBeCallableByChildTypes());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\InterfaceMethodsShouldBeCallableByChildTypes.cs", new InterfaceMethodsShouldBeCallableByChildTypes());
 
 #if NET
         [TestMethod]

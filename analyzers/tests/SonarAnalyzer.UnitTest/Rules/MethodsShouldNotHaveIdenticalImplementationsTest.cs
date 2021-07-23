@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveIdenticalImplementations() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.cs", new CS.MethodsShouldNotHaveIdenticalImplementations(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.cs", new CS.MethodsShouldNotHaveIdenticalImplementations(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveIdenticalImplementations_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.vb", new VB.MethodsShouldNotHaveIdenticalImplementations());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.vb", new VB.MethodsShouldNotHaveIdenticalImplementations());
     }
 }

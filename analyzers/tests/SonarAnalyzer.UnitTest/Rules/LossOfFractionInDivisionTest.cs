@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LossOfFractionInDivision() =>
-            Verifier.VerifyAnalyzer(@"TestCases\LossOfFractionInDivision.cs", new LossOfFractionInDivision());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\LossOfFractionInDivision.cs", new LossOfFractionInDivision());
 
 #if NET
         [TestMethod]

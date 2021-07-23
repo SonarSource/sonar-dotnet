@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberInitializedToDefault() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberInitializedToDefault.cs", new MemberInitializedToDefault());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MemberInitializedToDefault.cs", new MemberInitializedToDefault());
 
 #if NET
         [TestMethod]
