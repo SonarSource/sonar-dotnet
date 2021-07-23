@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ConfiguringLoggers_Log4Net_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Log4Net.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Log4Net.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 Log4NetReferences);
 
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ConfiguringLoggers_Log4Net_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Log4Net.vb",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Log4Net.vb",
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 Log4NetReferences);
 

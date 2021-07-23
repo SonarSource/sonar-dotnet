@@ -173,6 +173,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                      additionalReferences,
                                      sonarProjectConfigPath);
 
+        public static void VerifyConcurrentAnalyzer(string path,
+                                                    DiagnosticAnalyzer diagnosticAnalyzer,
+                                                    IEnumerable<MetadataReference> additionalReferences) =>
+            VerifyConcurrentAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, null, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths,
                                                            UtilityAnalyzerBase diagnosticAnalyzer,
                                                            string protobufPath,
