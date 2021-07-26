@@ -108,18 +108,18 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         internal static bool IsDefaultValueInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type) =>
-            CheckDefaultExpressionInitializer(initializer)
-            || CheckReferenceTypeNullInitializer(initializer, type)
-            || CheckValueTypeDefaultValueInitializer(initializer, type);
+            IsDefaultExpressionInitializer(initializer)
+            || IsReferenceTypeNullInitializer(initializer, type)
+            || IsValueTypeDefaultValueInitializer(initializer, type);
 
-        private static bool CheckDefaultExpressionInitializer(EqualsValueClauseSyntax initializer) =>
+        private static bool IsDefaultExpressionInitializer(EqualsValueClauseSyntax initializer) =>
             initializer.Value is DefaultExpressionSyntax;
 
-        private static bool CheckReferenceTypeNullInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type) =>
+        private static bool IsReferenceTypeNullInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type) =>
             type.IsReferenceType
             && CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, initializer.Value);
 
-        private static bool CheckValueTypeDefaultValueInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type)
+        private static bool IsValueTypeDefaultValueInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type)
         {
             if (!type.IsValueType)
             {
