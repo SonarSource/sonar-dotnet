@@ -58,17 +58,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool CheckExpression(ExpressionSyntax constant, ExpressionSyntax modulus, SemanticModel semanticModel, out int constantValue) =>
-            ExpressionNumericConverter.TryGetConstantIntValue(constant, out constantValue)
+        private static bool CheckExpression(SyntaxNode node, ExpressionSyntax modulus, SemanticModel semanticModel, out int constantValue) =>
+            ExpressionNumericConverter.TryGetConstantIntValue(node, out constantValue)
             && constantValue != 0
-            && ExpressionIsModulus(modulus)
-            && !ExpressionIsNonNegative(modulus, semanticModel);
+            && IsModulus(modulus)
+            && !IsUnsigned(modulus, semanticModel);
 
-        private static bool ExpressionIsModulus(ExpressionSyntax expression) =>
+        private static bool IsModulus(ExpressionSyntax expression) =>
             expression.RemoveParentheses() is BinaryExpressionSyntax binary
             && binary.IsKind(SyntaxKind.ModuloExpression);
 
-        private static bool ExpressionIsNonNegative(ExpressionSyntax expression, SemanticModel semantic)
+        private static bool IsUnsigned(ExpressionSyntax expression, SemanticModel semantic)
         {
             var type = semantic.GetTypeInfo(expression).Type;
             return type.IsAny(KnownType.UnsignedIntegers);
