@@ -204,7 +204,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                                  IEnumerable<MetadataReference> additionalReferences = null)
         {
             using var scope = new EnvironmentVariableScope();
-            scope.SetVariableInRelease(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "true");
+            scope.SetVariableInRelease(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
             VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
         }
 
@@ -343,7 +343,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                      string sonarProjectConfigPath = null)
         {
             using var scope = new EnvironmentVariableScope();
-            scope.SetVariableInRelease(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "true");
+            scope.SetVariableInRelease(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
             var solution = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences, false, true);
             VerifyAnalyzer(solution, diagnosticAnalyzers, options, checkMode, sonarProjectConfigPath);
         }

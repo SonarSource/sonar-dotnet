@@ -116,45 +116,45 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Verify_ConcurrentProcessingDisabledByDefault()
+        public void Verify_ConcurrentExecutionDisabledByDefault()
         {
-            var retriever = new ConcurrentProcessingRetriever();
-            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
+            var retriever = new ConcurrentExecutionStatusRetriever();
+            retriever.IsConcurrentExecutionEnabled.Should().BeNull();
             Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
-            retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
+            retriever.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 
         [TestMethod]
-        public void Verify_ConcurrentProcessingGetsEnabled()
+        public void Verify_ConcurrentExecutionGetsEnabled()
         {
             using var scope = new EnvironmentVariableScope();
-            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "true");
-            var retriever = new ConcurrentProcessingRetriever();
-            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
+            var retriever = new ConcurrentExecutionStatusRetriever();
+            retriever.IsConcurrentExecutionEnabled.Should().BeNull();
             Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
-            retriever.IsConcurrentProcessingDisabled.Should().BeFalse();
+            retriever.IsConcurrentExecutionEnabled.Should().BeTrue();
         }
 
         [TestMethod]
-        public void Verify_ConcurrentProcessingGetsExplicitlyDisabled()
+        public void Verify_ConcurrentExecutionGetsExplicitlyDisabled()
         {
             using var scope = new EnvironmentVariableScope();
-            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "false");
-            var retriever = new ConcurrentProcessingRetriever();
-            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "false");
+            var retriever = new ConcurrentExecutionStatusRetriever();
+            retriever.IsConcurrentExecutionEnabled.Should().BeNull();
             Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
-            retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
+            retriever.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 
         [TestMethod]
-        public void Verify_ConcurrentProcessingGetsDisabledOnWrongValue()
+        public void Verify_ConcurrentExecutionGetsDisabledOnWrongValue()
         {
             using var scope = new EnvironmentVariableScope();
-            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "loremipsum");
-            var retriever = new ConcurrentProcessingRetriever();
-            retriever.IsConcurrentProcessingDisabled.Should().BeNull();
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "loremipsum");
+            var retriever = new ConcurrentExecutionStatusRetriever();
+            retriever.IsConcurrentExecutionEnabled.Should().BeNull();
             Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
-            retriever.IsConcurrentProcessingDisabled.Should().BeTrue();
+            retriever.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 
         [TestMethod]
@@ -324,14 +324,14 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
-        private class ConcurrentProcessingRetriever : SonarDiagnosticAnalyzer
+        private class ConcurrentExecutionStatusRetriever : SonarDiagnosticAnalyzer
         {
             private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor("S9999", "Rule test");
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-            public bool? IsConcurrentProcessingDisabled { get; private set; }
+            public bool? IsConcurrentExecutionEnabled { get; private set; }
             protected override void Initialize(SonarAnalysisContext context) =>
-                IsConcurrentProcessingDisabled = ConcurrentProcessingDisabled;
+                IsConcurrentExecutionEnabled = EnableConcurrentExecution;
         }
     }
 }

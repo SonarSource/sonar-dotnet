@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
         protected virtual bool AnalyzeGeneratedCode { get; set; }
         protected string OutPath { get; set; }
         protected bool IsTestProject { get; set; }
-        protected override bool ConcurrentProcessingDisabled => true;
+        protected override bool EnableConcurrentExecution => false;
 
         internal /* for testing */ static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
             new TextRange
