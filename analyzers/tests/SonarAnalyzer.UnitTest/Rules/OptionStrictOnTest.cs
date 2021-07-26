@@ -22,7 +22,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.VisualBasic;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -50,9 +52,27 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void OptionStrictOn_IsOn() =>
             VerifyAnalyzer("Option Strict On ' Compliant", OptionStrict.On);
 
-        private static void VerifyAnalyzer(string snippit, OptionStrict optionStrict)
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void OptionStrictOn_Concurrent()
         {
-            var project = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).AddSnippet(snippit);
+            using var scope = new EnvironmentVariableScope();
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "true");
+            var project = SolutionBuilder.Create()
+                                         .AddProject(AnalyzerLanguage.VisualBasic)
+                                         .AddSnippet("Option Strict Off ' Noncompliant ^1#17 {{Change this to 'Option Strict On'.}}")
+                                         .AddSnippet("Option Strict On ' Compliant");
+            VerifyAnalyzer(project, OptionStrict.On);
+        }
+
+        private static void VerifyAnalyzer(string snippet, OptionStrict optionStrict)
+        {
+            var project = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).AddSnippet(snippet);
+            VerifyAnalyzer(project, optionStrict);
+        }
+
+        private static void VerifyAnalyzer(ProjectBuilder project, OptionStrict optionStrict)
+        {
             var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionStrict: optionStrict);
             var compilation = project.GetCompilation(null, options);
             DiagnosticVerifier.Verify(compilation, new OptionStrictOn(), CompilationErrorBehavior.Default);

@@ -45,6 +45,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void MarkAssemblyWithAssemblyVersionAttribute_CS_Concurrent() =>
+            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs", },
+                                                           new CS.MarkAssemblyWithAssemblyVersionAttribute(),
+                                                           null,
+                                                           NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_CS()
         {
             Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
@@ -62,6 +70,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb",
                 new VB.MarkAssemblyWithAssemblyVersionAttribute(),
                 NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkAssemblyWithAssemblyVersionAttribute_VB_Concurrent() =>
+            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb", },
+                                                           new VB.MarkAssemblyWithAssemblyVersionAttribute(),
+                                                           null,
+                                                           NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
 
         [TestMethod]
         [TestCategory("Rule")]

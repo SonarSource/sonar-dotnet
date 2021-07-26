@@ -66,7 +66,7 @@ internal class Bar
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldUseBaseTypes.cs", new MethodsShouldUseBaseTypes());
+            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\MethodsShouldUseBaseTypes.cs", @"TestCases\MethodsShouldUseBaseTypes2.cs", }, new MethodsShouldUseBaseTypes());
 
 #if NET
         [TestMethod]

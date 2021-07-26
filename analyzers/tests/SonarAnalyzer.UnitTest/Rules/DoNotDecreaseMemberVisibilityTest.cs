@@ -40,6 +40,18 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     ParseOptionsHelper.FromCSharp8);
 #endif
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotDecreaseMemberVisibility_Concurrent() =>
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotDecreaseMemberVisibility_Concurrent.cs",
+                                              new DoNotDecreaseMemberVisibility(),
+#if NETFRAMEWORK
+                                              ParseOptionsHelper.FromCSharp8,
+                                              NuGetMetadataReference.NETStandardV2_1_0);
+#else
+                                              ParseOptionsHelper.FromCSharp8);
+#endif
+
 #if NET
         [TestMethod]
         [TestCategory("Rule")]

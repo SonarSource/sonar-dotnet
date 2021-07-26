@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NumberPatternShouldBeRegular_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs", new NumberPatternShouldBeRegular(), ParseOptionsHelper.FromCSharp7);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs", new NumberPatternShouldBeRegular(), ParseOptionsHelper.FromCSharp7);
 
 #if NET
         [TestMethod]

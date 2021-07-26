@@ -30,20 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void FileLines_CSharp()
-        {
-            var diagnosticCs = new CS.FileLines { Maximum = 10 };
-            Verifier.VerifyAnalyzer(@"TestCases\FileLines20.cs", diagnosticCs);
-            Verifier.VerifyAnalyzer(@"TestCases\FileLines9.cs", diagnosticCs);
-        }
+        public void FileLines_CSharp() =>
+            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\FileLines20.cs", @"TestCases\FileLines9.cs" }, new CS.FileLines { Maximum = 10 });
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void FileLines_VBNet()
-        {
-            var diagnosticVb = new VB.FileLines { Maximum = 10 };
-            Verifier.VerifyAnalyzer(@"TestCases\FileLines20.vb", diagnosticVb);
-            Verifier.VerifyAnalyzer(@"TestCases\FileLines9.vb", diagnosticVb);
-        }
+        public void FileLines_VBNet() =>
+            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\FileLines20.vb", @"TestCases\FileLines9.vb" }, new VB.FileLines { Maximum = 10 });
     }
 }

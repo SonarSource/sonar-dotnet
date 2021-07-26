@@ -1,13 +1,20 @@
 ﻿using System;
 using System.IO;
 
-public class Record
+var tempPath = Path.GetTempFileName(); // Noncompliant {{'Path.GetTempFileName()' is insecure. Use 'Path.GetRandomFileName()' instead.}}
+//             ^^^^^^^^^^^^^^^^^^^^
+
+_ = Path.GetTempFileName(); // Noncompliant
+
+string Get() => Path.GetTempFileName(); // Noncompliant
+
+public record Record
 {
-    private string tempFileName;
+    private readonly string tempFileName;
 
     public string TempFileName
     {
-        set => tempFileName = Path.Combine(value, Path.GetTempFileName()); // Noncompliant
+        init => tempFileName = Path.Combine(value, Path.GetTempFileName()); // Noncompliant
         get => tempFileName;
     }
 

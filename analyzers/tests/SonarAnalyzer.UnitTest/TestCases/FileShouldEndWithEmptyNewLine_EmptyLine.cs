@@ -2,7 +2,7 @@
 
 namespace Tests.Diagnostics
 {
-    class Program
+    class Program2
     {
     }
 }

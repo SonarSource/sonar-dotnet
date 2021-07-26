@@ -22,7 +22,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.VisualBasic;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -54,5 +56,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void OptionExplicitOn_IsMissing() =>
             Verifier.VerifyVisualBasicAnalyzer("Option Strict Off", new OptionExplicitOn());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void OptionExplicitOn_Concurrent()
+        {
+            using var scope = new EnvironmentVariableScope();
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "true");
+            var project = SolutionBuilder.Create()
+                                         .AddProject(AnalyzerLanguage.VisualBasic)
+                                         .AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}")
+                                         .AddSnippet("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}");
+            var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false);    // optionExplicit is true by default => tested in other tests
+            var compilation = project.GetCompilation(null, options);
+            DiagnosticVerifier.Verify(compilation, new OptionExplicitOn(), CompilationErrorBehavior.Default);
+        }
     }
 }
