@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StringOrIntegralTypesForIndexers() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\StringOrIntegralTypesForIndexers.cs" }, new StringOrIntegralTypesForIndexers(),
+            Verifier.VerifyConcurrentAnalyzer(new[] { @"TestCases\StringOrIntegralTypesForIndexers.cs" }, new StringOrIntegralTypesForIndexers(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
