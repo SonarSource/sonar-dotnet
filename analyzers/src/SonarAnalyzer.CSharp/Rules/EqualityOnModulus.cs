@@ -33,52 +33,46 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class EqualityOnModulus : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2197";
+        private const string DiagnosticId = "S2197";
         private const string MessageFormat = "The result of this modulus operation may not be {0}.";
 
         private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(VisitEquality, SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression);
+
+        private static void VisitEquality(SyntaxNodeAnalysisContext c)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var equalsExpression = (BinaryExpressionSyntax)c.Node;
+            var equalsExpression = (BinaryExpressionSyntax)c.Node;
 
-                    if (CheckExpression(equalsExpression.Left, equalsExpression.Right, c.SemanticModel, out var constantValue) ||
-                        CheckExpression(equalsExpression.Right, equalsExpression.Left, c.SemanticModel, out constantValue))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, equalsExpression.GetLocation(),
-                            constantValue < 0 ? "negative" : "positive"));
-                    }
-                },
-                SyntaxKind.EqualsExpression,
-                SyntaxKind.NotEqualsExpression);
+            if (CheckExpression(equalsExpression.Left, equalsExpression.Right, c.SemanticModel, out var constantValue)
+                || CheckExpression(equalsExpression.Right, equalsExpression.Left, c.SemanticModel, out constantValue))
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                                                               equalsExpression.GetLocation(),
+                                                               constantValue < 0 ? "negative" : "positive"));
+            }
         }
 
-        private static bool CheckExpression(ExpressionSyntax constant, ExpressionSyntax modulus, SemanticModel semanticModel,
-            out int constantValue)
-        {
-            return ExpressionNumericConverter.TryGetConstantIntValue(constant, out constantValue) &&
-                   constantValue != 0 &&
-                   ExpressionIsModulus(modulus) &&
-                   !ExpressionIsNonNegative(modulus, semanticModel);
-        }
+        private static bool CheckExpression(SyntaxNode node, ExpressionSyntax modulus, SemanticModel semanticModel, out int constantValue) =>
+            ExpressionNumericConverter.TryGetConstantIntValue(node, out constantValue)
+            && constantValue != 0
+            && IsModulus(modulus)
+            && !IsUnsigned(modulus, semanticModel);
 
-        private static bool ExpressionIsModulus(ExpressionSyntax expression)
-        {
-            return expression.RemoveParentheses() is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.ModuloExpression);
-        }
+        private static bool IsModulus(ExpressionSyntax expression) =>
+            expression.RemoveParentheses() is BinaryExpressionSyntax binary
+            && binary.IsKind(SyntaxKind.ModuloExpression);
 
-        private static bool ExpressionIsNonNegative(ExpressionSyntax expression, SemanticModel semantic)
+        private static bool IsUnsigned(ExpressionSyntax expression, SemanticModel semantic)
         {
             var type = semantic.GetTypeInfo(expression).Type;
-            return type.IsAny(KnownType.UnsignedIntegers);
+            return type.IsAny(KnownType.UnsignedIntegers)
+                   || type.Is(KnownType.System_UIntPtr);
         }
     }
 }

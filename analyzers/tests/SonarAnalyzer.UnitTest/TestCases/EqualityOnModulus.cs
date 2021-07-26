@@ -16,7 +16,7 @@ namespace Tests.Diagnostics
 
             var unsignedY = 54U;
 
-            var xx = unsignedY % 4 == 1; //Compliant
+            var xx = unsignedY % 4 == 1; // Compliant
         }
     }
 }
