@@ -17,6 +17,8 @@ Method((nint)3 / 2);            // Noncompliant
 right = (decimal)3 / b;         // Compliant
 Method(3.0F / b);               // Compliant
 
+left = (UnknownType)3 / 2;      // Error [CS0246]
+
 void Method(float f) { }
 
 static double Calc()
