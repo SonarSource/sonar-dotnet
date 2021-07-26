@@ -42,6 +42,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
             Environment.SetEnvironmentVariable(name, value, EnvironmentVariableTarget.Process);
         }
 
+        public void SetVariableInRelease(string name, string value)
+        {
+            // do nothing in Debug mode
+#if RELEASE
+            SetVariable(name, value);
+#endif
+        }
+
         #region IDispose implementation
 
         private bool disposed;

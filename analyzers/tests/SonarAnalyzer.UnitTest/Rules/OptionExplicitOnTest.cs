@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void OptionExplicitOn_Concurrent()
         {
             using var scope = new EnvironmentVariableScope();
-            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "true");
+            scope.SetVariableInRelease(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "true");
             var project = SolutionBuilder.Create()
                                          .AddProject(AnalyzerLanguage.VisualBasic)
                                          .AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}")
