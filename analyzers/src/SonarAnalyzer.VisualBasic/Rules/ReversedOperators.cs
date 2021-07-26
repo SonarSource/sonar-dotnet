@@ -32,19 +32,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ReversedOperators : ReversedOperatorsBase<UnaryExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GetAnalysisAction(rule),
-                // As opposed to C#, the VB operators for negation ('Not') and inequality ('<>') leave no room for confusion
-                SyntaxKind.UnaryMinusExpression,
-                SyntaxKind.UnaryPlusExpression);
-        }
+               GetAnalysisAction(Rule),
+               // As opposed to C#, the VB operators for negation ('Not') and inequality ('<>') leave no room for confusion
+               SyntaxKind.UnaryMinusExpression,
+               SyntaxKind.UnaryPlusExpression);
 
         protected override SyntaxToken GetOperatorToken(UnaryExpressionSyntax e) => e.OperatorToken;
 
