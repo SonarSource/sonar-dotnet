@@ -35,4 +35,6 @@
         get => 0;
         init => field1 = 0; // Not tracked
     }
+
+    public nint Property8 { get; set; } = 0 * 20 - 0; // FN - Expression is not evaluated
 }
