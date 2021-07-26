@@ -40,51 +40,39 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckField,
-                SyntaxKind.FieldDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckEvent,
-                SyntaxKind.EventFieldDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckAutoProperty,
-                SyntaxKind.PropertyDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckField, SyntaxKind.FieldDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckEvent, SyntaxKind.EventFieldDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckAutoProperty, SyntaxKind.PropertyDeclaration);
         }
 
         private static void CheckAutoProperty(SyntaxNodeAnalysisContext context)
         {
             var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
 
-            if (propertyDeclaration.Initializer == null ||
-                !IsAutoProperty(propertyDeclaration))
+            if (propertyDeclaration.Initializer == null
+                || !IsAutoProperty(propertyDeclaration))
             {
                 return;
             }
 
             var propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
 
-            if (propertySymbol != null &&
-                IsDefaultValueInitializer(propertyDeclaration.Initializer, propertySymbol.Type))
+            if (propertySymbol != null
+                && IsDefaultValueInitializer(propertyDeclaration.Initializer, propertySymbol.Type))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, propertyDeclaration.Initializer.GetLocation(), propertySymbol.Name));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, propertyDeclaration.Initializer.GetLocation(), propertySymbol.Name));
             }
         }
 
-        internal static bool IsAutoProperty(PropertyDeclarationSyntax propertyDeclaration)
-        {
-            return propertyDeclaration.AccessorList != null &&
-                propertyDeclaration.AccessorList.Accessors.All(
-                    accessor => accessor.Body == null && accessor.ExpressionBody() == null);
-        }
+        internal static bool IsAutoProperty(PropertyDeclarationSyntax propertyDeclaration) =>
+            propertyDeclaration.AccessorList != null
+            && propertyDeclaration.AccessorList.Accessors.All(accessor => accessor.Body == null && accessor.ExpressionBody() == null);
 
         private static void CheckEvent(SyntaxNodeAnalysisContext context)
         {
@@ -99,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (IsDefaultValueInitializer(eventDeclaration.Initializer, eventSymbol.Type))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, eventDeclaration.Initializer.GetLocation(), eventSymbol.Name));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, eventDeclaration.Initializer.GetLocation(), eventSymbol.Name));
                     return;
                 }
             }
@@ -111,33 +99,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var variableDeclarator in field.Declaration.Variables.Where(v => v.Initializer != null))
             {
-
-                if (context.SemanticModel.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol fieldSymbol &&
-                    !fieldSymbol.IsConst &&
-                    IsDefaultValueInitializer(variableDeclarator.Initializer, fieldSymbol.Type))
+                if (context.SemanticModel.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol {IsConst: false} fieldSymbol
+                    && IsDefaultValueInitializer(variableDeclarator.Initializer, fieldSymbol.Type))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, variableDeclarator.Initializer.GetLocation(), fieldSymbol.Name));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, variableDeclarator.Initializer.GetLocation(), fieldSymbol.Name));
                 }
             }
         }
 
-        internal static bool IsDefaultValueInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type)
-        {
-            return CheckDefaultExpressionInitializer(initializer) ||
-                CheckReferenceTypeNullInitializer(initializer, type) ||
-                CheckValueTypeDefaultValueInitializer(initializer, type);
-        }
+        internal static bool IsDefaultValueInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type) =>
+            CheckDefaultExpressionInitializer(initializer)
+            || CheckReferenceTypeNullInitializer(initializer, type)
+            || CheckValueTypeDefaultValueInitializer(initializer, type);
 
-        private static bool CheckDefaultExpressionInitializer(EqualsValueClauseSyntax initializer)
-        {
-            return initializer.Value is DefaultExpressionSyntax defaultValue;
-        }
+        private static bool CheckDefaultExpressionInitializer(EqualsValueClauseSyntax initializer) =>
+            initializer.Value is DefaultExpressionSyntax;
 
-        private static bool CheckReferenceTypeNullInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type)
-        {
-            return type.IsReferenceType &&
-                CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, initializer.Value);
-        }
+        private static bool CheckReferenceTypeNullInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type) =>
+            type.IsReferenceType
+            && CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, initializer.Value);
 
         private static bool CheckValueTypeDefaultValueInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type)
         {
@@ -167,8 +147,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 case SpecialType.System_UInt32:
                 case SpecialType.System_UInt64:
                     {
-                        return ExpressionNumericConverter.TryGetConstantIntValue(initializer.Value, out var constantValue) &&
-                            constantValue == default(int);
+                        return ExpressionNumericConverter.TryGetConstantIntValue(initializer.Value, out var constantValue)
+                               && constantValue == default;
                     }
                 default:
                     return false;
