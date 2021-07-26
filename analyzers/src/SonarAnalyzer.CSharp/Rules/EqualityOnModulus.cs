@@ -71,7 +71,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsUnsigned(ExpressionSyntax expression, SemanticModel semantic)
         {
             var type = semantic.GetTypeInfo(expression).Type;
-            return type.IsAny(KnownType.UnsignedIntegers);
+            return type.IsAny(KnownType.UnsignedIntegers)
+                   || type.Is(KnownType.System_UIntPtr);
         }
     }
 }

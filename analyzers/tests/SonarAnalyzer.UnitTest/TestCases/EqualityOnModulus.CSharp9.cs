@@ -7,4 +7,4 @@ y = x % 2 != -1; // Noncompliant {{The result of this modulus operation may not 
 y = 1 == x % 2; // Noncompliant {{The result of this modulus operation may not be positive.}}
 
 nuint unsignedX = 100;
-var xx = unsignedX % 4 == 1; // Noncompliant FP
+var xx = unsignedX % 4 == 1;
