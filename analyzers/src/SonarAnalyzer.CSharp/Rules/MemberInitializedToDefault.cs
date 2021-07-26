@@ -146,6 +146,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 case SpecialType.System_UInt16:
                 case SpecialType.System_UInt32:
                 case SpecialType.System_UInt64:
+                case SpecialType.System_IntPtr:
+                case SpecialType.System_UIntPtr:
                     {
                         return ExpressionNumericConverter.TryGetConstantIntValue(initializer.Value, out var constantValue)
                                && constantValue == default;
