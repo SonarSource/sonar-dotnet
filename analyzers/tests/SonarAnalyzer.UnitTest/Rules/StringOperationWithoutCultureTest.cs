@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StringOperationWithoutCulture() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringOperationWithoutCulture.cs", new StringOperationWithoutCulture());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\StringOperationWithoutCulture.cs", new StringOperationWithoutCulture());
     }
 }

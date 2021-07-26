@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterNameMatchesOriginal_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterNameMatchesOriginal.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParameterNameMatchesOriginal.cs",
                                     new CS.ParameterNameMatchesOriginal(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
@@ -51,6 +51,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterNameMatchesOriginal_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterNameMatchesOriginal.vb", new VB.ParameterNameMatchesOriginal());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParameterNameMatchesOriginal.vb", new VB.ParameterNameMatchesOriginal());
     }
 }

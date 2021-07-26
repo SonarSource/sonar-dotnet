@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantNullCheck_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.cs", new CS.RedundantNullCheck());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RedundantNullCheck.cs", new CS.RedundantNullCheck());
 
 #if NET
         [TestMethod]

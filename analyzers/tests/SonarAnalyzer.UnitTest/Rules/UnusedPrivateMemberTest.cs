@@ -182,7 +182,7 @@ namespace EntityFrameworkMigrations
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void UnusedPrivateMember(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UnusedPrivateMember.cs",
                                     new UnusedPrivateMember(),
                                     TestHelper.ProjectTypeReference(projectType));
 

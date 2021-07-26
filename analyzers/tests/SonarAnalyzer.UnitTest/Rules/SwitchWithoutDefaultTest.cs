@@ -32,8 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SwitchWithoutDefault()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchWithoutDefault.cs", new CS.SwitchWithoutDefault());
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchWithoutDefault.vb", new VB.SwitchWithoutDefault());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SwitchWithoutDefault.cs", new CS.SwitchWithoutDefault());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SwitchWithoutDefault.vb", new VB.SwitchWithoutDefault());
         }
     }
 }

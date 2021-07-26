@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument(NetFrameworkVersion version, string testFilePath) =>
-            Verifier.VerifyAnalyzer(testFilePath,
+            Verifier.VerifyConcurrentAnalyzer(testFilePath,
                 new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
                 MetadataReferenceFacade.SystemXml
                     .Concat(MetadataReferenceFacade.SystemData)

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
                                     new CS.PropertiesAccessCorrectField(),
                                     AdditionalReferences);
 
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
                                     new VB.PropertiesAccessCorrectField(),
                                     AdditionalReferences);
 

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ReversedOperators_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReversedOperators.cs", new CS.ReversedOperators());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ReversedOperators.cs", new CS.ReversedOperators());
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ReversedOperators_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReversedOperators.vb", new VB.ReversedOperators());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ReversedOperators.vb", new VB.ReversedOperators());
     }
 }

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldWrittenFromInstanceMember() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceMember.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceMember.cs",
                                     new StaticFieldWrittenFromInstanceMember(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,

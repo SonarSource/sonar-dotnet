@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyGetterWithThrowCSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyGetterWithThrow.cs", new CS.PropertyGetterWithThrow());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PropertyGetterWithThrow.cs", new CS.PropertyGetterWithThrow());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyGetterWithThrowVBNet() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyGetterWithThrow.vb", new VB.PropertyGetterWithThrow());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PropertyGetterWithThrow.vb", new VB.PropertyGetterWithThrow());
     }
 }

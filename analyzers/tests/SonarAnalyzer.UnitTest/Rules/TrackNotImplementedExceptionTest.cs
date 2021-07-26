@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TrackNotImplementedException() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TrackNotImplementedException.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\TrackNotImplementedException.cs",
                 new TrackNotImplementedException(),
 #if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UriShouldNotBeHardcoded_CSharp_General() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UriShouldNotBeHardcoded.cs",
                                     new CS.UriShouldNotBeHardcoded());
 
 #if NETFRAMEWORK // HttpContext is available only when targeting .Net Framework
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UriShouldNotBeHardcoded_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.vb",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UriShouldNotBeHardcoded.vb",
                                     new VB.UriShouldNotBeHardcoded());
     }
 }

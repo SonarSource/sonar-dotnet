@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PublicFieldName() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PublicFieldName.vb", new PublicFieldName());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PublicFieldName.vb", new PublicFieldName());
     }
 }

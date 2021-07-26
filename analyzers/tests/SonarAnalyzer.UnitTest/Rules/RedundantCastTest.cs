@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantCast() =>
-            Verifier.VerifyAnalyzer(
+            Verifier.VerifyConcurrentAnalyzer(
                 @"TestCases\RedundantCast.cs",
                 new RedundantCast());
 

@@ -31,9 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesShouldBePreferred() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesShouldBePreferred.cs",
-                                    new PropertiesShouldBePreferred(),
-                                    MetadataReferenceFacade.SystemThreadingTasks);
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PropertiesShouldBePreferred.cs",
+                                              new PropertiesShouldBePreferred(),
+                                              MetadataReferenceFacade.SystemThreadingTasks);
 
 #if NET
         [TestMethod]

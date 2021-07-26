@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace.cs",
                                     new SqlKeywordsDelimitedBySpace(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
