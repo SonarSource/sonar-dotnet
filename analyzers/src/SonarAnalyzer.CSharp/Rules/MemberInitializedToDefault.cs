@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -56,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
 
             if (propertyDeclaration.Initializer == null
-                || !IsAutoProperty(propertyDeclaration))
+                || !propertyDeclaration.IsAutoProperty())
             {
                 return;
             }
@@ -69,10 +70,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, propertyDeclaration.Initializer.GetLocation(), propertySymbol.Name));
             }
         }
-
-        internal static bool IsAutoProperty(PropertyDeclarationSyntax propertyDeclaration) =>
-            propertyDeclaration.AccessorList != null
-            && propertyDeclaration.AccessorList.Accessors.All(accessor => accessor.Body == null && accessor.ExpressionBody() == null);
 
         private static void CheckEvent(SyntaxNodeAnalysisContext context)
         {

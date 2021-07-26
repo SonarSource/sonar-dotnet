@@ -29,4 +29,10 @@
         get => 0;
         init => field1 = 0; // Not tracked
     }
+
+    public nuint Property7
+    {
+        get => 0;
+        init => field1 = 0; // Not tracked
+    }
 }

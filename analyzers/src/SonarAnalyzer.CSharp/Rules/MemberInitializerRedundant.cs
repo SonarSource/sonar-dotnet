@@ -140,7 +140,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<PropertyDeclarationSyntax>()
                 .Where(p => !p.Modifiers.Any(IsStaticOrConst) &&
                     p.Initializer != null &&
-                    MemberInitializedToDefault.IsAutoProperty(p))
+                    p.IsAutoProperty())
                 .Select(p =>
                     new DeclarationTuple<IPropertySymbol>
                     {
