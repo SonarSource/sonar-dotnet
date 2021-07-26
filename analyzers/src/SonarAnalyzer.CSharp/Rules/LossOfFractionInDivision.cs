@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!(c.SemanticModel.GetSymbolInfo(division).Symbol is IMethodSymbol symbol)
                         || symbol.ContainingType == null
-                        || !symbol.ContainingType.IsAny(KnownType.IntegralNumbers))
+                        || !symbol.ContainingType.IsAny(KnownType.IntegralNumbersIncludingNative))
                     {
                         return;
                     }
