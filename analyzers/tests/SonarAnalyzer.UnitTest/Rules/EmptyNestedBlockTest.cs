@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyNestedBlock_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyNestedBlock.cs", new CS.EmptyNestedBlock());
+            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\EmptyNestedBlock.cs", @"TestCases\EmptyNestedBlock2.cs" }, new CS.EmptyNestedBlock());
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -96,7 +96,7 @@ public static class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMemberWithPartialClasses() =>
-            Verifier.VerifyAnalyzer(new[]
+            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[]
                                     {
                                         @"TestCases\UnusedPrivateMember.part1.cs",
                                         @"TestCases\UnusedPrivateMember.part2.cs"
@@ -189,7 +189,7 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp7.cs",
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UnusedPrivateMember.CSharp7.cs",
                                     new UnusedPrivateMember(),
                                     ParseOptionsHelper.FromCSharp7);
 

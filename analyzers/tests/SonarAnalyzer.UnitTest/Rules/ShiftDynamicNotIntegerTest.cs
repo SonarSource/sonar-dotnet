@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ShiftDynamicNotInteger_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.cs", new CS.ShiftDynamicNotInteger());
+            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ShiftDynamicNotInteger.cs", new CS.ShiftDynamicNotInteger());
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ShiftDynamicNotInteger_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.vb", new VB.ShiftDynamicNotInteger());
+            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\ShiftDynamicNotInteger.vb", @"TestCases\ShiftDynamicNotInteger2.vb" }, new VB.ShiftDynamicNotInteger());
     }
 }
