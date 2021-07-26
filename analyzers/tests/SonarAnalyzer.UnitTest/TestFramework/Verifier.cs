@@ -198,6 +198,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                     IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyConcurrentAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, null, checkMode, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
+        public static void VerifyConcurrentAnalyzerNoDuplication(IEnumerable<string> paths,
+                                                                 DiagnosticAnalyzer diagnosticAnalyzer,
+                                                                 IEnumerable<ParseOptions> options = null,
+                                                                 IEnumerable<MetadataReference> additionalReferences = null)
+        {
+            using var scope = new EnvironmentVariableScope();
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentProcessing, "true");
+            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+        }
+
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths,
                                                            UtilityAnalyzerBase diagnosticAnalyzer,
                                                            string protobufPath,
