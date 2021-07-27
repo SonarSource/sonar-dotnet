@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotDecreaseMemberVisibility() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotDecreaseMemberVisibility.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DoNotDecreaseMemberVisibility.cs",
                                     new DoNotDecreaseMemberVisibility(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotDecreaseMemberVisibility_Concurrent() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotDecreaseMemberVisibility_Concurrent.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotDecreaseMemberVisibility_Concurrent.cs",
                                               new DoNotDecreaseMemberVisibility(),
 #if NETFRAMEWORK
                                               ParseOptionsHelper.FromCSharp8,

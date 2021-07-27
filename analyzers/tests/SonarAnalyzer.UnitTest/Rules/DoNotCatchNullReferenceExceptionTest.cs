@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCatchNullReferenceException() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotCatchNullReferenceException.cs", new DoNotCatchNullReferenceException());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCatchNullReferenceException.cs", new DoNotCatchNullReferenceException());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCatchNullReferenceException_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchNullReferenceException.CSharp9.cs", new DoNotCatchNullReferenceException());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchNullReferenceException.CSharp9.cs", new DoNotCatchNullReferenceException());
 #endif
     }
 }

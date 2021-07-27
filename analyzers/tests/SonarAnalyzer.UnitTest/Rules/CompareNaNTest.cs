@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CompareNaN() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CompareNaN.cs", new CompareNaN());
+            Verifier.VerifyAnalyzer(@"TestCases\CompareNaN.cs", new CompareNaN());
     }
 }

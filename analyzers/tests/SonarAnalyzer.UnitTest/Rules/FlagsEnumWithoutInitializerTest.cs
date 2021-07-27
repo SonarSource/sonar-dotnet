@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FlagsEnumWithoutInitializer_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FlagsEnumWithoutInitializer.cs", new CS.FlagsEnumWithoutInitializer());
+            Verifier.VerifyAnalyzer(@"TestCases\FlagsEnumWithoutInitializer.cs", new CS.FlagsEnumWithoutInitializer());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void FlagsEnumWithoutInitializer_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FlagsEnumWithoutInitializer.vb", new VB.FlagsEnumWithoutInitializer());
+            Verifier.VerifyAnalyzer(@"TestCases\FlagsEnumWithoutInitializer.vb", new VB.FlagsEnumWithoutInitializer());
     }
 }

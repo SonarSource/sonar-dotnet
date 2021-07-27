@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyNamespace() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EmptyNamespace.cs", new EmptyNamespace());
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyNamespace.cs", new EmptyNamespace());
 
         [TestMethod]
         [TestCategory("CodeFix")]

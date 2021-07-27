@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NativeMethodsShouldBeWrapped() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs", new NativeMethodsShouldBeWrapped(), CompilationErrorBehavior.Ignore);
+            Verifier.VerifyAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs", new NativeMethodsShouldBeWrapped(), CompilationErrorBehavior.Ignore);
 
 #if NET
         [TestMethod]
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NativeMethodsShouldBeWrapped_InvalidCode() => Verifier.VerifyCSharpAnalyzer(@"
+        public void NativeMethodsShouldBeWrapped_InvalidCode() => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 public class InvalidSyntax
 {
     extern public void Extern1

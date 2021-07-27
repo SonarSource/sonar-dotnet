@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHideBaseClassMethods() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotHideBaseClassMethods.cs", new DoNotHideBaseClassMethods());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DoNotHideBaseClassMethods.cs", new DoNotHideBaseClassMethods());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHideBaseClassMethods_Concurrent() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotHideBaseClassMethods_Concurrent.cs", new DoNotHideBaseClassMethods());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotHideBaseClassMethods_Concurrent.cs", new DoNotHideBaseClassMethods());
 
 #if NET
         [TestMethod]

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void EncryptingData_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\EncryptingData.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.cs",
                                               new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
                                               GetAdditionalReferences());
 
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void EncryptingData_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\EncryptingData.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.vb",
                                               new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
                                               GetAdditionalReferences());
 

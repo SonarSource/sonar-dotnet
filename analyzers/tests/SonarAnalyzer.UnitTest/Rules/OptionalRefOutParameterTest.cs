@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalRefOutParameter() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\OptionalRefOutParameter.cs", new OptionalRefOutParameter());
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalRefOutParameter.cs", new OptionalRefOutParameter());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalRefOutParameter_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\OptionalRefOutParameter.CSharp9.cs", new OptionalRefOutParameter());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\OptionalRefOutParameter.CSharp9.cs", new OptionalRefOutParameter());
 #endif
 
         [TestMethod]

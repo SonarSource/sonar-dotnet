@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace.cs",
                                     new SqlKeywordsDelimitedBySpace(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
                                     new SqlKeywordsDelimitedBySpace(),
                                     GetAdditionalReferences());
 
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(NuGetMetadataReference.SystemDataSqlClient())
                 .Concat(NuGetMetadataReference.SystemDataSQLiteCore());
 
-            Verifier.VerifyCSharpAnalyzer($@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer($@"
 using {sqlNamespace};
 namespace TestNamespace
 {{
@@ -107,7 +107,7 @@ namespace TestNamespace
                 .Concat(NuGetMetadataReference.SystemDataSqlClient())
                 .Concat(NuGetMetadataReference.SystemDataOracleClient());
 
-            Verifier.VerifyCSharpAnalyzer($@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer($@"
 using {sqlNamespace};
 namespace TestNamespace
 {{

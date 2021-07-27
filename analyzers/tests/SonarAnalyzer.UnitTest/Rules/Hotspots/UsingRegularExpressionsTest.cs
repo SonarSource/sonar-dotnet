@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingRegularExpressions_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.cs",
                                               new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
                                               MetadataReferenceFacade.RegularExpressions);
 
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingRegularExpressions_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.vb",
                                               new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
                                               MetadataReferenceFacade.RegularExpressions);
     }

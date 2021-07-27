@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantParentheses_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RedundantParenthesesExpression.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesExpression.cs",
                 new CS.RedundantParentheses());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantParentheses_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RedundantParentheses.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantParentheses.vb",
                 new VB.RedundantParentheses());
     }
 }

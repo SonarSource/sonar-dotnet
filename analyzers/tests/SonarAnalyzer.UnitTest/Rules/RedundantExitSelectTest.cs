@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantExitSelect() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RedundantExitSelect.vb", new RedundantExitSelect());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantExitSelect.vb", new RedundantExitSelect());
     }
 }

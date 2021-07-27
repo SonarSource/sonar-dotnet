@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericTypeParameterEmptinessChecking() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
                                               new GenericTypeParameterEmptinessChecking(),
                                               CompilationErrorBehavior.Ignore,
                                               MetadataReferenceFacade.SystemCollections);
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericTypeParameterEmptinessChecking_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterEmptinessChecking.CSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterEmptinessChecking.CSharp9.cs",
                                                       new GenericTypeParameterEmptinessChecking(),
                                                       MetadataReferenceFacade.SystemCollections);
 #endif

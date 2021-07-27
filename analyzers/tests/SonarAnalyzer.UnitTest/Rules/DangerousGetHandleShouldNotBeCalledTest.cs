@@ -32,14 +32,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
                                               new CS.DangerousGetHandleShouldNotBeCalled(),
                                               MetadataReferenceFacade.MicrosoftWin32Registry);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DangerousGetHandleShouldNotBeCalled.CSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DangerousGetHandleShouldNotBeCalled.CSharp9.cs",
                 new CS.DangerousGetHandleShouldNotBeCalled(),
                 MetadataReferenceFacade.MicrosoftWin32Registry);
 #endif
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
                                               new VB.DangerousGetHandleShouldNotBeCalled());
     }
 }

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ExpandingArchives_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\ExpandingArchives.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.cs",
                                               new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
                                               AdditionalReferences);
 
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ExpandingArchives_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\ExpandingArchives.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.vb",
                                               new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
                                               AdditionalReferences);
 

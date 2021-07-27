@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ProvideDeserializationMethodsForOptionalFields_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.cs", new CS.ProvideDeserializationMethodsForOptionalFields());
+            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.cs", new CS.ProvideDeserializationMethodsForOptionalFields());
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ProvideDeserializationMethodsForOptionalFields_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.vb", new VB.ProvideDeserializationMethodsForOptionalFields());
+            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.vb", new VB.ProvideDeserializationMethodsForOptionalFields());
     }
 }

@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TryStatementsWithIdenticalCatchShouldBeMerged() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\TryStatementsWithIdenticalCatchShouldBeMerged.cs", new TryStatementsWithIdenticalCatchShouldBeMerged());
+            Verifier.VerifyAnalyzer(@"TestCases\TryStatementsWithIdenticalCatchShouldBeMerged.cs", new TryStatementsWithIdenticalCatchShouldBeMerged());
     }
 }

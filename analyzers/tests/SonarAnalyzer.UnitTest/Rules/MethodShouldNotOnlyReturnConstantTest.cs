@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodShouldNotOnlyReturnConstant() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodShouldNotOnlyReturnConstant.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\MethodShouldNotOnlyReturnConstant.cs",
                                               new MethodShouldNotOnlyReturnConstant());
     }
 }

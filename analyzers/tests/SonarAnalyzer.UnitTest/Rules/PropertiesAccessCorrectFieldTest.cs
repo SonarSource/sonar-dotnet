@@ -35,14 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
                                     new CS.PropertiesAccessCorrectField(),
                                     AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.CSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\PropertiesAccessCorrectField.CSharp8.cs",
                                     new CS.PropertiesAccessCorrectField(),
                                     ParseOptionsHelper.FromCSharp8);
 
@@ -55,18 +55,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CS_NetFramework() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.cs", new CS.PropertiesAccessCorrectField(), AdditionalReferences);
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.cs", new CS.PropertiesAccessCorrectField(), AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_VB_NetFramework() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.vb", new VB.PropertiesAccessCorrectField(), AdditionalReferences);
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.vb", new VB.PropertiesAccessCorrectField(), AdditionalReferences);
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
                                     new VB.PropertiesAccessCorrectField(),
                                     AdditionalReferences);
 

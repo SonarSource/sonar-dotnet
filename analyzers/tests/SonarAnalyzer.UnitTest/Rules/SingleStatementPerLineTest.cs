@@ -31,18 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SingleStatementPerLine_CSharp() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SingleStatementPerLine.cs", new CS.SingleStatementPerLine());
+            Verifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.cs", new CS.SingleStatementPerLine());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void SingleStatementPerLine_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SingleStatementPerLine.CSharp9.cs", new CS.SingleStatementPerLine());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\SingleStatementPerLine.CSharp9.cs", new CS.SingleStatementPerLine());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SingleStatementPerLine_VisualBasic() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SingleStatementPerLine.vb", new VB.SingleStatementPerLine());
+            Verifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.vb", new VB.SingleStatementPerLine());
     }
 }

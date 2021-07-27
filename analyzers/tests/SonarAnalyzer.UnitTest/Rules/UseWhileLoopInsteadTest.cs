@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseWhileLoopInstead() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UseWhileLoopInstead.cs", new UseWhileLoopInstead());
+            Verifier.VerifyAnalyzer(@"TestCases\UseWhileLoopInstead.cs", new UseWhileLoopInstead());
     }
 }

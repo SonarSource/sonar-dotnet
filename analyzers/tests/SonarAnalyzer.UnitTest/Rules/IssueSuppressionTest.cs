@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void IssueSuppression() =>
-            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\IssueSuppression.cs", @"TestCases\IssueSuppression2.cs", }, new IssueSuppression());
+            Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\IssueSuppression.cs", @"TestCases\IssueSuppression2.cs", }, new IssueSuppression());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void IssueSuppression_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IssueSuppression.CSharp9.cs", new IssueSuppression());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\IssueSuppression.CSharp9.cs", new IssueSuppression());
 #endif
     }
 }

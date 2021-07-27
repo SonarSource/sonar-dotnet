@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExceptionsNeedStandardConstructors() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ExceptionsNeedStandardConstructors.cs", new ExceptionsNeedStandardConstructors());
+            Verifier.VerifyAnalyzer(@"TestCases\ExceptionsNeedStandardConstructors.cs", new ExceptionsNeedStandardConstructors());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExceptionsNeedStandardConstructors_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 public class  : Exception
 {
     My_07_Exception() {}

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ArrayCreationLongSyntax() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ArrayCreationLongSyntax.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\ArrayCreationLongSyntax.vb",
                                               new ArrayCreationLongSyntax());
 
         [TestMethod]

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableTypesNeedFinalizers() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs", new DisposableTypesNeedFinalizers());
+            Verifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs", new DisposableTypesNeedFinalizers());
 
 #if NET
         [TestMethod]
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableTypesNeedFinalizers_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 public class Foo_05 : IDisposable
 {
     private HandleRef;

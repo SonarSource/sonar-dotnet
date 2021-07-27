@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideChangedDefaultValue() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
                                               new MethodOverrideChangedDefaultValue(),
 #if NETFRAMEWORK
                                               ParseOptionsHelper.FromCSharp8,

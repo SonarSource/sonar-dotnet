@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\TestMethodShouldContainAssertion.MsTest.cs", @"TestCases\TestMethodShouldContainAssertion.MsTest.AnotherFile.cs" },
+            Verifier.VerifyNonConcurrentAnalyzer(new[] { @"TestCases\TestMethodShouldContainAssertion.MsTest.cs", @"TestCases\TestMethodShouldContainAssertion.MsTest.AnotherFile.cs" },
                 new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion)));
 
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\TestMethodShouldContainAssertion.NUnit.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.NUnit.cs",
                 new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion, nSubstituteVersion));
 
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(NUnitVersions.Ver27)]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_NUnit_V2Specific(string testFwkVersion) =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using NUnit.Framework;
 
@@ -122,14 +122,14 @@ public class Foo
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.cs",
                 new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.XunitFramework(testFwkVersion), fluentVersion, nSubstituteVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_Xunit_Legacy() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.Legacy.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.Legacy.cs",
                 new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.XunitFrameworkV1));
 
@@ -138,7 +138,7 @@ public class Foo
         [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver4)]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_NUnit_FluentAssertionsLegacy(string testFwkVersion, string fluentVersion) =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using FluentAssertions;
 using NUnit.Framework;
@@ -172,7 +172,7 @@ public class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Custom.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Custom.cs",
                 new TestMethodShouldContainAssertion(),
                 NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion));
 

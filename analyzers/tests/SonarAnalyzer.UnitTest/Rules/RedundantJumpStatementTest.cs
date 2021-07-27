@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantJumpStatement() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RedundantJumpStatement.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantJumpStatement.cs",
                                     new RedundantJumpStatement(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantJumpStatement_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantJumpStatement.CSharp9.cs", new RedundantJumpStatement());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\RedundantJumpStatement.CSharp9.cs", new RedundantJumpStatement());
 #endif
     }
 }

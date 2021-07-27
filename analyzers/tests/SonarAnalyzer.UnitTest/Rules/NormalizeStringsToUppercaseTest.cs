@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NormalizeStringsToUppercase() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\NormalizeStringsToUppercase.cs", new NormalizeStringsToUppercase());
+            Verifier.VerifyAnalyzer(@"TestCases\NormalizeStringsToUppercase.cs", new NormalizeStringsToUppercase());
     }
 }

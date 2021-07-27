@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyNamesShouldNotMatchGetMethods() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs", new PropertyNamesShouldNotMatchGetMethods());
+            Verifier.VerifyAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs", new PropertyNamesShouldNotMatchGetMethods());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyNamesShouldNotMatchGetMethods_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
     public int { get; } // Missing identifier on purpose
     public int () { return 42; } // Missing identifier on purpose
 ", new PropertyNamesShouldNotMatchGetMethods(), CompilationErrorBehavior.Ignore);

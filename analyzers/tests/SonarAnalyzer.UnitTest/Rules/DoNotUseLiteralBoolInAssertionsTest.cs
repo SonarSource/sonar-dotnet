@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion) =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.MsTest.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.MsTest.cs",
                                               new DoNotUseLiteralBoolInAssertions(),
                                               NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.NUnit.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.NUnit.cs",
                                     new DoNotUseLiteralBoolInAssertions(),
                                     NuGetMetadataReference.NUnit(testFwkVersion));
 
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.Xunit.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.Xunit.cs",
                                     new DoNotUseLiteralBoolInAssertions(),
                                     NuGetMetadataReference.XunitFramework(testFwkVersion));
     }

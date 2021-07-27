@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PublicConstantField_CSharp() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PublicConstantField.cs", new CS.PublicConstantField());
+            Verifier.VerifyAnalyzer(@"TestCases\PublicConstantField.cs", new CS.PublicConstantField());
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PublicConstantField_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PublicConstantField.vb", new VB.PublicConstantField());
+            Verifier.VerifyAnalyzer(@"TestCases\PublicConstantField.vb", new VB.PublicConstantField());
     }
 }

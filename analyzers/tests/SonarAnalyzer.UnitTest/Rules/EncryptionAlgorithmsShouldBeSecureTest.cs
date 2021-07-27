@@ -35,14 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
                                               new CS.EncryptionAlgorithmsShouldBeSecure(),
                                               GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_CS_NetStandard21() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
                 new CS.EncryptionAlgorithmsShouldBeSecure(),
 #if NETFRAMEWORK
                 NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));
@@ -53,14 +53,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
                                               new VB.EncryptionAlgorithmsShouldBeSecure(),
                                               GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
                 new VB.EncryptionAlgorithmsShouldBeSecure(),
 #if NETFRAMEWORK
                 NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));

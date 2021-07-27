@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StringConcatenationWithPlus() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\StringConcatenationWithPlus.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\StringConcatenationWithPlus.vb",
                                               new StringConcatenationWithPlus(),
                                               MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemXmlLinq));
 

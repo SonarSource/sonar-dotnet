@@ -31,27 +31,27 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ConditionalStructureSameCondition.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.cs",
                                               new CS.ConditionalStructureSameCondition());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalStructureSameCondition.CSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ConditionalStructureSameCondition.CSharp9.cs",
                 new CS.ConditionalStructureSameCondition());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionalStructureSameCondition.vb",
                 new VB.ConditionalStructureSameCondition());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_VisualBasic_Concurrent() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ConditionalStructureSameCondition_Concurrent.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition_Concurrent.vb",
                                               new VB.ConditionalStructureSameCondition());
     }
 }

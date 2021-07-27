@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodParameterUnused_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodParameterUnused.cs", new CS.MethodParameterUnused());
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.cs", new CS.MethodParameterUnused());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodParameterUnused_CSharp8_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.CSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MethodParameterUnused.CSharp8.cs",
                                     new CS.MethodParameterUnused(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
@@ -65,6 +65,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodParameterUnused_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodParameterUnused.vb", new VB.MethodParameterUnused());
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.vb", new VB.MethodParameterUnused());
     }
 }

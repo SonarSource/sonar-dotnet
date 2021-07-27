@@ -37,13 +37,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CertificateValidationCheck.cs", new CS.CertificateValidationCheck(), GetAdditionalReferences());
+            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs", new CS.CertificateValidationCheck(), GetAdditionalReferences());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.CSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CertificateValidationCheck.CSharp8.cs",
                                     new CS.CertificateValidationCheck(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
                                                       new CS.CertificateValidationCheck(),
                                                       GetAdditionalReferences());
 #endif
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CertificateValidationCheck.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
                                               new VB.CertificateValidationCheck(),
                                               GetAdditionalReferences());
 

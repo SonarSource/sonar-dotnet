@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UriShouldNotBeHardcoded_CSharp_General() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UriShouldNotBeHardcoded.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.cs",
                                     new CS.UriShouldNotBeHardcoded());
 
 #if NETFRAMEWORK // HttpContext is available only when targeting .Net Framework
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNet(string aspNetMvcVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNet.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNet.cs",
                                     new CS.UriShouldNotBeHardcoded(),
                                     MetadataReferenceFacade.SystemWeb.Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion)));
 #endif
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.0.4", "2.0.3", "2.1.1")]
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNetCore.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNetCore.cs",
                 new CS.UriShouldNotBeHardcoded(),
                 // for VirtualFileResult
                 NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion)
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UriShouldNotBeHardcoded_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UriShouldNotBeHardcoded.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.vb",
                                     new VB.UriShouldNotBeHardcoded());
     }
 }

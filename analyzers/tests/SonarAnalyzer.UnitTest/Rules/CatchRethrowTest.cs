@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CatchRethrow() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CatchRethrow.cs", new CS.CatchRethrow());
+            Verifier.VerifyAnalyzer(@"TestCases\CatchRethrow.cs", new CS.CatchRethrow());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -45,6 +45,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CatchRethrow_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CatchRethrow.vb", new VB.CatchRethrow());
+            Verifier.VerifyAnalyzer(@"TestCases\CatchRethrow.vb", new VB.CatchRethrow());
     }
 }

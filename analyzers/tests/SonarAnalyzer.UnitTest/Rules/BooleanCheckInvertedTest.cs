@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void BooleanCheckInverted_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\BooleanCheckInverted.cs", new CS.BooleanCheckInverted());
+            Verifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.cs", new CS.BooleanCheckInverted());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -46,6 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void BooleanCheckInverted_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\BooleanCheckInverted.vb", new VB.BooleanCheckInverted());
+            Verifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.vb", new VB.BooleanCheckInverted());
     }
 }

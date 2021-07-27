@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotUseIif() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotUseIif.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb",
                                               new DoNotUseIif(),
                                               MetadataReferenceFacade.MicrosoftVisualBasic);
 

@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void IfCollapsible_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\IfCollapsible.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\IfCollapsible.cs",
                                               new CS.IfCollapsible());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void IfCollapsible_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\IfCollapsible.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\IfCollapsible.vb",
                                               new VB.IfCollapsible());
     }
 }

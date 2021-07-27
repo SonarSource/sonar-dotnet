@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalParameterNotPassedToBaseCall_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.cs", new CS.OptionalParameterNotPassedToBaseCall());
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.cs", new CS.OptionalParameterNotPassedToBaseCall());
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalParameterNotPassedToBaseCall_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.vb", new VB.OptionalParameterNotPassedToBaseCall());
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.vb", new VB.OptionalParameterNotPassedToBaseCall());
     }
 }

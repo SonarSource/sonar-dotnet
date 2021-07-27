@@ -163,7 +163,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ? new TestSymbolReferenceAnalyzer_CS(testRoot, projectType == ProjectType.Test)
                 : new TestSymbolReferenceAnalyzer_VB(testRoot, projectType == ProjectType.Test);
 
-            Verifier.VerifyUtilityAnalyzer<SymbolReferenceInfo>(
+            Verifier.VerifyNonConcurrentUtilityAnalyzer<SymbolReferenceInfo>(
                 new[] { Root + fileName },
                 analyzer,
                 @$"{testRoot}\symrefs.pb",

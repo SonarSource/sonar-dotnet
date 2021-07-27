@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldVisible() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\StaticFieldVisible.cs", new StaticFieldVisible());
+            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldVisible.cs", new StaticFieldVisible());
 
 #if NET
         [TestMethod]

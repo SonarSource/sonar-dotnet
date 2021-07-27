@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MutableFieldsShouldNotBePublicStatic() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MutableFieldsShouldNotBePublicStatic.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\MutableFieldsShouldNotBePublicStatic.cs",
                                               new MutableFieldsShouldNotBePublicStatic(),
                                               NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
     }

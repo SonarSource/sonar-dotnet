@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesFormatters() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\RestrictDeserializedTypes.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 GetAdditionalReferences());
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesJavaScriptSerializer() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.JavaScriptSerializer.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\RestrictDeserializedTypes.JavaScriptSerializer.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 GetAdditionalReferences());
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesLosFormatter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.LosFormatter.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\RestrictDeserializedTypes.LosFormatter.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 GetAdditionalReferences());
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesFormatters_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RestrictDeserializedTypes.CSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\RestrictDeserializedTypes.CSharp9.cs",
                 GetAnalyzer(),
                 new[] { MetadataReferences.CoreMetadataReference.SystemRuntimeSerializationFormatters });
 #endif

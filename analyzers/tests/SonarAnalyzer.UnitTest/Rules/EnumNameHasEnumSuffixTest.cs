@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EnumNameHasEnumSuffix_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EnumNameHasEnumSuffix.cs", new CS.EnumNameHasEnumSuffix());
+            Verifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.cs", new CS.EnumNameHasEnumSuffix());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EnumNameHasEnumSuffix_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EnumNameHasEnumSuffix.vb", new VB.EnumNameHasEnumSuffix());
+            Verifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.vb", new VB.EnumNameHasEnumSuffix());
     }
 }

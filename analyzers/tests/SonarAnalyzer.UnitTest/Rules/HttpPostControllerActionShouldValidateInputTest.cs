@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void HttpPostControllerActionShouldValidateInput(string aspNetMvcVersion) =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\HttpPostControllerActionShouldValidateInput.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\HttpPostControllerActionShouldValidateInput.cs",
                                               new HttpPostControllerActionShouldValidateInput(),
                                               NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
     }

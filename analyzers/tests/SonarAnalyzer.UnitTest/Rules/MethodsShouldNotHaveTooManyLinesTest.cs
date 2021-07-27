@@ -33,18 +33,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_DefaultValues_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs", new CS.MethodsShouldNotHaveTooManyLines());
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs", new CS.MethodsShouldNotHaveTooManyLines());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp9.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp9.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
 #endif
 
         [TestMethod]
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_InvalidSyntax_CS() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 public class Foo
 {
     public string ()
@@ -72,7 +72,7 @@ public class Foo
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_InvalidMaxThreshold_CS(int max)
         {
-            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs",
+            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs",
                 new CS.MethodsShouldNotHaveTooManyLines { Max = max });
 
             action.Should().Throw<AssertFailedException>()
@@ -82,12 +82,12 @@ public class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_DefaultValues_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb", new VB.MethodsShouldNotHaveTooManyLines());
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb", new VB.MethodsShouldNotHaveTooManyLines());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = 2 });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = 2 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -101,7 +101,7 @@ public class Foo
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_InvalidMaxThreshold_VB(int max)
         {
-            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = max });
+            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = max });
 
             action.Should().Throw<AssertFailedException>()
                 .WithMessage("*error AD0001: *SonarAnalyzer.Rules.VisualBasic.MethodsShouldNotHaveTooManyLines* *System.InvalidOperationException* *Invalid rule parameter: maximum number of lines = *. Must be at least 2.*");

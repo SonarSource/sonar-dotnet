@@ -39,21 +39,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
                                     GetAnalyzer(),
                                     NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp7.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp7.cs",
                                     GetAnalyzer(),
                                     ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
                                     GetAnalyzer(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
@@ -71,14 +71,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp9_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs", GetAnalyzer());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs", GetAnalyzer());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_UncaughtException()
         {
-            Action action = () => Verifier.VerifyCSharpAnalyzer(@"
+            Action action = () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 public class Reproducer
 {

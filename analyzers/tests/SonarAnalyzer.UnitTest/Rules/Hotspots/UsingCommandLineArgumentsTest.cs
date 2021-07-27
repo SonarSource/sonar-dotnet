@@ -33,14 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingCommandLineArguments_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.cs",
                                               new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingCommandLineArguments_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\UsingCommandLineArguments.CSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\Hotspots\UsingCommandLineArguments.CSharp9.cs",
                                                       new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
@@ -75,7 +75,7 @@ partial class Program1
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingCommandLineArguments_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
                                               new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]

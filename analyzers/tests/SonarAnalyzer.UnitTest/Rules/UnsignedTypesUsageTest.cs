@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnsignedTypesUsage() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UnsignedTypesUsage.vb", new UnsignedTypesUsage());
+            Verifier.VerifyAnalyzer(@"TestCases\UnsignedTypesUsage.vb", new UnsignedTypesUsage());
     }
 }

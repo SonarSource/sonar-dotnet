@@ -31,14 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnconditionalJumpStatement_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UnconditionalJumpStatement.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\UnconditionalJumpStatement.cs",
                 new CS.UnconditionalJumpStatement(),
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnconditionalJumpStatement_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UnconditionalJumpStatement.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\UnconditionalJumpStatement.vb",
                 new VB.UnconditionalJumpStatement());
     }
 }

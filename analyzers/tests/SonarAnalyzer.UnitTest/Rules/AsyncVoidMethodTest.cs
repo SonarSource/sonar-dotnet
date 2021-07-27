@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AsyncVoidMethod() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\AsyncVoidMethod.cs", new AsyncVoidMethod());
+            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.cs", new AsyncVoidMethod());
 
 #if NET
         [TestMethod]
@@ -45,14 +45,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void AsyncVoidMethod_MsTestV2(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV2.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV2.cs",
                                     new AsyncVoidMethod(),
                                     NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AsyncVoidMethod_MsTestV1() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV1.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV1.cs",
                                     new AsyncVoidMethod(),
                                     NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
     }

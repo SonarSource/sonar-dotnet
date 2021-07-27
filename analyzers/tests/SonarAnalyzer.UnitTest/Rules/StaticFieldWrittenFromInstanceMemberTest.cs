@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldWrittenFromInstanceMember() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceMember.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceMember.cs",
                                     new StaticFieldWrittenFromInstanceMember(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldWrittenFromInstanceMember_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StaticFieldWrittenFromInstanceMember.CSharp9.cs", new StaticFieldWrittenFromInstanceMember());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\StaticFieldWrittenFromInstanceMember.CSharp9.cs", new StaticFieldWrittenFromInstanceMember());
 #endif
     }
 }

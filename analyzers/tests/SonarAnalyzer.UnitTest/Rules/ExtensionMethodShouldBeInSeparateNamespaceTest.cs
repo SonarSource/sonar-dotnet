@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExtensionMethodShouldBeInSeparateNamespace() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.cs", new ExtensionMethodShouldBeInSeparateNamespace());
+            Verifier.VerifyAnalyzer(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.cs", new ExtensionMethodShouldBeInSeparateNamespace());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ExtensionMethodShouldBeInSeparateNamespace_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp9.cs", new ExtensionMethodShouldBeInSeparateNamespace());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp9.cs", new ExtensionMethodShouldBeInSeparateNamespace());
 #endif
     }
 }

@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposeNotImplementingDispose() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DisposeNotImplementingDispose.cs", new DisposeNotImplementingDispose(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\DisposeNotImplementingDispose.cs", new DisposeNotImplementingDispose(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposeNotImplementingDispose_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposeNotImplementingDispose.CSharp9.cs", new DisposeNotImplementingDispose());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DisposeNotImplementingDispose.CSharp9.cs", new DisposeNotImplementingDispose());
 #endif
     }
 }

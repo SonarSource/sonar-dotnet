@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LineContinuation() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\LineContinuation.vb", new LineContinuation());
+            Verifier.VerifyAnalyzer(@"TestCases\LineContinuation.vb", new LineContinuation());
     }
 }

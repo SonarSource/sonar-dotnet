@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallAssemblyLoadInvalidMethods() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.cs",
                                               new DoNotCallAssemblyLoadInvalidMethods(),
                                               MetadataReferenceFacade.SystemSecurityPermissions);
 
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs",
                                     new DoNotCallAssemblyLoadInvalidMethods(),
                                     MetadataReferenceFacade.SystemSecurityPermissions);
 #endif
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallAssemblyLoadInvalidMethods_EvidenceParameter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.Evidence.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.Evidence.cs",
                                     new DoNotCallAssemblyLoadInvalidMethods());
 #endif
     }

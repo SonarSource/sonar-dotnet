@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UninvokedEventDeclaration() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UninvokedEventDeclaration.cs", new UninvokedEventDeclaration());
+            Verifier.VerifyAnalyzer(@"TestCases\UninvokedEventDeclaration.cs", new UninvokedEventDeclaration());
 
 #if NET
         [TestMethod]

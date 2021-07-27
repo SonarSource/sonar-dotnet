@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void BreakOutsideSwitch() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\BreakOutsideSwitch.cs", new BreakOutsideSwitch());
+            Verifier.VerifyAnalyzer(@"TestCases\BreakOutsideSwitch.cs", new BreakOutsideSwitch());
     }
 }

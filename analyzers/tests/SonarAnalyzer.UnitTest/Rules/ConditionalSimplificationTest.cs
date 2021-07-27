@@ -34,14 +34,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalSimplification_BeforeCSharp8() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
                                               new ConditionalSimplification(),
                                               ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalSimplification_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.CSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionalSimplification.CSharp8.cs",
                                     new ConditionalSimplification(),
                                     new[] { new CSharpParseOptions(LanguageVersion.CSharp8) });
 
@@ -57,14 +57,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalSimplification_FromCSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
                                     new ConditionalSimplification(),
                                     ParseOptionsHelper.FromCSharp8);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalSimplification_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
                                                       new ConditionalSimplification());
 #endif
 

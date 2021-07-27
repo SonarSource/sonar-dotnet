@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverloadOptionalParameter() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodOverloadOptionalParameter.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadOptionalParameter.cs",
                                               new MethodOverloadOptionalParameter(),
 #if NETFRAMEWORK
                                               ParseOptionsHelper.FromCSharp8,

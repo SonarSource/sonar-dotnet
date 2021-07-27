@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DelegateSubtraction() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DelegateSubtraction.cs", new DelegateSubtraction());
+            Verifier.VerifyAnalyzer(@"TestCases\DelegateSubtraction.cs", new DelegateSubtraction());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DelegateSubtraction_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DelegateSubtraction.CSharp9.cs", new DelegateSubtraction());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DelegateSubtraction.CSharp9.cs", new DelegateSubtraction());
 #endif
     }
 }

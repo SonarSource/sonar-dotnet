@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableShadowsField() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\VariableShadowsField.cs", new VariableShadowsField(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\VariableShadowsField.cs", new VariableShadowsField(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableShadowsField_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableShadowsField.CSharp9.cs", new VariableShadowsField());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\VariableShadowsField.CSharp9.cs", new VariableShadowsField());
 #endif
     }
 }

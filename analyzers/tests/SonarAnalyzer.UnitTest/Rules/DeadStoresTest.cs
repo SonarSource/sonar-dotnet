@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DeadStores() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DeadStores.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DeadStores.cs",
                                               new DeadStores(),
 #if NETFRAMEWORK
                                               ParseOptionsHelper.FromCSharp8,
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DeadStores_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeadStores.CSharp9.cs", new DeadStores());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DeadStores.CSharp9.cs", new DeadStores());
 #endif
     }
 }

@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConstructorOverridableCall() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ConstructorOverridableCall.cs", new ConstructorOverridableCall());
+            Verifier.VerifyAnalyzer(@"TestCases\ConstructorOverridableCall.cs", new ConstructorOverridableCall());
     }
 }

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
                                     new CS.ShouldImplementExportedInterfaces(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
 
@@ -48,14 +48,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
                                     new VB.ShouldImplementExportedInterfaces(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_Partial() =>
-            Verifier.VerifyAnalyzer(new[]
+            Verifier.VerifyNonConcurrentAnalyzer(new[]
                 {
                     @"TestCases\ShouldImplementExportedInterfaces_Part1.cs",
                     @"TestCases\ShouldImplementExportedInterfaces_Part2.cs",

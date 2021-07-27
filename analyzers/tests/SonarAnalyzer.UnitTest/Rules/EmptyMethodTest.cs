@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyMethod() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EmptyMethod.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.cs",
                                               new CS.EmptyMethod(),
 #if NETFRAMEWORK
                                               ParseOptionsHelper.FromCSharp8,
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyMethod_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyMethod.CSharp9.cs", new CS.EmptyMethod());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\EmptyMethod.CSharp9.cs", new CS.EmptyMethod());
 #endif
 
         [TestMethod]
@@ -74,11 +74,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyMethod_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EmptyMethod.vb", new VB.EmptyMethod());
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.vb", new VB.EmptyMethod());
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.cs", new CS.EmptyMethod());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.cs", new CS.EmptyMethod());
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS() =>
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB() =>

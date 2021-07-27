@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GetHashCodeMutable() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\GetHashCodeMutable.cs", new GetHashCodeMutable());
+            Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs", new GetHashCodeMutable());
 
 #if NET
         [TestMethod]
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GetHashCodeMutable_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"class
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"class
 {
     int i;
     public override int GetHashCode()

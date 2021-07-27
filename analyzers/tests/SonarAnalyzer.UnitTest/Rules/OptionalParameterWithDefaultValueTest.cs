@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalParameterWithDefaultValue() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\OptionalParameterWithDefaultValue.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterWithDefaultValue.cs",
                                               new OptionalParameterWithDefaultValue());
 
         [TestMethod]

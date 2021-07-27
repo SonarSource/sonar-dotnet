@@ -85,94 +85,102 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenUnlicensedFileStartingWithUsing_ShouldBeNoncompliant_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedFileStartingWithUsing_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedFileStartingWithUsingAndUsingCustomValues_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineRegexHeader, IsRegularExpression = true });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithUsing.cs",
+                                                 new CS.CheckFileLicense { HeaderFormat = SingleLineRegexHeader, IsRegularExpression = true });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedWithMultilineCommentStartingWithUsing_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = MultiLineHeader });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = MultiLineHeader });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedWithMultilineCommentStartingWithUsingWithCustomValues_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = MultiLineRegexHeader, IsRegularExpression = true });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithUsing.cs",
+                                                 new CS.CheckFileLicense { HeaderFormat = MultiLineRegexHeader, IsRegularExpression = true });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenNoLicenseStartingWithNamespace_ShouldBeNonCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedWithSingleLineCommentStartingWithNamespace_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedWithSingleLineCommentStartingWithNamespaceAndUsingCustomValues_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineRegexHeader, IsRegularExpression = true });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithNamespace.cs",
+                                                 new CS.CheckFileLicense { HeaderFormat = SingleLineRegexHeader, IsRegularExpression = true });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedWithMultilineCommentStartingWithNamespace_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = MultiLineHeader });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = MultiLineHeader });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedWithMultilineCommentStartingWithNamespaceAndUsingCustomValues_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = MultiLineRegexHeader, IsRegularExpression = true });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithNamespace.cs",
+                                                 new CS.CheckFileLicense { HeaderFormat = MultiLineRegexHeader, IsRegularExpression = true });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithNamespaceAndNoRegex_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = MultiSingleLineCommentHeader });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = MultiSingleLineCommentHeader });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithAdditionalComments_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithAdditionalComment.cs", new CS.CheckFileLicense { HeaderFormat = MultiSingleLineCommentHeader });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithAdditionalComment.cs",
+                                                 new CS.CheckFileLicense { HeaderFormat = MultiSingleLineCommentHeader });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithAdditionalCommentOnSameLine_ShouldBeNonCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithAdditionalCommentOnSameLine.cs", new CS.CheckFileLicense { HeaderFormat = MultiSingleLineCommentHeader });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithAdditionalCommentOnSameLine.cs",
+                                                 new CS.CheckFileLicense { HeaderFormat = MultiSingleLineCommentHeader });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WithForcingEmptyLines_ShouldBeNonCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_ForcingEmptyLinesKo.cs", new CS.CheckFileLicense { HeaderFormat = HeaderForcingLineBreak });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_ForcingEmptyLinesKo.cs", new CS.CheckFileLicense { HeaderFormat = HeaderForcingLineBreak });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WithForcingEmptyLines_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_ForcingEmptyLinesOk.cs", new CS.CheckFileLicense { HeaderFormat = HeaderForcingLineBreak });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_ForcingEmptyLinesOk.cs", new CS.CheckFileLicense { HeaderFormat = HeaderForcingLineBreak });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithNamespaceAndMultiLineRegexWithNewLine_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = MultiLineRegexWithNewLine, IsRegularExpression = true });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs",
+                                                 new CS.CheckFileLicense { HeaderFormat = MultiLineRegexWithNewLine, IsRegularExpression = true });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithNamespaceAndMultiLineRegexWithDot_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs", new CS.CheckFileLicense { HeaderFormat = MultiLineRegexWithDot, IsRegularExpression = true });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs",
+                                                 new CS.CheckFileLicense { HeaderFormat = MultiLineRegexWithDot, IsRegularExpression = true });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenEmptyFile_ShouldBeNonCompliant_CS()
         {
             Action action =
-                () => Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_EmptyFile.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
+                () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_EmptyFile.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
                 "CSharp*: Unexpected primary issue on line 1, span (0,0)-(0,0) with message 'Add or update the header of this file.'." + Environment.NewLine
                 + "See output to see all actual diagnostics raised on the file");
@@ -181,13 +189,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("CodeFix")]
         public void CheckFileLicenseCodeFix_WhenThereIsAYearDifference_ShouldBeNonCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_YearDifference.cs", new CS.CheckFileLicense { HeaderFormat = MultiLineHeader });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_YearDifference.cs", new CS.CheckFileLicense { HeaderFormat = MultiLineHeader });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenProvidingAnInvalidRegex_ShouldThrowException_CS()
         {
-            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
+            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs",
+                                                                       new CS.CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
 
             action.Should().Throw<AssertFailedException>().WithMessage("*error AD0001:*SonarAnalyzer.Rules.CSharp.CheckFileLicense*System.InvalidOperationException*Invalid regular expression: [*");
         }
@@ -195,13 +204,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenUsingComplexRegex_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_ComplexRegex.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_ComplexRegex.cs",
                new CS.CheckFileLicense { HeaderFormat = @"// <copyright file="".*\.cs"" company="".*"">\r\n// Copyright \(c\) 2012 All Rights Reserved\r\n// </copyright>\r\n// <author>.*</author>\r\n// <date>.*</date>\r\n// <summary>.*</summary>\r\n", IsRegularExpression = true });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenUsingMultilinesHeaderAsSingleLineString_ShouldBeCompliant_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_ComplexRegex.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_ComplexRegex.cs",
                new CS.CheckFileLicense { HeaderFormat = @"// <copyright file=""ProgramHeader2.cs"" company=""My Company Name"">\r\n// Copyright (c) 2012 All Rights Reserved\r\n// </copyright>\r\n// <author>Name of the Authour</author>\r\n// <date>08/22/2017 12:39:58 AM </date>\r\n// <summary>Class representing a Sample entity</summary>\r\n", IsRegularExpression = false });
 
         [TestMethod]
@@ -277,13 +286,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_NonCompliant_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CheckFileLicense_NonCompliant.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NonCompliant.vb",
                                               new VB.CheckFileLicense());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_Compliant_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_Compliant.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CheckFileLicense_Compliant.vb",
                 new VB.CheckFileLicense
                 {
                     HeaderFormat = @"Copyright \(c\) [0-9]+ All Rights Reserved

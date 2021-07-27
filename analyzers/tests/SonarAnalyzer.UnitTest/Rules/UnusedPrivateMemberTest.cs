@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_DebuggerDisplay_Attribute() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/1195
 [System.Diagnostics.DebuggerDisplay(""{field1}"", Name = ""{Property1} {Property3}"", Type = ""{Method1()}"")]
 public class MethodUsages
@@ -61,7 +61,7 @@ public class MethodUsages
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Members_With_Attributes_Are_Not_Removable() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 public class FieldUsages
 {
@@ -82,7 +82,7 @@ public class FieldUsages
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Assembly_Level_Attributes() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 [assembly: System.Reflection.AssemblyCompany(Foo.Constants.AppCompany)]
 public static class Foo
 {
@@ -96,7 +96,7 @@ public static class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMemberWithPartialClasses() =>
-            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[]
+            Verifier.VerifyAnalyzerNoDuplication(new[]
                                     {
                                         @"TestCases\UnusedPrivateMember.part1.cs",
                                         @"TestCases\UnusedPrivateMember.part2.cs"
@@ -110,7 +110,7 @@ public static class Foo
             // could be added through XAML and no warning will be generated if the
             // method is removed, which could lead to serious problems that are hard
             // to diagnose.
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 public class NewClass
 {
@@ -125,7 +125,7 @@ public partial class PartialClass
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Unity3D_Ignored() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/159
 public class UnityMessages1 : UnityEngine.MonoBehaviour
 {
@@ -163,7 +163,7 @@ namespace UnityEditor
         [TestMethod]
         [TestCategory("Rule")]
         public void EntityFrameworkMigration_Ignored() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 namespace EntityFrameworkMigrations
 {
     using Microsoft.EntityFrameworkCore.Migrations;
@@ -182,21 +182,21 @@ namespace EntityFrameworkMigrations
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void UnusedPrivateMember(ProjectType projectType) =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UnusedPrivateMember.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.cs",
                                     new UnusedPrivateMember(),
                                     TestHelper.ProjectTypeReference(projectType));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp7() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UnusedPrivateMember.CSharp7.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp7.cs",
                                     new UnusedPrivateMember(),
                                     ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
                                     new UnusedPrivateMember(),
                                     ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK
@@ -215,7 +215,7 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs",
                                                       new UnusedPrivateMember());
 #endif
 
@@ -231,7 +231,7 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_UsedInGeneratedFile() =>
-            Verifier.VerifyAnalyzer(new[]
+            Verifier.VerifyNonConcurrentAnalyzer(new[]
                                     {
                                         @"TestCases\UnusedPrivateMember.CalledFromGenerated.cs",
                                         @"TestCases\UnusedPrivateMember.Generated.cs"
@@ -242,7 +242,7 @@ namespace EntityFrameworkMigrations
         [TestCategory("Performance")]
         public void UnusedPrivateMember_Performance()
         {
-            Action verifyAnalyzer = () => Verifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
+            Action verifyAnalyzer = () => Verifier.VerifyNonConcurrentAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
                                                                   new UnusedPrivateMember(),
                                                                   GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
 

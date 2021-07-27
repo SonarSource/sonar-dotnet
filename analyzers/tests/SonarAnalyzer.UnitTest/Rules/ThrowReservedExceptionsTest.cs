@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ThrowReservedExceptions_CSharp() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ThrowReservedExceptions.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.cs",
                 new CS.ThrowReservedExceptions());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ThrowReservedExceptions_VisualBasic() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ThrowReservedExceptions.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.vb",
                 new VB.ThrowReservedExceptions());
     }
 }

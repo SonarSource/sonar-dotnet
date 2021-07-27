@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NonFlagsEnumInBitwiseOperation() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
                                               new NonFlagsEnumInBitwiseOperation(),
                                               MetadataReferenceFacade.SystemComponentModelPrimitives);
 

@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseReturnStatement() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UseReturnStatement.vb", new UseReturnStatement());
+            Verifier.VerifyAnalyzer(@"TestCases\UseReturnStatement.vb", new UseReturnStatement());
     }
 }

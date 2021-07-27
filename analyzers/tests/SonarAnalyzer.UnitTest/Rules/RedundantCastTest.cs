@@ -31,14 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantCast() =>
-            Verifier.VerifyConcurrentAnalyzer(
+            Verifier.VerifyAnalyzer(
                 @"TestCases\RedundantCast.cs",
                 new RedundantCast());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantCast_CSharp8() =>
-            Verifier.VerifyAnalyzer(
+            Verifier.VerifyNonConcurrentAnalyzer(
                 @"TestCases\RedundantCast.CSharp8.cs",
                 new RedundantCast(),
                 ParseOptionsHelper.FromCSharp8);
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantCast_DefaultLiteral() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 public static class MyClass
 {

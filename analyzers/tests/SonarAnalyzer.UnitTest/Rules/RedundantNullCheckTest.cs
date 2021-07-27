@@ -32,13 +32,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantNullCheck_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RedundantNullCheck.cs", new CS.RedundantNullCheck());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.cs", new CS.RedundantNullCheck());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantNullCheck_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantNullCheck.CSharp9.cs", new CS.RedundantNullCheck());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\RedundantNullCheck.CSharp9.cs", new CS.RedundantNullCheck());
 #endif
 
         [TestMethod]
@@ -65,6 +65,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantNullCheck_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.vb", new VB.RedundantNullCheck());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\RedundantNullCheck.vb", new VB.RedundantNullCheck());
     }
 }

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs",
                                               new DisposableMemberInNonDisposableClass(),
                                               ParseOptionsHelper.FromCSharp8);
 
@@ -41,11 +41,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new DisposableMemberInNonDisposableClass());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new DisposableMemberInNonDisposableClass());
 
         [TestMethod]
         public void DisposableMemberInNonDisposableClass_IAsyncDisposable() => // IAsyncDisposable is available only on .Net Core
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 namespace Namespace
 {
     using System;

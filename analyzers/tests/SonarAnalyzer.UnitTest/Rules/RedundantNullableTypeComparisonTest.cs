@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantNullableTypeComparison() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RedundantNullableTypeComparison.cs", new RedundantNullableTypeComparison());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantNullableTypeComparison.cs", new RedundantNullableTypeComparison());
     }
 }

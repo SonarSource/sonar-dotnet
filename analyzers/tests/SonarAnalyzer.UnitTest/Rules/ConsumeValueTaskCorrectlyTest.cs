@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConsumeValueTaskCorrectly() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ConsumeValueTaskCorrectly.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConsumeValueTaskCorrectly.cs",
                                               new ConsumeValueTaskCorrectly(),
                                               GetReferences());
 

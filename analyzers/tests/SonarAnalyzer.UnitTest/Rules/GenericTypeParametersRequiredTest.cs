@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericTypeParametersRequired() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\GenericTypeParametersRequired.cs", new GenericTypeParametersRequired());
+            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParametersRequired.cs", new GenericTypeParametersRequired());
     }
 }

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotUseByVal() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotUseByVal.vb", new DoNotUseByVal());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseByVal.vb", new DoNotUseByVal());
 
         [TestMethod]
         [TestCategory("CodeFix")]

@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EqualityOnModulus() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EqualityOnModulus.cs", new EqualityOnModulus());
+            Verifier.VerifyAnalyzer(@"TestCases\EqualityOnModulus.cs", new EqualityOnModulus());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EqualityOnModulus_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EqualityOnModulus.CSharp9.cs", new EqualityOnModulus());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\EqualityOnModulus.CSharp9.cs", new EqualityOnModulus());
 #endif
     }
 }

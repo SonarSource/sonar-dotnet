@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShouldNotBePublic_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FieldShouldNotBePublic.cs", new CS.FieldShouldNotBePublic());
+            Verifier.VerifyAnalyzer(@"TestCases\FieldShouldNotBePublic.cs", new CS.FieldShouldNotBePublic());
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShouldNotBePublic_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FieldShouldNotBePublic.vb", new VB.FieldShouldNotBePublic());
+            Verifier.VerifyAnalyzer(@"TestCases\FieldShouldNotBePublic.vb", new VB.FieldShouldNotBePublic());
     }
 }

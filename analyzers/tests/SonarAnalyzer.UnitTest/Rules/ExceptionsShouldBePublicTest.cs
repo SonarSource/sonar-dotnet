@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExceptionsShouldBePublic() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ExceptionsShouldBePublic.cs", new ExceptionsShouldBePublic());
+            Verifier.VerifyAnalyzer(@"TestCases\ExceptionsShouldBePublic.cs", new ExceptionsShouldBePublic());
     }
 }

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OverrideGetHashCodeOnOverridingEquals() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\OverrideGetHashCodeOnOverridingEquals.cs", new OverrideGetHashCodeOnOverridingEquals());
+            Verifier.VerifyAnalyzer(@"TestCases\OverrideGetHashCodeOnOverridingEquals.cs", new OverrideGetHashCodeOnOverridingEquals());
 
 #if NET
         [TestMethod]

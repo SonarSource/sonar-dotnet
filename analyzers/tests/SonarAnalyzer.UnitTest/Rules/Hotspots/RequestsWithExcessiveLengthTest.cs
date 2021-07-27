@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength.cs",
                                               new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
                                               GetAdditionalReferences());
 
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_CS_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.cs",
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
                 GetAdditionalReferences());
 
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength.vb",
                                               new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
                                               GetAdditionalReferences());
 
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_VB_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.vb",
                 new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
                 GetAdditionalReferences());
 

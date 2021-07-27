@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassName_CS() =>
-            Verifier.VerifyAnalyzer(
+            Verifier.VerifyNonConcurrentAnalyzer(
                 new[]
                 {
                     @"TestCases\ClassName.cs",
@@ -50,18 +50,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassName_InTestProject_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ClassName.Tests.cs", new CS.ClassAndMethodName(), ParseOptionsHelper.FromCSharp8, NuGetMetadataReference.MSTestTestFrameworkV1);
+            Verifier.VerifyAnalyzer(@"TestCases\ClassName.Tests.cs", new CS.ClassAndMethodName(), ParseOptionsHelper.FromCSharp8, NuGetMetadataReference.MSTestTestFrameworkV1);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassName_TopLevelStatement_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassName.TopLevelStatement.cs", new CS.ClassAndMethodName());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ClassName.TopLevelStatement.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassName_TopLevelStatement_InTestProject_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9ConsoleInTest(@"TestCases\ClassName.TopLevelStatement.Test.cs", new CS.ClassAndMethodName());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9ConsoleInTest(@"TestCases\ClassName.TopLevelStatement.Test.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RecordName_InTestProject_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9LibraryInTest(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
 #endif
 
         [DataTestMethod]
@@ -79,14 +79,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void ClassName_VB(ProjectType projectType) =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ClassName.vb", new VB.ClassName(), TestHelper.ProjectTypeReference(projectType));
+            Verifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new VB.ClassName(), TestHelper.ProjectTypeReference(projectType));
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void MethodName(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(
+            Verifier.VerifyNonConcurrentAnalyzer(
                 new[]
                 {
                     @"TestCases\MethodName.cs",
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodName_InTestProject_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9LibraryInTest(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
 
 #endif
 

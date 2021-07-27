@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotNestTernaryOperators_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotNestTernaryOperators.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTernaryOperators.cs",
                                               new CS.DoNotNestTernaryOperators());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotNestTernaryOperators_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotNestTernaryOperators.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTernaryOperators.vb",
                                               new VB.DoNotNestTernaryOperators());
     }
 }

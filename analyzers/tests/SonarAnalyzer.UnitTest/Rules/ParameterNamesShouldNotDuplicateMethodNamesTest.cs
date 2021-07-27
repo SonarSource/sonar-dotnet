@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterNamesShouldNotDuplicateMethodNames() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParameterNamesShouldNotDuplicateMethodNames.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ParameterNamesShouldNotDuplicateMethodNames.cs",
                                     new ParameterNamesShouldNotDuplicateMethodNames(),
                                     ParseOptionsHelper.FromCSharp8);
     }

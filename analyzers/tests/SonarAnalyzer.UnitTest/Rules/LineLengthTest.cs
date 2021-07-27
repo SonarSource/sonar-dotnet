@@ -33,10 +33,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void LineLength()
         {
             var diagnosticCs = new CS.LineLength { Maximum = 127 };
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\LineLength.cs", diagnosticCs);
+            Verifier.VerifyAnalyzer(@"TestCases\LineLength.cs", diagnosticCs);
 
             var diagnosticVb = new VB.LineLength { Maximum = 127 };
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\LineLength.vb", diagnosticVb);
+            Verifier.VerifyAnalyzer(@"TestCases\LineLength.vb", diagnosticVb);
         }
     }
 }

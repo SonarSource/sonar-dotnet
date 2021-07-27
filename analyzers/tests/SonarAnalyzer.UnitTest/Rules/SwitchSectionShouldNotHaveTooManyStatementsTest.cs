@@ -31,26 +31,26 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.cs",
                 new CS.SwitchSectionShouldNotHaveTooManyStatements());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs",
                 new CS.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 },
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.vb",
                 new VB.SwitchSectionShouldNotHaveTooManyStatements());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.vb",
-                new VB.SwitchSectionShouldNotHaveTooManyStatements() { Threshold = 1 });
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.vb",
+                                                 new VB.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 });
     }
 }

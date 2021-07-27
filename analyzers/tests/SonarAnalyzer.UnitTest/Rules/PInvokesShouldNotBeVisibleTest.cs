@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PInvokesShouldNotBeVisible() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PInvokesShouldNotBeVisible.cs", new PInvokesShouldNotBeVisible());
+            Verifier.VerifyAnalyzer(@"TestCases\PInvokesShouldNotBeVisible.cs", new PInvokesShouldNotBeVisible());
 
 #if NET
         [TestMethod]

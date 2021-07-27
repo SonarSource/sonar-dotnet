@@ -31,19 +31,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCheckZeroSizeCollection_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs", new CS.DoNotCheckZeroSizeCollection());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs", new CS.DoNotCheckZeroSizeCollection());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCheckZeroSizeCollection_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCheckZeroSizeCollection.CSharp9.cs", new CS.DoNotCheckZeroSizeCollection());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DoNotCheckZeroSizeCollection.CSharp9.cs", new CS.DoNotCheckZeroSizeCollection());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCheckZeroSizeCollection_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.vb",
                                               new VB.DoNotCheckZeroSizeCollection());
     }
 }

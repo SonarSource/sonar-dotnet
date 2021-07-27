@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void IfChainWithoutElse_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\IfChainWithoutElse.cs", new CS.IfChainWithoutElse());
+            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.cs", new CS.IfChainWithoutElse());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void IfChainWithoutElse_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\IfChainWithoutElse.vb", new VB.IfChainWithoutElse());
+            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.vb", new VB.IfChainWithoutElse());
     }
 }

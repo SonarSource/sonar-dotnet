@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallAssemblyGetExecutingAssembly() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotCallAssemblyGetExecutingAssembly.cs", new DoNotCallAssemblyGetExecutingAssemblyMethod());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyGetExecutingAssembly.cs", new DoNotCallAssemblyGetExecutingAssemblyMethod());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallAssemblyGetExecutingAssembly_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallAssemblyGetExecutingAssembly.CSharp9.cs", new DoNotCallAssemblyGetExecutingAssemblyMethod());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DoNotCallAssemblyGetExecutingAssembly.CSharp9.cs", new DoNotCallAssemblyGetExecutingAssemblyMethod());
 #endif
     }
 }

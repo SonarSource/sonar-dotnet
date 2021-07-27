@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_CS_DefaultValues() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.cs",
                                               new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                                               AdditionalReferences);
 
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_CSharp8_DefaultValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp8.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromCSharp8,
                 AdditionalReferences);
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_CS_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE, x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_VB_DefaultValues() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.vb",
                                               new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                                               AdditionalReferences);
 
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_VB_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 

@@ -31,17 +31,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CommentedOutCode() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CommentedOutCode_Concurrent() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CommentedOutCode_Concurrent.cs", new CommentedOutCode());
+            Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode_Concurrent.cs", new CommentedOutCode());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CommentedOutCode_NoDocumentation() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode(),
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode(),
                 new[] { new CSharpParseOptions(documentationMode: Microsoft.CodeAnalysis.DocumentationMode.None) });
     }
 }

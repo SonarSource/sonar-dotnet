@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void WcfMissingContractAttribute() =>
-            Verifier.VerifyConcurrentAnalyzer(
+            Verifier.VerifyAnalyzer(
                 @"TestCases\WcfMissingContractAttribute.cs",
                 new WcfMissingContractAttribute(),
                 MetadataReferenceFacade.SystemServiceModel);

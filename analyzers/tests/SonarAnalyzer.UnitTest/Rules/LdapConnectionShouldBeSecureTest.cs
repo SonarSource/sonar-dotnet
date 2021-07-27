@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LdapConnectionsShouldBeSecure() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\LdapConnectionShouldBeSecure.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\LdapConnectionShouldBeSecure.cs",
                                               new LdapConnectionShouldBeSecure(),
                                               ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LdapConnectionsShouldBeSecure_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp9.cs",
                 new LdapConnectionShouldBeSecure(),
                 MetadataReferenceFacade.SystemDirectoryServices);
 #endif

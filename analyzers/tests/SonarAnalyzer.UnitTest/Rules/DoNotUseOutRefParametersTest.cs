@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotUseOutRefParameters() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotUseOutRefParameters.cs", new DoNotUseOutRefParameters());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseOutRefParameters.cs", new DoNotUseOutRefParameters());
 
 #if NET
         [TestMethod]

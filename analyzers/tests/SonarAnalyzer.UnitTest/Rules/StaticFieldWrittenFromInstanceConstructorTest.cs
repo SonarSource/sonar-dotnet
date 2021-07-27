@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldWrittenFromInstanceConstructor() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceConstructor.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceConstructor.cs",
                                     new StaticFieldWrittenFromInstanceConstructor(),
                                     ParseOptionsHelper.FromCSharp8);
 

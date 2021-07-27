@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EnumNameShouldFollowRegex_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EnumNameShouldFollowRegex.cs", new CS.EnumNameShouldFollowRegex());
+            Verifier.VerifyAnalyzer(@"TestCases\EnumNameShouldFollowRegex.cs", new CS.EnumNameShouldFollowRegex());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EnumNameShouldFollowRegex_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EnumNameShouldFollowRegex.vb", new VB.EnumNameShouldFollowRegex());
+            Verifier.VerifyAnalyzer(@"TestCases\EnumNameShouldFollowRegex.vb", new VB.EnumNameShouldFollowRegex());
     }
 }

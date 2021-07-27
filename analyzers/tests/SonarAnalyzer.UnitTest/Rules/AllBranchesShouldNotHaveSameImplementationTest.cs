@@ -31,14 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AllBranchesShouldNotHaveSameImplementation_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.cs",
                                               new CS.AllBranchesShouldNotHaveSameImplementation(),
                                               ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AllBranchesShouldNotHaveSameImplementation_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.vb",
                                               new VB.AllBranchesShouldNotHaveSameImplementation());
     }
 }

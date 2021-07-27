@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingCookies_CS_Net46() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.cs",
                                               new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                                               GetAdditionalReferencesForNet46());
 
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingCookies_VB_Net46() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.vb",
                                               new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                                               GetAdditionalReferencesForNet46());
 
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingCookies_CS_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.cs",
                 new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingCookies_VB_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.vb",
                 new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ReturnEmptyCollectionInsteadOfNull() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
                                     new ReturnEmptyCollectionInsteadOfNull(),
                                     MetadataReferenceFacade.SystemXml);
 
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ReturnEmptyCollectionInsteadOfNull_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnEmptyCollectionInsteadOfNull.CSharp9.cs", new ReturnEmptyCollectionInsteadOfNull());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ReturnEmptyCollectionInsteadOfNull.CSharp9.cs", new ReturnEmptyCollectionInsteadOfNull());
 #endif
     }
 }

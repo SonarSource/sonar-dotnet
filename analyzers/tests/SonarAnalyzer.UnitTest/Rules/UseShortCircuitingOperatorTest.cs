@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod, TestCategory("Rule")]
         public void UseShortCircuitingOperators_VisualBasic() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UseShortCircuitingOperator.vb", new VB.UseShortCircuitingOperator());
+            Verifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.vb", new VB.UseShortCircuitingOperator());
 
         [TestMethod, TestCategory("CodeFix")]
         public void UseShortCircuitingOperators_VisualBasic_CodeFix() =>
@@ -41,12 +41,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod, TestCategory("Rule")]
         public void UseShortCircuitingOperators_CSharp() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UseShortCircuitingOperator.cs", new CS.UseShortCircuitingOperator());
+            Verifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.cs", new CS.UseShortCircuitingOperator());
 
 #if NET
         [TestMethod, TestCategory("Rule")]
         public void UseShortCircuitingOperators_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
                                                       new CS.UseShortCircuitingOperator());
 
         [TestMethod, TestCategory("CodeFix")]

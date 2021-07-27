@@ -30,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AssignmentInsideSubExpression() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\AssignmentInsideSubExpression.cs", new AssignmentInsideSubExpression(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\AssignmentInsideSubExpression.cs", new AssignmentInsideSubExpression(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AssignmentInsideSubExpression_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AssignmentInsideSubExpression.CSharp9.cs", new AssignmentInsideSubExpression());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\AssignmentInsideSubExpression.CSharp9.cs", new AssignmentInsideSubExpression());
     }
 }

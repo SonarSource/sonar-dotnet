@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EndStatementUsage() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EndStatementUsage.vb", new EndStatementUsage());
+            Verifier.VerifyAnalyzer(@"TestCases\EndStatementUsage.vb", new EndStatementUsage());
     }
 }

@@ -31,20 +31,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_Concurrent() =>
-            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\DeclareTypesInNamespaces.cs", @"TestCases\DeclareTypesInNamespaces2.cs", },
+            Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\DeclareTypesInNamespaces.cs", @"TestCases\DeclareTypesInNamespaces2.cs", },
                                                            new CS.DeclareTypesInNamespaces());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_Before8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.BeforeCSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DeclareTypesInNamespaces.BeforeCSharp8.cs",
                 new CS.DeclareTypesInNamespaces(),
                 ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_After8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.AfterCSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DeclareTypesInNamespaces.AfterCSharp8.cs",
                 new CS.DeclareTypesInNamespaces(),
                 ParseOptionsHelper.FromCSharp8);
 
@@ -52,14 +52,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_AfterCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs",
                 new CS.DeclareTypesInNamespaces());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_VB_Concurrent() =>
-            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\DeclareTypesInNamespaces.vb", @"TestCases\DeclareTypesInNamespaces2.vb", },
+            Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\DeclareTypesInNamespaces.vb", @"TestCases\DeclareTypesInNamespaces2.vb", },
                                                            new VB.DeclareTypesInNamespaces());
     }
 }

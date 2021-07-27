@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FrameworkTypeNaming() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FrameworkTypeNaming.cs", new FrameworkTypeNaming());
+            Verifier.VerifyAnalyzer(@"TestCases\FrameworkTypeNaming.cs", new FrameworkTypeNaming());
     }
 }

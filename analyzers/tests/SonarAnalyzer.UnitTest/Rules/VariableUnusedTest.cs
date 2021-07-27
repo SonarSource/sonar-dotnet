@@ -31,18 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableUnused_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\VariableUnused.cs", new CS.VariableUnused(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.cs", new CS.VariableUnused(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableUnused_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableUnused.CSharp9.cs", new CS.VariableUnused());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\VariableUnused.CSharp9.cs", new CS.VariableUnused());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableUnused_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\VariableUnused.vb", new VB.VariableUnused());
+            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.vb", new VB.VariableUnused());
     }
 }

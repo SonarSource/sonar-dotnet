@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ValuesUselesslyIncremented() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ValuesUselesslyIncremented.cs", new ValuesUselesslyIncremented());
+            Verifier.VerifyAnalyzer(@"TestCases\ValuesUselesslyIncremented.cs", new ValuesUselesslyIncremented());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ValuesUselesslyIncremented_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ValuesUselesslyIncremented.CSharp9.cs", new ValuesUselesslyIncremented());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ValuesUselesslyIncremented.CSharp9.cs", new ValuesUselesslyIncremented());
 #endif
     }
 }

@@ -33,20 +33,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithClsCompliantAttribute_CS() =>
-            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\MarkAssemblyWithClsCompliantAttribute.cs", @"TestCases\MarkAssemblyWithClsCompliantAttribute2.cs", },
+            Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\MarkAssemblyWithClsCompliantAttribute.cs", @"TestCases\MarkAssemblyWithClsCompliantAttribute2.cs", },
                                                            new CS.MarkAssemblyWithClsCompliantAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithClsCompliantAttribute_VB() =>
-            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\MarkAssemblyWithClsCompliantAttribute.vb", @"TestCases\MarkAssemblyWithClsCompliantAttribute2.vb", },
+            Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\MarkAssemblyWithClsCompliantAttribute.vb", @"TestCases\MarkAssemblyWithClsCompliantAttribute2.vb", },
                                                            new VB.MarkAssemblyWithClsCompliantAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_CS()
         {
-            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs", new CS.MarkAssemblyWithClsCompliantAttribute());
+            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs", new CS.MarkAssemblyWithClsCompliantAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
 
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_VB()
         {
-            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.vb", new VB.MarkAssemblyWithClsCompliantAttribute());
+            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.vb", new VB.MarkAssemblyWithClsCompliantAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
     }

@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SelfAssignment_CSharp() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SelfAssignment.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.cs",
                 new CS.SelfAssignment(),
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SelfAssignment_VisualBasic() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\SelfAssignment.vb", new VB.SelfAssignment());
+            Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.vb", new VB.SelfAssignment());
     }
 }

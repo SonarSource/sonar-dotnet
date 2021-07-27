@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CollectionQuerySimplification() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CollectionQuerySimplification.cs", new CollectionQuerySimplification());
+            Verifier.VerifyAnalyzer(@"TestCases\CollectionQuerySimplification.cs", new CollectionQuerySimplification());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CollectionQuerySimplification_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CollectionQuerySimplification.CSharp9.cs", new CollectionQuerySimplification());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\CollectionQuerySimplification.CSharp9.cs", new CollectionQuerySimplification());
 #endif
     }
 }

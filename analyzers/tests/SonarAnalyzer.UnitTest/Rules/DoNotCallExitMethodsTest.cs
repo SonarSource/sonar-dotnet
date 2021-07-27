@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallExitMethods() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
                                               new DoNotCallExitMethods(),
                                               MetadataReferenceFacade.SystemWindowsForms);
 #endif
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallExitMethods_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs", new DoNotCallExitMethods());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs", new DoNotCallExitMethods());
 #endif
     }
 }

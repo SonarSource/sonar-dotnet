@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.cs",
                                               new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                               ParseOptionsHelper.FromCSharp8,
                                               GetAdditionalReferences());
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_CS_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.cs",
                                     new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.vb",
                                               new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                               GetAdditionalReferences());
 
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_VB_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.vb",
                                     new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences());
 #endif

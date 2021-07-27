@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OrderByRepeated() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\OrderByRepeated.cs", new OrderByRepeated());
+            Verifier.VerifyAnalyzer(@"TestCases\OrderByRepeated.cs", new OrderByRepeated());
 
         [TestMethod]
         [TestCategory("CodeFix")]

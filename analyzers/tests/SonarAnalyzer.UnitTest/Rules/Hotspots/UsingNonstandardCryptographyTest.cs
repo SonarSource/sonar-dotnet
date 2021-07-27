@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingNonstandardCryptography_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.cs",
                                               new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
                                               MetadataReferenceFacade.SystemSecurityCryptography);
 
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingNonstandardCryptography_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.vb",
                                               new VB.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
                                               MetadataReferenceFacade.SystemSecurityCryptography);
     }

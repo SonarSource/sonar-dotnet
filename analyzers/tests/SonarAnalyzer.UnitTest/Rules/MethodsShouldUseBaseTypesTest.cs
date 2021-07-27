@@ -66,19 +66,19 @@ internal class Bar
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes() =>
-            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\MethodsShouldUseBaseTypes.cs", @"TestCases\MethodsShouldUseBaseTypes2.cs", }, new MethodsShouldUseBaseTypes());
+            Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\MethodsShouldUseBaseTypes.cs", @"TestCases\MethodsShouldUseBaseTypes2.cs", }, new MethodsShouldUseBaseTypes());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new MethodsShouldUseBaseTypes());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new MethodsShouldUseBaseTypes());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections;
 using System.Collections.Generic;

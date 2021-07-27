@@ -31,18 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterAssignedTo_CSharp() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParameterAssignedTo.cs", new CS.ParameterAssignedTo());
+            Verifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.cs", new CS.ParameterAssignedTo());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterAssignedTo_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ParameterAssignedTo.CSharp9.cs", new CS.ParameterAssignedTo());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ParameterAssignedTo.CSharp9.cs", new CS.ParameterAssignedTo());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterAssignedTo_VisualBasic() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParameterAssignedTo.vb", new VB.ParameterAssignedTo());
+            Verifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.vb", new VB.ParameterAssignedTo());
     }
 }

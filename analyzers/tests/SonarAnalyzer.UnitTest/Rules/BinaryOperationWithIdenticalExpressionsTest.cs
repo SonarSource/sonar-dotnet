@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void BinaryOperationWithIdenticalExpressions_CSharp() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.cs",
                                               new CS.BinaryOperationWithIdenticalExpressions());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void BinaryOperationWithIdenticalExpressions_VisualBasic() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.vb",
                                               new VB.BinaryOperationWithIdenticalExpressions());
     }
 }

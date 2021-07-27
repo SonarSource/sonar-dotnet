@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void VerifyMetrics()
         {
             var testRoot = Root + nameof(VerifyMetrics);
-            Verifier.VerifyUtilityAnalyzer<MetricsInfo>(
+            Verifier.VerifyNonConcurrentUtilityAnalyzer<MetricsInfo>(
                 new[] { Root + "AllMetrics.cs" },
                 new TestMetricsAnalyzer(testRoot, false),
                 @$"{testRoot}\metrics.pb",
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_NotRunForTestProject()
         {
             var testRoot = Root + nameof(Verify_NotRunForTestProject);
-            Verifier.VerifyUtilityAnalyzerIsNotRun(new[] { Root + "AllMetrics.cs" },
+            Verifier.VerifyNonConcurrentUtilityAnalyzerIsNotRun(new[] { Root + "AllMetrics.cs" },
                                                    new TestMetricsAnalyzer(testRoot, true),
                                                    @$"{testRoot}\metrics.pb");
         }

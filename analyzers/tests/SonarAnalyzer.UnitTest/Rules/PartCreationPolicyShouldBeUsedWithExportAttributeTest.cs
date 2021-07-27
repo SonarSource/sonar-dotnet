@@ -32,14 +32,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
                                     new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_UnresolvedSymbol_CS() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 [UnresolvedAttribute] // Error [CS0246]
 class Bar { }",
                                           new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
@@ -57,7 +57,7 @@ class Bar { }",
         [TestMethod]
         [TestCategory("Rule")]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.vb",
                                     new VB.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
     }

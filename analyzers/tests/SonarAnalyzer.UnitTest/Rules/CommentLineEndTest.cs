@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CommentLineEnd() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CommentLineEnd.vb", new CommentLineEnd());
+            Verifier.VerifyAnalyzer(@"TestCases\CommentLineEnd.vb", new CommentLineEnd());
     }
 }

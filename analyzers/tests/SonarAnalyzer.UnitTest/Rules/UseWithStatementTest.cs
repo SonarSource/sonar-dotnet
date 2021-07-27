@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseWithStatement() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\UseWithStatement.vb", new UseWithStatement { MinimumSeriesLength = 2 });
+            Verifier.VerifyAnalyzer(@"TestCases\UseWithStatement.vb", new UseWithStatement { MinimumSeriesLength = 2 });
     }
 }

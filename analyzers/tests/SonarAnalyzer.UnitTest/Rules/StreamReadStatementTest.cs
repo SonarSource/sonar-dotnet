@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StreamReadStatement() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\StreamReadStatement.cs", new StreamReadStatement());
+            Verifier.VerifyAnalyzer(@"TestCases\StreamReadStatement.cs", new StreamReadStatement());
     }
 }

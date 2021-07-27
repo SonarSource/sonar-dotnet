@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ObsoleteAttributesNeedExplanation() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ObsoleteAttributesNeedExplanation.cs", new ObsoleteAttributesNeedExplanation());
+            Verifier.VerifyAnalyzer(@"TestCases\ObsoleteAttributesNeedExplanation.cs", new ObsoleteAttributesNeedExplanation());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ObsoleteAttributesNeedExplanation_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ObsoleteAttributesNeedExplanation.CSharp9.cs", new ObsoleteAttributesNeedExplanation());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ObsoleteAttributesNeedExplanation.CSharp9.cs", new ObsoleteAttributesNeedExplanation());
 #endif
     }
 }

@@ -32,8 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void OptionalParameter()
         {
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\OptionalParameter.cs", new CS.OptionalParameter());
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\OptionalParameter.vb", new VB.OptionalParameter());
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameter.cs", new CS.OptionalParameter());
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameter.vb", new VB.OptionalParameter());
         }
     }
 }

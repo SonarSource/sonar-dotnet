@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EventNameContainsBeforeOrAfter() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\EventNameContainsBeforeOrAfter.vb", new EventNameContainsBeforeOrAfter());
+            Verifier.VerifyAnalyzer(@"TestCases\EventNameContainsBeforeOrAfter.vb", new EventNameContainsBeforeOrAfter());
     }
 }

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShadowsOuterStaticMember() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MemberShadowsOuterStaticMember.cs", new MemberShadowsOuterStaticMember());
+            Verifier.VerifyAnalyzer(@"TestCases\MemberShadowsOuterStaticMember.cs", new MemberShadowsOuterStaticMember());
 
 #if NET
         [TestMethod]

@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterName() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParameterName.vb", new ParameterName());
+            Verifier.VerifyAnalyzer(@"TestCases\ParameterName.vb", new ParameterName());
     }
 }

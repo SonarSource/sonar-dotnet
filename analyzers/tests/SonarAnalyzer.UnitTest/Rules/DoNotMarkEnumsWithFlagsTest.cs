@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotMarkEnumsWithFlags() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotMarkEnumsWithFlags.cs", new DoNotMarkEnumsWithFlags());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotMarkEnumsWithFlags.cs", new DoNotMarkEnumsWithFlags());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotMarkEnumsWithFlags_InvalidEnumType() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 [System.Flags]
 public enum InvalidStringEnum : string // Noncompliant
 {

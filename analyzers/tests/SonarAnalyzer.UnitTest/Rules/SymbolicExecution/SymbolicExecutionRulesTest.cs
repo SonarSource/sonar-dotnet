@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         [TestCategory("Rule")]
         public void VerifySymbolicExecutionRules() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecutionRules.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SymbolicExecutionRules.cs",
                 new SymbolicExecutionRunner(),
 #if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,

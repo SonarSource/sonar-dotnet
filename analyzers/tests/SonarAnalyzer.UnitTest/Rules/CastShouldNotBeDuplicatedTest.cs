@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CastShouldNotBeDuplicated() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CastShouldNotBeDuplicated.cs", new CastShouldNotBeDuplicated());
+            Verifier.VerifyAnalyzer(@"TestCases\CastShouldNotBeDuplicated.cs", new CastShouldNotBeDuplicated());
 
 #if NET
         [TestMethod]

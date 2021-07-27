@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
+            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Generic_No_Constraints() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
@@ -48,7 +48,7 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Generic_With_Constraints() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 4 to the maximum authorized 0 or less.}}
@@ -65,7 +65,7 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Generic_Bounded() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 3 to the maximum authorized 0 or less.}}
@@ -80,7 +80,7 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Generic_Bounded_Deep_Nesting() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 6 to the maximum authorized 0 or less.}}
@@ -96,7 +96,7 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Task_Not_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System.Threading.Tasks;
 public class Tasks // Compliant, Task types are not counted
 {
@@ -108,7 +108,7 @@ public class Tasks // Compliant, Task types are not counted
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Action_Not_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 public class Actions // Compliant, Action types are not counted
 {
@@ -120,7 +120,7 @@ public class Actions // Compliant, Action types are not counted
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Func_Not_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 public class Functions // Compliant, Func types are not counted
 {
@@ -132,7 +132,7 @@ public class Functions // Compliant, Func types are not counted
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Pointers_Not_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 public class Pointers // Compliant, pointers are not counted
 {
@@ -144,7 +144,7 @@ public class Pointers // Compliant, pointers are not counted
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Enums_Not_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 public class Pointers // Compliant, enums are not counted
 {
@@ -156,7 +156,7 @@ public class Pointers // Compliant, enums are not counted
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Lazy_Not_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 public class Lazyness // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
@@ -169,7 +169,7 @@ public class Lazyness // Noncompliant {{Split this class into smaller and more s
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Fields_Are_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System.Collections.Generic;
 public class Fields // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 5 to the maximum authorized 0 or less.}}
 {
@@ -187,7 +187,7 @@ public class Fields // Noncompliant {{Split this class into smaller and more spe
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Properties_Are_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System.Collections.Generic;
 public class Properties // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 9 to the maximum authorized 0 or less.}}
 {
@@ -220,7 +220,7 @@ public class Properties // Noncompliant {{Split this class into smaller and more
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Indexers_Are_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System.Collections.Generic;
 public class Indexers // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 6 to the maximum authorized 0 or less.}}
 {
@@ -238,7 +238,7 @@ public class Indexers // Noncompliant {{Split this class into smaller and more s
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Events_Are_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 public class Events // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 9 to the maximum authorized 0 or less.}}
@@ -269,7 +269,7 @@ public class Events // Noncompliant {{Split this class into smaller and more spe
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Methods_Are_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -300,7 +300,7 @@ public class Methods // Noncompliant {{Split this class into smaller and more sp
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Inner_Classes_And_Structs_Are_Not_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 public class OuterClass // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
@@ -327,7 +327,7 @@ public struct OuterStruct // Noncompliant {{Split this struct into smaller and m
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Interface_Declaration() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 public interface I // Noncompliant {{Split this interface into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
@@ -341,7 +341,7 @@ public interface I // Noncompliant {{Split this interface into smaller and more 
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Self_Reference() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 public class Self // Compliant, self references are not counted
@@ -354,7 +354,7 @@ public class Self // Compliant, self references are not counted
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Base_Classes_Interfaces_NotCounted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 public class Base {}
@@ -369,7 +369,7 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Catch_Statements() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
 public class Self // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 2 to the maximum authorized 0 or less.}}
@@ -386,7 +386,7 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Attributes() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 [Serializable]
 public class Self // Compliant, attributes are not counted
@@ -402,7 +402,7 @@ public class Self // Compliant, attributes are not counted
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Nameof() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 public class A // Compliant, types referenced by the nameof expression are not counted
 {
     public A()
@@ -423,7 +423,7 @@ public class A // Compliant, types referenced by the nameof expression are not c
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_InRecord_Enums_Not_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 public record Pointers // Compliant, enums are not counted
 {
@@ -434,7 +434,7 @@ public record Pointers // Compliant, enums are not counted
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Base_Records_Interfaces_NotCounted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 using System.Runtime.Serialization;
 public record Base {}
@@ -450,7 +450,7 @@ public record Self // Noncompliant
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Primitive_Types_Not_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 using System;
 public class Types // Compliant, pointers are not counted
 {

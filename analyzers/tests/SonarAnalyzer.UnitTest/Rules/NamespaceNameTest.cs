@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NamespaceName() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\NamespaceName.vb", new NamespaceName());
+            Verifier.VerifyAnalyzer(@"TestCases\NamespaceName.vb", new NamespaceName());
     }
 }

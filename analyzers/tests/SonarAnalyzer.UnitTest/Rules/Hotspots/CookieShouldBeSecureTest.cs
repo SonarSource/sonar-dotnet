@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_Nancy() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_Nancy.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_Nancy.cs",
                                               new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                               AdditionalReferences);
 
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
                                     new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemWeb);
 
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure_WithWebConfigValueSetToTrue(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_WithWebConfig.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_WithWebConfig.cs",
                                     new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemWeb,
                                     TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure_WithWebConfigValueSetToFalse(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
                                     new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemWeb,
                                     TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_NetCore.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_NetCore.cs",
                                     new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences_NetCore());
 
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\CookieShouldBeSecure.CSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\Hotspots\CookieShouldBeSecure.CSharp9.cs",
                                                       new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                                       GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()));
 

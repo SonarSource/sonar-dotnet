@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PointersShouldBePrivate() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PointersShouldBePrivate.cs", new PointersShouldBePrivate());
+            Verifier.VerifyAnalyzer(@"TestCases\PointersShouldBePrivate.cs", new PointersShouldBePrivate());
 
 #if NET // Function pointers are supported only by .Net 5 runtime
         [TestMethod]

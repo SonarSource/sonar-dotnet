@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private void Verify(string fileName, ProjectType projectType, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
-            Verifier.VerifyUtilityAnalyzer<TokenTypeInfo>(
+            Verifier.VerifyNonConcurrentUtilityAnalyzer<TokenTypeInfo>(
                 new[] { Root + fileName },
                 new TestTokenTypeAnalyzer(testRoot, projectType == ProjectType.Test),
                 @$"{testRoot}\token-type.pb",

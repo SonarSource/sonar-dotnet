@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotThrowFromDestructors_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotThrowFromDestructors.cs", new CS.DoNotThrowFromDestructors());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.cs", new CS.DoNotThrowFromDestructors());
 
 #if NET
         [TestMethod]
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotThrowFromDestructors_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotThrowFromDestructors.vb", new VB.DoNotThrowFromDestructors());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.vb", new VB.DoNotThrowFromDestructors());
     }
 }

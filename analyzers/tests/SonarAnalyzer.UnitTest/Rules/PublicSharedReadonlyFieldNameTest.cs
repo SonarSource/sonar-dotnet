@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PublicSharedReadonlyFieldName() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PublicSharedReadonlyFieldName.vb", new PublicSharedReadonlyFieldName());
+            Verifier.VerifyAnalyzer(@"TestCases\PublicSharedReadonlyFieldName.vb", new PublicSharedReadonlyFieldName());
     }
 }

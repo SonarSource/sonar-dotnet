@@ -32,28 +32,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\JwtSigned.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
+            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_JWTDecoderExtensions_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.Extensions.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("7.3.1"));
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\JwtSigned.Extensions.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("7.3.1"));
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_CS_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\JwtSigned.CSharp9.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\JwtSigned.CSharp9.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\JwtSigned.vb", new VB.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
+            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.vb", new VB.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_JWTDecoderExtensions_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.Extensions.vb", new VB.JwtSigned(), NuGetMetadataReference.JWT("7.3.1"));
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\JwtSigned.Extensions.vb", new VB.JwtSigned(), NuGetMetadataReference.JWT("7.3.1"));
     }
 }

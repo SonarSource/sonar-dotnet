@@ -32,12 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShadowsParentField_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
+            Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShadowsParentField_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
+            Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -66,13 +66,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void FieldsShouldNotDifferByCapitalization_CS(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs", new CS.FieldShadowsParentField(), TestHelper.ProjectTypeReference(projectType));
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs", new CS.FieldShadowsParentField(), TestHelper.ProjectTypeReference(projectType));
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void FieldsShouldNotDifferByCapitalization_VB(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.vb", new VB.FieldShadowsParentField(), TestHelper.ProjectTypeReference(projectType));
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.vb", new VB.FieldShadowsParentField(), TestHelper.ProjectTypeReference(projectType));
     }
 }

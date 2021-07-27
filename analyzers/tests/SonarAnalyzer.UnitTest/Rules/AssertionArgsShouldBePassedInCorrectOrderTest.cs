@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs",
                                               new AssertionArgsShouldBePassedInCorrectOrder(),
                                               NuGetMetadataReference.MSTestTestFramework(testFwkVersion).ToArray());
 
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs",
                                     new AssertionArgsShouldBePassedInCorrectOrder(),
                                     NuGetMetadataReference.NUnit(testFwkVersion).ToArray());
 
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs",
                                     new AssertionArgsShouldBePassedInCorrectOrder(),
                                     NuGetMetadataReference.XunitFramework(testFwkVersion)
                                         .Concat(NetStandardMetadataReference.Netstandard)

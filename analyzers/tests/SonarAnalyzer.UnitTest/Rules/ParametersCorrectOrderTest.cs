@@ -31,14 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParametersCorrectOrder_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
                 new CS.ParametersCorrectOrder(),
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ParametersCorrectOrder_InvalidCode_CS() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 public class Foo
 {
     public void Bar()
@@ -52,13 +52,13 @@ public class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void ParametersCorrectOrder_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ParametersCorrectOrder.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.vb",
                 new VB.ParametersCorrectOrder());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ParametersCorrectOrder_InvalidCode_VB() =>
-            Verifier.VerifyVisualBasicAnalyzer(@"
+            Verifier.VerifyNonConcurrentVisualBasicAnalyzer(@"
 Public Class Foo
     Public Sub Bar()
         Dim x = New ()

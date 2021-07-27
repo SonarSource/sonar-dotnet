@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyWithArrayType() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\PropertyWithArrayType.vb", new PropertyWithArrayType());
+            Verifier.VerifyAnalyzer(@"TestCases\PropertyWithArrayType.vb", new PropertyWithArrayType());
     }
 }

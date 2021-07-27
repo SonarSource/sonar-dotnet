@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NameOfShouldBeUsed_FromCSharp6() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\NameOfShouldBeUsed.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.cs",
                                               new CS.NameOfShouldBeUsed(),
                                               ParseOptionsHelper.FromCSharp6);
 
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NameOfShouldBeUsed_FromVB14() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\NameOfShouldBeUsed.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.vb",
                                               new VB.NameOfShouldBeUsed(),
                                               ParseOptionsHelper.FromVisualBasic14);
 

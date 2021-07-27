@@ -31,12 +31,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InheritedCollidingInterfaceMembers() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.cs", new InheritedCollidingInterfaceMembers());
+            Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.cs", new InheritedCollidingInterfaceMembers());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void InheritedCollidingInterfaceMembers_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.AfterCSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.AfterCSharp8.cs",
                                     new InheritedCollidingInterfaceMembers(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,

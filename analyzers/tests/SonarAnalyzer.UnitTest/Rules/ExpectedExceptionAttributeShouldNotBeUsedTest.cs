@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest(string testFwkVersion) =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs",
                                               new ExpectedExceptionAttributeShouldNotBeUsed(),
                                               NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.6.7")]
         [TestCategory("Rule")]
         public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
                                     new ExpectedExceptionAttributeShouldNotBeUsed(),
                                     NuGetMetadataReference.NUnit(testFwkVersion));
 

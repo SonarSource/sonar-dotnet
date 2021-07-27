@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotUseCollectionInItsOwnMethodCalls() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotUseCollectionInItsOwnMethodCalls.cs", new DoNotUseCollectionInItsOwnMethodCalls());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseCollectionInItsOwnMethodCalls.cs", new DoNotUseCollectionInItsOwnMethodCalls());
     }
 }

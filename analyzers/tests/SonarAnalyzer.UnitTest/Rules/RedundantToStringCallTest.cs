@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantToStringCall() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RedundantToStringCall.cs", new RedundantToStringCall());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantToStringCall.cs", new RedundantToStringCall());
 
 #if NET
         [TestMethod]

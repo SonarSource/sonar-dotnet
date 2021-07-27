@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GetHashCodeEqualsOverride() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\GetHashCodeEqualsOverride.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeEqualsOverride.cs",
                                               new GetHashCodeEqualsOverride(),
                                               MetadataReferenceFacade.SystemComponentModelPrimitives);
 

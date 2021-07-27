@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ImplementIDisposableCorrectly.cs", new ImplementIDisposableCorrectly(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.cs", new ImplementIDisposableCorrectly(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
@@ -44,12 +44,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_AbstractClass() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.AbstractClass.cs", new ImplementIDisposableCorrectly());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ImplementIDisposableCorrectly.AbstractClass.cs", new ImplementIDisposableCorrectly());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles() =>
-            Verifier.VerifyAnalyzer(
+            Verifier.VerifyNonConcurrentAnalyzer(
                 new[]
                 {
                     @"TestCases\ImplementIDisposableCorrectlyPartial1.cs",

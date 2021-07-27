@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ControllingPermissions_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\ControllingPermissions.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.cs",
                                               new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
                                               AdditionalReferences);
 
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ControllingPermissions_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\Hotspots\ControllingPermissions.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.vb",
                                               new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
                                               AdditionalReferences);
     }

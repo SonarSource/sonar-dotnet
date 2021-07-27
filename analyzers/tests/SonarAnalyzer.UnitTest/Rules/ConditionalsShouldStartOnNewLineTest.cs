@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalsShouldStartOnNewLine() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ConditionalsShouldStartOnNewLine.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalsShouldStartOnNewLine.cs",
                                               new ConditionalsShouldStartOnNewLine());
     }
 }

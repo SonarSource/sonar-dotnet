@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CastConcreteTypeToInterface() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\CastConcreteTypeToInterface.cs", new CastConcreteTypeToInterface());
+            Verifier.VerifyAnalyzer(@"TestCases\CastConcreteTypeToInterface.cs", new CastConcreteTypeToInterface());
     }
 }

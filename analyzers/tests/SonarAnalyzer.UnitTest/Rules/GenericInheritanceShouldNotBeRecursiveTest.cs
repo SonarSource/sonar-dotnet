@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericInheritanceShouldNotBeRecursive_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.cs", new CS.GenericInheritanceShouldNotBeRecursive());
+            Verifier.VerifyAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.cs", new CS.GenericInheritanceShouldNotBeRecursive());
 
 #if NET
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericInheritanceShouldNotBeRecursive_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.vb",
                                               new VB.GenericInheritanceShouldNotBeRecursive());
     }
 }

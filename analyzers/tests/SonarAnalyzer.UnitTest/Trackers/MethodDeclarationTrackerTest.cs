@@ -99,7 +99,7 @@ public class Sample
     public static int operator +(Sample a, Sample b) => 42;
 //                             ^
 }";
-            Verifier.VerifyCSharpAnalyzer(code, new TestRule_CS(), ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(code, new TestRule_CS(), ParseOptionsHelper.FromCSharp9);
         }
 
 #endif
@@ -164,7 +164,7 @@ Public Class Sample
     Declare Function ExternalMethod Lib ""foo.dll"" (lpBuffer As String) As Integer
 
 End Class";
-            Verifier.VerifyVisualBasicAnalyzer(code, new TestRule_VB());
+            Verifier.VerifyNonConcurrentVisualBasicAnalyzer(code, new TestRule_VB());
         }
 
         private static MethodDeclarationContext CreateContext(string testInput, AnalyzerLanguage language, string methodName)

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideAddsParams() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MethodOverrideAddsParams.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideAddsParams.cs",
                                               new MethodOverrideAddsParams(),
 #if NETFRAMEWORK
                                               ParseOptionsHelper.FromCSharp8,

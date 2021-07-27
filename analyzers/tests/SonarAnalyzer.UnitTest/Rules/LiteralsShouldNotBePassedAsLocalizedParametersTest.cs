@@ -31,14 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LiteralsShouldNotBePassedAsLocalizedParameters() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.cs",
                                               new LiteralsShouldNotBePassedAsLocalizedParameters(),
                                               MetadataReferenceFacade.SystemComponentModelPrimitives);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void LiteralsShouldNotBePassedAsLocalizedParameters_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.CSharp9.cs",
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.CSharp9.cs",
                                                       new LiteralsShouldNotBePassedAsLocalizedParameters(),
                                                       MetadataReferenceFacade.SystemComponentModelPrimitives);
 #endif

@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantDeclaration() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\RedundantDeclaration.cs", new RedundantDeclaration());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantDeclaration.cs", new RedundantDeclaration());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantDeclaration_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantDeclaration.CSharp9.cs", new RedundantDeclaration());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\RedundantDeclaration.CSharp9.cs", new RedundantDeclaration());
 #endif
 
         [TestMethod]

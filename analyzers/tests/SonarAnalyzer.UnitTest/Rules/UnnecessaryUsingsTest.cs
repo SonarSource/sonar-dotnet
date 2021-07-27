@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnnecessaryUsings() =>
-            Verifier.VerifyConcurrentAnalyzerNoDuplication(new[] { @"TestCases\UnnecessaryUsings.cs", @"TestCases\UnnecessaryUsings2.cs" },
+            Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\UnnecessaryUsings.cs", @"TestCases\UnnecessaryUsings2.cs" },
                                                            new UnnecessaryUsings(),
                                                            additionalReferences: GetAdditionalReferences());
 
@@ -45,19 +45,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnnecessaryUsings_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new UnnecessaryUsings());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new UnnecessaryUsings());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnnecessaryUsings_TupleDeconstruct_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetCore.cs", new UnnecessaryUsings());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetCore.cs", new UnnecessaryUsings());
 
 #elif NETFRAMEWORK
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnnecessaryUsings_TupleDeconstruct_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetFx.cs", new UnnecessaryUsings());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetFx.cs", new UnnecessaryUsings());
 
 #endif
 

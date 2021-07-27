@@ -35,14 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_CS() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
                                               new CS.MarkWindowsFormsMainWithStaThread(),
                                               FrameworkMetadataReference.SystemWindowsForms);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.vb",
                                               new VB.MarkWindowsFormsMainWithStaThread(),
                                               FrameworkMetadataReference.SystemWindowsForms);
 #endif
@@ -50,13 +50,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
                                     new CS.MarkWindowsFormsMainWithStaThread());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
                                     new VB.MarkWindowsFormsMainWithStaThread(),
                                     CompilationErrorBehavior.Ignore);
     }

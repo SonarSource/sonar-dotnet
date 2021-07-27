@@ -31,31 +31,31 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameImplementation_If_CSharp() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.cs",
                                               new CS.ConditionalStructureSameImplementation());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameImplementation_Switch_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.cs",
                 new CS.ConditionalStructureSameImplementation());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameImplementation_If_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.vb",
                 new VB.ConditionalStructureSameImplementation());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameImplementation_If_VisualBasic_Concurrent() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If_Concurrent.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If_Concurrent.vb",
                                               new VB.ConditionalStructureSameImplementation());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameImplementation_Switch_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.vb",
                 new VB.ConditionalStructureSameImplementation());
     }
 }

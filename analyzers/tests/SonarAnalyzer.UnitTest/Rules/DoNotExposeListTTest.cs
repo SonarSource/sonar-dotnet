@@ -30,27 +30,27 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT() =>
-            Verifier.VerifyConcurrentAnalyzer(@"TestCases\DoNotExposeListT.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs",
                                               new DoNotExposeListT(),
                                               MetadataReferences.MetadataReferenceFacade.SystemXml);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.CSharp8.cs", new DoNotExposeListT(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DoNotExposeListT.CSharp8.cs", new DoNotExposeListT(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
+            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT_InvalidCode()
         {
-            Verifier.VerifyCSharpAnalyzer(@"
+            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
 public class InvalidCode
 {
     public List<int> () => null;
