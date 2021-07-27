@@ -113,7 +113,7 @@ Namespace Tests.TestCases
                 DeclarationAssignmentCompliantCB = AddressOf InvalidValidation          'This is compliant due to the more assignments, first one is in variable initialization
             End If
             'Secondary@+1
-            InitAsArgument(SingleAssignmentCB)                                          'Secondary
+            iNITaSaRGUMENT(SingleAssignmentCB)                                          'Secondary
             InitAsArgument(FalseNegativeCB)
             InitAsArgument(CompliantCB)
             InitAsArgument(DeclarationAssignmentCompliantCB)

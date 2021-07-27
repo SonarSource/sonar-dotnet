@@ -309,7 +309,7 @@ namespace SonarAnalyzer.Rules
             foreach (var invocation in root.DescendantNodesAndSelf().OfType<TInvocationExpressionSyntax>())
             {
                 if (Language.Syntax.InvocationIdentifier(invocation) is { } invocationIdentifier
-                    && invocationIdentifier.ValueText.Equals(method.Name)
+                    && invocationIdentifier.ValueText.Equals(method.Name, Language.NameComparison)
                     && c.SemanticModel.GetSymbolInfo(invocation).Symbol is { } symbol
                     && symbol.Equals(method))
                 {
