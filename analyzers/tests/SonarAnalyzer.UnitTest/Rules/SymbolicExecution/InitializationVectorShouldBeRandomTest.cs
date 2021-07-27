@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         [TestCategory("Rule")]
         public void InitializationVectorShouldBeRandom() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\InitializationVectorShouldBeRandom.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\InitializationVectorShouldBeRandom.cs",
                                     GetAnalyzer(),
                                     ParseOptionsHelper.FromCSharp8,
                                     MetadataReferenceFacade.SystemSecurityCryptography);

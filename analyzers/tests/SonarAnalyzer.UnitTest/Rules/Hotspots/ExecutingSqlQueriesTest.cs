@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CS_NetCore() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
                                     new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetReferencesNetCore(Constants.DotNetCore220Version));
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_VB_NetCore() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
                                     new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromVisualBasic15,
                                     GetReferencesNetCore(Constants.DotNetCore220Version));

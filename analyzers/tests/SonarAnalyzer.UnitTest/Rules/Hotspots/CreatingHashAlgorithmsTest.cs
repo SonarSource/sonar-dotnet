@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_CS_NetFx() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.cs",
                                     new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());

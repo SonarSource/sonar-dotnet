@@ -95,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestMethod]
         public void MethodShouldBeNamedAccordingToSynchronicity_CSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.CSharp8.cs",
                                     new MethodShouldBeNamedAccordingToSynchronicity(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,

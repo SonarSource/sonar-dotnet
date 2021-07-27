@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesFormatters() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\RestrictDeserializedTypes.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 GetAdditionalReferences());
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesJavaScriptSerializer() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\RestrictDeserializedTypes.JavaScriptSerializer.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.JavaScriptSerializer.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 GetAdditionalReferences());
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesLosFormatter() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\RestrictDeserializedTypes.LosFormatter.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.LosFormatter.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 GetAdditionalReferences());

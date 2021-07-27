@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldBeStatic_CSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MemberShouldBeStatic.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.CSharp8.cs",
                 new MemberShouldBeStatic(),
 #if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,

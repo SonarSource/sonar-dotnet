@@ -117,7 +117,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             foreach (var testCase in testCases)
             {
                 // ToDo: We test that a rule is enabled only by checking the issues are reported
-                Verifier.VerifyNonConcurrentAnalyzer(testCase.Path,
+                Verifier.VerifyAnalyzer(testCase.Path,
                                         testCase.Analyzer,
                                         ParseOptionsHelper.FromCSharp8,
                                         testCase.AdditionalReferences);
@@ -133,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.TestSourceScopeTag));
                 if (hasTestScope)
                 {
-                    Verifier.VerifyNonConcurrentAnalyzer(testCase.Path,
+                    Verifier.VerifyAnalyzer(testCase.Path,
                                             testCase.Analyzer,
                                             ParseOptionsHelper.FromCSharp8,
                                             testCase.AdditionalReferences,
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 }
                 else
                 {
-                    Verifier.VerifyNonConcurrentAnalyzer(testCase.Path,
+                    Verifier.VerifyAnalyzer(testCase.Path,
                                             testCase.Analyzer,
                                             ParseOptionsHelper.FromCSharp8,
                                             testCase.AdditionalReferences,
@@ -187,7 +187,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.MainSourceScopeTag));
                 if (hasProductScope)
                 {
-                    Verifier.VerifyNonConcurrentAnalyzer(testCase.Path,
+                    Verifier.VerifyAnalyzer(testCase.Path,
                                             testCase.Analyzer,
                                             ParseOptionsHelper.FromCSharp8,
                                             testCase.AdditionalReferences,
@@ -255,7 +255,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                         }
                         else
                         {
-                            Verifier.VerifyNonConcurrentAnalyzer(testCase.Path,
+                            Verifier.VerifyAnalyzer(testCase.Path,
                                                     testCase.Analyzer,
                                                     ParseOptionsHelper.FromCSharp8,
                                                     testCase.AdditionalReferences);

@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_CSharp8_DefaultValues() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp8.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromCSharp8,
                 AdditionalReferences);

@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
                                     GetAnalyzer(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,

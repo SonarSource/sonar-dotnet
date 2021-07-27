@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodParameterUnused_CSharp8_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MethodParameterUnused.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.CSharp8.cs",
                                     new CS.MethodParameterUnused(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,

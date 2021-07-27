@@ -196,7 +196,7 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
                                     new UnusedPrivateMember(),
                                     ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK
