@@ -27,24 +27,16 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class TokenTypeAnalyzer : TokenTypeAnalyzerBase
+    public class TokenTypeAnalyzer : TokenTypeAnalyzerBase<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            CSharpGeneratedCodeRecognizer.Instance;
-
-        public TokenTypeAnalyzer() : base((int)SyntaxKind.IdentifierToken)
-        {
-        }
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
         protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens) =>
             new TokenClassifier(token, semanticModel, skipIdentifierTokens);
 
         private class TokenClassifier : TokenClassifierBase
         {
-            public TokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers)
-                : base(token, semanticModel, skipIdentifiers)
-            {
-            }
+            public TokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers) : base(token, semanticModel, skipIdentifiers) { }
 
             protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
                 token.GetBindableParent();
@@ -55,42 +47,23 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override bool IsKeyword(SyntaxToken token) =>
                 SyntaxFacts.IsKeywordKind(token.Kind());
 
-            protected override bool IsRegularComment(SyntaxTrivia trivia)
-            {
-                switch (trivia.Kind())
-                {
-                    case SyntaxKind.SingleLineCommentTrivia:
-                    case SyntaxKind.MultiLineCommentTrivia:
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
+            protected override bool IsRegularComment(SyntaxTrivia trivia) =>
+                trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia);
 
             protected override bool IsNumericLiteral(SyntaxToken token) =>
                 token.IsKind(SyntaxKind.NumericLiteralToken);
 
-            protected override bool IsStringLiteral(SyntaxToken token)
-            {
-                switch (token.Kind())
-                {
-                    case SyntaxKind.StringLiteralToken:
-                    case SyntaxKind.CharacterLiteralToken:
-                    case SyntaxKind.InterpolatedStringStartToken:
-                    case SyntaxKind.InterpolatedVerbatimStringStartToken:
-                    case SyntaxKind.InterpolatedStringTextToken:
-                    case SyntaxKind.InterpolatedStringEndToken:
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
+            protected override bool IsStringLiteral(SyntaxToken token) =>
+                token.IsAnyKind(
+                    SyntaxKind.StringLiteralToken,
+                    SyntaxKind.CharacterLiteralToken,
+                    SyntaxKind.InterpolatedStringStartToken,
+                    SyntaxKind.InterpolatedVerbatimStringStartToken,
+                    SyntaxKind.InterpolatedStringTextToken,
+                    SyntaxKind.InterpolatedStringEndToken);
 
             protected override bool IsDocComment(SyntaxTrivia trivia) =>
-                trivia.IsKind(SyntaxKind.SingleLineDocumentationCommentTrivia) ||
-                trivia.IsKind(SyntaxKind.MultiLineDocumentationCommentTrivia);
+                trivia.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia);
         }
     }
 }

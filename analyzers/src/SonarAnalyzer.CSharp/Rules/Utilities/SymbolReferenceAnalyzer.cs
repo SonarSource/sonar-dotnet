@@ -29,15 +29,12 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class SymbolReferenceAnalyzer : SymbolReferenceAnalyzerBase
+    public class SymbolReferenceAnalyzer : SymbolReferenceAnalyzerBase<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
         protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
             token.GetBindableParent();
-
-        protected override bool IsIdentifier(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.IdentifierToken);
 
         protected override SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol) =>
             IsValuePropertyParameter(valuePropertySymbol)

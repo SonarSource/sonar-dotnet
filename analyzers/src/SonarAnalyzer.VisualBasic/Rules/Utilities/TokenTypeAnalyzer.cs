@@ -27,24 +27,16 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class TokenTypeAnalyzer : TokenTypeAnalyzerBase
+    public sealed class TokenTypeAnalyzer : TokenTypeAnalyzerBase<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            VisualBasicGeneratedCodeRecognizer.Instance;
-
-        public TokenTypeAnalyzer() : base((int)SyntaxKind.IdentifierToken)
-        {
-        }
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
         protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens) =>
             new TokenClassifier(token, semanticModel, skipIdentifierTokens);
 
         private class TokenClassifier : TokenClassifierBase
         {
-            public TokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers)
-                : base(token, semanticModel, skipIdentifiers)
-            {
-            }
+            public TokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers) : base(token, semanticModel, skipIdentifiers) { }
 
             protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
                 token.GetBindableParent();
@@ -58,34 +50,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
                 trivia.IsKind(SyntaxKind.CommentTrivia);
 
-            protected override bool IsNumericLiteral(SyntaxToken token)
-            {
-                switch (token.Kind())
-                {
-                    case SyntaxKind.DecimalLiteralToken:
-                    case SyntaxKind.FloatingLiteralToken:
-                    case SyntaxKind.IntegerLiteralToken:
-                        return true;
+            protected override bool IsNumericLiteral(SyntaxToken token) =>
+                token.IsAnyKind(SyntaxKind.DecimalLiteralToken, SyntaxKind.FloatingLiteralToken, SyntaxKind.IntegerLiteralToken);
 
-                    default:
-                        return false;
-                }
-            }
-
-            protected override bool IsStringLiteral(SyntaxToken token)
-            {
-                switch (token.Kind())
-                {
-                    case SyntaxKind.StringLiteralToken:
-                    case SyntaxKind.CharacterLiteralToken:
-                    case SyntaxKind.InterpolatedStringTextToken:
-                    case SyntaxKind.EndOfInterpolatedStringToken:
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
+            protected override bool IsStringLiteral(SyntaxToken token) =>
+                token.IsAnyKind(
+                    SyntaxKind.StringLiteralToken,
+                    SyntaxKind.CharacterLiteralToken,
+                    SyntaxKind.InterpolatedStringTextToken,
+                    SyntaxKind.EndOfInterpolatedStringToken);
 
             protected override bool IsDocComment(SyntaxTrivia trivia) =>
                 trivia.IsKind(SyntaxKind.DocumentationCommentTrivia);

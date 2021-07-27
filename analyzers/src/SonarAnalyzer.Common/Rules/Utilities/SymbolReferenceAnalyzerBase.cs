@@ -19,23 +19,21 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class SymbolReferenceAnalyzerBase : UtilityAnalyzerBase<SymbolReferenceInfo>
+    public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, SymbolReferenceInfo>
+        where TSyntaxKind : struct
     {
         private const string DiagnosticId = "S9999-symbolRef";
         private const string Title = "Symbol reference calculator";
-        private const string SymbolReferenceFileName = "symrefs.pb";
         private const int TokenCountThreshold = 40_000;
 
-        private static readonly ISet<SymbolKind> DeclarationKinds = new HashSet<SymbolKind>
+        private readonly ISet<SymbolKind> declarationKinds = new HashSet<SymbolKind>
         {
             SymbolKind.Event,
             SymbolKind.Field,
@@ -47,13 +45,11 @@ namespace SonarAnalyzer.Rules
             SymbolKind.TypeParameter
         };
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
         protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
-        protected abstract bool IsIdentifier(SyntaxToken token);
 
-        protected sealed override string FileName => SymbolReferenceFileName;
+        protected sealed override string FileName => "symrefs.pb";
+
+        protected SymbolReferenceAnalyzerBase() : base(DiagnosticId, Title) { }
 
         protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
@@ -117,7 +113,7 @@ namespace SonarAnalyzer.Rules
 
         private SymRefInfo GetSymRefInfo(SyntaxToken token, SemanticModel semanticModel)
         {
-            if (!IsIdentifier(token))
+            if (!Language.Syntax.IsKind(token, Language.SyntaxKind.IdentifierToken))
             {
                 // For the time being, we only handle identifier tokens.
                 // We could also handle keywords, such as this, base
@@ -126,7 +122,7 @@ namespace SonarAnalyzer.Rules
 
             if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaredSymbol)
             {
-                return DeclarationKinds.Contains(declaredSymbol.Kind)
+                return declarationKinds.Contains(declaredSymbol.Kind)
                     ? new SymRefInfo(token, declaredSymbol, true)
                     : null;
             }

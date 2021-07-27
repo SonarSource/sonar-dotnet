@@ -18,27 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class CopyPasteTokenAnalyzerBase : UtilityAnalyzerBase<CopyPasteTokenInfo>
+    public abstract class CopyPasteTokenAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, CopyPasteTokenInfo>
+        where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S9999-cpd";
+        private const string DiagnosticId = "S9999-cpd";
         private const string Title = "Copy-paste token calculator";
-        private const string CopyPasteTokenFileName = "token-cpd.pb";
-
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected abstract string GetCpdValue(SyntaxToken token);
         protected abstract bool IsUsingDirective(SyntaxNode node);
 
         protected sealed override bool AnalyzeTestProjects => false;
-        protected sealed override string FileName => CopyPasteTokenFileName;
+        protected sealed override string FileName => "token-cpd.pb";
+
+        protected CopyPasteTokenAnalyzerBase() : base(DiagnosticId, Title) { }
 
         protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
@@ -47,7 +44,7 @@ namespace SonarAnalyzer.Rules
             {
                 var tokenInfo = new CopyPasteTokenInfo.Types.TokenInfo
                 {
-                    TokenValue = GetCpdValue(token),
+                    TokenValue = GetCpdValue(token),    // FIXME: Improve perf
                     TextRange = GetTextRange(Location.Create(syntaxTree, token.Span).GetLineSpan())
                 };
                 if (!string.IsNullOrWhiteSpace(tokenInfo.TokenValue))

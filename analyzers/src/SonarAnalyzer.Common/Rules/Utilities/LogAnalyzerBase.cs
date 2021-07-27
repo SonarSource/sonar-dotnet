@@ -18,23 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class LogAnalyzerBase : UtilityAnalyzerBase<LogInfo>
+    public abstract class LogAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, LogInfo>
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S9999-log";
         private const string Title = "Log generator";
-        private const string MetricsFileName = "log.pb";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        protected sealed override string FileName => "log.pb";
 
-        protected sealed override string FileName => MetricsFileName;
+        protected LogAnalyzerBase() : base(DiagnosticId, Title) { }
 
         protected sealed override LogInfo CreateAnalysisMessage(SonarAnalysisContext context) =>
             new LogInfo { Severity = LogSeverity.Info, Text = "Roslyn version: " + typeof(SyntaxNode).Assembly.GetName().Version };

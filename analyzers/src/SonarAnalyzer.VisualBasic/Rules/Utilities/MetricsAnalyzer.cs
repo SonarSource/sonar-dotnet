@@ -20,15 +20,16 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class MetricsAnalyzer : MetricsAnalyzerBase
+    public sealed class MetricsAnalyzer : MetricsAnalyzerBase<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
         protected override MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
             new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel);

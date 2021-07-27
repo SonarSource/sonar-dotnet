@@ -140,7 +140,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             public bool TestIgnoreHeaderComments => IgnoreHeaderComments;
             public string TestOutPath => OutPath;
 
-            public TestUtilityAnalyzer(string language, params string[] additionalPaths)
+            public TestUtilityAnalyzer(string language, params string[] additionalPaths) : base("S9999-test", "Title")
             {
                 var additionalFiles = additionalPaths.Select(x => new AnalyzerAdditionalFile(x)).ToImmutableArray<AdditionalText>();
                 var context = new SonarAnalysisContext(new SonarAnalysisContextTest.DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());

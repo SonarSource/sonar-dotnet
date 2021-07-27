@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
-            CopyPasteTokenAnalyzerBase analyzer = fileName.EndsWith(".cs")
+            UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")
                 ? new TestCopyPasteTokenAnalyzer_CS(testRoot, false)
                 : new TestCopyPasteTokenAnalyzer_VB(testRoot, false);
 

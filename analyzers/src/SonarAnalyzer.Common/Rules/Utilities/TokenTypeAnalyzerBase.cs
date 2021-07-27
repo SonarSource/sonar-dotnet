@@ -19,37 +19,31 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class TokenTypeAnalyzerBase : UtilityAnalyzerBase<TokenTypeInfo>
+    public abstract class TokenTypeAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, TokenTypeInfo>
+        where TSyntaxKind : struct
     {
         private const string DiagnosticId = "S9999-token-type";
         private const string Title = "Token type calculator";
-        private const string TokenTypeFileName = "token-type.pb";
         private const int IdentifierTokenCountThreshold = 4_000;
-        private readonly int identifierTokenKind;
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
+        protected sealed override string FileName => "token-type.pb";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        protected TokenTypeAnalyzerBase(int identifierTokenKind) => this.identifierTokenKind = identifierTokenKind;
+        protected TokenTypeAnalyzerBase() : base(DiagnosticId, Title) { }
 
         protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifierTokens);
-
-        protected sealed override string FileName => TokenTypeFileName;
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var tokens = syntaxTree.GetRoot().DescendantTokens();
-            var skipIdentifierTokens = tokens.Count(token => token.RawKind == identifierTokenKind) > IdentifierTokenCountThreshold;
+            var identifierTokenKind = Language.SyntaxKind.IdentifierToken;
+            var skipIdentifierTokens = tokens.Count(token => Language.Syntax.IsKind(token, identifierTokenKind)) > IdentifierTokenCountThreshold;
 
             var spans = new List<TokenTypeInfo.Types.TokenInfo>();
             // The second iteration of the tokens is intended since there is no processing done and we want to avoid copying all the tokens to a second collection.

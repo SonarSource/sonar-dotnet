@@ -27,9 +27,9 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class CopyPasteTokenAnalyzer : CopyPasteTokenAnalyzerBase
+    public class CopyPasteTokenAnalyzer : CopyPasteTokenAnalyzerBase<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
         protected override bool IsUsingDirective(SyntaxNode node) =>
             node is UsingDirectiveSyntax;

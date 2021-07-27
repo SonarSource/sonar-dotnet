@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using Google.Protobuf;
@@ -34,12 +35,18 @@ namespace SonarAnalyzer.Rules
         private const string ProjectOutFolderPathFileName = "ProjectOutFolderPath.txt";
 
         protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
+        private readonly DiagnosticDescriptor rule;
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
         protected bool IsAnalyzerEnabled { get; set; }
         protected bool IgnoreHeaderComments { get; set; }
         protected virtual bool AnalyzeGeneratedCode { get; set; }
+        protected virtual bool AnalyzeTestProjects => true;
         protected string OutPath { get; set; }
         protected bool IsTestProject { get; set; }
+
+        protected UtilityAnalyzerBase(string diagnosticId, string title) =>
+            rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(diagnosticId, title);
 
         internal /* for testing */ static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
             new TextRange
@@ -73,17 +80,19 @@ namespace SonarAnalyzer.Rules
             ParameterLoader.ConfigurationFilePathMatchesExpected(file.Path, ProjectOutFolderPathFileName);
     }
 
-    public abstract class UtilityAnalyzerBase<TMessage> : UtilityAnalyzerBase
+    public abstract class UtilityAnalyzerBase<TSyntaxKind, TMessage> : UtilityAnalyzerBase
+        where TSyntaxKind : struct
         where TMessage : class, IMessage, new()
     {
         private static readonly object FileWriteLock = new TMessage();
 
-        protected virtual bool AnalyzeTestProjects => true;
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string FileName { get; }
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } // FIXME: Use language facade instead
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
         protected virtual TMessage CreateAnalysisMessage(SonarAnalysisContext context) => null;
+
+        protected UtilityAnalyzerBase(string diagnosticId, string title) : base(diagnosticId, title) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationAction(c =>
@@ -116,6 +125,6 @@ namespace SonarAnalyzer.Rules
             // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
             (AnalyzeTestProjects || !IsTestProject)
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
-            && (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree));
+            && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
     }
 }

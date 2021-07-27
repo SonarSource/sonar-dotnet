@@ -18,31 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class FileMetadataAnalyzerBase : UtilityAnalyzerBase<FileMetadataInfo>
+    public abstract class FileMetadataAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, FileMetadataInfo>
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S9999-metadata";
         private const string Title = "File metadata generator";
-        private const string MetadataFileName = "file-metadata.pb";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        protected sealed override string FileName => MetadataFileName;
-
+        protected sealed override string FileName => "file-metadata.pb";
         protected override bool AnalyzeGeneratedCode => true;
+
+        protected FileMetadataAnalyzerBase() : base(DiagnosticId, Title) { }
 
         protected sealed override FileMetadataInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
             new FileMetadataInfo
             {
                 FilePath = syntaxTree.FilePath,
-                IsGenerated = GeneratedCodeRecognizer.IsGenerated(syntaxTree),
+                IsGenerated = Language.GeneratedCodeRecognizer.IsGenerated(syntaxTree),
                 Encoding = syntaxTree.Encoding?.WebName.ToLowerInvariant() ?? string.Empty
             };
     }
