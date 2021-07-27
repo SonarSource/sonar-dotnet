@@ -1,6 +1,6 @@
 ﻿//
 // SonarAnalyzer for .NET
-// Copyright (C) 2015-2020 SonarSource SA
+// Copyright (C) 2015-2021 SonarSource SA
 // mailto:contact@sonarsource.com
 //
 // This program is free software; you can redistribute it and/or
@@ -27,6 +27,9 @@ option java_outer_classname = "SonarAnalyzer";
 
 option optimize_for = SPEED;
 
+// Naming convention:
+// we use singular for repeated field names, because that works better in Java, and we don't care in C#
+
 // Lines start at 1 and line offsets start at 0
 message TextRange {
   int32 start_line = 1;
@@ -37,16 +40,13 @@ message TextRange {
 }
 
 enum TokenType {
-  UNKNOWN = 0;
+  UNKNOWN_TOKENTYPE = 0;
   TYPE_NAME = 1;
   NUMERIC_LITERAL = 2;
   STRING_LITERAL = 3;
   KEYWORD = 4;
   COMMENT = 5;
 }
-
-// Naming convention:
-// we use singular for repeated field names, because that works better in Java, and we don't care in C#
 
 // Used for code coloring
 message TokenTypeInfo {
@@ -107,3 +107,17 @@ message FileMetadataInfo {
   bool is_generated = 2;
   string encoding = 3;
 }
+
+// Logging
+enum LogSeverity {
+  UNKNOWN_SEVERITY = 0;
+  DEBUG = 1;
+  INFO = 2;
+  WARNING = 3;
+}
+
+message LogInfo {
+    LogSeverity severity = 1;
+    string text = 2;
+}
+
