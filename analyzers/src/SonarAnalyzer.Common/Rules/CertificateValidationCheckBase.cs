@@ -69,6 +69,7 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxNode ExtractArgumentExpressionNode(SyntaxNode expression);
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
         private protected abstract KnownType GenericDelegateType();
+        private protected abstract bool AreSameMethods(TInvocationExpressionSyntax invocation, string methodName);
 
         protected CertificateValidationCheckBase()
         {
@@ -299,7 +300,7 @@ namespace SonarAnalyzer.Rules
             return lst;
         }
 
-        private static ImmutableArray<TInvocationExpressionSyntax> FindInvocationList(SyntaxNodeAnalysisContext c, SyntaxNode root, IMethodSymbol method)
+        private ImmutableArray<TInvocationExpressionSyntax> FindInvocationList(SyntaxNodeAnalysisContext c, SyntaxNode root, IMethodSymbol method)
         {
             if (root == null || method == null)
             {
@@ -308,7 +309,8 @@ namespace SonarAnalyzer.Rules
             var ret = ImmutableArray.CreateBuilder<TInvocationExpressionSyntax>();
             foreach (var invocation in root.DescendantNodesAndSelf().OfType<TInvocationExpressionSyntax>())
             {
-                if (c.SemanticModel.GetSymbolInfo(invocation).Symbol is { } symbol
+                if (AreSameMethods(invocation, method.Name)
+                    && c.SemanticModel.GetSymbolInfo(invocation).Symbol is { } symbol
                     && symbol.Equals(method))
                 {
                     ret.Add(invocation);
