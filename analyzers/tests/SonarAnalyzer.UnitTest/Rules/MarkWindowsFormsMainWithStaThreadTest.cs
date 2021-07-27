@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
                                     new VB.MarkWindowsFormsMainWithStaThread(),
                                     CompilationErrorBehavior.Ignore);
     }

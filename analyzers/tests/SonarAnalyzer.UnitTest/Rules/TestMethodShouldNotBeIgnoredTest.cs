@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_MsTest_Legacy() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
                                     new TestMethodShouldNotBeIgnored(),
                                     CompilationErrorBehavior.Ignore,    // IgnoreAttribute doesn't contain any reason param
                                     NuGetMetadataReference.MSTestTestFramework("1.1.11"));
