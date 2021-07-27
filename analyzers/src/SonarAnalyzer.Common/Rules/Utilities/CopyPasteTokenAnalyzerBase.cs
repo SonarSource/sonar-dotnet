@@ -42,14 +42,9 @@ namespace SonarAnalyzer.Rules
             var cpdTokenInfo = new CopyPasteTokenInfo { FilePath = syntaxTree.FilePath };
             foreach (var token in syntaxTree.GetRoot().DescendantTokens(n => !IsUsingDirective(n)))
             {
-                var tokenInfo = new CopyPasteTokenInfo.Types.TokenInfo
+                if (GetCpdValue(token) is var value && !string.IsNullOrWhiteSpace(value))
                 {
-                    TokenValue = GetCpdValue(token),    // FIXME: Improve perf
-                    TextRange = GetTextRange(Location.Create(syntaxTree, token.Span).GetLineSpan())
-                };
-                if (!string.IsNullOrWhiteSpace(tokenInfo.TokenValue))
-                {
-                    cpdTokenInfo.TokenInfo.Add(tokenInfo);
+                    cpdTokenInfo.TokenInfo.Add(new CopyPasteTokenInfo.Types.TokenInfo { TokenValue = value, TextRange = GetTextRange(Location.Create(syntaxTree, token.Span).GetLineSpan()) });
                 }
             }
             return cpdTokenInfo;
