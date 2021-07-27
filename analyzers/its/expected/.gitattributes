@@ -1,2 +1,2 @@
-# Text files should have CRLF line endings, even on non-Windows machines
-*.json eol=crlf
+# Force LF to avoid "git diff" warning about replacing CRLF
+*.json eol=lf

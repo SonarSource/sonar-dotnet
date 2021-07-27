@@ -162,6 +162,7 @@ function New-IssueReports([string]$sarifReportPath) {
                 ) -split "`r`n"                                                              # Convert JSON to String and split lines
             ) | Foreach-Object { $_.TrimStart() }                                            # Remove leading spaces
 
-        Set-Content $path $lines
+        $content = $lines -join "`n"        # Use unix-like EOL to avoid "git diff" warnings
+        Set-Content $path "$content`n" -NoNewLine
     }
 }
