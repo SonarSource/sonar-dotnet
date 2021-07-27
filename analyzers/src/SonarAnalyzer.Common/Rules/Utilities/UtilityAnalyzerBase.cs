@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules
     {
         private static readonly object FileWriteLock = new TMessage();
 
-        protected virtual bool SkipAnalysisForTestProject => false;                 // FIXME: Revert logic to AnalyzeTestProjects
+        protected virtual bool AnalyzeTestProjects => true;
         protected abstract string FileName { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } // FIXME: Use language facade instead
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules
 
         protected virtual bool ShouldGenerateMetrics(SyntaxTree tree) =>
             // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
-            !(IsTestProject && SkipAnalysisForTestProject)
+            (AnalyzeTestProjects || !IsTestProject)
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree));
     }

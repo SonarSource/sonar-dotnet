@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
         protected abstract string GetCpdValue(SyntaxToken token);
         protected abstract bool IsUsingDirective(SyntaxNode node);
 
-        protected sealed override bool SkipAnalysisForTestProject => true;
+        protected sealed override bool AnalyzeTestProjects => false;
         protected sealed override string FileName => CopyPasteTokenFileName;
 
         protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
