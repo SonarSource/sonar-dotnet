@@ -3,17 +3,20 @@ using System.Collections.Generic;
 
 nint resultNint;
 nint bitMaskNint = 0x010F;
-nint nOne = 1;
-nint nZero = 0;
+const nint nOne = 1;
+const nint nZero = 0;
 
 resultNint = -1 & bitMaskNint;      // Noncompliant
-resultNint = bitMaskNint | nOne;    // Compliant - FN
-resultNint = bitMaskNint ^ nZero;   // Compliant - FN
-resultNint = bitMaskNint ^ nZero;   // Compliant - FN
-resultNint &= -nOne;                // Compliant - FN
-resultNint |= nZero;                // Compliant - FN
-resultNint ^= nZero;                // Compliant - FN
-var result2 = resultNint ^= nZero;  // Compliant - FN
+resultNint = bitMaskNint & -nOne;   // Noncompliant
+resultNint = bitMaskNint | nZero;   // Noncompliant
+resultNint = bitMaskNint ^ nZero;   // Noncompliant
+resultNint &= -nOne;                // Noncompliant
+resultNint |= nZero;                // Noncompliant
+resultNint ^= nZero;                // Noncompliant
+var result2 = resultNint ^= nZero;  // Noncompliant
+
+resultNint = bitMaskNint & - - -+nOne; // Noncompliant
+resultNint = bitMaskNint | + + +nZero; // Noncompliant
 
 resultNint = bitMaskNint & 1;   // Compliant
 resultNint = bitMaskNint | 1;   // Compliant
@@ -24,11 +27,11 @@ resultNint ^= 1;                // Compliant
 
 nuint bitMaskNuint = 0x010F;
 nuint resultNuint;
-nuint nuOne = 1;
-nuint nuZero = 0;
+const nuint nuZero = 0;
 
-resultNuint = bitMaskNuint & + + +nuOne;    // FN
+resultNuint = bitMaskNuint | + + +nuZero;   // Noncompliant
 resultNuint = bitMaskNuint & nuZero;        // Compliant
+resultNuint = bitMaskNuint ^ 0;             // Noncompliant
 resultNuint = bitMaskNuint | 0;             // Noncompliant
 resultNuint = bitMaskNuint | 0x0;           // Noncompliant
 resultNuint = bitMaskNuint & returnNuint(); // Compliant
@@ -38,7 +41,6 @@ MyMethod(1 | 0x00000); // Noncompliant
 
 static void MyMethod(nuint u) { }
 static nuint returnNuint() => 1;
-
 
 public class CSharp8
 {
