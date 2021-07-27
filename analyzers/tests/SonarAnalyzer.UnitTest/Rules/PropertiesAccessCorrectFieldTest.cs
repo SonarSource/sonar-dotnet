@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\PropertiesAccessCorrectField.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.CSharp8.cs",
                                     new CS.PropertiesAccessCorrectField(),
                                     ParseOptionsHelper.FromCSharp8);
 

@@ -42,6 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CommentedOutCode_NoDocumentation() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode(),
-                new[] { new CSharpParseOptions(documentationMode: Microsoft.CodeAnalysis.DocumentationMode.None) });
+                                                  new[] { new CSharpParseOptions(documentationMode: Microsoft.CodeAnalysis.DocumentationMode.None) });
     }
 }

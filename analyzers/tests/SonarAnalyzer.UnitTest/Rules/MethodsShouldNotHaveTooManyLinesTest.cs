@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
 
 #if NET
         [TestMethod]
@@ -72,7 +72,7 @@ public class Foo
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_InvalidMaxThreshold_CS(int max)
         {
-            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs",
+            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs",
                 new CS.MethodsShouldNotHaveTooManyLines { Max = max });
 
             action.Should().Throw<AssertFailedException>()
@@ -87,7 +87,7 @@ public class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_VB() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = 2 });
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = 2 });
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -101,7 +101,7 @@ public class Foo
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_InvalidMaxThreshold_VB(int max)
         {
-            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = max });
+            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = max });
 
             action.Should().Throw<AssertFailedException>()
                 .WithMessage("*error AD0001: *SonarAnalyzer.Rules.VisualBasic.MethodsShouldNotHaveTooManyLines* *System.InvalidOperationException* *Invalid rule parameter: maximum number of lines = *. Must be at least 2.*");

@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TaskConfigureAwait_NetCore() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new TaskConfigureAwait());
+            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new TaskConfigureAwait());
 
 #endif
 

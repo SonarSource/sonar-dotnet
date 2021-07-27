@@ -45,6 +45,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StringFormatEdgeCasesValidator() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\StringFormatEdgeCasesValidator.cs", new StringFormatValidator());
+            Verifier.VerifyAnalyzer(@"TestCases\StringFormatEdgeCasesValidator.cs", new StringFormatValidator());
     }
 }

@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test throws OOM on Azure DevOps
             {
-                Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+                Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
             }
         }
 
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDO: Test throws OOM on Azure DevOps
             {
-                Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.vb", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+                Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.vb", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
             }
         }
     }

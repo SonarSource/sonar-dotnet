@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallAssemblyLoadInvalidMethods_EvidenceParameter() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.Evidence.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.Evidence.cs",
                                     new DoNotCallAssemblyLoadInvalidMethods());
 #endif
     }

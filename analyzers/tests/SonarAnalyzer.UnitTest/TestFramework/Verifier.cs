@@ -137,7 +137,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                         OutputKind.DynamicallyLinkedLibrary,
                                         additionalReferences,
                                         sonarProjectConfigPath);
-
+        // reduced
         public static void VerifyNonConcurrentAnalyzer(string path,
                                                        DiagnosticAnalyzer diagnosticAnalyzer,
                                                        IEnumerable<ParseOptions> options = null,

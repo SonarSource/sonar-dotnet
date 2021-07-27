@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseCurlyBraces_FromCSharp7() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\UseCurlyBraces.CSharp7.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.CSharp7.cs",
                 new UseCurlyBraces(),
                 ParseOptionsHelper.FromCSharp7);
     }

@@ -141,7 +141,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 MetadataReferenceFacade.SystemXml);
 
         private static void VerifyRule(NetFrameworkVersion version, string testFilePath, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<ParseOptions> options = null) =>
-            Verifier.VerifyNonConcurrentAnalyzer(testFilePath,
+            Verifier.VerifyAnalyzer(testFilePath,
                 new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
                 options,
                 CompilationErrorBehavior.Default,

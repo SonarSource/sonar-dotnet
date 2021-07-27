@@ -213,7 +213,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             try
             {
                 SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => tree.FilePath.EndsWith(new FileInfo(testCases[0].Path).Name, StringComparison.OrdinalIgnoreCase);
-                Verifier.VerifyNonConcurrentAnalyzer(testCases[0].Path, testCases[0].Analyzer);
+                Verifier.VerifyAnalyzer(testCases[0].Path, testCases[0].Analyzer);
                 Verifier.VerifyNoIssueReported(testCases[2].Path, testCases[2].Analyzer);
             }
             finally

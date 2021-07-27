@@ -50,14 +50,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnnecessaryUsings_TupleDeconstruct_NetCore() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetCore.cs", new UnnecessaryUsings());
+            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetCore.cs", new UnnecessaryUsings());
 
 #elif NETFRAMEWORK
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnnecessaryUsings_TupleDeconstruct_NetFx() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetFx.cs", new UnnecessaryUsings());
+            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetFx.cs", new UnnecessaryUsings());
 
 #endif
 

@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.cs", new CS.EmptyMethod());
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.cs", new CS.EmptyMethod());
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS() =>
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_VB() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB() =>

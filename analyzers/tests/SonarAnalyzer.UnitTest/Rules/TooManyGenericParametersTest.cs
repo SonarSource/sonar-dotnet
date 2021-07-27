@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TooManyGenericParameters_CustomValues() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TooManyGenericParameters_CustomValues.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyGenericParameters_CustomValues.cs",
                 new TooManyGenericParameters { MaxNumberOfGenericParametersInClass = 4, MaxNumberOfGenericParametersInMethod = 4 });
 
 #if NET

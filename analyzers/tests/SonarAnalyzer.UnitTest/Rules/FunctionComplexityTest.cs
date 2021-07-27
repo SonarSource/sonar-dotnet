@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test doesn't work on Azure DevOps
             {
-                Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", new CS.FunctionComplexity { Maximum = 3 });
+                Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", new CS.FunctionComplexity { Maximum = 3 });
             }
         }
 
