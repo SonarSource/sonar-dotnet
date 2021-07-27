@@ -139,9 +139,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         private protected override KnownType GenericDelegateType() => KnownType.System_Func_T1_T2_T3_T4_TResult_VB;
-
-        private protected override bool AreSameMethods(InvocationExpressionSyntax invocation, string methodName) =>
-            invocation.Expression.GetIdentifier()?.Identifier.ValueText is { } invocationName
-            && invocationName.Equals(methodName);
     }
 }
