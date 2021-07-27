@@ -308,7 +308,8 @@ namespace SonarAnalyzer.Rules
             var ret = ImmutableArray.CreateBuilder<TInvocationExpressionSyntax>();
             foreach (var invocation in root.DescendantNodesAndSelf().OfType<TInvocationExpressionSyntax>())
             {
-                if (c.SemanticModel.GetSymbolInfo(invocation).Symbol.Equals(method))
+                if (c.SemanticModel.GetSymbolInfo(invocation).Symbol is { } symbol
+                    && symbol.Equals(method))
                 {
                     ret.Add(invocation);
                 }
