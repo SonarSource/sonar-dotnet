@@ -157,6 +157,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
+        public static void VerifyAnalyzer(IEnumerable<string> paths,
+                                          DiagnosticAnalyzer diagnosticAnalyzer,
+                                          IEnumerable<MetadataReference> additionalReferences) =>
+            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, null, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer[] diagnosticAnalyzers,
                                           IEnumerable<ParseOptions> options = null,

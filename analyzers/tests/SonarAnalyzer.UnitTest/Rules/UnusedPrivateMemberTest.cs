@@ -242,7 +242,7 @@ namespace EntityFrameworkMigrations
         [TestCategory("Performance")]
         public void UnusedPrivateMember_Performance()
         {
-            Action verifyAnalyzer = () => Verifier.VerifyNonConcurrentAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
+            Action verifyAnalyzer = () => Verifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
                                                                   new UnusedPrivateMember(),
                                                                   GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
 

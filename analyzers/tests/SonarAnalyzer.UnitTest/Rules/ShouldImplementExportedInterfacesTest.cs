@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_Partial() =>
-            Verifier.VerifyNonConcurrentAnalyzer(new[]
+            Verifier.VerifyAnalyzer(new[]
                 {
                     @"TestCases\ShouldImplementExportedInterfaces_Part1.cs",
                     @"TestCases\ShouldImplementExportedInterfaces_Part2.cs",
