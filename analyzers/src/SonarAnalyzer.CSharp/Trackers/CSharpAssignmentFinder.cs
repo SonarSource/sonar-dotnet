@@ -22,6 +22,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -33,6 +34,11 @@ namespace SonarAnalyzer.Helpers
         /// <param name="anyAssignmentKind">'true' will find any AssignmentExpressionSyntax like =, +=, -=, &=. 'false' will find only '=' SimpleAssignmentExpression.</param>
         protected override bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, bool anyAssignmentKind, out SyntaxNode rightExpression)
         {
+            if (node.IsKind(SyntaxKindEx.GlobalStatement))
+            {
+                node = ((GlobalStatementSyntax)node).Statement;
+            }
+
             if (node is ExpressionStatementSyntax statement)
             {
                 node = statement.Expression;
@@ -50,12 +56,18 @@ namespace SonarAnalyzer.Helpers
 
         protected override bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer)
         {
+            if (node.IsKind(SyntaxKindEx.GlobalStatement))
+            {
+                node = ((GlobalStatementSyntax)node).Statement;
+            }
+
             if (node is LocalDeclarationStatementSyntax declarationStatement
                 && declarationStatement.Declaration.Variables.SingleOrDefault(x => x.Identifier.ValueText == identifierName) is { } declaration)
             {
                 initializer = declaration.Initializer?.Value;
                 return true;
             }
+
             initializer = null;
             return false;
         }
