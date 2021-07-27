@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S3052";
         private const string MessageFormat = "Remove this initialization to '{0}', the compiler will do that for you.";
+        private const string Zero = "Zero";
 
         private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
 
@@ -145,8 +146,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 case SpecialType.System_IntPtr:
                 case SpecialType.System_UIntPtr:
                     {
-                        return ExpressionNumericConverter.TryGetConstantIntValue(initializer.Value, out var constantValue)
-                               && constantValue == default;
+                        if (initializer.Value is MemberAccessExpressionSyntax memberAccess
+                            && memberAccess.Name.Identifier.Text == Zero)
+                        {
+                            return true;
+                        }
+                        else if (initializer.Value is ObjectCreationExpressionSyntax objectCreation)
+                        {
+                            return ExpressionNumericConverter.TryGetConstantIntValue(objectCreation.ArgumentList?.Arguments.First().Expression, out var ctorParameter)
+                                   && ctorParameter == default;
+                        }
+                        else
+                        {
+                            return ExpressionNumericConverter.TryGetConstantIntValue(initializer.Value, out var constantValue)
+                                   && constantValue == default;
+                        }
                     }
                 default:
                     return false;

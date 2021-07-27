@@ -1,10 +1,16 @@
-﻿record NativeInts
+﻿using System;
+
+record NativeInts
 {
     public const nint myConst = 0;  // Compliant
     public nint field1 = 0;         // Noncompliant
     public nint field2 = 42;
     public nuint field3 = 0;        // Noncompliant
     public nuint field4 = 42;
+    public nint field5 = IntPtr.Zero;         // Noncompliant
+    public nint field6 = 0x0000000000000000;  // Noncompliant
+    public nuint field7 = UIntPtr.Zero;       // Noncompliant
+    public nint field8 = new IntPtr(0);       // Noncompliant
 
     public nint Property1 { get; set; } = 0;    // Noncompliant
     public nint Property2 { get; set; } = 42;
