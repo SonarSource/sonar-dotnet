@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Field1', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3052.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  28,
+"endLine":  5,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Field3', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3052.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  29,
+"endLine":  7,
+"endColumn":  32
+}
+}
+}
+]
+}
