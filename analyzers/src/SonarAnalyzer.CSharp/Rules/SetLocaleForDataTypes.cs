@@ -46,6 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Data_DataSet);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        protected override bool EnableConcurrentExecution => false;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(
