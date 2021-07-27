@@ -27,7 +27,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class TokenTypeAnalyzer : TokenTypeAnalyzerBase<SyntaxKind>
+    public class TokenTypeAnalyzer : TokenTypeAnalyzerBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
