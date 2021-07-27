@@ -37,12 +37,10 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsMinusToken(SyntaxToken token);
 
-        protected static bool TiedTogether(FileLinePositionSpan left, FileLinePositionSpan right)
-        {
-            return left.EndLinePosition == right.StartLinePosition;
-        }
+        private static bool TiedTogether(FileLinePositionSpan left, FileLinePositionSpan right) =>
+            left.EndLinePosition == right.StartLinePosition;
 
-        public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
+        protected Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
             c =>
             {
                 var unaryExpression = (TUnaryExpressionSyntax)c.Node;
