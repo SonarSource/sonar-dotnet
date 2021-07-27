@@ -231,7 +231,7 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_UsedInGeneratedFile() =>
-            Verifier.VerifyNonConcurrentAnalyzer(new[]
+            Verifier.VerifyAnalyzer(new[]
                                     {
                                         @"TestCases\UnusedPrivateMember.CalledFromGenerated.cs",
                                         @"TestCases\UnusedPrivateMember.Generated.cs"

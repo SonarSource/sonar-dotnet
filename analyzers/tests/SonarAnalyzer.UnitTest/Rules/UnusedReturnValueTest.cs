@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedReturnValueWithPartialClasses() =>
-            Verifier.VerifyNonConcurrentAnalyzer(new[] { @"TestCases\UnusedReturnValue.part1.cs", @"TestCases\UnusedReturnValue.part2.cs", @"TestCases\UnusedReturnValue.External.cs" },
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\UnusedReturnValue.part1.cs", @"TestCases\UnusedReturnValue.part2.cs", @"TestCases\UnusedReturnValue.External.cs" },
                                     new UnusedReturnValue(),
                                     ParseOptionsHelper.FromCSharp8);
 

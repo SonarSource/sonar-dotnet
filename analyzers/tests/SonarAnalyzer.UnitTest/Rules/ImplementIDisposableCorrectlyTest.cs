@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles() =>
-            Verifier.VerifyNonConcurrentAnalyzer(
+            Verifier.VerifyAnalyzer(
                 new[]
                 {
                     @"TestCases\ImplementIDisposableCorrectlyPartial1.cs",
