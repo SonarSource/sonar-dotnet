@@ -146,14 +146,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, options, checkMode, outputKind, additionalReferences);
 
-        public static void VerifyNonConcurrentAnalyzer(string path,
-                                                       DiagnosticAnalyzer[] diagnosticAnalyzers,
-                                                       IEnumerable<ParseOptions> options = null,
-                                                       CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                                       OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                                       IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyNonConcurrentAnalyzer(new[] { path }, diagnosticAnalyzers, options, checkMode, outputKind, additionalReferences);
-
         public static void VerifyNonConcurrentAnalyzer(IEnumerable<string> paths,
                                                        DiagnosticAnalyzer diagnosticAnalyzer,
                                                        IEnumerable<MetadataReference> additionalReferences) =>
@@ -164,6 +156,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<ParseOptions> options = null,
                                                        IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+
+        public static void VerifyAnalyzer(string path,
+                                          DiagnosticAnalyzer[] diagnosticAnalyzers,
+                                          IEnumerable<ParseOptions> options = null,
+                                          CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                          IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, options, checkMode, outputKind, additionalReferences);
 
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
