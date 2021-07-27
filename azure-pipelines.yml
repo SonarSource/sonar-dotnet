@@ -249,6 +249,8 @@ stages:
 
       - task: PowerShell@2
         displayName: 'Run ITs'
+        env:          
+          SONAR_DOTNET_ENABLE_CONCURRENT_PROCESSING: true
         inputs:
           filePath: 'analyzers/its/regression-test.ps1'
           workingDirectory: 'analyzers/its'
