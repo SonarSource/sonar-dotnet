@@ -45,14 +45,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void AsyncVoidMethod_MsTestV2(string testFwkVersion) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV2.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV2.cs",
                                     new AsyncVoidMethod(),
                                     NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AsyncVoidMethod_MsTestV1() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV1.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV1.cs",
                                     new AsyncVoidMethod(),
                                     NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
     }

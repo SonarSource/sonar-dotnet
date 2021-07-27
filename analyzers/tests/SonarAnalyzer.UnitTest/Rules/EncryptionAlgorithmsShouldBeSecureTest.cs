@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_CS_NetStandard21() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
                 new CS.EncryptionAlgorithmsShouldBeSecure(),
 #if NETFRAMEWORK
                 NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
                 new VB.EncryptionAlgorithmsShouldBeSecure(),
 #if NETFRAMEWORK
                 NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void CommentFixme_CS(ProjectType projectType) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentFixme.cs", new CS.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
+            Verifier.VerifyAnalyzer(@"TestCases\CommentFixme.cs", new CS.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -55,6 +55,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void CommentFixme_VB(ProjectType projectType) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentFixme.vb", new VB.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
+            Verifier.VerifyAnalyzer(@"TestCases\CommentFixme.vb", new VB.CommentKeyword(), TestHelper.ProjectTypeReference(projectType));
     }
 }

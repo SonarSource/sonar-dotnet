@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.6.7")]
         [TestCategory("Rule")]
         public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit(string testFwkVersion) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
                                     new ExpectedExceptionAttributeShouldNotBeUsed(),
                                     NuGetMetadataReference.NUnit(testFwkVersion));
 

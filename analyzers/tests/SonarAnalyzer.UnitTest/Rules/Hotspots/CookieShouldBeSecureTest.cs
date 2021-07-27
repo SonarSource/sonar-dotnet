@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
                                     new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemWeb);
 
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_NetCore() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_NetCore.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_NetCore.cs",
                                     new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences_NetCore());
 

@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_CS_CustomValues() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.cs",
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
                 GetAdditionalReferences());
 
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_VB_CustomValues() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.vb",
                 new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
                 GetAdditionalReferences());
 

@@ -52,14 +52,14 @@ namespace SonarAnalyzer.UnitTest.Rules.Hotspots
         [TestMethod]
         [TestCategory("Rule")]
         public void LooseFilePermissions_Unix_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Unix.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Unix.cs",
                                     new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
                                     NuGetMetadataReference.MonoPosixNetStandard());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LooseFilePermissions_Unix_VB() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Unix.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Unix.vb",
                                     new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
                                     NuGetMetadataReference.MonoPosixNetStandard());
 #endif

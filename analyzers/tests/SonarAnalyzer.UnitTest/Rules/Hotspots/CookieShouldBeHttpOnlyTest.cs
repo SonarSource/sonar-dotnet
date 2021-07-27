@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
                                     new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemWeb);
 
@@ -89,7 +89,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_NetCore() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_NetCore.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_NetCore.cs",
                                     new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences_NetCore());
 

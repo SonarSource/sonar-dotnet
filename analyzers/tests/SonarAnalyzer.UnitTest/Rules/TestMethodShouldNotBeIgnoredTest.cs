@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
                                     new TestMethodShouldNotBeIgnored(),
                                     NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.7.0")]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_NUnit_V2(string testFwkVersion) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.V2.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.V2.cs",
                                     new TestMethodShouldNotBeIgnored(),
                                     NuGetMetadataReference.MSTestTestFrameworkV1
                                         .Concat(NuGetMetadataReference.NUnit(testFwkVersion))
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_NUnit(string testFwkVersion) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.cs",
                                     new TestMethodShouldNotBeIgnored(),
                                     NuGetMetadataReference.MSTestTestFrameworkV1
                                         .Concat(NuGetMetadataReference.NUnit(testFwkVersion))
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_Xunit(string testFwkVersion) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.cs",
                                     new TestMethodShouldNotBeIgnored(),
                                     NuGetMetadataReference.MSTestTestFrameworkV1
                                         .Concat(NuGetMetadataReference.XunitFramework(testFwkVersion))
