@@ -74,14 +74,16 @@ namespace SonarAnalyzer.Rules
     }
 
     public abstract class UtilityAnalyzerBase<TMessage> : UtilityAnalyzerBase
-        where TMessage : IMessage, new()
+        where TMessage : class, IMessage, new()
     {
         private static readonly object FileWriteLock = new TMessage();
 
-        protected virtual bool SkipAnalysisForTestProject => false;
+        protected virtual bool SkipAnalysisForTestProject => false;                 // FIXME: Revert logic to AnalyzeTestProjects
         protected abstract string FileName { get; }
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } // FIXME: Use language facade instead
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
+
+        protected virtual TMessage CreateAnalysisMessage(SonarAnalysisContext context) => null;
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationAction(c =>
@@ -95,12 +97,13 @@ namespace SonarAnalyzer.Rules
                     var messages = c.Compilation.SyntaxTrees
                         .Where(ShouldGenerateMetrics)
                         .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)))
+                        .Concat(new[] { CreateAnalysisMessage(context) })
+                        .WhereNotNull()
                         .ToArray();
 
                     lock (FileWriteLock)
                     {
                         Directory.CreateDirectory(OutPath);
-
                         using var metricsStream = File.Create(Path.Combine(OutPath, FileName));
                         foreach (var message in messages)
                         {

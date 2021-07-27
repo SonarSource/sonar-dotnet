@@ -1,0 +1,96 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2021 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
+
+namespace SonarAnalyzer.UnitTest.Rules
+{
+    [TestClass]
+    public class LogAnalyzerTest
+    {
+        private const string Root = @"TestCases\Utilities\LogAnalyzer\";
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LogRoslynVersion_CS()
+        {
+            var testRoot = Root + nameof(LogRoslynVersion_CS);
+            Verifier.VerifyUtilityAnalyzer<LogInfo>(
+                new[] { Root + "Normal.cs", Root + "Second.cs" },
+                new TestLogAnalyzer_CS(testRoot),
+                @$"{testRoot}\log.pb",
+                TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
+                VerifyRoslynVersion);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LogRoslynVersion_VB()
+        {
+            var testRoot = Root + nameof(LogRoslynVersion_VB);
+            Verifier.VerifyUtilityAnalyzer<LogInfo>(
+                new[] { Root + "Normal.vb", Root + "Second.vb" },
+                new TestLogAnalyzer_VB(testRoot),
+                @$"{testRoot}\log.pb",
+                TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
+                VerifyRoslynVersion);
+        }
+
+        private static void VerifyRoslynVersion(IEnumerable<LogInfo> messages)
+        {
+            messages.Should().NotBeEmpty();
+            var versionMessage = messages.SingleOrDefault(x => x.Text.Contains("Roslyn version"));
+            versionMessage.Should().NotBeNull();
+            versionMessage.Severity.Should().Be(LogSeverity.Info);
+            versionMessage.Text.Should().MatchRegex(@"^Roslyn version: \d(\.\d){3}");
+            var version = new Version(versionMessage.Text.Substring(16));
+            version.Should().BeGreaterThan(new Version(3, 0));  // Avoid 1.0.0.0
+        }
+
+        // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
+        private class TestLogAnalyzer_CS : LogAnalyzer
+        {
+            public TestLogAnalyzer_CS(string outPath)
+            {
+                IsAnalyzerEnabled = true;
+                OutPath = outPath;
+                IsTestProject = false;
+            }
+        }
+
+        private class TestLogAnalyzer_VB : LogAnalyzer
+        {
+            public TestLogAnalyzer_VB(string outPath)
+            {
+                IsAnalyzerEnabled = true;
+                OutPath = outPath;
+                IsTestProject = false;
+            }
+        }
+    }
+}
