@@ -26,7 +26,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class LogAnalyzer : LogAnalyzerBase<SyntaxKind>
+    public class LogAnalyzer : LogAnalyzerBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
     }

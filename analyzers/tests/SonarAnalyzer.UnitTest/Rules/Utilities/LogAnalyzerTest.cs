@@ -25,8 +25,9 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -73,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
-        private class TestLogAnalyzer_CS : LogAnalyzer
+        private class TestLogAnalyzer_CS : CS.LogAnalyzer
         {
             public TestLogAnalyzer_CS(string outPath)
             {
@@ -83,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
         }
 
-        private class TestLogAnalyzer_VB : LogAnalyzer
+        private class TestLogAnalyzer_VB : VB.LogAnalyzer
         {
             public TestLogAnalyzer_VB(string outPath)
             {
