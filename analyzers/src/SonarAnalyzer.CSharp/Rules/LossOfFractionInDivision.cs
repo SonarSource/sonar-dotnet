@@ -32,46 +32,40 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class LossOfFractionInDivision : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2184";
+        private const string DiagnosticId = "S2184";
         private const string MessageFormat = "Cast one of the operands of this division to '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var division = (BinaryExpressionSyntax) c.Node;
+                    var division = (BinaryExpressionSyntax)c.Node;
 
-                    if (!(c.SemanticModel.GetSymbolInfo(division).Symbol is IMethodSymbol symbol) ||
-                        symbol.ContainingType == null ||
-                        !symbol.ContainingType.IsAny(KnownType.IntegralNumbers))
+                    if (!(c.SemanticModel.GetSymbolInfo(division).Symbol is IMethodSymbol symbol)
+                        || symbol.ContainingType == null
+                        || !symbol.ContainingType.IsAny(KnownType.IntegralNumbersIncludingNative))
                     {
                         return;
                     }
 
-                    if (TryGetTypeFromAssignmentToFloatType(division, c.SemanticModel, out var assignedToType) ||
-                        TryGetTypeFromArgumentMappedToFloatType(division, c.SemanticModel, out assignedToType) ||
-                        TryGetTypeFromReturnMappedToFloatType(division, c.SemanticModel, out assignedToType))
+                    if (TryGetTypeFromAssignmentToFloatType(division, c.SemanticModel, out var assignedToType)
+                        || TryGetTypeFromArgumentMappedToFloatType(division, c.SemanticModel, out assignedToType)
+                        || TryGetTypeFromReturnMappedToFloatType(division, c.SemanticModel, out assignedToType))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
-                            rule,
-                            division.GetLocation(),
-                            assignedToType.ToMinimalDisplayString(c.SemanticModel, division.SpanStart)));
+                        var diagnostic = Diagnostic.Create(Rule, division.GetLocation(), assignedToType.ToMinimalDisplayString(c.SemanticModel, division.SpanStart));
+                        c.ReportDiagnosticWhenActive(diagnostic);
                     }
                 },
                 SyntaxKind.DivideExpression);
-        }
 
-        private static bool TryGetTypeFromReturnMappedToFloatType(BinaryExpressionSyntax division, SemanticModel semanticModel,
-            out ITypeSymbol type)
+        private static bool TryGetTypeFromReturnMappedToFloatType(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol type)
         {
-            if (division.Parent is ReturnStatementSyntax ||
-                division.Parent is LambdaExpressionSyntax)
+            if (division.Parent is ReturnStatementSyntax
+                || division.Parent is LambdaExpressionSyntax)
             {
                 type = (semanticModel.GetEnclosingSymbol(division.SpanStart) as IMethodSymbol)?.ReturnType;
                 return type.IsAny(KnownType.NonIntegralNumbers);
@@ -81,8 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return false;
         }
 
-        private static bool TryGetTypeFromArgumentMappedToFloatType(BinaryExpressionSyntax division, SemanticModel semanticModel,
-            out ITypeSymbol type)
+        private static bool TryGetTypeFromArgumentMappedToFloatType(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol type)
         {
             if (!(division.Parent is ArgumentSyntax argument))
             {
@@ -107,8 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return type.IsAny(KnownType.NonIntegralNumbers);
         }
 
-        private static bool TryGetTypeFromAssignmentToFloatType(BinaryExpressionSyntax division, SemanticModel semanticModel,
-            out ITypeSymbol type)
+        private static bool TryGetTypeFromAssignmentToFloatType(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol type)
         {
             if (division.Parent is AssignmentExpressionSyntax assignment)
             {

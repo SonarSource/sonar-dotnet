@@ -529,6 +529,19 @@ namespace SonarAnalyzer.Helpers
                 System_Char,
                 System_Byte,
                 System_SByte);
+        internal static readonly ImmutableArray<KnownType> IntegralNumbersIncludingNative =
+            ImmutableArray.Create(
+                System_Int16,
+                System_Int32,
+                System_Int64,
+                System_UInt16,
+                System_UInt32,
+                System_UInt64,
+                System_Char,
+                System_Byte,
+                System_SByte,
+                System_IntPtr,
+                System_UIntPtr);
         internal static readonly ImmutableArray<KnownType> NonIntegralNumbers =
             ImmutableArray.Create(
                 System_Single,
