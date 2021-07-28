@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -101,20 +102,48 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportOnInvalidThrowStatement(SyntaxNodeAnalysisContext analysisContext,
             SyntaxNode node, ImmutableArray<KnownType> allowedTypes)
         {
-            var throwToReportOn = node.DescendantNodes()
-                .OfType<ThrowStatementSyntax>()
-                .Where(tss => tss.Expression != null)
-                .Select(tss => new NodeAndSymbol(tss, analysisContext.SemanticModel.GetSymbolInfo(tss.Expression).Symbol))
-                .FirstOrDefault(tuple => tuple.Symbol != null
-                                && !tuple.Symbol.ContainingType.IsAny(allowedTypes)
-                                && !tuple.Symbol.ContainingType.DerivesFromAny(allowedTypes))
-                ?.Node;
+            SyntaxNode throwToReportOn = null;
+            if (ExpressionBody(node) is { } expressionBody)
+            {
+                if (ThrowExpressionSyntaxWrapper.IsInstance(expressionBody.Expression))
+                {
+                    var throwExpression = (ThrowExpressionSyntaxWrapper)expressionBody.Expression;
+                    if (analysisContext.SemanticModel.GetSymbolInfo(throwExpression.Expression).Symbol is { } symbol
+                        && !symbol.ContainingType.IsAny(allowedTypes)
+                        && !symbol.ContainingType.DerivesFromAny(allowedTypes))
+                    {
+                        analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwExpression.Expression.GetLocation()));
+                    }
+                }
+            }
+            else
+            {
+                throwToReportOn = node.DescendantNodes()
+                    .OfType<ThrowStatementSyntax>()
+                    .Where(tss => tss.Expression != null)
+                    .Select(tss => new NodeAndSymbol(tss, analysisContext.SemanticModel.GetSymbolInfo(tss.Expression).Symbol))
+                    .FirstOrDefault(tuple => tuple.Symbol != null
+                                    && !tuple.Symbol.ContainingType.IsAny(allowedTypes)
+                                    && !tuple.Symbol.ContainingType.DerivesFromAny(allowedTypes))
+                    ?.Node;
+            }
 
             if (throwToReportOn != null)
             {
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwToReportOn.GetLocation()));
             }
         }
+
+        private static ArrowExpressionClauseSyntax ExpressionBody(SyntaxNode node) =>
+            node switch
+            {
+                MethodDeclarationSyntax a => a.ExpressionBody,
+                ConstructorDeclarationSyntax b => b.ExpressionBody(),
+                OperatorDeclarationSyntax c => c.ExpressionBody,
+                AccessorDeclarationSyntax d => d.ExpressionBody(),
+                ConversionOperatorDeclarationSyntax e => e.ExpressionBody,
+                _ => null
+            };
 
         private static bool IsTrackedMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel) =>
             semanticModel.GetDeclaredSymbol(declaration) is {} methodSymbol

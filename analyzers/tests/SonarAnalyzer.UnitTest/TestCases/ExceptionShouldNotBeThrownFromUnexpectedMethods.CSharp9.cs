@@ -14,7 +14,7 @@ namespace Tests.Diagnostics
 
     record Record2 : IDisposable
     {
-        static Record2() => throw new Exception(); // FN, needs support for throw expressions
+        static Record2() => throw new Exception(); // Noncompliant
 
         [ModuleInitializer]
         internal static void M1()
@@ -36,7 +36,7 @@ namespace Tests.Diagnostics
 
         event EventHandler OnSomeArrow
         {
-            add => throw new Exception(); // FN
+            add => throw new Exception(); // Noncompliant
             remove => throw new InvalidOperationException(); // Compliant
         }
 

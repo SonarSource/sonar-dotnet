@@ -265,14 +265,30 @@ namespace Tests.Diagnostics
 
     class ArrowMethods : IDisposable
     {
-        static ArrowMethods() => throw new Exception(); // FN, needs support for throw expressions
-        public void Dispose() => throw new Exception(); // FN
-        public static bool operator ==(ArrowMethods a, ArrowMethods b) => throw new Exception(); // FN
-        public static bool operator !=(ArrowMethods a, ArrowMethods b) => throw new Exception(); // FN
+        static ArrowMethods() => throw new Exception(); // Noncompliant
+        public void Dispose() => throw new Exception(); // Noncompliant
+        public static bool operator ==(ArrowMethods a, ArrowMethods b) => throw new Exception(); // Noncompliant
+        public static bool operator !=(ArrowMethods a, ArrowMethods b) => throw new Exception(); // Noncompliant
         event EventHandler OnSomething
         {
-            add => throw new Exception(); // FN
-            remove => throw new Exception(); // FN
+            add => throw new Exception(); // Noncompliant
+            remove => throw new Exception(); // Noncompliant
         }
     }
+
+    class CompliantArrowMethods : IDisposable
+    {
+        static CompliantArrowMethods() => throw new NotImplementedException();
+        public void Dispose() => throw new NotImplementedException();
+        public static bool operator ==(CompliantArrowMethods a, CompliantArrowMethods b) => throw new NotImplementedException();
+        public static bool operator !=(CompliantArrowMethods a, CompliantArrowMethods b) => throw new NotImplementedException();
+        event EventHandler OnSomething
+        {
+            add => throw new InvalidOperationException();
+            remove => throw new ArgumentException();
+        }
+
+        static void Foo() => throw new Exception();
+    }
+
 }
