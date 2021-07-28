@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string Root = @"TestCases\Utilities\LogAnalyzer\";
 
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("Utility")]
         public void LogRoslynVersion_CS()
         {
             var testRoot = Root + nameof(LogRoslynVersion_CS);
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("Utility")]
         public void LogRoslynVersion_VB()
         {
             var testRoot = Root + nameof(LogRoslynVersion_VB);

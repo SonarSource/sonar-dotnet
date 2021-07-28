@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var tokens = syntaxTree.GetRoot().DescendantTokens();
-            var identifierTokenKind = Language.SyntaxKind.IdentifierToken;
+            var identifierTokenKind = Language.SyntaxKind.IdentifierToken;  // Performance optimization
             var skipIdentifierTokens = tokens.Count(token => Language.Syntax.IsKind(token, identifierTokenKind)) > IdentifierTokenCountThreshold;
 
             var spans = new List<TokenTypeInfo.Types.TokenInfo>();
