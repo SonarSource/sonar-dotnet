@@ -87,12 +87,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ConversionOperatorDeclaration);
         }
 
-        private static void CheckForIssue<TSyntax>(SyntaxNodeAnalysisContext analysisContext,
-            Func<TSyntax, bool> isTrackedSyntax, ImmutableArray<KnownType> allowedThrowTypes)
+        private static void CheckForIssue<TSyntax>(SyntaxNodeAnalysisContext analysisContext, Func<TSyntax, bool> isTrackedSyntax, ImmutableArray<KnownType> allowedThrowTypes)
             where TSyntax : SyntaxNode
         {
             var syntax = (TSyntax)analysisContext.Node;
-            // TODO move this after filtering the exceptions - for MethodDeclaration we are invoking the SemanticModel even if there's no `throw` inside
             if (isTrackedSyntax(syntax))
             {
                 ReportOnInvalidThrowStatement(analysisContext, syntax, allowedThrowTypes);
@@ -146,12 +144,16 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static bool IsTrackedMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel) =>
-            semanticModel.GetDeclaredSymbol(declaration) is {} methodSymbol
+            semanticModel.GetDeclaredSymbol(declaration) is { } methodSymbol
             && (methodSymbol.IsObjectEquals()
                 || methodSymbol.IsObjectGetHashCode()
                 || methodSymbol.IsObjectToString()
                 || methodSymbol.IsIDisposableDispose()
-                || methodSymbol.IsIEquatableEquals());
+                || methodSymbol.IsIEquatableEquals()
+                || IsModuleInitializer(methodSymbol));
+
+        private static bool IsModuleInitializer(IMethodSymbol methodSymbol) =>
+            methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
 
         private static bool IsTrackedOperator(OperatorDeclarationSyntax declaration) =>
             TrackedOperators.Contains(declaration.OperatorToken.Kind());

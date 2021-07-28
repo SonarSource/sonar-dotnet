@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 
 namespace Tests.Diagnostics
 {
+    using System.Runtime.CompilerServices;
+
     record Record1 : IDisposable
     {
         static Record1() => throw new NotImplementedException();
@@ -19,8 +20,15 @@ namespace Tests.Diagnostics
         [ModuleInitializer]
         internal static void M1()
         {
-            throw new Exception(); // FN
+            throw new Exception(); // Noncompliant
         }
+
+        [Obsolete]
+        [System.Runtime.CompilerServices.ModuleInitializerAttribute]
+        internal static void M2() => throw new Exception(); // Noncompliant
+
+        [Obsolete]
+        internal static void M3() => throw new Exception(); // Compliant
 
         event EventHandler OnSomething
         {
@@ -48,6 +56,20 @@ namespace Tests.Diagnostics
         public void Dispose()
         {
             throw new Exception(); // Noncompliant
+        }
+    }
+}
+
+namespace Tests.Diagnostics2
+{
+    public class ModuleInitializerAttribute : Attribute { }
+
+    public class Foo
+    {
+        [ModuleInitializer]
+        internal static void M1()
+        {
+            throw new Exception(); // Compliant
         }
     }
 }
