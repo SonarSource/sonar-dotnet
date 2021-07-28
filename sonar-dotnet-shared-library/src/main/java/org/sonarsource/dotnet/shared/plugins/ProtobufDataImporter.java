@@ -94,7 +94,7 @@ public class ProtobufDataImporter {
     }
   }
 
-  private static void parseProtobuf(RawProtobufImporter<?> importer, Path workDirectory, String filename) {
+  public static void parseProtobuf(RawProtobufImporter<?> importer, Path workDirectory, String filename) {
     Path protobuf = workDirectory.resolve(filename);
     if (protobuf.toFile().exists()) {
       importer.accept(protobuf);

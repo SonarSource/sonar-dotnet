@@ -19,21 +19,24 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.batch.ScannerSide;
+import java.nio.file.Path;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonarsource.dotnet.shared.plugins.protobuf.LogImporter;
 
-@ScannerSide
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.LOG_FILENAME;
+
 public class LogSensor implements Sensor {
   private static final Logger LOG = Loggers.get(LogSensor.class);
-
   private final DotNetPluginMetadata pluginMetadata;
+  private final AbstractModuleConfiguration configuration;
 
-  public LogSensor(DotNetPluginMetadata pluginMetadata) {
+  public LogSensor(DotNetPluginMetadata pluginMetadata, AbstractModuleConfiguration configuration) {
     this.pluginMetadata = pluginMetadata;
+    this.configuration = configuration;
   }
 
   @Override
@@ -45,8 +48,10 @@ public class LogSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
-    //FIXME: Get protobuf
-    //FIXME: Read it
-    //FIXME: Log it
+    LogImporter importer = new LogImporter(LOG);
+    for (Path protobufDir : configuration.protobufReportPaths()) {
+      ProtobufDataImporter.parseProtobuf(importer, protobufDir, LOG_FILENAME);
+      importer.save();
+    }
   }
 }

@@ -19,10 +19,14 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.io.File;
+import java.util.Collections;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.utils.log.LogTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,18 +36,27 @@ import static org.mockito.Mockito.when;
 public class LogSensorTest {
   private static final String LANG_KEY = "LANG_KEY";
   private static final String SHORT_LANG_NAME = "SHORT_LANG_NAME";
+  // see src/test/resources/ProtobufImporterTest/README.md for explanation. log.pb is copy of custom-log.pb
+  private static final File TEST_DATA_DIR = new File("src/test/resources/LogSensorTest");
+
+  @Rule
+  public TemporaryFolder temp = new TemporaryFolder();
 
   @Rule
   public LogTester logTester = new LogTester();
 
+  private SensorContextTester context;
   private LogSensor sensor;
 
   @Before
   public void prepare() throws Exception {
+    context = SensorContextTester.create(temp.getRoot());
     DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
     when(metadata.languageKey()).thenReturn(LANG_KEY);
     when(metadata.shortLanguageName()).thenReturn(SHORT_LANG_NAME);
-    sensor = new LogSensor(metadata);
+    AbstractModuleConfiguration configuration = mock(AbstractModuleConfiguration.class);
+    when(configuration.protobufReportPaths()).thenReturn(Collections.singletonList(TEST_DATA_DIR.toPath()));
+    sensor = new LogSensor(metadata, configuration);
   }
 
   @Test
@@ -52,5 +65,11 @@ public class LogSensorTest {
     sensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.name()).isEqualTo(SHORT_LANG_NAME + " Analysis Log");
     assertThat(sensorDescriptor.languages()).isEmpty();     // should not filter per language
+  }
+
+  @Test
+  public void executeLogsMessages() {
+    sensor.execute(context);
+    assertThat(logTester.logs()).hasSize(4);
   }
 }
