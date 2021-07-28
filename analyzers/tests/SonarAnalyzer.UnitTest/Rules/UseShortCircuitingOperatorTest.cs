@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod, TestCategory("Rule")]
         public void UseShortCircuitingOperators_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
                                                       new CS.UseShortCircuitingOperator());
 
         [TestMethod, TestCategory("CodeFix")]

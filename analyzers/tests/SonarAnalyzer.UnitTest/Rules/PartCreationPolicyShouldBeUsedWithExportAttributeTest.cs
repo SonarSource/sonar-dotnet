@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_UnresolvedSymbol_CS() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 [UnresolvedAttribute] // Error [CS0246]
 class Bar { }",
                                           new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),

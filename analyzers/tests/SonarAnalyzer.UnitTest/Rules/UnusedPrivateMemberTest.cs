@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_DebuggerDisplay_Attribute() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/1195
 [System.Diagnostics.DebuggerDisplay(""{field1}"", Name = ""{Property1} {Property3}"", Type = ""{Method1()}"")]
 public class MethodUsages
@@ -61,7 +61,7 @@ public class MethodUsages
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Members_With_Attributes_Are_Not_Removable() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 using System;
 public class FieldUsages
 {
@@ -82,7 +82,7 @@ public class FieldUsages
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Assembly_Level_Attributes() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 [assembly: System.Reflection.AssemblyCompany(Foo.Constants.AppCompany)]
 public static class Foo
 {
@@ -110,7 +110,7 @@ public static class Foo
             // could be added through XAML and no warning will be generated if the
             // method is removed, which could lead to serious problems that are hard
             // to diagnose.
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 using System;
 public class NewClass
 {
@@ -125,7 +125,7 @@ public partial class PartialClass
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Unity3D_Ignored() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/159
 public class UnityMessages1 : UnityEngine.MonoBehaviour
 {
@@ -163,7 +163,7 @@ namespace UnityEditor
         [TestMethod]
         [TestCategory("Rule")]
         public void EntityFrameworkMigration_Ignored() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 namespace EntityFrameworkMigrations
 {
     using Microsoft.EntityFrameworkCore.Migrations;
@@ -215,7 +215,7 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs",
                                                       new UnusedPrivateMember());
 #endif
 

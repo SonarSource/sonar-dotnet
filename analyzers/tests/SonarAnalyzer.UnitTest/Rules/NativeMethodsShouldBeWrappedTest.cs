@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NativeMethodsShouldBeWrapped_InvalidCode() => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+        public void NativeMethodsShouldBeWrapped_InvalidCode() => Verifier.VerifyCSharpAnalyzer(@"
 public class InvalidSyntax
 {
     extern public void Extern1

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StringLiteralShouldNotBeDuplicated_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\StringLiteralShouldNotBeDuplicated.CSharp9.cs", new CS.StringLiteralShouldNotBeDuplicated());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StringLiteralShouldNotBeDuplicated.CSharp9.cs", new CS.StringLiteralShouldNotBeDuplicated());
 #endif
 
         [TestMethod]

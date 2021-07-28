@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SetLocaleForDataTypes_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\SetLocaleForDataTypes.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SetLocaleForDataTypes.CSharp9.cs",
                                     new SetLocaleForDataTypes(),
                                     MetadataReferenceFacade.SystemData);
 #endif

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableUnused_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\VariableUnused.CSharp9.cs", new CS.VariableUnused());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableUnused.CSharp9.cs", new CS.VariableUnused());
 #endif
 
         [TestMethod]

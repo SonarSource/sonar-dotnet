@@ -43,14 +43,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT_InvalidCode()
         {
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 public class InvalidCode
 {
     public List<int> () => null;

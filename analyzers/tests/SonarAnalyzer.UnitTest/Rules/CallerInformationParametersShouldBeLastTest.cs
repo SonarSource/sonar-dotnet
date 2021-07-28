@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLast_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs", new CallerInformationParametersShouldBeLast());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs", new CallerInformationParametersShouldBeLast());
 #endif
 
         [TestMethod]

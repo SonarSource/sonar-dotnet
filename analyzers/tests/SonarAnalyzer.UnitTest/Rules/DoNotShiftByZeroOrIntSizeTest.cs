@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotShiftByZeroOrIntSize_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DoNotShiftByZeroOrIntSize.CSharp9.cs", new DoNotShiftByZeroOrIntSize());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotShiftByZeroOrIntSize.CSharp9.cs", new DoNotShiftByZeroOrIntSize());
 #endif
     }
 }

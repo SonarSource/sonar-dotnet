@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldBeStatic_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\MemberShouldBeStatic.CSharp9.cs", new MemberShouldBeStatic());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MemberShouldBeStatic.CSharp9.cs", new MemberShouldBeStatic());
 #endif
 
         [TestMethod]
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldBeStatic_HttpApplication() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 public class HttpApplication1 : System.Web.HttpApplication
 {
     public int Foo() => 0;
@@ -82,7 +82,7 @@ public class HttpApplication1 : System.Web.HttpApplication
         [TestCategory("Rule")]
         public void MemberShouldBeStatic_InvalidCode() =>
             // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-dotnet/issues/819
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 public class Class7
 {
     public async Task<Result<T> Function<T>(Func<Task<Result<T>>> f)

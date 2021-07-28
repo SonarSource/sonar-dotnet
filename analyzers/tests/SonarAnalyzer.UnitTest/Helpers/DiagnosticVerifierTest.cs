@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public void PrimaryIssueNotExpected()
         {
             Action action =
-                () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+                () => Verifier.VerifyCSharpAnalyzer(@"
 public class UnexpectedSecondary
     {
         public void Test(bool a, bool b)
@@ -53,7 +53,7 @@ public class UnexpectedSecondary
         public void SecondaryIssueNotExpected()
         {
             Action action =
-                () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+                () => Verifier.VerifyCSharpAnalyzer(@"
 public class UnexpectedSecondary
     {
         public void Test(bool a, bool b)
@@ -73,7 +73,7 @@ public class UnexpectedSecondary
         public void UnexpectedSecondaryIssueWrongId()
         {
             Action action =
-                () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+                () => Verifier.VerifyCSharpAnalyzer(@"
 public class UnexpectedSecondary
     {
         public void Test(bool a, bool b)
@@ -94,7 +94,7 @@ public class UnexpectedSecondary
         public void SecondaryIssueUnexpectedMessage()
         {
             Action action =
-                () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+                () => Verifier.VerifyCSharpAnalyzer(@"
 public class UnexpectedSecondary
     {
         public void Test(bool a, bool b)
@@ -116,7 +116,7 @@ public class UnexpectedSecondary
         public void SecondaryIssueUnexpectedStartPosition()
         {
             Action action =
-                () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+                () => Verifier.VerifyCSharpAnalyzer(@"
 public class UnexpectedSecondary
     {
         public void Test(bool a, bool b)
@@ -137,7 +137,7 @@ public class UnexpectedSecondary
         public void SecondaryIssueUnexpectedLength()
         {
             Action action =
-                () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+                () => Verifier.VerifyCSharpAnalyzer(@"
 public class UnexpectedSecondary
     {
         public void Test(bool a, bool b)
@@ -158,7 +158,7 @@ public class UnexpectedSecondary
         public void ValidVerification()
         {
             Action action =
-                () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+                () => Verifier.VerifyCSharpAnalyzer(@"
 public class UnexpectedSecondary
     {
         public void Test(bool a, bool b)
@@ -177,7 +177,7 @@ public class UnexpectedSecondary
         public void BuildError()
         {
             Action action =
-                () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+                () => Verifier.VerifyCSharpAnalyzer(@"
 public class UnexpectedSecondaryWithBuildError
 
         public void Test(bool a, bool b) { }
@@ -192,7 +192,7 @@ public class UnexpectedSecondaryWithBuildError
         public void UnexpectedRemainingOpeningCurlyBrace()
         {
             Action action =
-                () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+                () => Verifier.VerifyCSharpAnalyzer(@"
 public class UnexpectedRemainingCurlyBrace
     {
         public void Test(bool a, bool b)
@@ -211,7 +211,7 @@ public class UnexpectedRemainingCurlyBrace
         public void UnexpectedRemainingClosingCurlyBrace()
         {
             Action action =
-                () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+                () => Verifier.VerifyCSharpAnalyzer(@"
 public class UnexpectedRemainingCurlyBrace
     {
         public void Test(bool a, bool b)
@@ -230,7 +230,7 @@ public class UnexpectedRemainingCurlyBrace
         public void ExpectedIssuesNotRaised()
         {
             Action action =
-                () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+                () => Verifier.VerifyCSharpAnalyzer(@"
 public class ExpectedIssuesNotRaised
     {
         public void Test(bool a, bool b) // Noncompliant [MyId0]

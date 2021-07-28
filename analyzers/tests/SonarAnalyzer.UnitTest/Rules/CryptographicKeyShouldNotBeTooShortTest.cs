@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CryptographicKeyShouldNotBeTooShort_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\CryptographicKeyShouldNotBeTooShort.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CryptographicKeyShouldNotBeTooShort.CSharp9.cs",
                                                       new CryptographicKeyShouldNotBeTooShort(),
                                                       GetAdditionalReferences());
 #endif

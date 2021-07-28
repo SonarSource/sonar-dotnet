@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnnecessaryUsings_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new UnnecessaryUsings());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new UnnecessaryUsings());
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodParameterMissingOptional_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\MethodParameterMissingOptional.CSharp9.cs", new MethodParameterMissingOptional());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodParameterMissingOptional.CSharp9.cs", new MethodParameterMissingOptional());
 #endif
 
         [TestMethod]

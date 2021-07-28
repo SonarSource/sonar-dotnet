@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CollectionQuerySimplification_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\CollectionQuerySimplification.CSharp9.cs", new CollectionQuerySimplification());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CollectionQuerySimplification.CSharp9.cs", new CollectionQuerySimplification());
 #endif
     }
 }

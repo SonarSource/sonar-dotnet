@@ -118,42 +118,42 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void Verify_ConcurrentExecutionDisabledByDefault()
         {
-            var retriever = new ConcurrentExecutionStatusRetriever();
+            var retriever = new ConcurrentExecutionReader();
             retriever.IsConcurrentExecutionEnabled.Should().BeNull();
-            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
+            Verifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { retriever });
             retriever.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 
         [TestMethod]
-        public void Verify_ConcurrentExecutionGetsEnabled()
+        public void Verify_ConcurrentExecutionIsExplicitlyEnabled()
         {
             using var scope = new EnvironmentVariableScope();
             scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
-            var retriever = new ConcurrentExecutionStatusRetriever();
+            var retriever = new ConcurrentExecutionReader();
             retriever.IsConcurrentExecutionEnabled.Should().BeNull();
-            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
+            Verifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { retriever });
             retriever.IsConcurrentExecutionEnabled.Should().BeTrue();
         }
 
         [TestMethod]
-        public void Verify_ConcurrentExecutionGetsExplicitlyDisabled()
+        public void Verify_ConcurrentExecutionIsExplicitlyDisabled()
         {
             using var scope = new EnvironmentVariableScope();
             scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "false");
-            var retriever = new ConcurrentExecutionStatusRetriever();
+            var retriever = new ConcurrentExecutionReader();
             retriever.IsConcurrentExecutionEnabled.Should().BeNull();
-            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
+            Verifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { retriever });
             retriever.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 
         [TestMethod]
-        public void Verify_ConcurrentExecutionGetsDisabledOnWrongValue()
+        public void Verify_ConcurrentExecutionIsDisabledForInvalidValue()
         {
             using var scope = new EnvironmentVariableScope();
             scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "loremipsum");
-            var retriever = new ConcurrentExecutionStatusRetriever();
+            var retriever = new ConcurrentExecutionReader();
             retriever.IsConcurrentExecutionEnabled.Should().BeNull();
-            Verifier.VerifyNoExceptionThrown("TestCasesForRuleFailure\\SpecialCases.cs", new[] { retriever });
+            Verifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { retriever });
             retriever.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 
@@ -324,12 +324,13 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
-        private class ConcurrentExecutionStatusRetriever : SonarDiagnosticAnalyzer
+        private class ConcurrentExecutionReader : SonarDiagnosticAnalyzer
         {
             private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor("S9999", "Rule test");
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
             public bool? IsConcurrentExecutionEnabled { get; private set; }
+
             protected override void Initialize(SonarAnalysisContext context) =>
                 IsConcurrentExecutionEnabled = EnableConcurrentExecution;
         }

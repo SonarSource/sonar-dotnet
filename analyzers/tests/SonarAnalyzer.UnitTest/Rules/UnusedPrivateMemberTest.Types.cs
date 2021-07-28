@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Types_Accessibility() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateTypes
 {
     private class InnerPrivateClass // Noncompliant {{Remove the unused private type 'InnerPrivateClass'.}}
@@ -62,7 +62,7 @@ public class NonPrivateTypes
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Types_InternalsVisibleTo() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo("""")]
 public class PrivateTypes
 {
@@ -74,7 +74,7 @@ public class PrivateTypes
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Types_Internals() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/1225
 // https://github.com/SonarSource/sonar-dotnet/issues/904
 using System;
@@ -97,7 +97,7 @@ public class Sample
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Types_DirectReferences() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 using System.Linq;
 public class PrivateTypes
 {
@@ -127,7 +127,7 @@ public class PrivateTypes
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_SupportTypeKinds() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateTypes
 {
     private class MyPrivateClass { } // Noncompliant

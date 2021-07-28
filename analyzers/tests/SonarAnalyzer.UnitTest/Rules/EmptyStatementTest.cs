@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyStatement_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\EmptyStatement.CSharp9.cs", new EmptyStatement());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyStatement.CSharp9.cs", new EmptyStatement());
 #endif
 
         [TestMethod]

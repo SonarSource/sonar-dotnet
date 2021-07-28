@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableNotDisposed_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DisposableNotDisposed.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableNotDisposed.CSharp9.cs",
                                                       new DisposableNotDisposed(),
                                                       MetadataReferenceFacade.SystemNetHttp);
 #endif

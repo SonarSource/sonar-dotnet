@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallExitMethods_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs", new DoNotCallExitMethods());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs", new DoNotCallExitMethods());
 #endif
     }
 }

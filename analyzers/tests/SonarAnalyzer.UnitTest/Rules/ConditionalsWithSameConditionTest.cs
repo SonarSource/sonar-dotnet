@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalsWithSameCondition_CSharp9_TopLevelStatements() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ConditionalsWithSameCondition.CSharp9.TopLevelStatements.cs", new ConditionalsWithSameCondition());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalsWithSameCondition.CSharp9.TopLevelStatements.cs", new ConditionalsWithSameCondition());
 #endif
     }
 }

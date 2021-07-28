@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCheckZeroSizeCollection_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DoNotCheckZeroSizeCollection.CSharp9.cs", new CS.DoNotCheckZeroSizeCollection());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCheckZeroSizeCollection.CSharp9.cs", new CS.DoNotCheckZeroSizeCollection());
 #endif
 
         [TestMethod]

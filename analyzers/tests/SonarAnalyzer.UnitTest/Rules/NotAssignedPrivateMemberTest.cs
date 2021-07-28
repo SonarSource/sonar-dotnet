@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NotAssignedPrivateMember_IndexingMovableFixedBuffer() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 unsafe struct FixedArray
 {
     private fixed int a[42]; // Compliant, because of the fixed modifier

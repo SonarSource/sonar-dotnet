@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_InvalidCode() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 [Serializable]
     public partial class InvalidCode : ISerializable
     {

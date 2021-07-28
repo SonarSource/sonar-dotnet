@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableShadowsField_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\VariableShadowsField.CSharp9.cs", new VariableShadowsField());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableShadowsField.CSharp9.cs", new VariableShadowsField());
 #endif
     }
 }

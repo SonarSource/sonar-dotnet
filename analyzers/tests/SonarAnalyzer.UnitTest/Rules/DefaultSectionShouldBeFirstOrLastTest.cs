@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DefaultSectionShouldBeFirstOrLast_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DefaultSectionShouldBeFirstOrLast.CSharp9.cs", new DefaultSectionShouldBeFirstOrLast());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DefaultSectionShouldBeFirstOrLast.CSharp9.cs", new DefaultSectionShouldBeFirstOrLast());
 #endif
     }
 }

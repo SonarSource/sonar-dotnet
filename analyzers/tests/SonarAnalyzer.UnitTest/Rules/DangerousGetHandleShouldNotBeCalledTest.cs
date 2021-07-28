@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_CS_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DangerousGetHandleShouldNotBeCalled.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DangerousGetHandleShouldNotBeCalled.CSharp9.cs",
                 new CS.DangerousGetHandleShouldNotBeCalled(),
                 MetadataReferenceFacade.MicrosoftWin32Registry);
 #endif

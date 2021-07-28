@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantConditionalAroundAssignment_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new RedundantConditionalAroundAssignment());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new RedundantConditionalAroundAssignment());
 
         [TestMethod]
         [TestCategory("CodeFix")]

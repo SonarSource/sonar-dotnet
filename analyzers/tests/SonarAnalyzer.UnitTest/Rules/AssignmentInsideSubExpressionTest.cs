@@ -35,6 +35,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AssignmentInsideSubExpression_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\AssignmentInsideSubExpression.CSharp9.cs", new AssignmentInsideSubExpression());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AssignmentInsideSubExpression.CSharp9.cs", new AssignmentInsideSubExpression());
     }
 }

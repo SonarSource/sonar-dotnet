@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SillyBitwiseOperation_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\SillyBitwiseOperation.CSharp9.cs", new CS.SillyBitwiseOperation());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SillyBitwiseOperation.CSharp9.cs", new CS.SillyBitwiseOperation());
 #endif
 
         [TestMethod]

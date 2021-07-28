@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassWithOnlyStaticMember_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ClassWithOnlyStaticMember.CSharp9.cs", new ClassWithOnlyStaticMember());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassWithOnlyStaticMember.CSharp9.cs", new ClassWithOnlyStaticMember());
 #endif
     }
 }

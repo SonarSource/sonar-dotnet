@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LossOfFractionInDivision_FromCSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\LossOfFractionInDivision.CSharp9.cs", new LossOfFractionInDivision());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LossOfFractionInDivision.CSharp9.cs", new LossOfFractionInDivision());
 #endif
     }
 }

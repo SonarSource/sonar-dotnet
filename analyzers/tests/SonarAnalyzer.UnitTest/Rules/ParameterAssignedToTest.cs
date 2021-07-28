@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterAssignedTo_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ParameterAssignedTo.CSharp9.cs", new CS.ParameterAssignedTo());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ParameterAssignedTo.CSharp9.cs", new CS.ParameterAssignedTo());
 #endif
 
         [TestMethod]

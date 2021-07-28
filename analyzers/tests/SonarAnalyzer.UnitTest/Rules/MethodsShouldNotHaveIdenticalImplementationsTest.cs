@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs", new CS.MethodsShouldNotHaveIdenticalImplementations());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs", new CS.MethodsShouldNotHaveIdenticalImplementations());
 #endif
 
         [TestMethod]

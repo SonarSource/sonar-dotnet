@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericTypeParameterUnused_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterUnused.CSharp9.cs", new GenericTypeParameterUnused());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterUnused.CSharp9.cs", new GenericTypeParameterUnused());
 #endif
     }
 }

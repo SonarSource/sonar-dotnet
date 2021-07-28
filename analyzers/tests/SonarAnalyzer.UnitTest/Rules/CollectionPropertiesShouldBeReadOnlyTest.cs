@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CollectionPropertiesShouldBeReadOnly_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\CollectionPropertiesShouldBeReadOnly.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CollectionPropertiesShouldBeReadOnly.CSharp9.cs",
                                                       new CollectionPropertiesShouldBeReadOnly(),
                                                       MetadataReferenceFacade.SystemRuntimeSerialization);
 #endif

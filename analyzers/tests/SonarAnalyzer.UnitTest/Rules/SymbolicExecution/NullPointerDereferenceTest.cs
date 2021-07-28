@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_ValidatedNotNull() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 using System;
 
 public sealed class ValidatedNotNullAttribute : Attribute { }
@@ -101,7 +101,7 @@ public static class Utils
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\NullPointerDereference.CSharp9.cs", GetAnalyzer());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NullPointerDereference.CSharp9.cs", GetAnalyzer());
 #endif
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>

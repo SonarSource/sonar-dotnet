@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SingleStatementPerLine_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\SingleStatementPerLine.CSharp9.cs", new CS.SingleStatementPerLine());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SingleStatementPerLine.CSharp9.cs", new CS.SingleStatementPerLine());
 #endif
 
         [TestMethod]

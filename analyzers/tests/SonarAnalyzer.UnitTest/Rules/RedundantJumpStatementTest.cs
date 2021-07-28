@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantJumpStatement_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\RedundantJumpStatement.CSharp9.cs", new RedundantJumpStatement());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantJumpStatement.CSharp9.cs", new RedundantJumpStatement());
 #endif
     }
 }

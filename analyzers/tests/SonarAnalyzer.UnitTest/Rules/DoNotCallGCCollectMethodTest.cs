@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallGCCollectMethod_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DoNotCallGCCollectMethod.CSharp9.cs", new DoNotCallGCCollectMethod());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallGCCollectMethod.CSharp9.cs", new DoNotCallGCCollectMethod());
 #endif
     }
 }

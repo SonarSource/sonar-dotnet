@@ -45,24 +45,24 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionExplicitOn_IsOff() =>
-            Verifier.VerifyNonConcurrentVisualBasicAnalyzer("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}", new OptionExplicitOn());
+            Verifier.VerifyVisualBasicAnalyzer("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}", new OptionExplicitOn());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionExplicitOn_IsOn() =>
-            Verifier.VerifyNonConcurrentVisualBasicAnalyzer("Option Explicit On", new OptionExplicitOn());
+            Verifier.VerifyVisualBasicAnalyzer("Option Explicit On", new OptionExplicitOn());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionExplicitOn_IsMissing() =>
-            Verifier.VerifyNonConcurrentVisualBasicAnalyzer("Option Strict Off", new OptionExplicitOn());
+            Verifier.VerifyVisualBasicAnalyzer("Option Strict Off", new OptionExplicitOn());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionExplicitOn_Concurrent()
         {
-            using var scope = new EnvironmentVariableScope();
-            scope.SetVariableInRelease(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
+            using var scope = new EnvironmentVariableScope(true);
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
             var project = SolutionBuilder.Create()
                                          .AddProject(AnalyzerLanguage.VisualBasic)
                                          .AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}")

@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LdapConnectionsShouldBeSecure_FromCSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp9.cs",
                 new LdapConnectionShouldBeSecure(),
                 MetadataReferenceFacade.SystemDirectoryServices);
 #endif

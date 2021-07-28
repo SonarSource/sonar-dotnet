@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using FluentAssertions;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis;
@@ -55,18 +56,30 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             DiagnosticVerifier.GetAllDiagnostics(compilation, diagnosticAnalyzers, checkMode);
         }
 
-        public static void VerifyNonConcurrentCSharpAnalyzer(string snippet,
+        /// <summary>
+        /// Verify analyzer from C# on a snippet. Note that analyzer is being run in non-concurrent execution mode,
+        /// that means that issues regarding concurrent execution could not be detected with this method.
+        /// </summary>
+        public static void VerifyCSharpAnalyzer(string snippet,
                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                         IEnumerable<MetadataReference> additionalReferences) =>
-            VerifyNonConcurrentCSharpAnalyzer(snippet, diagnosticAnalyzer, null, CompilationErrorBehavior.Default, additionalReferences);
+            VerifyCSharpAnalyzer(snippet, diagnosticAnalyzer, null, CompilationErrorBehavior.Default, additionalReferences);
 
-        public static void VerifyNonConcurrentCSharpAnalyzer(string snippet,
+        /// <summary>
+        /// Verify analyzer from C# on a snippet. Note that analyzer is being run in non-concurrent execution mode,
+        /// that means that issues regarding concurrent execution could not be detected with this method.
+        /// </summary>
+        public static void VerifyCSharpAnalyzer(string snippet,
                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                         CompilationErrorBehavior checkMode,
                                         IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyNonConcurrentCSharpAnalyzer(snippet, diagnosticAnalyzer, null, checkMode, additionalReferences);
+            VerifyCSharpAnalyzer(snippet, diagnosticAnalyzer, null, checkMode, additionalReferences);
 
-        public static void VerifyNonConcurrentCSharpAnalyzer(string snippet,
+        /// <summary>
+        /// Verify analyzer from C# on a snippet. Note that analyzer is being run in non-concurrent execution mode,
+        /// that means that issues regarding concurrent execution could not be detected with this method.
+        /// </summary>
+        public static void VerifyCSharpAnalyzer(string snippet,
                                                 SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                 IEnumerable<ParseOptions> options = null,
                                                 CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
@@ -76,7 +89,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             CompileAndVerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode);
         }
 
-        public static void VerifyNonConcurrentVisualBasicAnalyzer(string snippet,
+        /// <summary>
+        /// Verify analyzer from VB.NET on a snippet. Note that analyzer is being run in non-concurrent execution mode,
+        /// that means that issues regarding concurrent execution could not be detected with this method.
+        /// </summary>
+        public static void VerifyVisualBasicAnalyzer(string snippet,
                                                      DiagnosticAnalyzer diagnosticAnalyzer,
                                                      CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                      IEnumerable<MetadataReference> additionalReferences = null)
@@ -86,9 +103,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         /// <summary>
-        /// Verify analyzer from C# 9 with top level statements.
+        /// Verify analyzer from C# 9 with top level statements. Note that analyzer is being run in non-concurrent execution mode,
+        /// that means that issues regarding concurrent execution could not be detected with this method.
         /// </summary>
-        public static void VerifyNonConcurrentAnalyzerFromCSharp9Console(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+        public static void VerifyAnalyzerFromCSharp9Console(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(new[] { path },
                                         new[] { diagnosticAnalyzer },
                                         ParseOptionsHelper.FromCSharp9,
@@ -97,19 +115,29 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                         additionalReferences);
 
         /// <summary>
-        /// Verify analyzer from C# 9 with top level statements.
+        /// Verify analyzer from C# 9 with top level statements. Note that analyzer is being run in non-concurrent execution mode,
+        /// that means that issues regarding concurrent execution could not be detected with this method.
         /// </summary>
-        public static void VerifyNonConcurrentAnalyzerFromCSharp9Console(string path, DiagnosticAnalyzer[] diagnosticAnalyzers, IEnumerable<MetadataReference> additionalReferences = null) =>
+        public static void VerifyAnalyzerFromCSharp9Console(string path, DiagnosticAnalyzer[] diagnosticAnalyzers, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(new[] { path }, diagnosticAnalyzers, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.ConsoleApplication, additionalReferences);
 
-        public static void VerifyNonConcurrentAnalyzerFromCSharp9LibraryInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+        /// <summary>
+        /// Verify analyzer from C# 9 on a test library project. Note that analyzer is being run in non-concurrent execution mode,
+        /// that means that issues regarding concurrent execution could not be detected with this method.
+        /// </summary>
+        public static void VerifyAnalyzerFromCSharp9LibraryInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzerFromCSharp9InTest(path, diagnosticAnalyzer, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
-        public static void VerifyNonConcurrentAnalyzerFromCSharp9ConsoleInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+        /// <summary>
+        /// Verify analyzer from C# 9 on a test console project. Note that analyzer is being run in non-concurrent execution mode,
+        /// that means that issues regarding concurrent execution could not be detected with this method.
+        /// </summary>
+        public static void VerifyAnalyzerFromCSharp9ConsoleInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzerFromCSharp9InTest(path, diagnosticAnalyzer, OutputKind.ConsoleApplication, additionalReferences);
 
         /// <summary>
-        /// Verify analyzer from C# 9 without top level statements.
+        /// Verify analyzer from C# 9 without top level statements. Note that analyzer is being run in non-concurrent execution mode,
+        /// that means that issues regarding concurrent execution could not be detected with this method.
         /// </summary>
         public static void VerifyAnalyzerFromCSharp9Library(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(new[] { path },
@@ -224,8 +252,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<ParseOptions> options = null,
                                                        IEnumerable<MetadataReference> additionalReferences = null)
         {
-            using var scope = new EnvironmentVariableScope();
-            scope.SetVariableInRelease(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
+            using var scope = new EnvironmentVariableScope(true);
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
             VerifyNonConcurrentAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
         }
 
@@ -371,9 +399,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                            IEnumerable<MetadataReference> additionalReferences,
                                            string sonarProjectConfigPath = null)
         {
-            using var scope = new EnvironmentVariableScope();
-            scope.SetVariableInRelease(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
-            var solution = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences, false, true);
+            using var scope = new EnvironmentVariableScope(true);
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
+            var analyzerLanguage = AnalyzerLanguage.FromPath(paths.First());
+            var content = paths.Select(x => new ProjectFileAsPathAndContent(x, File.ReadAllText(new FileInfo(x).FullName, Encoding.UTF8))).ToList();
+            var duplicatedFiles = content.Select(x => x.Duplicate(analyzerLanguage)).ToList();
+            content.AddRange(duplicatedFiles);
+            var solution = SolutionBuilder.CreateSolutionFromContent(content, analyzerLanguage, outputKind, additionalReferences);
             CompileAndVerifyAnalyzer(solution, diagnosticAnalyzers, options, checkMode, sonarProjectConfigPath);
         }
 

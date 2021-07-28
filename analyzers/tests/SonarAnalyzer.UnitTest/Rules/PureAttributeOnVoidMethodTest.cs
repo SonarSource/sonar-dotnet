@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PureAttributeOnVoidMethod_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\PureAttributeOnVoidMethod.CSharp9.cs", new CS.PureAttributeOnVoidMethod());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\PureAttributeOnVoidMethod.CSharp9.cs", new CS.PureAttributeOnVoidMethod());
 #endif
 
         [TestMethod]

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableReturnedFromUsing_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DisposableReturnedFromUsing.CSharp9.cs", new DisposableReturnedFromUsing());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableReturnedFromUsing.CSharp9.cs", new DisposableReturnedFromUsing());
 #endif
     }
 }

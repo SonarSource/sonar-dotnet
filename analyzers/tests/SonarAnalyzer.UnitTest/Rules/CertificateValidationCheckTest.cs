@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
                                                       new CS.CertificateValidationCheck(),
                                                       GetAdditionalReferences());
 #endif

@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseUriInsteadOfString_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\UseUriInsteadOfString.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseUriInsteadOfString.CSharp9.cs",
                                                       new UseUriInsteadOfString(),
                                                       MetadataReferenceFacade.SystemDrawing);
 #endif
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseUriInsteadOfString_InvalidCode() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 public class Foo
 {
 }

@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ExecutingSqlQueries.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ExecutingSqlQueries.CSharp9.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 GetReferencesNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()));
 

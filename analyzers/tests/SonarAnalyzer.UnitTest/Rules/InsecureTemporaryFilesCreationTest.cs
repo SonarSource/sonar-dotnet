@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureTemporaryFilesCreation_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\InsecureTemporaryFilesCreation.CSharp9.cs", new CS.InsecureTemporaryFilesCreation());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureTemporaryFilesCreation.CSharp9.cs", new CS.InsecureTemporaryFilesCreation());
 
         [TestMethod]
         [TestCategory("Rule")]

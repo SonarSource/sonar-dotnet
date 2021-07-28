@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SuppressFinalizeUseless_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\SuppressFinalizeUseless.CSharp9.cs", new SuppressFinalizeUseless());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SuppressFinalizeUseless.CSharp9.cs", new SuppressFinalizeUseless());
 #endif
 
         [TestMethod]

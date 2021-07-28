@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9.cs",
                 new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
                 MetadataReferenceFacade.SystemXml
                     .Concat(MetadataReferenceFacade.SystemData)
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9.cs",
                 new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
                 MetadataReferenceFacade.SystemXml.ToArray());
 #endif
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9.cs",
                                                       new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
                                                       MetadataReferenceFacade.SystemXml
                                                           .Concat(MetadataReferenceFacade.SystemData)
@@ -111,7 +111,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9.cs",
                                                       new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
                                                       MetadataReferenceFacade.SystemXml
                                                           .Concat(MetadataReferenceFacade.SystemData)

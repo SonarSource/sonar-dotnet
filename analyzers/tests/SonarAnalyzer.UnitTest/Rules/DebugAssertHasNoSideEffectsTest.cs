@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DebugAssertHasNoSideEffects_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DebugAssertHasNoSideEffects.CSharp9.cs", new DebugAssertHasNoSideEffects());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DebugAssertHasNoSideEffects.CSharp9.cs", new DebugAssertHasNoSideEffects());
 #endif
     }
 }

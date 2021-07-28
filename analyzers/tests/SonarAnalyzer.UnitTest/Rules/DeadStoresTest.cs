@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DeadStores_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DeadStores.CSharp9.cs", new DeadStores());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeadStores.CSharp9.cs", new DeadStores());
 #endif
     }
 }

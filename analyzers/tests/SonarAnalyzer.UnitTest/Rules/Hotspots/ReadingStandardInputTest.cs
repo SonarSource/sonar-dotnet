@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ReadingStandardInput_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ReadingStandardInput.CSharp9.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ReadingStandardInput.CSharp9.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
 #endif
 
         [TestMethod]

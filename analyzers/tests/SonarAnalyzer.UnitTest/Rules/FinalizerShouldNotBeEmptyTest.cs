@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FinalizerShouldNotBeEmpty_InvalidCode() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"class Program4
+            Verifier.VerifyCSharpAnalyzer(@"class Program4
     {
         ~Program4() =>
     }", new FinalizerShouldNotBeEmpty(), CompilationErrorBehavior.Ignore);

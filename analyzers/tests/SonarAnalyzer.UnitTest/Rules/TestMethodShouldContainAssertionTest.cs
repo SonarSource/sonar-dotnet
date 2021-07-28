@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(NUnitVersions.Ver27)]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_NUnit_V2Specific(string testFwkVersion) =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using NUnit.Framework;
 
@@ -138,7 +138,7 @@ public class Foo
         [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver4)]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_NUnit_FluentAssertionsLegacy(string testFwkVersion, string fluentVersion) =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using FluentAssertions;
 using NUnit.Framework;

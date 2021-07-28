@@ -37,13 +37,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_CS_FromCSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp9.cs", new CS.ImplementSerializationMethodsCorrectly());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp9.cs", new CS.ImplementSerializationMethodsCorrectly());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_CS_InvalidCode() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 [Serializable]
 public class Foo
 {

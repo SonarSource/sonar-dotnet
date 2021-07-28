@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyNullableValueAccess_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\EmptyNullableValueAccess.CSharp9.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyNullableValueAccess.CSharp9.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
 #endif
     }
 }

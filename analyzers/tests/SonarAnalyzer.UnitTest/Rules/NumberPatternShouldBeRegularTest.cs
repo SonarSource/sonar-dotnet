@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NumberPatternShouldBeRegular_FromCSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\NumberPatternShouldBeRegular.CSharp9.cs", new NumberPatternShouldBeRegular());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NumberPatternShouldBeRegular.CSharp9.cs", new NumberPatternShouldBeRegular());
 #endif
 
         [DataTestMethod]

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposeNotImplementingDispose_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DisposeNotImplementingDispose.CSharp9.cs", new DisposeNotImplementingDispose());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposeNotImplementingDispose.CSharp9.cs", new DisposeNotImplementingDispose());
 #endif
     }
 }

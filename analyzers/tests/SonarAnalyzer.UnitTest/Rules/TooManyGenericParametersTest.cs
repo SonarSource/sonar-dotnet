@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TooManyGenericParameters_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\TooManyGenericParameters.CSharp9.cs", new TooManyGenericParameters());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyGenericParameters.CSharp9.cs", new TooManyGenericParameters());
 #endif
     }
 }

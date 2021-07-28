@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void BypassingAccessibility_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\BypassingAccessibility.CSharp9.cs", new CS.BypassingAccessibility());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\BypassingAccessibility.CSharp9.cs", new CS.BypassingAccessibility());
 
         [TestMethod]
         [TestCategory("Rule")]

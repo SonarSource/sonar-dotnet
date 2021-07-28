@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckArgumentException_TopLevelStatements() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\CheckArgumentException.TopLevelStatements.cs", new CheckArgumentException());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CheckArgumentException.TopLevelStatements.cs", new CheckArgumentException());
 #endif
     }
 }

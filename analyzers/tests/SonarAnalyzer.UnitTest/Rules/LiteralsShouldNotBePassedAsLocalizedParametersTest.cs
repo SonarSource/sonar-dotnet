@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LiteralsShouldNotBePassedAsLocalizedParameters_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.CSharp9.cs",
                                                       new LiteralsShouldNotBePassedAsLocalizedParameters(),
                                                       MetadataReferenceFacade.SystemComponentModelPrimitives);
 #endif

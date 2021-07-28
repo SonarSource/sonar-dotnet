@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CS_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp9.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp9.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
 #endif
 
         [TestMethod]
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_InvalidSyntax_CS() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 public class Foo
 {
     public string ()

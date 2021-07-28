@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs",
                                                       new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                                                       AdditionalReferences);
 #endif

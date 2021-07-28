@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchCaseFallsThroughToDefault_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\SwitchCaseFallsThroughToDefault.CSharp9.cs", new SwitchCaseFallsThroughToDefault());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SwitchCaseFallsThroughToDefault.CSharp9.cs", new SwitchCaseFallsThroughToDefault());
 #endif
 
         [TestMethod]

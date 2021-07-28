@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyNamesShouldNotMatchGetMethods_InvalidCode() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
     public int { get; } // Missing identifier on purpose
     public int () { return 42; } // Missing identifier on purpose
 ", new PropertyNamesShouldNotMatchGetMethods(), CompilationErrorBehavior.Ignore);

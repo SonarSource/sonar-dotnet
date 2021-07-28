@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         [TestCategory("Rule")]
         public void InvalidCastToInterface_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\InvalidCastToInterface.CSharp9.cs", GetAnalyzers());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InvalidCastToInterface.CSharp9.cs", GetAnalyzers());
 #endif
 
         private static DiagnosticAnalyzer[] GetAnalyzers() =>

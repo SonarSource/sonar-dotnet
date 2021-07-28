@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ReversedOperators_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ReversedOperators.CSharp9.cs", new CS.ReversedOperators());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReversedOperators.CSharp9.cs", new CS.ReversedOperators());
 #endif
 
         [TestMethod]

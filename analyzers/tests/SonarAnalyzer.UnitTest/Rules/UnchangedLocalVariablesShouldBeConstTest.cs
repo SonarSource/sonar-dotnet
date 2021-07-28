@@ -36,13 +36,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnchangedLocalVariablesShouldBeConst_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp9.cs", new UnchangedLocalVariablesShouldBeConst());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp9.cs", new UnchangedLocalVariablesShouldBeConst());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnchangedLocalVariablesShouldBeConst_InvalidCode() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 // invalid code
 public void Test_TypeThatCannotBeConst(int arg)
 {

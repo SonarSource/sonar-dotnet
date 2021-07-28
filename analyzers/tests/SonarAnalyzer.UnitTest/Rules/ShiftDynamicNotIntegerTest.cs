@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ShiftDynamicNotInteger_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ShiftDynamicNotInteger.CSharp9.cs", new CS.ShiftDynamicNotInteger());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ShiftDynamicNotInteger.CSharp9.cs", new CS.ShiftDynamicNotInteger());
 #endif
 
         [TestMethod]

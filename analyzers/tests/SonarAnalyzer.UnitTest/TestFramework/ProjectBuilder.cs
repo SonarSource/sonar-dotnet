@@ -84,6 +84,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
             paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
 
+        public ProjectBuilder AddDocuments(IEnumerable<ProjectFileAsPathAndContent> paths) =>
+            paths.Aggregate(this, (projectBuilder, path) => AddDocument(projectBuilder.Project,
+                                                                        new FileInfo(path.Path).Name,
+                                                                        path.Content,
+                                                                        false));
         public ProjectBuilder AddDocument(string path, bool removeAnalysisComments = false)
         {
             if (path == null)
@@ -99,9 +104,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 : AddDocument(Project, fileInfo.Name, File.ReadAllText(fileInfo.FullName, Encoding.UTF8), removeAnalysisComments);
         }
 
-        public ProjectBuilder AddDuplicatedDocuments(IEnumerable<string> paths) =>
-            paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDuplicatedDocument(path));
-
         public ProjectBuilder AddSnippet(string code, string fileName = null, bool removeAnalysisComments = false)
         {
             if (code == null)
@@ -116,42 +118,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static ProjectBuilder FromProject(Project project) =>
             new ProjectBuilder(project);
-
-        private ProjectBuilder AddDuplicatedDocument(string path, bool removeAnalysisComments = false)
-        {
-            if (path == null)
-            {
-                throw new ArgumentNullException(nameof(path));
-            }
-
-            var fileInfo = new FileInfo(path);
-
-            if (fileInfo.Extension != FileExtension)
-            {
-                throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not" +
-                                            $" match the project language '{Project.Language}'.", nameof(path));
-            }
-            else
-            {
-                var content = File.ReadAllText(fileInfo.FullName, Encoding.UTF8);
-                var project = AddDocument(Project, fileInfo.Name, content, removeAnalysisComments);
-                return AddDocument(project.Project, $"{fileInfo.Name}{FileExtension}", AppendNamespace(content), removeAnalysisComments);
-            }
-        }
-
-        private string AppendNamespace(string content) =>
-            Project.Language switch
-            {
-                LanguageNames.CSharp => $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}",
-                LanguageNames.VisualBasic => InsertNamespaceForVB(content),
-                _ => content
-            };
-
-        private static string InsertNamespaceForVB(string content)
-        {
-            var match = Regex.Match(content, @"\s*Imports\s+(\w|\.|=| )*\s*", RegexOptions.RightToLeft);
-            return content.Insert(match.Index + match.Length, "Namespace AppendedNamespaceForConcurrencyTest\n") + "\nEnd Namespace";
-        }
 
         private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent, bool removeAnalysisComments)
         {

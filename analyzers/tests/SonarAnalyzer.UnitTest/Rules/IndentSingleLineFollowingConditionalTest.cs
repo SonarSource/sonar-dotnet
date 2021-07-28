@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void IndentSingleLineFollowingConditional_FromCSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\IndentSingleLineFollowingConditional.CSharp9.cs", new IndentSingleLineFollowingConditional());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IndentSingleLineFollowingConditional.CSharp9.cs", new IndentSingleLineFollowingConditional());
 #endif
     }
 }

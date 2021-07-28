@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParametersCorrectOrder_InvalidCode_CS() =>
-            Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Verifier.VerifyCSharpAnalyzer(@"
 public class Foo
 {
     public void Bar()
@@ -58,7 +58,7 @@ public class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void ParametersCorrectOrder_InvalidCode_VB() =>
-            Verifier.VerifyNonConcurrentVisualBasicAnalyzer(@"
+            Verifier.VerifyVisualBasicAnalyzer(@"
 Public Class Foo
     Public Sub Bar()
         Dim x = New ()

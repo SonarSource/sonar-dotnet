@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EqualityOnModulus_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\EqualityOnModulus.CSharp9.cs", new EqualityOnModulus());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EqualityOnModulus.CSharp9.cs", new EqualityOnModulus());
 #endif
     }
 }

@@ -30,24 +30,28 @@ namespace SonarAnalyzer.UnitTest.Helpers
     /// </summary>
     public sealed class EnvironmentVariableScope : IDisposable
     {
+        private readonly bool setOnlyInRelease;
         private IDictionary<string, string> originalValues = new Dictionary<string, string>();
+
+        public EnvironmentVariableScope(bool setVariablesOnlyInRelease = false)
+        {
+            setOnlyInRelease = setVariablesOnlyInRelease;
+        }
 
         public void SetVariable(string name, string value)
         {
+            if (setOnlyInRelease)
+            {
+#if !RELEASE
+                return;
+#endif
+            }
             // Store the original value, or null if there isn't one
             if (!originalValues.ContainsKey(name))
             {
                 originalValues.Add(name, Environment.GetEnvironmentVariable(name));
             }
             Environment.SetEnvironmentVariable(name, value, EnvironmentVariableTarget.Process);
-        }
-
-        public void SetVariableInRelease(string name, string value)
-        {
-            // do nothing in Debug mode
-#if RELEASE
-            SetVariable(name, value);
-#endif
         }
 
         #region IDispose implementation

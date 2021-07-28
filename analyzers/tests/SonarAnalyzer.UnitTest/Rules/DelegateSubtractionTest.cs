@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DelegateSubtraction_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\DelegateSubtraction.CSharp9.cs", new DelegateSubtraction());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DelegateSubtraction.CSharp9.cs", new DelegateSubtraction());
 #endif
     }
 }

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void IssueSuppression_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\IssueSuppression.CSharp9.cs", new IssueSuppression());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IssueSuppression.CSharp9.cs", new IssueSuppression());
 #endif
     }
 }

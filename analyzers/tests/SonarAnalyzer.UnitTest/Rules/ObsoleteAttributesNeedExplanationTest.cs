@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ObsoleteAttributesNeedExplanation_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ObsoleteAttributesNeedExplanation.CSharp9.cs", new ObsoleteAttributesNeedExplanation());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ObsoleteAttributesNeedExplanation.CSharp9.cs", new ObsoleteAttributesNeedExplanation());
 #endif
     }
 }

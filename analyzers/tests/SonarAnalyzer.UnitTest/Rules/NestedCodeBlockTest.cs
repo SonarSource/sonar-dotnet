@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NestedCodeBlock_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\NestedCodeBlock.CSharp9.cs", new NestedCodeBlock());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NestedCodeBlock.CSharp9.cs", new NestedCodeBlock());
 #endif
     }
 }

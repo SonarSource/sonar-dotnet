@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ReturnValueIgnored_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ReturnValueIgnored.CSharp9.cs", new ReturnValueIgnored());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnValueIgnored.CSharp9.cs", new ReturnValueIgnored());
 #endif
     }
 }

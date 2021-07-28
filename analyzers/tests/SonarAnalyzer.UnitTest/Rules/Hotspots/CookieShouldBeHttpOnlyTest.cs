@@ -97,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\Hotspots\CookieShouldBeHttpOnly.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\CookieShouldBeHttpOnly.CSharp9.cs",
                 new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()));
 

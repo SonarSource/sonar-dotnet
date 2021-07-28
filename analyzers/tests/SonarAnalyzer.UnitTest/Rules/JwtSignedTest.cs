@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_CS_FromCSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\JwtSigned.CSharp9.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\JwtSigned.CSharp9.cs", new CS.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
 #endif
 
         [TestMethod]

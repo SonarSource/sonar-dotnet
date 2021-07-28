@@ -71,14 +71,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp9_TopLevelStatements() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs", GetAnalyzer());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs", GetAnalyzer());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_UncaughtException()
         {
-            Action action = () => Verifier.VerifyNonConcurrentCSharpAnalyzer(@"
+            Action action = () => Verifier.VerifyCSharpAnalyzer(@"
 using System;
 public class Reproducer
 {

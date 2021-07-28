@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesFormatters_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\RestrictDeserializedTypes.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RestrictDeserializedTypes.CSharp9.cs",
                 GetAnalyzer(),
                 new[] { MetadataReferences.CoreMetadataReference.SystemRuntimeSerializationFormatters });
 #endif

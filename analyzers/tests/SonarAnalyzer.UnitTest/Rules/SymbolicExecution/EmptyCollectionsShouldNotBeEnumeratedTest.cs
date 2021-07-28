@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs",
                                                                    new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()));
 #endif
     }

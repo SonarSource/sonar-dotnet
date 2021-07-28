@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(NuGetMetadataReference.SystemDataSqlClient())
                 .Concat(NuGetMetadataReference.SystemDataSQLiteCore());
 
-            Verifier.VerifyNonConcurrentCSharpAnalyzer($@"
+            Verifier.VerifyCSharpAnalyzer($@"
 using {sqlNamespace};
 namespace TestNamespace
 {{
@@ -107,7 +107,7 @@ namespace TestNamespace
                 .Concat(NuGetMetadataReference.SystemDataSqlClient())
                 .Concat(NuGetMetadataReference.SystemDataOracleClient());
 
-            Verifier.VerifyNonConcurrentCSharpAnalyzer($@"
+            Verifier.VerifyCSharpAnalyzer($@"
 using {sqlNamespace};
 namespace TestNamespace
 {{

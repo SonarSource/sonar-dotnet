@@ -65,8 +65,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static SolutionBuilder CreateSolutionFromPaths(IEnumerable<string> paths,
                                                               OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                                               IEnumerable<MetadataReference> additionalReferences = null,
-                                                              bool isSupportForCSharp9InitNeeded = false,
-                                                              bool duplicateDocumentsNeeded = false)
+                                                              bool isSupportForCSharp9InitNeeded = false)
         {
             if (paths == null || !paths.Any())
             {
@@ -79,23 +78,45 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 throw new ArgumentException("Please use a collection of paths with the same extension", nameof(paths));
             }
 
-            var project = duplicateDocumentsNeeded switch
-            {
-                true => Create()
-                                .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
-                                .AddDuplicatedDocuments(paths)
-                                .AddReferences(additionalReferences),
-                false => Create()
-                                .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
-                                .AddDocuments(paths)
-                                .AddReferences(additionalReferences),
-            };
+            var project = Create()
+                                  .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
+                                  .AddDocuments(paths)
+                                  .AddReferences(additionalReferences);
 
             if (isSupportForCSharp9InitNeeded)
             {
                 project = project.AddSnippet(InitSnippet);
             }
 
+            return AddReferencesToSolution(additionalReferences, project);
+        }
+
+        public static SolutionBuilder CreateSolutionFromContent(IEnumerable<ProjectFileAsPathAndContent> pathsAndContents,
+                                                                AnalyzerLanguage language,
+                                                                OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                                IEnumerable<MetadataReference> additionalReferences = null)
+        {
+            if (pathsAndContents == null || !pathsAndContents.Any())
+            {
+                throw new ArgumentException("Please specify at least one file to analyze.", nameof(pathsAndContents));
+            }
+
+            var extensions = pathsAndContents.Select(path => Path.GetExtension(path.Path)).Distinct().ToList();
+            if (extensions.Count != 1)
+            {
+                throw new ArgumentException("Please use a collection of paths with the same extension", nameof(pathsAndContents));
+            }
+
+            var project = Create()
+                                  .AddProject(language, outputKind: outputKind)
+                                  .AddDocuments(pathsAndContents)
+                                  .AddReferences(additionalReferences);
+
+            return AddReferencesToSolution(additionalReferences, project);
+        }
+
+        private static SolutionBuilder AddReferencesToSolution(IEnumerable<MetadataReference> additionalReferences, ProjectBuilder project)
+        {
             if (additionalReferences != null
                 && additionalReferences.Any(r => r.Display.Contains("\\netstandard")))
             {

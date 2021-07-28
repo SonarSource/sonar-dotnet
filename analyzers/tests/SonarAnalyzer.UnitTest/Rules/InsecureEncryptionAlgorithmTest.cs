@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureEncryptionAlgorithm_CSharp9() =>
-            Verifier.VerifyNonConcurrentAnalyzerFromCSharp9Console(@"TestCases\InsecureEncryptionAlgorithm.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureEncryptionAlgorithm.CSharp9.cs",
                                                       new CS.InsecureEncryptionAlgorithm(),
                                                       GetAdditionalReferences());
 #endif
