@@ -563,4 +563,31 @@ namespace Tests.Diagnostics
 //                                                                                                 ^^^^ Secondary
         }
     }
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/4710
+    public static class ReproFor4710
+    {
+        public static void SomeMethodWithNameofCall()
+        {
+            Console.WriteLine(nameof(SomeMethodWithNameofCall));
+        }
+
+        public static void RestoreCertificateValidation(RemoteCertificateValidationCallback prevValidator)
+        {
+            ServicePointManager.ServerCertificateValidationCallback = prevValidator;
+        }
+    }
+
+    public static class UnknownTypeUSage
+    {
+        public static void SomeMethod(RemoteCertificateValidationCallback validator)
+        {
+            UnknownType.RestoreCertificateValidation(validator); // Error [CS0103]
+        }
+
+        public static void RestoreCertificateValidation(RemoteCertificateValidationCallback prevValidator)
+        {
+            ServicePointManager.ServerCertificateValidationCallback = prevValidator;
+        }
+    }
 }

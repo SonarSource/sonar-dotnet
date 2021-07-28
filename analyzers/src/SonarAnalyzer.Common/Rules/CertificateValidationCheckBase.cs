@@ -299,7 +299,7 @@ namespace SonarAnalyzer.Rules
             return lst;
         }
 
-        private static ImmutableArray<TInvocationExpressionSyntax> FindInvocationList(SyntaxNodeAnalysisContext c, SyntaxNode root, IMethodSymbol method)
+        private ImmutableArray<TInvocationExpressionSyntax> FindInvocationList(SyntaxNodeAnalysisContext c, SyntaxNode root, IMethodSymbol method)
         {
             if (root == null || method == null)
             {
@@ -308,7 +308,10 @@ namespace SonarAnalyzer.Rules
             var ret = ImmutableArray.CreateBuilder<TInvocationExpressionSyntax>();
             foreach (var invocation in root.DescendantNodesAndSelf().OfType<TInvocationExpressionSyntax>())
             {
-                if (c.SemanticModel.GetSymbolInfo(invocation).Symbol.Equals(method))
+                if (Language.Syntax.InvocationIdentifier(invocation) is { } invocationIdentifier
+                    && invocationIdentifier.ValueText.Equals(method.Name, Language.NameComparison)
+                    && c.SemanticModel.GetSymbolInfo(invocation).Symbol is { } symbol
+                    && symbol.Equals(method))
                 {
                     ret.Add(invocation);
                 }
