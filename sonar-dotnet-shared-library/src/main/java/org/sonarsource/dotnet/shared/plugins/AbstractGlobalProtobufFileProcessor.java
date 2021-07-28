@@ -42,7 +42,7 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
 
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
-import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.FILEMETADATA_FILENAME;
 
 /**
  * Since SonarQube 7.5, InputFileFilter can only access to global configuration. Use this ProjectBuilder to collect 
@@ -73,7 +73,7 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
   }
 
   private void processMetadataReportIfPresent(Path reportPath) {
-    Path metadataReportProtobuf = reportPath.resolve(FILEMETADATA_OUTPUT_PROTOBUF_NAME);
+    Path metadataReportProtobuf = reportPath.resolve(FILEMETADATA_FILENAME);
     if (metadataReportProtobuf.toFile().exists()) {
       LOG.debug("Processing {}", metadataReportProtobuf);
       FileMetadataImporter fileMetadataImporter = new FileMetadataImporter();

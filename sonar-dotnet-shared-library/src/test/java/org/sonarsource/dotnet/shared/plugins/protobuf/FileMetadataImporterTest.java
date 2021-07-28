@@ -42,7 +42,7 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.FILEMETADATA_FILENAME;
 
 public class FileMetadataImporterTest {
   @Rule
@@ -56,7 +56,7 @@ public class FileMetadataImporterTest {
   private FileMetadataImporter fileMetadataImporter = new FileMetadataImporter(parser);
   private SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
 
-  private File protobuf = new File(TEST_DATA_DIR, FILEMETADATA_OUTPUT_PROTOBUF_NAME);
+  private File protobuf = new File(TEST_DATA_DIR, FILEMETADATA_FILENAME);
   private File invalidProtobuf = new File(TEST_DATA_DIR, "invalid-encoding.pb");
 
   @Test

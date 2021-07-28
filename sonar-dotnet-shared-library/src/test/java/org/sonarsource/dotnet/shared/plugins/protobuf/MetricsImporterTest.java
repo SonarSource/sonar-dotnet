@@ -43,7 +43,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.METRICS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.METRICS_FILENAME;
 
 public class MetricsImporterTest {
 
@@ -53,7 +53,7 @@ public class MetricsImporterTest {
   private static final File TEST_FILE = new File(TEST_DATA_DIR, TEST_FILE_PATH);
 
   private SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
-  private File protobuf = new File(TEST_DATA_DIR, METRICS_OUTPUT_PROTOBUF_NAME);
+  private File protobuf = new File(TEST_DATA_DIR, METRICS_FILENAME);
 
   @Before
   public void before() {

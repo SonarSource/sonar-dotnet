@@ -45,11 +45,11 @@ import org.sonarsource.dotnet.shared.plugins.protobuf.SymbolRefsImporter;
 
 @ScannerSide
 public class ProtobufDataImporter {
-  public static final String HIGHLIGHT_OUTPUT_PROTOBUF_NAME = "token-type.pb";
-  public static final String SYMBOLREFS_OUTPUT_PROTOBUF_NAME = "symrefs.pb";
-  public static final String CPDTOKENS_OUTPUT_PROTOBUF_NAME = "token-cpd.pb";
-  public static final String METRICS_OUTPUT_PROTOBUF_NAME = "metrics.pb";
-  public static final String FILEMETADATA_OUTPUT_PROTOBUF_NAME = "file-metadata.pb";
+  public static final String CPDTOKENS_FILENAME = "token-cpd.pb";
+  public static final String FILEMETADATA_FILENAME = "file-metadata.pb";
+  public static final String HIGHLIGHT_FILENAME = "token-type.pb";
+  public static final String METRICS_FILENAME = "metrics.pb";
+  public static final String SYMBOLREFS_FILENAME = "symrefs.pb";
 
   private static final Logger LOG = Loggers.get(ProtobufDataImporter.class);
 
@@ -72,10 +72,10 @@ public class ProtobufDataImporter {
       long protoFiles = countProtoFiles(protobufReportsDir);
       LOG.info(String.format("Importing results from %d proto %s in '%s'", protoFiles, StringUtils.pluralize("file", protoFiles), protobufReportsDir));
       // Note: the no-sonar "measure" must be imported before issues, otherwise the affected issues won't get excluded!
-      parseProtobuf(metricsImporter, protobufReportsDir, METRICS_OUTPUT_PROTOBUF_NAME);
-      parseProtobuf(highlightImporter, protobufReportsDir, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
-      parseProtobuf(symbolRefsImporter, protobufReportsDir, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
-      parseProtobuf(cpdTokensImporter, protobufReportsDir, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
+      parseProtobuf(metricsImporter, protobufReportsDir, METRICS_FILENAME);
+      parseProtobuf(highlightImporter, protobufReportsDir, HIGHLIGHT_FILENAME);
+      parseProtobuf(symbolRefsImporter, protobufReportsDir, SYMBOLREFS_FILENAME);
+      parseProtobuf(cpdTokensImporter, protobufReportsDir, CPDTOKENS_FILENAME);
     }
 
     metricsImporter.save();
