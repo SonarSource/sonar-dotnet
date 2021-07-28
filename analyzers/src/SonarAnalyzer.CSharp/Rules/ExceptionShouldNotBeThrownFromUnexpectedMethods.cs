@@ -38,12 +38,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3877";
         private const string MessageFormat = "Remove this 'throw' statement.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ImmutableArray<KnownType> DefaultAllowedExceptions =
-            ImmutableArray.Create(KnownType.System_NotImplementedException);
+        private static readonly ImmutableArray<KnownType> DefaultAllowedExceptions = ImmutableArray.Create(KnownType.System_NotImplementedException);
 
         private static readonly ImmutableArray<KnownType> EventAccessorAllowedExceptions =
             ImmutableArray.Create(
@@ -66,13 +65,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForIssue<MethodDeclarationSyntax>(c, mds => IsTrackedMethod(mds, c.SemanticModel),
-                    DefaultAllowedExceptions),
+                c => CheckForIssue<MethodDeclarationSyntax>(c, mds => IsTrackedMethod(mds, c.SemanticModel), DefaultAllowedExceptions),
                 SyntaxKind.MethodDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForIssue<ConstructorDeclarationSyntax>(c,
-                    cds => cds.Modifiers.Any(SyntaxKind.StaticKeyword), DefaultAllowedExceptions),
+                c => CheckForIssue<ConstructorDeclarationSyntax>(c, cds => cds.Modifiers.Any(SyntaxKind.StaticKeyword), DefaultAllowedExceptions),
                 SyntaxKind.ConstructorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -85,61 +82,49 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.RemoveAccessorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForIssue<ConversionOperatorDeclarationSyntax>(c,
-                    cods => cods.ImplicitOrExplicitKeyword.IsKind(SyntaxKind.ImplicitKeyword),
-                    DefaultAllowedExceptions),
+                c => CheckForIssue<ConversionOperatorDeclarationSyntax>(c, cods => cods.ImplicitOrExplicitKeyword.IsKind(SyntaxKind.ImplicitKeyword), DefaultAllowedExceptions),
                 SyntaxKind.ConversionOperatorDeclaration);
         }
 
-        private void CheckForIssue<TSyntax>(SyntaxNodeAnalysisContext analysisContext,
+        private static void CheckForIssue<TSyntax>(SyntaxNodeAnalysisContext analysisContext,
             Func<TSyntax, bool> isTrackedSyntax, ImmutableArray<KnownType> allowedThrowTypes)
             where TSyntax : SyntaxNode
         {
             var syntax = (TSyntax)analysisContext.Node;
-            if (!isTrackedSyntax(syntax))
+            // TODO move this after filtering the exceptions - for MethodDeclaration we are invoking the SemanticModel even if there's no `throw` inside
+            if (isTrackedSyntax(syntax))
             {
-                return;
+                ReportOnInvalidThrowStatement(analysisContext, syntax, allowedThrowTypes);
             }
-
-            ReportOnInvalidThrowStatement(analysisContext, syntax, allowedThrowTypes);
         }
 
-        private void ReportOnInvalidThrowStatement(SyntaxNodeAnalysisContext analysisContext,
+        private static void ReportOnInvalidThrowStatement(SyntaxNodeAnalysisContext analysisContext,
             SyntaxNode node, ImmutableArray<KnownType> allowedTypes)
         {
             var throwToReportOn = node.DescendantNodes()
                 .OfType<ThrowStatementSyntax>()
                 .Where(tss => tss.Expression != null)
                 .Select(tss => new NodeAndSymbol(tss, analysisContext.SemanticModel.GetSymbolInfo(tss.Expression).Symbol))
-                .FirstOrDefault(tuple => tuple.Symbol != null &&
-                    !tuple.Symbol.ContainingType.IsAny(allowedTypes) &&
-                    !tuple.Symbol.ContainingType.DerivesFromAny(allowedTypes))
+                .FirstOrDefault(tuple => tuple.Symbol != null
+                                && !tuple.Symbol.ContainingType.IsAny(allowedTypes)
+                                && !tuple.Symbol.ContainingType.DerivesFromAny(allowedTypes))
                 ?.Node;
 
             if (throwToReportOn != null)
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, throwToReportOn.GetLocation()));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwToReportOn.GetLocation()));
             }
         }
 
-        private static bool IsTrackedMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel)
-        {
-            var methodSymbol = semanticModel.GetDeclaredSymbol(declaration);
-            if (methodSymbol == null)
-            {
-                return false;
-            }
+        private static bool IsTrackedMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel) =>
+            semanticModel.GetDeclaredSymbol(declaration) is {} methodSymbol
+            && (methodSymbol.IsObjectEquals()
+                || methodSymbol.IsObjectGetHashCode()
+                || methodSymbol.IsObjectToString()
+                || methodSymbol.IsIDisposableDispose()
+                || methodSymbol.IsIEquatableEquals());
 
-            return methodSymbol.IsObjectEquals() ||
-                methodSymbol.IsObjectGetHashCode() ||
-                methodSymbol.IsObjectToString() ||
-                methodSymbol.IsIDisposableDispose() ||
-                methodSymbol.IsIEquatableEquals();
-        }
-
-        private static bool IsTrackedOperator(OperatorDeclarationSyntax declaration)
-        {
-            return TrackedOperators.Contains(declaration.OperatorToken.Kind());
-        }
+        private static bool IsTrackedOperator(OperatorDeclarationSyntax declaration) =>
+            TrackedOperators.Contains(declaration.OperatorToken.Kind());
     }
 }
