@@ -1,0 +1,1 @@
+First debug lineSecond debug lineSingle info lineSingle warning line

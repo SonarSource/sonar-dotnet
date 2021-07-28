@@ -48,6 +48,7 @@ public class ProtobufDataImporter {
   public static final String CPDTOKENS_FILENAME = "token-cpd.pb";
   public static final String FILEMETADATA_FILENAME = "file-metadata.pb";
   public static final String HIGHLIGHT_FILENAME = "token-type.pb";
+  public static final String LOG_FILENAME = "log.pb";
   public static final String METRICS_FILENAME = "metrics.pb";
   public static final String SYMBOLREFS_FILENAME = "symrefs.pb";
 
@@ -61,8 +62,7 @@ public class ProtobufDataImporter {
     this.noSonarFilter = noSonarFilter;
   }
 
-  public void importResults(SensorContext context, List<Path> protobufReportsDirectories,
-    UnaryOperator<String> toRealPath) {
+  public void importResults(SensorContext context, List<Path> protobufReportsDirectories, UnaryOperator<String> toRealPath) {
     RawProtobufImporter<MetricsInfo> metricsImporter = new MetricsImporter(context, fileLinesContextFactory, noSonarFilter, toRealPath);
     RawProtobufImporter<TokenTypeInfo> highlightImporter = new HighlightImporter(context, toRealPath);
     RawProtobufImporter<SymbolReferenceInfo> symbolRefsImporter = new SymbolRefsImporter(context, toRealPath);
