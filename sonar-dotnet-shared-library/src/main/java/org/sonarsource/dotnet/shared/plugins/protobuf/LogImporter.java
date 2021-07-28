@@ -21,6 +21,7 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.sonar.api.utils.log.Logger;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.LogInfo;
 
@@ -29,10 +30,12 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.LogInfo;
  */
 public class LogImporter extends RawProtobufImporter<LogInfo> {
 
+  private final Logger log;
   private List<LogInfo> messages = new ArrayList<>();
 
-  LogImporter() {
+  public LogImporter(Logger log) {
     super(SonarAnalyzer.LogInfo.parser());
+    this.log = log;
   }
 
   @Override
@@ -40,7 +43,29 @@ public class LogImporter extends RawProtobufImporter<LogInfo> {
     messages.add(message);
   }
 
-  public List<LogInfo> messages() {
-    return messages;
+  @Override
+  public void save() {
+    for (LogInfo message : messages) {
+      switch (message.getSeverity()) {
+        case DEBUG:
+          log.debug(message.getText());
+          break;
+
+        case INFO:
+          log.info(message.getText());
+          break;
+
+        case WARNING:
+          log.warn(message.getText());
+          break;
+
+        case UNKNOWN_SEVERITY:
+        default:
+          log.warn("Unexpected log message severity: " + message.getSeverity());
+          log.info(message.getText());
+      }
+    }
+
+    messages.clear();
   }
 }

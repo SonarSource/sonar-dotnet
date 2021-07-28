@@ -20,36 +20,44 @@
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import java.io.File;
-import java.util.List;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.LoggerLevel;
+import org.sonar.api.utils.log.Loggers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LogImporterTest {
   // see src/test/resources/ProtobufImporterTest/README.md for explanation
   private File protobuf = new File("src/test/resources/ProtobufImporterTest/custom-log.pb");
-  LogImporter sut = new LogImporter();
 
-  @Before
-  public void before() {
-    assertThat(protobuf).withFailMessage("no such file: " + protobuf).isFile();
-  }
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Test
   public void importLogMessages() {
+    Logger log = Loggers.get(LogImporterTest.class);
+    LogImporter sut = new LogImporter(log);
     sut.accept(protobuf.toPath());
-    List<SonarAnalyzer.LogInfo> ret = sut.messages();
+    sut.save();
 
-    assertThat(ret).hasSize(4);
-    assertThat(ret.get(0).getSeverity()).isEqualTo(SonarAnalyzer.LogSeverity.DEBUG);
-    assertThat(ret.get(0).getText()).isEqualTo("First debug line");
-    assertThat(ret.get(1).getSeverity()).isEqualTo(SonarAnalyzer.LogSeverity.DEBUG);
-    assertThat(ret.get(1).getText()).isEqualTo("Second debug line");
-    assertThat(ret.get(2).getSeverity()).isEqualTo(SonarAnalyzer.LogSeverity.INFO);
-    assertThat(ret.get(2).getText()).isEqualTo("Single info line");
-    assertThat(ret.get(3).getSeverity()).isEqualTo(SonarAnalyzer.LogSeverity.WARNING);
-    assertThat(ret.get(3).getText()).isEqualTo("Single warning line");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(2).contains("First debug line", "Second debug line");
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Single info line");
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Single warning line");
+  }
+
+  @Test
+  public void clearsInternalStateOnSave() {
+    Logger log = Loggers.get(LogImporterTest.class);
+    LogImporter sut = new LogImporter(log);
+    sut.accept(protobuf.toPath());
+    sut.save();
+    assertThat(logTester.logs()).isNotEmpty();
+    logTester.clear();
+
+    sut.save(); // Previous save cleared internal state so it should be empty this time
+    assertThat(logTester.logs()).isEmpty();
   }
 }
