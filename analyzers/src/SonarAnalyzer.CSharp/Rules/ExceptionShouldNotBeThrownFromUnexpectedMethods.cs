@@ -144,13 +144,27 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static bool IsTrackedMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel) =>
-            semanticModel.GetDeclaredSymbol(declaration) is { } methodSymbol
+            HasNameOrAttribute(declaration)
+            && semanticModel.GetDeclaredSymbol(declaration) is { } methodSymbol
             && (methodSymbol.IsObjectEquals()
                 || methodSymbol.IsObjectGetHashCode()
                 || methodSymbol.IsObjectToString()
                 || methodSymbol.IsIDisposableDispose()
                 || methodSymbol.IsIEquatableEquals()
                 || IsModuleInitializer(methodSymbol));
+
+        private static bool HasNameOrAttribute(MethodDeclarationSyntax declaration)
+        {
+            var name = declaration.Identifier.ValueText;
+            if (name == "Equals" || name == "GetHashCode" || name == "ToString" || name == "Dispose" || name == "Equals")
+            {
+                return true;
+            }
+            else
+            {
+                return declaration.AttributeLists.SelectMany(list => list.Attributes).Any(x => x.ArgumentList == null && x.Name.ToStringContains("ModuleInitializer"));
+            }
+        }
 
         private static bool IsModuleInitializer(IMethodSymbol methodSymbol) =>
             methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
