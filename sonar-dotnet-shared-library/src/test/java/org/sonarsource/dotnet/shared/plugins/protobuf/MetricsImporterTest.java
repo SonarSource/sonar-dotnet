@@ -43,7 +43,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.METRICS_OUTPUT_PROTOBUF_NAME;
 
 public class MetricsImporterTest {
 

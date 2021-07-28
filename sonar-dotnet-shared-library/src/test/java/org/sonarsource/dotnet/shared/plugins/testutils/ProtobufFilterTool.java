@@ -32,10 +32,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.METRICS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
 
 /**
  * Utility class to filter protobuf binary files to contain a single input-file (Program.cs)

@@ -37,12 +37,12 @@ import java.util.Map;
 /**
   This class is responsible of reading/importing the highlight info that was processed by the C#/VB.NET analyzer.
  */
-class HighlightImporter extends ProtobufImporter<SonarAnalyzer.TokenTypeInfo> {
+public class HighlightImporter extends ProtobufImporter<SonarAnalyzer.TokenTypeInfo> {
 
   private final SensorContext context;
   private final Map<InputFile, HashSet<TokenTypeInfo.TokenInfo>> fileHighlights = new HashMap<>();
 
-  HighlightImporter(SensorContext context, UnaryOperator<String> toRealPath) {
+  public HighlightImporter(SensorContext context, UnaryOperator<String> toRealPath) {
     super(SonarAnalyzer.TokenTypeInfo.parser(), context, SonarAnalyzer.TokenTypeInfo::getFilePath, toRealPath);
     this.context = context;
   }

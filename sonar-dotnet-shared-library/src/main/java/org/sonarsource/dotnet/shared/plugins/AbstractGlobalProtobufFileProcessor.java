@@ -42,7 +42,7 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
 
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
 
 /**
  * Since SonarQube 7.5, InputFileFilter can only access to global configuration. Use this ProjectBuilder to collect 

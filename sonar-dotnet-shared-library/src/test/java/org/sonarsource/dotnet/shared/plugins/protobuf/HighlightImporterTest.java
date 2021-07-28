@@ -30,7 +30,7 @@ import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
 
 public class HighlightImporterTest {
 

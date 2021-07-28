@@ -35,7 +35,7 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
 
 public class CPDTokensImporterTest {
 

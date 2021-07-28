@@ -42,7 +42,7 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
 
 public class FileMetadataImporterTest {
   @Rule
