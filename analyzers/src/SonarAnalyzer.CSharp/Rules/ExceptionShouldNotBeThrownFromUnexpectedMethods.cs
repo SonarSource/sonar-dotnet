@@ -97,6 +97,36 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
+        private static bool IsTrackedOperator(OperatorDeclarationSyntax declaration) =>
+            TrackedOperators.Contains(declaration.OperatorToken.Kind());
+
+        private static bool IsTrackedMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel) =>
+            HasTrackedMethodOrAttributeName(declaration)
+            && semanticModel.GetDeclaredSymbol(declaration) is { } methodSymbol
+            && HasTrackedMethodOrAttributeType(methodSymbol);
+
+        private static bool HasTrackedMethodOrAttributeName(MethodDeclarationSyntax declaration)
+        {
+            var name = declaration.Identifier.ValueText;
+            return name == "Equals"
+                || name == "GetHashCode"
+                || name == "ToString"
+                || name == "Dispose"
+                || name == "Equals"
+                || declaration.AttributeLists.SelectMany(list => list.Attributes).Any(x => x.ArgumentList == null && x.Name.ToStringContains("ModuleInitializer"));
+        }
+
+        private static bool HasTrackedMethodOrAttributeType(IMethodSymbol methodSymbol) =>
+            methodSymbol.IsObjectEquals()
+            || methodSymbol.IsObjectGetHashCode()
+            || methodSymbol.IsObjectToString()
+            || methodSymbol.IsIDisposableDispose()
+            || methodSymbol.IsIEquatableEquals()
+            || IsModuleInitializer(methodSymbol);
+
+        private static bool IsModuleInitializer(IMethodSymbol methodSymbol) =>
+            methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
+
         private static void ReportOnInvalidThrowStatement(SyntaxNodeAnalysisContext analysisContext,
             SyntaxNode node, ImmutableArray<KnownType> allowedTypes)
         {
@@ -131,35 +161,5 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ShouldReport(INamedTypeSymbol exceptionType, ImmutableArray<KnownType> allowedTypes) =>
             !exceptionType.IsAny(allowedTypes) && !exceptionType.DerivesFromAny(allowedTypes);
-
-        private static bool IsTrackedMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel) =>
-            HasTrackedMethodOrAttributeName(declaration)
-            && semanticModel.GetDeclaredSymbol(declaration) is { } methodSymbol
-            && HasTrackedMethodOrAttributeType(methodSymbol);
-
-        private static bool HasTrackedMethodOrAttributeName(MethodDeclarationSyntax declaration)
-        {
-            var name = declaration.Identifier.ValueText;
-            return name == "Equals"
-                || name == "GetHashCode"
-                || name == "ToString"
-                || name == "Dispose"
-                || name == "Equals"
-                || declaration.AttributeLists.SelectMany(list => list.Attributes).Any(x => x.ArgumentList == null && x.Name.ToStringContains("ModuleInitializer"));
-        }
-
-        private static bool HasTrackedMethodOrAttributeType(IMethodSymbol methodSymbol) =>
-            methodSymbol.IsObjectEquals()
-            || methodSymbol.IsObjectGetHashCode()
-            || methodSymbol.IsObjectToString()
-            || methodSymbol.IsIDisposableDispose()
-            || methodSymbol.IsIEquatableEquals()
-            || IsModuleInitializer(methodSymbol);
-
-        private static bool IsModuleInitializer(IMethodSymbol methodSymbol) =>
-            methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
-
-        private static bool IsTrackedOperator(OperatorDeclarationSyntax declaration) =>
-            TrackedOperators.Contains(declaration.OperatorToken.Kind());
     }
 }
