@@ -58,24 +58,24 @@ public class VbNetPluginTest {
     List extensions = context.getExtensions();
 
     Object[] expectedExtensions = new Object[] {
+      DotNetSensor.class,
+      EncodingPerFile.class,
+      FileTypeSensor.class,
+      GeneratedFileFilter.class,
+      ProjectTypeCollector.class,
+      PropertiesSensor.class,
+      ProtobufDataImporter.class,
+      ReportPathCollector.class,
+      RoslynDataImporter.class,
+      RoslynProfileExporter.class
+      SonarLintProfileExporter.class,
       VbNetPlugin.METADATA,
       VbNet.class,
       VbNetSonarRulesDefinition.class,
-      DotNetSensor.class,
       VbNetLanguageConfiguration.class,
       VbNetModuleConfiguration.class,
       VbNetGlobalProtobufFileProcessor.class,
       WrongEncodingFileFilter.class,
-      EncodingPerFile.class,
-      ProjectTypeCollector.class,
-      ReportPathCollector.class,
-      PropertiesSensor.class,
-      GeneratedFileFilter.class,
-      FileTypeSensor.class,
-      SonarLintProfileExporter.class,
-      ProtobufDataImporter.class,
-      RoslynDataImporter.class,
-      RoslynProfileExporter.class
     };
 
     assertThat(nonProperties(extensions)).contains(expectedExtensions);
