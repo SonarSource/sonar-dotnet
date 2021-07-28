@@ -31,12 +31,17 @@ namespace SonarAnalyzer.Rules
         private const string Title = "Log generator";
 
         protected sealed override string FileName => "log.pb";
+        protected override bool AnalyzeGeneratedCode => true;
 
         protected LogAnalyzerBase() : base(DiagnosticId, Title) { }
 
         protected sealed override LogInfo CreateAnalysisMessage(SonarAnalysisContext context) =>
             new LogInfo { Severity = LogSeverity.Info, Text = "Roslyn version: " + typeof(SyntaxNode).Assembly.GetName().Version };
 
-        protected sealed override LogInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) => null;
+        protected sealed override LogInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
+            Language.GeneratedCodeRecognizer.IsGenerated(syntaxTree)
+            ? new LogInfo { Severity = LogSeverity.Debug, Text = $"File '{syntaxTree.FilePath}' was recognized as generated" }
+            : null;
+
     }
 }
