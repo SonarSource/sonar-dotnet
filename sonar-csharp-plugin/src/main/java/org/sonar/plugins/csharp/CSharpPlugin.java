@@ -27,6 +27,7 @@ import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.LogSensor;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -58,6 +59,7 @@ public class CSharpPlugin implements Plugin {
       // module-level components (some relying on deprecated Scanner APIs)
       CSharpModuleConfiguration.class,
       FileTypeSensor.class,
+      LogSensor.class,
       PropertiesSensor.class,
       // global components
       // collectors - they are populated by the module-level sensors

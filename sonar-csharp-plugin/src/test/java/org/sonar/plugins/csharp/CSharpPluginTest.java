@@ -34,6 +34,7 @@ import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.LogSensor;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -68,6 +69,7 @@ public class CSharpPluginTest {
       EncodingPerFile.class,
       FileTypeSensor.class,
       GeneratedFileFilter.class,
+      LogSensor.class,
       ProjectTypeCollector.class,
       PropertiesSensor.class,
       ProtobufDataImporter.class,
