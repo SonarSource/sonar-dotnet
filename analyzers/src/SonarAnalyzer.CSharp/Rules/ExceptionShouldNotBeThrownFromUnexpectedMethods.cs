@@ -37,10 +37,10 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ExceptionShouldNotBeThrownFromUnexpectedMethods : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3877";
-        private const string MessageFormat = "Remove this 'throw' statement.";
+        private const string MessageFormat = "Remove this 'throw' {0}.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> DefaultAllowedExceptions = ImmutableArray.Create(KnownType.System_NotImplementedException);
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && analysisContext.SemanticModel.GetSymbolInfo(throwExpression.Expression).Symbol is { } symbol
                 && ShouldReport(symbol.ContainingType, allowedTypes))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwExpression.Expression.GetLocation()));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwExpression.SyntaxNode.GetLocation(), "expression"));
             }
             else if (node.DescendantNodes()
                     .OfType<ThrowStatementSyntax>()
@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(x => new NodeAndSymbol(x, analysisContext.SemanticModel.GetSymbolInfo(x.Expression).Symbol))
                     .FirstOrDefault(nodeAndSymbol => nodeAndSymbol.Symbol != null && ShouldReport(nodeAndSymbol.Symbol.ContainingType, allowedTypes)) is { } throwStatement)
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwStatement.Node.GetLocation()));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwStatement.Node.GetLocation(), "statement"));
             }
         }
 
