@@ -33,6 +33,8 @@ namespace SonarAnalyzer.Helpers.Facade
 
         public override bool IsKind(SyntaxNode node, SyntaxKind kind) => node.IsKind(kind);
 
+        public override bool IsKind(SyntaxToken token, SyntaxKind kind) => token.IsKind(kind);
+
         public override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
 
         public override bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) => node.IsAnyKind(syntaxKinds);

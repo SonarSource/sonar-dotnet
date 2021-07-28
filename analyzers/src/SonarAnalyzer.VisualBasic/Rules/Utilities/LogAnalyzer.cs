@@ -19,19 +19,15 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
+using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class MetricsAnalyzer : MetricsAnalyzerBase<SyntaxKind>
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+    public class LogAnalyzer : LogAnalyzerBase<SyntaxKind>
     {
-        protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
-
-        protected override MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel)
-            => new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel);
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
     }
 }

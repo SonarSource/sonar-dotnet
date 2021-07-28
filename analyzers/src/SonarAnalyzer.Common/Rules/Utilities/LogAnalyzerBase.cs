@@ -19,27 +19,24 @@
  */
 
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class FileMetadataAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, FileMetadataInfo>
+    public abstract class LogAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, LogInfo>
         where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S9999-metadata";
-        private const string Title = "File metadata generator";
+        protected const string DiagnosticId = "S9999-log";
+        private const string Title = "Log generator";
 
-        protected sealed override string FileName => "file-metadata.pb";
-        protected override bool AnalyzeGeneratedCode => true;
+        protected sealed override string FileName => "log.pb";
 
-        protected FileMetadataAnalyzerBase() : base(DiagnosticId, Title) { }
+        protected LogAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected sealed override FileMetadataInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
-            new FileMetadataInfo
-            {
-                FilePath = syntaxTree.FilePath,
-                IsGenerated = Language.GeneratedCodeRecognizer.IsGenerated(syntaxTree),
-                Encoding = syntaxTree.Encoding?.WebName.ToLowerInvariant() ?? string.Empty
-            };
+        protected sealed override LogInfo CreateAnalysisMessage(SonarAnalysisContext context) =>
+            new LogInfo { Severity = LogSeverity.Info, Text = "Roslyn version: " + typeof(SyntaxNode).Assembly.GetName().Version };
+
+        protected sealed override LogInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) => null;
     }
 }

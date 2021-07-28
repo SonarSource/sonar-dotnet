@@ -27,13 +27,11 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public class SymbolReferenceAnalyzer : SymbolReferenceAnalyzerBase
+    public class SymbolReferenceAnalyzer : SymbolReferenceAnalyzerBase<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
         protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
             token.GetBindableParent();
-
-        protected override bool IsIdentifier(SyntaxToken token) => token.IsKind(SyntaxKind.IdentifierToken);
     }
 }

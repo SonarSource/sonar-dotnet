@@ -30,6 +30,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public abstract TSyntaxKind Kind(SyntaxNode node);
         public abstract bool IsNullLiteral(SyntaxNode node);
         public abstract bool IsKind(SyntaxNode node, TSyntaxKind kind);
+        public abstract bool IsKind(SyntaxToken token, TSyntaxKind kind);
         public abstract bool IsAnyKind(SyntaxNode node, ISet<TSyntaxKind> syntaxKinds);
         public abstract bool IsAnyKind(SyntaxNode node, params TSyntaxKind[] syntaxKinds);
 

@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public TestContext TestContext { get; set; } // Set automatically by MsTest
 
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("Utility")]
         public void Verify_Unique_CS() =>
             Verify("Unique.cs", info =>
             {
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("Utility")]
         public void Verify_Unique_VB() =>
             Verify("Unique.vb", info =>
             {
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("Utility")]
         public void Verify_Duplicated_CS() =>
             Verify("Duplicated.cs", info =>
             {
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("Utility")]
         public void Verify_DuplicatedDifferentLiterals_CS() =>
             Verify("DuplicatedDifferentLiterals.cs", info =>
             {
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("Utility")]
         public void Verify_NotRunForTestProject_CS()
         {
             var testRoot = Root + TestContext.TestName;
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
-            CopyPasteTokenAnalyzerBase analyzer = fileName.EndsWith(".cs")
+            UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")
                 ? new TestCopyPasteTokenAnalyzer_CS(testRoot, false)
                 : new TestCopyPasteTokenAnalyzer_VB(testRoot, false);
 

@@ -18,33 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MetricsAnalyzerBase : UtilityAnalyzerBase<MetricsInfo>
+    public abstract class MetricsAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, MetricsInfo>
+        where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S9999-metrics";
+        private const string DiagnosticId = "S9999-metrics";
         private const string Title = "Metrics calculator";
-        private const string MetricsFileName = "metrics.pb";
-
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected abstract MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
-        protected sealed override bool SkipAnalysisForTestProject => true;
-        protected sealed override string FileName => MetricsFileName;
+        protected sealed override string FileName => "metrics.pb";
+        protected sealed override bool AnalyzeTestProjects => false;
+
+        protected MetricsAnalyzerBase() : base(DiagnosticId, Title) { }
 
         protected sealed override MetricsInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var metrics = GetMetrics(syntaxTree, semanticModel);
             var complexity = metrics.Complexity;
-
             var metricsInfo = new MetricsInfo
             {
                 FilePath = syntaxTree.FilePath,
