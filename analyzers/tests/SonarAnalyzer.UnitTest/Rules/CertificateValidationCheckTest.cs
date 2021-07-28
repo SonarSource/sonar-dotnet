@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CertificateValidationCheck.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.CSharp8.cs",
                                     new CS.CertificateValidationCheck(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());

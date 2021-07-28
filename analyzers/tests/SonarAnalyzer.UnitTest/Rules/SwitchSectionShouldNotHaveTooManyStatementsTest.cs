@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs",
                 new CS.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 },
                 ParseOptionsHelper.FromCSharp8);
 
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_VB() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.vb",
                                                  new VB.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 });
     }
 }

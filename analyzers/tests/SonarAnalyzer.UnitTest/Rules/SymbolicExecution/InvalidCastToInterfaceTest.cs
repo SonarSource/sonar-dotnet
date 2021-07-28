@@ -37,14 +37,14 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void InvalidCastToInterface(ProjectType projectType) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\InvalidCastToInterface.cs",
-                GetAnalyzers(),
+            Verifier.VerifyAnalyzer(@"TestCases\InvalidCastToInterface.cs",
+                                    GetAnalyzers(),
 #if NETFRAMEWORK
-                additionalReferences: TestHelper.ProjectTypeReference(projectType).Concat(NuGetMetadataReference.NETStandardV2_1_0),
+                                    additionalReferences: TestHelper.ProjectTypeReference(projectType).Concat(NuGetMetadataReference.NETStandardV2_1_0),
 #else
-                additionalReferences: TestHelper.ProjectTypeReference(projectType),
+                                    additionalReferences: TestHelper.ProjectTypeReference(projectType),
 #endif
-                options: ParseOptionsHelper.FromCSharp8);
+                                    options: ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]

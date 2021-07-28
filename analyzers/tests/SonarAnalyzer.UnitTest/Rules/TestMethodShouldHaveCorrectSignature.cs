@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_NUnit(string testFwkVersion) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.NUnit.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.NUnit.cs",
                                     new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.NUnit(testFwkVersion));
 
@@ -54,14 +54,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_Xunit(string testFwkVersion) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.cs",
                                     new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.XunitFramework(testFwkVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_Xunit_Legacy() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.Legacy.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.Legacy.cs",
                                     new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.XunitFrameworkV1);
 
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             // Additional test cases e.g. partial classes, and methods with multiple faults.
             // We have to specify a test framework for the tests, but it doesn't really matter which
             // one, so we're using MSTest and only testing a single version.
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Misc.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Misc.cs",
                                     new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.MSTestTestFrameworkV1);
 

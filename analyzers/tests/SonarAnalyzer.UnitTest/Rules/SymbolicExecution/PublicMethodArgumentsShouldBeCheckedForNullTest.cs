@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void PublicMethodArgumentsShouldBeCheckedForNull(ProjectType projectType) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.cs",
                 new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),
                 ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK

@@ -65,6 +65,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantNullCheck_VB() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\RedundantNullCheck.vb", new VB.RedundantNullCheck());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.vb", new VB.RedundantNullCheck());
     }
 }

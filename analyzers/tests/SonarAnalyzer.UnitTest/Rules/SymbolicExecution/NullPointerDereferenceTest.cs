@@ -74,21 +74,21 @@ public static class Utils
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp6() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\NullPointerDereference.CSharp6.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp6.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp6);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp7() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\NullPointerDereference.CSharp7.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp7.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\NullPointerDereference.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp8.cs",
                 GetAnalyzer(),
 #if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,

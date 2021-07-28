@@ -149,17 +149,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static void VerifyNonConcurrentAnalyzer(string path,
                                                        DiagnosticAnalyzer diagnosticAnalyzer,
-                                                       IEnumerable<MetadataReference> additionalReferences,
-                                                       string sonarProjectConfigPath) =>
-            VerifyNonConcurrentAnalyzer(new[] { path },
-                                        new[] { diagnosticAnalyzer },
-                                        null, CompilationErrorBehavior.Default,
-                                        OutputKind.DynamicallyLinkedLibrary,
-                                        additionalReferences,
-                                        sonarProjectConfigPath);
-
-        public static void VerifyNonConcurrentAnalyzer(string path,
-                                                       DiagnosticAnalyzer diagnosticAnalyzer,
                                                        IEnumerable<MetadataReference> additionalReferences) =>
             VerifyNonConcurrentAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, null, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
@@ -178,25 +167,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static void VerifyNonConcurrentAnalyzer(string path,
                                                        DiagnosticAnalyzer diagnosticAnalyzer,
-                                                       CompilationErrorBehavior checkMode,
-                                                       IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyNonConcurrentAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, null, checkMode, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
-
-        public static void VerifyNonConcurrentAnalyzer(string path,
-                                                       DiagnosticAnalyzer diagnosticAnalyzer,
                                                        IEnumerable<ParseOptions> options = null,
                                                        CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                        OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                                        IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, options, checkMode, outputKind, additionalReferences);
-
-        public static void VerifyNonConcurrentAnalyzer(string path,
-                                                       DiagnosticAnalyzer[] diagnosticAnalyzers,
-                                                       IEnumerable<ParseOptions> options = null,
-                                                       CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                                       OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                                       IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyNonConcurrentAnalyzer(new[] { path }, diagnosticAnalyzers, options, checkMode, outputKind, additionalReferences);
 
         public static void VerifyNonConcurrentAnalyzer(IEnumerable<string> paths,
                                                        DiagnosticAnalyzer diagnosticAnalyzer,
@@ -208,6 +183,30 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<ParseOptions> options = null,
                                                        IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+
+        public static void VerifyAnalyzer(IEnumerable<string> paths,
+                                          DiagnosticAnalyzer diagnosticAnalyzer,
+                                          IEnumerable<MetadataReference> additionalReferences) =>
+            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, null, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+
+        public static void VerifyAnalyzer(string path,
+                                          DiagnosticAnalyzer[] diagnosticAnalyzers,
+                                          IEnumerable<ParseOptions> options = null,
+                                          CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                          IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, options, checkMode, outputKind, additionalReferences);
+
+        public static void VerifyAnalyzer(string path,
+                                          DiagnosticAnalyzer diagnosticAnalyzer,
+                                          IEnumerable<MetadataReference> additionalReferences,
+                                          string sonarProjectConfigPath) =>
+            VerifyAnalyzer(new[] { path },
+                           new[] { diagnosticAnalyzer },
+                           null, CompilationErrorBehavior.Default,
+                           OutputKind.DynamicallyLinkedLibrary,
+                           additionalReferences,
+                           sonarProjectConfigPath);
 
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,

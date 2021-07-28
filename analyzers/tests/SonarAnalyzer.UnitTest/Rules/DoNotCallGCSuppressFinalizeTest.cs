@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallGCSuppressFinalize_NetCore() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.NetCore.cs", new DoNotCallGCSuppressFinalize(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.NetCore.cs", new DoNotCallGCSuppressFinalize(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]

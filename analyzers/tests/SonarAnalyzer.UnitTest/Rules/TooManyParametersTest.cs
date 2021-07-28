@@ -50,11 +50,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TooManyParameters_CS_DefaultValues() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new CS.TooManyParameters(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new CS.TooManyParameters(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void TooManyParameters_VB_DefaultValues() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TooManyParameters_DefaultValues.vb", new VB.TooManyParameters());
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.vb", new VB.TooManyParameters());
     }
 }

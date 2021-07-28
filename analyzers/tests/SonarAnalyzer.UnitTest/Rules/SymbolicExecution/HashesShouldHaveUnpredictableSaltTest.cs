@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void HashesShouldHaveUnpredictableSalt() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\HashesShouldHaveUnpredictableSalt.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\HashesShouldHaveUnpredictableSalt.cs",
                                     GetAnalyzer(),
                                     ParseOptionsHelper.FromCSharp8,
                                     MetadataReferenceFacade.SystemSecurityCryptography);

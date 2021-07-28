@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void ObjectsShouldNotBeDisposedMoreThanOnce(ProjectType projectType) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ObjectsShouldNotBeDisposedMoreThanOnce.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ObjectsShouldNotBeDisposedMoreThanOnce.cs",
                 new SymbolicExecutionRunner(new ObjectsShouldNotBeDisposedMoreThanOnce()),
                 ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK

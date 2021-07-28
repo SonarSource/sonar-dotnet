@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PermissiveCors_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\PermissiveCors.Net.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PermissiveCors.Net.cs",
                                     new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp9,
                                     AdditionalReferences);

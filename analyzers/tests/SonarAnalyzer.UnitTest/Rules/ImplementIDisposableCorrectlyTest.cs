@@ -44,12 +44,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_AbstractClass() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ImplementIDisposableCorrectly.AbstractClass.cs", new ImplementIDisposableCorrectly());
+            Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.AbstractClass.cs", new ImplementIDisposableCorrectly());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles() =>
-            Verifier.VerifyNonConcurrentAnalyzer(
+            Verifier.VerifyAnalyzer(
                 new[]
                 {
                     @"TestCases\ImplementIDisposableCorrectlyPartial1.cs",

@@ -38,15 +38,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_Before8() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DeclareTypesInNamespaces.BeforeCSharp8.cs",
-                new CS.DeclareTypesInNamespaces(),
-                ParseOptionsHelper.BeforeCSharp8);
+                                                  new CS.DeclareTypesInNamespaces(),
+                                                  ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_After8() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DeclareTypesInNamespaces.AfterCSharp8.cs",
-                new CS.DeclareTypesInNamespaces(),
-                ParseOptionsHelper.FromCSharp8);
+                                                  new CS.DeclareTypesInNamespaces(),
+                                                  ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]

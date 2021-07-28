@@ -40,11 +40,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void StringFormatTypoFreeValidator(ProjectType projectType) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\StringFormatTypoFreeValidator.cs", new StringFormatValidator(), TestHelper.ProjectTypeReference(projectType));
+            Verifier.VerifyAnalyzer(@"TestCases\StringFormatTypoFreeValidator.cs", new StringFormatValidator(), TestHelper.ProjectTypeReference(projectType));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void StringFormatEdgeCasesValidator() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\StringFormatEdgeCasesValidator.cs", new StringFormatValidator());
+            Verifier.VerifyAnalyzer(@"TestCases\StringFormatEdgeCasesValidator.cs", new StringFormatValidator());
     }
 }

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposeFromDispose_CSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DisposeFromDispose.CSharp8.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp8.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]

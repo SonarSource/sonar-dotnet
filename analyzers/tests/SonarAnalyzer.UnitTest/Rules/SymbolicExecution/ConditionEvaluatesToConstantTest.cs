@@ -39,21 +39,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant(ProjectType projectType) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
                                     GetAnalyzer(),
                                     NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp7() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp7.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp7.cs",
                                     GetAnalyzer(),
                                     ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
                                     GetAnalyzer(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,

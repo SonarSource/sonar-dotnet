@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalSimplification_CSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionalSimplification.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.CSharp8.cs",
                                     new ConditionalSimplification(),
                                     new[] { new CSharpParseOptions(LanguageVersion.CSharp8) });
 
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalSimplification_FromCSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
                                     new ConditionalSimplification(),
                                     ParseOptionsHelper.FromCSharp8);
 #if NET

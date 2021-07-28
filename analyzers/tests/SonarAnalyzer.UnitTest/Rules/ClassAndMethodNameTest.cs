@@ -86,7 +86,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void MethodName(ProjectType projectType) =>
-            Verifier.VerifyNonConcurrentAnalyzer(
+            Verifier.VerifyAnalyzer(
                 new[]
                 {
                     @"TestCases\MethodName.cs",

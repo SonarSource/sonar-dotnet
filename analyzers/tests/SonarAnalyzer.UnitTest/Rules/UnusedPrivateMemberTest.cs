@@ -196,7 +196,7 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
                                     new UnusedPrivateMember(),
                                     ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK
@@ -231,7 +231,7 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_UsedInGeneratedFile() =>
-            Verifier.VerifyNonConcurrentAnalyzer(new[]
+            Verifier.VerifyAnalyzer(new[]
                                     {
                                         @"TestCases\UnusedPrivateMember.CalledFromGenerated.cs",
                                         @"TestCases\UnusedPrivateMember.Generated.cs"
@@ -242,7 +242,7 @@ namespace EntityFrameworkMigrations
         [TestCategory("Performance")]
         public void UnusedPrivateMember_Performance()
         {
-            Action verifyAnalyzer = () => Verifier.VerifyNonConcurrentAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
+            Action verifyAnalyzer = () => Verifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
                                                                   new UnusedPrivateMember(),
                                                                   GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
 

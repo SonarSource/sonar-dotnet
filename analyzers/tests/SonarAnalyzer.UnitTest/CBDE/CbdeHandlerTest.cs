@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             System.Environment.SetEnvironmentVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", "true");
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CbdeHandler.cs",
-                CbdeHandlerRule.MakeUnitTestInstance(null, null));
+                                                  CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
 #if NET
         [TestMethod]

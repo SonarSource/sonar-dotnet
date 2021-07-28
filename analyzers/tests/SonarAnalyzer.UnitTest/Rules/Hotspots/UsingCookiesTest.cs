@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingCookies_CS_NetCore() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.cs",
                 new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingCookies_VB_NetCore() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.vb",
                 new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 

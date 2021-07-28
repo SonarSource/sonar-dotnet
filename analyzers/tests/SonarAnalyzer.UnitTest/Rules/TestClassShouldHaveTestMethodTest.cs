@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
                                     new TestClassShouldHaveTestMethod(),
                                     NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InheritedCollidingInterfaceMembers_CSharp8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.AfterCSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.AfterCSharp8.cs",
                                     new InheritedCollidingInterfaceMembers(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,

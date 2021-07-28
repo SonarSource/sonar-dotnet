@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void EmptyNullableValueAccess(ProjectType projectType) =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\EmptyNullableValueAccess.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyNullableValueAccess.cs",
                 new SymbolicExecutionRunner(new EmptyNullableValueAccess()),
                 ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
         public void EmptyCollectionsShouldNotBeEnumerated(ProjectType projectType) =>
-            Verifier.VerifyNonConcurrentAnalyzer(
+            Verifier.VerifyAnalyzer(
                 @"TestCases\EmptyCollectionsShouldNotBeEnumerated.cs",
                 new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()),
                 ParseOptionsHelper.FromCSharp8,

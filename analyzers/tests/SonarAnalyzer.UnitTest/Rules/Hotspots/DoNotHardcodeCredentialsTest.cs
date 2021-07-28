@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_CSharp8_DefaultValues() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp8.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromCSharp8,
                 AdditionalReferences);
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_CS_CustomValues() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE, x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_VB_CustomValues() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 

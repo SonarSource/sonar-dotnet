@@ -63,6 +63,7 @@ namespace SonarAnalyzer.Rules
 
         [RuleParameter("fileUploadSizeLimit", PropertyType.Integer, "The maximum size of HTTP requests handling file uploads (in bytes).", DefaultFileUploadSizeLimit)]
         public int FileUploadSizeLimit { get; set; } = DefaultFileUploadSizeLimit;
+        protected override bool EnableConcurrentExecution => false;
 
         protected RequestsWithExcessiveLengthBase(IAnalyzerConfiguration analyzerConfiguration)
         {
