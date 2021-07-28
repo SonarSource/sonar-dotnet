@@ -34,6 +34,12 @@ namespace Tests.Diagnostics
             }
         }
 
+        event EventHandler OnSomeArrow
+        {
+            add => throw new Exception(); // FN
+            remove => throw new InvalidOperationException(); // Compliant
+        }
+
         public override string ToString()
         {
             throw new Exception(); // Noncompliant

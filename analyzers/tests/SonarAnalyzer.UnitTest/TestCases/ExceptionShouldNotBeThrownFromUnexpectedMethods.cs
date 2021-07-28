@@ -267,5 +267,12 @@ namespace Tests.Diagnostics
     {
         static ArrowMethods() => throw new Exception(); // FN, needs support for throw expressions
         public void Dispose() => throw new Exception(); // FN
+        public static bool operator ==(ArrowMethods a, ArrowMethods b) => throw new Exception(); // FN
+        public static bool operator !=(ArrowMethods a, ArrowMethods b) => throw new Exception(); // FN
+        event EventHandler OnSomething
+        {
+            add => throw new Exception(); // FN
+            remove => throw new Exception(); // FN
+        }
     }
 }
