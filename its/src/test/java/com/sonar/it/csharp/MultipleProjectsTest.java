@@ -75,6 +75,12 @@ public class MultipleProjectsTest {
   }
 
   @Test
+  public void roslynVersionIsLogged() {
+    // FirstProject + FirstProjectTests + 2x SecondProject (each target framework has its log) + SecondProjectTests
+    assertThat(buildResult.getLogsLines(x -> x.startsWith("INFO: Roslyn version: "))).hasSize(5);
+  }
+
+  @Test
   public void projectIsAnalyzed() {
     assertThat(getComponent(PROJECT).getName()).isEqualTo("MultipleProjects");
 
