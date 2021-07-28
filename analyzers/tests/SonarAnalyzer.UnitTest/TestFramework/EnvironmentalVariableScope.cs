@@ -30,21 +30,19 @@ namespace SonarAnalyzer.UnitTest.Helpers
     /// </summary>
     public sealed class EnvironmentVariableScope : IDisposable
     {
-        private readonly bool setOnlyInRelease;
+        private readonly bool setOnlyInAzureDevOpsContext;
         private IDictionary<string, string> originalValues = new Dictionary<string, string>();
 
-        public EnvironmentVariableScope(bool setVariablesOnlyInRelease = false)
+        public EnvironmentVariableScope(bool setVariablesOnlyInAzureDevOpsContext = false)
         {
-            setOnlyInRelease = setVariablesOnlyInRelease;
+            setOnlyInAzureDevOpsContext = setVariablesOnlyInAzureDevOpsContext;
         }
 
         public void SetVariable(string name, string value)
         {
-            if (setOnlyInRelease)
+            if (setOnlyInAzureDevOpsContext && !TestContextHelper.IsAzureDevOpsContext)
             {
-#if !RELEASE
                 return;
-#endif
             }
             // Store the original value, or null if there isn't one
             if (!originalValues.ContainsKey(name))
