@@ -100,35 +100,21 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportOnInvalidThrowStatement(SyntaxNodeAnalysisContext analysisContext,
             SyntaxNode node, ImmutableArray<KnownType> allowedTypes)
         {
-            SyntaxNode throwToReportOn = null;
-            if (ExpressionBody(node) is { } expressionBody)
+            if (ExpressionBody(node) is { } expressionBody
+                && ThrowExpressionSyntaxWrapper.IsInstance(expressionBody.Expression)
+                && (ThrowExpressionSyntaxWrapper)expressionBody.Expression is { } throwExpression
+                && analysisContext.SemanticModel.GetSymbolInfo(throwExpression.Expression).Symbol is { } symbol
+                && ShouldReport(symbol.ContainingType, allowedTypes))
             {
-                if (ThrowExpressionSyntaxWrapper.IsInstance(expressionBody.Expression))
-                {
-                    var throwExpression = (ThrowExpressionSyntaxWrapper)expressionBody.Expression;
-                    if (analysisContext.SemanticModel.GetSymbolInfo(throwExpression.Expression).Symbol is { } symbol
-                        && !symbol.ContainingType.IsAny(allowedTypes)
-                        && !symbol.ContainingType.DerivesFromAny(allowedTypes))
-                    {
-                        analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwExpression.Expression.GetLocation()));
-                    }
-                }
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwExpression.Expression.GetLocation()));
             }
-            else
-            {
-                throwToReportOn = node.DescendantNodes()
+            else if (node.DescendantNodes()
                     .OfType<ThrowStatementSyntax>()
-                    .Where(tss => tss.Expression != null)
-                    .Select(tss => new NodeAndSymbol(tss, analysisContext.SemanticModel.GetSymbolInfo(tss.Expression).Symbol))
-                    .FirstOrDefault(tuple => tuple.Symbol != null
-                                    && !tuple.Symbol.ContainingType.IsAny(allowedTypes)
-                                    && !tuple.Symbol.ContainingType.DerivesFromAny(allowedTypes))
-                    ?.Node;
-            }
-
-            if (throwToReportOn != null)
+                    .Where(x => x.Expression != null)
+                    .Select(x => new NodeAndSymbol(x, analysisContext.SemanticModel.GetSymbolInfo(x.Expression).Symbol))
+                    .FirstOrDefault(nodeAndSymbol => nodeAndSymbol.Symbol != null && ShouldReport(nodeAndSymbol.Symbol.ContainingType, allowedTypes)) is { } throwStatement)
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwToReportOn.GetLocation()));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwStatement.Node.GetLocation()));
             }
         }
 
@@ -143,28 +129,32 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => null
             };
 
-        private static bool IsTrackedMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel) =>
-            HasNameOrAttribute(declaration)
-            && semanticModel.GetDeclaredSymbol(declaration) is { } methodSymbol
-            && (methodSymbol.IsObjectEquals()
-                || methodSymbol.IsObjectGetHashCode()
-                || methodSymbol.IsObjectToString()
-                || methodSymbol.IsIDisposableDispose()
-                || methodSymbol.IsIEquatableEquals()
-                || IsModuleInitializer(methodSymbol));
+        private static bool ShouldReport(INamedTypeSymbol exceptionType, ImmutableArray<KnownType> allowedTypes) =>
+            !exceptionType.IsAny(allowedTypes) && !exceptionType.DerivesFromAny(allowedTypes);
 
-        private static bool HasNameOrAttribute(MethodDeclarationSyntax declaration)
+        private static bool IsTrackedMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel) =>
+            HasTrackedMethodOrAttributeName(declaration)
+            && semanticModel.GetDeclaredSymbol(declaration) is { } methodSymbol
+            && HasTrackedMethodOrAttributeType(methodSymbol);
+
+        private static bool HasTrackedMethodOrAttributeName(MethodDeclarationSyntax declaration)
         {
             var name = declaration.Identifier.ValueText;
-            if (name == "Equals" || name == "GetHashCode" || name == "ToString" || name == "Dispose" || name == "Equals")
-            {
-                return true;
-            }
-            else
-            {
-                return declaration.AttributeLists.SelectMany(list => list.Attributes).Any(x => x.ArgumentList == null && x.Name.ToStringContains("ModuleInitializer"));
-            }
+            return name == "Equals"
+                || name == "GetHashCode"
+                || name == "ToString"
+                || name == "Dispose"
+                || name == "Equals"
+                || declaration.AttributeLists.SelectMany(list => list.Attributes).Any(x => x.ArgumentList == null && x.Name.ToStringContains("ModuleInitializer"));
         }
+
+        private static bool HasTrackedMethodOrAttributeType(IMethodSymbol methodSymbol) =>
+            methodSymbol.IsObjectEquals()
+            || methodSymbol.IsObjectGetHashCode()
+            || methodSymbol.IsObjectToString()
+            || methodSymbol.IsIDisposableDispose()
+            || methodSymbol.IsIEquatableEquals()
+            || IsModuleInitializer(methodSymbol);
 
         private static bool IsModuleInitializer(IMethodSymbol methodSymbol) =>
             methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
