@@ -398,22 +398,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var language = AnalyzerLanguage.FromPath(paths.First());
             foreach (var path in paths)
             {
-                var fullName = Path.GetFullPath(path);
-                var folder = Path.GetDirectoryName(fullName) + Path.DirectorySeparatorChar;
-                var nameWithoutExtension = Path.GetFileNameWithoutExtension(path);
-                var content = File.ReadAllText(fullName, Encoding.UTF8);
-                if (language == AnalyzerLanguage.CSharp)
-                {
-                    var newPath = $"{folder}{nameWithoutExtension}.Concurrent.cs";
-                    File.WriteAllText(newPath, $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}");
-                    ret.Add(newPath);
-                }
-                else
-                {
-                    var newPath = $"{folder}{nameWithoutExtension}.Concurrent.vb";
-                    File.WriteAllText(newPath, InsertNamespaceForVB(content));
-                    ret.Add(newPath);
-                }
+                var sourcePath = Path.GetFullPath(path);
+                var newPath = Path.Combine(Path.GetDirectoryName(sourcePath), Path.GetFileNameWithoutExtension(path) + ".Concurrent" + Path.GetExtension(path));
+                var content = File.ReadAllText(sourcePath, Encoding.UTF8);
+                File.WriteAllText(newPath, language == AnalyzerLanguage.CSharp ? $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}" : InsertNamespaceForVB(content));
+                ret.Add(newPath);
             }
             return ret;
         }
