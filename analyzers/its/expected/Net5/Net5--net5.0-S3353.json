@@ -54,6 +54,19 @@
 },
 {
 "id":  "S3353",
+"message":  "Add the 'const' modifier to 'bitMask'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2437.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  18,
+"endLine":  8,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
 "message":  "Add the 'const' modifier to 'c'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2760.cs",
