@@ -83,12 +83,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
             paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
 
-        public ProjectBuilder AddDocuments(IEnumerable<ProjectFileContent> paths) =>
-            paths.Aggregate(this, (projectBuilder, path) => AddDocument(projectBuilder.Project,
-                                                                        Path.GetFileName(path.Path),
-                                                                        path.Content,
-                                                                        false));
-
         public ProjectBuilder AddDocument(string path, bool removeAnalysisComments = false)
         {
             if (path == null)
