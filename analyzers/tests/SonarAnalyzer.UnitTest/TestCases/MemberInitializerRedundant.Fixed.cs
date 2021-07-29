@@ -185,6 +185,36 @@ namespace Tests.Diagnostics
         public Person11() => a = 42;
     }
 
+    class Person12
+    {
+        int age;
+        public Person12()
+        {
+            age = 0; // FN
+        }
+    }
+
+    class Person13
+    {
+        static int x = 42; // FN
+        static int y;
+        static Person13()
+        {
+            x = 41;
+            y = 41;
+        }
+    }
+
+    class Person14
+    {
+        static int x = 42; // Compliant
+        static Person14()
+        {
+            Console.WriteLine(x);
+            x = 41;
+        }
+    }
+
     class CSharp8_PersonA
     {
         int age = 42;

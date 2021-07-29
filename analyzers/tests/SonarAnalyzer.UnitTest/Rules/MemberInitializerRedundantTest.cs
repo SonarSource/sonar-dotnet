@@ -40,6 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializerRedundant.CSharp9.cs", new MemberInitializerRedundant());
 
 #endif
+        // FIXME add codefix for C# 9
 
         [TestMethod]
         [TestCategory("CodeFix")]

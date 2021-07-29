@@ -67,6 +67,7 @@ namespace Tests.Diagnostics
     class Person3
     {
         int age = 42; // Noncompliant
+        int id = 42; // only set in the second constructor
         public Person3(int age)
         {
             this.age = age;
@@ -75,6 +76,7 @@ namespace Tests.Diagnostics
         public Person3(int age, int other)
             : this(age)
         {
+            id = other;
         }
     }
 
@@ -187,6 +189,36 @@ namespace Tests.Diagnostics
         public Person11() => a = 42;
     }
 
+    class Person12
+    {
+        int age;
+        public Person12()
+        {
+            age = 0; // FN
+        }
+    }
+
+    class Person13
+    {
+        static int x = 42; // FN
+        static int y;
+        static Person13()
+        {
+            x = 41;
+            y = 41;
+        }
+    }
+
+    class Person14
+    {
+        static int x = 42; // Compliant
+        static Person14()
+        {
+            Console.WriteLine(x);
+            x = 41;
+        }
+    }
+
     class CSharp8_PersonA
     {
         int age = 42;
@@ -208,6 +240,23 @@ namespace Tests.Diagnostics
         public CSharp8_PersonB(int[] ids)
         {
             this.ids ??= ids;
+        }
+    }
+
+    class BaseClass
+    {
+        int foo = 42; // Noncompliant
+        public BaseClass(int i)
+        {
+            foo = 42;
+        }
+    }
+    class NewClass : BaseClass
+    {
+        int baz = 0; // FN
+        public NewClass() : base(1)
+        {
+            baz = 0;
         }
     }
 }
