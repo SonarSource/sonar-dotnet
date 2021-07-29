@@ -45,6 +45,9 @@ namespace Tests.Diagnostics
         [Obsolete]
         internal static void M3() => throw new Exception(); // Compliant
 
+        [Obsolete("This attribute has arguments.", true)]
+        internal static void M4() => throw new Exception(); // Compliant
+
         event EventHandler OnSomething
         {
             add

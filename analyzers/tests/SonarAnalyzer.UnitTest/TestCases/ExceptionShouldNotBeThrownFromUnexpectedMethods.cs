@@ -274,6 +274,7 @@ namespace Tests.Diagnostics
             add => throw new Exception(); // Noncompliant
             remove => throw new Exception(); // Noncompliant
         }
+        public static implicit operator byte(ArrowMethods d) => throw new Exception(); // Noncompliant
     }
 
     class CompliantArrowMethods : IDisposable
@@ -291,4 +292,38 @@ namespace Tests.Diagnostics
         static void Foo() => throw new Exception();
     }
 
+    class MultipleExceptions
+    {
+        public override string ToString()
+        {
+            if (Foo())
+            {
+                if (Foo())
+                {
+                    throw new Exception(); // Noncompliant
+                }
+                throw new Exception(); // FN only the first is reported
+            }
+            else
+            {
+                throw new Exception(); // FN only the first is reported
+            }
+        }
+        bool Foo() => true;
+    }
+
+    class CodeCoverage : IDisposable
+    {
+        static CodeCoverage() => throw new UnknownException(); // Error [CS0246]
+        public void Dispose()
+        {
+            throw new UnknownException(); // Error [CS0246]
+        }
+        public override bool Equals(object obj)
+        {
+            Dispose();
+            return true;
+        }
+        public override int GetHashCode() => 0;
+    }
 }

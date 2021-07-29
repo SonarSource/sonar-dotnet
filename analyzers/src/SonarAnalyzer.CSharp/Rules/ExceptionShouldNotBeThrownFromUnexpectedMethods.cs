@@ -156,7 +156,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 OperatorDeclarationSyntax c => c.ExpressionBody,
                 AccessorDeclarationSyntax d => d.ExpressionBody(),
                 ConversionOperatorDeclarationSyntax e => e.ExpressionBody,
-                _ => null
+                _ => throw new NotSupportedException($"This rule does not support {node.GetType().FullName} syntax.")
             };
 
         private static bool ShouldReport(INamedTypeSymbol exceptionType, ImmutableArray<KnownType> allowedTypes) =>
