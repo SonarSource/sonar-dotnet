@@ -29,7 +29,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LogImporterTest {
   // see src/test/resources/ProtobufImporterTest/README.md for explanation
-  private File protobuf = new File("src/test/resources/ProtobufImporterTest/custom-log.pb");
+  private File regularProtobuf = new File("src/test/resources/ProtobufImporterTest/custom-log.pb");
+  private File unknownProfobuf = new File("src/test/resources/ProtobufImporterTest/unknown-log.pb");
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -37,18 +38,31 @@ public class LogImporterTest {
   @Test
   public void importLogMessages() {
     LogImporter sut = new LogImporter();
-    sut.accept(protobuf.toPath());
+    sut.accept(regularProtobuf.toPath());
     sut.save();
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(2).contains("First debug line", "Second debug line");
     assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Single info line");
     assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Single warning line");
+    assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
+  }
+
+  @Test
+  public void unknownLogReportedAsInfoWithWarning() {
+    LogImporter sut = new LogImporter();
+    sut.accept(unknownProfobuf.toPath());
+    sut.save();
+
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Unknown severify for Coverage");
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Unexpected log message severity: UNKNOWN_SEVERITY");
+    assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
   }
 
   @Test
   public void clearsInternalStateOnSave() {
     LogImporter sut = new LogImporter();
-    sut.accept(protobuf.toPath());
+    sut.accept(regularProtobuf.toPath());
     sut.save();
     assertThat(logTester.logs()).isNotEmpty();
     logTester.clear();

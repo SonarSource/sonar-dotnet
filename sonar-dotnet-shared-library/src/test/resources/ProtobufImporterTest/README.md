@@ -28,7 +28,7 @@ The test files in this directory are generated with:
 Log file was generated in C# unit test like this:
 
 ```
-using var metricsStream = File.Create(@"<path>\custom-logs.pb");
+using var metricsStream = File.Create(@"<path>\custom-log.pb");
 var messages = new[]
 {
     new LogInfo {Severity = LogSeverity.Debug, Text = "First debug line" },
@@ -40,4 +40,12 @@ foreach (var message in messages)
 {
     message.WriteDelimitedTo(metricsStream);
 }
+```
+
+### unknown-log.pb
+
+Same as `custom-log.pb` with this message:
+
+```
+new LogInfo {Severity = LogSeverity.UnknownSeverity, Text = "Unknown severify for Coverage" }
 ```
