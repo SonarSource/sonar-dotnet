@@ -6,4 +6,7 @@ nuint u = 0;
 u = u++; // Noncompliant; u is still zero
 u = ++u; // Compliant
 
-return (int)i++; // Compliant FN
+int Compute(nint v) =>
+    (int) v++; // Noncompliant
+
+return (int)i++; // Noncompliant
