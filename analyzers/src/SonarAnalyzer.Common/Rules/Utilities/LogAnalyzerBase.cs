@@ -42,6 +42,5 @@ namespace SonarAnalyzer.Rules
             Language.GeneratedCodeRecognizer.IsGenerated(syntaxTree)
             ? new LogInfo { Severity = LogSeverity.Debug, Text = $"File '{syntaxTree.FilePath}' was recognized as generated" }
             : null;
-
     }
 }
