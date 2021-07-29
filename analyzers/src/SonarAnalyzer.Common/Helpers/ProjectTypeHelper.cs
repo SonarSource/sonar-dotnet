@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
@@ -49,9 +51,19 @@ namespace SonarAnalyzer.Helpers
             "Telerik.JustMock"
         };
 
-        // should only be used by SonarAnalysisContext
+        private static readonly ConditionalWeakTable<Compilation, IsTestWrapper> Cache = new ConditionalWeakTable<Compilation, IsTestWrapper>();
+
+        // Should only be used by SonarAnalysisContext
         public static bool IsTest(this Compilation compilation) =>
-            compilation != null // We can't detect references => it's MAIN
-            && compilation.ReferencedAssemblyNames.Any(assembly => TestAssemblyNames.Contains(assembly.Name));
+            // We can't detect references => it's MAIN
+            compilation != null && Cache.GetValue(compilation, x => new IsTestWrapper(x)).Value;
+
+        private class IsTestWrapper
+        {
+            public readonly bool Value;
+
+            public IsTestWrapper(Compilation compilation) =>
+                Value = compilation.ReferencedAssemblyNames.Any(assembly => TestAssemblyNames.Contains(assembly.Name));
+        }
     }
 }
