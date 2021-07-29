@@ -422,7 +422,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 }
                 else
                 {
-                    var newPath = $"{fullName}.cs";
+                    var newPath = $"{fullName}.vb";
                     File.WriteAllText(newPath, InsertNamespaceForVB(content));
                     resultingPaths.Add(newPath);
                 }
