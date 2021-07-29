@@ -22,7 +22,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -56,8 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void OptionStrictOn_Concurrent()
         {
-            using var scope = new EnvironmentVariableScope(true);
-            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
+            using var scope = new EnvironmentVariableScope(true) { EnableConcurrentAnalysis = true};
             var project = SolutionBuilder.Create()
                                          .AddProject(AnalyzerLanguage.VisualBasic)
                                          .AddSnippet("Option Strict Off ' Noncompliant ^1#17 {{Change this to 'Option Strict On'.}}")

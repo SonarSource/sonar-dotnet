@@ -39,9 +39,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("CodeFix")]
         public void DoNotUseIif_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\DoNotUseIif.vb",
-                                   @"TestCases\DoNotUseIif.Fixed.vb",
-                                   new DoNotUseIif(),
-                                   new DoNotUseIifCodeFixProvider(),
-                                   additionalReferences: MetadataReferenceFacade.MicrosoftVisualBasic);
+                @"TestCases\DoNotUseIif.Fixed.vb",
+                new DoNotUseIif(),
+                new DoNotUseIifCodeFixProvider(),
+                additionalReferences: MetadataReferenceFacade.MicrosoftVisualBasic);
     }
 }

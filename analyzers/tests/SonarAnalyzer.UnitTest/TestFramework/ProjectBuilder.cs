@@ -88,6 +88,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                                         Path.GetFileName(path.Path),
                                                                         path.Content,
                                                                         false));
+
         public ProjectBuilder AddDocument(string path, bool removeAnalysisComments = false)
         {
             if (path == null)

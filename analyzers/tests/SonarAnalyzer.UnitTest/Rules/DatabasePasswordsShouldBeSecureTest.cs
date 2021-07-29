@@ -70,7 +70,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 webConfigPath,
-                File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
@@ -85,7 +84,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 webConfigPath,
-                File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath, externalConfigPath)));
         }
 
@@ -101,7 +99,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 corruptFilePath,
-                File.ReadAllText(corruptFilePath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
         }
 
@@ -119,7 +116,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 appSettingsPath,
-                File.ReadAllText(appSettingsPath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, appSettingsPath)));
         }
 
@@ -135,7 +131,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 corruptFilePath,
-                File.ReadAllText(corruptFilePath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
         }
 

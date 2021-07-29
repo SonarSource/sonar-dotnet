@@ -79,9 +79,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
 
             var project = Create()
-                                  .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
-                                  .AddDocuments(paths)
-                                  .AddReferences(additionalReferences);
+                .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
+                .AddDocuments(paths)
+                .AddReferences(additionalReferences);
 
             if (isSupportForCSharp9InitNeeded)
             {

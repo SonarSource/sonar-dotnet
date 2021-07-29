@@ -20,23 +20,33 @@
 
 using System;
 using System.Collections.Generic;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     /// <summary>
     /// Defines a scope inside which new environment variables can be set.
     /// The variables will be cleared when the scope is disposed.
-    /// Copy-pasted from S4NET codebase.
     /// </summary>
     public sealed class EnvironmentVariableScope : IDisposable
     {
         private readonly bool setOnlyInAzureDevOpsContext;
         private IDictionary<string, string> originalValues = new Dictionary<string, string>();
 
-        public EnvironmentVariableScope(bool setVariablesOnlyInAzureDevOpsContext = false)
+#pragma warning disable S2376 // Write-only properties should not be used
+        public bool EnableConcurrentAnalysis
         {
-            setOnlyInAzureDevOpsContext = setVariablesOnlyInAzureDevOpsContext;
+            set => SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value.ToString());
         }
+
+        public bool InternalLogCBDE
+        {
+            set => SetVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", value.ToString());
+        }
+#pragma warning restore S2376
+
+        public EnvironmentVariableScope(bool setVariablesOnlyInAzureDevOpsContext = false) =>
+            setOnlyInAzureDevOpsContext = setVariablesOnlyInAzureDevOpsContext;
 
         public void SetVariable(string name, string value)
         {
@@ -53,9 +63,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         #region IDispose implementation
-
-        private bool disposed;
-
         public void Dispose()
         {
             Dispose(true);
@@ -64,12 +71,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         private void Dispose(bool disposing)
         {
-            if (disposed)
-            {
-                return;
-            }
-            disposed = true;
-
             if (disposing && originalValues != null)
             {
                 foreach (var kvp in originalValues)
@@ -80,7 +81,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 originalValues = null;
             }
         }
-
         #endregion IDispose implementation
     }
 }

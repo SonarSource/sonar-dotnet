@@ -138,10 +138,12 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Verify_ConcurrentExecutionIsExplicitlyDisabled()
+        [DataRow("false")]
+        [DataRow("fALSE")]
+        public void Verify_ConcurrentExecutionIsExplicitlyDisabled(string value)
         {
             using var scope = new EnvironmentVariableScope();
-            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "false");
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value);
             var reader = new ConcurrentExecutionReader();
             reader.IsConcurrentExecutionEnabled.Should().BeNull();
             Verifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });

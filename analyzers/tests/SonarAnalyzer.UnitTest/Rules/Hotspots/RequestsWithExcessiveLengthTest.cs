@@ -98,7 +98,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
                 webConfigPath,
-                File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
@@ -114,7 +113,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
                 corruptFilePath,
-                File.ReadAllText(corruptFilePath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
         }
 
