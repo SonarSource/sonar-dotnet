@@ -253,37 +253,20 @@ public class ExpectedIssuesNotRaised
         public void ExpectedIssuesNotRaised_MultipleFiles()
         {
             Action action =
-                () => Verifier.VerifyCSharpAnalyzer(new[] { @"
-public class ExpectedIssuesNotRaised
-    {
-        public void Test(bool a, bool b) // Noncompliant [MyId0]
-        {
-            if (a == b) // Noncompliant
-            { } // Secondary [MyId1]
-        }
-    }",
-                    @"
-public class ExpectedIssuesNotRaised2
-    {
-        public void Test(bool a, bool b) // Noncompliant [MyId0]
-        {
-            if (a == b) // Noncompliant
-            { } // Secondary [MyId1]
-        }
-    }" },
+                () => Verifier.VerifyNonConcurrentAnalyzer(new[] { @"TestCases\DiagnosticsVerifier\ExpectedIssuesNotRaised.cs", @"TestCases\DiagnosticsVerifier\ExpectedIssuesNotRaised2.cs" },
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<AssertFailedException>().WithMessage(
                 @"CSharp*: Issue(s) expected but not raised in file(s):" + Environment.NewLine +
-                "File: snippet1.cs" + Environment.NewLine +
-                "Line: 4, Type: primary, Id: 'MyId0'" + Environment.NewLine +
-                "Line: 6, Type: primary, Id: ''" + Environment.NewLine +
-                "Line: 7, Type: secondary, Id: 'MyId1'" + Environment.NewLine +
+                "File: ExpectedIssuesNotRaised.cs" + Environment.NewLine +
+                "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
+                "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
+                "Line: 6, Type: secondary, Id: 'MyId1'" + Environment.NewLine +
                 Environment.NewLine +
-                "File: snippet2.cs" + Environment.NewLine +
-                "Line: 4, Type: primary, Id: 'MyId0'" + Environment.NewLine +
-                "Line: 6, Type: primary, Id: ''" + Environment.NewLine +
-                "Line: 7, Type: secondary, Id: 'MyId1'");
+                "File: ExpectedIssuesNotRaised2.cs" + Environment.NewLine +
+                "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
+                "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
+                "Line: 6, Type: secondary, Id: 'MyId1'");
         }
     }
 }

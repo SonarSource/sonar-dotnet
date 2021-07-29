@@ -88,20 +88,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         /// <summary>
-        /// Verify analyzer from C# on a series of snippets in non-concurrent execution mode.
-        /// </summary>
-        public static void VerifyCSharpAnalyzer(string[] snippets,
-                                                SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                                IEnumerable<ParseOptions> options = null,
-                                                CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                                IEnumerable<MetadataReference> additionalReferences = null)
-        {
-            var projectBuilder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp);
-            var solution = snippets.Aggregate(projectBuilder, (builder, snippet) => builder.AddSnippet(snippet)).AddReferences(additionalReferences).GetSolution();
-            CompileAndVerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode);
-        }
-
-        /// <summary>
         /// Verify analyzer from VB.NET on a snippet in non-concurrent execution mode.
         /// </summary>
         public static void VerifyVisualBasicAnalyzer(string snippet,
@@ -257,7 +243,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<ParseOptions> options = null,
                                                        IEnumerable<MetadataReference> additionalReferences = null)
         {
-            using var scope = new EnvironmentVariableScope(true) { EnableConcurrentAnalysis = true};
+            using var _ = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};
             VerifyNonConcurrentAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
         }
 
@@ -319,12 +305,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             VerifyNoIssueReported(builder, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, null);
         }
-
-        public static void VerifyNoIssueReportedFromCSharp9InTest(string path,
-                                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                                                  OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                                                  IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyNoIssueReported(path, diagnosticAnalyzer, options: ParseOptionsHelper.FromCSharp9, outputKind: outputKind, additionalReferences: AddTestReference(additionalReferences));
 
         public static void VerifyNoIssueReported(string path,
                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
@@ -406,40 +386,43 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                            IEnumerable<MetadataReference> additionalReferences,
                                            string sonarProjectConfigPath = null)
         {
-            using var scope = new EnvironmentVariableScope(true) { EnableConcurrentAnalysis = true};
-            CreateConcurrencyTest(paths, out var pathsWithConcurrencyTests);
+            using var _ = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};
+            var pathsWithConcurrencyTests = CreateConcurrencyTest(paths);
             var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, outputKind, additionalReferences);
             CompileAndVerifyAnalyzer(solution, diagnosticAnalyzers, options, checkMode, sonarProjectConfigPath);
         }
 
-        private static void CreateConcurrencyTest(IEnumerable<string> paths, out List<string> resultingPaths)
+        private static List<string> CreateConcurrencyTest(IEnumerable<string> paths)
         {
-            resultingPaths = new List<string>(paths);
+            var ret = new List<string>(paths);
             var language = AnalyzerLanguage.FromPath(paths.First());
             foreach (var path in paths)
             {
-                var fullName = new FileInfo(path).FullName;
+                var fullName = Path.GetFullPath(path);
+                var folder = Path.GetDirectoryName(fullName) + Path.DirectorySeparatorChar;
+                var nameWithoutExtension = Path.GetFileNameWithoutExtension(path);
                 var content = File.ReadAllText(fullName, Encoding.UTF8);
                 if (language == AnalyzerLanguage.CSharp)
                 {
-                    var newPath = $"{fullName}.cs";
+                    var newPath = $"{folder}{nameWithoutExtension}.Concurrent.cs";
                     File.WriteAllText(newPath, $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}");
-                    resultingPaths.Add(newPath);
+                    ret.Add(newPath);
                 }
                 else
                 {
-                    var newPath = $"{fullName}.vb";
+                    var newPath = $"{folder}{nameWithoutExtension}.Concurrent.vb";
                     File.WriteAllText(newPath, InsertNamespaceForVB(content));
-                    resultingPaths.Add(newPath);
+                    ret.Add(newPath);
                 }
             }
+            return ret;
         }
 
         private static string InsertNamespaceForVB(string content)
         {
             var match = Regex.Match(content, @"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
             var idx = match.Success ? match.Index + match.Length + 1 : 0;
-            return content.Insert(idx, "Namespace AppendedNamespaceForConcurrencyTest\n") + "\nEnd Namespace";
+            return content.Insert(idx, "Namespace AppendedNamespaceForConcurrencyTest : ") + " : End Namespace";
         }
 
         private static void VerifyNonConcurrentAnalyzer(IEnumerable<string> paths,

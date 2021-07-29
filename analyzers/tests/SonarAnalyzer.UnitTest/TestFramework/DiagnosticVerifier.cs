@@ -70,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             try
             {
                 var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath: sonarProjectConfigPath);
-                var expectedIssues = sources.Select(x => x.ToIssueLocations()).ToArray();
+                var expectedIssues = sources.Select(x => x.ToExpectedIssueLocations()).ToArray();
                 CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
@@ -150,7 +150,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Where(d => ids.Contains(d.Id));
         }
 
-        internal static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, FileNameIssueLocations[] expectedIssuesPerFile, bool compareIdToMessage)
+        internal static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, FileIssueLocations[] expectedIssuesPerFile, bool compareIdToMessage)
         {
             DumpActualDiagnostics(languageVersion, diagnostics);
 
@@ -213,7 +213,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var expectedBuildErrors = compilation.SyntaxTrees
                                                  .Skip(1)
-                                                 .Select(x => new FileNameIssueLocations(x.FilePath, IssueLocationCollector.GetExpectedBuildErrors(x.GetText().Lines).ToList()))
+                                                 .Select(x => new FileIssueLocations(x.FilePath, IssueLocationCollector.GetExpectedBuildErrors(x.GetText().Lines).ToList()))
                                                  .ToArray();
             CompareActualToExpected(compilation.LanguageVersionString(), buildErrors, expectedBuildErrors, true);
         }
@@ -284,31 +284,31 @@ Actual  : '{message}'");
 
         internal class File
         {
-            private string FileName { get; }
-            private SourceText SourceText { get; }
+            private readonly string fileName;
+            private readonly SourceText sourceText;
 
             public File(string fileName)
             {
-                FileName = fileName;
-                SourceText = SourceText.From(System.IO.File.ReadAllText(fileName));
+                this.fileName = fileName;
+                sourceText = SourceText.From(System.IO.File.ReadAllText(fileName));
             }
 
             public File(SyntaxTree syntaxTree)
             {
-                FileName = syntaxTree.FilePath;
-                SourceText = syntaxTree.GetText();
+                fileName = syntaxTree.FilePath;
+                sourceText = syntaxTree.GetText();
             }
 
-            public FileNameIssueLocations ToIssueLocations() =>
-                new (FileName, IssueLocationCollector.GetExpectedIssueLocations(SourceText.Lines));
+            public FileIssueLocations ToExpectedIssueLocations() =>
+                new (fileName, IssueLocationCollector.GetExpectedIssueLocations(sourceText.Lines));
         }
 
-        internal class FileNameIssueLocations
+        internal class FileIssueLocations
         {
             public string FileName { get; }
             public IList<IIssueLocation> IssueLocations { get; }
 
-            public FileNameIssueLocations(string fileName, IList<IIssueLocation> issueLocations)
+            public FileIssueLocations(string fileName, IList<IIssueLocation> issueLocations)
             {
                 FileName = fileName;
                 IssueLocations = issueLocations;

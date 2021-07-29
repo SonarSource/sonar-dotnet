@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CbdeHandler_CS()
         {
-            using var scope = new EnvironmentVariableScope { InternalLogCBDE = true };
+            using var _ = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CbdeHandler.cs", CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
 #if NET
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CbdeHandler_CS_FromCSharp9()
         {
-            using var scope = new EnvironmentVariableScope { InternalLogCBDE = true };
+            using var _ = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CbdeHandler.CSharp9.cs",
                                                       CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }

@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void OptionStrictOn_Concurrent()
         {
-            using var scope = new EnvironmentVariableScope(true) { EnableConcurrentAnalysis = true};
+            using var _ = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};
             var project = SolutionBuilder.Create()
                                          .AddProject(AnalyzerLanguage.VisualBasic)
                                          .AddSnippet("Option Strict Off ' Noncompliant ^1#17 {{Change this to 'Option Strict On'.}}")

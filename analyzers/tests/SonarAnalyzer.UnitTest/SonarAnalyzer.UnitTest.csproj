@@ -47,6 +47,8 @@
 
   <ItemGroup>
     <Compile Remove="TestCases\**\*" />
+    <Compile Include="TestCases\DiagnosticsVerifier\ExpectedIssuesNotRaised.cs" />
+    <Compile Include="TestCases\DiagnosticsVerifier\ExpectedIssuesNotRaised2.cs" />
     <None Include="TestCases\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

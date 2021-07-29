@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 #pragma warning restore S2376
 
-        public EnvironmentVariableScope(bool setVariablesOnlyInAzureDevOpsContext = false) =>
+        public EnvironmentVariableScope(bool setVariablesOnlyInAzureDevOpsContext = true) =>
             setOnlyInAzureDevOpsContext = setVariablesOnlyInAzureDevOpsContext;
 
         public void SetVariable(string name, string value)
@@ -63,6 +63,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         #region IDispose implementation
+
         public void Dispose()
         {
             Dispose(true);
@@ -77,10 +78,10 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 {
                     Environment.SetEnvironmentVariable(kvp.Key, kvp.Value);
                 }
-
                 originalValues = null;
             }
         }
+
         #endregion IDispose implementation
     }
 }

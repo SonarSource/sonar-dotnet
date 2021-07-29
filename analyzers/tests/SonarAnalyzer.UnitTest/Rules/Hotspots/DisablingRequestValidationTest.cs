@@ -186,7 +186,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var actualIssues = allDiagnostics.Where(d => d.Location.GetLineSpan().Path.EndsWith(webConfigPath));
             var fileNameSourceText = new DiagnosticVerifier.File(webConfigPath);
-            var expectedIssueLocations = fileNameSourceText.ToIssueLocations();
+            var expectedIssueLocations = fileNameSourceText.ToExpectedIssueLocations();
             DiagnosticVerifier.CompareActualToExpected(languageVersion, actualIssues, new[] { expectedIssueLocations }, false);
         }
     }
