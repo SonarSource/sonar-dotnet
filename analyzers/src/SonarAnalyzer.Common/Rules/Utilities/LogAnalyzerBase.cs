@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
             new LogInfo { Severity = LogSeverity.Info, Text = "Roslyn version: " + typeof(SyntaxNode).Assembly.GetName().Version };
 
         protected sealed override LogInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
-            Language.GeneratedCodeRecognizer.IsGenerated(syntaxTree)
+            DiagnosticAnalyzerContextHelper.IsGenerated(syntaxTree, Language.GeneratedCodeRecognizer, semanticModel.Compilation)
             ? new LogInfo { Severity = LogSeverity.Debug, Text = $"File '{syntaxTree.FilePath}' was recognized as generated" }
             : null;
     }
