@@ -22,6 +22,7 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.LogInfo;
 
@@ -30,12 +31,11 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.LogInfo;
  */
 public class LogImporter extends RawProtobufImporter<LogInfo> {
 
-  private final Logger log;
+  private static final Logger LOG = Loggers.get(LogImporter.class);
   private List<LogInfo> messages = new ArrayList<>();
 
-  public LogImporter(Logger log) {
+  public LogImporter() {
     super(SonarAnalyzer.LogInfo.parser());
-    this.log = log;
   }
 
   @Override
@@ -48,21 +48,21 @@ public class LogImporter extends RawProtobufImporter<LogInfo> {
     for (LogInfo message : messages) {
       switch (message.getSeverity()) {
         case DEBUG:
-          log.debug(message.getText());
+          LOG.debug(message.getText());
           break;
 
         case INFO:
-          log.info(message.getText());
+          LOG.info(message.getText());
           break;
 
         case WARNING:
-          log.warn(message.getText());
+          LOG.warn(message.getText());
           break;
 
         case UNKNOWN_SEVERITY:
         default:
-          log.warn("Unexpected log message severity: " + message.getSeverity());
-          log.info(message.getText());
+          LOG.warn("Unexpected log message severity: " + message.getSeverity());
+          LOG.info(message.getText());
       }
     }
 

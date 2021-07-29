@@ -23,9 +23,7 @@ import java.io.File;
 import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.LoggerLevel;
-import org.sonar.api.utils.log.Loggers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,8 +36,7 @@ public class LogImporterTest {
 
   @Test
   public void importLogMessages() {
-    Logger log = Loggers.get(LogImporterTest.class);
-    LogImporter sut = new LogImporter(log);
+    LogImporter sut = new LogImporter();
     sut.accept(protobuf.toPath());
     sut.save();
 
@@ -50,8 +47,7 @@ public class LogImporterTest {
 
   @Test
   public void clearsInternalStateOnSave() {
-    Logger log = Loggers.get(LogImporterTest.class);
-    LogImporter sut = new LogImporter(log);
+    LogImporter sut = new LogImporter();
     sut.accept(protobuf.toPath());
     sut.save();
     assertThat(logTester.logs()).isNotEmpty();

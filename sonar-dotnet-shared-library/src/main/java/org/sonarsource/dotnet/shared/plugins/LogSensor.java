@@ -23,14 +23,11 @@ import java.nio.file.Path;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.LogImporter;
 
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.LOG_FILENAME;
 
 public class LogSensor implements Sensor {
-  private static final Logger LOG = Loggers.get(LogSensor.class);
   private final DotNetPluginMetadata pluginMetadata;
   private final AbstractModuleConfiguration configuration;
 
@@ -48,7 +45,7 @@ public class LogSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
-    LogImporter importer = new LogImporter(LOG);
+    LogImporter importer = new LogImporter();
     for (Path protobufDir : configuration.protobufReportPaths()) {
       ProtobufDataImporter.parseProtobuf(importer, protobufDir, LOG_FILENAME);
       importer.save();
