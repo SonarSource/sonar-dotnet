@@ -26,6 +26,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -37,16 +38,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CbdeHandler_CS()
         {
-            System.Environment.SetEnvironmentVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", "true");
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CbdeHandler.cs",
-                                                  CbdeHandlerRule.MakeUnitTestInstance(null, null));
+            using var scope = new EnvironmentVariableScope();
+            scope.SetVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", "true");
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CbdeHandler.cs", CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CbdeHandler_CS_FromCSharp9()
         {
-            System.Environment.SetEnvironmentVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", "true");
+            using var scope = new EnvironmentVariableScope();
+            scope.SetVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", "true");
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CbdeHandler.CSharp9.cs",
                                                       CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }

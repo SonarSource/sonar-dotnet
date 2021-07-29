@@ -91,7 +91,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return AddReferencesToSolution(additionalReferences, project);
         }
 
-        public static SolutionBuilder CreateSolutionFromContent(IEnumerable<ProjectFileAsPathAndContent> pathsAndContents,
+        public static SolutionBuilder CreateSolutionFromContent(IEnumerable<ProjectFileContent> pathsAndContents,
                                                                 AnalyzerLanguage language,
                                                                 OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                                                 IEnumerable<MetadataReference> additionalReferences = null)

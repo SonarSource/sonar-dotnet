@@ -23,26 +23,27 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    public class ProjectFileAsPathAndContent
+    public class ProjectFileContent
     {
         public string Path { get; }
         public string Content { get; }
 
-        public ProjectFileAsPathAndContent(string path, string content)
+        public ProjectFileContent(string path, string content)
         {
             Path = path;
             Content = content;
         }
 
-        public ProjectFileAsPathAndContent Duplicate(AnalyzerLanguage language) =>
+        public ProjectFileContent CreateConcurrencyTest(AnalyzerLanguage language) =>
             language == AnalyzerLanguage.CSharp
                 ? new ($"{Path}.cs", $"namespace AppendedNamespaceForConcurrencyTest {{ {Content} }}")
                 : new ($"{Path}.vb", InsertNamespaceForVB(Content));
 
         private static string InsertNamespaceForVB(string content)
         {
-            var match = Regex.Match(content, @"\s*Imports\s+(\w|\.|=| )*\s*", RegexOptions.RightToLeft);
-            return content.Insert(match.Index + match.Length, "Namespace AppendedNamespaceForConcurrencyTest\n") + "\nEnd Namespace";
+            var match = Regex.Match(content, @"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
+            var idx = match.Success ? match.Index + match.Length + 1 : 0;
+            return content.Insert(idx, "Namespace AppendedNamespaceForConcurrencyTest\n") + "\nEnd Namespace";
         }
     }
 }

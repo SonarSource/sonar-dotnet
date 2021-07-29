@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using FluentAssertions;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis;
@@ -400,12 +401,39 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             using var scope = new EnvironmentVariableScope(true);
             scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, "true");
-            var analyzerLanguage = AnalyzerLanguage.FromPath(paths.First());
-            var content = paths.Select(x => new ProjectFileAsPathAndContent(x, File.ReadAllText(new FileInfo(x).FullName, Encoding.UTF8))).ToList();
-            var duplicatedFiles = content.Select(x => x.Duplicate(analyzerLanguage)).ToList();
-            content.AddRange(duplicatedFiles);
-            var solution = SolutionBuilder.CreateSolutionFromContent(content, analyzerLanguage, outputKind, additionalReferences);
+            CreateConcurrencyTest(paths, out var pathsWithConcurrencyTests);
+            var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, outputKind, additionalReferences);
             CompileAndVerifyAnalyzer(solution, diagnosticAnalyzers, options, checkMode, sonarProjectConfigPath);
+        }
+
+        private static void CreateConcurrencyTest(IEnumerable<string> paths, out List<string> resultingPaths)
+        {
+            resultingPaths = new List<string>(paths);
+            var language = AnalyzerLanguage.FromPath(paths.First());
+            foreach (var path in paths)
+            {
+                var fullName = new FileInfo(path).FullName;
+                var content = File.ReadAllText(fullName, Encoding.UTF8);
+                if (language == AnalyzerLanguage.CSharp)
+                {
+                    var newPath = $"{fullName}.cs";
+                    File.WriteAllText(newPath, $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}");
+                    resultingPaths.Add(newPath);
+                }
+                else
+                {
+                    var newPath = $"{fullName}.cs";
+                    File.WriteAllText(newPath, InsertNamespaceForVB(content));
+                    resultingPaths.Add(newPath);
+                }
+            }
+        }
+
+        private static string InsertNamespaceForVB(string content)
+        {
+            var match = Regex.Match(content, @"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
+            var idx = match.Success ? match.Index + match.Length + 1 : 0;
+            return content.Insert(idx, "Namespace AppendedNamespaceForConcurrencyTest\n") + "\nEnd Namespace";
         }
 
         private static void VerifyNonConcurrentAnalyzer(IEnumerable<string> paths,

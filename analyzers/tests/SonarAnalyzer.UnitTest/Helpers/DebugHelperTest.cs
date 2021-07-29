@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
@@ -44,8 +43,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private static void SetupRunAndReset(string value, bool shouldBeTrue)
         {
             // Arrange
-            var oldValue = Environment.GetEnvironmentVariable(DebugHelper.AnalyzerInternalDebugEnvVariable);
-            Environment.SetEnvironmentVariable(DebugHelper.AnalyzerInternalDebugEnvVariable, value);
+            using var scope = new EnvironmentVariableScope();
+            scope.SetVariable(DebugHelper.AnalyzerInternalDebugEnvVariable, value);
 
             // Act & assert
             if (shouldBeTrue)
@@ -56,9 +55,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
             {
                 DebugHelper.IsInternalDebuggingContext().Should().BeFalse();
             }
-
-            // Reset state
-            Environment.SetEnvironmentVariable(DebugHelper.AnalyzerInternalDebugEnvVariable, oldValue);
         }
     }
 }

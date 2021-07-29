@@ -23,7 +23,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 
@@ -84,9 +83,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
             paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
 
-        public ProjectBuilder AddDocuments(IEnumerable<ProjectFileAsPathAndContent> paths) =>
+        public ProjectBuilder AddDocuments(IEnumerable<ProjectFileContent> paths) =>
             paths.Aggregate(this, (projectBuilder, path) => AddDocument(projectBuilder.Project,
-                                                                        new FileInfo(path.Path).Name,
+                                                                        Path.GetFileName(path.Path),
                                                                         path.Content,
                                                                         false));
         public ProjectBuilder AddDocument(string path, bool removeAnalysisComments = false)
