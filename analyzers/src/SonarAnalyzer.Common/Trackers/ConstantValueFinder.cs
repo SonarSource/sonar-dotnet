@@ -28,17 +28,19 @@ namespace SonarAnalyzer.Helpers
         where TIdentifierNameSyntax : SyntaxNode
         where TVariableDeclaratorSyntax : SyntaxNode
     {
-        private readonly SemanticModel semanticModel;
+        protected readonly SemanticModel SemanticModel;
+
         private readonly AssignmentFinder assignmentFinder;
         private readonly int nullLiteralExpressionSyntaxKind;
 
         protected abstract string IdentifierName(TIdentifierNameSyntax node);
         protected abstract SyntaxNode InitializerValue(TVariableDeclaratorSyntax node);
         protected abstract TVariableDeclaratorSyntax VariableDeclarator(SyntaxNode node);
+        protected abstract bool IsPtrZero(SyntaxNode node);
 
         protected ConstantValueFinder(SemanticModel semanticModel, AssignmentFinder assignmentFinder, int nullLiteralExpressionSyntaxKind)
         {
-            this.semanticModel = semanticModel;
+            SemanticModel = semanticModel;
             this.assignmentFinder = assignmentFinder;
             this.nullLiteralExpressionSyntaxKind = nullLiteralExpressionSyntaxKind;
         }
@@ -52,7 +54,13 @@ namespace SonarAnalyzer.Helpers
             {
                 return null;
             }
-            return node.EnsureCorrectSemanticModelOrDefault(semanticModel) is { } nodeSemanticModel
+
+            if (IsPtrZero(node))
+            {
+                return 0;
+            }
+
+            return node.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } nodeSemanticModel
                 ? nodeSemanticModel.GetConstantValue(node).Value ?? FindAssignedConstant(node, nodeSemanticModel, visitedVariables)
                 : null;
         }

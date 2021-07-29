@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -36,5 +37,9 @@ namespace SonarAnalyzer.Helpers
 
         protected override VariableDeclaratorSyntax VariableDeclarator(SyntaxNode node) =>
             node?.Parent as VariableDeclaratorSyntax;
+
+        protected override bool IsPtrZero(SyntaxNode node) =>
+            node is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.IsPtrZero(SemanticModel);
     }
 }

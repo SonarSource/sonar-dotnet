@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 
 nint resultNint;
@@ -6,14 +7,16 @@ nint bitMaskNint = 0x010F;
 const nint nOne = 1;
 const nint nZero = 0;
 
-resultNint = -1 & bitMaskNint;      // Noncompliant
-resultNint = bitMaskNint & -nOne;   // Noncompliant
-resultNint = bitMaskNint | nZero;   // Noncompliant
-resultNint = bitMaskNint ^ nZero;   // Noncompliant
-resultNint &= -nOne;                // Noncompliant
-resultNint |= nZero;                // Noncompliant
-resultNint ^= nZero;                // Noncompliant
-var result2 = resultNint ^= nZero;  // Noncompliant
+resultNint = -1 & bitMaskNint;            // Noncompliant
+resultNint = bitMaskNint & -nOne;         // Noncompliant
+resultNint = bitMaskNint | nZero;         // Noncompliant
+resultNint = bitMaskNint ^ nZero;         // Noncompliant
+resultNint = bitMaskNint | IntPtr.Zero;   // Noncompliant
+resultNint = bitMaskNint ^ IntPtr.Zero;   // Noncompliant
+resultNint &= -nOne;                      // Noncompliant
+resultNint |= nZero;                      // Noncompliant
+resultNint ^= nZero;                      // Noncompliant
+var result2 = resultNint ^= nZero;        // Noncompliant
 
 resultNint = bitMaskNint & - - -+nOne; // Noncompliant
 resultNint = bitMaskNint | + + +nZero; // Noncompliant
@@ -34,6 +37,8 @@ resultNuint = bitMaskNuint & nuZero;        // Compliant
 resultNuint = bitMaskNuint ^ 0;             // Noncompliant
 resultNuint = bitMaskNuint | 0;             // Noncompliant
 resultNuint = bitMaskNuint | 0x0;           // Noncompliant
+resultNuint = bitMaskNuint ^ UIntPtr.Zero;  // Noncompliant
+resultNuint = bitMaskNuint | UIntPtr.Zero;  // Noncompliant
 resultNuint = bitMaskNuint & returnNuint(); // Compliant
 resultNuint = bitMaskNuint & 0x0F;          // Compliant
 

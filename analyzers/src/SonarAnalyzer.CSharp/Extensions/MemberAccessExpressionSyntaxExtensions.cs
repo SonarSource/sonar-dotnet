@@ -24,7 +24,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Extensions
 {
-    internal static class MemberAccessExpressionSyntaxExtensions
+    internal static partial class MemberAccessExpressionSyntaxExtensions
     {
         public static bool IsMemberAccessOnKnownType(this MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
             memberAccess.NameIs(name)

@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -36,5 +38,9 @@ namespace SonarAnalyzer.Helpers
 
         protected override VariableDeclaratorSyntax VariableDeclarator(SyntaxNode node) =>
             node as VariableDeclaratorSyntax;
+
+        protected override bool IsPtrZero(SyntaxNode node) =>
+            node is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.IsPtrZero(SemanticModel);
     }
 }
