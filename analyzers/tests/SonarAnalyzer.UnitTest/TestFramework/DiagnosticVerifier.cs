@@ -158,7 +158,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 var expectedIssues = diagnostic.Location.SourceTree != null
                     ? expectedIssuesPerFile.Single(x => x.FileName == diagnostic.Location.SourceTree.FilePath).IssueLocations
-                    : expectedIssuesPerFile.Single(x => x.IssueLocations.Any()).IssueLocations;
+                    : expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IIssueLocation>(); // Issue locations get removed, so the list could become empty
                 var issueId = VerifyPrimaryIssue(languageVersion,
                     expectedIssues,
                     issue => issue.IsPrimary,
