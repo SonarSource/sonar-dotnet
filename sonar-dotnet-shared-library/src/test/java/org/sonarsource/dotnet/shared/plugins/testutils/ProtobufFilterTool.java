@@ -32,10 +32,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.CPDTOKENS_FILENAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.HIGHLIGHT_FILENAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.METRICS_FILENAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.SYMBOLREFS_FILENAME;
 
 /**
  * Utility class to filter protobuf binary files to contain a single input-file (Program.cs)
@@ -50,16 +50,16 @@ public class ProtobufFilterTool {
   public static void main(String[] args) throws IOException {
     String pathSuffix = "\\" + TEST_FILENAME;
 
-    rewrite(SYMBOLREFS_OUTPUT_PROTOBUF_NAME, SonarAnalyzer.SymbolReferenceInfo.parser(),
+    rewrite(SYMBOLREFS_FILENAME, SonarAnalyzer.SymbolReferenceInfo.parser(),
       m -> m.getFilePath().endsWith(pathSuffix), m -> m.toBuilder().setFilePath(TEST_FILENAME).build());
 
-    rewrite(HIGHLIGHT_OUTPUT_PROTOBUF_NAME, SonarAnalyzer.TokenTypeInfo.parser(),
+    rewrite(HIGHLIGHT_FILENAME, SonarAnalyzer.TokenTypeInfo.parser(),
       m -> m.getFilePath().endsWith(pathSuffix), m -> m.toBuilder().setFilePath(TEST_FILENAME).build());
 
-    rewrite(CPDTOKENS_OUTPUT_PROTOBUF_NAME, SonarAnalyzer.CopyPasteTokenInfo.parser(),
+    rewrite(CPDTOKENS_FILENAME, SonarAnalyzer.CopyPasteTokenInfo.parser(),
       m -> m.getFilePath().endsWith(pathSuffix), m -> m.toBuilder().setFilePath(TEST_FILENAME).build());
 
-    rewrite(METRICS_OUTPUT_PROTOBUF_NAME, SonarAnalyzer.MetricsInfo.parser(),
+    rewrite(METRICS_FILENAME, SonarAnalyzer.MetricsInfo.parser(),
       m -> m.getFilePath().endsWith(pathSuffix), m -> m.toBuilder().setFilePath(TEST_FILENAME).build());
 
   }

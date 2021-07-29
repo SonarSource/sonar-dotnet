@@ -37,16 +37,21 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
 import org.sonarsource.dotnet.shared.StringUtils;
-import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
+import org.sonarsource.dotnet.shared.plugins.protobuf.CPDTokensImporter;
+import org.sonarsource.dotnet.shared.plugins.protobuf.HighlightImporter;
+import org.sonarsource.dotnet.shared.plugins.protobuf.MetricsImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.RawProtobufImporter;
-
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
+import org.sonarsource.dotnet.shared.plugins.protobuf.SymbolRefsImporter;
 
 @ScannerSide
 public class ProtobufDataImporter {
+  public static final String CPDTOKENS_FILENAME = "token-cpd.pb";
+  public static final String FILEMETADATA_FILENAME = "file-metadata.pb";
+  public static final String HIGHLIGHT_FILENAME = "token-type.pb";
+  public static final String LOG_FILENAME = "log.pb";
+  public static final String METRICS_FILENAME = "metrics.pb";
+  public static final String SYMBOLREFS_FILENAME = "symrefs.pb";
+
   private static final Logger LOG = Loggers.get(ProtobufDataImporter.class);
 
   private final FileLinesContextFactory fileLinesContextFactory;
@@ -57,22 +62,20 @@ public class ProtobufDataImporter {
     this.noSonarFilter = noSonarFilter;
   }
 
-  public void importResults(SensorContext context, List<Path> protobufReportsDirectories,
-    UnaryOperator<String> toRealPath) {
-    RawProtobufImporter<MetricsInfo> metricsImporter = ProtobufImporters.metricsImporter(context,
-      fileLinesContextFactory, noSonarFilter, toRealPath);
-    RawProtobufImporter<TokenTypeInfo> highlightImporter = ProtobufImporters.highlightImporter(context, toRealPath);
-    RawProtobufImporter<SymbolReferenceInfo> symbolRefsImporter = ProtobufImporters.symbolRefsImporter(context, toRealPath);
-    RawProtobufImporter<CopyPasteTokenInfo> cpdTokensImporter = ProtobufImporters.cpdTokensImporter(context, toRealPath);
+  public void importResults(SensorContext context, List<Path> protobufReportsDirectories, UnaryOperator<String> toRealPath) {
+    RawProtobufImporter<MetricsInfo> metricsImporter = new MetricsImporter(context, fileLinesContextFactory, noSonarFilter, toRealPath);
+    RawProtobufImporter<TokenTypeInfo> highlightImporter = new HighlightImporter(context, toRealPath);
+    RawProtobufImporter<SymbolReferenceInfo> symbolRefsImporter = new SymbolRefsImporter(context, toRealPath);
+    RawProtobufImporter<CopyPasteTokenInfo> cpdTokensImporter = new CPDTokensImporter(context, toRealPath);
 
     for (Path protobufReportsDir : protobufReportsDirectories) {
       long protoFiles = countProtoFiles(protobufReportsDir);
       LOG.info(String.format("Importing results from %d proto %s in '%s'", protoFiles, StringUtils.pluralize("file", protoFiles), protobufReportsDir));
       // Note: the no-sonar "measure" must be imported before issues, otherwise the affected issues won't get excluded!
-      parseProtobuf(metricsImporter, protobufReportsDir, METRICS_OUTPUT_PROTOBUF_NAME);
-      parseProtobuf(highlightImporter, protobufReportsDir, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
-      parseProtobuf(symbolRefsImporter, protobufReportsDir, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
-      parseProtobuf(cpdTokensImporter, protobufReportsDir, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
+      parseProtobuf(metricsImporter, protobufReportsDir, METRICS_FILENAME);
+      parseProtobuf(highlightImporter, protobufReportsDir, HIGHLIGHT_FILENAME);
+      parseProtobuf(symbolRefsImporter, protobufReportsDir, SYMBOLREFS_FILENAME);
+      parseProtobuf(cpdTokensImporter, protobufReportsDir, CPDTOKENS_FILENAME);
     }
 
     metricsImporter.save();
@@ -91,7 +94,7 @@ public class ProtobufDataImporter {
     }
   }
 
-  private static void parseProtobuf(RawProtobufImporter<?> importer, Path workDirectory, String filename) {
+  public static void parseProtobuf(RawProtobufImporter<?> importer, Path workDirectory, String filename) {
     Path protobuf = workDirectory.resolve(filename);
     if (protobuf.toFile().exists()) {
       importer.accept(protobuf);

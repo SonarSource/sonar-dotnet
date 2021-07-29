@@ -30,7 +30,7 @@ import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.HIGHLIGHT_FILENAME;
 
 public class HighlightImporterTest {
 
@@ -48,7 +48,7 @@ public class HighlightImporterTest {
       .build();
     tester.fileSystem().add(inputFile);
 
-    File protobuf = new File(TEST_DATA_DIR, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
+    File protobuf = new File(TEST_DATA_DIR, HIGHLIGHT_FILENAME);
     assertThat(protobuf).withFailMessage("no such file: " + protobuf).isFile();
 
     HighlightImporter importer = new HighlightImporter(tester, String::toString);

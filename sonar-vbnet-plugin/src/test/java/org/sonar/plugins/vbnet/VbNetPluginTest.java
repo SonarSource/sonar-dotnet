@@ -34,6 +34,7 @@ import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.LogSensor;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -58,24 +59,25 @@ public class VbNetPluginTest {
     List extensions = context.getExtensions();
 
     Object[] expectedExtensions = new Object[] {
+      DotNetSensor.class,
+      EncodingPerFile.class,
+      FileTypeSensor.class,
+      GeneratedFileFilter.class,
+      LogSensor.class,
+      ProjectTypeCollector.class,
+      PropertiesSensor.class,
+      ProtobufDataImporter.class,
+      ReportPathCollector.class,
+      RoslynDataImporter.class,
+      RoslynProfileExporter.class,
+      SonarLintProfileExporter.class,
       VbNetPlugin.METADATA,
       VbNet.class,
       VbNetSonarRulesDefinition.class,
-      DotNetSensor.class,
       VbNetLanguageConfiguration.class,
       VbNetModuleConfiguration.class,
       VbNetGlobalProtobufFileProcessor.class,
-      WrongEncodingFileFilter.class,
-      EncodingPerFile.class,
-      ProjectTypeCollector.class,
-      ReportPathCollector.class,
-      PropertiesSensor.class,
-      GeneratedFileFilter.class,
-      FileTypeSensor.class,
-      SonarLintProfileExporter.class,
-      ProtobufDataImporter.class,
-      RoslynDataImporter.class,
-      RoslynProfileExporter.class
+      WrongEncodingFileFilter.class
     };
 
     assertThat(nonProperties(extensions)).contains(expectedExtensions);

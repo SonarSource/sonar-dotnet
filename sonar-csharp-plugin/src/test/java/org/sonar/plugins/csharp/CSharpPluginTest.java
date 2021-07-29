@@ -34,6 +34,7 @@ import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.LogSensor;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -58,24 +59,25 @@ public class CSharpPluginTest {
     List extensions = context.getExtensions();
 
     Object[] expectedExtensions = new Object[] {
-      CSharpPlugin.METADATA,
       CSharp.class,
-      CSharpSonarRulesDefinition.class,
-      DotNetSensor.class,
+      CSharpGlobalProtobufFileProcessor.class,
       CSharpLanguageConfiguration.class,
       CSharpModuleConfiguration.class,
-      CSharpGlobalProtobufFileProcessor.class,
-      WrongEncodingFileFilter.class,
+      CSharpPlugin.METADATA,
+      CSharpSonarRulesDefinition.class,
+      DotNetSensor.class,
       EncodingPerFile.class,
-      ProjectTypeCollector.class,
-      ReportPathCollector.class,
-      PropertiesSensor.class,
-      GeneratedFileFilter.class,
       FileTypeSensor.class,
-      SonarLintProfileExporter.class,
+      GeneratedFileFilter.class,
+      LogSensor.class,
+      ProjectTypeCollector.class,
+      PropertiesSensor.class,
       ProtobufDataImporter.class,
+      ReportPathCollector.class,
       RoslynDataImporter.class,
-      RoslynProfileExporter.class
+      RoslynProfileExporter.class,
+      SonarLintProfileExporter.class,
+      WrongEncodingFileFilter.class
     };
 
     assertThat(nonProperties(extensions)).contains(expectedExtensions);

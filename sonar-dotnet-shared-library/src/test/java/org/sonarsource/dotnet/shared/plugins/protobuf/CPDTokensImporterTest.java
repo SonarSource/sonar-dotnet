@@ -35,7 +35,7 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.CPDTOKENS_FILENAME;
 
 public class CPDTokensImporterTest {
 
@@ -49,7 +49,7 @@ public class CPDTokensImporterTest {
 
   private SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
   private CPDTokensImporter underTest = new CPDTokensImporter(tester, String::toString);
-  private File protobuf = new File(TEST_DATA_DIR, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
+  private File protobuf = new File(TEST_DATA_DIR, CPDTOKENS_FILENAME);
 
   @Before
   public void before() {

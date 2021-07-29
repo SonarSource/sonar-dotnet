@@ -30,7 +30,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.SYMBOLREFS_FILENAME;
 
 public class SymbolRefsImporterTest {
 
@@ -40,7 +40,7 @@ public class SymbolRefsImporterTest {
   private static final File TEST_FILE = new File(TEST_DATA_DIR, TEST_FILE_PATH);
 
   private SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
-  private File protobuf = new File(TEST_DATA_DIR, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
+  private File protobuf = new File(TEST_DATA_DIR, SYMBOLREFS_FILENAME);
   SymbolRefsImporter underTest = new SymbolRefsImporter(tester, String::toString);
 
   @Before
