@@ -47,5 +47,5 @@ foreach (var message in messages)
 Same as `custom-log.pb` with this message:
 
 ```
-new LogInfo {Severity = LogSeverity.UnknownSeverity, Text = "Unknown severify for Coverage" }
+new LogInfo {Severity = LogSeverity.UnknownSeverity, Text = "Unknown severity for Coverage" }
 ```

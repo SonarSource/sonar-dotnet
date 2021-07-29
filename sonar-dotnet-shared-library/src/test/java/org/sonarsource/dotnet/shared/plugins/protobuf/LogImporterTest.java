@@ -54,7 +54,7 @@ public class LogImporterTest {
     sut.save();
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Unknown severify for Coverage");
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Unknown severity for Coverage");
     assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Unexpected log message severity: UNKNOWN_SEVERITY");
     assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
   }

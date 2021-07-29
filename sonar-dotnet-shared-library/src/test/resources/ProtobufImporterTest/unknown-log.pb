@@ -1,1 +1,1 @@
-Unknown severify for Coverage
+Unknown severity for Coverage
