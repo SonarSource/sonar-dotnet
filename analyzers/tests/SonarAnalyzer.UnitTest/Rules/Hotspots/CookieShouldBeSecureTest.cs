@@ -40,8 +40,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_Nancy.cs",
-                                              new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                                              AdditionalReferences);
+                                    new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferences);
 
 #if NETFRAMEWORK // HttpCookie is not available on .Net Core
 

@@ -63,9 +63,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PermissiveCors_AspNet_WebApi() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PermissiveCors.NetFramework.cs",
-                                              new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
-                                              ParseOptionsHelper.FromCSharp9,
-                                              AdditionalReferences);
+                                    new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    AdditionalReferences);
 
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             NuGetMetadataReference.MicrosoftNetHttpHeaders(Constants.NuGetLatestVersion)

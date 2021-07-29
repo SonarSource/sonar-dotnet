@@ -38,16 +38,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
-                                              new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                                              AdditionalReferencesNetCore2);
+                                    new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
-                                              new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                                              AdditionalReferencesNetCore2);
+                                    new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferencesNetCore2);
 
 #if NET
 

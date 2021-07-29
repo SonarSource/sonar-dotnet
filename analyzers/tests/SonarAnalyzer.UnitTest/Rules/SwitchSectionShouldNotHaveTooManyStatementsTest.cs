@@ -51,6 +51,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.vb",
-                                                 new VB.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 });
+                new VB.SwitchSectionShouldNotHaveTooManyStatements() { Threshold = 1 });
     }
 }

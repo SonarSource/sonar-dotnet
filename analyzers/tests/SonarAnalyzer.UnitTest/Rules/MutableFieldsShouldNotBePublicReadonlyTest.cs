@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PublicMutableFieldsShouldNotBeReadonly() =>
             Verifier.VerifyAnalyzer(@"TestCases\MutableFieldsShouldNotBePublicReadonly.cs",
-                                              new MutableFieldsShouldNotBePublicReadonly(),
-                                              NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
+                                    new MutableFieldsShouldNotBePublicReadonly(),
+                                    NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
     }
 }

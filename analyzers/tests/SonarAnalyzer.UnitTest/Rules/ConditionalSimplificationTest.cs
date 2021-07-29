@@ -35,8 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConditionalSimplification_BeforeCSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
-                                              new ConditionalSimplification(),
-                                              ParseOptionsHelper.BeforeCSharp8);
+                                    new ConditionalSimplification(),
+                                    ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]

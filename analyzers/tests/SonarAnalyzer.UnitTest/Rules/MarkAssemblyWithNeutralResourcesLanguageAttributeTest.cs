@@ -43,8 +43,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_NoResx_HasAttribute_Compliant() =>
             Verifier.VerifyNonConcurrentAnalyzer(
-                                                  @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
-                                                  new MarkAssemblyWithNeutralResourcesLanguageAttribute());
+                @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
+                new MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]

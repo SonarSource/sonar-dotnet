@@ -35,8 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs",
-                                              new AssertionArgsShouldBePassedInCorrectOrder(),
-                                              NuGetMetadataReference.MSTestTestFramework(testFwkVersion).ToArray());
+                                    new AssertionArgsShouldBePassedInCorrectOrder(),
+                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion).ToArray());
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]

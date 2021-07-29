@@ -49,8 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs",
-                                                                   new SymbolicExecutionRunner(new ObjectsShouldNotBeDisposedMoreThanOnce()));
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs", new SymbolicExecutionRunner(new ObjectsShouldNotBeDisposedMoreThanOnce()));
 #endif
     }
 }

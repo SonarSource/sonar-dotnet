@@ -132,13 +132,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_NoCrashOnExternalParameterUse() =>
             Verifier.VerifyAnalyzer(
-                                    new[]
-                                    {
-                                        @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ExternalParameter.cs",
-                                        @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ParameterProvider.cs"
-                                    },
-                                    new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                                    MetadataReferenceFacade.SystemXml);
+                new[]
+                {
+                    @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ExternalParameter.cs",
+                    @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ParameterProvider.cs"
+                },
+                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
+                MetadataReferenceFacade.SystemXml);
 
         private static void VerifyRule(NetFrameworkVersion version, string testFilePath, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<ParseOptions> options = null) =>
             Verifier.VerifyAnalyzer(testFilePath,

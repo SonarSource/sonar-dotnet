@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void DoNotUseRandom() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotUseRandom.cs",
-                                              new DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
-                                              MetadataReferenceFacade.SystemSecurityCryptography);
+                                    new DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
+                                    MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

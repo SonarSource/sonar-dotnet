@@ -44,6 +44,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotCheckZeroSizeCollection_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.vb",
-                                              new VB.DoNotCheckZeroSizeCollection());
+                new VB.DoNotCheckZeroSizeCollection());
     }
 }

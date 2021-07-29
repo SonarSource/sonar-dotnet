@@ -36,15 +36,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
-                                              new CS.MarkWindowsFormsMainWithStaThread(),
-                                              FrameworkMetadataReference.SystemWindowsForms);
+                                    new CS.MarkWindowsFormsMainWithStaThread(),
+                                    FrameworkMetadataReference.SystemWindowsForms);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.vb",
-                                              new VB.MarkWindowsFormsMainWithStaThread(),
-                                              FrameworkMetadataReference.SystemWindowsForms);
+                                    new VB.MarkWindowsFormsMainWithStaThread(),
+                                    FrameworkMetadataReference.SystemWindowsForms);
 #endif
 
         [TestMethod]

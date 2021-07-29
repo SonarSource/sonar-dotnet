@@ -34,8 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.MsTest.cs",
-                                              new DoNotUseLiteralBoolInAssertions(),
-                                              NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+                                    new DoNotUseLiteralBoolInAssertions(),
+                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]

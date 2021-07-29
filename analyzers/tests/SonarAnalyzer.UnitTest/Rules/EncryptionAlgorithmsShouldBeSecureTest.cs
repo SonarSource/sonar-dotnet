@@ -36,8 +36,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
-                                              new CS.EncryptionAlgorithmsShouldBeSecure(),
-                                              GetAdditionalReferences());
+                new CS.EncryptionAlgorithmsShouldBeSecure(),
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -54,8 +54,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
-                                              new VB.EncryptionAlgorithmsShouldBeSecure(),
-                                              GetAdditionalReferences());
+                new VB.EncryptionAlgorithmsShouldBeSecure(),
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]

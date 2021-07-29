@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotNestTypesInArguments() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTypesInArguments.cs",
-                                              new DoNotNestTypesInArguments(),
-                                              ParseOptionsHelper.FromCSharp8);
+                                    new DoNotNestTypesInArguments(),
+                                    ParseOptionsHelper.FromCSharp8);
     }
 }

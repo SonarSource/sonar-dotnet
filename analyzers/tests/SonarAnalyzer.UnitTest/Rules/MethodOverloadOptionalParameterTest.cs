@@ -32,12 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MethodOverloadOptionalParameter() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadOptionalParameter.cs",
-                                              new MethodOverloadOptionalParameter(),
+                new MethodOverloadOptionalParameter(),
 #if NETFRAMEWORK
-                                              ParseOptionsHelper.FromCSharp8,
-                                              NuGetMetadataReference.NETStandardV2_1_0);
+                ParseOptionsHelper.FromCSharp8,
+                NuGetMetadataReference.NETStandardV2_1_0);
 #else
-                                              ParseOptionsHelper.FromCSharp8);
+                ParseOptionsHelper.FromCSharp8);
 #endif
 
 #if NET

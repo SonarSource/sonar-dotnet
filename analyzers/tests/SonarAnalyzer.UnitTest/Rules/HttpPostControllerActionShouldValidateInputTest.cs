@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void HttpPostControllerActionShouldValidateInput(string aspNetMvcVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\HttpPostControllerActionShouldValidateInput.cs",
-                                              new HttpPostControllerActionShouldValidateInput(),
-                                              NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
+                                    new HttpPostControllerActionShouldValidateInput(),
+                                    NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
     }
 }

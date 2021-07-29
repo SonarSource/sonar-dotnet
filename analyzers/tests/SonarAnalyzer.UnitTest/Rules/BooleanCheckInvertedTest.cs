@@ -46,6 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void BooleanCheckInverted_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.vb", new VB.BooleanCheckInverted());
+            Verifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.vb",
+                new VB.BooleanCheckInverted());
     }
 }

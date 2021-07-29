@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void OptionalParameterWithDefaultValue() =>
             Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterWithDefaultValue.cs",
-                                              new OptionalParameterWithDefaultValue());
+                new OptionalParameterWithDefaultValue());
 
         [TestMethod]
         [TestCategory("CodeFix")]

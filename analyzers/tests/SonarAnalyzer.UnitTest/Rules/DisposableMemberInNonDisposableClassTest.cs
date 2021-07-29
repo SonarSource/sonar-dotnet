@@ -34,8 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs",
-                                              new DisposableMemberInNonDisposableClass(),
-                                              ParseOptionsHelper.FromCSharp8);
+                                    new DisposableMemberInNonDisposableClass(),
+                                    ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]

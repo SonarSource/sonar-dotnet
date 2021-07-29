@@ -32,12 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void IfCollapsible_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\IfCollapsible.cs",
-                                              new CS.IfCollapsible());
+                new CS.IfCollapsible());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void IfCollapsible_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\IfCollapsible.vb",
-                                              new VB.IfCollapsible());
+                new VB.IfCollapsible());
     }
 }

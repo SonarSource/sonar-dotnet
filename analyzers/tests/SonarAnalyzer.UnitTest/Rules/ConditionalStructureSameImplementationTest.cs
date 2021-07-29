@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConditionalStructureSameImplementation_If_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.cs",
-                                              new CS.ConditionalStructureSameImplementation());
+                new CS.ConditionalStructureSameImplementation());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -44,18 +44,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConditionalStructureSameImplementation_If_VisualBasic() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.vb",
-                                                  new VB.ConditionalStructureSameImplementation());
+                new VB.ConditionalStructureSameImplementation());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameImplementation_If_VisualBasic_Concurrent() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If_Concurrent.vb",
-                                              new VB.ConditionalStructureSameImplementation());
+                new VB.ConditionalStructureSameImplementation());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameImplementation_Switch_VisualBasic() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.vb",
-                                                  new VB.ConditionalStructureSameImplementation());
+                new VB.ConditionalStructureSameImplementation());
     }
 }

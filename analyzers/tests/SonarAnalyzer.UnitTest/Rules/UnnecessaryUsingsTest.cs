@@ -37,8 +37,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UnnecessaryUsings() =>
             Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\UnnecessaryUsings.cs", @"TestCases\UnnecessaryUsings2.cs" },
-                                                           new UnnecessaryUsings(),
-                                                           additionalReferences: GetAdditionalReferences());
+                                    new UnnecessaryUsings(),
+                                    additionalReferences: GetAdditionalReferences());
 
 #if NET
 

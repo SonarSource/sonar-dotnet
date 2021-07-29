@@ -35,8 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConsumeValueTaskCorrectly() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConsumeValueTaskCorrectly.cs",
-                                              new ConsumeValueTaskCorrectly(),
-                                              GetReferences());
+                                    new ConsumeValueTaskCorrectly(),
+                                    GetReferences());
 
         private static IEnumerable<MetadataReference> GetReferences() =>
             Enumerable.Empty<MetadataReference>()

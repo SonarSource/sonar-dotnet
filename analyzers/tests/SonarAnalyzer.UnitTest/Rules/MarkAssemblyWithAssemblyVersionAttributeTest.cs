@@ -47,9 +47,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttribute_CS_Concurrent() =>
             Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs", },
-                                                           new CS.MarkAssemblyWithAssemblyVersionAttribute(),
-                                                           null,
-                                                           NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
+                new CS.MarkAssemblyWithAssemblyVersionAttribute(),
+                null,
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -75,9 +75,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB_Concurrent() =>
             Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb", },
-                                                           new VB.MarkAssemblyWithAssemblyVersionAttribute(),
-                                                           null,
-                                                           NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
+                new VB.MarkAssemblyWithAssemblyVersionAttribute(),
+                null,
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
 
         [TestMethod]
         [TestCategory("Rule")]

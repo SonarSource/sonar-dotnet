@@ -36,13 +36,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.cs",
-                                              new MemberShouldBeStatic(),
-                                              NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
-                                                  .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
-                                                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
-                                                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
-                                                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion))
-                                                  .ToImmutableArray());
+                                    new MemberShouldBeStatic(),
+                                    NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion))
+                                        .ToImmutableArray());
 
 #if NET
         [TestMethod]

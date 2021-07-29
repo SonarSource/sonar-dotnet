@@ -34,8 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs",
-                                              new ExpectedExceptionAttributeShouldNotBeUsed(),
-                                              NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+                                    new ExpectedExceptionAttributeShouldNotBeUsed(),
+                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]

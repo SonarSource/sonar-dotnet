@@ -31,6 +31,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ReferenceEqualityCheckWhenEqualsExists() =>
             Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\ReferenceEqualityCheckWhenEqualsExists.cs", @"TestCases\ReferenceEqualityCheckWhenEqualsExists2.cs" },
-                                                           new ReferenceEqualityCheckWhenEqualsExists());
+                new ReferenceEqualityCheckWhenEqualsExists());
     }
 }

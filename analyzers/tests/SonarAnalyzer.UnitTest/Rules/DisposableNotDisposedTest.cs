@@ -33,9 +33,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisposableNotDisposed() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.cs",
-                                              new DisposableNotDisposed(),
-                                              ParseOptionsHelper.FromCSharp8,
-                                              MetadataReferenceFacade.SystemNetHttp.Concat(NuGetMetadataReference.FluentAssertions("5.9.0")));
+                                    new DisposableNotDisposed(),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    MetadataReferenceFacade.SystemNetHttp.Concat(NuGetMetadataReference.FluentAssertions("5.9.0")));
 
 #if NET
         [TestMethod]

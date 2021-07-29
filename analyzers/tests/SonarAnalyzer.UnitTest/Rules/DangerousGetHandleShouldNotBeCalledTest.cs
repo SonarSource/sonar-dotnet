@@ -33,8 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
-                                              new CS.DangerousGetHandleShouldNotBeCalled(),
-                                              MetadataReferenceFacade.MicrosoftWin32Registry);
+                new CS.DangerousGetHandleShouldNotBeCalled(),
+                MetadataReferenceFacade.MicrosoftWin32Registry);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
@@ -48,6 +48,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
-                                              new VB.DangerousGetHandleShouldNotBeCalled());
+                new VB.DangerousGetHandleShouldNotBeCalled());
     }
 }

@@ -45,16 +45,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void ControllingPermissions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.cs",
-                                              new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                                              AdditionalReferences);
+                                    new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ControllingPermissions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.vb",
-                                              new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                                              AdditionalReferences);
+                                    new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferences);
     }
 }
 

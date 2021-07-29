@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void UsingCommandLineArguments_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.cs",
-                                              new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
+                                    new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -76,7 +76,7 @@ partial class Program1
         [TestCategory("Hotspot")]
         public void UsingCommandLineArguments_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
-                                              new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
+                                    new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]

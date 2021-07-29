@@ -39,8 +39,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength.cs",
-                                              new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
-                                              GetAdditionalReferences());
+                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -65,8 +65,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength.vb",
-                                              new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
-                                              GetAdditionalReferences());
+                new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
