@@ -10,8 +10,11 @@ if (target == alreadyConst)
 
 nint foo = 42; // Noncompliant
 
-nuint bar = 31; // Noncompliant - FP
+nuint bar = 31;
 bar++;
+
+nint foo1 = IntPtr.Zero; // Compliant - IntPtr.Zero is not compile time constant
+nuint bar2 = UIntPtr.Zero; // Compliant - UIntPtr.Zero is not compile time constant
 
 if (target == (int)bar)
 {
@@ -60,4 +63,3 @@ public class Repro_3271
         return x;
     }
 }
-

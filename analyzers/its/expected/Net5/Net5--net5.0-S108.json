@@ -329,6 +329,19 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
+"uri":  "sources\Net5\Net5\S3353.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
 "uri":  "sources\Net5\Net5\S3981.cs",
 "region":  {
 "startLine":  13,

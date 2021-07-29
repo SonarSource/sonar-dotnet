@@ -138,13 +138,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasMutableUsagesInMethod(VariableDeclaratorSyntax variable, ISymbol variableSymbol, SemanticModel semanticModel)
         {
-            var methodSyntax = variable?.Ancestors()?.FirstOrDefault(IsMethodLike);
-            if (methodSyntax == null)
+            var parentSyntax = variable?.Ancestors()?.FirstOrDefault(IsMethodLike);
+            if (parentSyntax == null)
             {
                 return false;
             }
+            else if (parentSyntax is GlobalStatementSyntax)
+            {
+                // If the variable is declared in a top level statement we should search inside the compilation unit.
+                parentSyntax = parentSyntax.Parent;
+            }
 
-            return methodSyntax
+            return parentSyntax
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Where(MatchesIdentifier)
@@ -154,7 +159,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 arg is BaseMethodDeclarationSyntax
                 || arg is IndexerDeclarationSyntax
                 || arg is AccessorDeclarationSyntax
-                || arg is LambdaExpressionSyntax;
+                || arg is LambdaExpressionSyntax
+                || arg is GlobalStatementSyntax;
 
             bool MatchesIdentifier(IdentifierNameSyntax id) =>
                 Equals(variableSymbol, semanticModel.GetSymbolInfo(id).Symbol);

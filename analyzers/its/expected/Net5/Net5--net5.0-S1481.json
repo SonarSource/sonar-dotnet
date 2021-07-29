@@ -158,6 +158,19 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'foo'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3353.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  18,
+"endLine":  7,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'i'.",
 "location":  {
 "uri":  "sources\Net5\Net5\SkipLocalsInit.cs",
