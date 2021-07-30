@@ -275,6 +275,14 @@ namespace Tests.Diagnostics
             remove => throw new Exception(); // Noncompliant
         }
         public static implicit operator byte(ArrowMethods d) => throw new Exception(); // Noncompliant
+
+        private string name;
+        public override string ToString() =>
+            string.IsNullOrEmpty(name)
+                ? name == "x"
+                    ? throw new NotImplementedException()
+                    : "y"
+                : throw new ArgumentException("..."); // Noncompliant
     }
 
     class CompliantArrowMethods : IDisposable
@@ -290,6 +298,14 @@ namespace Tests.Diagnostics
         }
 
         static void Foo() => throw new Exception();
+
+        private string name;
+        public override string ToString() =>
+            string.IsNullOrEmpty(name)
+                ? name == "x"
+                    ? throw new NotImplementedException()
+                    : "y"
+                : throw new NotImplementedException("...");
     }
 
     class MultipleExceptions

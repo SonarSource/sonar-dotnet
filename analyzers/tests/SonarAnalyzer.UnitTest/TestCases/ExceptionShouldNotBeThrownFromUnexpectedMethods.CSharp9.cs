@@ -9,7 +9,7 @@ namespace Tests.CustomType
         [ModuleInitializer]
         internal static void M1()
         {
-            throw new Exception(); // Compliant
+            throw new Exception(); // Compliant - the attribute is not in the System.Runtime.CompilerServices namespace
         }
     }
 }
@@ -20,10 +20,10 @@ namespace Tests.Diagnostics
 
     record Record1 : IDisposable
     {
-        static Record1() => throw new NotImplementedException(); // Compliant
+        static Record1() => throw new NotImplementedException(); // Compliant (allowed exception)
         public void Dispose()
         {
-            throw new NotImplementedException(); // Compliant
+            throw new NotImplementedException(); // Compliant (allowed exception)
         }
     }
 
@@ -43,10 +43,10 @@ namespace Tests.Diagnostics
         internal static void M2() => throw new Exception(); // Noncompliant
 
         [Obsolete]
-        internal static void M3() => throw new Exception(); // Compliant
+        internal static void M3() => throw new Exception(); // Compliant - different attribute
 
         [Obsolete("This attribute has arguments.", true)]
-        internal static void M4() => throw new Exception(); // Compliant
+        internal static void M4() => throw new Exception(); // Compliant - different attribute
 
         event EventHandler OnSomething
         {
@@ -56,14 +56,14 @@ namespace Tests.Diagnostics
             }
             remove
             {
-                throw new InvalidOperationException(); // Compliant
+                throw new InvalidOperationException(); // Compliant - allowed exception
             }
         }
 
         event EventHandler OnSomeArrow
         {
             add => throw new Exception(); // Noncompliant
-            remove => throw new InvalidOperationException(); // Compliant
+            remove => throw new InvalidOperationException(); // Compliant - allowed exception
         }
 
         public override string ToString()

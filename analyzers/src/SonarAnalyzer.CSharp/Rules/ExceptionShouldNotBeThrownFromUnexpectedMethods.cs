@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -36,12 +37,10 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ExceptionShouldNotBeThrownFromUnexpectedMethods : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3877";
+        private const string DiagnosticId = "S3877";
         private const string MessageFormat = "Remove this 'throw' {0}.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> DefaultAllowedExceptions = ImmutableArray.Create(KnownType.System_NotImplementedException);
 
@@ -62,6 +61,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.LessThanEqualsToken,
             SyntaxKind.GreaterThanEqualsToken
         };
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -93,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var syntax = (TSyntax)analysisContext.Node;
             if (isTrackedSyntax(syntax))
             {
-                ReportOnInvalidThrowStatement(analysisContext, syntax, allowedThrowTypes);
+                ReportOnInvalidThrow(analysisContext, syntax, allowedThrowTypes);
             }
         }
 
@@ -113,7 +114,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 || name == "ToString"
                 || name == "Dispose"
                 || name == "Equals"
-                || declaration.AttributeLists.SelectMany(list => list.Attributes).Any(x => x.ArgumentList == null && x.Name.ToStringContains("ModuleInitializer"));
+                || CanBeModuleInitializer();
+
+            bool CanBeModuleInitializer() =>
+                declaration.AttributeLists.SelectMany(list => list.Attributes)
+                                          .Any(x => x.ArgumentList == null && x.Name.ToStringContains("ModuleInitializer"));
         }
 
         private static bool HasTrackedMethodOrAttributeType(IMethodSymbol methodSymbol) =>
@@ -127,16 +132,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsModuleInitializer(IMethodSymbol methodSymbol) =>
             methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
 
-        private static void ReportOnInvalidThrowStatement(SyntaxNodeAnalysisContext analysisContext,
+        private static void ReportOnInvalidThrow(SyntaxNodeAnalysisContext analysisContext,
             SyntaxNode node, ImmutableArray<KnownType> allowedTypes)
         {
-            if (ExpressionBody(node) is { } expressionBody
-                && ThrowExpressionSyntaxWrapper.IsInstance(expressionBody.Expression)
-                && (ThrowExpressionSyntaxWrapper)expressionBody.Expression is { } throwExpression
-                && analysisContext.SemanticModel.GetSymbolInfo(throwExpression.Expression).Symbol is { } symbol
-                && ShouldReport(symbol.ContainingType, allowedTypes))
+            if (node.ArrowExpressionBody() is { } expressionBody
+                && expressionBody.Expression.DescendantNodesAndSelf()
+                .Where(x => ThrowExpressionSyntaxWrapper.IsInstance(x))
+                .Select(x => (ThrowExpressionSyntaxWrapper)x)
+                .Select(x => new NodeAndSymbol(x, analysisContext.SemanticModel.GetSymbolInfo(x.Expression).Symbol))
+                .FirstOrDefault(nodeAndSymbol => nodeAndSymbol.Symbol != null && ShouldReport(nodeAndSymbol.Symbol.ContainingType, allowedTypes)) is { } throwExpression)
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwExpression.SyntaxNode.GetLocation(), "expression"));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwExpression.Node.GetLocation(), "expression"));
             }
             else if (node.DescendantNodes()
                     .OfType<ThrowStatementSyntax>()
@@ -147,17 +153,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwStatement.Node.GetLocation(), "statement"));
             }
         }
-
-        private static ArrowExpressionClauseSyntax ExpressionBody(SyntaxNode node) =>
-            node switch
-            {
-                MethodDeclarationSyntax a => a.ExpressionBody,
-                ConstructorDeclarationSyntax b => b.ExpressionBody(),
-                OperatorDeclarationSyntax c => c.ExpressionBody,
-                AccessorDeclarationSyntax d => d.ExpressionBody(),
-                ConversionOperatorDeclarationSyntax e => e.ExpressionBody,
-                _ => throw new NotSupportedException($"This rule does not support {node.GetType().FullName} syntax.")
-            };
 
         private static bool ShouldReport(INamedTypeSymbol exceptionType, ImmutableArray<KnownType> allowedTypes) =>
             !exceptionType.IsAny(allowedTypes) && !exceptionType.DerivesFromAny(allowedTypes);

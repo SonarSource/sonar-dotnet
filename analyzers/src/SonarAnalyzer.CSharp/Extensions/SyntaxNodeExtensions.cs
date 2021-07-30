@@ -88,6 +88,18 @@ namespace SonarAnalyzer.Extensions
                 _ => GetUnknownType(node.Kind())
             };
 
+        // Extracts the expression body from an arrow-bodied syntax node.
+        public static ArrowExpressionClauseSyntax ArrowExpressionBody(this SyntaxNode node) =>
+            node switch
+            {
+                MethodDeclarationSyntax a => a.ExpressionBody,
+                ConstructorDeclarationSyntax b => b.ExpressionBody(),
+                OperatorDeclarationSyntax c => c.ExpressionBody,
+                AccessorDeclarationSyntax d => d.ExpressionBody(),
+                ConversionOperatorDeclarationSyntax e => e.ExpressionBody,
+                _ => null
+            };
+
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
             var currentExpression = expression;
