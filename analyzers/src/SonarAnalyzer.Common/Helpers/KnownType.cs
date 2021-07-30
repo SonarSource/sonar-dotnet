@@ -321,6 +321,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_CompilerServices_CallerLineNumberAttribute = new KnownType("System.Runtime.CompilerServices.CallerLineNumberAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_CallerMemberNameAttribute = new KnownType("System.Runtime.CompilerServices.CallerMemberNameAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_InternalsVisibleToAttribute = new KnownType("System.Runtime.CompilerServices.InternalsVisibleToAttribute");
+        internal static readonly KnownType System_Runtime_CompilerServices_ModuleInitializerAttribute = new KnownType("System.Runtime.CompilerServices.ModuleInitializerAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_ValueTaskAwaiter = new KnownType("System.Runtime.CompilerServices.ValueTaskAwaiter");
         internal static readonly KnownType System_Runtime_CompilerServices_ValueTaskAwaiter_TResult = new KnownType("System.Runtime.CompilerServices.ValueTaskAwaiter<TResult>");
         internal static readonly KnownType System_Runtime_CompilerServices_TaskAwaiter = new KnownType("System.Runtime.CompilerServices.TaskAwaiter");

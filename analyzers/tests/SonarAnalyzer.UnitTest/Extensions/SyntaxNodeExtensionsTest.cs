@@ -81,6 +81,14 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
+        public void ArrowExpressionBody_WithNotExpectedNode_ReturnsNull()
+        {
+            const string code = "var x = 1;";
+            var syntaxTree = CSharpSyntaxTree.ParseText(code);
+            SyntaxNodeExtensions.ArrowExpressionBody(syntaxTree.GetRoot()).Should().BeNull();
+        }
+
+        [TestMethod]
         public void GetDeclarationTypeName_UnknownType() =>
 #if DEBUG
             Assert.ThrowsException<ArgumentException>(() => SyntaxNodeExtensions.GetDeclarationTypeName(SyntaxFactory.Block()), "Unexpected type Block\r\nParameter name: kind");

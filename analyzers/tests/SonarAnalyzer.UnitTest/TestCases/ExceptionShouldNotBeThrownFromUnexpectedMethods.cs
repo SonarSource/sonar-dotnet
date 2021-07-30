@@ -265,7 +265,81 @@ namespace Tests.Diagnostics
 
     class ArrowMethods : IDisposable
     {
-        static ArrowMethods() => throw new Exception(); // FN, needs support for throw expressions
-        public void Dispose() => throw new Exception(); // FN
+        static ArrowMethods() => throw new Exception(); // Noncompliant
+        public void Dispose() => throw new Exception(); // Noncompliant
+        public static bool operator ==(ArrowMethods a, ArrowMethods b) => throw new Exception(); // Noncompliant
+        public static bool operator !=(ArrowMethods a, ArrowMethods b) => throw new Exception(); // Noncompliant
+        event EventHandler OnSomething
+        {
+            add => throw new Exception(); // Noncompliant
+            remove => throw new Exception(); // Noncompliant
+        }
+        public static implicit operator byte(ArrowMethods d) => throw new Exception(); // Noncompliant
+
+        private string name;
+        public override string ToString() =>
+            string.IsNullOrEmpty(name)
+                ? name == "x"
+                    ? throw new NotImplementedException()
+                    : "y"
+                : throw new ArgumentException("..."); // Noncompliant
+    }
+
+    class CompliantArrowMethods : IDisposable
+    {
+        static CompliantArrowMethods() => throw new NotImplementedException();
+        public void Dispose() => throw new NotImplementedException();
+        public static bool operator ==(CompliantArrowMethods a, CompliantArrowMethods b) => throw new NotImplementedException();
+        public static bool operator !=(CompliantArrowMethods a, CompliantArrowMethods b) => throw new NotImplementedException();
+        event EventHandler OnSomething
+        {
+            add => throw new InvalidOperationException();
+            remove => throw new ArgumentException();
+        }
+
+        static void Foo() => throw new Exception();
+
+        private string name;
+        public override string ToString() =>
+            string.IsNullOrEmpty(name)
+                ? name == "x"
+                    ? throw new NotImplementedException()
+                    : "y"
+                : throw new NotImplementedException("...");
+    }
+
+    class MultipleExceptions
+    {
+        public override string ToString()
+        {
+            if (Foo())
+            {
+                if (Foo())
+                {
+                    throw new Exception(); // Noncompliant
+                }
+                throw new Exception(); // FN only the first is reported
+            }
+            else
+            {
+                throw new Exception(); // FN only the first is reported
+            }
+        }
+        bool Foo() => true;
+    }
+
+    class CodeCoverage : IDisposable
+    {
+        static CodeCoverage() => throw new UnknownException(); // Error [CS0246]
+        public void Dispose()
+        {
+            throw new UnknownException(); // Error [CS0246]
+        }
+        public override bool Equals(object obj)
+        {
+            Dispose();
+            return true;
+        }
+        public override int GetHashCode() => 0;
     }
 }

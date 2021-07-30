@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3877",
+"message":  "Remove this 'throw' statement.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3877.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  13,
+"endLine":  11,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3877",
+"message":  "Remove this 'throw' expression.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3877.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  38,
+"endLine":  15,
+"endColumn":  59
+}
+}
+}
+]
+}
