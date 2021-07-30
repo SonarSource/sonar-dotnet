@@ -77,6 +77,32 @@
 "endColumn":  30
 }
 }
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'foo'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3353.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  18,
+"endLine":  7,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'bar'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3353.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  19,
+"endLine":  9,
+"endColumn":  22
+}
+}
 }
 ]
 }
