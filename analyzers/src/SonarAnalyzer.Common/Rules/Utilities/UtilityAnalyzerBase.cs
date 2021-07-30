@@ -103,10 +103,8 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    var messages = c.Compilation.SyntaxTrees
-                        .Where(ShouldGenerateMetrics)
-                        .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)))
-                        .Concat(CreateAnalysisMessage(c))
+                    var messages = CreateAnalysisMessage(c)
+                        .Concat(c.Compilation.SyntaxTrees.Where(ShouldGenerateMetrics).Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x))))
                         .WhereNotNull()
                         .ToArray();
 
