@@ -12,8 +12,10 @@ int x = (int) u++;
 
 int Compute(nint v) =>
     (int) v++; // Noncompliant
+//        ^^^
 
 int ComputeArrowBody(int v) =>
     v--; // Noncompliant
+//  ^^^
 
 return (int)i++; // Noncompliant

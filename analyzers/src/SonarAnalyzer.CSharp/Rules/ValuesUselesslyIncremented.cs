@@ -46,12 +46,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     var increment = (PostfixUnaryExpressionSyntax)c.Node;
                     var symbol = c.SemanticModel.GetSymbolInfo(increment.Operand).Symbol;
 
-                    if (!(symbol is ILocalSymbol || symbol is IParameterSymbol {RefKind: RefKind.None}))
+                    if (symbol is ILocalSymbol || symbol is IParameterSymbol {RefKind: RefKind.None })
                     {
-                        return;
+                        VisitParent(increment, c);
                     }
-
-                    VisitParent(increment, c);
                 },
                 SyntaxKind.PostIncrementExpression,
                 SyntaxKind.PostDecrementExpression);
