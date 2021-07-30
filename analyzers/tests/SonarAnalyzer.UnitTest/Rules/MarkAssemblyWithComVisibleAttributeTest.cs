@@ -33,13 +33,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithComVisibleAttribute_CS() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithComVisibleAttribute.cs", @"TestCases\MarkAssemblyWithComVisibleAttribute2.cs", },
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.cs",
                 new CS.MarkAssemblyWithComVisibleAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithComVisibleAttribute_VB() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithComVisibleAttribute.vb", @"TestCases\MarkAssemblyWithComVisibleAttribute2.vb", },
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.vb",
                 new VB.MarkAssemblyWithComVisibleAttribute());
 
         [TestMethod]

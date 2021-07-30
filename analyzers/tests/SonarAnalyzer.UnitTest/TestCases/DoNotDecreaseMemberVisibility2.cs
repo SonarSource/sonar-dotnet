@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MyLibrary
+namespace AppendedNamespaceForConcurrencyTest.MyLibrary
 {
     class A
     {
@@ -67,7 +67,7 @@ namespace MyLibrary
 
     class C : B
     {
-        private void Method_01(int count) { } // Noncompliant
+        private void Method_01(int count) { } // Noncompliant {{This member hides 'AppendedNamespaceForConcurrencyTest.MyLibrary.A.Method_01(int)'. Make it non-private or seal the class.}}
 //                   ^^^^^^^^^
 
         protected void Method_02(int count) { } // Noncompliant
@@ -138,7 +138,7 @@ namespace MyLibrary
     }
 }
 
-namespace OtherNamespace
+namespace AppendedNamespaceForConcurrencyTest.OtherNamespace
 {
     public class Class1
     {
@@ -151,15 +151,15 @@ namespace OtherNamespace
     }
 }
 
-namespace SomeNamespace
+namespace AppendedNamespaceForConcurrencyTest.SomeNamespace
 {
-    public class Class3 : OtherNamespace.Class1
+    public class Class3 : AppendedNamespaceForConcurrencyTest.OtherNamespace.Class1
     {
         private void SomeMethod(string s) { }
     }
 }
 
-namespace FalsePositiveOnIndexers
+namespace AppendedNamespaceForConcurrencyTest.FalsePositiveOnIndexers
 {
     public class BaseClass
     {
@@ -179,7 +179,7 @@ namespace FalsePositiveOnIndexers
     }
 }
 
-namespace DefaultInterfaceMembers
+namespace AppendedNamespaceForConcurrencyTest.DefaultInterfaceMembers
 {
     public interface IFoo
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 // Test interface inheritance
-namespace Test_101
+namespace AppendedNamespaceForConcurrencyTest.Test_01
 {
     public interface A
     {
@@ -15,8 +15,8 @@ namespace Test_101
     {
         public void Method() { }
 
-        public void Test_101(B foo) // Noncompliant {{Consider using more general type 'Test_101.A' instead of 'Test_101.B'.}}
-//                             ^^^
+        public void Test_01(B foo) // Noncompliant {{Consider using more general type 'AppendedNamespaceForConcurrencyTest.Test_01.A' instead of 'AppendedNamespaceForConcurrencyTest.Test_01.B'.}}
+//                            ^^^
         {
             foo.Method();
         }
@@ -24,7 +24,7 @@ namespace Test_101
 }
 
 // Test interface inheritance with in-between interface
-namespace Test_102
+namespace AppendedNamespaceForConcurrencyTest.Test_02
 {
     public interface A
     {
@@ -39,7 +39,7 @@ namespace Test_102
     {
         public void Method() { }
 
-        public void Test_102(C foo) // Noncompliant {{Consider using more general type 'Test_102.A' instead of 'Test_102.C'.}}
+        public void Test_02(C foo) // Noncompliant {{Consider using more general type 'AppendedNamespaceForConcurrencyTest.Test_02.A' instead of 'AppendedNamespaceForConcurrencyTest.Test_02.C'.}}
         {
             foo.Method();
         }
@@ -47,7 +47,7 @@ namespace Test_102
 }
 
 // Test interface inheritance with hierarchy
-namespace Test_103
+namespace AppendedNamespaceForConcurrencyTest.Test_03
 {
     public interface A_Base
     {
@@ -72,7 +72,7 @@ namespace Test_103
         public void Method() { }
         public void OtherMethod() { }
 
-        public void Test_103(C foo) // Noncompliant {{Consider using more general type 'Test_103.A_Base' instead of 'Test_103.C'.}}
+        public void Test_03(C foo) // Noncompliant {{Consider using more general type 'AppendedNamespaceForConcurrencyTest.Test_03.A_Base' instead of 'AppendedNamespaceForConcurrencyTest.Test_03.C'.}}
         {
             foo.Method();
         }
@@ -80,7 +80,7 @@ namespace Test_103
 }
 
 // Test new method (without "new" keyword)
-namespace Test_104
+namespace AppendedNamespaceForConcurrencyTest.Test_04
 {
     public class A
     {
@@ -91,7 +91,7 @@ namespace Test_104
     {
         public void Method() { }
 
-        public void Test_104(B foo)
+        public void Test_04(B foo)
         {
             foo.Method();
         }
@@ -99,7 +99,7 @@ namespace Test_104
 }
 
 // Test new method (with "new" keyword)
-namespace Test_105
+namespace AppendedNamespaceForConcurrencyTest.Test_05
 {
     public class A
     {
@@ -110,7 +110,7 @@ namespace Test_105
     {
         public new void Method() { }
 
-        public void Test_105(B foo)
+        public void Test_05(B foo)
         {
             foo.Method();
         }
@@ -118,7 +118,7 @@ namespace Test_105
 }
 
 // Test virtual method
-namespace Test_106
+namespace AppendedNamespaceForConcurrencyTest.Test_06
 {
     public class A
     {
@@ -129,7 +129,7 @@ namespace Test_106
     {
         public override void Method() { }
 
-        public void Test_106(B foo) // Noncompliant {{Consider using more general type 'Test_106.A' instead of 'Test_106.B'.}}
+        public void Test_06(B foo) // Noncompliant {{Consider using more general type 'AppendedNamespaceForConcurrencyTest.Test_06.A' instead of 'AppendedNamespaceForConcurrencyTest.Test_06.B'.}}
         {
             foo.Method();
         }
@@ -137,7 +137,7 @@ namespace Test_106
 }
 
 // Test property inheritance
-namespace Test_107
+namespace AppendedNamespaceForConcurrencyTest.Test_07
 {
     public class A
     {
@@ -146,7 +146,7 @@ namespace Test_107
 
     public class B : A
     {
-        public void Test_107(B foo) // Noncompliant {{Consider using more general type 'Test_107.A' instead of 'Test_107.B'.}}
+        public void Test_07(B foo) // Noncompliant {{Consider using more general type 'AppendedNamespaceForConcurrencyTest.Test_07.A' instead of 'AppendedNamespaceForConcurrencyTest.Test_07.B'.}}
         {
             int x = foo.Property;
         }
@@ -154,7 +154,7 @@ namespace Test_107
 }
 
 // Test property with no base setter
-namespace Test_108
+namespace AppendedNamespaceForConcurrencyTest.Test_08
 {
     public interface A
     {
@@ -165,7 +165,7 @@ namespace Test_108
     {
         public int Property { get; set; }
 
-        public void Test_108(B foo)
+        public void Test_08(B foo)
         {
             foo.Property = 1;
         }
@@ -173,7 +173,7 @@ namespace Test_108
 }
 
 // Test constraints from other methods
-namespace Test_109
+namespace AppendedNamespaceForConcurrencyTest.Test_09
 {
     public interface A
     {
@@ -184,12 +184,12 @@ namespace Test_109
     {
         public int Property { get; set; }
 
-        public void Test_109(B foo) // Noncompliant
+        public void Test_09(B foo) // Noncompliant
         {
             MethodA(foo);
         }
 
-        public void Test_109_01(B foo)
+        public void Test_09_01(B foo)
         {
             MethodB(foo);
         }
@@ -201,7 +201,7 @@ namespace Test_109
 }
 
 // Test assignments
-namespace Test_110
+namespace AppendedNamespaceForConcurrencyTest.Test_10
 {
     public interface A
     {
@@ -212,19 +212,19 @@ namespace Test_110
     {
         public int Property { get; set; }
 
-        public void Test_110(B foo)
+        public void Test_10(B foo)
         {
-            foo = new Test_110.B();
+            foo = new Test_10.B();
             var y = foo.Property;
         }
 
-        public void Test_110_01(B foo)
+        public void Test_10_01(B foo)
         {
             var x = foo;
             var y = foo.Property;
         }
 
-        public void Test_110_02(B foo) // Noncompliant
+        public void Test_10_02(B foo) // Noncompliant
         {
             var y = foo.Property;
         }
@@ -232,7 +232,7 @@ namespace Test_110
 }
 
 // Test fields
-namespace Test_111
+namespace AppendedNamespaceForConcurrencyTest.Test_11
 {
     public class A
     {
@@ -249,22 +249,22 @@ namespace Test_111
 
         new protected int protectedField;
 
-        public void Test_111(B foo)
+        public void Test_11(B foo)
         {
             foo.publicField = 1;
         }
 
-        public void Test_111_01(B foo) // Noncompliant
+        public void Test_11_01(B foo) // Noncompliant
         {
             foo.publicField_2 = 1;
         }
 
-        public void Test_111_02(B foo)
+        public void Test_11_02(B foo)
         {
             var x = foo.publicField;
         }
 
-        public void Test_111_03(B foo) // Noncompliant
+        public void Test_11_03(B foo) // Noncompliant
         {
             var x = foo.publicField_2;
         }
@@ -272,7 +272,7 @@ namespace Test_111
 }
 
 // Test conditional access
-namespace Test_112
+namespace AppendedNamespaceForConcurrencyTest.Test_12
 {
     public class A
     {
@@ -291,22 +291,22 @@ namespace Test_112
 
     public class B : A
     {
-        public void Test_112(B foo) // Noncompliant
+        public void Test_12(B foo) // Noncompliant
         {
             var x = foo?.Field;
         }
 
-        public void Test_112_01(B foo) // Noncompliant
+        public void Test_12_01(B foo) // Noncompliant
         {
             var x = foo?.Property;
         }
 
-        public void Test_112_02(B foo) // Noncompliant
+        public void Test_12_02(B foo) // Noncompliant
         {
             foo?.Method();
         }
 
-        public void Test_112_03(B foo) // Noncompliant
+        public void Test_12_03(B foo) // Noncompliant
         {
             foo.Event += Foo_SomeEvent;
         }
@@ -316,7 +316,7 @@ namespace Test_112
 }
 
 // Test parameter ordering
-namespace Test_113
+namespace AppendedNamespaceForConcurrencyTest.Test_13
 {
     public class A
     {
@@ -329,18 +329,18 @@ namespace Test_113
 
     public class B : A
     {
-        public void Test_113(Test_113.B foo) // Noncompliant
+        public void Test_13(Test_13.B foo) // Noncompliant
         {
             MethodA(1, 1, foo, false);
         }
-        public void MethodA(int unused, int param2, Test_113.A something, bool f) { }
+        public void MethodA(int unused, int param2, Test_13.A something, bool f) { }
 
-        public void MethodB(Test_113.B something) { }
+        public void MethodB(Test_13.B something) { }
     }
 }
 
 // Test extension methods
-namespace Test_114
+namespace AppendedNamespaceForConcurrencyTest.Test_14
 {
     public class A
     {
@@ -348,17 +348,17 @@ namespace Test_114
 
     public class B : A
     {
-        public void Test_114(B foo) // Noncompliant
+        public void Test_14(B foo) // Noncompliant
         {
             foo.ExtMethodA();
         }
 
-        public void Test_114_01(B foo)
+        public void Test_14_01(B foo)
         {
             foo.ExtMethodB();
         }
 
-        public void Test_114_02(B foo)
+        public void Test_14_02(B foo)
         {
             foo?.ExtMethodB();
         }
@@ -377,7 +377,7 @@ namespace Test_114
 }
 
 // Test events
-namespace Test_115
+namespace AppendedNamespaceForConcurrencyTest.Test_15
 {
     public interface A
     {
@@ -392,12 +392,12 @@ namespace Test_115
             remove { }
         }
 
-        public void Test_115(B foo) // Noncompliant
+        public void Test_15(B foo) // Noncompliant
         {
             foo.SomeEvent += Foo_SomeEvent;
         }
 
-        public void Test_115_01(A foo)
+        public void Test_15_01(A foo)
         {
             foo.SomeEvent += Foo_SomeEvent;
         }
@@ -407,7 +407,7 @@ namespace Test_115
 }
 
 // Test multiple parameters
-namespace Test_116
+namespace AppendedNamespaceForConcurrencyTest.Test_16
 {
     public interface A
     {
@@ -424,9 +424,9 @@ namespace Test_116
 
         public void OtherMethod() { }
 
-        public void Test_116(B foo1, B foo2, B foo3)
-//                             ^^^^ Noncompliant {{Consider using more general type 'Test_116.A' instead of 'Test_116.B'.}}
-//                                     ^^^^ Noncompliant@-1 {{Consider using more general type 'Test_116.A' instead of 'Test_116.B'.}}
+        public void Test_16(B foo1, B foo2, B foo3)
+//                            ^^^^ Noncompliant {{Consider using more general type 'AppendedNamespaceForConcurrencyTest.Test_16.A' instead of 'AppendedNamespaceForConcurrencyTest.Test_16.B'.}}
+//                                    ^^^^ Noncompliant@-1 {{Consider using more general type 'AppendedNamespaceForConcurrencyTest.Test_16.A' instead of 'AppendedNamespaceForConcurrencyTest.Test_16.B'.}}
         {
             foo1.Method();
             var x = foo2.Property;
@@ -436,7 +436,7 @@ namespace Test_116
 }
 
 // Test overridden method
-namespace Test_117
+namespace AppendedNamespaceForConcurrencyTest.Test_17
 {
     public interface IA
     {
@@ -452,7 +452,7 @@ namespace Test_117
         public void Method() { }
 
         // Compliant - method is virtual so there is a contract to respect
-        public virtual void Test_117(B foo)
+        public virtual void Test_17(B foo)
         {
             foo.Method();
         }
@@ -467,7 +467,7 @@ namespace Test_117
         public void OtherMethod() { }
 
         // Compliant - cannot change parameter type, because it is an override.
-        public override void Test_117(B foo)
+        public override void Test_17(B foo)
         {
             foo.Method();
         }
@@ -475,7 +475,7 @@ namespace Test_117
 }
 
 // Test excluded types
-namespace Test_118
+namespace AppendedNamespaceForConcurrencyTest.Test_18
 {
     using System.Collections.Generic;
 
@@ -492,36 +492,36 @@ namespace Test_118
         // types starting with "_"
         // unused parameter
 
-        public void Test_118_Object(B foo)
+        public void Test_18_Object(B foo)
         {
             var x = foo.ToString();
         }
 
-        public void Test_118_Enum(AreWeGood foo)
+        public void Test_18_Enum(AreWeGood foo)
         {
             foo.HasFlag(AreWeGood.Yes);
         }
 
-        public void Test_118_Interop(System.Type foo)
+        public void Test_18_Interop(System.Type foo)
         {
             var x = foo.IsEnum;
         }
 
-        public void Test_118_Unused(B foo)
+        public void Test_18_Unused(B foo)
         {
         }
 
-        public void Test_118_Array(B[] foo)
+        public void Test_18_Array(B[] foo)
         {
             var x = foo.Length;
         }
 
-        public void Test_118_ValueType(Guid foo)
+        public void Test_18_ValueType(Guid foo)
         {
             var x = foo.ToString();
         }
 
-        public void Test_118_String(string foo)
+        public void Test_18_String(string foo)
         {
             var x = foo.Equals("");
         }
@@ -531,7 +531,7 @@ namespace Test_118
 }
 
 // Test parentheses
-namespace Test_119
+namespace AppendedNamespaceForConcurrencyTest.Test_19
 {
     public class A
     {
@@ -542,17 +542,17 @@ namespace Test_119
 
     public class B : A
     {
-        public void Test_119_Method(B foo) // Noncompliant
+        public void Test_19_Method(B foo) // Noncompliant
         {
             (((foo))).Method();
         }
 
-        public void Test_119_Method2(B foo) // Noncompliant
+        public void Test_19_Method2(B foo) // Noncompliant
         {
             Foo( (((foo))) );
         }
 
-        public void Test_119_Property(B foo) // Noncompliant
+        public void Test_19_Property(B foo) // Noncompliant
         {
             (foo).Property = 1;
         }
@@ -562,7 +562,7 @@ namespace Test_119
 }
 
 // Test unsupported
-namespace Test_120
+namespace AppendedNamespaceForConcurrencyTest.Test_20
 {
     public class A
     {
@@ -571,7 +571,7 @@ namespace Test_120
 
     public class B : A
     {
-        public void Test_119_Method(B foo) // False negative
+        public void Test_19_Method(B foo) // False negative
         {
             (foo ?? null).Method();
         }
@@ -579,7 +579,7 @@ namespace Test_120
 }
 
 // Test implementing interface
-namespace Test_121
+namespace AppendedNamespaceForConcurrencyTest.Test_21
 {
     public interface I
     {
@@ -621,7 +621,7 @@ namespace Test_121
 }
 
 // Test collection accessed through indexer
-namespace Test_123
+namespace AppendedNamespaceForConcurrencyTest.Test_23
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -654,13 +654,13 @@ namespace Test_123
 
         public void MethodThree(IList<Foo> list)
         {
-            list[0] = new Test_123.Foo();
+            list[0] = new Test_23.Foo();
         }
     }
 }
 
 // Test that rule doesn't suggest other types for EventHandler methods
-namespace Test_124
+namespace AppendedNamespaceForConcurrencyTest.Test_24
 {
     public interface IFooEventArgs
     {
@@ -687,7 +687,7 @@ namespace Test_124
     }
 }
 
-namespace Something2
+namespace AppendedNamespaceForConcurrencyTest.Something
 {
     internal interface IFoo
     {
@@ -705,46 +705,46 @@ namespace Something2
 }
 
 // Test that rule doesn't suggest base with inconsistent accessibility
-namespace Test_125
+namespace AppendedNamespaceForConcurrencyTest.Test_25
 {
     public class Bar
     {
-        public void MethodOne(Something2.Foo f)
+        public void MethodOne(Something.Foo f)
         {
             var x = f.IsFoo;
         }
 
-        protected void MethodTwo(Something2.Foo f)
+        protected void MethodTwo(Something.Foo f)
         {
             var x = f.IsFoo;
         }
 
-        private void MethodThree(Something2.Foo f) // Noncompliant
+        private void MethodThree(Something.Foo f) // Noncompliant
         {
             var x = f.IsFoo;
         }
 
-        internal void MethodFour(Something2.Foo f) // Noncompliant
+        internal void MethodFour(Something.Foo f) // Noncompliant
         {
             var x = f.IsFoo;
         }
 
-        public void MethodFive(Something2.Bar f) // Noncompliant {{Consider using more general type 'Something2.Foo' instead of 'Something2.Bar'.}}
+        public void MethodFive(Something.Bar f) // Noncompliant {{Consider using more general type 'AppendedNamespaceForConcurrencyTest.Something.Foo' instead of 'AppendedNamespaceForConcurrencyTest.Something.Bar'.}}
         {
             var x = f.IsFoo;
         }
 
-        protected void MethodSix(Something2.Bar f) // Noncompliant {{Consider using more general type 'Something2.Foo' instead of 'Something2.Bar'.}}
+        protected void MethodSix(Something.Bar f) // Noncompliant {{Consider using more general type 'AppendedNamespaceForConcurrencyTest.Something.Foo' instead of 'AppendedNamespaceForConcurrencyTest.Something.Bar'.}}
         {
             var x = f.IsFoo;
         }
 
-        private void MethodSeven(Something2.Bar f) // Noncompliant {{Consider using more general type 'Something2.IFoo' instead of 'Something2.Bar'.}}
+        private void MethodSeven(Something.Bar f) // Noncompliant {{Consider using more general type 'AppendedNamespaceForConcurrencyTest.Something.IFoo' instead of 'AppendedNamespaceForConcurrencyTest.Something.Bar'.}}
         {
             var x = f.IsFoo;
         }
 
-        internal void MethodEight(Something2.Bar f) // Noncompliant {{Consider using more general type 'Something2.IFoo' instead of 'Something2.Bar'.}}
+        internal void MethodEight(Something.Bar f) // Noncompliant {{Consider using more general type 'AppendedNamespaceForConcurrencyTest.Something.IFoo' instead of 'AppendedNamespaceForConcurrencyTest.Something.Bar'.}}
         {
             var x = f.IsFoo;
         }
@@ -752,7 +752,7 @@ namespace Test_125
 }
 
 // Do not suggest ICollection<KVP<T1, T2>> instead of Dictionary<T1, T2>
-namespace Test_126
+namespace AppendedNamespaceForConcurrencyTest.Test_26
 {
     public class Foo
     {
@@ -769,7 +769,7 @@ namespace Test_126
 }
 
 // Test IEnumerable iterated over twice
-namespace Test_126
+namespace AppendedNamespaceForConcurrencyTest.Test_26
 {
     public class IEnumerable_T_Tests
     {
@@ -810,7 +810,7 @@ namespace Test_126
     }
 }
 
-namespace Test_127
+namespace AppendedNamespaceForConcurrencyTest.Test_27
 {
     public sealed class ReproIssue2479
     {
@@ -833,7 +833,7 @@ namespace Test_127
     }
 }
 
-namespace MultiConditionalAccess2
+namespace AppendedNamespaceForConcurrencyTest.MultiConditionalAccess
 {
     public class BaseItem
     {

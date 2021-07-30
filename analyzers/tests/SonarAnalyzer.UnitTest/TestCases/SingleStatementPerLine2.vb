@@ -1,4 +1,4 @@
-﻿Namespace Tests.Diagnostics2
+﻿Namespace AppendedNamespaceForConcurrencyTest.Tests.Diagnostics
     Class SingleStatementPerLine
         Sub Main()
             Dim a = 0 : Dim b = 0  ' Noncompliant {{Reformat the code to have only one statement per line.}}

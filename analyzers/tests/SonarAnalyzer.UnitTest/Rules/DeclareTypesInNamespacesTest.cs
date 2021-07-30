@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DeclareTypesInNamespaces_CS_Concurrent() =>
+        public void DeclareTypesInNamespaces_CS() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\DeclareTypesInNamespaces.cs", @"TestCases\DeclareTypesInNamespaces2.cs", },
                 new CS.DeclareTypesInNamespaces());
 
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DeclareTypesInNamespaces_VB_Concurrent() =>
+        public void DeclareTypesInNamespaces_VB() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\DeclareTypesInNamespaces.vb", @"TestCases\DeclareTypesInNamespaces2.vb", },
                 new VB.DeclareTypesInNamespaces());
     }

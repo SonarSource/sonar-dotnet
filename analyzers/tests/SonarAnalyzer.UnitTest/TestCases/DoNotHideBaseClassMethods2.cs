@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MyLibrary
+namespace AppendedNamespaceForConcurrencyTest.MyLibrary
 {
     class Foo
     {
@@ -18,7 +18,7 @@ namespace MyLibrary
 
     class Bar : Foo
     {
-        public void SomePublicMethod(string s1, object s2) { } // Noncompliant
+        public void SomePublicMethod(string s1, object s2) { } // Noncompliant {{Remove or rename that method because it hides 'AppendedNamespaceForConcurrencyTest.MyLibrary.Foo.SomePublicMethod(string, string)'.}}
 //                  ^^^^^^^^^^^^^^^^
         protected void SomeProtectedMethod(string s1, object o2) { } // Noncompliant
 
@@ -54,7 +54,7 @@ namespace MyLibrary
     }
 }
 
-namespace OtherNamespace
+namespace AppendedNamespaceForConcurrencyTest.OtherNamespace
 {
     class Class1
     {
@@ -67,9 +67,9 @@ namespace OtherNamespace
     }
 }
 
-namespace MyNamespace
+namespace AppendedNamespaceForConcurrencyTest.MyNamespace
 {
-    class Class3 : OtherNamespace.Class1
+    class Class3 : AppendedNamespaceForConcurrencyTest.OtherNamespace.Class1
     {
         void SomeMethod(object s) { }
     }

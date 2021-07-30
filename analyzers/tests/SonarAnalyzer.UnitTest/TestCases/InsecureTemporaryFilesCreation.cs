@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-public class Record
+public class Sample
 {
     private string tempFileName;
 

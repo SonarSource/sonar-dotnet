@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Tests.Diagnostics
+namespace EmptyLine
 {
-    class Program2
+    class Program
     {
     }
 }

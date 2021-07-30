@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommentedOutCode() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode());
+        public void CommentedOutCode_Nonconcurrent() =>
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode_Nonconcurrent.cs", new CommentedOutCode());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommentedOutCode_Concurrent() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode_Concurrent.cs", new CommentedOutCode());
+        public void CommentedOutCode() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode());
 
         [TestMethod]
         [TestCategory("Rule")]

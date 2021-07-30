@@ -33,13 +33,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithClsCompliantAttribute_CS() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithClsCompliantAttribute.cs", @"TestCases\MarkAssemblyWithClsCompliantAttribute2.cs", },
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.cs",
                 new CS.MarkAssemblyWithClsCompliantAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithClsCompliantAttribute_VB() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithClsCompliantAttribute.vb", @"TestCases\MarkAssemblyWithClsCompliantAttribute2.vb", },
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.vb",
                 new VB.MarkAssemblyWithClsCompliantAttribute());
 
         [TestMethod]
