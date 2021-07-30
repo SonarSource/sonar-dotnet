@@ -43,12 +43,12 @@ namespace SonarAnalyzer.Rules
         {
             Location location;
             bool isReportingOnLeftKey;
-            if (FindIntConstant(context.SemanticModel, left) is int valueLeft && valueLeft == constValueToLookFor)
+            if (FindIntConstant(context.SemanticModel, left) is { } valueLeft && valueLeft == constValueToLookFor)
             {
                 location = left.CreateLocation(@operator);
                 isReportingOnLeftKey = true;
             }
-            else if (FindIntConstant(context.SemanticModel, right) is int valueRight && valueRight == constValueToLookFor)
+            else if (FindIntConstant(context.SemanticModel, right) is { } valueRight && valueRight == constValueToLookFor)
             {
                 location = @operator.CreateLocation(right);
                 isReportingOnLeftKey = false;
@@ -57,13 +57,19 @@ namespace SonarAnalyzer.Rules
             {
                 return;
             }
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
+
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                                                                 location,
+                                                                 ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
         }
 
         protected int? FindIntConstant(SemanticModel semanticModel, SyntaxNode node) =>
-            FindConstant(semanticModel, node) is { } value && !IsEnum(semanticModel, node) ? ConversionHelper.TryConvertToInt(value) : null;
+            FindConstant(semanticModel, node) is { } value
+            && !IsEnum(semanticModel, node)
+                ? ConversionHelper.TryConvertToInt(value)
+                : null;
 
         private static bool IsEnum(SemanticModel semanticModel, SyntaxNode node) =>
-            semanticModel.GetSymbolInfo(node).Symbol.GetSymbolType() is INamedTypeSymbol type && type.EnumUnderlyingType != null;
+            semanticModel.GetSymbolInfo(node).Symbol.GetSymbolType() is INamedTypeSymbol {EnumUnderlyingType: { }};
     }
 }

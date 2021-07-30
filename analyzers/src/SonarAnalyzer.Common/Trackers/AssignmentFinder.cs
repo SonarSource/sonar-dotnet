@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Helpers
             {
                 if (IsLoop(current) && ContainsNestedAssignmentToIdentifier(current))
                 {
-                    return null; // There's asignment inside this loop, value can be altered by each iteration
+                    return null; // There's assignment inside this loop, value can be altered by each iteration
                 }
 
                 foreach (var statement in current.Parent.ChildNodes().TakeWhile(x => x != current).Reverse())
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Helpers
                 }
                 current = current.Parent;
             }
-            return defaultValue == null ? null : defaultValue();
+            return defaultValue?.Invoke();
 
             bool ContainsNestedAssignmentToIdentifier(SyntaxNode node) =>
                 node.DescendantNodes().Any(x => IsAssignmentToIdentifier(x, identifierName, true, out _));

@@ -61,7 +61,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private void CheckAssignment(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
-            if (FindIntConstant(context.SemanticModel, assignment.Right) is int constValue && constValue == constValueToLookFor)
+            if (FindIntConstant(context.SemanticModel, assignment.Right) is { } constValue
+                && constValue == constValueToLookFor)
             {
                 var location = assignment.Parent is StatementSyntax
                     ? assignment.Parent.GetLocation()

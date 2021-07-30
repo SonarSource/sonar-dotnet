@@ -55,6 +55,20 @@ namespace Tests.Diagnostics
             flags = flags | Types.Private;  // Compliant, even when "flags" was initally zero
         }
 
+        public static void WithUnaryPrefix()
+        {
+            int result;
+            int bitMask = 0x010F;
+            int one = 1;
+            int zero = 0;
+
+            result = bitMask & -one;       // FN - Unary Operator is not supported
+            result &= -one;                // FN - Unary Operator is not supported
+            result = bitMask & - - -+one;  // FN - Unary Operator is not supported
+            result = bitMask | + + +zero;  // FN - Unary Operator is not supported
+            result = bitMask | + + +zero;  // FN - Unary Operator is not supported
+        }
+
         private static long returnLong()
         {
             return 1L;

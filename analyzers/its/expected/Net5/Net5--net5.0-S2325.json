@@ -277,6 +277,19 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
+"uri":  "sources\Net5\Net5\S2437.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Foo' a static method.",
+"location":  {
 "uri":  "sources\Net5\Net5\S2612.cs",
 "region":  {
 "startLine":  7,

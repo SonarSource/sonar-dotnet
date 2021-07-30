@@ -41,6 +41,19 @@
 },
 {
 "id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'result'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2437.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  20,
+"endLine":  10,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'y'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3440.cs",
