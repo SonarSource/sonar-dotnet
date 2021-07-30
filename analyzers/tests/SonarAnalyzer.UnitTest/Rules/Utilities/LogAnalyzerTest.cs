@@ -38,28 +38,28 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Utility")]
-        public void LogRoslynVersion_CS()
+        public void LogCompilationMessages_CS()
         {
-            var testRoot = Root + nameof(LogRoslynVersion_CS);
+            var testRoot = Root + nameof(LogCompilationMessages_CS);
             Verifier.VerifyUtilityAnalyzer<LogInfo>(
                 new[] { Root + "Normal.cs", Root + "Second.cs" },
                 new TestLogAnalyzer_CS(testRoot),
                 @$"{testRoot}\log.pb",
                 TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
-                VerifyRoslynVersion);
+                VerifyCompilationMessages);
         }
 
         [TestMethod]
         [TestCategory("Utility")]
-        public void LogRoslynVersion_VB()
+        public void LogCompilationMessages_VB()
         {
-            var testRoot = Root + nameof(LogRoslynVersion_VB);
+            var testRoot = Root + nameof(LogCompilationMessages_VB);
             Verifier.VerifyUtilityAnalyzer<LogInfo>(
                 new[] { Root + "Normal.vb", Root + "Second.vb" },
                 new TestLogAnalyzer_VB(testRoot),
                 @$"{testRoot}\log.pb",
                 TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
-                VerifyRoslynVersion);
+                VerifyCompilationMessages);
         }
 
         [TestMethod]
@@ -88,6 +88,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 VerifyGenerated);
         }
 
+        private static void VerifyCompilationMessages(IEnumerable<LogInfo> messages)
+        {
+            VerifyRoslynVersion(messages);
+            VerifyLanguageVersion(messages);
+        }
+
         private static void VerifyRoslynVersion(IEnumerable<LogInfo> messages)
         {
             messages.Should().NotBeEmpty();
@@ -97,6 +103,15 @@ namespace SonarAnalyzer.UnitTest.Rules
             versionMessage.Text.Should().MatchRegex(@"^Roslyn version: \d(\.\d){3}");
             var version = new Version(versionMessage.Text.Substring(16));
             version.Should().BeGreaterThan(new Version(3, 0));  // Avoid 1.0.0.0
+        }
+
+        private static void VerifyLanguageVersion(IEnumerable<LogInfo> messages)
+        {
+            messages.Should().NotBeEmpty();
+            var versionMessage = messages.SingleOrDefault(x => x.Text.Contains("Language version"));
+            versionMessage.Should().NotBeNull();
+            versionMessage.Severity.Should().Be(LogSeverity.Info);
+            versionMessage.Text.Should().MatchRegex(@"^Language version: (CSharp|VisualBasic)\d");
         }
 
         private static void VerifyGenerated(IEnumerable<LogInfo> messages)

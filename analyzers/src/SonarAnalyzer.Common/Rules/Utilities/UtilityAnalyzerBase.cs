@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules
         protected abstract string FileName { get; }
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
-        protected virtual TMessage CreateAnalysisMessage(SonarAnalysisContext context) => null;
+        protected virtual IEnumerable<TMessage> CreateAnalysisMessage(CompilationAnalysisContext c) => Enumerable.Empty<TMessage>();
 
         protected UtilityAnalyzerBase(string diagnosticId, string title) : base(diagnosticId, title) { }
 
@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Rules
                     var messages = c.Compilation.SyntaxTrees
                         .Where(ShouldGenerateMetrics)
                         .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)))
-                        .Concat(new[] { CreateAnalysisMessage(context) })
+                        .Concat(CreateAnalysisMessage(c))
                         .WhereNotNull()
                         .ToArray();
 

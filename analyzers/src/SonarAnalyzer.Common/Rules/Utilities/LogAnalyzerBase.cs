@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
@@ -30,13 +32,19 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S9999-log";
         private const string Title = "Log generator";
 
+        protected abstract string LanguageVersion(Compilation compilation);
+
         protected sealed override string FileName => "log.pb";
         protected override bool AnalyzeGeneratedCode => true;
 
         protected LogAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected sealed override LogInfo CreateAnalysisMessage(SonarAnalysisContext context) =>
-            new LogInfo { Severity = LogSeverity.Info, Text = "Roslyn version: " + typeof(SyntaxNode).Assembly.GetName().Version };
+        protected sealed override IEnumerable<LogInfo> CreateAnalysisMessage(CompilationAnalysisContext c) =>
+            new[]
+            {
+                new LogInfo { Severity = LogSeverity.Info, Text = "Roslyn version: " + typeof(SyntaxNode).Assembly.GetName().Version },
+                new LogInfo { Severity = LogSeverity.Info, Text = "Language version: " + LanguageVersion(c.Compilation) }
+            };
 
         protected sealed override LogInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
             DiagnosticAnalyzerContextHelper.IsGenerated(syntaxTree, Language.GeneratedCodeRecognizer, semanticModel.Compilation)
