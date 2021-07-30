@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests.Diagnostics
 {
@@ -17,6 +18,13 @@ namespace Tests.Diagnostics
             var unsignedY = 54U;
 
             var xx = unsignedY % 4 == 1; // Compliant
+
+            var array = new[] {1};
+            y = array.Length % 2 == 1; // Noncompliant - FP: array Length is > 0;
+
+            IEnumerable<int> enumerable = array;
+            y = enumerable.Count() % 2 == 1; // Noncompliant - FP: IEnumerable Count is > 0;
+            y = enumerable.LongCount() % 2 == 1; // Noncompliant - FP: IEnumerable LongCount is > 0;
         }
     }
 }
