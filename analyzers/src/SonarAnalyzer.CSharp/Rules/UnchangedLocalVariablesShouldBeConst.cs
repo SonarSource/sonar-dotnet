@@ -138,7 +138,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasMutableUsagesInMethod(VariableDeclaratorSyntax variable, ISymbol variableSymbol, SemanticModel semanticModel)
         {
-            var parentSyntax = variable?.Ancestors()?.FirstOrDefault(IsMethodLike);
+            var parentSyntax = variable.Ancestors().FirstOrDefault(IsMethodLike);
             if (parentSyntax == null)
             {
                 return false;
