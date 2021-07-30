@@ -32,55 +32,50 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ValuesUselesslyIncremented : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2123";
+        private const string DiagnosticId = "S2123";
         private const string MessageFormat = "Remove this {0} or correct the code not to waste it.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var increment = (PostfixUnaryExpressionSyntax)c.Node;
                     var symbol = c.SemanticModel.GetSymbolInfo(increment.Operand).Symbol;
-                    var localSymbol = symbol as ILocalSymbol;
-                    var parameterSymbol = symbol as IParameterSymbol;
 
-                    if (localSymbol == null &&
-                        (parameterSymbol == null || parameterSymbol.RefKind != RefKind.None))
+                    if (symbol is ILocalSymbol || symbol is IParameterSymbol {RefKind: RefKind.None })
                     {
-                        return;
+                        VisitParent(increment, c);
                     }
+                },
+                SyntaxKind.PostIncrementExpression,
+                SyntaxKind.PostDecrementExpression);
+
+        private static void VisitParent(PostfixUnaryExpressionSyntax increment, SyntaxNodeAnalysisContext context)
+        {
+            switch (increment.Parent)
+            {
+                case ReturnStatementSyntax _:
+                case ArrowExpressionClauseSyntax _:
+                case CastExpressionSyntax castExpressionSyntax
+                    when castExpressionSyntax.Parent.IsAnyKind(SyntaxKind.ReturnStatement, SyntaxKind.ArrowExpressionClause):
+                case AssignmentExpressionSyntax assignment
+                    when assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
+                         && assignment.Right == increment
+                         && CSharpEquivalenceChecker.AreEquivalent(assignment.Left, increment.Operand):
 
                     var operatorText = increment.OperatorToken.IsKind(SyntaxKind.PlusPlusToken)
                         ? "increment"
                         : "decrement";
 
-                    if (increment.Parent is ReturnStatementSyntax)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, increment.GetLocation(), operatorText));
-                        return;
-                    }
-                    if (increment.Parent is ArrowExpressionClauseSyntax)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, increment.GetLocation(), operatorText));
-                        return;
-                    }
-
-                    if (increment.Parent is AssignmentExpressionSyntax assignment &&
-                        assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
-                        assignment.Right == increment &&
-                        CSharpEquivalenceChecker.AreEquivalent(assignment.Left, increment.Operand))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, increment.GetLocation(), operatorText));
-                    }
-                },
-                SyntaxKind.PostIncrementExpression,
-                SyntaxKind.PostDecrementExpression);
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, increment.GetLocation(), operatorText));
+                    return;
+                default:
+                    return;
+            }
         }
     }
 }
