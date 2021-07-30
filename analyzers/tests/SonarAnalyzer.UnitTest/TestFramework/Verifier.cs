@@ -243,7 +243,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<ParseOptions> options = null,
                                                        IEnumerable<MetadataReference> additionalReferences = null)
         {
-            using var _ = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};
+            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};
             VerifyNonConcurrentAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
         }
 
@@ -386,7 +386,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                            IEnumerable<MetadataReference> additionalReferences,
                                            string sonarProjectConfigPath = null)
         {
-            using var _ = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};
+            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};
             var pathsWithConcurrencyTests = CreateConcurrencyTest(paths);
             var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, outputKind, additionalReferences);
             CompileAndVerifyAnalyzer(solution, diagnosticAnalyzers, options, checkMode, sonarProjectConfigPath);
