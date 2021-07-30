@@ -162,7 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 return true;
                             }
 
-                            return ExpressionNumericConverter.TryGetConstantIntValue(oc.ArgumentList?.Arguments.First().Expression, out var ctorParameter)
+                            return ExpressionNumericConverter.TryGetConstantIntValue(oc.ArgumentList.Arguments.First().Expression, out var ctorParameter)
                                    && ctorParameter == default;
                         }
                         else
