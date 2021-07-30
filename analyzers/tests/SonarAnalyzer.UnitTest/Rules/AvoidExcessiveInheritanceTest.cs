@@ -31,13 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_DefaultValues() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\AvoidExcessiveInheritance_DefaultValues.cs",
-                new AvoidExcessiveInheritance());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void AvoidExcessiveInheritance_Concurrent() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_Concurrent.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_DefaultValues.cs",
                 new AvoidExcessiveInheritance());
 
 #if NET
