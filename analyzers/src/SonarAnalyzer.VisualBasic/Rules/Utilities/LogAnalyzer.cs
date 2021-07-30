@@ -29,5 +29,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public class LogAnalyzer : LogAnalyzerBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
+
+        protected override string LanguageVersion(Compilation compilation) =>
+            ((VisualBasicCompilation)compilation).LanguageVersion.ToString();
     }
 }

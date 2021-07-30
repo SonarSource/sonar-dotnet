@@ -29,5 +29,8 @@ namespace SonarAnalyzer.Rules.CSharp
     public class LogAnalyzer : LogAnalyzerBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
+
+        protected override string LanguageVersion(Compilation compilation) =>
+            ((CSharpCompilation)compilation).LanguageVersion.ToString();
     }
 }
