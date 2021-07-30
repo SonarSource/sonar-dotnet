@@ -136,22 +136,33 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxNode node, ImmutableArray<KnownType> allowedTypes)
         {
             if (node.ArrowExpressionBody() is { } expressionBody
-                && expressionBody.Expression.DescendantNodesAndSelf()
-                .Where(x => ThrowExpressionSyntaxWrapper.IsInstance(x))
-                .Select(x => (ThrowExpressionSyntaxWrapper)x)
-                .Select(x => new NodeAndSymbol(x, analysisContext.SemanticModel.GetSymbolInfo(x.Expression).Symbol))
-                .FirstOrDefault(nodeAndSymbol => nodeAndSymbol.Symbol != null && ShouldReport(nodeAndSymbol.Symbol.ContainingType, allowedTypes)) is { } throwExpression)
+                && GetLocationToReport(
+                    expressionBody.Expression
+                                  .DescendantNodesAndSelf()
+                                  .Where(x => ThrowExpressionSyntaxWrapper.IsInstance(x))
+                                  .Select(x => (ThrowExpressionSyntaxWrapper)x),
+                    x => x.SyntaxNode,
+                    x => x.Expression) is { } throwExpressionLocation)
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwExpression.Node.GetLocation(), "expression"));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwExpressionLocation, "expression"));
             }
-            else if (node.DescendantNodes()
-                    .OfType<ThrowStatementSyntax>()
-                    .Where(x => x.Expression != null)
-                    .Select(x => new NodeAndSymbol(x, analysisContext.SemanticModel.GetSymbolInfo(x.Expression).Symbol))
-                    .FirstOrDefault(nodeAndSymbol => nodeAndSymbol.Symbol != null && ShouldReport(nodeAndSymbol.Symbol.ContainingType, allowedTypes)) is { } throwStatement)
+            else if (GetLocationToReport(
+                        node.DescendantNodes()
+                            .OfType<ThrowStatementSyntax>()
+                            .Where(x => x.Expression != null),
+                        x => x,
+                        x => x.Expression) is { } throwStatementLocation)
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwStatement.Node.GetLocation(), "statement"));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwStatementLocation, "statement"));
             }
+
+            // `throwNodes` is an enumeration of either throw expressions or throw statements
+            // Because of the ShimLayer ThrowExpression implementation, we need to provide extra boilerplate as the wrappers to extract the node and the expression.
+            // The location is returned only if an issue should be reported. Otherwise, null is returned.
+            Location GetLocationToReport<TThrow>(IEnumerable<TThrow> throwNodes, Func<TThrow, SyntaxNode> getNode, Func<TThrow, ExpressionSyntax> getExpression) =>
+                throwNodes.Select(x => new NodeAndSymbol(getNode(x), analysisContext.SemanticModel.GetSymbolInfo(getExpression(x)).Symbol))
+                          .FirstOrDefault(nodeAndSymbol => nodeAndSymbol.Symbol != null && ShouldReport(nodeAndSymbol.Symbol.ContainingType, allowedTypes))
+                          ?.Node.GetLocation();
         }
 
         private static bool ShouldReport(INamedTypeSymbol exceptionType, ImmutableArray<KnownType> allowedTypes) =>
