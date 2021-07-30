@@ -45,13 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_VisualBasic() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConditionalStructureSameCondition.vb",
-                new VB.ConditionalStructureSameCondition());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ConditionalStructureSameCondition_VisualBasic_Concurrent() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition_Concurrent.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.vb",
                 new VB.ConditionalStructureSameCondition());
     }
 }
