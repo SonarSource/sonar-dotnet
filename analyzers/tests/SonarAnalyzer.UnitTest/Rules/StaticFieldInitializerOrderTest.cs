@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldInitializerOrder() =>
-            Verifier.VerifyAnalyzerNoDuplication(
+            Verifier.VerifyAnalyzer(
                 new[]
                 {
                     @"TestCases\StaticFieldInitializerOrder.cs",

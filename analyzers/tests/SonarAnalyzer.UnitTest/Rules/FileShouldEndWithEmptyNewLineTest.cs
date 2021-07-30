@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FileShouldEndWithEmptyNewLine_Concurrent() =>
-            Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\FileShouldEndWithEmptyNewLine_EmptyLine.cs", @"TestCases\FileShouldEndWithEmptyNewLine_NoEmptyLine.cs" },
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\FileShouldEndWithEmptyNewLine_EmptyLine.cs", @"TestCases\FileShouldEndWithEmptyNewLine_NoEmptyLine.cs" },
                                                            new FileShouldEndWithEmptyNewLine());
 
         [TestMethod]

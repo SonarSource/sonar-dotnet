@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FileLines_CSharp() =>
-            Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\FileLines20.cs", @"TestCases\FileLines9.cs" }, new CS.FileLines { Maximum = 10 });
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\FileLines20.cs", @"TestCases\FileLines9.cs" }, new CS.FileLines { Maximum = 10 });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void FileLines_VBNet() =>
-            Verifier.VerifyAnalyzerNoDuplication(new[] { @"TestCases\FileLines20.vb", @"TestCases\FileLines9.vb" }, new VB.FileLines { Maximum = 10 });
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\FileLines20.vb", @"TestCases\FileLines9.vb" }, new VB.FileLines { Maximum = 10 });
     }
 }

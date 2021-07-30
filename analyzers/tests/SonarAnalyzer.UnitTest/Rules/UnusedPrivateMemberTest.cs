@@ -96,7 +96,7 @@ public static class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMemberWithPartialClasses() =>
-            Verifier.VerifyAnalyzerNoDuplication(new[]
+            Verifier.VerifyAnalyzer(new[]
                                     {
                                         @"TestCases\UnusedPrivateMember.part1.cs",
                                         @"TestCases\UnusedPrivateMember.part2.cs"
