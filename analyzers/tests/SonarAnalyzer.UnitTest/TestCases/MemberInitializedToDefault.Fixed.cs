@@ -17,12 +17,13 @@ namespace Tests.Diagnostics
         public decimal fieldD5 = .2m;
         public byte b; // Fixed
         public char c; // Fixed
+        public char c2; // Fixed
         public bool bo; // Fixed
         public sbyte sb; // Fixed
         public ushort us; // Fixed
         public uint ui; // Fixed
         public ulong ul; // Fixed
-
+        public long l; // Fixed
         public static object o; // Fixed
         public object MyProperty { get; set; } // Fixed
         public object Property3 => null;
