@@ -75,6 +75,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, increment.GetLocation(), operatorText));
                     return;
+                default:
+                    return;
             }
         }
     }
