@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -63,7 +62,7 @@ namespace SonarAnalyzer.Helpers
             public readonly bool Value;
 
             public IsTestWrapper(Compilation compilation) =>
-                Value = compilation.ReferencedAssemblyNames.Any(assembly => TestAssemblyNames.Contains(assembly.Name));
+                Value = compilation.ReferencedAssemblyNames.Any(x => TestAssemblyNames.Contains(x.Name));
         }
     }
 }
