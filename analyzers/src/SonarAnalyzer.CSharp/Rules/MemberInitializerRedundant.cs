@@ -44,13 +44,12 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3604";
         private const string MessageFormat = "Remove the member initializer, all constructors set an initial value for the member.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -91,13 +90,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         if (setInAllCtors)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, symbolInitializerPairs[declaredSymbol].GetLocation()));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, symbolInitializerPairs[declaredSymbol].GetLocation()));
                         }
                     }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration);
-        }
 
         private static List<CtorDeclarationTuple> GetConstructorTuples(SyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols) =>
             constructorSymbols
@@ -107,12 +105,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(x => x.SemanticModel != null)
                 .ToList();
 
-        private static bool IsExplicitlyDefinedConstructor(ISymbol member)
-        {
-            return member is IMethodSymbol method &&
+        private static bool IsExplicitlyDefinedConstructor(ISymbol member) =>
+            member is IMethodSymbol method &&
                 method.MethodKind == MethodKind.Constructor &&
                 !method.IsImplicitlyDeclared;
-        }
 
         private static bool IsSymbolFirstSetInCtor(ISymbol declaredSymbol, CtorDeclarationTuple ctor)
         {
@@ -134,9 +130,8 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static IEnumerable<DeclarationTuple<IPropertySymbol>> GetInitializedPropertyDeclarations(TypeDeclarationSyntax declaration,
-            SemanticModel semanticModel)
-        {
-            return declaration.Members
+                                                                                                         SemanticModel semanticModel) =>
+            declaration.Members
                 .OfType<PropertyDeclarationSyntax>()
                 .Where(p => !p.Modifiers.Any(IsStaticOrConst) &&
                     p.Initializer != null &&
@@ -151,14 +146,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(t =>
                     t.Symbol != null &&
                     !MemberInitializedToDefault.IsDefaultValueInitializer(t.Initializer, t.Symbol.Type));
-        }
 
         private static IEnumerable<DeclarationTuple<TSymbol>> GetInitializedFieldLikeDeclarations<TDeclarationType, TSymbol>(TypeDeclarationSyntax declaration,
-            SemanticModel semanticModel, Func<TSymbol, ITypeSymbol> typeSelector)
+                                                                                                                             SemanticModel semanticModel,
+                                                                                                                             Func<TSymbol, ITypeSymbol> typeSelector)
             where TDeclarationType : BaseFieldDeclarationSyntax
-            where TSymbol : class, ISymbol
-        {
-            return declaration.Members
+            where TSymbol : class, ISymbol =>
+            declaration.Members
                 .OfType<TDeclarationType>()
                 .Where(fd => !fd.Modifiers.Any(IsStaticOrConst))
                 .SelectMany(fd => fd.Declaration.Variables
@@ -173,12 +167,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(t =>
                     t.Symbol != null &&
                     !MemberInitializedToDefault.IsDefaultValueInitializer(t.Initializer, typeSelector(t.Symbol)));
-        }
 
-        private static bool IsStaticOrConst(SyntaxToken token)
-        {
-            return token.IsKind(SyntaxKind.StaticKeyword) || token.IsKind(SyntaxKind.ConstKeyword);
-        }
+        private static bool IsStaticOrConst(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.StaticKeyword) || token.IsKind(SyntaxKind.ConstKeyword);
 
         private class DeclarationTuple<TSymbol>
             where TSymbol : ISymbol
@@ -200,10 +191,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.semanticModel = semanticModel;
             }
 
+            // Returns true if the block contains assignment before access
             protected override bool IsBlockValid(Block block)
             {
-                // Contains assignment before access
-
                 foreach (var instruction in block.Instructions)
                 {
                     switch (instruction.Kind())
@@ -229,16 +219,18 @@ namespace SonarAnalyzer.Rules.CSharp
                                 }
                             }
                             break;
+                        default:
+                            // continue search
+                            break;
                     }
                 }
 
                 return false;
             }
 
+            // Returns true if the block contains access before assignment
             protected override bool IsBlockInvalid(Block block)
             {
-                // Contains access before assignment
-
                 foreach (var instruction in block.Instructions)
                 {
                     switch (instruction.Kind())
@@ -276,6 +268,9 @@ namespace SonarAnalyzer.Rules.CSharp
                                 }
                             }
                             break;
+                        default:
+                            // continue search
+                            break;
                     }
                 }
 
@@ -308,24 +303,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            private static bool IsOutArgument(ExpressionSyntax parenthesized)
-            {
-                return parenthesized.Parent is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
-            }
+            private static bool IsOutArgument(ExpressionSyntax parenthesized) =>
+                parenthesized.Parent is ArgumentSyntax argument
+                && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
 
-            private static bool IsReadAccess(ExpressionSyntax parenthesized, SemanticModel semanticModel)
-            {
-                return !IsBeingAssigned(parenthesized) &&
-                    !parenthesized.IsInNameOfArgument(semanticModel);
-            }
+            private static bool IsReadAccess(ExpressionSyntax parenthesized, SemanticModel semanticModel) =>
+                !IsBeingAssigned(parenthesized)
+                && !parenthesized.IsInNameOfArgument(semanticModel);
 
-            private bool IsMemberUsedInsideLambda(SyntaxNode instruction)
-            {
-                return instruction.DescendantNodes()
+            private bool IsMemberUsedInsideLambda(SyntaxNode instruction) =>
+                instruction.DescendantNodes()
                     .OfType<IdentifierNameSyntax>()
                     .Select(i => GetPossibleMemberAccessParent(i))
                     .Any(i => IsMatchingMember(i));
-            }
 
             private static ExpressionSyntax GetPossibleMemberAccessParent(SyntaxNode node)
             {
@@ -357,13 +347,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return identifier;
             }
 
-            private static bool IsBeingAssigned(ExpressionSyntax expression)
-            {
-
-                return expression.Parent is AssignmentExpressionSyntax assignment &&
-                    assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
-                    assignment.Left == expression;
-            }
+            private static bool IsBeingAssigned(ExpressionSyntax expression) =>
+                expression.Parent is AssignmentExpressionSyntax assignment
+                && assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
+                && assignment.Left == expression;
 
             private bool IsMatchingMember(ExpressionSyntax expression)
             {
@@ -391,9 +378,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
                 }
 
-                var assignedSymbol = this.semanticModel.GetSymbolInfo(identifier).Symbol;
+                var assignedSymbol = semanticModel.GetSymbolInfo(identifier).Symbol;
 
-                return this.memberToCheck.Equals(assignedSymbol);
+                return memberToCheck.Equals(assignedSymbol);
             }
         }
     }
