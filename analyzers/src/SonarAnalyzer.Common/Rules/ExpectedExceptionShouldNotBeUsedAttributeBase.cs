@@ -43,12 +43,15 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
             {
-                if (c.SemanticModel.GetDeclaredSymbol(c.Node) is { } methodSymbol
+                if (HasMultiLineBody(c.Node)
+                    && c.SemanticModel.GetDeclaredSymbol(c.Node) is { } methodSymbol
                     && methodSymbol.GetAttributes(UnitTestHelper.KnownExpectedExceptionAttributes).FirstOrDefault() is { } attribute)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                 }
             },
             Language.SyntaxKind.MethodDeclarations);
+
+        protected abstract bool HasMultiLineBody(SyntaxNode syntax);
     }
 }

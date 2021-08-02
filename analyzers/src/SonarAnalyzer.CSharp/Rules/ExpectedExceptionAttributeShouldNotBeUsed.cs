@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -31,5 +32,10 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptionShouldNotBeUsedAttributeBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+        protected override bool HasMultiLineBody(SyntaxNode syntax) =>
+            syntax is MethodDeclarationSyntax declaration
+            && declaration.ExpressionBody is null
+            && declaration.Body?.Statements.Count > 1;
     }
 }

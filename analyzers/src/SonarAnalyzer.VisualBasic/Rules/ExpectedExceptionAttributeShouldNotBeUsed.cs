@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -31,5 +32,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptionShouldNotBeUsedAttributeBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+        protected override bool HasMultiLineBody(SyntaxNode syntax) =>
+            syntax.Parent is MethodBlockSyntax block
+            && block.Statements.Count > 1;
     }
 }
