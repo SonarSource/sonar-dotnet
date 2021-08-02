@@ -34,6 +34,9 @@ namespace SonarAnalyzer.Extensions
             symbol.ReturnsVoid &&
             symbol.DeclaredAccessibility == Accessibility.Public;
 
+        internal static bool IsModuleInitializer(this IMethodSymbol methodSymbol) =>
+            methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
+
         internal static bool IsGetTypeCall(this IMethodSymbol invokedMethod) =>
             invokedMethod.Name == nameof(Type.GetType)
             && !invokedMethod.IsStatic

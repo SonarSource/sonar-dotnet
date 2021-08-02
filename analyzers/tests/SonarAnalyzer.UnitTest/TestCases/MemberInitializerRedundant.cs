@@ -200,12 +200,16 @@ namespace Tests.Diagnostics
 
     class Person13
     {
-        static int x = 42; // FN
+        static int x = 42; // Noncompliant {{Remove the static member initializer, a static constructor or module initializer sets an initial value for the member.}}
         static int y;
+        static int z { get; } = 2; // Noncompliant
+        static event EventHandler w = (a, b) => { }; // Noncompliant
         static Person13()
         {
             x = 41;
             y = 41;
+            z = 2;
+            w = (a, b) => { };
         }
     }
 

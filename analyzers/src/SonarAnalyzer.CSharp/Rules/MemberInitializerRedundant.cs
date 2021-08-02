@@ -33,6 +33,7 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 using CtorDeclarationTuple = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.ConstructorDeclarationSyntax, Microsoft.CodeAnalysis.IMethodSymbol>;
+using InitializerDeclarationTuple = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.BaseMethodDeclarationSyntax, Microsoft.CodeAnalysis.IMethodSymbol>;
 using SymbolWithInitializer = System.Collections.Generic.KeyValuePair<Microsoft.CodeAnalysis.ISymbol, Microsoft.CodeAnalysis.CSharp.Syntax.EqualsValueClauseSyntax>;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -42,10 +43,11 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class MemberInitializerRedundant : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3604";
-        private const string MessageFormat = "Remove the member initializer, all constructors set an initial value for the member.";
+        private const string InstanceMemberMessage = "Remove the member initializer, all constructors set an initial value for the member.";
+        private const string StaticMemberMessage = "Remove the static member initializer, a static constructor or module initializer sets an initial value for the member.";
 
         private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -55,42 +57,41 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var declaration = (TypeDeclarationSyntax)c.Node;
                     var symbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-
-                    var constructorSymbols = symbol?.GetMembers()
-                        .OfType<IMethodSymbol>()
-                        .Where(IsExplicitlyDefinedConstructor)
-                        .ToList();
-
-                    if (constructorSymbols == null ||
-                        !constructorSymbols.Any())
+                    var members = symbol?.GetMembers();
+                    if (members == null || members.Value.Length == 0)
                     {
                         return;
                     }
 
-                    var ctorDeclarations = GetConstructorTuples(c, constructorSymbols);
+                    var constructorSymbols = members.OfType<IMethodSymbol>().Where(IsExplicitlyDefinedConstructor).ToList();
+                    ReportRedundantInitializers(c,
+                        declaration,
+                        constructorSymbols,
+                        x => !x.Modifiers.Any(IsStaticOrConst),
+                        x => !x.Modifiers.Any(IsStaticOrConst));
 
-                    var candidateFields = GetInitializedFieldLikeDeclarations<FieldDeclarationSyntax, IFieldSymbol>(declaration, c.SemanticModel, f => f.Type);
-                    var candidateEvents = GetInitializedFieldLikeDeclarations<EventFieldDeclarationSyntax, IEventSymbol>(declaration, c.SemanticModel, f => f.Type);
-                    var candidateProperties = GetInitializedPropertyDeclarations(declaration, c.SemanticModel);
-
-                    var symbolInitializerPairs = candidateFields.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer))
-                        .Concat(candidateEvents.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
-                        .Concat(candidateProperties.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
-                        .ToDictionary(t => t.Key, t => t.Value);
-
-                    if (!symbolInitializerPairs.Any())
+                    var staticInitializerSymbols = members.OfType<IMethodSymbol>().Where(IsStaticInitializer).ToList();
+                    if (staticInitializerSymbols?.Count > 0)
                     {
-                        return;
-                    }
-
-                    foreach (var declaredSymbol in symbolInitializerPairs.Keys)
-                    {
-                        var setInAllCtors = ctorDeclarations
-                            .All(ctor => IsSymbolFirstSetInCtor(declaredSymbol, ctor));
-
-                        if (setInAllCtors)
+                        var staticInitializerDeclarations = GetInitializerTuples<BaseMethodDeclarationSyntax>(c, staticInitializerSymbols);
+                        var candidateStaticFields = GetInitializedFieldLikeDeclarations<FieldDeclarationSyntax, IFieldSymbol>(declaration, x => x.Modifiers.Any(IsStatic), c.SemanticModel, f => f.Type);
+                        var candidateProperties = GetInitializedPropertyDeclarations(declaration, x => x.Modifiers.Any(IsStatic), c.SemanticModel);
+                        var candidateEvents = GetInitializedFieldLikeDeclarations<EventFieldDeclarationSyntax, IEventSymbol>(declaration, x => x.Modifiers.Any(IsStatic), c.SemanticModel, f => f.Type);
+                        var staticMembers = candidateStaticFields.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer))
+                            .Concat(candidateEvents.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
+                            .Concat(candidateProperties.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
+                            .ToDictionary(t => t.Key, t => t.Value);
+                        if (staticMembers.Any())
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, symbolInitializerPairs[declaredSymbol].GetLocation()));
+                            foreach (var declaredSymbol in staticMembers.Keys)
+                            {
+                                var setInStaticInitializer = staticInitializerDeclarations
+                                    .Any(x => IsSymbolFirstSetInStaticInitializer(declaredSymbol, x));
+                                if (setInStaticInitializer)
+                                {
+                                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, staticMembers[declaredSymbol].GetLocation(), StaticMemberMessage));
+                                }
+                            }
                         }
                     }
                 },
@@ -98,18 +99,55 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.StructDeclaration,
                 SyntaxKindEx.RecordDeclaration);
 
-        private static List<CtorDeclarationTuple> GetConstructorTuples(SyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols) =>
+        private static void ReportRedundantInitializers(SyntaxNodeAnalysisContext c,
+                                                        TypeDeclarationSyntax declaration,
+                                                        List<IMethodSymbol> constructorSymbols,
+                                                        Func<BaseFieldDeclarationSyntax, bool> fieldFilter,
+                                                        Func<PropertyDeclarationSyntax, bool> propertyFilter)
+        {
+            if (constructorSymbols?.Count > 0)
+            {
+                var ctorDeclarations = GetInitializerTuples<ConstructorDeclarationSyntax>(c, constructorSymbols);
+                var candidateFields = GetInitializedFieldLikeDeclarations<FieldDeclarationSyntax, IFieldSymbol>(declaration, fieldFilter, c.SemanticModel, f => f.Type);
+                var candidateProperties = GetInitializedPropertyDeclarations(declaration, propertyFilter, c.SemanticModel);
+                var candidateEvents = GetInitializedFieldLikeDeclarations<EventFieldDeclarationSyntax, IEventSymbol>(declaration, fieldFilter, c.SemanticModel, f => f.Type);
+                var instanceMembers = candidateFields.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer))
+                    .Concat(candidateEvents.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
+                    .Concat(candidateProperties.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
+                    .ToDictionary(t => t.Key, t => t.Value);
+
+                if (instanceMembers.Any())
+                {
+                    foreach (var declaredSymbol in instanceMembers.Keys)
+                    {
+                        var setInAllCtors = ctorDeclarations
+                            .All(ctor => IsSymbolFirstSetInCtor(declaredSymbol, ctor));
+                        if (setInAllCtors)
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, instanceMembers[declaredSymbol].GetLocation(), InstanceMemberMessage));
+                        }
+                    }
+                }
+            }
+        }
+
+        private static List<NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>> GetInitializerTuples<TSyntax>(SyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols)
+            where TSyntax : SyntaxNode =>
             constructorSymbols
-                .Select(x => new CtorDeclarationTuple(null, x.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as ConstructorDeclarationSyntax, x))
+                .Select(x => new NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>(null, x.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as TSyntax, x))
                 .Where(x => x.Node != null)
-                .Select(x => new CtorDeclarationTuple(x.Node.EnsureCorrectSemanticModelOrDefault(context.SemanticModel), x.Node, x.Symbol))
+                .Select(x => new NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>(x.Node.EnsureCorrectSemanticModelOrDefault(context.SemanticModel), x.Node, x.Symbol))
                 .Where(x => x.SemanticModel != null)
                 .ToList();
 
-        private static bool IsExplicitlyDefinedConstructor(ISymbol member) =>
-            member is IMethodSymbol method &&
-                method.MethodKind == MethodKind.Constructor &&
-                !method.IsImplicitlyDeclared;
+        private static bool IsExplicitlyDefinedConstructor(IMethodSymbol method) =>
+            method.MethodKind == MethodKind.Constructor
+            && !method.IsStatic
+            && !method.IsImplicitlyDeclared;
+
+        private static bool IsStaticInitializer(IMethodSymbol method) =>
+            method.MethodKind == MethodKind.StaticConstructor
+            || method.IsModuleInitializer();
 
         private static bool IsSymbolFirstSetInCtor(ISymbol declaredSymbol, CtorDeclarationTuple ctor)
         {
@@ -130,11 +168,24 @@ namespace SonarAnalyzer.Rules.CSharp
             return checker.CheckAllPaths();
         }
 
+        private static bool IsSymbolFirstSetInStaticInitializer(ISymbol declaredSymbol, InitializerDeclarationTuple initializer)
+        {
+            var body = (CSharpSyntaxNode)initializer.Node.Body ?? initializer.Node.ExpressionBody();
+            if (!CSharpControlFlowGraph.TryGet(body, initializer.SemanticModel, out var cfg))
+            {
+                return false;
+            }
+
+            var checker = new MemberInitializerRedundancyChecker(cfg, declaredSymbol, initializer.SemanticModel);
+            return checker.CheckAllPaths();
+        }
+
         private static IEnumerable<DeclarationTuple<IPropertySymbol>> GetInitializedPropertyDeclarations(TypeDeclarationSyntax declaration,
+                                                                                                         Func<PropertyDeclarationSyntax, bool> declarationFilter,
                                                                                                          SemanticModel semanticModel) =>
             declaration.Members
                 .OfType<PropertyDeclarationSyntax>()
-                .Where(p => !p.Modifiers.Any(IsStaticOrConst) &&
+                .Where(p => declarationFilter(p) &&
                     p.Initializer != null &&
                     p.IsAutoProperty())
                 .Select(p =>
@@ -149,13 +200,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     !MemberInitializedToDefault.IsDefaultValueInitializer(t.Initializer, t.Symbol.Type));
 
         private static IEnumerable<DeclarationTuple<TSymbol>> GetInitializedFieldLikeDeclarations<TDeclarationType, TSymbol>(TypeDeclarationSyntax declaration,
+                                                                                                                             Func<TDeclarationType, bool> declarationFilter,
                                                                                                                              SemanticModel semanticModel,
                                                                                                                              Func<TSymbol, ITypeSymbol> typeSelector)
             where TDeclarationType : BaseFieldDeclarationSyntax
             where TSymbol : class, ISymbol =>
             declaration.Members
                 .OfType<TDeclarationType>()
-                .Where(fd => !fd.Modifiers.Any(IsStaticOrConst))
+                .Where(fd => declarationFilter(fd))
                 .SelectMany(fd => fd.Declaration.Variables
                     .Where(v => v.Initializer != null)
                     .Select(v =>
@@ -171,6 +223,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsStaticOrConst(SyntaxToken token) =>
             token.IsKind(SyntaxKind.StaticKeyword) || token.IsKind(SyntaxKind.ConstKeyword);
+
+        private static bool IsStatic(SyntaxToken token) => token.IsKind(SyntaxKind.StaticKeyword);
 
         private class DeclarationTuple<TSymbol>
             where TSymbol : ISymbol
