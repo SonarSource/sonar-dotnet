@@ -42,10 +42,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("CodeFix")]
         public void MemberInitializedToDefault_CodeFix() =>
-            Verifier.VerifyCodeFix(
-                @"TestCases\MemberInitializedToDefault.cs",
-                @"TestCases\MemberInitializedToDefault.Fixed.cs",
-                new MemberInitializedToDefault(),
-                new MemberInitializedToDefaultCodeFixProvider());
+            Verifier.VerifyCodeFix(@"TestCases\MemberInitializedToDefault.cs",
+                                   @"TestCases\MemberInitializedToDefault.Fixed.cs",
+                                   new MemberInitializedToDefault(),
+                                   new MemberInitializedToDefaultCodeFixProvider());
     }
 }

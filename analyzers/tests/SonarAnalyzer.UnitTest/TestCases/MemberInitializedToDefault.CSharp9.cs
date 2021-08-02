@@ -13,6 +13,9 @@ record NativeInts
     public nuint field7 = UIntPtr.Zero;       // Noncompliant
     public nint field8 = new IntPtr(0);       // Noncompliant
     public nint field9 = new IntPtr(staticField);
+    public nuint field10 = new UIntPtr(0);    // Noncompliant
+    public nuint field11 = new ();           // Noncompliant
+    public nuint field12 = new nuint { };    // Noncompliant
 
     public nint Property1 { get; set; } = 0;    // Noncompliant
     public nint Property2 { get; set; } = 42;

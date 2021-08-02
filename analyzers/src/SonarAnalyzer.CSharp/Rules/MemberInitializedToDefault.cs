@@ -28,6 +28,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -151,9 +153,16 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             return true;
                         }
-                        else if (initializer.Value is ObjectCreationExpressionSyntax objectCreation)
+                        else if (initializer.Value is ObjectCreationExpressionSyntax || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(initializer.Value))
                         {
-                            return ExpressionNumericConverter.TryGetConstantIntValue(objectCreation.ArgumentList?.Arguments.First().Expression, out var ctorParameter)
+                            var objectCreation = ObjectCreationFactory.Create(initializer.Value);
+                            var argCount = objectCreation.ArgumentList?.Arguments.Count;
+                            if (argCount == null || argCount == 0)
+                            {
+                                return true;
+                            }
+
+                            return ExpressionNumericConverter.TryGetConstantIntValue(objectCreation.ArgumentList.Arguments.First().Expression, out var ctorParameter)
                                    && ctorParameter == default;
                         }
                         else
