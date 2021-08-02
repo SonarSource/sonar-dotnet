@@ -37,8 +37,8 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase<SyntaxKind, InvocationExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-        protected override SyntaxKind InvocationExpressionKind { get; } = SyntaxKind.InvocationExpression;
-        protected override string CallbackParameterName { get; } = "callback";
+        protected override SyntaxKind InvocationExpressionKind => SyntaxKind.InvocationExpression;
+        protected override string CallbackParameterName => "callback";
         protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
         {
             SyntaxKind.AnonymousMethodExpression,
@@ -92,7 +92,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 callback = objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().Expression : null;
                 if (callback != null && semanticModel.GetSymbolInfo(callback).Symbol is IMethodSymbol methodSymbol)
                 {
-                    callback = methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+                    callback = methodSymbol.PartialImplementationPart?.DeclaringSyntaxReferences.First().GetSyntax()
+                        ?? methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
                 }
             }
 
