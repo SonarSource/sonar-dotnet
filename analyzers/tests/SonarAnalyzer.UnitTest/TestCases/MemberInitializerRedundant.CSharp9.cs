@@ -51,8 +51,8 @@ class Person
 record Foo
 {
     static int foo = 1; // FN
-    int bar = 42; // FN
-    int fred { get; init; } = 42; // FN
+    int bar = 42; // Noncompliant
+    int fred { get; init; } = 42; // Noncompliant
     int quix = 9; // ok, not initialized in all constructors
 
     [ModuleInitializer]

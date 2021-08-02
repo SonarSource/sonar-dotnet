@@ -95,7 +95,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration);
+                SyntaxKind.StructDeclaration,
+                SyntaxKindEx.RecordDeclaration);
 
         private static List<CtorDeclarationTuple> GetConstructorTuples(SyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols) =>
             constructorSymbols
