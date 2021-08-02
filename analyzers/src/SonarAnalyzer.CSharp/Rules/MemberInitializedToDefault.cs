@@ -155,14 +155,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                         else if (initializer.Value is ObjectCreationExpressionSyntax || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(initializer.Value))
                         {
-                            var oc = ObjectCreationFactory.Create(initializer.Value);
-                            var argCount = oc.ArgumentList?.Arguments.Count;
+                            var objectCreation = ObjectCreationFactory.Create(initializer.Value);
+                            var argCount = objectCreation.ArgumentList?.Arguments.Count;
                             if (argCount == null || argCount == 0)
                             {
                                 return true;
                             }
 
-                            return ExpressionNumericConverter.TryGetConstantIntValue(oc.ArgumentList.Arguments.First().Expression, out var ctorParameter)
+                            return ExpressionNumericConverter.TryGetConstantIntValue(objectCreation.ArgumentList.Arguments.First().Expression, out var ctorParameter)
                                    && ctorParameter == default;
                         }
                         else
