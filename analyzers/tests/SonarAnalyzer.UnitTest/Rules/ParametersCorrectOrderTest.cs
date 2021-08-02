@@ -67,4 +67,3 @@ Public Class Foo
 End Class", new VB.ParametersCorrectOrder(), CompilationErrorBehavior.Ignore);
     }
 }
-

@@ -69,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                File.ReadAllText(webConfigPath),
+                webConfigPath,
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                File.ReadAllText(webConfigPath),
+                webConfigPath,
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath, externalConfigPath)));
         }
 
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                File.ReadAllText(corruptFilePath),
+                corruptFilePath,
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
         }
 
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                File.ReadAllText(appSettingsPath),
+                appSettingsPath,
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, appSettingsPath)));
         }
 
@@ -130,7 +130,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                File.ReadAllText(corruptFilePath),
+                corruptFilePath,
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
         }
 

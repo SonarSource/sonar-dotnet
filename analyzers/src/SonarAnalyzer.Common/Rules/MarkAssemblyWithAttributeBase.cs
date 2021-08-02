@@ -32,6 +32,8 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
+        protected override bool EnableConcurrentExecution => false;
+
         protected MarkAssemblyWithAttributeBase(DiagnosticDescriptor rule) =>
             this.rule = rule;
 

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassName_CS() =>
-            Verifier.VerifyAnalyzer(
+            Verifier.VerifyNonConcurrentAnalyzer(
                 new[]
                 {
                     @"TestCases\ClassName.cs",

@@ -34,40 +34,56 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttribute_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttributeRazor_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs",
                 new CS.MarkAssemblyWithAssemblyVersionAttribute(),
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkAssemblyWithAssemblyVersionAttribute_CS_Concurrent() =>
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs", },
+                new CS.MarkAssemblyWithAssemblyVersionAttribute(),
+                null,
                 NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_CS()
         {
-            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
+            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttributeRazor_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb",
                 new VB.MarkAssemblyWithAssemblyVersionAttribute(),
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkAssemblyWithAssemblyVersionAttribute_VB_Concurrent() =>
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb", },
+                new VB.MarkAssemblyWithAssemblyVersionAttribute(),
+                null,
                 NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_VB()
         {
-            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
+            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
         }
 

@@ -25,29 +25,30 @@ namespace SonarAnalyzer.Helpers
 {
     public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
     {
-        private const string EnableConcurrentProcessing = "SONAR_DOTNET_ENABLE_CONCURRENT_PROCESSING";
-        protected virtual bool ConcurrentProcessingDisabled => IsConcurrentProcessingDisabled();
+        public static readonly string EnableConcurrentExecutionVariable = "SONAR_DOTNET_ENABLE_CONCURRENT_EXECUTION";
+
+        protected virtual bool EnableConcurrentExecution => IsConcurrentExecutionEnabled();
 
         protected abstract void Initialize(SonarAnalysisContext context);
 
         public sealed override void Initialize(AnalysisContext context)
         {
-            if (!ConcurrentProcessingDisabled)
+            if (EnableConcurrentExecution)
             {
                 context.EnableConcurrentExecution();
             }
             Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
         }
 
-        private static bool IsConcurrentProcessingDisabled()
+        private static bool IsConcurrentExecutionEnabled()
         {
-            var value = Environment.GetEnvironmentVariable(EnableConcurrentProcessing);
+            var value = Environment.GetEnvironmentVariable(EnableConcurrentExecutionVariable);
 
             if (value != null && bool.TryParse(value, out var result))
             {
-                return !result;
+                return result;
             }
-            return true;
+            return false;
         }
     }
 }

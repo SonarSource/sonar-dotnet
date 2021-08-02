@@ -64,7 +64,7 @@ public static class Utils
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.cs", GetAnalyzer());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\NullPointerDereference.cs", GetAnalyzer());
 
         [TestMethod]
         [TestCategory("Rule")]

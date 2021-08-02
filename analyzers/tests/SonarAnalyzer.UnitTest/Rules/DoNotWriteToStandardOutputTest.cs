@@ -35,11 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotWriteToStandardOutput_ConditionalDirectives1() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging_Conditionals1.cs", new DoNotWriteToStandardOutput());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals1.cs", new DoNotWriteToStandardOutput());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotWriteToStandardOutput_ConditionalDirectives2() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging_Conditionals2.cs", new DoNotWriteToStandardOutput());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals2.cs", new DoNotWriteToStandardOutput());
     }
 }

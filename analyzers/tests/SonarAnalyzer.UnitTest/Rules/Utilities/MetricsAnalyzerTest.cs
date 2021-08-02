@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void VerifyMetrics()
         {
             var testRoot = Root + nameof(VerifyMetrics);
-            Verifier.VerifyUtilityAnalyzer<MetricsInfo>(
+            Verifier.VerifyNonConcurrentUtilityAnalyzer<MetricsInfo>(
                 new[] { Root + "AllMetrics.cs" },
                 new TestMetricsAnalyzer(testRoot, false),
                 @$"{testRoot}\metrics.pb",

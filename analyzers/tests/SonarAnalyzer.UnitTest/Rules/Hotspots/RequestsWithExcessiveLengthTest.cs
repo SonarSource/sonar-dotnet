@@ -97,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
-                File.ReadAllText(webConfigPath),
+                webConfigPath,
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
-                File.ReadAllText(corruptFilePath),
+                corruptFilePath,
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
         }
 

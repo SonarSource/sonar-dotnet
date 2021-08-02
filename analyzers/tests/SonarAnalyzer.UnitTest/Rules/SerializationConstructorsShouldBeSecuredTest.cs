@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured.cs",
                                     new SerializationConstructorsShouldBeSecured(),
                                     GetAdditionalReferences());
 
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_PartialClasses() =>
-            Verifier.VerifyAnalyzer(
+            Verifier.VerifyNonConcurrentAnalyzer(
                                     new[]
                                     {
                                         @"TestCases\SerializationConstructorsShouldBeSecured_Part1.cs",

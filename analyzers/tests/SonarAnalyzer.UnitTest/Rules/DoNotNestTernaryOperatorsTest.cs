@@ -30,18 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotNestTernaryOperators_CS()
-        {
+        public void DoNotNestTernaryOperators_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTernaryOperators.cs",
                 new CS.DoNotNestTernaryOperators());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotNestTernaryOperators_VB()
-        {
+        public void DoNotNestTernaryOperators_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTernaryOperators.vb",
                 new VB.DoNotNestTernaryOperators());
-        }
     }
 }

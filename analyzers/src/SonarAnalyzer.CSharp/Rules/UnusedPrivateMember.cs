@@ -56,6 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Microsoft_EntityFrameworkCore_Migrations_Migration);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleS1144, RuleS4487);
+        protected override bool EnableConcurrentExecution => false;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(
