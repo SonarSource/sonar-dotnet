@@ -13,5 +13,14 @@ public class DateTimeAsProvider
     public void CompliantAre()
     {
         var other = DateTime.DaysInMonth(2000, 2); // Compliant
+        var noSystemDateTime = NotSystem.DateTime.Now; // Compliant
+    }
+}
+
+namespace NotSystem
+{
+    public class DateTime
+    {
+        public static DateTime Now => new DateTime();
     }
 }
