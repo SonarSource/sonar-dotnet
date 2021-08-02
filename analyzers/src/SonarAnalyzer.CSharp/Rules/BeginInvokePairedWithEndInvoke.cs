@@ -64,9 +64,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (FindCallback(callbackArg, semanticModel) is { } callback)
             {
+                var callbackSemanticModel = callback.EnsureCorrectSemanticModelOrDefault(semanticModel);
                 return callback is MemberAccessExpressionSyntax memberAccess && memberAccess.Name.ToString().Equals(EndInvoke)
-                    ? !(semanticModel.GetSymbolInfo(callback).Symbol is IMethodSymbol)
-                    : Language.Syntax.IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, semanticModel);
+                    ? !(callbackSemanticModel.GetSymbolInfo(callback).Symbol is IMethodSymbol)
+                    : Language.Syntax.IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, callbackSemanticModel);
             }
 
             return false;
@@ -92,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 callback = objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().Expression : null;
                 if (callback != null && semanticModel.GetSymbolInfo(callback).Symbol is IMethodSymbol methodSymbol)
                 {
-                    callback = methodSymbol.PartialImplementationPart?.DeclaringSyntaxReferences.First().GetSyntax()
+                    callback = methodSymbol.PartialImplementationPart?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
                         ?? methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
                 }
             }

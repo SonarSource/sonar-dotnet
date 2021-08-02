@@ -37,6 +37,22 @@ namespace Tests.Diagnostics
             caller.BeginInvoke("delegate", 1, callback, null); // Noncompliant
         }
 
+        private static void BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod4()
+        {
+            var caller = new AsyncMethodCaller(AsyncMethod);
+            var wrapper = new CallerWrapperAnotherFile(caller);
+            var callback = new AsyncCallback(wrapper.CallEndInvoke);
+            caller.BeginInvoke("delegate", 1, callback, null); // Compliant, EndInvoke is called by wrapper.CallEndInvoke
+        }
+
+        private static void BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod5()
+        {
+            var caller = new AsyncMethodCaller(AsyncMethod);
+            var wrapper = new CallerWrapperAnotherFile(caller);
+            var callback = new AsyncCallback(wrapper.DoNothing);
+            caller.BeginInvoke("delegate", 1, callback, null); // Noncompliant
+        }
+
         private static void AsyncMethod(string msg, int i)
         {
             Console.WriteLine($"AsyncMethod: {msg} {i}");
@@ -77,5 +93,19 @@ namespace Tests.Diagnostics
         }
 
         public partial void MissingImplementation(IAsyncResult result); // Error [CS8795] Partial method 'CallerWrapperNoImplementation.MissingImplementation(IAsyncResult)' must have an implementation part because it has accessibility modifiers.
+    }
+
+    public partial class CallerWrapperAnotherFile
+    {
+        private AsyncMethodCaller caller;
+
+        public CallerWrapperAnotherFile(AsyncMethodCaller caller)
+        {
+            this.caller = caller;
+        }
+
+        public partial void CallEndInvoke(IAsyncResult result);
+
+        public partial void DoNothing(IAsyncResult result);
     }
 }
