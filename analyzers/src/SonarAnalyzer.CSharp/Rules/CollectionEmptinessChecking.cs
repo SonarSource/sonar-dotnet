@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (methodSymbol.IsGenericMethod)
                 {
-                    typeArgument = methodSymbol.TypeArguments.First().ToDisplayString();
+                    typeArgument = methodSymbol.TypeArguments.Single().ToDisplayString();
                 }
 
                 countLocation = memberAccess.Name.GetLocation();
