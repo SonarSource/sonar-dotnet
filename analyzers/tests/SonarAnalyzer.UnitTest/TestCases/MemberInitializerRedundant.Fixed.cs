@@ -65,6 +65,7 @@ namespace Tests.Diagnostics
     class Person3
     {
         int age; // Fixed
+        int id = 42; // only set in the second constructor
         public Person3(int age)
         {
             this.age = age;
@@ -73,6 +74,7 @@ namespace Tests.Diagnostics
         public Person3(int age, int other)
             : this(age)
         {
+            id = other;
         }
     }
 
@@ -196,12 +198,16 @@ namespace Tests.Diagnostics
 
     class Person13
     {
-        static int x = 42; // FN
+        static int x; // Fixed
         static int y;
+        static int z { get; } // Fixed
+        static event EventHandler w; // Fixed
         static Person13()
         {
             x = 41;
             y = 41;
+            z = 2;
+            w = (a, b) => { };
         }
     }
 
@@ -236,6 +242,23 @@ namespace Tests.Diagnostics
         public CSharp8_PersonB(int[] ids)
         {
             this.ids ??= ids;
+        }
+    }
+
+    class BaseClass
+    {
+        int foo; // Fixed
+        public BaseClass(int i)
+        {
+            foo = 42;
+        }
+    }
+    class NewClass : BaseClass
+    {
+        int baz = 0; // FN
+        public NewClass() : base(1)
+        {
+            baz = 0;
         }
     }
 }
