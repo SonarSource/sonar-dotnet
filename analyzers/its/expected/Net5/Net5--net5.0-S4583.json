@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4583",
+"message":  "Pair this "BeginInvoke" with an "EndInvoke".",
+"location":  {
+"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  20,
+"endLine":  22,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4583",
+"message":  "Pair this "BeginInvoke" with an "EndInvoke".",
+"location":  {
+"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  20,
+"endLine":  38,
+"endColumn":  31
+}
+}
+}
+]
+}

@@ -50,6 +50,48 @@
 }
 }
 ]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'delegate' 4 times.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  32,
+"endLine":  14,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  32,
+"endLine":  22,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  32,
+"endLine":  30,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  32,
+"endLine":  38,
+"endColumn":  42
+}
+}
+]
 }
 ]
 }
