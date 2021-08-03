@@ -30,6 +30,19 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
+"uri":  "sources\Net5\Net5\S2330.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  32,
+"endLine":  5,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
+"location":  {
 "uri":  "sources\Net5\Net5\S3240.cs",
 "region":  {
 "startLine":  5,

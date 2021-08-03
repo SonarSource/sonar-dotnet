@@ -106,6 +106,19 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'fruits'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2330.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  21,
+"endLine":  11,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'vegetable'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3247.cs",
