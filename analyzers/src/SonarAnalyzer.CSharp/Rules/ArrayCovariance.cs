@@ -33,29 +33,21 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ArrayCovariance : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2330";
+        private const string DiagnosticId = "S2330";
         private const string MessageFormat = "Refactor the code to not rely on potentially unsafe array conversions.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInSimpleAssignmentExpression,
-                SyntaxKind.SimpleAssignmentExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInVariableDeclaration,
-                SyntaxKind.VariableDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInInvocationExpression,
-                SyntaxKind.InvocationExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInCastExpression,
-                SyntaxKind.CastExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInSimpleAssignmentExpression, SyntaxKind.SimpleAssignmentExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInVariableDeclaration, SyntaxKind.VariableDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInInvocationExpression, SyntaxKind.InvocationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInCastExpression, SyntaxKind.CastExpression);
         }
 
-        private void RaiseOnArrayCovarianceInSimpleAssignmentExpression(SyntaxNodeAnalysisContext context)
+        private static void RaiseOnArrayCovarianceInSimpleAssignmentExpression(SyntaxNodeAnalysisContext context)
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
             var typeDerived = context.SemanticModel.GetTypeInfo(assignment.Right).Type;
@@ -63,36 +55,34 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (AreCovariantArrayTypes(typeDerived, typeBase))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.Right.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.Right.GetLocation()));
             }
         }
 
-        private void RaiseOnArrayCovarianceInVariableDeclaration(SyntaxNodeAnalysisContext context)
+        private static void RaiseOnArrayCovarianceInVariableDeclaration(SyntaxNodeAnalysisContext context)
         {
             var variableDeclaration = (VariableDeclarationSyntax)context.Node;
             var typeBase = context.SemanticModel.GetTypeInfo(variableDeclaration.Type).Type;
 
-            foreach (var variable in variableDeclaration.Variables
-                .Where(syntax => syntax.Initializer != null))
+            foreach (var variable in variableDeclaration.Variables.Where(syntax => syntax.Initializer != null))
             {
                 var typeDerived = context.SemanticModel.GetTypeInfo(variable.Initializer.Value).Type;
 
                 if (AreCovariantArrayTypes(typeDerived, typeBase))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, variable.Initializer.Value.GetLocation()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, variable.Initializer.Value.GetLocation()));
                 }
             }
         }
 
-        private void RaiseOnArrayCovarianceInInvocationExpression(SyntaxNodeAnalysisContext context)
+        private static void RaiseOnArrayCovarianceInInvocationExpression(SyntaxNodeAnalysisContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
             var methodParameterLookup = new CSharpMethodParameterLookup(invocation, context.SemanticModel);
 
             foreach (var argument in invocation.ArgumentList.Arguments)
             {
-                if (!methodParameterLookup.TryGetSymbol(argument, out var parameter) ||
-                    parameter.IsParams)
+                if (!methodParameterLookup.TryGetSymbol(argument, out var parameter) || parameter.IsParams)
                 {
                     continue;
                 }
@@ -100,12 +90,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 var typeDerived = context.SemanticModel.GetTypeInfo(argument.Expression).Type;
                 if (AreCovariantArrayTypes(typeDerived, parameter.Type))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, argument.GetLocation()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, argument.GetLocation()));
                 }
             }
         }
 
-        private void RaiseOnArrayCovarianceInCastExpression(SyntaxNodeAnalysisContext context)
+        private static void RaiseOnArrayCovarianceInCastExpression(SyntaxNodeAnalysisContext context)
         {
             var castExpression = (CastExpressionSyntax)context.Node;
             var typeDerived = context.SemanticModel.GetTypeInfo(castExpression.Expression).Type;
@@ -113,25 +103,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (AreCovariantArrayTypes(typeDerived, typeBase))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, castExpression.Type.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, castExpression.Type.GetLocation()));
             }
         }
 
         private static bool AreCovariantArrayTypes(ITypeSymbol typeDerivedArray, ITypeSymbol typeBaseArray)
         {
-            if (typeDerivedArray == null ||
-                typeBaseArray == null ||
-                typeBaseArray.Kind != SymbolKind.ArrayType ||
-                typeDerivedArray.Kind != SymbolKind.ArrayType)
+            if (typeDerivedArray == null
+                || !(typeBaseArray is {Kind: SymbolKind.ArrayType})
+                || typeDerivedArray.Kind != SymbolKind.ArrayType)
             {
                 return false;
             }
 
-            var typeDerivedElement = ((IArrayTypeSymbol) typeDerivedArray).ElementType;
+            var typeDerivedElement = ((IArrayTypeSymbol)typeDerivedArray).ElementType;
             var typeBaseElement = ((IArrayTypeSymbol)typeBaseArray).ElementType;
 
-            return typeDerivedElement.BaseType != null &&
-                typeDerivedElement.BaseType.ConstructedFrom.DerivesFrom(typeBaseElement);
+            return typeDerivedElement.BaseType?.ConstructedFrom.DerivesFrom(typeBaseElement) == true;
         }
     }
 }
