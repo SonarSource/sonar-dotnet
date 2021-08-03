@@ -186,9 +186,8 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
         public override string ToString()
             => $"{(ComparisonKind == SymbolicComparisonKind.Less ? "<" : "<=")}({LeftOperand}, {RightOperand})";
 
-        public override bool Equals(object obj) => obj is null
-            ? false
-            : Equals(obj as ComparisonRelationship);
+        public override bool Equals(object obj) => 
+        	obj != null && Equals(obj as ComparisonRelationship);
 
         public bool Equals(ComparisonRelationship other) => other == null ||
                 ComparisonKind != other.ComparisonKind
