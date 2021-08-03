@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             : CSharpFacade.Instance.Syntax.ComparisonKind(binary).Mirror();
                         var expression = left is null ? binary.Left : binary.Right;
 
-                        if (comparison.Count(constant).EmptyOrNotEmpty()
+                        if (comparison.Compare(constant).EmptyOrNotEmpty()
                             && TryGetCountCall(expression, c.SemanticModel, out var location, out var typeArgument))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, typeArgument));

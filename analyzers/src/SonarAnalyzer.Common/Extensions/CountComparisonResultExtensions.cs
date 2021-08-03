@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Helpers
         public static bool EmptyOrNotEmpty(this CountComparisonResult comparison) =>
             comparison == CountComparisonResult.Empty || comparison == CountComparisonResult.NotEmpty;
 
-        public static CountComparisonResult Count(this ComparisonKind comparison, int count) =>
+        public static CountComparisonResult Compare(this ComparisonKind comparison, int count) =>
             comparison switch
             {
                 ComparisonKind.Equals => Equals(count),
