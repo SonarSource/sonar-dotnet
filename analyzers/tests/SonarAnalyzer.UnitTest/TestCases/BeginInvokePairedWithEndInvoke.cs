@@ -117,6 +117,13 @@ namespace Tests.Diagnostics
             caller.BeginInvoke("delegate",  callback, null); // Noncompliant
         }
 
+        private static void BeginInvokeAndEndInvokeOnDelegateWithNonExistingCallback()
+        {
+            var caller = new AsyncMethodCaller(AsyncMethod);
+            var callback = new AsyncCallback(Console.WriteLine);
+            caller.BeginInvoke("delegate",  callback, null); // Compliant
+        }
+
         private static void BeginInvokeOnAnyClassButDelegate()
         {
             var notADelegate = new AnyClassWithOptionalEndInvoke();

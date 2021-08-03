@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tests.Diagnostics
+namespace Net5.S4583
 {
     public partial class CallerWrapperAnotherFile
     {

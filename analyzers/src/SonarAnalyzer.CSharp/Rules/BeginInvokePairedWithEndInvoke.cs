@@ -93,8 +93,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 callback = objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().Expression : null;
                 if (callback != null && semanticModel.GetSymbolInfo(callback).Symbol is IMethodSymbol methodSymbol)
                 {
-                    callback = methodSymbol.PartialImplementationPart?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
-                        ?? methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+                    var declaration = methodSymbol.PartialImplementationPart?.DeclaringSyntaxReferences.FirstOrDefault() ?? methodSymbol.DeclaringSyntaxReferences.FirstOrDefault();
+                    callback = declaration?.GetSyntax();
                 }
             }
 
