@@ -22,7 +22,6 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
-using ComparisonKind = SonarAnalyzer.SymbolicExecution.SymbolicValues.ComparisonKind;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.SymbolicValues
 {
@@ -70,10 +69,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.SymbolicValues
 
         [TestMethod]
         public void ComparisonConstraint_ToString_Less() =>
-            new ComparisonSymbolicValue(ComparisonKind.Less, SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("<(SV_True, SV_False)");
+            new ComparisonSymbolicValue(SymbolicComparisonKind.Less, SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("<(SV_True, SV_False)");
 
         [TestMethod]
         public void ComparisonConstraint_ToString_LessOrEqual() =>
-            new ComparisonSymbolicValue(ComparisonKind.LessOrEqual, SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("<=(SV_True, SV_False)");
+            new ComparisonSymbolicValue(SymbolicComparisonKind.LessOrEqual, SymbolicValue.True, SymbolicValue.False).ToString().Should().Be("<=(SV_True, SV_False)");
     }
 }

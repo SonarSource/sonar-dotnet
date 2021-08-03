@@ -239,19 +239,19 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKind.LessThanExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.Less, l, r));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(SymbolicComparisonKind.Less, l, r));
                     break;
 
                 case SyntaxKind.LessThanOrEqualExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessOrEqual, l, r));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(SymbolicComparisonKind.LessOrEqual, l, r));
                     break;
 
                 case SyntaxKind.GreaterThanExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.Less, r, l));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(SymbolicComparisonKind.Less, r, l));
                     break;
 
                 case SyntaxKind.GreaterThanOrEqualExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessOrEqual, r, l));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(SymbolicComparisonKind.LessOrEqual, r, l));
                     break;
 
                 case SyntaxKind.SubtractExpression:
