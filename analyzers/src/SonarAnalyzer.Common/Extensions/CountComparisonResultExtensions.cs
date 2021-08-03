@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Helpers
 {
     public static class CountComparisonResultExtensions
     {
-        public static bool EmptyOrNotEmpty(this CountComparisonResult comparison) =>
+        public static bool IsEmptyOrNotEmpty(this CountComparisonResult comparison) =>
             comparison == CountComparisonResult.Empty || comparison == CountComparisonResult.NotEmpty;
 
         public static CountComparisonResult Compare(this ComparisonKind comparison, int count) =>
