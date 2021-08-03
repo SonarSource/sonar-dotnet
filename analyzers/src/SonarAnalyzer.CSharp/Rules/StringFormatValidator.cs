@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor BugRule = DiagnosticDescriptorBuilder.GetDescriptor(BugDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         private static readonly DiagnosticDescriptor CodeSmellRule = DiagnosticDescriptorBuilder.GetDescriptor(CodeSmellDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly ISet<MemberDescriptor> HandledFormatMethods = new HashSet<MemberDescriptor>
+        private static readonly HashSet<MemberDescriptor> HandledFormatMethods = new HashSet<MemberDescriptor>
         {
             new MemberDescriptor(KnownType.System_String, "Format"),
             new MemberDescriptor(KnownType.System_Console, "Write"),
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new MemberDescriptor(KnownType.System_Diagnostics_TraceSource, "TraceInformation")
         };
 
-        private static readonly ISet<ValidationFailure> BugRelatedFailures = new HashSet<ValidationFailure>
+        private static readonly HashSet<ValidationFailure> BugRelatedFailures = new HashSet<ValidationFailure>
         {
             ValidationFailure.UnknownError,
             ValidationFailure.NullFormatString,
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ValidationFailure.FormatItemAlignmentBiggerThanMaxValue
         };
 
-        private static readonly ISet<ValidationFailure> CodeSmellRelatedFailures = new HashSet<ValidationFailure>
+        private static readonly HashSet<ValidationFailure> CodeSmellRelatedFailures = new HashSet<ValidationFailure>
         {
             ValidationFailure.SimpleString,
             ValidationFailure.MissingFormatItemIndex,
