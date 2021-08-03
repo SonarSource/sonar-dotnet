@@ -49,7 +49,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected override void Initialize(SonarAnalysisContext context)
+        {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -64,9 +65,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     InitializationVerifierFactory.InstanceMemberInitializationVerifier.Report(c, declaration, members);
                     InitializationVerifierFactory.StaticMemberInitializationVerifier.Report(c, declaration, members);
                 },
+                // see details in https://github.com/SonarSource/sonar-dotnet/pull/4756
+                // it is difficult to work with instance record constructors w/o raising FPs
+                // also, this rule is covered by the C# Compiler for record instance members
                 SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKindEx.RecordDeclaration);
+                SyntaxKind.StructDeclaration);
+        }
 
         private static class InitializationVerifierFactory
         {
@@ -108,13 +112,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     PropertyFilter = property => property.Modifiers.Any(IsStatic),
                     IsSymbolFirstSetInInitializers = (fieldOrPropertySymbol, initializerDeclarations) =>
                         // there can be only one static constructor
-                        // all module initializers are executed when the type is created, so it is enough if one initializes the member
+                        // all module initializers are executed when the type is created, so it is enough if ANY initializes the member
                         initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(fieldOrPropertySymbol, x.Node, x.SemanticModel)),
                     DiagnosticMessage = StaticMemberMessage
                 };
 
-            private static bool IsStaticOrConst(SyntaxToken token) =>
-                token.IsKind(SyntaxKind.StaticKeyword) || token.IsKind(SyntaxKind.ConstKeyword);
+            private static bool IsStaticOrConst(SyntaxToken token) => token.IsKind(SyntaxKind.StaticKeyword) || token.IsKind(SyntaxKind.ConstKeyword);
 
             private static bool IsStatic(SyntaxToken token) => token.IsKind(SyntaxKind.StaticKeyword);
 
@@ -140,6 +143,10 @@ namespace SonarAnalyzer.Rules.CSharp
             public Func<IMethodSymbol, bool> InitializerFilter;
             public Func<BaseFieldDeclarationSyntax, bool> FieldFilter;
             public Func<PropertyDeclarationSyntax, bool> PropertyFilter;
+            // The first parameter is the symbol of a member of the type.
+            // The second parameter is a list with the type initializers - the syntax node of the constructors/method, its symbol and its semantic model
+            //
+            // Read the implementations in InitializationVerifierFactory.
             public Func<ISymbol, List<NodeSymbolAndSemanticModel<TInitializerDeclaration, IMethodSymbol>>, bool> IsSymbolFirstSetInInitializers;
             public string DiagnosticMessage;
 
