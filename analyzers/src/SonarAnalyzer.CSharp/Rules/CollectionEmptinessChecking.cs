@@ -48,8 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
-                    var left = ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out var l_out) ? (int?)l_out : null;
-                    var right = ExpressionNumericConverter.TryGetConstantIntValue(binary.Right, out var r_out) ? (int?)r_out : null;
+                    var left = TryGetExpressionValue(binary.Left);
+                    var right = left.HasValue ? null : TryGetExpressionValue(binary.Right);
 
                     if ((left ?? right) is int constant)
                     {
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             : CSharpFacade.Instance.Syntax.ComparisonKind(binary).Mirror();
                         var expression = left is null ? binary.Left : binary.Right;
 
-                        if (comparison.Compare(constant).EmptyOrNotEmpty()
+                        if (comparison.Compare(constant).IsEmptyOrNotEmpty()
                             && TryGetCountCall(expression, c.SemanticModel, out var location, out var typeArgument))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, typeArgument));
@@ -71,6 +71,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.LessThanOrEqualExpression,
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
+
+        private static int? TryGetExpressionValue(ExpressionSyntax expression) =>
+            ExpressionNumericConverter.TryGetConstantIntValue(expression, out var value)
+            ? (int?)value
+            : null;
 
         private static bool TryGetCountCall(ExpressionSyntax expression, SemanticModel semanticModel, out Location countLocation, out string typeArgument)
         {
