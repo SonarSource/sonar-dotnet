@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -48,11 +49,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ImmutableArray<KnownType> ComparableInterfaces =
             ImmutableArray.Create(
                 KnownType.System_IComparable,
-                KnownType.System_IComparable_T
-            );
-                
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+                KnownType.System_IComparable_T);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -94,7 +93,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration);
-        }
 
         private static IEnumerable<string> GetImplementedComparableInterfaces(INamedTypeSymbol classSymbol) =>
             classSymbol
@@ -103,14 +101,10 @@ namespace SonarAnalyzer.Rules.CSharp
             .Select(GetClassNameOnly)
             .ToList();
 
-        private static string GetClassNameOnly(INamedTypeSymbol typeSymbol)
-        {
-            var fullName = typeSymbol.OriginalDefinition.ToDisplayString();
-
-            return fullName
+        private static string GetClassNameOnly(INamedTypeSymbol typeSymbol) =>
+            typeSymbol.OriginalDefinition.ToDisplayString()
                 .Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
                 .Last();
-        }
 
         private static IEnumerable<string> GetMembersToOverride(IEnumerable<IMethodSymbol> methods)
         {

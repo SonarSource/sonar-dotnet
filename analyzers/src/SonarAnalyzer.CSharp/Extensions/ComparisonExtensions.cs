@@ -19,18 +19,22 @@
  */
 
 using System;
-namespace SonarAnalyzer.Helpers
+using SonarAnalyzer.Helpers;
+
+namespace SonarAnalyzer.Extensions
 {
     public static class ComparisonKindExtensions
     {
-        public static ComparisonKind Mirror(this ComparisonKind comparison) =>
-           comparison switch
-           {
-               ComparisonKind.GreaterThan => ComparisonKind.LessThan,
-               ComparisonKind.GreaterThanOrEqual => ComparisonKind.LessThanOrEqual,
-               ComparisonKind.LessThan => ComparisonKind.GreaterThan,
-               ComparisonKind.LessThanOrEqual => ComparisonKind.GreaterThanOrEqual,
-               _ => comparison,
-           };
+        public static string CSharp(this ComparisonKind kind) =>
+            kind switch
+            {
+                ComparisonKind.Equals => "==",
+                ComparisonKind.NotEquals => "!=",
+                ComparisonKind.LessThan => "<",
+                ComparisonKind.LessThanOrEqual => "<=",
+                ComparisonKind.GreaterThan => ">",
+                ComparisonKind.GreaterThanOrEqual => ">=",
+                _ => throw new InvalidOperationException(),
+            };
     }
 }

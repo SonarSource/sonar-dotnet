@@ -18,19 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using Microsoft.CodeAnalysis;
+using Comparison = SonarAnalyzer.Helpers.ComparisonKind;
+
 namespace SonarAnalyzer.Helpers
 {
-    public static class ComparisonKindExtensions
+    public static class MethodSymbolExtensions
     {
-        public static ComparisonKind Mirror(this ComparisonKind comparison) =>
-           comparison switch
-           {
-               ComparisonKind.GreaterThan => ComparisonKind.LessThan,
-               ComparisonKind.GreaterThanOrEqual => ComparisonKind.LessThanOrEqual,
-               ComparisonKind.LessThan => ComparisonKind.GreaterThan,
-               ComparisonKind.LessThanOrEqual => ComparisonKind.GreaterThanOrEqual,
-               _ => comparison,
-           };
+        public static Comparison ComparisonKind(this IMethodSymbol method) =>
+            method?.Name switch
+            {
+                "op_Equality" => Comparison.Equals,
+                "op_Inequality" => Comparison.NotEquals,
+                "op_LessThan" => Comparison.LessThan,
+                "op_LessThanOrEqual" => Comparison.LessThanOrEqual,
+                "op_GreaterThan" => Comparison.GreaterThan,
+                "op_GreaterThanOrEqual" => Comparison.GreaterThanOrEqual,
+                _ => Comparison.None,
+            };
     }
 }
