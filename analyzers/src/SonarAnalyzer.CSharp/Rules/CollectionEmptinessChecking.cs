@@ -79,6 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var invocation = expression as InvocationExpressionSyntax;
 
             if ((invocation?.Expression is MemberAccessExpressionSyntax memberAccess)
+				&& memberAccess.Name.Identifier.ValueText == nameof(Enumerable.Count)
                 && (semanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol methodSymbol)
                 && IsMethodCountExtension(methodSymbol)
                 && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
