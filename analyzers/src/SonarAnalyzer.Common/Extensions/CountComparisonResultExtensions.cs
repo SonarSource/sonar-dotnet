@@ -30,13 +30,10 @@ namespace SonarAnalyzer.Helpers
             {
                 ComparisonKind.Equals => Equals(count),
                 ComparisonKind.NotEquals => NotEquals(count),
-
                 ComparisonKind.GreaterThanOrEqual => GreaterThanOrEqual(count),
                 ComparisonKind.GreaterThan => GreaterThan(count),
-
                 ComparisonKind.LessThan => LessThan(count),
                 ComparisonKind.LessThanOrEqual => LessThanOrEqual(count),
-
                 _ => CountComparisonResult.None,
             };
 
