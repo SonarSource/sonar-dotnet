@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 yield return new NodeTypePair(conditionalExpression.WhenTrue, semanticModel);
                 yield return new NodeTypePair(conditionalExpression.WhenFalse, semanticModel);
             }
-            else if (syntax.IsKind(SyntaxKindEx.CoalesceExpression))
+            else if (syntax.IsKind(SyntaxKind.CoalesceExpression))
             {
                 var binaryExpression = (BinaryExpressionSyntax)syntax;
                 yield return new NodeTypePair(binaryExpression.Left, semanticModel);
