@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename record 'S3604_Record' to match pascal case naming rules, consider using 'S3604Record'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3604.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  19,
+"endLine":  22,
+"endColumn":  31
+}
+}
+}
+]
+}

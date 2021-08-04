@@ -41,6 +41,45 @@
 },
 {
 "id":  "S4487",
+"message":  "Remove this unread private field 'foo' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3604.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  20,
+"endLine":  7,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'bar' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3604.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  20,
+"endLine":  8,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'foo' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3604.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  16,
+"endLine":  24,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4487",
 "message":  "Remove this unread private field 'field' or refactor the code to use its value.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3776.cs",
