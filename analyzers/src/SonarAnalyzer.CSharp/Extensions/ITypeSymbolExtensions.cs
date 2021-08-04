@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Extensions
         internal static bool IsRefStruct(this ITypeSymbol symbol) =>
             symbol != null &&
             symbol.IsStruct() &&
-            symbol.DeclaringSyntaxReferences.Length == 1 &&
+            symbol.DeclaringSyntaxReferences.Length > 0 &&
             symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration &&
             structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
     }

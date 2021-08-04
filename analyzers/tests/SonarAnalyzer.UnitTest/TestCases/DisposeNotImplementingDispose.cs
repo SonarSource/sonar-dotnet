@@ -120,13 +120,13 @@ namespace Tests.Diagnostics
         }
     }
 
-    public partial class MyPartial // FN, partial classes are not processed, see https://github.com/dotnet/roslyn/issues/3748
+    public partial class MyPartial
     {
     }
 
     public partial class MyPartial
     {
-        void Dispose() { }
+        void Dispose() { }  // Noncompliant
     }
 
     public ref struct RefStruct
