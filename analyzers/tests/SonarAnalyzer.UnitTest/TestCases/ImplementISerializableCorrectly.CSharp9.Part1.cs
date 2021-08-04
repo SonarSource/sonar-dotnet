@@ -270,4 +270,13 @@ namespace Tests.Diagnostics.PartialMethods
         public override partial void GetObjectData(SerializationInfo info, StreamingContext context) =>
             base.GetObjectData(info, context);
     }
+
+    [Serializable]
+    public partial class Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class : SerializableClass
+//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant [3] {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
+    {
+        public Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class() { }
+        protected Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        public override partial void GetObjectData(SerializationInfo info, StreamingContext context); // Secondary [3] {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
+    }
 }
