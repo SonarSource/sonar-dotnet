@@ -34,32 +34,29 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ParameterValidationInAsyncShouldBeWrapped : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4457";
-        private const string MessageFormat = "Split this method into two, one handling parameters check and the other " +
-           "handling the asynchronous code.";
+        private const string DiagnosticId = "S4457";
+        private const string MessageFormat = "Split this method into two, one handling parameters check and the other handling the asynchronous code.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    if (!methodDeclaration.Modifiers.Any(SyntaxKind.AsyncKeyword)
-                        || methodDeclaration.ReturnType.ToString() == "void")
+                    var method = (MethodDeclarationSyntax)c.Node;
+                    if (!method.Modifiers.Any(SyntaxKind.AsyncKeyword)
+                        || method.ReturnType.ToString() == "void"
+                        || (method.Identifier.ValueText == "Main" && c.SemanticModel.GetDeclaredSymbol(method).IsMainMethod()))
                     {
                         return;
                     }
 
                     var walker = new ParameterValidationInMethodWalker(c.SemanticModel);
-                    walker.SafeVisit(methodDeclaration);
-
+                    walker.SafeVisit(method);
                     if (walker.ArgumentExceptionLocations.Any())
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                            additionalLocations: walker.ArgumentExceptionLocations));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, method.Identifier.GetLocation(), walker.ArgumentExceptionLocations));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
