@@ -126,7 +126,7 @@ namespace Tests.Diagnostics
         }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/4702
-        private static async Task Main(string[] args)   // Ccompliant, should not raise on Main
+        private static async Task Main(string[] args)   // Compliant, should not raise on Main
         {
             if (args.Length == 0)
             {
