@@ -124,7 +124,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var currentType in type.GetSelfAndBaseTypes().TakeWhile(tp => !tp.Is(KnownType.System_Object)))
             {
-                candidateEqualsMethods.UnionWith(currentType.GetMembers(EqualsName)
+                candidateEqualsMethods.UnionWith(currentType
+                    .GetMembers(EqualsName)
                     .OfType<IMethodSymbol>()
                     .Where(method => method.IsOverride && method.OverriddenMethod != null));
             }
