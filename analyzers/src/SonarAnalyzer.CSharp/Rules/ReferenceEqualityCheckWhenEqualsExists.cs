@@ -120,11 +120,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<IMethodSymbol> GetEqualsOverrides(ITypeSymbol type)
         {
-            if (type == null)
-            {
-                return Enumerable.Empty<IMethodSymbol>();
-            }
-
             var candidateEqualsMethods = new HashSet<IMethodSymbol>();
 
             foreach (var currentType in type.GetSelfAndBaseTypes().TakeWhile(tp => !tp.Is(KnownType.System_Object)))
@@ -147,7 +142,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     return true;
                 }
-
                 currentMethod = currentMethod.OverriddenMethod;
             }
             return false;
