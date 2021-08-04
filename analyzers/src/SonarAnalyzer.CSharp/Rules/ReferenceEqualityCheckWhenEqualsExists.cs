@@ -101,8 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
             || HasTypeConstraintsWhichMightOverrideEquals(type, allInterfacesWithImplementationsOverriddenEquals);
 
         private static bool HasTypeConstraintsWhichMightOverrideEquals(ITypeSymbol type, ISet<INamedTypeSymbol> allInterfacesWithImplementationsOverriddenEquals) =>
-            type.TypeKind == TypeKind.TypeParameter
-            && type is ITypeParameterSymbol typeParameter
+            type is ITypeParameterSymbol typeParameter
             && typeParameter.ConstraintTypes.Any(x => MightOverrideEquals(x, allInterfacesWithImplementationsOverriddenEquals));
 
         private static bool IsAllowedType(ITypeSymbol type) =>
