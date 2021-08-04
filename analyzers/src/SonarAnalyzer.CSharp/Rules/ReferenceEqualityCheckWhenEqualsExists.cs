@@ -77,10 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             var typeLeft = c.SemanticModel.GetTypeInfo(binary.Left).Type;
                             var typeRight = c.SemanticModel.GetTypeInfo(binary.Right).Type;
-                            if (typeLeft == null ||
-                                typeRight == null ||
-                                IsAllowedType(typeLeft) ||
-                                IsAllowedType(typeRight))
+                            if (IsAllowedTypeOrNull(typeLeft) || IsAllowedTypeOrNull(typeRight))
                             {
                                 return;
                             }
@@ -104,8 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
             type is ITypeParameterSymbol typeParameter
             && typeParameter.ConstraintTypes.Any(x => MightOverrideEquals(x, allInterfacesWithImplementationsOverriddenEquals));
 
-        private static bool IsAllowedType(ITypeSymbol type) =>
-            type.IsAny(AllowedTypes) || HasAllowedBaseType(type);
+        private static bool IsAllowedTypeOrNull(ITypeSymbol type) =>
+            type is null || type.IsAny(AllowedTypes) || HasAllowedBaseType(type);
 
         private static bool HasAllowedBaseType(ITypeSymbol type) =>
             type.GetSelfAndBaseTypes().Any(t => t.IsAny(AllowedTypesWithAllDerived));
