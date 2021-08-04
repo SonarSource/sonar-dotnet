@@ -32,6 +32,102 @@
 }
 }
 ]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S2952.Part1.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  26,
+"endLine":  19,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Net5\Net5\S2952.Part1.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  26,
+"endLine":  19,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S2952.Part1.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  26,
+"endLine":  28,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Net5\Net5\S2952.Part1.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  26,
+"endLine":  28,
+"endColumn":  41
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S2952.Part1.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  26,
+"endLine":  6,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Net5\Net5\S2952.Part1.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  26,
+"endLine":  6,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S2952.Part2.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  26,
+"endLine":  6,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Net5\Net5\S2952.Part2.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  26,
+"endLine":  6,
+"endColumn":  41
+}
+}
+]
 }
 ]
 }

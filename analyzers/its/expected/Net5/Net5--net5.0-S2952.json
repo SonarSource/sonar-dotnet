@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2952",
+"message":  "Move this 'Dispose' call into this class' own 'Dispose' method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2952.Part1.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  21,
+"endLine":  22,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2952",
+"message":  "Move this 'Dispose' call into this class' own 'Dispose' method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2952.Part1.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  21,
+"endLine":  31,
+"endColumn":  28
+}
+}
+}
+]
+}
