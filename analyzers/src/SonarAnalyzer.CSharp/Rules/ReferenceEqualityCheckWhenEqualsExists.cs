@@ -103,9 +103,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool HasTypeConstraintsWhichMightOverrideEquals(ITypeSymbol type, ISet<INamedTypeSymbol> allInterfacesWithImplementationsOverriddenEquals) =>
             type.TypeKind == TypeKind.TypeParameter
             && type is ITypeParameterSymbol typeParameter
-            && typeParameter.ConstraintTypes.Any(t => MightOverrideEquals(t, allInterfacesWithImplementationsOverriddenEquals));
+            && typeParameter.ConstraintTypes.Any(x => MightOverrideEquals(x, allInterfacesWithImplementationsOverriddenEquals));
 
-        private static bool IsAllowedType(ITypeSymbol type) => type.IsAny(AllowedTypes) || HasAllowedBaseType(type);
+        private static bool IsAllowedType(ITypeSymbol type) => 
+            type.IsAny(AllowedTypes) || HasAllowedBaseType(type);
 
         private static bool HasAllowedBaseType(ITypeSymbol type) =>
             type.GetSelfAndBaseTypes().Any(t => t.IsAny(AllowedTypesWithAllDerived));
@@ -116,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && !IsInEqualsOverride(semanticModel.GetEnclosingSymbol(binary.SpanStart) as IMethodSymbol);
 
         private static bool HasEqualsOverride(ITypeSymbol type) =>
-            GetEqualsOverrides(type).Any(m => m.OverriddenMethod.IsInType(KnownType.System_Object));
+            GetEqualsOverrides(type).Any(x => x.OverriddenMethod.IsInType(KnownType.System_Object));
 
         private static IEnumerable<IMethodSymbol> GetEqualsOverrides(ITypeSymbol type)
         {
