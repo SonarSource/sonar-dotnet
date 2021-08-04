@@ -36,33 +36,26 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S1155";
         private const string MessageFormat = "Use '.Any()' to test whether this 'IEnumerable<{0}>' is empty or not.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
-                    var left = TryGetExpressionValue(binary.Left);
-                    var right = left.HasValue ? null : TryGetExpressionValue(binary.Right);
 
-                    if ((left ?? right) is int constant)
+                    if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out var left))
                     {
-                        var comparison = left is null
-                            ? CSharpFacade.Instance.Syntax.ComparisonKind(binary)
-                            : CSharpFacade.Instance.Syntax.ComparisonKind(binary).Mirror();
-                        var expression = left is null ? binary.Left : binary.Right;
-
-                        if (comparison.Compare(constant).IsEmptyOrNotEmpty()
-                            && TryGetCountCall(expression, c.SemanticModel, out var location, out var typeArgument))
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, typeArgument));
-                        }
+                        CheckExpression(c, binary.Right, left, CSharpFacade.Instance.Syntax.ComparisonKind(binary).Mirror());
+                    }
+                    else if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Right, out var right))
+                    {
+                        CheckExpression(c, binary.Left, right, CSharpFacade.Instance.Syntax.ComparisonKind(binary));
                     }
                 },
                 SyntaxKind.GreaterThanExpression,
@@ -72,10 +65,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
 
-        private static int? TryGetExpressionValue(ExpressionSyntax expression) =>
-            ExpressionNumericConverter.TryGetConstantIntValue(expression, out var value)
-            ? (int?)value
-            : null;
+        private static void CheckExpression(
+            SyntaxNodeAnalysisContext context,
+            ExpressionSyntax expression,
+            int constant,
+            ComparisonKind comparison)
+        {
+            if (comparison.Compare(constant).IsEmptyOrNotEmpty()
+                && TryGetCountCall(expression, context.SemanticModel, out var location, out var typeArgument))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, typeArgument));
+            }
+        }
 
         private static bool TryGetCountCall(ExpressionSyntax expression, SemanticModel semanticModel, out Location countLocation, out string typeArgument)
         {
