@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && type is ITypeParameterSymbol typeParameter
             && typeParameter.ConstraintTypes.Any(x => MightOverrideEquals(x, allInterfacesWithImplementationsOverriddenEquals));
 
-        private static bool IsAllowedType(ITypeSymbol type) => 
+        private static bool IsAllowedType(ITypeSymbol type) =>
             type.IsAny(AllowedTypes) || HasAllowedBaseType(type);
 
         private static bool HasAllowedBaseType(ITypeSymbol type) =>
