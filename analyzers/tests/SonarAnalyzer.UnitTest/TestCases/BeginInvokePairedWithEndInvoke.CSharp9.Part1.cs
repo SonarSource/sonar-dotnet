@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
 
     class Program
     {
-        private static void BeginInvokeOnDelegateWithLambdaCallback_DiscardParam()
+        private static void BeginInvokeOnDelegateWithLambdaCallback_UnderscoreParam()
         {
             var caller = new AsyncMethodCaller(AsyncMethod);
             // here the "_" is actually an identifier, not a discard parameter
