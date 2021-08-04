@@ -22,6 +22,7 @@ extern alias csharp;
 extern alias vbnet;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
@@ -31,6 +32,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using SonarAnalyzer.Utilities;
 
@@ -112,6 +114,42 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>($"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
             }
+        }
+
+        [TestMethod]
+        public void Verify_ConcurrentExecutionDisabledByDefault()
+        {
+            var reader = new ConcurrentExecutionReader();
+            reader.IsConcurrentExecutionEnabled.Should().BeNull();
+            Verifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
+            reader.IsConcurrentExecutionEnabled.Should().BeFalse();
+        }
+
+        [DataTestMethod]
+        [DataRow("true")]
+        [DataRow("tRUE")]
+        public void Verify_ConcurrentExecutionIsExplicitlyEnabled(string value)
+        {
+            using var scope = new EnvironmentVariableScope(false);
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value);
+            var reader = new ConcurrentExecutionReader();
+            reader.IsConcurrentExecutionEnabled.Should().BeNull();
+            Verifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
+            reader.IsConcurrentExecutionEnabled.Should().BeTrue();
+        }
+
+        [TestMethod]
+        [DataRow("false")]
+        [DataRow("fALSE")]
+        [DataRow("loremipsum")]
+        public void Verify_ConcurrentExecutionIsExplicitlyDisabled(string value)
+        {
+            using var scope = new EnvironmentVariableScope(false);
+            scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value);
+            var reader = new ConcurrentExecutionReader();
+            reader.IsConcurrentExecutionEnabled.Should().BeNull();
+            Verifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
+            reader.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 
         [TestMethod]
@@ -278,6 +316,18 @@ namespace SonarAnalyzer.UnitTest.Common
                     throw new InvalidOperationException($"{nameof(AllCSharpRules_HaveCSharpTag)} or {nameof(AllVbNetRules_HaveVbNetTag)} should fail, fix them first.");
                 }
             }
+        }
+
+        [DiagnosticAnalyzer(LanguageNames.CSharp)]
+        private class ConcurrentExecutionReader : SonarDiagnosticAnalyzer
+        {
+            private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor("S9999", "Rule test");
+
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+            public bool? IsConcurrentExecutionEnabled { get; private set; }
+
+            protected override void Initialize(SonarAnalysisContext context) =>
+                IsConcurrentExecutionEnabled = EnableConcurrentExecution;
         }
     }
 }

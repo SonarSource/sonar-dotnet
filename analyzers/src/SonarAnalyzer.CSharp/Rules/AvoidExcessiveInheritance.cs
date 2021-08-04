@@ -70,6 +70,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
+        // See https://github.com/SonarSource/sonar-dotnet/issues/4745
+        protected override bool EnableConcurrentExecution => false;
+
         protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

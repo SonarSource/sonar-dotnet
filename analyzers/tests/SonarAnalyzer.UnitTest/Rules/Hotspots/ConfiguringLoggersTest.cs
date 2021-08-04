@@ -86,7 +86,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ConfiguringLoggers_AspNetCore_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
                                     new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                                     AspNetCoreLoggingReferences);
 

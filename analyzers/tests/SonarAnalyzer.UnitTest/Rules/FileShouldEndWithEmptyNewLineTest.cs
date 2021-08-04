@@ -29,17 +29,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void FileShouldEndWithEmptyNewLine_EmptyLine() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FileShouldEndWithEmptyNewLine_EmptyLine.cs", new FileShouldEndWithEmptyNewLine());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void FileShouldEndWithEmptyNewLine_NoEmptyLine() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FileShouldEndWithEmptyNewLine_NoEmptyLine.cs", new FileShouldEndWithEmptyNewLine());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void FileShouldEndWithEmptyNewLine_EmptyFile() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FileShouldEndWithEmptyNewLine_EmptyFile.cs", new FileShouldEndWithEmptyNewLine());
+        public void FileShouldEndWithEmptyNewLine() =>
+            Verifier.VerifyAnalyzer(new[]
+                {
+                    @"TestCases\FileShouldEndWithEmptyNewLine_EmptyLine.cs",
+                    @"TestCases\FileShouldEndWithEmptyNewLine_NoEmptyLine.cs",
+                    @"TestCases\FileShouldEndWithEmptyNewLine_EmptyFile.cs"
+                },
+                new FileShouldEndWithEmptyNewLine());
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tests.Diagnostics
+namespace NoEmptyLine
 {
     class Program
     {

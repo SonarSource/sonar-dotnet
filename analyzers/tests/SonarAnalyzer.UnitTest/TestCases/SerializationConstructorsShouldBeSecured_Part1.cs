@@ -5,34 +5,6 @@ using System.Security.Permissions;
 [assembly: System.Security.AllowPartiallyTrustedCallers()]
 namespace MyLibrary
 {
-
-    // Noncompliant - in Part2.cs
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     [Serializable]
     public partial class PartialFoo : ISerializable
     {

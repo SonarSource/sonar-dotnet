@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
                                     new SqlKeywordsDelimitedBySpace(),
                                     GetAdditionalReferences());
 

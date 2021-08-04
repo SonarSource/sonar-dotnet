@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SingleStatementPerLine_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.vb", new VB.SingleStatementPerLine());
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\SingleStatementPerLine.vb", @"TestCases\SingleStatementPerLine2.vb", }, new VB.SingleStatementPerLine());
     }
 }

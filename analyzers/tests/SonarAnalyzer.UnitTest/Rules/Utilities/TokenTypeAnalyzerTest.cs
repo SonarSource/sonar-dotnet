@@ -132,7 +132,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")
                 ? new TestTokenTypeAnalyzer_CS(testRoot, projectType == ProjectType.Test)
                 : new TestTokenTypeAnalyzer_VB(testRoot, projectType == ProjectType.Test);
-            Verifier.VerifyUtilityAnalyzer<TokenTypeInfo>(
+            Verifier.VerifyNonConcurrentUtilityAnalyzer<TokenTypeInfo>(
                 new[] { Root + fileName },
                 analyzer,
                 @$"{testRoot}\token-type.pb",

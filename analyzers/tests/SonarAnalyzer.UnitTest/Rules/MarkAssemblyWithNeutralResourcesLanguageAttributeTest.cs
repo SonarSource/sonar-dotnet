@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -44,14 +42,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_NoResx_HasAttribute_Compliant() =>
-            Verifier.VerifyAnalyzer(
+            Verifier.VerifyNonConcurrentAnalyzer(
                 @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
                 new MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasInvalidAttribute_Noncompliant() =>
-            Verifier.VerifyAnalyzer(
+            Verifier.VerifyNonConcurrentAnalyzer(
                 new[]
                 {
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.Invalid.cs",
@@ -61,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_NoAttribute_Noncompliant() =>
-            Verifier.VerifyAnalyzer(
+            Verifier.VerifyNonConcurrentAnalyzer(
                 new[]
                 {
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs",

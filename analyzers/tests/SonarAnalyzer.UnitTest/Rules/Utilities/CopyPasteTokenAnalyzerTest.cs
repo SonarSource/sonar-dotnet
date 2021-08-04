@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ? new TestCopyPasteTokenAnalyzer_CS(testRoot, false)
                 : new TestCopyPasteTokenAnalyzer_VB(testRoot, false);
 
-            Verifier.VerifyUtilityAnalyzer<CopyPasteTokenInfo>(
+            Verifier.VerifyNonConcurrentUtilityAnalyzer<CopyPasteTokenInfo>(
                 new[] { Root + fileName },
                 analyzer,
                 @$"{testRoot}\token-cpd.pb",

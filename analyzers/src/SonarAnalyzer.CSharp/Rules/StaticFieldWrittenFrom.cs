@@ -31,6 +31,8 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class StaticFieldWrittenFrom : SonarDiagnosticAnalyzer
     {
+        protected override bool EnableConcurrentExecution => false;
+
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(

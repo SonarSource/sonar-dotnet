@@ -189,7 +189,7 @@ $@"namespace PartiallyGenerated
                .AddSnippet(content, "Foo.cs")
                .GetCompilation();
 
-            DiagnosticVerifier.Verify(compilation, new CS.EmptyStatement(), CompilationErrorBehavior.FailTest, compilation.SyntaxTrees.First().GetText());
+            DiagnosticVerifier.Verify(compilation, new CS.EmptyStatement(), CompilationErrorBehavior.FailTest, compilation.SyntaxTrees.First());
         }
 
         [TestMethod]

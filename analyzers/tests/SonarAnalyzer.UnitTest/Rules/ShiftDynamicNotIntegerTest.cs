@@ -43,6 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ShiftDynamicNotInteger_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.vb", new VB.ShiftDynamicNotInteger());
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\ShiftDynamicNotInteger.vb", @"TestCases\ShiftDynamicNotInteger2.vb" }, new VB.ShiftDynamicNotInteger());
     }
 }

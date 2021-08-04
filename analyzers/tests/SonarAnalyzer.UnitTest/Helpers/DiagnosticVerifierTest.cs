@@ -242,10 +242,31 @@ public class ExpectedIssuesNotRaised
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<AssertFailedException>().WithMessage(
-                @"CSharp*: Issue(s) expected but not raised on line(s):" + Environment.NewLine +
+                @"CSharp*: Issue(s) expected but not raised in file(s):" + Environment.NewLine +
+                "File: snippet1.cs" + Environment.NewLine +
                 "Line: 4, Type: primary, Id: 'MyId0'" + Environment.NewLine +
                 "Line: 6, Type: primary, Id: ''" + Environment.NewLine +
                 "Line: 7, Type: secondary, Id: 'MyId1'");
+        }
+
+        [TestMethod]
+        public void ExpectedIssuesNotRaised_MultipleFiles()
+        {
+            Action action =
+                () => Verifier.VerifyNonConcurrentAnalyzer(new[] { @"TestCases\DiagnosticsVerifier\ExpectedIssuesNotRaised.cs", @"TestCases\DiagnosticsVerifier\ExpectedIssuesNotRaised2.cs" },
+                    new BinaryOperationWithIdenticalExpressions());
+
+            action.Should().Throw<AssertFailedException>().WithMessage(
+                @"CSharp*: Issue(s) expected but not raised in file(s):" + Environment.NewLine +
+                "File: ExpectedIssuesNotRaised.cs" + Environment.NewLine +
+                "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
+                "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
+                "Line: 6, Type: secondary, Id: 'MyId1'" + Environment.NewLine +
+                Environment.NewLine +
+                "File: ExpectedIssuesNotRaised2.cs" + Environment.NewLine +
+                "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
+                "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
+                "Line: 6, Type: secondary, Id: 'MyId1'");
         }
     }
 }
