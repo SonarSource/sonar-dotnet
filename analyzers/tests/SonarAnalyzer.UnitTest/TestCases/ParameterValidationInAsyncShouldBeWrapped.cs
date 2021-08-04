@@ -124,5 +124,14 @@ namespace Tests.Diagnostics
 
             await Task.Delay(0);
         }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/4702
+        private static async Task Main(string[] args)   // Noncompliant FP, should not raise on Main
+        {
+            if (args.Length == 0)
+            {
+                throw new ArgumentException(nameof(args));  // Secondary
+            }
+        }
     }
 }
