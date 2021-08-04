@@ -65,11 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
 
-        private static void CheckExpression(
-            SyntaxNodeAnalysisContext context,
-            ExpressionSyntax expression,
-            int constant,
-            ComparisonKind comparison)
+        private static void CheckExpression(SyntaxNodeAnalysisContext context, ExpressionSyntax expression, int constant, ComparisonKind comparison)
         {
             if (comparison.Compare(constant).IsEmptyOrNotEmpty()
                 && TryGetCountCall(expression, context.SemanticModel, out var location, out var typeArgument))
