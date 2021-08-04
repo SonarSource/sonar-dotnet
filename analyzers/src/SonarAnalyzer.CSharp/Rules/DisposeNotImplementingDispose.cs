@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var declaredSymbol = (INamedTypeSymbol)c.Symbol;
 
-                    // And ref structs cannot inherit from the IDisposable interface
+                    // ref structs cannot inherit from the IDisposable interface
                     if (declaredSymbol.IsRefStruct())
                     {
                         return;
@@ -73,9 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var disposeMethodsCalledFromDispose = new HashSet<IMethodSymbol>();
                     CollectInvocationsFromDisposeImplementation(disposeMethod, c.Compilation, mightImplementDispose, disposeMethodsCalledFromDispose);
 
-                    ReportDisposeMethods(
-                        namedDispose.Except(mightImplementDispose).Where(m => !disposeMethodsCalledFromDispose.Contains(m)),
-                        c);
+                    ReportDisposeMethods(namedDispose.Except(mightImplementDispose).Where(m => !disposeMethodsCalledFromDispose.Contains(m)), c);
                 },
                 SymbolKind.NamedType);
 
@@ -99,8 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var invocations = methodDeclaration.Node.DescendantNodes().OfType<InvocationExpressionSyntax>();
                 foreach (var invocation in invocations)
                 {
-                    CollectDisposeMethodsCalledFromDispose(invocation, methodDeclaration.SemanticModel,
-                        disposeMethodsCalledFromDispose);
+                    CollectDisposeMethodsCalledFromDispose(invocation, methodDeclaration.SemanticModel, disposeMethodsCalledFromDispose);
                 }
             }
         }
@@ -114,8 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!(semanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol invokedMethod) ||
-                invokedMethod.Name != DisposeMethodName)
+            if (!(semanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol invokedMethod) || invokedMethod.Name != DisposeMethodName)
             {
                 return;
             }
@@ -147,9 +143,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             namedDispose.Add(methodSymbol);
 
-            if (methodSymbol.IsOverride ||
-                MethodIsDisposeImplementation(methodSymbol, disposeMethod) ||
-                MethodMightImplementDispose(methodSymbol))
+            if (methodSymbol.IsOverride
+                || MethodIsDisposeImplementation(methodSymbol, disposeMethod)
+                || MethodMightImplementDispose(methodSymbol))
             {
                 mightImplementDispose.Add(methodSymbol);
             }
@@ -162,7 +158,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var containingType = declaredMethodSymbol.ContainingType;
 
-            if (containingType.BaseType != null && containingType.BaseType.Kind == SymbolKind.ErrorType)
+            if (containingType.BaseType is { Kind: SymbolKind.ErrorType })
             {
                 return true;
             }
