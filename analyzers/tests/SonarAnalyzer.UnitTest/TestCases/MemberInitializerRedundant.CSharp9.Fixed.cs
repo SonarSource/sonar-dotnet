@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 
 class Person
 {
+    const int forCoverage = 0;
     static int minAge = 0;
     static int Bar { get; set; } = 1;
     static event EventHandler Quix = (a, b) => { };
@@ -13,6 +14,8 @@ class Person
     static bool Nice; // Fixed
     static int Foo { get; set; } // Fixed
     static event EventHandler Taz; // Fixed
+
+    public Person() { } // for coverage
 
     [ModuleInitializer]
     internal static void Initialize()
