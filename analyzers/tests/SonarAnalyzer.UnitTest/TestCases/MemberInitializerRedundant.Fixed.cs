@@ -261,4 +261,16 @@ namespace Tests.Diagnostics
             baz = 0;
         }
     }
+
+    struct Struct1
+    {
+        // structs cannot initialize instance fields/properties at declaration, only const
+        const int a = 42;
+        static int b; // Fixed
+        static int b2 = 2;
+
+        static Struct1() => b = 1;
+    }
+    class EmptyClassForCoverage { }
+    struct EmptyStructForCoverage { }
 }

@@ -42,7 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new MemberInitializedToDefaultCodeFixProvider());
 
 #if NET
-
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberInitializerRedundant_CSharp9() =>
@@ -57,8 +56,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new MemberInitializerRedundant(),
                 new MemberInitializedToDefaultCodeFixProvider(),
                 ParseOptionsHelper.FromCSharp9);
-
 #endif
-
     }
 }

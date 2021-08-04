@@ -64,8 +64,8 @@ class Person
 record Foo
 {
     static int foo = 1; // FN
-    int bar = 42; // FN, reported by the C# compiler
-    int fred { get; init; } = 42; // FN, reported by the C# compiler
+    int bar = 42; // FN
+    int fred { get; init; } = 42; // FN
     int quix = 9; // ok, not initialized in all constructors
     const int barney = 1;
 
@@ -117,3 +117,26 @@ public record StaticRecord
 }
 
 record EmptyRecordForCoverage { }
+
+struct Struct1
+{
+    static int b = 1; // Noncompliant
+    static int b2 = 2;
+
+    [ModuleInitializer]
+    internal static void Initialize() => b = 42;
+}
+
+interface SomeInterface
+{
+    static int Field = 1; // Noncompliant
+    static int Field2 = 2;
+    static event EventHandler Taz = (a, b) => { }; // Noncompliant
+
+    [ModuleInitializer]
+    internal static void Initialize()
+    {
+        Field = 2;
+        Taz = (a, b) => { };
+    }
+}
