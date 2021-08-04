@@ -275,6 +275,19 @@
 },
 {
 "id":  "S2325",
+"message":  "Make 'TestCases' a static method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2330.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  21,
+"endLine":  9,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2437.cs",

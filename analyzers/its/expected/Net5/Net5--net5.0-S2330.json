@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2330",
+"message":  "Refactor the code to not rely on potentially unsafe array conversions.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2330.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  19,
+"endLine":  12,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2330",
+"message":  "Refactor the code to not rely on potentially unsafe array conversions.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2330.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  19,
+"endLine":  13,
+"endColumn":  32
+}
+}
+}
+]
+}
