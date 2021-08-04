@@ -32,7 +32,7 @@ public ref partial struct DisposableRefStruct1
 {
     private FileStream fs;
     public void OpenResource(string path) => this.fs = new FileStream(path, FileMode.Open);
-    public void CleanUp() => this.fs.Dispose(); // FN
+    public void CleanUp() => this.fs.Dispose(); // Noncompliant
 
     public partial void Dispose();
 }
@@ -46,7 +46,7 @@ public ref partial struct DisposableRefStruct2
 {
     private FileStream fs;
     public void OpenResource(string path) => this.fs = new FileStream(path, FileMode.Open);
-    public void CleanUp() => this.fs.Dispose();
+    public void CleanUp() => this.fs.Dispose(); // Noncompliant
     public partial void Dispose();
 }
 
