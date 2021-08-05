@@ -47,7 +47,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var property = (PropertyStatementSyntax)c.Node;
                     if (property.ImplementsClause is null
                         && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.OverridesKeyword))
-                        && c.SemanticModel.GetDeclaredSymbol(property) is { } symbol
+                        && c.SemanticModel.GetDeclaredSymbol(property) is IPropertySymbol symbol
+                        && !symbol.IsAutoProperty()
                         && symbol.Type is IArrayTypeSymbol)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, property.Identifier.GetLocation(), symbol.Name));

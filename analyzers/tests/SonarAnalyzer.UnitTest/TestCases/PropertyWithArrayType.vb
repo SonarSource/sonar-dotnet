@@ -3,7 +3,7 @@
     ' Internal state
     Dim Array = {"apple", "banana", "orange", "pineapple", "strawberry"}
 
-    Public Property NotAProblem As Byte()   'Noncompliant FP, this doens't copy anything inside
+    Public Property NotAProblem As Byte()   'Compliant, this doens't copy anything inside
 
     ReadOnly Property Foo As String()   ' Noncompliant {{Refactor 'Foo' into a method, properties should not be based on arrays.}}
         '             ^^^
@@ -54,5 +54,10 @@ Public Class Sample
     End Property
 
     Public Overrides Property Bad As Byte() ' Ccompliant, this class cannot change overriden property signature
+        Get
+        End Get
+        Set(value As Byte())
+        End Set
+    End Property
 
 End Class
