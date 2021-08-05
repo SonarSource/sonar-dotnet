@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ExceptionsNeedStandardConstructorsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ExceptionsNeedStandardConstructors() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExceptionsNeedStandardConstructors.cs", new ExceptionsNeedStandardConstructors());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ExceptionsNeedStandardConstructors_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class  : Exception

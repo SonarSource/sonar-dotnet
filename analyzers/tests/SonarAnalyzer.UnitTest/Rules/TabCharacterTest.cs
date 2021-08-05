@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class TabCharacterTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void TabCharacter()
         {
             Verifier.VerifyAnalyzer(@"TestCases\TabCharacter.cs", new CS.TabCharacter());

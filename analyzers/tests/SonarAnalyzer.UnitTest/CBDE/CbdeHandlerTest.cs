@@ -35,7 +35,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CbdeHandlerTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CbdeHandler_CS()
         {
             using var scope = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
@@ -43,7 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void CbdeHandler_CS_FromCSharp9()
         {
             using var scope = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
@@ -52,7 +50,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 #endif
         [TestMethod]
-        [TestCategory("CBDE")]
         public void CbdeHandlerWait()
         {
             var cbdeExecuted = false;
@@ -73,7 +70,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("CBDE")]
         public void CbdeHandlerExecutableNotFound()
         {
             var cbdeExecuted = false;
@@ -89,7 +85,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("CBDE")]
         public void CbdeHandlerFailed()
         {
             var cbdeExecuted = false;
@@ -105,7 +100,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("CBDE")]
         public void CbdeHandlerIncorrectOutput()
         {
             var cbdeExecuted = false;

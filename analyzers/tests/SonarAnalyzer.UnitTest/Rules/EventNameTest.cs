@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class EventNameTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void EventName() =>
             Verifier.VerifyAnalyzer(@"TestCases\EventName.vb", new EventName());
     }

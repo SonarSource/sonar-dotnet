@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MemberInitializerRedundantTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MemberInitializerRedundant() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
 
@@ -43,12 +42,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MemberInitializerRedundant_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializerRedundant.CSharp9.cs", new MemberInitializerRedundant());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void MemberInitializerRedundant_CSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MemberInitializerRedundant.CSharp9.cs",

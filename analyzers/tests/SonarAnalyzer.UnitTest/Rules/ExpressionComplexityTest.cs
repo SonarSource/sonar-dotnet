@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ExpressionComplexityTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ExpressionComplexity_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs",
                 new CS.ExpressionComplexity { Maximum = 3},
@@ -37,14 +36,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ExpressionComplexity_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExpressionComplexity.CSharp9.cs",
                 new CS.ExpressionComplexity { Maximum = 3});
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ExpressionComplexity_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.vb",
                 new VB.ExpressionComplexity { Maximum = 3 });

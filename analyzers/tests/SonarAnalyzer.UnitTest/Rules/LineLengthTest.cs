@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class LineLengthTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void LineLength()
         {
             var diagnosticCs = new CS.LineLength { Maximum = 127 };

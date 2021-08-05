@@ -34,30 +34,25 @@ namespace SonarAnalyzer.UnitTest.Rules.Hotspots
     public class LooseFilePermissionsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void LooseFilePermissions_Windows_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void LooseFilePermissions_Windows_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.vb", new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void LooseFilePermissions_Windows_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\LooseFilePermissions.Windows.CSharp9.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void LooseFilePermissions_Unix_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Unix.cs",
                                     new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
                                     NuGetMetadataReference.MonoPosixNetStandard());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void LooseFilePermissions_Unix_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Unix.vb",
                                     new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),

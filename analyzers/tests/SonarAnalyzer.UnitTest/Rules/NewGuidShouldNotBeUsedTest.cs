@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class NewGuidShouldNotBeUsedTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void NewGuidShouldNotBeUsed() =>
             Verifier.VerifyAnalyzer(@"TestCases\NewGuidShouldNotBeUsed.cs", new NewGuidShouldNotBeUsed());
     }

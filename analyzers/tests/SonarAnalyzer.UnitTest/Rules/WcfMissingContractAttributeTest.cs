@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class WcfMissingContractAttributeTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void WcfMissingContractAttribute() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\WcfMissingContractAttribute.cs",

@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class StaticFieldInitializerOrderTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void StaticFieldInitializerOrder() =>
             Verifier.VerifyAnalyzer(
                 new[]
@@ -45,7 +44,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void StaticFieldInitializerOrder_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldInitializerOrder.CSharp9.cs", new StaticFieldInitializerOrder());
 #endif

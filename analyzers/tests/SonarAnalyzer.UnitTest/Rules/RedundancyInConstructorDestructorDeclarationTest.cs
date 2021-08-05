@@ -28,18 +28,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class RedundancyInConstructorDestructorDeclarationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundancyInConstructorDestructorDeclaration() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs", new RedundancyInConstructorDestructorDeclaration());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundancyInConstructorDestructorDeclaration_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs", new RedundancyInConstructorDestructorDeclaration());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp9() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs",
                                    @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.Fixed.cs",
@@ -50,7 +47,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_BaseCall() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                                    @"TestCases\RedundancyInConstructorDestructorDeclaration.BaseCall.Fixed.cs",
@@ -59,7 +55,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveBaseCall);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Constructor() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                                    @"TestCases\RedundancyInConstructorDestructorDeclaration.Constructor.Fixed.cs",
@@ -68,7 +63,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveConstructor);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Destructor() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                                    @"TestCases\RedundancyInConstructorDestructorDeclaration.Destructor.Fixed.cs",

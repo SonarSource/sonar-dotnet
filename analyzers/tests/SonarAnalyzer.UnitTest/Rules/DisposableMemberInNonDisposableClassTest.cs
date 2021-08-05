@@ -31,7 +31,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DisposableMemberInNonDisposableClassTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs",
                                     new DisposableMemberInNonDisposableClass(),
@@ -39,7 +38,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new DisposableMemberInNonDisposableClass());
 

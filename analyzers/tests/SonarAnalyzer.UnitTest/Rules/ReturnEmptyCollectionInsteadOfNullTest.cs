@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ReturnEmptyCollectionInsteadOfNullTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ReturnEmptyCollectionInsteadOfNull() =>
             Verifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
                                     new ReturnEmptyCollectionInsteadOfNull(),
@@ -37,7 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ReturnEmptyCollectionInsteadOfNull_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnEmptyCollectionInsteadOfNull.CSharp9.cs", new ReturnEmptyCollectionInsteadOfNull());
 #endif

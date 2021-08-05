@@ -35,13 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CertificateValidationCheckTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CertificateValidationCheck_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs", new CS.CertificateValidationCheck(), GetAdditionalReferences());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void CertificateValidationCheck_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.CSharp8.cs",
                                     new CS.CertificateValidationCheck(),
@@ -49,14 +47,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CertificateValidationCheck.CSharp9.cs",
                                                       new CS.CertificateValidationCheck(),
                                                       GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
                                                       new CS.CertificateValidationCheck(),
@@ -64,14 +60,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CertificateValidationCheck_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
                                     new VB.CertificateValidationCheck(),
                                     GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CreateParameterLookup_CS_ThrowsException()
         {
             var analyzer = new CS.CertificateValidationCheck();
@@ -80,7 +74,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CreateParameterLookup_VB_ThrowsException()
         {
             var analyzer = new VB.CertificateValidationCheck();

@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class SecurityPInvokeMethodShouldNotBeCalledTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void SecurityPInvokeMethodShouldNotBeCalled_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SecurityPInvokeMethodShouldNotBeCalled.cs", new CS.SecurityPInvokeMethodShouldNotBeCalled());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void SecurityPInvokeMethodShouldNotBeCalled_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\SecurityPInvokeMethodShouldNotBeCalled.vb", new VB.SecurityPInvokeMethodShouldNotBeCalled());
     }

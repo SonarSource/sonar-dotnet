@@ -33,7 +33,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("1.0.0", "3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.cs",
                                     new MemberShouldBeStatic(),
@@ -46,13 +45,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MemberShouldBeStatic_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MemberShouldBeStatic.CSharp9.cs", new MemberShouldBeStatic());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MemberShouldBeStatic_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.CSharp8.cs",
                 new MemberShouldBeStatic(),
@@ -65,7 +62,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NETFRAMEWORK // HttpApplication is available only on .Net Framework
         [TestMethod]
-        [TestCategory("Rule")]
         public void MemberShouldBeStatic_HttpApplication() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class HttpApplication1 : System.Web.HttpApplication
@@ -79,7 +75,6 @@ public class HttpApplication1 : System.Web.HttpApplication
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MemberShouldBeStatic_InvalidCode() =>
             // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-dotnet/issues/819
             Verifier.VerifyCSharpAnalyzer(@"

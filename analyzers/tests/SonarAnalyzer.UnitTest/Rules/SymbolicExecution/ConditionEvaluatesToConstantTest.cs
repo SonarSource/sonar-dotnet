@@ -37,21 +37,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
                                     GetAnalyzer(),
                                     NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)));
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp7.cs",
                                     GetAnalyzer(),
                                     ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
                                     GetAnalyzer(),
@@ -64,18 +61,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ConditionEvaluatesToConstant.CSharp9.cs", GetAnalyzer());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp9_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs", GetAnalyzer());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_UncaughtException()
         {
             Action action = () => Verifier.VerifyCSharpAnalyzer(@"

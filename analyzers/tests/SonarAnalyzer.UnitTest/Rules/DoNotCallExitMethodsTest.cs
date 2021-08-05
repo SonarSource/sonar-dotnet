@@ -32,7 +32,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 // https://github.com/SonarSource/sonar-dotnet/issues/3426
 #if NETFRAMEWORK
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotCallExitMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
                 new DoNotCallExitMethods(),
@@ -41,7 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotCallExitMethods_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs", new DoNotCallExitMethods());
 #endif

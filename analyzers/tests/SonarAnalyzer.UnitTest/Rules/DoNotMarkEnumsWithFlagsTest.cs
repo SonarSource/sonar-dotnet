@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DoNotMarkEnumsWithFlagsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotMarkEnumsWithFlags() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotMarkEnumsWithFlags.cs", new DoNotMarkEnumsWithFlags());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotMarkEnumsWithFlags_InvalidEnumType() =>
             Verifier.VerifyCSharpAnalyzer(@"
 [System.Flags]

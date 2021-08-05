@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CollectionsShouldImplementGenericInterfaceTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CollectionsShouldImplementGenericInterface() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionsShouldImplementGenericInterface.cs",
                                     new CollectionsShouldImplementGenericInterface(),

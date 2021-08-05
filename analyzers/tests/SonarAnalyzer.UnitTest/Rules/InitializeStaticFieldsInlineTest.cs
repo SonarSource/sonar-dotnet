@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class InitializeStaticFieldsInlineTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void InitializeStaticFieldsInline() =>
             Verifier.VerifyAnalyzer(@"TestCases\InitializeStaticFieldsInline.cs", new InitializeStaticFieldsInline());
     }

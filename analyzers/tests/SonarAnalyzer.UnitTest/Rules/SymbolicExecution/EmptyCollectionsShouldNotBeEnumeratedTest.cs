@@ -36,7 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Rule")]
         public void EmptyCollectionsShouldNotBeEnumerated(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\EmptyCollectionsShouldNotBeEnumerated.cs",
@@ -50,7 +49,6 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs", new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()));
 #endif

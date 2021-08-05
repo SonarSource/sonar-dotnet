@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class TrackNotImplementedExceptionTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void TrackNotImplementedException() =>
             Verifier.VerifyAnalyzer(@"TestCases\TrackNotImplementedException.cs",
                 new TrackNotImplementedException(),

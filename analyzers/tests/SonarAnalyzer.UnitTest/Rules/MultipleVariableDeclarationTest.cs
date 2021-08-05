@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MultipleVariableDeclarationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MultipleVariableDeclaration()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.cs", new CS.MultipleVariableDeclaration());
@@ -37,7 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void MultipleVariableDeclaration_CodeFix()
         {
             Verifier.VerifyCodeFix(

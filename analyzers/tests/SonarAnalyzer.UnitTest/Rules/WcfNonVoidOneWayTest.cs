@@ -30,14 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class WcfNonVoidOneWayTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void WcfNonVoidOneWay_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.cs",
                 new CS.WcfNonVoidOneWay(),
                 MetadataReferenceFacade.SystemServiceModel);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void WcfNonVoidOneWay_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.vb",
                 new VB.WcfNonVoidOneWay(),

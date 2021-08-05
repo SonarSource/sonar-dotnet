@@ -30,19 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class RedundantNullCheckTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantNullCheck_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.cs", new CS.RedundantNullCheck());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantNullCheck_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantNullCheck.CSharp9.cs", new CS.RedundantNullCheck());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantNullCheck_CS_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantNullCheck.cs",
                                    @"TestCases\RedundantNullCheck.Fixed.cs",
@@ -52,7 +49,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantNullCheck_CSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantNullCheck.CSharp9.cs",
                                    @"TestCases\RedundantNullCheck.CSharp9.Fixed.cs",
@@ -63,7 +59,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantNullCheck_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.vb", new VB.RedundantNullCheck());
     }

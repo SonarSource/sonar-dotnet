@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ArrayCovarianceTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ArrayCovariance() =>
             Verifier.VerifyAnalyzer(@"TestCases\ArrayCovariance.cs", new ArrayCovariance());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ArrayCovariance_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ArrayCovariance.CSharp9.cs", new ArrayCovariance());
 #endif

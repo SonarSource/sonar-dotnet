@@ -58,7 +58,6 @@ namespace NS
 }}";
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SequentialInput()
         {
             const string testInput = "var a = true; var b = false; b = !b; a = (b);";
@@ -92,7 +91,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SequentialInput_OutParameter()
         {
             const string testInput = "outParameter = true;";
@@ -113,7 +111,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SequentialInput_Max()
         {
             var inputBuilder = new StringBuilder();
@@ -132,7 +129,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SingleBranchVisited_If()
         {
             const string testInput = "var a = false; bool b; if (a) { b = true; } else { b = false; } a = b;";
@@ -169,7 +165,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SingleBranchVisited_And()
         {
             const string testInput = "var a = false; if (a && !a) { a = !true; } else { a = true; }";
@@ -197,7 +192,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_BothBranchesVisited()
         {
             const string testInput = "var a = false; bool b; if (inParameter) { b = inParameter; } else { b = !inParameter; } a = b;";
@@ -258,7 +252,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_BothBranchesVisited_StateMerge()
         {
             const string testInput = "var a = !true; bool b; if (inParameter) { b = false; } else { b = false; } a = b;";
@@ -281,7 +274,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_BothBranchesVisited_NonCondition()
         {
             const string testInput = "var str = this?.ToString();";
@@ -302,7 +294,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_AllBranchesVisited()
         {
             const string testInput = "int i = 1; switch (i) { case 1: default: cw1(); break; case 2: cw2(); break; }";
@@ -329,7 +320,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_NonDecisionMakingAssignments()
         {
             const string testInput = "var a = true; a |= false; var b = 42; b++; ++b;";
@@ -381,7 +371,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_NonLocalNorFieldSymbolBranching()
         {
             const string testInput = "if (Property) { cw(); }";
@@ -402,7 +391,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_LoopExploration()
         {
             const string testInput = "var i = 0; while (i < 1) { i = i + 1; }";
@@ -420,7 +408,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_InternalStateCount_MaxReached()
         {
             if (TestContextHelper.IsAzureDevOpsContext) // ToDo: test throws OutOfMemory on Azure DevOps
@@ -479,7 +466,6 @@ namespace TesteAnalyzer
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_StaticLocalFunctions()
         {
             const string testInput = @"static string Local(object o) {return o.ToString()} Local(null);";
@@ -499,7 +485,6 @@ namespace TesteAnalyzer
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_DeclarationExpressionVisit_AsOutParameter_AddsNotNullConstraintForValueType()
         {
             const string testInput = @"
@@ -566,7 +551,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_DeclarationExpressionVisit_AsOutParameter_AddsNoConstraintForReferenceType()
         {
             const string testInput = @"
@@ -633,7 +617,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_DeclarationExpressionVisit_AsOutParameter_Discard()
         {
             const string testInput =
@@ -679,7 +662,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_VariableDesignationVisit_InsideIf()
         {
             const string testInput = "if (value is int x) { }";
@@ -701,7 +683,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchExpression_SimpleExpression()
         {
             const string testInput = @"string s = null; s = (s == null) switch { true => ""Value"", _ => s}; s.ToString();";
@@ -723,7 +704,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_IsPatternVisit_DeclarationPattern_Discard()
         {
             const string testInput = @"var x = options is Options _;";
@@ -760,7 +740,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchStatement()
         {
             const string testInput = @"string s=null; switch(s==null) {case true: s=""Value""; break; default : break;}; s.ToString();";
@@ -782,7 +761,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchWithRecursivePatternVisit()
         {
             const string testInput = @"
@@ -851,7 +829,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_IsPattern_WithRecursivePattern()
         {
             const string testInput = @"var x = address is Address { State: ""WA"" } addr;";
@@ -892,7 +869,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_IsPattern_WithPositionalPattern()
         {
             const string testInput = @"var x = obj is (string s, int i) t;";
@@ -933,7 +909,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchExpressionVisit()
         {
             const string testInput = @"
@@ -981,7 +956,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchExpression_AllPatterns()
         {
             const string testInput = @"string str = GetStr(); var x = str switch { null => 1, int i => 2, { } => 3, _ => 4};";
@@ -1042,7 +1016,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchExpression_NullConstraint()
         {
             const string testInput = @"const string a = null; string str = GetStr(); var x = str switch { a => 1, _ => 2};";
@@ -1089,7 +1062,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_NullCoalesceAssignmentVisit()
         {
             const string testInput = @"string s = null; s ??= ""N/A""; s.ToString();";
@@ -1121,7 +1093,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_DefaultLiteral()
         {
             const string testInput = "var i = default(int); int j = default; System.IO.File k = default;";
@@ -1155,7 +1126,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_TupleExpressions()
         {
             const string testInput = "var myTuple = (1, 2); (object a, object b) c = (1, null); (object d, object e) = (1, null);";
@@ -1192,7 +1162,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_DeclarationExpression()
         {
             const string testInput = @"
@@ -1261,7 +1230,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_RefExpressions()
         {
             const string testInput = @"
@@ -1293,7 +1261,6 @@ namespace Test
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_TupleExpressionsDeconstruct()
         {
             const string testInput = "var (projectInstance, diagnostics) = loader;";
@@ -1335,7 +1302,6 @@ namespace Test
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_TupleExpressionsWithDiscardDeconstruct()
         {
             const string testInput = "var (projectInstance, _) = loader;";
@@ -1373,7 +1339,6 @@ namespace Test
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_DiscardDesignationAsFunctionArgument()
         {
             const string testInput = @"var result = obj.Read(out int _);";
@@ -1419,7 +1384,6 @@ namespace Test
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_CoalesceAssignmentOnProperty()
         {
             var context = new ExplodedGraphContext("return options.Property ??= 1");
@@ -1442,7 +1406,6 @@ namespace Test
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_IndiceFromVariable()
         {
             const string testInput = @"
@@ -1470,7 +1433,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_CollectionInitializerWithIndice()
         {
             const string testInput = @"
@@ -1498,7 +1460,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_RangeFromVariables()
         {
             const string testInput = @"
@@ -1526,7 +1487,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_CollectionInitializerWithRange()
         {
             const string testInput = @"

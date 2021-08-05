@@ -29,18 +29,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class RedundantConditionalAroundAssignmentTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantConditionalAroundAssignment() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantConditionalAroundAssignment.cs", new RedundantConditionalAroundAssignment());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantConditionalAroundAssignment_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new RedundantConditionalAroundAssignment());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantConditionalAroundAssignment_CSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs",
                                    @"TestCases\RedundantConditionalAroundAssignment.CSharp9.Fixed.cs",
@@ -51,7 +48,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantConditionalAroundAssignment_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.cs",
                                    @"TestCases\RedundantConditionalAroundAssignment.Fixed.cs",

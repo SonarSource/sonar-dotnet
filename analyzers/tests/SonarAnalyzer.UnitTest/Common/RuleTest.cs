@@ -253,12 +253,10 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        [TestCategory("Hotspot")]
         public void OnlySecurityHotspots_AreNotConfigurable_CS() =>
             OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.CSharp);
 
         [TestMethod]
-        [TestCategory("Hotspot")]
         public void OnlySecurityHotspots_AreNotConfigurable_VB() =>
             OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.VisualBasic);
 

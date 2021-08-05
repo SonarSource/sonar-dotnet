@@ -30,12 +30,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class StringConcatenationWithPlusTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void StringConcatenationWithPlus() =>
             Verifier.VerifyAnalyzer(@"TestCases\StringConcatenationWithPlus.vb", new StringConcatenationWithPlus(), MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemXmlLinq));
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void StringConcatenationWithPlus_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\StringConcatenationWithPlus.vb",

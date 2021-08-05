@@ -32,7 +32,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs",
                                     new AssertionArgsShouldBePassedInCorrectOrder(),
@@ -41,7 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs",
                                     new AssertionArgsShouldBePassedInCorrectOrder(),
@@ -50,7 +48,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs",
                                     new AssertionArgsShouldBePassedInCorrectOrder(),

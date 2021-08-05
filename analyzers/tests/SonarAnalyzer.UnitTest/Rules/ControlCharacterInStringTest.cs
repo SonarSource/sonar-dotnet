@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ControlCharacterInStringTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ControlCharacterInString() =>
             Verifier.VerifyAnalyzer(@"TestCases\ControlCharacterInString.cs",
                                     new ControlCharacterInString(),

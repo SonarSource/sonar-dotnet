@@ -34,7 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DisablingCsrfProtectionTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisablingCSRFProtection_CS() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\DisablingCSRFProtection.cs",
                                                       new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled),

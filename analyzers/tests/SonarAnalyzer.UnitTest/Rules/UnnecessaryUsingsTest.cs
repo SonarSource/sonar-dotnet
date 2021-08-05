@@ -34,7 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UnnecessaryUsingsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnnecessaryUsings() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\UnnecessaryUsings.cs", @"TestCases\UnnecessaryUsings2.cs" },
                                     new UnnecessaryUsings(),
@@ -43,26 +42,22 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnnecessaryUsings_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new UnnecessaryUsings());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnnecessaryUsings_TupleDeconstruct_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetCore.cs", new UnnecessaryUsings());
 
 #elif NETFRAMEWORK
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnnecessaryUsings_TupleDeconstruct_NetFx() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetFx.cs", new UnnecessaryUsings());
 
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void UnnecessaryUsings_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\UnnecessaryUsings.cs",
                                    @"TestCases\UnnecessaryUsings.Fixed.cs",

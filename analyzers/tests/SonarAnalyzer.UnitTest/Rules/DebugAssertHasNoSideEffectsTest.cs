@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DebugAssertHasNoSideEffectsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DebugAssertHasNoSideEffects() =>
             Verifier.VerifyAnalyzer(@"TestCases\DebugAssertHasNoSideEffects.cs", new DebugAssertHasNoSideEffects());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void DebugAssertHasNoSideEffects_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DebugAssertHasNoSideEffects.CSharp9.cs", new DebugAssertHasNoSideEffects());
 #endif

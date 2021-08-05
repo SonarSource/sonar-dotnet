@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DeadStoresTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DeadStores() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeadStores.cs",
                                     new DeadStores(),
@@ -42,7 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void DeadStores_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeadStores.CSharp9.cs", new DeadStores());
 #endif

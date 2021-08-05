@@ -28,19 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class FinalizerShouldNotBeEmptyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void FinalizerShouldNotBeEmpty() =>
             Verifier.VerifyAnalyzer(@"TestCases\FinalizerShouldNotBeEmpty.cs", new FinalizerShouldNotBeEmpty());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void FinalizerShouldNotBeEmpty_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FinalizerShouldNotBeEmpty.CSharp9.cs", new FinalizerShouldNotBeEmpty());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FinalizerShouldNotBeEmpty_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"class Program4
     {

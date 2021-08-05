@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class OperatorsShouldBeOverloadedConsistentlyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void OperatorsShouldBeOverloadedConsistently() =>
             Verifier.VerifyAnalyzer(@"TestCases\OperatorsShouldBeOverloadedConsistently.cs", new OperatorsShouldBeOverloadedConsistently());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void OperatorsShouldBeOverloadedConsistently_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OperatorsShouldBeOverloadedConsistently.CSharp9.cs", new OperatorsShouldBeOverloadedConsistently());
 #endif

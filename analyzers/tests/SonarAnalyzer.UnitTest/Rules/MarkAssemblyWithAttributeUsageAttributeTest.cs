@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MarkAssemblyWithAttributeUsageAttributeTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void RequireAttributeUsageAttribute() =>
             Verifier.VerifyAnalyzer(@"TestCases\RequireAttributeUsageAttribute.cs", new RequireAttributeUsageAttribute());
     }

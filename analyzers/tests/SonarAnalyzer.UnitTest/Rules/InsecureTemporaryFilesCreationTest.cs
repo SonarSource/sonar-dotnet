@@ -29,17 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class InsecureTemporaryFilesCreationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void InsecureTemporaryFilesCreation_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\InsecureTemporaryFilesCreation.cs", new CS.InsecureTemporaryFilesCreation());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void InsecureTemporaryFilesCreation_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureTemporaryFilesCreation.CSharp9.cs", new CS.InsecureTemporaryFilesCreation());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void InsecureTemporaryFilesCreation_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\InsecureTemporaryFilesCreation.vb", new VB.InsecureTemporaryFilesCreation());
     }

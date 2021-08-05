@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MarkAssemblyWithNeutralResourcesLanguageAttributeTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasAttribute_Compliant() =>
             Verifier.VerifyAnalyzer(
                 new[]
@@ -40,14 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_NoResx_HasAttribute_Compliant() =>
             Verifier.VerifyNonConcurrentAnalyzer(
                 @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
                 new MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasInvalidAttribute_Noncompliant() =>
             Verifier.VerifyNonConcurrentAnalyzer(
                 new[]
@@ -57,7 +54,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_NoAttribute_Noncompliant() =>
             Verifier.VerifyNonConcurrentAnalyzer(
                 new[]

@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MethodOverrideAddsParamsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodOverrideAddsParams() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideAddsParams.cs",
                 new MethodOverrideAddsParams(),
@@ -42,13 +41,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodOverrideAddsParams_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideAddsParams.CSharp9.cs", new MethodOverrideAddsParams());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void MethodOverrideAddsParams_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodOverrideAddsParams.cs",

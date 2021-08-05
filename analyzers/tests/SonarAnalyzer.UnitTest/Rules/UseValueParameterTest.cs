@@ -28,19 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UseValueParameterTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseValueParameter() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new UseValueParameter());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseValueParameter_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseValueParameter.CSharp9.cs", new UseValueParameter());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseValueParameter_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public int Foo

@@ -28,19 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MethodOverrideNoParamsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodOverrideNoParams() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideNoParams.cs", new MethodOverrideNoParams());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodOverrideNoParams_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideNoParams.CSharp9.cs", new MethodOverrideNoParams());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void MethodOverrideNoParams_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodOverrideNoParams.cs",

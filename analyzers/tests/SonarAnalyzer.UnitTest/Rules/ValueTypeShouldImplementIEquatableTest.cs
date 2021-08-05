@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ValueTypeShouldImplementIEquatableTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ValueTypeShouldImplementIEquatable() =>
             Verifier.VerifyAnalyzer(@"TestCases\ValueTypeShouldImplementIEquatable.cs", new ValueTypeShouldImplementIEquatable(), ParseOptionsHelper.FromCSharp8);
     }

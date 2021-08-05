@@ -31,14 +31,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class NameOfShouldBeUsedTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void NameOfShouldBeUsed_FromCSharp6() =>
             Verifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.cs",
                 new CS.NameOfShouldBeUsed(),
                 ParseOptionsHelper.FromCSharp6);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void NameOfShouldBeUsed_CSharp5() =>
             Verifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.cs",
                 new CS.NameOfShouldBeUsed(),
@@ -46,14 +44,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CompilationErrorBehavior.Ignore);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void NameOfShouldBeUsed_FromVB14() =>
             Verifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.vb",
                 new VB.NameOfShouldBeUsed(),
                 ParseOptionsHelper.FromVisualBasic14);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void NameOfShouldBeUsed_VB12() =>
             Verifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.vb",
                 new VB.NameOfShouldBeUsed(),

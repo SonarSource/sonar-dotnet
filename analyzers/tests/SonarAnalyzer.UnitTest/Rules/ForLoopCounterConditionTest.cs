@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ForLoopCounterConditionTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ForLoopCounterCondition() =>
             Verifier.VerifyAnalyzer(@"TestCases\ForLoopCounterCondition.cs", new ForLoopCounterCondition());
     }

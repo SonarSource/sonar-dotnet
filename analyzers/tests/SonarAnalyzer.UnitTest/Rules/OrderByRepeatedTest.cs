@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class OrderByRepeatedTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void OrderByRepeated() =>
             Verifier.VerifyAnalyzer(@"TestCases\OrderByRepeated.cs", new OrderByRepeated());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void OrderByRepeated_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\OrderByRepeated.cs",

@@ -30,7 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ShouldImplementExportedInterfacesTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
                                     new CS.ShouldImplementExportedInterfaces(),
@@ -38,7 +37,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_CSharp9() =>
            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ShouldImplementExportedInterfaces.CSharp9.cs",
                                               new CS.ShouldImplementExportedInterfaces(),
@@ -46,14 +44,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
                                     new VB.ShouldImplementExportedInterfaces(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_Partial() =>
             Verifier.VerifyAnalyzer(new[]
                 {

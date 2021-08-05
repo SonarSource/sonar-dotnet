@@ -30,12 +30,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PubliclyWritableDirectoriesTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PubliclyWritableDirectories_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.cs", new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void PubliclyWritableDirectories_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.vb", new VB.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
     }

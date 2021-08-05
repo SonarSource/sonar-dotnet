@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MutableFieldsShouldNotBePublicReadonlyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PublicMutableFieldsShouldNotBeReadonly() =>
             Verifier.VerifyAnalyzer(@"TestCases\MutableFieldsShouldNotBePublicReadonly.cs",
                                     new MutableFieldsShouldNotBePublicReadonly(),

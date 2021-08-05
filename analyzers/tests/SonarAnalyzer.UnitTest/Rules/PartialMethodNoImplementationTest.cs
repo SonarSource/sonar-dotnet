@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PartialMethodNoImplementationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PartialMethodNoImplementation() =>
             Verifier.VerifyAnalyzer(@"TestCases\PartialMethodNoImplementation.cs", new PartialMethodNoImplementation());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void PartialMethodNoImplementation_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(new string[] { @"TestCases\PartialMethodNoImplementation.CSharp9.Part1.cs", @"TestCases\PartialMethodNoImplementation.CSharp9.Part2.cs"},
                                                       new PartialMethodNoImplementation());

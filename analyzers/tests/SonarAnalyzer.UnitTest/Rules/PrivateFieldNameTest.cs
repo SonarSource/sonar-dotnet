@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PrivateFieldNameTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PrivateFieldName() =>
             Verifier.VerifyAnalyzer(@"TestCases\PrivateFieldName.vb", new PrivateFieldName());
     }

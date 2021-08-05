@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PropertiesShouldBePreferredTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertiesShouldBePreferred() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesShouldBePreferred.cs",
                                     new PropertiesShouldBePreferred(),
@@ -37,7 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertiesShouldBePreferred_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesShouldBePreferred.CSharp9.cs", new PropertiesShouldBePreferred());
 #endif

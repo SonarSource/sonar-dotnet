@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class AvoidUnsealedAttributesTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidUnsealedAttributes() =>
             Verifier.VerifyAnalyzer(@"TestCases\AvoidUnsealedAttributes.cs",
                 new AvoidUnsealedAttributes());

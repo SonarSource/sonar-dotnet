@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ConstructorOverridableCallTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConstructorOverridableCall() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorOverridableCall.cs", new ConstructorOverridableCall());
     }

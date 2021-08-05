@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MethodsShouldNotHaveIdenticalImplementationsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveIdenticalImplementations() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.cs", new CS.MethodsShouldNotHaveIdenticalImplementations(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs", new CS.MethodsShouldNotHaveIdenticalImplementations());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveIdenticalImplementations_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.vb", new VB.MethodsShouldNotHaveIdenticalImplementations());
     }

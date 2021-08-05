@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ParameterNamesShouldNotDuplicateMethodNamesTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ParameterNamesShouldNotDuplicateMethodNames() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParameterNamesShouldNotDuplicateMethodNames.cs",
                                     new ParameterNamesShouldNotDuplicateMethodNames(),

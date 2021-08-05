@@ -34,48 +34,36 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ConfiguringLoggersTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ConfiguringLoggers_Log4Net_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Log4Net.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 Log4NetReferences);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ConfiguringLoggers_Log4Net_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Log4Net.vb",
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 Log4NetReferences);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ConfiguringLoggers_NLog_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_NLog.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 NLogReferences);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ConfiguringLoggers_NLog_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_NLog.vb",
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 NLogReferences);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ConfiguringLoggers_Serilog_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Serilog.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 SeriLogReferences);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ConfiguringLoggers_Serilog_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Serilog.vb",
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
@@ -83,16 +71,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ConfiguringLoggers_AspNetCore_CS() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
                                     new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                                     AspNetCoreLoggingReferences);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ConfiguringLoggers_AspNetCore_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.vb",
                                     new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),

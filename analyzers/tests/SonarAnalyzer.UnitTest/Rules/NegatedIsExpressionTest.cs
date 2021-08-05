@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class NegatedIsExpressionTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void NegatedIsExpression() =>
             Verifier.VerifyAnalyzer(@"TestCases\NegatedIsExpression.vb", new NegatedIsExpression());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void NegatedIsExpression_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\NegatedIsExpression.vb",

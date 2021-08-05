@@ -29,14 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class NonFlagsEnumInBitwiseOperationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void NonFlagsEnumInBitwiseOperation() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
                                     new NonFlagsEnumInBitwiseOperation(),
                                     MetadataReferenceFacade.SystemComponentModelPrimitives);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void NonFlagsEnumInBitwiseOperation_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
                                    @"TestCases\NonFlagsEnumInBitwiseOperation.Fixed.cs",

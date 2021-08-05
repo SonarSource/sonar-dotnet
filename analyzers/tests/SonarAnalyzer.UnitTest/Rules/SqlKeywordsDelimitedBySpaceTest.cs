@@ -32,7 +32,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class SqlKeywordsDelimitedBySpaceTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace() =>
             Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace.cs",
                                     new SqlKeywordsDelimitedBySpace(),
@@ -40,14 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
                                     new SqlKeywordsDelimitedBySpace(),
                                     GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_DefaultNamespace() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\SqlKeywordsDelimitedBySpace_DefaultNamespace.cs",
                                                  new SqlKeywordsDelimitedBySpace(),
@@ -64,7 +61,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("NHibernate")]
         [DataRow("PetaPoco")]
         [DataTestMethod]
-        [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_DotnetFramework(string sqlNamespace)
         {
             var references = MetadataReferenceFacade.SystemData
@@ -98,7 +94,6 @@ namespace TestNamespace
         [DataRow("Microsoft.EntityFrameworkCore")]
         [DataRow("ServiceStack.OrmLite")]
         [DataTestMethod]
-        [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_DotnetCore(string sqlNamespace)
         {
             var references = MetadataReferenceFacade.SystemData

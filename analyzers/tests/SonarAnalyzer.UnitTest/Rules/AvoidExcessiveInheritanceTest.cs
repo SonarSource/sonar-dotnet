@@ -29,41 +29,35 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class AvoidExcessiveInheritanceTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_DefaultValues() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\AvoidExcessiveInheritance_DefaultValues.cs",
                 new AvoidExcessiveInheritance());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_DefaultValues_Records() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveInheritance_DefaultValues.Records.cs",
                 new AvoidExcessiveInheritance());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_CustomValuesFullyNamedFilteredClass() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.cs",
                 new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.SecondSubClass" });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredClass() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.cs",
                 new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubClass" });
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredRecord() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveInheritance_CustomValues.Records.cs",
                 new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubRecord" });
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FilteredClasses_ByDefault_ShouldBeEmpty() =>
             new AvoidExcessiveInheritance().FilteredClasses.Should().BeEmpty();
     }

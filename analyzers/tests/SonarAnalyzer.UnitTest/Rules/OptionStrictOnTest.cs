@@ -32,27 +32,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class OptionStrictOnTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void OptionStrictOn_IsOff_ForProject() =>
             VerifyAnalyzer("' Noncompliant ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}", OptionStrict.Off);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void OptionStrictOn_IsCustom_ForProject() =>
             VerifyAnalyzer("' Noncompliant ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}", OptionStrict.Custom);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void OptionStrictOn_IsOff() =>
             VerifyAnalyzer("Option Strict Off ' Noncompliant ^1#17 {{Change this to 'Option Strict On'.}}", OptionStrict.On);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void OptionStrictOn_IsOn() =>
             VerifyAnalyzer("Option Strict On ' Compliant", OptionStrict.On);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void OptionStrictOn_Concurrent()
         {
             using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};

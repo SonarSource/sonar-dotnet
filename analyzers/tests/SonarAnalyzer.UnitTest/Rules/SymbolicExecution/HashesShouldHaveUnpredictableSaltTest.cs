@@ -34,7 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class HashesShouldHaveUnpredictableSaltTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void HashesShouldHaveUnpredictableSalt() =>
             Verifier.VerifyAnalyzer(@"TestCases\HashesShouldHaveUnpredictableSalt.cs",
                                     GetAnalyzer(),
@@ -42,7 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void HashesShouldHaveUnpredictableSalt_DoesNotRaiseIssuesForTestProject() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\HashesShouldHaveUnpredictableSalt.cs",
                                                  GetAnalyzer(),
@@ -52,7 +50,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void HashesShouldHaveUnpredictableSalt_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\HashesShouldHaveUnpredictableSalt.CSharp9.cs",
                                                       GetAnalyzer(),
@@ -61,7 +58,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void HashesShouldHaveUnpredictableSalt_LocationContext_Equals()
         {
             var tree = SyntaxFactory.ParseSyntaxTree("public class Test {}");

@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class IfChainWithoutElseTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void IfChainWithoutElse_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.cs", new CS.IfChainWithoutElse());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void IfChainWithoutElse_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.vb", new VB.IfChainWithoutElse());
     }

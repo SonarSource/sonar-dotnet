@@ -31,7 +31,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.MsTest.cs",
                                     new DoNotUseLiteralBoolInAssertions(),
@@ -40,7 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.NUnit.cs",
                                     new DoNotUseLiteralBoolInAssertions(),
@@ -49,7 +47,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.Xunit.cs",
                                     new DoNotUseLiteralBoolInAssertions(),

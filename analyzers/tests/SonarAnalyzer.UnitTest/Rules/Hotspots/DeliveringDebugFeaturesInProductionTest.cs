@@ -34,16 +34,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DeliveringDebugFeaturesInProductionTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
                                     new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferencesNetCore2);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
                                     new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
@@ -52,16 +48,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.cs",
                                     new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferencesNetCore3);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.vb",
                                     new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),

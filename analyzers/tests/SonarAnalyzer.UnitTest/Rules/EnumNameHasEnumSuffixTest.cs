@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class EnumNameHasEnumSuffixTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void EnumNameHasEnumSuffix_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.cs", new CS.EnumNameHasEnumSuffix());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void EnumNameHasEnumSuffix_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.vb", new VB.EnumNameHasEnumSuffix());
     }

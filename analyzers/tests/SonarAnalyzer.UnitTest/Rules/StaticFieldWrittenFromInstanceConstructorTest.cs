@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class StaticFieldWrittenFromInstanceConstructorTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void StaticFieldWrittenFromInstanceConstructor() =>
             Verifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceConstructor.cs",
                                     new StaticFieldWrittenFromInstanceConstructor(),
@@ -36,7 +35,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void StaticFieldWrittenFromInstanceConstructor_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldWrittenFromInstanceConstructor.CSharp9.cs", new StaticFieldWrittenFromInstanceConstructor());
 #endif

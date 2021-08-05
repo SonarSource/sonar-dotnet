@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class VariableUnusedTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void VariableUnused_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.cs", new CS.VariableUnused(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void VariableUnused_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableUnused.CSharp9.cs", new CS.VariableUnused());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void VariableUnused_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.vb", new VB.VariableUnused());
     }

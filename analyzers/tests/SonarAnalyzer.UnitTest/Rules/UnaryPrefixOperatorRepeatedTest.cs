@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UnaryPrefixOperatorRepeatedTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnaryPrefixOperatorRepeated() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.cs", new CS.UnaryPrefixOperatorRepeated());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnaryPrefixOperatorRepeated_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnaryPrefixOperatorRepeated.CSharp9.cs", new CS.UnaryPrefixOperatorRepeated());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void UnaryPrefixOperatorRepeated_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\UnaryPrefixOperatorRepeated.cs",
@@ -50,7 +47,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.UnaryPrefixOperatorRepeatedCodeFixProvider());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnaryPrefixOperatorRepeated_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.vb", new VB.UnaryPrefixOperatorRepeated());
     }

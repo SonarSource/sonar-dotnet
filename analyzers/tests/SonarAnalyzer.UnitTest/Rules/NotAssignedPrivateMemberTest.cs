@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class NotAssignedPrivateMemberTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void NotAssignedPrivateMember() =>
             Verifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs", new NotAssignedPrivateMember());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void NotAssignedPrivateMember_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NotAssignedPrivateMember.CSharp9.cs", new NotAssignedPrivateMember());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void NotAssignedPrivateMember_IndexingMovableFixedBuffer() =>
             Verifier.VerifyCSharpAnalyzer(@"
 unsafe struct FixedArray

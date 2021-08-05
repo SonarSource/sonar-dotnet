@@ -35,16 +35,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class RequestsWithExcessiveLengthTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength.cs",
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_CS_CustomValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.cs",
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
@@ -52,8 +48,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_Csharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp9.cs",
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
@@ -61,16 +55,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength.vb",
                 new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void RequestsWithExcessiveLength_VB_CustomValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.vb",
                 new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
@@ -90,7 +80,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\NoSystemWeb")]
         [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\NoSystemWebServer")]
         [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\UnexpectedContent")]
-        [TestCategory("Rule")]
         public void RequestsWithExcessiveLength_CS_WebConfig(string root)
         {
             var webConfigPath = GetWebConfigPath(root);
@@ -102,7 +91,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void RequestsWithExcessiveLength_CS_CorruptAndNonExistingWebConfigs_ShouldNotFail()
         {
             var root = @"TestCases\WebConfig\RequestsWithExcessiveLength\Corrupt";

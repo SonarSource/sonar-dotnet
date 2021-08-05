@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PropertyWriteOnlyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertyWriteOnly_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.cs", new CS.PropertyWriteOnly());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertyWriteOnly_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyWriteOnly.CSharp9.cs", new CS.PropertyWriteOnly());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertyWriteOnly_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.vb", new VB.PropertyWriteOnly());
     }

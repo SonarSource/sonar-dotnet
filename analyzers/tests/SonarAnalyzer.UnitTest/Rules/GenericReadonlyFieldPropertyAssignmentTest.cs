@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class GenericReadonlyFieldPropertyAssignmentTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void GenericReadonlyFieldPropertyAssignment() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                                     new CS.GenericReadonlyFieldPropertyAssignment(),
@@ -37,14 +36,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void GenericReadonlyFieldPropertyAssignment_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp9.cs",
                                                       new CS.GenericReadonlyFieldPropertyAssignment());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Remove_Statement() =>
             Verifier.VerifyCodeFix(@"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                                    @"TestCases\GenericReadonlyFieldPropertyAssignment.Remove.Fixed.cs",
@@ -54,7 +51,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Add_Generic_Type_Constraint() =>
             Verifier.VerifyCodeFix(@"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                                    @"TestCases\GenericReadonlyFieldPropertyAssignment.AddConstraint.Fixed.cs",

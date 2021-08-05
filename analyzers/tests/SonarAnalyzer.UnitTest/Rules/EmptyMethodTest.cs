@@ -33,7 +33,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class EmptyMethodTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void EmptyMethod() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.cs",
                 new CS.EmptyMethod(),
@@ -46,13 +45,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void EmptyMethod_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyMethod.CSharp9.cs", new CS.EmptyMethod());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void EmptyMethod_CodeFix_Throw() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\EmptyMethod.cs",
@@ -62,7 +59,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CS.EmptyMethodCodeFixProvider.TitleThrow);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void EmptyMethod_CodeFix_Comment() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\EmptyMethod.cs",
@@ -72,7 +68,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CS.EmptyMethodCodeFixProvider.TitleComment);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void EmptyMethod_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.vb", new VB.EmptyMethod());
 

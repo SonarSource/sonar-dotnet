@@ -36,7 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public partial class UnusedPrivateMemberTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_DebuggerDisplay_Attribute() =>
             Verifier.VerifyCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/1195
@@ -59,7 +58,6 @@ public class MethodUsages
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Members_With_Attributes_Are_Not_Removable() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -80,7 +78,6 @@ public class FieldUsages
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Assembly_Level_Attributes() =>
             Verifier.VerifyCSharpAnalyzer(@"
 [assembly: System.Reflection.AssemblyCompany(Foo.Constants.AppCompany)]
@@ -94,7 +91,6 @@ public static class Foo
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMemberWithPartialClasses() =>
             Verifier.VerifyAnalyzer(new[]
                                     {
@@ -104,7 +100,6 @@ public static class Foo
                                     new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Methods_EventHandler() =>
             // Event handler methods are not reported because in WPF an event handler
             // could be added through XAML and no warning will be generated if the
@@ -123,7 +118,6 @@ public partial class PartialClass
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Unity3D_Ignored() =>
             Verifier.VerifyCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/159
@@ -161,7 +155,6 @@ namespace UnityEditor
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void EntityFrameworkMigration_Ignored() =>
             Verifier.VerifyCSharpAnalyzer(@"
 namespace EntityFrameworkMigrations
@@ -180,21 +173,18 @@ namespace EntityFrameworkMigrations
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.cs",
                                     new UnusedPrivateMember(),
                                     TestHelper.ProjectTypeReference(projectType));
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp7.cs",
                                     new UnusedPrivateMember(),
                                     ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
                                     new UnusedPrivateMember(),
@@ -207,20 +197,17 @@ namespace EntityFrameworkMigrations
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UnusedPrivateMember.CSharp9.cs",
                                                       new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs",
                                                       new UnusedPrivateMember());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void UnusedPrivateMember_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\UnusedPrivateMember.cs",
                                    @"TestCases\UnusedPrivateMember.Fixed.cs",
@@ -229,7 +216,6 @@ namespace EntityFrameworkMigrations
                                    new UnusedPrivateMemberCodeFixProvider());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_UsedInGeneratedFile() =>
             Verifier.VerifyAnalyzer(new[]
                                     {
@@ -239,7 +225,6 @@ namespace EntityFrameworkMigrations
                                     new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Performance")]
         public void UnusedPrivateMember_Performance()
         {
             Action verifyAnalyzer = () => Verifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},

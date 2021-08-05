@@ -28,18 +28,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CheckArgumentExceptionTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CheckArgumentException() =>
             Verifier.VerifyAnalyzer(@"TestCases\CheckArgumentException.cs", new CheckArgumentException());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void CheckArgumentException_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CheckArgumentException.CSharp9.cs", new CheckArgumentException());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CheckArgumentException_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CheckArgumentException.TopLevelStatements.cs", new CheckArgumentException());
 #endif

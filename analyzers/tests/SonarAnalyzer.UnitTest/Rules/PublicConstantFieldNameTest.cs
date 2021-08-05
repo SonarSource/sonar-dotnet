@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PublicConstantFieldNameTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PublicConstantFieldName() =>
             Verifier.VerifyAnalyzer(@"TestCases\PublicConstantFieldName.vb", new PublicConstantFieldName());
     }

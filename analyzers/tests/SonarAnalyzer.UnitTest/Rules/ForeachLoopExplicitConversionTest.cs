@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ForeachLoopExplicitConversionTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ForeachLoopExplicitConversion() =>
             Verifier.VerifyAnalyzer(@"TestCases\ForeachLoopExplicitConversion.cs", new ForeachLoopExplicitConversion());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void ForeachLoopExplicitConversion_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\ForeachLoopExplicitConversion.cs",

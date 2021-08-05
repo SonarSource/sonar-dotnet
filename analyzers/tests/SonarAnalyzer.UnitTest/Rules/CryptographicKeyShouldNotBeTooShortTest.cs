@@ -32,7 +32,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CryptographicKeyShouldNotBeTooShortTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CryptographicKeyShouldNotBeTooShort() =>
             Verifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.cs",
                                     new CryptographicKeyShouldNotBeTooShort(),
@@ -41,7 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void CryptographicKeyShouldNotBeTooShort_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CryptographicKeyShouldNotBeTooShort.CSharp9.cs",
                                                       new CryptographicKeyShouldNotBeTooShort(),

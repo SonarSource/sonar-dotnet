@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class BeginInvokePairedWithEndInvokeTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void BeginInvokePairedWithEndInvoke_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.cs", new CS.BeginInvokePairedWithEndInvoke());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void BeginInvokePairedWithEndInvoke_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\BeginInvokePairedWithEndInvoke.CSharp9.cs", new CS.BeginInvokePairedWithEndInvoke());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void BeginInvokePairedWithEndInvoke_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.vb", new VB.BeginInvokePairedWithEndInvoke());
     }

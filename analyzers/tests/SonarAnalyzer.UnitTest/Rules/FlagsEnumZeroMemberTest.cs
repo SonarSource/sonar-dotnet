@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class FlagsEnumZeroMemberTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void FlagsEnumZeroMember_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\FlagsEnumZeroMember.cs", new CS.FlagsEnumZeroMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FlagsEnumZeroMember_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\FlagsEnumZeroMember.vb", new VB.FlagsEnumZeroMember());
     }

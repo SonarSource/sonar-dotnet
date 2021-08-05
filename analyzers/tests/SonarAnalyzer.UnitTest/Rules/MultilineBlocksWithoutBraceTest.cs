@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MultilineBlocksWithoutBraceTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MultilineBlocksWithoutBrace() =>
             Verifier.VerifyAnalyzer(@"TestCases\MultilineBlocksWithoutBrace.cs", new MultilineBlocksWithoutBrace());
     }

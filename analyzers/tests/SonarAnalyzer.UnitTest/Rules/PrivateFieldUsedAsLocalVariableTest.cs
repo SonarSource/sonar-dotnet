@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PrivateFieldUsedAsLocalVariableTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PrivateFieldUsedAsLocalVariable() =>
             Verifier.VerifyAnalyzer(@"TestCases\PrivateFieldUsedAsLocalVariable.cs", new PrivateFieldUsedAsLocalVariable());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void PrivateFieldUsedAsLocalVariable_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PrivateFieldUsedAsLocalVariable.CSharp9.cs", new PrivateFieldUsedAsLocalVariable());
 #endif

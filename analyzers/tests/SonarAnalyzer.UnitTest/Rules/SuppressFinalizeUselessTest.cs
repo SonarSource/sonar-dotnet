@@ -28,19 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class SuppressFinalizeUselessTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void SuppressFinalizeUseless() =>
             Verifier.VerifyAnalyzer(@"TestCases\SuppressFinalizeUseless.cs", new SuppressFinalizeUseless());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void SuppressFinalizeUseless_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SuppressFinalizeUseless.CSharp9.cs", new SuppressFinalizeUseless());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void SuppressFinalizeUseless_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\SuppressFinalizeUseless.cs",
                                    @"TestCases\SuppressFinalizeUseless.Fixed.cs",

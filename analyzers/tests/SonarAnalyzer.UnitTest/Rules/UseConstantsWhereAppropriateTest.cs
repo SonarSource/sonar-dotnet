@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UseConstantsWhereAppropriateTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseConstantsWhereAppropriate() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseConstantsWhereAppropriate.cs", new UseConstantsWhereAppropriate());
     }

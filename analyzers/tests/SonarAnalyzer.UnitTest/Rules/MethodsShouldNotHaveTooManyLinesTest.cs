@@ -31,29 +31,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MethodsShouldNotHaveTooManyLinesTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_DefaultValues_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs", new CS.MethodsShouldNotHaveTooManyLines());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp9.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_CS() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs", new CS.MethodsShouldNotHaveTooManyLines());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_InvalidSyntax_CS() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class Foo
@@ -69,7 +64,6 @@ public class Foo
         [DataRow(1)]
         [DataRow(0)]
         [DataRow(-1)]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_InvalidMaxThreshold_CS(int max)
         {
             Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs",
@@ -80,17 +74,14 @@ public class Foo
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_DefaultValues_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb", new VB.MethodsShouldNotHaveTooManyLines());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = 2 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_VB() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb", new VB.MethodsShouldNotHaveTooManyLines());
 
@@ -98,7 +89,6 @@ public class Foo
         [DataRow(1)]
         [DataRow(0)]
         [DataRow(-1)]
-        [TestCategory("Rule")]
         public void MethodsShouldNotHaveTooManyLines_InvalidMaxThreshold_VB(int max)
         {
             Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = max });

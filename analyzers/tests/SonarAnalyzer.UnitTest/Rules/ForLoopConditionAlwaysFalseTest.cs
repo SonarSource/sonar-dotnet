@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ForLoopConditionAlwaysFalseTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ForLoopConditionAlwaysFalse() =>
             Verifier.VerifyAnalyzer(@"TestCases\ForLoopConditionAlwaysFalse.cs", new ForLoopConditionAlwaysFalse());
     }

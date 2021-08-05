@@ -28,19 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class RedundantParenthesesObjectCreationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantParenthesesObjectCreation() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesObjectCreation.cs", new RedundantParenthesesObjectsCreation());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantParenthesesObjectCreation_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantParenthesesObjectCreation.CSharp9.cs", new RedundantParenthesesObjectsCreation());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantParenthesesObjectCreation_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantParenthesesObjectCreation.cs",
                                    @"TestCases\RedundantParenthesesObjectCreation.Fixed.cs",

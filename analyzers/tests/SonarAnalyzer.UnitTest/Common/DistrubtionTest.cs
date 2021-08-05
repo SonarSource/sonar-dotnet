@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Common
     public class DistributionTest
     {
         [TestMethod]
-        [TestCategory(MetricsTest.MetricsTestCategoryName)]
         public void Distribution()
         {
             var distribution = new Distribution(new[] { 0, 10, 20 });

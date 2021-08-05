@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class StringConcatenationInLoopTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void StringConcatenationInLoop()
         {
             Verifier.VerifyAnalyzer(@"TestCases\StringConcatenationInLoop.cs", new CS.StringConcatenationInLoop());

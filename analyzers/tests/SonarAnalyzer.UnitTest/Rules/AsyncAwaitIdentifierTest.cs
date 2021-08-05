@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class AsyncAwaitIdentifierTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void AsyncAwaitIdentifier() =>
             Verifier.VerifyAnalyzer(@"TestCases\AsyncAwaitIdentifier.cs", new AsyncAwaitIdentifier());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void AsyncAwaitIdentifier_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AsyncAwaitIdentifier.CSharp9.cs", new AsyncAwaitIdentifier());
 #endif

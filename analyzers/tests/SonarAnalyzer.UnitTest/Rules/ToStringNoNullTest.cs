@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ToStringNoNullTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ToStringNoNull() =>
             Verifier.VerifyAnalyzer(@"TestCases\ToStringNoNull.cs", new ToStringNoNull());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ToStringNoNull_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ToStringNoNull.CSharp9.cs", new ToStringNoNull());
 #endif

@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ImplementSerializationMethodsCorrectlyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs", new CS.ImplementSerializationMethodsCorrectly());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_CS_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp9.cs", new CS.ImplementSerializationMethodsCorrectly());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_CS_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 [Serializable]
@@ -52,7 +49,6 @@ public class Foo
 }", new CS.ImplementSerializationMethodsCorrectly(), CompilationErrorBehavior.Ignore);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb", new VB.ImplementSerializationMethodsCorrectly());
     }

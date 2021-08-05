@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class GuardConditionOnEqualsOverrideTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void GuardConditionOnEqualsOverride() =>
             Verifier.VerifyAnalyzer(@"TestCases\GuardConditionOnEqualsOverride.cs", new GuardConditionOnEqualsOverride());
     }

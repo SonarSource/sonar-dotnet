@@ -42,7 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_MainTokens_CS(ProjectType projectType) =>
             Verify("Tokens.cs", projectType, info =>
             {
@@ -56,7 +55,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_MainTokens_VB(ProjectType projectType) =>
             Verify("Tokens.vb", projectType, info =>
             {
@@ -70,7 +68,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Identifiers_CS(ProjectType projectType) =>
             Verify("Identifiers.cs", projectType, info =>
             {
@@ -83,7 +80,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Identifiers_VB(ProjectType projectType) =>
             Verify("Identifiers.vb", projectType, info =>
             {
@@ -96,7 +92,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Trivia_CS(ProjectType projectType) =>
             Verify("Trivia.cs", projectType, info =>
             {
@@ -108,7 +103,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Trivia_VB(ProjectType projectType) =>
             Verify("Trivia.vb", projectType, info =>
             {
@@ -118,7 +112,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        [TestCategory("Utility")]
         public void Verify_IdentifierTokenThreshold() =>
             Verify("IdentifierTokenThreshold.cs", ProjectType.Product, tokenInfo =>
             {

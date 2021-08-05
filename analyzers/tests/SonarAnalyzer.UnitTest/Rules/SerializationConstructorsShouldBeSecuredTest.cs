@@ -31,7 +31,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class SerializationConstructorsShouldBeSecuredTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured.cs",
                                     new SerializationConstructorsShouldBeSecured(),
@@ -39,7 +38,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\SerializationConstructorsShouldBeSecured.CSharp9.cs",
                                     new SerializationConstructorsShouldBeSecured(),
@@ -47,7 +45,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 [Serializable]
@@ -63,14 +60,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     }", new SerializationConstructorsShouldBeSecured(), CompilationErrorBehavior.Ignore);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute() =>
             Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs",
                                     new SerializationConstructorsShouldBeSecured(),
                                     GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_PartialClasses() =>
             Verifier.VerifyNonConcurrentAnalyzer(
                                     new[]

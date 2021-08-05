@@ -28,14 +28,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UnusedReturnValueTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedReturnValue() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedReturnValue.cs",
                                     new UnusedReturnValue(),
                                     ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedReturnValueWithPartialClasses() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\UnusedReturnValue.part1.cs", @"TestCases\UnusedReturnValue.part2.cs", @"TestCases\UnusedReturnValue.External.cs" },
                                     new UnusedReturnValue(),
@@ -43,7 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedReturnValue_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedReturnValue.CSharp9.cs", new UnusedReturnValue());
 #endif

@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class OptionalParameterTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void OptionalParameter()
         {
             Verifier.VerifyAnalyzer(@"TestCases\OptionalParameter.cs", new CS.OptionalParameter());

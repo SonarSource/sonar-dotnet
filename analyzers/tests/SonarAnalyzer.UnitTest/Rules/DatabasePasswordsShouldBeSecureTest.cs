@@ -38,7 +38,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("3.1.11", "3.19.80")]
         [DataRow("5.0.2", "5.21.1")]
-        [TestCategory("Rule")]
         public void DatabasePasswordsShouldBeSecure_CS(string entityFrameworkCoreVersion, string oracleVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.cs",
                                     new DatabasePasswordsShouldBeSecure(),
@@ -62,7 +61,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\Values")]
         [DataRow(@"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\UnexpectedContent")]
-        [TestCategory("Rule")]
         public void DatabasePasswordsShouldBeSecure_CS_WebConfig(string root)
         {
             var webConfigPath = GetWebConfigPath(root);
@@ -74,7 +72,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DatabasePasswordsShouldBeSecure_CS_ExternalConnection()
         {
             var root = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\ExternalConfig";
@@ -88,7 +85,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DatabasePasswordsShouldBeSecure_CS_CorruptAndNonExistingWebConfigs_ShouldNotFail()
         {
             var root = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\Corrupt";
@@ -108,7 +104,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\EmptyArray")]
         [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\EmptyFile")]
         [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\WrongStructure")]
-        [TestCategory("Rule")]
         public void DatabasePasswordsShouldBeSecure_CS_AppSettings(string root)
         {
             var appSettingsPath = GetAppSettingsPath(root);
@@ -120,7 +115,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DatabasePasswordsShouldBeSecure_CS_CorruptAndNonExistingAppSettings_ShouldNotFail()
         {
             var root = @"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\Corrupt";

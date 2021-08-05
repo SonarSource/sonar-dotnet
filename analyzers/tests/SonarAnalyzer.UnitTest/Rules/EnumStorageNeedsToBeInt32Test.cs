@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class EnumStorageNeedsToBeInt32Test
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void EnumStorageNeedsToBeInt32() => Verifier.VerifyAnalyzer(@"TestCases\EnumStorageNeedsToBeInt32.cs", new EnumStorageNeedsToBeInt32());
     }
 }

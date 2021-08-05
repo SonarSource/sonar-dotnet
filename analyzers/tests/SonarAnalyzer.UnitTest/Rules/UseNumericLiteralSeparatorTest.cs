@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UseNumericLiteralSeparatorTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseNumericLiteralSeparator_BeforeCSharp7() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UseNumericLiteralSeparator.cs",
                                            new UseNumericLiteralSeparator(),
@@ -36,7 +35,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                            CompilationErrorBehavior.Ignore);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseNumericLiteralSeparator_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseNumericLiteralSeparator.cs",
                                     new UseNumericLiteralSeparator(),
@@ -44,7 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseNumericLiteralSeparator_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseNumericLiteralSeparator.CSharp9.cs", new UseNumericLiteralSeparator());
 #endif

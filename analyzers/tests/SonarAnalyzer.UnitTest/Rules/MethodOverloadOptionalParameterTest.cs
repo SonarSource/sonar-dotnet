@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MethodOverloadOptionalParameterTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodOverloadOptionalParameter() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadOptionalParameter.cs",
                 new MethodOverloadOptionalParameter(),
@@ -42,7 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodOverloadOptionalParameter_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverloadOptionalParameter.CSharp9.cs", new MethodOverloadOptionalParameter());
 #endif

@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UseParamsForVariableArgumentsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseParamsForVariableArguments() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseParamsForVariableArguments.cs", new UseParamsForVariableArguments());
     }

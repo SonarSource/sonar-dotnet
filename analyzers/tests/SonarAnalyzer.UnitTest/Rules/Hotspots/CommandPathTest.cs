@@ -31,14 +31,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CommandPathTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void CommandPath_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.cs", new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void CommandPath_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.vb", new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
     }

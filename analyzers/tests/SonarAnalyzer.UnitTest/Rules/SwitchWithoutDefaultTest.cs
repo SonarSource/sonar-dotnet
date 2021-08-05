@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class StringConcatenationInLoopSwitchWithoutDefaultTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void SwitchWithoutDefault()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SwitchWithoutDefault.cs", new CS.SwitchWithoutDefault());

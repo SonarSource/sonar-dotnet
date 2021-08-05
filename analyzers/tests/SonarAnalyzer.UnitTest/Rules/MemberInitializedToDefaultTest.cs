@@ -28,19 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MemberInitializedToDefaultTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MemberInitializedToDefault() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberInitializedToDefault.cs", new MemberInitializedToDefault());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MemberInitializedToDefault_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializedToDefault.CSharp9.cs", new MemberInitializedToDefault());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void MemberInitializedToDefault_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\MemberInitializedToDefault.cs",
                                    @"TestCases\MemberInitializedToDefault.Fixed.cs",

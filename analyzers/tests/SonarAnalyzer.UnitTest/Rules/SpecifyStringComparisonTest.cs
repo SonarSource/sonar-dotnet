@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class SpecifyStringComparisonTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void SpecifyStringComparison() =>
             Verifier.VerifyAnalyzer(@"TestCases\SpecifyStringComparison.cs", new SpecifyStringComparison());
     }

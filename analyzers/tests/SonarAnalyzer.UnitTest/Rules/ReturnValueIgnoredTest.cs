@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ReturnValueIgnoredTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ReturnValueIgnored() =>
             Verifier.VerifyAnalyzer(@"TestCases\ReturnValueIgnored.cs", new ReturnValueIgnored());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ReturnValueIgnored_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnValueIgnored.CSharp9.cs", new ReturnValueIgnored());
 #endif

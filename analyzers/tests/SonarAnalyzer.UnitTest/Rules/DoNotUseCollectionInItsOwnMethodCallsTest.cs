@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DoNotUseCollectionInItsOwnMethodCallsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotUseCollectionInItsOwnMethodCalls() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseCollectionInItsOwnMethodCalls.cs", new DoNotUseCollectionInItsOwnMethodCalls());
     }

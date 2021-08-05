@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ThreadResumeOrSuspendShouldNotBeCalledTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ThreadResumeOrSuspendShouldNotBeCalled() => Verifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.cs",
                 new CS.ThreadResumeOrSuspendShouldNotBeCalled());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ThreadResumeOrSuspendShouldNotBeCalled_VB() => Verifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.vb",
                 new VB.ThreadResumeOrSuspendShouldNotBeCalled());
     }

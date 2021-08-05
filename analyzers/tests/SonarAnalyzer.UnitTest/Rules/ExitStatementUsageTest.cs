@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ExitStatementUsageTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ExitStatementUsage() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExitStatementUsage.vb", new ExitStatementUsage());
     }

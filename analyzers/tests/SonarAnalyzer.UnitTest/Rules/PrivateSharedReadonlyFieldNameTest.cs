@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PrivateSharedReadonlyFieldNameTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PrivateSharedReadonlyFieldName() =>
             Verifier.VerifyAnalyzer(@"TestCases\PrivateSharedReadonlyFieldName.vb", new PrivateSharedReadonlyFieldName());
     }

@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class InfiniteRecursionTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void InfiniteRecursion() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\InfiniteRecursion.cs",

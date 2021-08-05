@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PreferJaggedArraysOverMultidimensionalTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PreferJaggedArraysOverMultidimensional() =>
             Verifier.VerifyAnalyzer(@"TestCases\PreferJaggedArraysOverMultidimensional.cs", new PreferJaggedArraysOverMultidimensional());
     }

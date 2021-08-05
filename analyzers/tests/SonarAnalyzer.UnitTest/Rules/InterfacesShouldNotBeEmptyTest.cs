@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class InterfacesShouldNotBeEmptyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void InterfacesShouldNotBeEmpty() =>
             Verifier.VerifyAnalyzer(@"TestCases\InterfacesShouldNotBeEmpty.cs", new InterfacesShouldNotBeEmpty());
     }

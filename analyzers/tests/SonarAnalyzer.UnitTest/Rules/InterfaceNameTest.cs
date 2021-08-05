@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class InterfaceNameTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void InterfaceName() =>
             Verifier.VerifyAnalyzer(@"TestCases\InterfaceName.vb", new InterfaceName());
     }

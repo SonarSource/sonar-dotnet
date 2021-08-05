@@ -27,7 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public partial class UnusedPrivateMemberTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Method_Accessibility() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateMembers
@@ -85,7 +84,6 @@ public class InterfaceImpl : IInterface
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Methods_DirectReferences() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -136,7 +134,6 @@ public class MethodUsages
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Methods_Main() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Threading.Tasks;

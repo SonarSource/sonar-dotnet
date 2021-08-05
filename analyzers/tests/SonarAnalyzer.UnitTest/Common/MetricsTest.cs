@@ -30,10 +30,7 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class MetricsTest
     {
-        internal const string MetricsTestCategoryName = "Metrics";
-
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void Lines()
         {
             Lines(AnalyzerLanguage.CSharp, "").Should().Be(1);
@@ -54,7 +51,6 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void LinesOfCode()
         {
             LinesOfCode(AnalyzerLanguage.CSharp, "").Should().BeEquivalentTo();
@@ -79,7 +75,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void CommentsWithoutHeaders()
         {
             CommentsWithoutHeaders(AnalyzerLanguage.CSharp, "").NonBlank.Should().BeEquivalentTo();
@@ -136,7 +131,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void CommentsWithHeaders()
         {
             CommentsWithHeaders(AnalyzerLanguage.CSharp, "").NonBlank.Should().BeEquivalentTo();
@@ -193,7 +187,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void Classes()
         {
             Classes(AnalyzerLanguage.CSharp, "").Should().Be(0);
@@ -215,7 +208,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void Accessors()
         {
             Functions(AnalyzerLanguage.CSharp, "").Should().Be(0);
@@ -249,7 +241,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void Statements()
         {
             Statements(AnalyzerLanguage.CSharp, "").Should().Be(0);
@@ -314,7 +305,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void Functions()
         {
             Functions(AnalyzerLanguage.CSharp, "").Should().Be(0);
@@ -346,7 +336,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void Complexity()
         {
             Complexity(AnalyzerLanguage.CSharp, "")
@@ -499,7 +488,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void CognitiveComplexity()
         {
             var csharpText = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.cs");
@@ -510,7 +498,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void WrongMetrics_CSharp()
         {
             (var syntaxTree, var semanticModel) = TestHelper.Compile("", isCSharp: false);
@@ -518,7 +505,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void WrongMetrics_VisualBasic()
         {
             (var syntaxTree, var semanticModel) = TestHelper.Compile("", isCSharp: true);
@@ -526,14 +512,12 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void ExecutableLinesMetricsIsPopulated_CSharp() =>
             ExecutableLines(AnalyzerLanguage.CSharp,
                 @"public void Foo(int x) { int i = 0; if (i == 0) {i++;i--;} else { while(true){i--;} } }")
                 .Should().BeEquivalentTo(new[] { 1 });
 
         [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void ExecutableLinesMetricsIsPopulated_VB() =>
             ExecutableLines(AnalyzerLanguage.VisualBasic,
                 @"Private Sub Foo(x As Integer)

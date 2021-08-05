@@ -29,8 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class InsecureDeserializationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void InsecureDeserialization() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\InsecureDeserialization.cs",
                                     new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
@@ -38,8 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void InsecureDeserialization_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\InsecureDeserialization.CSharp9.cs", new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
 #endif

@@ -28,17 +28,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ConsoleLoggingTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConsoleLogging() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging.cs", new ConsoleLogging());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConsoleLogging_ConditionalDirectives1() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals1.cs", new ConsoleLogging());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConsoleLogging_ConditionalDirectives2() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals2.cs", new ConsoleLogging());
     }

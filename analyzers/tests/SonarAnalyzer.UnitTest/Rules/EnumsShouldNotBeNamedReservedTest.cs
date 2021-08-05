@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class EnumsShouldNotBeNamedReservedTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void EnumsShouldNotBeNamedReserved() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumsShouldNotBeNamedReserved.cs", new EnumsShouldNotBeNamedReserved());
     }

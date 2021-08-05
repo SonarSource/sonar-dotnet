@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class SwitchDefaultClauseEmptyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void SwitchDefaultClauseEmpty() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchDefaultClauseEmpty.cs", new SwitchDefaultClauseEmpty());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void SwitchDefaultClauseEmpty_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\SwitchDefaultClauseEmpty.cs",

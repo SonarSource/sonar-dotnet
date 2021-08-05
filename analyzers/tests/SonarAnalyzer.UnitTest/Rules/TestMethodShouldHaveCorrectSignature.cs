@@ -34,7 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.MsTest.cs",
                                     new TestMethodShouldHaveCorrectSignature(),
@@ -43,7 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.NUnit.cs",
                                     new TestMethodShouldHaveCorrectSignature(),
@@ -52,21 +50,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_Xunit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.cs",
                                     new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.XunitFramework(testFwkVersion));
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_Xunit_Legacy() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.Legacy.cs",
                                     new TestMethodShouldHaveCorrectSignature(),
                                     NuGetMetadataReference.XunitFrameworkV1);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_MSTest_Miscellaneous() =>
             // Additional test cases e.g. partial classes, and methods with multiple faults.
             // We have to specify a test framework for the tests, but it doesn't really matter which
@@ -77,7 +72,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldHaveCorrectSignature.CSharp9.cs",
                                                 new TestMethodShouldHaveCorrectSignature(),

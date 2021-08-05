@@ -29,14 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class RedundantCastTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantCast() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\RedundantCast.cs",
                 new RedundantCast());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantCast_CSharp8() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\RedundantCast.CSharp8.cs",
@@ -44,7 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantCast_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\RedundantCast.cs",
@@ -53,7 +50,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new RedundantCastCodeFixProvider());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantCast_DefaultLiteral() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;

@@ -33,14 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PropertiesAccessCorrectFieldTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
                                     new CS.PropertiesAccessCorrectField(),
                                     AdditionalReferences);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.CSharp8.cs",
                                     new CS.PropertiesAccessCorrectField(),
@@ -48,23 +46,19 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesAccessCorrectField.CSharp9.cs", new CS.PropertiesAccessCorrectField());
 #else
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CS_NetFramework() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.cs", new CS.PropertiesAccessCorrectField(), AdditionalReferences);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_VB_NetFramework() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.vb", new VB.PropertiesAccessCorrectField(), AdditionalReferences);
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
                                     new VB.PropertiesAccessCorrectField(),

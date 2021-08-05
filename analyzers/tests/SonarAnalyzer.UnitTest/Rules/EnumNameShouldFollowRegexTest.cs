@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class EnumNameShouldFollowRegexTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void EnumNameShouldFollowRegex_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumNameShouldFollowRegex.cs", new CS.EnumNameShouldFollowRegex());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void EnumNameShouldFollowRegex_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumNameShouldFollowRegex.vb", new VB.EnumNameShouldFollowRegex());
     }

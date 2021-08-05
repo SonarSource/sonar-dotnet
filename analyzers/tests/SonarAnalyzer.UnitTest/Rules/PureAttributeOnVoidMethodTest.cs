@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PureAttributeOnVoidMethodTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PureAttributeOnVoidMethod_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.cs", new CS.PureAttributeOnVoidMethod());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void PureAttributeOnVoidMethod_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\PureAttributeOnVoidMethod.CSharp9.cs", new CS.PureAttributeOnVoidMethod());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void PureAttributeOnVoidMethod_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.vb", new VB.PureAttributeOnVoidMethod());
     }

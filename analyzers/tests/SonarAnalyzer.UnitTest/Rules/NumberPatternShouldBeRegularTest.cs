@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class NumberPatternShouldBeRegularTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void NumberPatternShouldBeRegular_BeforeCSharp7() =>
             Verifier.VerifyNoIssueReported(@"TestCases\NumberPatternShouldBeRegular.cs",
                                            new NumberPatternShouldBeRegular(),
@@ -36,19 +35,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                                            CompilationErrorBehavior.Ignore);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void NumberPatternShouldBeRegular_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs", new NumberPatternShouldBeRegular(), ParseOptionsHelper.FromCSharp7);
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void NumberPatternShouldBeRegular_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NumberPatternShouldBeRegular.CSharp9.cs", new NumberPatternShouldBeRegular());
 #endif
 
         [DataTestMethod]
-        [TestCategory("Rule")]
         [DataRow("1_1_1", "Group size of 1")]
         [DataRow("123_12", "First group is bigger then the second")]
         [DataRow("1234_123_123", "First group is bigger then the others")]
@@ -67,7 +63,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void HasIrregularPattern(string numericToken, string message) => Assert.IsTrue(NumberPatternShouldBeRegular.HasIrregularPattern(numericToken), message);
 
         [DataTestMethod]
-        [TestCategory("Rule")]
         [DataRow(".123_123_123_1", "No group before the dot")]
         [DataRow("123", "No group character")]
         [DataRow("1_123_123LU", "With LU suffix")]
