@@ -243,6 +243,10 @@ namespace NS
             SymbolHelper.AnyAttributeDerivesFrom(null, KnownType.Void).Should().BeFalse();
 
         [TestMethod]
+        public void AnyAttributeDerivesFromAny_WhenSymbolIsNull_ReturnsFalse() =>
+            SymbolHelper.AnyAttributeDerivesFromAny(null, ImmutableArray.Create(KnownType.Void)).Should().BeFalse();
+
+        [TestMethod]
         public void GetAttributesForKnownType_WhenSymbolIsNull_ReturnsEmpty() =>
             SymbolHelper.GetAttributes(null, KnownType.Void).Should().BeEmpty();
 
@@ -261,5 +265,21 @@ namespace NS
         [TestMethod]
         public void GetOverriddenMember_WhenSymbolIsNull_ReturnsEmpty() =>
             ((ISymbol)null).GetOverriddenMember().Should().BeNull();
+
+        [TestMethod]
+        public void GetAllNamedTypesForNamespace_WhenSymbolIsNull_ReturnsEmpty() =>
+            ((INamespaceSymbol)null).GetAllNamedTypes().Should().BeEmpty();
+
+        [TestMethod]
+        public void GetAllNamedTypesForNamedType_WhenSymbolIsNull_ReturnsEmpty() =>
+            ((INamedTypeSymbol)null).GetAllNamedTypes().Should().BeEmpty();
+
+        [TestMethod]
+        public void GetSelfAndBaseTypes_WhenSymbolIsNull_ReturnsEmpty() =>
+            ((ITypeSymbol)null).GetSelfAndBaseTypes().Should().BeEmpty();
+
+        [TestMethod]
+        public void GetEffectiveAccessibility_WhenSymbolIsNull_ReturnsNotApplicable() =>
+            ((ISymbol)null).GetEffectiveAccessibility().Should().Be(Accessibility.NotApplicable);
     }
 }

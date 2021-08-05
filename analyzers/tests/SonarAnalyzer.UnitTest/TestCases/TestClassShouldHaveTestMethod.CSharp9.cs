@@ -31,6 +31,15 @@
         {
         }
     }
+
+    [TestClass]
+    record PositionalRecord(string SomeProperty)
+    {
+        [TestMethod]
+        public void Method()
+        {
+        }
+    }
 }
 
 namespace NUnitTests

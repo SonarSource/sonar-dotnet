@@ -67,6 +67,11 @@ namespace Tests.Diagnostics
     {
 
     }
+
+    [TestClass]
+    class // Error [CS1001]
+    {
+    }
 }
 
 namespace TestSetupAndCleanupAttributes
