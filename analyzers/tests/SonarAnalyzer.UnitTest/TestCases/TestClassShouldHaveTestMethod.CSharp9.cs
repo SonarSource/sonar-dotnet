@@ -14,6 +14,23 @@
             void NestedDataTest() { }
         }
     }
+
+    [TestClass]
+    record TestSuiteRecord1 // Noncompliant {{Add some tests to this record.}}
+    {
+        public void Method()
+        {
+        }
+    }
+
+    [TestClass]
+    record TestSuiteRecord2
+    {
+        [TestMethod]
+        public void Method()
+        {
+        }
+    }
 }
 
 namespace NUnitTests

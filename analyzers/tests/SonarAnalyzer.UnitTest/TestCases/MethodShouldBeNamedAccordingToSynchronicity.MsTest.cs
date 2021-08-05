@@ -10,5 +10,13 @@ namespace Tests.Diagnostics
 
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataTestMethod]
         public async Task MSTest_DataTestMethod() { }
+
+        [DerivedTestMethodAttribute]
+        public async Task MSTest_DerivedTestMethod() { }
+    }
+
+    public class DerivedTestMethodAttribute : Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute
+    {
+
     }
 }

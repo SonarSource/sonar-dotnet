@@ -109,3 +109,43 @@ namespace TestSetupAndCleanupAttributes
         }
     }
 }
+
+namespace DerivedAttributes
+{
+
+    public class DerivedTestClassAttribute: TestClassAttribute
+    {
+
+    }
+
+    public class DerivedTestMethodAttribute: TestMethodAttribute
+    {
+
+    }
+
+    public class DerivedDataTestMethodAttribute : DataTestMethodAttribute
+    {
+
+    }
+
+    [DerivedTestClass]
+    class DerivedClassAttribute // Noncompliant
+//        ^^^^^^^^^^^^^^^^^^^^^
+    {
+    }
+
+    [DerivedTestClassAttribute]
+    class DerivedMethodAttribute1
+    {
+        [DerivedTestMethod]
+        public void Foo() { }
+    }
+
+    [DerivedTestClass]
+    class DerivedMethodAttribute2
+    {
+        [DerivedTestMethod]
+        [DataRow(1)]
+        public void Foo() { }
+    }
+}

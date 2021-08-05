@@ -195,6 +195,20 @@
         {
             Assert.IsTrue(true);
         }
+
+        [DerivedTestMethod]
+        public void DerivedTestMethod1() // Noncompliant {{Add at least one assertion to this test case.}}
+//                  ^^^^^^^^^^^^^^^^^^
+        {
+            var x = 42;
+        }
+
+        [DerivedTestMethod]
+        public void DerivedTestMethod2()
+        {
+            var x = 42;
+            Assert.AreEqual(x, 42);
+        }
     }
 
     [TestClass]
@@ -469,4 +483,10 @@
             }
         }
     }
+
+    public class DerivedTestMethodAttribute : TestMethodAttribute
+    {
+
+    }
+
 }
