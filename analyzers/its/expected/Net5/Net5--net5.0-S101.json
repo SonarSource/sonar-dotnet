@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S101",
+"message":  "Rename record 'S3604_Record' to match pascal case naming rules, consider using 'S3604Record'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3604.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  19,
+"endLine":  22,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
 "message":  "Rename record 'SerializableDerived_1' to match pascal case naming rules, consider using 'SerializableDerived1'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3925.Part1.cs",
