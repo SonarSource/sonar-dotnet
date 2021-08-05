@@ -11,3 +11,20 @@ public class MyExtension3 : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider) => null;
 }
+
+// This is fake scaffolding to avoid .NET 5 reference issue.
+// https://github.com/SonarSource/sonar-dotnet/issues/3425
+namespace System.Windows.Markup
+{
+    public interface IServiceProvider { }
+
+    public abstract class MarkupExtension
+    {
+        public abstract object ProvideValue(IServiceProvider serviceProvider);
+    }
+
+    public class ConstructorArgumentAttribute : Attribute
+    {
+        public ConstructorArgumentAttribute(string argumentName) { }
+    }
+}
