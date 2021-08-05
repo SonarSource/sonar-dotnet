@@ -8,12 +8,12 @@ class Person
     static int Bar { get; set; } = 1;
     static event EventHandler Quix = (a, b) => { };
 
-    static int maxAge = 42; // Noncompliant {{Remove the static member initializer, a static constructor or module initializer sets an initial value for the member.}}
-    static string Name = "X"; // Noncompliant
-    static string Job = "1"; // Noncompliant
-    static bool Nice = true; // Noncompliant
-    static int Foo { get; set; } = 1; // Noncompliant
-    static event EventHandler Taz = (a, b) => { }; // Noncompliant
+    static int maxAge; // Fixed
+    static string Name; // Fixed
+    static string Job; // Fixed
+    static bool Nice; // Fixed
+    static int Foo { get; set; } // Fixed
+    static event EventHandler Taz; // Fixed
 
     public Person() { } // for coverage
 
@@ -120,7 +120,7 @@ record EmptyRecordForCoverage { }
 
 struct Struct1
 {
-    static int b = 1; // Noncompliant
+    static int b; // Fixed
     static int b2 = 2;
 
     [ModuleInitializer]
@@ -129,9 +129,9 @@ struct Struct1
 
 interface SomeInterface
 {
-    static int Field = 1; // Noncompliant
+    static int Field; // Fixed
     static int Field2 = 2;
-    static event EventHandler Taz = (a, b) => { }; // Noncompliant
+    static event EventHandler Taz; // Fixed
 
     [ModuleInitializer]
     internal static void Initialize()

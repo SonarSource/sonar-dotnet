@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3963",
+"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3604.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  9,
+"endLine":  19,
+"endColumn":  10
+}
+}
+}
+]
+}

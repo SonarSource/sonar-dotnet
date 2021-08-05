@@ -32,15 +32,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MemberInitializerRedundant() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
 
-#if NET
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void MemberInitializerRedundant_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializerRedundant.CSharp9.cs", new MemberInitializerRedundant());
-
-#endif
-
         [TestMethod]
         [TestCategory("CodeFix")]
         public void MemberInitializerRedundant_CodeFix() =>
@@ -49,5 +40,22 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\MemberInitializerRedundant.Fixed.cs",
                 new MemberInitializerRedundant(),
                 new MemberInitializedToDefaultCodeFixProvider());
+
+#if NET
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MemberInitializerRedundant_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializerRedundant.CSharp9.cs", new MemberInitializerRedundant());
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void MemberInitializerRedundant_CSharp9_CodeFix() =>
+            Verifier.VerifyCodeFix(
+                @"TestCases\MemberInitializerRedundant.CSharp9.cs",
+                @"TestCases\MemberInitializerRedundant.CSharp9.Fixed.cs",
+                new MemberInitializerRedundant(),
+                new MemberInitializedToDefaultCodeFixProvider(),
+                ParseOptionsHelper.FromCSharp9);
+#endif
     }
 }

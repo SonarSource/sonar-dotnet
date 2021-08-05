@@ -106,6 +106,19 @@
 },
 {
 "id":  "S2933",
+"message":  "Make 'foo' 'readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3604.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  16,
+"endLine":  24,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S2933",
 "message":  "Make 'exception' 'readonly'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3928.cs",

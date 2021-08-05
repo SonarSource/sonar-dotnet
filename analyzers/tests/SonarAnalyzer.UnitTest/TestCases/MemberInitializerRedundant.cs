@@ -67,6 +67,7 @@ namespace Tests.Diagnostics
     class Person3
     {
         int age = 42; // Noncompliant
+        int id = 42; // only set in the second constructor
         public Person3(int age)
         {
             this.age = age;
@@ -75,6 +76,7 @@ namespace Tests.Diagnostics
         public Person3(int age, int other)
             : this(age)
         {
+            id = other;
         }
     }
 
@@ -187,6 +189,40 @@ namespace Tests.Diagnostics
         public Person11() => a = 42;
     }
 
+    class Person12
+    {
+        int age;
+        public Person12()
+        {
+            age = 0; // FN
+        }
+    }
+
+    class Person13
+    {
+        static int x = 42; // Noncompliant {{Remove the static member initializer, a static constructor or module initializer sets an initial value for the member.}}
+        static int y;
+        static int z { get; } = 2; // Noncompliant
+        static event EventHandler w = (a, b) => { }; // Noncompliant
+        static Person13()
+        {
+            x = 41;
+            y = 41;
+            z = 2;
+            w = (a, b) => { };
+        }
+    }
+
+    class Person14
+    {
+        static int x = 42; // Compliant
+        static Person14()
+        {
+            Console.WriteLine(x);
+            x = 41;
+        }
+    }
+
     class CSharp8_PersonA
     {
         int age = 42;
@@ -210,4 +246,33 @@ namespace Tests.Diagnostics
             this.ids ??= ids;
         }
     }
+
+    class BaseClass
+    {
+        int foo = 42; // Noncompliant
+        public BaseClass(int i)
+        {
+            foo = 42;
+        }
+    }
+    class NewClass : BaseClass
+    {
+        int baz = 0; // FN
+        public NewClass() : base(1)
+        {
+            baz = 0;
+        }
+    }
+
+    struct Struct1
+    {
+        // structs cannot initialize instance fields/properties at declaration, only const
+        const int a = 42;
+        static int b = 1; // Noncompliant
+        static int b2 = 2;
+
+        static Struct1() => b = 1;
+    }
+    class EmptyClassForCoverage { }
+    struct EmptyStructForCoverage { }
 }
