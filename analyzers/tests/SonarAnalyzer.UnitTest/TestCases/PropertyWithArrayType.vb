@@ -48,7 +48,7 @@ Public Class Sample
     Inherits Base
     Implements IBase
 
-    Public ReadOnly Property Hash As Byte() Implements IBase.Hash   ' Noncompliant FP, this class cannot change interface signature
+    Public ReadOnly Property Hash As Byte() Implements IBase.Hash   ' Compliant, this class cannot change interface signature
         Get
         End Get
     End Property

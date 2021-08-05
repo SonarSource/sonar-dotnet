@@ -44,12 +44,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var propertyStatement = (PropertyStatementSyntax)c.Node;
-                    if (!propertyStatement.Modifiers.Any(x => x.IsKind(SyntaxKind.OverridesKeyword))
-                        && c.SemanticModel.GetDeclaredSymbol(propertyStatement) is { } symbol
+                    var property = (PropertyStatementSyntax)c.Node;
+                    if (property.ImplementsClause is null
+                        && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.OverridesKeyword))
+                        && c.SemanticModel.GetDeclaredSymbol(property) is { } symbol
                         && symbol.Type is IArrayTypeSymbol)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, propertyStatement.Identifier.GetLocation(), symbol.Name));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, property.Identifier.GetLocation(), symbol.Name));
                     }
                 },
                 SyntaxKind.PropertyStatement);
