@@ -1,7 +1,6 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace Tests.Diagnostics.PartialMethods
+namespace Net5
 {
     public partial class Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class
     {
