@@ -25,9 +25,17 @@ namespace SonarAnalyzer.Helpers.Facade
 {
     internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     {
-        public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
-        public SyntaxKind[] ObjectCreationExpressions => new[] {SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression};
+        public SyntaxKind Attribute => SyntaxKind.Attribute;
         public SyntaxKind[] ClassAndRecordDeclaration => new[] {SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration};
+        public SyntaxKind EnumDeclaration => SyntaxKind.EnumDeclaration;
+        public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
+        public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
+        public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
+        public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
+        public SyntaxKind[] ObjectCreationExpressions => new[] {SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression};
+        public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
+        public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
+        public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
         public SyntaxKind[] TypeDeclaration => new[]
         {
             SyntaxKind.ClassDeclaration,
@@ -36,13 +44,5 @@ namespace SonarAnalyzer.Helpers.Facade
             SyntaxKind.EnumDeclaration,
             SyntaxKindEx.RecordDeclaration
         };
-        public SyntaxKind EnumDeclaration => SyntaxKind.EnumDeclaration;
-        public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
-        public SyntaxKind Attribute => SyntaxKind.Attribute;
-        public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
-        public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
-        public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
-        public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
-        public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
     }
 }

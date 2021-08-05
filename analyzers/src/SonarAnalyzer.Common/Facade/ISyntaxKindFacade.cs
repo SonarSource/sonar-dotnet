@@ -23,17 +23,17 @@ namespace SonarAnalyzer.Helpers.Facade
     public interface ISyntaxKindFacade<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        abstract TSyntaxKind InvocationExpression { get; }
-        abstract TSyntaxKind[] ObjectCreationExpressions { get; }
-        abstract TSyntaxKind[] ClassAndRecordDeclaration { get; }
-        abstract TSyntaxKind[] TypeDeclaration { get; }
-        abstract TSyntaxKind EnumDeclaration { get; }
-        abstract TSyntaxKind SimpleMemberAccessExpression { get; }
         abstract TSyntaxKind Attribute { get; }
+        abstract TSyntaxKind[] ClassAndRecordDeclaration { get; }
+        abstract TSyntaxKind EnumDeclaration { get; }
         abstract TSyntaxKind IdentifierName { get; }
         abstract TSyntaxKind IdentifierToken { get; }
-        abstract TSyntaxKind StringLiteralExpression { get; }
+        abstract TSyntaxKind InvocationExpression { get; }
         abstract TSyntaxKind InterpolatedStringExpression { get; }
+        abstract TSyntaxKind[] ObjectCreationExpressions { get; }
         abstract TSyntaxKind ReturnStatement { get; }
+        abstract TSyntaxKind SimpleMemberAccessExpression { get; }
+        abstract TSyntaxKind StringLiteralExpression { get; }
+        abstract TSyntaxKind[] TypeDeclaration { get; }
     }
 }
