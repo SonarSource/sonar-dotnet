@@ -86,10 +86,10 @@ namespace SonarAnalyzer.Helpers
         /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes)
         /// </summary>
         public static bool IsTestClass(this INamedTypeSymbol classSymbol) =>
-            classSymbol.GetAttributes(KnownTestClassAttributes).Any();
+            classSymbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
 
         public static bool IsTestMethod(this IMethodSymbol method) =>
-            method.GetAttributes(KnownTestMethodAttributes).Any();
+            method.AnyAttributeDerivesFromAny(KnownTestMethodAttributes);
 
         public static bool HasExpectedExceptionAttribute(this IMethodSymbol method) =>
             method.GetAttributes().Any(a => a.AttributeClass.IsAny(KnownExpectedExceptionAttributes));
