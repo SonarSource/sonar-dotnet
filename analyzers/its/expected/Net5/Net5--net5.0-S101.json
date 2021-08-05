@@ -12,6 +12,58 @@
 "endColumn":  31
 }
 }
+},
+{
+"id":  "S101",
+"message":  "Rename record 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataRecord'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  27,
+"endLine":  15,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename record 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataRecord'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataSeparateFilesClass'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  26,
+"endLine":  36,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataSeparateFilesClass'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part2.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  26,
+"endLine":  5,
+"endColumn":  103
+}
+}
 }
 ]
 }

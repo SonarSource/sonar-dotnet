@@ -355,25 +355,12 @@
 "id":  "S109",
 "message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
-"region":  {
-"startLine":  24,
-"startColumn":  16,
-"endLine":  24,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
 "uri":  "sources\Net5\Net5\S3251.Part2.cs",
 "region":  {
-"startLine":  22,
-"startColumn":  16,
-"endLine":  22,
-"endColumn":  18
+"startLine":  24,
+"startColumn":  20,
+"endLine":  24,
+"endColumn":  22
 }
 }
 },

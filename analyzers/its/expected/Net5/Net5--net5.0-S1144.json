@@ -162,23 +162,10 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3251.Part1.cs",
 "region":  {
-"startLine":  3,
-"startColumn":  5,
-"endLine":  3,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private method 'Method'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  5,
-"endLine":  47,
-"endColumn":  27
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  31
 }
 }
 },
@@ -188,10 +175,10 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3251.Part1.cs",
 "region":  {
-"startLine":  48,
-"startColumn":  5,
-"endLine":  48,
-"endColumn":  28
+"startLine":  6,
+"startColumn":  9,
+"endLine":  6,
+"endColumn":  32
 }
 }
 },
@@ -201,10 +188,10 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3251.Part2.cs",
 "region":  {
-"startLine":  3,
-"startColumn":  5,
-"endLine":  3,
-"endColumn":  28
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  32
 }
 }
 },
