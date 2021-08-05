@@ -93,19 +93,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static IEnumerable<TSyntax> DeclarationOrImplementation<TSyntax>(TypeDeclarationSyntax typeDeclaration, IMethodSymbol symbol)
-        {
-            if (symbol == null)
-            {
-                return Enumerable.Empty<TSyntax>();
-            }
-
-            return symbol.PartialImplementationPart != null
-                   && symbol.PartialImplementationPart?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } partialImplementation
+        // symbol should be checked for null in the caller.
+        private static IEnumerable<TSyntax> DeclarationOrImplementation<TSyntax>(TypeDeclarationSyntax typeDeclaration, IMethodSymbol symbol) =>
+            symbol.PartialImplementationPart != null
+                   && symbol.PartialImplementationPart.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } partialImplementation
                    && typeDeclaration.DescendantNodes().Any(x => x.Equals(partialImplementation))
                 ? new[] { partialImplementation }.Cast<TSyntax>()
                 : symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax()).Cast<TSyntax>();
-        }
 
         private static IEnumerable<SecondaryLocation> CheckGetObjectData(TypeDeclarationSyntax typeDeclaration, INamedTypeSymbol typeSymbol, IMethodSymbol getObjectData)
         {
