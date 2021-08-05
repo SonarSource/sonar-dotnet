@@ -82,7 +82,17 @@ public class SarifParserFactoryTest {
     Files.write(f, "{}".getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
     SarifParserFactory.create(new RoslynReport(null, f), String::toString);
   }
-
+  
+  @Test
+  public void testNullJson() throws IOException {
+    thrown.expectMessage("Unable to parse the Roslyn SARIF report file:");
+    thrown.expectMessage("invalid.json");
+    thrown.expectMessage("Unrecognized format");
+    Path f = temp.newFile("null.json").toPath();
+    Files.write(f, "null".getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
+    SarifParserFactory.create(new RoslynReport(null, f), String::toString);
+  }
+  
   @Test
   public void testCreate_v10() {
     SarifParser parser = SarifParserFactory.create(new RoslynReport(null, Paths.get("src/test/resources/SarifParserTest/v1_0.json")), String::toString);
