@@ -30,6 +30,19 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
+"uri":  "sources\Net5\Net5\S2953.Part2.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  29,
+"endLine":  5,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
 "uri":  "sources\Net5\Net5\S3251.Part2.cs",
 "region":  {
 "startLine":  7,
@@ -88,6 +101,32 @@
 "startColumn":  38,
 "endLine":  7,
 "endColumn":  51
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  29,
+"endLine":  62,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4583.Part2.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  29,
+"endLine":  10,
+"endColumn":  38
 }
 }
 }
