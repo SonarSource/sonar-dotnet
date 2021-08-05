@@ -203,7 +203,7 @@ stages:
           . .\scripts\utils.ps1
           cd analyzers
 
-          nuget restore -LockedMode -ConfigFile "NuGet.Config" $(solution)
+          nuget restore -LockedMode -ConfigFile "NuGet.Config" SonarAnalyzer.sln
 
           $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
 
