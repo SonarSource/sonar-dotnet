@@ -29,13 +29,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class BinaryOperationWithIdenticalExpressionsTest
     {
         [TestMethod]
-        public void BinaryOperationWithIdenticalExpressions_CSharp() =>
+        public void BinaryOperationWithIdenticalExpressions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.cs",
                 new CS.BinaryOperationWithIdenticalExpressions());
 
         [TestMethod]
-        public void BinaryOperationWithIdenticalExpressions_VisualBasic() =>
+        public void BinaryOperationWithIdenticalExpressions_TestProject_CS() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\BinaryOperationWithIdenticalExpressions.cs",
+                new CS.BinaryOperationWithIdenticalExpressions(),
+                TestHelper.ProjectTypeReference(SonarAnalyzer.Helpers.ProjectType.Test));
+
+        [TestMethod]
+        public void BinaryOperationWithIdenticalExpressions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.vb",
                 new VB.BinaryOperationWithIdenticalExpressions());
+
+        [TestMethod]
+        public void BinaryOperationWithIdenticalExpressions_TestProject_VB() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\BinaryOperationWithIdenticalExpressions.vb",
+                new VB.BinaryOperationWithIdenticalExpressions(),
+                TestHelper.ProjectTypeReference(SonarAnalyzer.Helpers.ProjectType.Test));
     }
 }
