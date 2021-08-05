@@ -12,6 +12,32 @@
 "endColumn":  27
 }
 }
+},
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3251.Part1.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  24,
+"endLine":  22,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3251.Part2.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  24,
+"endLine":  20,
+"endColumn":  27
+}
+}
 }
 ]
 }
