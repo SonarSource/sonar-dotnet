@@ -19,33 +19,38 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+#if NET
+using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+#else
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
+#endif
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class ConstructorArgumentValueShouldExistTest
     {
+#if NET
+        [TestMethod]
+        public void ConstructorArgumentValueShouldExist_CS_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConstructorArgumentValueShouldExist.CSharp9.cs",
+                new CS.ConstructorArgumentValueShouldExist());
+#else
         [TestMethod]
         public void ConstructorArgumentValueShouldExist_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.cs",
                 new CS.ConstructorArgumentValueShouldExist(),
                 MetadataReferenceFacade.SystemXaml);
 
-#if NET
-        [TestMethod]
-        public void ConstructorArgumentValueShouldExist_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConstructorArgumentValueShouldExist.CSharp9.cs",
-                new CS.ConstructorArgumentValueShouldExist());
-#endif
-
         [TestMethod]
         public void ConstructorArgumentValueShouldExist_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.vb",
                 new VB.ConstructorArgumentValueShouldExist(),
                 MetadataReferenceFacade.SystemXaml);
+#endif
     }
 }
