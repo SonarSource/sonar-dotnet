@@ -25,7 +25,9 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,12 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class TestClassShouldHaveTestMethod : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2187";
-        private const string MessageFormat = "Add some tests to this class.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private const string DiagnosticId = "S2187";
+        private const string MessageFormat = "Add some tests to this {0}.";
 
         private static readonly ImmutableArray<KnownType> HandledGlobalSetupAndCleanUpAttributes =
             ImmutableArray.Create(
@@ -46,45 +44,53 @@ namespace SonarAnalyzer.Rules.CSharp
                 // NUnit has equivalent attributes, but they can only be applied to classes
                 // marked with [SetupFixture], which cannot contain tests.
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyInitializeAttribute,
-                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute
-            );
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        private static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    if (classDeclaration.Identifier.IsMissing)
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
                     {
                         return;
                     }
 
-                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
-
-                    if (classSymbol != null &&
-                        IsViolatingRule(classSymbol) &&
-                        !IsExceptionToTheRule(classSymbol))
+                    var typeDeclaration = (TypeDeclarationSyntax)c.Node;
+                    if (typeDeclaration.Identifier.IsMissing)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
+                        return;
+                    }
+
+                    var typeSymbol = c.SemanticModel.GetDeclaredSymbol(typeDeclaration);
+
+                    if (typeSymbol != null
+                        && IsViolatingRule(typeSymbol)
+                        && !IsExceptionToTheRule(typeSymbol))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), typeDeclaration.GetDeclarationTypeName()));
                     }
                 },
-                SyntaxKind.ClassDeclaration);
-        }
+                SyntaxKind.ClassDeclaration,
+                SyntaxKindEx.RecordDeclaration);
 
         private static bool HasAnyTestMethod(INamedTypeSymbol classSymbol) =>
             classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.IsTestMethod());
 
-        private bool IsViolatingRule(INamedTypeSymbol classSymbol) =>
-            classSymbol.IsTestClass() &&
-            !HasAnyTestMethod(classSymbol);
+        private static bool IsViolatingRule(INamedTypeSymbol classSymbol) =>
+            classSymbol.IsTestClass()
+            && !HasAnyTestMethod(classSymbol);
 
-        private bool IsExceptionToTheRule(INamedTypeSymbol classSymbol) =>
-            classSymbol.IsAbstract ||
-            (classSymbol.BaseType.IsAbstract && HasAnyTestMethod(classSymbol.BaseType)) ||
-            HasSetupOrCleanupAttributes(classSymbol);
+        private static bool IsExceptionToTheRule(INamedTypeSymbol classSymbol) =>
+            classSymbol.IsAbstract
+            || (classSymbol.BaseType.IsAbstract && HasAnyTestMethod(classSymbol.BaseType))
+            || HasSetupOrCleanupAttributes(classSymbol);
 
-        private bool HasSetupOrCleanupAttributes(INamedTypeSymbol classSymbol) =>
+        private static bool HasSetupOrCleanupAttributes(INamedTypeSymbol classSymbol) =>
             classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledGlobalSetupAndCleanUpAttributes).Any());
     }
 }
