@@ -57,6 +57,5 @@ public class SarifParserFactory {
       }
 
       throw new IllegalStateException(String.format("Unable to parse the Roslyn SARIF report file: %s. Unrecognized format", report.getReportPath().toAbsolutePath()));
-    }
   }
 }
