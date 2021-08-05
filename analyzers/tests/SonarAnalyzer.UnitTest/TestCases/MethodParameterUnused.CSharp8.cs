@@ -124,13 +124,24 @@ namespace Tests.TestCases
     // https://github.com/SonarSource/sonar-dotnet/issues/4704
     public static  class Repro_4704
     {
-        private static void ConfigureAndValidateSettings(this int someNumber, string someString) // Noncompliant FP
+        private static void ConfigureAndValidateSettings(this int someNumber, string someString)    // Compliant, captured in generic local method
         {
             PrintSomeSum<int>();
 
             void PrintSomeSum<TOptions>() where TOptions : struct
             {
                 Console.WriteLine(someNumber + someString.Length);
+            }
+        }
+
+        private static void NotInvoked(string someString)    // Noncompliant
+        {
+            var somethingWithGenericName = new System.Lazy<object>(() => null);
+            Undefined<int>(); // Error [CS0103] The name 'Undefined' does not exist in the current context
+
+            void PrintSomeSum<TOptions>() where TOptions : struct
+            {
+                Console.WriteLine(someString.Length);
             }
         }
     }
