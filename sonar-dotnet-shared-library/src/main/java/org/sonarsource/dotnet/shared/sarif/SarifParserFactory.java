@@ -34,26 +34,29 @@ public class SarifParserFactory {
   }
 
   public static SarifParser create(RoslynReport report, UnaryOperator<String> toRealPath) {
-    try (InputStreamReader reader = new InputStreamReader(Files.newInputStream(report.getReportPath()), StandardCharsets.UTF_8)) {
+      try (InputStreamReader reader = new InputStreamReader(Files.newInputStream(report.getReportPath()), StandardCharsets.UTF_8)) {
+        JsonParser parser = new JsonParser();
+        JsonElement parsed = parser.parse(reader);
+        if(!parsed.isJsonNull()){
+          JsonObject root = parsed.getAsJsonObject();
+          if (!root.isJsonNull() && root.has("version")) {
+            String version = root.get("version").getAsString();
 
-      JsonParser parser = new JsonParser();
-      JsonObject root = parser.parse(reader).getAsJsonObject();
-      if (root.has("version")) {
-        String version = root.get("version").getAsString();
-
-        switch (version) {
-          case "0.4":
-          case "0.1":
-            return new SarifParser01And04(report.getProject(), root, toRealPath);
-          case "1.0":
-          default:
-            return new SarifParser10(report.getProject(), root, toRealPath);
+            switch (version) {
+              case "0.4":
+              case "0.1":
+                return new SarifParser01And04(report.getProject(), root, toRealPath);
+              case "1.0":
+              default:
+                return new SarifParser10(report.getProject(), root, toRealPath);
+            }
+          }
         }
+      } catch (IOException e) {
+        throw new IllegalStateException("Unable to read the Roslyn SARIF report file: " + report.getReportPath().toAbsolutePath(), e);
       }
-    } catch (IOException e) {
-      throw new IllegalStateException("Unable to read the Roslyn SARIF report file: " + report.getReportPath().toAbsolutePath(), e);
-    }
 
-    throw new IllegalStateException(String.format("Unable to parse the Roslyn SARIF report file: %s. Unrecognized format", report.getReportPath().toAbsolutePath()));
+      throw new IllegalStateException(String.format("Unable to parse the Roslyn SARIF report file: %s. Unrecognized format", report.getReportPath().toAbsolutePath()));
+    }
   }
 }
