@@ -35,27 +35,22 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DisposeNotImplementingDispose : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2953";
+        private const string DiagnosticId = "S2953";
         private const string MessageFormat = "Either implement 'IDisposable.Dispose', or totally rename this method to prevent confusion.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         private const string DisposeMethodName = "Dispose";
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
                     var declaredSymbol = (INamedTypeSymbol)c.Symbol;
 
-                    // Partial classes are not processed, see https://github.com/dotnet/roslyn/issues/3748
-                    // And ref structs cannot inherit from the IDisposable interface
-                    if (declaredSymbol.DeclaringSyntaxReferences.Length > 1 ||
-                        declaredSymbol.IsRefStruct())
+                    // ref structs cannot inherit from the IDisposable interface
+                    if (declaredSymbol.IsRefStruct())
                     {
                         return;
                     }
@@ -78,16 +73,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     var disposeMethodsCalledFromDispose = new HashSet<IMethodSymbol>();
                     CollectInvocationsFromDisposeImplementation(disposeMethod, c.Compilation, mightImplementDispose, disposeMethodsCalledFromDispose);
 
-                    ReportDisposeMethods(
-                        namedDispose.Except(mightImplementDispose).Where(m => !disposeMethodsCalledFromDispose.Contains(m)),
-                        c);
+                    ReportDisposeMethods(namedDispose.Except(mightImplementDispose).Where(m => !disposeMethodsCalledFromDispose.Contains(m)), c);
                 },
                 SymbolKind.NamedType);
-        }
 
         private static void CollectInvocationsFromDisposeImplementation(IMethodSymbol disposeMethod, Compilation compilation,
-            HashSet<IMethodSymbol> mightImplementDispose,
-            HashSet<IMethodSymbol> disposeMethodsCalledFromDispose)
+                                                                        HashSet<IMethodSymbol> mightImplementDispose,
+                                                                        HashSet<IMethodSymbol> disposeMethodsCalledFromDispose)
         {
             foreach (var method in mightImplementDispose
                 .Where(method => MethodIsDisposeImplementation(method, disposeMethod)))
@@ -105,23 +97,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 var invocations = methodDeclaration.Node.DescendantNodes().OfType<InvocationExpressionSyntax>();
                 foreach (var invocation in invocations)
                 {
-                    CollectDisposeMethodsCalledFromDispose(invocation, methodDeclaration.SemanticModel,
-                        disposeMethodsCalledFromDispose);
+                    CollectDisposeMethodsCalledFromDispose(invocation, methodDeclaration.SemanticModel, disposeMethodsCalledFromDispose);
                 }
             }
         }
 
         private static void CollectDisposeMethodsCalledFromDispose(InvocationExpressionSyntax invocationExpression,
-            SemanticModel semanticModel,
-            HashSet<IMethodSymbol> disposeMethodsCalledFromDispose)
+                                                                   SemanticModel semanticModel,
+                                                                   HashSet<IMethodSymbol> disposeMethodsCalledFromDispose)
         {
             if (!invocationExpression.IsOnThis())
             {
                 return;
             }
 
-            if (!(semanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol invokedMethod) ||
-                invokedMethod.Name != DisposeMethodName)
+            if (!(semanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol invokedMethod) || invokedMethod.Name != DisposeMethodName)
             {
                 return;
             }
@@ -130,17 +120,21 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void ReportDisposeMethods(IEnumerable<IMethodSymbol> disposeMethods,
-            SymbolAnalysisContext context)
+                                                 SymbolAnalysisContext context)
         {
-            foreach (var location in disposeMethods.SelectMany(m => m.Locations))
+            foreach (var disposeMethod in disposeMethods)
             {
-                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(
-                    rule, location));
+                foreach (var location in disposeMethod.Locations)
+                {
+                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, disposeMethod.PartialImplementationPart?.Locations ?? Enumerable.Empty<Location>()));
+                }
             }
         }
 
-        private static void CollectMethodsNamedAndImplementingDispose(IMethodSymbol methodSymbol, IMethodSymbol disposeMethod,
-            HashSet<IMethodSymbol> namedDispose, HashSet<IMethodSymbol> mightImplementDispose)
+        private static void CollectMethodsNamedAndImplementingDispose(IMethodSymbol methodSymbol,
+                                                                      IMethodSymbol disposeMethod,
+                                                                      HashSet<IMethodSymbol> namedDispose,
+                                                                      HashSet<IMethodSymbol> mightImplementDispose)
         {
             if (methodSymbol.Name != DisposeMethodName)
             {
@@ -149,24 +143,22 @@ namespace SonarAnalyzer.Rules.CSharp
 
             namedDispose.Add(methodSymbol);
 
-            if (methodSymbol.IsOverride ||
-                MethodIsDisposeImplementation(methodSymbol, disposeMethod) ||
-                MethodMightImplementDispose(methodSymbol))
+            if (methodSymbol.IsOverride
+                || MethodIsDisposeImplementation(methodSymbol, disposeMethod)
+                || MethodMightImplementDispose(methodSymbol))
             {
                 mightImplementDispose.Add(methodSymbol);
             }
         }
 
-        private static bool MethodIsDisposeImplementation(IMethodSymbol methodSymbol, IMethodSymbol disposeMethod)
-        {
-            return methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethod));
-        }
+        private static bool MethodIsDisposeImplementation(IMethodSymbol methodSymbol, IMethodSymbol disposeMethod) =>
+            methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethod));
 
         private static bool MethodMightImplementDispose(IMethodSymbol declaredMethodSymbol)
         {
             var containingType = declaredMethodSymbol.ContainingType;
 
-            if (containingType.BaseType != null && containingType.BaseType.Kind == SymbolKind.ErrorType)
+            if (containingType.BaseType is { Kind: SymbolKind.ErrorType })
             {
                 return true;
             }

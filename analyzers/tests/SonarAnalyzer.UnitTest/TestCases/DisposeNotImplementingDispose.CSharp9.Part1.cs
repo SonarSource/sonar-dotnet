@@ -20,14 +20,29 @@ public record GarbageDisposalExceptionBase : IDisposable
     }
 }
 
-public partial record MyPartial // FN, partial classes are not processed, see https://github.com/dotnet/roslyn/issues/3748
+public partial record MyPartial
 {
-    public partial void Dispose();
+    public partial void Dispose();   // Noncompliant
 }
 
 public partial record MyPartial
 {
+    public partial void Dispose() { } // Secondary
+}
+
+public partial record MyPartial2 : IDisposable
+{
+    public partial void Dispose();
+}
+
+public partial record MyPartial2 : IDisposable
+{
     public partial void Dispose() { }
+}
+
+public partial record MyPartial3
+{
+    public partial void Dispose();   // Noncompliant [another-file]
 }
 
 public ref partial struct RefStruct

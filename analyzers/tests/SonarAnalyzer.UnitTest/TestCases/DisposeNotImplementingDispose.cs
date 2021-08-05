@@ -73,6 +73,17 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class NoRealDisposalDone : IDisposable
+    {
+        private void Dummy() { }
+
+        public void Dispose()
+        {
+            Dummy();
+            NotExists();  // Error [CS0103]
+        }
+    }
+
     public class GarbageDisposalException2 : SomeUnknownType // Error [CS0246] - unknown type
     {
         protected override void Dispose(bool disposing) // Error [CS0115] - no method to override
@@ -120,13 +131,13 @@ namespace Tests.Diagnostics
         }
     }
 
-    public partial class MyPartial // FN, partial classes are not processed, see https://github.com/dotnet/roslyn/issues/3748
+    public partial class MyPartial
     {
     }
 
     public partial class MyPartial
     {
-        void Dispose() { }
+        void Dispose() { }  // Noncompliant
     }
 
     public ref struct RefStruct

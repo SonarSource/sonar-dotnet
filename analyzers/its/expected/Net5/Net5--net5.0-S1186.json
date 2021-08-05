@@ -30,6 +30,19 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
+"uri":  "sources\Net5\Net5\S2953.Part2.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  29,
+"endLine":  5,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
 "uri":  "sources\Net5\Net5\S3251.Part1.cs",
 "region":  {
 "startLine":  12,

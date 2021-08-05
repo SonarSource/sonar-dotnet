@@ -156,9 +156,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             foreach (var diagnostic in diagnostics)
             {
-                var expectedIssues = diagnostic.Location.SourceTree != null
-                    ? expectedIssuesPerFile.Single(x => x.FileName == diagnostic.Location.SourceTree.FilePath).IssueLocations
-                    : expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IIssueLocation>(); // Issue locations get removed, so the list could become empty
+                var expectedIssues = ExpectedIssues(expectedIssuesPerFile, diagnostic.Location);
                 var issueId = VerifyPrimaryIssue(languageVersion,
                     expectedIssues,
                     issue => issue.IsPrimary,
@@ -175,8 +173,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
                 foreach (var secondaryLocation in secondaryLocations)
                 {
+                    var expectedIssuesSecondaryLocation = ExpectedIssues(expectedIssuesPerFile, secondaryLocation.Location);
                     VerifySecondaryIssue(languageVersion,
-                        expectedIssues,
+                        expectedIssuesSecondaryLocation,
                         issue => issue.IssueId == issueId && !issue.IsPrimary,
                         secondaryLocation.Location,
                         secondaryLocation.Message,
@@ -196,6 +195,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 Execute.Assertion.FailWith($"{languageVersion}: Issue(s) expected but not raised in file(s):{issuesString}");
             }
         }
+
+        private static IList<IIssueLocation> ExpectedIssues(FileIssueLocations[] expectedIssuesPerFile, Location location) =>
+            location.SourceTree == null
+                ? expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IIssueLocation>() // Issue locations get removed, so the list could become empty
+                : expectedIssuesPerFile.Single(x => x.FileName == location.SourceTree.FilePath).IssueLocations;
 
         private static void DumpActualDiagnostics(string languageVersion, IEnumerable<Diagnostic> diagnostics)
         {
