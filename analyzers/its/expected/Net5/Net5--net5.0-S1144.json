@@ -162,23 +162,10 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3251.Part1.cs",
 "region":  {
-"startLine":  3,
-"startColumn":  5,
-"endLine":  3,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private method 'Method'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  5,
-"endLine":  47,
-"endColumn":  27
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  31
 }
 }
 },
@@ -188,10 +175,10 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3251.Part1.cs",
 "region":  {
-"startLine":  48,
-"startColumn":  5,
-"endLine":  48,
-"endColumn":  28
+"startLine":  6,
+"startColumn":  9,
+"endLine":  6,
+"endColumn":  32
 }
 }
 },
@@ -201,10 +188,10 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3251.Part2.cs",
 "region":  {
-"startLine":  3,
-"startColumn":  5,
-"endLine":  3,
-"endColumn":  28
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  32
 }
 }
 },
@@ -283,58 +270,6 @@
 "startColumn":  9,
 "endLine":  28,
 "endColumn":  89
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'serializableField'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  45,
-"startColumn":  9,
-"endLine":  45,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'field'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  9,
-"endLine":  62,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'serializableField'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  133,
-"startColumn":  9,
-"endLine":  133,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'serializableField'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  155,
-"startColumn":  9,
-"endLine":  155,
-"endColumn":  54
 }
 }
 },

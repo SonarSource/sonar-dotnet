@@ -15,208 +15,13 @@
 },
 {
 "id":  "S101",
-"message":  "Rename record 'SerializableDerived_1' to match pascal case naming rules, consider using 'SerializableDerived1'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  43,
-"startColumn":  19,
-"endLine":  43,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Serializable_NoAttribute' to match pascal case naming rules, consider using 'SerializableNoAttribute'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  60,
-"startColumn":  19,
-"endLine":  60,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Serializable_NoAttribute_1' to match pascal case naming rules, consider using 'SerializableNoAttribute1'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  19,
-"endLine":  70,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Serializable_ExplicitImplementation' to match pascal case naming rules, consider using 'SerializableExplicitImplementation'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  78,
-"startColumn":  19,
-"endLine":  78,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Serializable_ExplicitImplementation2' to match pascal case naming rules, consider using 'SerializableExplicitImplementation2'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  86,
-"startColumn":  19,
-"endLine":  86,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Serializable_Sealed' to match pascal case naming rules, consider using 'SerializableSealed'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  100,
-"startColumn":  26,
-"endLine":  100,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Serializable_Sealed_NoConstructor' to match pascal case naming rules, consider using 'SerializableSealedNoConstructor'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  109,
-"startColumn":  26,
-"endLine":  109,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Serializable_NoConstructor' to match pascal case naming rules, consider using 'SerializableNoConstructor'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  116,
-"startColumn":  19,
-"endLine":  116,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'SerializableDerived_Not_CallingBase' to match pascal case naming rules, consider using 'SerializableDerivedNotCallingBase'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  123,
-"startColumn":  19,
-"endLine":  123,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'SerializableDerived_Not_CallingBase_GetObjectData' to match pascal case naming rules, consider using 'SerializableDerivedNotCallingBaseGetObjectData'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  131,
-"startColumn":  19,
-"endLine":  131,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'SerializableDerived_New_GetObjectData' to match pascal case naming rules, consider using 'SerializableDerivedNewGetObjectData'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  141,
-"startColumn":  19,
-"endLine":  141,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'SerializableDerived_Not_Overriding_GetObjectData' to match pascal case naming rules, consider using 'SerializableDerivedNotOverridingGetObjectData'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  153,
-"startColumn":  19,
-"endLine":  153,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Serializable_NoConstructor_Positional' to match pascal case naming rules, consider using 'SerializableNoConstructorPositional'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  162,
-"startColumn":  19,
-"endLine":  162,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Partial_SerializableDerived_CallingBase_GetObjectData_Record' to match pascal case naming rules, consider using 'PartialSerializableDerivedCallingBaseGetObjectDataRecord'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  172,
-"startColumn":  27,
-"endLine":  172,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Partial_SerializableDerived_CallingBase_GetObjectData_Record' to match pascal case naming rules, consider using 'PartialSerializableDerivedCallingBaseGetObjectDataRecord'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  179,
-"startColumn":  27,
-"endLine":  179,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S101",
 "message":  "Rename record 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataRecord'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3925.Part1.cs",
 "region":  {
-"startLine":  186,
+"startLine":  15,
 "startColumn":  27,
-"endLine":  186,
+"endLine":  15,
 "endColumn":  91
 }
 }
@@ -227,88 +32,10 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3925.Part1.cs",
 "region":  {
-"startLine":  193,
+"startLine":  22,
 "startColumn":  27,
-"endLine":  193,
+"endLine":  22,
 "endColumn":  91
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'Partial_SerializableDerived_CallingBase_GetObjectData_Class' to match pascal case naming rules, consider using 'PartialSerializableDerivedCallingBaseGetObjectDataClass'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  207,
-"startColumn":  26,
-"endLine":  207,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'Partial_SerializableDerived_CallingBase_GetObjectData_Class' to match pascal case naming rules, consider using 'PartialSerializableDerivedCallingBaseGetObjectDataClass'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  214,
-"startColumn":  26,
-"endLine":  214,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_Class' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataClass'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  221,
-"startColumn":  26,
-"endLine":  221,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_Class' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataClass'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  228,
-"startColumn":  26,
-"endLine":  228,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Partial_SerializableDerived_Not_SerializableAttributeOnNonInheriting_Record' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotSerializableAttributeOnNonInheritingRecord'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  233,
-"startColumn":  27,
-"endLine":  233,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Partial_SerializableDerived_Not_SerializableAttributeOnNonInheriting_Record' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotSerializableAttributeOnNonInheritingRecord'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  241,
-"startColumn":  27,
-"endLine":  241,
-"endColumn":  102
 }
 }
 },
@@ -318,9 +45,9 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3925.Part1.cs",
 "region":  {
-"startLine":  248,
+"startLine":  36,
 "startColumn":  26,
-"endLine":  248,
+"endLine":  36,
 "endColumn":  103
 }
 }
@@ -331,9 +58,9 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3925.Part2.cs",
 "region":  {
-"startLine":  6,
+"startLine":  5,
 "startColumn":  26,
-"endLine":  6,
+"endLine":  5,
 "endColumn":  103
 }
 }

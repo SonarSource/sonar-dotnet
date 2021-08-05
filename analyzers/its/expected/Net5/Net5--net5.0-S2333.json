@@ -12,19 +12,6 @@
 "endColumn":  19
 }
 }
-},
-{
-"id":  "S2333",
-"message":  "'partial' is gratuitous in this context.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
-"region":  {
-"startLine":  33,
-"startColumn":  8,
-"endLine":  33,
-"endColumn":  15
-}
-}
 }
 ]
 }

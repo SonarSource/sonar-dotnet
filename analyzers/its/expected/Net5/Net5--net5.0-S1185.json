@@ -12,58 +12,6 @@
 "endColumn":  107
 }
 }
-},
-{
-"id":  "S1185",
-"message":  "Remove this method 'GetObjectData' to simply inherit its behavior.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  9,
-"endLine":  53,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S1185",
-"message":  "Remove this method 'GetObjectData' to simply inherit its behavior.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  181,
-"startColumn":  9,
-"endLine":  182,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S1185",
-"message":  "Remove this method 'GetObjectData' to simply inherit its behavior.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  216,
-"startColumn":  9,
-"endLine":  217,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S1185",
-"message":  "Remove this method 'GetObjectData' to simply inherit its behavior.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  243,
-"startColumn":  9,
-"endLine":  244,
-"endColumn":  47
-}
-}
 }
 ]
 }

@@ -19,49 +19,10 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3251.Part1.cs",
 "region":  {
-"startLine":  3,
-"startColumn":  5,
-"endLine":  3,
-"endColumn":  12
-}
-}
-},
-{
-"id":  "S3251",
-"message":  "Supply an implementation for this partial method.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  5,
-"endLine":  35,
-"endColumn":  12
-}
-}
-},
-{
-"id":  "S3251",
-"message":  "Supply an implementation for the partial method, otherwise this call will be ignored.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
-"region":  {
-"startLine":  41,
+"startLine":  5,
 "startColumn":  9,
-"endLine":  41,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S3251",
-"message":  "Supply an implementation for this partial method.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  5,
-"endLine":  47,
-"endColumn":  12
+"endLine":  5,
+"endColumn":  16
 }
 }
 },
@@ -71,10 +32,10 @@
 "location":  {
 "uri":  "sources\Net5\Net5\S3251.Part2.cs",
 "region":  {
-"startLine":  3,
-"startColumn":  5,
-"endLine":  3,
-"endColumn":  12
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  16
 }
 }
 }

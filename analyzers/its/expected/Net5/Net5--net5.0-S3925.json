@@ -7,210 +7,18 @@
 {
 "uri":  "sources\Net5\Net5\S3925.Part1.cs",
 "region":  {
-"startLine":  100,
-"startColumn":  26,
-"endLine":  100,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  104,
-"startColumn":  19,
-"endLine":  104,
-"endColumn":  38
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  109,
-"startColumn":  26,
-"endLine":  109,
-"endColumn":  59
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  109,
-"startColumn":  19,
-"endLine":  109,
-"endColumn":  25
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  116,
-"startColumn":  19,
-"endLine":  116,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  116,
-"startColumn":  12,
-"endLine":  116,
-"endColumn":  18
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  123,
-"startColumn":  19,
-"endLine":  123,
-"endColumn":  54
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  127,
-"startColumn":  19,
-"endLine":  127,
-"endColumn":  54
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  131,
-"startColumn":  19,
-"endLine":  131,
-"endColumn":  68
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  137,
-"startColumn":  30,
-"endLine":  137,
-"endColumn":  43
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  141,
-"startColumn":  19,
-"endLine":  141,
-"endColumn":  56
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  146,
-"startColumn":  25,
-"endLine":  146,
-"endColumn":  38
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  153,
-"startColumn":  19,
-"endLine":  153,
-"endColumn":  67
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  153,
-"startColumn":  12,
-"endLine":  153,
-"endColumn":  18
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  162,
-"startColumn":  19,
-"endLine":  162,
-"endColumn":  56
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  162,
-"startColumn":  12,
-"endLine":  162,
-"endColumn":  18
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  186,
+"startLine":  15,
 "startColumn":  27,
-"endLine":  186,
+"endLine":  15,
 "endColumn":  91
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3925.Part1.cs",
 "region":  {
-"startLine":  190,
+"startLine":  19,
 "startColumn":  38,
-"endLine":  190,
+"endLine":  19,
 "endColumn":  51
 }
 }
@@ -223,18 +31,18 @@
 {
 "uri":  "sources\Net5\Net5\S3925.Part1.cs",
 "region":  {
-"startLine":  193,
+"startLine":  22,
 "startColumn":  27,
-"endLine":  193,
+"endLine":  22,
 "endColumn":  91
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3925.Part1.cs",
 "region":  {
-"startLine":  195,
+"startLine":  24,
 "startColumn":  38,
-"endLine":  195,
+"endLine":  24,
 "endColumn":  51
 }
 }
@@ -247,133 +55,19 @@
 {
 "uri":  "sources\Net5\Net5\S3925.Part1.cs",
 "region":  {
-"startLine":  221,
+"startLine":  36,
 "startColumn":  26,
-"endLine":  221,
-"endColumn":  89
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  225,
-"startColumn":  38,
-"endLine":  225,
-"endColumn":  51
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  228,
-"startColumn":  26,
-"endLine":  228,
-"endColumn":  89
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  230,
-"startColumn":  38,
-"endLine":  230,
-"endColumn":  51
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  248,
-"startColumn":  26,
-"endLine":  248,
+"endLine":  36,
 "endColumn":  103
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3925.Part1.cs",
 "region":  {
-"startLine":  252,
+"startLine":  40,
 "startColumn":  38,
-"endLine":  252,
+"endLine":  40,
 "endColumn":  51
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  60,
-"startColumn":  19,
-"endLine":  60,
-"endColumn":  43
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  60,
-"startColumn":  12,
-"endLine":  60,
-"endColumn":  18
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  67,
-"startColumn":  21,
-"endLine":  67,
-"endColumn":  34
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  19,
-"endLine":  70,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  12,
-"endLine":  70,
-"endColumn":  18
-}
-},
-{
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
-"region":  {
-"startLine":  74,
-"startColumn":  19,
-"endLine":  74,
-"endColumn":  45
 }
 }
 ]
@@ -385,18 +79,18 @@
 {
 "uri":  "sources\Net5\Net5\S3925.Part2.cs",
 "region":  {
-"startLine":  6,
+"startLine":  5,
 "startColumn":  26,
-"endLine":  6,
+"endLine":  5,
 "endColumn":  103
 }
 },
 {
 "uri":  "sources\Net5\Net5\S3925.Part2.cs",
 "region":  {
-"startLine":  8,
+"startLine":  7,
 "startColumn":  38,
-"endLine":  8,
+"endLine":  7,
 "endColumn":  51
 }
 }

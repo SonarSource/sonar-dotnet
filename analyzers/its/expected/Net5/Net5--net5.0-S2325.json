@@ -355,12 +355,12 @@
 "id":  "S2325",
 "message":  "Make 'M11' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
+"uri":  "sources\Net5\Net5\S3251.Part2.cs",
 "region":  {
 "startLine":  22,
-"startColumn":  24,
+"startColumn":  28,
 "endLine":  22,
-"endColumn":  27
+"endColumn":  31
 }
 }
 },
@@ -368,51 +368,12 @@
 "id":  "S2325",
 "message":  "Make 'M12' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
+"uri":  "sources\Net5\Net5\S3251.Part2.cs",
 "region":  {
 "startLine":  27,
-"startColumn":  25,
+"startColumn":  29,
 "endLine":  27,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'SomeMethod' a static method.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
-"region":  {
-"startLine":  37,
-"startColumn":  17,
-"endLine":  37,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'M11' a static method.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3251.Part2.cs",
-"region":  {
-"startLine":  20,
-"startColumn":  24,
-"endLine":  20,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'M12' a static method.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3251.Part2.cs",
-"region":  {
-"startLine":  25,
-"startColumn":  25,
-"endLine":  25,
-"endColumn":  28
+"endColumn":  32
 }
 }
 },
