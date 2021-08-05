@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  9,
+"endLine":  104,
+"endColumn":  18
+}
+}
+}
+]
+}

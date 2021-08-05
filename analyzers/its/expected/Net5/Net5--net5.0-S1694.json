@@ -51,6 +51,19 @@
 "endColumn":  29
 }
 }
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' record to a concrete type with a protected constructor.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  28,
+"endLine":  14,
+"endColumn":  48
+}
+}
 }
 ]
 }

@@ -12,6 +12,45 @@
 "endColumn":  10
 }
 }
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  9,
+"endLine":  31,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  9,
+"endLine":  111,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  9,
+"endLine":  118,
+"endColumn":  48
+}
+}
 }
 ]
 }

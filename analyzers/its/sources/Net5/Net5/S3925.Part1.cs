@@ -26,7 +26,7 @@ namespace Tests.Diagnostics
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
-    internal record SerializableInternal : ISerializable // Nonpublic types are ignored
+    internal record SerializableInternal : ISerializable
     {
         public SerializableInternal() { }
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
@@ -58,30 +58,24 @@ namespace Tests.Diagnostics
     }
 
     public record Serializable_NoAttribute : ISerializable
-//                ^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
-//         ^^^^^^ Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'Serializable_NoAttribute' because it implements 'ISerializable'.}}
     {
-        private readonly NonSerializedType field; // FN, should be marked with [NonSerialized]
+        private readonly NonSerializedType field;
 
         public Serializable_NoAttribute() { }
         protected Serializable_NoAttribute(SerializationInfo info, StreamingContext context) { }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
-//                  ^^^^^^^^^^^^^ Secondary {{Make 'GetObjectData' 'public' and 'virtual', or seal 'Serializable_NoAttribute'.}}
     }
 
     public record Serializable_NoAttribute_1 : SerializableRecord
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
-//         ^^^^^^ Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'Serializable_NoAttribute_1' because it implements 'ISerializable'.}}
     {
         public Serializable_NoAttribute_1() { }
 
         protected Serializable_NoAttribute_1(SerializationInfo info, StreamingContext context) { }
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{Call constructor 'base(SerializationInfo, StreamingContext)'.}}
     }
 
     [Serializable]
-    public record Serializable_ExplicitImplementation : ISerializable // Compliant, False Negative - rule should be extended to ensure there is a virtual GetObjectData method that is called
+    public record Serializable_ExplicitImplementation : ISerializable
     {
         public Serializable_ExplicitImplementation() { }
         protected Serializable_ExplicitImplementation(SerializationInfo info, StreamingContext context) { }
@@ -104,19 +98,15 @@ namespace Tests.Diagnostics
 
     [Serializable]
     public sealed record Serializable_Sealed : ISerializable
-//                       ^^^^^^^^^^^^^^^^^^^ Noncompliant
     {
         public Serializable_Sealed() { }
 
         protected Serializable_Sealed(SerializationInfo info, StreamingContext context) { }
-//                ^^^^^^^^^^^^^^^^^^^ Secondary {{Make this constructor 'private'.}}
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
     [Serializable]
     public sealed record Serializable_Sealed_NoConstructor : ISerializable
-//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
-//                ^^^^^^ Secondary@-1 {{Add a 'private' constructor 'Serializable_Sealed_NoConstructor(SerializationInfo, StreamingContext)'.}}
     {
         public Serializable_Sealed_NoConstructor() { }
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
@@ -124,8 +114,6 @@ namespace Tests.Diagnostics
 
     [Serializable]
     public record Serializable_NoConstructor : ISerializable
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
-//         ^^^^^^ Secondary@-1 {{Add a 'protected' constructor 'Serializable_NoConstructor(SerializationInfo, StreamingContext)'.}}
     {
         public Serializable_NoConstructor() { }
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
@@ -133,35 +121,29 @@ namespace Tests.Diagnostics
 
     [Serializable]
     public record SerializableDerived_Not_CallingBase : SerializableRecord
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
     {
         public SerializableDerived_Not_CallingBase() { }
 
         protected SerializableDerived_Not_CallingBase(SerializationInfo info, StreamingContext context) { }
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{Call constructor 'base(SerializationInfo, StreamingContext)'.}}
     }
 
     [Serializable]
     public record SerializableDerived_Not_CallingBase_GetObjectData : SerializableRecord
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
     {
         private SerializableRecord serializableField;
         public SerializableDerived_Not_CallingBase_GetObjectData() { }
         protected SerializableDerived_Not_CallingBase_GetObjectData(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context) { }
-//                           ^^^^^^^^^^^^^ Secondary {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
     }
 
     [Serializable]
     public record SerializableDerived_New_GetObjectData : SerializableRecord
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
     {
         public SerializableDerived_New_GetObjectData() { }
         protected SerializableDerived_New_GetObjectData(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
         public new void GetObjectData(SerializationInfo info, StreamingContext context)
-//                      ^^^^^^^^^^^^^ Secondary {{Make 'GetObjectData' 'public' and 'virtual', or seal 'SerializableDerived_New_GetObjectData'.}}
         {
             base.GetObjectData(info, context);
         }
@@ -169,8 +151,6 @@ namespace Tests.Diagnostics
 
     [Serializable]
     public record SerializableDerived_Not_Overriding_GetObjectData : SerializableRecord
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
-//         ^^^^^^ Secondary@-1 {{Override 'GetObjectData(SerializationInfo, StreamingContext)' and serialize 'serializableField'.}}
     {
         private SerializableRecord serializableField;
 
@@ -180,8 +160,6 @@ namespace Tests.Diagnostics
 
     [Serializable]
     public record Serializable_NoConstructor_Positional(string Value) : ISerializable
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
-//         ^^^^^^ Secondary@-1 {{Add a 'protected' constructor 'Serializable_NoConstructor_Positional(SerializationInfo, StreamingContext)'.}}
     {
         public Serializable_NoConstructor_Positional() : this("") { }
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
@@ -190,7 +168,6 @@ namespace Tests.Diagnostics
 
 namespace Tests.Diagnostics.PartialMethods
 {
-    // See https://github.com/SonarSource/sonar-dotnet/issues/4411 Applicable to all raised issues below
     [Serializable]
     public partial record Partial_SerializableDerived_CallingBase_GetObjectData_Record : SerializableRecord
     {
@@ -207,17 +184,15 @@ namespace Tests.Diagnostics.PartialMethods
 
     [Serializable]
     public partial record Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record : SerializableRecord
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
     {
         public Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record() { }
         protected Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record(SerializationInfo info, StreamingContext context) : base(info, context) { }
-        public override partial void GetObjectData(SerializationInfo info, StreamingContext context);     // Secondary
+        public override partial void GetObjectData(SerializationInfo info, StreamingContext context);
     }
 
     public partial record Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
     {
-        public override partial void GetObjectData(SerializationInfo info, StreamingContext context) { }      // Secondary
+        public override partial void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
     [Serializable]
@@ -244,17 +219,15 @@ namespace Tests.Diagnostics.PartialMethods
 
     [Serializable]
     public partial class Partial_SerializableDerived_Not_CallingBase_GetObjectData_Class : SerializableClass
-//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant [1] {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
     {
         public Partial_SerializableDerived_Not_CallingBase_GetObjectData_Class() { }
         protected Partial_SerializableDerived_Not_CallingBase_GetObjectData_Class(SerializationInfo info, StreamingContext context) : base(info, context) { }
-        public override partial void GetObjectData(SerializationInfo info, StreamingContext context); // Secondary [1] {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
+        public override partial void GetObjectData(SerializationInfo info, StreamingContext context);
     }
 
     public partial class Partial_SerializableDerived_Not_CallingBase_GetObjectData_Class
-//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant [2] {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
     {
-        public override partial void GetObjectData(SerializationInfo info, StreamingContext context) { }  // Secondary [2] {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
+        public override partial void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
     public partial record Partial_SerializableDerived_Not_SerializableAttributeOnNonInheriting_Record : SerializableRecord
@@ -273,10 +246,9 @@ namespace Tests.Diagnostics.PartialMethods
 
     [Serializable]
     public partial class Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class : SerializableClass
-//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant [3] {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
     {
         public Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class() { }
         protected Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class(SerializationInfo info, StreamingContext context) : base(info, context) { }
-        public override partial void GetObjectData(SerializationInfo info, StreamingContext context); // Secondary [3] {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
+        public override partial void GetObjectData(SerializationInfo info, StreamingContext context);
     }
 }

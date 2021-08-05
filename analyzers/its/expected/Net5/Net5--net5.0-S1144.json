@@ -288,6 +288,58 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private field 'serializableField'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  9,
+"endLine":  45,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'field'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  9,
+"endLine":  62,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'serializableField'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  9,
+"endLine":  133,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'serializableField'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  9,
+"endLine":  155,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field 'exception'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3928.cs",
