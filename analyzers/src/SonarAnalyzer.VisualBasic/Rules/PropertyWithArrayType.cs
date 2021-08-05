@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -44,8 +45,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var propertyStatement = (PropertyStatementSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(propertyStatement);
-                    if (symbol?.Type is IArrayTypeSymbol)
+                    if (!propertyStatement.Modifiers.Any(x => x.IsKind(SyntaxKind.OverridesKeyword))
+                        && c.SemanticModel.GetDeclaredSymbol(propertyStatement) is { } symbol
+                        && symbol.Type is IArrayTypeSymbol)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, propertyStatement.Identifier.GetLocation(), symbol.Name));
                     }
