@@ -51,6 +51,58 @@
 "endColumn":  58
 }
 }
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3251.Part1.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  29,
+"endLine":  7,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3251.Part1.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  29,
+"endLine":  27,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3251.Part1.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  29,
+"endLine":  52,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3251.Part2.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  29,
+"endLine":  25,
+"endColumn":  32
+}
+}
 }
 ]
 }

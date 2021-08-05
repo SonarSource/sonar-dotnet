@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -33,24 +34,18 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class PartialMethodNoImplementation : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3251";
+        private const string DiagnosticId = "S3251";
         private const string MessageFormat = "Supply an implementation for {0} partial method{1}.";
-        internal const string MessageAdditional = ", otherwise this call will be ignored";
+        private const string MessageAdditional = ", otherwise this call will be ignored";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckForCandidatePartialInvocation,
-                SyntaxKind.InvocationExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckForCandidatePartialDeclaration,
-                SyntaxKind.MethodDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckForCandidatePartialDeclaration, SyntaxKind.MethodDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckForCandidatePartialInvocation, SyntaxKind.InvocationExpression);
         }
 
         private static void CheckForCandidatePartialDeclaration(SyntaxNodeAnalysisContext context)
@@ -58,17 +53,13 @@ namespace SonarAnalyzer.Rules.CSharp
             var declaration = (MethodDeclarationSyntax)context.Node;
             var partialKeyword = declaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.PartialKeyword));
 
-            if (partialKeyword == default(SyntaxToken)||
-                declaration.HasBodyOrExpressionBody())
+            if (partialKeyword != default
+                && !declaration.HasBodyOrExpressionBody()
+                && !declaration.Modifiers.Any(HasAccessModifier)
+                && context.SemanticModel.GetDeclaredSymbol(declaration) is { } methodSymbol
+                && methodSymbol.PartialImplementationPart == null)
             {
-                return;
-            }
-
-            var methodSymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
-            if (methodSymbol != null &&
-                methodSymbol.PartialImplementationPart == null)
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, partialKeyword.GetLocation(), "this", string.Empty));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, partialKeyword.GetLocation(), "this", string.Empty));
             }
         }
 
@@ -76,33 +67,27 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
 
-            if (!(invocation.Parent is StatementSyntax statement))
+            if (invocation.Parent is StatementSyntax statement
+                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                && methodSymbol.PartialImplementationPart == null
+                && PartialMethodsWithoutAccessModifier(methodSymbol).Any())
             {
-                return;
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, statement.GetLocation(), "the", MessageAdditional));
             }
+        }
 
-            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol))
-            {
-                return;
-            }
-
-            // from the method symbol it's not possible to tell if it's a partial method or not.
-            // https://github.com/dotnet/roslyn/issues/48
-            var partialDeclarations = methodSymbol.DeclaringSyntaxReferences
+        // from the method symbol it's not possible to tell if it's a partial method or not.
+        // https://github.com/dotnet/roslyn/issues/48
+        private static IEnumerable<MethodDeclarationSyntax> PartialMethodsWithoutAccessModifier(IMethodSymbol methodSymbol) =>
+            methodSymbol.DeclaringSyntaxReferences
                 .Select(r => r.GetSyntax())
                 .OfType<MethodDeclarationSyntax>()
-                .Where(method => method.Modifiers.Any(SyntaxKind.PartialKeyword) &&
-                    method.Body == null &&
-                    method.ExpressionBody == null);
+                .Where(method => method.Modifiers.Any(SyntaxKind.PartialKeyword)
+                                 && !method.Modifiers.Any(HasAccessModifier)
+                                 && method.Body == null
+                                 && method.ExpressionBody == null);
 
-            if (methodSymbol.PartialImplementationPart != null ||
-                !partialDeclarations.Any())
-            {
-                return;
-            }
-
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, statement.GetLocation(), "the", MessageAdditional));
-        }
+        private static bool HasAccessModifier(SyntaxToken token) =>
+            token.IsAnyKind(SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword, SyntaxKind.ProtectedKeyword, SyntaxKind.PrivateKeyword);
     }
 }
-
