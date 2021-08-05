@@ -405,6 +405,58 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod1'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  9,
+"endLine":  15,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod2'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  9,
+"endLine":  23,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod4'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  9,
+"endLine":  31,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod5'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  9,
+"endLine":  39,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private method 'Foo'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S4830.cs",
