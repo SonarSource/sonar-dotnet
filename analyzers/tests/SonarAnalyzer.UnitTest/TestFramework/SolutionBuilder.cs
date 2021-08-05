@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string InitSnippet = @"namespace System.Runtime.CompilerServices { public class IsExternalInit { } }";
         private const string GeneratedAssemblyName = "project";
 
-        private static readonly string[] DefaultGlobalImportsVisualBasic = new[]
+        private static readonly GlobalImport[] DefaultGlobalImportsVisualBasic = new[]
         {
             "Microsoft.VisualBasic",
             "System",
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             "System.Linq",
             "System.Xml.Linq",
             "System.Threading.Tasks"
-        };
+        }.Select(GlobalImport.Parse).ToArray();
 
         public IReadOnlyList<ProjectId> ProjectIds => Solution.ProjectIds;
 
@@ -125,7 +125,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             compilationOptions = languageName switch
             {
                 LanguageNames.CSharp => ((CSharpCompilationOptions)compilationOptions).WithAllowUnsafe(true),
-                LanguageNames.VisualBasic => ((VisualBasicCompilationOptions)compilationOptions).WithGlobalImports(GlobalImport.Parse(DefaultGlobalImportsVisualBasic)),
+                LanguageNames.VisualBasic => ((VisualBasicCompilationOptions)compilationOptions).WithGlobalImports(DefaultGlobalImportsVisualBasic),
                 _ => throw new InvalidOperationException("Unexpected project language: " + language)
             };
             project = project.WithCompilationOptions(compilationOptions);
