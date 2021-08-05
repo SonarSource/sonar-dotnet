@@ -35,10 +35,10 @@ namespace SonarAnalyzer.Extensions
             symbol.GetMembers("Dispose").Any(s => s is IMethodSymbol method && method.IsDisposeMethod());
 
         internal static bool IsRefStruct(this ITypeSymbol symbol) =>
-            symbol != null &&
-            symbol.IsStruct() &&
-            symbol.DeclaringSyntaxReferences.Length > 0 &&
-            symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration &&
-            structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
+            symbol != null
+            && symbol.IsStruct()
+            && symbol.DeclaringSyntaxReferences.Length > 0
+            && symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration
+            && structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
     }
 }

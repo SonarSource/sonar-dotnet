@@ -197,9 +197,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         private static IList<IIssueLocation> ExpectedIssues(FileIssueLocations[] expectedIssuesPerFile, Location location) =>
-            location.SourceTree != null
-                ? expectedIssuesPerFile.Single(x => x.FileName == location.SourceTree.FilePath).IssueLocations
-                : expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IIssueLocation>(); // Issue locations get removed, so the list could become empty
+            location.SourceTree == null
+                ? expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IIssueLocation>() // Issue locations get removed, so the list could become empty
+                : expectedIssuesPerFile.Single(x => x.FileName == location.SourceTree.FilePath).IssueLocations;
 
         private static void DumpActualDiagnostics(string languageVersion, IEnumerable<Diagnostic> diagnostics)
         {
