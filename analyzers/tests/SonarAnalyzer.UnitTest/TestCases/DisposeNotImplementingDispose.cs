@@ -73,6 +73,17 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class NoRealDisposalDone : IDisposable
+    {
+        private void Dummy() { }
+
+        public void Dispose()
+        {
+            Dummy();
+            NotExists();  // Error [CS0103]
+        }
+    }
+
     public class GarbageDisposalException2 : SomeUnknownType // Error [CS0246] - unknown type
     {
         protected override void Dispose(bool disposing) // Error [CS0115] - no method to override
