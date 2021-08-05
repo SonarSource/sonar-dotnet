@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,18 +28,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MemberOverrideCallsBaseMemberTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MemberOverrideCallsBaseMember() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberOverrideCallsBaseMember.cs", new MemberOverrideCallsBaseMember());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MemberOverrideCallsBaseMember_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs", new MemberOverrideCallsBaseMember());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void MemberOverrideCallsBaseMember_CSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs",
                                    @"TestCases\MemberOverrideCallsBaseMember.CSharp9.Fixed.cs",
@@ -49,7 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void MemberOverrideCallsBaseMember_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MemberOverrideCallsBaseMember.cs",

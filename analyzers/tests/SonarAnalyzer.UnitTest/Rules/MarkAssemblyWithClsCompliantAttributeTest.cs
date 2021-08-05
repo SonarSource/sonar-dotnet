@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,19 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MarkAssemblyWithClsCompliantAttributeTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithClsCompliantAttribute_CS() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.cs",
                 new CS.MarkAssemblyWithClsCompliantAttribute());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithClsCompliantAttribute_VB() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.vb",
                 new VB.MarkAssemblyWithClsCompliantAttribute());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_CS()
         {
             Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs", new CS.MarkAssemblyWithClsCompliantAttribute());
@@ -51,7 +48,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_VB()
         {
             Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.vb", new VB.MarkAssemblyWithClsCompliantAttribute());

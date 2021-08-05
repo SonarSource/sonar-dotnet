@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -36,16 +36,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NETFRAMEWORK // System.Data.OracleClient.dll is not available on .Net Core
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CS_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.cs",
                                     new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                                     GetReferencesNet46(Constants.NuGetLatestVersion));
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_VB_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.vb",
                                     new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
@@ -64,8 +60,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CS_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
                                     new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
@@ -73,16 +67,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     GetReferencesNetCore(Constants.DotNetCore220Version));
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ExecutingSqlQueries.CSharp9.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 GetReferencesNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()));
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_VB_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
                                     new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),

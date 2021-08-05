@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class GenericTypeParameterEmptinessCheckingTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void GenericTypeParameterEmptinessChecking() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
                                     new GenericTypeParameterEmptinessChecking(),
@@ -38,7 +37,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void GenericTypeParameterEmptinessChecking_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterEmptinessChecking.CSharp9.cs",
                                                       new GenericTypeParameterEmptinessChecking(),
@@ -46,7 +44,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void GenericTypeParameterEmptinessChecking_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
                                    @"TestCases\GenericTypeParameterEmptinessChecking.Fixed.cs",

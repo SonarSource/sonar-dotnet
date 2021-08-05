@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,14 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ParametersCorrectOrderTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ParametersCorrectOrder_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
                 new CS.ParametersCorrectOrder(),
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ParametersCorrectOrder_InvalidCode_CS() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class Foo
@@ -50,13 +48,11 @@ public class Foo
 }", new CS.ParametersCorrectOrder(), CompilationErrorBehavior.Ignore);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ParametersCorrectOrder_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.vb",
                 new VB.ParametersCorrectOrder());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ParametersCorrectOrder_InvalidCode_VB() =>
             Verifier.VerifyVisualBasicAnalyzer(@"
 Public Class Foo

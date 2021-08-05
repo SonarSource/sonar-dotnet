@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,7 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.NUnit.cs",
                                     new TestClassShouldHaveTestMethod(),
@@ -43,7 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
                                     new TestClassShouldHaveTestMethod(),
@@ -51,7 +49,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [DataTestMethod]
-        [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestClassShouldHaveTestMethod.CSharp9.cs",
                             new TestClassShouldHaveTestMethod(),

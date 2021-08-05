@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PropertyNamesShouldNotMatchGetMethodsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertyNamesShouldNotMatchGetMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs", new PropertyNamesShouldNotMatchGetMethods());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertyNamesShouldNotMatchGetMethods_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
     public int { get; } // Missing identifier on purpose

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,13 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DoNotNestTernaryOperatorsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotNestTernaryOperators_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTernaryOperators.cs",
                 new CS.DoNotNestTernaryOperators());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotNestTernaryOperators_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTernaryOperators.vb",
                 new VB.DoNotNestTernaryOperators());

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,16 +31,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UsingNonstandardCryptographyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void UsingNonstandardCryptography_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.cs",
                                     new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void UsingNonstandardCryptography_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.vb",
                                     new VB.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),

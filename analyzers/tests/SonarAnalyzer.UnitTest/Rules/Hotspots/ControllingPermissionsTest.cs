@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -41,16 +41,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(FrameworkMetadataReference.SystemWeb);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ControllingPermissions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.cs",
                                     new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferences);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ControllingPermissions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.vb",
                                     new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),

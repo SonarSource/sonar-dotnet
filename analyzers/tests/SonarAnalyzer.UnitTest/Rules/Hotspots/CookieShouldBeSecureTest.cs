@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -36,8 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CookieShouldBeSecureTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_Nancy.cs",
                                     new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
@@ -48,8 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string WebConfig = "Web.config";
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
                                     new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
@@ -58,8 +54,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\SecureCookieConfig")]
         [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\Formatting")]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_WithWebConfigValueSetToTrue(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
@@ -73,8 +67,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\NonSecureCookieConfig")]
         [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\UnrelatedConfig")]
         [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\ConfigWithoutAttribute")]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_WithWebConfigValueSetToFalse(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
@@ -87,16 +79,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_NetCore.cs",
                                     new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences_NetCore());
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\CookieShouldBeSecure.CSharp9.cs",
                                                       new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),

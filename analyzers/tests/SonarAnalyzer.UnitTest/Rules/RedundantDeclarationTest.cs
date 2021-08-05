@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,19 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class RedundantDeclarationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantDeclaration() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantDeclaration.cs", new RedundantDeclaration());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantDeclaration_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantDeclaration.CSharp9.cs", new RedundantDeclaration());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantDeclaration_CodeFix_ArraySize() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.ArraySize.Fixed.cs",
@@ -49,7 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    RedundantDeclarationCodeFixProvider.TitleRedundantArraySize);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantDeclaration_CodeFix_ArrayType() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.ArrayType.Fixed.cs",
@@ -58,7 +54,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    RedundantDeclarationCodeFixProvider.TitleRedundantArrayType);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantDeclaration_CodeFix_DelegateParameterList() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.DelegateParameterList.Fixed.cs",
@@ -67,7 +62,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    RedundantDeclarationCodeFixProvider.TitleRedundantDelegateParameterList);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantDeclaration_CodeFix_ExplicitDelegate() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.ExplicitDelegate.Fixed.cs",
@@ -76,7 +70,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    RedundantDeclarationCodeFixProvider.TitleRedundantExplicitDelegate);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantDeclaration_CodeFix_ExplicitNullable() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.ExplicitNullable.Fixed.cs",
@@ -85,7 +78,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    RedundantDeclarationCodeFixProvider.TitleRedundantExplicitNullable);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantDeclaration_CodeFix_LambdaParameterType() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.LambdaParameterType.Fixed.cs",
@@ -94,7 +86,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    RedundantDeclarationCodeFixProvider.TitleRedundantLambdaParameterType);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantDeclaration_CodeFix_ObjectInitializer() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.ObjectInitializer.Fixed.cs",

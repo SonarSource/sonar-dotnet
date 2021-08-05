@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class RedundantPropertyNamesInAnonymousClassTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantPropertyNamesInAnonymousClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantPropertyNamesInAnonymousClass.cs", new RedundantPropertyNamesInAnonymousClass());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantPropertyNamesInAnonymousClass_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\RedundantPropertyNamesInAnonymousClass.cs",

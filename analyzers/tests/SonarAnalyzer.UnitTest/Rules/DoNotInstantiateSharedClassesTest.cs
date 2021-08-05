@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,28 +32,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DoNotInstantiateSharedClassesTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotInstantiateSharedClasses_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.cs",
                 new CS.DoNotInstantiateSharedClasses(),
                 GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotInstantiateSharedClasses_CS_InTest() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.cs",
                 new CS.DoNotInstantiateSharedClasses(),
                 GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotInstantiateSharedClasses_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.vb",
                 new VB.DoNotInstantiateSharedClasses(),
                 GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotInstantiateSharedClasses_VB_InTest() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.vb",
                 new VB.DoNotInstantiateSharedClasses(),

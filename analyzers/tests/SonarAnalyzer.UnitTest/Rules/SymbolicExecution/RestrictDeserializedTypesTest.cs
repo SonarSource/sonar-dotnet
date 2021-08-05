@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,7 +37,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
 #if NETFRAMEWORK // These serializers are available only when targeting .Net Framework
         [TestMethod]
-        [TestCategory("Rule")]
         public void RestrictDeserializedTypesFormatters() =>
             Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.cs",
                 GetAnalyzer(),
@@ -45,7 +44,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\RestrictDeserializedTypes.cs",
                 GetAnalyzer(),
@@ -53,7 +51,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void RestrictDeserializedTypesJavaScriptSerializer() =>
             Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.JavaScriptSerializer.cs",
                 GetAnalyzer(),
@@ -61,7 +58,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void RestrictDeserializedTypesLosFormatter() =>
             Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.LosFormatter.cs",
                 GetAnalyzer(),
@@ -77,7 +73,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void RestrictDeserializedTypesFormatters_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RestrictDeserializedTypes.CSharp9.cs",
                 GetAnalyzer(),

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,7 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Rule")]
         public void EmptyNullableValueAccess(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyNullableValueAccess.cs",
                 new SymbolicExecutionRunner(new EmptyNullableValueAccess()),
@@ -47,7 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void EmptyNullableValueAccess_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyNullableValueAccess.CSharp9.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
 #endif

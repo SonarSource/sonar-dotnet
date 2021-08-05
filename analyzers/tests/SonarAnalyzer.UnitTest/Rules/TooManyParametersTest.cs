@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,31 +29,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class TooManyParametersTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void TooManyParameters_CS_CustomValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.cs", new CS.TooManyParameters { Maximum = 3 }, ParseOptionsHelper.FromCSharp8);
 
 #if NET
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TooManyParameters_CS_CustomValues_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyParameters_CustomValues.CSharp9.cs", new CS.TooManyParameters { Maximum = 3 });
 
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TooManyParameters_VB_CustomValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.vb", new VB.TooManyParameters { Maximum = 3 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TooManyParameters_CS_DefaultValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new CS.TooManyParameters(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TooManyParameters_VB_DefaultValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.vb", new VB.TooManyParameters());
     }

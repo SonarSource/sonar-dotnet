@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,29 +29,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class StringLiteralShouldNotBeDuplicatedTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void StringLiteralShouldNotBeDuplicated_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.cs", new CS.StringLiteralShouldNotBeDuplicated());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void StringLiteralShouldNotBeDuplicated_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StringLiteralShouldNotBeDuplicated.CSharp9.cs", new CS.StringLiteralShouldNotBeDuplicated());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void StringLiteralShouldNotBeDuplicated_Attributes_CS() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated_Attributes.cs", new CS.StringLiteralShouldNotBeDuplicated { Threshold = 2 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void StringLiteralShouldNotBeDuplicated_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.vb", new VB.StringLiteralShouldNotBeDuplicated());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void StringLiteralShouldNotBeDuplicated_Attributes_VB() =>
            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated_Attributes.vb", new VB.StringLiteralShouldNotBeDuplicated { Threshold = 2 });
     }

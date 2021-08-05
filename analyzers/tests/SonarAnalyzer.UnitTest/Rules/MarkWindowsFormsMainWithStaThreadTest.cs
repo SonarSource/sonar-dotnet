@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,14 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 // https://github.com/SonarSource/sonar-dotnet/issues/3426
 #if NETFRAMEWORK
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
                                     new CS.MarkWindowsFormsMainWithStaThread(),
                                     FrameworkMetadataReference.SystemWindowsForms);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.vb",
                                     new VB.MarkWindowsFormsMainWithStaThread(),
@@ -48,13 +46,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
                                     new CS.MarkWindowsFormsMainWithStaThread());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
                                     new VB.MarkWindowsFormsMainWithStaThread(),

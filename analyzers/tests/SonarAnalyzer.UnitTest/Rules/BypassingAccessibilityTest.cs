@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,17 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class BypassingAccessibilityTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void BypassingAccessibility_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\BypassingAccessibility.cs", new CS.BypassingAccessibility());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void BypassingAccessibility_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\BypassingAccessibility.CSharp9.cs", new CS.BypassingAccessibility());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void BypassingAccessibility_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\BypassingAccessibility.vb", new VB.BypassingAccessibility());
     }

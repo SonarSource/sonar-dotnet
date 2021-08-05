@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ImplementISerializableCorrectlyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ImplementISerializableCorrectly() =>
             Verifier.VerifyAnalyzer(@"TestCases\ImplementISerializableCorrectly.cs", new ImplementISerializableCorrectly());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ImplementISerializableCorrectly_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ImplementISerializableCorrectly.CSharp9.cs", new ImplementISerializableCorrectly());
 #endif

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public partial class UnusedPrivateMemberTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Types_Accessibility() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateTypes
@@ -60,7 +59,6 @@ public class NonPrivateTypes
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Types_InternalsVisibleTo() =>
             Verifier.VerifyCSharpAnalyzer(@"
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo("""")]
@@ -72,7 +70,6 @@ public class PrivateTypes
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Types_Internals() =>
             Verifier.VerifyCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/1225
@@ -95,7 +92,6 @@ public class Sample
 }", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Types_DirectReferences() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Linq;
@@ -125,7 +121,6 @@ public class PrivateTypes
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_SupportTypeKinds() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateTypes

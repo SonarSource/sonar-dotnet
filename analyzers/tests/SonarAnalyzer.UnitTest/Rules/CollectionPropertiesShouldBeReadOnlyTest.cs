@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CollectionPropertiesShouldBeReadOnlyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CollectionPropertiesShouldBeReadOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
                                     new CollectionPropertiesShouldBeReadOnly(),
@@ -37,7 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void CollectionPropertiesShouldBeReadOnly_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CollectionPropertiesShouldBeReadOnly.CSharp9.cs",
                                                       new CollectionPropertiesShouldBeReadOnly(),

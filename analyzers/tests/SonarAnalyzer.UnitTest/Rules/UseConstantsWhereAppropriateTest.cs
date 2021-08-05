@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UseConstantsWhereAppropriateTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseConstantsWhereAppropriate() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseConstantsWhereAppropriate.cs", new UseConstantsWhereAppropriate());
     }

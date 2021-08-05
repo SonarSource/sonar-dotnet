@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class NoExceptionsInFinallyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void NoExceptionsInFinally_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\NoExceptionsInFinally.cs", new CS.NoExceptionsInFinally());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void NoExceptionsInFinally_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\NoExceptionsInFinally.vb", new VB.NoExceptionsInFinally());
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UseCurlyBracesTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseCurlyBraces() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.cs", new UseCurlyBraces());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseCurlyBraces_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.CSharp7.cs",
                 new UseCurlyBraces(),

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class StaticSealedClassProtectedMembersTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void StaticSealedClassProtectedMembers() =>
             Verifier.VerifyAnalyzer(@"TestCases\StaticSealedClassProtectedMembers.cs", new StaticSealedClassProtectedMembers());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void StaticSealedClassProtectedMembers_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticSealedClassProtectedMembers.CSharp9.cs", new StaticSealedClassProtectedMembers());
 #endif

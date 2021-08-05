@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MultipleVariableDeclarationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MultipleVariableDeclaration()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.cs", new CS.MultipleVariableDeclaration());
@@ -37,7 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void MultipleVariableDeclaration_CodeFix()
         {
             Verifier.VerifyCodeFix(

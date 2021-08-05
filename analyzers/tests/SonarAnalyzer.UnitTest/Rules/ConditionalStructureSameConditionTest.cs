@@ -29,21 +29,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ConditionalStructureSameConditionTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.cs",
                 new CS.ConditionalStructureSameCondition());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalStructureSameCondition.CSharp9.cs",
                 new CS.ConditionalStructureSameCondition());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.vb",
                 new VB.ConditionalStructureSameCondition());

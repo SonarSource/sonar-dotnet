@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class AvoidExcessiveClassCouplingTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling() =>
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Generic_No_Constraints() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -46,7 +44,6 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Generic_With_Constraints() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -63,7 +60,6 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Generic_Bounded() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -78,7 +74,6 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Generic_Bounded_Deep_Nesting() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -94,7 +89,6 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Task_Not_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Threading.Tasks;
@@ -106,7 +100,6 @@ public class Tasks // Compliant, Task types are not counted
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Action_Not_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -118,7 +111,6 @@ public class Actions // Compliant, Action types are not counted
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Func_Not_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -130,7 +122,6 @@ public class Functions // Compliant, Func types are not counted
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Pointers_Not_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -142,7 +133,6 @@ public class Pointers // Compliant, pointers are not counted
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Enums_Not_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -154,7 +144,6 @@ public class Pointers // Compliant, enums are not counted
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Lazy_Not_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -167,7 +156,6 @@ public class Lazyness // Noncompliant {{Split this class into smaller and more s
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Fields_Are_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Collections.Generic;
@@ -185,7 +173,6 @@ public class Fields // Noncompliant {{Split this class into smaller and more spe
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Properties_Are_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Collections.Generic;
@@ -218,7 +205,6 @@ public class Properties // Noncompliant {{Split this class into smaller and more
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Indexers_Are_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Collections.Generic;
@@ -236,7 +222,6 @@ public class Indexers // Noncompliant {{Split this class into smaller and more s
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Events_Are_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -267,7 +252,6 @@ public class Events // Noncompliant {{Split this class into smaller and more spe
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Methods_Are_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -298,7 +282,6 @@ public class Methods // Noncompliant {{Split this class into smaller and more sp
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Inner_Classes_And_Structs_Are_Not_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -325,7 +308,6 @@ public struct OuterStruct // Noncompliant {{Split this struct into smaller and m
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Interface_Declaration() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -339,7 +321,6 @@ public interface I // Noncompliant {{Split this interface into smaller and more 
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Self_Reference() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -352,7 +333,6 @@ public class Self // Compliant, self references are not counted
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Base_Classes_Interfaces_NotCounted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -367,7 +347,6 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Catch_Statements() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -384,7 +363,6 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Attributes() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -400,7 +378,6 @@ public class Self // Compliant, attributes are not counted
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Nameof() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class A // Compliant, types referenced by the nameof expression are not counted
@@ -416,12 +393,10 @@ public class A // Compliant, types referenced by the nameof expression are not c
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveClassCoupling.CSharp9.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_InRecord_Enums_Not_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -432,7 +407,6 @@ public record Pointers // Compliant, enums are not counted
 ", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Base_Records_Interfaces_NotCounted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -448,7 +422,6 @@ public record Self // Noncompliant
 ", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Primitive_Types_Not_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;

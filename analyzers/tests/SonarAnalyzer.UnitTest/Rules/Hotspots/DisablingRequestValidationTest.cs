@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -42,14 +42,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string WebConfig = "Web.config";
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisablingRequestValidation_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.cs",
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\DisablingRequestValidation.cs",
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.Hotspot),
@@ -59,7 +57,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Values")]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Formatting")]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\UnexpectedContent")]
-        [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
@@ -71,7 +68,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_CorruptAndNonExistingWebConfigs()
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\Corrupt";
@@ -88,7 +84,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\MultipleFiles", "SubFolder")]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\EdgeValues", "3.9", "5.6")]
-        [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig_SubFolders(string rootDirectory, params string[] subFolders)
         {
             List<Diagnostic> allDiagnostics;
@@ -130,7 +125,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig_LowerCase()
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\LowerCase";
@@ -146,7 +140,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformCustom\Web.Custom.config")]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformDebug\Web.Debug.config")]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformRelease\Web.Release.config")]
-        [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig_Transformation(string configPath) =>
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
@@ -155,21 +148,18 @@ namespace SonarAnalyzer.UnitTest.Rules
                 TestHelper.CreateSonarProjectConfig(Path.GetDirectoryName(configPath), TestHelper.CreateFilesToAnalyze(Path.GetDirectoryName(configPath), configPath)));
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisablingRequestValidation_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.vb",
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisablingRequestValidation_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\DisablingRequestValidation.vb",
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.Hotspot),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisablingRequestValidation_VB_WebConfig()
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\Values";

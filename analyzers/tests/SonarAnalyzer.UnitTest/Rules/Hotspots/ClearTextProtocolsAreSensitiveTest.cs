@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,8 +33,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ClearTextProtocolsAreSensitiveTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ClearTextProtocolsAreSensitive() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.cs",
                                     new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
@@ -43,8 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET5_0
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs",
                                                       new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),

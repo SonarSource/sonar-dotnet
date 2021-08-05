@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class AnonymousDelegateEventUnsubscribeTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void AnonymousDelegateEventUnsubscribe() =>
             Verifier.VerifyAnalyzer(@"TestCases\AnonymousDelegateEventUnsubscribe.cs", new AnonymousDelegateEventUnsubscribe());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void AnonymousDelegateEventUnsubscribe_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AnonymousDelegateEventUnsubscribe.CSharp9.cs", new AnonymousDelegateEventUnsubscribe());
 #endif

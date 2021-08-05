@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DoNotTestThisWithIsOperatorTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotTestThisWithIsOperator() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotTestThisWithIsOperator.cs", new DoNotTestThisWithIsOperator());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotTestThisWithIsOperator_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotTestThisWithIsOperator.CSharp9.cs", new DoNotTestThisWithIsOperator());
 #endif

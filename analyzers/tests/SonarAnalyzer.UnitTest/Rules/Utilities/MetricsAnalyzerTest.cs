@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,7 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string Root = @"TestCases\Utilities\MetricsAnalyzer\";
 
         [DataTestMethod]
-        [TestCategory("Utility")]
         public void VerifyMetrics()
         {
             var testRoot = Root + nameof(VerifyMetrics);
@@ -61,7 +60,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Utility")]
         public void Verify_NotRunForTestProject()
         {
             var testRoot = Root + nameof(Verify_NotRunForTestProject);

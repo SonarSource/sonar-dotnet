@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,7 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class LdapConnectionShouldBeSecureTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void LdapConnectionsShouldBeSecure() =>
             Verifier.VerifyAnalyzer(@"TestCases\LdapConnectionShouldBeSecure.cs",
                                     new LdapConnectionShouldBeSecure(),
@@ -44,7 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void LdapConnectionsShouldBeSecure_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp9.cs",
                                                       new LdapConnectionShouldBeSecure(),

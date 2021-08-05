@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class WcfMissingContractAttributeTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void WcfMissingContractAttribute() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\WcfMissingContractAttribute.cs",

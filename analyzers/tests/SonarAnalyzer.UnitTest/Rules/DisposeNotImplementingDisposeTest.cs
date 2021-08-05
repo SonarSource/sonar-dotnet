@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DisposeNotImplementingDisposeTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisposeNotImplementingDispose() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposeNotImplementingDispose.cs", new DisposeNotImplementingDispose(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void DisposeNotImplementingDispose_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposeNotImplementingDispose.CSharp9.cs", new DisposeNotImplementingDispose());
 #endif

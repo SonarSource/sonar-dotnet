@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class EmptyNamespaceTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void EmptyNamespace() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyNamespace.cs", new EmptyNamespace());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void EmptyNamespace_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\EmptyNamespace.cs",

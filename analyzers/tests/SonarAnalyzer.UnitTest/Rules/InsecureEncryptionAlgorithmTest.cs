@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,18 +33,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class InsecureEncryptionAlgorithmTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void InsecureEncryptionAlgorithm_MainProject_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void InsecureEncryptionAlgorithm_DoesNotRaiseIssuesForTestProject_CS() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void InsecureEncryptionAlgorithm_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureEncryptionAlgorithm.CSharp9.cs",
                                                       new CS.InsecureEncryptionAlgorithm(),
@@ -52,7 +49,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void InsecureEncryptionAlgorithm_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.vb", new VB.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 

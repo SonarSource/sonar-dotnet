@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public partial class UnusedPrivateMemberTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Field_Accessibility() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateMembers
@@ -75,7 +74,6 @@ public class NonPrivateMembers
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Field_MultipleDeclarations() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateMembers
@@ -92,7 +90,6 @@ public class PrivateMembers
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Fields_DirectReferences() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;

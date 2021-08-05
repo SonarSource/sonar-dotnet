@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DoNotDecreaseMemberVisibilityTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotDecreaseMemberVisibility() =>
             Verifier.VerifyNonConcurrentAnalyzer(new[] { @"TestCases\DoNotDecreaseMemberVisibility.cs", @"TestCases\DoNotDecreaseMemberVisibility2.cs", },
                                     new DoNotDecreaseMemberVisibility(),
@@ -42,7 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotDecreaseMemberVisibility_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotDecreaseMemberVisibility.CSharp9.cs", new DoNotDecreaseMemberVisibility());
 #endif

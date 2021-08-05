@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,7 +31,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         public class TestBlock : Block { }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ProgramPoint_Equivalence()
         {
             var block = new TestBlock();
@@ -43,7 +42,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ProgramPoint_Diff_Offset()
         {
             var block = new TestBlock();
@@ -55,7 +53,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ProgramPoint_Diff_Block()
         {
             var pp1 = new ProgramPoint(new TestBlock(), 1);

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class EnumerableSumInUncheckedTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void EnumerableSumInUnchecked() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumerableSumInUnchecked.cs", new EnumerableSumInUnchecked());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void EnumerableSumInUnchecked_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EnumerableSumInUnchecked.CSharp9.cs", new EnumerableSumInUnchecked());
 #endif

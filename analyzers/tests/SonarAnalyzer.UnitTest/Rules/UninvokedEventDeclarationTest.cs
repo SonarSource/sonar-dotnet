@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UninvokedEventDeclarationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UninvokedEventDeclaration() =>
             Verifier.VerifyAnalyzer(@"TestCases\UninvokedEventDeclaration.cs", new UninvokedEventDeclaration());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void UninvokedEventDeclaration_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UninvokedEventDeclaration.CSharp9.cs", new UninvokedEventDeclaration());
 #endif

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class FunctionNestingDepthTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void FunctionNestingDepth_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.cs", new CS.FunctionNestingDepth { Maximum = 3 });
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void FunctionNestingDepth_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\FunctionNestingDepth.CSharp9.cs", new CS.FunctionNestingDepth { Maximum = 3 });
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FunctionNestingDepth_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.vb", new VB.FunctionNestingDepth { Maximum = 3 });
     }

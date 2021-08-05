@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class BooleanLiteralUnnecessaryTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void BooleanLiteralUnnecessary_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.cs", new CS.BooleanLiteralUnnecessary());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void BooleanLiteralUnnecessary_CodeFix_CS() =>
             Verifier.VerifyCodeFix(@"TestCases\BooleanLiteralUnnecessary.cs",
                                    @"TestCases\BooleanLiteralUnnecessary.Fixed.cs",
@@ -42,7 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new CS.BooleanLiteralUnnecessaryCodeFixProvider());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void BooleanLiteralUnnecessary_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.vb", new VB.BooleanLiteralUnnecessary());
     }

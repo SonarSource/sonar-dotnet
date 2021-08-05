@@ -28,28 +28,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseShortCircuitingOperatorTest
     {
-        [TestMethod, TestCategory("Rule")]
+        [TestMethod]
         public void UseShortCircuitingOperators_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.vb", new VB.UseShortCircuitingOperator());
 
-        [TestMethod, TestCategory("CodeFix")]
+        [TestMethod]
         public void UseShortCircuitingOperators_VisualBasic_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\UseShortCircuitingOperator.vb",
                                    @"TestCases\UseShortCircuitingOperator.Fixed.vb",
                                    new VB.UseShortCircuitingOperator(),
                                    new VB.UseShortCircuitingOperatorFixProvider());
 
-        [TestMethod, TestCategory("Rule")]
+        [TestMethod]
         public void UseShortCircuitingOperators_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.cs", new CS.UseShortCircuitingOperator());
 
 #if NET
-        [TestMethod, TestCategory("Rule")]
+        [TestMethod]
         public void UseShortCircuitingOperators_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
                                                       new CS.UseShortCircuitingOperator());
 
-        [TestMethod, TestCategory("CodeFix")]
+        [TestMethod]
         public void UseShortCircuitingOperators_CSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
                                    @"TestCases\UseShortCircuitingOperator.CSharp9.Fixed.cs",
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    ParseOptionsHelper.FromCSharp9);
 #endif
 
-        [TestMethod, TestCategory("CodeFix")]
+        [TestMethod]
         public void UseShortCircuitingOperators_CSharp_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\UseShortCircuitingOperator.cs",
                                    @"TestCases\UseShortCircuitingOperator.Fixed.cs",

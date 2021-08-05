@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,7 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     {
         // This test is meant to run all the symbolic execution rules together and verify different scenarios.
         [TestMethod]
-        [TestCategory("Rule")]
         public void VerifySymbolicExecutionRules() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecutionRules.cs",
                 new SymbolicExecutionRunner(),

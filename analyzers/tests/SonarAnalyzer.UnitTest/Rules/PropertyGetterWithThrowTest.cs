@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PropertyGetterWithThrowTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertyGetterWithThrowCSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertyGetterWithThrow.cs", new CS.PropertyGetterWithThrow());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void PropertyGetterWithThrowVBNet() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertyGetterWithThrow.vb", new VB.PropertyGetterWithThrow());
     }

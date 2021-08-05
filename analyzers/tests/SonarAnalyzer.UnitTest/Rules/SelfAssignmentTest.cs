@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,14 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class SelfAssignmentTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void SelfAssignment_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.cs",
                 new CS.SelfAssignment(),
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void SelfAssignment_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.vb", new VB.SelfAssignment());
     }

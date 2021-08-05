@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,7 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Rule")]
         public void PublicMethodArgumentsShouldBeCheckedForNull(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.cs",
                 new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),
@@ -47,7 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs",
                                                       new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),

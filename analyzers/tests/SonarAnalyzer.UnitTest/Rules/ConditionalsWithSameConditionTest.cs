@@ -28,18 +28,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ConditionalsWithSameConditionTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConditionalsWithSameCondition() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalsWithSameCondition.cs", new ConditionalsWithSameCondition());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConditionalsWithSameCondition_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ConditionalsWithSameCondition.CSharp9.cs", new ConditionalsWithSameCondition());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ConditionalsWithSameCondition_CSharp9_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalsWithSameCondition.CSharp9.TopLevelStatements.cs", new ConditionalsWithSameCondition());
 #endif

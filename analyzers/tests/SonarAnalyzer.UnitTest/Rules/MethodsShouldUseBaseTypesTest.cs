@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MethodsShouldUseBaseTypesTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes_Internals()
         {
             var solution = SolutionBuilder.Create()
@@ -64,19 +63,16 @@ internal class Bar
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\MethodsShouldUseBaseTypes.cs", @"TestCases\MethodsShouldUseBaseTypes2.cs", }, new MethodsShouldUseBaseTypes());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new MethodsShouldUseBaseTypes());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;

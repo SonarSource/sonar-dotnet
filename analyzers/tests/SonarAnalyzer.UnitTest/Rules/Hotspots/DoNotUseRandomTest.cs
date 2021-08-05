@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,8 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DoNotUseRandomTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void DoNotUseRandom() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotUseRandom.cs",
                                     new DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,18 +28,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class VirtualEventFieldTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void VirtualEventField() =>
             Verifier.VerifyAnalyzer(@"TestCases\VirtualEventField.cs", new VirtualEventField());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void VirtualEventField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\VirtualEventField.CSharp9.cs", new VirtualEventField());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void VirtualEventField_CSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\VirtualEventField.CSharp9.cs",
                                    @"TestCases\VirtualEventField.CSharp9.Fixed.cs",
@@ -49,7 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void VirtualEventField_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\VirtualEventField.cs",

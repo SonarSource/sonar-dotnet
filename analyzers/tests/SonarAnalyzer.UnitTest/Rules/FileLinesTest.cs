@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class FileLinesTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void FileLines_CS() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\FileLines20.cs", @"TestCases\FileLines9.cs" }, new CS.FileLines { Maximum = 10 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FileLines_VB() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\FileLines20.vb", @"TestCases\FileLines9.vb" }, new VB.FileLines { Maximum = 10 });
     }

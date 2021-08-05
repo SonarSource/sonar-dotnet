@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UseGenericEventHandlerInstancesTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseGenericEventHandlerInstances() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseGenericEventHandlerInstances.cs", new UseGenericEventHandlerInstances());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseGenericEventHandlerInstances_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseGenericEventHandlerInstances.CSharp9.cs", new UseGenericEventHandlerInstances());
 #endif

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CatchRethrowTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CatchRethrow() =>
             Verifier.VerifyAnalyzer(@"TestCases\CatchRethrow.cs", new CS.CatchRethrow());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void CatchRethrow_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\CatchRethrow.cs",
@@ -43,7 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.CatchRethrowCodeFixProvider());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CatchRethrow_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CatchRethrow.vb",
                 new VB.CatchRethrow());

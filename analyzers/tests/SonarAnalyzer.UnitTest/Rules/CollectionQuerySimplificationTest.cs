@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CollectionQuerySimplificationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CollectionQuerySimplification() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionQuerySimplification.cs", new CollectionQuerySimplification());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void CollectionQuerySimplification_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CollectionQuerySimplification.CSharp9.cs", new CollectionQuerySimplification());
 #endif

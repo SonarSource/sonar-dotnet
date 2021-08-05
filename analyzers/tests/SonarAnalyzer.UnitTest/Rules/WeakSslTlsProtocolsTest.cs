@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,7 +33,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class WeakSslTlsProtocolsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void WeakSslTlsProtocols_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.cs",
                                     new CS.WeakSslTlsProtocols(),
@@ -41,7 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     GetAdditionalReferences());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void WeakSslTlsProtocols_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.vb",
                                     new VB.WeakSslTlsProtocols(),

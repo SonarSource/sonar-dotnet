@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ClassWithEqualityShouldImplementIEquatableTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ClassWithEqualityShouldImplementIEquatable() =>
             Verifier.VerifyAnalyzer(@"TestCases\ClassWithEqualityShouldImplementIEquatable.cs", new ClassWithEqualityShouldImplementIEquatable());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ClassWithEqualityShouldImplementIEquatable_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassWithEqualityShouldImplementIEquatable.CSharp9.cs", new ClassWithEqualityShouldImplementIEquatable());
 #endif

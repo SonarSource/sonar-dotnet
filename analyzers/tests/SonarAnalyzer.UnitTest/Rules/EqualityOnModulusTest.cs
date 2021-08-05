@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class EqualityOnModulusTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void EqualityOnModulus() =>
             Verifier.VerifyAnalyzer(@"TestCases\EqualityOnModulus.cs", new EqualityOnModulus());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void EqualityOnModulus_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EqualityOnModulus.CSharp9.cs", new EqualityOnModulus());
 #endif

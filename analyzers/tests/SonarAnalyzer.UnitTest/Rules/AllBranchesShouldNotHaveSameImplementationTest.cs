@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,14 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class AllBranchesShouldNotHaveSameImplementationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void AllBranchesShouldNotHaveSameImplementation_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.cs",
                 new CS.AllBranchesShouldNotHaveSameImplementation(),
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void AllBranchesShouldNotHaveSameImplementation_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.vb",
                 new VB.AllBranchesShouldNotHaveSameImplementation());

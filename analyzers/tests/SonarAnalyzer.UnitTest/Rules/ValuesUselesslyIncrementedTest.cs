@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ValuesUselesslyIncrementedTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ValuesUselesslyIncremented() =>
             Verifier.VerifyAnalyzer(@"TestCases\ValuesUselesslyIncremented.cs", new ValuesUselesslyIncremented());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ValuesUselesslyIncremented_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ValuesUselesslyIncremented.CSharp9.cs", new ValuesUselesslyIncremented());
 #endif

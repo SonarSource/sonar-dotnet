@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class SwitchCasesMinimumThreeTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void SwitchCasesMinimumThree_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.cs", new CS.SwitchCasesMinimumThree(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void SwitchCasesMinimumThree_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.vb",
                 new VB.SwitchCasesMinimumThree());

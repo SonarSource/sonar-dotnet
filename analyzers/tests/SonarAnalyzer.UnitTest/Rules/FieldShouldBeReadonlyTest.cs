@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,19 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class FieldShouldBeReadonlyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void FieldShouldBeReadonly() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs", new FieldShouldBeReadonly(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void FieldShouldBeReadonly_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShouldBeReadonly.CSharp9.cs", new FieldShouldBeReadonly());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void FieldShouldBeReadonly_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\FieldShouldBeReadonly.cs",

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,7 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UseWithStatementTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseWithStatement() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseWithStatement.vb", new UseWithStatement { MinimumSeriesLength = 2 });
     }

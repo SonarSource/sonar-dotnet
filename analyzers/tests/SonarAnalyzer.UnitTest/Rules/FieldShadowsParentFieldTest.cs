@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,33 +30,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class FieldShadowsParentFieldTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void FieldShadowsParentField_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FieldShadowsParentField_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_CS() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_VB() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void FieldShadowsParentField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShadowsParentField.CSharp9.cs", new CS.FieldShadowsParentField());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FieldsShouldNotDifferByCapitalization_CShar9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldNotDifferByCapitalization.CSharp9.cs", new CS.FieldShadowsParentField());
 #endif
@@ -64,14 +58,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Rule")]
         public void FieldsShouldNotDifferByCapitalization_CS(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs", new CS.FieldShadowsParentField(), TestHelper.ProjectTypeReference(projectType));
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Rule")]
         public void FieldsShouldNotDifferByCapitalization_VB(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.vb", new VB.FieldShadowsParentField(), TestHelper.ProjectTypeReference(projectType));
     }

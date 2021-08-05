@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,7 +31,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class StringOrIntegralTypesForIndexersTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void StringOrIntegralTypesForIndexers() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\StringOrIntegralTypesForIndexers.cs" }, new StringOrIntegralTypesForIndexers(),
 #if NETFRAMEWORK
@@ -41,7 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void StringOrIntegralTypesForIndexers_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StringOrIntegralTypesForIndexers.CSharp9.cs", new StringOrIntegralTypesForIndexers());
 #endif

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -43,7 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Method_PreciseLocation_CS(ProjectType projectType) =>
             Verify("Method.cs", projectType, references =>
             {
@@ -57,7 +56,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Method_PreciseLocation_VB(ProjectType projectType) =>
             Verify("Method.vb", projectType, references =>
             {
@@ -71,76 +69,65 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Event_CS(ProjectType projectType) =>
             Verify("Event.cs", projectType, 6, 5, 9, 10);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Field_CS(ProjectType projectType) =>
             Verify("Field.cs", projectType, 4, 3, 7, 8);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_LocalFunction_CS(ProjectType projectType) =>
             Verify("LocalFunction.cs", projectType, 4, 7, 5);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Method_CS(ProjectType projectType) =>
             Verify("Method.cs", projectType, 3, 3, 6);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_NamedType_CS(ProjectType projectType) =>
             Verify("NamedType.cs", projectType, 4, 3, 7, 7); // 'var' and type name on the same line
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Parameter_CS(ProjectType projectType) =>
             Verify("Parameter.cs", projectType, 4, 4, 6, 7);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Property_CS(ProjectType projectType) =>
             Verify("Property.cs", projectType, 4, 3, 7, 8);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_Setter_CS(ProjectType projectType) =>
             Verify("Setter.cs", projectType, 4, 6, 8);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Utility")]
         public void Verify_TypeParameter_CS(ProjectType projectType) =>
             Verify("TypeParameter.cs", projectType, 5, 2, 4, 6);
 
         [DataTestMethod]
         [DataRow(true)]
         [DataRow(false)]
-        [TestCategory("Utility")]
         public void GetSetKeyword_ReturnsNull_VB(bool isTestProject) =>
             // This path is unreachable for VB code
             new TestSymbolReferenceAnalyzer_VB(null, isTestProject).TestGetSetKeyword(null).Should().BeNull();
 
         [TestMethod]
-        [TestCategory("Utility")]
         public void Verify_TokenThreshold() =>
             // In TokenThreshold.cs there are 40009 tokens which is more than the current limit of 40000
             Verify("TokenThreshold.cs", ProjectType.Product, _ => { }, false);

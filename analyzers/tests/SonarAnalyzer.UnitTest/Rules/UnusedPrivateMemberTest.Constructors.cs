@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public partial class UnusedPrivateMemberTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Constructor_Accessibility() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateConstructors
@@ -68,7 +67,6 @@ public class NonPrivateMembers
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Constructor_DirectReferences() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public abstract class PrivateConstructors
@@ -99,7 +97,6 @@ public abstract class PrivateConstructors
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Constructor_Inheritance() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class Inheritance
@@ -128,7 +125,6 @@ public class Inheritance
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Empty_Constructors() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateConstructors
@@ -138,7 +134,6 @@ public class PrivateConstructors
 ", new UnusedPrivateMember());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UnusedPrivateMember_Illegal_Interface_Constructor() =>
             // While typing code in IDE, we can end up in a state where an interface has a constructor defined.
             // Even though this results in a compiler error (CS0526), IDE will still trigger rules on the interface.

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -40,7 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public TestContext TestContext { get; set; } // Set automatically by MsTest
 
         [TestMethod]
-        [TestCategory("Utility")]
         public void Verify_Unique_CS() =>
             Verify("Unique.cs", info =>
             {
@@ -51,7 +50,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        [TestCategory("Utility")]
         public void Verify_Unique_VB() =>
             Verify("Unique.vb", info =>
             {
@@ -62,7 +60,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        [TestCategory("Utility")]
         public void Verify_Duplicated_CS() =>
             Verify("Duplicated.cs", info =>
             {
@@ -71,7 +68,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        [TestCategory("Utility")]
         public void Verify_DuplicatedDifferentLiterals_CS() =>
             Verify("DuplicatedDifferentLiterals.cs", info =>
             {
@@ -80,7 +76,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
-        [TestCategory("Utility")]
         public void Verify_NotRunForTestProject_CS()
         {
             var testRoot = Root + TestContext.TestName;

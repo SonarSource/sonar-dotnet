@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,7 +37,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ProgramState_Equivalence()
         {
             var ps1 = new ProgramState();
@@ -56,7 +55,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ProgramState_Diff_SymbolicValue()
         {
             var ps1 = new ProgramState();
@@ -71,7 +69,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ProgramState_Diff_Constraint()
         {
             var ps1 = new ProgramState();
@@ -89,7 +86,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ProgramState_Diff_Symbol()
         {
             var ps1 = new ProgramState();
@@ -104,7 +100,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ProgramState_Constraint()
         {
             var ps = new ProgramState();
@@ -119,7 +114,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [TestMethod]
-        [TestCategory("Symbolic execution")]
         public void ProgramState_NotNull_Bool_Constraint()
         {
             var ps = new ProgramState();

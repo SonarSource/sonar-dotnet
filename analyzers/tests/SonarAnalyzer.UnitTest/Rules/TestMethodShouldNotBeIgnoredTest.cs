@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,7 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class TestMethodShouldNotBeIgnoredTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_MsTest_Legacy() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
                                     new TestMethodShouldNotBeIgnored(),
@@ -40,7 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("1.2.0")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
                                     new TestMethodShouldNotBeIgnored(),
@@ -49,7 +47,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow("2.7.0")]
-        [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_NUnit_V2(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.V2.cs",
                                     new TestMethodShouldNotBeIgnored(),
@@ -60,7 +57,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("3.0.0")] // Ignore without reason no longer exist
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.cs",
                                     new TestMethodShouldNotBeIgnored(),
@@ -71,7 +67,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_Xunit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.cs",
                                     new TestMethodShouldNotBeIgnored(),
@@ -80,7 +75,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                         .ToArray());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_Xunit_v1() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.v1.cs",
                                     new TestMethodShouldNotBeIgnored(),
@@ -90,7 +84,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldNotBeIgnored.CSharp9.cs",
                                                 new TestMethodShouldNotBeIgnored(),

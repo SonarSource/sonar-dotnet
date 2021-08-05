@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,7 +31,6 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     public class NullPointerDereferenceTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void NullPointerDereference_ValidatedNotNull() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -62,31 +61,26 @@ public static class Utils
 ", GetAnalyzer());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void NullPointerDereference() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\NullPointerDereference.cs", GetAnalyzer());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void NullPointerDereference_DoesNotRaiseIssuesForTestProject() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\NullPointerDereference.cs", GetAnalyzer());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void NullPointerDereference_CSharp6() =>
             Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp6.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp6);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void NullPointerDereference_CSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp7.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void NullPointerDereference_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp8.cs",
                 GetAnalyzer(),
@@ -99,7 +93,6 @@ public static class Utils
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void NullPointerDereference_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NullPointerDereference.CSharp9.cs", GetAnalyzer());
 #endif

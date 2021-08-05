@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PartialMethodNoImplementationTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PartialMethodNoImplementation() =>
             Verifier.VerifyAnalyzer(@"TestCases\PartialMethodNoImplementation.cs", new PartialMethodNoImplementation());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void PartialMethodNoImplementation_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartialMethodNoImplementation.CSharp9.cs", new PartialMethodNoImplementation());
 #endif

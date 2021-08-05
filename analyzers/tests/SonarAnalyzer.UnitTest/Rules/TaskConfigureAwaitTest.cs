@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,21 +33,18 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NETFRAMEWORK
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TaskConfigureAwait_NetFx() =>
             Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetFx.cs", new TaskConfigureAwait());
 
 #else
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TaskConfigureAwait_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new TaskConfigureAwait());
 
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TaskConfigureAwait_ConsoleApp()
         {
             const string code = @"

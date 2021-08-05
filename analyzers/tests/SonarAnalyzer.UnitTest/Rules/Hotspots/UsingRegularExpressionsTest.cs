@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,16 +31,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UsingRegularExpressionsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void UsingRegularExpressions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.cs",
                                     new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.RegularExpressions);
 
         [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void UsingRegularExpressions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.vb",
                                     new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),

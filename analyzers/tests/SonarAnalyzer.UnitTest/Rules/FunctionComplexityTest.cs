@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,19 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class FunctionComplexityTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void FunctionComplexity_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.cs", new CS.FunctionComplexity { Maximum = 3 }, ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void FunctionComplexity_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\FunctionComplexity.CSharp9.cs", new CS.FunctionComplexity { Maximum = 3 });
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FunctionComplexity_InsufficientExecutionStack_CS()
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test doesn't work on Azure DevOps
@@ -52,7 +49,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FunctionComplexity_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.vb", new VB.FunctionComplexity { Maximum = 3 });
     }

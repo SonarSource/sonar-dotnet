@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,19 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class TooManyGenericParametersTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void TooManyGenericParameters_DefaultValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\TooManyGenericParameters_DefaultValues.cs", new TooManyGenericParameters());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TooManyGenericParameters_CustomValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\TooManyGenericParameters_CustomValues.cs",
                 new TooManyGenericParameters { MaxNumberOfGenericParametersInClass = 4, MaxNumberOfGenericParametersInMethod = 4 });
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void TooManyGenericParameters_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyGenericParameters.CSharp9.cs", new TooManyGenericParameters());
 #endif

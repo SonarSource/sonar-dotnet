@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -45,7 +45,6 @@ namespace SonarAnalyzer.UnitTest.ControlFlowGraph
         #region Top level - build CFG expression body / body
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Constructed_for_Body()
         {
             var cfg = Build("i = 4 + 5;");
@@ -53,7 +52,6 @@ namespace SonarAnalyzer.UnitTest.ControlFlowGraph
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Constructed_for_ExpressionBody()
         {
             const string input = @"
@@ -71,7 +69,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Constructed_for_Ctor_ComplexArguments()
         {
             const string input = @"
@@ -117,7 +114,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Constructed_for_Ctor_This()
         {
             const string input = @"
@@ -148,7 +144,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Constructed_for_Ctor_Base()
         {
             const string input = @"
@@ -181,7 +176,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ExtremelyNestedExpression_NotSupported_FromExpression()
         {
             var method = CompileWithMethodBody(string.Format(TestInput, $"var x = {ExtremelyNestedExpression()};"), "Bar", out var semanticModel);
@@ -193,7 +187,6 @@ namespace NS
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ExtremelyNestedExpression_NotSupported_FromBodyMethod()
         {
             var input = @$"
@@ -212,7 +205,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ExtremelyNestedExpression_NotSupported_FromArrowMethod()
         {
             var input = @$"
@@ -228,7 +220,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ExtremelyNestedExpression_IsSupported_InSimpleLambda()
         {
             var input = @$"
@@ -244,7 +235,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ExtremelyNestedExpression_IsSupported_InParenthesizedLambda()
         {
             var input = @$"
@@ -264,7 +254,6 @@ public class Sample
         #region Empty statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_EmptyStatement()
         {
             var cfg = Build(";;;;;");
@@ -276,7 +265,6 @@ public class Sample
         #region Variable declaration
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_VariableDeclaration()
         {
             var cfg = Build("var x = 10, y = 11; var z = 12;");
@@ -290,7 +278,6 @@ public class Sample
         #region If statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_If()
         {
             var cfg = Build("if (true) { var x = 10; }");
@@ -311,7 +298,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_If_Branch_Or_Condition()
         {
             var cfg = Build("if (a || b) { var x = 10; }");
@@ -332,7 +318,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_If_Branch_And_Condition()
         {
             var cfg = Build("if (a && b) { var x = 10; }");
@@ -353,7 +338,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_If_Branch_And_Condition_Parentheses()
         {
             var cfg = Build("if (((a && b))) { var x = 10; }");
@@ -374,7 +358,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_If_Else()
         {
             var cfg = Build("if (true) { var x = 10; } else { var y = 11; }");
@@ -393,7 +376,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_If_ElseIf()
         {
             var cfg = Build("if (true) { var x = 10; } else if (false) { var y = 11; }");
@@ -416,7 +398,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_If_ElseIf_Else()
         {
             var cfg = Build("if (true) { var x = 10; } else if (false) { var y = 11; } else { var z = 12; }");
@@ -443,7 +424,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NestedIf()
         {
             var cfg = Build("if (true) { if (false) { var x = 10; } else { var y = 10; } }");
@@ -471,7 +451,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_If_Coalesce()
         {
             var cfg = Build("if (a ?? b) { var y = 10; }");
@@ -495,7 +474,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Conditional_ComplexCondition_Coalesce()
         {
             var cfg = Build("var a = (x ?? y) ? b : c;");
@@ -529,7 +507,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_If_Patterns_Constant_Complex_Condition()
         {
             var cfg = Build("cw0(); if (x is 10 && o is null) { cw1(); } cw2()");
@@ -559,7 +536,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_If_Patterns_Single_Var_Complex_Condition()
         {
             var cfg = Build("cw0(); if (x is int i && o is string s) { cw1(); } cw2()");
@@ -589,7 +565,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_If_Patterns_Not_Null()
         {
             var cfg = Build("cw0(); if (!(x is null)) { cw1(); } cw2()");
@@ -619,7 +594,6 @@ public class Sample
         #region While statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_While()
         {
             var cfg = Build("while (true) { var x = 10; }");
@@ -641,7 +615,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_While_ComplexCondition_Or()
         {
             var cfg = Build("while (a || b) { var x = 10; }");
@@ -670,7 +643,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_While_ComplexCondition_And()
         {
             var cfg = Build("while (a && b) { var x = 10; }");
@@ -700,7 +672,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NestedWhile()
         {
             var cfg = Build("while (true) while(false) { var x = 10; }");
@@ -731,7 +702,6 @@ public class Sample
         #region Do statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_DoWhile_ComplexCondition()
         {
             var cfg = Build("do { var x = 10; } while (a || b);");
@@ -756,7 +726,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_DoWhile()
         {
             var cfg = Build("do { var x = 10; } while (true);");
@@ -778,7 +747,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NestedDoWhile()
         {
             var cfg = Build("do { do { var x = 10; } while (false); } while (true);");
@@ -805,7 +773,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_DoWhile_Continue()
         {
             var cfg = Build(@"
@@ -854,7 +821,6 @@ public class Sample
         #region Foreach statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Foreach()
         {
             var cfg = Build("foreach (var item in collection) { var x = 10; }");
@@ -880,7 +846,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NestedForeach()
         {
             var cfg = Build("foreach (var item1 in collection1) { foreach (var item2 in collection2) { var x = 10; } }");
@@ -917,7 +882,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Foreach_VarDeclaration()
         {
             var cfg = Build("foreach (var (key, value) in collection) { string j = value; } ");
@@ -949,7 +913,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Foreach_AsyncStream()
         {
             var cfg = Build("await foreach (var number in GetAsync()) { var x = 10; }");
@@ -979,7 +942,6 @@ public class Sample
         #region For statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_For()
         {
             var cfg = Build("for (var i = 0; true; i++) { var x = 10; }");
@@ -1003,7 +965,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_For_NoInitializer()
         {
             var cfg = Build("for (; true; i++) { var x = 10; }");
@@ -1014,7 +975,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_For_NoIncrementor()
         {
             var cfg = Build("for (var i = 0; true;) { var x = 10; }");
@@ -1025,7 +985,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_For_Empty()
         {
             var cfg = Build("for (; true;) { var x = 10; }");
@@ -1036,7 +995,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NestedFor()
         {
             var cfg = Build("for (var i = 0; true; i++) { for (var j = 0; false; j++) { var x = 10; } }");
@@ -1081,7 +1039,6 @@ public class Sample
         #region Return, throw, yield break statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Return()
         {
             var cfg = Build($"if (true) {{ var y = 12; {SimpleReturn}; }} var x = 11;");
@@ -1092,7 +1049,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Throw_Statement_InvalidThrow()
         {
             var cfg = Build($"if (true) {{ var y = 12; {SimpleThrow}; }} var x = 11;");
@@ -1103,7 +1059,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Throw_Statement()
         {
             var throwException = "throw new InvalidOperationException(\"\")";
@@ -1115,7 +1070,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_YieldBreak()
         {
             var cfg = Build($"if (true) {{ var y = 12; {SimpleYieldBreak}; }} var x = 11;");
@@ -1126,7 +1080,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Return_Value()
         {
             var cfg = Build($"if (true) {{ var y = 12; {ExpressionReturn}; }} var x = 11;");
@@ -1134,7 +1087,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Return_JustBeforeExit()
         {
             var cfg = Build(@"
@@ -1158,7 +1110,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Throw_Value()
         {
             var cfg = Build($"if (true) {{ var y = 12; {ExpressionThrow}; }} var x = 11;");
@@ -1170,7 +1121,6 @@ public class Sample
         #region Lock statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Lock()
         {
             var cfg = Build("lock(this) { var x = 10; }");
@@ -1189,7 +1139,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NestedLock()
         {
             var cfg = Build("lock(this) { lock(that) { var x = 10; }}");
@@ -1215,7 +1164,6 @@ public class Sample
         #region Using statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_UsingDeclaration()
         {
             var cfg = Build("using(var stream = new MemoryStream()) { var x = 10; }");
@@ -1230,7 +1178,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_UsingAssignment()
         {
             var cfg = Build("Stream stream; using(stream = new MemoryStream()) { var x = 10; }");
@@ -1245,7 +1192,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_UsingExpression()
         {
             var cfg = Build("using(new MemoryStream()) { var x = 10; }");
@@ -1255,7 +1201,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_UsingLocalDeclaration()
         {
             var cfg = Build("using var stream = new MemoryStream();");
@@ -1270,7 +1215,6 @@ public class Sample
         #region Fixed statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Fixed()
         {
             var cfg = Build("fixed (int* p = &pt.x) { *p = 1; }");
@@ -1284,7 +1228,6 @@ public class Sample
         #region Checked/unchecked statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Checked()
         {
             var cfg = Build("checked { var i = int.MaxValue + 1; }");
@@ -1305,7 +1248,6 @@ public class Sample
         #region Unsafe statement
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Unsafe()
         {
             var cfg = Build("unsafe { int* p = &i; *p *= *p; }");
@@ -1320,7 +1262,6 @@ public class Sample
         #region Logical && and ||
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_LogicalAnd()
         {
             var cfg = Build("var b = a && c;");
@@ -1344,7 +1285,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_LogicalOr()
         {
             var cfg = Build("var b = a || c;");
@@ -1368,7 +1308,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_LogicalAnd_Multiple()
         {
             var cfg = Build("var b = a && c && d;");
@@ -1390,7 +1329,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_LogicalAnd_With_For()
         {
             var cfg = Build("for(x = 10; a && c; y++) { var z = 11; }");
@@ -1424,7 +1362,6 @@ public class Sample
         #region Coalesce expression
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Coalesce()
         {
             var cfg = Build("var a = b ?? c;");
@@ -1447,7 +1384,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Coalesce_Self()
         {
             var cfg = Build("a = a ?? c;");
@@ -1473,7 +1409,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Coalesce_Multiple()
         {
             var cfg = Build("var a = b ?? c ?? d;");
@@ -1504,7 +1439,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Coalesce_MultipleAssignments()
         {
             var cfg = Build("a = a ?? (b = b ?? c);");
@@ -1539,7 +1473,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Coalesce_Throw()
         {
             var cfg = Build(@"var a = b ?? throw new Exception(""Test"");");
@@ -1563,7 +1496,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Coalesce_ThrowCoalesce()
         {
             var cfg = Build(@"var a = b ?? throw ex ?? new Exception(""Test"");");
@@ -1600,7 +1532,6 @@ public class Sample
         #region Null-coalescing assigment
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NullCoalescingAssignment()
         {
             // is similar with "a = a ?? b;"
@@ -1627,7 +1558,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NullCoalescingAssignment_Multiple()
         {
             // is similar with "a = a ?? (b = b ?? c);"
@@ -1664,7 +1594,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NullCoalescingAssignment_Coalesce()
         {
             // similar to a = a ?? b ?? c
@@ -1696,7 +1625,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NullCoalescingAssignment_Conditional()
         {
             var cfg = Build("a ??= b ? c : d;");
@@ -1736,7 +1664,6 @@ public class Sample
         #region Conditional expression
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Conditional()
         {
             var cfg = Build("var a = cond ? b : c;");
@@ -1763,7 +1690,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Conditional_ComplexCondition_Or()
         {
             var cfg = Build("var a = x || y ? b : c;");
@@ -1794,7 +1720,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Conditional_ComplexCondition_And()
         {
             var cfg = Build("var a = x && y ? b : c;");
@@ -1825,7 +1750,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ConditionalMultiple()
         {
             var cfg = Build("var a = cond1 ? (cond2?x:y) : (cond3?p:q);");
@@ -1857,7 +1781,6 @@ public class Sample
         #region Throw expression
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Throw_Expression_NullCoalesce()
         {
             var throwException = "throw new InvalidOperationException(\"\")";
@@ -1866,7 +1789,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Throw_Expression_Ternary()
         {
             var throwException = "throw new InvalidOperationException(\"\")";
@@ -1889,7 +1811,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Throw_Expression_MethodArgument()
         {
             var throwException = "throw new InvalidOperationException(\"\")";
@@ -1912,7 +1833,6 @@ public class Sample
         #region Ranges and Indices
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Range_Expression()
         {
             var cfg = Build($"Range r = 1..4;");
@@ -1929,7 +1849,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Index_Expression()
         {
             var cfg = Build($"Index index = ^1;");
@@ -1950,7 +1869,6 @@ public class Sample
         #region Conditional access
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ConditionalAccess()
         {
             var cfg = Build("var a = o?.method(1);");
@@ -1975,7 +1893,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ConditionalAccessNested()
         {
             var cfg = Build("var a = o?.method()?[10];");
@@ -2002,7 +1919,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ConditionalAccess_Coalesce()
         {
             var cfg = Build("var a = aObj?.booleanVal ?? false");
@@ -2032,7 +1948,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ConditionalAccess_Conditional()
         {
             var cfg = Build("a?.booleanVal == null ? true : false");
@@ -2062,7 +1977,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ConditionalAccess_is()
         {
             var cfg = Build("if(a?.booleanVal is null) {return 1;}");
@@ -2093,7 +2007,6 @@ public class Sample
         #region Break
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_For_Break()
         {
             var cfg = Build("cw0(); for (a; b && c; d) { if (e) { cw1(); break; } cw2(); } cw3();");
@@ -2140,7 +2053,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_While_Break()
         {
             var cfg = Build("cw0(); while (b && c) { if (e) { cw1(); break; } cw2(); } cw3();");
@@ -2170,7 +2082,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Foreach_Break()
         {
             var cfg = Build("cw0(); foreach (var x in xs) { if (e) { cw1(); break; } cw2(); } cw3();");
@@ -2205,7 +2116,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Do_Break()
         {
             var cfg = Build("cw0(); do { if (e) { cw1(); break; } cw2(); } while (b && c); cw3();");
@@ -2236,7 +2146,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_Break()
         {
             var cfg = Build("cw0(); switch(a) { case 1: case 2: cw1(); break; } cw3();");
@@ -2273,7 +2182,6 @@ public class Sample
         #region Continue
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_For_Continue()
         {
             var cfg = Build("cw0(); for (a; b && c; d) { if (e) { cw1(); continue; } cw2(); } cw3();");
@@ -2320,7 +2228,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_While_Continue()
         {
             var cfg = Build("cw0(); while (b && c) { if (e) { cw1(); continue; } cw2(); } cw3();");
@@ -2350,7 +2257,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Foreach_Continue()
         {
             var cfg = Build("cw0(); foreach (var x in xs) { if (e) { cw1(); continue; } cw2(); } cw3();");
@@ -2387,7 +2293,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Foreach_Finally()
         {
             var cfg = Build(@"
@@ -2431,7 +2336,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Do_Continue()
         {
             var cfg = Build("cw0(); do { if (e) { cw1(); continue; } cw2(); } while (b && c); cw3();");
@@ -2466,7 +2370,6 @@ public class Sample
         #region Try/Finally
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Try_Finally()
         {
             var cfg = Build(@"
@@ -2510,7 +2413,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Try_CatchSome()
         {
             var cfg = Build(@"
@@ -2563,7 +2465,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Try_CatchAll()
         {
             var cfg = Build(@"
@@ -2616,7 +2517,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Try_CatchSome_Finally()
         {
             var cfg = Build(@"
@@ -2678,7 +2578,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Try_CatchAll_Finally()
         {
             var cfg = Build(@"
@@ -2740,7 +2639,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Try_CatchAll_Finally_Conditional_Return()
         {
             var cfg = Build(@"
@@ -2802,7 +2700,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Try_CatchSome_Finally_Conditional_Return()
         {
             var cfg = Build(@"
@@ -2864,7 +2761,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Try_CatchSome_Conditional_Return()
         {
             var cfg = Build(@"
@@ -2918,7 +2814,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Try_CatchAll_Conditional_Return()
         {
             var cfg = Build(@"
@@ -2972,7 +2867,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_TryCatch_Exception_Filter()
         {
             var cfg = Build(@"
@@ -3022,7 +2916,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_TryCatch_ThrowInsideTry()
         {
             var cfg = Build(@"
@@ -3073,7 +2966,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_TryCatch_WithBreak_Inside_DoWhile()
         {
             var cfg = Build(@"
@@ -3135,7 +3027,6 @@ public class Sample
 
         // This should be fixed in https://github.com/SonarSource/sonar-dotnet/issues/474
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_TryCatchFinally_InsideLoop_WithBreakInsideTry_AndContinueInsideCatch()
         {
             var cfg = Build(@"
@@ -3206,7 +3097,6 @@ public class Sample
 
         // This should be fixed in https://github.com/SonarSource/sonar-dotnet/issues/474
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_TryFinally_InsideLoop_WithBreakAndContinueInsideTry()
         {
             var cfg = Build(@"
@@ -3281,7 +3171,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_TryCatch_Inside_DoWhile_WithThrow_InsideCatch()
         {
             var cfg = Build(@"
@@ -3360,7 +3249,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_TryFinally_Inside_DoWhile_WithThrow_InsideCatch()
         {
             var cfg = Build(@"
@@ -3419,7 +3307,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_TryCatchFinally_Return_Nested()
         {
             var cfg = Build(@"
@@ -3503,7 +3390,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_TryCatch_ReturnVariable_InCatch()
         {
             var cfg = Build(@"
@@ -3549,7 +3435,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_TryCatch_NestedReturnVariable_InCatch()
         {
             var cfg = Build(@"
@@ -3599,7 +3484,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_TryCatch_MultipleReturnsInTry()
         {
             var cfg = Build(@"
@@ -3655,7 +3539,6 @@ public class Sample
         #region Switch
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch()
         {
             var cfg = Build("cw0(); switch(a) { case 1: case 2: cw1(); break; case 3: default: case 4: cw2(); break; } cw3();");
@@ -3710,7 +3593,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_NoDefault()
         {
             var cfg = Build("cw0(); switch(a) { case 1: case 2: cw1(); break; case 3: case 4: cw2(); break; } cw3();");
@@ -3753,7 +3635,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_GotoCase()
         {
             var cfg = Build("cw0(); switch(a) { case 1: case 2: cw1(); goto case 3; case 3: default: case 4: cw2(); break; } cw3();");
@@ -3804,7 +3685,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_Null()
         {
             var cfg = Build("cw0(); switch(a) { case \"\": case null: cw1(); break; case \"a\": cw2(); goto case null; } cw3();");
@@ -3841,7 +3721,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_GotoDefault()
         {
             var cfg = Build("cw0(); switch(a) { case 1: case 2: cw1(); goto default; case 3: default: case 4: cw2(); break; } cw3();");
@@ -3892,7 +3771,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_Patterns_Default()
         {
             var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); break; default: case double d: cw2(); break; } cw3();");
@@ -3934,7 +3812,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_Patterns_Two_Case_When()
         {
             var cfg = Build("cw0(); switch(o) { case int i when i > 0: case string s when s.Length > 0: cw1(); break; } cw2();");
@@ -3977,7 +3854,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_One_Simple_Case_And_One_Case_With_When()
         {
             var cfg = Build("cw(); switch(o) { case 0 : cw0(); break; case 1 when s: cw1(); break; } cw2();");
@@ -4019,7 +3895,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_Case_With_When_And_Default()
         {
             var cfg = Build("cw(); switch(o) { case 1 when i > 0: cw0(); break; default: cw1(); break; } cw2();");
@@ -4052,7 +3927,6 @@ public class Sample
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_SwitchExpression_Return()
         {
             var cfg = Build(@"
@@ -4098,7 +3972,6 @@ return type switch
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_SwitchExpression_Assignment()
         {
             var cfg = Build(@"var type = ""test""; var result = type switch {""a"" => 1, ""b"" => 2, _ => 3};");
@@ -4134,7 +4007,6 @@ return type switch
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_SwitchExpression_InnerSwitch()
         {
             var cfg = Build(@"
@@ -4182,7 +4054,6 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_SwitchExpression_WhenClause()
         {
             var cfg = Build(@"string first = ""foo"", second = ""bar""; var result = first switch {""a"" when second == ""bar"" => 1, ""a"" => 2, ""b"" => 3, _ => 4};");
@@ -4233,7 +4104,6 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_VarPattern_InSwitchExpression_IsNotSupported()
         {
             var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"string a = taintedString switch {var x => null};"));
@@ -4242,7 +4112,6 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_VarPattern_InIf_IsNotSupported()
         {
             var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is var x) { }"));
@@ -4251,7 +4120,6 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NotPattern_InIf_IsNotSupported()
         {
             var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is not null) { }"));
@@ -4260,7 +4128,6 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_AndPattern_InIf_IsNotSupported()
         {
             var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is int and > 0) { }"));
@@ -4269,7 +4136,6 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_OrPattern_InIf_IsNotSupported()
         {
             var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is string or int) { }"));
@@ -4278,7 +4144,6 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_Patterns_NoDefault()
         {
             var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); break; case double d: cw2(); break; } cw3();");
@@ -4320,7 +4185,6 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_Patterns_GotoDefault()
         {
             var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); goto default; default: case double d: cw2(); break; } cw3();");
@@ -4362,7 +4226,6 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_Patterns_Null()
         {
             var cfg = Build("cw0(); switch(o) { case int i: case null: cw1(); break; } cw2();");
@@ -4395,7 +4258,6 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Switch_Patterns_Null_Default()
         {
             var cfg = Build(@"cw0(); switch(o) { case int i: cw1(); break; case null: cw2(); break; default: cw3(); break; } cw4();");
@@ -4436,7 +4298,6 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_String_And_Throw()
         {
             var cfg = Build(@"
@@ -4473,7 +4334,6 @@ cw1(); // afterSwitchBlock
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Throws()
         {
             var cfg = Build(@"
@@ -4521,7 +4381,6 @@ cw1(); // afterSwitchBlock
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Enumerable_Patterns()
         {
             var cfg = Build(@"
@@ -4565,7 +4424,6 @@ cw3();
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Default_Statement_First()
         {
             var cfg = Build(@"
@@ -4603,7 +4461,6 @@ switch (index)
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Mixed_Cases_With_The_Same_Action()
         {
             var cfg = Build(@"
@@ -4659,7 +4516,6 @@ switch (o)
         #region Goto
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Goto_A()
         {
             var cfg = Build("var x = 1; a: b: x++; if (x < 42) { cw1(); goto a; } cw2();");
@@ -4692,7 +4548,6 @@ switch (o)
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Goto_B()
         {
             var cfg = Build("var x = 1; a: b: x++; if (x < 42) { cw1(); goto b; } cw2();");
@@ -4729,7 +4584,6 @@ switch (o)
         #region Yield return
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_YieldReturn()
         {
             var cfg = Build(@"yield return 5;");
@@ -4747,7 +4601,6 @@ switch (o)
         #region Non-branching expressions
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NonBranchingExpressions()
         {
             var cfg = Build(@"
@@ -4911,7 +4764,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Stackalloc()
         {
             var cfg = Build("var x = stackalloc int[10];");
@@ -4920,7 +4772,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Stackalloc_Initializer()
         {
             var cfg = Build("var x = stackalloc int[2] { 10, 20 };");
@@ -4929,7 +4780,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Stackalloc_Implicit()
         {
             var cfg = Build("var x = stackalloc [] {100, 200, 300};");
@@ -4938,7 +4788,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_NonRemovedCalls()
         {
             var cfg = Build(@"System.Diagnostics.Debug.Fail("""");");
@@ -4955,7 +4804,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         #region Method invocation
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Ref_Arg_Should_Be_Last_Instruction()
         {
             var cfg = Build(@"Bye(ref x0, x1, x2, x3, ref x4);}");
@@ -4965,7 +4813,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Ref_Arg_Should_Be_Last_Instruction_WithMethodCallOnObject()
         {
             var cfg = Build(@"Bye.Hi(ref x0, x1, x2, x3, ref x4);}");
@@ -4979,7 +4826,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         #region Property Pattern Clause
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_PropertyPatternClause_Simple()
         {
             var cfg = Build(@"var x = address is Address { State: ""WA"" };");
@@ -4998,7 +4844,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_PropertyPatternClause_MultipleProperties()
         {
             var cfg = Build(@"var x = address is { State: ""WA"", Street: ""Rue"" };");
@@ -5017,7 +4862,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_PropertyPatternClause_WithSingleVariableDesignation()
         {
             var cfg = Build(@"var x = address is Address { State: ""WA"" } addr;");
@@ -5036,7 +4880,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_PropertyPatternClause_InsideIf()
         {
             var cfg = Build(@"if (address is Address { State: ""WA"" }) { return true; }");
@@ -5061,7 +4904,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_PropertyPatternClause_InsideIf_WithSingleVariableDesignation()
         {
             var cfg = Build(@"if (address is Address { State: ""WA"" } addr) { return true; }");
@@ -5086,7 +4928,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_PropertyPatternClause_InsideSwitch()
         {
             var cfg = Build(@"location switch { { State: ""WA"" } adr => salePrice * 0.06M, { State: ""MN"" } => salePrice * 0.75M, _ => 0M };");
@@ -5121,7 +4962,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_PropertyPatternClause_Nested()
         {
             var cfg = Build(@"var result = o is Person { Name: ""John Doe"", Address: { State: ""WA"" } };");
@@ -5144,7 +4984,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         #region Instance creation
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_New()
         {
             var cfg = Build(@"var x = new Object()");
@@ -5154,7 +4993,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_New_TargetTyped()
         {
             Action a = () => Build(@"Object x = new()");
@@ -5166,7 +5004,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         #region "Tuples"
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Tuple_Create()
         {
             var cfg = Build(@"var x = (true, 42);");
@@ -5176,7 +5013,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Tuple_ComplexExpression()
         {
             const string code = @"
@@ -5193,7 +5029,6 @@ int LocalInt() => 40;
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Tuple_InDeclaration()
         {
             var cfg = Build(@"var (a, b) = (true, 42);");
@@ -5203,7 +5038,6 @@ int LocalInt() => 40;
         }
 
         [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_Tuple_AssignmentTarget()
         {
             var cfg = Build(@"bool a; int b; (a, b) = (true, 42);");

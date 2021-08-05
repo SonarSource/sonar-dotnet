@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,13 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DoNotLockOnSharedResourceTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotLockOnSharedResource_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.cs",
                 new CS.DoNotLockOnSharedResource());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotLockOnSharedResource_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.vb",
                 new VB.DoNotLockOnSharedResource());

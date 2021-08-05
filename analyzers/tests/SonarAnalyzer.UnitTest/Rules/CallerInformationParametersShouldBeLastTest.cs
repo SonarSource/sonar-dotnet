@@ -28,19 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CallerInformationParametersShouldBeLastTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLast() =>
             Verifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLast.cs", new CallerInformationParametersShouldBeLast());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLast_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs", new CallerInformationParametersShouldBeLast());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLastInvalidSyntax() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CallerInformationParametersShouldBeLastInvalidSyntax.cs",
                                            new CallerInformationParametersShouldBeLast(),

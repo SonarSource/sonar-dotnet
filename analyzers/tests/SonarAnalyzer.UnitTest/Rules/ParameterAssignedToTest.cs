@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ParameterAssignedToTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ParameterAssignedTo_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.cs", new CS.ParameterAssignedTo());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ParameterAssignedTo_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ParameterAssignedTo.CSharp9.cs", new CS.ParameterAssignedTo());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ParameterAssignedTo_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.vb", new VB.ParameterAssignedTo());
     }

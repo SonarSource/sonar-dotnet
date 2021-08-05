@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,7 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ParameterNameMatchesOriginalTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ParameterNameMatchesOriginal_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParameterNameMatchesOriginal.cs",
                                     new CS.ParameterNameMatchesOriginal(),
@@ -43,13 +42,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ParameterNameMatchesOriginal_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ParameterNameMatchesOriginal.CSharp9.cs", new CS.ParameterNameMatchesOriginal());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ParameterNameMatchesOriginal_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParameterNameMatchesOriginal.vb", new VB.ParameterNameMatchesOriginal());
     }

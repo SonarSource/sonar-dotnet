@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,7 +33,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Rule")]
         public void UseUriInsteadOfString(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
                                     new UseUriInsteadOfString(),
@@ -41,7 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseUriInsteadOfString_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseUriInsteadOfString.CSharp9.cs",
                                                       new UseUriInsteadOfString(),
@@ -49,7 +47,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseUriInsteadOfString_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class Foo

@@ -34,7 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ClassAndMethodNameTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ClassName_CS() =>
             Verifier.VerifyNonConcurrentAnalyzer(
                 new[]
@@ -48,28 +47,23 @@ namespace SonarAnalyzer.UnitTest.Rules
                 options: ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ClassName_InTestProject_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ClassName.Tests.cs", new CS.ClassAndMethodName(), ParseOptionsHelper.FromCSharp8, NuGetMetadataReference.MSTestTestFrameworkV1);
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ClassName_TopLevelStatement_CS() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassName.TopLevelStatement.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ClassName_TopLevelStatement_InTestProject_CS() =>
             Verifier.VerifyAnalyzerFromCSharp9ConsoleInTest(@"TestCases\ClassName.TopLevelStatement.Test.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void RecordName_CS() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void RecordName_InTestProject_CS() =>
             Verifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
 #endif
@@ -77,14 +71,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Rule")]
         public void ClassName_VB(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new VB.ClassName(), TestHelper.ProjectTypeReference(projectType));
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        [TestCategory("Rule")]
         public void MethodName(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(
                 new[]
@@ -98,12 +90,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodName_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodName_InTestProject_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
 

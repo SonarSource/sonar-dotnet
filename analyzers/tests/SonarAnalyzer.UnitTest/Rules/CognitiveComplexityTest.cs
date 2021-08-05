@@ -30,24 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CognitiveComplexityTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CognitiveComplexity_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 }, ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void CognitiveComplexity_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CognitiveComplexity.CSharp9.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CognitiveComplexity_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.vb", new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CognitiveComplexity_StackOverflow_CS()
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test throws OOM on Azure DevOps
@@ -57,7 +53,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CognitiveComplexity_StackOverflow_VB()
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDO: Test throws OOM on Azure DevOps

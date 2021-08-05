@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class VariableShadowsFieldTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void VariableShadowsField() =>
             Verifier.VerifyAnalyzer(@"TestCases\VariableShadowsField.cs", new VariableShadowsField(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void VariableShadowsField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableShadowsField.CSharp9.cs", new VariableShadowsField());
 #endif

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,12 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CatchEmptyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CatchEmpty() =>
             Verifier.VerifyAnalyzer(@"TestCases\CatchEmpty.cs", new CatchEmpty());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CatchEmpty_InTest() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\CatchEmpty.cs", new CatchEmpty());
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,19 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class FinalizerShouldNotBeEmptyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void FinalizerShouldNotBeEmpty() =>
             Verifier.VerifyAnalyzer(@"TestCases\FinalizerShouldNotBeEmpty.cs", new FinalizerShouldNotBeEmpty());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void FinalizerShouldNotBeEmpty_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FinalizerShouldNotBeEmpty.CSharp9.cs", new FinalizerShouldNotBeEmpty());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void FinalizerShouldNotBeEmpty_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"class Program4
     {

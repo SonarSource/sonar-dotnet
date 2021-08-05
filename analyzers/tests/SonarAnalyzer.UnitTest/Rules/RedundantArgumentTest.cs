@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class RedundantArgumentTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantArgument() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantArgument.cs",
                                     new RedundantArgument(),
@@ -42,13 +41,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void RedundantArgument_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantArgument.CSharp9.cs", new RedundantArgument());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantArgument_CodeFix_No_Named_Arguments() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantArgument.cs",
                                    @"TestCases\RedundantArgument.NoNamed.Fixed.cs",
@@ -58,7 +55,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void RedundantArgument_CodeFix_Named_Arguments() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantArgument.cs",
                                    @"TestCases\RedundantArgument.Named.Fixed.cs",

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,14 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DangerousGetHandleShouldNotBeCalledTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
                 new CS.DangerousGetHandleShouldNotBeCalled(),
                 MetadataReferenceFacade.MicrosoftWin32Registry);
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DangerousGetHandleShouldNotBeCalled.CSharp9.cs",
                 new CS.DangerousGetHandleShouldNotBeCalled(),
@@ -45,7 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
                 new VB.DangerousGetHandleShouldNotBeCalled());

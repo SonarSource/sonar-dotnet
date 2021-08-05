@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MethodOverrideChangedDefaultValueTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodOverrideChangedDefaultValue() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
                 new MethodOverrideChangedDefaultValue(),
@@ -42,13 +41,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void MethodOverrideChangedDefaultValue_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new MethodOverrideChangedDefaultValue());
 #endif
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void MethodOverrideChangedDefaultValue_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodOverrideChangedDefaultValue.cs",

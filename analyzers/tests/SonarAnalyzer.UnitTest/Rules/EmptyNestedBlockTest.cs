@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class EmptyNestedBlockTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void EmptyNestedBlock_CS() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\EmptyNestedBlock.cs", @"TestCases\EmptyNestedBlock2.cs" }, new CS.EmptyNestedBlock());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void EmptyNestedBlock_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyNestedBlock.vb", new VB.EmptyNestedBlock());
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DoNotHideBaseClassMethodsTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotHideBaseClassMethods() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\DoNotHideBaseClassMethods.cs", @"TestCases\DoNotHideBaseClassMethods2.cs", }, new DoNotHideBaseClassMethods());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void DoNotHideBaseClassMethods_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotHideBaseClassMethods.CSharp9.cs", new DoNotHideBaseClassMethods());
 #endif

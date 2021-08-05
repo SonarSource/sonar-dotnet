@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class OptionalParameterNotPassedToBaseCallTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void OptionalParameterNotPassedToBaseCall_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.cs", new CS.OptionalParameterNotPassedToBaseCall());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void OptionalParameterNotPassedToBaseCall_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OptionalParameterNotPassedToBaseCall.CSharp9.cs", new CS.OptionalParameterNotPassedToBaseCall());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void OptionalParameterNotPassedToBaseCall_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.vb", new VB.OptionalParameterNotPassedToBaseCall());
     }

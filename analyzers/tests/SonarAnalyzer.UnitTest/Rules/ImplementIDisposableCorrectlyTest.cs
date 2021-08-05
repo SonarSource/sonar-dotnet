@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ImplementIDisposableCorrectlyTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly() =>
             Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.cs", new ImplementIDisposableCorrectly(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_FromCSharp9()
         {
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ImplementIDisposableCorrectly.CSharp9.cs", new ImplementIDisposableCorrectly());
@@ -42,12 +40,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_AbstractClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.AbstractClass.cs", new ImplementIDisposableCorrectly());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles() =>
             Verifier.VerifyAnalyzer(
                 new[]

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class SetLocaleForDataTypesTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void SetLocaleForDataTypes() =>
             Verifier.VerifyAnalyzer(@"TestCases\SetLocaleForDataTypes.cs",
                                     new SetLocaleForDataTypes(),
@@ -37,7 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void SetLocaleForDataTypes_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SetLocaleForDataTypes.CSharp9.cs",
                                     new SetLocaleForDataTypes(),

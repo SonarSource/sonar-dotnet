@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ArrayCreationLongSyntaxTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void ArrayCreationLongSyntax() =>
             Verifier.VerifyAnalyzer(@"TestCases\ArrayCreationLongSyntax.vb",
                                     new ArrayCreationLongSyntax());
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void ArrayCreationLongSyntax_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\ArrayCreationLongSyntax.vb",
                                    @"TestCases\ArrayCreationLongSyntax.Fixed.vb",

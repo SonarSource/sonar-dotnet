@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class StaticFieldInGenericClassTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void StaticFieldInGenericClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\StaticFieldInGenericClass.cs", new StaticFieldInGenericClass());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void StaticFieldInGenericClass_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldInGenericClass.CSharp9.cs", new StaticFieldInGenericClass());
 #endif

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,13 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CastShouldNotBeDuplicatedTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CastShouldNotBeDuplicated() =>
             Verifier.VerifyAnalyzer(@"TestCases\CastShouldNotBeDuplicated.cs", new CastShouldNotBeDuplicated());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void CastShouldNotBeDuplicated_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CastShouldNotBeDuplicated.CSharp9.cs", new CastShouldNotBeDuplicated());
 #endif

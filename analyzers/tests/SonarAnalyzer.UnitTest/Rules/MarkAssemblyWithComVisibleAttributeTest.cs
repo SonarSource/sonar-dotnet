@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,19 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MarkAssemblyWithComVisibleAttributeTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithComVisibleAttribute_CS() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.cs",
                 new CS.MarkAssemblyWithComVisibleAttribute());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithComVisibleAttribute_VB() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.vb",
                 new VB.MarkAssemblyWithComVisibleAttribute());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithComVisibleAttributeNoncompliant_CS()
         {
             Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.cs", new CS.MarkAssemblyWithComVisibleAttribute());
@@ -51,7 +48,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void MarkAssemblyWithComVisibleAttributeNoncompliant_VB()
         {
             Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.vb", new VB.MarkAssemblyWithComVisibleAttribute());

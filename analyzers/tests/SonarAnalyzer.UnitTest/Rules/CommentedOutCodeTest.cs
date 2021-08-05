@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,17 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CommentedOutCodeTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void CommentedOutCode_Nonconcurrent() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode_Nonconcurrent.cs", new CommentedOutCode());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CommentedOutCode() =>
             Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void CommentedOutCode_NoDocumentation() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode(),
                 new[] { new CSharpParseOptions(documentationMode: Microsoft.CodeAnalysis.DocumentationMode.None) });

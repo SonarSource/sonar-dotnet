@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,19 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class PublicConstantFieldTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void PublicConstantField_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\PublicConstantField.cs", new CS.PublicConstantField());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void PublicConstantField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PublicConstantField.CSharp9.cs", new CS.PublicConstantField());
 #endif
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void PublicConstantField_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\PublicConstantField.vb", new VB.PublicConstantField());
     }
