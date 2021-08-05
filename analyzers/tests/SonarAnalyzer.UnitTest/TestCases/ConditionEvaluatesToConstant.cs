@@ -1436,6 +1436,57 @@ namespace Tests.Diagnostics
                     }
                 }
             }
+
+            // https://github.com/SonarSource/sonar-dotnet/issues/4755
+            public void IfElseIfElseFlow_FromCast(object value)
+            {
+                var b = (bool?)value;
+                if (b == true)
+                {
+                    Console.WriteLine("true");
+                }
+                else if (b == false)            // Noncompliant FP
+                {
+                    Console.WriteLine("false");
+                }
+                else
+                {                               // Secondary
+                    Console.WriteLine("null");
+                }
+            }
+
+            public void IfElseIfElseFlow_DirectValue(bool? b)
+            {
+                if (b == true)
+                {
+                    Console.WriteLine("true");
+                }
+                else if (b == false)
+                {
+                    Console.WriteLine("false");
+                }
+                else
+                {
+                    Console.WriteLine("null");
+                }
+            }
+
+            public void IfElseIfElseFlow_KnownNull()
+            {
+                bool? b = null;
+                if (b == true)          // Noncompliant
+                {                       // Secondary
+                    Console.WriteLine("true");
+                }
+                else if (b == false)    // Noncompliant
+                {                       // Secondary
+                    Console.WriteLine("false");
+                }
+                else
+                {
+                    Console.WriteLine("null");
+                }
+            }
         }
 
         public class ConstantExpressionsAreExcluded
