@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -35,24 +36,24 @@ namespace SonarAnalyzer.Rules.VisualBasic
         internal const string DiagnosticId = "S2365";
         private const string MessageFormat = "Refactor '{0}' into a method, properties should not be based on arrays.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var propertyStatement = (PropertyStatementSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(propertyStatement);
-                    if (symbol?.Type is IArrayTypeSymbol)
+                    var property = (PropertyStatementSyntax)c.Node;
+                    if (property.ImplementsClause is null
+                        && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.OverridesKeyword))
+                        && c.SemanticModel.GetDeclaredSymbol(property) is IPropertySymbol symbol
+                        && !symbol.IsAutoProperty()
+                        && symbol.Type is IArrayTypeSymbol)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, propertyStatement.Identifier.GetLocation(), symbol.Name));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, property.Identifier.GetLocation(), symbol.Name));
                     }
                 },
                 SyntaxKind.PropertyStatement);
-        }
     }
 }

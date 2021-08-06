@@ -30,5 +30,8 @@ namespace SonarAnalyzer.Helpers
 
         public static SyntaxNode GetFirstSyntaxRef(this ISymbol symbol) =>
             symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+
+        public static bool IsAutoProperty(this ISymbol symbol) =>
+            symbol.Kind == SymbolKind.Property && symbol.ContainingType.GetMembers().OfType<IFieldSymbol>().Any(x => symbol.Equals(x.AssociatedSymbol));
     }
 }
