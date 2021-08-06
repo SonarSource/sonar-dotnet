@@ -33,11 +33,12 @@ jobs:
                 });
             }
             //
-            const matches = context.payload.pull_request.body.match(/(close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s*#\d+/gi);
+            const pr = context.payload.pull_request;
+            const matches = pr.body == null ? null : pr.body.match(/(close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s*#\d+/gi);
             if(matches) {
                 console.log("Skip, contains '" + matches[0] + "'");
             } else {
-                addAssignee(context.payload.pull_request, context.payload.sender.login);
-                github.projects.createCard({ column_id: IN_PROGRESS_COLUMN, content_id: context.payload.pull_request.id, content_type: "PullRequest" });
+                addAssignee(pr, context.payload.sender.login);
+                github.projects.createCard({ column_id: IN_PROGRESS_COLUMN, content_id: pr.id, content_type: "PullRequest" });
                 console.log("Done");
             }
