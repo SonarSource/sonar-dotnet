@@ -43,8 +43,8 @@ public class Example
     {
         return new Example
         {
-            Foo = Foo ?? other.Foo, // Noncompliant FP
-            Bar = Bar ?? other.Bar // Noncompliant FP
+            Foo = Foo ?? other.Foo,
+            Bar = Bar ?? other.Bar
         };
     }
 }
