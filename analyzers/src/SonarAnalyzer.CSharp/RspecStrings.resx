@@ -6944,7 +6944,7 @@
     <value>cwe,owasp-a6,owasp-m5</value>
   </data>
   <data name="S3329_Title" xml:space="preserve">
-    <value>Cipher Block Chaining IV's should be unpredictable</value>
+    <value>Cipher Block Chaining IVs should be unpredictable</value>
   </data>
   <data name="S3329_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
@@ -9251,7 +9251,7 @@
     <value>ready</value>
   </data>
   <data name="S3949_Tags" xml:space="preserve">
-    <value>overflow,based-on-misra</value>
+    <value>overflow</value>
   </data>
   <data name="S3949_Title" xml:space="preserve">
     <value>Calculations should not overflow</value>

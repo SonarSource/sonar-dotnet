@@ -11,10 +11,16 @@ if (x is Fruit)  // Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
+// C# 6
 var f = x as Fruit;
 if (f != null)
 {
-  // code
+  // ...
+}
+// C# 7
+if (x is Fruit fruit)
+{
+  // ...
 }
 </pre>
 
