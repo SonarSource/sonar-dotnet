@@ -202,8 +202,7 @@ public class Repro_4573
 
     public virtual DateTime? Foo
     {
-        get { return foo; }
-
+        get => foo;
         set
         {
             if (value.HasValue)
