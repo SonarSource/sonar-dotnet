@@ -7,8 +7,7 @@
     "constantCost": "5min"
   },
   "tags": [
-    "overflow",
-    "based-on-misra"
+    "overflow"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-3949",
