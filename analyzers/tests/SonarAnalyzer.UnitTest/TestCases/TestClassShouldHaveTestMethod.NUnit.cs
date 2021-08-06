@@ -92,3 +92,42 @@ namespace Tests.Diagnostics
 
     }
 }
+
+namespace DerivedAttributes
+{
+
+    public class DerivedTestFixtureAttribute : TestFixtureAttribute
+    {
+
+    }
+
+    public class DerivedTestCaseAttribute : TestCaseAttribute
+    {
+
+    }
+
+    public class DerivedTheoryAttribute : TheoryAttribute
+    {
+
+    }
+
+    [DerivedTestFixtureAttribute]
+    class DerivedClassAttribute // Noncompliant
+//        ^^^^^^^^^^^^^^^^^^^^^
+    {
+    }
+
+    [DerivedTestFixtureAttribute]
+    class DerivedMethodAttribute1
+    {
+        [DerivedTestCaseAttribute]
+        public void Foo() { }
+    }
+
+    [DerivedTestFixtureAttribute]
+    class DerivedMethodAttribute2
+    {
+        [DerivedTheoryAttribute]
+        public void Foo() { }
+    }
+}

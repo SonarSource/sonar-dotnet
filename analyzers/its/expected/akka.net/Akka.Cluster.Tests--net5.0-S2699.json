@@ -4,6 +4,32 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MemberOrderingModelBasedTests.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  25,
+"endLine":  31,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MemberOrderingModelBasedTests.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  25,
+"endLine":  37,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Serialization\ClusterMessageSerializerSpec.cs",
 "region":  {
 "startLine":  44,

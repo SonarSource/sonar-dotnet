@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\MultiNodeTestRunnerDiscovery\DiscoveryCases.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  25,
+"endLine":  32,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\MultiNodeTestRunnerDiscovery\DiscoveryCases.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  25,
+"endLine":  54,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\MultiNodeTestRunnerDiscovery\DiscoveryCases.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  25,
+"endLine":  111,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\MultiNodeTestRunnerDiscovery\DiscoveryCases.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  25,
+"endLine":  156,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\MultiNodeTestRunnerDiscovery\DiscoveryCases.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  25,
+"endLine":  184,
+"endColumn":  30
+}
+}
+}
+]
+}

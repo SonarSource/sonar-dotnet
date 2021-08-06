@@ -39,19 +39,19 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string AddAsyncSuffixMessage = "Add the 'Async' suffix to the name of this method.";
         private const string RemoveAsyncSuffixMessage = "Remove the 'Async' suffix to the name of this method.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ImmutableArray<KnownType> asyncReturnTypes =
+        private static readonly ImmutableArray<KnownType> AsyncReturnTypes =
             ImmutableArray.Create(
                 KnownType.System_Threading_Tasks_Task,
                 KnownType.System_Threading_Tasks_Task_T,
                 KnownType.System_Threading_Tasks_ValueTask, // NetCore 2.2+
                 KnownType.System_Threading_Tasks_ValueTask_TResult);
 
-        private static readonly ImmutableArray<KnownType> asyncReturnInterfaces =
+        private static readonly ImmutableArray<KnownType> AsyncReturnInterfaces =
             ImmutableArray.Create(KnownType.System_Collections_Generic_IAsyncEnumerable_T);
+
+        private static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -64,13 +64,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    if (methodSymbol == null ||
-                        methodSymbol.IsMainMethod() ||
-                        methodSymbol.GetInterfaceMember() != null ||
-                        methodSymbol.GetOverriddenMember() != null ||
-                        methodSymbol.IsTestMethod() ||
-                        methodSymbol.IsControllerMethod() ||
-                        IsSignalRHubMethod(methodSymbol))
+                    if (methodSymbol == null
+                        || methodSymbol.IsMainMethod()
+                        || methodSymbol.GetInterfaceMember() != null
+                        || methodSymbol.GetOverriddenMember() != null
+                        || methodSymbol.IsTestMethod()
+                        || methodSymbol.IsControllerMethod()
+                        || IsSignalRHubMethod(methodSymbol))
                     {
                         return;
                     }
@@ -80,11 +80,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (hasAsyncSuffix && !hasAsyncReturnType)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(), RemoveAsyncSuffixMessage));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), RemoveAsyncSuffixMessage));
                     }
                     else if (!hasAsyncSuffix && hasAsyncReturnType)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(), AddAsyncSuffixMessage));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), AddAsyncSuffixMessage));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
@@ -97,9 +97,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            return returnSymbol.DerivesFromAny(asyncReturnTypes) ||
-                   returnSymbol.IsAny(asyncReturnInterfaces) ||
-                   returnSymbol.ImplementsAny(asyncReturnInterfaces);
+            return returnSymbol.DerivesFromAny(AsyncReturnTypes)
+                   || returnSymbol.IsAny(AsyncReturnInterfaces)
+                   || returnSymbol.ImplementsAny(AsyncReturnInterfaces);
 
         }
 
@@ -107,8 +107,8 @@ namespace SonarAnalyzer.Rules.CSharp
             methodDeclaration.Identifier.ValueText.ToUpper().EndsWith("ASYNC");
 
         private static bool IsSignalRHubMethod(ISymbol methodSymbol) =>
-            methodSymbol.GetEffectiveAccessibility() == Accessibility.Public &&
-            IsSignalRHubMethod(methodSymbol.ContainingType);
+            methodSymbol.GetEffectiveAccessibility() == Accessibility.Public
+            && IsSignalRHubMethod(methodSymbol.ContainingType);
 
         private static bool IsSignalRHubMethod(ITypeSymbol typeSymbol) =>
             typeSymbol.DerivesFrom(KnownType.Microsoft_AspNet_SignalR_Hub);
