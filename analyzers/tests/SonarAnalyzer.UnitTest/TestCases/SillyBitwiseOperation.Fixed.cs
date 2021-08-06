@@ -178,4 +178,18 @@ public class Repro_4399
         } while (index < values.Length);
         unchanged = 1;
     }
+
+    class LocalFields
+    {
+        private int start = 0;
+
+        public void UpdateStart(int val) => start = val;
+
+        public override int GetHashCode()
+        {
+            return Method(); // Fixed
+
+            int Method() => 42;
+        }
+    }
 }
