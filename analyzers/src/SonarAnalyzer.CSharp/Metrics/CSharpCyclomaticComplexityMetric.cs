@@ -175,6 +175,11 @@ namespace SonarAnalyzer.Metrics.CSharp
                     var arm = (SwitchExpressionArmSyntaxWrapper)node;
                     AddLocation(arm.EqualsGreaterThanToken);
                 }
+                else if (node.IsAnyKind(SyntaxKindEx.AndPattern, SyntaxKindEx.OrPattern))
+                {
+                    var binaryPatternNode = (BinaryPatternSyntaxWrapper)node;
+                    AddLocation(binaryPatternNode.OperatorToken);
+                }
 
                 base.Visit(node);
             }

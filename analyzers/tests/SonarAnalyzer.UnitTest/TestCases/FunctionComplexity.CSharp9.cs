@@ -27,10 +27,26 @@ public record FunctionComplexity
     }
 
     public bool PatternMatchingAnd(object arg) =>
-        arg is true and true and true and true;         // FN
+        //      ^^^^^^^^^^^^^^^^^^                    Noncompliant [2]
+        //      ^^^^^^^^^^^^^^^^^^                    Secondary@-1 [2] {{+1}}
+        arg is true
+            and true
+        //  ^^^                                       Secondary [2] {{+1}}
+            and true
+        //  ^^^                                       Secondary [2] {{+1}}
+            and true;
+        //  ^^^                                       Secondary [2] {{+1}}
 
     public bool PatternMatchingOr(object arg) =>
-        arg is true or true or true or true;            // FN
+        //      ^^^^^^^^^^^^^^^^^                     Noncompliant [3]
+        //      ^^^^^^^^^^^^^^^^^                     Secondary@-1 [3] {{+1}}
+        arg is not true
+            or true
+        //  ^^                                        Secondary [3] {{+1}}
+            or true
+        //  ^^                                        Secondary [3] {{+1}}
+            or true;
+        //  ^^                                        Secondary [3] {{+1}}
 
     public int Property
     {
@@ -38,12 +54,12 @@ public record FunctionComplexity
         {
             return 0;
         }
-        init               // Noncompliant [2]
-                           // Secondary@-1 [2] {{+1}}
+        init               // Noncompliant [4]
+                           // Secondary@-1 [4] {{+1}}
         {
-            if (false) { } // Secondary [2] {{+1}}
-            if (false) { } // Secondary [2] {{+1}}
-            if (false) { } // Secondary [2] {{+1}}
+            if (false) { } // Secondary [4] {{+1}}
+            if (false) { } // Secondary [4] {{+1}}
+            if (false) { } // Secondary [4] {{+1}}
         }
     }
 }
