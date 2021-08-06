@@ -53,7 +53,7 @@ Public Class Sample
         End Get
     End Property
 
-    Public Overrides Property Bad As Byte() ' Ccompliant, this class cannot change overriden property signature
+    Public Overrides Property Bad As Byte() ' Compliant, this class cannot change overriden property signature
         Get
         End Get
         Set(value As Byte())
