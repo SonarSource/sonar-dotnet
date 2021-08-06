@@ -947,4 +947,26 @@ namespace Repro_3395
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4784
+    class Repro_4784
+    {
+        public static long Reproducer()
+        {
+            long sum = 0;
+            long[] array = new[] { 1L, 2L, 3L };
+            List<long> test = array.ToList();
+            if (test?.Count == 0)
+            {
+                // Do something
+            }
+
+            foreach (long number in test) // Noncompliant
+            {
+                sum += number;
+            }
+
+            return sum;
+        }
+    }
 }
