@@ -25,6 +25,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -45,7 +46,20 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new TestLogAnalyzer_CS(testRoot),
                 @$"{testRoot}\log.pb",
                 TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
-                VerifyCompilationMessages);
+                VerifyCompilationMessagesNonConcurrentRuleExecution);
+        }
+
+        [TestMethod]
+        public void LogCompilationMessages_CS_Concurrent()
+        {
+            using var scope = new EnvironmentVariableScope(false) {EnableConcurrentAnalysis = true};
+            var testRoot = Root + nameof(LogCompilationMessages_CS);
+            Verifier.VerifyNonConcurrentUtilityAnalyzer<LogInfo>(
+                new[] { Root + "Normal.cs", Root + "Second.cs" },
+                new TestLogAnalyzer_CS(testRoot),
+                @$"{testRoot}\log.pb",
+                TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
+                VerifyCompilationMessagesConcurrentRuleExecution);
         }
 
         [TestMethod]
@@ -57,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new TestLogAnalyzer_VB(testRoot),
                 @$"{testRoot}\log.pb",
                 TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
-                VerifyCompilationMessages);
+                VerifyCompilationMessagesNonConcurrentRuleExecution);
         }
 
         [TestMethod]
@@ -84,10 +98,17 @@ namespace SonarAnalyzer.UnitTest.Rules
                 VerifyGenerated);
         }
 
-        private static void VerifyCompilationMessages(IEnumerable<LogInfo> messages)
+        private static void VerifyCompilationMessagesNonConcurrentRuleExecution(IEnumerable<LogInfo> messages) =>
+            VerifyCompilationMessagesBase(messages, false);
+
+        private static void VerifyCompilationMessagesConcurrentRuleExecution(IEnumerable<LogInfo> messages) =>
+            VerifyCompilationMessagesBase(messages, true);
+
+        private static void VerifyCompilationMessagesBase(IEnumerable<LogInfo> messages, bool isEnabled)
         {
             VerifyRoslynVersion(messages);
             VerifyLanguageVersion(messages);
+            VerifyConcurrentExecution(messages, isEnabled);
         }
 
         private static void VerifyRoslynVersion(IEnumerable<LogInfo> messages)
@@ -108,6 +129,15 @@ namespace SonarAnalyzer.UnitTest.Rules
             versionMessage.Should().NotBeNull();
             versionMessage.Severity.Should().Be(LogSeverity.Info);
             versionMessage.Text.Should().MatchRegex(@"^Language version: (CSharp|VisualBasic)\d");
+        }
+
+        private static void VerifyConcurrentExecution(IEnumerable<LogInfo> messages, bool isEnabled)
+        {
+            messages.Should().NotBeEmpty();
+            var executionState = messages.SingleOrDefault(x => x.Text.Contains("Concurrent execution: "));
+            executionState.Should().NotBeNull();
+            executionState.Severity.Should().Be(LogSeverity.Info);
+            executionState.Text.Should().Be("Concurrent execution: " + (isEnabled ? "enabled" : "disabled"));
         }
 
         private static void VerifyGenerated(IEnumerable<LogInfo> messages)

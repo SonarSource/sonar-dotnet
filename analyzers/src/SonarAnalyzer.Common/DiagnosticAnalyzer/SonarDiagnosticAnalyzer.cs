@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Helpers
             Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
         }
 
-        private static bool IsConcurrentExecutionEnabled()
+        protected static bool IsConcurrentExecutionEnabled()
         {
             var value = Environment.GetEnvironmentVariable(EnableConcurrentExecutionVariable);
 
