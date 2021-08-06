@@ -94,6 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckCoalesceExpression(SyntaxNodeAnalysisContext context)
         {
             if (context.Node.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax assignment
+                && !assignment.Parent.IsKind(SyntaxKind.ObjectInitializerExpression)
                 && context.Compilation.IsCoalesceAssignmentSupported())
             {
                 var left = ((BinaryExpressionSyntax)context.Node).Left.RemoveParentheses();
