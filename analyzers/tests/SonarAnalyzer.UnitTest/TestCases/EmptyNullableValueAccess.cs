@@ -208,16 +208,12 @@ public class Repro_4573
         {
             if (value.HasValue)
             {
-                value = DateTime.SpecifyKind(value.Value, DateTimeKind.Unspecified);
+                //HasValue and NoValue constraints are set here
             }
-
-            if (foo != value || (foo.HasValue && value.HasValue && foo.Value.Kind != value.Value.Kind))
+            if (foo != value || foo.HasValue)
             {
                 foo = value;
-                Bar("x");
             }
         }
     }
-
-    public void Bar(string x) { }
 }
