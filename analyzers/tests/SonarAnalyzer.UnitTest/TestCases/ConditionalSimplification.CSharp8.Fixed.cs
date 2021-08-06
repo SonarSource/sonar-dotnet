@@ -43,8 +43,8 @@ public class Example
     {
         return new Example
         {
-            Foo ??= other.Foo, // Fixed
-            Bar ??= other.Bar // Fixed
+            Foo = Foo ?? other.Foo, // Compliant, cannot be changed
+            Bar = Bar ?? other.Bar  // Compliant, cannot be changed
         };
     }
 }

@@ -43,8 +43,8 @@ public class Example
     {
         return new Example
         {
-            Foo = Foo ?? other.Foo,
-            Bar = Bar ?? other.Bar
+            Foo = Foo ?? other.Foo, // Compliant, cannot be changed
+            Bar = Bar ?? other.Bar  // Compliant, cannot be changed
         };
     }
 }
