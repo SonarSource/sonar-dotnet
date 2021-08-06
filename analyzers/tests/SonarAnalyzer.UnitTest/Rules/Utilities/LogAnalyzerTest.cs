@@ -99,16 +99,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         private static void VerifyCompilationMessagesNonConcurrentRuleExecution(IEnumerable<LogInfo> messages) =>
-            VerifyCompilationMessagesBase(messages, false);
+            VerifyCompilationMessagesBase(messages, "disabled");
 
         private static void VerifyCompilationMessagesConcurrentRuleExecution(IEnumerable<LogInfo> messages) =>
-            VerifyCompilationMessagesBase(messages, true);
+            VerifyCompilationMessagesBase(messages, "enabled");
 
-        private static void VerifyCompilationMessagesBase(IEnumerable<LogInfo> messages, bool isEnabled)
+        private static void VerifyCompilationMessagesBase(IEnumerable<LogInfo> messages, string expectedConcurrencyMessage)
         {
             VerifyRoslynVersion(messages);
             VerifyLanguageVersion(messages);
-            VerifyConcurrentExecution(messages, isEnabled);
+            VerifyConcurrentExecution(messages, expectedConcurrencyMessage);
         }
 
         private static void VerifyRoslynVersion(IEnumerable<LogInfo> messages)
@@ -131,13 +131,13 @@ namespace SonarAnalyzer.UnitTest.Rules
             versionMessage.Text.Should().MatchRegex(@"^Language version: (CSharp|VisualBasic)\d");
         }
 
-        private static void VerifyConcurrentExecution(IEnumerable<LogInfo> messages, bool isEnabled)
+        private static void VerifyConcurrentExecution(IEnumerable<LogInfo> messages, string expectedConcurrencyMessage)
         {
             messages.Should().NotBeEmpty();
             var executionState = messages.SingleOrDefault(x => x.Text.Contains("Concurrent execution: "));
             executionState.Should().NotBeNull();
             executionState.Severity.Should().Be(LogSeverity.Info);
-            executionState.Text.Should().Be("Concurrent execution: " + (isEnabled ? "enabled" : "disabled"));
+            executionState.Text.Should().Be($"Concurrent execution: {expectedConcurrencyMessage}");
         }
 
         private static void VerifyGenerated(IEnumerable<LogInfo> messages)
