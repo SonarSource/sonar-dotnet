@@ -93,7 +93,7 @@ jobs:
             //
             let processPR = true;
             const pr = context.payload.pull_request;
-            const matches = pr.body.match(/(close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s*#\d+/gi);
+            const matches = pr.body == null ? null : pr.body.match(/(close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s*#\d+/gi);
             if (matches) {
                 for (let i = 0; i < matches.length; i++) {
                     console.log("Processing linked issue: " + matches[i]);
