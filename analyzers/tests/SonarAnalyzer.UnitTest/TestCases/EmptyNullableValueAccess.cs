@@ -193,5 +193,31 @@ namespace Tests.Diagnostics
             return i.Value; //Noncompliant
         }
     }
+}
 
+// https://github.com/SonarSource/sonar-dotnet/issues/4573
+public class Repro_4573
+{
+    private DateTime? foo;
+
+    public virtual DateTime? Foo
+    {
+        get { return foo; }
+
+        set
+        {
+            if (value.HasValue)
+            {
+                value = DateTime.SpecifyKind(value.Value, DateTimeKind.Unspecified);
+            }
+
+            if (foo != value || (foo.HasValue && value.HasValue && foo.Value.Kind != value.Value.Kind))
+            {
+                foo = value;
+                Bar("x");
+            }
+        }
+    }
+
+    public void Bar(string x) { }
 }
