@@ -243,7 +243,35 @@ public class Repro_4573
         }
     }
 
-    public void Nested(DateTime? value)
+    public void NestedIsolated1(DateTime? value)
+    {
+        if (foo == value)   // Relationship is added here
+        {
+            if (value.HasValue)
+            {
+                if (!foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant
+                }
+            }
+        }
+    }
+
+    public void NestedIsolated2(DateTime? value)
+    {
+        if (foo == value)   // Relationship is added here
+        {
+            if (!value.HasValue)
+            {
+                if (foo == null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant
+                }
+            }
+        }
+    }
+
+    public void NestedCombined(DateTime? value)
     {
         if (foo == value)   // Relationship is added here
         {
@@ -255,7 +283,7 @@ public class Repro_4573
                 }
                 if (!foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // Noncompliant FP, unreachable
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant FP, unreachable. It works as expected when isolated, see NestedIsolated1() above
                 }
                 if (foo == null)
                 {
@@ -278,7 +306,7 @@ public class Repro_4573
                 }
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FN
+                    Console.WriteLine(foo.Value.ToString());    // FN. It works as expected when isolated, see NestedIsolated2() above
                 }
                 if (foo != null)
                 {
