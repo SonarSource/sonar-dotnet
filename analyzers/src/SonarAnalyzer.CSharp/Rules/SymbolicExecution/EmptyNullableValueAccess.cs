@@ -145,11 +145,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     return new[] { programState };
                 }
 
-                var nullabilityConstraint = boolConstraint == BoolConstraint.True
-                    ? ObjectConstraint.NotNull
-                    : ObjectConstraint.Null;
-
-                return MemberExpression.TrySetConstraint(nullabilityConstraint, programState);
+                var nullabilityConstraint = boolConstraint == BoolConstraint.True ? ObjectConstraint.NotNull : ObjectConstraint.Null;
+                if (programState.Constraints.TryGetValue(MemberExpression, out var oldConstraints) && oldConstraints.GetConstraintOrDefault<NullableValueConstraint>() is { } oldNullableConstraint)
+                {
+                    return oldNullableConstraint == NullableValueConstraint.HasValue ^ nullabilityConstraint == ObjectConstraint.NotNull
+                        ? Enumerable.Empty<ProgramState>()  // Unreachable state, cannot be HasValue && Null nor NoValue && NotNull at the same time => don't explore this branch
+                        : new[] { programState };           // Just keep what we had, because situation didn't change
+                }
+                else
+                {
+                    return MemberExpression.TrySetConstraint(nullabilityConstraint, programState);
+                }
             }
         }
     }
