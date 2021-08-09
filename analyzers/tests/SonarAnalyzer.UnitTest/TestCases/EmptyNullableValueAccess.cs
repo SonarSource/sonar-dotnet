@@ -234,7 +234,7 @@ public class Repro_4573
             }
             if (foo == null)
             {
-                Console.WriteLine(foo.Value.ToString());    // Noncompliant
+                Console.WriteLine(foo.Value.ToString());    // FN
             }
             if (foo != null)
             {
@@ -274,11 +274,11 @@ public class Repro_4573
                 }
                 if (!foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FN
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant
                 }
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // Noncompliant
+                    Console.WriteLine(foo.Value.ToString());    // FN
                 }
                 if (foo != null)
                 {

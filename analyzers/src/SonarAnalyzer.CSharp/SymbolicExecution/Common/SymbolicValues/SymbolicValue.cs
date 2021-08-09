@@ -143,7 +143,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 // It was null, and now it should be true or false
                 return new[] { programState };
             }
-            else if (oldConstraints.GetConstraintOrDefault<BoolConstraint>() is { }  oldBoolConstraint && oldBoolConstraint != constraint)
+            else if (oldConstraints.GetConstraintOrDefault<BoolConstraint>() is { } oldBoolConstraint && oldBoolConstraint != constraint)
             {
                 return Enumerable.Empty<ProgramState>();
             }
@@ -171,6 +171,12 @@ namespace SonarAnalyzer.SymbolicExecution
             else if (oldConstraints.GetConstraintOrDefault<ObjectConstraint>() is { } oldObjectConstraint)
             {
                 return oldObjectConstraint != constraint ? Enumerable.Empty<ProgramState>() : new[] { programState.SetConstraint(this, constraint) };
+            }
+            else if (oldConstraints.GetConstraintOrDefault<NullableValueConstraint>() is { } oldNullableConstraint)
+            {
+                return oldNullableConstraint == NullableValueConstraint.HasValue ^ constraint == ObjectConstraint.NotNull
+                    ? Enumerable.Empty<ProgramState>()  // Unreachable state, cannot be HasValue && Null nor NoValue && NotNull at the same time => don't explore this branch
+                    : new[] { programState.SetConstraint(this, constraint) };
             }
             else
             {
