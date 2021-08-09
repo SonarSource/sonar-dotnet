@@ -134,7 +134,7 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 20 which is greater than 10 authorized.",
+"message":  "The Cyclomatic Complexity of this method is 40 which is greater than 10 authorized.",
 "location":  [
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
@@ -324,12 +324,192 @@
 "endLine":  24,
 "endColumn":  31
 }
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  23,
+"endLine":  24,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  42,
+"endLine":  24,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  61,
+"endLine":  24,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  80,
+"endLine":  24,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  26,
+"endLine":  25,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  45,
+"endLine":  25,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  64,
+"endLine":  25,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  83,
+"endLine":  25,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  26,
+"endLine":  26,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  45,
+"endLine":  26,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  64,
+"endLine":  26,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  83,
+"endLine":  26,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  26,
+"endLine":  27,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  45,
+"endLine":  27,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  64,
+"endLine":  27,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  83,
+"endLine":  27,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  26,
+"endLine":  28,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  45,
+"endLine":  28,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  64,
+"endLine":  28,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  83,
+"endLine":  28,
+"endColumn":  85
+}
 }
 ]
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this accessor is 21 which is greater than 10 authorized.",
+"message":  "The Cyclomatic Complexity of this accessor is 41 which is greater than 10 authorized.",
 "location":  [
 {
 "uri":  "sources\Net5\Net5\S3776.cs",
@@ -528,12 +708,192 @@
 "endLine":  12,
 "endColumn":  39
 }
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  31,
+"endLine":  12,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  50,
+"endLine":  12,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  69,
+"endLine":  12,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  88,
+"endLine":  12,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  34,
+"endLine":  13,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  53,
+"endLine":  13,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  72,
+"endLine":  13,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  91,
+"endLine":  13,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  34,
+"endLine":  14,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  53,
+"endLine":  14,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  72,
+"endLine":  14,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  91,
+"endLine":  14,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  34,
+"endLine":  15,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  53,
+"endLine":  15,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  72,
+"endLine":  15,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  91,
+"endLine":  15,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  34,
+"endLine":  16,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  53,
+"endLine":  16,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  72,
+"endLine":  16,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3776.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  91,
+"endLine":  16,
+"endColumn":  93
+}
 }
 ]
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
 "location":  [
 {
 "uri":  "sources\Net5\Net5\S4201.cs",
@@ -574,6 +934,15 @@
 {
 "uri":  "sources\Net5\Net5\S4201.cs",
 "region":  {
+"startLine":  17,
+"startColumn":  35,
+"endLine":  17,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
 "startLine":  18,
 "startColumn":  19,
 "endLine":  18,
@@ -596,6 +965,15 @@
 "startColumn":  33,
 "endLine":  23,
 "endColumn":  35
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  22,
+"endLine":  23,
+"endColumn":  24
 }
 },
 {
@@ -628,10 +1006,28 @@
 {
 "uri":  "sources\Net5\Net5\S4201.cs",
 "region":  {
+"startLine":  31,
+"startColumn":  27,
+"endLine":  31,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
 "startLine":  32,
 "startColumn":  19,
 "endLine":  32,
 "endColumn":  21
+}
+},
+{
+"uri":  "sources\Net5\Net5\S4201.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  31,
+"endLine":  36,
+"endColumn":  33
 }
 },
 {
