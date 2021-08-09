@@ -131,7 +131,7 @@ namespace Tests.Diagnostics
 
         public int CSharp8_SwitchExpressions3(int? value)
         {
-            return value.HasValue switch { true => value.Value, false => 0};
+            return value.HasValue switch { true => value.Value, false => 0 };
         }
 
         public int CSharp8_SwitchExpressions4(int? value)
@@ -212,6 +212,78 @@ public class Repro_4573
             if (foo != value || foo.HasValue)
             {
                 foo = value;
+            }
+        }
+    }
+
+    public void Sequence(DateTime? value)
+    {
+        if (value.HasValue)
+        {
+            //HasValue and NoValue constraints are set here
+        }
+        if (foo == value)   // Relationship is added here
+        {
+            if (foo.HasValue)
+            {
+                Console.WriteLine(foo.Value.ToString());
+            }
+            if (!foo.HasValue)
+            {
+                Console.WriteLine(foo.Value.ToString());    // Noncompliant
+            }
+            if (foo == null)
+            {
+                Console.WriteLine(foo.Value.ToString());    // Noncompliant
+            }
+            if (foo != null)
+            {
+                Console.WriteLine(foo.Value.ToString());
+            }
+        }
+    }
+
+    public void Nested(DateTime? value)
+    {
+        if (foo == value)   // Relationship is added here
+        {
+            if (value.HasValue)
+            {
+                if (foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());
+                }
+                if (!foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant FP, unreachable
+                }
+                if (foo == null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                }
+                if (foo != null)
+                {
+                    Console.WriteLine(foo.Value.ToString());
+                }
+            }
+            else
+            {
+                if (foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                }
+                if (!foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // FN
+                }
+                if (foo == null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant
+                }
+                if (foo != null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                }
             }
         }
     }
