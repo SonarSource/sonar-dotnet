@@ -42,9 +42,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string ValueLiteral = "Value";
         private const string HasValueLiteral = "HasValue";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
@@ -54,8 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
             private readonly NullableValueAccessedCheck nullableValueCheck;
 
-            public IEnumerable<Diagnostic> GetDiagnostics() =>
-                nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(rule, nullIdentifier.Parent.GetLocation(), nullIdentifier.Identifier.ValueText));
+            public bool SupportsPartialResults => true;
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph)
             {
@@ -63,11 +62,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 nullableValueCheck.ValuePropertyAccessed += AddIdentifier;
             }
 
-            public bool SupportsPartialResults => true;
+            public IEnumerable<Diagnostic> GetDiagnostics() =>
+                nullIdentifiers.Select(x => Diagnostic.Create(Rule, x.Parent.GetLocation(), x.Identifier.ValueText));
 
-            private void AddIdentifier(object sender, MemberAccessedEventArgs args) => nullIdentifiers.Add(args.Identifier);
+            private void AddIdentifier(object sender, MemberAccessedEventArgs args) =>
+                nullIdentifiers.Add(args.Identifier);
 
-            public void Dispose() => nullableValueCheck.ValuePropertyAccessed -= AddIdentifier;
+            public void Dispose() =>
+                nullableValueCheck.ValuePropertyAccessed -= AddIdentifier;
         }
 
         internal sealed class NullableValueAccessedCheck : ExplodedGraphCheck
@@ -79,42 +81,32 @@ namespace SonarAnalyzer.Rules.CSharp
             private void OnValuePropertyAccessed(IdentifierNameSyntax identifier) =>
                 ValuePropertyAccessed?.Invoke(this, new MemberAccessedEventArgs(identifier));
 
-            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
-            {
-                var instruction = programPoint.CurrentInstruction;
-
-                return instruction.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                    ? ProcessMemberAccess(programState, (MemberAccessExpressionSyntax)instruction)
+            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
+                programPoint.CurrentInstruction.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                    ? ProcessMemberAccess(programState, (MemberAccessExpressionSyntax)programPoint.CurrentInstruction)
                     : programState;
-            }
 
             private ProgramState ProcessMemberAccess(ProgramState programState, MemberAccessExpressionSyntax memberAccess)
             {
-                if (!(memberAccess.Expression.RemoveParentheses() is IdentifierNameSyntax identifier) ||
-                    memberAccess.Name.Identifier.ValueText != ValueLiteral)
-                {
-                    return programState;
-                }
-
-                var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
-                if (!IsNullableLocalScoped(symbol))
-                {
-                    return programState;
-                }
-
-                if (symbol.HasConstraint(ObjectConstraint.Null, programState))
+                if (memberAccess.Expression.RemoveParentheses() is IdentifierNameSyntax identifier
+                    && memberAccess.Name.Identifier.ValueText == ValueLiteral
+                    && semanticModel.GetSymbolInfo(identifier).Symbol is var symbol
+                    && IsNullableLocalScoped(symbol)
+                    && symbol.HasConstraint(ObjectConstraint.Null, programState))
                 {
                     OnValuePropertyAccessed(identifier);
                     return null;
                 }
-
-                return programState;
+                else
+                {
+                    return programState;
+                }
             }
 
             private bool IsNullableLocalScoped(ISymbol symbol) =>
                 symbol.GetSymbolType() is { } type
-                    && type.OriginalDefinition.Is(KnownType.System_Nullable_T)
-                    && explodedGraph.IsSymbolTracked(symbol);
+                && type.OriginalDefinition.Is(KnownType.System_Nullable_T)
+                && explodedGraph.IsSymbolTracked(symbol);
 
             private bool IsHasValueAccess(MemberAccessExpressionSyntax memberAccess) =>
                 memberAccess.Name.Identifier.ValueText == HasValueLiteral
@@ -128,9 +120,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     newProgramState = newProgramState.PushValue(new HasValueAccessSymbolicValue(nullable));
                     return true;
                 }
-
-                newProgramState = programState;
-                return false;
+                else
+                {
+                    newProgramState = programState;
+                    return false;
+                }
             }
         }
 
