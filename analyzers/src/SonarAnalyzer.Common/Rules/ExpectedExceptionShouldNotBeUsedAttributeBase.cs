@@ -37,6 +37,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
+        protected abstract bool HasMultiLineBody(SyntaxNode syntax);
+
         protected ExpectedExceptionShouldNotBeUsedAttributeBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
@@ -51,7 +53,5 @@ namespace SonarAnalyzer.Rules
                 }
             },
             Language.SyntaxKind.MethodDeclarations);
-
-        protected abstract bool HasMultiLineBody(SyntaxNode syntax);
     }
 }
