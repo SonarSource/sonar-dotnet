@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S1698";
         private const string MessageFormat = "Consider using 'Equals' if value comparison was intended.";
-        private const string EqualsName = "Equals";
+        private const string EqualsName = nameof(Equals);
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -95,10 +95,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool MightOverrideEquals(ITypeSymbol type, ISet<INamedTypeSymbol> allInterfacesWithImplementationsOverriddenEquals) =>
             HasEqualsOverride(type)
             || allInterfacesWithImplementationsOverriddenEquals.Contains(type)
-            || HasTypeConstraintsWhichMightOverrideEquals((ITypeParameterSymbol)type, allInterfacesWithImplementationsOverriddenEquals);
+            || HasTypeConstraintsWhichMightOverrideEquals(type, allInterfacesWithImplementationsOverriddenEquals);
 
-        private static bool HasTypeConstraintsWhichMightOverrideEquals(ITypeParameterSymbol type, ISet<INamedTypeSymbol> allInterfacesWithImplementationsOverriddenEquals) =>
-            type.ConstraintTypes.Any(x => MightOverrideEquals(x, allInterfacesWithImplementationsOverriddenEquals));
+        private static bool HasTypeConstraintsWhichMightOverrideEquals(ITypeSymbol type, ISet<INamedTypeSymbol> allInterfacesWithImplementationsOverriddenEquals) =>
+            type is ITypeParameterSymbol parameter
+            && parameter.ConstraintTypes.Any(x => MightOverrideEquals(x, allInterfacesWithImplementationsOverriddenEquals));
 
         private static bool IsAllowedTypeOrNull(ITypeSymbol type) =>
             type is null || type.IsAny(AllowedTypes) || HasAllowedBaseType(type);

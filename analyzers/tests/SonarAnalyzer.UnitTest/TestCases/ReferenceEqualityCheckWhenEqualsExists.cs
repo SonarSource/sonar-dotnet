@@ -92,3 +92,18 @@ namespace Tests.Diagnostics
         }
     }
 }
+namespace MissingGeneric
+    {
+    interface IWithGeneric
+    {
+        void Something<T>();
+    }
+
+    class UsingInterfaces
+    {
+        public void Compare(IWithGeneric a, IWithGeneric b)
+        {
+            if (a == b) { }
+        }
+    }
+}
