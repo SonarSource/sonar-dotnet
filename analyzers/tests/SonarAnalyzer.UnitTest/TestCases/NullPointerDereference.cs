@@ -947,4 +947,51 @@ namespace Repro_3395
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4784
+    class Repro_4784
+    {
+        public static int Reproducer()
+        {
+            List<long> test = new[] { 1L, 2L, 3L }.ToList();
+            if (test?.Count == 0)
+            {
+                // Do something
+            }
+
+            return test.Count; // Noncompliant FP
+        }
+
+        public static int NoIssueReported()
+        {
+            var something = new Something();
+            if (something?.SomeProperty == 0)
+            {
+                // Do something
+            }
+
+            return something.SomeProperty;
+        }
+
+        public static int IssueReported()
+        {
+            var something = GetSomething();
+            if (something?.SomeProperty == 0)
+            {
+                // Do something
+            }
+
+            return something.SomeProperty; // Noncompliant
+        }
+
+        public static Something GetSomething()
+        {
+            return new Something();
+        }
+
+        public class Something
+        {
+            public int SomeProperty { get; set; }
+        }
+    }
 }
