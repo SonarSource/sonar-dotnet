@@ -153,4 +153,24 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public sealed class OuterFoo
+    {
+        private static class InnerFactory
+        {
+            public static InnerFoo<string> Instance = new InnerFoo<string> { X = "X" };
+        }
+
+        private class InnerFoo<T>
+        {
+            public string X;
+            public string Y;  // Noncompliant
+
+            public void Foo()
+            {
+                Console.Write(X);
+                Console.Write(Y);
+            }
+        }
+    }
 }
