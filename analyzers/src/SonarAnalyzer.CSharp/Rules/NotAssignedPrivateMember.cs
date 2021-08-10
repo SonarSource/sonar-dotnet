@@ -192,39 +192,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var parentNode = node.Parent;
 
-                if (PreOrPostfixOpSyntaxKinds.Contains(parentNode.Kind()))
+                if (PreOrPostfixOpSyntaxKinds.Contains(parentNode.Kind())
+                    || (parentNode is AssignmentExpressionSyntax assignment && assignment.Left == node)
+                    || (parentNode is ArgumentSyntax argument && (!argument.RefOrOutKeyword.IsKind(SyntaxKind.None) || TupleExpressionSyntaxWrapper.IsInstance(argument.Parent))))
                 {
-                    AddAssignedMember(assignedMembers, memberSymbol);
-                    continue;
-                }
-
-                if (parentNode is AssignmentExpressionSyntax assignment)
-                {
-                    if (assignment.Left == node)
-                    {
-                        AddAssignedMember(assignedMembers, memberSymbol);
-                    }
-
-                    continue;
-                }
-
-                if (parentNode is ArgumentSyntax argument
-                    && (!argument.RefOrOutKeyword.IsKind(SyntaxKind.None) || TupleExpressionSyntaxWrapper.IsInstance(argument.Parent)))
-                {
-                    AddAssignedMember(assignedMembers, memberSymbol);
+                    assignedMembers.Add(memberSymbol);
+                    assignedMembers.Add(memberSymbol.OriginalDefinition);
                 }
             }
 
             return assignedMembers;
-        }
-
-        private static void AddAssignedMember(ISet<ISymbol> assignedMembers, ISymbol symbol)
-        {
-            assignedMembers.Add(symbol);
-            if (!symbol.Equals(symbol.OriginalDefinition))
-            {
-                assignedMembers.Add(symbol.OriginalDefinition);
-            }
         }
 
         private static bool IsParentMemberAccess(MemberAccessExpressionSyntax parent, ExpressionSyntax node) =>
