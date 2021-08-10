@@ -93,7 +93,7 @@ namespace Tests.Diagnostics
     }
 }
 namespace MissingGeneric
-    {
+{
     interface IWithGeneric
     {
         void Something<T>();
