@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S1698";
         private const string MessageFormat = "Consider using 'Equals' if value comparison was intended.";
-        private const string EqualsName = nameof(Equals);
+        private const string EqualsName = "Equals";
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
