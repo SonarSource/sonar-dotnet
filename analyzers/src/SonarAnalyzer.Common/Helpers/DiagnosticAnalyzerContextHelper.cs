@@ -125,17 +125,8 @@ namespace SonarAnalyzer.Helpers
             {
                 return false;
             }
-
-            // this is locking if the compilation is not present in the Cache.
-            var cache = Cache.GetOrCreateValue(compilation);
-            if (cache.TryGetValue(tree, out var result))
-            {
-                return result;
-            }
-
-            var generated = generatedCodeRecognizer.IsGenerated(tree);
-            cache.TryAdd(tree, generated);
-            return generated;
+            var cache = Cache.GetOrCreateValue(compilation);    // This is locking if the compilation is not present in the Cache.
+            return cache.GetOrAdd(tree, x => generatedCodeRecognizer.IsGenerated(x));
         }
 
         internal static bool ShouldAnalyze(SonarAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>

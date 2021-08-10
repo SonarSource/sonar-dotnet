@@ -24,17 +24,17 @@ namespace SonarAnalyzer.Helpers.Facade
 {
     internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     {
-        public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
-        public SyntaxKind[] ObjectCreationExpressions => new[] {SyntaxKind.ObjectCreationExpression};
-        public SyntaxKind[] ClassAndRecordDeclaration => new[] {SyntaxKind.ClassBlock};
-        public SyntaxKind[] TypeDeclaration { get; } = {SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock};
-        public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
-        public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
         public SyntaxKind Attribute => SyntaxKind.Attribute;
+        public SyntaxKind[] ClassAndRecordDeclaration => new[] {SyntaxKind.ClassBlock};
+        public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
         public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
         public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
-        public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
+        public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
         public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
+        public SyntaxKind[] ObjectCreationExpressions => new[] {SyntaxKind.ObjectCreationExpression};
         public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
+        public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
+        public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
+        public SyntaxKind[] TypeDeclaration { get; } = {SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock};
     }
 }
