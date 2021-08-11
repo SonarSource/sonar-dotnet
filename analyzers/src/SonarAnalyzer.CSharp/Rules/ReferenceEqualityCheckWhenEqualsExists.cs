@@ -36,13 +36,12 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S1698";
         private const string MessageFormat = "Consider using 'Equals' if value comparison was intended.";
+        private const string EqualsName = nameof(Equals);
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private const string EqualsName = "Equals";
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> AllowedTypes =
             ImmutableArray.Create(
@@ -51,20 +50,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Reflection_MemberInfo,
                 KnownType.System_Reflection_Module,
                 KnownType.System_Data_Common_CommandTrees_DbExpression,
-                KnownType.System_Object
-            );
+                KnownType.System_Object);
 
         private static readonly ImmutableArray<KnownType> AllowedTypesWithAllDerived =
             ImmutableArray.Create(KnownType.System_Windows_DependencyObject);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(
                 compilationStartContext =>
                 {
-                    var allNamedTypeSymbols = compilationStartContext.Compilation.GlobalNamespace.GetAllNamedTypes();
                     var allInterfacesWithImplementationsOverriddenEquals =
-                        allNamedTypeSymbols
+                        compilationStartContext.Compilation.GlobalNamespace
+                            .GetAllNamedTypes()
                             .Where(t => t.AllInterfaces.Any() && HasEqualsOverride(t))
                             .SelectMany(t => t.AllInterfaces)
                             .ToHashSet();
@@ -80,10 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             var typeLeft = c.SemanticModel.GetTypeInfo(binary.Left).Type;
                             var typeRight = c.SemanticModel.GetTypeInfo(binary.Right).Type;
-                            if (typeLeft == null ||
-                                typeRight == null ||
-                                IsAllowedType(typeLeft) ||
-                                IsAllowedType(typeRight))
+                            if (IsAllowedTypeOrNull(typeLeft) || IsAllowedTypeOrNull(typeRight))
                             {
                                 return;
                             }
@@ -91,82 +85,46 @@ namespace SonarAnalyzer.Rules.CSharp
                             if (MightOverrideEquals(typeLeft, allInterfacesWithImplementationsOverriddenEquals) ||
                                 MightOverrideEquals(typeRight, allInterfacesWithImplementationsOverriddenEquals))
                             {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, binary.OperatorToken.GetLocation()));
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, binary.OperatorToken.GetLocation()));
                             }
                         },
                         SyntaxKind.EqualsExpression,
                         SyntaxKind.NotEqualsExpression);
                 });
-        }
 
-        private static bool MightOverrideEquals(ITypeSymbol type, ISet<INamedTypeSymbol> allInterfacesWithImplementationsOverriddenEquals)
-        {
-            return HasEqualsOverride(type) ||
-                allInterfacesWithImplementationsOverriddenEquals.Contains(type) ||
-                HasTypeConstraintsWhichMightOverrideEquals(type, allInterfacesWithImplementationsOverriddenEquals);
-        }
+        private static bool MightOverrideEquals(ITypeSymbol type, ISet<INamedTypeSymbol> allInterfacesWithImplementationsOverriddenEquals) =>
+            HasEqualsOverride(type)
+            || allInterfacesWithImplementationsOverriddenEquals.Contains(type)
+            || HasTypeConstraintsWhichMightOverrideEquals(type, allInterfacesWithImplementationsOverriddenEquals);
 
-        private static bool HasTypeConstraintsWhichMightOverrideEquals(ITypeSymbol type, ISet<INamedTypeSymbol> allInterfacesWithImplementationsOverriddenEquals)
-        {
-            if (type.TypeKind != TypeKind.TypeParameter)
-            {
-                return false;
-            }
+        private static bool HasTypeConstraintsWhichMightOverrideEquals(ITypeSymbol type, ISet<INamedTypeSymbol> allInterfacesWithImplementationsOverriddenEquals) =>
+            type is ITypeParameterSymbol genericParameter
+            && genericParameter.ConstraintTypes.Any(x => MightOverrideEquals(x, allInterfacesWithImplementationsOverriddenEquals));
 
-            var typeParameter = (ITypeParameterSymbol)type;
-            return typeParameter.ConstraintTypes.Any(t => MightOverrideEquals(t, allInterfacesWithImplementationsOverriddenEquals));
-        }
+        private static bool IsAllowedTypeOrNull(ITypeSymbol type) =>
+            type is null || type.IsAny(AllowedTypes) || HasAllowedBaseType(type);
 
-        private static bool IsAllowedType(ITypeSymbol type)
-        {
-            return type.IsAny(AllowedTypes) || HasAllowedBaseType(type);
-        }
+        private static bool HasAllowedBaseType(ITypeSymbol type) =>
+            type.GetSelfAndBaseTypes().Any(t => t.IsAny(AllowedTypesWithAllDerived));
 
-        private static bool HasAllowedBaseType(ITypeSymbol type)
-        {
-            var currentType = type;
-            while (currentType != null)
-            {
-                if (currentType.IsAny(AllowedTypesWithAllDerived))
-                {
-                    return true;
-                }
-                currentType = currentType.BaseType;
-            }
-            return false;
-        }
+        private static bool IsBinaryCandidateForReporting(BinaryExpressionSyntax binary, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(binary).Symbol is IMethodSymbol equalitySymbol
+            && equalitySymbol.IsInType(KnownType.System_Object)
+            && !IsInEqualsOverride(semanticModel.GetEnclosingSymbol(binary.SpanStart) as IMethodSymbol);
 
-        private static bool IsBinaryCandidateForReporting(BinaryExpressionSyntax binary, SemanticModel semanticModel)
-        {
-            var equalitySymbol = semanticModel.GetSymbolInfo(binary).Symbol as IMethodSymbol;
-
-            return equalitySymbol.IsInType(KnownType.System_Object) &&
-                !IsInEqualsOverride(semanticModel.GetEnclosingSymbol(binary.SpanStart) as IMethodSymbol);
-        }
-
-        private static bool HasEqualsOverride(ITypeSymbol type)
-        {
-            return GetEqualsOverrides(type).Any(m => m.OverriddenMethod.IsInType(KnownType.System_Object));
-        }
+        private static bool HasEqualsOverride(ITypeSymbol type) =>
+            GetEqualsOverrides(type).Any(x => x.OverriddenMethod.IsInType(KnownType.System_Object));
 
         private static IEnumerable<IMethodSymbol> GetEqualsOverrides(ITypeSymbol type)
         {
-            if (type == null)
-            {
-                return Enumerable.Empty<IMethodSymbol>();
-            }
-
             var candidateEqualsMethods = new HashSet<IMethodSymbol>();
 
-            var currentType = type;
-            while (currentType != null &&
-                !currentType.Is(KnownType.System_Object))
+            foreach (var currentType in type.GetSelfAndBaseTypes().TakeWhile(tp => !tp.Is(KnownType.System_Object)))
             {
-                candidateEqualsMethods.UnionWith(currentType.GetMembers(EqualsName)
+                candidateEqualsMethods.UnionWith(currentType
+                    .GetMembers(EqualsName)
                     .OfType<IMethodSymbol>()
                     .Where(method => method.IsOverride && method.OverriddenMethod != null));
-
-                currentType = currentType.BaseType;
             }
 
             return candidateEqualsMethods;
@@ -174,11 +132,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsInEqualsOverride(IMethodSymbol method)
         {
-            if (method == null)
-            {
-                return false;
-            }
-
             var currentMethod = method;
             while (currentMethod != null)
             {
@@ -187,7 +140,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     return true;
                 }
-
                 currentMethod = currentMethod.OverriddenMethod;
             }
             return false;
