@@ -80,7 +80,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                         break;
 
                     case SyntaxKind.GenericName:
-                        ProcessGenericName(instruction, state);
+                        ProcessGenericName((GenericNameSyntax)instruction, state);
                         break;
 
                     case SyntaxKind.SimpleAssignmentExpression:
@@ -175,18 +175,17 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                     }
                 }
 
-                if (symbol is IMethodSymbol method && method.MethodKind == MethodKindEx.LocalFunction)
+                if (symbol is IMethodSymbol { MethodKind: MethodKindEx.LocalFunction } method)
                 {
                     ProcessLocalFunction(symbol, state);
                 }
             }
         }
 
-        private void ProcessGenericName(SyntaxNode genericName, State state)
+        private void ProcessGenericName(GenericNameSyntax genericName, State state)
         {
-            if (genericName.Parent.IsKind(SyntaxKind.InvocationExpression)
-                && semanticModel.GetSymbolInfo(genericName).Symbol is IMethodSymbol method
-                && method.MethodKind == MethodKindEx.LocalFunction)
+            if (!genericName.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
+                && semanticModel.GetSymbolInfo(genericName).Symbol is IMethodSymbol {MethodKind: MethodKindEx.LocalFunction } method)
             {
                 ProcessLocalFunction(method, state);
             }

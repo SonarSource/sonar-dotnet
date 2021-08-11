@@ -144,5 +144,48 @@ namespace Tests.TestCases
                 Console.WriteLine(someString.Length);
             }
         }
+
+        private static void UsedByReferenceWithStruct(this int someNumber, string someString)
+        {
+            Action x = PrintSomeSum<int>;
+
+            x();
+
+            void PrintSomeSum<TOptions>() where TOptions : struct
+            {
+                Console.WriteLine(someNumber + someString.Length);
+            }
+        }
+
+        private static void UsedByReferenceAsArgument(int[] list, string arg)
+        {
+            list.Where(LocalFunction<int>);
+
+            bool LocalFunction<TOptions>(TOptions x) where TOptions : struct
+            {
+                Console.WriteLine(arg);
+                return true;
+            }
+        }
+
+        private static void InsideNameOf_Valid(string arg)   // Noncompliant
+        {
+            var name = nameof(LocalFunction);
+
+            void LocalFunction<TOptions>() where TOptions : struct
+            {
+                Console.WriteLine(arg);
+            }
+        }
+
+        private static void InsideNameOf_Invalid(string arg)   // Noncompliant
+        {
+            var name = nameof(LocalFunction<int>);      // Error [CS8084] Type parameters are not allowed on a method group as an argument to 'nameof'
+
+            void LocalFunction<TOptions>() where TOptions : struct
+            {
+                Console.WriteLine(arg);
+            }
+        }
     }
 }
