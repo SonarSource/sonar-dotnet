@@ -36,7 +36,7 @@ dotnet_diagnostic.Sxxx.severity = none
 ## Improving Performance  
 
 You can enable parallel processing to speed up analysis and reduce overall build time by setting the following environment variable:
-```bash
+```
 SONAR_DOTNET_ENABLE_CONCURRENT_EXECUTION=true
 ```
 If you still have problems [this](https://community.sonarsource.com/t/47279) community thread may help you diagnose the issues.
