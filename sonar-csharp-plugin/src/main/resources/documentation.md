@@ -35,11 +35,11 @@ dotnet_diagnostic.Sxxx.severity = none
 
 ## Improving Performance  
 
-Analysis will significantly increase your build time. If this is causing a problem there are a number of things you can do. It is possible for many of the rules to use parallel processing to speed up execution. To enable this you need to set the following environment variable.
+You can enable parallel processing to speed up analysis and reduce overall build time by setting the following environment variable:
 ```bash
 SONAR_DOTNET_ENABLE_CONCURRENT_EXECUTION=true
 ```
-If you still have problems [this](https://community.sonarsource.com/t/the-sonarsource-guide-for-investigating-the-performance-of-net-analysis/47279) community thread may help you diagnose the issues
+If you still have problems [this](https://community.sonarsource.com/t/47279) community thread may help you diagnose the issues.
 
 ## Related Pages
 * [Excluding External Roslyn Issues](/analysis/external-issues/) (See "Notes on external .NET issues")
