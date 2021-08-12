@@ -187,5 +187,17 @@ namespace Tests.TestCases
                 Console.WriteLine(arg);
             }
         }
+
+        private static void InvokingMethod(string someString)    // Noncompliant
+        {
+            PrintSomeSum<int, int>(); // External method, not a local function
+
+            void PrintSomeSum<TOptions>() where TOptions : struct
+            {
+                Console.WriteLine(someString);
+            }
+        }
+
+        private static void PrintSomeSum<TFirst, TSecond>() { }
     }
 }
