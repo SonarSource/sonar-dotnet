@@ -33,6 +33,14 @@ As an alternative, an `.editorconfig` file can be used to disable the analysis f
 dotnet_diagnostic.Sxxx.severity = none
 ```
 
+## Improving Performance  
+
+You can enable parallel processing to speed up analysis and reduce overall build time by setting the following environment variable:
+```
+SONAR_DOTNET_ENABLE_CONCURRENT_EXECUTION=true
+```
+If you still have problems [this](https://community.sonarsource.com/t/47279) community thread may help you diagnose the issues.
+
 ## Known Limitations
 
 Currently an error will be thrown when an issue is raised on a line of code containing the following pattern `\s+error\s*:` (i.e. one or more spaces, the string 'error', zero or more spaces and a ':' ) . This is a well known problem on the Microsoft side (see [issue](https://github.com/dotnet/roslyn/issues/5724/)). In order to work around this problem, analysis will skip issues reported on any line where the pattern is detected.
