@@ -131,7 +131,7 @@ namespace Tests.Diagnostics
 
         public int CSharp8_SwitchExpressions3(int? value)
         {
-            return value.HasValue switch { true => value.Value, false => 0};
+            return value.HasValue switch { true => value.Value, false => 0 };
         }
 
         public int CSharp8_SwitchExpressions4(int? value)
@@ -193,5 +193,126 @@ namespace Tests.Diagnostics
             return i.Value; //Noncompliant
         }
     }
+}
 
+// https://github.com/SonarSource/sonar-dotnet/issues/4573
+public class Repro_4573
+{
+    private DateTime? foo;
+
+    public virtual DateTime? Foo
+    {
+        get => foo;
+        set
+        {
+            if (value.HasValue)
+            {
+                //HasValue and NoValue constraints are set here
+            }
+            if (foo != value || foo.HasValue)
+            {
+                foo = value;
+            }
+        }
+    }
+
+    public void Sequence(DateTime? value)
+    {
+        if (value.HasValue)
+        {
+            //HasValue and NoValue constraints are set here
+        }
+        if (foo == value)   // Relationship is added here
+        {
+            if (foo.HasValue)
+            {
+                Console.WriteLine(foo.Value.ToString());
+            }
+            if (!foo.HasValue)
+            {
+                Console.WriteLine(foo.Value.ToString());    // Noncompliant
+            }
+            if (foo == null)
+            {
+                Console.WriteLine(foo.Value.ToString());    // FN
+            }
+            if (foo != null)
+            {
+                Console.WriteLine(foo.Value.ToString());
+            }
+        }
+    }
+
+    public void NestedIsolated1(DateTime? value)
+    {
+        if (foo == value)   // Relationship is added here
+        {
+            if (value.HasValue)
+            {
+                if (!foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant
+                }
+            }
+        }
+    }
+
+    public void NestedIsolated2(DateTime? value)
+    {
+        if (foo == value)   // Relationship is added here
+        {
+            if (!value.HasValue)
+            {
+                if (foo == null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant
+                }
+            }
+        }
+    }
+
+    public void NestedCombined(DateTime? value)
+    {
+        if (foo == value)   // Relationship is added here
+        {
+            if (value.HasValue)
+            {
+                if (foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());
+                }
+                if (!foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant FP, unreachable. It works as expected when isolated, see NestedIsolated1() above
+                }
+                if (foo == null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                }
+                if (foo != null)
+                {
+                    Console.WriteLine(foo.Value.ToString());
+                }
+            }
+            else
+            {
+                if (foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                }
+                if (!foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant
+                }
+                if (foo == null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // FN. It works as expected when isolated, see NestedIsolated2() above
+                }
+                if (foo != null)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                }
+            }
+        }
+    }
 }
