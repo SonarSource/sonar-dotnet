@@ -26,7 +26,12 @@ namespace SonarAnalyzer.Helpers
     public static class MethodSymbolExtensions
     {
         public static Comparison ComparisonKind(this IMethodSymbol method) =>
-            method?.Name switch
+            method?.MethodKind == MethodKind.UserDefinedOperator
+                ? ComparisonKind(method.Name)
+                : Comparison.None;
+
+        private static Comparison ComparisonKind(string method) =>
+            method switch
             {
                 "op_Equality" => Comparison.Equals,
                 "op_Inequality" => Comparison.NotEquals,

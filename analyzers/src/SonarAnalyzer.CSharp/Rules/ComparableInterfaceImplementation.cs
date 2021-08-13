@@ -117,10 +117,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(m => m.MethodKind == MethodKind.UserDefinedOperator)
                 .Select(m => m.ComparisonKind());
 
-            foreach (var comparisonKind in ComparisonKinds.All.Except(overridenOperators))
+            foreach (var comparisonKind in ComparisonKinds.Except(overridenOperators))
             {
                 yield return comparisonKind.CSharp();
             }
         }
+
+        private static readonly ComparisonKind[] ComparisonKinds =
+            Enum.GetValues(typeof(ComparisonKind)).Cast<ComparisonKind>()
+                .Where(x => x != ComparisonKind.None)
+                .ToArray();
     }
 }
