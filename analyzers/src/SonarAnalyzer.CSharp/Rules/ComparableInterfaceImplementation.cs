@@ -38,18 +38,22 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S1210";
         private const string MessageFormat = "When implementing {0}, you should also override {1}.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         private const string ObjectEquals = nameof(object.Equals);
 
         private static readonly ImmutableArray<KnownType> ComparableInterfaces =
             ImmutableArray.Create(
                 KnownType.System_IComparable,
                 KnownType.System_IComparable_T);
+
+        private static readonly ComparisonKind[] ComparisonKinds =
+           Enum.GetValues(typeof(ComparisonKind)).Cast<ComparisonKind>()
+               .Where(x => x != ComparisonKind.None)
+               .ToArray();
+
+        private static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -85,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (membersToOverride.Any())
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(
-                            rule,
+                            Rule,
                             classDeclaration.Identifier.GetLocation(),
                             string.Join(" or ", implementedComparableInterfaces),
                             string.Join(", ", membersToOverride)));
@@ -122,10 +126,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 yield return comparisonKind.CSharp();
             }
         }
-
-        private static readonly ComparisonKind[] ComparisonKinds =
-            Enum.GetValues(typeof(ComparisonKind)).Cast<ComparisonKind>()
-                .Where(x => x != ComparisonKind.None)
-                .ToArray();
     }
 }
