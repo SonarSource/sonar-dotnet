@@ -186,6 +186,7 @@ public class Foo
             testFrameworkReference
                 .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
                 .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
+                .Concat(MetadataReferenceFacade.SystemData)
                 .Concat(MetadataReferenceFacade.SystemXml)
                 .Concat(MetadataReferenceFacade.SystemXmlLinq)
                 .Concat(MetadataReferenceFacade.SystemThreadingTasks)
