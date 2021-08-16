@@ -33,9 +33,11 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override bool HasMultiLineBody(SyntaxNode syntax) =>
-            syntax is MethodDeclarationSyntax declaration
-            && declaration.ExpressionBody is null
-            && declaration.Body?.Statements.Count > 1;
+        protected override bool HasMultiLineBody(SyntaxNode syntax)
+        {
+            var declaration = (MethodDeclarationSyntax)syntax;
+            return declaration.ExpressionBody is null
+                && declaration.Body.Statements.Count > 1;
+        }
     }
 }

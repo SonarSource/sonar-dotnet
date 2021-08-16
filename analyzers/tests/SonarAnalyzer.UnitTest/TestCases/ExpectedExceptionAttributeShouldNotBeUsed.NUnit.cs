@@ -38,9 +38,5 @@ namespace Tests.Diagnostics
                 callFailed = true;
             }
         }
-
-        [Test]
-        [NUnit.Framework.ExpectedException(typeof(ArgumentNullException))]
-        public void NoBody() // Error [CS0501,CS1002]
     }
 }

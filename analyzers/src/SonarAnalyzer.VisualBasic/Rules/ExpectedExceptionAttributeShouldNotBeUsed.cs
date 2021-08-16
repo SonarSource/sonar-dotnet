@@ -34,7 +34,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override bool HasMultiLineBody(SyntaxNode syntax) =>
-            syntax.Parent is MethodBlockSyntax block
-            && block.Statements.Count > 1;
+            ((MethodBlockSyntax)syntax.Parent).Statements.Count > 1;
     }
 }
