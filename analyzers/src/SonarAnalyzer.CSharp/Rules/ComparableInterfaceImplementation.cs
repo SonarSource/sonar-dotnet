@@ -123,8 +123,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var comparisonKind in ComparisonKinds.Except(overridenOperators))
             {
-                yield return comparisonKind.CSharp();
+                yield return CSharp(comparisonKind);
             }
         }
+
+        private static string CSharp(ComparisonKind kind) =>
+            kind switch
+            {
+                ComparisonKind.Equals => "==",
+                ComparisonKind.NotEquals => "!=",
+                ComparisonKind.LessThan => "<",
+                ComparisonKind.LessThanOrEqual => "<=",
+                ComparisonKind.GreaterThan => ">",
+                ComparisonKind.GreaterThanOrEqual => ">=",
+                _ => throw new InvalidOperationException(),
+            };
     }
 }
