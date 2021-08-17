@@ -14,7 +14,7 @@ namespace Tests.Diagnostics
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]  // Compliant - one line
+        [ExpectedException(typeof(ArgumentNullException))] // Compliant - one line
         public void TestFoo3()
         {
             new object().ToString();

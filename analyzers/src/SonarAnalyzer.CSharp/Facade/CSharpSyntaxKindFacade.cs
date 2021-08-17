@@ -32,6 +32,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
         public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
         public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
+        public SyntaxKind[] MethodDeclarations => new[] { SyntaxKind.MethodDeclaration };
         public SyntaxKind[] ObjectCreationExpressions => new[] {SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression};
         public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
         public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;

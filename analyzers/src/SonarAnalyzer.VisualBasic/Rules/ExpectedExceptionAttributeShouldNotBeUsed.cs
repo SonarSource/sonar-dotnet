@@ -19,25 +19,21 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptionShouldNotBeUsedAttributeBase<SyntaxKind>
     {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override bool HasMultiLineBody(SyntaxNode syntax)
-        {
-            var declaration = (MethodDeclarationSyntax)syntax;
-            return declaration.ExpressionBody is null
-                && declaration.Body?.Statements.Count > 1;
-        }
+        protected override bool HasMultiLineBody(SyntaxNode syntax) =>
+            ((MethodBlockSyntax)syntax.Parent).Statements.Count > 1;
     }
 }
