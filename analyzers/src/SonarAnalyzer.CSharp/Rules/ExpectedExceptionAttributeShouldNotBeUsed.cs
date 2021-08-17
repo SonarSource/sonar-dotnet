@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var declaration = (MethodDeclarationSyntax)syntax;
             return declaration.ExpressionBody is null
-                && declaration.Body.Statements.Count > 1;
+                && declaration.Body?.Statements.Count > 1;
         }
     }
 }
