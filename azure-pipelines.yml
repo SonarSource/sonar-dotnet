@@ -152,13 +152,10 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
 
-          $folderName="coverage"
-          If (Test-Path $folderName){
-            Remove-Item $folderName -recurse
-          }
-          mkdir $folderName
+          CreateFolder("coverage")
+          CreateFolder("TestResults")
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll --logger trx" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:$folderName/net48.xml -oldStyle
+          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll --logger trx" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -oldStyle
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
@@ -187,13 +184,10 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
 
-          $folderName="coverage"
-          If (Test-Path $folderName){
-            Remove-Item $folderName -recurse
-          }
-          mkdir $folderName
+          CreateFolder("coverage")
+          CreateFolder("TestResults")
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net5.0\SonarAnalyzer.UnitTest.dll --logger trx" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:$folderName/net5.0.xml -oldStyle
+          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net5.0\SonarAnalyzer.UnitTest.dll --logger trx" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net5.0.xml -oldStyle
           Test-ExitCode "ERROR: Unit tests for net5.0 FAILED."
         displayName: '.Net UTs'
 
