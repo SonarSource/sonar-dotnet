@@ -33,7 +33,6 @@ using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 using StyleCop.Analyzers.Lightup;
-using ComparisonKind = SonarAnalyzer.SymbolicExecution.SymbolicValues.ComparisonKind;
 
 namespace SonarAnalyzer.SymbolicExecution
 {

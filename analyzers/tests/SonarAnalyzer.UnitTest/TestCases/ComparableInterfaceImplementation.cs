@@ -455,7 +455,7 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
         }
     }
 
-    public struct Struct : IComparable // Noncompliant {{When implementing IComparable, you should also override Equals, <, >, <=, >=, ==, !=.}}
+    public struct Struct : IComparable // Noncompliant {{When implementing IComparable, you should also override Equals, ==, !=, <, <=, >, >=.}}
     {
         public int CompareTo(object obj)
         {
@@ -906,7 +906,7 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
 
 namespace Tests.Diagnostics.BothInterfacesImplementation
 {
-    public class NonCompliant : IComparable, IComparable<NonCompliant> // Noncompliant {{When implementing IComparable or IComparable<T>, you should also override Equals, <, >, <=, >=, ==, !=.}}
+    public class NonCompliant : IComparable, IComparable<NonCompliant> // Noncompliant {{When implementing IComparable or IComparable<T>, you should also override Equals, ==, !=, <, <=, >, >=.}}
     {
         public string Name { get; set; }
 
