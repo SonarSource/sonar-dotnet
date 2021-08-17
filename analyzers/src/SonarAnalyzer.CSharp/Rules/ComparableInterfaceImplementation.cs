@@ -48,6 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ComparisonKind[] ComparisonKinds =
            Enum.GetValues(typeof(ComparisonKind)).Cast<ComparisonKind>()
                .Where(x => x != ComparisonKind.None)
+               .OrderBy(x => x)
                .ToArray();
 
         private static readonly DiagnosticDescriptor Rule =
