@@ -53,7 +53,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.Batch.cs",
                 new MethodOverrideChangedDefaultValue(),
                 new MethodOverrideChangedDefaultValueCodeFixProvider(),
-                ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
+                ParseOptionsHelper.FromCSharp8);
     }
 }
