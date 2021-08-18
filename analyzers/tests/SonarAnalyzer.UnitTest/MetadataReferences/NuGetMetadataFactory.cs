@@ -23,21 +23,27 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using NuGet;
+using NuGet.Common;
+using NuGet.Configuration;
+using NuGet.Packaging;
+using NuGet.Protocol;
+using NuGet.Protocol.Core.Types;
+using NuGet.Versioning;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
-    public static partial class NuGetMetadataFactory
+    public static class NuGetMetadataFactory
     {
-        private const string NuGetConfigFileRelativePath = @"..\..\..\nuget.config";
+        private const string NugetConfigFolderRelativePath = @"..\..\..";
+        private const string PackagesFolderRelativePath = @"..\..\..\..\..\packages\";
 
         // We use the global nuget cache for storing our packages if the NUGET_PACKAGES environment variable is defined.
         // This is especially helpful on the build agents where the packages are precached
         // (since we don't need to spawn a new process for calling the nuget.exe to install or copy them from global cache)
-        private static readonly string PackagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? @"..\..\..\..\..\packages";
-        private static readonly PackageManager PackageManager = new (CreatePackageRepository(), PackagesFolder);
+        private static readonly string PackagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? PackagesFolderRelativePath;
 
         private static readonly string[] SortedAllowedDirectories =
         {
@@ -55,32 +61,24 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             "net40",
             "net20",
             "portable-net45",
-            "lib" // This has to be last, some packages have DLLs directly in "lib" directory
+            "lib", // This has to be last, some packages have DLLs directly in "lib" directory
         };
 
-        /// <param name="dllDirectory">Name of the directory containing DLL files inside *.nupgk/lib/{dllDirectory}/ or *.nupgk/runtimes/{runtime}/lib/{dllDirectory}/ folder.
+        /// <param name="dllDirectory">Name of the directory containing DLL files inside *.nupgk/lib/{dllDirectory}/ folder.
         /// This directory name represents target framework in most cases.</param>
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime, string dllDirectory) =>
-            Create(new Package(packageId, packageVersion, runtime), new[] { dllDirectory });
+            Create(packageId, packageVersion, runtime, new[] { dllDirectory });
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime = null) =>
-            Create(new Package(packageId, packageVersion, runtime), SortedAllowedDirectories);
+            Create(packageId, packageVersion, runtime, SortedAllowedDirectories);
 
         public static IEnumerable<MetadataReference> CreateNetStandard21()
         {
             var packageDir = Path.Combine(PackagesFolder, @"NETStandard.Library.Ref.2.1.0\ref\netstandard2.1");
-            if (Directory.Exists(packageDir))
+            EnsurePackageIsInstalled("NETStandard.Library.Ref", "2.1.0");
+            if (!Directory.Exists(packageDir))
             {
-                LogMessage($"Package found at {packageDir}");
-            }
-            else
-            {
-                LogMessage($"Package not found at {packageDir}");
-                PackageManager.InstallPackage("NETStandard.Library.Ref", SemanticVersion.ParseOptionalVersion("2.1.0"), ignoreDependencies: true, allowPrereleaseVersions: false);
-                if (!Directory.Exists(packageDir))
-                {
-                    throw new ApplicationException($"Test setup error: folder for downloaded package does not exist. Folder: {packageDir}");
-                }
+                throw new ApplicationException($"Test setup error: folder for downloaded package does not exist. Folder: {packageDir}");
             }
 
             return Directory.GetFiles(packageDir, "*.dll", SearchOption.AllDirectories)
@@ -88,42 +86,95 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                .ToImmutableArray();
         }
 
-        /// <param name="allowedDirectories">List of allowed directories sorted by preference to search for DLL files.</param>
-        private static IEnumerable<MetadataReference> Create(Package package, string[] allowedDirectories)
+        private static string GetNuGetPackageDirectory(string packageId, string packageVersion, string runtime = null)
         {
-            Console.WriteLine();
-            Console.WriteLine($"Package: {package.Id}, {package.Version}");
-            package.EnsurePackageIsInstalled();
-
-            var packageDirectory = package.PackageDirectory();
-            if (!Directory.Exists(packageDirectory))
-            {
-                throw new ApplicationException($"Test setup error: Package directory doesn't exist: {packageDirectory}");
-            }
-            var dllsPerDirectory = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
-                .GroupBy(x => new FileInfo(x).Directory.Name)
-                .ToDictionary(x => x.Key.Split('+').First(), x => x.AsEnumerable());
-
-            // if this throws because it doesn't find a DLL (because the lib contains "_._"), maybe you are referencing the wrong DLL (check the dependencies of the DLL you use)
-            var directory = allowedDirectories.FirstOrDefault(x => dllsPerDirectory.ContainsKey(x))
-                ?? throw new InvalidOperationException($"No allowed directory with DLL files was found in {packageDirectory}. " +
-                                                        "Add new target framework to SortedAllowedDirectories or set targetFramework argument explicitly.");
-            var dlls = dllsPerDirectory[directory];
-            foreach (string filePath in dlls)
-            {
-                Console.WriteLine($"File: {filePath}");
-            }
-            return dlls.Select(x => MetadataReference.CreateFromFile(x)).ToArray();
+            var runtimePath = runtime == null ? string.Empty : $"runtimes\\{runtime}\\";
+            return Path.GetFullPath($@"{PackagesFolder}{packageId}.{packageVersion}\{runtimePath}lib");
         }
 
-        private static IPackageRepository CreatePackageRepository()
+        /// <param name="allowedDirectories">List of allowed directories sorted by preference to search for DLL files.</param>
+        private static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime, string[] allowedDirectories)
         {
-            var currentFolder = Path.GetDirectoryName(typeof(NuGetMetadataFactory).Assembly.Location);
-            var localSettings = Settings.LoadDefaultSettings(new PhysicalFileSystem(currentFolder), null, null);
-            // Get a package source provider that can use the settings
-            var packageSourceProvider = new PackageSourceProvider(localSettings);
-            // Create an aggregate repository that uses all of the configured sources
-            return packageSourceProvider.CreateAggregateRepository(PackageRepositoryFactory.Default, true /* ignore failing repos. Errors will be logged as warnings. */);
+            EnsurePackageIsInstalled(packageId, packageVersion);
+
+            var allowedNugetLibDirectoriesByPreference = allowedDirectories.Select((folder, priority) => new { folder, priority });
+            var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion, runtime);
+            if (!Directory.Exists(packageDirectory))
+            {
+                throw new ApplicationException($"Test setup error: folder for downloaded package does not exist. Folder: {packageDirectory}");
+            }
+
+            var matchingDllsGroups = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
+                                              .Select(path => new FileInfo(path))
+                                              .GroupBy(file => file.Directory.Name).ToArray();
+            var selectedGroup = matchingDllsGroups.Length == 1 && matchingDllsGroups[0].Key.EndsWith(".dll")
+                ? matchingDllsGroups[0]
+                : matchingDllsGroups.Join(
+                                        allowedNugetLibDirectoriesByPreference,
+                                        group => group.Key.Split('+').First(),
+                                        allowed => allowed.folder,
+                                        (group, allowed) => new { group, allowed.priority })
+                                    .OrderBy(merged => merged.priority)
+                                    .First()
+                                    .group;
+
+            return selectedGroup.Select(file => (MetadataReference)MetadataReference.CreateFromFile(file.FullName))
+                                .ToImmutableArray();
+        }
+
+        private static void EnsurePackageIsInstalled(string packageId, string packageVersion)
+        {
+            // Check to see if the specific package is already installed
+            var packageDir = GetNuGetPackageDirectory(packageId, packageVersion);
+            if (!Directory.Exists(packageDir))
+            {
+                LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
+                InstallPackageAsync(packageId, packageVersion).Wait();
+            }
+        }
+
+        private static async Task InstallPackageAsync(string packageId, string packageVersion)
+        {
+            var nugetOrgUrl = Settings.LoadSpecificSettings(NugetConfigFolderRelativePath, "nuget.config")
+                                      .GetSection("packageSources").Items.OfType<AddItem>()
+                                      .Where(ai => ai.Key == "nuget.org")
+                                      .Select(ai => ai.Value)
+                                      .Single();
+            var repository = Repository.Factory.GetCoreV3(nugetOrgUrl);
+            var context = new SourceCacheContext();
+            var resource = await repository.GetResourceAsync<FindPackageByIdResource>();
+
+            NuGetVersion version;
+            if (packageVersion == Constants.NuGetLatestVersion)
+            {
+                var versions = await resource.GetAllVersionsAsync(
+                    packageId,
+                    context,
+                    NullLogger.Instance,
+                    CancellationToken.None);
+                version = versions.OrderByDescending(x => x.Version).First(x => !x.IsPrerelease);
+            }
+            else
+            {
+                version = new NuGetVersion(packageVersion);
+            }
+
+            using var packageStream = new MemoryStream();
+            await resource.CopyNupkgToStreamAsync(
+                packageId,
+                version,
+                packageStream,
+                context,
+                NullLogger.Instance,
+                CancellationToken.None);
+
+            var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion);
+            using var packageReader = new PackageArchiveReader(packageStream);
+
+            foreach (var dllFile in packageReader.GetFiles().Where(f => f.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)))
+            {
+                packageReader.ExtractFile(dllFile, $"{packageDirectory}\\{dllFile}", NullLogger.Instance);
+            }
         }
 
         private static void LogMessage(string message) =>
