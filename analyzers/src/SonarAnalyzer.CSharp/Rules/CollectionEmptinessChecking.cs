@@ -33,84 +33,44 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class CollectionEmptinessChecking : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1155";
+        private const string DiagnosticId = "S1155";
         private const string MessageFormat = "Use '.Any()' to test whether this 'IEnumerable<{0}>' is empty or not.";
+
+        private static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var binary = (BinaryExpressionSyntax)c.Node;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax) c.Node;
-                    CheckCountZero(binary.Right, binary.Left, c);
-                    CheckCountOne(binary.Left, binary.Right, c);
+                    if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out var left))
+                    {
+                        CheckExpression(c, binary.Right, left, CSharpFacade.Instance.Syntax.ComparisonKind(binary).Mirror());
+                    }
+                    else if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Right, out var right))
+                    {
+                        CheckExpression(c, binary.Left, right, CSharpFacade.Instance.Syntax.ComparisonKind(binary));
+                    }
                 },
-                SyntaxKind.GreaterThanExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckCountZero(binary.Left, binary.Right, c);
-                    CheckCountOne(binary.Right, binary.Left, c);
-                },
-                SyntaxKind.LessThanExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckCountOne(binary.Right, binary.Left, c);
-                    CheckCountZero(binary.Left, binary.Right, c);
-                },
-                SyntaxKind.GreaterThanOrEqualExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckCountOne(binary.Left, binary.Right, c);
-                    CheckCountZero(binary.Right, binary.Left, c);
-                },
-                SyntaxKind.LessThanOrEqualExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckCountZero(binary.Left, binary.Right, c);
-                    CheckCountZero(binary.Right, binary.Left, c);
-                },
-                SyntaxKind.EqualsExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckCountZero(binary.Left, binary.Right, c);
-                    CheckCountZero(binary.Right, binary.Left, c);
-                },
+                SyntaxKind.GreaterThanExpression,
+                SyntaxKind.GreaterThanOrEqualExpression,
+                SyntaxKind.LessThanExpression,
+                SyntaxKind.LessThanOrEqualExpression,
+                SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
-        }
 
-        private static void CheckCountZero(ExpressionSyntax zero, ExpressionSyntax count, SyntaxNodeAnalysisContext context)
+        private static void CheckExpression(SyntaxNodeAnalysisContext context, ExpressionSyntax expression, int constant, ComparisonKind comparison)
         {
-            if (ExpressionNumericConverter.TryGetConstantIntValue(zero, out var value) &&
-                value == 0 &&
-                TryGetCountCall(count, context.SemanticModel, out var reportLocation, out var typeArgument))
+            if (comparison.Compare(constant).IsEmptyOrNotEmpty()
+                && TryGetCountCall(expression, context.SemanticModel, out var location, out var typeArgument))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, reportLocation, typeArgument));
-            }
-        }
-        private static void CheckCountOne(ExpressionSyntax one, ExpressionSyntax count, SyntaxNodeAnalysisContext context)
-        {
-            if (ExpressionNumericConverter.TryGetConstantIntValue(one, out var value) &&
-                value == 1 &&
-                TryGetCountCall(count, context.SemanticModel, out var reportLocation, out var typeArgument))
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, reportLocation, typeArgument));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, typeArgument));
             }
         }
 
@@ -119,32 +79,30 @@ namespace SonarAnalyzer.Rules.CSharp
             countLocation = null;
             typeArgument = null;
             var invocation = expression as InvocationExpressionSyntax;
-            if (!(invocation?.Expression is MemberAccessExpressionSyntax memberAccess))
+
+            if (invocation?.Expression is MemberAccessExpressionSyntax memberAccess
+                && memberAccess.Name.Identifier.ValueText == nameof(Enumerable.Count)
+                && (semanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol methodSymbol)
+                && IsMethodCountExtension(methodSymbol)
+                && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
+            {
+                if (methodSymbol.IsGenericMethod)
+                {
+                    typeArgument = methodSymbol.TypeArguments.Single().ToDisplayString();
+                }
+
+                countLocation = memberAccess.Name.GetLocation();
+                return true;
+            }
+            else
             {
                 return false;
             }
-
-            if (!(semanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol methodSymbol) ||
-                !IsMethodCountExtension(methodSymbol) ||
-                !methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
-            {
-                return false;
-            }
-
-            if (methodSymbol.IsGenericMethod)
-            {
-                typeArgument = methodSymbol.TypeArguments.First().ToDisplayString();
-            }
-
-            countLocation = memberAccess.Name.GetLocation();
-            return true;
         }
 
-        private static bool IsMethodCountExtension(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.Name == "Count" &&
-                methodSymbol.IsExtensionMethod &&
-                methodSymbol.ReceiverType != null;
-        }
+        private static bool IsMethodCountExtension(IMethodSymbol methodSymbol) =>
+            methodSymbol.Name == nameof(Enumerable.Count)
+            && methodSymbol.IsExtensionMethod
+            && methodSymbol.ReceiverType != null;
     }
 }

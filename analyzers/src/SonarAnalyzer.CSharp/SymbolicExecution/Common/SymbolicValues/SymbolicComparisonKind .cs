@@ -20,9 +20,9 @@
 
 namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 {
-    public enum ComparisonKind
+    public enum SymbolicComparisonKind
     {
         Less,
-        LessOrEqual
+        LessOrEqual,
     }
 }

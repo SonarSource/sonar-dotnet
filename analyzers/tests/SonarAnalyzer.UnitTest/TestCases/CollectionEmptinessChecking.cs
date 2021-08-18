@@ -68,5 +68,9 @@ namespace Tests.Diagnostics
         {
             return numbers.Count(n => n % 2 == 0) == 0; // Noncompliant
         }
+        static bool SizeDepedentCheck(int[] numbers)
+        {
+            return numbers.Count() != 2; // Compliant 
+        }
     }
 }

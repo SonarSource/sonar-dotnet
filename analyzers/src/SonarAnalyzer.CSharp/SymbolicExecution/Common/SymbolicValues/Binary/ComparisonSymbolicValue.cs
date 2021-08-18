@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Relationships;
 
@@ -27,9 +28,9 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 {
     public class ComparisonSymbolicValue : BoolBinarySymbolicValue
     {
-        private readonly ComparisonKind comparisonKind;
+        private readonly SymbolicComparisonKind  comparisonKind;
 
-        public ComparisonSymbolicValue(ComparisonKind comparisonKind, SymbolicValue leftOperand, SymbolicValue rightOperand) : base(leftOperand, rightOperand) =>
+        public ComparisonSymbolicValue(SymbolicComparisonKind  comparisonKind, SymbolicValue leftOperand, SymbolicValue rightOperand) : base(leftOperand, rightOperand) =>
             this.comparisonKind = comparisonKind;
 
         protected override IEnumerable<ProgramState> TrySetBoolConstraint(BoolConstraint constraint, ProgramState programState) =>
@@ -43,10 +44,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             return boolConstraint == BoolConstraint.True ? relationship : relationship.Negate();
         }
 
-        public override string ToString()
-        {
-            var op = comparisonKind == ComparisonKind.Less ? "<" : "<=";
-            return $"{op}({LeftOperand}, {RightOperand})";
-        }
+        public override string ToString() =>
+            $"{(comparisonKind == SymbolicComparisonKind.Less ? "<" : "<=")}({LeftOperand}, {RightOperand})";
     }
 }

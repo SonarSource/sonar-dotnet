@@ -37,42 +37,25 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S1210";
         private const string MessageFormat = "When implementing {0}, you should also override {1}.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         private const string ObjectEquals = nameof(object.Equals);
 
         private static readonly ImmutableArray<KnownType> ComparableInterfaces =
             ImmutableArray.Create(
                 KnownType.System_IComparable,
-                KnownType.System_IComparable_T
-            );
+                KnownType.System_IComparable_T);
 
-        private static readonly IList<string> RequiredOperators = new List<string>
-        {
-            "op_LessThan",
-            "op_GreaterThan",
-            "op_LessThanOrEqual",
-            "op_GreaterThanOrEqual",
-            "op_Equality",
-            "op_Inequality"
-        };
+        private static readonly ComparisonKind[] ComparisonKinds =
+           Enum.GetValues(typeof(ComparisonKind)).Cast<ComparisonKind>()
+               .Where(x => x != ComparisonKind.None)
+               .OrderBy(x => x)
+               .ToArray();
 
-        private static readonly IDictionary<string, string> OperatorNamesMap = new Dictionary<string, string>
-        {
-            { "op_LessThan", "<" },
-            { "op_GreaterThan", ">" },
-            { "op_LessThanOrEqual", "<=" },
-            { "op_GreaterThanOrEqual", ">=" },
-            { "op_Equality", "==" },
-            { "op_Inequality" , "!=" },
-        };
+        private static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -106,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (membersToOverride.Any())
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(
-                            rule,
+                            Rule,
                             classDeclaration.Identifier.GetLocation(),
                             string.Join(" or ", implementedComparableInterfaces),
                             string.Join(", ", membersToOverride)));
@@ -114,25 +97,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration);
-        }
 
-        private static IEnumerable<string> GetImplementedComparableInterfaces(INamedTypeSymbol classSymbol)
-        {
-            return classSymbol
-                .Interfaces
-                .Where(i => i.OriginalDefinition.IsAny(ComparableInterfaces))
-                .Select(GetClassNameOnly)
-                .ToList();
-        }
+        private static IEnumerable<string> GetImplementedComparableInterfaces(INamedTypeSymbol classSymbol) =>
+            classSymbol
+            .Interfaces
+            .Where(i => i.OriginalDefinition.IsAny(ComparableInterfaces))
+            .Select(GetClassNameOnly)
+            .ToList();
 
-        private static string GetClassNameOnly(INamedTypeSymbol typeSymbol)
-        {
-            var fullName = typeSymbol.OriginalDefinition.ToDisplayString();
-
-            return fullName
+        private static string GetClassNameOnly(INamedTypeSymbol typeSymbol) =>
+            typeSymbol.OriginalDefinition.ToDisplayString()
                 .Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
                 .Last();
-        }
 
         private static IEnumerable<string> GetMembersToOverride(IEnumerable<IMethodSymbol> methods)
         {
@@ -143,12 +119,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var overridenOperators = methods
                 .Where(m => m.MethodKind == MethodKind.UserDefinedOperator)
-                .Select(m => m.Name);
+                .Select(m => m.ComparisonKind());
 
-            foreach (var op in RequiredOperators.Except(overridenOperators))
+            foreach (var comparisonKind in ComparisonKinds.Except(overridenOperators))
             {
-                yield return OperatorNamesMap[op];
+                yield return CSharp(comparisonKind);
             }
         }
+
+        private static string CSharp(ComparisonKind kind) =>
+            kind switch
+            {
+                ComparisonKind.Equals => "==",
+                ComparisonKind.NotEquals => "!=",
+                ComparisonKind.LessThan => "<",
+                ComparisonKind.LessThanOrEqual => "<=",
+                ComparisonKind.GreaterThan => ">",
+                ComparisonKind.GreaterThanOrEqual => ">=",
+                _ => throw new InvalidOperationException(),
+            };
     }
 }

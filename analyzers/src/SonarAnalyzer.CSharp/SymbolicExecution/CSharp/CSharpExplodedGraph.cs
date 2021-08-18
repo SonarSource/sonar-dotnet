@@ -238,19 +238,19 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKind.LessThanExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.Less, l, r));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, instruction, (l, r) => new ComparisonSymbolicValue(SymbolicComparisonKind.Less, l, r));
                     break;
 
                 case SyntaxKind.LessThanOrEqualExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessOrEqual, l, r));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, instruction, (l, r) => new ComparisonSymbolicValue(SymbolicComparisonKind.LessOrEqual, l, r));
                     break;
 
                 case SyntaxKind.GreaterThanExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.Less, r, l));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, instruction, (l, r) => new ComparisonSymbolicValue(SymbolicComparisonKind.Less, r, l));
                     break;
 
                 case SyntaxKind.GreaterThanOrEqualExpression:
-                    newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessOrEqual, r, l));
+                    newProgramState = VisitComparisonBinaryOperator(newProgramState, instruction, (l, r) => new ComparisonSymbolicValue(SymbolicComparisonKind.LessOrEqual, r, l));
                     break;
 
                 case SyntaxKind.SubtractExpression:
@@ -699,11 +699,9 @@ namespace SonarAnalyzer.SymbolicExecution
             return newProgramState;
         }
 
-        private ProgramState InvokeChecks(ProgramState programState, Func<ProgramState, ExplodedGraphCheck, ProgramState> invoke)
-        {
-            // If a check returns null, we will skip the next checks and return null
-            return this.explodedGraphChecks.Aggregate(programState, (ps, check) => ps == null ? null : invoke(ps, check));
-        }
+        // If a check returns null, we will skip the next checks and return null
+        private ProgramState InvokeChecks(ProgramState programState, Func<ProgramState, ExplodedGraphCheck, ProgramState> invoke) =>
+            explodedGraphChecks.Aggregate(programState, (ps, check) => ps == null ? null : invoke(ps, check));
 
         private ProgramState EnsureStackState(ExpressionSyntax parenthesizedExpression, ProgramState programState)
         {
@@ -1035,11 +1033,9 @@ namespace SonarAnalyzer.SymbolicExecution
             return newProgramState.PushValue(sv);
         }
 
-        private bool IsOperatorOnObject(SyntaxNode instruction)
-        {
-            return SemanticModel.GetSymbolInfo(instruction).Symbol is IMethodSymbol operatorSymbol &&
-                operatorSymbol.ContainingType.Is(KnownType.System_Object);
-        }
+        private bool IsOperatorOnObject(SyntaxNode instruction) =>
+            SemanticModel.GetSymbolInfo(instruction).Symbol is IMethodSymbol operatorSymbol
+            && operatorSymbol.ContainingType.Is(KnownType.System_Object);
 
         private static ProgramState VisitValueEquals(ProgramState programState)
         {
@@ -1062,9 +1058,10 @@ namespace SonarAnalyzer.SymbolicExecution
                 equals.Left, equals.Right, newProgramState, SemanticModel).PushWithConstraint();
         }
 
-        private ProgramState VisitComparisonBinaryOperator(ProgramState programState, BinaryExpressionSyntax comparison,
+        private ProgramState VisitComparisonBinaryOperator(ProgramState programState, SyntaxNode instruction,
             Func<SymbolicValue, SymbolicValue, SymbolicValue> svFactory)
         {
+            var comparison = (BinaryExpressionSyntax)instruction;
             var newProgramState = programState
                 .PopValue(out var rightSymbol)
                 .PopValue(out var leftSymbol);
@@ -1337,21 +1334,15 @@ namespace SonarAnalyzer.SymbolicExecution
                    parent is YieldStatementSyntax;
         }
 
-        private static bool IsEmptyNullableCtorCall(IMethodSymbol nullableConstructorCall)
-        {
-            return nullableConstructorCall != null &&
-                nullableConstructorCall.MethodKind == MethodKind.Constructor &&
-                nullableConstructorCall.ReceiverType.OriginalDefinition.Is(KnownType.System_Nullable_T) &&
-                nullableConstructorCall.Parameters.Length == 0;
-        }
+        private static bool IsEmptyNullableCtorCall(IMethodSymbol nullableConstructorCall) =>
+            nullableConstructorCall != null
+            && nullableConstructorCall.MethodKind == MethodKind.Constructor
+            && nullableConstructorCall.ReceiverType.OriginalDefinition.Is(KnownType.System_Nullable_T)
+            && nullableConstructorCall.Parameters.Length == 0;
 
-        protected override Block GetForEachExitBlock(Block block)
-        {
-            if (block is BinaryBranchBlock branchBlock && branchBlock.BranchingNode.Kind() is SyntaxKind.ForEachStatement)
-            {
-                return branchBlock.FalseSuccessorBlock;
-            }
-            return null;
-        }
+        protected override Block GetForEachExitBlock(Block block) =>
+            block is BinaryBranchBlock branchBlock && branchBlock.BranchingNode.Kind() is SyntaxKind.ForEachStatement
+            ? branchBlock.FalseSuccessorBlock
+            : null;
     }
 }

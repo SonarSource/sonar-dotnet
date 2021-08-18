@@ -44,26 +44,19 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 
             var isComparisonContradicting = relationships
                 .OfType<ComparisonRelationship>()
-                .Where(c => c.ComparisonKind == ComparisonKind.Less)
+                .Where(c => c.ComparisonKind == SymbolicComparisonKind.Less)
                 .Any(c => AreOperandsMatching(c));
 
             return isComparisonContradicting;
         }
 
-        public override BinaryRelationship Negate()
-        {
-            return new ValueNotEqualsRelationship(LeftOperand, RightOperand);
-        }
+        public override BinaryRelationship Negate() =>
+            new ValueNotEqualsRelationship(LeftOperand, RightOperand);
 
-        public override string ToString()
-        {
-            return $"Eq({LeftOperand}, {RightOperand})";
-        }
+        public override string ToString() => $"Eq({LeftOperand}, {RightOperand})";
 
-        internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand)
-        {
-            return new ValueEqualsRelationship(leftOperand, rightOperand);
-        }
+        internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand) =>
+            new ValueEqualsRelationship(leftOperand, rightOperand);
 
         internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships)
         {
