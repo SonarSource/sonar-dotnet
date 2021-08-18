@@ -7316,7 +7316,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3431_Description" xml:space="preserve">
-    <value>It should be clear to a casual reader what code a test is testing and what results are expected. Unfortunately, that’s not usually the case with the [ExpectedException] attribute since an exception could be thrown from almost any line in the method.</value>
+    <value>It should be clear to a casual reader what code a test is testing and what results are expected. Unfortunately, that’s not usually the case with the ExpectedException attribute since an exception could be thrown from almost any line in the method.</value>
   </data>
   <data name="S3431_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>

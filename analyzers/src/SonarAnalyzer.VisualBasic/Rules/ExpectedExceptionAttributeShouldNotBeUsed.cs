@@ -29,11 +29,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptionShouldNotBeUsedAttributeBase<SyntaxKind>
+    public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptionAttributeShouldNotBeUsedBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override bool HasMultiLineBody(SyntaxNode syntax) =>
-            ((MethodBlockSyntax)syntax.Parent).Statements.Count > 1;
+            syntax.Parent is MethodBlockSyntax methodBlockSyntax
+            && methodBlockSyntax.Statements.Count > 1;
     }
 }

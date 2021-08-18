@@ -25,7 +25,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExpectedExceptionShouldNotBeUsedAttributeBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ExpectedExceptionAttributeShouldNotBeUsedBase<TSyntaxKind> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S3431";
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool HasMultiLineBody(SyntaxNode syntax);
 
-        protected ExpectedExceptionShouldNotBeUsedAttributeBase() =>
+        protected ExpectedExceptionAttributeShouldNotBeUsedBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
         protected override void Initialize(SonarAnalysisContext context) =>
