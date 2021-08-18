@@ -19,8 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -28,7 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class CollectionEmptinessCheckingTest
     {
         [TestMethod]
-        public void CollectionEmptinessChecking() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CollectionEmptinessChecking.cs", new CollectionEmptinessChecking());
+        public void CollectionEmptinessChecking_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CollectionEmptinessChecking.cs", new CS.CollectionEmptinessChecking());
+
+        [TestMethod]
+        public void CollectionEmptinessChecking_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CollectionEmptinessChecking.vb", new VB.CollectionEmptinessChecking());
     }
 }

@@ -44,5 +44,15 @@ namespace SonarAnalyzer.Helpers.Facade
             SyntaxKind.EnumDeclaration,
             SyntaxKindEx.RecordDeclaration
         };
+
+        public SyntaxKind[] ComparisonKinds => new[]
+        {
+            SyntaxKind.GreaterThanExpression,
+            SyntaxKind.GreaterThanOrEqualExpression,
+            SyntaxKind.LessThanExpression,
+            SyntaxKind.LessThanOrEqualExpression,
+            SyntaxKind.EqualsExpression,
+            SyntaxKind.NotEqualsExpression
+        };
     }
 }

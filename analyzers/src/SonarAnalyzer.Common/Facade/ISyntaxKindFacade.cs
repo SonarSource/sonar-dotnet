@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Helpers.Facade
 {
-    public interface ISyntaxKindFacade<TSyntaxKind>
+    public interface ISyntaxKindFacade<out TSyntaxKind>
         where TSyntaxKind : struct
     {
         abstract TSyntaxKind Attribute { get; }
@@ -35,5 +35,6 @@ namespace SonarAnalyzer.Helpers.Facade
         abstract TSyntaxKind SimpleMemberAccessExpression { get; }
         abstract TSyntaxKind StringLiteralExpression { get; }
         abstract TSyntaxKind[] TypeDeclaration { get; }
+        abstract TSyntaxKind[] ComparisonKinds { get; }
     }
 }
