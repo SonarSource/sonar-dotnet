@@ -45,33 +45,25 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 
             var comparisons = relationships
                 .OfType<ComparisonRelationship>()
-                .Where(c => c.ComparisonKind == ComparisonKind.LessOrEqual)
+                .Where(c => c.ComparisonKind == SymbolicComparisonKind.LessOrEqual)
                 .Where(c => AreOperandsMatching(c));
 
             return comparisons.Count() == 2;
         }
 
-        public override BinaryRelationship Negate()
-        {
-            return new ValueEqualsRelationship(LeftOperand, RightOperand);
-        }
+        public override BinaryRelationship Negate() =>
+            new ValueEqualsRelationship(LeftOperand, RightOperand);
 
-        public override string ToString()
-        {
-            return $"!Eq({LeftOperand}, {RightOperand})";
-        }
+        public override string ToString() =>
+            $"!Eq({LeftOperand}, {RightOperand})";
 
-        internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand)
-        {
-            return new ValueNotEqualsRelationship(leftOperand, rightOperand);
-        }
+        internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand) =>
+            new ValueNotEqualsRelationship(leftOperand, rightOperand);
 
-        internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships)
-        {
-            return relationships
+        internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships) =>
+            relationships
                 .OfType<EqualsRelationship>()
                 .Select(other => ComputeTransitiveRelationship(other, this))
                 .WhereNotNull();
-        }
     }
 }

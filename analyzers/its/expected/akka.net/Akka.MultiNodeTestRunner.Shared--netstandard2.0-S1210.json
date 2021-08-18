@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1210",
-"message":  "When implementing IComparable<T>, you should also override <, >, <=, >=, ==, !=.",
+"message":  "When implementing IComparable<T>, you should also override ==, !=, <, <=, >, >=.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
 "region":  {
