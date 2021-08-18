@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             "lib", // This has to be last, some packages have DLLs directly in "lib" directory
         };
 
-        /// <param name="dllDirectory">Name of the directory containing DLL files inside *.nupgk/lib/{dllDirectory}/ folder.
+        /// <param name="dllDirectory">Name of the directory containing DLL files inside *.nupgk/lib/{dllDirectory}/ or *.nupgk/runtimes/{runtime}/lib/{dllDirectory}/ folder.
         /// This directory name represents target framework in most cases.</param>
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime, string dllDirectory) =>
             Create(packageId, packageVersion, runtime, new[] { dllDirectory });
