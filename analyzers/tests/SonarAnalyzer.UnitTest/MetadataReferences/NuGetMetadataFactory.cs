@@ -74,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         public static IEnumerable<MetadataReference> CreateNetStandard21()
         {
-            var packageDir = Path.Combine(PackagesFolder, @"NETStandard.Library.Ref.2.1.0\ref\netstandard2.1");
+            var packageDir = Path.Combine(PackagesFolder, @"NETStandard.Library.Ref.2.1.0\lib\ref\netstandard2.1");
             EnsurePackageIsInstalled("NETStandard.Library.Ref", "2.1.0");
             if (!Directory.Exists(packageDir))
             {
@@ -89,7 +89,8 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         private static string GetNuGetPackageDirectory(string packageId, string packageVersion, string runtime = null)
         {
             var runtimePath = runtime == null ? string.Empty : $"runtimes\\{runtime}\\";
-            return Path.GetFullPath($@"{PackagesFolder}{packageId}.{packageVersion}\{runtimePath}lib");
+            var combinedPath = Path.Combine(PackagesFolder, $@"{packageId}.{packageVersion}", runtimePath, "lib");
+            return Path.GetFullPath(combinedPath);
         }
 
         /// <param name="allowedDirectories">List of allowed directories sorted by preference to search for DLL files.</param>
