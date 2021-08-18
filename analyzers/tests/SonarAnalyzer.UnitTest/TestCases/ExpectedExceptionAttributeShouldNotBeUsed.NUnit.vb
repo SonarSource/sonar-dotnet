@@ -30,3 +30,7 @@ Public Class ExceptionTests
     End Function
 
 End Class
+
+Public Interface ISomeInterface
+    Sub SomeSub()
+End Interface
