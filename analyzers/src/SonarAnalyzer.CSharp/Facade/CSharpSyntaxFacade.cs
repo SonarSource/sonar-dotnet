@@ -31,6 +31,18 @@ namespace SonarAnalyzer.Helpers.Facade
     {
         public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
+        public override ComparisonKind ComparisonKind(SyntaxNode node) =>
+           node.Kind() switch
+           {
+               SyntaxKind.EqualsExpression => Helpers.ComparisonKind.Equals,
+               SyntaxKind.NotEqualsExpression => Helpers.ComparisonKind.NotEquals,
+               SyntaxKind.LessThanExpression => Helpers.ComparisonKind.LessThan,
+               SyntaxKind.LessThanOrEqualExpression => Helpers.ComparisonKind.LessThanOrEqual,
+               SyntaxKind.GreaterThanExpression => Helpers.ComparisonKind.GreaterThan,
+               SyntaxKind.GreaterThanOrEqualExpression => Helpers.ComparisonKind.GreaterThanOrEqual,
+               _ => Helpers.ComparisonKind.None,
+           };
+
         public override bool IsKind(SyntaxNode node, SyntaxKind kind) => node.IsKind(kind);
 
         public override bool IsKind(SyntaxToken token, SyntaxKind kind) => token.IsKind(kind);

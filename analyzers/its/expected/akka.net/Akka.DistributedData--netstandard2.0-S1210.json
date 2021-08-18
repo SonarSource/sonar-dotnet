@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1210",
-"message":  "When implementing IComparable<T> or IComparable, you should also override <, >, <=, >=, ==, !=.",
+"message":  "When implementing IComparable<T> or IComparable, you should also override ==, !=, <, <=, >, >=.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Flag.cs",
 "region":  {
