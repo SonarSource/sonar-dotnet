@@ -186,10 +186,10 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
         public override string ToString()
             => $"{(ComparisonKind == SymbolicComparisonKind.Less ? "<" : "<=")}({LeftOperand}, {RightOperand})";
 
-        public override bool Equals(object obj) => 
-        	obj != null && Equals(obj as ComparisonRelationship);
+        public override bool Equals(object obj) =>
+            obj != null && Equals(obj as ComparisonRelationship);
 
-        public bool Equals(ComparisonRelationship other) => 
+        public bool Equals(ComparisonRelationship other) =>
             other != null && ComparisonKind == other.ComparisonKind && base.Equals(other);
 
         public override int GetHashCode() => this.hash.Value;
