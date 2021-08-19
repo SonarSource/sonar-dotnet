@@ -1,7 +1,7 @@
 schedules:
 # Run from Monday to Friday at 5:30 UTC (https://docs.microsoft.com/en-us/azure/devops/pipelines/process/scheduled-triggers?view=azure-devops&tabs=yaml#cron-syntax)
 - cron: "30 5 * * 1-5"
-  displayName: Daily midnight build
+  displayName: Daily build
   branches:
     include:
     - master
@@ -50,20 +50,6 @@ stages:
         displayName: "Publish AZP Variables as pipeline artifact"
 
       - template: set-azp-variables-steps.yml@pipelines-yaml-templates
-
-      - powershell: |
-          cd analyzers
-          $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
-
-          Write-Host "Remove .Net 5 target for UnitTest project"
-
-          ((Get-Content -Path $testProjFileName -raw) -Replace "net48;net5.0","net48") | Set-Content -Path $testProjFileName
-
-          Write-Host "Show test project after we modified the target frameworks to exclude net5"
-          Get-Content -Path $testProjFileName
-
-          cd ..
-        displayName: 'Exclude net5 from the main build'
 
       - task: VSBuild@1
         displayName: 'Set BranchName, Sha1 and BuildNumber'
@@ -132,6 +118,12 @@ stages:
           artifact: Binaries
 
       - task: PublishPipelineArtifact@1
+        displayName: 'Publish analyzer test binaries as pipeline artifact'
+        inputs:
+          path: analyzers\tests\SonarAnalyzer.UnitTest\bin
+          artifact: TestBinaries
+
+      - task: PublishPipelineArtifact@1
         displayName: 'Publish rule descriptor binaries as pipeline artifact'
         inputs:
           path: analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin
@@ -142,25 +134,87 @@ stages:
     burgrName: 'qa'
     burgrType: 'qa'
     stageName: 'qa'
-    # .NET analyzers UTs, ITs, build Java and publish SC QG
+    # .NET code analysis, UTs, ITs, build Java and publish SC QG
     stageDisplayName: 'Tests:'
     stageDependencies: build
 
     jobs:
-    - job: runUnitTestsJob
-      displayName: '.NET UTs'
+    - job: runUnitTestsJobNet48
+      displayName: '.NET 4.8 UTs'
 
+      steps:
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download binaries to test'
+        inputs:
+          artifact: TestBinaries
+          targetPath: 'analyzers\tests\SonarAnalyzer.UnitTest\bin'
+
+      - powershell: |
+          . .\scripts\utils.ps1
+
+          CreateFolder("coverage")
+          CreateFolder("TestResults")
+
+          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll --logger trx" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -oldStyle
+          Test-ExitCode "ERROR: Unit tests for net48 FAILED."
+        displayName: '.Net UTs'
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Save coverage files'
+        inputs:
+          path: 'coverage'
+          artifact: DotnetCoverageNet48
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Save test results files'
+        inputs:
+          path: 'TestResults'
+          artifact: DotnetTestResultsNet48
+
+    - job: runUnitTestsJobNet5
+      displayName: '.NET 5 UTs'
+
+      steps:
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download binaries to test'
+        inputs:
+          artifact: TestBinaries
+          targetPath: 'analyzers\tests\SonarAnalyzer.UnitTest\bin'
+
+      - powershell: |
+          . .\scripts\utils.ps1
+
+          CreateFolder("coverage")
+          CreateFolder("TestResults")
+
+          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net5.0\SonarAnalyzer.UnitTest.dll --logger trx" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net5.0.xml -oldStyle
+          Test-ExitCode "ERROR: Unit tests for net5.0 FAILED."
+        displayName: '.Net UTs'
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Save coverage files'
+        inputs:
+          path: 'coverage'
+          artifact: DotnetCoverageNet5
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Save test results files'
+        inputs:
+          path: 'TestResults'
+          artifact: DotnetTestResultsNet5
+
+    - job: dotNetAnalysis
+      displayName: '.Net Analysis'
+      # This job runs the .Net code analysis and uploads to SonarCloud the test results and coverage reports generated
+      # in previous jobs.
+      dependsOn:
+      - runUnitTestsJobNet48
+      - runUnitTestsJobNet5
       steps:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
       - template: set-azp-variables-steps.yml@pipelines-yaml-templates
-
-      - task: VSBuild@1
-        displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
-        inputs:
-          solution: scripts/version/ChangeVersion.proj
-          msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
 
       - task: SonarCloudPrepare@1
         displayName: 'Code Analysis - Begin (PR)'
@@ -173,8 +227,8 @@ stages:
           projectName: 'SonarAnalyzer .Net'
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
-            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.**.xml"
-            sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/**/tests/SonarAnalyzer.UnitTest/TestResults/*.trx"
+            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/coverage/**.xml"
+            sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/TestResults/*.trx"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
@@ -192,38 +246,53 @@ stages:
           projectName: 'SonarAnalyzer .Net'
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
-            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.**.xml"
-            sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/**/tests/SonarAnalyzer.UnitTest/TestResults/*.trx"
+            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/coverage/**.xml"
+            sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/TestResults/*.trx"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(Build.SourceVersion)
             sonar.analysis.repository=$(Build.Repository.ID)
 
-      - powershell: |
-          . .\scripts\utils.ps1
-          cd analyzers
+      - task: VSBuild@1
+        displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
+        inputs:
+          solution: scripts/version/ChangeVersion.proj
+          msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
 
-          nuget restore -LockedMode -ConfigFile "NuGet.Config" SonarAnalyzer.sln
+      - script: nuget restore -LockedMode -ConfigFile "analyzers\NuGet.Config" $(solution)
+        displayName: "NuGet Restore"
 
-          $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
+      - task: VSBuild@1
+        displayName: "Run .Net code analysis"
+        inputs:
+          solution: '$(solution)'
+          platform: '$(buildPlatform)'
+          configuration: '$(buildConfiguration)'
+          msbuildArgs: '/p:DeployExtension=false /p:RunAnalyzers=true'
 
-          Write-Host "Show test project"
-          Get-Content -Path $testProjFileName
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download coverage reports'
+        inputs:
+          artifact: DotnetCoverageNet48
+          targetPath: 'coverage'
 
-          Write-Host "Build UnitTest project"
-          & dotnet build /p:RunAnalyzers=true $testProjFileName -c $(BuildConfiguration)
-          Test-ExitCode "ERROR: UnitTest project build FAILED."
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download coverage reports'
+        inputs:
+          artifact: DotnetCoverageNet5
+          targetPath: 'coverage'
 
-          $supportedFrameworks = @('net48', 'net5.0')
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download test results'
+        inputs:
+          artifact: DotnetTestResultsNet48
+          targetPath: 'TestResults'
 
-          Foreach ($framework in $supportedFrameworks)
-          {
-            & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test $testProjFileName --no-build -c $(BuildConfiguration) -f $framework --logger trx" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.$framework.xml -oldStyle
-            Test-ExitCode "ERROR: Unit tests for $framework FAILED."
-          }
-
-          cd ..
-        displayName: '.Net UTs'
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download test results'
+        inputs:
+          artifact: DotnetTestResultsNet5
+          targetPath: 'TestResults'
 
       - task: SonarCloudAnalyze@1
         displayName: 'Code Analysis - End'

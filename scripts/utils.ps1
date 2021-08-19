@@ -114,3 +114,10 @@ function Test-FileExists([string]$path) {
         throw "Could not find '${path}'."
     }
 }
+
+function CreateFolder([string] $folderName){
+    If (Test-Path $folderName){
+        Remove-Item $folderName -recurse
+    }
+    mkdir $folderName
+}
