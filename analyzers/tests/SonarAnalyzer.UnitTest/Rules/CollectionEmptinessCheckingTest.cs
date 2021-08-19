@@ -30,5 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void CollectionEmptinessChecking() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionEmptinessChecking.cs", new CollectionEmptinessChecking());
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void CollectionEmptinessChecking_CodeFix() =>
+           Verifier.VerifyCodeFix(
+               @"TestCases\CollectionEmptinessChecking.NotFixed.cs",
+               @"TestCases\CollectionEmptinessChecking.Fixed.cs",
+               new CollectionEmptinessChecking(),
+               new CollectionEmptinessCheckingFixProvider());
     }
 }
