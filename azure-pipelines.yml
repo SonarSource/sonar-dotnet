@@ -1,7 +1,7 @@
 schedules:
 # Run from Monday to Friday at 5:30 UTC (https://docs.microsoft.com/en-us/azure/devops/pipelines/process/scheduled-triggers?view=azure-devops&tabs=yaml#cron-syntax)
 - cron: "30 5 * * 1-5"
-  displayName: Daily midnight build
+  displayName: Daily build
   branches:
     include:
     - master
@@ -203,8 +203,8 @@ stages:
           path: 'TestResults'
           artifact: DotnetTestResultsNet5
 
-    - job: pushQualityGate
-      displayName: '.Net Quality Gate'
+    - job: dotNetAnalysis
+      displayName: '.Net Analysis'
       dependsOn:
       - runUnitTestsJobNet48
       - runUnitTestsJobNet5
@@ -256,7 +256,7 @@ stages:
         inputs:
           solution: scripts/version/ChangeVersion.proj
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
-
+          
       - script: nuget restore -LockedMode -ConfigFile "analyzers\NuGet.Config" $(solution)
         displayName: "NuGet Restore"
 
