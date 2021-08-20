@@ -20,10 +20,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using NuGet.Packaging;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
@@ -64,39 +64,36 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime = null) =>
             Create(new Package(packageId, packageVersion, runtime), SortedAllowedDirectories);
 
-        public static IEnumerable<MetadataReference> CreateNetStandard21()
-        {
-            var package = new Package("NETStandard.Library.Ref", "2.1.0", "netstandard2.1");
-            package.EnsurePackageIsInstalled();
-
-            return Directory.GetFiles(package.PackageDirectory(), "*.dll", SearchOption.AllDirectories)
-               .Select(x => (MetadataReference)MetadataReference.CreateFromFile(x))
-               .ToImmutableArray();
-        }
-
         /// <param name="allowedDirectories">List of allowed directories sorted by preference to search for DLL files.</param>
         private static IEnumerable<MetadataReference> Create(Package package, string[] allowedDirectories)
         {
             package.EnsurePackageIsInstalled();
+            var dllsPerDirectory = new Dictionary<string, IEnumerable<string>>();
+            var packageLibDirectory = package.PackageDirectory();
+            var foldersWithDlls = new List<string> { Path.Combine(packageLibDirectory, "lib"), Path.Combine(packageLibDirectory, "ref") };
+            foreach (var folder in foldersWithDlls.Where(Directory.Exists))
+            {
+                dllsPerDirectory.AddRange(DllsPerDirectory(folder).Where(x => !dllsPerDirectory.ContainsKey(x.Key)));
+            }
 
-            var allowedNugetLibDirectoriesByPreference = allowedDirectories.Select((folder, priority) => new { folder, priority });
-            var packageDirectory = package.PackageDirectory();
-            var matchingDllsGroups = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
-                                              .Select(path => new FileInfo(path))
-                                              .GroupBy(file => file.Directory.Name).ToArray();
-            var selectedGroup = matchingDllsGroups.Length == 1 && matchingDllsGroups[0].Key.EndsWith(".dll")
-                ? matchingDllsGroups[0]
-                : matchingDllsGroups.Join(
-                                        allowedNugetLibDirectoriesByPreference,
-                                        group => group.Key.Split('+').First(),
-                                        allowed => allowed.folder,
-                                        (group, allowed) => new { group, allowed.priority })
-                                    .OrderBy(merged => merged.priority)
-                                    .First()
-                                    .group;
+            // if this throws because it doesn't find a DLL (because the lib contains "_._"), maybe you are referencing the wrong DLL (check the dependencies of the DLL you use)
+            var directory = allowedDirectories.FirstOrDefault(x => dllsPerDirectory.ContainsKey(x))
+                            ?? throw new InvalidOperationException($"No allowed directory with DLL files was found in {packageLibDirectory}. " +
+                                                                   "Add new target framework to SortedAllowedDirectories or set targetFramework argument explicitly.");
+            var dlls = dllsPerDirectory[directory].ToList();
+            foreach (var filePath in dlls)
+            {
+                Console.WriteLine($"File: {filePath}");
+            }
 
-            return selectedGroup.Select(file => (MetadataReference)MetadataReference.CreateFromFile(file.FullName))
-                                .ToImmutableArray();
+            return dlls.Select(x => MetadataReference.CreateFromFile(x)).ToArray();
+
+            static Dictionary<string, IEnumerable<string>> DllsPerDirectory(string s)
+            {
+                return Directory.GetFiles(s, "*.dll", SearchOption.AllDirectories)
+                                .GroupBy(x => new FileInfo(x).Directory.Name)
+                                .ToDictionary(x => x.Key.Split('+').First(), x => x.AsEnumerable());
+            }
         }
     }
 }
