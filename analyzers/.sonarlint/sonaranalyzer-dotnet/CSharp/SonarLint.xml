@@ -86,7 +86,7 @@
       <Key>S134</Key>
       <Parameters>
         <Parameter>
-          <Key>max</Key>
+          <Key>maximumNestingLevel</Key>
           <Value>3</Value>
         </Parameter>
       </Parameters>
