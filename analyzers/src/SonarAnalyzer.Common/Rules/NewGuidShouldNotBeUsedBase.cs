@@ -18,43 +18,69 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    [Rule(DiagnosticId)]
-    public abstract class NewGuidShouldNotBeUsedBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class NewGuidShouldNotBeUsedBase<TExpression, TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TExpression : SyntaxNode
         where TSyntaxKind : struct
     {
-        internal const string DiagnosticId = "S4581";
-        private const string MessageFormat = "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this Guid instantiation.";
-
-        private readonly DiagnosticDescriptor rule;
+        protected const string DiagnosticId = "S4581";
+        private const string MessageFormat = "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this GUID instantiation.";
+        protected readonly DiagnosticDescriptor rule;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract IEnumerable<TExpression> ArgumentExpressions(SyntaxNode node);
 
         protected NewGuidShouldNotBeUsedBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected override void Initialize(SonarAnalysisContext context)
+        {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (ConstructorArgumentListCount(c.Node) == 0
+                    if (NotAllowedGuidCtorArguments(c.Node, c.SemanticModel)
                         && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol methodSymbol
                         && methodSymbol.ContainingType.Is(KnownType.System_Guid))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }
                 },
-                Language.SyntaxKind.ObjectCreationExpression);
+                Language.SyntaxKind.ObjectCreationExpressions);
 
-        protected abstract int? ConstructorArgumentListCount(SyntaxNode node);
-    }
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                Language.GeneratedCodeRecognizer,
+                c =>
+                {
+                    if (c.SemanticModel.GetTypeInfo(c.Node).Type.Is(KnownType.System_Guid))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
+                    }
+                },
+                Language.SyntaxKind.DefaultLiteral);
+        }
+
+        private bool NotAllowedGuidCtorArguments(SyntaxNode ctorNode, SemanticModel semanticModel)
+        {
+            var arguments = ArgumentExpressions(ctorNode).ToArray();
+            return arguments.Length == 0 || CreatesGuidEmpty(arguments, semanticModel);
+        }
+
+        private static bool CreatesGuidEmpty(TExpression[] arguments, SemanticModel semanticModel) =>
+            arguments.Length == 1
+            && semanticModel.GetConstantValue(arguments[0]) is { HasValue: true } optional
+            && optional.Value is string str
+            && Guid.TryParse(str, out var guid)
+            && guid == Guid.Empty;
+        }
 }

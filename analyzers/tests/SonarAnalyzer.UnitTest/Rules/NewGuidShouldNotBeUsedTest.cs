@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void VerifyCSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NewGuidShouldNotBeUsed.cs", new CS.NewGuidShouldNotBeUsed());
+        public void Verify_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\NewGuidShouldNotBeUsed.cs", new CS.NewGuidShouldNotBeUsed(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void VerifyVisualBasic() =>
+        public void Verify_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\NewGuidShouldNotBeUsed.vb", new VB.NewGuidShouldNotBeUsed());
     }
 }

@@ -27,7 +27,7 @@
     checking the file extension.
    -->
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(TargetFileName.EndsWith(&quot;exe&quot;))">
-    <Exec Command="cd $(OutDir)&#xD;&#xA;$(TargetFileName) cs&#xD;&#xA;$(TargetFileName) vbnet" />
+    <!--<Exec Command="cd $(OutDir)&#xD;&#xA;$(TargetFileName) cs&#xD;&#xA;$(TargetFileName) vbnet" />-->
   </Target>
 
 </Project>

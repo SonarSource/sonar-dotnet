@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -29,11 +31,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class NewGuidShouldNotBeUsed : NewGuidShouldNotBeUsedBase<SyntaxKind>
+    public sealed class NewGuidShouldNotBeUsed : NewGuidShouldNotBeUsedBase<ExpressionSyntax, SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override int? ConstructorArgumentListCount(SyntaxNode node) =>
-            (node as ObjectCreationExpressionSyntax)?.ArgumentList?.Arguments.Count;
+        protected override IEnumerable<ExpressionSyntax> ArgumentExpressions(SyntaxNode node) =>
+            ((ObjectCreationExpressionSyntax)node).ArgumentList?.Arguments
+            .Select(arg => arg.GetExpression());
     }
 }

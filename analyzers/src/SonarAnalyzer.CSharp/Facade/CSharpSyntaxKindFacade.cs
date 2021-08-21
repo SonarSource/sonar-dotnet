@@ -45,5 +45,6 @@ namespace SonarAnalyzer.Helpers.Facade
             SyntaxKind.EnumDeclaration,
             SyntaxKindEx.RecordDeclaration
         };
+        public SyntaxKind DefaultLiteral => SyntaxKindEx.DefaultLiteralExpression;
     }
 }

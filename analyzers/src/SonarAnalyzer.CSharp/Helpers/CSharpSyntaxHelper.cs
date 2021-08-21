@@ -298,20 +298,14 @@ namespace SonarAnalyzer.Helpers
         public static bool HasBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
             node?.Body != null || node?.ExpressionBody() != null;
 
-        public static SimpleNameSyntax GetIdentifier(this ExpressionSyntax expression)
-        {
-            switch (expression?.Kind())
+        public static SimpleNameSyntax GetIdentifier(this ExpressionSyntax expression) =>
+            expression?.Kind() switch
             {
-                case SyntaxKind.MemberBindingExpression:
-                    return ((MemberBindingExpressionSyntax)expression).Name;
-                case SyntaxKind.SimpleMemberAccessExpression:
-                    return ((MemberAccessExpressionSyntax)expression).Name;
-                case SyntaxKind.IdentifierName:
-                    return (IdentifierNameSyntax)expression;
-                default:
-                    return null;
-            }
-        }
+                SyntaxKind.MemberBindingExpression => ((MemberBindingExpressionSyntax)expression).Name,
+                SyntaxKind.SimpleMemberAccessExpression => ((MemberAccessExpressionSyntax)expression).Name,
+                SyntaxKind.IdentifierName => (IdentifierNameSyntax)expression,
+                _ => null,
+            };
 
         public static string GetName(this ExpressionSyntax expression) =>
             expression switch

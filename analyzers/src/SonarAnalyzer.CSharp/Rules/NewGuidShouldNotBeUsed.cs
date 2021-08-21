@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -29,11 +31,30 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class NewGuidShouldNotBeUsed : NewGuidShouldNotBeUsedBase<SyntaxKind>
+    public sealed class NewGuidShouldNotBeUsed : NewGuidShouldNotBeUsedBase<ExpressionSyntax, SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override int? ConstructorArgumentListCount(SyntaxNode node) =>
-             (node as ObjectCreationExpressionSyntax)?.ArgumentList?.Arguments.Count;
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            base.Initialize(context);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                Language.GeneratedCodeRecognizer,
+                c =>
+                {
+                    var defaultExpression = (DefaultExpressionSyntax)c.Node;
+                    if (c.SemanticModel.GetSymbolInfo(defaultExpression.Type.GetIdentifier()).Symbol is INamedTypeSymbol type
+                        && type.Is(KnownType.System_Guid))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, defaultExpression.GetLocation()));
+                    }
+                },
+                SyntaxKind.DefaultKeyword);
+        }
+
+        protected override IEnumerable<ExpressionSyntax> ArgumentExpressions(SyntaxNode node) =>
+            ((ObjectCreationExpressionSyntax)node).ArgumentList?.Arguments
+                .Select(arg => arg.Expression);
     }
 }
