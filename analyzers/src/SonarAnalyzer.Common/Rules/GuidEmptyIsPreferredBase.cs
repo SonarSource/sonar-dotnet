@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }
                 },
-                Language.SyntaxKind.DefaultLiteral);
+                Language.SyntaxKind.DefaultExpressions);
         }
 
         private bool NotAllowedGuidCtorArguments(SyntaxNode ctorNode, SemanticModel semanticModel)

@@ -35,24 +35,6 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            base.Initialize(context);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                Language.GeneratedCodeRecognizer,
-                c =>
-                {
-                    var defaultExpression = (DefaultExpressionSyntax)c.Node;
-                    if (c.SemanticModel.GetSymbolInfo(defaultExpression.Type.GetIdentifier()).Symbol is INamedTypeSymbol type
-                        && type.Is(KnownType.System_Guid))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, defaultExpression.GetLocation()));
-                    }
-                },
-                SyntaxKind.DefaultExpression);
-        }
-
         protected override IEnumerable<ExpressionSyntax> ArgumentExpressions(SyntaxNode node) =>
             ((ObjectCreationExpressionSyntax)node).ArgumentList?.Arguments
                 .Select(arg => arg.Expression);

@@ -301,9 +301,9 @@ namespace SonarAnalyzer.Helpers
         public static SimpleNameSyntax GetIdentifier(this ExpressionSyntax expression) =>
             expression?.Kind() switch
             {
+                SyntaxKind.IdentifierName => (IdentifierNameSyntax)expression,
                 SyntaxKind.MemberBindingExpression => ((MemberBindingExpressionSyntax)expression).Name,
                 SyntaxKind.SimpleMemberAccessExpression => ((MemberAccessExpressionSyntax)expression).Name,
-                SyntaxKind.IdentifierName => (IdentifierNameSyntax)expression,
                 _ => null,
             };
 

@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
         public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
         public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
-        public SyntaxKind[] TypeDeclaration { get; } = { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock };
-        public SyntaxKind DefaultLiteral => SyntaxKind.NothingLiteralExpression;
+        public SyntaxKind[] TypeDeclaration => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock };
+        public SyntaxKind[] DefaultExpressions => new[] { SyntaxKind.NothingLiteralExpression };
     }
 }
