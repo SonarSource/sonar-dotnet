@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -80,8 +80,10 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
             node.GetSelfOrTopParenthesizedExpression().Parent;
 
-        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists, KnownType attributeKnownType, SemanticModel semanticModel) =>
-            attributeLists.SelectMany(x => x.Attributes).Where(x => x.IsKnownType(attributeKnownType, semanticModel));
+        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists,
+            KnownType attributeKnownType, SemanticModel semanticModel) =>
+            attributeLists.SelectMany(list => list.Attributes)
+                .Where(a => semanticModel.GetTypeInfo(a).Type.Is(attributeKnownType));
 
         public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists,
             ImmutableArray<KnownType> attributeKnownTypes, SemanticModel semanticModel) =>
@@ -297,13 +299,12 @@ namespace SonarAnalyzer.Helpers
             node?.Body != null || node?.ExpressionBody() != null;
 
         public static SimpleNameSyntax GetIdentifier(this ExpressionSyntax expression) =>
-            expression switch
+            expression?.Kind() switch
             {
-                MemberBindingExpressionSyntax memberBinding => memberBinding.Name,
-                MemberAccessExpressionSyntax memberAccess => memberAccess.Name,
-                QualifiedNameSyntax qualified => qualified.Right,
-                IdentifierNameSyntax identifier => identifier,
-                _ => null
+                SyntaxKind.MemberBindingExpression => ((MemberBindingExpressionSyntax)expression).Name,
+                SyntaxKind.SimpleMemberAccessExpression => ((MemberAccessExpressionSyntax)expression).Name,
+                SyntaxKind.IdentifierName => (IdentifierNameSyntax)expression,
+                _ => null,
             };
 
         public static string GetName(this ExpressionSyntax expression) =>
@@ -331,9 +332,9 @@ namespace SonarAnalyzer.Helpers
         public static bool IsLeftSideOfAssignment(this ExpressionSyntax expression)
         {
             var topParenthesizedExpression = expression.GetSelfOrTopParenthesizedExpression();
-            return topParenthesizedExpression.Parent.IsKind(SyntaxKind.SimpleAssignmentExpression)
-                   && topParenthesizedExpression.Parent is AssignmentExpressionSyntax assignment
-                   && assignment.Left == topParenthesizedExpression;
+            return topParenthesizedExpression.Parent.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
+                topParenthesizedExpression.Parent is AssignmentExpressionSyntax assignment &&
+                assignment.Left == topParenthesizedExpression;
         }
 
         public static bool IsComment(this SyntaxTrivia trivia)

@@ -61,5 +61,6 @@ namespace SonarAnalyzer.Helpers.Facade
             SyntaxKindEx.RecordClassDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
         };
+        public SyntaxKind DefaultLiteral => SyntaxKindEx.DefaultLiteralExpression;
     }
 }

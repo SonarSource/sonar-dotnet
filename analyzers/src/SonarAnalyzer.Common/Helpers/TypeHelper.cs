@@ -28,47 +28,27 @@ namespace SonarAnalyzer.Helpers
     {
         #region TypeKind
 
-        public static bool IsInterface(this ITypeSymbol self)
-        {
-            return self != null && self.TypeKind == TypeKind.Interface;
-        }
+        public static bool IsInterface(this ITypeSymbol self) => self is { TypeKind: TypeKind.Interface };
 
-        public static bool IsClass(this ITypeSymbol self)
-        {
-            return self != null && self.TypeKind == TypeKind.Class;
-        }
+        public static bool IsClass(this ITypeSymbol self) => self is { TypeKind: TypeKind.Class };
 
-        public static bool IsStruct(this ITypeSymbol self)
-        {
-            return self != null && self.TypeKind == TypeKind.Struct;
-        }
+        public static bool IsStruct(this ITypeSymbol self) => self is { TypeKind: TypeKind.Struct };
 
-        public static bool IsClassOrStruct(this ITypeSymbol self)
-        {
-            return self.IsStruct() || self.IsClass();
-        }
+        public static bool IsClassOrStruct(this ITypeSymbol self) => self.IsStruct() || self.IsClass();
 
-        public static bool Is(this ITypeSymbol self, TypeKind typeKind)
-        {
-            return self != null && self.TypeKind == typeKind;
-        }
+        public static bool Is(this ITypeSymbol self, TypeKind typeKind) => self is { } && self.TypeKind == typeKind;
 
         #endregion TypeKind
 
         #region TypeName
 
-        private static bool IsMatch(ITypeSymbol typeSymbol, KnownType type)
-        {
-            return type.Matches(typeSymbol.SpecialType) ||
-                type.Matches(typeSymbol.OriginalDefinition.SpecialType) ||
-                type.Matches(typeSymbol.ToDisplayString()) ||
-                type.Matches(typeSymbol.OriginalDefinition.ToDisplayString());
-        }
+        private static bool IsMatch(ITypeSymbol typeSymbol, KnownType type) =>
+            type.Matches(typeSymbol.SpecialType)
+            || type.Matches(typeSymbol.OriginalDefinition.SpecialType)
+            || type.Matches(typeSymbol.ToDisplayString())
+            || type.Matches(typeSymbol.OriginalDefinition.ToDisplayString());
 
-        public static bool Is(this ITypeSymbol typeSymbol, KnownType type)
-        {
-            return typeSymbol != null && IsMatch(typeSymbol, type);
-        }
+        public static bool Is(this ITypeSymbol typeSymbol, KnownType type) => typeSymbol != null && IsMatch(typeSymbol, type);
 
         public static bool IsAny(this ITypeSymbol typeSymbol, params KnownType[] types)
         {
@@ -206,17 +186,11 @@ namespace SonarAnalyzer.Helpers
                 type.DerivesFrom(baseType);
         }
 
-        public static bool DerivesOrImplements(this ITypeSymbol type, ITypeSymbol baseType)
-        {
-            return type.Implements(baseType) ||
-                type.DerivesFrom(baseType);
-        }
+        public static bool DerivesOrImplements(this ITypeSymbol type, ITypeSymbol baseType) =>
+            type.Implements(baseType) || type.DerivesFrom(baseType);
 
-        public static bool DerivesOrImplementsAny(this ITypeSymbol type, ImmutableArray<KnownType> baseTypes)
-        {
-            return type.ImplementsAny(baseTypes) ||
-                type.DerivesFromAny(baseTypes);
-        }
+        public static bool DerivesOrImplementsAny(this ITypeSymbol type, ImmutableArray<KnownType> baseTypes) =>
+            type.ImplementsAny(baseTypes) || type.DerivesFromAny(baseTypes);
 
         public static ITypeSymbol GetSymbolType(this ISymbol symbol)
         {

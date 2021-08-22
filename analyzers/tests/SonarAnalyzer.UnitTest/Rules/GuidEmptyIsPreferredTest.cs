@@ -24,16 +24,24 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class NewGuidShouldNotBeUsedTest
+    public class GuidEmptyIsPreferredTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void VerifyCSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NewGuidShouldNotBeUsed.cs", new CS.NewGuidShouldNotBeUsed());
+        public void GuidEmptyIsPreferred_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\GuidEmptyPreferred.cs", new CS.GuidEmptyIsPreferred(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void VerifyVisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NewGuidShouldNotBeUsed.vb", new VB.NewGuidShouldNotBeUsed());
+        public void GuidEmptyIsPreferred_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\GuidEmptyPreferred.vb", new VB.GuidEmptyIsPreferred());
+
+        [TestMethod]
+        public void GuidEmptyPreferred_CodeFix_CS() =>
+            Verifier.VerifyCodeFix(
+                @"TestCases\GuidEmptyPreferred.cs",
+                @"TestCases\GuidEmptyPreferred.Fixed.cs",
+                new CS.GuidEmptyIsPreferred(),
+                new CS.GuidEmptyIsPreferredFixProvider());
     }
 }

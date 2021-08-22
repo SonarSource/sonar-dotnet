@@ -18,22 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class NewGuidShouldNotBeUsed : NewGuidShouldNotBeUsedBase<SyntaxKind>
+    public sealed class GuidEmptyIsPreferred : GuidEmptyIsPreferredBase<ExpressionSyntax, SyntaxKind>
     {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override int? ConstructorArgumentListCount(SyntaxNode node) =>
-             (node as ObjectCreationExpressionSyntax)?.ArgumentList?.Arguments.Count;
+        protected override IEnumerable<ExpressionSyntax> ArgumentExpressions(SyntaxNode node) =>
+            ((ObjectCreationExpressionSyntax)node).ArgumentList?.Arguments
+            .Select(arg => arg.GetExpression());
     }
 }
