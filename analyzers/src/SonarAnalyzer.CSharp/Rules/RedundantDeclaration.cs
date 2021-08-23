@@ -148,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static IEnumerable<string> GetUsedIdentifiers(ParenthesizedLambdaExpressionSyntax lambda) =>
-            lambda.Body.DescendantNodes().OfType<IdentifierNameSyntax>().Select(x => x.Identifier.Text);
+            lambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Select(x => x.Identifier.Text);
 
         private static bool IsParameterListModifiable(ParenthesizedLambdaExpressionSyntax lambda) =>
             lambda.ParameterList != null && lambda.ParameterList.Parameters.All(p => p.Type != null && p.Modifiers.All(m => !RefOutKeywords.Contains(m.Kind())));
