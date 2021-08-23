@@ -29,14 +29,13 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Helpers;
-using SonarAnalyzer.ControlFlowGraph;
-using SonarAnalyzer.ControlFlowGraph.CSharp;
+using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.UnitTest.ControlFlowGraph;
+using SonarAnalyzer.UnitTest.CFG;
 using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution
@@ -1528,7 +1527,7 @@ namespace Namespace
             public int NumberOfProcessedInstructions;
 
             public ExplodedGraphContext(string methodBody)
-                : this(ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, methodBody), "Main", out var semanticModel), semanticModel)
+                : this(SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, methodBody), "Main", out var semanticModel), semanticModel)
             { }
 
             public ExplodedGraphContext((SyntaxTree tree, SemanticModel semanticModel) compilation)

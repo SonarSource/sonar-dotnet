@@ -18,25 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Collections.Generic;
+using SonarAnalyzer.CFG.Helpers;
 
-namespace SonarAnalyzer.ControlFlowGraph.CSharp
+namespace SonarAnalyzer.CFG.Sonar
 {
-    public sealed class ForeachCollectionProducerBlock : SimpleBlock
+    public  class BlockIdProvider
     {
-        internal ForeachCollectionProducerBlock(StatementSyntax foreachNode, Block successor)
-            : base(successor)
-        {
-            ForeachNode = foreachNode ?? throw new ArgumentNullException(nameof(foreachNode));
-        }
+        private readonly Dictionary<Block, string> map = new Dictionary<Block, string>();
+        private int counter;
 
-        public StatementSyntax ForeachNode { get; }
-
-        internal override Block GetPossibleNonEmptySuccessorBlock()
-        {
-            // This block can't be removed by the CFG simplification, unlike the base class SimpleBlock
-            return this;
-        }
+        public string Get(Block cfgBlock) =>
+            this.map.GetOrAdd(cfgBlock, b => $"{this.counter++}");
     }
 }

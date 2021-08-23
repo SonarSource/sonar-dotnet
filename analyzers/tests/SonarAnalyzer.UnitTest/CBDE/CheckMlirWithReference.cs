@@ -21,7 +21,7 @@
 using System.IO;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.ControlFlowGraph;
+using SonarAnalyzer.UnitTest.CFG;
 
 namespace SonarAnalyzer.UnitTest.CBDE
 {
@@ -367,7 +367,7 @@ public class Sample
 {{
     public string Main()
     {{
-        return {ControlFlowGraphTest.ExtremelyNestedExpression()};
+        return {SonarControlFlowGraphTest.ExtremelyNestedExpression()};
     }}
 }}";
             using var writer = new StringWriter();

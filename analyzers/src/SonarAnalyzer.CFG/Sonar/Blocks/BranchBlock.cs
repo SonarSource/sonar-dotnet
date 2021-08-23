@@ -20,40 +20,33 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.ControlFlowGraph
+namespace SonarAnalyzer.CFG.Sonar
 {
-    public sealed class JumpBlock : SimpleBlock
+    public class BranchBlock : Block
     {
-        internal JumpBlock(SyntaxNode jumpNode, Block successor, Block wouldBeSuccessor)
-            : base(successor)
+        internal BranchBlock(SyntaxNode branchingNode, params Block[] successors)
         {
-            JumpNode = jumpNode ?? throw new ArgumentNullException(nameof(jumpNode));
-            WouldBeSuccessor = wouldBeSuccessor;
+            this.successors = successors ?? throw new ArgumentNullException(nameof(successors));
+            BranchingNode = branchingNode ?? throw new ArgumentNullException(nameof(branchingNode));
         }
 
-        public SyntaxNode JumpNode { get; }
+        public SyntaxNode BranchingNode { get; }
 
-        /// <summary>
-        /// If there was no jump, this block would be the successor.
-        /// It can be null, when it doesn't make sense. For example in case of lock statements.
-        /// </summary>
-        public Block WouldBeSuccessor { get; private set; }
+        protected readonly Block[] successors;
 
-        internal override Block GetPossibleNonEmptySuccessorBlock()
-        {
-            // JumpBlock can't be removed by the CFG simplification, unlike the base class SimpleBlock
-            return this;
-        }
+        public override IReadOnlyList<Block> SuccessorBlocks => ImmutableArray.Create(this.successors);
 
         internal override void ReplaceSuccessors(Dictionary<Block, Block> replacementMapping)
         {
-            base.ReplaceSuccessors(replacementMapping);
-
-            if (WouldBeSuccessor != null && replacementMapping.ContainsKey(WouldBeSuccessor))
+            for (var i = 0; i < this.successors.Length; i++)
             {
-                WouldBeSuccessor = replacementMapping[WouldBeSuccessor];
+                if (replacementMapping.ContainsKey(this.successors[i]))
+                {
+                    this.successors[i] = replacementMapping[this.successors[i]];
+                }
             }
         }
     }
