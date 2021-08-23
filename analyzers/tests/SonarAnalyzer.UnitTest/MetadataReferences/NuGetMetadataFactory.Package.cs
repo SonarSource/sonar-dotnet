@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             public string PackageDirectory()
             {
                 var runtimePath = runtime == null ? string.Empty : $"runtimes\\{runtime}\\";
-                var combinedPath = Path.Combine(PackagesFolder, id, version, runtimePath);
+                var combinedPath = Path.Combine(PackagesFolder, id, $"Sonar.{version}", runtimePath);
                 return Path.GetFullPath(combinedPath);
             }
 
@@ -113,17 +113,15 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             /// </remarks>
             private IEnumerable<string> SortedPackageFolders()
             {
-                // The package will be in a folder called "\packages\{packageId}\{version}", but:
+                // The package will be in a folder called "\packages\{packageId}\Sonar.{version}", but:
                 // : the package might not be installed
                 // : there might be multiple versions installed
-                // : there might be a package that starts with the same package id
-                //      e.g. Microsoft.AspNetCore.Core and Microsoft.AspNetCore.Core.Diagnostics
                 // Most packages have a three-part version, but some have four. We don't check
                 // the actual number of parts, as long as there is at least one.
-                var matcher = new Regex(@"(\.\d+)+$", RegexOptions.IgnoreCase);
+                var matcher = new Regex(@"(\d+\.?)+$", RegexOptions.IgnoreCase);
                 var packagePath = Path.Combine(PackagesFolder, id);
                 return Directory.Exists(packagePath)
-                    ? Directory.GetDirectories(packagePath, "*.*", SearchOption.TopDirectoryOnly).Where(x => matcher.IsMatch(x)).OrderBy(x => x)
+                    ? Directory.GetDirectories(packagePath, "Sonar.*.*").Where(x => matcher.IsMatch(x)).Select(x => matcher.Match(x).Groups[0].Value).OrderBy(x => x)
                     : Enumerable.Empty<string>();
             }
 
@@ -166,7 +164,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 // The file containing the next-check timestamp is stored in folder of the latest version of the package.
                 const string NextUpdateFileName = "NextCheckForUpdate.txt";
                 var directory = SortedPackageFolders().LastOrDefault();
-                return directory == null ? null : Path.Combine(directory, "..", NextUpdateFileName);
+                return directory == null ? null : Path.Combine(PackagesFolder, id, NextUpdateFileName);
             }
 
             private static void LogMessage(string message) =>
