@@ -59,3 +59,5 @@ namespace SonarAnalyzer.UnitTest.Extensions
         private class Walker : CSharpSyntaxWalker { }
     }
 }
+
+// ToDo: Remove this useless comment
