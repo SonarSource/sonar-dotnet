@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Constants;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -43,6 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string TitleRedundantExplicitNullable = "Remove redundant explicit nullable creation";
         internal const string TitleRedundantObjectInitializer = "Remove redundant object initializer";
         internal const string TitleRedundantDelegateParameterList = "Remove redundant parameter list";
+        internal const string TitleRedundantParameterName = "Use discard parameter";
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantDeclaration.DiagnosticId);
 
@@ -59,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Task.CompletedTask;
             }
 
-            if (TryGetAction(syntaxNode, root, diagnosticType, context.Document, out var action))
+            if (TryGetAction(syntaxNode, root, diagnosticType, context.Document, diagnostic.Properties, out var action))
             {
                 context.RegisterCodeFix(action, context.Diagnostics);
             }
@@ -67,24 +69,40 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        private static bool TryGetRedundantLambdaParameterAction(SyntaxNode syntaxNode, SyntaxNode root,
-            Document document, out CodeAction action)
+        private static bool TryGetRedundantLambdaParameterAction(SyntaxNode syntaxNode,
+                                                                 SyntaxNode root,
+                                                                 Document document,
+                                                                 ImmutableDictionary<string, string> properties,
+                                                                 out CodeAction action)
         {
-            if (!(syntaxNode.Parent?.Parent is ParameterListSyntax parameterList))
+            if (syntaxNode.Parent?.Parent is ParenthesizedLambdaExpressionSyntax lambdaExpressionSyntax)
+            {
+                action = CodeAction.Create(TitleRedundantParameterName, c =>
+                {
+                    var parameterName = properties[RedundantDeclaration.ParameterNameKey];
+                    var parameter = lambdaExpressionSyntax.ParameterList.Parameters.Single(parameter => parameter.Identifier.Text == parameterName);
+                    var newRoot = root.ReplaceNode(parameter, SyntaxFactory.Parameter(SyntaxFactory.Identifier(SyntaxConstants.Discard)));
+
+                    return Task.FromResult(document.WithSyntaxRoot(newRoot));
+                }, TitleRedundantParameterName);
+                return true;
+            }
+            else if (syntaxNode.Parent?.Parent is ParameterListSyntax parameterList)
+            {
+                action = CodeAction.Create(TitleRedundantLambdaParameterType, c =>
+                {
+                    var newParameterList = parameterList.WithParameters(SyntaxFactory.SeparatedList(parameterList.Parameters.Select(p => SyntaxFactory.Parameter(p.Identifier).WithTriviaFrom(p))));
+                    var newRoot = root.ReplaceNode(parameterList, newParameterList);
+
+                    return Task.FromResult(document.WithSyntaxRoot(newRoot));
+                }, TitleRedundantLambdaParameterType);
+                return true;
+            }
+            else
             {
                 action = null;
                 return false;
             }
-
-            action = CodeAction.Create(TitleRedundantLambdaParameterType, c =>
-            {
-                var newParameterList = parameterList.WithParameters(
-                    SyntaxFactory.SeparatedList(parameterList.Parameters.Select(p =>
-                        SyntaxFactory.Parameter(p.Identifier).WithTriviaFrom(p))));
-                var newRoot = root.ReplaceNode(parameterList, newParameterList);
-                return Task.FromResult(document.WithSyntaxRoot(newRoot));
-            }, TitleRedundantLambdaParameterType);
-            return true;
         }
 
         private static bool TryGetRedundantArraySizeAction(SyntaxNode syntaxNode, SyntaxNode root,
@@ -192,13 +210,17 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool TryGetAction(SyntaxNode syntaxNode, SyntaxNode root, RedundantDeclaration.RedundancyType diagnosticType,
-            Document document, out CodeAction action)
+        private static bool TryGetAction(SyntaxNode syntaxNode,
+                                         SyntaxNode root,
+                                         RedundantDeclaration.RedundancyType diagnosticType,
+                                         Document document,
+                                         ImmutableDictionary<string, string> properties,
+                                         out CodeAction action)
         {
             switch (diagnosticType)
             {
                 case RedundantDeclaration.RedundancyType.LambdaParameterType:
-                    return TryGetRedundantLambdaParameterAction(syntaxNode, root, document, out action);
+                    return TryGetRedundantLambdaParameterAction(syntaxNode, root, document, properties, out action);
                 case RedundantDeclaration.RedundancyType.ArraySize:
                     return TryGetRedundantArraySizeAction(syntaxNode, root, document, out action);
                 case RedundantDeclaration.RedundancyType.ArrayType:

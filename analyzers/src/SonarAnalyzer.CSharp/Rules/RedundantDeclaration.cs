@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Constants;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Wrappers;
@@ -41,6 +42,8 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S3257";
         internal const string DiagnosticTypeKey = "diagnosticType";
+        internal const string ParameterNameKey = "ParameterNameKey";
+
         private const string MessageFormat = "Remove the {0}; it is redundant.";
         private const string UseDiscardMessageFormat = "'{0}' is not used. Use discard parameter instead.";
 
@@ -130,9 +133,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 var usedIdentifiers = GetUsedIdentifiers(lambda).ToList();
                 foreach (var parameter in lambda.ParameterList.Parameters)
                 {
-                    if (!usedIdentifiers.Contains(parameter.Identifier.Text))
+                    var parameterName = parameter.Identifier.Text;
+
+                    if (parameterName != SyntaxConstants.Discard && !usedIdentifiers.Contains(parameterName))
                     {
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(DiscardRule, parameter.GetLocation(), parameter.Identifier.Text));
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(DiscardRule,
+                                                                             parameter.GetLocation(),
+                                                                             ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString())
+                                                                                                                      .Add(ParameterNameKey, parameterName),
+                                                                             parameterName));
                     }
                 }
             }
