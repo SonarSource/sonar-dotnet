@@ -75,7 +75,8 @@ namespace SonarAnalyzer.Rules.CSharp
                                                                  ImmutableDictionary<string, string> properties,
                                                                  out CodeAction action)
         {
-            if (syntaxNode.Parent?.Parent is ParenthesizedLambdaExpressionSyntax lambdaExpressionSyntax)
+            var parentExpression = syntaxNode.Parent?.Parent;
+            if (parentExpression is ParenthesizedLambdaExpressionSyntax lambdaExpressionSyntax)
             {
                 action = CodeAction.Create(TitleRedundantParameterName, c =>
                 {
@@ -87,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }, TitleRedundantParameterName);
                 return true;
             }
-            else if (syntaxNode.Parent?.Parent is ParameterListSyntax parameterList)
+            else if (parentExpression is ParameterListSyntax parameterList)
             {
                 action = CodeAction.Create(TitleRedundantLambdaParameterType, c =>
                 {
