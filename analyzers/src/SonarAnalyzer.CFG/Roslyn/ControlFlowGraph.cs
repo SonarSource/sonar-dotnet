@@ -19,6 +19,10 @@
  */
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using Microsoft.CodeAnalysis;
@@ -30,11 +34,14 @@ namespace SonarAnalyzer.CFG.Roslyn
     {
         private static readonly MethodInfo CreateMethod;
         private static readonly PropertyInfo RootProperty;
+        private static readonly PropertyInfo BlocksProperty;
 
         private readonly Lazy<ControlFlowRegion> root;
+        private readonly Lazy<ImmutableArray<BasicBlock>> blocks;
 
         public static bool IsAvailable { get; }
         public ControlFlowRegion Root => root.Value;
+        public ImmutableArray<BasicBlock> Blocks => blocks.Value;
 
         static ControlFlowGraph()
         {
@@ -44,6 +51,8 @@ namespace SonarAnalyzer.CFG.Roslyn
                 IsAvailable = true;
                 CreateMethod = type.GetMethod(nameof(Create), new[] { typeof(SyntaxNode), typeof(SemanticModel), typeof(CancellationToken) });
                 RootProperty = type.GetProperty(nameof(Root));
+                BlocksProperty = type.GetProperty(nameof(Blocks));
+
             }
         }
 
@@ -51,6 +60,7 @@ namespace SonarAnalyzer.CFG.Roslyn
         {
             _ = instance ?? throw new ArgumentNullException(nameof(instance));
             root = new Lazy<ControlFlowRegion>(() => new ControlFlowRegion(RootProperty.GetValue(instance)));
+            blocks = new Lazy<ImmutableArray<BasicBlock>>(() => ((IEnumerable<object>)BlocksProperty.GetValue(instance)).Select(x => new BasicBlock(x)).ToImmutableArray());
         }
 
         public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel) =>

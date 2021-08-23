@@ -74,6 +74,7 @@ public class Sample
             var cfg = Compile(code);
             cfg.Should().NotBeNull();
             cfg.Root.Should().NotBeNull();
+            cfg.Blocks.Should().NotBeNull().And.HaveCount(3); // Enter, Instructions, Exit
         }
 
         private ControlFlowGraph Compile(string snippet, bool isCSharp = true)
