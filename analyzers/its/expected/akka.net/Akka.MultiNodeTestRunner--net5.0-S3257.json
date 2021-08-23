@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "'sender' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  64,
+"endLine":  375,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'sender' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  52,
+"endLine":  388,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'eventArgs' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  60,
+"endLine":  388,
+"endColumn":  69
+}
+}
+}
+]
+}
