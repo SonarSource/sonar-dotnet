@@ -27,7 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG.Helpers;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.ControlFlowGraph.CSharp
+namespace SonarAnalyzer.CFG.Sonar
 {
     public sealed class CSharpControlFlowGraphBuilder : AbstractControlFlowGraphBuilder
     {
