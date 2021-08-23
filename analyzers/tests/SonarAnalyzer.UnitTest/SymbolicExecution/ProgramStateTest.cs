@@ -24,7 +24,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.UnitTest.ControlFlowGraph;
+using SonarAnalyzer.UnitTest.CFG;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution
 {
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         private static ISymbol GetSymbol()
         {
             var testInput = "var a = true; var b = false; b = !b; a = (b);";
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(ControlFlowGraphTest.TestInput, testInput), "Bar", out var semanticModel);
+            var method = SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(SonarControlFlowGraphTest.TestInput, testInput), "Bar", out var semanticModel);
             return semanticModel.GetDeclaredSymbol(method);
         }
     }

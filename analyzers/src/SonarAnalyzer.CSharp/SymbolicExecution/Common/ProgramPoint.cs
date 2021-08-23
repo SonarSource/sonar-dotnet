@@ -20,7 +20,7 @@
 
 using System;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.ControlFlowGraph;
+using SonarAnalyzer.CFG.Sonar;
 
 namespace SonarAnalyzer.SymbolicExecution
 {

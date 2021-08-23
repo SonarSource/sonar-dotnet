@@ -18,20 +18,31 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System;
+using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.ControlFlowGraph
+namespace SonarAnalyzer.CFG.Sonar
 {
-    /// <summary>
-    /// Represents a Control Flow Graph of a method or property.
-    /// Provides access to the entry, exit and all blocks (<see cref="Block"/>) inside the CFG.
-    /// </summary>
-    public interface IControlFlowGraph
+    public class BinaryBranchBlock : BranchBlock
     {
-        IEnumerable<Block> Blocks { get;}
+        internal BinaryBranchBlock(SyntaxNode branchingNode, Block trueSuccessor, Block falseSuccessor)
+            : base(branchingNode, trueSuccessor, falseSuccessor)
+        {
+            if (trueSuccessor == null)
+            {
+                throw new ArgumentNullException(nameof(trueSuccessor));
+            }
 
-        Block EntryBlock { get; }
+            if (falseSuccessor == null)
+            {
+                throw new ArgumentNullException(nameof(falseSuccessor));
+            }
+        }
 
-        ExitBlock ExitBlock { get; }
+        public Block TrueSuccessorBlock => this.successors[0];
+
+        public Block FalseSuccessorBlock => this.successors[1];
+
+        public SyntaxNode Parent => BranchingNode.Parent;
     }
 }

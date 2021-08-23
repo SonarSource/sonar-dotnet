@@ -25,16 +25,15 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.ControlFlowGraph;
-using SonarAnalyzer.ControlFlowGraph.CSharp;
+using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.Helpers;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.ControlFlowGraph
+namespace SonarAnalyzer.UnitTest.CFG
 {
     [TestClass]
-    public class ControlFlowGraphTest
+    public class SonarControlFlowGraphTest
     {
         private const string SimpleReturn = "return";
         private const string SimpleThrow = "throw";

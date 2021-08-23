@@ -25,7 +25,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Helpers;
 
-namespace SonarAnalyzer.ControlFlowGraph
+namespace SonarAnalyzer.CFG.Sonar
 {
     /// <summary>
     /// Basic building blocks of a Control Flow Graph (<see cref="IControlFlowGraph"/>).
