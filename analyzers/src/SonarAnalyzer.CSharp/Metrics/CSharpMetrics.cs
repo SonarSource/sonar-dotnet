@@ -77,6 +77,9 @@ namespace SonarAnalyzer.Metrics.CSharp
         {
             switch (node.Kind())
             {
+                case SyntaxKindEx.LocalFunctionStatement:
+                    return true;
+
                 case SyntaxKind.PropertyDeclaration:
                     return ((PropertyDeclarationSyntax)node).ExpressionBody != null;
 

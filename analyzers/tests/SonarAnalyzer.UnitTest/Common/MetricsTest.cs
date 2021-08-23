@@ -325,6 +325,7 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty5 { get => 42; } }").Should().Be(1);
             Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty6 { get { return 0; } set { } } }").Should().Be(2);
             Functions(AnalyzerLanguage.CSharp, "class MyClass { public event EventHandler OnSomething { add { } remove {} } }").Should().Be(2);
+            Functions(AnalyzerLanguage.CSharp, "class Foo { void Bar() { void LocalFunction() { } } }").Should().Be(2);
 
             Functions(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
             Functions(AnalyzerLanguage.VisualBasic, "Class MyClass \n \n End Class").Should().Be(0);
