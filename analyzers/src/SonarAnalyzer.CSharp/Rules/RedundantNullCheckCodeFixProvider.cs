@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 RegisterBinaryPatternCodeFix(context, root, diagnosticNode.Parent);
             }
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static void RegisterBinaryExpressionCodeFix(CodeFixContext context, SyntaxNode root, SyntaxNode mustBeReplaced) =>

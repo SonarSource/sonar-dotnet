@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.Common
                     Title),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         protected abstract SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node);

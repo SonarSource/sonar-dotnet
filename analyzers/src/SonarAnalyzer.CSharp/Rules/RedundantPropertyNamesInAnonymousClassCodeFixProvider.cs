@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var nameEquals = root.FindNode(diagnosticSpan) as NameEqualsSyntax;
             if (!(nameEquals?.Parent?.Parent is AnonymousObjectCreationExpressionSyntax anonymousObjectCreation))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             context.RegisterCodeFix(
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static SyntaxNodeOrToken GetNewSyntaxListItem(SyntaxNodeOrToken item)
@@ -88,4 +88,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

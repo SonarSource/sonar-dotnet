@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!paramsToken.IsKind(SyntaxKind.ParamsKeyword))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             context.RegisterCodeFix(
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

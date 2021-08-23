@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             if (!(root.FindNode(diagnosticSpan) is SwitchSectionSyntax syntaxNode))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             context.RegisterCodeFix(
@@ -56,8 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }
-

@@ -69,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
             {
                 context.RegisterCodeFix(CodeAction.Create("TestTitle", c => Task.FromResult(context.Document)), context.Diagnostics);
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
         }
     }

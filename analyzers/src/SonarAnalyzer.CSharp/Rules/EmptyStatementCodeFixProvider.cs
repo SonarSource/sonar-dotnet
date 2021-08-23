@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!IsInBlock(syntaxNode))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             context.RegisterCodeFix(
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static bool IsInBlock(SyntaxNode node)

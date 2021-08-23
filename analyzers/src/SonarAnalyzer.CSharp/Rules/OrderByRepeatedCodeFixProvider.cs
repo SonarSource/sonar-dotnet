@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     c => ChangeToThenByAsync(context.Document, syntaxNode, c)),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static async Task<Document> ChangeToThenByAsync(Document document, SyntaxNode syntaxNode, CancellationToken cancellationToken)
@@ -70,4 +70,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

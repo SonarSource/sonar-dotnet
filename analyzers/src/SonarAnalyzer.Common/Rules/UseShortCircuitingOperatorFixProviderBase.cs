@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.Common
             if (!(root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is TBinaryExpression expression) ||
                 !IsCandidateExpression(expression))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             context.RegisterCodeFix(
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.Common
                     c => ReplaceExpressionAsync(expression, root, context.Document)),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         internal abstract bool IsCandidateExpression(TBinaryExpression expression);

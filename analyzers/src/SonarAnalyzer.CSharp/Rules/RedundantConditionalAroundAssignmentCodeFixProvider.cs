@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
         }
 
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (statement == null)
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             context.RegisterCodeFix(
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static Task HandleSwitchExpression(SyntaxNode root, CodeFixContext context, SyntaxNode switchExpression)
@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

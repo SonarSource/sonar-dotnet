@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!(root.FindNode(diagnosticSpan) is EqualsValueClauseSyntax initializer))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             context.RegisterCodeFix(
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

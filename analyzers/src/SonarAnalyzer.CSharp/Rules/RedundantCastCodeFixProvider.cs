@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (syntaxNode.Parent is CastExpressionSyntax castExpression)
             {
                 //this is handled by IDE0004 code fix.
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             var castInvocation = syntaxNode as InvocationExpressionSyntax;
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     context.Diagnostics);
             }
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static SyntaxNode RemoveCall(SyntaxNode root,
@@ -115,4 +115,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-
