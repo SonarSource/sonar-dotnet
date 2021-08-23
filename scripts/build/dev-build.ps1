@@ -86,7 +86,7 @@ try {
         # It considers to run under CI/CD only if the following environment variable is set.
         # When running this script, we want to run all unit tests.
         # see analyzers\tests\SonarAnalyzer.UnitTest\TestFramework\ParseOptionsHelper.cs
-        $env:SYSTEM_DEFINITIONID="set"
+        $env:Build.Reason="set"
         Invoke-UnitTests $binPath $buildConfiguration
     }
 
