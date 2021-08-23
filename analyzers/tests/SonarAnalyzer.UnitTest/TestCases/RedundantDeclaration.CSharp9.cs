@@ -9,9 +9,9 @@ Action<int, int> a = static (parameter1, parameter2) => { };
 //                           ^^^^^^^^^^ {{'parameter1' is not used. Use discard parameter instead.}}
 //                                       ^^^^^^^^^^@-1 {{'parameter2' is not used. Use discard parameter instead.}}
 
-Action<int> b = static (parameter1) => { Console.WriteLine(parameter1); };
+Action<int> b = static (parameter1) => { Console.WriteLine(parameter1); }; // FN - Can be replaced with method group `Action<int> b = Console.WriteLine;`
 
-Action<int> c = static parameter1 => { Console.WriteLine(parameter1); };
+Action<int> c = static parameter1 => { Console.WriteLine(parameter1); }; // FN - Can be replaced with method group `Action<int> c = Console.WriteLine;`
 
 Record Local() => new Record(); // Compliant - FN
 static Record LocalStatic(Record r) => r;
