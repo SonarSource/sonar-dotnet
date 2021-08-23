@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -273,6 +274,8 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { try {} finally {} } }").Should().Be(1);
             Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { try {} catch {} finally {} } }").Should().Be(1);
             Statements(AnalyzerLanguage.CSharp, "class MyClass { int MyMethod() { int a = 42; Console.WriteLine(a); return a; } }").Should().Be(3);
+            Statements(AnalyzerLanguage.CSharp, "class Foo { void Bar() { void LocalFunction() { } } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Foo { void Bar(List<(int, int)> names) { foreach ((int x, int y) in names){} } }").Should().Be(1); // ForEachVariableStatement
 
             Statements(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
             Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n \n End Class").Should().Be(0);

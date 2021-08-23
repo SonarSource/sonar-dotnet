@@ -135,6 +135,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.ExpressionStatement:
                 case SyntaxKind.FixedStatement:
                 case SyntaxKind.ForEachStatement:
+                case SyntaxKindEx.ForEachVariableStatement:
                 case SyntaxKind.ForStatement:
                 case SyntaxKind.GlobalStatement:
                 case SyntaxKind.GotoCaseStatement:
@@ -143,6 +144,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.IfStatement:
                 case SyntaxKind.LabeledStatement:
                 case SyntaxKind.LocalDeclarationStatement:
+                case SyntaxKindEx.LocalFunctionStatement:
                 case SyntaxKind.LockStatement:
                 case SyntaxKind.ReturnStatement:
                 case SyntaxKind.SwitchStatement:
