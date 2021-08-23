@@ -21,7 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SonarAnalyzer.ControlFlowGraph.CSharp
+namespace SonarAnalyzer.CFG.Sonar
 {
     public class CfgAllPathValidator
     {

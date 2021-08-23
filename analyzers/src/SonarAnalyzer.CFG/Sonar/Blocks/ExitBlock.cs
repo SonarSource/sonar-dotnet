@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.ControlFlowGraph
+namespace SonarAnalyzer.CFG.Sonar
 {
     public sealed class ExitBlock : Block
     {

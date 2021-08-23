@@ -18,26 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 
-namespace SonarAnalyzer.ControlFlowGraph
+namespace SonarAnalyzer.CFG.Sonar
 {
-    public sealed class TemporaryBlock : Block
+    /// <summary>
+    /// Represents a Control Flow Graph of a method or property.
+    /// Provides access to the entry, exit and all blocks (<see cref="Block"/>) inside the CFG.
+    /// </summary>
+    public interface IControlFlowGraph
     {
-        public Block SuccessorBlock { get; set; }
+        IEnumerable<Block> Blocks { get;}
 
-        public override IReadOnlyList<Block> SuccessorBlocks => ImmutableArray.Create(SuccessorBlock);
+        Block EntryBlock { get; }
 
-        internal override Block GetPossibleNonEmptySuccessorBlock()
-        {
-            if (SuccessorBlock == null)
-            {
-                throw new InvalidOperationException($"{nameof(SuccessorBlock)} is null");
-            }
-
-            return SuccessorBlock.GetPossibleNonEmptySuccessorBlock();
-        }
+        ExitBlock ExitBlock { get; }
     }
 }

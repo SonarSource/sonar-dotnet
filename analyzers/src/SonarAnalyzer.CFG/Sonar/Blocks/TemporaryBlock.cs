@@ -18,17 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
-using SonarAnalyzer.CFG.Helpers;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.ControlFlowGraph
+namespace SonarAnalyzer.CFG.Sonar
 {
-    public  class BlockIdProvider
+    public sealed class TemporaryBlock : Block
     {
-        private readonly Dictionary<Block, string> map = new Dictionary<Block, string>();
-        private int counter;
+        public Block SuccessorBlock { get; set; }
 
-        public string Get(Block cfgBlock) =>
-            this.map.GetOrAdd(cfgBlock, b => $"{this.counter++}");
+        public override IReadOnlyList<Block> SuccessorBlocks => ImmutableArray.Create(SuccessorBlock);
+
+        internal override Block GetPossibleNonEmptySuccessorBlock()
+        {
+            if (SuccessorBlock == null)
+            {
+                throw new InvalidOperationException($"{nameof(SuccessorBlock)} is null");
+            }
+
+            return SuccessorBlock.GetPossibleNonEmptySuccessorBlock();
+        }
     }
 }

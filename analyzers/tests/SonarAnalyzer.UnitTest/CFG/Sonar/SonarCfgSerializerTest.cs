@@ -20,14 +20,13 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.ControlFlowGraph;
-using SonarAnalyzer.ControlFlowGraph.CSharp;
+using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.UnitTest.Helpers;
 
-namespace SonarAnalyzer.UnitTest.ControlFlowGraph
+namespace SonarAnalyzer.UnitTest.CFG
 {
     [TestClass]
-    public class CfgSerializerTest
+    public class SonarCfgSerializerTest
     {
         [TestMethod]
         public void Serialize_Empty_Method()

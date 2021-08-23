@@ -19,30 +19,24 @@
  */
 
 using System;
-using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.ControlFlowGraph
+namespace SonarAnalyzer.CFG.Sonar
 {
-    public class BinaryBranchBlock : BranchBlock
+    public sealed class ForInitializerBlock : SimpleBlock
     {
-        internal BinaryBranchBlock(SyntaxNode branchingNode, Block trueSuccessor, Block falseSuccessor)
-            : base(branchingNode, trueSuccessor, falseSuccessor)
+        internal ForInitializerBlock(ForStatementSyntax forNode, Block successor)
+            : base(successor)
         {
-            if (trueSuccessor == null)
-            {
-                throw new ArgumentNullException(nameof(trueSuccessor));
-            }
-
-            if (falseSuccessor == null)
-            {
-                throw new ArgumentNullException(nameof(falseSuccessor));
-            }
+            ForNode = forNode ?? throw new ArgumentNullException(nameof(forNode));
         }
 
-        public Block TrueSuccessorBlock => this.successors[0];
+        public ForStatementSyntax ForNode { get; }
 
-        public Block FalseSuccessorBlock => this.successors[1];
-
-        public SyntaxNode Parent => BranchingNode.Parent;
+        internal override Block GetPossibleNonEmptySuccessorBlock()
+        {
+            // This block can't be removed by the CFG simplification, unlike the base class SimpleBlock
+            return this;
+        }
     }
 }
