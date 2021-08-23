@@ -24,7 +24,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.UnitTest.CFG;
+using SonarAnalyzer.UnitTest.CFG.Sonar;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution
 {
