@@ -19,6 +19,10 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Reflection;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.CFG.Helpers
@@ -27,5 +31,11 @@ namespace SonarAnalyzer.CFG.Helpers
     {
         public static Type FlowAnalysisType(string typeName) =>
             typeof(SemanticModel).Assembly.GetType("Microsoft.CodeAnalysis.FlowAnalysis." + typeName);
+
+        public static Lazy<T> ReadValue<T>(PropertyInfo property, object instance, Func<object, T> createInstance) =>
+            new Lazy<T>(() => createInstance(property.GetValue(instance)));
+
+        public static Lazy<ImmutableArray<T>> ReadImmutableArray<T>(PropertyInfo property, object instance, Func<object, T> createInstance) =>
+            new Lazy<ImmutableArray<T>>(() => ((IEnumerable<object>)property.GetValue(instance)).Select(createInstance).ToImmutableArray());
     }
 }
