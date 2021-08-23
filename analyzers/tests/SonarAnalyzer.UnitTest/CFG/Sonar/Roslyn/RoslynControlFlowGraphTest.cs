@@ -20,9 +20,12 @@
 
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
+using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
+using FlowAnalysis = Microsoft.CodeAnalysis.FlowAnalysis;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.CFG.Roslyn
@@ -68,13 +71,21 @@ public class Sample
 {
     public void Method()
     {
-        return 42;
+        System.Action a = () => { };
+        return LocalMethod();
+
+        int LocalMethod() => 42;
     }
 }";
             var cfg = Compile(code);
             cfg.Should().NotBeNull();
             cfg.Root.Should().NotBeNull();
             cfg.Blocks.Should().NotBeNull().And.HaveCount(3); // Enter, Instructions, Exit
+            cfg.OriginalOperation.Should().NotBeNull().And.BeAssignableTo<IMethodBodyOperation>();
+            cfg.LocalFunctions.Should().HaveCount(1);
+            cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single()).Should().NotBeNull();
+            var anonymousFunction = cfg.Blocks.SelectMany(x => x.Operations).SelectMany(x => x.DescendantsAndSelf()).OfType<FlowAnalysis.IFlowAnonymousFunctionOperation>().Single();
+            cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction)).Should().NotBeNull();
         }
 
         private ControlFlowGraph Compile(string snippet, bool isCSharp = true)

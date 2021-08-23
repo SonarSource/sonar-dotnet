@@ -19,25 +19,33 @@
  */
 
 using System;
+using System.Collections.Immutable;
+using System.Reflection;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.CFG.Roslyn
 {
     public class BasicBlock
     {
+        private static readonly PropertyInfo OperationsProperty;
+
+        private readonly Lazy<ImmutableArray<IOperation>> operations;
+
+        public ImmutableArray<IOperation> Operations => operations.Value;
+
         static BasicBlock()
         {
-            var type = RoslynHelper.FlowAnalysisType("BasicBlock");
-            if (type != null)
+            if (RoslynHelper.FlowAnalysisType("BasicBlock") is { } type)
             {
-                //FIXME: Prepare
+                OperationsProperty = type.GetProperty(nameof(Operations));
             }
         }
 
         public BasicBlock(object instance)
         {
             _ = instance ?? throw new ArgumentNullException(nameof(instance));
-            //FIXME: Prepare
+            operations = RoslynHelper.ReadImmutableArray(OperationsProperty, instance, x => (IOperation)x);
         }
     }
 }

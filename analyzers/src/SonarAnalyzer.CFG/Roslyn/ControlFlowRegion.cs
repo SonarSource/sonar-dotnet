@@ -27,8 +27,7 @@ namespace SonarAnalyzer.CFG.Roslyn
     {
         static ControlFlowRegion()
         {
-            var type = RoslynHelper.FlowAnalysisType("ControlFlowRegion");
-            if (type != null)
+            if (RoslynHelper.FlowAnalysisType("ControlFlowRegion") is { } type)
             {
                 //FIXME: Prepare
             }
