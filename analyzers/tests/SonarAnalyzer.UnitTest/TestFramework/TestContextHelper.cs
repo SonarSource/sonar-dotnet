@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public static bool IsAzureDevOpsContext =>
             Environment.GetEnvironmentVariable("Build.Reason") != null;
 
-        public static bool IsNotPullRequestBuild =>
-            Environment.GetEnvironmentVariable("Build.Reason") != "PullRequest";
+        public static bool IsLocalOrPullRequestBuild =>
+            Environment.GetEnvironmentVariable("Build.Reason") is null or "PullRequest";
     }
 }

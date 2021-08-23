@@ -94,9 +94,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             };
 
         private static ImmutableArray<ParseOptions> FilterByEnvironment(this IEnumerable<ParseOptions> options) =>
-            TestContextHelper.IsNotPullRequestBuild
-                ? options.ToImmutableArray()
-                : ImmutableArray.Create(options.First()); // Use only the oldest version for local test run and debug
+            TestContextHelper.IsLocalOrPullRequestBuild
+                ? ImmutableArray.Create(options.First()) // Use only the oldest version for local test run and debug
+                : options.ToImmutableArray();
 
         private static IEnumerable<ParseOptions> CreateOptions(params CS.LanguageVersion[] options) =>
             options.Select(x => new CS.CSharpParseOptions(x));

@@ -82,10 +82,9 @@ try {
     }
 
     if ($test) {
-        # in ParseOptionsHelper.FilterByEnvironment, it does not run tests for all C# versions unless it detects it's on the CI/CD
-        # It considers to run under CI/CD only if the following environment variable is set.
-        # When running this script, we want to run all unit tests.
-        # see analyzers\tests\SonarAnalyzer.UnitTest\TestFramework\ParseOptionsHelper.cs
+        # ParseOptionsHelper.FilterByEnvironment is responsible for limiting language versions for C# and VB.NET
+        # on local builds and non-master builds on Azure. Since we want to run master-like build we need to set
+        # the following variable to something not equal to PullRequest.
         $env:Build.Reason="set"
         Invoke-UnitTests $binPath $buildConfiguration
     }

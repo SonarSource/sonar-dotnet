@@ -34,7 +34,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         [TestMethod]
         public void ExpectedLanguageVersion()
         {
-            if (TestContextHelper.IsNotPullRequestBuild)
+            var vbVersions = ParseOptionsHelper.FromVisualBasic12.Cast<VB.VisualBasicParseOptions>().Select(x => x.LanguageVersion);
+            if (TestContextHelper.IsLocalOrPullRequestBuild)
+            {
+                ParseOptionsHelper.FromCSharp6.Should().Contain(new CS.CSharpParseOptions(CS.LanguageVersion.CSharp6));
+                vbVersions.Should().BeEquivalentTo(VB.LanguageVersion.VisualBasic12);
+            }
+            else
             {
                 CS.LanguageVersion[] csVersions =
                 {
@@ -46,24 +52,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     CS.LanguageVersion.CSharp8,
                     CS.LanguageVersion.CSharp9
                 };
-                // the following assertion is expected to fail when we add the support of C#10
+                // This should fail when we add new language version
                 ParseOptionsHelper.FromCSharp6.Should().Contain(csVersions.Select(x => new CS.CSharpParseOptions(x)));
 
-                VB.LanguageVersion[] vbVersions =
-                {
+                vbVersions.Should().BeEquivalentTo(
                     VB.LanguageVersion.VisualBasic12,
                     VB.LanguageVersion.VisualBasic14,
                     VB.LanguageVersion.VisualBasic15,
                     VB.LanguageVersion.VisualBasic15_3,
                     VB.LanguageVersion.VisualBasic15_5,
-                    VB.LanguageVersion.VisualBasic16
-                };
-                ParseOptionsHelper.FromVisualBasic12.Should().Contain(vbVersions.Select(x => new VB.VisualBasicParseOptions(x)));
-            }
-            else
-            {
-                ParseOptionsHelper.FromCSharp6.Should().Contain(new CS.CSharpParseOptions(CS.LanguageVersion.CSharp6));
-                ParseOptionsHelper.FromVisualBasic12.Should().Contain(new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic12));
+                    VB.LanguageVersion.VisualBasic16);
             }
         }
     }
