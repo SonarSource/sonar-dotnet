@@ -57,7 +57,8 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
             public void EnsurePackageIsInstalled()
             {
-                if (version == Constants.NuGetLatestVersion)
+                var latestVersionObtained = version == Constants.NuGetLatestVersion;
+                if (latestVersionObtained)
                 {
                     version = GetLatestVersion().Result;
                 }
@@ -67,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 if (!Directory.Exists(packageDir))
                 {
                     LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
-                    InstallPackageAsync().Wait();
+                    InstallPackageAsync(latestVersionObtained).Wait();
                     if (!Directory.Exists(packageDir))
                     {
                         throw new ApplicationException($"Test setup error: folder for downloaded package does not exist. Folder: {packageDir}");
@@ -75,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 }
             }
 
-            private async Task InstallPackageAsync()
+            private async Task InstallPackageAsync(bool lastVersionObtained)
             {
                 var resource = await GetNuGetRepository();
 
@@ -89,7 +90,11 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 {
                     packageReader.ExtractFile(dllFile, $"{packageDirectory}\\{dllFile}", NullLogger.Instance);
                 }
-                WriteNextCheckTime();
+
+                if (lastVersionObtained)
+                {
+                    WriteNextCheckTime();
+                }
             }
 
             private static async Task<FindPackageByIdResource> GetNuGetRepository()
