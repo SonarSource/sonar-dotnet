@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.ControlFlowGraph;
+using SonarAnalyzer.CFG.Sonar;
 
 namespace SonarAnalyzer.LiveVariableAnalysis
 {

@@ -23,11 +23,10 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.ControlFlowGraph;
-using SonarAnalyzer.ControlFlowGraph.CSharp;
+using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using SonarAnalyzer.UnitTest.ControlFlowGraph;
+using SonarAnalyzer.UnitTest.CFG;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
@@ -124,7 +123,7 @@ outParameter = LocalFunction(inParameter);",
 
             public LiveVariableAnalysisContext(string methodBody, string localFunctionName = null)
             {
-                var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, methodBody), "Main", out var semanticModel);
+                var method = SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, methodBody), "Main", out var semanticModel);
                 IMethodSymbol symbol;
                 CSharpSyntaxNode body;
                 if (localFunctionName == null)

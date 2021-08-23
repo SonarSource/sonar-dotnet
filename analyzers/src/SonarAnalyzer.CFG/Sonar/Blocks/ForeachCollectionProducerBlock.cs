@@ -19,39 +19,24 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.ControlFlowGraph
+namespace SonarAnalyzer.CFG.Sonar
 {
-    public class SimpleBlock : Block
+    public sealed class ForeachCollectionProducerBlock : SimpleBlock
     {
-        internal SimpleBlock(Block successor)
+        internal ForeachCollectionProducerBlock(StatementSyntax foreachNode, Block successor)
+            : base(successor)
         {
-            SuccessorBlock = successor ?? throw new ArgumentNullException(nameof(successor));
+            ForeachNode = foreachNode ?? throw new ArgumentNullException(nameof(foreachNode));
         }
 
-        public Block SuccessorBlock { get; internal set; }
-
-        public override IReadOnlyList<Block> SuccessorBlocks => ImmutableArray.Create(SuccessorBlock);
-
-        internal override void ReplaceSuccessors(Dictionary<Block, Block> replacementMapping)
-        {
-            if (replacementMapping.ContainsKey(SuccessorBlock))
-            {
-                SuccessorBlock = replacementMapping[SuccessorBlock];
-            }
-        }
+        public StatementSyntax ForeachNode { get; }
 
         internal override Block GetPossibleNonEmptySuccessorBlock()
         {
-            if (ReversedInstructions.Any())
-            {
-                return this;
-            }
-
-            return SuccessorBlock.GetPossibleNonEmptySuccessorBlock();
+            // This block can't be removed by the CFG simplification, unlike the base class SimpleBlock
+            return this;
         }
     }
 }

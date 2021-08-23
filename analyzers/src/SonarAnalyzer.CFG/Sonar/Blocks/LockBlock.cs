@@ -18,18 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
+using System;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.ControlFlowGraph
+namespace SonarAnalyzer.CFG.Sonar
 {
-    public sealed class BinaryBranchingSimpleBlock : SimpleBlock
+    public class LockBlock : SimpleBlock
     {
-        internal BinaryBranchingSimpleBlock(SyntaxNode branchingInstruction, Block trueAndFalseSuccessor)
-            : base(trueAndFalseSuccessor)
+        public LockBlock(LockStatementSyntax lockNode, Block successor)
+            : base(successor)
         {
-            BranchingInstruction = branchingInstruction;
+            LockNode = lockNode ?? throw new ArgumentNullException(nameof(lockNode));
         }
 
-        public SyntaxNode BranchingInstruction { get; }
+        public LockStatementSyntax LockNode { get; }
+
+        internal override Block GetPossibleNonEmptySuccessorBlock()
+        {
+            // This block can't be removed by the CFG simplification, unlike the base class SimpleBlock
+            return this;
+        }
     }
 }
