@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Wrappers;
 using StyleCop.Analyzers.Lightup;
@@ -41,6 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3257";
         internal const string DiagnosticTypeKey = "diagnosticType";
         private const string MessageFormat = "Remove the {0}; it is redundant.";
+        private const string UseDiscardMessageFormat = "'{0}' is not used. Use discard parameter instead.";
 
         internal enum RedundancyType
         {
@@ -54,8 +56,9 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor DiscardRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, UseDiscardMessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule, DiscardRule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -68,17 +71,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                ReportOnRedundantParameterList,
-                SyntaxKind.AnonymousMethodExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                ReportRedundancyInArrayCreation,
-                SyntaxKind.ArrayCreationExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                ReportRedundantTypeSpecificationInLambda,
-                SyntaxKind.ParenthesizedLambdaExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportOnRedundantParameterList, SyntaxKind.AnonymousMethodExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportRedundancyInArrayCreation, SyntaxKind.ArrayCreationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(VisitParenthesizedLambdaExpression, SyntaxKind.ParenthesizedLambdaExpression);
         }
 
         #region Type specification in lambda
@@ -89,9 +84,16 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.OutKeyword
         };
 
-        private static void ReportRedundantTypeSpecificationInLambda(SyntaxNodeAnalysisContext context)
+        private static void VisitParenthesizedLambdaExpression(SyntaxNodeAnalysisContext context)
         {
             var lambda = (ParenthesizedLambdaExpressionSyntax)context.Node;
+
+            CheckUnusedParameters(lambda, context);
+            CheckTypeSpecifications(lambda, context);
+        }
+
+        private static void CheckTypeSpecifications(ParenthesizedLambdaExpressionSyntax lambda, SyntaxNodeAnalysisContext context)
+        {
             if (!IsParameterListModifiable(lambda))
             {
                 return;
@@ -114,11 +116,30 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var parameter in lambda.ParameterList.Parameters)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, parameter.Type.GetLocation(),
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()),
-                    "type specification"));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                                                                     parameter.Type.GetLocation(),
+                                                                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()),
+                                                                     "type specification"));
             }
         }
+
+        private static void CheckUnusedParameters(ParenthesizedLambdaExpressionSyntax lambda, SyntaxNodeAnalysisContext context)
+        {
+            if (context.Compilation.IsLambdaDiscardParameterSupported())
+            {
+                var usedIdentifiers = GetUsedIdentifiers(lambda).ToList();
+                foreach (var parameter in lambda.ParameterList.Parameters)
+                {
+                    if (!usedIdentifiers.Contains(parameter.Identifier.Text))
+                    {
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(DiscardRule, parameter.GetLocation(), parameter.Identifier.Text));
+                    }
+                }
+            }
+        }
+
+        private static IEnumerable<string> GetUsedIdentifiers(ParenthesizedLambdaExpressionSyntax lambda) =>
+            lambda.Body.DescendantNodes().OfType<IdentifierNameSyntax>().Select(x => x.Identifier.Text);
 
         private static bool IsParameterListModifiable(ParenthesizedLambdaExpressionSyntax lambda) =>
             lambda.ParameterList != null && lambda.ParameterList.Parameters.All(p => p.Type != null && p.Modifiers.All(m => !RefOutKeywords.Contains(m.Kind())));
