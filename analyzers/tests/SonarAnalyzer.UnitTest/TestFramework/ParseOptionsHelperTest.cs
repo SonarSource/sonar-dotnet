@@ -35,25 +35,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public void ExpectedLanguageVersion()
         {
             var vbVersions = ParseOptionsHelper.FromVisualBasic12.Cast<VB.VisualBasicParseOptions>().Select(x => x.LanguageVersion);
-            if (TestContextHelper.IsLocalOrPullRequestBuild)
+            var csVersions = ParseOptionsHelper.FromCSharp6.Cast<CS.CSharpParseOptions>().Select(x => x.LanguageVersion);
+            if (!TestContextHelper.IsAzureDevOpsContext || TestContextHelper.IsPullRequestBuild)
             {
-                ParseOptionsHelper.FromCSharp6.Should().Contain(new CS.CSharpParseOptions(CS.LanguageVersion.CSharp6));
+                csVersions.Should().BeEquivalentTo(CS.LanguageVersion.CSharp6);
                 vbVersions.Should().BeEquivalentTo(VB.LanguageVersion.VisualBasic12);
             }
             else
             {
-                CS.LanguageVersion[] csVersions =
-                {
+                // This should fail when we add new language version
+                csVersions.Should().BeEquivalentTo(
                     CS.LanguageVersion.CSharp6,
                     CS.LanguageVersion.CSharp7,
                     CS.LanguageVersion.CSharp7_1,
                     CS.LanguageVersion.CSharp7_2,
                     CS.LanguageVersion.CSharp7_3,
                     CS.LanguageVersion.CSharp8,
-                    CS.LanguageVersion.CSharp9
-                };
-                // This should fail when we add new language version
-                ParseOptionsHelper.FromCSharp6.Should().Contain(csVersions.Select(x => new CS.CSharpParseOptions(x)));
+                    CS.LanguageVersion.CSharp9);
 
                 vbVersions.Should().BeEquivalentTo(
                     VB.LanguageVersion.VisualBasic12,
