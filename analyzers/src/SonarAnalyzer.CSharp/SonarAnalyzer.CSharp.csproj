@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <AssemblyName>SonarAnalyzer.CSharp</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
