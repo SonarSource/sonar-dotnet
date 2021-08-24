@@ -40,10 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SonarAnalyzer.ShimLayer.CodeGeneration\SonarAnalyzer.ShimLayer.CodeGeneration.csproj"
-                      SetTargetFramework="TargetFramework=netstandard2.0"
-                      OutputItemType="Analyzer"
-                      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\SonarAnalyzer.ShimLayer.CodeGeneration\SonarAnalyzer.ShimLayer.CodeGeneration.csproj" SetTargetFramework="TargetFramework=netstandard2.0" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true' and $(TargetFramework) != ''" AfterTargets="Build">
