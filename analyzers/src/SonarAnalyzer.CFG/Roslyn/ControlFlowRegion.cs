@@ -19,24 +19,78 @@
  */
 
 using System;
+using System.Collections.Immutable;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.CFG.Roslyn
 {
     public class ControlFlowRegion
     {
+        private static readonly PropertyInfo KindProperty;
+        private static readonly PropertyInfo EnclosingRegionProperty;
+        private static readonly PropertyInfo ExceptionTypeProperty;
+        private static readonly PropertyInfo FirstBlockOrdinalProperty;
+        private static readonly PropertyInfo LastBlockOrdinalProperty;
+        private static readonly PropertyInfo NestedRegionsProperty;
+        private static readonly PropertyInfo LocalsProperty;
+        private static readonly PropertyInfo LocalFunctionsProperty;
+        private static readonly PropertyInfo CaptureIdsProperty;
+        private static readonly ConditionalWeakTable<object, ControlFlowRegion> InstanceCache = new ConditionalWeakTable<object, ControlFlowRegion>();
+
+        private readonly Lazy<ControlFlowRegionKind> kind;
+        private readonly Lazy<ControlFlowRegion> enclosingRegion;
+        private readonly Lazy<ITypeSymbol> exceptionType;
+        private readonly Lazy<int> firstBlockOrdinal;
+        private readonly Lazy<int> lastBlockOrdinal;
+        private readonly Lazy<ImmutableArray<ControlFlowRegion>> nestedRegions;
+        private readonly Lazy<ImmutableArray<ILocalSymbol>> locals;
+        private readonly Lazy<ImmutableArray<IMethodSymbol>> localFunctions;
+        private readonly Lazy<ImmutableArray<CaptureId>> captureIds;
+
+        public ControlFlowRegionKind Kind => kind.Value;
+        public ControlFlowRegion EnclosingRegion => enclosingRegion.Value;
+        public ITypeSymbol ExceptionType => exceptionType.Value;
+        public int FirstBlockOrdinal => firstBlockOrdinal.Value;
+        public int LastBlockOrdinal => lastBlockOrdinal.Value;
+        public ImmutableArray<ControlFlowRegion> NestedRegions => nestedRegions.Value;
+        public ImmutableArray<ILocalSymbol> Locals => locals.Value;
+        public ImmutableArray<IMethodSymbol> LocalFunctions => localFunctions.Value;
+        public ImmutableArray<CaptureId> CaptureIds => captureIds.Value;
+
         static ControlFlowRegion()
         {
             if (RoslynHelper.FlowAnalysisType("ControlFlowRegion") is { } type)
             {
-                //FIXME: Prepare
+                KindProperty = type.GetProperty(nameof(Kind));
+                EnclosingRegionProperty = type.GetProperty(nameof(EnclosingRegion));
+                ExceptionTypeProperty = type.GetProperty(nameof(ExceptionType));
+                FirstBlockOrdinalProperty = type.GetProperty(nameof(FirstBlockOrdinal));
+                LastBlockOrdinalProperty = type.GetProperty(nameof(LastBlockOrdinal));
+                NestedRegionsProperty = type.GetProperty(nameof(NestedRegions));
+                LocalsProperty = type.GetProperty(nameof(Locals));
+                LocalFunctionsProperty = type.GetProperty(nameof(LocalFunctions));
+                CaptureIdsProperty = type.GetProperty(nameof(CaptureIds));
             }
         }
 
-        public ControlFlowRegion(object instance)
+        private ControlFlowRegion(object instance)
         {
             _ = instance ?? throw new ArgumentNullException(nameof(instance));
-            //FIXME: Prepare
+            kind = KindProperty.ReadValue(instance, x => (ControlFlowRegionKind)x);
+            enclosingRegion = EnclosingRegionProperty.ReadValue(instance, x => Wrap(x));
+            exceptionType = ExceptionTypeProperty.ReadValue(instance, x => (ITypeSymbol)x);
+            firstBlockOrdinal = FirstBlockOrdinalProperty.ReadValue(instance, x => (int)x);
+            lastBlockOrdinal = LastBlockOrdinalProperty.ReadValue(instance, x => (int)x);
+            nestedRegions = NestedRegionsProperty.ReadImmutableArray(instance, x => Wrap(x));
+            locals = LocalsProperty.ReadImmutableArray(instance, x => (ILocalSymbol)x);
+            localFunctions = LocalFunctionsProperty.ReadImmutableArray(instance, x => (IMethodSymbol)x);
+            captureIds = CaptureIdsProperty.ReadImmutableArray(instance, x => new CaptureId(x));
         }
+
+        public static ControlFlowRegion Wrap(object instance) =>
+            instance == null ? null : InstanceCache.GetValue(instance, x => new ControlFlowRegion(x));
     }
 }
