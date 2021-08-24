@@ -111,6 +111,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                     var resource = await GetNuGetRepository();
                     var versions = await resource.GetAllVersionsAsync(id, new SourceCacheContext(), NullLogger.Instance, default);
                     latest = versions.OrderByDescending(x => x.Version).First(x => !x.IsPrerelease).OriginalVersion;
+                    new FileInfo(path).Directory.Create(); // Ensure that folder exists, if not create one
                     File.WriteAllText(path, $"{DateTime.Today.AddDays(VersionCheckDays):yyyy-MM-dd};{latest}");
                 }
                 return latest;
