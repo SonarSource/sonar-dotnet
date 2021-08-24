@@ -35,7 +35,7 @@ using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.UnitTest.CFG;
+using SonarAnalyzer.UnitTest.CFG.Sonar;
 using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution
