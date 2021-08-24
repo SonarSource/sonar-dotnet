@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             if (!(root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is LiteralExpressionSyntax literal))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             var newLiteral = SyntaxFactory.Literal(
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     context.Diagnostics);
             }
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

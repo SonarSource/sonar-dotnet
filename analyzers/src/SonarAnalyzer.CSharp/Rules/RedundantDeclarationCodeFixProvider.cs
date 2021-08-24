@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!Enum.TryParse(diagnostic.Properties[RedundantDeclaration.DiagnosticTypeKey], out RedundantDeclaration.RedundancyType diagnosticType))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (TryGetAction(syntaxNode, root, diagnosticType, context.Document, out var action))
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.RegisterCodeFix(action, context.Diagnostics);
             }
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static bool TryGetRedundantLambdaParameterAction(SyntaxNode syntaxNode, SyntaxNode root,
@@ -216,4 +216,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (syntaxNode is ConstructorInitializerSyntax initializer)
             {
                 RegisterActionForBaseCall(context, root, initializer);
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             var method = syntaxNode.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>();
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (method is ConstructorDeclarationSyntax)
             {
                 RegisterActionForConstructor(context, root, method);
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (method is DestructorDeclarationSyntax)
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 RegisterActionForDestructor(context, root, method);
             }
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static void RegisterActionForDestructor(CodeFixContext context, SyntaxNode root, SyntaxNode method) =>

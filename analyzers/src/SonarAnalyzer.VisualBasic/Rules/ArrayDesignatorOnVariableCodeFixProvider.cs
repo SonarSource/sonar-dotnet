@@ -57,12 +57,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (!(name?.Parent is VariableDeclaratorSyntax variableDeclarator) ||
                 variableDeclarator.Names.Count != 1)
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (!(variableDeclarator.AsClause is SimpleAsClauseSyntax simpleAsClause))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             context.RegisterCodeFix(
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     }),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

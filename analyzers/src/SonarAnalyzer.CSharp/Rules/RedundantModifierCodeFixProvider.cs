@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         }),
                     context.Diagnostics);
 
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (SimpleTokenKinds.Contains(token.Kind()))
@@ -95,12 +95,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         }),
                     context.Diagnostics);
 
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             RegisterCodeFixForChecked(token.Parent, root, context);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static void RegisterCodeFixForChecked(SyntaxNode node, SyntaxNode root, CodeFixContext context)
@@ -182,4 +182,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

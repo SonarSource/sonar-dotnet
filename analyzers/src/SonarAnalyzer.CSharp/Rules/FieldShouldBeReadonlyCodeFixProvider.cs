@@ -55,14 +55,14 @@ namespace SonarAnalyzer.Rules.CSharp
             var variableDeclarator = syntaxNode.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             if (!(variableDeclarator?.Parent is VariableDeclarationSyntax variableDeclaration))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (variableDeclaration.Variables.Count == 1)
             {
                 if (!(variableDeclaration.Parent is FieldDeclarationSyntax fieldDeclaration))
                 {
-                    return TaskHelper.CompletedTask;
+                    return Task.CompletedTask;
                 }
 
                 context.RegisterCodeFix(
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     context.Diagnostics);
             }
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private bool HasAnyAccessibilityModifier(FieldDeclarationSyntax fieldDeclaration)
@@ -96,4 +96,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

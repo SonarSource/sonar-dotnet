@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (!(unary?.Operand is BinaryExpressionSyntax isExpression) ||
                 !isExpression.IsKind(SyntaxKind.IsExpression))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             context.RegisterCodeFix(
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     c => ChangeToIsNotAsync(context.Document, unary, isExpression, c)),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static async Task<Document> ChangeToIsNotAsync(Document document, UnaryExpressionSyntax unary, BinaryExpressionSyntax isExpression,

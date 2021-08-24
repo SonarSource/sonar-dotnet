@@ -44,12 +44,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 !diagnostic.Properties.ContainsKey(CheckFileLicense.IsRegularExpressionPropertyKey) ||
                 !diagnostic.Properties.ContainsKey(CheckFileLicense.HeaderFormatPropertyKey))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (!bool.TryParse(diagnostic.Properties[CheckFileLicense.IsRegularExpressionPropertyKey], out var b) || b)
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static IEnumerable<SyntaxTrivia> CreateFileHeaderTrivias(string comment)

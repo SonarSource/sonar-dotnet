@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     context.Diagnostics);
             }
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

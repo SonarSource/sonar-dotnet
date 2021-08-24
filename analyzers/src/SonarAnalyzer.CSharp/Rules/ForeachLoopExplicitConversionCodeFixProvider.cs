@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var foreachSyntax = root.FindNode(diagnosticSpan).FirstAncestorOrSelf<ForEachStatementSyntax>();
             if (foreachSyntax == null)
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             var semanticModel = context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     context.Diagnostics);
             }
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private const string ofTypeExtensionClass = "System.Linq.Enumerable";
@@ -135,4 +135,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

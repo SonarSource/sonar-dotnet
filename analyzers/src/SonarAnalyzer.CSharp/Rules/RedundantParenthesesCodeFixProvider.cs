@@ -65,8 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Do nothing, we don't want to mess the code if we don't find what we expect
             }
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }
-

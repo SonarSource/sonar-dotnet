@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             if (!(root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is ExpressionSyntax syntaxNode))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             var parent = syntaxNode.Parent;
@@ -63,45 +63,45 @@ namespace SonarAnalyzer.Rules.CSharp
             if (syntaxNode is BinaryExpressionSyntax binary)
             {
                 RegisterBinaryExpressionReplacement(context, root, syntaxNode, binary);
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (syntaxNode is ConditionalExpressionSyntax conditional)
             {
                 RegisterConditionalExpressionRemoval(context, root, conditional);
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (!(syntaxNode is LiteralExpressionSyntax literal))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (parent is PrefixUnaryExpressionSyntax)
             {
                 RegisterBooleanInversion(context, root, literal);
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (parent is ConditionalExpressionSyntax conditionalParent)
             {
                 RegisterConditionalExpressionRewrite(context, root, literal, conditionalParent);
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (parent is BinaryExpressionSyntax binaryParent)
             {
                 RegisterBinaryExpressionRemoval(context, root, literal, binaryParent);
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             if (parent is ForStatementSyntax forStatement)
             {
                 RegisterForStatementConditionRemoval(context, root, forStatement);
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static void RegisterForStatementConditionRemoval(CodeFixContext context, SyntaxNode root, ForStatementSyntax forStatement)

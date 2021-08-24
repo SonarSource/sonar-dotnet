@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!(syntaxNode.Parent is TryStatementSyntax tryStatement))
             {
-                return TaskHelper.CompletedTask;
+                return Task.CompletedTask;
             }
 
             context.RegisterCodeFix(
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }),
                 context.Diagnostics);
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode currentNode, TryStatementSyntax tryStatement)
@@ -84,4 +84,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

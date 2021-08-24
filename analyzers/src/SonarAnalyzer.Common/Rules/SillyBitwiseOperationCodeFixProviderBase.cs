@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
             {
                 context.RegisterCodeFix(CodeAction.Create(Title, c => Task.FromResult(context.Document.WithSyntaxRoot(createNewRoot()))), context.Diagnostics);
             }
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

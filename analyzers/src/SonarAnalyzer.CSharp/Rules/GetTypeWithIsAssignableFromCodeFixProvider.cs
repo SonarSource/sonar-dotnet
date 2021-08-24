@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.RegisterCodeFix(CodeAction.Create(Title, c => Task.FromResult(context.Document.WithSyntaxRoot(newRoot))), context.Diagnostics);
             }
 
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private static SyntaxNode NewRoot(SyntaxNode root, Diagnostic diagnostic, SyntaxNode node) =>
