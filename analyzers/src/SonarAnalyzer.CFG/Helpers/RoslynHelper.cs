@@ -32,8 +32,14 @@ namespace SonarAnalyzer.CFG.Helpers
         public static Type FlowAnalysisType(string typeName) =>
             typeof(SemanticModel).Assembly.GetType("Microsoft.CodeAnalysis.FlowAnalysis." + typeName);
 
+        public static Lazy<T> ReadValue<T>(this PropertyInfo property, object instance) =>
+            ReadValue(property, instance, x => (T)x);
+
         public static Lazy<T> ReadValue<T>(this PropertyInfo property, object instance, Func<object, T> createInstance) =>
             new Lazy<T>(() => createInstance(property.GetValue(instance)));
+
+        public static Lazy<ImmutableArray<T>> ReadImmutableArray<T>(this PropertyInfo property, object instance) =>
+            ReadImmutableArray(property, instance, x => (T)x);
 
         public static Lazy<ImmutableArray<T>> ReadImmutableArray<T>(this PropertyInfo property, object instance, Func<object, T> createInstance) =>
             new Lazy<ImmutableArray<T>>(() => ((IEnumerable)property.GetValue(instance)).Cast<object>().Select(createInstance).ToImmutableArray());

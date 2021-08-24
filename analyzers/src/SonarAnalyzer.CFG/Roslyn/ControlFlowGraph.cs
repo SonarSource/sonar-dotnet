@@ -69,9 +69,9 @@ namespace SonarAnalyzer.CFG.Roslyn
         {
             this.instance = instance ?? throw new ArgumentNullException(nameof(instance));
             blocks = BlocksProperty.ReadImmutableArray(instance, x => new BasicBlock(x));
-            localFunctions = LocalFunctionsProperty.ReadImmutableArray(instance, x => (IMethodSymbol)x);
-            originalOperation = OriginalOperationProperty.ReadValue(instance, x => (IOperation)x);
-            root = RootProperty.ReadValue(instance, x => ControlFlowRegion.Wrap(x));
+            localFunctions = LocalFunctionsProperty.ReadImmutableArray<IMethodSymbol>(instance);
+            originalOperation = OriginalOperationProperty.ReadValue<IOperation>(instance);
+            root = RootProperty.ReadValue(instance, ControlFlowRegion.Wrap);
         }
 
         public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel) =>
