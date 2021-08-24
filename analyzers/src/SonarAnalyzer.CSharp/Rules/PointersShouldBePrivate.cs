@@ -35,13 +35,12 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S4000";
         private const string MessageFormat = "Make '{0}' 'private' or 'protected readonly'.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
@@ -55,23 +54,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var variableSymbol = (IFieldSymbol)c.SemanticModel.GetDeclaredSymbol(variable);
 
-                    if (variableSymbol != null &&
-                        variableSymbol.Type.IsAny(KnownType.PointerTypes))
+                    if (variableSymbol != null
+                        && variableSymbol.Type.IsAny(KnownType.PointerTypes)
+                        && variableSymbol.GetEffectiveAccessibility() is var accessibility
+                        && accessibility != Accessibility.Private
+                        && accessibility != Accessibility.Internal
+                        && !variableSymbol.IsReadOnly)
                     {
-                        var accessibility = variableSymbol.GetEffectiveAccessibility();
-                        if (accessibility == Accessibility.Private ||
-                            accessibility == Accessibility.Internal ||
-                            variableSymbol.IsReadOnly)
-                        {
-                            return;
-                        }
-
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, variable.GetLocation(),
-                            variableSymbol.Name));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, variable.GetLocation(), variableSymbol.Name));
                     }
                 }
             },
             SyntaxKind.FieldDeclaration);
-        }
     }
 }
