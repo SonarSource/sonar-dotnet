@@ -21,4 +21,17 @@ namespace TestCases
             //                                                                             ^^^^ Secondary
         }
     }
+
+    class StaticLocalFunctionCase
+    {
+        public void Foo()
+        {
+            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // Secondary
+
+            static HttpWebRequest CreateRQ() => (HttpWebRequest)System.Net.HttpWebRequest.Create("http://localhost");
+
+            static void InitAsArgument(RemoteCertificateValidationCallback callback) =>
+                CreateRQ().ServerCertificateValidationCallback += callback; // Noncompliant
+        }
+    }
 }
