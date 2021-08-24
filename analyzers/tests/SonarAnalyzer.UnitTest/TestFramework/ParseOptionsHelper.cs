@@ -94,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             };
 
         private static ImmutableArray<ParseOptions> FilterByEnvironment(this IEnumerable<ParseOptions> options) =>
-            TestContextHelper.IsAzureDevOpsContext
+            TestContextHelper.IsAzureDevOpsContext && !TestContextHelper.IsPullRequestBuild
                 ? options.ToImmutableArray()
                 : ImmutableArray.Create(options.First()); // Use only the oldest version for local test run and debug
 

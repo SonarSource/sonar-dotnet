@@ -25,6 +25,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
     internal static class TestContextHelper
     {
         public static bool IsAzureDevOpsContext =>
-            Environment.GetEnvironmentVariable("SYSTEM_DEFINITIONID") != null;
+            Environment.GetEnvironmentVariable("Build.Reason") != null;
+
+        public static bool IsPullRequestBuild =>
+            Environment.GetEnvironmentVariable("Build.Reason") == "PullRequest";
     }
 }
