@@ -12,12 +12,17 @@ record Record
 
     public static void DoSomethingStatic() => count++; // Compliant
 
-    public Action<int> Foo() => static x =>
+    public static Action<int> StaticFoo() => static x =>
     {
-        count += x; // Noncompliant FP (?) - static lambda
+        count += x; // compliant because it can only be used in a static context
     };
 
-    public void CallFoo() => Foo()(1); // count gets incremented from a static member
+    public Action<int> Foo() => static x =>
+    {
+        count += x; // Noncompliant {{Make the enclosing instance method 'static' or remove this set on the 'static' field.}}
+    };
+
+    public void CallFoo() => Foo()(1); // 'count' gets incremented from an instance member
 }
 
 class Class
