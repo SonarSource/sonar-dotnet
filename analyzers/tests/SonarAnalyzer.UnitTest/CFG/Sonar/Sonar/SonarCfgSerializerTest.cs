@@ -23,7 +23,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.UnitTest.Helpers;
 
-namespace SonarAnalyzer.UnitTest.CFG
+namespace SonarAnalyzer.UnitTest.CFG.Sonar
 {
     [TestClass]
     public class SonarCfgSerializerTest
