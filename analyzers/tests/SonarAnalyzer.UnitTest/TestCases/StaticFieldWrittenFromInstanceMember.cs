@@ -30,13 +30,12 @@ namespace Tests.Diagnostics
             text ??= "empty";
         }
 
-
         public int MyProperty
         {
             get { return myVar; }
             set
             {
-                count++; // Noncompliant [1]
+                count++; // Noncompliant [1] {{Make the enclosing instance property 'static' or remove this set on the 'static' field.}}
                 count += 42; // Compliant, already reported on this symbol
                 myVar = value;
             }
@@ -77,9 +76,26 @@ namespace Tests.Diagnostics
             get { return 0; }
             set
             {
-                count++; // Noncompliant
+                count++; // Noncompliant {{Remove this set, which updates a 'static' field from an instance property.}}
                 count += 42; // Compliant, already reported on this symbol
             }
         }
+    }
+
+    public partial class PartialClass
+    {
+        static int field = 1;
+//                 ^^^^^^^^^ Secondary
+//                 ^^^^^^^^^ Secondary@-1
+
+    }
+
+    public partial class PartialClass
+    {
+        void Foo()
+        {
+            field++; // Noncompliant
+        }
+        void Bar() => field++; // Noncompliant
     }
 }
