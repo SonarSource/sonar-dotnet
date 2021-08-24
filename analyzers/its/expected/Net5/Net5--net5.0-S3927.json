@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3927",
+"message":  "Serialization attributes on local methods are not considered.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3927.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  27
+}
+}
+}
+]
+}

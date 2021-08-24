@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-[OnSerialized]
-int OnSerialized(StreamingContext context) => 42; // FN, top level statement is not supported
+[OnSerialized] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+int OnSerialized(StreamingContext context) => 42;
 
 [Serializable]
 public record Foo
@@ -57,24 +57,24 @@ public record Foo
 
     public void LocalFunctions()
     {
-        [OnSerializing()]
-        void OnSerializing(StreamingContext context) // FN, attribute should not be on a local method
+        [OnSerializing()] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+        void OnSerializing(StreamingContext context)
         { }
 
-        [OnSerialized()]
-        void OnSerialized(StreamingContext context) // FN, attribute should not be on a local method
+        [OnSerialized()] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+        void OnSerialized(StreamingContext context)
         { }
 
-        [OnDeserializing()]
-        void OnDeserializing(StreamingContext context) // FN, attribute should not be on a local method
+        [OnDeserializing()] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+        void OnDeserializing(StreamingContext context)
         { }
 
-        [OnDeserialized()]
-        void OnDeserialized(StreamingContext context) // FN, attribute should not be on a local method
+        [OnDeserialized()] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+        void OnDeserialized(StreamingContext context)
         { }
 
-        [OnDeserialized()]
-        static void OnDeserializedStatic(StreamingContext context) // FN, attribute should not be on a local nor static method
+        [OnDeserialized()] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+        static void OnDeserializedStatic(StreamingContext context)
         { }
     }
 }

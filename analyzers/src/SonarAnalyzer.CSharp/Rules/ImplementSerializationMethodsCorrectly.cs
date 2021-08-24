@@ -18,12 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -48,5 +51,29 @@ namespace SonarAnalyzer.Rules.CSharp
                 .FirstOrDefault()
                 ?.Identifier
                 .GetLocation();
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                                                           {
+                                                               var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                                                               var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.SemanticModel);
+
+                                                               foreach (var attribute in attributes)
+                                                               {
+                                                                   c.ReportDiagnosticWhenActive(Diagnostic.Create(AttributeOnLocalMethodRule, attribute.GetLocation()));
+                                                               }
+                                                           },
+                                                           SyntaxKindEx.LocalFunctionStatement);
+
+            base.Initialize(context);
+        }
+
+        private static IEnumerable<AttributeSyntax> GetSerializationAttributes(SyntaxList<AttributeListSyntax> attributeList, SemanticModel model) =>
+            attributeList.SelectMany(x => x.Attributes)
+                         .Where(attribute => attribute.IsKnownType(KnownType.System_Runtime_Serialization_OnSerializingAttribute, model)
+                                             || attribute.IsKnownType(KnownType.System_Runtime_Serialization_OnSerializedAttribute, model)
+                                             || attribute.IsKnownType(KnownType.System_Runtime_Serialization_OnDeserializingAttribute, model)
+                                             || attribute.IsKnownType(KnownType.System_Runtime_Serialization_OnDeserializedAttribute, model));
     }
 }
