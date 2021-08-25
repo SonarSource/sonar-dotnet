@@ -88,7 +88,7 @@ public class Sample
             cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction)).Should().NotBeNull();
         }
 
-        private ControlFlowGraph Compile(string snippet, bool isCSharp = true)
+        private static ControlFlowGraph Compile(string snippet, bool isCSharp = true)
         {
             var (tree, semanticModel) = TestHelper.Compile(snippet, isCSharp);
             var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (isCSharp ? (int)CS.SyntaxKind.MethodDeclaration : (int)VB.SyntaxKind.FunctionBlock));

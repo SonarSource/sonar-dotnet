@@ -117,7 +117,7 @@ public class Sample
             exit.Predecessors.Should().HaveCount(2);
         }
 
-        private ControlFlowGraph Compile(string snippet)
+        private static ControlFlowGraph Compile(string snippet)
         {
             var (tree, semanticModel) = TestHelper.Compile(snippet);
             var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)SyntaxKind.MethodDeclaration);
