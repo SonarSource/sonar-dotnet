@@ -50,27 +50,21 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                     : version;
             }
 
-            public string PackageDirectory()
-            {
-                var runtimePath = runtime == null ? string.Empty : $"runtimes\\{runtime}\\";
-                var combinedPath = Path.Combine(PackagesFolder, id, $"{PackageVersionPrefix}{version}", runtimePath);
-                return Path.GetFullPath(combinedPath);
-            }
-
-            public void EnsurePackageIsInstalled()
+            public string EnsureInstalled()
             {
                 // Check to see if the specific package is already installed
-                var packageDir = PackageDirectory();
+                var packageDir = Path.GetFullPath(Path.Combine(PackagesFolder, id, PackageVersionPrefix + version, runtime == null ? string.Empty : $@"runtimes\{runtime}\"));
                 if (!Directory.Exists(packageDir))
                 {
                     LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
-                    InstallPackageAsync().Wait();
+                    InstallPackageAsync(packageDir).Wait();
                 }
+
+                return packageDir;
             }
 
-            private async Task InstallPackageAsync()
+            private async Task InstallPackageAsync(string packageDir)
             {
-                var packageDirectory = PackageDirectory();
                 var resource = await GetNuGetRepository();
                 using var packageStream = new MemoryStream();
                 await resource.CopyNupkgToStreamAsync(id, new NuGetVersion(version), packageStream, new SourceCacheContext(), NullLogger.Instance, default);
@@ -80,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 {
                     foreach (var dllFile in dllFiles)
                     {
-                        packageReader.ExtractFile(dllFile, $"{packageDirectory}\\{dllFile}", NullLogger.Instance);
+                        packageReader.ExtractFile(dllFile, $"{packageDir}\\{dllFile}", NullLogger.Instance);
                     }
                 }
                 else
@@ -116,9 +110,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 }
                 return latest;
             }
-
-            private static void LogMessage(string message) =>
-                Console.WriteLine($"[{DateTime.Now}] Test setup: {message}");
         }
     }
 }

@@ -67,26 +67,24 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         /// <param name="allowedDirectories">List of allowed directories sorted by preference to search for DLL files.</param>
         private static IEnumerable<MetadataReference> Create(Package package, string[] allowedDirectories)
         {
-            package.EnsurePackageIsInstalled();
+            var packageDirectory = package.EnsureInstalled();
             var dllsPerDirectory = new Dictionary<string, IEnumerable<string>>();
-            var packageLibDirectory = package.PackageDirectory();
-            var foldersWithDlls = new List<string> { Path.Combine(packageLibDirectory, "lib"), Path.Combine(packageLibDirectory, "ref") };
-            foreach (var folder in foldersWithDlls.Where(Directory.Exists))
+            // some packages (see Mono.Posix.NETStandard.1.0.0) may contain target framework only in ref folder
+            foreach (var folder in new[] { "lib", "ref" }.Select(x => Path.Combine(packageDirectory, x)).Where(Directory.Exists))
             {
                 dllsPerDirectory.AddRange(DllsPerDirectory(folder).Where(x => !dllsPerDirectory.ContainsKey(x.Key)));
             }
 
             // if this throws because it doesn't find a DLL (because the lib contains "_._"), maybe you are referencing the wrong DLL (check the dependencies of the DLL you use)
             var directory = allowedDirectories.FirstOrDefault(x => dllsPerDirectory.ContainsKey(x))
-                            ?? throw new InvalidOperationException($"No allowed directory with DLL files was found in {packageLibDirectory}. " +
+                            ?? throw new InvalidOperationException($"No allowed directory with DLL files was found in {packageDirectory}. " +
                                                                    "Add new target framework to SortedAllowedDirectories or set targetFramework argument explicitly.");
-            var dlls = dllsPerDirectory[directory].ToList();
-            foreach (var filePath in dlls)
+            foreach (var dllPath in dllsPerDirectory[directory])
             {
-                Console.WriteLine($"File: {filePath}");
+                LogMessage($"File: {dllPath}");
             }
 
-            return dlls.Select(x => MetadataReference.CreateFromFile(x)).ToArray();
+            return dllsPerDirectory[directory].Select(x => MetadataReference.CreateFromFile(x)).ToArray();
 
             static Dictionary<string, IEnumerable<string>> DllsPerDirectory(string s)
             {
@@ -95,5 +93,8 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                                 .ToDictionary(x => x.Key.Split('+').First(), x => x.AsEnumerable());
             }
         }
+
+        private static void LogMessage(string message) =>
+            Console.WriteLine($"Test setup: {message}");
     }
 }
