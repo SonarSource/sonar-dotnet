@@ -22,13 +22,20 @@ using System;
 
 namespace SonarAnalyzer.CFG.Roslyn
 {
-    public class CaptureId
+    public struct CaptureId : IEquatable<CaptureId>
     {
-        private readonly object instance;
+        private readonly object instance;   // Underlaying struct holds only internal int Value as the identificator.
 
         public CaptureId(object instance) =>
             this.instance = instance ?? throw new ArgumentNullException(nameof(instance));
 
-        //FIXME: Finish
+        public override bool Equals(object obj) =>
+            obj is CaptureId capture && Equals(capture);
+
+        public bool Equals(CaptureId other) =>
+            instance.Equals(other.instance);
+
+        public override int GetHashCode() =>
+            instance.GetHashCode();
     }
 }
