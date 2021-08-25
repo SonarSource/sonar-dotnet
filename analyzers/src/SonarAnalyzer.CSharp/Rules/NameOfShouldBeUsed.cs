@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class NameOfShouldBeUsed : NameOfShouldBeUsedBase<BaseMethodDeclarationSyntax>
     {
-       private static readonly HashSet<SyntaxKind> StringTokenTypes
+        private static readonly HashSet<SyntaxKind> StringTokenTypes
             = new HashSet<SyntaxKind>
             {
                 SyntaxKind.InterpolatedStringTextToken,
@@ -64,6 +64,22 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return paramGroups.Select(g => g.First().Identifier.ValueText);
+        }
+
+        protected override bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments)
+        {
+            var throwNode = (ThrowStatementSyntax)node;
+            if (throwNode.Expression is ObjectCreationExpressionSyntax objectCreation)
+            {
+                var nameOfCallIdx = objectCreation.ArgumentList.Arguments.IndexOf(x =>
+                    x.Expression is InvocationExpressionSyntax invocation
+                    && invocation.Expression.ToString() == "nameof"
+                    && invocation.ArgumentList.Arguments.Count == 1
+                    && arguments.Contains(invocation.ArgumentList.Arguments[0].Expression.ToString()));
+                return ArgumentExceptionCouldBeSkipped(objectCreation.Type.ToString(), nameOfCallIdx);
+            }
+
+            return false;
         }
 
         protected override void Initialize(SonarAnalysisContext context)

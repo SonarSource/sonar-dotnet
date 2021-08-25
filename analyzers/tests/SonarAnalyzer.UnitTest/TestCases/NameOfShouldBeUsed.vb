@@ -38,23 +38,22 @@ Namespace Tests.TestCases
             Throw New ArgumentException("argument123")
             Throw New ArgumentException("arg123")
 
-            ' See https://github.com/SonarSource/sonar-dotnet/issues/4454
             Throw New ArgumentException("This is argument.") ' Noncompliant
-            Throw New ArgumentException("This is argument.", NameOf(argument)) ' Noncompliant FP
+            Throw New ArgumentException("This is argument.", NameOf(argument))
             Throw New ArgumentException("argument and arg1") ' Noncompliant
-            Throw New ArgumentException("argument and arg1", NameOf(arg1)) ' Noncompliant FP
+            Throw New ArgumentException("argument and arg1", NameOf(arg1))
 
             Throw New ArgumentNullException("arg1") ' Noncompliant
             Throw New ArgumentNullException(NameOf(arg1))
-            Throw New ArgumentNullException(NameOf(argument), "argument") ' Noncompliant
-            Throw New ArgumentNullException(NameOf(argument), "Incorrect argument value") ' Noncompliant FP
+            Throw New ArgumentNullException(NameOf(argument), "argument")
+            Throw New ArgumentNullException(NameOf(argument), "Incorrect argument value")
 
             Throw New ArgumentOutOfRangeException("arg1") ' Noncompliant
             Throw New ArgumentOutOfRangeException(NameOf(arg1))
-            Throw New ArgumentOutOfRangeException(NameOf(argument), "argument") ' Noncompliant
-            Throw New ArgumentOutOfRangeException(NameOf(argument), "Incorrect argument value") ' Noncompliant FP
-            Throw New ArgumentOutOfRangeException(NameOf(argument), argument, "argument") ' Noncompliant
-            Throw New ArgumentOutOfRangeException(NameOf(argument), argument, "Incorrect argument value") ' Noncompliant FP
+            Throw New ArgumentOutOfRangeException(NameOf(argument), "argument")
+            Throw New ArgumentOutOfRangeException(NameOf(argument), "Incorrect argument value")
+            Throw New ArgumentOutOfRangeException(NameOf(argument), argument, "argument")
+            Throw New ArgumentOutOfRangeException(NameOf(argument), argument, "Incorrect argument value")
 
         End Sub
 

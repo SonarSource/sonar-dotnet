@@ -57,6 +57,8 @@ namespace SonarAnalyzer.Rules
         // handle parameters with the same name (in the IDE it can happen) - get groups of parameters
         protected abstract IEnumerable<string> GetParameterNames(TMethodSyntax method);
 
+        protected abstract bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments);
+
         protected void ReportIssues<TThrowSyntax>(SyntaxNodeAnalysisContext context)
             where TThrowSyntax : SyntaxNode
         {
@@ -71,6 +73,7 @@ namespace SonarAnalyzer.Rules
             var stringTokensInsideThrowExpressions = methodSyntax
                 .DescendantNodes()
                 .OfType<TThrowSyntax>()
+                .Where(x => !IsArgumentExceptionCallingNameOf(x, parameterNames))
                 .SelectMany(th => th.DescendantTokens())
                 .Where(IsStringLiteral);
 
@@ -121,6 +124,15 @@ namespace SonarAnalyzer.Rules
             }
             return result;
         }
+
+        protected static bool ArgumentExceptionCouldBeSkipped(string name, int nameOfIdx) =>
+            name switch
+            {
+                "ArgumentException" => nameOfIdx == 1,
+                "ArgumentNullException" => nameOfIdx == 0,
+                "ArgumentOutOfRangeException" => nameOfIdx == 0,
+                _ => false
+            };
     }
 }
 

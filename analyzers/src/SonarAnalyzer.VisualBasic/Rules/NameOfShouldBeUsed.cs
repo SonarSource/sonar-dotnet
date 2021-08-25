@@ -66,6 +66,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return paramGroups.Select(g => g.First().Identifier.Identifier.ValueText);
         }
 
+        protected override bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments)
+        {
+            var throwNode = (ThrowStatementSyntax)node;
+            if (throwNode.Expression is ObjectCreationExpressionSyntax objectCreation)
+            {
+                var nameOfCallIdx = objectCreation.ArgumentList.Arguments.IndexOf(x =>
+                    x.GetExpression() is NameOfExpressionSyntax nameOfExpression
+                    && arguments.Contains(nameOfExpression.Argument.ToString()));
+                return ArgumentExceptionCouldBeSkipped(objectCreation.Type.ToString(), nameOfCallIdx);
+            }
+
+            return false;
+        }
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
