@@ -12,6 +12,19 @@
 "endColumn":  25
 }
 }
+},
+{
+"id":  "S3453",
+"message":  "This record can't be instantiated; make its constructor 'public'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3603.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  12,
+"endLine":  5,
+"endColumn":  18
+}
+}
 }
 ]
 }
