@@ -19,27 +19,67 @@
  */
 
 using System;
+using System.Collections.Immutable;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.CFG.Roslyn
 {
     public class ControlFlowBranch
     {
+        private static readonly ConditionalWeakTable<object, ControlFlowBranch> InstanceCache = new ConditionalWeakTable<object, ControlFlowBranch>();
+        private static readonly PropertyInfo SourceProperty;
+        private static readonly PropertyInfo DestinationProperty;
+        private static readonly PropertyInfo SemanticsProperty;
+        private static readonly PropertyInfo IsConditionalSuccessorProperty;
+        private static readonly PropertyInfo EnteringRegionsProperty;
+        private static readonly PropertyInfo LeavingRegionsProperty;
+        private static readonly PropertyInfo FinallyRegionsProperty;
+
+        private readonly Lazy<BasicBlock> source;
+        private readonly Lazy<BasicBlock> destination;
+        private readonly Lazy<ControlFlowBranchSemantics> semantics;
+        private readonly Lazy<bool> isConditionalSuccessor;
+        private readonly Lazy<ImmutableArray<ControlFlowRegion>> enteringRegions;
+        private readonly Lazy<ImmutableArray<ControlFlowRegion>> leavingRegions;
+        private readonly Lazy<ImmutableArray<ControlFlowRegion>> finallyRegions;
+
+        public BasicBlock Source => source.Value;
+        public BasicBlock Destination => destination.Value;
+        public ControlFlowBranchSemantics Semantics => semantics.Value;
+        public bool IsConditionalSuccessor => isConditionalSuccessor.Value;
+        public ImmutableArray<ControlFlowRegion> EnteringRegions => enteringRegions.Value;
+        public ImmutableArray<ControlFlowRegion> LeavingRegions => leavingRegions.Value;
+        public ImmutableArray<ControlFlowRegion> FinallyRegions => finallyRegions.Value;
+
         static ControlFlowBranch()
         {
             if (RoslynHelper.FlowAnalysisType("ControlFlowBranch") is { } type)
             {
-                //FIXME: Implement
+                SourceProperty = type.GetProperty(nameof(Source));
+                DestinationProperty = type.GetProperty(nameof(Destination));
+                SemanticsProperty = type.GetProperty(nameof(Semantics));
+                IsConditionalSuccessorProperty = type.GetProperty(nameof(IsConditionalSuccessor));
+                EnteringRegionsProperty = type.GetProperty(nameof(EnteringRegions));
+                LeavingRegionsProperty = type.GetProperty(nameof(LeavingRegions));
+                FinallyRegionsProperty = type.GetProperty(nameof(FinallyRegions));
             }
         }
 
         private ControlFlowBranch(object instance)
         {
             _ = instance ?? throw new ArgumentNullException(nameof(instance));
-            //FIXME: Implement
+            source = SourceProperty.ReadValue(instance, BasicBlock.Wrap);
+            destination = DestinationProperty.ReadValue(instance, BasicBlock.Wrap);
+            semantics = SemanticsProperty.ReadValue<ControlFlowBranchSemantics>(instance);
+            isConditionalSuccessor = IsConditionalSuccessorProperty.ReadValue<bool>(instance);
+            enteringRegions = EnteringRegionsProperty.ReadImmutableArray(instance, ControlFlowRegion.Wrap);
+            leavingRegions = LeavingRegionsProperty.ReadImmutableArray(instance, ControlFlowRegion.Wrap);
+            finallyRegions = FinallyRegionsProperty.ReadImmutableArray(instance, ControlFlowRegion.Wrap);
         }
 
         public static ControlFlowBranch Wrap(object instance) =>
-            instance == null ? null : new ControlFlowBranch(instance);
+            instance == null ? null : InstanceCache.GetValue(instance, x => new ControlFlowBranch(x));
     }
 }
