@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol) =>
-            (owningSymbol != null && !owningSymbol.IsStatic)
+            owningSymbol is { IsStatic: false }
             && (node is MethodDeclarationSyntax || node is AccessorDeclarationSyntax);
 
         protected override string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field)

@@ -43,6 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
             node is ConstructorDeclarationSyntax declaration
             && !declaration.Modifiers.Any(SyntaxKind.StaticKeyword);
 
-        protected override string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field) => field.Name;
+        protected override string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field) =>
+            field.Name;
     }
 }
