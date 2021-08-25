@@ -42,11 +42,13 @@ namespace XUnitTests
     {
         public void Method()
         {
+            // Compliant - xUnit allows local functions to be executed as test methods
+
             [Fact]
-            void NestedFact() { } // Noncompliant
+            void NestedFact() { }
 
             [Theory]
-            void NestedTheory() { } // Noncompliant
+            void NestedTheory() { }
         }
     }
 }

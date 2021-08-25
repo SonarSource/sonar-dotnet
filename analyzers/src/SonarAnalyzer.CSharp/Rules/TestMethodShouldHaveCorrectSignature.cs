@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,15 +40,15 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MakePublicMessage = "'public'";
         private const string MakeNonAsyncOrTaskMessage = "non-'async' or return 'Task'";
         private const string MakeNotGenericMessage = "non-generic";
-        private const string MakeMethodNotLocalFunction = "a public method instead of a local function.";
+        private const string MakeMethodNotLocalFunction = "a public method instead of a local function";
 
         /// <summary>
         /// Validation method. Checks the supplied method and returns the error message,
         /// or null if there is no issue.
         /// </summary>
-        private delegate string SignatureValidator(IMethodSymbol method);
+        private delegate string SignatureValidator(SyntaxNode node, IMethodSymbol method);
 
-        private static readonly SignatureValidator NullValidator = m => null;
+        private static readonly SignatureValidator NullValidator = (n, m) => null;
 
         // We currently support three test framework, each of which supports multiple test method attribute markers, and each of which
         // has differing constraints (public/private, generic/non-generic).
@@ -59,43 +60,43 @@ namespace SonarAnalyzer.Rules.CSharp
             // MSTest
             {
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: false)
             },
             {
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: false)
             },
 
             // NUnit
             {
                 KnownType.NUnit_Framework_TestAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: false)
             },
             {
                 KnownType.NUnit_Framework_TestCaseAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: true)
+                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: true)
             },
             {
                 KnownType.NUnit_Framework_TestCaseSourceAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: true)
+                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: true)
             },
             {
                 KnownType.NUnit_Framework_TheoryAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: false)
             },
 
-            // XUnit
+            // XUnit - note that local functions can be test methods, thus we skip checking the syntax node
             {
                 KnownType.Xunit_FactAttribute,
-                m => GetFaultMessage(m, publicOnly: false, allowGenerics: false)
+                (_, m) => GetFaultMessage(m, publicOnly: false, allowGenerics: false)
             },
             {
                 KnownType.Xunit_TheoryAttribute,
-                m => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
+                (_, m) => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
             },
             {
                 KnownType.LegacyXunit_TheoryAttribute,
-                m => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
+                (_, m) => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
             }
         };
 
@@ -105,22 +106,25 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeMethod, SyntaxKind.MethodDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeMethod, SyntaxKind.MethodDeclaration, SyntaxKindEx.LocalFunctionStatement);
 
-        private void AnalyzeMethod(SyntaxNodeAnalysisContext c)
+        private static void AnalyzeMethod(SyntaxNodeAnalysisContext c)
         {
-            if (c.Node is MethodDeclarationSyntax methodDeclaration
-                && methodDeclaration.AttributeLists.Count > 0
-                && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol)
+            if (HasAttributes(c.Node) && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol)
             {
                 var validator = GetValidator(methodSymbol);
-                var message = validator(methodSymbol);
+                var message = validator(c.Node, methodSymbol);
                 if (message != null)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodSymbol.Locations.First(), message));
                 }
             }
         }
+
+        private static bool HasAttributes(SyntaxNode node) =>
+            node is MethodDeclarationSyntax methodDeclaration
+                ? methodDeclaration.AttributeLists.Count > 0
+                : ((LocalFunctionStatementSyntaxWrapper)node).AttributeLists.Count > 0;
 
         private static SignatureValidator GetValidator(IMethodSymbol method)
         {
@@ -133,6 +137,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return AttributeToConstraintsMap.GetValueOrDefault(attributeKnownType);
         }
+
+        private static string GetFaultMessage(SyntaxNode node, IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
+            LocalFunctionStatementSyntaxWrapper.IsInstance(node)
+            ? MakeMethodNotLocalFunction
+            : GetFaultMessage(methodSymbol, publicOnly, allowGenerics);
 
         private static string GetFaultMessage(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
             GetFaultMessageParts(methodSymbol, publicOnly, allowGenerics).ToSentence();
