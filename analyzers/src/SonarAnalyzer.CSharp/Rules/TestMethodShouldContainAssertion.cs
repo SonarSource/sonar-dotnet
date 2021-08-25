@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -63,7 +64,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected override void Initialize(SonarAnalysisContext context)
+        {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -91,7 +93,35 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.MethodDeclaration);
 
-        private static bool ContainsAssertion(MethodDeclarationSyntax methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var methodDeclaration = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                    if (methodDeclaration.Identifier.IsMissing
+                        || (methodDeclaration.Body == null && methodDeclaration.ExpressionBody == null))
+                    {
+                        return;
+                    }
+
+                    var methodSymbol = (IMethodSymbol)c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+                    if (methodSymbol == null
+                        || !methodSymbol.IsTestMethod()
+                        || methodSymbol.HasExpectedExceptionAttribute()
+                        || methodSymbol.HasAssertionInAttribute()
+                        || IsTestIgnored(methodSymbol))
+                    {
+                        return;
+                    }
+
+                    if (!ContainsAssertion(methodDeclaration, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
+                    }
+                },
+                SyntaxKindEx.LocalFunctionStatement);
+        }
+
+        private static bool ContainsAssertion(SyntaxNode methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
         {
             var currentSemanticModel = methodDeclaration.EnsureCorrectSemanticModelOrDefault(previousSemanticModel);
             if (currentSemanticModel == null)
