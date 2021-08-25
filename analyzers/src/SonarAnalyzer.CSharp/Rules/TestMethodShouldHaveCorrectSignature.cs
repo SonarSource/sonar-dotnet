@@ -23,6 +23,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -108,16 +109,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void AnalyzeMethod(SyntaxNodeAnalysisContext c)
         {
-            if (!(c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol))
+            if (c.Node is MethodDeclarationSyntax methodDeclaration
+                && methodDeclaration.AttributeLists.Count > 0
+                && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol)
             {
-                return;
-            }
-
-            var validator = GetValidator(methodSymbol);
-            var message = validator(methodSymbol);
-            if (message != null)
-            {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodSymbol.Locations.First(), message));
+                var validator = GetValidator(methodSymbol);
+                var message = validator(methodSymbol);
+                if (message != null)
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodSymbol.Locations.First(), message));
+                }
             }
         }
 
