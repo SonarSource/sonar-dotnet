@@ -32,31 +32,18 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class StaticFieldWrittenFromInstanceConstructor : StaticFieldWrittenFrom
     {
-        internal const string DiagnosticId = "S3010";
+        private const string DiagnosticId = "S3010";
         private const string MessageFormat = "Remove this assignment of '{0}' or initialize it statically.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol)
-        {
-            if (!(node is ConstructorDeclarationSyntax declaration))
-            {
-                return false;
-            }
+        protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol) =>
+            node is ConstructorDeclarationSyntax declaration
+            && !declaration.Modifiers.Any(SyntaxKind.StaticKeyword);
 
-            if (declaration.Modifiers.Any(SyntaxKind.StaticKeyword))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        protected override string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field)
-        {
-            return field.Name;
-        }
+        protected override string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field) =>
+            field.Name;
     }
 }
