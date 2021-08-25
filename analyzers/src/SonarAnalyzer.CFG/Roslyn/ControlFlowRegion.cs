@@ -29,6 +29,7 @@ namespace SonarAnalyzer.CFG.Roslyn
 {
     public class ControlFlowRegion
     {
+        private static readonly ConditionalWeakTable<object, ControlFlowRegion> InstanceCache = new ConditionalWeakTable<object, ControlFlowRegion>();
         private static readonly PropertyInfo KindProperty;
         private static readonly PropertyInfo EnclosingRegionProperty;
         private static readonly PropertyInfo ExceptionTypeProperty;
@@ -38,7 +39,6 @@ namespace SonarAnalyzer.CFG.Roslyn
         private static readonly PropertyInfo LocalsProperty;
         private static readonly PropertyInfo LocalFunctionsProperty;
         private static readonly PropertyInfo CaptureIdsProperty;
-        private static readonly ConditionalWeakTable<object, ControlFlowRegion> InstanceCache = new ConditionalWeakTable<object, ControlFlowRegion>();
 
         private readonly Lazy<ControlFlowRegionKind> kind;
         private readonly Lazy<ControlFlowRegion> enclosingRegion;

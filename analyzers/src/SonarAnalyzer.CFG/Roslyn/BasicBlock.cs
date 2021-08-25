@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Helpers;
 
@@ -28,6 +29,7 @@ namespace SonarAnalyzer.CFG.Roslyn
 {
     public class BasicBlock
     {
+        private static readonly ConditionalWeakTable<object, BasicBlock> InstanceCache = new ConditionalWeakTable<object, BasicBlock>();
         private static readonly PropertyInfo BranchValueProperty;
         private static readonly PropertyInfo ConditionalSuccessorProperty;
         private static readonly PropertyInfo ConditionKindProperty;
@@ -78,7 +80,7 @@ namespace SonarAnalyzer.CFG.Roslyn
             }
         }
 
-        public BasicBlock(object instance)
+        private BasicBlock(object instance)
         {
             _ = instance ?? throw new ArgumentNullException(nameof(instance));
             branchValue = BranchValueProperty.ReadValue<IOperation>(instance);
@@ -92,5 +94,8 @@ namespace SonarAnalyzer.CFG.Roslyn
             ordinal = OrdinalProperty.ReadValue<int>(instance);
             predecessors = PredecessorsProperty.ReadImmutableArray(instance, ControlFlowBranch.Wrap);
         }
+
+        public static BasicBlock Wrap(object instance) =>
+            instance == null ? null : InstanceCache.GetValue(instance, x => new BasicBlock(x));
     }
 }

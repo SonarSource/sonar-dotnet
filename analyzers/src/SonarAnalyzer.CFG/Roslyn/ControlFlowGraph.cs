@@ -68,7 +68,7 @@ namespace SonarAnalyzer.CFG.Roslyn
         private ControlFlowGraph(object instance)
         {
             this.instance = instance ?? throw new ArgumentNullException(nameof(instance));
-            blocks = BlocksProperty.ReadImmutableArray(instance, x => new BasicBlock(x));
+            blocks = BlocksProperty.ReadImmutableArray(instance, BasicBlock.Wrap);
             localFunctions = LocalFunctionsProperty.ReadImmutableArray<IMethodSymbol>(instance);
             originalOperation = OriginalOperationProperty.ReadValue<IOperation>(instance);
             root = RootProperty.ReadValue(instance, ControlFlowRegion.Wrap);
