@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -26,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -70,25 +72,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    if (methodDeclaration.Identifier.IsMissing
-                        || (methodDeclaration.Body == null && methodDeclaration.ExpressionBody == null))
+                    var methodIdentifier = methodDeclaration.Identifier;
+                    if (!methodIdentifier.IsMissing && methodDeclaration.HasImplementation())
                     {
-                        return;
-                    }
-
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    if (methodSymbol == null
-                        || !methodSymbol.IsTestMethod()
-                        || methodSymbol.HasExpectedExceptionAttribute()
-                        || methodSymbol.HasAssertionInAttribute()
-                        || IsTestIgnored(methodSymbol))
-                    {
-                        return;
-                    }
-
-                    if (!ContainsAssertion(methodDeclaration, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
+                        ReportIfNoAssertion(c, methodDeclaration, methodIdentifier, x => x.IsTestMethod());
                     }
                 },
                 SyntaxKind.MethodDeclaration);
@@ -97,28 +84,29 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodDeclaration = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                    if (methodDeclaration.Identifier.IsMissing
-                        || (methodDeclaration.Body == null && methodDeclaration.ExpressionBody == null))
+                    var methodIdentifier = methodDeclaration.Identifier;
+                    if (!methodIdentifier.IsMissing && methodDeclaration.HasImplementation())
                     {
-                        return;
-                    }
-
-                    var methodSymbol = (IMethodSymbol)c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    if (methodSymbol == null
-                        || !methodSymbol.IsTestMethod()
-                        || methodSymbol.HasExpectedExceptionAttribute()
-                        || methodSymbol.HasAssertionInAttribute()
-                        || IsTestIgnored(methodSymbol))
-                    {
-                        return;
-                    }
-
-                    if (!ContainsAssertion(methodDeclaration, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
+                        ReportIfNoAssertion(c, methodDeclaration, methodIdentifier, x => IsXunitTestMethod(x));
                     }
                 },
                 SyntaxKindEx.LocalFunctionStatement);
+
+            static bool IsXunitTestMethod(IMethodSymbol methodSymbol) =>
+                methodSymbol.AnyAttributeDerivesFromAny(UnitTestHelper.KnownTestMethodAttributesOfxUnit);
+        }
+
+        private static void ReportIfNoAssertion(SyntaxNodeAnalysisContext c, SyntaxNode methodDeclaration, SyntaxToken identifier, Func<IMethodSymbol, bool> isTestMethod)
+        {
+            if (c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is IMethodSymbol methodSymbol
+                && isTestMethod(methodSymbol)
+                && !methodSymbol.HasExpectedExceptionAttribute()
+                && !methodSymbol.HasAssertionInAttribute()
+                && !IsTestIgnored(methodSymbol)
+                && !ContainsAssertion(methodDeclaration, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation()));
+            }
         }
 
         private static bool ContainsAssertion(SyntaxNode methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
