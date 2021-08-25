@@ -98,4 +98,13 @@ namespace Tests.Diagnostics
         }
         void Bar() => field++; // Noncompliant
     }
+
+    public class NotCompileable : NotKnownType // Error [CS0246]
+    {
+        private static int count = 0; // Secondary
+        void Method()
+        {
+            count++; // Noncompliant
+        }
+    }
 }
