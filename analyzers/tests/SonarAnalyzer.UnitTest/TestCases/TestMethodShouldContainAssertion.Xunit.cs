@@ -38,10 +38,7 @@
         }
 
         [Fact]
-        public void Fact8()
-        {
-            AssertSomething(42);
-        }
+        public void Fact8() => AssertSomething(42);
 
         [Fact]
         public void Fact9()

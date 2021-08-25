@@ -8,10 +8,10 @@
         public void Method()
         {
             [TestMethod]
-            void NestedTest() { } // Compliant - FN, there is no assert
+            void NestedTest() { } // Compliant - test methods must be public, this code does not work
 
             [DataTestMethod]
-            void NestedDataTest() { } // Compliant - FN, there is no assert
+            void NestedDataTest() { } // Compliant - test methods must be public, this code does not work
         }
     }
 
@@ -54,10 +54,10 @@ namespace NUnitTests
         public void Method()
         {
             [Test]
-            void NestedTest() { } // Compliant - FN, there is no assert
+            void NestedTest() { } // Compliant - test methods must be public, this code does not work
 
             [TestCase(42)]
-            void NestedTestCase() { } // Compliant - FN, there is no assert
+            void NestedTestCase() { } // Compliant - test methods must be public, this code does not work
         }
     }
 }
@@ -71,10 +71,10 @@ namespace XUnitTests
         public void Method()
         {
             [Fact]
-            void NestedFact() { } // Compliant - FN, there is no assert
+            void NestedFact() { } // Noncompliant
 
             [Theory]
-            void NestedTheory() { } // Compliant - FN, there is no assert
+            void NestedTheory() { } // Noncompliant
         }
     }
 }
