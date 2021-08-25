@@ -38,6 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MakePublicMessage = "'public'";
         private const string MakeNonAsyncOrTaskMessage = "non-'async' or return 'Task'";
         private const string MakeNotGenericMessage = "non-generic";
+        private const string MakeMethodNotLocalFunction = "a public method instead of a local function.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
