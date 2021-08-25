@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -31,5 +32,19 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class PureAttributeOnVoidMethod : PureAttributeOnVoidMethodBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            base.Initialize(context);
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    if (InvalidPureDataAttributeUsage(c.SemanticModel.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+                    }
+                },
+                SyntaxKindEx.LocalFunctionStatement);
+        }
     }
 }

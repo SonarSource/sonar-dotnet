@@ -31,26 +31,31 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S3603";
         private const string MessageFormat = "Remove the 'Pure' attribute or change the method to return a value.";
 
-        private readonly DiagnosticDescriptor rule;
-
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        public DiagnosticDescriptor Rule { get; }
 
         protected PureAttributeOnVoidMethodBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
-                    if (c.Symbol is IMethodSymbol { ReturnsVoid: true } methodSymbol
-                        && !methodSymbol.Parameters.Any(p => p.RefKind != RefKind.None)
-                        && methodSymbol.GetAttributes().FirstOrDefault(a => a.AttributeClass.Is(KnownType.System_Diagnostics_Contracts_PureAttribute)) is { } pureAttribute)
+                    if (InvalidPureDataAttributeUsage(c.Symbol) is { } pureAttribute)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                     }
                 },
                 SymbolKind.Method);
+
+        protected static AttributeData InvalidPureDataAttributeUsage(ISymbol symbol) =>
+            symbol is IMethodSymbol { ReturnsVoid: true } methodSymbol
+                   && !methodSymbol.Parameters.Any(p => p.RefKind != RefKind.None)
+                   && methodSymbol.GetAttributes().FirstOrDefault(a => a.AttributeClass.Is(KnownType.System_Diagnostics_Contracts_PureAttribute)) is { } pureAttribute
+                ? pureAttribute
+                : null;
     }
 }
