@@ -92,7 +92,7 @@ public class Sample
             catchRegion.ExceptionType.Name.Should().Be("InvalidOperationException");
         }
 
-        private ControlFlowGraph Compile(string snippet)
+        private static ControlFlowGraph Compile(string snippet)
         {
             var (tree, semanticModel) = TestHelper.Compile(snippet);
             var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)SyntaxKind.MethodDeclaration);
