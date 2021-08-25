@@ -183,4 +183,13 @@ namespace Tests.Diagnostics
             throw new HubException("This error will be sent to the client!");
         }
     }
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/4799
+    public class AsyncCouldStay
+    {
+        public T GenericTaskTAsync<T>(T input) where T : Task // Noncompliant FP
+        {
+            return input;
+        }
+    }
 }
