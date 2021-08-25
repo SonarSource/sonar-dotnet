@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -39,12 +40,17 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (InvalidPureDataAttributeUsage(c.SemanticModel.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
+                if ((LocalFunctionStatementSyntaxWrapper)c.Node is var localFunction
+                    && localFunction.AttributeLists.SelectMany(x => x.Attributes).Any(attribute => IsPureAttribute(attribute.Name.GetIdentifier().Identifier.ValueText))
+                    && InvalidPureDataAttributeUsage(c.SemanticModel.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                     }
                 },
                 SyntaxKindEx.LocalFunctionStatement);
         }
+
+        private static bool IsPureAttribute(string attributeName) =>
+            attributeName.Equals("Pure") || attributeName.Equals("PureAttribute");
     }
 }
