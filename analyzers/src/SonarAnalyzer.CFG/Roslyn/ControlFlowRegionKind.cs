@@ -18,34 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Immutable;
-using System.Reflection;
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.CFG.Helpers;
-
 namespace SonarAnalyzer.CFG.Roslyn
 {
-    public class BasicBlock
+    /// <summary>
+    /// Copy of Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowRegionKind.
+    /// </summary>
+    public enum ControlFlowRegionKind
     {
-        private static readonly PropertyInfo OperationsProperty;
-
-        private readonly Lazy<ImmutableArray<IOperation>> operations;
-
-        public ImmutableArray<IOperation> Operations => operations.Value;
-
-        static BasicBlock()
-        {
-            if (RoslynHelper.FlowAnalysisType("BasicBlock") is { } type)
-            {
-                OperationsProperty = type.GetProperty(nameof(Operations));
-            }
-        }
-
-        public BasicBlock(object instance)
-        {
-            _ = instance ?? throw new ArgumentNullException(nameof(instance));
-            operations = OperationsProperty.ReadImmutableArray(instance, x => (IOperation)x);
-        }
+        Root = 0,
+        LocalLifetime = 1,
+        Try = 2,
+        Filter = 3,
+        Catch = 4,
+        FilterAndHandler = 5,
+        TryAndCatch = 6,
+        Finally = 7,
+        TryAndFinally = 8,
+        StaticLocalInitializer = 9,
+        ErroneousBody = 10
     }
 }
