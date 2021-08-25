@@ -33,16 +33,12 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class TestMethodShouldHaveCorrectSignature : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3433";
+        private const string DiagnosticId = "S3433";
         private const string MessageFormat = "Make this test method {0}.";
         private const string MakePublicMessage = "'public'";
         private const string MakeNonAsyncOrTaskMessage = "non-'async' or return 'Task'";
         private const string MakeNotGenericMessage = "non-generic";
         private const string MakeMethodNotLocalFunction = "a public method instead of a local function.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         /// <summary>
         /// Validation method. Checks the supplied method and returns the error message,
@@ -57,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
         // Rather than writing lots of conditional code, we're using a simple table-driven approach.
         // Currently we use the same validation method for all method types, but we could have a
         // different validation method for each type in future if necessary.
-        private static readonly Dictionary<KnownType, SignatureValidator> attributeToConstraintsMap = new Dictionary<KnownType, SignatureValidator>
+        private static readonly Dictionary<KnownType, SignatureValidator> AttributeToConstraintsMap = new Dictionary<KnownType, SignatureValidator>
         {
             // MSTest
             {
@@ -102,6 +98,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         };
 
+        private static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeMethod, SyntaxKind.MethodDeclaration);
 
@@ -116,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var message = validator(methodSymbol);
             if (message != null)
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodSymbol.Locations.First(), message));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodSymbol.Locations.First(), message));
             }
         }
 
@@ -129,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return NullValidator;
             }
 
-            return attributeToConstraintsMap.GetValueOrDefault(attributeKnownType);
+            return AttributeToConstraintsMap.GetValueOrDefault(attributeKnownType);
         }
 
         private static string GetFaultMessage(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
