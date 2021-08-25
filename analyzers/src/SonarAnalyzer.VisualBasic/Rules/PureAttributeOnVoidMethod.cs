@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -27,11 +28,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class PureAttributeOnVoidMethod : PureAttributeOnVoidMethodBase
+    public sealed class PureAttributeOnVoidMethod : PureAttributeOnVoidMethodBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected override DiagnosticDescriptor Rule { get; } = rule;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
     }
 }
