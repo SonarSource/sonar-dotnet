@@ -31,6 +31,10 @@ namespace SonarAnalyzer.UnitTest.CFG.Roslyn
     public class BasicBlockTest
     {
         [TestMethod]
+        public void Wrap_ReturnsNull() =>
+            BasicBlock.Wrap(null).Should().BeNull();
+
+        [TestMethod]
         public void ValidateReflection()
         {
             const string code = @"
