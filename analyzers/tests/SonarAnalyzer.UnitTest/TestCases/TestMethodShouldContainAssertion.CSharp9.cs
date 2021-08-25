@@ -71,10 +71,19 @@ namespace XUnitTests
         public void Method()
         {
             [Fact]
-            void NestedFact() { } // Noncompliant
+            void NestedFact() { } // Noncompliant {{Add at least one assertion to this test case.}}
+
+            [Fact]
+            void NestedFactWithAssert() => Assert.True(true);
 
             [Theory]
             void NestedTheory() { } // Noncompliant
+
+            [Theory]
+            void NestedTheoryWithAssert()
+            {
+                Assert.True(true);
+            }
         }
     }
 }
