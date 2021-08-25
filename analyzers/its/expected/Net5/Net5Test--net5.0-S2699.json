@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Net5\Net5Test\S2699.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  18,
+"endLine":  13,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Net5\Net5Test\S2699.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  25,
+"endLine":  16,
+"endColumn":  39
+}
+}
+}
+]
+}
