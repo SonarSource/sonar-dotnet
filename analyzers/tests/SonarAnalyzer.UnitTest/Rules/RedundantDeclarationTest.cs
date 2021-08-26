@@ -31,6 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantDeclaration() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantDeclaration.cs", new RedundantDeclaration());
 
+        [TestMethod]
+        public void RedundantDeclaration_UnusedLambdaParameters_BeforeCSharp9() =>
+            Verifier.VerifyCSharpAnalyzer(
+                @"using System; public class C { public void M() { Action<int, int> a = (p1, p2) => { }; /* Compliant - Lambda discard parameters have been introduced in C# 9 */ } }",
+                new RedundantDeclaration(),
+                ParseOptionsHelper.BeforeCSharp9);
+
 #if NET
         [TestMethod]
         public void RedundantDeclaration_CSharp9() =>
