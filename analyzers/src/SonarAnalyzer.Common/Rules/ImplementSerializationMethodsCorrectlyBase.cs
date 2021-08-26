@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S3927";
 
-        private const string AttributeOnLocalMethodMessageFormat = "Serialization attributes on local methods are not considered.";
+        private const string AttributeOnLocalMethodMessageFormat = "Serialization attributes on local functions are not considered.";
         private const string MessageFormat = "Make this method {0}.";
         private const string ProblemParameterText = "have a single parameter of type 'StreamingContext'";
         private const string ProblemGenericParameterText = "have no type parameters";
@@ -38,9 +38,9 @@ namespace SonarAnalyzer.Rules
 
         private readonly DiagnosticDescriptor rule;
 
-        protected readonly DiagnosticDescriptor AttributeOnLocalMethodRule;
+        protected readonly DiagnosticDescriptor AttributeOnLocalFunctionRule;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule, AttributeOnLocalMethodRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule, AttributeOnLocalFunctionRule);
 
         private static readonly ImmutableArray<KnownType> SerializationAttributes =
             ImmutableArray.Create(KnownType.System_Runtime_Serialization_OnSerializingAttribute,
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules
         protected ImplementSerializationMethodsCorrectlyBase(System.Resources.ResourceManager rspecResources)
         {
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
-            AttributeOnLocalMethodRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, AttributeOnLocalMethodMessageFormat, rspecResources);
+            AttributeOnLocalFunctionRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, AttributeOnLocalMethodMessageFormat, rspecResources);
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>

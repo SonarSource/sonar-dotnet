@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                                                                foreach (var attribute in attributes)
                                                                {
-                                                                   c.ReportDiagnosticWhenActive(Diagnostic.Create(AttributeOnLocalMethodRule, attribute.GetLocation()));
+                                                                   c.ReportDiagnosticWhenActive(Diagnostic.Create(AttributeOnLocalFunctionRule, attribute.GetLocation()));
                                                                }
                                                            },
                                                            SyntaxKindEx.LocalFunctionStatement);
