@@ -7,9 +7,11 @@ r2 = new Record(); // Compliant - FN
 LocalStatic(new Record()); // Compliant - FN
 Action<int, int> a = static (_, _) => { };
 
-Action<int> b = static (parameter1) => { Console.WriteLine(parameter1); }; // FN - Can be replaced with method group `Action<int> b = Console.WriteLine;`
+Action<int, int, int> b = static (_, p2, _) => { Console.WriteLine(p2); };
 
-Action<int> c = static parameter1 => { Console.WriteLine(parameter1); }; // FN - Can be replaced with method group `Action<int> c = Console.WriteLine;`
+Action<int> c = static (parameter1) => { Console.WriteLine(parameter1); }; // FN - Can be replaced with method group `Action<int> b = Console.WriteLine;`
+
+Action<int> d = static parameter1 => { Console.WriteLine(parameter1); }; // FN - Can be replaced with method group `Action<int> c = Console.WriteLine;`
 
 Record Local() => new Record(); // Compliant - FN
 static Record LocalStatic(Record r) => r;
