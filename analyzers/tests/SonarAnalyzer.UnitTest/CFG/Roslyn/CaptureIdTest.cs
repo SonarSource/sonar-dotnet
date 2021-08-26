@@ -39,6 +39,14 @@ namespace SonarAnalyzer.UnitTest.CFG.Roslyn
         }
 
         [TestMethod]
+        public void Equals_ReturnsFalse()
+        {
+            var capture = new CaptureId(new object());
+            capture.Equals(42).Should().BeFalse();
+            capture.Equals(null).Should().BeFalse();
+        }
+
+        [TestMethod]
         public void ValidateReflection()
         {
             const string code = @"
