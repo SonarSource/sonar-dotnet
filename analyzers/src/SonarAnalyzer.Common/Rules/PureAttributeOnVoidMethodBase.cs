@@ -25,36 +25,37 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class PureAttributeOnVoidMethodBase : SonarDiagnosticAnalyzer
+    public abstract class PureAttributeOnVoidMethodBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
-        internal const string DiagnosticId = "S3603";
-        protected const string MessageFormat = "Remove the 'Pure' attribute or change the method to return a value.";
+        protected const string DiagnosticId = "S3603";
+        private const string MessageFormat = "Remove the 'Pure' attribute or change the method to return a value.";
 
-        protected abstract DiagnosticDescriptor Rule { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        public DiagnosticDescriptor Rule { get; }
+
+        protected PureAttributeOnVoidMethodBase() =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
-                    var methodSymbol = (IMethodSymbol)c.Symbol;
-                    if (methodSymbol == null ||
-                        !methodSymbol.ReturnsVoid ||
-                        methodSymbol.Parameters.Any(p => p.RefKind != RefKind.None))
+                    if (InvalidPureDataAttributeUsage(c.Symbol) is { } pureAttribute)
                     {
-                        return;
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                     }
+                },
+                SymbolKind.Method);
 
-                    var pureAttribute = methodSymbol
-                        .GetAttributes()
-                        .FirstOrDefault(a => a.AttributeClass.Is(KnownType.System_Diagnostics_Contracts_PureAttribute));
-
-                    if (pureAttribute != null)
-                    {
-                        c.ReportDiagnosticWhenActive(
-                            Diagnostic.Create(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
-                    }
-                }, SymbolKind.Method);
+        protected static AttributeData InvalidPureDataAttributeUsage(ISymbol symbol) =>
+            symbol is IMethodSymbol { ReturnsVoid: true } methodSymbol
+                   && !methodSymbol.Parameters.Any(p => p.RefKind != RefKind.None)
+                   && methodSymbol.GetAttributes().FirstOrDefault(a => a.AttributeClass.Is(KnownType.System_Diagnostics_Contracts_PureAttribute)) is { } pureAttribute
+                ? pureAttribute
+                : null;
     }
 }

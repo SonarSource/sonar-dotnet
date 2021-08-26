@@ -236,6 +236,19 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private constructor 'Record'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3603.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  17,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private property 'Prop'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3626.cs",

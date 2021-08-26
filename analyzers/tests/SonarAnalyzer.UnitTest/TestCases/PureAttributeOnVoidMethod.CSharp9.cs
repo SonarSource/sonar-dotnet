@@ -3,7 +3,7 @@
 [Pure]
 int Compliant(int age) => age;
 
-[Pure] // Compliant - FN
+[Pure] // Noncompliant {{Remove the 'Pure' attribute or change the method to return a value.}}
 void Noncompliant()
 {
 }
@@ -12,13 +12,30 @@ record Record
 {
     Record()
     {
-        [Pure] // Compliant - FN
+        [Pure] // Noncompliant
+//       ^^^^
         void LocalFunction()
         {
-            [Pure] // Compliant - FN
+            [Pure] // Noncompliant
             void NestedLocalFunction()
             {
             }
+        }
+
+        [PureAttribute] // Noncompliant
+        void LocalFunction2()
+        {
+        }
+
+        [Pure]
+        int LocalFunction3()
+        {
+            return 42;
+        }
+
+        [Pure]
+        void LocalFunction4(ref int param)
+        {
         }
     }
 }

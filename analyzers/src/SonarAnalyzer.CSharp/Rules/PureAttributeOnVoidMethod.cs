@@ -18,20 +18,39 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class PureAttributeOnVoidMethod : PureAttributeOnVoidMethodBase
+    public sealed class PureAttributeOnVoidMethod : PureAttributeOnVoidMethodBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override DiagnosticDescriptor Rule { get; } = rule;
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            base.Initialize(context);
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                if ((LocalFunctionStatementSyntaxWrapper)c.Node is var localFunction
+                    && localFunction.AttributeLists.SelectMany(x => x.Attributes).Any(attribute => IsPureAttribute(attribute.Name.GetIdentifier().Identifier.ValueText))
+                    && InvalidPureDataAttributeUsage(c.SemanticModel.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+                    }
+                },
+                SyntaxKindEx.LocalFunctionStatement);
+        }
+
+        private static bool IsPureAttribute(string attributeName) =>
+            attributeName.Equals("Pure") || attributeName.Equals("PureAttribute");
     }
 }
