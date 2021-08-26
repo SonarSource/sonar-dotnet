@@ -55,16 +55,16 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                                                           {
-                                                               var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                                                               var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.SemanticModel);
+            {
+                var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.SemanticModel);
 
-                                                               foreach (var attribute in attributes)
-                                                               {
-                                                                   c.ReportDiagnosticWhenActive(Diagnostic.Create(AttributeOnLocalFunctionRule, attribute.GetLocation()));
-                                                               }
-                                                           },
-                                                           SyntaxKindEx.LocalFunctionStatement);
+                foreach (var attribute in attributes)
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(AttributeOnLocalFunctionRule, attribute.GetLocation()));
+                }
+            },
+            SyntaxKindEx.LocalFunctionStatement);
 
             base.Initialize(context);
         }
