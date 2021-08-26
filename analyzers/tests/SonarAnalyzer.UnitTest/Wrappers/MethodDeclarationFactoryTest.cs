@@ -46,11 +46,12 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             var snippet = new SnippetCompiler(code);
             var method = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
             var wrapper = MethodDeclarationFactory.Create(method);
-            // TODO add expression
-            //wrapper.Expression.Should().BeEquivalentTo(method);
             wrapper.Body.Should().BeEquivalentTo(method.Body);
+            wrapper.ExpressionBody.Should().BeEquivalentTo(method.ExpressionBody);
             wrapper.Identifier.Should().BeEquivalentTo(method.Identifier);
             wrapper.ParameterList.Should().BeEquivalentTo(method.ParameterList);
+            wrapper.HasImplementation.Should().BeTrue();
+            wrapper.IsLocal.Should().BeFalse();
         }
 
         [TestMethod]
@@ -68,10 +69,12 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             var snippet = new SnippetCompiler(code);
             var method = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().First();
             var wrapper = MethodDeclarationFactory.Create(method);
-            //wrapper.Expression.Should().BeEquivalentTo(method);
             wrapper.Body.Should().BeEquivalentTo(method.Body);
+            wrapper.ExpressionBody.Should().BeEquivalentTo(method.ExpressionBody);
             wrapper.Identifier.Should().BeEquivalentTo(method.Identifier);
             wrapper.ParameterList.Should().BeEquivalentTo(method.ParameterList);
+            wrapper.HasImplementation.Should().BeTrue();
+            wrapper.IsLocal.Should().BeTrue();
         }
 
     }
