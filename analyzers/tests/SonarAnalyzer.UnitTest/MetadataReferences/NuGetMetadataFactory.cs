@@ -23,7 +23,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using NuGet.Packaging;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
@@ -67,31 +66,25 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         /// <param name="allowedDirectories">List of allowed directories sorted by preference to search for DLL files.</param>
         private static IEnumerable<MetadataReference> Create(Package package, string[] allowedDirectories)
         {
-            var packageDirectory = package.EnsureInstalled();
-            var dllsPerDirectory = new Dictionary<string, IEnumerable<string>>();
+            var packageDir = package.EnsureInstalled();
             // some packages (see Mono.Posix.NETStandard.1.0.0) may contain target framework only in ref folder
-            foreach (var folder in new[] { "lib", "ref" }.Select(x => Path.Combine(packageDirectory, x)).Where(Directory.Exists))
+            var dllsPerDirectory = Directory.GetFiles(packageDir, "*.dll", SearchOption.AllDirectories)
+                                            .GroupBy(x => Path.GetDirectoryName(x).Split('+').First())
+                                            .Select(x => (directory: Path.GetFileName(x.Key), dllPaths: x.AsEnumerable()))
+                                            .ToArray();
+            foreach (var allowedDirectory in allowedDirectories)
             {
-                dllsPerDirectory.AddRange(DllsPerDirectory(folder).Where(x => !dllsPerDirectory.ContainsKey(x.Key)));
+                // dllsPerDirectory can contain the same <directory> from \lib\<directory> and \ref\<directory>. We don't care who wins.
+                if (dllsPerDirectory.Where(x => x.directory == allowedDirectory).Select(x => x.dllPaths).FirstOrDefault() is { } dllPaths)
+                {
+                    foreach (var dllPath in dllPaths)
+                    {
+                        LogMessage("File: " + dllPath);
+                    }
+                    return dllPaths.Select(x => MetadataReference.CreateFromFile(x)).ToArray();
+                }
             }
-
-            // if this throws because it doesn't find a DLL (because the lib contains "_._"), maybe you are referencing the wrong DLL (check the dependencies of the DLL you use)
-            var directory = allowedDirectories.FirstOrDefault(x => dllsPerDirectory.ContainsKey(x))
-                            ?? throw new InvalidOperationException($"No allowed directory with DLL files was found in {packageDirectory}. " +
-                                                                   "Add new target framework to SortedAllowedDirectories or set targetFramework argument explicitly.");
-            foreach (var dllPath in dllsPerDirectory[directory])
-            {
-                LogMessage($"File: {dllPath}");
-            }
-
-            return dllsPerDirectory[directory].Select(x => MetadataReference.CreateFromFile(x)).ToArray();
-
-            static Dictionary<string, IEnumerable<string>> DllsPerDirectory(string s)
-            {
-                return Directory.GetFiles(s, "*.dll", SearchOption.AllDirectories)
-                                .GroupBy(x => new FileInfo(x).Directory.Name)
-                                .ToDictionary(x => x.Key.Split('+').First(), x => x.AsEnumerable());
-            }
+            throw new InvalidOperationException($"No allowed DLL directory was found in {packageDir}. Add new target framework to SortedAllowedDirectories or set dllDirectory argument explicitly.");
         }
 
         private static void LogMessage(string message) =>
