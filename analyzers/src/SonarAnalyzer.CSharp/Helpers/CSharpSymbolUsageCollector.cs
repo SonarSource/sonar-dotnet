@@ -75,11 +75,13 @@ namespace SonarAnalyzer.Helpers
                 }
                 else if (node.IsKind(SyntaxKindEx.LocalFunctionStatement)
                     && ((LocalFunctionStatementSyntaxWrapper)node) is var localFunction
-                    && localFunction.AttributeLists.Count > 0)
+                    && localFunction.AttributeLists.Count > 0
+                    && semanticModel.GetDeclaredSymbol(node) is IMethodSymbol localFunctionSymbol)
                 {
-                    var localFunctionSymbol = (IMethodSymbol)semanticModel.GetDeclaredSymbol(node);
-                    var knownAttributes = localFunctionSymbol.GetAttributes().Where(a => knownSymbolNames.Contains(a.AttributeClass.Name));
-                    UsedSymbols.UnionWith(knownAttributes.Select(a => a.AttributeClass));
+                    UsedSymbols.UnionWith(localFunctionSymbol
+                                            .GetAttributes()
+                                            .Where(a => knownSymbolNames.Contains(a.AttributeClass.Name))
+                                            .Select(a => a.AttributeClass));
                 }
                 base.Visit(node);
             }

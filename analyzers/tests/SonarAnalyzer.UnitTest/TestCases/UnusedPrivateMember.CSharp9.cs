@@ -48,13 +48,24 @@ namespace Tests.Diagnostics
             };
 
         private class LocalFunctionAttribute : Attribute { }
+        private class LocalFunctionAttribute2 : Attribute { }
 
         public void Foo()
         {
             [LocalFunction]
-            static void Bar()
-            {
-            }
+            static void Bar() { }
+
+            [Obsolete]
+            [NotExisting] // Error [CS0246]
+                          // Error@-1 [CS0246]
+            [LocalFunctionAttribute2]
+            [LocalFunction]
+            static void Quix() { }
+
+            [Obsolete]
+            static void ForCoverage() { }
+
+            static void NoAttribute() { }
         }
     }
 
