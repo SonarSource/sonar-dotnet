@@ -47,7 +47,7 @@ namespace Tests.Diagnostics
                 >= 0 => 1
             };
 
-        private class LocalFunctionAttribute : Attribute { } // Noncompliant - FP
+        private class LocalFunctionAttribute : Attribute { }
 
         public void Foo()
         {
