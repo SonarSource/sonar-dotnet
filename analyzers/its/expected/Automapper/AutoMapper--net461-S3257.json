@@ -1,0 +1,303 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "'dest' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\CtorParamConfigurationExpression.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  117,
+"endLine":  58,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'destMember' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\CtorParamConfigurationExpression.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  123,
+"endLine":  58,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'ctxt' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  33,
+"endLine":  318,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'ctxt' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  33,
+"endLine":  351,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'ctxt' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  458,
+"startColumn":  33,
+"endLine":  458,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'destMember' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  113,
+"endLine":  93,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'ctxt' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  125,
+"endLine":  93,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'ctxt' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  125,
+"endLine":  103,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'ctxt' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  56,
+"endLine":  152,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'destMember' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  44,
+"endLine":  163,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'ctxt' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  56,
+"endLine":  163,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'srcMember' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  33,
+"endLine":  174,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'destMember' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  44,
+"endLine":  174,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'ctxt' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  56,
+"endLine":  174,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'dest' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  27,
+"endLine":  185,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'srcMember' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  33,
+"endLine":  185,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'destMember' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  44,
+"endLine":  185,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'ctxt' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  56,
+"endLine":  185,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'dest' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  27,
+"endLine":  196,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'ctxt' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  33,
+"endLine":  196,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'src' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  22,
+"endLine":  207,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'dest' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  27,
+"endLine":  207,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'dest' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  27,
+"endLine":  218,
+"endColumn":  31
+}
+}
+}
+]
+}

@@ -7,15 +7,15 @@ namespace Tests.Diagnostics
     {
         public RedundantDeclaration()
         {
-            MyEvent += (a, b) => { }; // Fixed
-            MyEvent += (a, b) => { };
+            MyEvent += Handle; // Fixed
+            MyEvent += (a, b) => { Handle(a, b); };
 
-            (new EventHandler((a, b) => { }))(1, null);
+            (new EventHandler(Handle))(1, null);
 
-            MyEvent2 = (i, j) => { }; // Fixed
+            MyEvent2 = Handle; // Fixed
             MyEvent2 = delegate (int i, int j) { };   // Fixed
 
-            Delegate anotherEvent = new EventHandler((a, b) => { });
+            Delegate anotherEvent = new EventHandler(Handle);
             BoolDelegate myDelegate = () => true;      // Fixed
 
             MyEvent2 = delegate (int i, int j) { Console.WriteLine(); }; // Fixed
@@ -67,12 +67,12 @@ namespace Tests.Diagnostics
 
             var f2 = new Func<int, int?>(i => i);
 
-            Func<int, int> f1 = (int i) => 1; //Fixed
-            Func<int, int> f3 = (i) => 1;
+            Func<int, int> f1 = (int i) => i; //Fixed
+            Func<int, int> f3 = (i) => i;
             var transformer = Funcify((string x) => new { Original = x, Normalized = x.ToLower() });
             var transformer2 = Funcify2((string x) => new { Original = x, Normalized = x.ToLower() }); // Fixed
 
-            RefDelegateMethod((ref int i) => { });
+            RefDelegateMethod((ref int i) => { i++; });
         }
 
         public void M()
@@ -115,5 +115,8 @@ namespace Tests.Diagnostics
 
         public static void NullableTest1<T>(T? x) where T : struct { }
         public static void NullableTest2(int? x) { }
+
+        private void Handle(object sender, EventArgs e) {}
+        private void Handle(int i, int j) {}
     }
 }

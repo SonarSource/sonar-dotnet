@@ -77,6 +77,84 @@
 "endColumn":  51
 }
 }
+},
+{
+"id":  "S3257",
+"message":  "'a' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3257.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  38,
+"endLine":  7,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'b' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3257.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  41,
+"endLine":  7,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'sender' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4830.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  72,
+"endLine":  8,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'chain' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4830.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  80,
+"endLine":  8,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'certificate' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4830.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  87,
+"endLine":  8,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'SslPolicyErrors' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4830.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  100,
+"endLine":  8,
+"endColumn":  115
+}
+}
 }
 ]
 }

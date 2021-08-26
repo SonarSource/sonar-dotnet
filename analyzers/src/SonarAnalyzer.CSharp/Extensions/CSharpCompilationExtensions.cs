@@ -32,6 +32,9 @@ namespace SonarAnalyzer.Extensions
         internal static bool IsTargetTypeConditionalSupported(this Compilation compilation) =>
             compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp9);
 
+        internal static bool IsLambdaDiscardParameterSupported(this Compilation compilation) =>
+            compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp9);
+
         internal static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
             compilation.GetLanguageVersion().IsAtLeast(languageVersion);
 
