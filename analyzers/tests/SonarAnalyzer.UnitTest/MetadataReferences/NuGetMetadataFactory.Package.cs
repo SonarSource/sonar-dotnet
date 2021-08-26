@@ -19,174 +19,96 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using NuGet.Common;
+using NuGet.Configuration;
+using NuGet.Packaging;
+using NuGet.Protocol;
+using NuGet.Protocol.Core.Types;
+using NuGet.Versioning;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     public static partial class NuGetMetadataFactory
     {
+        private const string PackageVersionPrefix = "Sonar.";
+
         private class Package
         {
-            public string Id { get; }
-            public string Version { get; }
-            public string Runtime { get; }
+            private readonly string id;
+            private readonly string runtime;
+            private readonly string version;
 
             public Package(string id, string version, string runtime)
             {
-                Id = id;
-                Version = version;
-                Runtime = runtime;
+                this.id = id;
+                this.runtime = runtime;
+                this.version = version == Constants.NuGetLatestVersion
+                    ? GetLatestVersion().Result
+                    : version;
             }
 
-            public string PackageDirectory()
+            public string EnsureInstalled()
             {
-                var runtimePath = Runtime == null ? string.Empty : $"runtimes\\{Runtime}\\";
-                var versionFolder = Version == Constants.NuGetLatestVersion
-                        ? SortedPackageFolders().Select(x => Path.GetFileName(x).Substring(Id.Length + 1)).Last(x => char.IsNumber(x[0]))
-                        : Version;
-                return Path.Combine(PackagesFolder, $@"{Id}.{versionFolder}\{runtimePath}lib");
-            }
-
-            public void EnsurePackageIsInstalled()
-            {
-                if (Version == Constants.NuGetLatestVersion)
+                // Check to see if the specific package is already installed
+                var packageDir = Path.GetFullPath(Path.Combine(PackagesFolder, id, PackageVersionPrefix + version, runtime == null ? string.Empty : $@"runtimes\{runtime}\"));
+                if (!Directory.Exists(packageDir))
                 {
-                    if (IsCheckForLatestPackageRequired())
+                    LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
+                    InstallPackageAsync(packageDir).Wait();
+                }
+
+                return packageDir;
+            }
+
+            private async Task InstallPackageAsync(string packageDir)
+            {
+                var resource = await GetNuGetRepository();
+                using var packageStream = new MemoryStream();
+                await resource.CopyNupkgToStreamAsync(id, new NuGetVersion(version), packageStream, new SourceCacheContext(), NullLogger.Instance, default);
+                using var packageReader = new PackageArchiveReader(packageStream);
+                var dllFiles = packageReader.GetFiles().Where(f => f.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)).ToArray();
+                if (dllFiles.Any())
+                {
+                    foreach (var dllFile in dllFiles)
                     {
-                        Install();
-                        WriteNextCheckTime();
-                    }
-                    else
-                    {
-                        LogMessage($"Skipping check for latest NuGet");
+                        packageReader.ExtractFile(dllFile, $"{packageDir}\\{dllFile}", NullLogger.Instance);
                     }
                 }
                 else
                 {
-                    var packageDir = PackageDirectory();
-                    if (Directory.Exists(packageDir))
-                    {
-                        LogMessage($"Package found at {packageDir}");
-                    }
-                    else
-                    {
-                        LogMessage($"Package not found at {packageDir}");
-                        Install();
-                    }
+                    throw new ApplicationException($"Test setup error: required dlls files are missing in the downloaded package. Package: {id} Runtime: {runtime}");
                 }
             }
 
-            private void Install()
+            private static async Task<FindPackageByIdResource> GetNuGetRepository()
             {
-                var versionArgument = Version == Constants.NuGetLatestVersion ? string.Empty : $"-Version {Version}";
-                var configFile = ValidatedNuGetConfigPath();
-                // Explicitly specify the NuGet config to use to avoid being impacted by the NuGet config on the machine running the tests.
-                // If the unit tests are failing since the nuget packages cannot be installed (nuget.exe: ERROR: Illegal characters in path.)
-                // please ensure that the PackagesFolder does not end with a separator.
-                var args = $"install {Id} {versionArgument} -OutputDirectory \"{Path.GetFullPath(PackagesFolder)}\" -NonInteractive -ForceEnglishOutput -ConfigFile \"{configFile}\"";
-                LogMessage($"Installing package using nuget.exe {args}");
-                var startInfo = new ProcessStartInfo
-                {
-                    FileName = "nuget.exe",
-                    Arguments = args,
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    RedirectStandardError = true,
-                    RedirectStandardOutput = true
-                };
-
-                using (var process = new Process())
-                {
-                    process.StartInfo = startInfo;
-                    process.OutputDataReceived += (s, e) => LogMessage($"  nuget.exe: {e.Data}");
-                    process.ErrorDataReceived += OnErrorDataReceived;
-
-                    process.Start();
-                    process.BeginErrorReadLine();
-                    process.BeginOutputReadLine();
-
-                    process.WaitForExit();
-                    if (process.ExitCode != 0)
-                    {
-                        throw new ApplicationException($"Test setup error: failed to download package using nuget.exe. Exit code: {process.ExitCode}");
-                    }
-                }
-
-                static void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
-                {
-                    if (e.Data != null)
-                    {
-                        LogMessage($"  nuget.exe: ERROR: {e.Data}");
-                    }
-                }
-
-                static string ValidatedNuGetConfigPath()
-                {
-                    var path = Path.GetFullPath(NuGetConfigFileRelativePath);
-                    if (!File.Exists(path))
-                    {
-                        throw new ApplicationException($"Test setup error: failed to find nuget.config file at \"{path}\"");
-                    }
-                    LogMessage($"Path to nuget.config: {path}");
-                    return path;
-                }
+                var nugetOrgUrl = Settings.LoadSpecificSettings(NugetConfigFolderRelativePath, "nuget.config")
+                                          .GetSection("packageSources").Items.OfType<AddItem>()
+                                          .Single(x => x.Key == "nuget.org").Value;
+                var repository = Repository.Factory.GetCoreV3(nugetOrgUrl);
+                return await repository.GetResourceAsync<FindPackageByIdResource>();
             }
 
-            /// <summary>
-            /// Returns the list of folders containing installed versions of the specified package,
-            /// or an empty list if the package is not installed.
-            /// </summary>
-            /// <remarks>
-            /// Package directory names are in the form "{package id}.{package version}".
-            /// The list is sorted in ascending order, so the most recent version will be last.
-            /// </remarks>
-            private IEnumerable<string> SortedPackageFolders()
-            {
-                // The package will be in a folder called "\packages\{packageId}.{version}", but:
-                // : the package might not be installed
-                // : there might be multiple versions installed
-                // : there might be a package that starts with the same package id
-                //      e.g. Microsoft.AspNetCore.Core and Microsoft.AspNetCore.Core.Diagnostics
-                // Most packages have a three-part version, but some have four. We don't check
-                // the actual number of parts, as long as there is at least one.
-                var matcher = new Regex($@"{Regex.Escape(Id)}(\.\d+)+$", RegexOptions.IgnoreCase);
-
-                return Directory.Exists(PackagesFolder)
-                    ? Directory.GetDirectories(PackagesFolder, $"{Id}.*", SearchOption.TopDirectoryOnly).Where(x => matcher.IsMatch(x)).OrderBy(x => x)
-                    : Enumerable.Empty<string>();
-            }
-
-            private bool IsCheckForLatestPackageRequired()
-            {
-                // Install new nugets only once per day to improve the performance when running tests locally.
-                var nextCheck = NextCheckFilePath() is { } filePath && File.Exists(filePath) && DateTime.TryParse(File.ReadAllText(filePath), out var timestamp)
-                        ? timestamp
-                        : DateTime.MinValue;
-                LogMessage($"Next check for latest NuGets: {nextCheck}");
-                return nextCheck < DateTime.Now;
-            }
-
-            private void WriteNextCheckTime()
+            private async Task<string> GetLatestVersion()
             {
                 const int VersionCheckDays = 5;
-                var filePath = NextCheckFilePath();
-                if (filePath == null)
+                var path = Path.Combine(PackagesFolder, id, "Sonar.Latest.txt");
+                var (nextCheck, latest) = File.Exists(path) && File.ReadAllText(path).Split(';') is var values && DateTime.TryParse(values[0], out var nextCheckValue)
+                    ? (nextCheckValue, values[1])
+                    : (DateTime.MinValue, null);
+                LogMessage($"Next check for latest NuGets: {nextCheck}");
+                if (nextCheck < DateTime.Now)
                 {
-                    return;
+                    var resource = await GetNuGetRepository();
+                    var versions = await resource.GetAllVersionsAsync(id, new SourceCacheContext(), NullLogger.Instance, default);
+                    latest = versions.OrderByDescending(x => x.Version).First(x => !x.IsPrerelease).OriginalVersion;
+                    new FileInfo(path).Directory.Create(); // Ensure that folder exists, if not create one
+                    File.WriteAllText(path, $"{DateTime.Today.AddDays(VersionCheckDays):yyyy-MM-dd};{latest}");
                 }
-                File.WriteAllText(filePath, DateTime.Now.AddDays(VersionCheckDays).ToString("yyyy-MM-dd"));
-            }
-
-            private string NextCheckFilePath()
-            {
-                // The file containing the next-check timestamp is stored in folder of the latest version of the package.
-                const string NextUpdateFileName = "NextCheckForUpdate.txt";
-                var directory = SortedPackageFolders().LastOrDefault();
-                return directory == null ? null : Path.Combine(directory, NextUpdateFileName);
+                return latest;
             }
         }
     }
