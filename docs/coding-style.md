@@ -13,6 +13,7 @@ Members and types should always have the lowest possible visibility.
 Ordering of class members should be the following:
 
 1. Constants
+1. Nested enum declarations
 1. Fields
 1. Abstract members
 1. Properties
@@ -57,6 +58,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 * Code should contain as few comments as necessary in favor of well-named members and variables.
 * Comments should generally be on separate lines.
 * Comments on the same line with code are acceptable for short lines of code and short comments.
+* For abstract methods and implementations: comments should be put only on the abstract method, to avoid duplication. _When reading the implementation, the IDE offers the tooling to peek in the base class and read the method comment._
 
 ## FIXME and ToDo
 
