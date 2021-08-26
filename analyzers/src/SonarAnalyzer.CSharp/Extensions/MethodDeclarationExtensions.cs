@@ -37,8 +37,5 @@ namespace SonarAnalyzer.Extensions
             syntaxNode.DescendantNodes().OfType<ReturnStatementSyntax>().Any(returnStatement => returnStatement.Expression.IsKind(SyntaxKind.NullLiteralExpression)) ||
             // For simplicity this returns true for any method witch contains a NullLiteralExpression but this could be a source of FNs
             syntaxNode.DescendantNodes().OfType<ExpressionSyntax>().Any(expression => expression.IsKind(SyntaxKind.NullLiteralExpression));
-
-        internal static bool HasImplementation(this MethodDeclarationSyntax node) =>
-            node.Body != null || node.ExpressionBody != null;
     }
 }

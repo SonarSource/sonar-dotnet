@@ -56,9 +56,15 @@ namespace SonarAnalyzer.Wrappers
 
             public BlockSyntax Body => syntaxWrapper.Body;
 
+            public ArrowExpressionClauseSyntax ExpressionBody => syntaxWrapper.ExpressionBody;
+
             public SyntaxToken Identifier => syntaxWrapper.Identifier;
 
             public ParameterListSyntax ParameterList => syntaxWrapper.ParameterList;
+
+            public bool HasImplementation => Body != null || ExpressionBody != null;
+
+            public bool IsLocal => true;
         }
 
         private class MethodDeclarationSyntaxAdapter : IMethodDeclaration
@@ -70,9 +76,15 @@ namespace SonarAnalyzer.Wrappers
 
             public BlockSyntax Body => declarationSyntax.Body;
 
+            public ArrowExpressionClauseSyntax ExpressionBody => declarationSyntax.ExpressionBody;
+
             public SyntaxToken Identifier => declarationSyntax.Identifier;
 
             public ParameterListSyntax ParameterList => declarationSyntax.ParameterList;
+
+            public bool HasImplementation => Body != null || ExpressionBody != null;
+
+            public bool IsLocal => false;
         }
     }
 }

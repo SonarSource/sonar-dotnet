@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -71,25 +72,18 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    var methodIdentifier = methodDeclaration.Identifier;
-                    if (!methodIdentifier.IsMissing && methodDeclaration.HasImplementation())
+                    var methodDeclaration = MethodDeclarationFactory.Create(c.Node);
+                    if (!methodDeclaration.Identifier.IsMissing && methodDeclaration.HasImplementation)
                     {
-                        ReportIfNoAssertion(c, methodDeclaration, methodIdentifier, x => x.IsTestMethod());
+                        ReportIfNoAssertion(c,
+                                            c.Node,
+                                            methodDeclaration.Identifier,
+                                            methodDeclaration.IsLocal
+                                                ? x => IsXunitTestMethod(x)
+                                                : x => x.IsTestMethod());
                     }
                 },
-                SyntaxKind.MethodDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var methodDeclaration = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                    var methodIdentifier = methodDeclaration.Identifier;
-                    if (!methodIdentifier.IsMissing && methodDeclaration.HasImplementation())
-                    {
-                        ReportIfNoAssertion(c, methodDeclaration, methodIdentifier, x => IsXunitTestMethod(x));
-                    }
-                },
+                SyntaxKind.MethodDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
 
             static bool IsXunitTestMethod(IMethodSymbol methodSymbol) =>
