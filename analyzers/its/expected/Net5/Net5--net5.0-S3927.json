@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3927",
-"message":  "Serialization attributes on local methods are not considered.",
+"message":  "Serialization attributes on local functions are not considered.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3927.cs",
 "region":  {

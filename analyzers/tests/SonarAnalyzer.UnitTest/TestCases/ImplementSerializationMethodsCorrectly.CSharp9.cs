@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-[OnSerialized] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+[OnSerialized] // Noncompliant {{Serialization attributes on local functions are not considered.}}
 int OnSerialized(StreamingContext context) => 42;
 
 [Serializable]
@@ -57,23 +57,23 @@ public record Foo
 
     public void LocalFunctions()
     {
-        [OnSerializing()] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+        [OnSerializing()] // Noncompliant {{Serialization attributes on local functions are not considered.}}
         void OnSerializing(StreamingContext context)
         { }
 
-        [OnSerialized()] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+        [OnSerialized()] // Noncompliant {{Serialization attributes on local functions are not considered.}}
         void OnSerialized(StreamingContext context)
         { }
 
-        [OnDeserializing()] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+        [OnDeserializing()] // Noncompliant {{Serialization attributes on local functions are not considered.}}
         void OnDeserializing(StreamingContext context)
         { }
 
-        [OnDeserialized()] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+        [OnDeserialized()] // Noncompliant {{Serialization attributes on local functions are not considered.}}
         void OnDeserialized(StreamingContext context)
         { }
 
-        [OnDeserialized()] // Noncompliant {{Serialization attributes on local methods are not considered.}}
+        [OnDeserialized()] // Noncompliant {{Serialization attributes on local functions are not considered.}}
         static void OnDeserializedStatic(StreamingContext context)
         { }
     }
