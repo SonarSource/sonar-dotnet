@@ -21,22 +21,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class GuidEmptyIsPreferred : GuidEmptyIsPreferredBase<ExpressionSyntax, SyntaxKind>
+    public sealed class PreferGuidEmpty : PreferGuidEmptyBase<ExpressionSyntax, SyntaxKind>
     {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override IEnumerable<ExpressionSyntax> ArgumentExpressions(SyntaxNode node) =>
             ((ObjectCreationExpressionSyntax)node).ArgumentList?.Arguments
-                .Select(arg => arg.Expression);
+            .Select(arg => arg.GetExpression());
     }
 }

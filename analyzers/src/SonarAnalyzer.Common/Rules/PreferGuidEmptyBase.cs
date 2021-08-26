@@ -27,7 +27,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class GuidEmptyIsPreferredBase<TExpression, TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class PreferGuidEmptyBase<TExpression, TSyntaxKind> : SonarDiagnosticAnalyzer
         where TExpression : SyntaxNode
         where TSyntaxKind : struct
     {
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract IEnumerable<TExpression> ArgumentExpressions(SyntaxNode node);
 
-        protected GuidEmptyIsPreferredBase() =>
+        protected PreferGuidEmptyBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
         protected override void Initialize(SonarAnalysisContext context)

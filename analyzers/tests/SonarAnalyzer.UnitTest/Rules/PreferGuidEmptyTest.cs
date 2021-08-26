@@ -24,24 +24,24 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class GuidEmptyIsPreferredTest
+    public class PreferGuidEmptyTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GuidEmptyIsPreferred_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GuidEmptyPreferred.cs", new CS.GuidEmptyIsPreferred(), ParseOptionsHelper.FromCSharp8);
+        public void PreferGuidEmpty_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PreferGuidEmpty.cs", new CS.PreferGuidEmpty(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void GuidEmptyIsPreferred_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GuidEmptyPreferred.vb", new VB.GuidEmptyIsPreferred());
+        public void PreferGuidEmpty_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PreferGuidEmpty.vb", new VB.PreferGuidEmpty());
 
         [TestMethod]
-        public void GuidEmptyPreferred_CodeFix_CS() =>
+        public void PreferGuidEmpty_CodeFix_CS() =>
             Verifier.VerifyCodeFix(
-                @"TestCases\GuidEmptyPreferred.cs",
-                @"TestCases\GuidEmptyPreferred.Fixed.cs",
-                new CS.GuidEmptyIsPreferred(),
-                new CS.GuidEmptyIsPreferredFixProvider());
+                @"TestCases\PreferGuidEmpty.cs",
+                @"TestCases\PreferGuidEmpty.Fixed.cs",
+                new CS.PreferGuidEmpty(),
+                new CS.PreferGuidEmptyFixProvider());
     }
 }

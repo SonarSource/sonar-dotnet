@@ -32,11 +32,11 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class GuidEmptyIsPreferredFixProvider : SonarCodeFixProvider
+    public sealed class PreferGuidEmptyFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Use Guid.Empty instead";
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(GuidEmptyIsPreferred.DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(PreferGuidEmpty.DiagnosticId);
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
