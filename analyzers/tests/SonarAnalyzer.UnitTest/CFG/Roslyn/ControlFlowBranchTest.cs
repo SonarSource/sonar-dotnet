@@ -122,7 +122,7 @@ public class Sample
             exiting.LeavingRegions.Should().HaveCount(2).And.ContainInOrder(tryRegion, tryAndFinallyRegion);
             exiting.FinallyRegions.Should().HaveCount(1).And.Contain(finallyRegion);
 
-            var insideFinally = cfg.Blocks[3].FallThroughSuccessor;
+            var insideFinally = finallyBlock.FallThroughSuccessor;
             insideFinally.Destination.Should().BeNull();
             insideFinally.Semantics.Should().Be(ControlFlowBranchSemantics.StructuredExceptionHandling);
             entering.EnteringRegions.Should().HaveCount(2).And.ContainInOrder(tryAndFinallyRegion, tryRegion); // Weird, but Roslyn does it this way.
