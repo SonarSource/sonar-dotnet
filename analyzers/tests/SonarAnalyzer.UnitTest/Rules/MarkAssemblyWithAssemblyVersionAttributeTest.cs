@@ -56,6 +56,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
+        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_CS()
+        {
+            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(
+                @"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs",
+                new CS.MarkAssemblyWithAssemblyVersionAttribute(),
+                NuGetMetadataReference.MicrosoftBuildNoTargets());
+
+            // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
+            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+        }
+
+        [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
 
@@ -79,5 +91,16 @@ namespace SonarAnalyzer.UnitTest.Rules
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
         }
 
+        [TestMethod]
+        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_VB()
+        {
+            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(
+                @"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb",
+                new CS.MarkAssemblyWithAssemblyVersionAttribute(),
+                NuGetMetadataReference.MicrosoftBuildNoTargets());
+
+            // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
+            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+        }
     }
 }

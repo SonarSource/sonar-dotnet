@@ -37,13 +37,14 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         private class Package
         {
-            private readonly string id;
             private readonly string runtime;
             private readonly string version;
 
+            public string Id { get; }
+
             public Package(string id, string version, string runtime)
             {
-                this.id = id;
+                Id = id;
                 this.runtime = runtime;
                 this.version = version == Constants.NuGetLatestVersion
                     ? GetLatestVersion().Result
@@ -53,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             public string EnsureInstalled()
             {
                 // Check to see if the specific package is already installed
-                var packageDir = Path.GetFullPath(Path.Combine(PackagesFolder, id, PackageVersionPrefix + version, runtime == null ? string.Empty : $@"runtimes\{runtime}\"));
+                var packageDir = Path.GetFullPath(Path.Combine(PackagesFolder, Id, PackageVersionPrefix + version, runtime == null ? string.Empty : $@"runtimes\{runtime}\"));
                 if (!Directory.Exists(packageDir))
                 {
                     LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
@@ -67,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             {
                 var resource = await GetNuGetRepository();
                 using var packageStream = new MemoryStream();
-                await resource.CopyNupkgToStreamAsync(id, new NuGetVersion(version), packageStream, new SourceCacheContext(), NullLogger.Instance, default);
+                await resource.CopyNupkgToStreamAsync(Id, new NuGetVersion(version), packageStream, new SourceCacheContext(), NullLogger.Instance, default);
                 using var packageReader = new PackageArchiveReader(packageStream);
                 var dllFiles = packageReader.GetFiles().Where(f => f.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)).ToArray();
                 if (dllFiles.Any())
@@ -79,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 }
                 else
                 {
-                    throw new ApplicationException($"Test setup error: required dlls files are missing in the downloaded package. Package: {id} Runtime: {runtime}");
+                    throw new ApplicationException($"Test setup error: required dlls files are missing in the downloaded package. Package: {Id} Runtime: {runtime}");
                 }
             }
 
@@ -95,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             private async Task<string> GetLatestVersion()
             {
                 const int VersionCheckDays = 5;
-                var path = Path.Combine(PackagesFolder, id, "Sonar.Latest.txt");
+                var path = Path.Combine(PackagesFolder, Id, "Sonar.Latest.txt");
                 var (nextCheck, latest) = File.Exists(path) && File.ReadAllText(path).Split(';') is var values && DateTime.TryParse(values[0], out var nextCheckValue)
                     ? (nextCheckValue, values[1])
                     : (DateTime.MinValue, null);
@@ -103,7 +104,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 if (nextCheck < DateTime.Now)
                 {
                     var resource = await GetNuGetRepository();
-                    var versions = await resource.GetAllVersionsAsync(id, new SourceCacheContext(), NullLogger.Instance, default);
+                    var versions = await resource.GetAllVersionsAsync(Id, new SourceCacheContext(), NullLogger.Instance, default);
                     latest = versions.OrderByDescending(x => x.Version).First(x => !x.IsPrerelease).OriginalVersion;
                     new FileInfo(path).Directory.Create(); // Ensure that folder exists, if not create one
                     File.WriteAllText(path, $"{DateTime.Today.AddDays(VersionCheckDays):yyyy-MM-dd};{latest}");
