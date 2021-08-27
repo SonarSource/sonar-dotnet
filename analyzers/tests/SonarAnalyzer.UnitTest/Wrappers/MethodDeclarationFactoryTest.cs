@@ -77,5 +77,38 @@ namespace SonarAnalyzer.UnitTest.Wrappers
             wrapper.IsLocal.Should().BeTrue();
         }
 
+        [TestMethod]
+        public void MethodDeclarationFactory_WithMethodDeclaration_NoImplementation()
+        {
+            const string code = @"
+                partial class Foo
+                {
+                    partial void Bar(int a);
+                }";
+            var snippet = new SnippetCompiler(code);
+            var method = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
+            var wrapper = MethodDeclarationFactory.Create(method);
+            wrapper.HasImplementation.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void MethodDeclarationFactory_Throws_WhenNull()
+        {
+            Action a = () => MethodDeclarationFactory.Create(null);
+            a.Should().Throw<ArgumentNullException>().WithMessage("*node*");
+        }
+
+        [TestMethod]
+        public void MethodDeclarationFactory_Throws_WhenNotMethodOrLocalFunction()
+        {
+            const string code = @"
+                public partial class Foo
+                {
+                }";
+            var snippet = new SnippetCompiler(code);
+            var method = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First();
+            Action a = () => MethodDeclarationFactory.Create(method);
+            a.Should().Throw<InvalidOperationException>().WithMessage("Unexpected type: ClassDeclarationSyntax");
+        }
     }
 }
