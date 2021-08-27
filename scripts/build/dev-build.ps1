@@ -85,7 +85,7 @@ try {
         # ParseOptionsHelper.FilterByEnvironment is responsible for limiting language versions for C# and VB.NET
         # on local builds and non-master builds on Azure. Since we want to run master-like build we need to set
         # the following variable to something not equal to PullRequest.
-        $env:Build.Reason="set"
+        ${env:Build.Reason}="set"
         Invoke-UnitTests $binPath $buildConfiguration
     }
 
