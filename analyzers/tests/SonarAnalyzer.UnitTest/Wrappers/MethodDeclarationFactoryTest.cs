@@ -20,14 +20,11 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using csharp::SonarAnalyzer.Wrappers;
 using FluentAssertions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using csharp::SonarAnalyzer.Wrappers;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Wrappers
