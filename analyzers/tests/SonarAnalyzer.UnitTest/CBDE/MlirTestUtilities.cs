@@ -25,6 +25,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CBDE;
+using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
 
 namespace SonarAnalyzer.UnitTest.CBDE

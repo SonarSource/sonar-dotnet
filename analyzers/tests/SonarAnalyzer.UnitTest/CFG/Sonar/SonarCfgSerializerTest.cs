@@ -20,6 +20,7 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.UnitTest.Helpers;
 

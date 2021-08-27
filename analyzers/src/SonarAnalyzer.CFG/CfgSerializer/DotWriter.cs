@@ -21,7 +21,7 @@
 using System.IO;
 using System.Linq;
 
-namespace SonarAnalyzer.CFG.Helpers
+namespace SonarAnalyzer.CFG
 {
     internal class DotWriter
     {

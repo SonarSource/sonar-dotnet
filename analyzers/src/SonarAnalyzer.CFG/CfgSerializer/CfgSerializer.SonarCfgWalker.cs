@@ -23,8 +23,9 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG.Helpers;
+using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.CFG.Sonar
+namespace SonarAnalyzer.CFG
 {
     public partial class CfgSerializer
     {
