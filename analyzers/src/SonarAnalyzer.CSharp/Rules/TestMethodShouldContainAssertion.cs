@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -66,41 +65,32 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var methodDeclaration = MethodDeclarationFactory.Create(c.Node);
-                    if (!methodDeclaration.Identifier.IsMissing && methodDeclaration.HasImplementation)
+                    if (!methodDeclaration.Identifier.IsMissing
+                        && methodDeclaration.HasImplementation
+                        && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol
+                        && IsTestMethod(methodSymbol, methodDeclaration.IsLocal)
+                        && !methodSymbol.HasExpectedExceptionAttribute()
+                        && !methodSymbol.HasAssertionInAttribute()
+                        && !IsTestIgnored(methodSymbol)
+                        && !ContainsAssertion(c.Node, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
                     {
-                        ReportIfNoAssertion(c,
-                                            c.Node,
-                                            methodDeclaration.Identifier,
-                                            methodDeclaration.IsLocal
-                                                ? x => IsXunitTestMethod(x)
-                                                : x => x.IsTestMethod());
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
 
-            static bool IsXunitTestMethod(IMethodSymbol methodSymbol) =>
-                methodSymbol.AnyAttributeDerivesFromAny(UnitTestHelper.KnownTestMethodAttributesOfxUnit);
-        }
+        // only xUnit allows local functions to be test methods.
+        private static bool IsTestMethod(IMethodSymbol symbol, bool isLocalFunction) =>
+                isLocalFunction ? IsXunitTestMethod(symbol) : symbol.IsTestMethod();
 
-        private static void ReportIfNoAssertion(SyntaxNodeAnalysisContext c, SyntaxNode methodDeclaration, SyntaxToken identifier, Func<IMethodSymbol, bool> isTestMethod)
-        {
-            if (c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is IMethodSymbol methodSymbol
-                && isTestMethod(methodSymbol)
-                && !methodSymbol.HasExpectedExceptionAttribute()
-                && !methodSymbol.HasAssertionInAttribute()
-                && !IsTestIgnored(methodSymbol)
-                && !ContainsAssertion(methodDeclaration, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
-            {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation()));
-            }
-        }
+        private static bool IsXunitTestMethod(IMethodSymbol methodSymbol) =>
+                methodSymbol.AnyAttributeDerivesFromAny(UnitTestHelper.KnownTestMethodAttributesOfxUnit);
 
         private static bool ContainsAssertion(SyntaxNode methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
         {
