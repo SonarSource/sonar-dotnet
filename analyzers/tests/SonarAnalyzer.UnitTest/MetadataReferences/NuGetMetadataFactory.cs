@@ -66,12 +66,18 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         /// <param name="allowedDirectories">List of allowed directories sorted by preference to search for DLL files.</param>
         private static IEnumerable<MetadataReference> Create(Package package, string[] allowedDirectories)
         {
+            if (package.Id == "Microsoft.Build.NoTargets")
+            {
+                return Enumerable.Empty<MetadataReference>();
+            }
+
             var packageDir = package.EnsureInstalled();
             // some packages (see Mono.Posix.NETStandard.1.0.0) may contain target framework only in ref folder
             var dllsPerDirectory = Directory.GetFiles(packageDir, "*.dll", SearchOption.AllDirectories)
                                             .GroupBy(x => Path.GetDirectoryName(x).Split('+').First())
                                             .Select(x => (directory: Path.GetFileName(x.Key), dllPaths: x.AsEnumerable()))
                                             .ToArray();
+
             foreach (var allowedDirectory in allowedDirectories)
             {
                 // dllsPerDirectory can contain the same <directory> from \lib\<directory> and \ref\<directory>. We don't care who wins.
@@ -84,6 +90,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                     return dllPaths.Select(x => MetadataReference.CreateFromFile(x)).ToArray();
                 }
             }
+
             throw new InvalidOperationException($"No allowed DLL directory was found in {packageDir}. Add new target framework to SortedAllowedDirectories or set dllDirectory argument explicitly.");
         }
 

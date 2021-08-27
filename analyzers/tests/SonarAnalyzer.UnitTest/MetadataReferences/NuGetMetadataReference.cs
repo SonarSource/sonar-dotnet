@@ -63,6 +63,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftAspNetMvc(string packageVersion) => Create("Microsoft.AspNet.Mvc", packageVersion);
         public static References MicrosoftAspNetSignalRCore(string packageVersion = "2.4.1") => Create("Microsoft.AspNet.SignalR.Core", packageVersion);
         public static References MicrosoftAspNetWebApiCors(string packageVersion) => Create("Microsoft.AspNet.WebApi.Cors", packageVersion);
+        public static References MicrosoftBuildNoTargets(string packageVersion = "3.1.0") => Create("Microsoft.Build.NoTargets", packageVersion);
         public static References MicrosoftDataSqliteCore(string packageVersion = "2.0.0") => Create("Microsoft.Data.Sqlite.Core", packageVersion);
         public static References MicrosoftEntityFrameworkCore(string packageVersion) => Create("Microsoft.EntityFrameworkCore", packageVersion);
         public static References MicrosoftEntityFrameworkCoreSqliteCore(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Sqlite.Core", packageVersion);
