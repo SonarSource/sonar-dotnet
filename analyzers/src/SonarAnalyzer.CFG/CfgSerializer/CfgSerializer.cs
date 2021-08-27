@@ -18,8 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.IO;
-using System.Text;
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
 
 namespace SonarAnalyzer.CFG
@@ -28,15 +27,16 @@ namespace SonarAnalyzer.CFG
     {
         public static string Serialize(string methodName, IControlFlowGraph cfg)
         {
-            var stringBuilder = new StringBuilder();
-            using (var writer = new StringWriter(stringBuilder))
-            {
-                Serialize(methodName, cfg, writer);
-            }
-            return stringBuilder.ToString();
+            var writer = new DotWriter();
+            new SonarCfgWalker(writer).Visit(methodName, cfg);
+            return writer.ToString();
         }
 
-        public static void Serialize(string methodName, IControlFlowGraph cfg, TextWriter writer) =>
-            new SonarCfgWalker(new DotWriter(writer)).Visit(methodName, cfg);
+        public static string Serialize(string methodName, ControlFlowGraph cfg)
+        {
+            var writer = new DotWriter();
+            new RoslynCfgWalker(writer).Visit(methodName, cfg, false);
+            return writer.ToString();
+        }
     }
 }

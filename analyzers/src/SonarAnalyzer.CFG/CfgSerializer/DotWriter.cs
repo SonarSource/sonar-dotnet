@@ -18,29 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.IO;
-using System.Linq;
+using System.Text;
 
 namespace SonarAnalyzer.CFG
 {
     internal class DotWriter
     {
-        private readonly TextWriter writer;
+        private readonly StringBuilder builder = new StringBuilder();
 
-        public DotWriter(TextWriter writer)
-        {
-            this.writer = writer;
-        }
+        public void WriteGraphStart(string graphName, bool subgraph) =>
+            builder.AppendLine(subgraph ? $"subgraph \"cluster_{Encode(graphName)}\" {{\nlabel = \"{Encode(graphName)}\"" : $"digraph \"{Encode(graphName)}\" {{");
 
-        public void WriteGraphStart(string graphName)
-        {
-            this.writer.WriteLine($"digraph \"{Encode(graphName)}\" {{");
-        }
-
-        public void WriteGraphEnd()
-        {
-            this.writer.WriteLine("}");
-        }
+        public void WriteGraphEnd() =>
+            builder.AppendLine("}");
 
         public void WriteNode(string id, string header, params string[] items)
         {
@@ -48,35 +38,35 @@ namespace SonarAnalyzer.CFG
             // Columns/rows are created with pipe
             // New lines are inserted with \n; \r\n does not work well.
             // ID [shape=record label="{<header>|<line1>\n<line2>\n...}"]
-            this.writer.Write(id);
-            this.writer.Write(" [shape=record label=\"{" + header);
-            if (items.Length > 0)
+            builder.Append(id).Append(" [shape=record label=\"{").Append(header);
+            foreach (var item in items)
             {
-                this.writer.Write("|");
-                this.writer.Write(string.Join("|", items.Select(Encode)));
+                builder.Append("|").Append(Encode(item));
             }
-            this.writer.Write("}\"");
-            this.writer.WriteLine("]");
+            builder.AppendLine("}\"]");
         }
 
-        internal void WriteEdge(string startId, string endId, string label)
+        public void WriteEdge(string startId, string endId, string label)
         {
-            this.writer.Write($"{startId} -> {endId}");
+            builder.Append(startId).Append(" -> ").Append(endId);
             if (!string.IsNullOrEmpty(label))
             {
-                this.writer.Write($" [label=\"{label}\"]");
+                builder.Append($" [label=\"{label}\"]");
             }
-            this.writer.WriteLine();
+            builder.AppendLine();
         }
 
         private static string Encode(string s) =>
             s.Replace("\r", string.Empty)
-            .Replace("\n", "\\n")
-            .Replace("{", "\\{")
-            .Replace("}", "\\}")
-            .Replace("|", "\\|")
-            .Replace("<", "\\<")
-            .Replace(">", "\\>")
-            .Replace("\"", "\\\"");
+            .Replace("\n", @"\n")
+            .Replace("{", @"\{")
+            .Replace("}", @"\}")
+            .Replace("|", @"\|")
+            .Replace("<", @"\<")
+            .Replace(">", @"\>")
+            .Replace("\"", @"\""");
+
+        public override string ToString() =>
+            builder.ToString();
     }
 }
