@@ -120,7 +120,7 @@ namespace SonarAnalyzer.CFG
                 }
                 if (block.FallThroughSuccessor != null && block.FallThroughSuccessor.Destination == null)
                 {
-                    writer.WriteEdge(BlockId(block), "NoDestination" + BlockId(block), block.FallThroughSuccessor.Semantics.ToString());
+                    writer.WriteEdge(BlockId(block), "NoDestination_" + BlockId(block), block.FallThroughSuccessor.Semantics.ToString());
                 }
             }
 
