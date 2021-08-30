@@ -176,7 +176,7 @@ cfg0_block2 -> cfg0_block3
         }
 
         [TestMethod]
-        public void Serialize_Foreach_Binary_Simple()
+        public void Serialize_Foreach_Simple()
         {
             var code = @"
 class Sample
@@ -230,7 +230,7 @@ cfg0_block2 -> cfg0_block7 [label=""WhenFalse""]
         }
 
         [TestMethod]
-        public void Serialize_Foreach_Binary_TupleVarDeclaration()
+        public void Serialize_Foreach_TupleVarDeclaration()
         {
             var code = @"
 public class Sample
@@ -289,7 +289,7 @@ cfg0_block2 -> cfg0_block8 [label=""WhenFalse""]
         }
 
         [TestMethod]
-        public void Serialize_For_Binary_Simple()
+        public void Serialize_For()
         {
             var code = @"
 class Sample
@@ -325,7 +325,7 @@ cfg0_block2 -> cfg0_block4 [label=""WhenFalse""]
         }
 
         [TestMethod]
-        public void Serialize_Jump_Using()
+        public void Serialize_Using()
         {
             var code = @"
 class Sample
@@ -373,7 +373,7 @@ cfg0_block2 -> cfg0_block6
         }
 
         [TestMethod]
-        public void Serialize_Lock_Simple()
+        public void Serialize_Lock()
         {
             var code = @"
 class Sample
@@ -423,7 +423,7 @@ cfg0_block2 -> cfg0_block6
         }
 
         [TestMethod]
-        public void Serialize_Regions_TryCatch()
+        public void Serialize_Regions()
         {
             var code = @"
 class Sample
@@ -521,7 +521,7 @@ cfg2_block1 -> cfg2_block2 [label=""Return""]
         }
 
         [TestMethod]
-        public void Serialize_Lambda()
+        public void Serialize_Lambdas()
         {
             var code = @"
 class Sample
