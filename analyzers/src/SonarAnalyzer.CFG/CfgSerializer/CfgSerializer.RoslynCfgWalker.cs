@@ -33,45 +33,37 @@ namespace SonarAnalyzer.CFG
         {
             private readonly DotWriter writer;
             private readonly HashSet<BasicBlock> visited = new HashSet<BasicBlock>();
-            private readonly char blockPrefix = '@';
-            private readonly int nestingLevel;
+            private readonly RoslynBlockPrefixProvider blockPrefixProvider;
+            private readonly int blockPrefix;
 
-            public RoslynCfgWalker(DotWriter writer, int nestingLevel = 0)
+            public RoslynCfgWalker(DotWriter writer, RoslynBlockPrefixProvider blockPrefixProvider)
             {
                 this.writer = writer;
-                this.nestingLevel = nestingLevel;
-
-                blockPrefix = (char)(blockPrefix + nestingLevel);
+                this.blockPrefixProvider = blockPrefixProvider;
+                blockPrefix = blockPrefixProvider.Next();
             }
 
             public void Visit(string methodName, ControlFlowGraph cfg, bool subgraph)
             {
                 writer.WriteGraphStart(methodName, subgraph);
-
                 foreach (var region in cfg.Root.NestedRegions)
                 {
                     Visit(cfg, region);
                 }
-
                 foreach (var block in cfg.Blocks.Where(x => !visited.Contains(x)).ToArray())
                 {
                     Visit(block);
                 }
-
                 foreach (var localFunction in cfg.LocalFunctions)
                 {
                     var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
-
-                    new RoslynCfgWalker(writer, nestingLevel + 1).Visit($"{methodName}.{localFunction.Name}", localFunctionCfg, true);
+                    new RoslynCfgWalker(writer, blockPrefixProvider).Visit($"{methodName}.{localFunction.Name}", localFunctionCfg, true);
                 }
-
                 foreach (var anonymousFunction in GetAnonymousFunctions(cfg))
                 {
                     var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
-
-                    new RoslynCfgWalker(writer, nestingLevel + 1).Visit($"{methodName}.anonymous", anonymousFunctionCfg, true);
+                    new RoslynCfgWalker(writer, blockPrefixProvider).Visit($"{methodName}.anonymous", anonymousFunctionCfg, true);
                 }
-
                 writer.WriteGraphEnd();
             }
 
@@ -103,11 +95,10 @@ namespace SonarAnalyzer.CFG
             }
 
             private static IEnumerable<string> SerializeBranchValue(IOperation operation) =>
-                operation == null
-                    ? Enumerable.Empty<string>()
-                    : new[] { "## BranchValue ##" }.Concat(SerializeOperation(operation));
+                operation == null ? Enumerable.Empty<string>() : new[] { "## BranchValue ##" }.Concat(SerializeOperation(operation));
 
-            private static IEnumerable<string> SerializeOperation(IOperation operation) => SerializeOperation(0, operation).Concat(new[] { new string('#', 10) });
+            private static IEnumerable<string> SerializeOperation(IOperation operation) =>
+                SerializeOperation(0, operation).Concat(new[] { "##########" });
 
             private static IEnumerable<string> SerializeOperation(int level, IOperation operation)
             {
@@ -128,9 +119,7 @@ namespace SonarAnalyzer.CFG
                     var condition = string.Empty;
                     if (predecessor.Source.ConditionKind != ControlFlowConditionKind.None)
                     {
-                        condition = predecessor == predecessor.Source.ConditionalSuccessor
-                            ? predecessor.Source.ConditionKind.ToString()
-                            : "Else";
+                        condition = predecessor == predecessor.Source.ConditionalSuccessor ? predecessor.Source.ConditionKind.ToString() : "Else";
                     }
                     var semantics = predecessor.Semantics == ControlFlowBranchSemantics.Regular ? null : predecessor.Semantics.ToString();
                     writer.WriteEdge(BlockId(predecessor.Source), BlockId(block), $"{semantics} {condition}".Trim());
@@ -142,10 +131,7 @@ namespace SonarAnalyzer.CFG
             }
 
             private string BlockId(BasicBlock block) =>
-                // To prevent collision with CfgSerializer in common subgraph
-                blockPrefix == '@'
-                    ? "Root" + block.Ordinal
-                    : blockPrefix.ToString() + block.Ordinal;
+                $"Block-{blockPrefix}-{block.Ordinal}";
 
             private static IEnumerable<IFlowAnonymousFunctionOperationWrapper> GetAnonymousFunctions(ControlFlowGraph cfg) =>
                 cfg.Blocks
@@ -153,6 +139,13 @@ namespace SonarAnalyzer.CFG
                    .Concat(cfg.Blocks.Select(block => block.BranchValue).Where(op => op != null))
                    .SelectMany(operation => operation.DescendantsAndSelf())
                    .OfType<IFlowAnonymousFunctionOperationWrapper>();
+        }
+
+        private class RoslynBlockPrefixProvider
+        {
+            private int value;
+
+            public int Next() => value++;
         }
     }
 }

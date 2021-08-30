@@ -35,7 +35,7 @@ namespace SonarAnalyzer.CFG
         public static string Serialize(string methodName, ControlFlowGraph cfg)
         {
             var writer = new DotWriter();
-            new RoslynCfgWalker(writer).Visit(methodName, cfg, false);
+            new RoslynCfgWalker(writer, new RoslynBlockPrefixProvider()).Visit(methodName, cfg, false);
             return writer.ToString();
         }
     }
