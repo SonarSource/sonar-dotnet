@@ -21,7 +21,6 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
-using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.CFG.Sonar
@@ -38,7 +37,6 @@ class Sample
     void Method() { }
 }";
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code), "GraphTitle");
-
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""GraphTitle"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
@@ -85,7 +83,6 @@ class Sample
     private int C() => 42;
 }";
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
-
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
@@ -98,7 +95,7 @@ cfg0_block1 -> cfg0_block2
         }
 
         [TestMethod]
-        public void Serialize_Branch_Jump()
+        public void Serialize_Branch_Switch()
         {
             var code = @"
 class Sample
@@ -120,30 +117,28 @@ class Sample
     private void c2();
 }
 ";
-            throw new System.NotImplementedException();
-//            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
-
-//            dot.Should().BeIgnoringLineEndings(
-//                @"digraph ""Foo"" {
-//0 [shape=record label=""{BRANCH:SwitchStatement|a}""]
-//0 -> 1
-//1 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
-//1 -> 2 [label=""True""]
-//1 -> 3 [label=""False""]
-//2 [shape=record label=""{JUMP:BreakStatement|c1|c1()}""]
-//2 -> 4
-//3 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
-//3 -> 5 [label=""True""]
-//3 -> 4 [label=""False""]
-//5 [shape=record label=""{JUMP:BreakStatement|c2|c2()}""]
-//5 -> 4
-//4 [shape=record label=""{EXIT}""]
-//}
-//");
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            dot.Should().BeIgnoringLineEndings(
+@"digraph ""RoslynCfg"" {
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation / IdentifierNameSyntax: a|1# ParameterReferenceOperation / IdentifierNameSyntax: a|##########|## BranchValue ##|0# BinaryOperation / LiteralExpressionSyntax: 1|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
+cfg0_block0 -> cfg0_block1
+cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: c1();|1# InvocationOperation: c1 / InvocationExpressionSyntax: c1()|2# InstanceReferenceOperation / IdentifierNameSyntax: c1|##########}""]
+cfg0_block1 -> cfg0_block2 [label=""Else""]
+cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# BinaryOperation / LiteralExpressionSyntax: 2|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|1# LiteralOperation / LiteralExpressionSyntax: 2|##########}""]
+cfg0_block1 -> cfg0_block3 [label=""WhenFalse""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# ExpressionStatementOperation / ExpressionStatementSyntax: c2();|1# InvocationOperation: c2 / InvocationExpressionSyntax: c2()|2# InstanceReferenceOperation / IdentifierNameSyntax: c2|##########}""]
+cfg0_block3 -> cfg0_block4 [label=""Else""]
+cfg0_block5 [shape=record label=""{EXIT #5}""]
+cfg0_block2 -> cfg0_block5
+cfg0_block3 -> cfg0_block5 [label=""WhenFalse""]
+cfg0_block4 -> cfg0_block5
+}
+");
         }
 
         [TestMethod]
-        public void Serialize_BinaryBranch_Simple()
+        public void Serialize_Branch_If()
         {
             var code = @"
 class Sample
@@ -158,18 +153,20 @@ class Sample
     void Bar() { }
 }
 ";
-            throw new System.NotImplementedException();
-            //            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
 
-            //            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
-            //0 [shape=record label=""{BINARY:TrueLiteralExpression|true}""]
-            //0 -> 1 [label=""True""]
-            //0 -> 2 [label=""False""]
-            //1 [shape=record label=""{SIMPLE|Bar|Bar()}""]
-            //1 -> 2
-            //2 [shape=record label=""{EXIT}""]
-            //}
-            //");
+            dot.Should().BeIgnoringLineEndings(
+@"digraph ""RoslynCfg"" {
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: true|##########}""]
+cfg0_block0 -> cfg0_block1
+cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar();|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar()|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|##########}""]
+cfg0_block1 -> cfg0_block2 [label=""Else""]
+cfg0_block3 [shape=record label=""{EXIT #3}""]
+cfg0_block1 -> cfg0_block3 [label=""WhenFalse""]
+cfg0_block2 -> cfg0_block3
+}
+");
         }
 
         [TestMethod]
