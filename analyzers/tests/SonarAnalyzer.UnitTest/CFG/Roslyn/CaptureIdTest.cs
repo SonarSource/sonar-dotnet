@@ -21,7 +21,6 @@
 using System;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
 using IFlowCaptureReferenceOperation = Microsoft.CodeAnalysis.FlowAnalysis.IFlowCaptureReferenceOperation;
@@ -55,7 +54,7 @@ public class Sample
     public string Method(object a, object b) =>
         a?.ToString() + b?.ToString();
 }";
-            var cfg = Compile(code);
+            var cfg = TestHelper.CompileCfg(code);
             var outerLocalLifetimeRegion = cfg.Root.NestedRegions.Single();
             outerLocalLifetimeRegion.Kind.Should().Be(ControlFlowRegionKind.LocalLifetime);
             outerLocalLifetimeRegion.NestedRegions.Should().HaveCount(2).And.OnlyContain(x => x.Kind == ControlFlowRegionKind.LocalLifetime);
@@ -76,13 +75,6 @@ public class Sample
                 flowCapture.Syntax.ToString().Should().Be(expectedName);
                 return new CaptureId(flowCapture.Id);
             }
-        }
-
-        private static ControlFlowGraph Compile(string snippet)
-        {
-            var (tree, semanticModel) = TestHelper.Compile(snippet);
-            var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)SyntaxKind.MethodDeclaration);
-            return ControlFlowGraph.Create(method, semanticModel);
         }
     }
 }

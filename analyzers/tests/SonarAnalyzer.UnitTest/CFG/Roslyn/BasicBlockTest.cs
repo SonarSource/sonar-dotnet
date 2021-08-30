@@ -20,7 +20,6 @@
 
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
@@ -48,7 +47,7 @@ public class Sample
             field = 42;
     }
 }";
-            var cfg = Compile(code);
+            var cfg = TestHelper.CompileCfg(code);
             /*
              *           Entry 0
              *             |
@@ -119,13 +118,6 @@ public class Sample
             branch.Predecessors.Should().HaveCount(1);
             assign.Predecessors.Should().HaveCount(1);
             exit.Predecessors.Should().HaveCount(2);
-        }
-
-        private static ControlFlowGraph Compile(string snippet)
-        {
-            var (tree, semanticModel) = TestHelper.Compile(snippet);
-            var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)SyntaxKind.MethodDeclaration);
-            return ControlFlowGraph.Create(method, semanticModel);
         }
     }
 }

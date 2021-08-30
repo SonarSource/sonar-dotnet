@@ -28,11 +28,14 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = Microsoft.CodeAnalysis.CSharp;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest
 {
@@ -44,8 +47,7 @@ namespace SonarAnalyzer.UnitTest
     <OutPath>{2}</OutPath>
 </SonarProjectConfig>";
 
-        public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true,
-            params MetadataReference[] additionalReferences)
+        public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true, params MetadataReference[] additionalReferences)
         {
             var language = isCSharp ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
 
@@ -57,6 +59,13 @@ namespace SonarAnalyzer.UnitTest
                 .GetCompilation();
             var tree = compilation.SyntaxTrees.First();
             return (tree, compilation.GetSemanticModel(tree));
+        }
+
+        public static ControlFlowGraph CompileCfg(string snippet, bool isCSharp = true)
+        {
+            var (tree, semanticModel) = Compile(snippet, isCSharp);
+            var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (isCSharp ? (int)CS.SyntaxKind.MethodDeclaration : (int)VB.SyntaxKind.FunctionBlock));
+            return ControlFlowGraph.Create(method, semanticModel);
         }
 
         public static MethodDeclarationSyntax GetMethod(this SyntaxTree syntaxTree, string name, int skip = 0) =>

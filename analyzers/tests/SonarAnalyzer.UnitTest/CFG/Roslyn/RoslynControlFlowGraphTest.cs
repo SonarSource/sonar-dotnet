@@ -24,9 +24,7 @@ using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
-using CS = Microsoft.CodeAnalysis.CSharp;
 using FlowAnalysis = Microsoft.CodeAnalysis.FlowAnalysis;
-using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.CFG.Roslyn
 {
@@ -48,7 +46,7 @@ public class Sample
         return 42;
     }
 }";
-            Compile(code).Should().NotBeNull();
+            TestHelper.CompileCfg(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -60,7 +58,7 @@ Public Class Sample
         Return 42
     End Function
 End Class";
-            Compile(code, false).Should().NotBeNull();
+            TestHelper.CompileCfg(code, false).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -77,7 +75,7 @@ public class Sample
         int LocalMethod() => 42;
     }
 }";
-            var cfg = Compile(code);
+            var cfg = TestHelper.CompileCfg(code);
             cfg.Should().NotBeNull();
             cfg.Root.Should().NotBeNull();
             cfg.Blocks.Should().NotBeNull().And.HaveCount(3); // Enter, Instructions, Exit
@@ -86,13 +84,6 @@ public class Sample
             cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single()).Should().NotBeNull();
             var anonymousFunction = cfg.Blocks.SelectMany(x => x.Operations).SelectMany(x => x.DescendantsAndSelf()).OfType<FlowAnalysis.IFlowAnonymousFunctionOperation>().Single();
             cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction)).Should().NotBeNull();
-        }
-
-        private static ControlFlowGraph Compile(string snippet, bool isCSharp = true)
-        {
-            var (tree, semanticModel) = TestHelper.Compile(snippet, isCSharp);
-            var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (isCSharp ? (int)CS.SyntaxKind.MethodDeclaration : (int)VB.SyntaxKind.FunctionBlock));
-            return ControlFlowGraph.Create(method, semanticModel);
         }
     }
 }
