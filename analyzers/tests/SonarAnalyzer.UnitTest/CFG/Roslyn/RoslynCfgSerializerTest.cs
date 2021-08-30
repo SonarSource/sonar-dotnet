@@ -290,24 +290,32 @@ class Sample
 {
     void Method()
     {
-        using (x)
+        using (var x = new System.IO.MemoryStream())
         {
             Bar();
         }
     }
+    private void Bar() { }
+}";
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            dot.Should().BeIgnoringLineEndings(
+@"digraph ""RoslynCfg"" {
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# LocalReferenceOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# ObjectCreationOperation / ObjectCreationExpressionSyntax: new System.IO.MemoryStream()|##########}""]
+cfg0_block0 -> cfg0_block1
+cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar();|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar()|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|##########}""]
+cfg0_block1 -> cfg0_block2
+cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# IsNullOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# LocalReferenceOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|##########}""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# InvocationOperation: Dispose / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# ConversionOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|2# LocalReferenceOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|##########}""]
+cfg0_block3 -> cfg0_block4 [label=""Else""]
+cfg0_block5 [shape=record label=""{BLOCK #5}""]
+cfg0_block3 -> cfg0_block5 [label=""WhenTrue""]
+cfg0_block4 -> cfg0_block5
+cfg0_block5 -> NoDestinationcfg0_block5 [label=""StructuredExceptionHandling""]
+cfg0_block6 [shape=record label=""{EXIT #6}""]
+cfg0_block2 -> cfg0_block6
 }
-";
-            throw new System.NotImplementedException();
-            //            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
-
-            //            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
-            //0 [shape=record label=""{JUMP:UsingStatement|x}""]
-            //0 -> 1
-            //1 [shape=record label=""{USING:UsingStatement|Bar|Bar()}""]
-            //1 -> 2
-            //2 [shape=record label=""{EXIT}""]
-            //}
-            //");
+");
         }
 
         [TestMethod]
@@ -316,6 +324,8 @@ class Sample
             var code = @"
 class Sample
 {
+    object x;
+
     void Method()
     {
         lock (x)
@@ -323,19 +333,27 @@ class Sample
             Bar();
         }
     }
+    private void Bar() { }
+}";
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            dot.Should().BeIgnoringLineEndings(
+@"digraph ""RoslynCfg"" {
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation / IdentifierNameSyntax: x|1# FieldReferenceOperation / IdentifierNameSyntax: x|2# InstanceReferenceOperation / IdentifierNameSyntax: x|##########}""]
+cfg0_block0 -> cfg0_block1
+cfg0_block2 [shape=record label=""{BLOCK #2|0# InvocationOperation: Enter / IdentifierNameSyntax: x|1# ArgumentOperation / IdentifierNameSyntax: x|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: x|1# ArgumentOperation / IdentifierNameSyntax: x|2# LocalReferenceOperation / IdentifierNameSyntax: x|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar();|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar()|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|##########}""]
+cfg0_block1 -> cfg0_block2
+cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# LocalReferenceOperation / IdentifierNameSyntax: x|##########}""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# InvocationOperation: Exit / IdentifierNameSyntax: x|1# ArgumentOperation / IdentifierNameSyntax: x|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: x|##########}""]
+cfg0_block3 -> cfg0_block4 [label=""Else""]
+cfg0_block5 [shape=record label=""{BLOCK #5}""]
+cfg0_block3 -> cfg0_block5 [label=""WhenFalse""]
+cfg0_block4 -> cfg0_block5
+cfg0_block5 -> NoDestinationcfg0_block5 [label=""StructuredExceptionHandling""]
+cfg0_block6 [shape=record label=""{EXIT #6}""]
+cfg0_block2 -> cfg0_block6
 }
-";
-            throw new System.NotImplementedException();
-            //            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
-
-            //            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
-            //0 [shape=record label=""{LOCK:LockStatement|x}""]
-            //0 -> 1
-            //1 [shape=record label=""{SIMPLE|Bar|Bar()}""]
-            //1 -> 2
-            //2 [shape=record label=""{EXIT}""]
-            //}
-            //");
+");
         }
 
         [TestMethod]
