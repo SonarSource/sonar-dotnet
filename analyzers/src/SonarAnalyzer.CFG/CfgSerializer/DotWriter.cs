@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Text;
 
 namespace SonarAnalyzer.CFG
@@ -25,11 +26,34 @@ namespace SonarAnalyzer.CFG
     internal class DotWriter
     {
         private readonly StringBuilder builder = new StringBuilder();
+        private readonly StringBuilder edges = new StringBuilder();
+        private bool started;
 
-        public void WriteGraphStart(string graphName, bool subgraph) =>
-            builder.AppendLine(subgraph ? $"subgraph \"cluster_{Encode(graphName)}\" {{\nlabel = \"{Encode(graphName)}\"" : $"digraph \"{Encode(graphName)}\" {{");
+        public void WriteGraphStart(string graphName)
+        {
+            if (started)
+            {
+                throw new InvalidOperationException("Graph was already started");
+            }
+            started = true;
+            builder.AppendLine($"digraph \"{Encode(graphName)}\" {{");
+        }
 
-        public void WriteGraphEnd() =>
+        public void WriteGraphEnd()
+        {
+            if (!started)
+            {
+                throw new InvalidOperationException("Graph was not started");
+            }
+            started = false;
+            builder.Append(edges).AppendLine("}");  // Edges crossing subgraphs must be listed at the end of the main graph to keep nodes rendered in the correct subgraph
+            edges.Clear();
+        }
+
+        public void WriteSubGraphStart(string graphName) =>
+            builder.AppendLine($"subgraph \"cluster_{Encode(graphName)}\" {{\nlabel = \"{Encode(graphName)}\"");
+
+        public void WriteSubGraphEnd() =>
             builder.AppendLine("}");
 
         public void WriteNode(string id, string header, params string[] items)
@@ -48,12 +72,12 @@ namespace SonarAnalyzer.CFG
 
         public void WriteEdge(string startId, string endId, string label)
         {
-            builder.Append(startId).Append(" -> ").Append(endId);
+            edges.Append(startId).Append(" -> ").Append(endId);
             if (!string.IsNullOrEmpty(label))
             {
-                builder.Append($" [label=\"{label}\"]");
+                edges.Append($" [label=\"{label}\"]");
             }
-            builder.AppendLine();
+            edges.AppendLine();
         }
 
         private static string Encode(string s) =>

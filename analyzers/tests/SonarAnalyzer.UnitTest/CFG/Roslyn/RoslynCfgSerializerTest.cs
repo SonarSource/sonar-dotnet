@@ -357,6 +357,38 @@ cfg0_block2 -> cfg0_block6
         }
 
         [TestMethod]
+        public void Serialize_Regions_TryCatch()
+        {
+            var code = @"
+class Sample
+{
+    void Method()
+    {
+
+        Before();
+        try
+        {
+            InTry();
+        }
+        finally
+        {
+            InFinally();
+        }
+        After();
+    }
+    private void Before() { }
+    private void InTry() { }
+    private void InFinally() { }
+    private void After() { }
+}";
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            dot.Should().BeIgnoringLineEndings(
+@"
+FIXME
+");
+        }
+
+        [TestMethod]
         public void Serialize_Lambda()
         {
             var code = @"

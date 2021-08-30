@@ -42,13 +42,13 @@ namespace SonarAnalyzer.CFG
                 cfgId = cfgIdProvider.Next();
             }
 
-            public void Visit(string title, ControlFlowGraph cfg, bool subgraph)
+            public void Visit(ControlFlowGraph cfg, string title)
             {
-                writer.WriteGraphStart(title, subgraph);
-                //foreach (var region in cfg.Root.NestedRegions)
-                //{
-                //    Visit(cfg, region);
-                //}
+                writer.WriteGraphStart(title);
+                foreach (var region in cfg.Root.NestedRegions)
+                {
+                    Visit(cfg, region);
+                }
                 foreach (var block in cfg.Blocks.Where(x => !visited.Contains(x)).ToArray())
                 {
                     Visit(block);
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.CFG
 
             private void Visit(ControlFlowGraph cfg, ControlFlowRegion region)
             {
-                writer.WriteGraphStart(region.Kind + " region" + (region.ExceptionType == null ? null : " " + region.ExceptionType), true);
+                writer.WriteSubGraphStart(region.Kind + " region" + (region.ExceptionType == null ? null : " " + region.ExceptionType));
                 foreach (var nested in region.NestedRegions)
                 {
                     Visit(cfg, nested);
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.CFG
                 {
                     Visit(block);
                 }
-                writer.WriteGraphEnd();
+                writer.WriteSubGraphEnd();
             }
 
             private void Visit(BasicBlock block)
