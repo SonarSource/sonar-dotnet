@@ -46,9 +46,9 @@ namespace SonarAnalyzer.Rules.CSharp
         /// Validation method. Checks the supplied method and returns the error message,
         /// or null if there is no issue.
         /// </summary>
-        private delegate string SignatureValidator(SyntaxNode node, IMethodSymbol method);
+        private delegate string SignatureValidator(SyntaxNode methodNode, IMethodSymbol methodSymbol);
 
-        private static readonly SignatureValidator NullValidator = (n, m) => null;
+        private static readonly SignatureValidator NullValidator = (node, symbol) => null;
 
         // We currently support three test framework, each of which supports multiple test method attribute markers, and each of which
         // has differing constraints (public/private, generic/non-generic).
@@ -60,43 +60,43 @@ namespace SonarAnalyzer.Rules.CSharp
             // MSTest
             {
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
-                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: false)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: false)
             },
             {
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
-                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: false)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: false)
             },
 
             // NUnit
             {
                 KnownType.NUnit_Framework_TestAttribute,
-                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: false)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: false)
             },
             {
                 KnownType.NUnit_Framework_TestCaseAttribute,
-                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: true)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: true)
             },
             {
                 KnownType.NUnit_Framework_TestCaseSourceAttribute,
-                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: true)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: true)
             },
             {
                 KnownType.NUnit_Framework_TheoryAttribute,
-                (n, m) => GetFaultMessage(n, m, publicOnly: true, allowGenerics: false)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: false)
             },
 
             // XUnit - note that local functions can be test methods, thus we skip checking the syntax node
             {
                 KnownType.Xunit_FactAttribute,
-                (_, m) => GetFaultMessage(m, publicOnly: false, allowGenerics: false)
+                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: false)
             },
             {
                 KnownType.Xunit_TheoryAttribute,
-                (_, m) => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
+                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: true)
             },
             {
                 KnownType.LegacyXunit_TheoryAttribute,
-                (_, m) => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
+                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: true)
             }
         };
 
@@ -138,8 +138,8 @@ namespace SonarAnalyzer.Rules.CSharp
             return AttributeToConstraintsMap.GetValueOrDefault(attributeKnownType);
         }
 
-        private static string GetFaultMessage(SyntaxNode node, IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
-            LocalFunctionStatementSyntaxWrapper.IsInstance(node)
+        private static string GetFaultMessage(SyntaxNode methodNode, IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
+            LocalFunctionStatementSyntaxWrapper.IsInstance(methodNode)
             ? MakeMethodNotLocalFunction
             : GetFaultMessage(methodSymbol, publicOnly, allowGenerics);
 
