@@ -20,7 +20,6 @@
 
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
 
@@ -37,7 +36,7 @@ public class Sample
 {
     public void Method(bool condition) { } // Empty, just Entry and Exit block
 }";
-            var cfg = Compile(code);
+            var cfg = TestHelper.CompileCfg(code);
             var entry = cfg.Blocks[0];
             var exit = cfg.Blocks[1];
             entry.Kind.Should().Be(BasicBlockKind.Entry);
@@ -72,7 +71,7 @@ public class Sample
         }
     }
 }";
-            var cfg = Compile(code);
+            var cfg = TestHelper.CompileCfg(code);
             /*
              *          Entry 0
              *            |
@@ -128,13 +127,6 @@ public class Sample
             entering.EnteringRegions.Should().HaveCount(2).And.ContainInOrder(tryAndFinallyRegion, tryRegion); // Weird, but Roslyn does it this way.
             entering.LeavingRegions.Should().BeEmpty();
             entering.FinallyRegions.Should().BeEmpty();
-        }
-
-        private static ControlFlowGraph Compile(string snippet)
-        {
-            var (tree, semanticModel) = TestHelper.Compile(snippet);
-            var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)SyntaxKind.MethodDeclaration);
-            return ControlFlowGraph.Create(method, semanticModel);
         }
     }
 }

@@ -20,7 +20,6 @@
 
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
 
@@ -53,7 +52,7 @@ public class Sample
         int LocalMethod() => 42;
     }
 }";
-            var root = Compile(code).Root;
+            var root = TestHelper.CompileCfg(code).Root;
 
             root.Should().NotBeNull();
             root.Kind.Should().Be(ControlFlowRegionKind.Root);
@@ -90,13 +89,6 @@ public class Sample
             catchRegion.Kind.Should().Be(ControlFlowRegionKind.Catch);
             catchRegion.ExceptionType.Should().NotBeNull();
             catchRegion.ExceptionType.Name.Should().Be("InvalidOperationException");
-        }
-
-        private static ControlFlowGraph Compile(string snippet)
-        {
-            var (tree, semanticModel) = TestHelper.Compile(snippet);
-            var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)SyntaxKind.MethodDeclaration);
-            return ControlFlowGraph.Create(method, semanticModel);
         }
     }
 }
