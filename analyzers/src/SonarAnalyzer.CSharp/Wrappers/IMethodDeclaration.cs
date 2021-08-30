@@ -27,8 +27,14 @@ namespace SonarAnalyzer.Wrappers
     {
         BlockSyntax Body { get; }
 
+        ArrowExpressionClauseSyntax ExpressionBody { get; }
+
         SyntaxToken Identifier { get; }
 
         ParameterListSyntax ParameterList { get; }
+
+        bool HasImplementation { get; }
+
+        bool IsLocal { get; }
     }
 }

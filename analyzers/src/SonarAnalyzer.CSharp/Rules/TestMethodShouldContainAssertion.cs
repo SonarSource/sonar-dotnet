@@ -27,6 +27,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -67,31 +69,30 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    if (methodDeclaration.Identifier.IsMissing
-                        || (methodDeclaration.Body == null && methodDeclaration.ExpressionBody == null))
-                    {
-                        return;
-                    }
-
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    if (methodSymbol == null
-                        || !methodSymbol.IsTestMethod()
-                        || methodSymbol.HasExpectedExceptionAttribute()
-                        || methodSymbol.HasAssertionInAttribute()
-                        || IsTestIgnored(methodSymbol))
-                    {
-                        return;
-                    }
-
-                    if (!ContainsAssertion(methodDeclaration, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
+                    var methodDeclaration = MethodDeclarationFactory.Create(c.Node);
+                    if (!methodDeclaration.Identifier.IsMissing
+                        && methodDeclaration.HasImplementation
+                        && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol
+                        && IsTestMethod(methodSymbol, methodDeclaration.IsLocal)
+                        && !methodSymbol.HasExpectedExceptionAttribute()
+                        && !methodSymbol.HasAssertionInAttribute()
+                        && !IsTestIgnored(methodSymbol)
+                        && !ContainsAssertion(c.Node, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
-                SyntaxKind.MethodDeclaration);
+                SyntaxKind.MethodDeclaration,
+                SyntaxKindEx.LocalFunctionStatement);
 
-        private static bool ContainsAssertion(MethodDeclarationSyntax methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
+        // only xUnit allows local functions to be test methods.
+        private static bool IsTestMethod(IMethodSymbol symbol, bool isLocalFunction) =>
+                isLocalFunction ? IsXunitTestMethod(symbol) : symbol.IsTestMethod();
+
+        private static bool IsXunitTestMethod(IMethodSymbol methodSymbol) =>
+                methodSymbol.AnyAttributeDerivesFromAny(UnitTestHelper.KnownTestMethodAttributesOfxUnit);
+
+        private static bool ContainsAssertion(SyntaxNode methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
         {
             var currentSemanticModel = methodDeclaration.EnsureCorrectSemanticModelOrDefault(previousSemanticModel);
             if (currentSemanticModel == null)

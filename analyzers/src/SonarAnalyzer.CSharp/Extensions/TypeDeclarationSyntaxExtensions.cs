@@ -36,39 +36,11 @@ namespace SonarAnalyzer.Extensions
             typeDeclaration
                 .Members
                 .OfType<MethodDeclarationSyntax>()
-                .SelectMany(method => GetLocalFunctions(method).Union(new List<IMethodDeclaration> { new MethodDeclarationSyntaxAdapter(method)}));
+                .SelectMany(method => GetLocalFunctions(method).Union(new List<IMethodDeclaration> { MethodDeclarationFactory.Create(method) }));
 
-        private static IEnumerable<LocalFunctionStatementAdapter> GetLocalFunctions(MethodDeclarationSyntax methodDeclaration)
+        private static IEnumerable<IMethodDeclaration> GetLocalFunctions(MethodDeclarationSyntax methodDeclaration)
             => methodDeclaration.DescendantNodes()
                 .Where(member => member.IsKind(SyntaxKindEx.LocalFunctionStatement))
-                .Select(member => new LocalFunctionStatementAdapter((LocalFunctionStatementSyntaxWrapper)member));
-
-        private class LocalFunctionStatementAdapter : IMethodDeclaration
-        {
-            private readonly LocalFunctionStatementSyntaxWrapper syntaxWrapper;
-
-            public LocalFunctionStatementAdapter(LocalFunctionStatementSyntaxWrapper syntaxWrapper)
-                => this.syntaxWrapper = syntaxWrapper;
-
-            public BlockSyntax Body => syntaxWrapper.Body;
-
-            public SyntaxToken Identifier => syntaxWrapper.Identifier;
-
-            public ParameterListSyntax ParameterList => syntaxWrapper.ParameterList;
-        }
-
-        private class MethodDeclarationSyntaxAdapter : IMethodDeclaration
-        {
-            private readonly MethodDeclarationSyntax declarationSyntax;
-
-            public MethodDeclarationSyntaxAdapter(MethodDeclarationSyntax declarationSyntax)
-                => this.declarationSyntax = declarationSyntax;
-
-            public BlockSyntax Body => declarationSyntax.Body;
-
-            public SyntaxToken Identifier => declarationSyntax.Identifier;
-
-            public ParameterListSyntax ParameterList => declarationSyntax.ParameterList;
-        }
+                .Select(member => MethodDeclarationFactory.Create(member));
     }
 }

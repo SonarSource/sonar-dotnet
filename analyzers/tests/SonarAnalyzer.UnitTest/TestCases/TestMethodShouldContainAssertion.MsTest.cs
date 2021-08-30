@@ -47,10 +47,7 @@
         }
 
         [TestMethod]
-        public void TestMethod8()
-        {
-            AssertSomething();
-        }
+        public void TestMethod8() => AssertSomething();
 
         [TestMethod]
         public void TestMethod9()
