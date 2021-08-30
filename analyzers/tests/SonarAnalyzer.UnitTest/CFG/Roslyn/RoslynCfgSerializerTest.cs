@@ -68,6 +68,37 @@ cfg0_block0 -> cfg0_block1
         }
 
         [TestMethod]
+        public void Serialize_OperationSequence()
+        {
+            var code = @"
+class Sample
+{
+    void Method()
+    {
+        A();
+        B();
+        var c = C();
+    }
+
+    private void A() { }
+    private void B() { }
+    private int C() => 42;
+}";
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+
+            dot.Should().BeIgnoringLineEndings(
+@"digraph ""RoslynCfg"" {
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: A();|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: B();|##########|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: c = C()|##########}""]
+cfg0_block0 -> cfg0_block1
+cfg0_block2 [shape=record label=""{EXIT #2}""]
+cfg0_block1 -> cfg0_block2
+}
+");
+        }
+
+
+        [TestMethod]
         public void Serialize_Branch_Jump()
         {
             var code = @"
@@ -90,24 +121,26 @@ class Sample
     private void c2();
 }
 ";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            throw new System.NotImplementedException();
+//            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
 
-            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
-0 [shape=record label=""{BRANCH:SwitchStatement|a}""]
-0 -> 1
-1 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
-1 -> 2 [label=""True""]
-1 -> 3 [label=""False""]
-2 [shape=record label=""{JUMP:BreakStatement|c1|c1()}""]
-2 -> 4
-3 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
-3 -> 5 [label=""True""]
-3 -> 4 [label=""False""]
-5 [shape=record label=""{JUMP:BreakStatement|c2|c2()}""]
-5 -> 4
-4 [shape=record label=""{EXIT}""]
-}
-");
+//            dot.Should().BeIgnoringLineEndings(
+//                @"digraph ""Foo"" {
+//0 [shape=record label=""{BRANCH:SwitchStatement|a}""]
+//0 -> 1
+//1 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
+//1 -> 2 [label=""True""]
+//1 -> 3 [label=""False""]
+//2 [shape=record label=""{JUMP:BreakStatement|c1|c1()}""]
+//2 -> 4
+//3 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
+//3 -> 5 [label=""True""]
+//3 -> 4 [label=""False""]
+//5 [shape=record label=""{JUMP:BreakStatement|c2|c2()}""]
+//5 -> 4
+//4 [shape=record label=""{EXIT}""]
+//}
+//");
         }
 
         [TestMethod]
