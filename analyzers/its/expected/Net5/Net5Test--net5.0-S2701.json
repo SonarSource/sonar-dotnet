@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\Net5\Net5Test\S3433_Mstest.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  17,
+"endLine":  13,
+"endColumn":  36
+}
+}
+}
+]
+}
