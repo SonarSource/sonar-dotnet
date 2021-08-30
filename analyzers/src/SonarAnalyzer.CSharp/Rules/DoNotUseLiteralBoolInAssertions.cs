@@ -34,18 +34,15 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotUseLiteralBoolInAssertions : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2701";
+        private const string DiagnosticId = "S2701";
         private const string MessageFormat = "Remove or correct this assertion.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static Dictionary<KnownType, HashSet<string>> trackedTypeAndMethods =
-            new Dictionary<KnownType, HashSet<string>>
+        private static readonly Dictionary<KnownType, HashSet<string>> TrackedTypeAndMethods =
+            new ()
             {
                 [KnownType.Xunit_Assert] = new HashSet<string>
                 {
+                    // "True" is not here because there was no Assert.Fail in Xunit until 2020 and Assert.True(false) was a way to simulate it.
                     "Equal", "False", "NotEqual", "Same", "StrictEqual", "NotSame"
                 },
 
@@ -66,12 +63,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             };
 
-        private static readonly ISet<SyntaxKind> boolLiterals =
+        private static readonly ISet<SyntaxKind> BoolLiterals =
             new HashSet<SyntaxKind>
             {
                 SyntaxKind.TrueLiteralExpression,
                 SyntaxKind.FalseLiteralExpression
             };
+
+        private static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -89,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         IsFirstOrSecondArgumentABoolLiteral(invocation.ArgumentList.Arguments) &&
                         !IsWorkingWithNullableType(methodSymbol, invocation.ArgumentList.Arguments, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
@@ -137,12 +139,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsBooleanLiteral(ArgumentSyntax argument)
         {
-            return argument.Expression.IsAnyKind(boolLiterals);
+            return argument.Expression.IsAnyKind(BoolLiterals);
         }
 
         private static bool IsTrackedMethod(ISymbol methodSymbol)
         {
-            return trackedTypeAndMethods
+            return TrackedTypeAndMethods
                 .Where(kvp => methodSymbol.ContainingType.Is(kvp.Key))
                 .Any(kvp => kvp.Value.Contains(methodSymbol.Name));
         }
