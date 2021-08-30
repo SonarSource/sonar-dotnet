@@ -40,7 +40,7 @@ class C
     }
 }
 ";
-            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Foo"), "Foo");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{EXIT}""]
@@ -69,7 +69,7 @@ class C
     }
 }
 ";
-            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Foo"), "Foo");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{BRANCH:SwitchStatement|a}""]
@@ -105,7 +105,7 @@ class C
     void Bar() { }
 }
 ";
-            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Foo"), "Foo");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{BINARY:TrueLiteralExpression|true}""]
@@ -133,7 +133,7 @@ class C
     }
 }
 ";
-            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Foo"), "Foo");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{FOREACH:ForEachStatement|items}""]
@@ -167,7 +167,7 @@ namespace Namespace
         }
     };";
 
-            var dot = CfgSerializer.Serialize("ForEach", GetCfgForMethod(code, "ForEach"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "ForEach"), "ForEach");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""ForEach"" {
 0 [shape=record label=""{FOREACH:ForEachVariableStatement|values}""]
@@ -197,7 +197,7 @@ class C
     }
 }
 ";
-            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Foo"), "Foo");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{FOR:ForStatement|0|i = 0}""]
@@ -229,7 +229,7 @@ class C
     }
 }
 ";
-            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Foo"), "Foo");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{JUMP:UsingStatement|x}""]
@@ -256,7 +256,7 @@ class C
     }
 }
 ";
-            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Foo"), "Foo");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{LOCK:LockStatement|x}""]
@@ -283,7 +283,7 @@ class C
     }
 }
 ";
-            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Foo"), "Foo");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{SIMPLE|Bar|x =\>\n        \{\n            return 1 + 1;\n        \}|Bar(x =\>\n        \{\n            return 1 + 1;\n        \})}""]
@@ -305,7 +305,7 @@ internal class Test
     }
 }
 ";
-            var dot = CfgSerializer.Serialize("Range", GetCfgForMethod(code, "Range"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Range"), "Range");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
 0 [shape=record label=""{SIMPLE|1..4|r = 1..4}""]
@@ -327,7 +327,7 @@ internal class Test
     }
 }
 ";
-            var dot = CfgSerializer.Serialize("Index", GetCfgForMethod(code, "Index"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Index"), "Index");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Index"" {
 0 [shape=record label=""{SIMPLE|^1|index = ^1}""]
@@ -349,7 +349,7 @@ internal class Test
     }
 }
 ";
-            var dot = CfgSerializer.Serialize("Range", GetCfgForMethod(code, "Range"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Range"), "Range");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
 0 [shape=record label=""{SIMPLE|^2..^0|range = ^2..^0}""]
@@ -372,7 +372,7 @@ internal class Test
     }
 }
 ";
-            var dot = CfgSerializer.Serialize("Range", GetCfgForMethod(code, "Range"));
+            var dot = CfgSerializer.Serialize(GetCfgForMethod(code, "Range"), "Range");
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
 0 [shape=record label=""{SIMPLE|new[] \{ 1, 2 \}|1|2|\{ 1, 2 \}|ints = new[] \{ 1, 2 \}|ints|^2..^1|ints[^2..^1]|lastTwo = ints[^2..^1]}""]

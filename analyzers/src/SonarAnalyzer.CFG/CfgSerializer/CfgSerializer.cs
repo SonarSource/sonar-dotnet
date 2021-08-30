@@ -25,17 +25,17 @@ namespace SonarAnalyzer.CFG
 {
     public partial class CfgSerializer
     {
-        public static string Serialize(string methodName, IControlFlowGraph cfg)
+        public static string Serialize(IControlFlowGraph cfg, string methodName = "SonarCfg")
         {
             var writer = new DotWriter();
             new SonarCfgWalker(writer).Visit(methodName, cfg);
             return writer.ToString();
         }
 
-        public static string Serialize(string methodName, ControlFlowGraph cfg)
+        public static string Serialize(ControlFlowGraph cfg, string methodName = "RoslynCfg")
         {
             var writer = new DotWriter();
-            new RoslynCfgWalker(writer, new RoslynBlockPrefixProvider()).Visit(methodName, cfg, false);
+            new RoslynCfgWalker(writer, new RoslynCfgIdProvider()).Visit(methodName, cfg, false);
             return writer.ToString();
         }
     }

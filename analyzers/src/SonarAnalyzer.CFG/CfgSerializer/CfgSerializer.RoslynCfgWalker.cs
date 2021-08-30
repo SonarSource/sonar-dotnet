@@ -21,7 +21,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Semantics;
 using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 
@@ -33,37 +32,37 @@ namespace SonarAnalyzer.CFG
         {
             private readonly DotWriter writer;
             private readonly HashSet<BasicBlock> visited = new HashSet<BasicBlock>();
-            private readonly RoslynBlockPrefixProvider blockPrefixProvider;
-            private readonly int blockPrefix;
+            private readonly RoslynCfgIdProvider cfgIdProvider;
+            private readonly int cfgId;
 
-            public RoslynCfgWalker(DotWriter writer, RoslynBlockPrefixProvider blockPrefixProvider)
+            public RoslynCfgWalker(DotWriter writer, RoslynCfgIdProvider cfgIdProvider)
             {
                 this.writer = writer;
-                this.blockPrefixProvider = blockPrefixProvider;
-                blockPrefix = blockPrefixProvider.Next();
+                this.cfgIdProvider = cfgIdProvider;
+                cfgId = cfgIdProvider.Next();
             }
 
             public void Visit(string methodName, ControlFlowGraph cfg, bool subgraph)
             {
                 writer.WriteGraphStart(methodName, subgraph);
-                foreach (var region in cfg.Root.NestedRegions)
-                {
-                    Visit(cfg, region);
-                }
+                //foreach (var region in cfg.Root.NestedRegions)
+                //{
+                //    Visit(cfg, region);
+                //}
                 foreach (var block in cfg.Blocks.Where(x => !visited.Contains(x)).ToArray())
                 {
                     Visit(block);
                 }
-                foreach (var localFunction in cfg.LocalFunctions)
-                {
-                    var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
-                    new RoslynCfgWalker(writer, blockPrefixProvider).Visit($"{methodName}.{localFunction.Name}", localFunctionCfg, true);
-                }
-                foreach (var anonymousFunction in GetAnonymousFunctions(cfg))
-                {
-                    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
-                    new RoslynCfgWalker(writer, blockPrefixProvider).Visit($"{methodName}.anonymous", anonymousFunctionCfg, true);
-                }
+                //foreach (var localFunction in cfg.LocalFunctions)
+                //{
+                //    var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
+                //    new RoslynCfgWalker(writer, blockPrefixProvider).Visit($"{methodName}.{localFunction.Name}", localFunctionCfg, true);
+                //}
+                //foreach (var anonymousFunction in GetAnonymousFunctions(cfg))
+                //{
+                //    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
+                //    new RoslynCfgWalker(writer, blockPrefixProvider).Visit($"{methodName}.anonymous", anonymousFunctionCfg, true);
+                //}
                 writer.WriteGraphEnd();
             }
 
@@ -90,7 +89,7 @@ namespace SonarAnalyzer.CFG
 
             private void WriteNode(BasicBlock block)
             {
-                var header = block.Kind.ToString().ToUpperInvariant() + " #" + BlockId(block);
+                var header = block.Kind.ToString().ToUpperInvariant() + " #" + block.Ordinal;
                 writer.WriteNode(BlockId(block), header, block.Operations.SelectMany(SerializeOperation).Concat(SerializeBranchValue(block.BranchValue)).ToArray());
             }
 
@@ -131,17 +130,17 @@ namespace SonarAnalyzer.CFG
             }
 
             private string BlockId(BasicBlock block) =>
-                $"Block-{blockPrefix}-{block.Ordinal}";
+                $"cfg{cfgId}_block{block.Ordinal}";
 
-            private static IEnumerable<IFlowAnonymousFunctionOperationWrapper> GetAnonymousFunctions(ControlFlowGraph cfg) =>
-                cfg.Blocks
-                   .SelectMany(block => block.Operations)
-                   .Concat(cfg.Blocks.Select(block => block.BranchValue).Where(op => op != null))
-                   .SelectMany(operation => operation.DescendantsAndSelf())
-                   .OfType<IFlowAnonymousFunctionOperationWrapper>();
+            //private static IEnumerable<IFlowAnonymousFunctionOperationWrapper> GetAnonymousFunctions(ControlFlowGraph cfg) =>
+            //    cfg.Blocks
+            //       .SelectMany(block => block.Operations)
+            //       .Concat(cfg.Blocks.Select(block => block.BranchValue).Where(op => op != null))
+            //       .SelectMany(operation => operation.DescendantsAndSelf())
+            //       .OfType<IFlowAnonymousFunctionOperationWrapper>();
         }
 
-        private class RoslynBlockPrefixProvider
+        private class RoslynCfgIdProvider
         {
             private int value;
 

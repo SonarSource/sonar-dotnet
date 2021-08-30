@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
         }
 
         public static string GetCfgGraph(string code, string methodName) =>
-            CfgSerializer.Serialize(methodName, GetCfgForMethod(code, methodName));
+            CfgSerializer.Serialize(GetCfgForMethod(code, methodName), methodName);
 
         public static void ExportAllMethods(string code, TextWriter writer, bool withLoc)
         {
