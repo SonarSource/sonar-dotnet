@@ -58,8 +58,7 @@ public record Record
             >= 0 => 1
         };
 
-    private class LocalFunctionAttribute : Attribute { } // Noncompliant - FP
-                                                         // Noncompliant@-1 - duplicate issue reported
+    private class LocalFunctionAttribute : Attribute { }
 
     public void Foo()
     {
