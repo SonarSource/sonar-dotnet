@@ -33,14 +33,14 @@ namespace SonarAnalyzer.UnitTest.CFG.Sonar
         public void Serialize_MethodNameUsedInTitle()
         {
             var code = @"
-class C
+class Sample
 {
-    void Foo() { }
+    void Method() { }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code), "Foo");
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code), "GraphTitle");
 
             dot.Should().BeIgnoringLineEndings(
-@"digraph ""Foo"" {
+@"digraph ""GraphTitle"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block1 [shape=record label=""{EXIT #1}""]
 cfg0_block0 -> cfg0_block1
@@ -52,9 +52,9 @@ cfg0_block0 -> cfg0_block1
         public void Serialize_Empty_Method()
         {
             var code = @"
-class C
+class Sample
 {
-    void Foo() { }
+    void Method() { }
 }";
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
 
@@ -71,7 +71,7 @@ cfg0_block0 -> cfg0_block1
         public void Serialize_Branch_Jump()
         {
             var code = @"
-class C
+class Sample
 {
     void Foo(int a)
     {
@@ -86,36 +86,37 @@ class C
                 break;
         }
     }
+    private void c1();
+    private void c2();
 }
 ";
-            throw new System.NotImplementedException();
-//            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
 
-//            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
-//0 [shape=record label=""{BRANCH:SwitchStatement|a}""]
-//0 -> 1
-//1 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
-//1 -> 2 [label=""True""]
-//1 -> 3 [label=""False""]
-//2 [shape=record label=""{JUMP:BreakStatement|c1|c1()}""]
-//2 -> 4
-//3 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
-//3 -> 5 [label=""True""]
-//3 -> 4 [label=""False""]
-//5 [shape=record label=""{JUMP:BreakStatement|c2|c2()}""]
-//5 -> 4
-//4 [shape=record label=""{EXIT}""]
-//}
-//");
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
+0 [shape=record label=""{BRANCH:SwitchStatement|a}""]
+0 -> 1
+1 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
+1 -> 2 [label=""True""]
+1 -> 3 [label=""False""]
+2 [shape=record label=""{JUMP:BreakStatement|c1|c1()}""]
+2 -> 4
+3 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
+3 -> 5 [label=""True""]
+3 -> 4 [label=""False""]
+5 [shape=record label=""{JUMP:BreakStatement|c2|c2()}""]
+5 -> 4
+4 [shape=record label=""{EXIT}""]
+}
+");
         }
 
         [TestMethod]
         public void Serialize_BinaryBranch_Simple()
         {
             var code = @"
-class C
+class Sample
 {
-    void Foo()
+    void Method()
     {
         if (true)
         {
@@ -126,7 +127,7 @@ class C
 }
 ";
             throw new System.NotImplementedException();
-            //            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            //            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
 
             //            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
             //0 [shape=record label=""{BINARY:TrueLiteralExpression|true}""]
@@ -143,9 +144,9 @@ class C
         public void Serialize_Foreach_Binary_Simple()
         {
             var code = @"
-class C
+class Sample
 {
-    void Foo()
+    void Method()
     {
         foreach (var i in items)
         {
@@ -155,7 +156,7 @@ class C
 }
 ";
             throw new System.NotImplementedException();
-            //            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            //            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
 
             //            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
             //0 [shape=record label=""{FOREACH:ForEachStatement|items}""]
@@ -208,9 +209,9 @@ namespace Namespace
         public void Serialize_For_Binary_Simple()
         {
             var code = @"
-class C
+class Sample
 {
-    void Foo()
+    void Method()
     {
         for (var i = 0; i < 10; i++)
         {
@@ -220,7 +221,7 @@ class C
 }
 ";
             throw new System.NotImplementedException();
-            //            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            //            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
 
             //            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
             //0 [shape=record label=""{FOR:ForStatement|0|i = 0}""]
@@ -241,9 +242,9 @@ class C
         public void Serialize_Jump_Using()
         {
             var code = @"
-class C
+class Sample
 {
-    void Foo()
+    void Method()
     {
         using (x)
         {
@@ -253,7 +254,7 @@ class C
 }
 ";
             throw new System.NotImplementedException();
-            //            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            //            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
 
             //            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
             //0 [shape=record label=""{JUMP:UsingStatement|x}""]
@@ -269,9 +270,9 @@ class C
         public void Serialize_Lock_Simple()
         {
             var code = @"
-class C
+class Sample
 {
-    void Foo()
+    void Method()
     {
         lock (x)
         {
@@ -281,7 +282,7 @@ class C
 }
 ";
             throw new System.NotImplementedException();
-            //            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            //            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
 
             //            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
             //0 [shape=record label=""{LOCK:LockStatement|x}""]
@@ -297,9 +298,9 @@ class C
         public void Serialize_Lambda()
         {
             var code = @"
-class C
+class Sample
 {
-    void Foo()
+    void Method()
     {
         Bar(x =>
         {
@@ -309,7 +310,7 @@ class C
 }
 ";
             throw new System.NotImplementedException();
-            //            var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
+            //            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
 
             //            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
             //0 [shape=record label=""{SIMPLE|Bar|x =\>\n        \{\n            return 1 + 1;\n        \}|Bar(x =\>\n        \{\n            return 1 + 1;\n        \})}""]

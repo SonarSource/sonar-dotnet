@@ -36,9 +36,9 @@ namespace SonarAnalyzer.CFG
             public SonarCfgWalker(DotWriter writer) =>
                 this.writer = writer;
 
-            public void Visit(string methodName, IControlFlowGraph cfg)
+            public void Visit(string title, IControlFlowGraph cfg)
             {
-                writer.WriteGraphStart(methodName, false);
+                writer.WriteGraphStart(title, false);
                 foreach (var block in cfg.Blocks)
                 {
                     Visit(block);

@@ -42,9 +42,9 @@ namespace SonarAnalyzer.CFG
                 cfgId = cfgIdProvider.Next();
             }
 
-            public void Visit(string methodName, ControlFlowGraph cfg, bool subgraph)
+            public void Visit(string title, ControlFlowGraph cfg, bool subgraph)
             {
-                writer.WriteGraphStart(methodName, subgraph);
+                writer.WriteGraphStart(title, subgraph);
                 //foreach (var region in cfg.Root.NestedRegions)
                 //{
                 //    Visit(cfg, region);
