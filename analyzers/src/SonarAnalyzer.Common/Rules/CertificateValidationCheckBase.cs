@@ -216,19 +216,12 @@ namespace SonarAnalyzer.Rules
 
         private ImmutableArray<Location> VisitInvocation(TInvocationExpressionSyntax invocation, InspectionContext c)
         {
-            var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-            var declaringReferences = invSymbol is IMethodSymbol { PartialImplementationPart: { } } methodSymbol
-                ? methodSymbol.PartialImplementationPart.DeclaringSyntaxReferences
-                : invSymbol.DeclaringSyntaxReferences;
+            var invSymbol = (IMethodSymbol)c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
+            var references = invSymbol.PartialImplementationPart?.DeclaringSyntaxReferences ?? invSymbol.DeclaringSyntaxReferences;
+            var syntax = SyntaxFromReference(references.Single());
 
-            if (declaringReferences.Length == 1
-                && SyntaxFromReference(declaringReferences.Single()) is { } syntax)
-            {
-                c.VisitedMethods.Add(syntax);
-                return InvocationLocations(c, syntax);
-            }
-
-            return ImmutableArray<Location>.Empty;
+            c.VisitedMethods.Add(syntax);
+            return InvocationLocations(c, syntax);
         }
 
         private ImmutableArray<Location> IdentifierLocations(InspectionContext c, SyntaxNode syntax) =>
