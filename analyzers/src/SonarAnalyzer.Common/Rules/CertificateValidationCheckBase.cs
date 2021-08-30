@@ -201,19 +201,7 @@ namespace SonarAnalyzer.Rules
                 case TLambdaSyntax lambda:
                     return LambdaLocations(c, lambda);
                 case TInvocationExpressionSyntax invocation:
-                    var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-                    var declaringReferences = invSymbol is IMethodSymbol { PartialImplementationPart: { } } methodSymbol
-                        ? methodSymbol.PartialImplementationPart.DeclaringSyntaxReferences
-                        : invSymbol.DeclaringSyntaxReferences;
-
-                    if (declaringReferences.Length == 1
-                        && SyntaxFromReference(declaringReferences.Single()) is { } syntax)
-                    {
-                        c.VisitedMethods.Add(syntax);
-                        return InvocationLocations(c, syntax);
-                    }
-
-                    break;
+                    return VisitInvocation(invocation, c);
                 case TMemberAccessSyntax memberAccess:
                     if (c.Context.SemanticModel.GetSymbolInfo(memberAccess).Symbol is { } maSymbol
                         && maSymbol.IsInType(KnownType.System_Net_Http_HttpClientHandler)
@@ -223,6 +211,23 @@ namespace SonarAnalyzer.Rules
                     }
                     break;
             }
+            return ImmutableArray<Location>.Empty;
+        }
+
+        private ImmutableArray<Location> VisitInvocation(TInvocationExpressionSyntax invocation, InspectionContext c)
+        {
+            var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
+            var declaringReferences = invSymbol is IMethodSymbol { PartialImplementationPart: { } } methodSymbol
+                ? methodSymbol.PartialImplementationPart.DeclaringSyntaxReferences
+                : invSymbol.DeclaringSyntaxReferences;
+
+            if (declaringReferences.Length == 1
+                && SyntaxFromReference(declaringReferences.Single()) is { } syntax)
+            {
+                c.VisitedMethods.Add(syntax);
+                return InvocationLocations(c, syntax);
+            }
+
             return ImmutableArray<Location>.Empty;
         }
 
