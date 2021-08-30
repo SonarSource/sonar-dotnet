@@ -85,10 +85,13 @@ class Sample
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
-cfg0_block0 [shape=record label=""{ENTRY #0}""]
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
 cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: A();|1# InvocationOperation: A / InvocationExpressionSyntax: A()|2# InstanceReferenceOperation / IdentifierNameSyntax: A|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: B();|1# InvocationOperation: B / InvocationExpressionSyntax: B()|2# InstanceReferenceOperation / IdentifierNameSyntax: B|##########|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: c = C()|1# LocalReferenceOperation / VariableDeclaratorSyntax: c = C()|1# InvocationOperation: C / InvocationExpressionSyntax: C()|2# InstanceReferenceOperation / IdentifierNameSyntax: C|##########}""]
-cfg0_block0 -> cfg0_block1
+}
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block2 [shape=record label=""{EXIT #2}""]
+cfg0_block0 -> cfg0_block1
 cfg0_block1 -> cfg0_block2
 }
 ");
@@ -120,16 +123,19 @@ class Sample
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
-cfg0_block0 [shape=record label=""{ENTRY #0}""]
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
 cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation / IdentifierNameSyntax: a|1# ParameterReferenceOperation / IdentifierNameSyntax: a|##########|## BranchValue ##|0# BinaryOperation / LiteralExpressionSyntax: 1|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
-cfg0_block0 -> cfg0_block1
 cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: c1();|1# InvocationOperation: c1 / InvocationExpressionSyntax: c1()|2# InstanceReferenceOperation / IdentifierNameSyntax: c1|##########}""]
-cfg0_block1 -> cfg0_block2 [label=""Else""]
 cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# BinaryOperation / LiteralExpressionSyntax: 2|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|1# LiteralOperation / LiteralExpressionSyntax: 2|##########}""]
-cfg0_block1 -> cfg0_block3 [label=""WhenFalse""]
 cfg0_block4 [shape=record label=""{BLOCK #4|0# ExpressionStatementOperation / ExpressionStatementSyntax: c2();|1# InvocationOperation: c2 / InvocationExpressionSyntax: c2()|2# InstanceReferenceOperation / IdentifierNameSyntax: c2|##########}""]
-cfg0_block3 -> cfg0_block4 [label=""Else""]
+}
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block5 [shape=record label=""{EXIT #5}""]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2 [label=""Else""]
+cfg0_block1 -> cfg0_block3 [label=""WhenFalse""]
+cfg0_block3 -> cfg0_block4 [label=""Else""]
 cfg0_block2 -> cfg0_block5
 cfg0_block3 -> cfg0_block5 [label=""WhenFalse""]
 cfg0_block4 -> cfg0_block5
@@ -159,10 +165,10 @@ class Sample
 @"digraph ""RoslynCfg"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: true|##########}""]
-cfg0_block0 -> cfg0_block1
 cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar();|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar()|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|##########}""]
-cfg0_block1 -> cfg0_block2 [label=""Else""]
 cfg0_block3 [shape=record label=""{EXIT #3}""]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2 [label=""Else""]
 cfg0_block1 -> cfg0_block3 [label=""WhenFalse""]
 cfg0_block2 -> cfg0_block3
 }
@@ -187,22 +193,37 @@ class Sample
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
-cfg0_block0 [shape=record label=""{ENTRY #0}""]
-cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation / IdentifierNameSyntax: items|1# InvocationOperation: GetEnumerator / IdentifierNameSyntax: items|2# ConversionOperation / IdentifierNameSyntax: items|3# ParameterReferenceOperation / IdentifierNameSyntax: items|##########}""]
-cfg0_block0 -> cfg0_block1
-cfg0_block2 [shape=record label=""{BLOCK #2|## BranchValue ##|0# InvocationOperation: MoveNext / IdentifierNameSyntax: items|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: items|##########}""]
-cfg0_block1 -> cfg0_block2
-cfg0_block3 -> cfg0_block2
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
+subgraph ""cluster_TryAndFinally region"" {
+label = ""TryAndFinally region""
+subgraph ""cluster_Try region"" {
+label = ""Try region""
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
 cfg0_block3 [shape=record label=""{BLOCK #3|0# SimpleAssignmentOperation / IdentifierNameSyntax: var|1# LocalReferenceOperation / IdentifierNameSyntax: var|1# ConversionOperation / IdentifierNameSyntax: var|2# PropertyReferenceOperation / IdentifierNameSyntax: var|3# FlowCaptureReferenceOperation / IdentifierNameSyntax: items|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar(i);|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar(i)|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|2# ArgumentOperation / ArgumentSyntax: i|3# LocalReferenceOperation / IdentifierNameSyntax: i|##########}""]
-cfg0_block2 -> cfg0_block3 [label=""Else""]
+}
+cfg0_block2 [shape=record label=""{BLOCK #2|## BranchValue ##|0# InvocationOperation: MoveNext / IdentifierNameSyntax: items|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: items|##########}""]
+}
+subgraph ""cluster_Finally region"" {
+label = ""Finally region""
 cfg0_block4 [shape=record label=""{BLOCK #4|0# FlowCaptureOperation / IdentifierNameSyntax: items|1# ConversionOperation / IdentifierNameSyntax: items|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: items|##########|## BranchValue ##|0# IsNullOperation / IdentifierNameSyntax: items|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: items|##########}""]
 cfg0_block5 [shape=record label=""{BLOCK #5|0# InvocationOperation: Dispose / IdentifierNameSyntax: items|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: items|##########}""]
-cfg0_block4 -> cfg0_block5 [label=""Else""]
 cfg0_block6 [shape=record label=""{BLOCK #6}""]
+}
+}
+cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation / IdentifierNameSyntax: items|1# InvocationOperation: GetEnumerator / IdentifierNameSyntax: items|2# ConversionOperation / IdentifierNameSyntax: items|3# ParameterReferenceOperation / IdentifierNameSyntax: items|##########}""]
+}
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block7 [shape=record label=""{EXIT #7}""]
+cfg0_block2 -> cfg0_block3 [label=""Else""]
+cfg0_block1 -> cfg0_block2
+cfg0_block3 -> cfg0_block2
+cfg0_block4 -> cfg0_block5 [label=""Else""]
 cfg0_block4 -> cfg0_block6 [label=""WhenTrue""]
 cfg0_block5 -> cfg0_block6
 cfg0_block6 -> NoDestination_cfg0_block6 [label=""StructuredExceptionHandling""]
-cfg0_block7 [shape=record label=""{EXIT #7}""]
+cfg0_block0 -> cfg0_block1
 cfg0_block2 -> cfg0_block7 [label=""WhenFalse""]
 }
 ");
@@ -226,24 +247,42 @@ public class Sample
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
-cfg0_block0 [shape=record label=""{ENTRY #0}""]
-cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation / IdentifierNameSyntax: values|1# InvocationOperation: GetEnumerator / IdentifierNameSyntax: values|2# ConversionOperation / IdentifierNameSyntax: values|3# ParameterReferenceOperation / IdentifierNameSyntax: values|##########}""]
-cfg0_block0 -> cfg0_block1
-cfg0_block2 [shape=record label=""{BLOCK #2|## BranchValue ##|0# InvocationOperation: MoveNext / IdentifierNameSyntax: values|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: values|##########}""]
-cfg0_block1 -> cfg0_block2
-cfg0_block4 -> cfg0_block2
-cfg0_block3 [shape=record label=""{BLOCK #3|0# DeconstructionAssignmentOperation / DeclarationExpressionSyntax: var (key, value)|1# DeclarationExpressionOperation / DeclarationExpressionSyntax: var (key, value)|2# TupleOperation / ParenthesizedVariableDesignationSyntax: (key, value)|3# LocalReferenceOperation / SingleVariableDesignationSyntax: key|3# LocalReferenceOperation / SingleVariableDesignationSyntax: value|1# ConversionOperation / DeclarationExpressionSyntax: var (key, value)|2# PropertyReferenceOperation / DeclarationExpressionSyntax: var (key, value)|3# FlowCaptureReferenceOperation / IdentifierNameSyntax: values|##########}""]
-cfg0_block2 -> cfg0_block3 [label=""Else""]
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
+subgraph ""cluster_TryAndFinally region"" {
+label = ""TryAndFinally region""
+subgraph ""cluster_Try region"" {
+label = ""Try region""
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
 cfg0_block4 [shape=record label=""{BLOCK #4|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: i = key|1# LocalReferenceOperation / VariableDeclaratorSyntax: i = key|1# LocalReferenceOperation / IdentifierNameSyntax: key|##########|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: j = value|1# LocalReferenceOperation / VariableDeclaratorSyntax: j = value|1# LocalReferenceOperation / IdentifierNameSyntax: value|##########}""]
-cfg0_block3 -> cfg0_block4
+}
+cfg0_block3 [shape=record label=""{BLOCK #3|0# DeconstructionAssignmentOperation / DeclarationExpressionSyntax: var (key, value)|1# DeclarationExpressionOperation / DeclarationExpressionSyntax: var (key, value)|2# TupleOperation / ParenthesizedVariableDesignationSyntax: (key, value)|3# LocalReferenceOperation / SingleVariableDesignationSyntax: key|3# LocalReferenceOperation / SingleVariableDesignationSyntax: value|1# ConversionOperation / DeclarationExpressionSyntax: var (key, value)|2# PropertyReferenceOperation / DeclarationExpressionSyntax: var (key, value)|3# FlowCaptureReferenceOperation / IdentifierNameSyntax: values|##########}""]
+}
+cfg0_block2 [shape=record label=""{BLOCK #2|## BranchValue ##|0# InvocationOperation: MoveNext / IdentifierNameSyntax: values|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: values|##########}""]
+}
+subgraph ""cluster_Finally region"" {
+label = ""Finally region""
 cfg0_block5 [shape=record label=""{BLOCK #5|0# FlowCaptureOperation / IdentifierNameSyntax: values|1# ConversionOperation / IdentifierNameSyntax: values|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: values|##########|## BranchValue ##|0# IsNullOperation / IdentifierNameSyntax: values|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: values|##########}""]
 cfg0_block6 [shape=record label=""{BLOCK #6|0# InvocationOperation: Dispose / IdentifierNameSyntax: values|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: values|##########}""]
-cfg0_block5 -> cfg0_block6 [label=""Else""]
 cfg0_block7 [shape=record label=""{BLOCK #7}""]
+}
+}
+cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation / IdentifierNameSyntax: values|1# InvocationOperation: GetEnumerator / IdentifierNameSyntax: values|2# ConversionOperation / IdentifierNameSyntax: values|3# ParameterReferenceOperation / IdentifierNameSyntax: values|##########}""]
+}
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block8 [shape=record label=""{EXIT #8}""]
+cfg0_block3 -> cfg0_block4
+cfg0_block2 -> cfg0_block3 [label=""Else""]
+cfg0_block1 -> cfg0_block2
+cfg0_block4 -> cfg0_block2
+cfg0_block5 -> cfg0_block6 [label=""Else""]
 cfg0_block5 -> cfg0_block7 [label=""WhenTrue""]
 cfg0_block6 -> cfg0_block7
 cfg0_block7 -> NoDestination_cfg0_block7 [label=""StructuredExceptionHandling""]
-cfg0_block8 [shape=record label=""{EXIT #8}""]
+cfg0_block0 -> cfg0_block1
 cfg0_block2 -> cfg0_block8 [label=""WhenFalse""]
 }
 ");
@@ -268,15 +307,18 @@ class Sample
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
-cfg0_block0 [shape=record label=""{ENTRY #0}""]
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
 cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: i = 0|1# LocalReferenceOperation / VariableDeclaratorSyntax: i = 0|1# LiteralOperation / LiteralExpressionSyntax: 0|##########}""]
-cfg0_block0 -> cfg0_block1
 cfg0_block2 [shape=record label=""{BLOCK #2|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: i \< 10|1# LocalReferenceOperation / IdentifierNameSyntax: i|1# LiteralOperation / LiteralExpressionSyntax: 10|##########}""]
+cfg0_block3 [shape=record label=""{BLOCK #3|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar(i);|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar(i)|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|2# ArgumentOperation / ArgumentSyntax: i|3# LocalReferenceOperation / IdentifierNameSyntax: i|##########|0# ExpressionStatementOperation / PostfixUnaryExpressionSyntax: i++|1# IncrementOrDecrementOperation / PostfixUnaryExpressionSyntax: i++|2# LocalReferenceOperation / IdentifierNameSyntax: i|##########}""]
+}
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block4 [shape=record label=""{EXIT #4}""]
+cfg0_block0 -> cfg0_block1
 cfg0_block1 -> cfg0_block2
 cfg0_block3 -> cfg0_block2
-cfg0_block3 [shape=record label=""{BLOCK #3|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar(i);|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar(i)|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|2# ArgumentOperation / ArgumentSyntax: i|3# LocalReferenceOperation / IdentifierNameSyntax: i|##########|0# ExpressionStatementOperation / PostfixUnaryExpressionSyntax: i++|1# IncrementOrDecrementOperation / PostfixUnaryExpressionSyntax: i++|2# LocalReferenceOperation / IdentifierNameSyntax: i|##########}""]
 cfg0_block2 -> cfg0_block3 [label=""Else""]
-cfg0_block4 [shape=record label=""{EXIT #4}""]
 cfg0_block2 -> cfg0_block4 [label=""WhenFalse""]
 }
 ");
@@ -300,19 +342,31 @@ class Sample
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
-cfg0_block0 [shape=record label=""{ENTRY #0}""]
-cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# LocalReferenceOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# ObjectCreationOperation / ObjectCreationExpressionSyntax: new System.IO.MemoryStream()|##########}""]
-cfg0_block0 -> cfg0_block1
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
+subgraph ""cluster_TryAndFinally region"" {
+label = ""TryAndFinally region""
+subgraph ""cluster_Try region"" {
+label = ""Try region""
 cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar();|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar()|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|##########}""]
-cfg0_block1 -> cfg0_block2
+}
+subgraph ""cluster_Finally region"" {
+label = ""Finally region""
 cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# IsNullOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# LocalReferenceOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|##########}""]
 cfg0_block4 [shape=record label=""{BLOCK #4|0# InvocationOperation: Dispose / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# ConversionOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|2# LocalReferenceOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|##########}""]
-cfg0_block3 -> cfg0_block4 [label=""Else""]
 cfg0_block5 [shape=record label=""{BLOCK #5}""]
+}
+}
+cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# LocalReferenceOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# ObjectCreationOperation / ObjectCreationExpressionSyntax: new System.IO.MemoryStream()|##########}""]
+}
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block6 [shape=record label=""{EXIT #6}""]
+cfg0_block1 -> cfg0_block2
+cfg0_block3 -> cfg0_block4 [label=""Else""]
 cfg0_block3 -> cfg0_block5 [label=""WhenTrue""]
 cfg0_block4 -> cfg0_block5
 cfg0_block5 -> NoDestination_cfg0_block5 [label=""StructuredExceptionHandling""]
-cfg0_block6 [shape=record label=""{EXIT #6}""]
+cfg0_block0 -> cfg0_block1
 cfg0_block2 -> cfg0_block6
 }
 ");
@@ -338,19 +392,31 @@ class Sample
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
-cfg0_block0 [shape=record label=""{ENTRY #0}""]
-cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation / IdentifierNameSyntax: x|1# FieldReferenceOperation / IdentifierNameSyntax: x|2# InstanceReferenceOperation / IdentifierNameSyntax: x|##########}""]
-cfg0_block0 -> cfg0_block1
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
+subgraph ""cluster_TryAndFinally region"" {
+label = ""TryAndFinally region""
+subgraph ""cluster_Try region"" {
+label = ""Try region""
 cfg0_block2 [shape=record label=""{BLOCK #2|0# InvocationOperation: Enter / IdentifierNameSyntax: x|1# ArgumentOperation / IdentifierNameSyntax: x|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: x|1# ArgumentOperation / IdentifierNameSyntax: x|2# LocalReferenceOperation / IdentifierNameSyntax: x|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar();|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar()|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|##########}""]
-cfg0_block1 -> cfg0_block2
+}
+subgraph ""cluster_Finally region"" {
+label = ""Finally region""
 cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# LocalReferenceOperation / IdentifierNameSyntax: x|##########}""]
 cfg0_block4 [shape=record label=""{BLOCK #4|0# InvocationOperation: Exit / IdentifierNameSyntax: x|1# ArgumentOperation / IdentifierNameSyntax: x|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: x|##########}""]
-cfg0_block3 -> cfg0_block4 [label=""Else""]
 cfg0_block5 [shape=record label=""{BLOCK #5}""]
+}
+}
+cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation / IdentifierNameSyntax: x|1# FieldReferenceOperation / IdentifierNameSyntax: x|2# InstanceReferenceOperation / IdentifierNameSyntax: x|##########}""]
+}
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block6 [shape=record label=""{EXIT #6}""]
+cfg0_block1 -> cfg0_block2
+cfg0_block3 -> cfg0_block4 [label=""Else""]
 cfg0_block3 -> cfg0_block5 [label=""WhenFalse""]
 cfg0_block4 -> cfg0_block5
 cfg0_block5 -> NoDestination_cfg0_block5 [label=""StructuredExceptionHandling""]
-cfg0_block6 [shape=record label=""{EXIT #6}""]
+cfg0_block0 -> cfg0_block1
 cfg0_block2 -> cfg0_block6
 }
 ");
@@ -364,7 +430,6 @@ class Sample
 {
     void Method()
     {
-
         Before();
         try
         {
@@ -383,8 +448,75 @@ class Sample
 }";
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
             dot.Should().BeIgnoringLineEndings(
-@"
-FIXME
+@"digraph ""RoslynCfg"" {
+subgraph ""cluster_TryAndFinally region"" {
+label = ""TryAndFinally region""
+subgraph ""cluster_Try region"" {
+label = ""Try region""
+cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: InTry();|1# InvocationOperation: InTry / InvocationExpressionSyntax: InTry()|2# InstanceReferenceOperation / IdentifierNameSyntax: InTry|##########}""]
+}
+subgraph ""cluster_Finally region"" {
+label = ""Finally region""
+cfg0_block3 [shape=record label=""{BLOCK #3|0# ExpressionStatementOperation / ExpressionStatementSyntax: InFinally();|1# InvocationOperation: InFinally / InvocationExpressionSyntax: InFinally()|2# InstanceReferenceOperation / IdentifierNameSyntax: InFinally|##########}""]
+}
+}
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: Before();|1# InvocationOperation: Before / InvocationExpressionSyntax: Before()|2# InstanceReferenceOperation / IdentifierNameSyntax: Before|##########}""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# ExpressionStatementOperation / ExpressionStatementSyntax: After();|1# InvocationOperation: After / InvocationExpressionSyntax: After()|2# InstanceReferenceOperation / IdentifierNameSyntax: After|##########}""]
+cfg0_block5 [shape=record label=""{EXIT #5}""]
+cfg0_block1 -> cfg0_block2
+cfg0_block3 -> NoDestination_cfg0_block3 [label=""StructuredExceptionHandling""]
+cfg0_block0 -> cfg0_block1
+cfg0_block2 -> cfg0_block4
+cfg0_block4 -> cfg0_block5
+}
+");
+        }
+
+        [TestMethod]
+        public void Serialize_LocalFunctions()
+        {
+            var code = @"
+class Sample
+{
+    void Method()
+    {
+        var fourty = 40;
+        Local();
+
+        int Local() => fourty + LocalStatic();
+
+        static int LocalStatic() => 1 + 1;
+    }
+}";
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            dot.Should().BeIgnoringLineEndings(
+@"digraph ""RoslynCfg"" {
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
+cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: fourty = 40|1# LocalReferenceOperation / VariableDeclaratorSyntax: fourty = 40|1# LiteralOperation / LiteralExpressionSyntax: 40|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: Local();|1# InvocationOperation: Local / InvocationExpressionSyntax: Local()|##########}""]
+}
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block2 [shape=record label=""{EXIT #2}""]
+subgraph ""cluster_RoslynCfg.Local"" {
+label = ""RoslynCfg.Local""
+cfg1_block0 [shape=record label=""{ENTRY #0}""]
+cfg1_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: fourty + LocalStatic()|1# LocalReferenceOperation / IdentifierNameSyntax: fourty|1# InvocationOperation: LocalStatic / InvocationExpressionSyntax: LocalStatic()|##########}""]
+cfg1_block2 [shape=record label=""{EXIT #2}""]
+}
+subgraph ""cluster_RoslynCfg.LocalStatic"" {
+label = ""RoslynCfg.LocalStatic""
+cfg2_block0 [shape=record label=""{ENTRY #0}""]
+cfg2_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: 1 + 1|1# LiteralOperation / LiteralExpressionSyntax: 1|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
+cfg2_block2 [shape=record label=""{EXIT #2}""]
+}
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2
+cfg1_block0 -> cfg1_block1
+cfg1_block1 -> cfg1_block2 [label=""Return""]
+cfg2_block0 -> cfg2_block1
+cfg2_block1 -> cfg2_block2 [label=""Return""]
+}
 ");
         }
 

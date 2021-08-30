@@ -45,6 +45,19 @@ namespace SonarAnalyzer.CFG
             public void Visit(ControlFlowGraph cfg, string title)
             {
                 writer.WriteGraphStart(title);
+                VisitContent(cfg, title);
+                writer.WriteGraphEnd();
+            }
+
+            private void VisitSubGraph(ControlFlowGraph cfg, string title)
+            {
+                writer.WriteSubGraphStart(title);
+                VisitContent(cfg, title);
+                writer.WriteSubGraphEnd();
+            }
+
+            private void VisitContent(ControlFlowGraph cfg, string titlePrefix)
+            {
                 foreach (var region in cfg.Root.NestedRegions)
                 {
                     Visit(cfg, region);
@@ -53,17 +66,16 @@ namespace SonarAnalyzer.CFG
                 {
                     Visit(block);
                 }
-                //foreach (var localFunction in cfg.LocalFunctions)
-                //{
-                //    var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
-                //    new RoslynCfgWalker(writer, blockPrefixProvider).Visit($"{methodName}.{localFunction.Name}", localFunctionCfg, true);
-                //}
+                foreach (var localFunction in cfg.LocalFunctions)
+                {
+                    var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
+                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(localFunctionCfg, $"{titlePrefix}.{localFunction.Name}");
+                }
                 //foreach (var anonymousFunction in GetAnonymousFunctions(cfg))
                 //{
                 //    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
                 //    new RoslynCfgWalker(writer, blockPrefixProvider).Visit($"{methodName}.anonymous", anonymousFunctionCfg, true);
                 //}
-                writer.WriteGraphEnd();
             }
 
             private void Visit(ControlFlowGraph cfg, ControlFlowRegion region)
