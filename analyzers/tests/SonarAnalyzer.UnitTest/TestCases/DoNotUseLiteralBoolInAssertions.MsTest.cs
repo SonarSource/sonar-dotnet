@@ -27,6 +27,8 @@ namespace Tests.Diagnostics
 
             bool? x = false;
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(false, x); // Compliant, since the comparison triggers a conversion
+
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(); // Error [CS1501] (code coverage)
         }
     }
 }
