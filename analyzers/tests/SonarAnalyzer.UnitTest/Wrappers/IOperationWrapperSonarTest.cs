@@ -24,9 +24,9 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.CFG.Roslyn;
+using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.CFG.Roslyn
+namespace SonarAnalyzer.UnitTest.Wrappers
 {
     [TestClass]
     public class IOperationWrapperSonarTest
