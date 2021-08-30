@@ -74,9 +74,8 @@ namespace SonarAnalyzer.Helpers
                     UsedSymbols.UnionWith(GetSymbols(node));
                 }
                 else if (node.IsKind(SyntaxKindEx.LocalFunctionStatement)
-                    && ((LocalFunctionStatementSyntaxWrapper)node) is var localFunction
-                    && localFunction.AttributeLists.Count > 0
-                    && semanticModel.GetDeclaredSymbol(node) is IMethodSymbol localFunctionSymbol)
+                         && ((LocalFunctionStatementSyntaxWrapper)node) is { AttributeLists: { Count: > 0 } }
+                         && semanticModel.GetDeclaredSymbol(node) is IMethodSymbol localFunctionSymbol)
                 {
                     UsedSymbols.UnionWith(localFunctionSymbol
                                             .GetAttributes()
