@@ -89,14 +89,13 @@ class Sample
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
-cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: A();|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: B();|##########|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: c = C()|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: A();|1# InvocationOperation: A / InvocationExpressionSyntax: A()|2# InstanceReferenceOperation / IdentifierNameSyntax: A|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: B();|1# InvocationOperation: B / InvocationExpressionSyntax: B()|2# InstanceReferenceOperation / IdentifierNameSyntax: B|##########|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: c = C()|1# LocalReferenceOperation / VariableDeclaratorSyntax: c = C()|1# InvocationOperation: C / InvocationExpressionSyntax: C()|2# InstanceReferenceOperation / IdentifierNameSyntax: C|##########}""]
 cfg0_block0 -> cfg0_block1
 cfg0_block2 [shape=record label=""{EXIT #2}""]
 cfg0_block1 -> cfg0_block2
 }
 ");
         }
-
 
         [TestMethod]
         public void Serialize_Branch_Jump()

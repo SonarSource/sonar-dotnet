@@ -99,17 +99,12 @@ namespace SonarAnalyzer.CFG
             private static IEnumerable<string> SerializeOperation(IOperation operation) =>
                 SerializeOperation(0, operation).Concat(new[] { "##########" });
 
-            private static IEnumerable<string> SerializeOperation(int level, IOperation operation)
-            {
-                var ret = new List<string>();
-                //FIXME: Vyresit
-                //ret.AddRange(((IOperationWrapper)operation).Children.SelectMany(x => SerializeOperation(level + 1, x)));
-                ret.Add($"{level}# {operation.GetType().Name}{OperationSuffix(operation)} / {operation.Syntax.GetType().Name}: {operation.Syntax}");
-                return ret;
-            }
+            private static IEnumerable<string> SerializeOperation(int level, IOperation operation) =>
+                new[] { $"{level}# {operation.GetType().Name}{OperationSuffix(operation)} / {operation.Syntax.GetType().Name}: {operation.Syntax}" }
+                .Concat(new IOperationWrapperSonar(operation).Children.SelectMany(x => SerializeOperation(level + 1, x)));
 
             private static string OperationSuffix(IOperation op) =>
-                IInvocationOperationWrapper.IsInstance(op) ? IInvocationOperationWrapper.FromOperation(op).TargetMethod.Name : null;
+                IInvocationOperationWrapper.IsInstance(op) ? ": " + IInvocationOperationWrapper.FromOperation(op).TargetMethod.Name : null;
 
             private void WriteEdges(BasicBlock block)
             {
