@@ -8,10 +8,10 @@
         public void Method()
         {
             [TestMethod]
-            void NestedTest() { } // Compliant - FN, test is not run by the test runner
+            void NestedTest() { } // Noncompliant {{Make this test method a public method instead of a local function.}}
 
             [DataTestMethod]
-            void NestedDataTest() { } // Compliant - FN, test is not run by the test runner
+            void NestedDataTest() { } // Noncompliant
         }
     }
 }
@@ -26,10 +26,10 @@ namespace NUnitTests
         public void Method()
         {
             [Test]
-            void NestedTest() { } // Compliant - FN, test is not run by the test runner
+            void NestedTest() { } // Noncompliant
 
             [TestCase(42)]
-            void NestedTestCase() { } // Compliant - FN, test is not run by the test runner
+            void NestedTestCase() { } // Noncompliant
         }
     }
 }
@@ -42,11 +42,13 @@ namespace XUnitTests
     {
         public void Method()
         {
+            // Compliant - xUnit allows local functions to be executed as test methods
+
             [Fact]
-            void NestedFact() { } // Compliant - FN, test is not run by the test runner
+            void NestedFact() { }
 
             [Theory]
-            void NestedTheory() { } // Compliant - FN, test is not run by the test runner
+            void NestedTheory() { }
         }
     }
 }

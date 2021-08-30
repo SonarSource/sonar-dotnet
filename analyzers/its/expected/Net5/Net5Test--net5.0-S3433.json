@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3433",
+"message":  "Make this test method a public method instead of a local function.",
+"location":  {
+"uri":  "sources\Net5\Net5Test\S3433_Mstest.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  28
+}
+}
+}
+]
+}

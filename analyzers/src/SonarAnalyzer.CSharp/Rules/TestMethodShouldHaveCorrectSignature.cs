@@ -23,9 +23,11 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,91 +35,96 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class TestMethodShouldHaveCorrectSignature : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3433";
+        private const string DiagnosticId = "S3433";
         private const string MessageFormat = "Make this test method {0}.";
         private const string MakePublicMessage = "'public'";
         private const string MakeNonAsyncOrTaskMessage = "non-'async' or return 'Task'";
         private const string MakeNotGenericMessage = "non-generic";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private const string MakeMethodNotLocalFunction = "a public method instead of a local function";
 
         /// <summary>
         /// Validation method. Checks the supplied method and returns the error message,
         /// or null if there is no issue.
         /// </summary>
-        private delegate string SignatureValidator(IMethodSymbol method);
+        private delegate string SignatureValidator(SyntaxNode methodNode, IMethodSymbol methodSymbol);
 
-        private static readonly SignatureValidator NullValidator = m => null;
+        private static readonly SignatureValidator NullValidator = (node, symbol) => null;
 
         // We currently support three test framework, each of which supports multiple test method attribute markers, and each of which
         // has differing constraints (public/private, generic/non-generic).
         // Rather than writing lots of conditional code, we're using a simple table-driven approach.
         // Currently we use the same validation method for all method types, but we could have a
         // different validation method for each type in future if necessary.
-        private static readonly Dictionary<KnownType, SignatureValidator> attributeToConstraintsMap = new Dictionary<KnownType, SignatureValidator>
+        private static readonly Dictionary<KnownType, SignatureValidator> AttributeToConstraintsMap = new Dictionary<KnownType, SignatureValidator>
         {
             // MSTest
             {
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: false)
             },
             {
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: false)
             },
 
             // NUnit
             {
                 KnownType.NUnit_Framework_TestAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: false)
             },
             {
                 KnownType.NUnit_Framework_TestCaseAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: true)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: true)
             },
             {
                 KnownType.NUnit_Framework_TestCaseSourceAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: true)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: true)
             },
             {
                 KnownType.NUnit_Framework_TheoryAttribute,
-                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+                (node, symbol) => GetFaultMessage(node, symbol, publicOnly: true, allowGenerics: false)
             },
 
-            // XUnit
+            // XUnit - note that local functions can be test methods, thus we skip checking the syntax node
             {
                 KnownType.Xunit_FactAttribute,
-                m => GetFaultMessage(m, publicOnly: false, allowGenerics: false)
+                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: false)
             },
             {
                 KnownType.Xunit_TheoryAttribute,
-                m => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
+                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: true)
             },
             {
                 KnownType.LegacyXunit_TheoryAttribute,
-                m => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
+                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: true)
             }
         };
 
+        private static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeMethod, SyntaxKind.MethodDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeMethod, SyntaxKind.MethodDeclaration, SyntaxKindEx.LocalFunctionStatement);
 
-        private void AnalyzeMethod(SyntaxNodeAnalysisContext c)
+        private static void AnalyzeMethod(SyntaxNodeAnalysisContext c)
         {
-            if (!(c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol))
+            if (HasAttributes(c.Node) && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol)
             {
-                return;
-            }
-
-            var validator = GetValidator(methodSymbol);
-            var message = validator(methodSymbol);
-            if (message != null)
-            {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodSymbol.Locations.First(), message));
+                var validator = GetValidator(methodSymbol);
+                var message = validator(c.Node, methodSymbol);
+                if (message != null)
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodSymbol.Locations.First(), message));
+                }
             }
         }
+
+        private static bool HasAttributes(SyntaxNode node) =>
+            node is MethodDeclarationSyntax methodDeclaration
+                ? methodDeclaration.AttributeLists.Count > 0
+                : ((LocalFunctionStatementSyntaxWrapper)node).AttributeLists.Count > 0;
 
         private static SignatureValidator GetValidator(IMethodSymbol method)
         {
@@ -128,8 +135,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return NullValidator;
             }
 
-            return attributeToConstraintsMap.GetValueOrDefault(attributeKnownType);
+            return AttributeToConstraintsMap.GetValueOrDefault(attributeKnownType);
         }
+
+        private static string GetFaultMessage(SyntaxNode methodNode, IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
+            LocalFunctionStatementSyntaxWrapper.IsInstance(methodNode)
+            ? MakeMethodNotLocalFunction
+            : GetFaultMessage(methodSymbol, publicOnly, allowGenerics);
 
         private static string GetFaultMessage(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
             GetFaultMessageParts(methodSymbol, publicOnly, allowGenerics).ToSentence();
