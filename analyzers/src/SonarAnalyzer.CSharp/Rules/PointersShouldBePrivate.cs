@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var variableSymbol = (IFieldSymbol)c.SemanticModel.GetDeclaredSymbol(variable);
 
                     if (variableSymbol != null
-                        && variableSymbol.Type.IsAny(KnownType.PointerTypes)
+                        && IsPointer(variableSymbol.Type)
                         && variableSymbol.GetEffectiveAccessibility() is var accessibility
                         && accessibility != Accessibility.Private
                         && accessibility != Accessibility.Internal
@@ -66,5 +66,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             },
             SyntaxKind.FieldDeclaration);
+
+        private static bool IsPointer(ITypeSymbol type)
+            => type.IsAny(KnownType.PointerTypes)
+               || type.Kind == SymbolKind.PointerType;
     }
 }
