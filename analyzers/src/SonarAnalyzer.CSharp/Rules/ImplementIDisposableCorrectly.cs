@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                                         c.Node.GetDeclarationTypeName(),
                                                         c.SemanticModel);
 
-                    var locations = checker.GetIssueLocations();
+                    var locations = checker.GetIssueLocations(typeDeclarationSyntax);
                     if (locations.Any())
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, declarationIdentifier.GetLocation(),
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.semanticModel = semanticModel;
             }
 
-            public List<SecondaryLocation> GetIssueLocations()
+            public List<SecondaryLocation> GetIssueLocations(TypeDeclarationSyntax typeDeclarationSyntax)
             {
                 if (typeSymbol == null || typeSymbol.IsSealed)
                 {
@@ -105,7 +105,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (typeSymbol.BaseType.Implements(KnownType.System_IDisposable))
                 {
                     var iDisposableInterfaceSyntax = baseTypes?.Types.FirstOrDefault(IsOrImplementsIDisposable);
-
                     if (iDisposableInterfaceSyntax != null)
                     {
                         AddSecondaryLocation(iDisposableInterfaceSyntax.GetLocation(),
@@ -115,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (HasVirtualDisposeBool(typeSymbol.BaseType))
                     {
-                        VerifyDisposeOverrideCallsBase(FindMethodDeclarations(typeSymbol, IsDisposeBool)
+                        VerifyDisposeOverrideCallsBase(FindMethodImplementation(typeSymbol, IsDisposeBool, typeDeclarationSyntax)
                                                        .OfType<MethodDeclarationSyntax>()
                                                        .FirstOrDefault());
                     }
@@ -132,13 +131,13 @@ namespace SonarAnalyzer.Rules.CSharp
                                              + $"'{typeSymbol.Name}' or mark the type as 'sealed'.");
                     }
 
-                    var destructor = FindMethodDeclarations(typeSymbol, SymbolHelper.IsDestructor)
+                    var destructor = FindMethodImplementation(typeSymbol, SymbolHelper.IsDestructor, typeDeclarationSyntax)
                                      .OfType<DestructorDeclarationSyntax>()
                                      .FirstOrDefault();
 
                     VerifyDestructor(destructor);
 
-                    var disposeMethod = FindMethodDeclarations(typeSymbol, KnownMethods.IsIDisposableDispose)
+                    var disposeMethod = FindMethodImplementation(typeSymbol, KnownMethods.IsIDisposableDispose, typeDeclarationSyntax)
                                         .OfType<MethodDeclarationSyntax>()
                                         .FirstOrDefault();
 
@@ -269,15 +268,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 typeSymbol.GetMembers()
                           .OfType<IMethodSymbol>()
                           .Where(predicate)
-                          .SelectMany(m => m.DeclaringSyntaxReferences)
-                          .Select(r => r.GetSyntax());
+                          .SelectMany(symbol => symbol.PartialImplementationPart?.DeclaringSyntaxReferences ?? symbol.DeclaringSyntaxReferences)
+                          .Select(reference => reference.GetSyntax());
 
-            private static bool HasVirtualDisposeBool(INamedTypeSymbol symbol) =>
-                symbol.GetSelfAndBaseTypes()
-                      .SelectMany(t => t.GetMembers())
-                      .OfType<IMethodSymbol>()
-                      .Where(IsDisposeBool)
-                      .Any(methodSym => !methodSym.IsAbstract);
+            private static IEnumerable<SyntaxNode> FindMethodImplementation(INamedTypeSymbol typeSymbol, Func<IMethodSymbol, bool> predicate, TypeDeclarationSyntax typeDeclarationSyntax) =>
+                FindMethodDeclarations(typeSymbol, predicate)
+                    .OfType<BaseMethodDeclarationSyntax>()
+                    .Where(syntax => typeDeclarationSyntax.Contains(syntax) && (syntax.HasBodyOrExpressionBody() || syntax.Modifiers.AnyOfKind(SyntaxKind.AbstractKeyword)));
+
+            private static bool HasVirtualDisposeBool(ITypeSymbol typeSymbol) =>
+                typeSymbol.GetSelfAndBaseTypes()
+                          .SelectMany(type => type.GetMembers())
+                          .OfType<IMethodSymbol>()
+                          .Where(IsDisposeBool)
+                          .Any(symbol => !symbol.IsAbstract);
         }
     }
 }
