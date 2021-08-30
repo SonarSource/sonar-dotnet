@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -75,31 +76,28 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-
-                    var symbolInfo = c.SemanticModel.GetSymbolInfo(invocation);
-                    var methodSymbol = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
-
-                    if (methodSymbol != null &&
-                        invocation.ArgumentList != null &&
-                        IsTrackedMethod(methodSymbol) &&
-                        IsFirstOrSecondArgumentABoolLiteral(invocation.ArgumentList.Arguments) &&
-                        !IsWorkingWithNullableType(methodSymbol, invocation.ArgumentList.Arguments, c.SemanticModel))
+                    if (invocation.ArgumentList != null
+                        && IsFirstOrSecondArgumentABoolLiteral(invocation.ArgumentList.Arguments))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation()));
+                        var methodSymbol = c.SemanticModel.GetSymbolOrCandidateSymbol(invocation);
+                        if (methodSymbol != null &&
+                            IsTrackedMethod(methodSymbol) &&
+                            !IsWorkingWithNullableType(methodSymbol, invocation.ArgumentList.Arguments, c.SemanticModel))
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation()));
+                        }
                     }
                 },
                 SyntaxKind.InvocationExpression);
-        }
 
-        private bool IsWorkingWithNullableType(ISymbol symbol, SeparatedSyntaxList<ArgumentSyntax> arguments, SemanticModel semanticModel)
+        private static bool IsWorkingWithNullableType(ISymbol symbol, SeparatedSyntaxList<ArgumentSyntax> arguments, SemanticModel semanticModel)
         {
-            if (!(symbol is IMethodSymbol methodSymbol))
+            if (symbol is not IMethodSymbol methodSymbol)
             {
                 return false;
             }
@@ -126,27 +124,20 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsFirstOrSecondArgumentABoolLiteral(
-            SeparatedSyntaxList<ArgumentSyntax> arguments)
-        {
-            switch (arguments.Count)
+        private static bool IsFirstOrSecondArgumentABoolLiteral(SeparatedSyntaxList<ArgumentSyntax> arguments) =>
+            arguments.Count switch
             {
-                case 0:  return false;
-                case 1:  return IsBooleanLiteral(arguments[0]);
-                default: return IsBooleanLiteral(arguments[0]) || IsBooleanLiteral(arguments[1]);
-            }
-        }
+                0 => false,
+                1 => IsBooleanLiteral(arguments[0]),
+                _ => IsBooleanLiteral(arguments[0]) || IsBooleanLiteral(arguments[1]),
+            };
 
-        private static bool IsBooleanLiteral(ArgumentSyntax argument)
-        {
-            return argument.Expression.IsAnyKind(BoolLiterals);
-        }
+        private static bool IsBooleanLiteral(ArgumentSyntax argument) =>
+            argument.Expression.IsAnyKind(BoolLiterals);
 
-        private static bool IsTrackedMethod(ISymbol methodSymbol)
-        {
-            return TrackedTypeAndMethods
+        private static bool IsTrackedMethod(ISymbol methodSymbol) =>
+            TrackedTypeAndMethods
                 .Where(kvp => methodSymbol.ContainingType.Is(kvp.Key))
                 .Any(kvp => kvp.Value.Contains(methodSymbol.Name));
-        }
     }
 }

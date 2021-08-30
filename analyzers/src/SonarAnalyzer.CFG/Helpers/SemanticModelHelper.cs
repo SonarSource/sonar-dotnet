@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.CFG.Helpers
 {
-    internal static class SemanticModelHelper
+    public static class SemanticModelHelper
     {
         /// <summary>
         /// Starting .NET Framework 4.6.1, we've noticed that LINQ methods aren't resolved properly, so we need to use the CandidateSymbol.
