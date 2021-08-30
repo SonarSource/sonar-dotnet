@@ -48,9 +48,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CertificateValidationCheck_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CertificateValidationCheck.CSharp9.cs",
-                                                      new CS.CertificateValidationCheck(),
-                                                      GetAdditionalReferences());
+            Verifier.VerifyAnalyzerFromCSharp9Library(
+                new[] { @"TestCases\CertificateValidationCheck.CSharp9.cs", @"TestCases\CertificateValidationCheck.CSharp9.Partial.cs" },
+                new CS.CertificateValidationCheck(),
+                GetAdditionalReferences());
 
         [TestMethod]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>

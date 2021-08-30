@@ -201,12 +201,18 @@ namespace SonarAnalyzer.Rules
                 case TLambdaSyntax lambda:
                     return LambdaLocations(c, lambda);
                 case TInvocationExpressionSyntax invocation:
-                    if (c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol is {DeclaringSyntaxReferences: {Length: 1}} invSymbol
-                        && SyntaxFromReference(invSymbol.DeclaringSyntaxReferences.Single()) is { } syntax)
+                    var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
+                    var declaringReferences = invSymbol is IMethodSymbol { PartialImplementationPart: { } } methodSymbol
+                        ? methodSymbol.PartialImplementationPart.DeclaringSyntaxReferences
+                        : invSymbol.DeclaringSyntaxReferences;
+
+                    if (declaringReferences.Length == 1
+                        && SyntaxFromReference(declaringReferences.Single()) is { } syntax)
                     {
                         c.VisitedMethods.Add(syntax);
                         return InvocationLocations(c, syntax);
                     }
+
                     break;
                 case TMemberAccessSyntax memberAccess:
                     if (c.Context.SemanticModel.GetSymbolInfo(memberAccess).Symbol is { } maSymbol
