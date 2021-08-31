@@ -82,19 +82,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsPointerStructure(VariableDeclarationSyntax variableDeclaration)
-        {
-            if (variableDeclaration.Type is IdentifierNameSyntax identifierName)
-            {
-                return IsNameOfPointerStruct(identifierName.Identifier.ValueText);
-            }
-            else
-            {
-                return variableDeclaration.Type is QualifiedNameSyntax qualifiedName
-                       && qualifiedName.Right is IdentifierNameSyntax identifierNameSyntax
-                       && IsNameOfPointerStruct(identifierNameSyntax.Identifier.ValueText);
-            }
-        }
+        private static bool IsPointerStructure(VariableDeclarationSyntax variableDeclaration) =>
+            variableDeclaration.Type is IdentifierNameSyntax identifierName
+                ? IsNameOfPointerStruct(identifierName.Identifier.ValueText)
+                : variableDeclaration.Type is QualifiedNameSyntax qualifiedName
+                  && qualifiedName.Right is IdentifierNameSyntax identifierNameSyntax
+                  && IsNameOfPointerStruct(identifierNameSyntax.Identifier.ValueText);
 
         private static bool IsNameOfPointerStruct(string typeName) =>
             typeName.Equals("IntPtr") || typeName.Equals("UIntPtr");
