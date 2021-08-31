@@ -25,7 +25,14 @@ namespace Tests.Diagnostics
 
             bool? x = false;
             NUnit.Framework.Assert.AreEqual(false, x); // Compliant, since the comparison triggers a conversion
+            NUnit.Framework.Assert.AreEqual(x, false); // Compliant, since the comparison triggers a conversion
 
+            int i = 1;
+            NUnit.Framework.Assert.AreEqual(i, false); // Noncompliant
+            NUnit.Framework.Assert.AreEqual(false, i); // Noncompliant
+            NUnit.Framework.Assert.AreEqual(); // Error [CS1501] (code coverage)
+
+            FooBar(); // Error [CS1501] (code coverage)
         }
     }
 }

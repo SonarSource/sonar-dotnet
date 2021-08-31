@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -34,18 +35,15 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotUseLiteralBoolInAssertions : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2701";
+        private const string DiagnosticId = "S2701";
         private const string MessageFormat = "Remove or correct this assertion.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static Dictionary<KnownType, HashSet<string>> trackedTypeAndMethods =
-            new Dictionary<KnownType, HashSet<string>>
+        private static readonly Dictionary<KnownType, HashSet<string>> TrackedTypeAndMethods =
+            new ()
             {
                 [KnownType.Xunit_Assert] = new HashSet<string>
                 {
+                    // "True" is not here because there was no Assert.Fail in Xunit until 2020 and Assert.True(false) was a way to simulate it.
                     "Equal", "False", "NotEqual", "Same", "StrictEqual", "NotSame"
                 },
 
@@ -66,42 +64,36 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             };
 
-        private static readonly ISet<SyntaxKind> boolLiterals =
+        private static readonly ISet<SyntaxKind> BoolLiterals =
             new HashSet<SyntaxKind>
             {
                 SyntaxKind.TrueLiteralExpression,
                 SyntaxKind.FalseLiteralExpression
             };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        private static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-
-                    var symbolInfo = c.SemanticModel.GetSymbolInfo(invocation);
-                    var methodSymbol = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
-
-                    if (methodSymbol != null &&
-                        invocation.ArgumentList != null &&
-                        IsTrackedMethod(methodSymbol) &&
-                        IsFirstOrSecondArgumentABoolLiteral(invocation.ArgumentList.Arguments) &&
-                        !IsWorkingWithNullableType(methodSymbol, invocation.ArgumentList.Arguments, c.SemanticModel))
+                    if (invocation.ArgumentList != null
+                        && IsFirstOrSecondArgumentABoolLiteral(invocation.ArgumentList.Arguments)
+                        && c.SemanticModel.GetSymbolOrCandidateSymbol(invocation) is IMethodSymbol methodSymbol
+                        && IsTrackedMethod(methodSymbol)
+                        && !IsWorkingWithNullableType(methodSymbol, invocation.ArgumentList.Arguments, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
-        }
 
-        private bool IsWorkingWithNullableType(ISymbol symbol, SeparatedSyntaxList<ArgumentSyntax> arguments, SemanticModel semanticModel)
+        private static bool IsWorkingWithNullableType(IMethodSymbol methodSymbol, SeparatedSyntaxList<ArgumentSyntax> arguments, SemanticModel semanticModel)
         {
-            if (!(symbol is IMethodSymbol methodSymbol))
-            {
-                return false;
-            }
-
             if (methodSymbol.TypeArguments.Length == 1) // We usually expect all comparison test methods to have one generic argument
             {
                 // Since we already know we are comparing with bool, no need to check Nullable<bool>, Nullable<T> is enough
@@ -124,27 +116,20 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsFirstOrSecondArgumentABoolLiteral(
-            SeparatedSyntaxList<ArgumentSyntax> arguments)
-        {
-            switch (arguments.Count)
+        private static bool IsFirstOrSecondArgumentABoolLiteral(SeparatedSyntaxList<ArgumentSyntax> arguments) =>
+            arguments.Count switch
             {
-                case 0:  return false;
-                case 1:  return IsBooleanLiteral(arguments[0]);
-                default: return IsBooleanLiteral(arguments[0]) || IsBooleanLiteral(arguments[1]);
-            }
-        }
+                0 => false,
+                1 => IsBooleanLiteral(arguments[0]),
+                _ => IsBooleanLiteral(arguments[0]) || IsBooleanLiteral(arguments[1]),
+            };
 
-        private static bool IsBooleanLiteral(ArgumentSyntax argument)
-        {
-            return argument.Expression.IsAnyKind(boolLiterals);
-        }
+        private static bool IsBooleanLiteral(ArgumentSyntax argument) =>
+            argument.Expression.IsAnyKind(BoolLiterals);
 
-        private static bool IsTrackedMethod(ISymbol methodSymbol)
-        {
-            return trackedTypeAndMethods
+        private static bool IsTrackedMethod(ISymbol methodSymbol) =>
+            TrackedTypeAndMethods
                 .Where(kvp => methodSymbol.ContainingType.Is(kvp.Key))
                 .Any(kvp => kvp.Value.Contains(methodSymbol.Name));
-        }
     }
 }
