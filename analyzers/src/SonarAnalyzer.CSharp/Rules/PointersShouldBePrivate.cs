@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -52,10 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var variable in fieldDeclaration.Declaration.Variables)
                 {
-                    var variableSymbol = (IFieldSymbol)c.SemanticModel.GetDeclaredSymbol(variable);
-
-                    if (variableSymbol != null
-                        && IsPointer(variableSymbol.Type)
+                    if (SymbolIfPointerType(fieldDeclaration.Declaration, variable, c.SemanticModel) is { } variableSymbol
                         && variableSymbol.GetEffectiveAccessibility() is var accessibility
                         && accessibility != Accessibility.Private
                         && accessibility != Accessibility.Internal
@@ -67,8 +65,26 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             SyntaxKind.FieldDeclaration);
 
-        private static bool IsPointer(ITypeSymbol type)
-            => type.IsAny(KnownType.PointerTypes)
-               || type.Kind == SymbolKind.PointerType;
+        private static IFieldSymbol SymbolIfPointerType(VariableDeclarationSyntax variableDeclaration, VariableDeclaratorSyntax variableDeclarator, SemanticModel semanticModel)
+        {
+            if (variableDeclaration.Type.IsKind(SyntaxKind.PointerType)
+                || IsUnmanagedFunctionPointer(variableDeclaration))
+            {
+                return (IFieldSymbol)semanticModel.GetDeclaredSymbol(variableDeclarator);
+            }
+            else
+            {
+                return ((IFieldSymbol)semanticModel.GetDeclaredSymbol(variableDeclarator)) is { } variableSymbol
+                        && variableSymbol.Type.IsAny(KnownType.PointerTypes)
+                    ? variableSymbol
+                    : null;
+            }
+        }
+
+        private static bool IsUnmanagedFunctionPointer(VariableDeclarationSyntax variableDeclaration) =>
+            variableDeclaration.Type.IsKind(SyntaxKindEx.FunctionPointerType)
+            && (FunctionPointerTypeSyntaxWrapper)variableDeclaration.Type is var functionPointerType
+            && functionPointerType.CallingConvention.SyntaxNode != null
+            && !functionPointerType.CallingConvention.ManagedOrUnmanagedKeyword.IsKind(SyntaxKindEx.ManagedKeyword);
     }
 }
