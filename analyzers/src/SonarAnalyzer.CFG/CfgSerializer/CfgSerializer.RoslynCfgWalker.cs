@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.CFG
@@ -69,13 +70,13 @@ namespace SonarAnalyzer.CFG
                 foreach (var localFunction in cfg.LocalFunctions)
                 {
                     var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
-                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(localFunctionCfg, $"{titlePrefix}.{localFunction.Name}");
+                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(localFunctionCfg, $"{titlePrefix}.{localFunction.Name}.{cfgIdProvider.Next()}");
                 }
-                //foreach (var anonymousFunction in GetAnonymousFunctions(cfg))
-                //{
-                //    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
-                //    new RoslynCfgWalker(writer, blockPrefixProvider).Visit($"{methodName}.anonymous", anonymousFunctionCfg, true);
-                //}
+                foreach (var anonymousFunction in AnonymousFunctions(cfg))
+                {
+                    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
+                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(anonymousFunctionCfg, $"{titlePrefix}.anonymous.{cfgIdProvider.Next()}");
+                }
             }
 
             private void Visit(ControlFlowGraph cfg, ControlFlowRegion region)
@@ -139,12 +140,13 @@ namespace SonarAnalyzer.CFG
             private string BlockId(BasicBlock block) =>
                 $"cfg{cfgId}_block{block.Ordinal}";
 
-            //private static IEnumerable<IFlowAnonymousFunctionOperationWrapper> GetAnonymousFunctions(ControlFlowGraph cfg) =>
-            //    cfg.Blocks
-            //       .SelectMany(block => block.Operations)
-            //       .Concat(cfg.Blocks.Select(block => block.BranchValue).Where(op => op != null))
-            //       .SelectMany(operation => operation.DescendantsAndSelf())
-            //       .OfType<IFlowAnonymousFunctionOperationWrapper>();
+            private static IEnumerable<IFlowAnonymousFunctionOperationWrapper> AnonymousFunctions(ControlFlowGraph cfg) =>
+                cfg.Blocks
+                   .SelectMany(x => x.Operations)
+                   .Concat(cfg.Blocks.Select(x => x.BranchValue).Where(x => x != null))
+                   .SelectMany(x => x.DescendantsAndSelf())
+                   .Where(x => IFlowAnonymousFunctionOperationWrapper.IsInstance(x))
+                   .Select(x => IFlowAnonymousFunctionOperationWrapper.FromOperation(x));
         }
 
         private class RoslynCfgIdProvider

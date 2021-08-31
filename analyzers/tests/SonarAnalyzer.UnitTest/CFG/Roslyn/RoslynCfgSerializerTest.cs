@@ -47,7 +47,7 @@ cfg0_block0 -> cfg0_block1
         }
 
         [TestMethod]
-        public void Serialize_Empty_Method()
+        public void Serialize_EmptyMethod()
         {
             var code = @"
 class Sample
@@ -98,7 +98,7 @@ cfg0_block1 -> cfg0_block2
         }
 
         [TestMethod]
-        public void Serialize_Branch_Switch()
+        public void Serialize_Switch()
         {
             var code = @"
 class Sample
@@ -144,7 +144,7 @@ cfg0_block4 -> cfg0_block5
         }
 
         [TestMethod]
-        public void Serialize_Branch_If()
+        public void Serialize_If()
         {
             var code = @"
 class Sample
@@ -486,7 +486,8 @@ class Sample
 
         int Local() => fourty + LocalStatic();
 
-        static int LocalStatic() => 1 + 1;
+        static int LocalStatic() => LocalStatic(1);
+        static int LocalStatic(int one) => one + 1; // Overloaded
     }
 }";
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
@@ -498,24 +499,32 @@ cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation / Varia
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block2 [shape=record label=""{EXIT #2}""]
-subgraph ""cluster_RoslynCfg.Local"" {
-label = ""RoslynCfg.Local""
+subgraph ""cluster_RoslynCfg.Local.2"" {
+label = ""RoslynCfg.Local.2""
 cfg1_block0 [shape=record label=""{ENTRY #0}""]
 cfg1_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: fourty + LocalStatic()|1# LocalReferenceOperation / IdentifierNameSyntax: fourty|1# InvocationOperation: LocalStatic / InvocationExpressionSyntax: LocalStatic()|##########}""]
 cfg1_block2 [shape=record label=""{EXIT #2}""]
 }
-subgraph ""cluster_RoslynCfg.LocalStatic"" {
-label = ""RoslynCfg.LocalStatic""
-cfg2_block0 [shape=record label=""{ENTRY #0}""]
-cfg2_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: 1 + 1|1# LiteralOperation / LiteralExpressionSyntax: 1|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
-cfg2_block2 [shape=record label=""{EXIT #2}""]
+subgraph ""cluster_RoslynCfg.LocalStatic.4"" {
+label = ""RoslynCfg.LocalStatic.4""
+cfg3_block0 [shape=record label=""{ENTRY #0}""]
+cfg3_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# InvalidOperation / InvocationExpressionSyntax: LocalStatic(1)|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
+cfg3_block2 [shape=record label=""{EXIT #2}""]
+}
+subgraph ""cluster_RoslynCfg.LocalStatic.6"" {
+label = ""RoslynCfg.LocalStatic.6""
+cfg5_block0 [shape=record label=""{ENTRY #0}""]
+cfg5_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: one + 1|1# ParameterReferenceOperation / IdentifierNameSyntax: one|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
+cfg5_block2 [shape=record label=""{EXIT #2}""]
 }
 cfg0_block0 -> cfg0_block1
 cfg0_block1 -> cfg0_block2
 cfg1_block0 -> cfg1_block1
 cfg1_block1 -> cfg1_block2 [label=""Return""]
-cfg2_block0 -> cfg2_block1
-cfg2_block1 -> cfg2_block2 [label=""Return""]
+cfg3_block0 -> cfg3_block1
+cfg3_block1 -> cfg3_block2 [label=""Return""]
+cfg5_block0 -> cfg5_block1
+cfg5_block1 -> cfg5_block2 [label=""Return""]
 }
 ");
         }
@@ -526,24 +535,40 @@ cfg2_block1 -> cfg2_block2 [label=""Return""]
             var code = @"
 class Sample
 {
-    void Method()
+    void Method(int arg)
     {
-        Bar(x =>
-        {
-            return 1 + 1;
-        });
+        Bar(x => { return arg + 1; });
+        Bar(x => arg - 1);
     }
+    private void Bar(System.Func<int, int> f) { }
+}";
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            dot.Should().BeIgnoringLineEndings(
+@"digraph ""RoslynCfg"" {
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar(x =\> \{ return arg + 1; \});|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar(x =\> \{ return arg + 1; \})|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|2# ArgumentOperation / ArgumentSyntax: x =\> \{ return arg + 1; \}|3# DelegateCreationOperation / SimpleLambdaExpressionSyntax: x =\> \{ return arg + 1; \}|4# FlowAnonymousFunctionOperation / SimpleLambdaExpressionSyntax: x =\> \{ return arg + 1; \}|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar(x =\> arg - 1);|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar(x =\> arg - 1)|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|2# ArgumentOperation / ArgumentSyntax: x =\> arg - 1|3# DelegateCreationOperation / SimpleLambdaExpressionSyntax: x =\> arg - 1|4# FlowAnonymousFunctionOperation / SimpleLambdaExpressionSyntax: x =\> arg - 1|##########}""]
+cfg0_block2 [shape=record label=""{EXIT #2}""]
+subgraph ""cluster_RoslynCfg.anonymous.2"" {
+label = ""RoslynCfg.anonymous.2""
+cfg1_block0 [shape=record label=""{ENTRY #0}""]
+cfg1_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: arg + 1|1# ParameterReferenceOperation / IdentifierNameSyntax: arg|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
+cfg1_block2 [shape=record label=""{EXIT #2}""]
 }
-";
-            throw new System.NotImplementedException();
-            //            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
-
-            //            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
-            //0 [shape=record label=""{SIMPLE|Bar|x =\>\n        \{\n            return 1 + 1;\n        \}|Bar(x =\>\n        \{\n            return 1 + 1;\n        \})}""]
-            //0 -> 1
-            //1 [shape=record label=""{EXIT}""]
-            //}
-            //");
+subgraph ""cluster_RoslynCfg.anonymous.4"" {
+label = ""RoslynCfg.anonymous.4""
+cfg3_block0 [shape=record label=""{ENTRY #0}""]
+cfg3_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: arg - 1|1# ParameterReferenceOperation / IdentifierNameSyntax: arg|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
+cfg3_block2 [shape=record label=""{EXIT #2}""]
+}
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2
+cfg1_block0 -> cfg1_block1
+cfg1_block1 -> cfg1_block2 [label=""Return""]
+cfg3_block0 -> cfg3_block1
+cfg3_block1 -> cfg3_block2 [label=""Return""]
+}
+");
         }
     }
 }
+
