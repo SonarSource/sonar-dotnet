@@ -40,7 +40,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 ## Multi-line statements
 
 * Operators (&&, ||, +, :, ?, ?? and others) are placed at the beginning of a line.
-* Dot inside an invocation `.Method()` is placed at the beginning of a line.
+* Dot before an invocation `.Method()` is placed at the beginning of a line.
 * The comma separating arguments is placed at the end of a line.
 * Method declaration parameters should be on the same line. If S103 is violated, parameters should be placed each on a separate line; the first parameter should be on the same line with the declaration; the other parameters should be aligned with the first parameter.
 ```
@@ -51,9 +51,9 @@ public void MethodWithManyParameters(int firstParameter,
 * Method invocation arguments should be placed on the same line only when they are few and simple. Otherwise, they should be placed on separate lines. The first argument should be on a separate line, aligned with a left-most single indendation.
 ```
 object.MethodName(
-  firstArgument,
-  x => x.Bar(),
-  thirdArgument.Property);
+    firstArgument,
+    x => x.Bar(),
+    thirdArgument.Property);
 ```
   * Exception from this rule: chained LINQ queries where the alignment of parameter expressions should be right-most.
 ```
