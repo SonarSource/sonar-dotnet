@@ -74,12 +74,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                return ((IFieldSymbol)semanticModel.GetDeclaredSymbol(variableDeclarator)) is { } variableSymbol
-                        && variableSymbol.Type.IsAny(KnownType.PointerTypes)
+                return variableDeclaration.Type is IdentifierNameSyntax identifierName
+                       && IsPointerStructure(identifierName.Identifier.ValueText)
+                       && ((IFieldSymbol)semanticModel.GetDeclaredSymbol(variableDeclarator)) is { } variableSymbol
+                       && variableSymbol.Type.IsAny(KnownType.PointerTypes)
                     ? variableSymbol
                     : null;
             }
         }
+
+        private static bool IsPointerStructure(string typeName) =>
+            typeName.Equals("IntPtr") || typeName.Equals("UIntPtr");
 
         private static bool IsUnmanagedFunctionPointer(VariableDeclarationSyntax variableDeclaration) =>
             variableDeclaration.Type.IsKind(SyntaxKindEx.FunctionPointerType)
