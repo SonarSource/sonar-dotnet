@@ -73,18 +73,18 @@ class C
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{BRANCH:SwitchStatement|a}""]
-0 -> 1
 1 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
+2 [shape=record label=""{JUMP:BreakStatement|c1|c1()}""]
+3 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
+5 [shape=record label=""{JUMP:BreakStatement|c2|c2()}""]
+4 [shape=record label=""{EXIT}""]
+0 -> 1
 1 -> 2 [label=""True""]
 1 -> 3 [label=""False""]
-2 [shape=record label=""{JUMP:BreakStatement|c1|c1()}""]
 2 -> 4
-3 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
 3 -> 5 [label=""True""]
 3 -> 4 [label=""False""]
-5 [shape=record label=""{JUMP:BreakStatement|c2|c2()}""]
 5 -> 4
-4 [shape=record label=""{EXIT}""]
 }
 ");
         }
@@ -109,11 +109,11 @@ class C
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{BINARY:TrueLiteralExpression|true}""]
+1 [shape=record label=""{SIMPLE|Bar|Bar()}""]
+2 [shape=record label=""{EXIT}""]
 0 -> 1 [label=""True""]
 0 -> 2 [label=""False""]
-1 [shape=record label=""{SIMPLE|Bar|Bar()}""]
 1 -> 2
-2 [shape=record label=""{EXIT}""]
 }
 ");
         }
@@ -137,13 +137,13 @@ class C
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{FOREACH:ForEachStatement|items}""]
-0 -> 1
 1 [shape=record label=""{BINARY:ForEachStatement}""]
+2 [shape=record label=""{SIMPLE|Bar|Bar()}""]
+3 [shape=record label=""{EXIT}""]
+0 -> 1
 1 -> 2 [label=""True""]
 1 -> 3 [label=""False""]
-2 [shape=record label=""{SIMPLE|Bar|Bar()}""]
 2 -> 1
-3 [shape=record label=""{EXIT}""]
 }
 ");
         }
@@ -171,13 +171,13 @@ namespace Namespace
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""ForEach"" {
 0 [shape=record label=""{FOREACH:ForEachVariableStatement|values}""]
-0 -> 1
 1 [shape=record label=""{BINARY:ForEachVariableStatement}""]
+2 [shape=record label=""{SIMPLE|key|i = key|value|j = value}""]
+3 [shape=record label=""{EXIT}""]
+0 -> 1
 1 -> 2 [label=""True""]
 1 -> 3 [label=""False""]
-2 [shape=record label=""{SIMPLE|key|i = key|value|j = value}""]
 2 -> 1
-3 [shape=record label=""{EXIT}""]
 }
 ");
         }
@@ -201,15 +201,15 @@ class C
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{FOR:ForStatement|0|i = 0}""]
-0 -> 1
 1 [shape=record label=""{BINARY:ForStatement|i|10|i \< 10}""]
+2 [shape=record label=""{SIMPLE|Bar|Bar()}""]
+4 [shape=record label=""{SIMPLE|i|i++}""]
+3 [shape=record label=""{EXIT}""]
+0 -> 1
 1 -> 2 [label=""True""]
 1 -> 3 [label=""False""]
-2 [shape=record label=""{SIMPLE|Bar|Bar()}""]
 2 -> 4
-4 [shape=record label=""{SIMPLE|i|i++}""]
 4 -> 1
-3 [shape=record label=""{EXIT}""]
 }
 ");
         }
@@ -233,10 +233,10 @@ class C
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{JUMP:UsingStatement|x}""]
-0 -> 1
 1 [shape=record label=""{USING:UsingStatement|Bar|Bar()}""]
-1 -> 2
 2 [shape=record label=""{EXIT}""]
+0 -> 1
+1 -> 2
 }
 ");
         }
@@ -260,10 +260,10 @@ class C
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{LOCK:LockStatement|x}""]
-0 -> 1
 1 [shape=record label=""{SIMPLE|Bar|Bar()}""]
-1 -> 2
 2 [shape=record label=""{EXIT}""]
+0 -> 1
+1 -> 2
 }
 ");
         }
@@ -287,8 +287,8 @@ class C
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{SIMPLE|Bar|x =\>\n        \{\n            return 1 + 1;\n        \}|Bar(x =\>\n        \{\n            return 1 + 1;\n        \})}""]
-0 -> 1
 1 [shape=record label=""{EXIT}""]
+0 -> 1
 }
 ");
         }
@@ -309,8 +309,8 @@ internal class Test
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
 0 [shape=record label=""{SIMPLE|1..4|r = 1..4}""]
-0 -> 1
 1 [shape=record label=""{EXIT}""]
+0 -> 1
 }
 ");
         }
@@ -331,8 +331,8 @@ internal class Test
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Index"" {
 0 [shape=record label=""{SIMPLE|^1|index = ^1}""]
-0 -> 1
 1 [shape=record label=""{EXIT}""]
+0 -> 1
 }
 ");
         }
@@ -353,8 +353,8 @@ internal class Test
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
 0 [shape=record label=""{SIMPLE|^2..^0|range = ^2..^0}""]
-0 -> 1
 1 [shape=record label=""{EXIT}""]
+0 -> 1
 }
 ");
         }
@@ -376,8 +376,8 @@ internal class Test
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
 0 [shape=record label=""{SIMPLE|new[] \{ 1, 2 \}|1|2|\{ 1, 2 \}|ints = new[] \{ 1, 2 \}|ints|^2..^1|ints[^2..^1]|lastTwo = ints[^2..^1]}""]
-0 -> 1
 1 [shape=record label=""{EXIT}""]
+0 -> 1
 }
 ");
         }
