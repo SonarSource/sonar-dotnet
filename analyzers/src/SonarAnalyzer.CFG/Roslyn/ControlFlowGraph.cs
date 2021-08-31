@@ -35,6 +35,7 @@ namespace SonarAnalyzer.CFG.Roslyn
         private static readonly PropertyInfo OriginalOperationProperty;
         private static readonly PropertyInfo RootProperty;
         private static readonly MethodInfo CreateMethod;
+        private static readonly MethodInfo CreateCoreMethod;
         private static readonly MethodInfo GetAnonymousFunctionControlFlowGraphMethod;
         private static readonly MethodInfo GetLocalFunctionControlFlowGraphMethod;
 
@@ -60,6 +61,12 @@ namespace SonarAnalyzer.CFG.Roslyn
                 OriginalOperationProperty = type.GetProperty(nameof(OriginalOperation));
                 RootProperty = type.GetProperty(nameof(Root));
                 CreateMethod = type.GetMethod(nameof(Create), new[] { typeof(SyntaxNode), typeof(SemanticModel), typeof(CancellationToken) });
+                CreateCoreMethod = type.GetMethod(
+                    nameof(CreateCore),
+                    BindingFlags.Static | BindingFlags.NonPublic,
+                    null,
+                    new[] { typeof(IOperation), typeof(string), typeof(CancellationToken) },
+                    null);
                 GetAnonymousFunctionControlFlowGraphMethod = type.GetMethod(nameof(GetAnonymousFunctionControlFlowGraph));
                 GetLocalFunctionControlFlowGraphMethod = type.GetMethod(nameof(GetLocalFunctionControlFlowGraph));
             }
@@ -77,6 +84,11 @@ namespace SonarAnalyzer.CFG.Roslyn
         public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel) =>
             IsAvailable
                 ? new ControlFlowGraph(CreateMethod.Invoke(null, new object[] { node, semanticModel, CancellationToken.None }))
+                : throw new InvalidOperationException("CFG is not available under this version of Roslyn compiler.");
+
+        public static ControlFlowGraph CreateCore(IOperation operation) =>
+            IsAvailable
+                ? new ControlFlowGraph(CreateCoreMethod.Invoke(null, new object[] { operation, nameof(operation), CancellationToken.None }))
                 : throw new InvalidOperationException("CFG is not available under this version of Roslyn compiler.");
 
         public ControlFlowGraph GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction) =>

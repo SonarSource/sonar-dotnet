@@ -47,6 +47,9 @@ public class Sample
     }
 }";
             TestHelper.CompileCfg(code).Should().NotBeNull();
+            var (tree, semanticModel) = TestHelper.Compile(code);
+            var declaration = tree.GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax>().Single();
+            ControlFlowGraph.CreateCore(semanticModel.GetOperation(declaration)).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -59,6 +62,9 @@ Public Class Sample
     End Function
 End Class";
             TestHelper.CompileCfg(code, false).Should().NotBeNull();
+            var (tree, semanticModel) = TestHelper.Compile(code, false);
+            var declaration = tree.GetRoot().DescendantNodes().Single(x => x.RawKind == (int)Microsoft.CodeAnalysis.VisualBasic.SyntaxKind.FunctionBlock);
+            ControlFlowGraph.CreateCore(semanticModel.GetOperation(declaration)).Should().NotBeNull();
         }
 
         [TestMethod]
