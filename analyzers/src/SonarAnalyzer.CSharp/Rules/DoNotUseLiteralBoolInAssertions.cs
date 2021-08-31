@@ -82,26 +82,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     if (invocation.ArgumentList != null
-                        && IsFirstOrSecondArgumentABoolLiteral(invocation.ArgumentList.Arguments))
+                        && IsFirstOrSecondArgumentABoolLiteral(invocation.ArgumentList.Arguments)
+                        && c.SemanticModel.GetSymbolOrCandidateSymbol(invocation) is IMethodSymbol methodSymbol
+                        && IsTrackedMethod(methodSymbol)
+                        && !IsWorkingWithNullableType(methodSymbol, invocation.ArgumentList.Arguments, c.SemanticModel))
                     {
-                        var methodSymbol = c.SemanticModel.GetSymbolOrCandidateSymbol(invocation);
-                        if (methodSymbol != null &&
-                            IsTrackedMethod(methodSymbol) &&
-                            !IsWorkingWithNullableType(methodSymbol, invocation.ArgumentList.Arguments, c.SemanticModel))
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation()));
-                        }
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
 
-        private static bool IsWorkingWithNullableType(ISymbol symbol, SeparatedSyntaxList<ArgumentSyntax> arguments, SemanticModel semanticModel)
+        private static bool IsWorkingWithNullableType(IMethodSymbol methodSymbol, SeparatedSyntaxList<ArgumentSyntax> arguments, SemanticModel semanticModel)
         {
-            if (symbol is not IMethodSymbol methodSymbol)
-            {
-                return false;
-            }
-
             if (methodSymbol.TypeArguments.Length == 1) // We usually expect all comparison test methods to have one generic argument
             {
                 // Since we already know we are comparing with bool, no need to check Nullable<bool>, Nullable<T> is enough
