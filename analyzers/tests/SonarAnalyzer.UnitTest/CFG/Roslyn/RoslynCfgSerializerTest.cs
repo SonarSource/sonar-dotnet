@@ -474,6 +474,41 @@ cfg0_block4 -> cfg0_block5
         }
 
         [TestMethod]
+        public void Serialize_Region_ExceptionType()
+        {
+            var code = @"
+class Sample
+{
+    void Method()
+    {
+        try { }
+        catch(System.InvalidOperationException ex) { }
+    }
+}";
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            dot.Should().BeIgnoringLineEndings(
+@"digraph ""RoslynCfg"" {
+subgraph ""cluster_TryAndCatch region"" {
+label = ""TryAndCatch region""
+subgraph ""cluster_Try region"" {
+label = ""Try region""
+cfg0_block1 [shape=record label=""{BLOCK #1}""]
+}
+subgraph ""cluster_Catch region System.InvalidOperationException"" {
+label = ""Catch region System.InvalidOperationException""
+cfg0_block2 [shape=record label=""{BLOCK #2|0# SimpleAssignmentOperation / CatchDeclarationSyntax: (System.InvalidOperationException ex)|1# LocalReferenceOperation / CatchDeclarationSyntax: (System.InvalidOperationException ex)|1# CaughtExceptionOperation / CatchDeclarationSyntax: (System.InvalidOperationException ex)|##########}""]
+}
+}
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block3 [shape=record label=""{EXIT #3}""]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block3
+cfg0_block2 -> cfg0_block3
+}
+");
+        }
+
+        [TestMethod]
         public void Serialize_LocalFunctions()
         {
             var code = @"
@@ -571,4 +606,3 @@ cfg3_block1 -> cfg3_block2 [label=""Return""]
         }
     }
 }
-
