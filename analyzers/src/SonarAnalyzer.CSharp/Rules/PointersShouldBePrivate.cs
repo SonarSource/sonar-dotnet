@@ -74,8 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                return variableDeclaration.Type is IdentifierNameSyntax identifierName
-                       && IsPointerStructure(identifierName.Identifier.ValueText)
+                return IsPointerStructure(variableDeclaration)
                        && ((IFieldSymbol)semanticModel.GetDeclaredSymbol(variableDeclarator)) is { } variableSymbol
                        && variableSymbol.Type.IsAny(KnownType.PointerTypes)
                     ? variableSymbol
@@ -83,7 +82,21 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsPointerStructure(string typeName) =>
+        private static bool IsPointerStructure(VariableDeclarationSyntax variableDeclaration)
+        {
+            if (variableDeclaration.Type is IdentifierNameSyntax identifierName)
+            {
+                return IsNameOfPointerStruct(identifierName.Identifier.ValueText);
+            }
+            else
+            {
+                return variableDeclaration.Type is QualifiedNameSyntax qualifiedName
+                       && qualifiedName.Right is IdentifierNameSyntax identifierNameSyntax
+                       && IsNameOfPointerStruct(identifierNameSyntax.Identifier.ValueText);
+            }
+        }
+
+        private static bool IsNameOfPointerStruct(string typeName) =>
             typeName.Equals("IntPtr") || typeName.Equals("UIntPtr");
 
         private static bool IsUnmanagedFunctionPointer(VariableDeclarationSyntax variableDeclaration) =>

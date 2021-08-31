@@ -4,6 +4,9 @@ public unsafe record Record
 {
     private IntPtr p1;
     public UIntPtr p2; // Noncompliant
+    public RandomNameSpace.UIntPtr p3; // Error [CS0246]
+    public (int, string) p4;
+    public System.UIntPtr p5; // Noncompliant
 }
 
 public unsafe class Class

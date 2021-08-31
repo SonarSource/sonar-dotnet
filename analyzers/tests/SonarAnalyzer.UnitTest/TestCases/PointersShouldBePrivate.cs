@@ -1,4 +1,5 @@
 ﻿using System;
+using PointerAlias = System.IntPtr;
 
 namespace Tests.Diagnostics
 {
@@ -21,6 +22,7 @@ namespace Tests.Diagnostics
         protected UIntPtr protectedPointer2; // Noncompliant
         protected internal IntPtr protectedInternalPointer1; // Noncompliant
         protected internal UIntPtr protectedInternalPointer2; // Noncompliant
+        protected internal PointerAlias protectedInternalAliasPointer; // FN
 
         public IntPtr pointer1, // Noncompliant {{Make 'pointer1' 'private' or 'protected readonly'.}}
             pointer2, // Noncompliant {{Make 'pointer2' 'private' or 'protected readonly'.}}
