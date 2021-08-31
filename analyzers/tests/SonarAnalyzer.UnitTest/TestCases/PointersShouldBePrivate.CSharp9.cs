@@ -1,6 +1,12 @@
 ﻿using System;
 
-unsafe public record Record
+public unsafe record Record
+{
+    private IntPtr p1;
+    public UIntPtr p2; // Noncompliant
+}
+
+public unsafe class Class
 {
     private IntPtr p1;
     protected int* p2; // Noncompliant
@@ -12,7 +18,7 @@ unsafe public record Record
     protected readonly UIntPtr p7;
     public UIntPtr p8; // Noncompliant
 
-    public delegate* managed<int, int> f1;
+    public delegate* <int, int> f1;
     protected delegate* managed<int, int> f2;
     protected readonly delegate* managed<int, int> f3;
     private readonly delegate* managed<int, int> f4;
