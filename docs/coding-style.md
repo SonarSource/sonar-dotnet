@@ -13,6 +13,7 @@ Members and types should always have the lowest possible visibility.
 Ordering of class members should be the following:
 
 1. Constants
+1. Nested enum declarations
 1. Fields
 1. Abstract members
 1. Properties
@@ -39,8 +40,26 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 ## Multi-line statements
 
 * Operators (&&, ||, +, :, ?, ?? and others) are placed at the beginning of a line.
-* Dots with invocation `.Method()` are placed at the beginning of a line.
-* Comma separating arguments is placed at the end of a line.
+* Dot before an invocation `.Method()` is placed at the beginning of a line.
+* The comma separating arguments is placed at the end of a line.
+* Method declaration parameters should be on the same line. If S103 is violated, parameters should be placed each on a separate line; the first parameter should be on the same line with the declaration; the other parameters should be aligned with the first parameter.
+```
+public void MethodWithManyParameters(int firstParameter,
+                                     string secondParameter,
+                                     Function<int, string, string> complexParameter);
+```
+* Method invocation arguments should be placed on the same line only when they are few and simple. Otherwise, they should be placed on separate lines. The first argument should be on a separate line, aligned with a left-most single indendation.
+```
+object.MethodName(
+    firstArgument,
+    x => x.Bar(),
+    thirdArgument.Property);
+```
+  * Exception from this rule: chained LINQ queries where the alignment of parameter expressions should be right-most.
+```
+someEnumerable.Select(x => x.Foo).Where(x => x.Condition1
+                                             && x.Condition2);
+```
 * Expression body of arrow property should be on the same line, as the property declaration. It should be on next line only when S103 is violated.
 * Expression body of method should be on the same line only for trivial cases: literal or simple identifier. Member access, indexer, invocation and other complex structures should be on the next line.
 
@@ -57,6 +76,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 * Code should contain as few comments as necessary in favor of well-named members and variables.
 * Comments should generally be on separate lines.
 * Comments on the same line with code are acceptable for short lines of code and short comments.
+* Documentation comments for abstract methods and their implementations should be placed only on the abstract method, to avoid duplication. _When reading the implementation, the IDE offers the tooling to peek in the base class and read the method comment._
 
 ## FIXME and ToDo
 
