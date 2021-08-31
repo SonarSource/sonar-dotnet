@@ -2,58 +2,6 @@
 "issues":  [
 {
 "id":  "S4000",
-"message":  "Make 'Field1' 'private' or 'protected readonly'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3052.cs",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4000",
-"message":  "Make 'Field2' 'private' or 'protected readonly'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3052.cs",
-"region":  {
-"startLine":  6,
-"startColumn":  21,
-"endLine":  6,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S4000",
-"message":  "Make 'Field3' 'private' or 'protected readonly'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3052.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  22,
-"endLine":  7,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S4000",
-"message":  "Make 'Field4' 'private' or 'protected readonly'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3052.cs",
-"region":  {
-"startLine":  8,
-"startColumn":  22,
-"endLine":  8,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4000",
 "message":  "Make 'p1' 'private' or 'protected readonly'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S4000.cs",

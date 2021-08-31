@@ -7,6 +7,8 @@ public unsafe record Record
     public RandomNameSpace.UIntPtr p3; // Error [CS0246]
     public (int, string) p4;
     public System.UIntPtr p5; // Noncompliant
+    public nint p5; // Compliant
+    public nuint p5; // Compliant
 }
 
 public unsafe class Class
