@@ -2,53 +2,40 @@
 "issues":  [
 {
 "id":  "S4000",
-"message":  "Make 'Field1' 'private' or 'protected readonly'.",
+"message":  "Make 'p1' 'private' or 'protected readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3052.cs",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4000",
-"message":  "Make 'Field2' 'private' or 'protected readonly'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3052.cs",
-"region":  {
-"startLine":  6,
-"startColumn":  21,
-"endLine":  6,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S4000",
-"message":  "Make 'Field3' 'private' or 'protected readonly'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3052.cs",
+"uri":  "sources\Net5\Net5\S4000.cs",
 "region":  {
 "startLine":  7,
-"startColumn":  22,
+"startColumn":  24,
 "endLine":  7,
-"endColumn":  32
+"endColumn":  26
 }
 }
 },
 {
 "id":  "S4000",
-"message":  "Make 'Field4' 'private' or 'protected readonly'.",
+"message":  "Make 'p2' 'private' or 'protected readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3052.cs",
+"uri":  "sources\Net5\Net5\S4000.cs",
 "region":  {
 "startLine":  8,
-"startColumn":  22,
+"startColumn":  23,
 "endLine":  8,
-"endColumn":  33
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S4000",
+"message":  "Make 'f1' 'private' or 'protected readonly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4000.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  53,
+"endLine":  9,
+"endColumn":  55
 }
 }
 }

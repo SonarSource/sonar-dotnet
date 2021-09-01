@@ -171,6 +171,32 @@
 },
 {
 "id":  "S2357",
+"message":  "Make 'p2' private.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4000.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  23,
+"endLine":  8,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'f1' private.",
+"location":  {
+"uri":  "sources\Net5\Net5\S4000.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  53,
+"endLine":  9,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
 "uri":  "sources\Net5\Net5\TargetTypedConditionals.cs",

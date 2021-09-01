@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,13 +36,12 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S4000";
         private const string MessageFormat = "Make '{0}' 'private' or 'protected readonly'.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
@@ -53,25 +53,49 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var variable in fieldDeclaration.Declaration.Variables)
                 {
-                    var variableSymbol = (IFieldSymbol)c.SemanticModel.GetDeclaredSymbol(variable);
-
-                    if (variableSymbol != null &&
-                        variableSymbol.Type.IsAny(KnownType.PointerTypes))
+                    if (SymbolIfPointerType(fieldDeclaration.Declaration, variable, c.SemanticModel) is { } variableSymbol
+                        && variableSymbol.GetEffectiveAccessibility() is var accessibility
+                        && accessibility != Accessibility.Private
+                        && accessibility != Accessibility.Internal
+                        && !variableSymbol.IsReadOnly)
                     {
-                        var accessibility = variableSymbol.GetEffectiveAccessibility();
-                        if (accessibility == Accessibility.Private ||
-                            accessibility == Accessibility.Internal ||
-                            variableSymbol.IsReadOnly)
-                        {
-                            return;
-                        }
-
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, variable.GetLocation(),
-                            variableSymbol.Name));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, variable.GetLocation(), variableSymbol.Name));
                     }
                 }
             },
             SyntaxKind.FieldDeclaration);
+
+        private static IFieldSymbol SymbolIfPointerType(VariableDeclarationSyntax variableDeclaration, VariableDeclaratorSyntax variableDeclarator, SemanticModel semanticModel)
+        {
+            if (variableDeclaration.Type.IsKind(SyntaxKind.PointerType)
+                || IsUnmanagedFunctionPointer(variableDeclaration))
+            {
+                return (IFieldSymbol)semanticModel.GetDeclaredSymbol(variableDeclarator);
+            }
+            else
+            {
+                return IsPointerStructure(variableDeclaration)
+                       && ((IFieldSymbol)semanticModel.GetDeclaredSymbol(variableDeclarator)) is { } variableSymbol
+                       && variableSymbol.Type.IsAny(KnownType.PointerTypes)
+                    ? variableSymbol
+                    : null;
+            }
         }
+
+        private static bool IsPointerStructure(VariableDeclarationSyntax variableDeclaration) =>
+            variableDeclaration.Type is IdentifierNameSyntax identifierName
+                ? IsNameOfPointerStruct(identifierName.Identifier.ValueText)
+                : variableDeclaration.Type is QualifiedNameSyntax qualifiedName
+                  && qualifiedName.Right is IdentifierNameSyntax identifierNameSyntax
+                  && IsNameOfPointerStruct(identifierNameSyntax.Identifier.ValueText);
+
+        private static bool IsNameOfPointerStruct(string typeName) =>
+            typeName.Equals("IntPtr") || typeName.Equals("UIntPtr");
+
+        private static bool IsUnmanagedFunctionPointer(VariableDeclarationSyntax variableDeclaration) =>
+            variableDeclaration.Type.IsKind(SyntaxKindEx.FunctionPointerType)
+            && (FunctionPointerTypeSyntaxWrapper)variableDeclaration.Type is var functionPointerType
+            && functionPointerType.CallingConvention.SyntaxNode != null
+            && !functionPointerType.CallingConvention.ManagedOrUnmanagedKeyword.IsKind(SyntaxKindEx.ManagedKeyword);
     }
 }

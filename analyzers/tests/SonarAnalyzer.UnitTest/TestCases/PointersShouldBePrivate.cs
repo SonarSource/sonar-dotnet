@@ -1,4 +1,5 @@
 ﻿using System;
+using PointerAlias = System.IntPtr;
 
 namespace Tests.Diagnostics
 {
@@ -21,6 +22,7 @@ namespace Tests.Diagnostics
         protected UIntPtr protectedPointer2; // Noncompliant
         protected internal IntPtr protectedInternalPointer1; // Noncompliant
         protected internal UIntPtr protectedInternalPointer2; // Noncompliant
+        protected internal PointerAlias protectedInternalAliasPointer; // FN
 
         public IntPtr pointer1, // Noncompliant {{Make 'pointer1' 'private' or 'protected readonly'.}}
             pointer2, // Noncompliant {{Make 'pointer2' 'private' or 'protected readonly'.}}
@@ -39,6 +41,50 @@ namespace Tests.Diagnostics
         internal class InternalInnerClass
         {
             public IntPtr publicPointer1;
+        }
+    }
+
+    public unsafe class PointerTypes
+    {
+        private int* privatePointer1;
+        private char* privatePointer2;
+        internal byte* internalPointer1;
+        internal uint* internalPointer2;
+        public readonly long* publicReadonlyPointer1;
+        protected readonly byte* protectedReadonlyPointer1;
+        protected readonly int* protectedReadonlyPointer2;
+        protected internal readonly int* protectedInternalReadonlyPointer1;
+        protected internal readonly int* protectedInternalReadonlyPointer2;
+
+        public int* publicPointer1; // Noncompliant {{Make 'publicPointer1' 'private' or 'protected readonly'.}}
+        public char* publicPointer2; // Noncompliant
+        protected byte* protectedPointer1; // Noncompliant
+        protected long* protectedPointer2; // Noncompliant
+        protected internal uint* protectedInternalPointer1; // Noncompliant
+        protected internal SomeStruct* protectedInternalPointer2; // Noncompliant
+
+        public int* pointer1, // Noncompliant {{Make 'pointer1' 'private' or 'protected readonly'.}}
+            pointer2, // Noncompliant {{Make 'pointer2' 'private' or 'protected readonly'.}}
+            pointer3; // Noncompliant {{Make 'pointer3' 'private' or 'protected readonly'.}}
+
+        public class PublicInnerClass
+        {
+            public int* publicPointer1; // Noncompliant
+        }
+
+        private class PrivateInnerClass
+        {
+            public int* publicPointer1;
+        }
+
+        internal class InternalInnerClass
+        {
+            public int* publicPointer1;
+        }
+
+        public struct SomeStruct
+        {
+            int value;
         }
     }
 }
