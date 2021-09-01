@@ -271,7 +271,10 @@ namespace SonarAnalyzer.Rules.CSharp
                           .SelectMany(symbol => symbol.PartialImplementationPart?.DeclaringSyntaxReferences ?? symbol.DeclaringSyntaxReferences)
                           .Select(reference => reference.GetSyntax());
 
-            private static IEnumerable<SyntaxNode> FindMethodImplementationOrAbstractDeclaration(INamedTypeSymbol typeSymbol, Func<IMethodSymbol, bool> predicate, TypeDeclarationSyntax typeDeclarationSyntax) =>
+            private static IEnumerable<SyntaxNode> FindMethodImplementationOrAbstractDeclaration(
+                INamedTypeSymbol typeSymbol,
+                Func<IMethodSymbol, bool> predicate,
+                TypeDeclarationSyntax typeDeclarationSyntax) =>
                 FindMethodDeclarations(typeSymbol, predicate)
                     .OfType<BaseMethodDeclarationSyntax>()
                     // We want to skip the partial method declarations when reporting secondary issues since the messages are relevant only for implementation part.
