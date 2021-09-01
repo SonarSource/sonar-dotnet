@@ -2,11 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
     using FluentAssertions;
     using NFluent;
     using NSubstitute;
     using NUnit.Framework;
+    using Shouldly;
 
     using static NUnit.Framework.Assert;
 
@@ -526,6 +528,53 @@
                 calculator.Add(1, 2);
             });
         }
+    }
+
+    // All assert methods start with "Should*". We do not test all APIs, just some.
+    public class ShouldlyTests
+    {
+        int i = 1;
+        public dynamic Foo() => null;
+        public void Bar() { }
+
+        [TestCase]
+        public void NoAssert() // Noncompliant
+        {
+        }
+
+        [TestCase]
+        public void W()
+        {
+            int[] empty = { };
+            empty.ShouldBeEmpty();
+
+            var dict = new Dictionary<string, string> { { "x", "x" } };
+            dict.ShouldContainKey("y");
+
+            Should.Throw<IndexOutOfRangeException>(() => Bar());
+        }
+
+        [TestCase]
+        public void X() => "Foo".ShouldMatchApproved();
+
+        [TestCase]
+        public void Y() => i.ShouldBeInRange(30000, 40000);
+
+        [TestCase]
+        public void Z() => Should.NotThrow(() => Bar());
+
+        [TestCase]
+        public void Dynamic()
+        {
+            dynamic theFuture = Foo();
+            DynamicShould.HaveProperty(theFuture, "X");
+        }
+
+        [TestCase]
+        public void CompleteIn() =>
+            Should.CompleteIn(action: () => { Thread.Sleep(TimeSpan.FromSeconds(2)); },
+                              timeout: TimeSpan.FromSeconds(1),
+                              customMessage: "Some additional context");
     }
 
     internal interface ICalculator

@@ -4,6 +4,7 @@
     using FluentAssertions;
     using NFluent;
     using NSubstitute;
+    using Shouldly;
     using Xunit;
 
     using static Xunit.Assert;
@@ -225,12 +226,15 @@
     }
 
     /// <summary>
-    /// The NSubstitute assertions are extensively verified in the NUnit test files.
+    /// The NSubstitute and Shoudly assertions are extensively verified in the NUnit test files.
     /// Here we just do a simple test to confirm that the errors are not raised in conjunction with XUnit.
     /// </summary>
-    public class NSubstituteTests
+    public class NSubstituteAndShouldlyTests
     {
         [Fact]
         public void Received() => Substitute.For<IDisposable>().Received().Dispose();
+
+        [Fact]
+        public void Shouldly() => "".ShouldBe("foo");
     }
 }

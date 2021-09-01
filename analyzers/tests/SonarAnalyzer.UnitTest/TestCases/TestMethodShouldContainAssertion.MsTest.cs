@@ -6,6 +6,7 @@
     using NFluent;
     using NSubstitute;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Shouldly;
 
     using static Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
@@ -339,14 +340,21 @@
     }
 
     /// <summary>
-    /// The NSubstitute assertions are extensively verified in the NUnit test files.
+    /// The NSubstitute and Shoudly assertions are extensively verified in the NUnit test files.
     /// Here we just do a simple test to confirm that the errors are not raised in conjunction with MsTest.
     /// </summary>
     [TestClass]
-    public class NSubstituteTests
+    public class NSubstituteAndShouldlyTests
     {
         [TestMethod]
         public void Received() => Substitute.For<IDisposable>().Received().Dispose();
+
+        [TestMethod]
+        public void Shouldly()
+        {
+            int[] array = { 1, 2, 3 };
+            array.ShouldAllBe(x => x > 0);
+        }
     }
 
     [TestClass]
