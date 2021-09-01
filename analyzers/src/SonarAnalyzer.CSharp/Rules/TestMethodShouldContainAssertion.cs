@@ -50,6 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {"InOrder", KnownType.NSubstitute_Received }
         };
 
+        /// The assertions in the Shouldly library are supported by <see cref="UnitTestHelper.KnownAssertionMethodParts"/> (they all contain "Should")
         private static readonly ImmutableArray<KnownType> KnownAssertionTypes = ImmutableArray.Create(
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
                 KnownType.NFluent_Check,
