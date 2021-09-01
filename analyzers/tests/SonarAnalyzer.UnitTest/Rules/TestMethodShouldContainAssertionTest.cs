@@ -38,6 +38,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             public const string Ver5 = "5.9.0";
         }
 
+        private static class NFluentVersions
+        {
+            public const string Ver1 = "1.3.1";
+            public const string Ver2 = "2.7.2";
+        }
+
         private static class MsTestVersions
         {
             public const string Ver1 = "1.1.11";
@@ -164,6 +170,29 @@ public class Foo
                 AdditionalTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion));
 
         [TestMethod]
+        public void TestMethodShouldContainAssertion_NUnit_NFluentLegacy() =>
+           Verifier.VerifyCSharpAnalyzer(@"
+using System;
+using NFluent;
+using NUnit.Framework;
+
+[TestFixture]
+public class Foo
+{
+    [Test]
+    public void Test1()
+    {
+        var x = 42;
+        if (x == 42)
+        {
+            throw new NFluent.FluentCheckException(""You failed me!"");
+        }
+    }
+}",
+                new TestMethodShouldContainAssertion(),
+                AdditionalTestReferences(NuGetMetadataReference.NUnit(NUnitVersions.Ver25), nFluentVersion: NFluentVersions.Ver1));
+
+        [TestMethod]
         public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Custom.cs",
                 new TestMethodShouldContainAssertion(),
@@ -182,10 +211,12 @@ public class Foo
 
         public static IEnumerable<MetadataReference> AdditionalTestReferences(IEnumerable<MetadataReference> testFrameworkReference,
                                                                               string fluentVersion = Constants.NuGetLatestVersion,
-                                                                              string nSubstituteVersion = Constants.NuGetLatestVersion) =>
+                                                                              string nSubstituteVersion = Constants.NuGetLatestVersion,
+                                                                              string nFluentVersion = Constants.NuGetLatestVersion) =>
             testFrameworkReference
                 .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
                 .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
+                .Concat(NuGetMetadataReference.NFluent(nFluentVersion))
                 .Concat(MetadataReferenceFacade.SystemData)
                 .Concat(MetadataReferenceFacade.SystemXml)
                 .Concat(MetadataReferenceFacade.SystemXmlLinq)

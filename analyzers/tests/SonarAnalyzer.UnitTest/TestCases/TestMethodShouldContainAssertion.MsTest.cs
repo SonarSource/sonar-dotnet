@@ -3,6 +3,7 @@
     using System;
     using System.Text;
     using FluentAssertions;
+    using NFluent;
     using NSubstitute;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -151,6 +152,22 @@
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        [TestMethod]
+        public void TestMethod21()
+        {
+            Check.ThatCode(() => 42).WhichResult().IsPositive();
+        }
+
+        [TestMethod]
+        public void TestMethod22()
+        {
+            var x = 42;
+            if (x == 42)
+            {
+                throw new NFluent.Kernel.FluentCheckException("You failed me!");
             }
         }
 

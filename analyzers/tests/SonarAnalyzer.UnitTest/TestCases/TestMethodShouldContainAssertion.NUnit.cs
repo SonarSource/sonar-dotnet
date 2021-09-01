@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using FluentAssertions;
+    using NFluent;
     using NSubstitute;
     using NUnit.Framework;
 
@@ -251,6 +252,22 @@
         public async Task<string> TestCase20(string str)
         {
             return str;
+        }
+
+        [TestCase]
+        public void TestCase21()
+        {
+            Check.ThatCode(() => 42).WhichResult().IsPositive();
+        }
+
+        [TestCase]
+        public void TestCase22()
+        {
+            var x = 42;
+            if (x == 42)
+            {
+                throw new NFluent.Kernel.FluentCheckException("You failed me!");
+            }
         }
     }
 

@@ -2,6 +2,7 @@
 {
     using System;
     using FluentAssertions;
+    using NFluent;
     using NSubstitute;
     using Xunit;
 
@@ -97,6 +98,22 @@
         [Fact(Skip = "reason")]
         public void Fact17() // Don't raise on skipped test methods
         {
+        }
+
+        [Fact]
+        public void Fact18()
+        {
+            Check.ThatCode(() => 42).WhichResult().IsPositive();
+        }
+
+        [Fact]
+        public void Fact19()
+        {
+            var x = 42;
+            if (x == 42)
+            {
+                throw new NFluent.Kernel.FluentCheckException("You failed me!");
+            }
         }
 
         [Theory]

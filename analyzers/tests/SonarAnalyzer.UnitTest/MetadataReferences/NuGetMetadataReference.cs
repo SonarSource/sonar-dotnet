@@ -91,6 +91,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MySqlData(string packageVersion) => Create("MySql.Data", packageVersion);
         public static References MySqlDataEntityFrameworkCore(string packageVersion = "8.0.22") => Create("MySql.Data.EntityFrameworkCore", packageVersion);
         public static References Nancy(string packageVersion = "2.0.0") => Create("Nancy", packageVersion);
+        public static References NFluent(string packageVersion) => Create("NFluent", packageVersion);
         public static References NLog(string packageVersion) => Create("NLog", packageVersion);
         public static References NHibernate(string packageVersion = "5.2.2") => Create("NHibernate", packageVersion);
         public static References NpgsqlEntityFrameworkCorePostgreSQL(string packageVersion) => Create("Npgsql.EntityFrameworkCore.PostgreSQL", packageVersion);
