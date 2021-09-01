@@ -35,79 +35,71 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
     public class LiveVariableAnalysisTest
     {
         [TestMethod]
-        public void LiveVariableAnalysis_StaticLocalFunction_ExpressionLiveIn()
+        public void StaticLocalFunction_ExpressionLiveIn()
         {
-            var context = new LiveVariableAnalysisContext(
-@"static int LocalFunction(int a) => a + 1;
-outParameter = LocalFunction(inParameter);",
-            "LocalFunction");
-            var liveIn = context.LVA.GetLiveIn(context.CFG.EntryBlock).OfType<IParameterSymbol>().ToArray();
-            liveIn.Should().ContainSingle();
-            liveIn.Single().Name.Should().Be("a");
+            var code = @"
+outParameter = LocalFunction(inParameter);
+static int LocalFunction(int a) => a + 1;";
+            var context = new LiveVariableAnalysisContext(code, "LocalFunction");
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("a"));
         }
 
         [TestMethod]
-        public void LiveVariableAnalysis_StaticLocalFunction_ExpressionNotLiveIn()
+        public void StaticLocalFunction_ExpressionNotLiveIn()
         {
-            var context = new LiveVariableAnalysisContext(
-@"static int LocalFunction(int a) => 42;
-outParameter = LocalFunction(0);",
-            "LocalFunction");
-            var liveIn = context.LVA.GetLiveIn(context.CFG.EntryBlock).OfType<IParameterSymbol>().ToArray();
-            liveIn.Should().BeEmpty();
+            var code = @"
+outParameter = LocalFunction(0);
+static int LocalFunction(int a) => 42;";
+            var context = new LiveVariableAnalysisContext(code, "LocalFunction");
+            context.Validate(context.Cfg.EntryBlock);
         }
 
         [TestMethod]
-        public void LiveVariableAnalysis_StaticLocalFunction_LiveIn()
+        public void StaticLocalFunction_LiveIn()
         {
-            var context = new LiveVariableAnalysisContext(
-@"static int LocalFunction(int a)
+            var code = @"
+outParameter = LocalFunction(inParameter);
+static int LocalFunction(int a)
 {
     return a + 1
-};
-outParameter = LocalFunction(inParameter);",
-            "LocalFunction");
-            var liveIn = context.LVA.GetLiveIn(context.CFG.EntryBlock).OfType<IParameterSymbol>().ToArray();
-            liveIn.Should().ContainSingle();
-            liveIn.Single().Name.Should().Be("a");
+};";
+            var context = new LiveVariableAnalysisContext(code, "LocalFunction");
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("a"));
         }
 
         [TestMethod]
-        public void LiveVariableAnalysis_StaticLocalFunction_NotLiveIn()
+        public void StaticLocalFunction_NotLiveIn()
         {
-            var context = new LiveVariableAnalysisContext(
-@"static int LocalFunction(int a)
+            var code = @"
+outParameter = LocalFunction(0);
+static int LocalFunction(int a)
 {
     return 42
-};
-outParameter = LocalFunction(0);",
-            "LocalFunction");
-            var liveIn = context.LVA.GetLiveIn(context.CFG.EntryBlock).OfType<IParameterSymbol>().ToArray();
-            liveIn.Should().BeEmpty();
+};";
+            var context = new LiveVariableAnalysisContext(code, "LocalFunction");
+            context.Validate(context.Cfg.EntryBlock);
         }
 
         [TestMethod]
-        public void LiveVariableAnalysis_StaticLocalFunction_Recursive()
+        public void StaticLocalFunction_Recursive()
         {
-            var context = new LiveVariableAnalysisContext(
-@"static int LocalFunction(int a)
+            var code = @"
+outParameter = LocalFunction(inParameter);
+static int LocalFunction(int a)
 {
     if(a <= 0)
         return 0;
     else
         return LocalFunction(a - 1);
-};
-outParameter = LocalFunction(inParameter);",
-            "LocalFunction");
-            var liveIn = context.LVA.GetLiveIn(context.CFG.EntryBlock).OfType<IParameterSymbol>().ToArray();
-            liveIn.Should().ContainSingle();
-            liveIn.Single().Name.Should().Be("a");
+};";
+            var context = new LiveVariableAnalysisContext(code, "LocalFunction");
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
         }
 
         private class LiveVariableAnalysisContext
         {
-            public readonly AbstractLiveVariableAnalysis LVA;
-            public readonly IControlFlowGraph CFG;
+            public readonly AbstractLiveVariableAnalysis Lva;
+            public readonly IControlFlowGraph Cfg;
 
             public LiveVariableAnalysisContext(string methodBody, string localFunctionName = null)
             {
@@ -134,9 +126,43 @@ public class Sample
                     symbol = semanticModel.GetDeclaredSymbol(function) as IMethodSymbol;
                     body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
                 }
-                CFG = CSharpControlFlowGraph.Create(body, semanticModel);
-                LVA = CSharpLiveVariableAnalysis.Analyze(CFG, symbol, semanticModel);
+                Cfg = CSharpControlFlowGraph.Create(body, semanticModel);
+                Lva = CSharpLiveVariableAnalysis.Analyze(Cfg, symbol, semanticModel);
             }
+
+            public void Validate(Block block, params Expected[] expected)
+            {
+                // This is not very nice from OOP perspective, but it makes UTs above easy to read.
+                var expectedLiveIn = expected.OfType<LiveIn>().SingleOrDefault() ?? new LiveIn();
+                var expectedLiveOut = expected.OfType<LiveOut>().SingleOrDefault() ?? new LiveOut();
+                var expectedCaptured = expected.OfType<Captured>().SingleOrDefault() ?? new Captured();
+                Lva.GetLiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names);
+                Lva.GetLiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names);
+                Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names);
+            }
+        }
+
+        private abstract class Expected
+        {
+            public readonly string[] Names;
+
+            protected Expected(string[] names) =>
+                Names = names;
+        }
+
+        private class LiveIn : Expected
+        {
+            public LiveIn(params string[] names) : base(names) { }
+        }
+
+        private class LiveOut : Expected
+        {
+            public LiveOut(params string[] names) : base(names) { }
+        }
+
+        private class Captured : Expected
+        {
+            public Captured(params string[] names) : base(names) { }
         }
     }
 }
