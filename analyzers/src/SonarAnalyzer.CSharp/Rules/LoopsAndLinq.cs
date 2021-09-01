@@ -19,8 +19,10 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -41,12 +43,15 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = c.Node;
-                    if (true)
+                    var node = (ForEachStatementSyntax)c.Node;
+
+                    if (node.Statement is BlockSyntax blockSyntax
+                        && blockSyntax.ChildNodes().Count() == 1
+                        && blockSyntax.ChildNodes().Single() is IfStatementSyntax)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
                     }
                 },
-                SyntaxKind.InvocationExpression);
+                SyntaxKind.ForEachStatement);
     }
 }

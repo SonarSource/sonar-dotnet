@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
         {
             var result = new List<string>();
 
-            foreach (var element in collection) // Noncompliant
+            foreach (var element in collection) // Noncompliant {{Loops should be simplified with "LINQ" expressions}}
             {
                 if (condition(element))
                 {
@@ -24,7 +24,7 @@ namespace Tests.Diagnostics
         {
             var result = new List<int>();
 
-            foreach (var element in collection) // Noncompliant
+            foreach (var element in collection)
             {
                 var someValue = element.Length;
                 if (someValue > 0)
