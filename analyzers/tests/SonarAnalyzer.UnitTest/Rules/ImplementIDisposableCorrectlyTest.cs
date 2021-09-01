@@ -33,10 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        public void ImplementIDisposableCorrectly_FromCSharp9()
-        {
+        public void ImplementIDisposableCorrectly_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ImplementIDisposableCorrectly.CSharp9.cs", new ImplementIDisposableCorrectly());
-        }
 #endif
 
         [TestMethod]

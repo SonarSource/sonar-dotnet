@@ -184,29 +184,59 @@ namespace Tests.Diagnostics
     {
     }
 
-    // See https://github.com/SonarSource/sonar-dotnet/issues/4402
-    public partial record PartialCompliant : IDisposable // Noncompliant FP, should be Compliant
-                                                         // Secondary@-1 FP
-    {
-        public partial void Dispose();
-    }
-
-    public partial record PartialCompliant // Noncompliant FP, should be Compliant
-                                           // Secondary@-1 FP
-    {
-        public partial void Dispose() { }
-    }
-
-    public partial record PartialSimpleDisposable : IDisposable // FN, should be Non-compliant with Fix this implementation of 'IDisposable' to conform to the dispose pattern.
+   // See https://github.com/SonarSource/sonar-dotnet/issues/4402
+    public partial record PartialCompliant : IDisposable
     {
         public partial void Dispose();
         protected virtual partial void Dispose(bool disposing);
     }
 
-    public partial record PartialSimpleDisposable // FN, should be Non-compliant with Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
+    public partial record PartialCompliant
     {
-        public partial void Dispose() => Dispose(true); // second location with, 'SimpleDisposable.Dispose()' should also call 'GC.SuppressFinalize(this)'.
+        public partial void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
         protected virtual partial void Dispose(bool disposing) { }
+    }
+
+    public partial record PartialDerived : PartialCompliant, IDisposable // Noncompliant {{Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
+                                                                         // Secondary@-1 {{Remove 'IDisposable' from the list of interfaces implemented by 'PartialDerived' and override the base record 'Dispose' implementation instead.}}
+    {
+        protected override partial void Dispose(bool disposing);
+    }
+
+    public partial record PartialDerived : PartialCompliant // Noncompliant {{Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
+    {
+        protected override partial void Dispose(bool disposing) { } // Secondary {{Modify 'Dispose(disposing)' so that it calls 'base.Dispose(disposing)'.}}
+    }
+
+    public partial record PartialSimpleDisposable : IDisposable
+    {
+        public partial void Dispose();
+        protected virtual partial void Dispose(bool disposing);
+    }
+
+    public partial record PartialSimpleDisposable // Noncompliant {{Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
+    {
+        public partial void Dispose() => Dispose(true); // Secondary {{'PartialSimpleDisposable.Dispose()' should also call 'GC.SuppressFinalize(this)'.}}
+
+        protected virtual partial void Dispose(bool disposing) { }
+    }
+
+    public partial record PartialWithoutDisposeBool : IDisposable // Noncompliant {{Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
+                                                                  // Secondary@-1 {{Provide 'protected' overridable implementation of 'Dispose(bool)' on 'PartialWithoutDisposeBool' or mark the type as 'sealed'.}}
+    {
+    }
+
+    public partial record PartialWithoutDisposeBool : IDisposable // Noncompliant {{Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
+                                                                  // Secondary@-1 {{Provide 'protected' overridable implementation of 'Dispose(bool)' on 'PartialWithoutDisposeBool' or mark the type as 'sealed'.}}
+    {
+        public void Dispose() // Secondary {{'PartialWithoutDisposeBool.Dispose()' should also call 'Dispose(true)'.}}
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }
