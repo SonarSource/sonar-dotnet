@@ -18,10 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.IO;
 using System.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.CFG;
 using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.Helpers.UnitTest
@@ -30,58 +32,62 @@ namespace SonarAnalyzer.Helpers.UnitTest
     public class DotWriterTest
     {
         [TestMethod]
-        public void WriteGraphStart_Should_Write_Name()
+        public void WriteGraphStart()
         {
-            var stringBuilder = new StringBuilder();
-            var writer = new DotWriter(new StringWriter(stringBuilder));
-
+            var writer = new DotWriter();
             writer.WriteGraphStart("test");
-
-            stringBuilder.ToString().Should().BeIgnoringLineEndings("digraph \"test\" {\r\n");
+            writer.ToString().Should().BeIgnoringLineEndings("digraph \"test\" {\r\n");
+            writer.Invoking(x => x.WriteGraphStart("second")).Should().Throw<InvalidOperationException>();
         }
 
         [TestMethod]
-        public void WriteGraphEnd_Test()
+        public void WriteGraphEnd()
         {
-            var stringBuilder = new StringBuilder();
-            var writer = new DotWriter(new StringWriter(stringBuilder));
-
+            var writer = new DotWriter();
+            writer.Invoking(x => x.WriteGraphEnd()).Should().Throw<InvalidOperationException>();
+            writer.WriteGraphStart("test");
             writer.WriteGraphEnd();
-
-            stringBuilder.ToString().Should().BeIgnoringLineEndings("}\r\n");
+            writer.ToString().Should().BeIgnoringLineEndings("digraph \"test\" {\r\n}\r\n");
         }
 
         [TestMethod]
-        public void WriteNode_With_Items()
+        public void WriteSubGraphStart()
         {
-            var stringBuilder = new StringBuilder();
-            var writer = new DotWriter(new StringWriter(stringBuilder));
+            var writer = new DotWriter();
+            writer.WriteSubGraphStart("test");
+            writer.ToString().Should().BeIgnoringLineEndings("subgraph \"cluster_test\" {\r\nlabel = \"test\"\r\n");
+        }
 
+        [TestMethod]
+        public void WriteSubGraphEnd()
+        {
+            var writer = new DotWriter();
+            writer.WriteSubGraphEnd();
+            writer.ToString().Should().BeIgnoringLineEndings("}\r\n");
+        }
+
+        [TestMethod]
+        public void WriteNode_WithItems()
+        {
+            var writer = new DotWriter();
             writer.WriteNode("1", "header", "a", "b", "c");
-
-            stringBuilder.ToString().Should().BeIgnoringLineEndings("1 [shape=record label=\"{header|a|b|c}\"]\r\n");
+            writer.ToString().Should().BeIgnoringLineEndings("1 [shape=record label=\"{header|a|b|c}\"]\r\n");
         }
 
         [TestMethod]
-        public void WriteNode_With_Encoding()
+        public void WriteNode_WithEncoding()
         {
-            var stringBuilder = new StringBuilder();
-            var writer = new DotWriter(new StringWriter(stringBuilder));
-
+            var writer = new DotWriter();
             writer.WriteNode("1", "header", "\r", "\n", "{", "}", "<", ">", "|", "\"");
-
-            stringBuilder.ToString().Should().BeIgnoringLineEndings(@"1 [shape=record label=""{header||\n|\{|\}|\<|\>|\||\""}""]" + "\r\n");
+            writer.ToString().Should().BeIgnoringLineEndings(@"1 [shape=record label=""{header||\n|\{|\}|\<|\>|\||\""}""]" + "\r\n");
         }
 
         [TestMethod]
-        public void WriteNode_No_Items()
+        public void WriteNode_NoItems()
         {
-            var stringBuilder = new StringBuilder();
-            var writer = new DotWriter(new StringWriter(stringBuilder));
-
+            var writer = new DotWriter();
             writer.WriteNode("1", "header");
-
-            stringBuilder.ToString().Should().BeIgnoringLineEndings("1 [shape=record label=\"{header}\"]\r\n");
+            writer.ToString().Should().BeIgnoringLineEndings("1 [shape=record label=\"{header}\"]\r\n");
         }
     }
 }
