@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -291,8 +292,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void ProcessAssignedExpression(ExpressionSyntax expression)
                 {
-                    var fieldSymbol = this.partialTypeDeclaration.SemanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
-                    ProcessExpressionOnField(expression, fieldSymbol);
+                    var symbolAndExpressionPairs = FieldSymbolFromAssignment(expression);
+                    foreach (var symbolAndExpressionPair in symbolAndExpressionPairs)
+                    {
+                        ProcessExpressionOnField(symbolAndExpressionPair.Item2, symbolAndExpressionPair.Item1);
+                    }
                 }
 
                 private void ProcessExpressionOnField(ExpressionSyntax expression, IFieldSymbol fieldSymbol)
@@ -332,6 +336,31 @@ namespace SonarAnalyzer.Rules.CSharp
                            !fieldSymbol.IsConst &&
                            !fieldSymbol.IsReadOnly &&
                            fieldSymbol.DeclaredAccessibility == Accessibility.Private;
+                }
+
+                private  IEnumerable<Tuple<IFieldSymbol, ExpressionSyntax>> FieldSymbolFromAssignment(ExpressionSyntax expression)
+                {
+                    var fieldSymbols = new List<Tuple<IFieldSymbol, ExpressionSyntax>>();
+
+                    if (TupleExpressionSyntaxWrapper.IsInstance(expression))
+                    {
+                        foreach (var argument in ((TupleExpressionSyntaxWrapper)expression).Arguments)
+                        {
+                            if (partialTypeDeclaration.SemanticModel.GetSymbolInfo(argument.Expression).Symbol is IFieldSymbol fieldSymbol)
+                            {
+                                fieldSymbols.Add(new Tuple<IFieldSymbol, ExpressionSyntax>(fieldSymbol, argument.Expression));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (partialTypeDeclaration.SemanticModel.GetSymbolInfo(expression).Symbol is IFieldSymbol fieldSymbol)
+                        {
+                            fieldSymbols.Add(new Tuple<IFieldSymbol, ExpressionSyntax>(fieldSymbol, expression));
+                        }
+                    }
+
+                    return fieldSymbols;
                 }
             }
         }
