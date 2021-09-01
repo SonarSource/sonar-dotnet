@@ -53,13 +53,16 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ImmutableArray<KnownType> KnownAssertionTypes = ImmutableArray.Create(
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
                 KnownType.NUnit_Framework_Assert,
-                KnownType.Xunit_Assert);
+                KnownType.Xunit_Assert,
+                KnownType.NFluent_Check);
 
         private static readonly ImmutableArray<KnownType> KnownAsertionExceptionTypes = ImmutableArray.Create(
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssertFailedException,
             KnownType.NUnit_Framework_AssertionException,
             KnownType.Xunit_Sdk_AssertException,
-            KnownType.Xunit_Sdk_XunitException);
+            KnownType.Xunit_Sdk_XunitException,
+            KnownType.NFluent_FluentCheckException,
+            KnownType.NFluent_Kernel_FluentCheckException);
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
