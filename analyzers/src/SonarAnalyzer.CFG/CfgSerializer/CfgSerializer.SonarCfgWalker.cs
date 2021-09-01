@@ -18,81 +18,45 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.IO;
 using System.Linq;
-using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG.Helpers;
+using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.CFG.Sonar
+namespace SonarAnalyzer.CFG
 {
-    public static class CfgSerializer
+    public partial class CfgSerializer
     {
-        public static string Serialize(string methodName, IControlFlowGraph cfg)
-        {
-            var stringBuilder = new StringBuilder();
-            using (var writer = new StringWriter(stringBuilder))
-            {
-                Serialize(methodName, cfg, writer);
-            }
-            return stringBuilder.ToString();
-        }
-
-        public static void Serialize(string methodName, IControlFlowGraph cfg, TextWriter writer)
-        {
-            new CfgWalker(new DotWriter(writer)).Visit(methodName, cfg);
-        }
-
-        private class CfgWalker
+        private class SonarCfgWalker
         {
             private readonly BlockIdProvider blockId = new BlockIdProvider();
             private readonly DotWriter writer;
 
-            public CfgWalker(DotWriter writer)
-            {
+            public SonarCfgWalker(DotWriter writer) =>
                 this.writer = writer;
-            }
 
-            public void Visit(string methodName, IControlFlowGraph cfg)
+            public void Visit(IControlFlowGraph cfg, string title)
             {
-                this.writer.WriteGraphStart(methodName);
-
+                writer.WriteGraphStart(title);
                 foreach (var block in cfg.Blocks)
                 {
                     Visit(block);
                 }
-
-                this.writer.WriteGraphEnd();
+                writer.WriteGraphEnd();
             }
 
             private void Visit(Block block)
             {
-                Func<Block, string> getLabel = b => string.Empty;
-
                 if (block is BinaryBranchBlock binaryBranchBlock)
                 {
                     WriteNode(block, binaryBranchBlock.BranchingNode);
-                    // Add labels to the binary branch block successors
-                    getLabel = b =>
-                    {
-                        if (b == binaryBranchBlock.TrueSuccessorBlock)
-                        {
-                            return bool.TrueString;
-                        }
-                        else if (b == binaryBranchBlock.FalseSuccessorBlock)
-                        {
-                            return bool.FalseString;
-                        }
-                        return string.Empty;
-                    };
                 }
                 else if (block is BranchBlock branchBlock)
                 {
                     WriteNode(block, branchBlock.BranchingNode);
                 }
-                else if (block is ExitBlock exitBlock)
+                else if (block is ExitBlock)
                 {
                     WriteNode(block);
                 }
@@ -120,7 +84,7 @@ namespace SonarAnalyzer.CFG.Sonar
                 {
                     WriteNode(block);
                 }
-                WriteEdges(block, getLabel);
+                WriteEdges(block);
             }
 
             private void WriteNode(Block block, SyntaxNode terminator = null)
@@ -128,19 +92,32 @@ namespace SonarAnalyzer.CFG.Sonar
                 var header = block.GetType().Name.SplitCamelCaseToWords().First().ToUpperInvariant();
                 if (terminator != null)
                 {
-                    // shorten the text
-                    var terminatorType = terminator.Kind().ToString().Replace("Syntax", string.Empty);
-
-                    header += ":" + terminatorType;
+                    header += ":" + terminator.Kind().ToString().Replace("Syntax", string.Empty);
                 }
-                this.writer.WriteNode(this.blockId.Get(block), header, block.Instructions.Select(i => i.ToString()).ToArray());
+                writer.WriteNode(blockId.Get(block), header, block.Instructions.Select(i => i.ToString()).ToArray());
             }
 
-            private void WriteEdges(Block block, Func<Block, string> getLabel)
+            private void WriteEdges(Block block)
             {
                 foreach (var successor in block.SuccessorBlocks)
                 {
-                    this.writer.WriteEdge(this.blockId.Get(block), this.blockId.Get(successor), getLabel(successor));
+                    writer.WriteEdge(blockId.Get(block), blockId.Get(successor), Label());
+
+                    string Label()
+                    {
+                        if (block is BinaryBranchBlock binary)
+                        {
+                            if (successor == binary.TrueSuccessorBlock)
+                            {
+                                return bool.TrueString;
+                            }
+                            else if (successor == binary.FalseSuccessorBlock)
+                            {
+                                return bool.FalseString;
+                            }
+                        }
+                        return string.Empty;
+                    }
                 }
             }
         }

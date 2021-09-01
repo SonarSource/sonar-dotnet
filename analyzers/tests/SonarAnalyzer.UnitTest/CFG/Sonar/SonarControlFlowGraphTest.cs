@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.Helpers;
@@ -5083,7 +5084,7 @@ namespace NS
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
 
             // when debugging the CFG, it is useful to visualize the CFG
-            var dot = CfgSerializer.Serialize("CFG diagnostics", cfg);
+            var dot = CfgSerializer.Serialize(cfg, "CFG diagnostics");
             System.Diagnostics.Debug.WriteLine(dot);
 
             return cfg;
