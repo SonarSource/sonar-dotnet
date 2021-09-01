@@ -166,16 +166,6 @@ namespace Tests.Diagnostics
         }
     }
 
-
-    // See https://github.com/SonarSource/sonar-dotnet/issues/4415
-    public partial class PartialClass
-    {
-        public static partial RemoteCertificateValidationCallback FindInvalid()
-        {
-            return (sender, certificate, chain, SslPolicyErrors) => true;  // should be secondary location for FN below
-        }
-    }
-
     public partial class PartialClass
     {
         public static partial RemoteCertificateValidationCallback FindInvalid();
@@ -187,7 +177,7 @@ namespace Tests.Diagnostics
 
         public void Init()
         {
-            CreateRQ().ServerCertificateValidationCallback += FindInvalid();  // Non-compliant FN
+            CreateRQ().ServerCertificateValidationCallback += FindInvalid();  // Noncompliant
         }
 
         static void Execute()
