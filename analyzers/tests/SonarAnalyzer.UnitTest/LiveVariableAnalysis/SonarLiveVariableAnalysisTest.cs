@@ -32,7 +32,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
 {
     [TestClass]
-    public class LiveVariableAnalysisTest
+    public class SonarLiveVariableAnalysisTest
     {
         [TestMethod]
         public void StaticLocalFunction_ExpressionLiveIn()
