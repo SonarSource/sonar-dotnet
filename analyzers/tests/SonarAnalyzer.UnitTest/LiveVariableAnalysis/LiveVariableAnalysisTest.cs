@@ -34,18 +34,6 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
     [TestClass]
     public class LiveVariableAnalysisTest
     {
-        private const string TestInput = @"
-namespace NS
-{{
-  public class Foo
-  {{
-    public void Main(bool inParameter, out bool outParameter)
-    {{
-      {0}
-    }}
-  }}
-}}";
-
         [TestMethod]
         public void LiveVariableAnalysis_StaticLocalFunction_ExpressionLiveIn()
         {
@@ -123,7 +111,15 @@ outParameter = LocalFunction(inParameter);",
 
             public LiveVariableAnalysisContext(string methodBody, string localFunctionName = null)
             {
-                var method = SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, methodBody), "Main", out var semanticModel);
+                var code = @$"
+public class Sample
+{{
+    public void Main(bool inParameter, out bool outParameter)
+    {{
+        {methodBody}
+    }}
+}}";
+                var method = SonarControlFlowGraphTest.CompileWithMethodBody(code, "Main", out var semanticModel);
                 IMethodSymbol symbol;
                 CSharpSyntaxNode body;
                 if (localFunctionName == null)
@@ -134,8 +130,7 @@ outParameter = LocalFunction(inParameter);",
                 else
                 {
                     var function = (LocalFunctionStatementSyntaxWrapper)method.DescendantNodes()
-                                                                              .Single(x => x.Kind() == SyntaxKindEx.LocalFunctionStatement
-                                                                                           && ((LocalFunctionStatementSyntaxWrapper)x).Identifier.Text == localFunctionName);
+                        .Single(x => x.Kind() == SyntaxKindEx.LocalFunctionStatement && ((LocalFunctionStatementSyntaxWrapper)x).Identifier.Text == localFunctionName);
                     symbol = semanticModel.GetDeclaredSymbol(function) as IMethodSymbol;
                     body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
                 }
