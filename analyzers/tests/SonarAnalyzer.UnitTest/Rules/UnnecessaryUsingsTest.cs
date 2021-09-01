@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnnecessaryUsings() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\UnnecessaryUsings.cs", @"TestCases\UnnecessaryUsings2.cs" },
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\UnnecessaryUsings.cs", @"TestCases\UnnecessaryUsings2.cs", @"TestCases\UnnecessaryUsingsFNRepro.cs" },
                                     new UnnecessaryUsings(),
                                     GetAdditionalReferences());
 
