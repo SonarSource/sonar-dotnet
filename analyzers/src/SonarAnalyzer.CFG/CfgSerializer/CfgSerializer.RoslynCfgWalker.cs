@@ -131,7 +131,7 @@ namespace SonarAnalyzer.CFG
                     var semantics = predecessor.Semantics == ControlFlowBranchSemantics.Regular ? null : predecessor.Semantics.ToString();
                     writer.WriteEdge(BlockId(predecessor.Source), BlockId(block), $"{semantics} {condition}".Trim());
                 }
-                if (block.FallThroughSuccessor != null && block.FallThroughSuccessor.Destination == null)
+                if (block.FallThroughSuccessor is {Destination: null })
                 {
                     writer.WriteEdge(BlockId(block), "NoDestination_" + BlockId(block), block.FallThroughSuccessor.Semantics.ToString());
                 }
@@ -145,8 +145,8 @@ namespace SonarAnalyzer.CFG
                    .SelectMany(x => x.Operations)
                    .Concat(cfg.Blocks.Select(x => x.BranchValue).Where(x => x != null))
                    .SelectMany(x => x.DescendantsAndSelf())
-                   .Where(x => IFlowAnonymousFunctionOperationWrapper.IsInstance(x))
-                   .Select(x => IFlowAnonymousFunctionOperationWrapper.FromOperation(x));
+                   .Where(IFlowAnonymousFunctionOperationWrapper.IsInstance)
+                   .Select(IFlowAnonymousFunctionOperationWrapper.FromOperation);
         }
 
         private class RoslynCfgIdProvider
