@@ -25,6 +25,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CBDE;
+using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
 
 namespace SonarAnalyzer.UnitTest.CBDE
@@ -87,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
         }
 
         public static string GetCfgGraph(string code, string methodName) =>
-            CfgSerializer.Serialize(methodName, GetCfgForMethod(code, methodName));
+            CfgSerializer.Serialize(GetCfgForMethod(code, methodName), methodName);
 
         public static void ExportAllMethods(string code, TextWriter writer, bool withLoc)
         {
