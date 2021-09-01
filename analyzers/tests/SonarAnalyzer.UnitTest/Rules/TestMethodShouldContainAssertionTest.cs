@@ -38,12 +38,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             public const string Ver5 = "5.9.0";
         }
 
-        private static class NFluentVersions
-        {
-            public const string Ver1 = "1.3.1";
-            public const string Ver2 = "2.7.2";
-        }
-
         private static class MsTestVersions
         {
             public const string Ver1 = "1.1.11";
@@ -182,15 +176,11 @@ public class Foo
     [Test]
     public void Test1()
     {
-        var x = 42;
-        if (x == 42)
-        {
-            throw new NFluent.FluentCheckException(""You failed me!"");
-        }
+        throw new NFluent.FluentCheckException(""You failed me!"");
     }
 }",
                 new TestMethodShouldContainAssertion(),
-                AdditionalTestReferences(NuGetMetadataReference.NUnit(NUnitVersions.Ver25), nFluentVersion: NFluentVersions.Ver1));
+                AdditionalTestReferences(NuGetMetadataReference.NUnit(NUnitVersions.Ver25), nFluentVersion: "1.3.1"));
 
         [TestMethod]
         public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>

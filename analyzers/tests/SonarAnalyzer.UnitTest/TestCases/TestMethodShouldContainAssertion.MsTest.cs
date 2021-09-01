@@ -97,42 +97,26 @@
         [TestMethod]
         public void TestMethod16()
         {
-            var x = 42;
-            if (x == 42)
-            {
-                throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException("You failed me!");
-            }
+            throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException("You failed me!");
         }
 
         [TestMethod]
         public void TestMethod17()
         {
-            var x = 42;
             var exception = new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException("You failed me!");
-            if (x == 42)
-            {
-                throw exception;
-            }
+            throw exception;
         }
 
         [TestMethod]
         public void TestMethod18() // Noncompliant
         {
-            var x = 42;
-            if (x == 42)
-            {
-                throw new Exception("You failed me!");
-            }
+            throw new Exception("You failed me!");
         }
 
         [TestMethod]
         public void TestMethod18_UndefinedException() // Noncompliant
         {
-            var x = 42;
-            if (x == 42)
-            {
-                throw new UndefinedTypeException("You failed me!"); // Error [CS0246]
-            }
+            throw new UndefinedTypeException("You failed me!"); // Error [CS0246]
         }
 
         [TestMethod]
@@ -164,11 +148,7 @@
         [TestMethod]
         public void TestMethod22()
         {
-            var x = 42;
-            if (x == 42)
-            {
-                throw new NFluent.Kernel.FluentCheckException("You failed me!");
-            }
+            throw new NFluent.Kernel.FluentCheckException("You failed me!");
         }
 
         [TestMethod]

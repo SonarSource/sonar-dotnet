@@ -127,11 +127,7 @@
         [Test]
         public void TestMethod16()
         {
-            var x = 42;
-            if (x == 42)
-            {
-                throw new NUnit.Framework.AssertionException("You failed me!");
-            }
+            throw new NUnit.Framework.AssertionException("You failed me!");
         }
 
         [Test]
@@ -263,11 +259,7 @@
         [TestCase]
         public void TestCase22()
         {
-            var x = 42;
-            if (x == 42)
-            {
-                throw new NFluent.Kernel.FluentCheckException("You failed me!");
-            }
+            throw new NFluent.Kernel.FluentCheckException("You failed me!");
         }
     }
 

@@ -93,11 +93,7 @@
         [Fact]
         public void Fact17()
         {
-            var x = 42;
-            if (x == 42)
-            {
-                throw new NFluent.Kernel.FluentCheckException("You failed me!");
-            }
+            throw new NFluent.Kernel.FluentCheckException("You failed me!");
         }
 
         [Theory]

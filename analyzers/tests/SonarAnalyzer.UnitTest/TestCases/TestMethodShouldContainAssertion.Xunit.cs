@@ -88,11 +88,7 @@
         [Fact]
         public void Fact16()
         {
-            var x = 42;
-            if (x == 42)
-            {
-                throw new Xunit.Sdk.XunitException("You failed me!");
-            }
+            throw new Xunit.Sdk.XunitException("You failed me!");
         }
 
         [Fact(Skip = "reason")]
@@ -109,11 +105,7 @@
         [Fact]
         public void Fact19()
         {
-            var x = 42;
-            if (x == 42)
-            {
-                throw new NFluent.Kernel.FluentCheckException("You failed me!");
-            }
+            throw new NFluent.Kernel.FluentCheckException("You failed me!");
         }
 
         [Theory]
