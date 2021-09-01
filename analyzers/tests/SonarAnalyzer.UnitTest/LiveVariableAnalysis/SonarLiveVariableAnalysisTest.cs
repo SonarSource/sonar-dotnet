@@ -35,12 +35,146 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
     public class SonarLiveVariableAnalysisTest
     {
         [TestMethod]
+        public void WriteOnly()
+        {
+            var code = @"
+int a = 1;
+var b = Method();
+var c = 2 + 3;";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock);
+        }
+
+        [TestMethod]
+        public void UsedBeforeAssigned_LiveIn()
+        {
+            var code = @"
+Method(intParameter);
+IsMethod(boolParameter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter", "boolParameter"));
+        }
+
+        [TestMethod]
+        public void UsedAfterBranch_LiveOut()
+        {
+            /*       Binary
+             *       /   \
+             *    Jump   Simple
+             *   return  Method()
+             *       \   /
+             *        Exit
+             */
+            var code = @"
+if (boolParameter)
+    return;
+Method(intParameter);";
+            var context = new Context(code);
+            var binary = context.Cfg.EntryBlock;
+            var jump = context.Block<JumpBlock>();
+            var simple = context.Block<SimpleBlock>();
+            var exit = context.Cfg.ExitBlock;
+            context.Validate(binary, new LiveIn("boolParameter", "intParameter"), new LiveOut("intParameter"));
+            context.Validate(jump);
+            context.Validate(simple, new LiveIn("intParameter"));
+            context.Validate(exit);
+        }
+
+        [TestMethod]
+        public void Captured_NotLiveIn_NotLiveOut()
+        {
+            /*       Binary
+             *       /   \
+             *    Jump   Simple
+             *   return  Method()
+             *       \   /
+             *        Exit
+             */
+            var code = @"
+Capturing(() => intParameter);
+if (boolParameter)
+    return;
+Method(intParameter);";
+            var context = new Context(code);
+            var binary = context.Cfg.EntryBlock;
+            var jump = context.Block<JumpBlock>();
+            var simple = context.Block<SimpleBlock>();
+            var exit = context.Cfg.ExitBlock;
+            context.Validate(binary, new Captured("intParameter"), new LiveIn("boolParameter"));
+            context.Validate(jump, new Captured("intParameter"));
+            context.Validate(simple, new Captured("intParameter"));
+            context.Validate(exit, new Captured("intParameter"));
+        }
+
+        [TestMethod]
+        public void Assigned_NotLiveIn_NotLiveOut()
+        {
+            /*       Binary
+             *       /   \
+             *    Jump   Simple
+             *   return  intParameter=0
+             *       \   /
+             *        Exit
+             */
+            var code = @"
+if (boolParameter)
+    return;
+intParameter = 0;";
+            var context = new Context(code);
+            var binary = context.Cfg.EntryBlock;
+            var jump = context.Block<JumpBlock>();
+            var simple = context.Block<SimpleBlock>();
+            var exit = context.Cfg.ExitBlock;
+            context.Validate(binary, new LiveIn("boolParameter"));
+            context.Validate(jump);
+            context.Validate(simple);
+            context.Validate(exit);
+        }
+
+        [TestMethod]
+        public void LongPropagationChain_LiveIn_LiveOut()
+        {
+            /*    Binary -> Jump (return) ----+
+             *    declare                     |
+             *      |                         |
+             *    Binary -> Jump (return) ---+|
+             *    use & assign               ||
+             *      |                        ||
+             *    Binary -> Jump (return) --+||
+             *    assign                    |||
+             *      |                       vvv
+             *    Simple -----------------> Exit
+             *    use
+             */
+            var code = @"
+var value = 0;
+if (boolParameter)
+    return;
+Method(value);
+value = 42;
+if (boolParameter)
+    return;
+value = 42
+if (boolParameter)
+    return;
+Method(intParameter, value);";
+            var context = new Context(code);
+            var allBinary = context.Cfg.Blocks.OfType<BinaryBranchBlock>().ToArray();
+            var simple = context.Block<SimpleBlock>();
+            context.Validate(allBinary[0], new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter", "value"));
+            context.Validate(allBinary[1], new LiveIn("boolParameter", "intParameter", "value"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(allBinary[2], new LiveIn("boolParameter", "intParameter"), new LiveOut("value", "intParameter"));
+            context.Validate(simple, new LiveIn("value", "intParameter"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
         public void StaticLocalFunction_ExpressionLiveIn()
         {
             var code = @"
-outParameter = LocalFunction(inParameter);
+outParameter = LocalFunction(boolParameter);
 static int LocalFunction(int a) => a + 1;";
-            var context = new LiveVariableAnalysisContext(code, "LocalFunction");
+            var context = new Context(code, "LocalFunction");
             context.Validate(context.Cfg.EntryBlock, new LiveIn("a"));
         }
 
@@ -50,7 +184,7 @@ static int LocalFunction(int a) => a + 1;";
             var code = @"
 outParameter = LocalFunction(0);
 static int LocalFunction(int a) => 42;";
-            var context = new LiveVariableAnalysisContext(code, "LocalFunction");
+            var context = new Context(code, "LocalFunction");
             context.Validate(context.Cfg.EntryBlock);
         }
 
@@ -58,12 +192,12 @@ static int LocalFunction(int a) => 42;";
         public void StaticLocalFunction_LiveIn()
         {
             var code = @"
-outParameter = LocalFunction(inParameter);
+outParameter = LocalFunction(boolParameter);
 static int LocalFunction(int a)
 {
     return a + 1
 };";
-            var context = new LiveVariableAnalysisContext(code, "LocalFunction");
+            var context = new Context(code, "LocalFunction");
             context.Validate(context.Cfg.EntryBlock, new LiveIn("a"));
         }
 
@@ -76,7 +210,7 @@ static int LocalFunction(int a)
 {
     return 42
 };";
-            var context = new LiveVariableAnalysisContext(code, "LocalFunction");
+            var context = new Context(code, "LocalFunction");
             context.Validate(context.Cfg.EntryBlock);
         }
 
@@ -84,7 +218,7 @@ static int LocalFunction(int a)
         public void StaticLocalFunction_Recursive()
         {
             var code = @"
-outParameter = LocalFunction(inParameter);
+outParameter = LocalFunction(boolParameter);
 static int LocalFunction(int a)
 {
     if(a <= 0)
@@ -92,24 +226,28 @@ static int LocalFunction(int a)
     else
         return LocalFunction(a - 1);
 };";
-            var context = new LiveVariableAnalysisContext(code, "LocalFunction");
+            var context = new Context(code, "LocalFunction");
             context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
         }
 
-        private class LiveVariableAnalysisContext
+        private class Context
         {
             public readonly AbstractLiveVariableAnalysis Lva;
             public readonly IControlFlowGraph Cfg;
 
-            public LiveVariableAnalysisContext(string methodBody, string localFunctionName = null)
+            public Context(string methodBody, string localFunctionName = null)
             {
                 var code = @$"
 public class Sample
 {{
-    public void Main(bool inParameter, out bool outParameter)
+    public void Main(bool boolParameter, int intParameter, out bool outParameter)
     {{
         {methodBody}
     }}
+
+    private int Method(params int[] args) => 42;
+    private bool IsMethod(params bool[] args) => true;
+    private void Capturing(Func<int> f) {{ }}
 }}";
                 var method = SonarControlFlowGraphTest.CompileWithMethodBody(code, "Main", out var semanticModel);
                 IMethodSymbol symbol;
@@ -129,6 +267,9 @@ public class Sample
                 Cfg = CSharpControlFlowGraph.Create(body, semanticModel);
                 Lva = CSharpLiveVariableAnalysis.Analyze(Cfg, symbol, semanticModel);
             }
+
+            public Block Block<TBlock>() where TBlock : Block =>
+                Cfg.Blocks.Single(x => x.GetType().Equals(typeof(TBlock)));
 
             public void Validate(Block block, params Expected[] expected)
             {
