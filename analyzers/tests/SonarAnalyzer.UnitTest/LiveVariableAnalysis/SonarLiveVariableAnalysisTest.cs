@@ -287,6 +287,18 @@ if (value == 0)
         }
 
         [TestMethod]
+        public void ProcessVariableDeclarator_NotLiveIn_LiveOut()
+        {
+            var code = @"
+int intValue = 42;
+var varValue = 42;
+if (intValue == 0)
+    Method(intValue, varValue);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveOut("intValue", "varValue"));
+        }
+
+        [TestMethod]
         public void StaticLocalFunction_ExpressionLiveIn()
         {
             var code = @"
