@@ -92,6 +92,23 @@ and pushed to SonarQube / SonarCloud as external issues.
 - Also check out [SonarQube Roslyn SDK](https://github.com/SonarSource-VisualStudio/sonarqube-roslyn-sdk) to embed
 your Roslyn analyzer in a SonarQube plugin, if you want to manage your rules from SonarQube.
 
+## Configuring Rules
+
+### SonarQube / SonarCloud and SonarLint in Connected Mode
+
+Open the rule in SonarQube / SonarCloud, scroll down and (in case the rule has parameters), you can configure the parameters for each Quality Profile the rule is part of.
+
+Use SonarLint Connected Mode to connect to SonarQube and SonarCloud.
+
+### standalone nuget / SonarLint
+
+You can see how we do it in our own repository for SonarLint Connected mode (and you can reuse the same concept for the nuget package):
+
+* we reference in each production-code project this [Directory.Build.props](analyzers/src/Directory.Build.props)
+* this file points to the following ruleset: [sonaranalyzer-dotnetCSharp.ruleset](analyzers/.sonarlint/sonaranalyzer-dotnetCSharp.ruleset)
+* and the following [SonarLint.xml](analyzers/.sonarlint/sonaranalyzer-dotnet/CSharp/SonarLint.xml)
+
+
 ## License
 
 Copyright 2014-2021 SonarSource.
