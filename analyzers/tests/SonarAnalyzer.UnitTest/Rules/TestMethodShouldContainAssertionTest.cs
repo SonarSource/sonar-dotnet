@@ -164,6 +164,25 @@ public class Foo
                 AdditionalTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion));
 
         [TestMethod]
+        public void TestMethodShouldContainAssertion_NUnit_NFluentLegacy() =>
+           Verifier.VerifyCSharpAnalyzer(@"
+using System;
+using NFluent;
+using NUnit.Framework;
+
+[TestFixture]
+public class Foo
+{
+    [Test]
+    public void Test1()
+    {
+        throw new NFluent.FluentCheckException(""You failed me!"");
+    }
+}",
+                new TestMethodShouldContainAssertion(),
+                AdditionalTestReferences(NuGetMetadataReference.NUnit(NUnitVersions.Ver25), nFluentVersion: "1.3.1"));
+
+        [TestMethod]
         public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Custom.cs",
                 new TestMethodShouldContainAssertion(),
@@ -182,10 +201,12 @@ public class Foo
 
         public static IEnumerable<MetadataReference> AdditionalTestReferences(IEnumerable<MetadataReference> testFrameworkReference,
                                                                               string fluentVersion = Constants.NuGetLatestVersion,
-                                                                              string nSubstituteVersion = Constants.NuGetLatestVersion) =>
+                                                                              string nSubstituteVersion = Constants.NuGetLatestVersion,
+                                                                              string nFluentVersion = Constants.NuGetLatestVersion) =>
             testFrameworkReference
                 .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
                 .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
+                .Concat(NuGetMetadataReference.NFluent(nFluentVersion))
                 .Concat(MetadataReferenceFacade.SystemData)
                 .Concat(MetadataReferenceFacade.SystemXml)
                 .Concat(MetadataReferenceFacade.SystemXmlLinq)

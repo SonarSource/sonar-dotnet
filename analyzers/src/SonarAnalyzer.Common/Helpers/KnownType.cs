@@ -111,6 +111,9 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType MySql_Data_MySqlClient_MySqlHelper = new KnownType("MySql.Data.MySqlClient.MySqlHelper");
         internal static readonly KnownType MySql_Data_MySqlClient_MySqlScript = new KnownType("MySql.Data.MySqlClient.MySqlScript");
         internal static readonly KnownType Nancy_Cookies_NancyCookie = new KnownType("Nancy.Cookies.NancyCookie");
+        internal static readonly KnownType NFluent_Check = new KnownType("NFluent.Check");
+        internal static readonly KnownType NFluent_FluentCheckException = new KnownType("NFluent.FluentCheckException");
+        internal static readonly KnownType NFluent_Kernel_FluentCheckException = new KnownType("NFluent.Kernel.FluentCheckException");
         internal static readonly KnownType NLog_LogManager = new KnownType("NLog.LogManager");
         internal static readonly KnownType NUnit_Framework_Assert = new KnownType("NUnit.Framework.Assert");
         internal static readonly KnownType NUnit_Framework_AssertionException = new KnownType("NUnit.Framework.AssertionException");
