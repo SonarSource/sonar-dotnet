@@ -245,6 +245,48 @@ Method(value, intParameter);";
         }
 
         [TestMethod]
+        public void ProcessSimpleAssignment_Discard_NotLiveIn_NotLiveOut()
+        {
+            var code = @"_ = intParameter;";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"));
+        }
+
+        [TestMethod]
+        public void ProcessSimpleAssignment_UndefinedSymbol_NotLiveIn_NotLiveOut()
+        {
+            var code = @"
+undefined = intParameter;
+if (undefined == 0)
+    Method(undefined);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"));
+        }
+
+        [TestMethod]
+        public void ProcessSimpleAssignment_GlobalScoped_NotLiveIn_NotLiveOut()
+        {
+            var code = @"
+field = intParameter;
+if (field == 0)
+    Method(field);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"));
+        }
+
+        [TestMethod]
+        public void ProcessSimpleAssignment_LocalScoped_NotLiveIn_LiveOut()
+        {
+            var code = @"
+int value;
+value = 42;
+if (value == 0)
+    Method(value);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveOut("value"));
+        }
+
+        [TestMethod]
         public void StaticLocalFunction_ExpressionLiveIn()
         {
             var code = @"
