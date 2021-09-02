@@ -299,6 +299,44 @@ if (intValue == 0)
         }
 
         [TestMethod]
+        public void ProcessVariableInForeach_Declared_LiveIn_LiveOut()
+        {
+            /*
+             * ForEach
+             *    |
+             * Binary <-----------+
+             *  |   \ true        |
+             *  v    \            |
+             * Exit  Simple       |
+             *       Method(i) -->+
+             */
+            var code = @"
+foreach(var i in new int[] {1, 2, 3})
+{
+    Method(i, intParameter);
+}";
+            var context = new Context(code);
+            context.Validate(context.Block<ForeachCollectionProducerBlock>(),new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("intParameter"), new LiveOut("intParameter", "i"));
+            context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter", "i"), new LiveOut("intParameter"));
+        }
+
+        [TestMethod]
+        public void ProcessVariableInForeach_Reused_LiveIn_LiveOut()
+        {
+            var code = @"
+int i = 42;
+foreach(i in new int[] {1, 2, 3})
+{
+    Method(i, intParameter);
+}";
+            var context = new Context(code);
+            context.Validate(context.Block<ForeachCollectionProducerBlock>(), new LiveIn("intParameter"), new LiveOut("intParameter", "i"));
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("intParameter", "i"), new LiveOut("intParameter", "i"));
+            context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter", "i"), new LiveOut("intParameter", "i"));
+        }
+
+        [TestMethod]
         public void StaticLocalFunction_ExpressionLiveIn()
         {
             var code = @"
