@@ -169,6 +169,110 @@ Method(intParameter, value);";
         }
 
         [TestMethod]
+        public void BranchedPropagationChain_LiveIn_LiveOut()
+        {
+            /*              Binary
+             *              boolParameter
+             *              /           \
+             *             /             \
+             *            /               \
+             *       Binary             Binary
+             *       firstBranch        secondBranch
+             *       /      \              /      \
+             *      /        \            /        \
+             *  Simple     Simple      Simple      Simple
+             *  firstTrue  firstFalse  secondTrue  secondFalse
+             *      \        /            \        /
+             *       \      /              \      /
+             *        Simple                Simple
+             *        first                 second
+             *             \               /
+             *              \             /
+             *                  Simple
+             *                  reassigned
+             *                  everywhere
+             */
+            var code = @"
+var everywhere = 42;
+var reasiggnedNowhere = 42;
+var first = 42;
+var firstTrue = 42;
+var firstFalse = 42;
+var second = 42;
+var secondTrue = 42;
+var secondFalse = 42;
+var firstCondition = boolParameter;
+var secondCondition = boolParameter;
+if (boolParameter)
+{
+    if (firstCondition)
+    {
+        Method(firstTrue);
+    }
+    else
+    {
+        Method(firstFalse);
+    }
+    Method(first);
+}
+else
+{
+    if (secondCondition)
+    {
+        Method(secondTrue);
+    }
+    else
+    {
+        Method(secondFalse);
+    }
+    Method(second);
+}
+reasiggnedNowhere = 0;
+Method(everywhere, reasiggnedNowhere);";
+            var context = new Context(code);
+            context.Validate(
+                context.Block<BinaryBranchBlock>("boolParameter"),
+                new LiveIn("boolParameter"),
+                new LiveOut("everywhere", "firstCondition", "firstTrue", "firstFalse", "first", "secondCondition", "secondTrue", "secondFalse", "second"));
+            // First block
+            context.Validate(
+                context.Block<BinaryBranchBlock>("firstCondition"),
+                new LiveIn("everywhere", "firstCondition", "firstTrue", "firstFalse", "first"),
+                new LiveOut("everywhere", "firstTrue", "firstFalse", "first"));
+            context.Validate(
+                context.Block<SimpleBlock>("Method(firstTrue)"),
+                new LiveIn("everywhere", "firstTrue", "first"),
+                new LiveOut("everywhere", "first"));
+            context.Validate(
+                context.Block<SimpleBlock>("Method(firstFalse)"),
+                new LiveIn("everywhere", "firstFalse", "first"),
+                new LiveOut("everywhere", "first"));
+            context.Validate(
+                context.Block<SimpleBlock>("Method(first)"),
+                new LiveIn("everywhere", "first"),
+                new LiveOut("everywhere"));
+            // Second block
+            context.Validate(
+                context.Block<BinaryBranchBlock>("secondCondition"),
+                new LiveIn("everywhere", "secondCondition", "secondTrue", "secondFalse", "second"),
+                new LiveOut("everywhere", "secondTrue", "secondFalse", "second"));
+            context.Validate(
+                context.Block<SimpleBlock>("Method(secondTrue)"),
+                new LiveIn("everywhere", "secondTrue", "second"),
+                new LiveOut("everywhere", "second"));
+            context.Validate(
+                context.Block<SimpleBlock>("Method(secondFalse)"),
+                new LiveIn("everywhere", "secondFalse", "second"),
+                new LiveOut("everywhere", "second"));
+            context.Validate(
+                context.Block<SimpleBlock>("Method(second)"),
+                new LiveIn("everywhere", "second"),
+                new LiveOut("everywhere"));
+            // Common end
+            context.Validate(context.Block<SimpleBlock>("Method(everywhere, reasiggnedNowhere)"), new LiveIn("everywhere"));
+        }
+
+        [TestMethod]
         public void ProcessIdentifier_InNameOf_NotLiveIn_NotLiveOut()
         {
             var code = @"Method(nameof(intParameter));";
@@ -440,8 +544,8 @@ public class Sample
                 Lva = CSharpLiveVariableAnalysis.Analyze(Cfg, symbol, semanticModel);
             }
 
-            public Block Block<TBlock>() where TBlock : Block =>
-                Cfg.Blocks.Single(x => x.GetType().Equals(typeof(TBlock)));
+            public Block Block<TBlock>(string withInstruction = null) where TBlock : Block =>
+                Cfg.Blocks.Single(x => x.GetType().Equals(typeof(TBlock)) && (withInstruction == null || x.Instructions.Any(instruction => instruction.ToString() == withInstruction)));
 
             public void Validate(Block block, params Expected[] expected)
             {
