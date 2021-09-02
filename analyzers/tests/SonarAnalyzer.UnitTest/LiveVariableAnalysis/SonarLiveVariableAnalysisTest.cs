@@ -169,6 +169,82 @@ Method(intParameter, value);";
         }
 
         [TestMethod]
+        public void ProcessIdentifier_InNameOf_NotLiveIn_NotLiveOut()
+        {
+            var code = @"Method(nameof(intParameter));";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock);
+        }
+
+        [TestMethod]
+        public void ProcessIdentifier_LocalScopeSymbol_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+Method(intParameter, variable);";
+            var context = new Context(code);
+            context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter", "variable"));
+        }
+
+        [TestMethod]
+        public void ProcessIdentifier_GlobalScopeSymbol_NotLiveIn_NotLiveOut()
+        {
+            var code = @"
+var s = new Sample();
+Method(field, s.Property);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock);
+        }
+
+        [TestMethod]
+        public void ProcessIdentifier_UndefinedSymbol_NotLiveIn_NotLiveOut()
+        {
+            var code = @"Method(undefined);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock);
+        }
+
+        [TestMethod]
+        public void ProcessIdentifier_RefOutArgument_NotLiveIn_LiveOut()
+        {
+            var code = @"
+outParameter = true;
+Method(outParameter, refParameter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock);
+        }
+
+        [TestMethod]
+        public void ProcessIdentifier_Assigned_NotLiveIn_LiveOut()
+        {
+            // Jump (intParamter=42; goto) --> Jump (label) --> Simple (Method) --> Exit
+            var code = @"
+intParameter = 42;
+goto A;
+A:
+Method(intParameter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveOut("intParameter"));
+            context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter"));
+        }
+
+        [TestMethod]
+        public void ProcessIdentifier_NotAssigned_LiveIn_LiveOut()
+        {
+            // Jump (intParamter=42; goto) --> Jump (label) --> Simple (Method) --> Exit
+            var code = @"
+var value = intParameter;
+goto A;
+A:
+Method(value, intParameter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter", "value"));
+            context.Validate(context.Block<SimpleBlock>(), new LiveIn("value", "intParameter"));
+        }
+
+        [TestMethod]
         public void StaticLocalFunction_ExpressionLiveIn()
         {
             var code = @"
@@ -240,12 +316,16 @@ static int LocalFunction(int a)
                 var code = @$"
 public class Sample
 {{
-    public void Main(bool boolParameter, int intParameter, out bool outParameter)
+    private int field;
+    public int Property {{ get; set; }};
+
+    public void Main(bool boolParameter, int intParameter, out bool outParameter, ref int refParameter)
     {{
         {methodBody}
     }}
 
     private int Method(params int[] args) => 42;
+    private string Method(params string[] args) => null;
     private bool IsMethod(params bool[] args) => true;
     private void Capturing(Func<int> f) {{ }}
 }}";
