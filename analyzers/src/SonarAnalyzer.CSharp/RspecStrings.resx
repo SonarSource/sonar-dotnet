@@ -9857,7 +9857,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S4000_Description" xml:space="preserve">
-    <value>The IntPtr and UIntPtr types are used to access unmanaged memory, usually in order to use C or C++ libraries. If such a pointer is not secured by making it private, internal or readonly, it can lead to a vulnerability allowing access to arbitrary locations.</value>
+    <value>Pointer and unmanaged function pointer types such as IntPtr, UIntPtr, int* etc. are used to access unmanaged memory, usually in order to use C or C++ libraries. If such a pointer is not secured by making it private, internal or readonly, it can lead to a vulnerability allowing access to arbitrary locations.</value>
   </data>
   <data name="S4000_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
