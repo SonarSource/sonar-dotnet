@@ -31,13 +31,10 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class MutableFieldsShouldNotBe : SonarDiagnosticAnalyzer
     {
-        protected const string MessageFormat = "Use an immutable collection or reduce the accessibility of the field(s) {0}.";
-
         private static readonly ImmutableArray<KnownType> MutableBaseTypes =
             ImmutableArray.Create(
                 KnownType.System_Collections_Generic_ICollection_T,
-                KnownType.System_Array
-            );
+                KnownType.System_Array);
 
         private static readonly ImmutableArray<KnownType> ImmutableBaseTypes =
             ImmutableArray.Create(
@@ -48,17 +45,12 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_Collections_Immutable_IImmutableList_T,
                 KnownType.System_Collections_Immutable_IImmutableSet_T,
                 KnownType.System_Collections_Immutable_IImmutableStack_T,
-                KnownType.System_Collections_Immutable_IImmutableQueue_T
-            );
+                KnownType.System_Collections_Immutable_IImmutableQueue_T);
 
         protected abstract ISet<SyntaxKind> InvalidModifiers { get; }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue,
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration);
-        }
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration);
 
         private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
