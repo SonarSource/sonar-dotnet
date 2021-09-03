@@ -504,7 +504,7 @@ static int LocalFunction(int a)
 
         private class Context
         {
-            public readonly LiveVariableAnalysisBase Lva;
+            public readonly SonarCSharpLiveVariableAnalysis Lva;
             public readonly IControlFlowGraph Cfg;
 
             public Context(string methodBody, string localFunctionName = null)
@@ -553,8 +553,8 @@ public class Sample
                 var expectedLiveIn = expected.OfType<LiveIn>().SingleOrDefault() ?? new LiveIn();
                 var expectedLiveOut = expected.OfType<LiveOut>().SingleOrDefault() ?? new LiveOut();
                 var expectedCaptured = expected.OfType<Captured>().SingleOrDefault() ?? new Captured();
-                Lva.GetLiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names);
-                Lva.GetLiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names);
+                Lva.LiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names);
+                Lva.LiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names);
                 Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names);
             }
         }

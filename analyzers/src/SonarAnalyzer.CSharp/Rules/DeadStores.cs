@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var lva = SonarCSharpLiveVariableAnalysis.Analyze(cfg, symbol, context.SemanticModel);
                 foreach (var block in cfg.Blocks)
                 {
-                    var blockLva = new InBlockLivenessAnalysis(context, symbol, node, block, lva.GetLiveOut(block), lva.CapturedVariables);
+                    var blockLva = new InBlockLivenessAnalysis(context, symbol, node, block, lva.LiveOut(block), lva.CapturedVariables);
                     blockLva.Analyze();
                 }
             }

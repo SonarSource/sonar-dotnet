@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;    //FIXME: VB
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.LiveVariableAnalysis;
+using SonarAnalyzer.CFG.LiveVariableAnalysis;
 //FIXME: using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.UnitTest.CFG.Sonar; //FIXME: Shouldn't be needed
 using StyleCop.Analyzers.Lightup;
@@ -530,7 +530,7 @@ static int LocalFunction(int a)
 
         private class Context
         {
-            public readonly LiveVariableAnalysisBase Lva;
+            public readonly RoslynLiveVariableAnalysis Lva;
             public readonly ControlFlowGraph Cfg;
 
             public Context(string methodBody, string localFunctionName = null)

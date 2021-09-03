@@ -18,10 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
@@ -29,27 +31,32 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 {
-    public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase
+    public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<IControlFlowGraph, Block>
     {
         private readonly ISymbol declaration;
         private readonly SemanticModel semanticModel;
 
+        protected override Block ExitBlock => cfg.ExitBlock;
+
         private SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel) : base(controlFlowGraph)
         {
+            //FIXME: Move to base?
             this.declaration = declaration;
             this.semanticModel = semanticModel;
         }
 
-        public static LiveVariableAnalysisBase Analyze(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel)
+        public static SonarCSharpLiveVariableAnalysis Analyze(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel)
         {
             var lva = new SonarCSharpLiveVariableAnalysis(controlFlowGraph, declaration, semanticModel);
-            lva.PerformAnalysis();
+            lva.Analyze();
             return lva;
         }
 
+        //FIXME: Move to base
         internal static bool IsOutArgument(IdentifierNameSyntax identifier) =>
             identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
 
+        //FIXME: Move to base
         internal static bool IsLocalScoped(ISymbol symbol, ISymbol declaration)
         {
             return IsLocalOrParameterSymbol()
@@ -60,6 +67,15 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 (symbol is ILocalSymbol local && local.RefKind() == RefKind.None)
                 || (symbol is IParameterSymbol parameter && parameter.RefKind == RefKind.None);
         }
+
+        protected override IEnumerable<Block> ReversedBlocks() =>
+            cfg.Blocks.Reverse();
+
+        protected override IEnumerable<Block> Successors(Block block) =>
+            block.SuccessorBlocks;
+
+        protected override IEnumerable<Block> Predecessors(Block block) =>
+            block.PredecessorBlocks;
 
         protected override State ProcessBlock(Block block)
         {
@@ -115,8 +131,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             if (block is UsingEndBlock usingFinalizerBlock)
             {
                 var disposableSymbols = usingFinalizerBlock.Identifiers
-                    .Select(i => semanticModel.GetDeclaredSymbol(i.Parent)
-                                ?? semanticModel.GetSymbolInfo(i.Parent).Symbol)
+                    .Select(x => semanticModel.GetDeclaredSymbol(x.Parent) ?? semanticModel.GetSymbolInfo(x.Parent).Symbol)
                     .WhereNotNull();
                 foreach (var disposableSymbol in disposableSymbols)
                 {
@@ -215,9 +230,10 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
             // Collect captured locals
             // Read and write both affects liveness
-            state.CapturedVariables.UnionWith(allCapturedSymbols);
+            state.Captured.UnionWith(allCapturedSymbols);
         }
 
+        //FIXME: Move to base
         private bool IsLocalScoped(ISymbol symbol) =>
             IsLocalScoped(symbol, declaration);
     }

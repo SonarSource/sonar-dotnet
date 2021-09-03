@@ -1517,7 +1517,7 @@ namespace Namespace
             public readonly SemanticModel SemanticModel;
             public readonly MethodDeclarationSyntax MainMethod;
             public readonly IMethodSymbol MainMethodSymbol;
-            public readonly LiveVariableAnalysisBase LiveVariableAnalysis;
+            public readonly SonarCSharpLiveVariableAnalysis LiveVariableAnalysis;
             public readonly IControlFlowGraph ControlFlowGraph;
             public readonly CSharpExplodedGraph ExplodedGraph;
 

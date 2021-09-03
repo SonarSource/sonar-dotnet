@@ -18,28 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 //FIXME: using Microsoft.CodeAnalysis.CSharp;
 //FIXME: using Microsoft.CodeAnalysis.CSharp.Syntax;
 //FIXME:
-using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 //FIXME: using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
+namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 {
-    public sealed class LiveVariableAnalysis : LiveVariableAnalysisBase
+    public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
     {
-        private readonly ISymbol declaration;
-        private readonly SemanticModel semanticModel;
+        //private readonly ISymbol declaration;
+        //private readonly SemanticModel semanticModel;
 
-        private LiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel) : base(controlFlowGraph)
+        protected override BasicBlock ExitBlock => throw new System.NotImplementedException();
+
+        private RoslynLiveVariableAnalysis(ControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel) : base(cfg)
         {
-            this.declaration = declaration;
-            this.semanticModel = semanticModel;
+            //this.declaration = declaration;
+            //this.semanticModel = semanticModel;
         }
+
+        protected override IEnumerable<BasicBlock> ReversedBlocks() =>
+            throw new System.NotImplementedException();
+
+        protected override IEnumerable<BasicBlock> Successors(BasicBlock block) =>
+            throw new System.NotImplementedException();
+
+        protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block) =>
+            throw new System.NotImplementedException();
+
 
         //public static LiveVariableAnalysisBase Analyze(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel)
         //{
@@ -62,7 +75,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
         //        || (symbol is IParameterSymbol parameter && parameter.RefKind == RefKind.None);
         //}
 
-        protected override State ProcessBlock(Block block)
+        protected override State ProcessBlock(BasicBlock block)
         {
             var ret = new State();
             throw new System.NotImplementedException();

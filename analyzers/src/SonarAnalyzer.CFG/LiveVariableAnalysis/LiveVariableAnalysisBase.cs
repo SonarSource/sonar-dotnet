@@ -23,92 +23,77 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.CFG.Helpers;
 
-namespace SonarAnalyzer.LiveVariableAnalysis
+namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 {
-    public abstract class LiveVariableAnalysisBase
+    public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
     {
-        private readonly IControlFlowGraph controlFlowGraph;
-        private readonly List<Block> reversedBlocks;
-        private readonly IDictionary<Block, HashSet<ISymbol>> liveOutStates = new Dictionary<Block, HashSet<ISymbol>>();
-        private readonly IDictionary<Block, HashSet<ISymbol>> liveInStates = new Dictionary<Block, HashSet<ISymbol>>();
-        private readonly ISet<ISymbol> capturedVariables = new HashSet<ISymbol>();
+        protected readonly TCfg cfg;
+        private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveOut = new Dictionary<TBlock, HashSet<ISymbol>>();
+        private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveIn = new Dictionary<TBlock, HashSet<ISymbol>>();
+        private readonly ISet<ISymbol> captured = new HashSet<ISymbol>();
 
-        protected abstract State ProcessBlock(Block block);
+        protected abstract TBlock ExitBlock { get; }
+        protected abstract State ProcessBlock(TBlock block);
+        protected abstract IEnumerable<TBlock> ReversedBlocks();
+        protected abstract IEnumerable<TBlock> Successors(TBlock block);
+        protected abstract IEnumerable<TBlock> Predecessors(TBlock block);
 
-        protected LiveVariableAnalysisBase(IControlFlowGraph controlFlowGraph)
+        public IReadOnlyList<ISymbol> CapturedVariables => captured.ToImmutableArray();
+
+        protected LiveVariableAnalysisBase(TCfg cfg) =>
+            this.cfg = cfg;
+
+        /// <summary>
+        /// LiveIn variables are alive when entering block. They are read inside the block or any of it's successors.
+        /// </summary>
+        public IReadOnlyList<ISymbol> LiveIn(TBlock block) =>
+            blockLiveIn[block].Except(captured).ToImmutableArray();
+
+        /// <summary>
+        /// LiveOut variables are alive when exiting block. They are read in any of it's successors.
+        /// </summary>
+        public IReadOnlyList<ISymbol> LiveOut(TBlock block) =>
+            blockLiveOut[block].Except(captured).ToImmutableArray();
+
+        protected void Analyze()
         {
-            this.controlFlowGraph = controlFlowGraph;
-            reversedBlocks = controlFlowGraph.Blocks.Reverse().ToList();
-        }
-
-        public IReadOnlyList<ISymbol> GetLiveOut(Block block) =>
-            liveOutStates[block].Except(capturedVariables).ToImmutableArray();
-
-        public IReadOnlyList<ISymbol> GetLiveIn(Block block) =>
-            liveInStates[block].Except(capturedVariables).ToImmutableArray();
-
-        public IReadOnlyList<ISymbol> CapturedVariables =>
-            capturedVariables.ToImmutableArray();
-
-        protected void PerformAnalysis()
-        {
-            var states = new Dictionary<Block, State>();
-            foreach (var block in reversedBlocks)
+            var states = new Dictionary<TBlock, State>();
+            var queue = new Queue<TBlock>();
+            foreach (var block in ReversedBlocks())
             {
                 var state = ProcessBlock(block);
-                capturedVariables.UnionWith(state.CapturedVariables);
+                captured.UnionWith(state.Captured);
                 states.Add(block, state);
+                blockLiveIn.Add(block, new HashSet<ISymbol>());
+                blockLiveOut.Add(block, new HashSet<ISymbol>());
+                queue.Enqueue(block);
             }
-
-            AnalyzeCfg(states);
-
-            if (liveOutStates[controlFlowGraph.ExitBlock].Any())
+            while (queue.Any())
             {
-                throw new InvalidOperationException("Out of exit block should be empty");
-            }
-        }
-
-        private void AnalyzeCfg(Dictionary<Block, State> states)
-        {
-            var workList = new Queue<Block>();
-            reversedBlocks.ForEach(b => workList.Enqueue(b));
-
-            while (workList.Any())
-            {
-                var block = workList.Dequeue();
-
-                if (!liveOutStates.ContainsKey(block))
-                {
-                    liveOutStates.Add(block, new HashSet<ISymbol>());
-                }
-                var liveOut = liveOutStates[block];
-
+                var block = queue.Dequeue();
+                var liveOut = blockLiveOut[block];
                 // note that on the PHP LVA impl, the `liveOut` gets cleared before being updated
-                foreach (var successor in block.SuccessorBlocks)
+                foreach (var successorLiveIn in Successors(block).Select(x => blockLiveIn[x]).Where(x => x.Any()))
                 {
-                    if (liveInStates.ContainsKey(successor))
+                    liveOut.UnionWith(successorLiveIn);
+                }
+                // liveIn = UsedBeforeAssigned + (LiveOut - Assigned)
+                var liveIn = states[block].UsedBeforeAssigned.Concat(liveOut.Except(states[block].Assigned)).ToHashSet();
+                // Don't enqueue predecessors if nothing changed.
+                if (!liveIn.SetEquals(blockLiveIn[block]))
+                {
+                    blockLiveIn[block] = liveIn;
+                    foreach (var predecessor in Predecessors(block))
                     {
-                        liveOut.UnionWith(liveInStates[successor]);
+                        queue.Enqueue(predecessor);
                     }
                 }
-
-                // in = usedBeforeAssigned + (out - assigned)
-                var liveIn = new HashSet<ISymbol>(states[block].UsedBeforeAssigned.Concat(liveOut.Except(states[block].Assigned)));
-
-                // if things have not changed, skip adding the predecessors to the workList
-                if (liveInStates.ContainsKey(block) && liveIn.SetEquals(liveInStates[block]))
-                {
-                    continue;
-                }
-
-                liveInStates[block] = liveIn;
-
-                foreach (var predecessor in block.PredecessorBlocks)
-                {
-                    workList.Enqueue(predecessor);
-                }
+            }
+            if (blockLiveOut[ExitBlock].Any())
+            {
+                throw new InvalidOperationException("Out of exit block should be empty");
             }
         }
 
@@ -118,7 +103,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis
             public ISet<ISymbol> UsedBeforeAssigned { get; } = new HashSet<ISymbol>();   // Gen:  The set of variables that are used before any assignment.
             public ISet<ISymbol> ProcessedLocalFunctions { get; } = new HashSet<ISymbol>();
             public ISet<SyntaxNode> AssignmentLhs { get; } = new HashSet<SyntaxNode>();
-            public ISet<ISymbol> CapturedVariables { get; } = new HashSet<ISymbol>();
+            public ISet<ISymbol> Captured { get; } = new HashSet<ISymbol>();
         }
     }
 }
