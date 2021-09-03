@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
@@ -26,37 +27,39 @@ namespace SonarAnalyzer.CFG.Helpers
 {
     public abstract class OperationWalker : OperationWalker<object>
     {
-        protected abstract void VoidVisitOperation(IOperation operation);
+        protected abstract void VoidVisitOperation(IOperationWrapperSonar operation);
 
-        protected override object VisitOperation(IOperation operation)
+        protected override bool VisitOperation(IOperationWrapperSonar operation)
         {
             VoidVisitOperation(operation);
-            return null;
+            return true;
         }
     }
 
-    public abstract class OperationWalker<TResult> : OperationVisitor<TResult>
-        where TResult : class
+    public abstract class OperationWalker<TResult>
     {
-        protected TResult Visit(IOperation operation)
-        {
-            if (operation == null)
-            {
-                return default;
-            }
-            var queue = new Queue<IOperation>();
-            queue.Enqueue(operation);
-            while (queue.Count != 0 && queue.Dequeue() is var elem)
-            {
-                if (VisitOperation(elem) is { } result)
-                {
-                    return result;
-                }
+        protected TResult Result { get; set; }
 
-                var wrapper = new IOperationWrapperSonar(elem);
-                foreach (var child in wrapper.Children)
+        protected abstract bool VisitOperation(IOperationWrapperSonar operation);
+
+        protected TResult Visit(IEnumerable<IOperation> operations)
+        {
+            var queue = new Queue<IOperation>();
+            foreach (var operation in operations)
+            {
+                queue.Enqueue(operation);
+                while (queue.Any())
                 {
-                    queue.Enqueue(child);
+                    var wrapper = new IOperationWrapperSonar(queue.Dequeue());
+                    if (!VisitOperation(wrapper))
+                    {
+                        return Result;
+                    }
+
+                    foreach (var child in wrapper.Children)
+                    {
+                        queue.Enqueue(child);
+                    }
                 }
             }
 

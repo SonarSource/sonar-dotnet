@@ -29,8 +29,7 @@ namespace SonarAnalyzer.Extensions
     {
         public static IEnumerable<IFlowAnonymousFunctionOperationWrapper> FlowAnonymousFunctionOperations(this ControlFlowGraph cfg) =>
             cfg.Blocks
-               .SelectMany(x => x.Operations)
-               .Concat(cfg.Blocks.Select(x => x.BranchValue).Where(x => x != null))
+               .SelectMany(x => x.OperationsAndBranchValue)
                .SelectMany(x => x.DescendantsAndSelf())
                .Where(IFlowAnonymousFunctionOperationWrapper.IsInstance)
                .Select(IFlowAnonymousFunctionOperationWrapper.FromOperation);

@@ -18,35 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.CFG.Helpers;
+using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.CFG.Roslyn
+namespace SonarAnalyzer.CFG.Helpers
 {
     public abstract class BasicBlockWalker : OperationWalker
     {
-        public void Visit(BasicBlock block)
-        {
-            foreach (var operation in block.BranchValueAndOperations)
-            {
-                Visit(operation);
-            }
-        }
+        public void Visit(BasicBlock block) =>
+            Visit(block.OperationsAndBranchValue);
     }
 
     public abstract class BasicBlockWalker<TResult> : OperationWalker<TResult>
         where TResult : class
     {
-        public TResult Visit(BasicBlock block)
-        {
-            foreach (var operation in block.BranchValueAndOperations)
-            {
-                var result = Visit(operation);
-                if (result != null)
-                {
-                    return result;
-                }
-            }
-            return null;
-        }
+        public TResult Visit(BasicBlock block) =>
+            Visit(block.OperationsAndBranchValue);
     }
 }
