@@ -194,7 +194,7 @@ Method(intParameter, value);";
              */
             var code = @"
 var everywhere = 42;
-var reasiggnedNowhere = 42;
+var reassigned = 42;
 var first = 42;
 var firstTrue = 42;
 var firstFalse = 42;
@@ -227,8 +227,8 @@ else
     }
     Method(second);
 }
-reasiggnedNowhere = 0;
-Method(everywhere, reasiggnedNowhere);";
+reassigned = 0;
+Method(everywhere, reassigned);";
             var context = new Context(code);
             context.Validate(
                 context.Block<BinaryBranchBlock>("boolParameter"),
@@ -269,7 +269,7 @@ Method(everywhere, reasiggnedNowhere);";
                 new LiveIn("everywhere", "second"),
                 new LiveOut("everywhere"));
             // Common end
-            context.Validate(context.Block<SimpleBlock>("Method(everywhere, reasiggnedNowhere)"), new LiveIn("everywhere"));
+            context.Validate(context.Block<SimpleBlock>("Method(everywhere, reassigned)"), new LiveIn("everywhere"));
         }
 
         [TestMethod]
@@ -444,7 +444,7 @@ foreach(i in new int[] {1, 2, 3})
         public void StaticLocalFunction_ExpressionLiveIn()
         {
             var code = @"
-outParameter = LocalFunction(boolParameter);
+outParameter = LocalFunction(intParameter);
 static int LocalFunction(int a) => a + 1;";
             var context = new Context(code, "LocalFunction");
             context.Validate(context.Cfg.EntryBlock, new LiveIn("a"));
@@ -464,11 +464,11 @@ static int LocalFunction(int a) => 42;";
         public void StaticLocalFunction_LiveIn()
         {
             var code = @"
-outParameter = LocalFunction(boolParameter);
+outParameter = LocalFunction(intParameter);
 static int LocalFunction(int a)
 {
-    return a + 1
-};";
+    return a + 1;
+}";
             var context = new Context(code, "LocalFunction");
             context.Validate(context.Cfg.EntryBlock, new LiveIn("a"));
         }
@@ -480,8 +480,8 @@ static int LocalFunction(int a)
 outParameter = LocalFunction(0);
 static int LocalFunction(int a)
 {
-    return 42
-};";
+    return 42;
+}";
             var context = new Context(code, "LocalFunction");
             context.Validate(context.Cfg.EntryBlock);
         }
@@ -490,14 +490,14 @@ static int LocalFunction(int a)
         public void StaticLocalFunction_Recursive()
         {
             var code = @"
-outParameter = LocalFunction(boolParameter);
+outParameter = LocalFunction(intParameter);
 static int LocalFunction(int a)
 {
     if(a <= 0)
         return 0;
     else
         return LocalFunction(a - 1);
-};";
+}";
             var context = new Context(code, "LocalFunction");
             context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
         }
@@ -513,9 +513,9 @@ static int LocalFunction(int a)
 public class Sample
 {{
     private int field;
-    public int Property {{ get; set; }};
+    public int Property {{ get; set; }}
 
-    public void Main(bool boolParameter, int intParameter, out bool outParameter, ref int refParameter)
+    public void Main(bool boolParameter, int intParameter, out int outParameter, ref int refParameter)
     {{
         {methodBody}
     }}
@@ -523,7 +523,7 @@ public class Sample
     private int Method(params int[] args) => 42;
     private string Method(params string[] args) => null;
     private bool IsMethod(params bool[] args) => true;
-    private void Capturing(Func<int> f) {{ }}
+    private void Capturing(System.Func<int> f) {{ }}
 }}";
                 var method = SonarControlFlowGraphTest.CompileWithMethodBody(code, "Main", out var semanticModel);
                 IMethodSymbol symbol;
