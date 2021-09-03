@@ -18,11 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
@@ -541,6 +543,7 @@ public class Sample
                     body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
                 }
                 Cfg = CSharpControlFlowGraph.Create(body, semanticModel);
+                Console.WriteLine(CfgSerializer.Serialize(Cfg));
                 Lva = new SonarCSharpLiveVariableAnalysis(Cfg, symbol, semanticModel);
             }
 
