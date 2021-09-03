@@ -57,8 +57,7 @@ namespace SonarAnalyzer.Rules
             var typeDeclaration = (TypeDeclarationSyntax)analysisContext.Node;
             var fieldDeclarations = typeDeclaration.Members.OfType<FieldDeclarationSyntax>();
 
-            var assignmentsImmutability = GetFieldAssignmentImmutability(typeDeclaration, fieldDeclarations,
-                analysisContext.SemanticModel);
+            var assignmentsImmutability = FieldAssignmentImmutability(typeDeclaration, fieldDeclarations, analysisContext.SemanticModel);
 
             foreach (var fieldDeclaration in fieldDeclarations)
             {
@@ -79,10 +78,7 @@ namespace SonarAnalyzer.Rules
         private bool HasAllInvalidModifiers(FieldDeclarationSyntax fieldDeclaration) =>
             fieldDeclaration.Modifiers.Count(m => InvalidModifiers.Contains(m.Kind())) == InvalidModifiers.Count;
 
-        private static Dictionary<string, bool?> GetFieldAssignmentImmutability(
-            TypeDeclarationSyntax typeDeclaration,
-            IEnumerable<FieldDeclarationSyntax> fieldDeclarations,
-            SemanticModel semanticModel)
+        private static Dictionary<string, bool?> FieldAssignmentImmutability(TypeDeclarationSyntax typeDeclaration, IEnumerable<FieldDeclarationSyntax> fieldDeclarations, SemanticModel semanticModel)
         {
             var variableNames = fieldDeclarations.SelectMany(x => x.Declaration.Variables)
                 .Select(x => x.Identifier.ValueText)
