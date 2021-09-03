@@ -62,41 +62,27 @@ namespace SonarAnalyzer.Rules
 
             foreach (var fieldDeclaration in fieldDeclarations)
             {
-                if (!HasAllInvalidModifiers(fieldDeclaration) ||
-                    fieldDeclaration.Declaration.Variables.Count == 0)
+                if (HasAllInvalidModifiers(fieldDeclaration)
+                    && fieldDeclaration.Declaration.Variables.Count > 0
+                    && analysisContext.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0]) is IFieldSymbol { Type: not null } fieldSymbol
+                    && fieldSymbol.GetEffectiveAccessibility() == Accessibility.Public
+                    && !IsImmutableOrValidMutableType(fieldSymbol.Type)
+                    // The field seems to be violating the rule but we should exclude the cases where the field is read-only
+                    // and all initializations to this field are immutable
+                    && CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability, analysisContext.SemanticModel).ToSentence(quoteWords: true) is { } incorrectFieldVariables)
                 {
-                    return;
-                }
-
-                if (!(analysisContext.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0]) is IFieldSymbol fieldSymbol) ||
-                    fieldSymbol.Type == null ||
-                    fieldSymbol.GetEffectiveAccessibility() != Accessibility.Public ||
-                    IsImmutableOrValidMutableType(fieldSymbol.Type))
-                {
-                    return;
-                }
-
-                // The field seems to be violating the rule but we should exclude the cases where the field is read-only
-                // and all initializations to this field are immutable
-                var incorrectFieldVariables = CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability,
-                        analysisContext.SemanticModel)
-                    .ToSentence(quoteWords: true);
-
-                if (incorrectFieldVariables != null)
-                {
-                    analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0],
-                        fieldDeclaration.Declaration.Type.GetLocation(), incorrectFieldVariables));
+                    analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], fieldDeclaration.Declaration.Type.GetLocation(), incorrectFieldVariables));
                 }
             }
         }
 
-        private bool HasAllInvalidModifiers(FieldDeclarationSyntax fieldDeclaration)
-        {
-            return fieldDeclaration.Modifiers.Count(m => InvalidModifiers.Contains(m.Kind())) == InvalidModifiers.Count;
-        }
+        private bool HasAllInvalidModifiers(FieldDeclarationSyntax fieldDeclaration) =>
+            fieldDeclaration.Modifiers.Count(m => InvalidModifiers.Contains(m.Kind())) == InvalidModifiers.Count;
 
-        private Dictionary<string, bool?> GetFieldAssignmentImmutability(TypeDeclarationSyntax typeDeclaration,
-            IEnumerable<FieldDeclarationSyntax> fieldDeclarations, SemanticModel semanticModel)
+        private static Dictionary<string, bool?> GetFieldAssignmentImmutability(
+            TypeDeclarationSyntax typeDeclaration,
+            IEnumerable<FieldDeclarationSyntax> fieldDeclarations,
+            SemanticModel semanticModel)
         {
             var variableNames = fieldDeclarations.SelectMany(x => x.Declaration.Variables)
                 .Select(x => x.Identifier.ValueText)
@@ -110,33 +96,25 @@ namespace SonarAnalyzer.Rules
 
             foreach (var assignment in ctorAssignments)
             {
-                if (!(assignment.Left is IdentifierNameSyntax identifierName) ||
-                    !variableNames.Contains(identifierName.Identifier.ValueText) ||
-                    variableToImmutability[identifierName.Identifier.ValueText] == false)
+                if (assignment.Left is not IdentifierNameSyntax identifierName
+                    || !variableNames.Contains(identifierName.Identifier.ValueText)
+                    || variableToImmutability[identifierName.Identifier.ValueText] == false)
                 {
                     continue;
                 }
 
-                variableToImmutability[identifierName.Identifier.ValueText] =
-                    IsImmutableOrValidMutableType(semanticModel.GetTypeInfo(assignment.Right).Type, assignment.Right);
+                variableToImmutability[identifierName.Identifier.ValueText] = IsImmutableOrValidMutableType(semanticModel.GetTypeInfo(assignment.Right).Type, assignment.Right);
             }
 
             return variableToImmutability;
         }
 
-        private IEnumerable<string> CollectInvalidFieldVariables(FieldDeclarationSyntax fieldDeclaration,
-            Dictionary<string, bool?> assignmentsInCtors, SemanticModel semanticModel)
-        {
-            if (!fieldDeclaration.Modifiers.Any(SyntaxKind.ReadOnlyKeyword))
-            {
-                return fieldDeclaration.Declaration.Variables.Select(x => x.Identifier.ValueText);
-            }
+        private static IEnumerable<string> CollectInvalidFieldVariables(FieldDeclarationSyntax fieldDeclaration, Dictionary<string, bool?> assignmentsInCtors, SemanticModel semanticModel) =>
+            fieldDeclaration.Modifiers.Any(SyntaxKind.ReadOnlyKeyword)
+            ? CollectReadonlyInvalidFieldVariables(fieldDeclaration, assignmentsInCtors, semanticModel)
+            : fieldDeclaration.Declaration.Variables.Select(x => x.Identifier.ValueText);
 
-            return CollectReadonlyInvalidFieldVariables(fieldDeclaration, assignmentsInCtors, semanticModel);
-        }
-
-        private IEnumerable<string> CollectReadonlyInvalidFieldVariables(FieldDeclarationSyntax fieldDeclaration,
-            Dictionary<string, bool?> assignmentsInCtors, SemanticModel semanticModel)
+        private static IEnumerable<string> CollectReadonlyInvalidFieldVariables(FieldDeclarationSyntax fieldDeclaration, Dictionary<string, bool?> assignmentsInCtors, SemanticModel semanticModel)
         {
             foreach (var variable in fieldDeclaration.Declaration.Variables)
             {
@@ -147,12 +125,8 @@ namespace SonarAnalyzer.Rules
                     yield return variable.Identifier.ValueText;
                 }
 
-                if (variable.Initializer == null)
-                {
-                    continue;
-                }
-
-                if (!(semanticModel.GetSymbolInfo(variable.Initializer.Value).Symbol is IMethodSymbol methodSymbol))
+                if (variable.Initializer == null
+                    || semanticModel.GetSymbolInfo(variable.Initializer.Value).Symbol is not IMethodSymbol methodSymbol)
                 {
                     continue;
                 }
@@ -168,7 +142,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private bool IsImmutableOrValidMutableType(ITypeSymbol typeSymbol, ExpressionSyntax value = null)
+        private static bool IsImmutableOrValidMutableType(ITypeSymbol typeSymbol, ExpressionSyntax value = null)
         {
             if (value.IsNullLiteral())
             {
@@ -180,8 +154,8 @@ namespace SonarAnalyzer.Rules
                 typeSymbol = namedTypeSymbol.ConstructedFrom;
             }
 
-            return !typeSymbol.DerivesOrImplementsAny(MutableBaseTypes) ||
-                typeSymbol.DerivesOrImplementsAny(ImmutableBaseTypes);
+            return !typeSymbol.DerivesOrImplementsAny(MutableBaseTypes)
+                   || typeSymbol.DerivesOrImplementsAny(ImmutableBaseTypes);
         }
     }
 }
