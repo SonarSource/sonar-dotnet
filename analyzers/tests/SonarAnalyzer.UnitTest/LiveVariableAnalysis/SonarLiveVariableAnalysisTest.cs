@@ -420,7 +420,7 @@ foreach(var i in new int[] {1, 2, 3})
     Method(i, intParameter);
 }";
             var context = new Context(code);
-            context.Validate(context.Block<ForeachCollectionProducerBlock>(),new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block<ForeachCollectionProducerBlock>(), new LiveIn("intParameter"), new LiveOut("intParameter"));
             context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("intParameter"), new LiveOut("intParameter", "i"));
             context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter", "i"), new LiveOut("intParameter"));
         }
