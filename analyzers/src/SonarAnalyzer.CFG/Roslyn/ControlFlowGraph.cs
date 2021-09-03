@@ -76,7 +76,7 @@ namespace SonarAnalyzer.CFG.Roslyn
             originalOperation = OriginalOperationProperty.ReadValue<IOperation>(instance);
             root = RootProperty.ReadValue(instance, ControlFlowRegion.Wrap);
             Debug.Assert(EntryBlock.Kind == BasicBlockKind.Entry);
-            Debug.Assert(EntryBlock.Kind == BasicBlockKind.Exit);
+            Debug.Assert(ExitBlock.Kind == BasicBlockKind.Exit);
         }
 
         public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel) =>
