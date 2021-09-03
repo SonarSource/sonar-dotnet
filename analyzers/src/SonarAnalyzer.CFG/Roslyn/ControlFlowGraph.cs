@@ -20,6 +20,8 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using Microsoft.CodeAnalysis;
@@ -49,6 +51,8 @@ namespace SonarAnalyzer.CFG.Roslyn
         public ImmutableArray<IMethodSymbol> LocalFunctions => localFunctions.Value;
         public IOperation OriginalOperation => originalOperation.Value;
         public ControlFlowRegion Root => root.Value;
+        public BasicBlock EntryBlock => Blocks[Root.FirstBlockOrdinal];
+        public BasicBlock ExitBlock => Blocks[Root.LastBlockOrdinal];
 
         static ControlFlowGraph()
         {
@@ -72,6 +76,8 @@ namespace SonarAnalyzer.CFG.Roslyn
             localFunctions = LocalFunctionsProperty.ReadImmutableArray<IMethodSymbol>(instance);
             originalOperation = OriginalOperationProperty.ReadValue<IOperation>(instance);
             root = RootProperty.ReadValue(instance, ControlFlowRegion.Wrap);
+            Debug.Assert(Blocks.Single(x => x.Kind == BasicBlockKind.Entry) == EntryBlock);
+            Debug.Assert(Blocks.Single(x => x.Kind == BasicBlockKind.Exit) == ExitBlock);
         }
 
         public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel) =>
