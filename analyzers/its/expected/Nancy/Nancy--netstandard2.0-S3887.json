@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'RootNamespaces'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  32,
+"endLine":  20,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Ignore'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  32,
+"endLine":  25,
+"endColumn":  47
+}
+}
+}
+]
+}

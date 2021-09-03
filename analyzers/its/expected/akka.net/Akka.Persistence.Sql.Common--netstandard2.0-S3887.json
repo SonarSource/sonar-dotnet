@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'EntryTags'.",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'EntryTags'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\Messages.cs",
 "region":  {
