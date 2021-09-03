@@ -465,7 +465,7 @@ foreach(i in new int[] {1, 2, 3})
         public void StaticLocalFunction_ExpressionLiveIn()
         {
             var code = @"
-outParameter = LocalFunction(boolParameter);
+outParameter = LocalFunction(intParameter);
 static int LocalFunction(int a) => a + 1;";
             var context = new Context(code, "LocalFunction");
             throw new System.NotImplementedException();
@@ -487,11 +487,11 @@ static int LocalFunction(int a) => 42;";
         public void StaticLocalFunction_LiveIn()
         {
             var code = @"
-outParameter = LocalFunction(boolParameter);
+outParameter = LocalFunction(intParameter);
 static int LocalFunction(int a)
 {
-    return a + 1
-};";
+    return a + 1;
+}";
             var context = new Context(code, "LocalFunction");
             throw new System.NotImplementedException();
             //context.Validate(context.Cfg.EntryBlock, new LiveIn("a"));
@@ -504,8 +504,8 @@ static int LocalFunction(int a)
 outParameter = LocalFunction(0);
 static int LocalFunction(int a)
 {
-    return 42
-};";
+    return 42;
+}";
             var context = new Context(code, "LocalFunction");
             throw new System.NotImplementedException();
             //FIXME: context.Validate(context.Cfg.EntryBlock);
@@ -515,7 +515,7 @@ static int LocalFunction(int a)
         public void StaticLocalFunction_Recursive()
         {
             var code = @"
-outParameter = LocalFunction(boolParameter);
+outParameter = LocalFunction(intParameter);
 static int LocalFunction(int a)
 {
     if(a <= 0)
@@ -541,7 +541,7 @@ public class Sample
     private int field;
     public int Property {{ get; set; }};
 
-    public void Main(bool boolParameter, int intParameter, out bool outParameter, ref int refParameter)
+    public void Main(bool boolParameter, int intParameter, out int outParameter, ref int refParameter)
     {{
         {methodBody}
     }}
@@ -549,7 +549,7 @@ public class Sample
     private int Method(params int[] args) => 42;
     private string Method(params string[] args) => null;
     private bool IsMethod(params bool[] args) => true;
-    private void Capturing(Func<int> f) {{ }}
+    private void Capturing(System.Func<int> f) {{ }}
 }}";
                 var method = SonarControlFlowGraphTest.CompileWithMethodBody(code, "Main", out var semanticModel);
                 IMethodSymbol symbol;
