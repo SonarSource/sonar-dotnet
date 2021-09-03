@@ -29,20 +29,20 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 {
-    public sealed class CSharpLiveVariableAnalysis : AbstractLiveVariableAnalysis
+    public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase
     {
         private readonly ISymbol declaration;
         private readonly SemanticModel semanticModel;
 
-        private CSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel) : base(controlFlowGraph)
+        private SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel) : base(controlFlowGraph)
         {
             this.declaration = declaration;
             this.semanticModel = semanticModel;
         }
 
-        public static AbstractLiveVariableAnalysis Analyze(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel)
+        public static LiveVariableAnalysisBase Analyze(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel)
         {
-            var lva = new CSharpLiveVariableAnalysis(controlFlowGraph, declaration, semanticModel);
+            var lva = new SonarCSharpLiveVariableAnalysis(controlFlowGraph, declaration, semanticModel);
             lva.PerformAnalysis();
             return lva;
         }

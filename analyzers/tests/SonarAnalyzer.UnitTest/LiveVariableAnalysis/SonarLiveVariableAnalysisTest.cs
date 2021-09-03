@@ -504,7 +504,7 @@ static int LocalFunction(int a)
 
         private class Context
         {
-            public readonly AbstractLiveVariableAnalysis Lva;
+            public readonly LiveVariableAnalysisBase Lva;
             public readonly IControlFlowGraph Cfg;
 
             public Context(string methodBody, string localFunctionName = null)
@@ -541,7 +541,7 @@ public class Sample
                     body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
                 }
                 Cfg = CSharpControlFlowGraph.Create(body, semanticModel);
-                Lva = CSharpLiveVariableAnalysis.Analyze(Cfg, symbol, semanticModel);
+                Lva = SonarCSharpLiveVariableAnalysis.Analyze(Cfg, symbol, semanticModel);
             }
 
             public Block Block<TBlock>(string withInstruction = null) where TBlock : Block =>

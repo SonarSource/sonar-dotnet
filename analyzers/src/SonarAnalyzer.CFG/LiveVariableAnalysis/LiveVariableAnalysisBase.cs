@@ -27,7 +27,7 @@ using SonarAnalyzer.CFG.Sonar;
 
 namespace SonarAnalyzer.LiveVariableAnalysis
 {
-    public abstract class AbstractLiveVariableAnalysis
+    public abstract class LiveVariableAnalysisBase
     {
         private readonly IControlFlowGraph controlFlowGraph;
         private readonly List<Block> reversedBlocks;
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis
 
         protected abstract State ProcessBlock(Block block);
 
-        protected AbstractLiveVariableAnalysis(IControlFlowGraph controlFlowGraph)
+        protected LiveVariableAnalysisBase(IControlFlowGraph controlFlowGraph)
         {
             this.controlFlowGraph = controlFlowGraph;
             reversedBlocks = controlFlowGraph.Blocks.Reverse().ToList();

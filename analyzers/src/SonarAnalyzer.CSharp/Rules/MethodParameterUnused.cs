@@ -155,7 +155,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             if (CSharpControlFlowGraph.TryGet(bodyNode, declaration.Context.SemanticModel, out var cfg))
             {
-                var lva = CSharpLiveVariableAnalysis.Analyze(cfg, declaration.Symbol, declaration.Context.SemanticModel);
+                var lva = SonarCSharpLiveVariableAnalysis.Analyze(cfg, declaration.Symbol, declaration.Context.SemanticModel);
                 var liveParameters = lva.GetLiveIn(cfg.EntryBlock).OfType<IParameterSymbol>();
                 ReportOnUnusedParameters(declaration, candidateParameters.Except(liveParameters).Except(lva.CapturedVariables), MessageDead, isRemovable: false);
             }

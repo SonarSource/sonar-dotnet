@@ -42,7 +42,7 @@ namespace SonarAnalyzer.SymbolicExecution
         private const int SyntaxKindRelationalPattern = 9029;
         private const int SyntaxKindTypePattern = 9030;
 
-        public CSharpExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, AbstractLiveVariableAnalysis lva)
+        public CSharpExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, LiveVariableAnalysisBase lva)
             : base(cfg, declaration, semanticModel, lva)
         {
             NullPointerCheck = new NullPointerDereference.NullPointerCheck(this);

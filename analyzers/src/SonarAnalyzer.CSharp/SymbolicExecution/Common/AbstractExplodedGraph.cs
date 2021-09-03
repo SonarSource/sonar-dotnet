@@ -44,7 +44,7 @@ namespace SonarAnalyzer.SymbolicExecution
         private readonly ISymbol declaration;
         private readonly IEnumerable<IParameterSymbol> declarationParameters;
         private readonly IEnumerable<IParameterSymbol> nonInDeclarationParameters;
-        private readonly AbstractLiveVariableAnalysis lva;
+        private readonly LiveVariableAnalysisBase lva;
 
         protected readonly ICollection<ExplodedGraphCheck> explodedGraphChecks = new List<ExplodedGraphCheck>();
 
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         public event EventHandler<ConditionEvaluatedEventArgs> ConditionEvaluated;
 
-        protected AbstractExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, AbstractLiveVariableAnalysis lva)
+        protected AbstractExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, LiveVariableAnalysisBase lva)
         {
             this.cfg = cfg;
             this.declaration = declaration;

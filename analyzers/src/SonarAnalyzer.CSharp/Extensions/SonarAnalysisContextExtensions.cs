@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Extensions
                 return;
             }
 
-            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, symbol, context.SemanticModel);
+            var lva = SonarCSharpLiveVariableAnalysis.Analyze(cfg, symbol, context.SemanticModel);
 
             try
             {

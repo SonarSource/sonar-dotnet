@@ -530,7 +530,7 @@ static int LocalFunction(int a)
 
         private class Context
         {
-            public readonly AbstractLiveVariableAnalysis Lva;
+            public readonly LiveVariableAnalysisBase Lva;
             public readonly ControlFlowGraph Cfg;
 
             public Context(string methodBody, string localFunctionName = null)
