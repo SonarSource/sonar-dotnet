@@ -68,9 +68,13 @@ namespace SonarAnalyzer.Rules
                     && !IsImmutableOrValidMutableType(fieldSymbol.Type)
                     // The field seems to be violating the rule but we should exclude the cases where the field is read-only
                     // and all initializations to this field are immutable
-                    && CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability, analysisContext.SemanticModel).ToSentence(quoteWords: true) is { } incorrectFieldVariables)
+                    && CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability, analysisContext.SemanticModel).ToList() is {Count: > 0} incorrectFieldVariables)
                 {
-                    analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], fieldDeclaration.Declaration.Type.GetLocation(), incorrectFieldVariables));
+                    var pluralize = incorrectFieldVariables.Count > 1 ? "s" : string.Empty;
+                    analysisContext.ReportDiagnosticWhenActive(
+                        Diagnostic.Create(SupportedDiagnostics[0],
+                        fieldDeclaration.Declaration.Type.GetLocation(),
+                        pluralize, incorrectFieldVariables.ToSentence(quoteWords: true)));
                 }
             }
         }

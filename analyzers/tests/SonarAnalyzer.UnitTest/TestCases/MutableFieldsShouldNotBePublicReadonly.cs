@@ -97,7 +97,7 @@ namespace Tests.Diagnostics
 
     public class MutableInitializedWithMutable
     {
-        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // Noncompliant {{Use an immutable collection or reduce the accessibility of the non-private readonly field(s) 'isetInitializaedWithHashSet'.}}
+        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // Noncompliant {{Use an immutable collection or reduce the accessibility of the non-private readonly field 'isetInitializaedWithHashSet'.}}
 //                      ^^^^^^^^^^^^
         public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" }; // Noncompliant
         public readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // Noncompliant
@@ -105,7 +105,7 @@ namespace Tests.Diagnostics
 
     public class HandleFieldWithMultipleVariables
     {
-        public readonly ISet<string> set1 = new HashSet<string>(), set2 = new HashSet<string>(); // Noncompliant {{Use an immutable collection or reduce the accessibility of the non-private readonly field(s) 'set1' and 'set2'.}}
+        public readonly ISet<string> set1 = new HashSet<string>(), set2 = new HashSet<string>(); // Noncompliant {{Use an immutable collection or reduce the accessibility of the non-private readonly fields 'set1' and 'set2'.}}
     }
 
     // When the types are uninitialized, this is equivalent to being initialized to null so we don't report

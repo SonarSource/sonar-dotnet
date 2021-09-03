@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class MutableFieldsShouldNotBePublicReadonly : MutableFieldsShouldNotBe
     {
         private const string DiagnosticId = "S3887";
-        private const string MessageFormat = "Use an immutable collection or reduce the accessibility of the non-private readonly field(s) {0}.";
+        private const string MessageFormat = "Use an immutable collection or reduce the accessibility of the non-private readonly field{0} {1}.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class MutableFieldsShouldNotBePublicStatic : MutableFieldsShouldNotBe
     {
         private const string DiagnosticId = "S2386";
-        private const string MessageFormat = "Use an immutable collection or reduce the accessibility of the public static field(s) {0}.";
+        private const string MessageFormat = "Use an immutable collection or reduce the accessibility of the public static field{0} {1}.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
