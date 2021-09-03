@@ -1541,7 +1541,7 @@ namespace Namespace
                 MainMethodSymbol = semanticModel.GetDeclaredSymbol(MainMethod);
                 var methodBody = (CSharpSyntaxNode)MainMethod.Body ?? MainMethod.ExpressionBody;
                 ControlFlowGraph = CSharpControlFlowGraph.Create(methodBody, semanticModel);
-                LiveVariableAnalysis = SonarCSharpLiveVariableAnalysis.Analyze(ControlFlowGraph, MainMethodSymbol, semanticModel);
+                LiveVariableAnalysis = new SonarCSharpLiveVariableAnalysis(ControlFlowGraph, MainMethodSymbol, semanticModel);
                 ExplodedGraph = new CSharpExplodedGraph(ControlFlowGraph, MainMethodSymbol, semanticModel, LiveVariableAnalysis);
                 ExplodedGraph.InstructionProcessed += (sender, args) => { NumberOfProcessedInstructions++; };
                 ExplodedGraph.ExplorationEnded += (sender, args) => { ExplorationEnded = true; };

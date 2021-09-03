@@ -42,6 +42,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         {
             //this.declaration = declaration;
             //this.semanticModel = semanticModel;
+            //Analyze();
         }
 
         protected override IEnumerable<BasicBlock> ReversedBlocks() =>
@@ -52,14 +53,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block) =>
             throw new System.NotImplementedException();
-
-
-        //public static LiveVariableAnalysisBase Analyze(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel)
-        //{
-        //    var lva = new LiveVariableAnalysis(controlFlowGraph, declaration, semanticModel);
-        //    lva.PerformAnalysis();
-        //    return lva;
-        //}
 
         //internal static bool IsOutArgument(IdentifierNameSyntax identifier) =>
         //    identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);

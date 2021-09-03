@@ -38,18 +38,12 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
         protected override Block ExitBlock => cfg.ExitBlock;
 
-        private SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel) : base(controlFlowGraph)
+        public SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel) : base(controlFlowGraph)
         {
             //FIXME: Move to base?
             this.declaration = declaration;
             this.semanticModel = semanticModel;
-        }
-
-        public static SonarCSharpLiveVariableAnalysis Analyze(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel)
-        {
-            var lva = new SonarCSharpLiveVariableAnalysis(controlFlowGraph, declaration, semanticModel);
-            lva.Analyze();
-            return lva;
+            Analyze();
         }
 
         //FIXME: Move to base

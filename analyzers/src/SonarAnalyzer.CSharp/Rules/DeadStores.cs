@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && !node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression)
                 && CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
             {
-                var lva = SonarCSharpLiveVariableAnalysis.Analyze(cfg, symbol, context.SemanticModel);
+                var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
                 foreach (var block in cfg.Blocks)
                 {
                     var blockLva = new InBlockLivenessAnalysis(context, symbol, node, block, lva.LiveOut(block), lva.CapturedVariables);

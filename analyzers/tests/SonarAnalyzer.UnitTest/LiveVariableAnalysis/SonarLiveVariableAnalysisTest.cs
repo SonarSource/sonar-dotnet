@@ -541,7 +541,7 @@ public class Sample
                     body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
                 }
                 Cfg = CSharpControlFlowGraph.Create(body, semanticModel);
-                Lva = SonarCSharpLiveVariableAnalysis.Analyze(Cfg, symbol, semanticModel);
+                Lva = new SonarCSharpLiveVariableAnalysis(Cfg, symbol, semanticModel);
             }
 
             public Block Block<TBlock>(string withInstruction = null) where TBlock : Block =>
