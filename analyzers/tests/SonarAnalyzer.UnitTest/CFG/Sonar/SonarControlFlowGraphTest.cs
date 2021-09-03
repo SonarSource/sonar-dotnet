@@ -5063,8 +5063,7 @@ namespace NS
   }}
 }}";
 
-        internal static MethodDeclarationSyntax CompileWithMethodBody(string input, string methodName,
-            out SemanticModel semanticModel, ParseOptions parseOptions = null)
+        internal static MethodDeclarationSyntax CompileWithMethodBody(string input, string methodName, out SemanticModel semanticModel, ParseOptions parseOptions = null)
         {
             MethodDeclarationSyntax methodDeclaration;
             (methodDeclaration, semanticModel) = TestHelper.Compile(input).GetMethod(methodName);
