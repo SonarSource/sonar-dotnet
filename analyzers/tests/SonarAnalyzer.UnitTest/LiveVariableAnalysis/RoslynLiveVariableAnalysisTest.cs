@@ -23,8 +23,8 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;    //FIXME: VB
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
+using SonarAnalyzer.CFG.Roslyn;
 //FIXME: using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.UnitTest.CFG.Sonar; //FIXME: Shouldn't be needed
 using StyleCop.Analyzers.Lightup;
@@ -41,9 +41,7 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
 int a = 1;
 var b = Method();
 var c = 2 + 3;";
-            var context = new Context(code);
-            throw new System.NotImplementedException();
-            //context.Validate(context.Cfg.EntryBlock);
+            new Context(code).ValidateAllEmpty();
         }
 
         [TestMethod]
@@ -283,9 +281,7 @@ Method(everywhere, reasiggnedNowhere);";
         public void ProcessIdentifier_InNameOf_NotLiveIn_NotLiveOut()
         {
             var code = @"Method(nameof(intParameter));";
-            var context = new Context(code);
-            throw new System.NotImplementedException();
-            //context.Validate(context.Cfg.EntryBlock);
+            new Context(code).ValidateAllEmpty();
         }
 
         [TestMethod]
@@ -307,18 +303,14 @@ Method(intParameter, variable);";
             var code = @"
 var s = new Sample();
 Method(field, s.Property);";
-            var context = new Context(code);
-            throw new System.NotImplementedException();
-            //context.Validate(context.Cfg.EntryBlock);
+            new Context(code).ValidateAllEmpty();
         }
 
         [TestMethod]
         public void ProcessIdentifier_UndefinedSymbol_NotLiveIn_NotLiveOut()
         {
             var code = @"Method(undefined);";
-            var context = new Context(code);
-            throw new System.NotImplementedException();
-            //context.Validate(context.Cfg.EntryBlock);
+            new Context(code).ValidateAllEmpty();
         }
 
         [TestMethod]
@@ -327,9 +319,7 @@ Method(field, s.Property);";
             var code = @"
 outParameter = true;
 Method(outParameter, refParameter);";
-            var context = new Context(code);
-            throw new System.NotImplementedException();
-            //context.Validate(context.Cfg.EntryBlock);
+            new Context(code).ValidateAllEmpty();
         }
 
         [TestMethod]
@@ -552,28 +542,30 @@ public class Sample
     private void Capturing(System.Func<int> f) {{ }}
 }}";
                 var method = SonarControlFlowGraphTest.CompileWithMethodBody(code, "Main", out var semanticModel);
-                IMethodSymbol symbol;
-                CSharpSyntaxNode body;
-                if (localFunctionName == null)
+                Cfg = ControlFlowGraph.Create(method, semanticModel);
+                var symbol = semanticModel.GetDeclaredSymbol(method);
+                if (localFunctionName != null)
                 {
-                    symbol = semanticModel.GetDeclaredSymbol(method);
-                    body = method.Body;
+                    throw new System.NotImplementedException();
+                    //var function = (LocalFunctionStatementSyntaxWrapper)method.DescendantNodes()
+                    //    .Single(x => x.Kind() == SyntaxKindEx.LocalFunctionStatement && ((LocalFunctionStatementSyntaxWrapper)x).Identifier.Text == localFunctionName);
+                    //symbol = semanticModel.GetDeclaredSymbol(function) as IMethodSymbol;
+                    //body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
                 }
-                else
-                {
-                    var function = (LocalFunctionStatementSyntaxWrapper)method.DescendantNodes()
-                        .Single(x => x.Kind() == SyntaxKindEx.LocalFunctionStatement && ((LocalFunctionStatementSyntaxWrapper)x).Identifier.Text == localFunctionName);
-                    symbol = semanticModel.GetDeclaredSymbol(function) as IMethodSymbol;
-                    body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
-                }
-                Cfg = ControlFlowGraph.Create(body, semanticModel);
-                throw new System.NotImplementedException();
-                //FIXME: Lva = CSharpLiveVariableAnalysis.Analyze(Cfg, symbol, semanticModel);
+                Lva = new RoslynLiveVariableAnalysis(Cfg, symbol, semanticModel);
             }
 
             public BasicBlock Block<TBlock>(string withInstruction = null) where TBlock : BasicBlock =>
                 throw new System.NotImplementedException();
                 //FIXME: Cfg.Blocks.Single(x => x.GetType().Equals(typeof(TBlock)) && (withInstruction == null || x.Instructions.Any(instruction => instruction.ToString() == withInstruction)));
+
+            public void ValidateAllEmpty()
+            {
+                foreach (var block in Cfg.Blocks)
+                {
+                    Validate(block);
+                }
+            }
 
             public void Validate(BasicBlock block, params Expected[] expected)
             {
@@ -581,10 +573,9 @@ public class Sample
                 var expectedLiveIn = expected.OfType<LiveIn>().SingleOrDefault() ?? new LiveIn();
                 var expectedLiveOut = expected.OfType<LiveOut>().SingleOrDefault() ?? new LiveOut();
                 var expectedCaptured = expected.OfType<Captured>().SingleOrDefault() ?? new Captured();
-                throw new System.NotImplementedException();
-                //FIXME: Lva.GetLiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names);
-                //FIXME: Lva.GetLiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names);
-                //FIXME: Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names);
+                Lva.LiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names, $"{block.Kind} #{block.Ordinal}");
+                Lva.LiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names, $"{block.Kind} #{block.Ordinal}");
+                Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names, $"{block.Kind} #{block.Ordinal}");
             }
         }
 

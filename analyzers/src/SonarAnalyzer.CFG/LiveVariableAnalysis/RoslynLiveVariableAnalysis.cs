@@ -33,26 +33,26 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 {
     public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
     {
-        //private readonly ISymbol declaration;
-        //private readonly SemanticModel semanticModel;
+        private readonly ISymbol declaration;
+        private readonly SemanticModel semanticModel;
 
-        protected override BasicBlock ExitBlock => throw new System.NotImplementedException();
+        protected override BasicBlock ExitBlock => cfg.ExitBlock;
 
-        private RoslynLiveVariableAnalysis(ControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel) : base(cfg)
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel) : base(cfg)
         {
-            //this.declaration = declaration;
-            //this.semanticModel = semanticModel;
-            //Analyze();
+            this.declaration = declaration;
+            this.semanticModel = semanticModel;
+            Analyze();
         }
 
         protected override IEnumerable<BasicBlock> ReversedBlocks() =>
-            throw new System.NotImplementedException();
+            cfg.Blocks.Reverse();
 
         protected override IEnumerable<BasicBlock> Successors(BasicBlock block) =>
-            throw new System.NotImplementedException();
+            block.SuccessorBlocks;
 
         protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block) =>
-            throw new System.NotImplementedException();
+            block.Predecessors.Select(x => x.Source);
 
         //internal static bool IsOutArgument(IdentifierNameSyntax identifier) =>
         //    identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
@@ -71,13 +71,14 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         protected override State ProcessBlock(BasicBlock block)
         {
             var ret = new State();
-            throw new System.NotImplementedException();
-            //ProcessBlockInternal(block, ret);
+            ProcessBlockInternal(block, ret);
             return ret;
         }
 
-        //private void ProcessBlockInternal(Block block, State state)
-        //{
+        private void ProcessBlockInternal(BasicBlock block, State state)
+        {
+            //FIXME: Something is missing around here
+
         //    foreach (var instruction in block.Instructions.Reverse())
         //    {
         //        switch (instruction.Kind())
@@ -131,7 +132,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         //            state.UsedBeforeAssigned.Add(disposableSymbol);
         //        }
         //    }
-        //}
+        }
 
         //private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode, State state)
         //{
