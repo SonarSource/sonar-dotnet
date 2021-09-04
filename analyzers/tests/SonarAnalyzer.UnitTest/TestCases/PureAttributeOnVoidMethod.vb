@@ -25,6 +25,11 @@ Namespace Tests.TestCases
         Function TaskDoesNotRetrun(input As Integer) As Task
             Return Task.FromResult(input)
         End Function
+		
+		<Pure> 'Noncompliant
+        Async Function AsyncTaskDoesNotRetrun(input As Integer) As Task
+            Me.age = input
+        End Function
 
         <My>
         Private Sub ConfigureAge2(ByVal age As Integer)
@@ -40,5 +45,10 @@ Namespace Tests.TestCases
         Private Sub ConfigureAge4(ByVal age As Integer, <Out> ByRef ret As Integer)
             ret = age
         End Sub
+		
+		<Pure>
+		Function TaskOfTReturns(input as Integer) As Task(of Integer)
+			Return Task.FromResult(input * 42)
+		End Function
     End Class
 End Namespace

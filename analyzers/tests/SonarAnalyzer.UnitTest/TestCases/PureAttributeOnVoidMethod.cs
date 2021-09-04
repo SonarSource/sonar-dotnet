@@ -22,9 +22,14 @@ namespace Tests.TestCases
         }
 
         [Pure] // Noncompliant
-        Task TaskDoesNotRetrun(int input)
+        Task TaskDoesNotReturn(int input)
         {
             return Task.FromResult(input);
+        }
+		[Pure] // Noncompliant
+        async Task AsyncTaskDoesNotReturn(int age)
+        {
+            this.age = age;
         }
 
         [My]
@@ -44,5 +49,11 @@ namespace Tests.TestCases
         {
             ret = age;
         }
+
+		[Pure]
+		Task<int> TaskOfTReturns(int input)
+		{
+			return Task.FromResult(input * 42);
+		}
     }
 }
