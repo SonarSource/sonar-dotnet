@@ -21,6 +21,12 @@ namespace Tests.TestCases
             this.age = age;
         }
 
+        [Pure] // Noncompliant
+        Task TaskDoesNotRetrun(int input)
+        {
+            return Task.FromResult(input);
+        }
+
         [My]
         void ConfigureAge2(int age)
         {

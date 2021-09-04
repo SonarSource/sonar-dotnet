@@ -21,6 +21,11 @@ Namespace Tests.TestCases
             Me.age = age
         End Sub
 
+        <Pure> 'Noncompliant
+        Function TaskDoesNotRetrun(input As Integer) As Task
+            Return Task.FromResult(input)
+        End Function
+
         <My>
         Private Sub ConfigureAge2(ByVal age As Integer)
             Me.age = age
