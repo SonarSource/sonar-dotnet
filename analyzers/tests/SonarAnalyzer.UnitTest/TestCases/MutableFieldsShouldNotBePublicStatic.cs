@@ -88,7 +88,7 @@ namespace Tests.Diagnostics
 
     public class WhenNonReadonlyAlwaysReport
     {
-        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b"); // Noncompliant {{Use an immutable collection or reduce the accessibility of the field(s) 'iSetInitializaedWithImmutableSet'.}}
+        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b"); // Noncompliant {{Use an immutable collection or reduce the accessibility of the public static field 'iSetInitializaedWithImmutableSet'.}}
 //                    ^^^^^^^^^^^^
         public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b"); // Noncompliant
         public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b"); // Noncompliant
@@ -110,7 +110,8 @@ namespace Tests.Diagnostics
 
     public class HandleFieldWithMultipleVariables
     {
-        public static ISet<string> set1, set2; // Noncompliant {{Use an immutable collection or reduce the accessibility of the field(s) 'set1' and 'set2'.}}
+        public static string validfield;
+        public static ISet<string> set1, set2; // Noncompliant {{Use an immutable collection or reduce the accessibility of the public static fields 'set1' and 'set2'.}}
     }
 
     public class WhenReadonlyAndInitializedToImmutable

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'MaterializedValueIds'.",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'MaterializedValueIds'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Stages'.",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Stages'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'OriginalAttributes'.",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'OriginalAttributes'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Inlets'.",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Inlets'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'InletOwners'.",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'InletOwners'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Outlets'.",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Outlets'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'OutletOwners'.",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'OutletOwners'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
 "region":  {
@@ -88,6 +88,32 @@
 "startColumn":  25,
 "endLine":  119,
 "endColumn":  30
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Logics'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  25,
+"endLine":  376,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Connections'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  25,
+"endLine":  392,
+"endColumn":  37
 }
 }
 }

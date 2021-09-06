@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'AdditionalProperties'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  25,
+"endLine":  178,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\MemberPath.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  25,
+"endLine":  14,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Parameters'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  25,
+"endLine":  176,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'MembersToExpand'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"region":  {
+"startLine":  427,
+"startColumn":  25,
+"endLine":  427,
+"endColumn":  37
+}
+}
+}
+]
+}

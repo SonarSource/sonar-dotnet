@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2386",
+"message":  "Use an immutable collection or reduce the accessibility of the public static field 'TestAssemblySuffixes'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  23,
+"endLine":  46,
+"endColumn":  36
+}
+}
+}
+]
+}
