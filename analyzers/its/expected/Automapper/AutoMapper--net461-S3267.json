@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(inheritedTypeMap => inheritedTypeMap._includedMembersTypeMaps))",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  50,
+"endLine":  271,
+"endColumn":  68
+}
+}
+}
+]
+}

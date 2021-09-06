@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(moduleRegistrationType => moduleRegistrationType.ModuleType))",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  52,
+"endLine":  160,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(header => header.Item1))",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  36,
+"endLine":  184,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(prioritizedProcessor => prioritizedProcessor.Item1))",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  54,
+"endLine":  293,
+"endColumn":  75
+}
+}
+}
+]
+}

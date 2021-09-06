@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'collection' before using it.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3267.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  37,
+"endLine":  12,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'collection' before using it.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3267.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  37,
+"endLine":  27,
+"endColumn":  47
+}
+}
+}
+]
+}

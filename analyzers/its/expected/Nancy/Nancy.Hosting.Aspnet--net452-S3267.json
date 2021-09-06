@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(registrationType => registrationType.ModuleType))",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  46,
+"endLine":  231,
+"endColumn":  69
+}
+}
+}
+]
+}

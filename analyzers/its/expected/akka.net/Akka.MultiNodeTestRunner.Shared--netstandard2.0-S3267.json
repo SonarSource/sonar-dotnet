@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(node => node.Value))",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  34,
+"endLine":  43,
+"endColumn":  48
+}
+}
+}
+]
+}
