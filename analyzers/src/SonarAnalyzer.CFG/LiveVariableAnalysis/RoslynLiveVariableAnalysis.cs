@@ -118,6 +118,9 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 switch (operation.Instance.Kind)
                 {
+                    case OperationKindEx.LocalReference:
+                        ProcessLocalReference(state, ILocalReferenceOperationWrapper.FromOperation(operation.Instance));
+                        break;
                     case OperationKindEx.ParameterReference:
                         ProcessParameterReference(state, IParameterReferenceOperationWrapper.FromOperation(operation.Instance));
                         break;
@@ -171,6 +174,19 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             //            state.UsedBeforeAssigned.Add(disposableSymbol);
             //        }
             //    }
+        }
+
+        private void ProcessLocalReference(State state, ILocalReferenceOperationWrapper localReference)
+        {
+            if (IsOutArgument(localReference.WrappedOperation))
+            {
+                state.Assigned.Add(localReference.Local);
+                state.UsedBeforeAssigned.Remove(localReference.Local);
+            }
+            else //FIXME: if (!state.AssignmentLhs.Contains(identifier))
+            {
+                state.UsedBeforeAssigned.Add(localReference.Local);
+            }
         }
 
         private void ProcessParameterReference(State state, IParameterReferenceOperationWrapper parameterReference)

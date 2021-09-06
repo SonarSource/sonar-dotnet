@@ -47,7 +47,7 @@ var c = 2 + 3;";
         }
 
         [TestMethod]
-        public void UsedBeforeAssigned_LiveIn()
+        public void ProcessParameterReference_LiveIn()
         {
             var code = @"
 Method(intParameter);
@@ -58,12 +58,19 @@ IsMethod(boolParameter);";
         }
 
         [TestMethod]
-        public void UsedAsOutArgument_NotLiveIn_NotLiveOut()
+        public void ProcessParameterReference_UsedAsOutArgument_NotLiveIn_NotLiveOut()
         {
             var code = @"Main(true, 0, out outParameter, ref refParameter);";
             var context = new Context(code);
             context.Validate(context.Cfg.EntryBlock, new LiveIn("refParameter"), new LiveOut("refParameter"));
             context.Validate(context.Cfg.Blocks[1], new LiveIn("refParameter"));
+        }
+
+        [TestMethod]
+        public void ProcessParameterReference_InNameOf_NotLiveIn_NotLiveOut()
+        {
+            var code = @"Method(nameof(intParameter));";
+            new Context(code).ValidateAllEmpty();
         }
 
         [TestMethod]
@@ -289,14 +296,20 @@ Method(everywhere, reasiggnedNowhere);";
         }
 
         [TestMethod]
-        public void ProcessIdentifier_InNameOf_NotLiveIn_NotLiveOut()
+        public void ProcessLocalReference_InNameOf_NotLiveIn_NotLiveOut()
         {
-            var code = @"Method(nameof(intParameter));";
-            new Context(code).ValidateAllEmpty();
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+Method(nameof(variable));";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn(/*FIXME: Will be removed*/ "variable", "boolParameter"), new LiveOut(/*FIXME: Will be removed*/ "variable", "boolParameter"));
+            context.Validate(context.Block("Method(nameof(variable));"));
         }
 
         [TestMethod]
-        public void ProcessIdentifier_LocalScopeSymbol_LiveIn()
+        public void ProcessLocalReference_LocalScopeSymbol_LiveIn()
         {
             var code = @"
 var variable = 42;
@@ -304,37 +317,43 @@ if (boolParameter)
     return;
 Method(intParameter, variable);";
             var context = new Context(code);
-            throw new System.NotImplementedException();
-            //context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter", "variable"));
+            context.Validate(context.Cfg.EntryBlock, new LiveIn( /*FIXME: Will be removed*/ "variable", "boolParameter", "intParameter"), new LiveOut(/*FIXME: Will be removed*/ "variable", "boolParameter", "intParameter"));
+            context.Validate(context.Block("Method(intParameter, variable);"), new LiveIn("intParameter", "variable"));
         }
 
         [TestMethod]
-        public void ProcessIdentifier_GlobalScopeSymbol_NotLiveIn_NotLiveOut()
+        public void ProcessLocalReference_GlobalScopeSymbol_NotLiveIn_NotLiveOut()
         {
             var code = @"
 var s = new Sample();
 Method(field, s.Property);";
+            throw new NotImplementedException(); // Depends on variable declarator processing
             new Context(code).ValidateAllEmpty();
         }
 
         [TestMethod]
-        public void ProcessIdentifier_UndefinedSymbol_NotLiveIn_NotLiveOut()
+        public void ProcessLocalReference_UndefinedSymbol_NotLiveIn_NotLiveOut()
         {
             var code = @"Method(undefined);";
             new Context(code).ValidateAllEmpty();
         }
 
         [TestMethod]
-        public void ProcessIdentifier_RefOutArgument_NotLiveIn_LiveOut()
+        public void ProcessLocalReference_UsedAsOutArgument_NotLiveIn()
         {
             var code = @"
-outParameter = true;
-Method(outParameter, refParameter);";
-            new Context(code).ValidateAllEmpty();
+var refVariable = 42;
+var outVariable = 42;
+if (boolParameter)
+    return;
+Main(true, 0, out outVariable, ref refVariable);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn(/*FIXME: Will be removed*/"refVariable", /*FIXME: Will be removed*/"outVariable", "boolParameter"), new LiveOut(/*FIXME: Will be removed*/"refVariable", /*FIXME: Will be removed*/"outVariable", "boolParameter"));
+            context.Validate(context.Block("Main(true, 0, out outVariable, ref refVariable);"), new LiveIn("refVariable"));
         }
 
         [TestMethod]
-        public void ProcessIdentifier_Assigned_NotLiveIn_LiveOut()
+        public void ProcessLocalReference_Assigned_NotLiveIn_LiveOut()
         {
             // Jump (intParamter=42; goto) --> Jump (label) --> Simple (Method) --> Exit
             var code = @"
@@ -349,18 +368,17 @@ Method(intParameter);";
         }
 
         [TestMethod]
-        public void ProcessIdentifier_NotAssigned_LiveIn_LiveOut()
+        public void ProcessLocalReference_NotAssigned_LiveIn_LiveOut()
         {
-            // Jump (intParamter=42; goto) --> Jump (label) --> Simple (Method) --> Exit
             var code = @"
-var value = intParameter;
-goto A;
-A:
-Method(value, intParameter);";
+var variable = intParameter;
+if (boolParameter)
+    return;
+Method(variable, intParameter);";
             var context = new Context(code);
-            throw new System.NotImplementedException();
-            //context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter", "value"));
-            //context.Validate(context.Block<SimpleBlock>(), new LiveIn("value", "intParameter"));
+            context.Validate(context.Cfg.EntryBlock, new LiveIn(/*FIXME: Will be removed*/ "variable", "boolParameter", "intParameter"), new LiveOut(/*FIXME: Will be removed*/ "variable", "boolParameter", "intParameter"));
+            context.Validate(context.Block("variable = intParameter"), new LiveIn("variable", "intParameter", "boolParameter"), new LiveOut("variable", "intParameter"));
+            context.Validate(context.Block("Method(variable, intParameter);"), new LiveIn("variable", "intParameter"));
         }
 
         [TestMethod]
@@ -567,9 +585,8 @@ public class Sample
                 Lva = new RoslynLiveVariableAnalysis(Cfg, symbol, semanticModel);
             }
 
-            public BasicBlock Block<TBlock>(string withInstruction = null) where TBlock : BasicBlock =>
-                throw new System.NotImplementedException();
-                //FIXME: Cfg.Blocks.Single(x => x.GetType().Equals(typeof(TBlock)) && (withInstruction == null || x.Instructions.Any(instruction => instruction.ToString() == withInstruction)));
+            public BasicBlock Block(string withSyntax = null) =>
+                Cfg.Blocks.Single(x => x.Kind == BasicBlockKind.Block && (withSyntax == null || x.Operations.Any(operation => operation.Syntax.ToString() == withSyntax)));
 
             public void ValidateAllEmpty()
             {
