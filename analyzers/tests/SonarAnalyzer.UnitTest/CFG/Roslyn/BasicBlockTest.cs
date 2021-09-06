@@ -202,7 +202,7 @@ public class Sample
             block1.ConditionalSuccessor.Destination.Should().Be(block3);
             block1.SuccessorBlocks.Should().ContainInOrder(block2, block3);
             block2.FallThroughSuccessor.Destination.Should().Be(block6);
-            block1.ConditionalSuccessor.Destination.Should().BeNull();
+            block2.ConditionalSuccessor.Destination.Should().BeNull();
             block2.SuccessorBlocks.Single().Should().Be(block6);
             block3.FallThroughSuccessor.Destination.Should().Be(block4);
             block3.ConditionalSuccessor.Destination.Should().Be(block5);
