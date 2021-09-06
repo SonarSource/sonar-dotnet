@@ -538,11 +538,6 @@
         public void Bar() { }
 
         [TestCase]
-        public void NoAssert() // Noncompliant
-        {
-        }
-
-        [TestCase]
         public void W()
         {
             int[] empty = { };
