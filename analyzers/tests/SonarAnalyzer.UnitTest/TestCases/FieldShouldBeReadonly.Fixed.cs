@@ -204,4 +204,28 @@ namespace Tests.Diagnostics
             value ??= "Empty";
         }
     }
+
+    public class TupleExpressionAssignment
+    {
+        private string a; // Compliant - set in tuple expression
+        private string b; // Compliant - set in tuple expression
+        private X1Struct x1; // Compliant - set in tuple expression
+        private X1Struct x2; // Compliant - set in tuple expression
+
+        public TupleExpressionAssignment()
+        {
+            a = string.Empty;
+            b = string.Empty;
+            x1 = new X1Struct();
+            x2 = new X1Struct();
+        }
+
+        public void SomeMethod()
+        {
+            (a, b) = NewValues();
+            ((this.x1.y).z, (this.x2.y).z) = NewValues();
+        }
+
+        private (string, string) NewValues() => ("FOO", "Bar");
+    }
 }

@@ -238,7 +238,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var assignment in assignments)
                     {
-                        ProcessExpression(assignment.Left);
+                        var assignmentExpressions = Assignments(assignment.Left);
+                        foreach (var theAssignment in assignmentExpressions)
+                        {
+                            ProcessExpression(theAssignment);
+                        }
                     }
                 }
 
@@ -292,11 +296,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void ProcessAssignedExpression(ExpressionSyntax expression)
                 {
-                    var symbolAndExpressionPairs = FieldSymbolFromAssignment(expression);
-                    foreach (var symbolAndExpressionPair in symbolAndExpressionPairs)
-                    {
-                        ProcessExpressionOnField(symbolAndExpressionPair.Item2, symbolAndExpressionPair.Item1);
-                    }
+                    var fieldSymbol = this.partialTypeDeclaration.SemanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
+                    ProcessExpressionOnField(expression, fieldSymbol);
                 }
 
                 private void ProcessExpressionOnField(ExpressionSyntax expression, IFieldSymbol fieldSymbol)
@@ -338,29 +339,21 @@ namespace SonarAnalyzer.Rules.CSharp
                            fieldSymbol.DeclaredAccessibility == Accessibility.Private;
                 }
 
-                private  IEnumerable<Tuple<IFieldSymbol, ExpressionSyntax>> FieldSymbolFromAssignment(ExpressionSyntax expression)
+                private static IEnumerable<ExpressionSyntax> Assignments(ExpressionSyntax expression)
                 {
-                    var fieldSymbols = new List<Tuple<IFieldSymbol, ExpressionSyntax>>();
-
                     if (TupleExpressionSyntaxWrapper.IsInstance(expression))
                     {
+                        var assignments = new List<ExpressionSyntax>();
                         foreach (var argument in ((TupleExpressionSyntaxWrapper)expression).Arguments)
                         {
-                            if (partialTypeDeclaration.SemanticModel.GetSymbolInfo(argument.Expression).Symbol is IFieldSymbol fieldSymbol)
-                            {
-                                fieldSymbols.Add(new Tuple<IFieldSymbol, ExpressionSyntax>(fieldSymbol, argument.Expression));
-                            }
+                            assignments.Add(argument.Expression);
                         }
+                        return assignments;
                     }
                     else
                     {
-                        if (partialTypeDeclaration.SemanticModel.GetSymbolInfo(expression).Symbol is IFieldSymbol fieldSymbol)
-                        {
-                            fieldSymbols.Add(new Tuple<IFieldSymbol, ExpressionSyntax>(fieldSymbol, expression));
-                        }
+                        return new List<ExpressionSyntax>() { expression };
                     }
-
-                    return fieldSymbols;
                 }
             }
         }
