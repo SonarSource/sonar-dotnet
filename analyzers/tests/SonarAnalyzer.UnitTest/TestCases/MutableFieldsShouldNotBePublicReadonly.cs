@@ -105,6 +105,7 @@ namespace Tests.Diagnostics
 
     public class HandleFieldWithMultipleVariables
     {
+        public readonly string validfield;
         public readonly ISet<string> set1 = new HashSet<string>(), set2 = new HashSet<string>(); // Noncompliant {{Use an immutable collection or reduce the accessibility of the non-private readonly fields 'set1' and 'set2'.}}
     }
 

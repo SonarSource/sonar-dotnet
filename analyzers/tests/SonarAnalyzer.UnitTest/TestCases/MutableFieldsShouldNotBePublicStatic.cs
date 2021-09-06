@@ -110,6 +110,7 @@ namespace Tests.Diagnostics
 
     public class HandleFieldWithMultipleVariables
     {
+        public static string validfield;
         public static ISet<string> set1, set2; // Noncompliant {{Use an immutable collection or reduce the accessibility of the public static fields 'set1' and 'set2'.}}
     }
 
