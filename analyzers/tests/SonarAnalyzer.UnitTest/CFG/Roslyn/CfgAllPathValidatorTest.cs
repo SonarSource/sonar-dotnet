@@ -63,6 +63,18 @@ public class Sample
             // only entry block is valid
             validator = new CfgValidate(cfg, new List<int> { 1, 2, 3, 4 });
             validator.CheckAllPaths().Should().BeTrue();
+
+            var emptyValidator = new EmptyValidator(cfg);
+            emptyValidator.CheckAllPaths().Should().BeFalse();
+        }
+
+        private class EmptyValidator : CfgAllPathValidator
+        {
+            public EmptyValidator(ControlFlowGraph cfg) : base(cfg) { }
+
+            protected override bool IsValid(BasicBlock block) => false;
+
+            protected override bool IsInvalid(BasicBlock block) => false;
         }
 
         private class CfgValidate : CfgAllPathValidator
