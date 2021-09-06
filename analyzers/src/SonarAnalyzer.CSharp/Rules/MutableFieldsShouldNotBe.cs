@@ -70,11 +70,12 @@ namespace SonarAnalyzer.Rules
                     // and all initializations to this field are immutable
                     && CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability, analysisContext.SemanticModel).ToList() is {Count: > 0} incorrectFieldVariables)
                 {
-                    var pluralize = incorrectFieldVariables.Count > 1 ? "s" : string.Empty;
+                    var pluralizeSuffix = incorrectFieldVariables.Count > 1 ? "s" : string.Empty;
                     analysisContext.ReportDiagnosticWhenActive(
                         Diagnostic.Create(SupportedDiagnostics[0],
                         fieldDeclaration.Declaration.Type.GetLocation(),
-                        pluralize, incorrectFieldVariables.ToSentence(quoteWords: true)));
+                        pluralizeSuffix,
+                        incorrectFieldVariables.ToSentence(quoteWords: true)));
                 }
             }
         }
