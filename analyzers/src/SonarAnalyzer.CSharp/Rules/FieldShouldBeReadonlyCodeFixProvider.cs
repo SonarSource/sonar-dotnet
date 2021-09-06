@@ -33,18 +33,10 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class FieldShouldBeReadonlyCodeFixProvider : SonarCodeFixProvider
     {
-        internal const string Title = "Add 'readonly' keyword";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(FieldShouldBeReadonly.DiagnosticId);
-            }
-        }
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return WellKnownFixAllProviders.BatchFixer;
-        }
+        private const string Title = "Add 'readonly' keyword";
+
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(FieldShouldBeReadonly.DiagnosticId);
+        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
@@ -53,14 +45,14 @@ namespace SonarAnalyzer.Rules.CSharp
             var syntaxNode = root.FindNode(diagnosticSpan);
 
             var variableDeclarator = syntaxNode.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
-            if (!(variableDeclarator?.Parent is VariableDeclarationSyntax variableDeclaration))
+            if (variableDeclarator?.Parent is not VariableDeclarationSyntax variableDeclaration)
             {
                 return Task.CompletedTask;
             }
 
             if (variableDeclaration.Variables.Count == 1)
             {
-                if (!(variableDeclaration.Parent is FieldDeclarationSyntax fieldDeclaration))
+                if (variableDeclaration.Parent is not FieldDeclarationSyntax fieldDeclaration)
                 {
                     return Task.CompletedTask;
                 }
@@ -71,11 +63,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         c =>
                         {
                             var readonlyToken = SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword);
-
                             var newFieldDeclaration = HasAnyAccessibilityModifier(fieldDeclaration)
                                 ? fieldDeclaration.AddModifiers(readonlyToken)
                                 : fieldDeclaration.WithoutLeadingTrivia()
-                                    .AddModifiers(readonlyToken.WithLeadingTrivia(fieldDeclaration.GetLeadingTrivia()));
+                                      .AddModifiers(readonlyToken.WithLeadingTrivia(fieldDeclaration.GetLeadingTrivia()));
 
                             var newRoot = root.ReplaceNode(fieldDeclaration, newFieldDeclaration);
                             return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
@@ -86,13 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        private bool HasAnyAccessibilityModifier(FieldDeclarationSyntax fieldDeclaration)
-        {
-            return fieldDeclaration.Modifiers.Any(modifier =>
-                modifier.IsKind(SyntaxKind.PrivateKeyword) ||
-                modifier.IsKind(SyntaxKind.PublicKeyword) ||
-                modifier.IsKind(SyntaxKind.InternalKeyword) ||
-                modifier.IsKind(SyntaxKind.ProtectedKeyword));
-        }
+        private static bool HasAnyAccessibilityModifier(FieldDeclarationSyntax fieldDeclaration) =>
+            fieldDeclaration.Modifiers.Any(modifier => modifier.IsAnyKind(SyntaxKind.PrivateKeyword, SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword, SyntaxKind.ProtectedKeyword));
     }
 }
