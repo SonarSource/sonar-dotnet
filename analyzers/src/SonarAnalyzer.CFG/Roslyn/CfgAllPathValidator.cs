@@ -35,7 +35,7 @@ namespace SonarAnalyzer.CFG.Roslyn
 
         protected virtual bool IsBlockInvalid(BasicBlock block) => false;
 
-        protected bool CheckAllPaths() =>
+        public bool CheckAllPaths() =>
             IsBlockOrAllSuccessorsValid(this.cfg.EntryBlock);
 
         private bool IsBlockOrAllSuccessorsValid(BasicBlock block) =>
