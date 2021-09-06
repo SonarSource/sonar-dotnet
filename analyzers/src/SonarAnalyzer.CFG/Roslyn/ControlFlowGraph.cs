@@ -75,8 +75,8 @@ namespace SonarAnalyzer.CFG.Roslyn
             localFunctions = LocalFunctionsProperty.ReadImmutableArray<IMethodSymbol>(instance);
             originalOperation = OriginalOperationProperty.ReadValue<IOperation>(instance);
             root = RootProperty.ReadValue(instance, ControlFlowRegion.Wrap);
-            Debug.Assert(EntryBlock.Kind == BasicBlockKind.Entry);
-            Debug.Assert(ExitBlock.Kind == BasicBlockKind.Exit);
+            Debug.Assert(EntryBlock.Kind == BasicBlockKind.Entry, "Roslyn CFG Entry block is not the first one");
+            Debug.Assert(ExitBlock.Kind == BasicBlockKind.Exit, "Roslyn CFG Exit block is not the last one");
         }
 
         public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel) =>

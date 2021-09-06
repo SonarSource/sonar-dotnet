@@ -20,11 +20,9 @@
 
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.CFG.Roslyn
@@ -43,15 +41,6 @@ public class Sample
             var cfg = TestHelper.CompileCfg(code);
             var entry = cfg.EntryBlock;
             var exit = cfg.ExitBlock;
-            entry.Kind.Should().Be(BasicBlockKind.Entry);
-            entry.Operations.Should().BeEmpty();
-            entry.BranchValue.Should().BeNull();
-            entry.OperationsAndBranchValue.Should().BeEmpty();
-            exit.Kind.Should().Be(BasicBlockKind.Exit);
-            exit.Operations.Should().BeEmpty();
-            exit.Operations.Should().BeEmpty();
-            exit.BranchValue.Should().BeNull();
-            exit.OperationsAndBranchValue.Should().BeEmpty();
 
             var branch = entry.FallThroughSuccessor;
             branch.Source.Should().Be(entry);
@@ -112,7 +101,6 @@ public class Sample
             var tryBlock = cfg.Blocks[2];
             var finallyBlock = cfg.Blocks[3];
             var exitBlock = cfg.ExitBlock;
-            entryBlock.Kind.Should().Be(BasicBlockKind.Entry);
             initBlock.Kind.Should().Be(BasicBlockKind.Block);
             tryBlock.Kind.Should().Be(BasicBlockKind.Block);
             finallyBlock.Kind.Should().Be(BasicBlockKind.Block);
@@ -163,29 +151,10 @@ public class Sample
             exit.Kind.Should().Be(BasicBlockKind.Exit);
             exit.Operations.Should().BeEmpty();
             body.Kind.Should().Be(BasicBlockKind.Block);
-            body.Operations.Length.Should().Be(1);
+            body.Operations.Should().HaveCount(1);
             body.Operations[0].Syntax.Kind().Should().Be(SyntaxKind.ExpressionStatement);
             body.BranchValue.Syntax.Kind().Should().Be(SyntaxKind.NumericLiteralExpression);
             body.OperationsAndBranchValue.Should().OnlyContainInOrder(body.Operations[0], body.BranchValue);
-        }
-
-        [TestMethod]
-        public void ValidateAnonymousFunctionFinder()
-        {
-            const string code = @"
-using System;
-public class Sample {
-    private Action<int> Simple()
-    {
-        var x = 42;
-        return (x) => {  };
-    }
-}";
-            var cfg = TestHelper.CompileCfg(code);
-            var anonymousFunctionOperations = cfg.FlowAnonymousFunctionOperations().ToList();
-            anonymousFunctionOperations.Count.Should().Be(1);
-            var anonymousCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0]);
-            anonymousCfg.Should().NotBeNull();
         }
     }
 }

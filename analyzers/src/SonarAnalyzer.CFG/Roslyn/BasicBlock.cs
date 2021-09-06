@@ -106,11 +106,11 @@ namespace SonarAnalyzer.CFG.Roslyn
                 if (SwitchExpressionArmSyntaxWrapper.IsInstance(this.BranchValue?.Syntax)
                     && DiscardPatternSyntaxWrapper.IsInstance(((SwitchExpressionArmSyntaxWrapper)this.BranchValue.Syntax).Pattern))
                 {
-                    return FallThroughSuccessor?.Destination is var destination ? ImmutableArray.Create(destination) : ImmutableArray<BasicBlock>.Empty;
+                    return FallThroughSuccessor?.Destination is { } destination ? ImmutableArray.Create(destination) : ImmutableArray<BasicBlock>.Empty;
                 }
                 else
                 {
-                    return ImmutableArray.CreateRange(new[] { ConditionalSuccessor?.Destination, FallThroughSuccessor?.Destination }.Where(x => x != null));
+                    return ImmutableArray.CreateRange(new[] { FallThroughSuccessor?.Destination, ConditionalSuccessor?.Destination }.Where(x => x != null));
                 }
             });
             operationsAndBranchValue = new Lazy<ImmutableArray<IOperation>>(() =>

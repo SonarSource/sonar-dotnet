@@ -85,5 +85,27 @@ public class Sample
             var anonymousFunction = cfg.Blocks.SelectMany(x => x.Operations).SelectMany(x => x.DescendantsAndSelf()).OfType<FlowAnalysis.IFlowAnonymousFunctionOperation>().Single();
             cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction)).Should().NotBeNull();
         }
+
+        [TestMethod]
+        public void FlowAnonymousFunctionOperations_FindsAll()
+        {
+            const string code = @"
+public class Sample {
+    private System.Action<int> Simple(int a)
+    {
+        var x = 42;
+        if (a == 42)
+        {
+            return (x) => {  };
+        }
+        return (x) => {  };
+    }
+}";
+            var cfg = TestHelper.CompileCfg(code);
+            var anonymousFunctionOperations = SonarAnalyzer.Extensions.ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
+            anonymousFunctionOperations.Should().HaveCount(2);
+            cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0]).Should().NotBeNull();
+            cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[1]).Should().NotBeNull();
+        }
     }
 }
