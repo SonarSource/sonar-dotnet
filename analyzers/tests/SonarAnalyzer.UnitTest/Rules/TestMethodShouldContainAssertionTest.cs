@@ -202,11 +202,13 @@ public class Foo
         public static IEnumerable<MetadataReference> AdditionalTestReferences(IEnumerable<MetadataReference> testFrameworkReference,
                                                                               string fluentVersion = Constants.NuGetLatestVersion,
                                                                               string nSubstituteVersion = Constants.NuGetLatestVersion,
-                                                                              string nFluentVersion = Constants.NuGetLatestVersion) =>
+                                                                              string nFluentVersion = Constants.NuGetLatestVersion,
+                                                                              string shouldlyVersion = Constants.NuGetLatestVersion) =>
             testFrameworkReference
                 .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
                 .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
                 .Concat(NuGetMetadataReference.NFluent(nFluentVersion))
+                .Concat(NuGetMetadataReference.Shouldly(shouldlyVersion))
                 .Concat(MetadataReferenceFacade.SystemData)
                 .Concat(MetadataReferenceFacade.SystemXml)
                 .Concat(MetadataReferenceFacade.SystemXmlLinq)
