@@ -22,16 +22,9 @@ using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.CFG.Helpers
 {
-    public abstract class BasicBlockWalker : OperationWalker
+    public abstract class BasicBlockOperationFinder<TResult> : OperationFinder<TResult>
     {
-        public void Visit(BasicBlock block) =>
-            Visit(block.OperationsAndBranchValue);
-    }
-
-    public abstract class BasicBlockWalker<TResult> : OperationWalker<TResult>
-        where TResult : class
-    {
-        public TResult Visit(BasicBlock block) =>
-            Visit(block.OperationsAndBranchValue);
+        public bool TryFind(BasicBlock block, out TResult var) =>
+            TryFind(block.OperationsAndBranchValue, out var);
     }
 }

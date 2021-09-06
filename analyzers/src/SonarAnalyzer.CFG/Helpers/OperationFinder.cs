@@ -25,24 +25,11 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.CFG.Helpers
 {
-    public abstract class OperationWalker : OperationWalker<object>
+    public abstract class OperationFinder<TResult>
     {
-        protected abstract void VoidVisitOperation(IOperationWrapperSonar operation);
+        protected abstract bool TryFindOperation(IOperationWrapperSonar operation, out TResult result);
 
-        protected override bool VisitOperation(IOperationWrapperSonar operation)
-        {
-            VoidVisitOperation(operation);
-            return true;
-        }
-    }
-
-    public abstract class OperationWalker<TResult>
-    {
-        protected TResult Result { get; set; }
-
-        protected abstract bool VisitOperation(IOperationWrapperSonar operation);
-
-        protected TResult Visit(IEnumerable<IOperation> operations)
+        protected bool TryFind(IEnumerable<IOperation> operations, out TResult result)
         {
             var queue = new Queue<IOperation>();
             foreach (var operation in operations)
@@ -51,9 +38,9 @@ namespace SonarAnalyzer.CFG.Helpers
                 while (queue.Any())
                 {
                     var wrapper = new IOperationWrapperSonar(queue.Dequeue());
-                    if (!VisitOperation(wrapper))
+                    if (TryFindOperation(wrapper, out result))
                     {
-                        return Result;
+                        return true;
                     }
 
                     foreach (var child in wrapper.Children)
@@ -63,7 +50,8 @@ namespace SonarAnalyzer.CFG.Helpers
                 }
             }
 
-            return default;
+            result = default;
+            return false;
         }
     }
 }
