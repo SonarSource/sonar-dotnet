@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -42,12 +41,12 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2933";
         private const string MessageFormat = "Make '{0}' 'readonly'.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ISet<SyntaxKind> assignmentKinds = new HashSet<SyntaxKind>
+        private static readonly ISet<SyntaxKind> AssignmentKinds = new HashSet<SyntaxKind>
         {
             SyntaxKind.SimpleAssignmentExpression,
             SyntaxKind.AddAssignmentExpression,
@@ -63,29 +62,28 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.CoalesceAssignmentExpression
         };
 
-        private static readonly ISet<SyntaxKind> prefixUnaryKinds = new HashSet<SyntaxKind>
+        private static readonly ISet<SyntaxKind> PrefixUnaryKinds = new HashSet<SyntaxKind>
         {
             SyntaxKind.PreDecrementExpression,
             SyntaxKind.PreIncrementExpression
         };
 
-        private static readonly ISet<SyntaxKind> postfixUnaryKinds = new HashSet<SyntaxKind>
+        private static readonly ISet<SyntaxKind> PostfixUnaryKinds = new HashSet<SyntaxKind>
         {
             SyntaxKind.PostDecrementExpression,
             SyntaxKind.PostIncrementExpression
         };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
                     var declaredSymbol = (INamedTypeSymbol)c.Symbol;
-                    if (!declaredSymbol.IsClassOrStruct() ||
+                    if (!declaredSymbol.IsClassOrStruct()
                         // Serializable classes are ignored because the serialized fields
                         // cannot be readonly. [Nonserialized] fields could be readonly,
                         // but all fields with attribute are ignored in the ReadonlyFieldCollector.
-                        declaredSymbol.HasAttribute(KnownType.System_SerializableAttribute))
+                        || declaredSymbol.HasAttribute(KnownType.System_SerializableAttribute))
                     {
                         return;
                     }
@@ -108,47 +106,46 @@ namespace SonarAnalyzer.Rules.CSharp
                     foreach (var field in fieldCollector.NonCompliantFields)
                     {
                         var identifier = field.Node.Identifier;
-                        c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, identifier.GetLocation(), identifier.ValueText));
+                        c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
                     }
                 },
                 SymbolKind.NamedType);
-        }
 
         private class ReadonlyFieldCollector
         {
             private readonly ISet<IFieldSymbol> assignedAsReadonly;
             private readonly ISet<IFieldSymbol> excludedFields;
-            private readonly List<FieldTuple> allFields = new List<FieldTuple>();
+            private readonly List<FieldTuple> allFields = new ();
 
             public IEnumerable<FieldTuple> NonCompliantFields
             {
                 get
                 {
-                    var reportedFields = new HashSet<IFieldSymbol>(this.assignedAsReadonly.Except(this.excludedFields));
-                    return this.allFields.Where(f => reportedFields.Contains(f.Symbol));
+                    var reportedFields = new HashSet<IFieldSymbol>(assignedAsReadonly.Except(excludedFields));
+                    return allFields.Where(f => reportedFields.Contains(f.Symbol));
                 }
             }
 
             public ReadonlyFieldCollector(IEnumerable<TypeDeclarationTuple> partialTypeDeclarations)
             {
-                this.excludedFields = new HashSet<IFieldSymbol>();
-                this.assignedAsReadonly = new HashSet<IFieldSymbol>();
+                excludedFields = new HashSet<IFieldSymbol>();
+                assignedAsReadonly = new HashSet<IFieldSymbol>();
 
                 foreach (var partialTypeDeclaration in partialTypeDeclarations)
                 {
                     var p = new PartialTypeDeclarationProcessor(partialTypeDeclaration, this);
                     p.CollectFields();
-                    this.allFields.AddRange(p.AllFields);
+                    allFields.AddRange(p.AllFields);
                 }
 
-                foreach (var attributedField in this.allFields.Where(f => ShouldBeExcluded(f)))
+                foreach (var attributedField in allFields.Where(f => ShouldBeExcluded(f)))
                 {
-                    this.excludedFields.Add(attributedField.Symbol);
+                    excludedFields.Add(attributedField.Symbol);
                 }
 
-                bool ShouldBeExcluded(FieldTuple fieldTuple) =>
-                    fieldTuple.Symbol.GetAttributes().Any() ||
-                    (fieldTuple.Symbol.Type.IsStruct() && fieldTuple.Symbol.Type.SpecialType == SpecialType.None);
+                static bool ShouldBeExcluded(FieldTuple fieldTuple) =>
+                    fieldTuple.Symbol.GetAttributes().Any()
+                    || (fieldTuple.Symbol.Type.IsStruct() && fieldTuple.Symbol.Type.SpecialType == SpecialType.None);
             }
 
             private class PartialTypeDeclarationProcessor
@@ -184,18 +181,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 private void CollectFieldsFromDeclarations()
                 {
                     var fieldDeclarations = AllFields.Where(f =>
-                        IsFieldRelevant(f.Symbol) &&
-                        f.Node.Initializer != null);
+                        IsFieldRelevant(f.Symbol)
+                        && f.Node.Initializer != null);
 
                     foreach (var field in fieldDeclarations)
                     {
-                        this.readonlyFieldCollector.assignedAsReadonly.Add(field.Symbol);
+                        readonlyFieldCollector.assignedAsReadonly.Add(field.Symbol);
                     }
                 }
 
                 private void CollectFieldsFromArguments()
                 {
-                    var arguments = this.partialTypeDeclaration.Node.DescendantNodes()
+                    var arguments = partialTypeDeclaration.Node.DescendantNodes()
                         .OfType<ArgumentSyntax>()
                         .Where(a => !a.RefOrOutKeyword.IsKind(SyntaxKind.None));
 
@@ -208,9 +205,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void CollectFieldsFromPostfixUnaryExpressions()
                 {
-                    var postfixUnaries = this.partialTypeDeclaration.Node.DescendantNodes()
+                    var postfixUnaries = partialTypeDeclaration.Node.DescendantNodes()
                         .OfType<PostfixUnaryExpressionSyntax>()
-                        .Where(a => postfixUnaryKinds.Contains(a.Kind()));
+                        .Where(a => PostfixUnaryKinds.Contains(a.Kind()));
 
                     foreach (var postfixUnary in postfixUnaries)
                     {
@@ -220,9 +217,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void CollectFieldsFromPrefixUnaryExpressions()
                 {
-                    var prefixUnaries = this.partialTypeDeclaration.Node.DescendantNodes()
+                    var prefixUnaries = partialTypeDeclaration.Node.DescendantNodes()
                         .OfType<PrefixUnaryExpressionSyntax>()
-                        .Where(a => prefixUnaryKinds.Contains(a.Kind()));
+                        .Where(a => PrefixUnaryKinds.Contains(a.Kind()));
 
                     foreach (var prefixUnary in prefixUnaries)
                     {
@@ -232,16 +229,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void CollectFieldsFromAssignments()
                 {
-                    var assignments = this.partialTypeDeclaration.Node.DescendantNodes()
+                    var assignments = partialTypeDeclaration.Node.DescendantNodes()
                         .OfType<AssignmentExpressionSyntax>()
-                        .Where(a => assignmentKinds.Contains(a.Kind()));
+                        .Where(a => AssignmentKinds.Contains(a.Kind()));
 
                     foreach (var assignment in assignments)
                     {
-                        var assignmentExpressions = Assignments(assignment.Left);
-                        foreach (var theAssignment in assignmentExpressions)
+                        var identifierNames = IdentifierNames(assignment.Left);
+                        foreach (var identifierName in identifierNames)
                         {
-                            ProcessExpression(theAssignment);
+                            ProcessExpression(identifierName);
                         }
                     }
                 }
@@ -260,9 +257,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var fieldSymbol = this.partialTypeDeclaration.SemanticModel.GetSymbolInfo(topExpression).Symbol as IFieldSymbol;
-                    if (fieldSymbol?.Type == null ||
-                        !fieldSymbol.Type.IsValueType)
+                    var fieldSymbol = partialTypeDeclaration.SemanticModel.GetSymbolInfo(topExpression).Symbol as IFieldSymbol;
+                    if (fieldSymbol?.Type == null
+                        || !fieldSymbol.Type.IsValueType)
                     {
                         return;
                     }
@@ -281,7 +278,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return isNestedMemberAccess ? noParens : null;
                     }
 
-                    if (!(noParens is MemberAccessExpressionSyntax memberAccess))
+                    if (noParens is not MemberAccessExpressionSyntax memberAccess)
                     {
                         return null;
                     }
@@ -296,7 +293,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void ProcessAssignedExpression(ExpressionSyntax expression)
                 {
-                    var fieldSymbol = this.partialTypeDeclaration.SemanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
+                    var fieldSymbol = partialTypeDeclaration.SemanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
                     ProcessExpressionOnField(expression, fieldSymbol);
                 }
 
@@ -309,37 +306,31 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!expression.RemoveParentheses().IsOnThis())
                     {
-                        this.readonlyFieldCollector.excludedFields.Add(fieldSymbol);
+                        readonlyFieldCollector.excludedFields.Add(fieldSymbol);
                         return;
                     }
 
-                    if (!(this.partialTypeDeclaration.SemanticModel.GetEnclosingSymbol(expression.SpanStart) is IMethodSymbol constructorSymbol))
+                    if (partialTypeDeclaration.SemanticModel.GetEnclosingSymbol(expression.SpanStart) is not IMethodSymbol constructorSymbol)
                     {
-                        this.readonlyFieldCollector.excludedFields.Add(fieldSymbol);
+                        readonlyFieldCollector.excludedFields.Add(fieldSymbol);
                         return;
                     }
 
-                    if (constructorSymbol.MethodKind == MethodKind.Constructor &&
-                        constructorSymbol.ContainingType.Equals(fieldSymbol.ContainingType))
+                    if (constructorSymbol.MethodKind == MethodKind.Constructor
+                        && constructorSymbol.ContainingType.Equals(fieldSymbol.ContainingType))
                     {
-                        this.readonlyFieldCollector.assignedAsReadonly.Add(fieldSymbol);
+                        readonlyFieldCollector.assignedAsReadonly.Add(fieldSymbol);
                     }
                     else
                     {
-                        this.readonlyFieldCollector.excludedFields.Add(fieldSymbol);
+                        readonlyFieldCollector.excludedFields.Add(fieldSymbol);
                     }
                 }
 
-                private static bool IsFieldRelevant(IFieldSymbol fieldSymbol)
-                {
-                    return fieldSymbol != null &&
-                           !fieldSymbol.IsStatic &&
-                           !fieldSymbol.IsConst &&
-                           !fieldSymbol.IsReadOnly &&
-                           fieldSymbol.DeclaredAccessibility == Accessibility.Private;
-                }
+                private static bool IsFieldRelevant(IFieldSymbol fieldSymbol) =>
+                    fieldSymbol is { IsStatic: false, IsConst: false, IsReadOnly: false, DeclaredAccessibility: Accessibility.Private };
 
-                private static IEnumerable<ExpressionSyntax> Assignments(ExpressionSyntax expression)
+                private static IEnumerable<ExpressionSyntax> IdentifierNames(ExpressionSyntax expression)
                 {
                     if (TupleExpressionSyntaxWrapper.IsInstance(expression))
                     {
@@ -352,7 +343,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else
                     {
-                        return new List<ExpressionSyntax>() { expression };
+                        return new List<ExpressionSyntax> { expression };
                     }
                 }
             }
