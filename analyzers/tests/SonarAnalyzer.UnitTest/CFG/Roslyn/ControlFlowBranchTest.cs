@@ -20,10 +20,8 @@
 
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.CFG.Roslyn
 {
@@ -96,7 +94,6 @@ public class Sample
              *            v
              *         Exit 4
              */
-            var entryBlock = cfg.EntryBlock;
             var initBlock = cfg.Blocks[1];
             var tryBlock = cfg.Blocks[2];
             var finallyBlock = cfg.Blocks[3];
@@ -128,33 +125,6 @@ public class Sample
             entering.EnteringRegions.Should().HaveCount(2).And.ContainInOrder(tryAndFinallyRegion, tryRegion); // Weird, but Roslyn does it this way.
             entering.LeavingRegions.Should().BeEmpty();
             entering.FinallyRegions.Should().BeEmpty();
-        }
-
-        [TestMethod]
-        public void ValidateOperations()
-        {
-            const string code = @"
-public class Sample
-{
-    int Pow(int num, int exponent)
-    {
-        num = num * Pow(num, exponent - 1);
-        return 42;
-    }
-}";
-            var cfg = TestHelper.CompileCfg(code);
-            var entry = cfg.EntryBlock;
-            var exit = cfg.ExitBlock;
-            var body = cfg.Blocks[1];
-            entry.Kind.Should().Be(BasicBlockKind.Entry);
-            entry.Operations.Should().BeEmpty();
-            exit.Kind.Should().Be(BasicBlockKind.Exit);
-            exit.Operations.Should().BeEmpty();
-            body.Kind.Should().Be(BasicBlockKind.Block);
-            body.Operations.Should().HaveCount(1);
-            body.Operations[0].Syntax.Kind().Should().Be(SyntaxKind.ExpressionStatement);
-            body.BranchValue.Syntax.Kind().Should().Be(SyntaxKind.NumericLiteralExpression);
-            body.OperationsAndBranchValue.Should().OnlyContainInOrder(body.Operations[0], body.BranchValue);
         }
     }
 }

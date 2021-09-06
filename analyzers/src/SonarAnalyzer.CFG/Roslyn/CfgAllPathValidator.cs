@@ -23,23 +23,22 @@ using System.Linq;
 
 namespace SonarAnalyzer.CFG.Roslyn
 {
-    public class CfgAllPathValidator
+    public abstract class CfgAllPathValidator
     {
         private readonly ControlFlowGraph cfg;
         private readonly HashSet<BasicBlock> visited = new HashSet<BasicBlock>();
 
+        protected abstract bool IsValid(BasicBlock block);
+        protected abstract bool IsInvalid(BasicBlock block);
+
         protected CfgAllPathValidator(ControlFlowGraph cfg) =>
             this.cfg = cfg;
-
-        protected virtual bool IsBlockValid(BasicBlock block) => false;
-
-        protected virtual bool IsBlockInvalid(BasicBlock block) => false;
 
         public bool CheckAllPaths() =>
             IsBlockOrAllSuccessorsValid(this.cfg.EntryBlock);
 
         private bool IsBlockOrAllSuccessorsValid(BasicBlock block) =>
-            !IsBlockInvalid(block) && (IsBlockValid(block) || AreAllSuccessorsValid(block));
+            !IsInvalid(block) && (IsValid(block) || AreAllSuccessorsValid(block));
 
         private bool AreAllSuccessorsValid(BasicBlock block)
         {

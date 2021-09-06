@@ -43,17 +43,26 @@ public class Sample
     }
 }";
             var cfg = TestHelper.CompileCfg(code);
+            /*
+             *           Entry 0
+             *             |
+             *             |
+             *           Block 1
+             *           /   \
+             *     Else /     \ WhenFalse
+             *         /       \
+             *     Block 2    Block 3
+             *        \        /
+             *         \      /
+             *          \    /
+             *           Exit 4
+             */
             var validator = new CfgValidate(cfg, new List<int> { 3, 4 });
             validator.CheckAllPaths().Should().BeTrue();
-            var emptyValidator = new EmptyValidator(cfg);
-            emptyValidator.CheckAllPaths().Should().BeFalse();
-        }
 
-        private class EmptyValidator : CfgAllPathValidator
-        {
-            public EmptyValidator(ControlFlowGraph cfg) : base(cfg)
-            {
-            }
+            // only entry block is valid
+            validator = new CfgValidate(cfg, new List<int> { 1, 2, 3, 4 });
+            validator.CheckAllPaths().Should().BeTrue();
         }
 
         private class CfgValidate : CfgAllPathValidator
@@ -65,10 +74,10 @@ public class Sample
                 this.invalidBlocks = invalidBlocks;
             }
 
-            protected override bool IsBlockValid(BasicBlock block) =>
+            protected override bool IsValid(BasicBlock block) =>
                 !invalidBlocks.Contains(block.Ordinal);
 
-            protected override bool IsBlockInvalid(BasicBlock block) =>
+            protected override bool IsInvalid(BasicBlock block) =>
                 invalidBlocks.Contains(block.Ordinal);
         }
     }

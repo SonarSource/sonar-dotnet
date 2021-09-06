@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.CFG.Helpers
@@ -28,6 +29,9 @@ namespace SonarAnalyzer.CFG.Helpers
     public abstract class OperationFinder<TResult>
     {
         protected abstract bool TryFindOperation(IOperationWrapperSonar operation, out TResult result);
+
+        public bool TryFind(BasicBlock block, out TResult var) =>
+            TryFind(block.OperationsAndBranchValue, out var);
 
         protected bool TryFind(IEnumerable<IOperation> operations, out TResult result)
         {

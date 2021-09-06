@@ -98,7 +98,7 @@ public class Sample {
         {
             return (x) => {  };
         }
-        return (x) => {  };
+        return x => {  };
     }
 }";
             var cfg = TestHelper.CompileCfg(code);

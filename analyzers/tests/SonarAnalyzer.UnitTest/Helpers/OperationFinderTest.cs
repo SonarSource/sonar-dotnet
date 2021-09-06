@@ -27,7 +27,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class BasicBlockOperationFinder
+    public class OperationFinderTest
     {
         [TestMethod]
         public void ValidateFinder()
@@ -52,13 +52,13 @@ public class Sample
             result.Should().Be(42);
         }
 
-        private class FirstNumericLiteralFinder : BasicBlockOperationFinder<int>
+        private class FirstNumericLiteralFinder : OperationFinder<int>
         {
             protected override bool TryFindOperation(IOperationWrapperSonar operation, out int result)
             {
                 if (operation.Instance is ILiteralOperation)
                 {
-                    result = int.Parse(operation.Instance.Syntax.ToString());
+                    result = (int)operation.Instance.ConstantValue.Value;
                     return true;
                 }
                 result = default;

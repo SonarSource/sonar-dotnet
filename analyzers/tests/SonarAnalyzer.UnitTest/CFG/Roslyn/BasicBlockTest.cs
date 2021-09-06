@@ -145,8 +145,8 @@ public class Sample
 }";
             var cfg = TestHelper.CompileCfg(code);
             var entry = cfg.EntryBlock;
-            var exit = cfg.ExitBlock;
             var body = cfg.Blocks[1];
+            var exit = cfg.ExitBlock;
             entry.Kind.Should().Be(BasicBlockKind.Entry);
             entry.Operations.Should().BeEmpty();
             exit.Kind.Should().Be(BasicBlockKind.Exit);
@@ -180,15 +180,16 @@ public class Sample
              *     /              \
              *  Block 2          Block 3
              *   => 42           _ => 43
-             *    |                |            WhenFalse from Block 3 - Block 5 should not be reachable
-             *    |                |
-             *    |              Block 4        Block 5
-             *    |               => 43         no match => throw exception
-             *    \                /
+             *    |                |     \
+             *    |          Else  |      \    WhenFalse from Block 3 - Block 5 should not be reachable
+             *    |                |       \
+             *    |              Block 4    Block 5
+             *    |               => 43     no match => throw exception
              *     \              /
-             *      \            /  Else
+             *      \            /
              *       \          /
              *        \        /
+             *         \      /
              *          Block 6
              */
             var block1 = cfg.Blocks[1];
@@ -201,10 +202,11 @@ public class Sample
             block1.ConditionalSuccessor.Destination.Should().Be(block3);
             block1.SuccessorBlocks.Should().ContainInOrder(block2, block3);
             block2.FallThroughSuccessor.Destination.Should().Be(block6);
+            block1.ConditionalSuccessor.Destination.Should().BeNull();
             block2.SuccessorBlocks.Single().Should().Be(block6);
             block3.FallThroughSuccessor.Destination.Should().Be(block4);
             block3.ConditionalSuccessor.Destination.Should().Be(block5);
-            block3.SuccessorBlocks.Single().Should().Be(block4);
+            block3.SuccessorBlocks.Single().Should().Be(block4);             // We don't add the unreachable ConditionalSuccessor in this case
             block6.SuccessorBlocks.Single().Should().Be(cfg.ExitBlock);
         }
     }
