@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -54,8 +55,10 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block) =>
             block.Predecessors.Select(x => x.Source);
 
-        //internal static bool IsOutArgument(IdentifierNameSyntax identifier) =>
-        //    identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
+        internal static bool IsOutArgument(IOperation operation) =>
+            new IOperationWrapperSonar(operation) is var wrapped
+            && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
+            && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
 
         //internal static bool IsLocalScoped(ISymbol symbol, ISymbol declaration)
         //{
@@ -70,68 +73,117 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         protected override State ProcessBlock(BasicBlock block)
         {
+            //FIXME: Ugly
             var ret = new State();
             ProcessBlockInternal(block, ret);
             return ret;
+        }
+
+        //FIXME: Make it an extension
+        private static IEnumerable<IOperationWrapperSonar> ToExecutionOrder(IEnumerable<IOperation> operations)
+        {
+            var stack = new Stack<StackItem>();
+            try
+            {
+                foreach (var operation in operations.Reverse())
+                {
+                    stack.Push(new StackItem(operation));
+                }
+                while (stack.Any())
+                {
+                    if (stack.Peek().NextChild() is { } child)
+                    {
+                        stack.Push(new StackItem(child));
+                    }
+                    else
+                    {
+                        yield return stack.Pop().DisposeEnumeratorAndReturnOperation();
+                    }
+                }
+            }
+            finally
+            {
+                while (stack.Any())
+                {
+                    stack.Pop().Dispose();
+                }
+            }
         }
 
         private void ProcessBlockInternal(BasicBlock block, State state)
         {
             //FIXME: Something is missing around here
 
-        //    foreach (var instruction in block.Instructions.Reverse())
-        //    {
-        //        switch (instruction.Kind())
-        //        {
-        //            case SyntaxKind.IdentifierName:
-        //                ProcessIdentifier((IdentifierNameSyntax)instruction, state);
-        //                break;
+            foreach (var operation in ToExecutionOrder(block.BranchValueAndOperations))
+            {
+                switch (operation.Instance.Kind)
+                {
+                    case OperationKindEx.ParameterReference:
+                        ProcessParameterReference(state, IParameterReferenceOperationWrapper.FromOperation(operation.Instance));
+                        break;
 
-        //            case SyntaxKind.GenericName:
-        //                ProcessGenericName((GenericNameSyntax)instruction, state);
-        //                break;
+                        //            case SyntaxKind.IdentifierName:
+                        //                ProcessIdentifier((IdentifierNameSyntax)instruction, state);
+                        //                break;
 
-        //            case SyntaxKind.SimpleAssignmentExpression:
-        //                ProcessSimpleAssignment((AssignmentExpressionSyntax)instruction, state);
-        //                break;
+                        //            case SyntaxKind.GenericName:
+                        //                ProcessGenericName((GenericNameSyntax)instruction, state);
+                        //                break;
 
-        //            case SyntaxKind.VariableDeclarator:
-        //                ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction, state);
-        //                break;
+                        //            case SyntaxKind.SimpleAssignmentExpression:
+                        //                ProcessSimpleAssignment((AssignmentExpressionSyntax)instruction, state);
+                        //                break;
 
-        //            case SyntaxKind.AnonymousMethodExpression:
-        //            case SyntaxKind.ParenthesizedLambdaExpression:
-        //            case SyntaxKind.SimpleLambdaExpression:
-        //            case SyntaxKind.QueryExpression:
-        //                CollectAllCapturedLocal(instruction, state);
-        //                break;
-        //        }
-        //    }
+                        //            case SyntaxKind.VariableDeclarator:
+                        //                ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction, state);
+                        //                break;
 
-        //    if (block.Instructions.Any())
-        //    {
-        //        return;
-        //    }
+                        //            case SyntaxKind.AnonymousMethodExpression:
+                        //            case SyntaxKind.ParenthesizedLambdaExpression:
+                        //            case SyntaxKind.SimpleLambdaExpression:
+                        //            case SyntaxKind.QueryExpression:
+                        //                CollectAllCapturedLocal(instruction, state);
+                        //                break;
+                }
+            }
 
-        //    // Variable declaration in a foreach statement is not a VariableDeclarator, so handling it separately:
-        //    if (block is BinaryBranchBlock foreachBlock && foreachBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement))
-        //    {
-        //        var foreachNode = (ForEachStatementSyntax)foreachBlock.BranchingNode;
-        //        ProcessVariableInForeach(foreachNode, state);
-        //    }
+            //    if (block.Instructions.Any())
+            //    {
+            //        return;
+            //    }
 
-        //    // Keep alive the variables declared and used in the using statement until the UsingFinalizerBlock
-        //    if (block is UsingEndBlock usingFinalizerBlock)
-        //    {
-        //        var disposableSymbols = usingFinalizerBlock.Identifiers
-        //            .Select(i => semanticModel.GetDeclaredSymbol(i.Parent)
-        //                        ?? semanticModel.GetSymbolInfo(i.Parent).Symbol)
-        //            .WhereNotNull();
-        //        foreach (var disposableSymbol in disposableSymbols)
-        //        {
-        //            state.UsedBeforeAssigned.Add(disposableSymbol);
-        //        }
-        //    }
+            //    // Variable declaration in a foreach statement is not a VariableDeclarator, so handling it separately:
+            //    if (block is BinaryBranchBlock foreachBlock && foreachBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement))
+            //    {
+            //        var foreachNode = (ForEachStatementSyntax)foreachBlock.BranchingNode;
+            //        ProcessVariableInForeach(foreachNode, state);
+            //    }
+
+            //    // Keep alive the variables declared and used in the using statement until the UsingFinalizerBlock
+            //    if (block is UsingEndBlock usingFinalizerBlock)
+            //    {
+            //        var disposableSymbols = usingFinalizerBlock.Identifiers
+            //            .Select(i => semanticModel.GetDeclaredSymbol(i.Parent)
+            //                        ?? semanticModel.GetSymbolInfo(i.Parent).Symbol)
+            //            .WhereNotNull();
+            //        foreach (var disposableSymbol in disposableSymbols)
+            //        {
+            //            state.UsedBeforeAssigned.Add(disposableSymbol);
+            //        }
+            //    }
+        }
+
+        private void ProcessParameterReference(State state, IParameterReferenceOperationWrapper parameterReference)
+        {
+            if (IsOutArgument(parameterReference.WrappedOperation))
+            {
+                state.Assigned.Add(parameterReference.Parameter);
+                state.UsedBeforeAssigned.Remove(parameterReference.Parameter);
+            }
+            else //FIXME: if (!state.AssignmentLhs.Contains(identifier))
+            {
+                state.UsedBeforeAssigned.Add(parameterReference.Parameter);
+            }
         }
 
         //private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode, State state)
@@ -229,5 +281,39 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         //private bool IsLocalScoped(ISymbol symbol) =>
         //    IsLocalScoped(symbol, declaration);
+
+        private class StackItem : IDisposable
+        {
+            private readonly IOperationWrapperSonar operation;
+            private readonly IEnumerator<IOperation> children;
+            private bool isDisposed;
+
+            public StackItem(IOperation operation)
+            {
+                this.operation = new IOperationWrapperSonar(operation);
+                children = this.operation.Children.GetEnumerator();
+            }
+
+            public IOperation NextChild() =>
+                children.MoveNext() ? children.Current : null;
+
+            public IOperationWrapperSonar DisposeEnumeratorAndReturnOperation()
+            {
+                Dispose();
+                return operation;
+            }
+
+            protected virtual void Dispose(bool disposing)
+            {
+                if (!isDisposed)
+                {
+                    children.Dispose();
+                    isDisposed = true;
+                }
+            }
+
+            public void Dispose() =>
+                Dispose(true);
+        }
     }
 }

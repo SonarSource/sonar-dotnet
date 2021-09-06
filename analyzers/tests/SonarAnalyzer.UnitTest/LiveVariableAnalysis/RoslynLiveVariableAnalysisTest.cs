@@ -53,7 +53,17 @@ var c = 2 + 3;";
 Method(intParameter);
 IsMethod(boolParameter);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter", "boolParameter"));
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
+            context.Validate(context.Cfg.Blocks[1], new LiveIn("intParameter", "boolParameter"));
+        }
+
+        [TestMethod]
+        public void UsedAsOutArgument_NotLiveIn_NotLiveOut()
+        {
+            var code = @"Main(true, 0, out outParameter, ref refParameter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("refParameter"), new LiveOut("refParameter"));
+            context.Validate(context.Cfg.Blocks[1], new LiveIn("refParameter"));
         }
 
         [TestMethod]
