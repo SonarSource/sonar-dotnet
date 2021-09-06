@@ -126,7 +126,7 @@ public class Sample
             exit.Predecessors.Should().HaveCount(2);
 
             entry.SuccessorBlocks.Should().HaveCount(1).And.Subject.Single().Should().Be(branch);
-            branch.SuccessorBlocks.Should().HaveCount(2).And.Subject.Should().ContainInOrder(exit, assign);
+            branch.SuccessorBlocks.Should().HaveCount(2).And.Subject.Should().ContainInOrder(assign, exit);
             assign.SuccessorBlocks.Should().HaveCount(1).And.Subject.Single().Should().Be(exit);
             exit.SuccessorBlocks.Should().HaveCount(0);
         }
