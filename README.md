@@ -105,12 +105,14 @@ Use SonarLint Connected Mode to connect to SonarQube and SonarCloud.
 The easiest way is to configure a Quality Profile in SonarCloud.
 
 * Create a dummy repository and analyze it in SonarCloud (it's free for open-source).
-* Configure the Quality Profile for the project you created.
-* Then connect SonarLint to that project, and it will configure itself (with a ruleset and SonarLint.xml file) locally based on the Quality Profile.
+* Configure the Quality Profile in SonarCloud for the project you created.
+* Then connect SonarLint to that project, and it will download the configuration (ruleset and SonarLint.xml files) locally and update your project based on the Quality Profile.
 
-### Standalone nuget
+### Standalone NuGet
 
-You can see how we do it in our own repository for SonarLint Connected mode (and you can reuse the same concept for the nuget package):
+Standalone NuGet packages can be configured the same way as SonarLint in connected mode. You can use SonarLint and SonarCloud to generate the ruleset and rule configuration file SonarLint.xml as described above and embed them into your project.
+
+You can see how we do it in our own repository for SonarLint Connected mode (and you can reuse the same concept for the NuGet package):
 
 * We reference in each production-code project this [Directory.Build.props](analyzers/src/Directory.Build.props).
 * This file points to the following ruleset: [sonaranalyzer-dotnetCSharp.ruleset](analyzers/.sonarlint/sonaranalyzer-dotnetCSharp.ruleset).
