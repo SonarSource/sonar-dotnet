@@ -72,30 +72,26 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool CanIfStatementBeMoved(IfStatementSyntax ifStatementSyntax) =>
             ifStatementSyntax.Else == null
-            && !ContainsExitPoints(ifStatementSyntax)
             && ifStatementSyntax.Condition is InvocationExpressionSyntax invocationExpressionSyntax
-            && !invocationExpressionSyntax.DescendantNodes().OfType<ArgumentSyntax>().Any(argument => argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword));
-
-        private static bool ContainsExitPoints(SyntaxNode syntaxNode) =>
-            syntaxNode.DescendantNodes()
-                      .Any(node => node.IsAnyKind(SyntaxKind.ReturnStatement,
-                                                  SyntaxKind.YieldReturnStatement,
-                                                  SyntaxKind.BreakStatement,
-                                                  SyntaxKind.YieldBreakStatement,
-                                                  SyntaxKind.GotoStatement));
+            && !invocationExpressionSyntax.DescendantNodes()
+                                          .OfType<ArgumentSyntax>()
+                                          .Any(argument => argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
 
         private static void CheckIfCanBeSimplifiedUsingSelect(ForEachStatementSyntax forEachStatementSyntax, SyntaxNodeAnalysisContext c)
         {
             // There are multiple scenarios where the code can be simplified using LINQ.
             // For simplicity, in the first version of the rule, we consider that Select() can be used
             // only when a single property from the foreach variable is used.
-            // This property needs to be used more than once or if it is the right side of a variable declaration.
+            // The issue is raised if:
+            //  - the property is used more than once
+            //  - the property is the right side of a variable declaration
             var declaredSymbol = c.SemanticModel.GetDeclaredSymbol(forEachStatementSyntax);
             var accessedProperties = new Dictionary<ISymbol, UsageStats>();
 
             foreach (var identifierSyntax in GetIdentifiers(forEachStatementSyntax))
             {
-                if (identifierSyntax.Parent is MemberAccessExpressionSyntax { Parent: not InvocationExpressionSyntax and not AssignmentExpressionSyntax } memberAccessExpressionSyntax
+                if (identifierSyntax.Parent is MemberAccessExpressionSyntax { Parent: not InvocationExpressionSyntax } memberAccessExpressionSyntax
+                    && !(identifierSyntax.Parent.Parent is AssignmentExpressionSyntax assignment && assignment.Left == identifierSyntax.Parent)
                     && c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol))
                 {
                     var symbol = c.SemanticModel.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol;

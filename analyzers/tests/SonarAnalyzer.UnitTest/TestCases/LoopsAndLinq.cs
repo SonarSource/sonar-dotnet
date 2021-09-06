@@ -57,6 +57,15 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void ForEach_PropertyGet_Compliant(ICollection<Point> collection)
+        {
+            var sum = 0;
+            foreach (var point in collection) // Noncompliant
+            {
+                sum = point.X + point.X + 3;
+            }
+        }
+
         public void ForEach_IfWithElseBranch_Compliant(ICollection<string> collection, Predicate<string> condition)
         {
             var result = new List<string>();
@@ -84,20 +93,6 @@ namespace Tests.Diagnostics
                 {
                     result.Add(element);
                 }
-        }
-
-        public void ForEachWithEarlyExitIsCompliant(ICollection<string> collection, Predicate<string> condition)
-        {
-            var result = new List<string>();
-
-            foreach (var element in collection)
-            {
-                if (condition(element))
-                {
-                    result.Add(element);
-                    return;
-                }
-            }
         }
 
         public void ForEachWithPropertyGet_SuggestsSelect(ICollection<string> collection, ICollection<Point> points, int[] values)
