@@ -64,15 +64,15 @@ public class Sample
             validator = new CfgValidate(cfg, new List<int> { 1, 2, 3, 4 });
             validator.CheckAllPaths().Should().BeTrue();
 
-            var emptyValidator = new EmptyValidator(cfg);
-            emptyValidator.CheckAllPaths().Should().BeFalse();
+            var nonEntryBlockValid = new NonEntryBlockValid(cfg);
+            nonEntryBlockValid.CheckAllPaths().Should().BeTrue();
         }
 
-        private class EmptyValidator : CfgAllPathValidator
+        private class NonEntryBlockValid : CfgAllPathValidator
         {
-            public EmptyValidator(ControlFlowGraph cfg) : base(cfg) { }
+            public NonEntryBlockValid(ControlFlowGraph cfg) : base(cfg) { }
 
-            protected override bool IsValid(BasicBlock block) => false;
+            protected override bool IsValid(BasicBlock block) => block.Ordinal > 0;
 
             protected override bool IsInvalid(BasicBlock block) => false;
         }
