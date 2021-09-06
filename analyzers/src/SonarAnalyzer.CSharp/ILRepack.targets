@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Target Name="ILRepacker" AfterTargets="Build" Condition="'$(Configuration)' == 'Release' AND '$(TargetFramework)' == 'net46'" >
+
+    <ItemGroup>
+        <InputAssemblies Include="$(OutputPath)\$(AssemblyName).dll" />
+        <InputAssemblies Include="$(OutputPath)\Newtonsoft.Json.dll" />
+    </ItemGroup>
+    <ItemGroup>
+      <SearchDirectories Include="$(OutputPath)" />
+    </ItemGroup>
+    <ILRepack
+        Parallel="true"
+        Verbose="false"
+        Internalize="true"
+        InputAssemblies="@(InputAssemblies)"
+        LibraryPath="@(SearchDirectories)"
+        TargetKind="Dll"
+        OutputFile="$(OutputPath)\$(AssemblyName).dll"
+    />
+
+    </Target>
+</Project>
