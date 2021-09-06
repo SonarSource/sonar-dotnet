@@ -27,24 +27,10 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class BasicBlockWalkerTest
+    public class BasicBlockOperationFinder
     {
-        class FirstNumericLiteralFinder : BasicBlockOperationFinder<int>
-        {
-            protected override bool TryFindOperation(IOperationWrapperSonar operation, out int result)
-            {
-                if (operation.Instance is ILiteralOperation)
-                {
-                    result = int.Parse(operation.Instance.Syntax.ToString());
-                    return true;
-                }
-                result = default;
-                return false;
-            }
-        }
-
         [TestMethod]
-        public void ValidateReflection()
+        public void ValidateFinder()
         {
             const string code = @"
 public class Sample
@@ -64,6 +50,20 @@ public class Sample
             result.Should().Be(default);
             finder.TryFind(assign, out result).Should().BeTrue();
             result.Should().Be(42);
+        }
+
+        private class FirstNumericLiteralFinder : BasicBlockOperationFinder<int>
+        {
+            protected override bool TryFindOperation(IOperationWrapperSonar operation, out int result)
+            {
+                if (operation.Instance is ILiteralOperation)
+                {
+                    result = int.Parse(operation.Instance.Syntax.ToString());
+                    return true;
+                }
+                result = default;
+                return false;
+            }
         }
     }
 }
