@@ -310,14 +310,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (partialTypeDeclaration.SemanticModel.GetEnclosingSymbol(expression.SpanStart) is not IMethodSymbol constructorSymbol)
+                    if (partialTypeDeclaration.SemanticModel.GetEnclosingSymbol(expression.SpanStart) is not IMethodSymbol methodSymbol)
                     {
                         readonlyFieldCollector.excludedFields.Add(fieldSymbol);
                         return;
                     }
 
-                    if (constructorSymbol.MethodKind == MethodKind.Constructor
-                        && constructorSymbol.ContainingType.Equals(fieldSymbol.ContainingType))
+                    if (methodSymbol.MethodKind == MethodKind.Constructor
+                        && methodSymbol.ContainingType.Equals(fieldSymbol.ContainingType))
                     {
                         readonlyFieldCollector.assignedAsReadonly.Add(fieldSymbol);
                     }

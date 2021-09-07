@@ -25,6 +25,8 @@ namespace Tests.Diagnostics
         int _birthDay4 = 31;  // Compliant, it is passed as out outside the ctor
         int _legSize = 3;
         int _legSize2 = 3;
+        int _handSize = 3;
+        int _handSize2 = 3;
         int _neverUsed;
 
         private readonly Action<int> setter;
@@ -58,6 +60,16 @@ namespace Tests.Diagnostics
             }
             set { _legSize = value; }
         }
+
+        public int HandSize
+        {
+            get
+            {
+                --_handSize2;
+                return _handSize;
+            }
+            set { _handSize = value; }
+        }
     }
 
     partial class Partial
@@ -78,6 +90,8 @@ namespace Tests.Diagnostics
         private int y; // Compliant
         private int z = 10; // Noncompliant
         private int w = 10; // Noncompliant
+        private int a, b; // Noncompliant
+//                           Noncompliant@-1
         public X()
         {
             new X().x = 12;
@@ -86,6 +100,8 @@ namespace Tests.Diagnostics
 
             Modif(ref (z));
             this.w = 42;
+            a = 42;
+            b = 42;
         }
 
         private void Modif(ref int i) { }
