@@ -466,24 +466,34 @@ if (value == 0)
         public void ProcessVariableInForeach_Declared_LiveIn_LiveOut()
         {
             /*
-             * ForEach
+             * Entry
              *    |
-             * Binary <-----------+
-             *  |   \ true        |
-             *  v    \            |
-             * Exit  Simple       |
-             *       Method(i) -->+
+             * Block 1
+             * new[] {1, 2, 3}
+             *    |
+             * Block 2 <------------------------+
+             * MoveNext branch                  |
+             * F|   \ Else                      |
+             *  v    \                          |
+             * Exit  Block 3                    |
+             *       i=capture.Current          |
+             *       Method(i, intParameter) -->+
+             *        |                         A
+             *       Block 4 ------------------>+
+             *       Method(i)
              */
             var code = @"
 foreach(var i in new int[] {1, 2, 3})
 {
     Method(i, intParameter);
+    if (boolParameter)
+      Method(i);
 }";
             var context = new Context(code);
-            TmpNotImplemented();
-            //context.Validate(context.Block<ForeachCollectionProducerBlock>(),new LiveIn("intParameter"), new LiveOut("intParameter"));
-            //context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("intParameter"), new LiveOut("intParameter", "i"));
-            //context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter", "i"), new LiveOut("intParameter"));
+            context.Validate(context.Cfg.Blocks[1], new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Cfg.Blocks[2], new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("Method(i, intParameter);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter", "i"));
+            context.Validate(context.Block("Method(i);"), new LiveIn("boolParameter", "intParameter", "i"), new LiveOut("boolParameter", "intParameter"));
         }
 
         [TestMethod]
@@ -496,10 +506,9 @@ foreach(i in new int[] {1, 2, 3})
     Method(i, intParameter);
 }";
             var context = new Context(code);
-            TmpNotImplemented();
-            //context.Validate(context.Block<ForeachCollectionProducerBlock>(), new LiveIn("intParameter"), new LiveOut("intParameter", "i"));
-            //context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("intParameter", "i"), new LiveOut("intParameter", "i"));
-            //context.Validate(context.Block<SimpleBlock>(), new LiveIn("intParameter", "i"), new LiveOut("intParameter", "i"));
+            context.Validate(context.Cfg.Blocks[1], new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Cfg.Blocks[2], new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(i, intParameter);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
         }
 
         [TestMethod]

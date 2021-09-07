@@ -138,7 +138,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                         ProcessSimpleAssignment(state, ISimpleAssignmentOperationWrapper.FromOperation(operation.Instance));
                         break;
 
-
                         //FIXME: Something is still missing around here
 
                         //            case SyntaxKind.GenericName:
@@ -154,18 +153,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 }
             }
             //FIXME: Something is still missing around here
-
-            //    if (block.Instructions.Any())
-            //    {
-            //        return;
-            //    }
-
-            //    // Variable declaration in a foreach statement is not a VariableDeclarator, so handling it separately:
-            //    if (block is BinaryBranchBlock foreachBlock && foreachBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement))
-            //    {
-            //        var foreachNode = (ForEachStatementSyntax)foreachBlock.BranchingNode;
-            //        ProcessVariableInForeach(foreachNode, state);
-            //    }
 
             //    // Keep alive the variables declared and used in the using statement until the UsingFinalizerBlock
             //    if (block is UsingEndBlock usingFinalizerBlock)
@@ -200,15 +187,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 && parent.Kind == OperationKindEx.SimpleAssignment
                 && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == reference.WrappedOperation;
         }
-
-        //private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode, State state)
-        //{
-        //    if (semanticModel.GetDeclaredSymbol(foreachNode) is { } symbol)
-        //    {
-        //        state.Assigned.Add(symbol);
-        //        state.UsedBeforeAssigned.Remove(symbol);
-        //    }
-        //}
 
         private void ProcessSimpleAssignment(State state, ISimpleAssignmentOperationWrapper assignment)
         {
