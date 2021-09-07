@@ -40,6 +40,8 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         protected override BasicBlock ExitBlock => cfg.ExitBlock;
 
+        //FIXME: What about LocalLifetime regions? Can we improve based on them?
+
         public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel) : base(cfg)
         {
             this.declaration = declaration;
