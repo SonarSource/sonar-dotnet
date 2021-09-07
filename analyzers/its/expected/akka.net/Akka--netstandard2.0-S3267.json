@@ -41,6 +41,19 @@
 },
 {
 "id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  36,
+"endLine":  217,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3267",
 "message":  "Loop should be simplified by calling Select(crs => crs.Child))",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
@@ -49,6 +62,19 @@
 "startColumn":  41,
 "endLine":  635,
 "endColumn":  49
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  965,
+"startColumn":  37,
+"endLine":  965,
+"endColumn":  42
 }
 }
 },

@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  52,
+"endLine":  73,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3267",
 "message":  "Loop should be simplified by calling Select(moduleRegistrationType => moduleRegistrationType.ModuleType))",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
@@ -10,6 +23,58 @@
 "startColumn":  52,
 "endLine":  160,
 "endColumn":  75
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\AssemblyExtensions.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  52,
+"endLine":  55,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  41,
+"endLine":  79,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  36,
+"endLine":  100,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultModelBinderLocator.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  41,
+"endLine":  50,
+"endColumn":  53
 }
 }
 },
@@ -36,6 +101,58 @@
 "startColumn":  54,
 "endLine":  293,
 "endColumn":  75
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  36,
+"endLine":  88,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3365,
+"startColumn":  35,
+"endLine":  3365,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3393,
+"startColumn":  35,
+"endLine":  3393,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3825,
+"startColumn":  34,
+"endLine":  3825,
+"endColumn":  39
 }
 }
 }

@@ -12,6 +12,19 @@
 "endColumn":  48
 }
 }
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  46,
+"endLine":  125,
+"endColumn":  121
+}
+}
 }
 ]
 }

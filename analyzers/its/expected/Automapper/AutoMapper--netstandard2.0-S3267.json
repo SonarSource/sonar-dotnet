@@ -2,6 +2,97 @@
 "issues":  [
 {
 "id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  42,
+"endLine":  70,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  42,
+"endLine":  88,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  36,
+"endLine":  460,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeExtensions.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  43,
+"endLine":  80,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  49,
+"endLine":  269,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  48,
+"endLine":  180,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"region":  {
+"startLine":  456,
+"startColumn":  44,
+"endLine":  456,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3267",
 "message":  "Loop should be simplified by calling Select(inheritedTypeMap => inheritedTypeMap._includedMembersTypeMaps))",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
