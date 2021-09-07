@@ -30,8 +30,8 @@ namespace SonarAnalyzer.CFG.Helpers
     {
         protected abstract bool TryFindOperation(IOperationWrapperSonar operation, out TResult result);
 
-        public bool TryFind(BasicBlock block, out TResult var) =>
-            TryFind(block.OperationsAndBranchValue, out var);
+        public bool TryFind(BasicBlock block, out TResult result) =>
+            TryFind(block.OperationsAndBranchValue, out result);
 
         protected bool TryFind(IEnumerable<IOperation> operations, out TResult result)
         {

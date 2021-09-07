@@ -65,10 +65,10 @@ public class Sample
              *          \    /
              *           Exit 3
              */
-            var entry = cfg.Blocks[0];
+            var entry = cfg.EntryBlock;
             var branch = cfg.Blocks[1];
             var assign = cfg.Blocks[2];
-            var exit = cfg.Blocks[3];
+            var exit = cfg.ExitBlock;
 
             entry.Kind.Should().Be(BasicBlockKind.Entry);
             branch.Kind.Should().Be(BasicBlockKind.Block);
@@ -149,12 +149,12 @@ public class Sample
             var exit = cfg.ExitBlock;
             entry.Kind.Should().Be(BasicBlockKind.Entry);
             entry.Operations.Should().BeEmpty();
-            exit.Kind.Should().Be(BasicBlockKind.Exit);
-            exit.Operations.Should().BeEmpty();
             body.Kind.Should().Be(BasicBlockKind.Block);
             body.Operations.Should().HaveCount(1).And.Subject.Single().Should().BeAssignableTo<IExpressionStatementOperation>();
             body.BranchValue.Should().BeAssignableTo<ILiteralOperation>();
             body.OperationsAndBranchValue.Should().OnlyContainInOrder(body.Operations[0], body.BranchValue);
+            exit.Kind.Should().Be(BasicBlockKind.Exit);
+            exit.Operations.Should().BeEmpty();
         }
 
         [TestMethod]

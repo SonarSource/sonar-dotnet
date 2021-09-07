@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
@@ -57,52 +57,38 @@ public class Sample
              *          \    /
              *           Exit 4
              */
-            var validator = new CfgValidate(cfg, new List<int> { 3, 4 });
+            var validator = new TestCfgValidator(cfg, 0, 1, 2);
             validator.CheckAllPaths().Should().BeTrue();
 
             // only entry block is valid
-            validator = new CfgValidate(cfg, new List<int> { 1, 2, 3, 4 });
+            validator = new TestCfgValidator(cfg, 0);
             validator.CheckAllPaths().Should().BeTrue();
 
-            var nonEntryBlockValid = new NonEntryBlockValid(cfg);
+            var nonEntryBlockValid = new TestNonEntryBlockValidator(cfg);
             nonEntryBlockValid.CheckAllPaths().Should().BeTrue();
-
-            var emptyValidator = new EmptyValidator(cfg);
-            emptyValidator.CheckAllPaths().Should().BeFalse();
         }
 
-        private class EmptyValidator : CfgAllPathValidator
+        private class TestNonEntryBlockValidator : CfgAllPathValidator
         {
-            public EmptyValidator(ControlFlowGraph cfg) : base(cfg) { }
-
-            protected override bool IsValid(BasicBlock block) => false;
-
-            protected override bool IsInvalid(BasicBlock block) => false;
-        }
-
-        private class NonEntryBlockValid : CfgAllPathValidator
-        {
-            public NonEntryBlockValid(ControlFlowGraph cfg) : base(cfg) { }
+            public TestNonEntryBlockValidator(ControlFlowGraph cfg) : base(cfg) { }
 
             protected override bool IsValid(BasicBlock block) => block.Ordinal > 0;
 
             protected override bool IsInvalid(BasicBlock block) => false;
         }
 
-        private class CfgValidate : CfgAllPathValidator
+        private class TestCfgValidator : CfgAllPathValidator
         {
-            private readonly List<int> invalidBlocks;
+            private readonly int[] validBlocks;
 
-            public CfgValidate(ControlFlowGraph cfg, List<int> invalidBlocks) : base(cfg)
-            {
-                this.invalidBlocks = invalidBlocks;
-            }
+            public TestCfgValidator(ControlFlowGraph cfg, params int[] validBlocks) : base(cfg) =>
+                this.validBlocks = validBlocks;
 
             protected override bool IsValid(BasicBlock block) =>
-                !invalidBlocks.Contains(block.Ordinal);
+                validBlocks.Contains(block.Ordinal);
 
             protected override bool IsInvalid(BasicBlock block) =>
-                invalidBlocks.Contains(block.Ordinal);
+                !validBlocks.Contains(block.Ordinal);
         }
     }
 }
