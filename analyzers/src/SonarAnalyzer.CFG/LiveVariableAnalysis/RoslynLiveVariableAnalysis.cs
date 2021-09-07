@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 //FIXME: using Microsoft.CodeAnalysis.CSharp;
@@ -76,6 +77,15 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             //FIXME: Ugly
             var ret = new State();
             ProcessBlockInternal(block, ret);
+
+            // FIXME: Remove debug
+            Console.WriteLine();
+            Console.WriteLine($"Processing {block.Kind} #{block.Ordinal}");
+            Console.WriteLine($"Assigned: " + string.Join(", ", ret.Assigned.Select(x => x.Name)));
+            Console.WriteLine($"UsedBeforeAssigned: " + string.Join(", ", ret.UsedBeforeAssigned.Select(x => x.Name)));
+            Console.WriteLine($"ProcessedLocalFunctions: " + string.Join(", ", ret.ProcessedLocalFunctions.Select(x => x.Name)));
+            Console.WriteLine($"Captured: " + string.Join(", ", ret.Captured.Select(x => x.Name)));
+
             return ret;
         }
 
@@ -112,33 +122,25 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         private void ProcessBlockInternal(BasicBlock block, State state)
         {
-            //FIXME: Something is missing around here
-
-            foreach (var operation in ToExecutionOrder(block.BranchValueAndOperations))
+            foreach (var operation in ToExecutionOrder(block.BranchValueAndOperations.Reverse()))
             {
                 switch (operation.Instance.Kind)
                 {
                     case OperationKindEx.LocalReference:
-                        ProcessLocalReference(state, ILocalReferenceOperationWrapper.FromOperation(operation.Instance));
+                        ProcessParameterOrLocalReference(state, ILocalReferenceOperationWrapper.FromOperation(operation.Instance));
                         break;
                     case OperationKindEx.ParameterReference:
-                        ProcessParameterReference(state, IParameterReferenceOperationWrapper.FromOperation(operation.Instance));
+                        ProcessParameterOrLocalReference(state, IParameterReferenceOperationWrapper.FromOperation(operation.Instance));
+                        break;
+                    case OperationKindEx.SimpleAssignment:
+                        ProcessSimpleAssignment(state, ISimpleAssignmentOperationWrapper.FromOperation(operation.Instance));
                         break;
 
-                        //            case SyntaxKind.IdentifierName:
-                        //                ProcessIdentifier((IdentifierNameSyntax)instruction, state);
-                        //                break;
+
+                        //FIXME: Something is still missing around here
 
                         //            case SyntaxKind.GenericName:
                         //                ProcessGenericName((GenericNameSyntax)instruction, state);
-                        //                break;
-
-                        //            case SyntaxKind.SimpleAssignmentExpression:
-                        //                ProcessSimpleAssignment((AssignmentExpressionSyntax)instruction, state);
-                        //                break;
-
-                        //            case SyntaxKind.VariableDeclarator:
-                        //                ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction, state);
                         //                break;
 
                         //            case SyntaxKind.AnonymousMethodExpression:
@@ -149,6 +151,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                         //                break;
                 }
             }
+            //FIXME: Something is still missing around here
 
             //    if (block.Instructions.Any())
             //    {
@@ -176,30 +179,24 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             //    }
         }
 
-        private void ProcessLocalReference(State state, ILocalReferenceOperationWrapper localReference)
+        private void ProcessParameterOrLocalReference(State state, IOperationWrapper reference)
         {
-            if (IsOutArgument(localReference.WrappedOperation))
+            var symbol = ParameterOrLocalSymbol(reference.WrappedOperation);
+            Debug.Assert(symbol != null, "Only supported types should be passed to ParameterOrLocalSymbol");
+            if (IsOutArgument(reference.WrappedOperation))
             {
-                state.Assigned.Add(localReference.Local);
-                state.UsedBeforeAssigned.Remove(localReference.Local);
+                state.Assigned.Add(symbol);
+                state.UsedBeforeAssigned.Remove(symbol);
             }
-            else //FIXME: if (!state.AssignmentLhs.Contains(identifier))
+            else if (!IsAssignmentTarget())
             {
-                state.UsedBeforeAssigned.Add(localReference.Local);
+                state.UsedBeforeAssigned.Add(symbol);
             }
-        }
 
-        private void ProcessParameterReference(State state, IParameterReferenceOperationWrapper parameterReference)
-        {
-            if (IsOutArgument(parameterReference.WrappedOperation))
-            {
-                state.Assigned.Add(parameterReference.Parameter);
-                state.UsedBeforeAssigned.Remove(parameterReference.Parameter);
-            }
-            else //FIXME: if (!state.AssignmentLhs.Contains(identifier))
-            {
-                state.UsedBeforeAssigned.Add(parameterReference.Parameter);
-            }
+            bool IsAssignmentTarget() =>
+                new IOperationWrapperSonar(reference.WrappedOperation).Parent is { } parent
+                && parent.Kind == OperationKindEx.SimpleAssignment
+                && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == reference.WrappedOperation;
         }
 
         //private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode, State state)
@@ -211,27 +208,14 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         //    }
         //}
 
-        //private void ProcessVariableDeclarator(VariableDeclaratorSyntax instruction, State state)
-        //{
-        //    if (semanticModel.GetDeclaredSymbol(instruction) is { } symbol)
-        //    {
-        //        state.Assigned.Add(symbol);
-        //        state.UsedBeforeAssigned.Remove(symbol);
-        //    }
-        //}
-
-        //private void ProcessSimpleAssignment(AssignmentExpressionSyntax assignment, State state)
-        //{
-        //    var left = assignment.Left.RemoveParentheses();
-        //    if (left.IsKind(SyntaxKind.IdentifierName)
-        //        && semanticModel.GetSymbolInfo(left).Symbol is { } symbol
-        //        && IsLocalScoped(symbol))
-        //    {
-        //        state.AssignmentLhs.Add(left);
-        //        state.Assigned.Add(symbol);
-        //        state.UsedBeforeAssigned.Remove(symbol);
-        //    }
-        //}
+        private void ProcessSimpleAssignment(State state, ISimpleAssignmentOperationWrapper assignment)
+        {
+            if (ParameterOrLocalSymbol(assignment.Target) is { } localTarget)
+            {
+                state.Assigned.Add(localTarget);
+                state.UsedBeforeAssigned.Remove(localTarget);
+            }
+        }
 
         //private void ProcessIdentifier(IdentifierNameSyntax identifier, State state)
         //{
@@ -294,6 +278,14 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         //    // Read and write both affects liveness
         //    state.CapturedVariables.UnionWith(allCapturedSymbols);
         //}
+
+        private static ISymbol ParameterOrLocalSymbol(IOperation operation) =>
+            operation switch
+            {
+                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
+                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                _ => null
+            };
 
         //private bool IsLocalScoped(ISymbol symbol) =>
         //    IsLocalScoped(symbol, declaration);
