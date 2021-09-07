@@ -94,6 +94,16 @@ namespace Tests.Diagnostics
             {
                 point.X = point.X + 3;
             }
+
+            foreach (var point in collection) // Compliant - Selecting `X` and setting it's value will not work in this case.
+            {
+                point.X += point.X + 3;
+            }
+
+            foreach (var point in collection) // Compliant - Selecting `X` and setting it's value will not work in this case.
+            {
+                point.X -= point.X + 3;
+            }
         }
 
         public void ForEach_PropertyGet_Compliant(ICollection<Point> collection)
@@ -212,7 +222,7 @@ namespace Tests.Diagnostics
         public class Point
         {
             public int X { get; set; }
-            public int Y { get; set; }
+            public int? Y { get; set; }
         }
     }
 }

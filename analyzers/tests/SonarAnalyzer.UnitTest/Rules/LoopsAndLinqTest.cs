@@ -31,5 +31,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void LoopsAndLinq_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\LoopsAndLinq.cs", new LoopsAndLinq());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LoopsAndLinq_CSharp8() =>
+            Verifier.VerifyAnalyzer(@"TestCases\LoopsAndLinq.CSharp8.cs", new LoopsAndLinq(), ParseOptionsHelper.FromCSharp8);
     }
 }
