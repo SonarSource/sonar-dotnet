@@ -12,7 +12,9 @@ namespace Tests.Diagnostics
             return true;
         }
 
-        public void ForEachWithBlockWithIfSuggestWhere(ICollection<string> collection, Predicate<string> condition)
+        public bool WithRefArg(string p1, ref string p2) => true;
+
+        public void ForEachWithBlockWithIfSuggestWhere(ICollection<string> collection, Predicate<string> condition, Predicate<string> secondCondition)
         {
             var result = new List<string>();
 
@@ -24,9 +26,33 @@ namespace Tests.Diagnostics
                     result.Add(element);
                 }
             }
+
+            foreach (var element in collection)
+            {
+                Foo(1);
+                if (condition(element))
+                {
+                    result.Add(element);
+                }
+            }
+
+            foreach (var element in collection)
+            {
+                result.Add(element);
+                if (condition(element)) { }
+            }
+
+            foreach (var element in collection) // Noncompliant
+            {
+                if (condition(element))
+                {
+                    if (secondCondition(element))
+                        result.Add(element);
+                }
+            }
         }
 
-        public void ForEach_IfWithSideEffects_Compliant(ICollection<string> collection)
+        public void ForEach_ConditionWithOutParameter_Compliant(ICollection<string> collection)
         {
             var result = new List<string>();
 
@@ -35,6 +61,19 @@ namespace Tests.Diagnostics
                 if (WithOutArg(element, out var a))
                 {
                     result.Add(a);
+                    result.Add(element);
+                }
+            }
+        }
+
+        public void ForEach_ConditionWithRefParameter_Compliant(ICollection<string> collection, ref string v)
+        {
+            var result = new List<string>();
+
+            foreach (var element in collection) // Compliant due to `ref v`
+            {
+                if (WithRefArg(element, ref v))
+                {
                     result.Add(element);
                 }
             }
