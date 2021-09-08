@@ -133,6 +133,8 @@ namespace Tests.Diagnostics
             }
         }
 
+        object Prop9 { }  // Error [CS0548]
+
         void InternalRecursion(int i)
         {
         start:
@@ -170,7 +172,7 @@ namespace Tests.Diagnostics
             Generic2<int>();
         }
 
-        // (FN) False Negative
+        // (FN) False Negative, was fixed in RoslynCFG. There will be no updates in SonarCFG in the future.
         // See https://github.com/SonarSource/sonar-dotnet/issues/2342
         int Power(int num, int exponent)
         {
@@ -194,95 +196,5 @@ namespace Tests.Diagnostics
         {
             return FixIt(a);
         }
-
-        int CSharp8_SwitchExpressions_OK(int a)
-        {
-            return a switch
-            {
-                0 => 1,
-                1 => 0,
-                _ => CSharp8_SwitchExpressions_OK(a) % 2
-            };
-        }
-
-        int CSharp8_SwitchExpressions_Bad(int a)    //Noncompliant
-        {
-            return a switch
-            {
-                0 => CSharp8_SwitchExpressions_Bad(a + 1),
-                1 => CSharp8_SwitchExpressions_Bad(a - 1),
-                _ => CSharp8_SwitchExpressions_Bad(a) % 2
-            };
-        }
-
-        int CSharp8_StaticLocalFunctions_OK(int a)
-        {
-            static int Calculate(int a, int b) => a + b + 1;
-
-            return Calculate(a, 1);
-        }
-
-        int CSharp8_StaticLocalFunctions_Bad(int a, int b)
-        {
-            static int Calculate(int a, int b) => Calculate(a, b) + 1;  //Noncompliant
-
-            return Calculate(a, b);
-        }
-
-        int CSharp8_StaticLocalFunctions_FN(int a, int b)
-        {
-            static int Add(int a, int b) => Fix(a, b);  // FN - Two methods calling each other are not recognized
-            static int Fix(int a, int b) => Add(a, b);
-
-            return Add(a, b);
-        }
-
-    }
-
-    public interface IWithDefaultImplementation
-    {
-        decimal Count { get; set; }
-        decimal Price { get; set; }
-
-        decimal Total() //Noncompliant
-        {
-            return Count * Price + Total();
-        }
-    }
-}
-
-// https://github.com/SonarSource/sonar-dotnet/issues/3624
-namespace Repro_3624
-{
-    public class Repro : Base
-    {
-        public string Name
-        {
-            get // Noncompliant
-            {
-                return Name;
-            }
-            set // FN
-            {
-                Name = value;
-            }
-        }
-
-        public virtual string Arrow
-        {
-            get => Arrow;           // Noncompliant
-            set => Arrow = value;   // FN
-        }
-
-        public override string Overriden
-        {
-            get => base.Overriden;          // Compliant
-            set => base.Overriden = value;  // Compliant
-        }
-    }
-
-    public class Base
-    {
-        public virtual string Overriden { get; set; }
     }
 }
