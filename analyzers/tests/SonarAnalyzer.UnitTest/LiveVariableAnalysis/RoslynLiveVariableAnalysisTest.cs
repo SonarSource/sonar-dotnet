@@ -161,16 +161,18 @@ intParameter = 0;";
         [TestMethod]
         public void LongPropagationChain_LiveIn_LiveOut()
         {
-            /*    Binary -> Jump (return) ----+
-             *    declare                     |
-             *      |                         |
-             *    Binary -> Jump (return) ---+|
-             *    use & assign               ||
-             *      |                        ||
-             *    Binary -> Jump (return) --+||
-             *    assign                    |||
-             *      |                       vvv
-             *    Simple -----------------> Exit
+            /*    Entry
+             *      |
+             *    Block 1 -------+
+             *    declare        |
+             *      |            |
+             *    Block 2 ------+|
+             *    use & assign  ||
+             *      |           ||
+             *    Block 3 -----+||
+             *    assign       |||
+             *      |          vvv
+             *    Block 4 ---> Exit
              *    use
              */
             var code = @"
@@ -178,22 +180,20 @@ var value = 0;
 if (boolParameter)
     return;
 Method(value);
-value = 42;
+value = 1;
 if (boolParameter)
     return;
-value = 42
+value = 42;
 if (boolParameter)
     return;
 Method(intParameter, value);";
             var context = new Context(code);
-            TmpNotImplemented();
-            //var allBinary = context.Cfg.Blocks.OfType<BinaryBranchBlock>().ToArray();
-            //var simple = context.Block<SimpleBlock>();
-            //context.Validate(allBinary[0], new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter", "value"));
-            //context.Validate(allBinary[1], new LiveIn("boolParameter", "intParameter", "value"), new LiveOut("boolParameter", "intParameter"));
-            //context.Validate(allBinary[2], new LiveIn("boolParameter", "intParameter"), new LiveOut("value", "intParameter"));
-            //context.Validate(simple, new LiveIn("value", "intParameter"));
-            //context.Validate(context.Cfg.ExitBlock);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("value = 0"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter", "value"));
+            context.Validate(context.Block("Method(value);"), new LiveIn("boolParameter", "intParameter", "value"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("value = 42;"), new LiveIn("boolParameter", "intParameter"), new LiveOut("value", "intParameter"));
+            context.Validate(context.Block("Method(intParameter, value);"), new LiveIn("value", "intParameter"));
+            context.Validate(context.Cfg.ExitBlock);
         }
 
         [TestMethod]
@@ -222,7 +222,7 @@ Method(intParameter, value);";
              */
             var code = @"
 var everywhere = 42;
-var reasiggnedNowhere = 42;
+var reassigned = 42;
 var first = 42;
 var firstTrue = 42;
 var firstFalse = 42;
@@ -255,50 +255,49 @@ else
     }
     Method(second);
 }
-reasiggnedNowhere = 0;
-Method(everywhere, reasiggnedNowhere);";
+reassigned = 0;
+Method(everywhere, reassigned);";
             var context = new Context(code);
-            TmpNotImplemented();
-            //context.Validate(
-            //    context.Block<BinaryBranchBlock>("boolParameter"),
-            //    new LiveIn("boolParameter"),
-            //    new LiveOut("everywhere", "firstCondition", "firstTrue", "firstFalse", "first", "secondCondition", "secondTrue", "secondFalse", "second"));
-            //// First block
-            //context.Validate(
-            //    context.Block<BinaryBranchBlock>("firstCondition"),
-            //    new LiveIn("everywhere", "firstCondition", "firstTrue", "firstFalse", "first"),
-            //    new LiveOut("everywhere", "firstTrue", "firstFalse", "first"));
-            //context.Validate(
-            //    context.Block<SimpleBlock>("Method(firstTrue)"),
-            //    new LiveIn("everywhere", "firstTrue", "first"),
-            //    new LiveOut("everywhere", "first"));
-            //context.Validate(
-            //    context.Block<SimpleBlock>("Method(firstFalse)"),
-            //    new LiveIn("everywhere", "firstFalse", "first"),
-            //    new LiveOut("everywhere", "first"));
-            //context.Validate(
-            //    context.Block<SimpleBlock>("Method(first)"),
-            //    new LiveIn("everywhere", "first"),
-            //    new LiveOut("everywhere"));
-            //// Second block
-            //context.Validate(
-            //    context.Block<BinaryBranchBlock>("secondCondition"),
-            //    new LiveIn("everywhere", "secondCondition", "secondTrue", "secondFalse", "second"),
-            //    new LiveOut("everywhere", "secondTrue", "secondFalse", "second"));
-            //context.Validate(
-            //    context.Block<SimpleBlock>("Method(secondTrue)"),
-            //    new LiveIn("everywhere", "secondTrue", "second"),
-            //    new LiveOut("everywhere", "second"));
-            //context.Validate(
-            //    context.Block<SimpleBlock>("Method(secondFalse)"),
-            //    new LiveIn("everywhere", "secondFalse", "second"),
-            //    new LiveOut("everywhere", "second"));
-            //context.Validate(
-            //    context.Block<SimpleBlock>("Method(second)"),
-            //    new LiveIn("everywhere", "second"),
-            //    new LiveOut("everywhere"));
-            //// Common end
-            //context.Validate(context.Block<SimpleBlock>("Method(everywhere, reasiggnedNowhere)"), new LiveIn("everywhere"));
+            context.Validate(
+                context.Block("everywhere = 42"),
+                new LiveIn("boolParameter"),
+                new LiveOut("everywhere", "firstCondition", "firstTrue", "firstFalse", "first", "secondCondition", "secondTrue", "secondFalse", "second"));
+            // First block
+            context.Validate(
+                context.Block("firstCondition"),
+                new LiveIn("everywhere", "firstCondition", "firstTrue", "firstFalse", "first"),
+                new LiveOut("everywhere", "firstTrue", "firstFalse", "first"));
+            context.Validate(
+                context.Block("Method(firstTrue);"),
+                new LiveIn("everywhere", "firstTrue", "first"),
+                new LiveOut("everywhere", "first"));
+            context.Validate(
+                context.Block("Method(firstFalse);"),
+                new LiveIn("everywhere", "firstFalse", "first"),
+                new LiveOut("everywhere", "first"));
+            context.Validate(
+                context.Block("Method(first);"),
+                new LiveIn("everywhere", "first"),
+                new LiveOut("everywhere"));
+            // Second block
+            context.Validate(
+                context.Block("secondCondition"),
+                new LiveIn("everywhere", "secondCondition", "secondTrue", "secondFalse", "second"),
+                new LiveOut("everywhere", "secondTrue", "secondFalse", "second"));
+            context.Validate(
+                context.Block("Method(secondTrue);"),
+                new LiveIn("everywhere", "secondTrue", "second"),
+                new LiveOut("everywhere", "second"));
+            context.Validate(
+                context.Block("Method(secondFalse);"),
+                new LiveIn("everywhere", "secondFalse", "second"),
+                new LiveOut("everywhere", "second"));
+            context.Validate(
+                context.Block("Method(second);"),
+                new LiveIn("everywhere", "second"),
+                new LiveOut("everywhere"));
+            // Common end
+            context.Validate(context.Block("Method(everywhere, reassigned);"), new LiveIn("everywhere"));
         }
 
         //FIXME: UT for nested instruction procesing order
@@ -617,7 +616,7 @@ public class Sample
             }
 
             public BasicBlock Block(string withSyntax = null) =>
-                Cfg.Blocks.Single(x => x.Kind == BasicBlockKind.Block && (withSyntax == null || x.Operations.Any(operation => operation.Syntax.ToString() == withSyntax)));
+                Cfg.Blocks.Single(x => x.Kind == BasicBlockKind.Block && (withSyntax == null || x.OperationsAndBranchValue.Any(operation => operation.Syntax.ToString() == withSyntax)));
 
             public void ValidateAllEmpty()
             {

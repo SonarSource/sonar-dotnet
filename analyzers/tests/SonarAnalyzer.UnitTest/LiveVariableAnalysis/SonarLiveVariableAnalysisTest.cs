@@ -156,7 +156,7 @@ Method(value);
 value = 42;
 if (boolParameter)
     return;
-value = 42
+value = 42;
 if (boolParameter)
     return;
 Method(intParameter, value);";
