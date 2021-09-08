@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -58,40 +57,9 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             return ret;
         }
 
-        //FIXME: Make it an extension
-        private static IEnumerable<IOperationWrapperSonar> ToExecutionOrder(IEnumerable<IOperation> operations)
-        {
-            var stack = new Stack<StackItem>();
-            try
-            {
-                foreach (var operation in operations.Reverse())
-                {
-                    stack.Push(new StackItem(operation));
-                }
-                while (stack.Any())
-                {
-                    if (stack.Peek().PrevChild() is { } child)
-                    {
-                        stack.Push(new StackItem(child));
-                    }
-                    else
-                    {
-                        yield return stack.Pop().DisposeEnumeratorAndReturnOperation();
-                    }
-                }
-            }
-            finally
-            {
-                while (stack.Any())
-                {
-                    stack.Pop().Dispose();
-                }
-            }
-        }
-
         private void ProcessBlockInternal(BasicBlock block, State state)
         {
-            foreach (var operation in ToExecutionOrder(block.OperationsAndBranchValue.Reverse()))
+            foreach (var operation in block.OperationsAndBranchValue.Reverse().ToExecutionOrder())
             {
                 switch (operation.Instance.Kind)
                 {
@@ -238,29 +206,5 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                 _ => null
             };
-
-        private sealed class StackItem : IDisposable
-        {
-            private readonly IOperationWrapperSonar operation;
-            private readonly IEnumerator<IOperation> reversedChildren;
-
-            public StackItem(IOperation operation)
-            {
-                this.operation = new IOperationWrapperSonar(operation);
-                reversedChildren = this.operation.Children.Reverse().GetEnumerator();
-            }
-
-            public IOperation PrevChild() =>
-                reversedChildren.MoveNext() ? reversedChildren.Current : null;
-
-            public IOperationWrapperSonar DisposeEnumeratorAndReturnOperation()
-            {
-                Dispose();
-                return operation;
-            }
-
-            public void Dispose() =>
-                reversedChildren.Dispose();
-        }
     }
 }

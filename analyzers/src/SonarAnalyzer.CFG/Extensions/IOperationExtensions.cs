@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -27,6 +28,36 @@ namespace SonarAnalyzer.Extensions
 {
     public static class IOperationExtensions
     {
+        public static IEnumerable<IOperationWrapperSonar> ToExecutionOrder(this IEnumerable<IOperation> operations)
+        {
+            var stack = new Stack<StackItem>();
+            try
+            {
+                foreach (var operation in operations.Reverse())
+                {
+                    stack.Push(new StackItem(operation));
+                }
+                while (stack.Any())
+                {
+                    if (stack.Peek().PrevChild() is { } child)
+                    {
+                        stack.Push(new StackItem(child));
+                    }
+                    else
+                    {
+                        yield return stack.Pop().DisposeEnumeratorAndReturnOperation();
+                    }
+                }
+            }
+            finally //FIXME: This will need to be in IEnumerator to make the logic work
+            {
+                while (stack.Any())
+                {
+                    stack.Pop().Dispose();
+                }
+            }
+        }
+
         // This method is taken from Roslyn implementation
         public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation operation) =>
             Descendants(operation, true);
@@ -59,6 +90,30 @@ namespace SonarAnalyzer.Extensions
                     stack.Push(new IOperationWrapperSonar(current).Children.GetEnumerator());
                 }
             }
+        }
+
+        private sealed class StackItem : IDisposable
+        {
+            private readonly IOperationWrapperSonar operation;
+            private readonly IEnumerator<IOperation> reversedChildren;
+
+            public StackItem(IOperation operation)
+            {
+                this.operation = new IOperationWrapperSonar(operation);
+                reversedChildren = this.operation.Children.Reverse().GetEnumerator();
+            }
+
+            public IOperation PrevChild() =>
+                reversedChildren.MoveNext() ? reversedChildren.Current : null;
+
+            public IOperationWrapperSonar DisposeEnumeratorAndReturnOperation()
+            {
+                Dispose();
+                return operation;
+            }
+
+            public void Dispose() =>
+                reversedChildren.Dispose();
         }
     }
 }
