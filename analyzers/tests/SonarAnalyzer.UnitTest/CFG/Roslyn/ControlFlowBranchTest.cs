@@ -37,10 +37,8 @@ public class Sample
     public void Method(bool condition) { } // Empty, just Entry and Exit block
 }";
             var cfg = TestHelper.CompileCfg(code);
-            var entry = cfg.Blocks[0];
-            var exit = cfg.Blocks[1];
-            entry.Kind.Should().Be(BasicBlockKind.Entry);
-            exit.Kind.Should().Be(BasicBlockKind.Exit);
+            var entry = cfg.EntryBlock;
+            var exit = cfg.ExitBlock;
 
             var branch = entry.FallThroughSuccessor;
             branch.Source.Should().Be(entry);
@@ -99,7 +97,7 @@ public class Sample
             var initBlock = cfg.Blocks[1];
             var tryBlock = cfg.Blocks[2];
             var finallyBlock = cfg.Blocks[3];
-            var exitBlock = cfg.Blocks[4];
+            var exitBlock = cfg.ExitBlock;
             initBlock.Kind.Should().Be(BasicBlockKind.Block);
             tryBlock.Kind.Should().Be(BasicBlockKind.Block);
             finallyBlock.Kind.Should().Be(BasicBlockKind.Block);
