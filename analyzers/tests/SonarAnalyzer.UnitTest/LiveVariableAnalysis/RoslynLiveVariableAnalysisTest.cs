@@ -300,7 +300,57 @@ Method(everywhere, reassigned);";
             context.Validate(context.Block("Method(everywhere, reassigned);"), new LiveIn("everywhere"));
         }
 
-        //FIXME: UT for nested instruction procesing order
+        [TestMethod]
+        public void ProcessBlockInternal_EvaluationOrder_UsedBeforeAssigned_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+Method(variable, variable = 42);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate(context.Block("Method(variable, variable = 42);"), new LiveIn("variable"));
+        }
+
+        [TestMethod]
+        public void ProcessBlockInternal_EvaluationOrder_UsedBeforeAssignedInSubexpression_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+Method(1 + 1 + Method(variable), variable = 42);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate(context.Block("Method(1 + 1 + Method(variable), variable = 42);"), new LiveIn("variable"));
+        }
+
+        [TestMethod]
+        public void ProcessBlockInternal_EvaluationOrder_AssignedBeforeUsed_NotLiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+Method(variable = 42, variable);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate(context.Block("Method(variable = 42, variable);"));
+        }
+
+        [TestMethod]
+        public void ProcessBlockInternal_EvaluationOrder_AssignedBeforeUsedInSubexpression_NotLiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+Method(variable = 42, 1 + 1 + Method(variable));";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate(context.Block("Method(variable = 42, 1 + 1 + Method(variable));"));
+        }
 
         [TestMethod]
         public void ProcessLocalReference_InNameOf_NotLiveIn_NotLiveOut()

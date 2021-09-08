@@ -103,7 +103,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 }
                 while (stack.Any())
                 {
-                    if (stack.Peek().NextChild() is { } child)
+                    if (stack.Peek().PrevChild() is { } child)
                     {
                         stack.Push(new StackItem(child));
                     }
@@ -273,16 +273,16 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         private sealed class StackItem : IDisposable
         {
             private readonly IOperationWrapperSonar operation;
-            private readonly IEnumerator<IOperation> children;
+            private readonly IEnumerator<IOperation> reversedChildren;
 
             public StackItem(IOperation operation)
             {
                 this.operation = new IOperationWrapperSonar(operation);
-                children = this.operation.Children.GetEnumerator();
+                reversedChildren = this.operation.Children.Reverse().GetEnumerator();
             }
 
-            public IOperation NextChild() =>
-                children.MoveNext() ? children.Current : null;
+            public IOperation PrevChild() =>
+                reversedChildren.MoveNext() ? reversedChildren.Current : null;
 
             public IOperationWrapperSonar DisposeEnumeratorAndReturnOperation()
             {
@@ -291,7 +291,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
 
             public void Dispose() =>
-                children.Dispose();
+                reversedChildren.Dispose();
         }
     }
 }
