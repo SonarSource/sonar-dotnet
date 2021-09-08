@@ -110,31 +110,38 @@ Method(intParameter);";
             context.Validate(context.Cfg.ExitBlock);
         }
 
-        [TestMethod]
-        public void Captured_NotLiveIn_NotLiveOut()
+        [DataTestMethod]
+        [DataRow("Capturing(x => field + variable + intParameter);", DisplayName = "SimpleLambda")]
+        [DataRow("Capturing((x) => field + variable + intParameter);", DisplayName = "ParenthesizedLambda")]
+        [DataRow("Capturing(x => { System.Func<int> xxx = () => field + variable + intParameter; return xxx();});", DisplayName = "NestedLambda")]
+        [DataRow("VoidDelegate d = delegate { return field + variable + intParameter;};", DisplayName = "AnonymousMethod")]
+        [DataRow("var items = from xxx in new int[] { 42, 100 } where xxx > field + variable + intParameter select xxx;", DisplayName = "Query")]
+        public void Captured_NotLiveIn_NotLiveOut(string capturingStatement)
         {
-            /*       Binary
+            /*       Entry
+             *         |
+             *       Block 1
              *       /   \
-             *    Jump   Simple
-             *   return  Method()
+             *      |   Block 2
+             *      |   Method()
              *       \   /
              *        Exit
              */
-            var code = @"
-Capturing(() => intParameter);
+            var code = @$"
+var variable = 42;
+{capturingStatement}
 if (boolParameter)
     return;
-Method(intParameter);";
+Method(field, variable, intParameter);";
+            capturingStatement.Should().Contain("field + variable + intParameter");
             var context = new Context(code);
-            TmpNotImplemented();
-            //var binary = context.Cfg.EntryBlock;
-            //var jump = context.Block<JumpBlock>();
-            //var simple = context.Block<SimpleBlock>();
-            //var exit = context.Cfg.ExitBlock;
-            //context.Validate(binary, new Captured("intParameter"), new LiveIn("boolParameter"));
-            //context.Validate(jump, new Captured("intParameter"));
-            //context.Validate(simple, new Captured("intParameter"));
-            //context.Validate(exit, new Captured("intParameter"));
+            var expectedCaptured = capturingStatement.Contains("xxx")
+                ? new Captured("variable", "intParameter", "xxx")
+                : new Captured("variable", "intParameter");
+            context.Validate(context.Cfg.EntryBlock, expectedCaptured, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate(context.Block("boolParameter"), expectedCaptured, new LiveIn("boolParameter"));
+            context.Validate(context.Block("Method(field, variable, intParameter);"), expectedCaptured);
+            context.Validate(context.Cfg.ExitBlock, expectedCaptured);
         }
 
         [TestMethod]
@@ -635,8 +642,11 @@ static int LocalFunction(int a)
             public Context(string methodBody, string localFunctionName = null)
             {
                 var code = @$"
+using System.Linq;
 public class Sample
 {{
+    delegate void VoidDelegate();
+
     private int field;
     public int Property {{ get; set; }};
 
@@ -648,7 +658,7 @@ public class Sample
     private int Method(params int[] args) => 42;
     private string Method(params string[] args) => null;
     private bool IsMethod(params bool[] args) => true;
-    private void Capturing(System.Func<int> f) {{ }}
+    private void Capturing(System.Func<int, int> f) {{ }}
 }}";
                 var method = SonarControlFlowGraphTest.CompileWithMethodBody(code, "Main", out var semanticModel);
                 Cfg = ControlFlowGraph.Create(method, semanticModel);

@@ -137,6 +137,9 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     case OperationKindEx.SimpleAssignment:
                         ProcessSimpleAssignment(state, ISimpleAssignmentOperationWrapper.FromOperation(operation.Instance));
                         break;
+                    case OperationKindEx.FlowAnonymousFunction:
+                        ProcessFlowAnonymousFunction(state, cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance));
+                        break;
 
                         //FIXME: Something is still missing around here
 
@@ -197,6 +200,26 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
         }
 
+        private void ProcessFlowAnonymousFunction(State state, ControlFlowGraph cfg, IFlowAnonymousFunctionOperationWrapper anonymousFunction)
+        {
+            var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
+            foreach (var operation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
+            {
+                switch (operation.Kind)
+                {
+                    case OperationKindEx.LocalReference:
+                        state.Captured.Add(ILocalReferenceOperationWrapper.FromOperation(operation).Local);
+                        break;
+                    case OperationKindEx.ParameterReference:
+                        state.Captured.Add(IParameterReferenceOperationWrapper.FromOperation(operation).Parameter);
+                        break;
+                    case OperationKindEx.FlowAnonymousFunction:
+                        ProcessFlowAnonymousFunction(state, anonymousFunctionCfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
+                        break;
+                }
+            }
+        }
+
         //private void ProcessIdentifier(IdentifierNameSyntax identifier, State state)
         //{
         //    if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
@@ -245,18 +268,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         //            ProcessBlockInternal(block, state);
         //        }
         //    }
-        //}
-
-        //private void CollectAllCapturedLocal(SyntaxNode instruction, State state)
-        //{
-        //    var allCapturedSymbols = instruction.DescendantNodes()
-        //        .OfType<IdentifierNameSyntax>()
-        //        .Select(i => semanticModel.GetSymbolInfo(i).Symbol)
-        //        .Where(s => s != null && IsLocalScoped(s));
-
-        //    // Collect captured locals
-        //    // Read and write both affects liveness
-        //    state.CapturedVariables.UnionWith(allCapturedSymbols);
         //}
 
         private static ISymbol ParameterOrLocalSymbol(IOperation operation) =>
