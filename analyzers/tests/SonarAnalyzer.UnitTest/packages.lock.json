@@ -314,6 +314,11 @@
           "System.Runtime.CompilerServices.Unsafe": "4.5.3"
         }
       },
+      "System.Xml.ReaderWriter": {
+        "type": "Transitive",
+        "resolved": "4.3.1",
+        "contentHash": "fVU1Xp9TEOHv1neQDtcJ4hNfYJ1pjfXzKY3VFeiRZK6HTV4Af2Ihyvq1FkPLrL1hzZhXv7NTmowQnL5DgTzIKA=="
+      },
       "SonarAnalyzer": {
         "type": "Project",
         "dependencies": {
@@ -347,7 +352,8 @@
         "dependencies": {
           "SonarAnalyzer": "1.0.0",
           "SonarAnalyzer.Utilities": "1.0.0",
-          "System.Collections.Immutable": "1.1.37"
+          "System.Collections.Immutable": "1.1.37",
+          "System.Xml.ReaderWriter": "4.3.1"
         }
       },
       "sonaranalyzer.utilities": {
@@ -1789,8 +1795,8 @@
       },
       "System.Xml.ReaderWriter": {
         "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "GrprA+Z0RUXaR4N7/eW71j1rgMnEnEVlgii49GZyAjTH7uliMnrOU3HNFBr6fEDBCJCIdlVNq9hHbaDR621XBA==",
+        "resolved": "4.3.1",
+        "contentHash": "fVU1Xp9TEOHv1neQDtcJ4hNfYJ1pjfXzKY3VFeiRZK6HTV4Af2Ihyvq1FkPLrL1hzZhXv7NTmowQnL5DgTzIKA==",
         "dependencies": {
           "System.Collections": "4.3.0",
           "System.Diagnostics.Debug": "4.3.0",
@@ -1878,7 +1884,8 @@
         "dependencies": {
           "SonarAnalyzer": "1.0.0",
           "SonarAnalyzer.Utilities": "1.0.0",
-          "System.Collections.Immutable": "1.1.37"
+          "System.Collections.Immutable": "1.1.37",
+          "System.Xml.ReaderWriter": "4.3.1"
         }
       },
       "sonaranalyzer.utilities": {
