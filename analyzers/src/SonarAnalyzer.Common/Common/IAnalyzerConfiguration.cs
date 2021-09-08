@@ -24,6 +24,9 @@ namespace SonarAnalyzer.Common
 {
     public interface IAnalyzerConfiguration
     {
+        // Force the use of Sonar Cfg in rules that support both Roslyn and Sonar CFGs
+        bool ForceSonarCfg { get; }
+
         bool IsEnabled(string ruleKey);
 
         void Initialize(AnalyzerOptions options);

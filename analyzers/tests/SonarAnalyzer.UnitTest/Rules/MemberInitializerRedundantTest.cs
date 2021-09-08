@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -28,16 +29,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MemberInitializerRedundantTest
     {
         [TestMethod]
-        public void MemberInitializerRedundant() =>
+        public void MemberInitializerRedundant_RoslynCfg() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
+        public void MemberInitializerRedundant_SonarCfg() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg), ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
         [TestCategory("CodeFix")]
-        public void MemberInitializerRedundant_CodeFix() =>
+        public void MemberInitializerRedundant_RoslynCfg_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MemberInitializerRedundant.cs",
                 @"TestCases\MemberInitializerRedundant.Fixed.cs",
                 new MemberInitializerRedundant(),
+                new MemberInitializedToDefaultCodeFixProvider());
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void MemberInitializerRedundant_SonarCfg_CodeFix() =>
+            Verifier.VerifyCodeFix(
+                @"TestCases\MemberInitializerRedundant.cs",
+                @"TestCases\MemberInitializerRedundant.Fixed.cs",
+                new MemberInitializerRedundant(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 new MemberInitializedToDefaultCodeFixProvider());
 
 #if NET

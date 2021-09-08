@@ -26,8 +26,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
@@ -37,16 +38,22 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class MemberInitializerRedundant : SonarDiagnosticAnalyzer
+    public sealed partial class MemberInitializerRedundant : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3604";
         private const string InstanceMemberMessage = "Remove the member initializer, all constructors set an initial value for the member.";
         private const string StaticMemberMessage = "Remove the static member initializer, a static constructor or module initializer sets an initial value for the member.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
+        private readonly bool forceSonarCfg;
+
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        public MemberInitializerRedundant() : this(AnalyzerConfiguration.AlwaysEnabled) { }
+
+        internal /* for testing */ MemberInitializerRedundant(IAnalyzerConfiguration configuration) =>
+            forceSonarCfg = !ControlFlowGraph.IsAvailable || configuration.ForceSonarCfg;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -63,15 +70,130 @@ namespace SonarAnalyzer.Rules.CSharp
                     // interfaces cannot have instance fields and instance properties cannot have initializers
                     if (declaration is ClassDeclarationSyntax)
                     {
-                        InitializationVerifierFactory.InstanceMemberInitializationVerifier.Report(c, declaration, members);
+                        InitializationVerifierFactory.InstanceMemberInitializationVerifier.Report(c, declaration, members, forceSonarCfg);
                     }
-                    InitializationVerifierFactory.StaticMemberInitializationVerifier.Report(c, declaration, members);
+                    InitializationVerifierFactory.StaticMemberInitializationVerifier.Report(c, declaration, members, forceSonarCfg);
                 },
                 // For record support, see details in https://github.com/SonarSource/sonar-dotnet/pull/4756
                 // it is difficult to work with instance record constructors w/o raising FPs
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration);
+
+        private class RedundancyChecker
+        {
+            private readonly ISymbol memberToCheck;
+            private readonly SemanticModel semanticModel;
+
+            public RedundancyChecker(ISymbol memberToCheck, SemanticModel semanticModel)
+            {
+                this.memberToCheck = memberToCheck;
+                this.semanticModel = semanticModel;
+            }
+
+            public bool IsMemberUsedInsideLambda(SyntaxNode instruction) =>
+                instruction.DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Select(GetPossibleMemberAccessParent)
+                    .Any(IsMatchingMember);
+
+            public static ExpressionSyntax GetPossibleMemberAccessParent(SyntaxNode node)
+            {
+                if (node is MemberAccessExpressionSyntax memberAccess)
+                {
+                    return memberAccess;
+                }
+                else
+                {
+                    return GetPossibleMemberAccessParent(node as IdentifierNameSyntax);
+                }
+            }
+
+            public bool IsMatchingMember(ExpressionSyntax expression)
+            {
+                IdentifierNameSyntax identifier = null;
+
+                if (expression.IsKind(SyntaxKind.IdentifierName))
+                {
+                    identifier = (IdentifierNameSyntax)expression;
+                }
+
+                if (expression is MemberAccessExpressionSyntax memberAccess
+                    && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+                {
+                    identifier = memberAccess.Name as IdentifierNameSyntax;
+                }
+
+                if (expression is ConditionalAccessExpressionSyntax conditionalAccess
+                    && conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+                {
+                    identifier = (conditionalAccess.WhenNotNull as MemberBindingExpressionSyntax)?.Name as IdentifierNameSyntax;
+                }
+
+                if (identifier == null)
+                {
+                    return false;
+                }
+
+                var assignedSymbol = semanticModel.GetSymbolInfo(identifier).Symbol;
+
+                return memberToCheck.Equals(assignedSymbol);
+            }
+
+            public bool TryGetReadWriteFromMemberAccess(ExpressionSyntax expression, out bool isRead)
+            {
+                isRead = false;
+
+                var parenthesized = expression.GetSelfOrTopParenthesizedExpression();
+
+                if (!IsMatchingMember(expression))
+                {
+                    return false;
+                }
+
+                if (IsOutArgument(parenthesized))
+                {
+                    isRead = false;
+                    return true;
+                }
+
+                if (IsReadAccess(parenthesized, this.semanticModel))
+                {
+                    isRead = true;
+                    return true;
+                }
+
+                return false;
+            }
+
+            private static ExpressionSyntax GetPossibleMemberAccessParent(IdentifierNameSyntax identifier)
+            {
+                if (identifier.Parent is MemberAccessExpressionSyntax memberAccess)
+                {
+                    return memberAccess;
+                }
+
+                if (identifier.Parent is MemberBindingExpressionSyntax memberBinding)
+                {
+                    return (ExpressionSyntax)memberBinding.Parent;
+                }
+
+                return identifier;
+            }
+
+            private static bool IsBeingAssigned(ExpressionSyntax expression) =>
+                expression.Parent is AssignmentExpressionSyntax assignment
+                && assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
+                && assignment.Left == expression;
+
+            private static bool IsOutArgument(ExpressionSyntax parenthesized) =>
+                parenthesized.Parent is ArgumentSyntax argument
+                && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
+
+            private static bool IsReadAccess(ExpressionSyntax parenthesized, SemanticModel semanticModel) =>
+                !IsBeingAssigned(parenthesized)
+                && !parenthesized.IsInNameOfArgument(semanticModel);
+        }
 
         private static class InitializationVerifierFactory
         {
@@ -82,7 +204,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     initializerFilter: method => method is { MethodKind: MethodKind.Constructor, IsStatic: false, IsImplicitlyDeclared: false },
                     fieldFilter: field => !field.Modifiers.Any(IsStaticOrConst),
                     propertyFilter: property => !property.Modifiers.Any(IsStaticOrConst),
-                    isSymbolFirstSetInInitializers: (fieldOrPropertySymbol, constructorDeclarations) =>
+                    isSymbolFirstSetInInitializers: (fieldOrPropertySymbol, constructorDeclarations, forceSonarCfg) =>
                         // the instance member should be initialized in ALL instance constructors
                         // otherwise, initializing it inline makes sense and the rule should not report
                         constructorDeclarations.All(constructor =>
@@ -94,7 +216,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 return true;
                             }
 
-                            return IsSymbolFirstSetInCfg(fieldOrPropertySymbol, constructor.Node, constructor.SemanticModel);
+                            return IsSymbolFirstSetInCfg(fieldOrPropertySymbol, constructor.Node, constructor.SemanticModel, forceSonarCfg);
                         }),
                     diagnosticMessage: InstanceMemberMessage);
 
@@ -106,10 +228,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     // only static members are interesting (const ones can only be initialized once)
                     fieldFilter: field => field.Modifiers.Any(IsStatic),
                     propertyFilter: property => property.Modifiers.Any(IsStatic),
-                    isSymbolFirstSetInInitializers: (fieldOrPropertySymbol, initializerDeclarations) =>
+                    isSymbolFirstSetInInitializers: (fieldOrPropertySymbol, initializerDeclarations, forceSonarCfg) =>
                         // there can be only one static constructor
                         // all module initializers are executed when the type is created, so it is enough if ANY initializes the member
-                        initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(fieldOrPropertySymbol, x.Node, x.SemanticModel)),
+                        initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(fieldOrPropertySymbol, x.Node, x.SemanticModel, forceSonarCfg)),
                     diagnosticMessage: StaticMemberMessage);
 
             private static bool IsStaticOrConst(SyntaxToken token) =>
@@ -122,16 +244,25 @@ namespace SonarAnalyzer.Rules.CSharp
             /// Returns true if the member is overwritten without being read in the instance constructor.
             /// Returns false if the member is not set in the constructor, or if it is read before being set.
             /// </summary>
-            private static bool IsSymbolFirstSetInCfg(ISymbol classMember, BaseMethodDeclarationSyntax constructorOrInitializer, SemanticModel semanticModel)
+            private static bool IsSymbolFirstSetInCfg(ISymbol classMember, BaseMethodDeclarationSyntax constructorOrInitializer, SemanticModel semanticModel, bool forceSonarCfg)
             {
                 var body = (CSharpSyntaxNode)constructorOrInitializer.Body ?? constructorOrInitializer.ExpressionBody();
-                if (!CSharpControlFlowGraph.TryGet(body, semanticModel, out var cfg))
+                if (forceSonarCfg)
                 {
-                    return false;
-                }
+                    if (!CSharpControlFlowGraph.TryGet(body, semanticModel, out var cfg))
+                    {
+                        return false;
+                    }
 
-                var checker = new MemberInitializerRedundancyChecker(cfg, classMember, semanticModel);
-                return checker.CheckAllPaths();
+                    var checker = new MemberInitializerRedundancyCheckerSonar(cfg, classMember, semanticModel);
+                    return checker.CheckAllPaths();
+                }
+                else
+                {
+                    var cfg = ControlFlowGraph.Create(body.Parent, semanticModel);
+                    var checker = new MemberInitializerRedundancyCheckerRoslyn(cfg, classMember, semanticModel);
+                    return checker.CheckAllPaths();
+                }
             }
         }
 
@@ -144,13 +275,13 @@ namespace SonarAnalyzer.Rules.CSharp
             // The second parameter is a list with the type initializers - the syntax node of the constructors/method, its symbol and its semantic model
             //
             // Read the implementations in InitializationVerifierFactory.
-            private readonly Func<ISymbol, List<NodeSymbolAndSemanticModel<TInitializerDeclaration, IMethodSymbol>>, bool> isSymbolFirstSetInInitializers;
+            private readonly Func<ISymbol, List<NodeSymbolAndSemanticModel<TInitializerDeclaration, IMethodSymbol>>, bool, bool> isSymbolFirstSetInInitializers;
             private readonly string diagnosticMessage;
 
             public InitializationVerifier(Func<IMethodSymbol, bool> initializerFilter,
                                    Func<BaseFieldDeclarationSyntax, bool> fieldFilter,
                                    Func<PropertyDeclarationSyntax, bool> propertyFilter,
-                                   Func<ISymbol, List<NodeSymbolAndSemanticModel<TInitializerDeclaration, IMethodSymbol>>, bool> isSymbolFirstSetInInitializers,
+                                   Func<ISymbol, List<NodeSymbolAndSemanticModel<TInitializerDeclaration, IMethodSymbol>>, bool, bool> isSymbolFirstSetInInitializers,
                                    string diagnosticMessage)
             {
                 this.initializerFilter = initializerFilter;
@@ -160,7 +291,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.diagnosticMessage = diagnosticMessage;
             }
 
-            public void Report(SyntaxNodeAnalysisContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
+            public void Report(SyntaxNodeAnalysisContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers, bool forceSonarCfg)
             {
                 var typeInitializers = typeMembers.OfType<IMethodSymbol>().Where(initializerFilter).ToList();
                 if (typeInitializers.Count == 0)
@@ -178,7 +309,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var initializerDeclarations = GetInitializerDeclarations<TInitializerDeclaration>(c, typeInitializers);
                 foreach (var memberSymbol in initializedMembers.Keys)
                 {
-                    if (isSymbolFirstSetInInitializers(memberSymbol, initializerDeclarations))
+                    if (isSymbolFirstSetInInitializers(memberSymbol, initializerDeclarations, forceSonarCfg))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), diagnosticMessage));
                     }
@@ -220,7 +351,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         new DeclarationTuple<IPropertySymbol>
                         {
                             Initializer = p.Initializer,
-                            SemanticModel = semanticModel,
                             Symbol = semanticModel.GetDeclaredSymbol(p)
                         })
                     .Where(t =>
@@ -242,7 +372,6 @@ namespace SonarAnalyzer.Rules.CSharp
                             new DeclarationTuple<TSymbol>
                             {
                                 Initializer = v.Initializer,
-                                SemanticModel = semanticModel,
                                 Symbol = semanticModel.GetDeclaredSymbol(v) as TSymbol
                             }))
                     .Where(t =>
@@ -254,213 +383,7 @@ namespace SonarAnalyzer.Rules.CSharp
             where TSymbol : ISymbol
         {
             public EqualsValueClauseSyntax Initializer { get; set; }
-            public SemanticModel SemanticModel { get; set; }
             public TSymbol Symbol { get; set; }
-        }
-
-        private class MemberInitializerRedundancyChecker : CfgAllPathValidator
-        {
-            private readonly ISymbol memberToCheck;
-            private readonly SemanticModel semanticModel;
-
-            public MemberInitializerRedundancyChecker(IControlFlowGraph cfg, ISymbol memberToCheck, SemanticModel semanticModel)
-                : base(cfg)
-            {
-                this.memberToCheck = memberToCheck;
-                this.semanticModel = semanticModel;
-            }
-
-            // Returns true if the block contains assignment before access
-            protected override bool IsBlockValid(Block block)
-            {
-                foreach (var instruction in block.Instructions)
-                {
-                    switch (instruction.Kind())
-                    {
-                        case SyntaxKind.IdentifierName:
-                        case SyntaxKind.SimpleMemberAccessExpression:
-                            {
-                                var memberAccess = GetPossibleMemberAccessParent(instruction);
-
-                                if (memberAccess != null
-                                    && TryGetReadWriteFromMemberAccess(memberAccess, out var isRead))
-                                {
-                                    return !isRead;
-                                }
-                            }
-                            break;
-                        case SyntaxKind.SimpleAssignmentExpression:
-                            {
-                                var assignment = (AssignmentExpressionSyntax)instruction;
-                                if (IsMatchingMember(assignment.Left.RemoveParentheses()))
-                                {
-                                    return true;
-                                }
-                            }
-                            break;
-                        default:
-                            // continue search
-                            break;
-                    }
-                }
-
-                return false;
-            }
-
-            // Returns true if the block contains access before assignment
-            protected override bool IsBlockInvalid(Block block)
-            {
-                foreach (var instruction in block.Instructions)
-                {
-                    switch (instruction.Kind())
-                    {
-                        case SyntaxKind.IdentifierName:
-                        case SyntaxKind.SimpleMemberAccessExpression:
-                            {
-                                var memberAccess = GetPossibleMemberAccessParent(instruction);
-
-                                if (memberAccess != null
-                                    && TryGetReadWriteFromMemberAccess(memberAccess, out var isRead))
-                                {
-                                    return isRead;
-                                }
-                            }
-                            break;
-                        case SyntaxKind.SimpleAssignmentExpression:
-                            {
-                                var assignment = (AssignmentExpressionSyntax)instruction;
-                                if (IsMatchingMember(assignment.Left))
-                                {
-                                    return false;
-                                }
-                            }
-                            break;
-
-                        case SyntaxKind.AnonymousMethodExpression:
-                        case SyntaxKind.ParenthesizedLambdaExpression:
-                        case SyntaxKind.SimpleLambdaExpression:
-                        case SyntaxKind.QueryExpression:
-                            {
-                                if (IsMemberUsedInsideLambda(instruction))
-                                {
-                                    return true;
-                                }
-                            }
-                            break;
-                        default:
-                            // continue search
-                            break;
-                    }
-                }
-
-                return false;
-            }
-
-            private bool TryGetReadWriteFromMemberAccess(ExpressionSyntax expression, out bool isRead)
-            {
-                isRead = false;
-
-                var parenthesized = expression.GetSelfOrTopParenthesizedExpression();
-
-                if (!IsMatchingMember(expression))
-                {
-                    return false;
-                }
-
-                if (IsOutArgument(parenthesized))
-                {
-                    isRead = false;
-                    return true;
-                }
-
-                if (IsReadAccess(parenthesized, this.semanticModel))
-                {
-                    isRead = true;
-                    return true;
-                }
-
-                return false;
-            }
-
-            private static bool IsOutArgument(ExpressionSyntax parenthesized) =>
-                parenthesized.Parent is ArgumentSyntax argument
-                && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
-
-            private static bool IsReadAccess(ExpressionSyntax parenthesized, SemanticModel semanticModel) =>
-                !IsBeingAssigned(parenthesized)
-                && !parenthesized.IsInNameOfArgument(semanticModel);
-
-            private bool IsMemberUsedInsideLambda(SyntaxNode instruction) =>
-                instruction.DescendantNodes()
-                    .OfType<IdentifierNameSyntax>()
-                    .Select(i => GetPossibleMemberAccessParent(i))
-                    .Any(i => IsMatchingMember(i));
-
-            private static ExpressionSyntax GetPossibleMemberAccessParent(SyntaxNode node)
-            {
-                if (node is MemberAccessExpressionSyntax memberAccess)
-                {
-                    return memberAccess;
-                }
-
-                if (node is IdentifierNameSyntax identifier)
-                {
-                    return GetPossibleMemberAccessParent(identifier);
-                }
-
-                return null;
-            }
-
-            private static ExpressionSyntax GetPossibleMemberAccessParent(IdentifierNameSyntax identifier)
-            {
-                if (identifier.Parent is MemberAccessExpressionSyntax memberAccess)
-                {
-                    return memberAccess;
-                }
-
-                if (identifier.Parent is MemberBindingExpressionSyntax memberBinding)
-                {
-                    return (ExpressionSyntax)memberBinding.Parent;
-                }
-
-                return identifier;
-            }
-
-            private static bool IsBeingAssigned(ExpressionSyntax expression) =>
-                expression.Parent is AssignmentExpressionSyntax assignment
-                && assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
-                && assignment.Left == expression;
-
-            private bool IsMatchingMember(ExpressionSyntax expression)
-            {
-                IdentifierNameSyntax identifier = null;
-
-                if (expression.IsKind(SyntaxKind.IdentifierName))
-                {
-                    identifier = (IdentifierNameSyntax)expression;
-                }
-
-                if (expression is MemberAccessExpressionSyntax memberAccess
-                    && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
-                {
-                    identifier = memberAccess.Name as IdentifierNameSyntax;
-                }
-
-                if (expression is ConditionalAccessExpressionSyntax conditionalAccess
-                    && conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
-                {
-                    identifier = (conditionalAccess.WhenNotNull as MemberBindingExpressionSyntax)?.Name as IdentifierNameSyntax;
-                }
-
-                if (identifier == null)
-                {
-                    return false;
-                }
-
-                var assignedSymbol = semanticModel.GetSymbolInfo(identifier).Symbol;
-
-                return memberToCheck.Equals(assignedSymbol);
-            }
         }
     }
 }
