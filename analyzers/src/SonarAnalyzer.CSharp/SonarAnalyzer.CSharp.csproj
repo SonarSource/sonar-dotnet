@@ -27,29 +27,19 @@
     </PackageReference>
     <!--
         For Newtonsoft.Json, to be able to overcome https://github.com/SonarSource/sonar-dotnet/issues/4808
+        See SonarAnalyzer.ILRepack.csproj for more details on the ILRepack target.
     -->
-    <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.2">
-        <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" ExcludeAssets="Compile" GeneratePathProperty="true" />
     <Reference Include="Newtonsoft.Json">
         <HintPath>$(NuGetPackageRoot)\newtonsoft.json\13.0.1\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
-  
-  <Target Name="PrintNuGetPackageRoot" BeforeTargets="Build" >
-    <Message Text="NuGetPackageRoot is $(NuGetPackageRoot)" Importance="high"/>
-  </Target>
 
   <ItemGroup>
     <ProjectReference Include="..\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <None Include="ILRepack.targets" />
-  </ItemGroup>
-    
+
   <ItemGroup>
     <EmbeddedResource Include="$(dotnet_symbolic_execution_windows)" />
 

@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>SonarAnalyzer</RootNamespace>
+    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+    <ProjectGuid>{c74616e8-d816-4dc2-86f4-3a5a585314d3}</ProjectGuid>
+    <!--
+     For .Net Standard this is no longer done automatically so we have to enable it.
+     The assemblies are needed by the ILRepack task and for publishing.
+    -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+        For Newtonsoft.Json, to be able to overcome https://github.com/SonarSource/sonar-dotnet/issues/4808
+    -->
+    <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.2">
+        <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="ILRepack.targets" />
+  </ItemGroup>
+
+</Project>
