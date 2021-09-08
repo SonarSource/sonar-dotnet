@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>SonarAnalyzer</RootNamespace>
-    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net46</TargetFrameworks>
     <ProjectGuid>{c74616e8-d816-4dc2-86f4-3a5a585314d3}</ProjectGuid>
     <!--
      For .Net Standard this is no longer done automatically so we have to enable it.

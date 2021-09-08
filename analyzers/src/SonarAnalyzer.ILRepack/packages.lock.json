@@ -406,37 +406,6 @@
           "System.Collections.Immutable": "1.1.37"
         }
       }
-    },
-    ".NETStandard,Version=v2.0": {
-      "ILRepack.Lib.MSBuild.Task": {
-        "type": "Direct",
-        "requested": "[2.0.18.2, )",
-        "resolved": "2.0.18.2",
-        "contentHash": "lreK19MMDA/ekeqjLY4w171cG7+pHwjeTMHMNq6tghuhTOIOfHT+b/LTMj5jpfbJoR7J6AMD3yOYZoyY/2wtJA=="
-      },
-      "NETStandard.Library": {
-        "type": "Direct",
-        "requested": "[2.0.3, )",
-        "resolved": "2.0.3",
-        "contentHash": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0"
-        }
-      },
-      "StyleCop.Analyzers": {
-        "type": "Direct",
-        "requested": "[1.1.118, )",
-        "resolved": "1.1.118",
-        "contentHash": "Onx6ovGSqXSK07n/0eM3ZusiNdB6cIlJdabQhWGgJp3Vooy9AaLS/tigeybOJAobqbtggTamoWndz72JscZBvw=="
-      },
-      "Microsoft.NETCore.Platforms": {
-        "type": "Transitive",
-        "resolved": "1.1.0",
-        "contentHash": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A=="
-      },
-      "sonaranalyzer.ruledescriptorgenerator": {
-        "type": "Project"
-      }
     }
   }
 }
