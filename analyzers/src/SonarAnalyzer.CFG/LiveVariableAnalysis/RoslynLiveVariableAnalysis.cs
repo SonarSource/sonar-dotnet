@@ -124,7 +124,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         private void ProcessBlockInternal(BasicBlock block, State state)
         {
-            foreach (var operation in ToExecutionOrder(block.BranchValueAndOperations.Reverse()))
+            foreach (var operation in ToExecutionOrder(block.OperationsAndBranchValue.Reverse()))
             {
                 switch (operation.Instance.Kind)
                 {
@@ -270,11 +270,10 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         //private bool IsLocalScoped(ISymbol symbol) =>
         //    IsLocalScoped(symbol, declaration);
 
-        private class StackItem : IDisposable
+        private sealed class StackItem : IDisposable
         {
             private readonly IOperationWrapperSonar operation;
             private readonly IEnumerator<IOperation> children;
-            private bool isDisposed;
 
             public StackItem(IOperation operation)
             {
@@ -291,17 +290,8 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 return operation;
             }
 
-            protected virtual void Dispose(bool disposing)
-            {
-                if (!isDisposed)
-                {
-                    children.Dispose();
-                    isDisposed = true;
-                }
-            }
-
             public void Dispose() =>
-                Dispose(true);
+                children.Dispose();
         }
     }
 }
