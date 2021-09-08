@@ -21,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.csproj" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <None Include="ILRepack.targets" />
   </ItemGroup>
