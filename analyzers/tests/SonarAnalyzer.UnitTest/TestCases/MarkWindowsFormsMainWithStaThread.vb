@@ -14,8 +14,6 @@ Namespace Tests.TestCases
   Public Class Program_01
     Shared Sub Main() ' Noncompliant {{Add the 'STAThread' attribute to this entry point.}}
 '              ^^^^
-      Dim winForm As Form = New Form
-      Application.Run(winForm)
     End Sub
   End Class
 
@@ -46,15 +44,11 @@ Namespace Tests.TestCases
 
   Public Class Program_07
     <STAThread()> Shared Sub Main()
-      Dim winForm As Form = New Form
-      Application.Run(winForm)
     End Sub
   End Class
 
   Public Class Program_08
     <STAThread> Shared Sub Main(args As String())
-      Dim winForm As Form = New Form
-      Application.Run(winForm)
     End Sub
   End Class
 

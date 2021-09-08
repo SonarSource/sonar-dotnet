@@ -20,7 +20,6 @@
 
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -54,7 +53,7 @@ Public Class Sample
 
 End Class";
             var sut = CreateCollector(code);
-            var ret = sut.GetRemovableFieldLikeDeclarations(new[] { SyntaxKind.FieldDeclaration }.ToHashSet(), Accessibility.Public);
+            var ret = sut.GetRemovableFieldLikeDeclarations(new[] { SyntaxKind.FieldDeclaration }.ToHashSet(), Microsoft.CodeAnalysis.Accessibility.Public);
             ret.Should().HaveCount(5);
             ret.Select(x => x.Symbol.Name).Should().BeEquivalentTo("CompliantA", "CompliantB", "CompliantC", "FieldInNestedClass", "FieldInNestedStruct");
         }
@@ -110,14 +109,14 @@ Public Class Sample
 
 End Class";
             var sut = CreateCollector(code);
-            var ret = sut.GetRemovableDeclarations(new[] { SyntaxKind.SubBlock, SyntaxKind.SubStatement }.ToHashSet(), Accessibility.Public);
+            var ret = sut.GetRemovableDeclarations(new[] { SyntaxKind.SubBlock, SyntaxKind.SubStatement }.ToHashSet(), Microsoft.CodeAnalysis.Accessibility.Public);
             ret.Should().ContainSingle();
             ret.Single().Symbol.Name.Should().Be("RemovableMethod");
         }
 
         [TestMethod]
         public void IsRemovable_Null_ReturnsFalse() =>
-            VisualBasicRemovableDeclarationCollector.IsRemovable(null, Accessibility.Public).Should().BeFalse();
+            VisualBasicRemovableDeclarationCollector.IsRemovable(null, Microsoft.CodeAnalysis.Accessibility.Public).Should().BeFalse();
 
         private static VisualBasicRemovableDeclarationCollector CreateCollector(string code)
         {

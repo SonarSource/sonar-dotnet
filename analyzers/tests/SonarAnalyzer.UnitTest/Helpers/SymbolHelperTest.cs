@@ -280,6 +280,6 @@ namespace NS
 
         [TestMethod]
         public void GetEffectiveAccessibility_WhenSymbolIsNull_ReturnsNotApplicable() =>
-            ((ISymbol)null).GetEffectiveAccessibility().Should().Be(Accessibility.NotApplicable);
+            ((ISymbol)null).GetEffectiveAccessibility().Should().Be(Microsoft.CodeAnalysis.Accessibility.NotApplicable);
     }
 }
