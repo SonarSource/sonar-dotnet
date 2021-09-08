@@ -64,6 +64,10 @@ public class Sample
             validator = new TestCfgValidator(cfg, 0);
             validator.CheckAllPaths().Should().BeTrue();
 
+            // only exit block is valid
+            validator = new TestCfgValidator(cfg, 4);
+            validator.CheckAllPaths().Should().BeFalse();
+
             var nonEntryBlockValid = new TestNonEntryBlockValidator(cfg);
             nonEntryBlockValid.CheckAllPaths().Should().BeTrue();
         }
