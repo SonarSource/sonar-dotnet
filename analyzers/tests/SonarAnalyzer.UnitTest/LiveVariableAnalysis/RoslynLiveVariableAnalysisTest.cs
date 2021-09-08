@@ -22,14 +22,10 @@ using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;    //FIXME: VB
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
-//FIXME: using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using SonarAnalyzer.UnitTest.CFG.Sonar; //FIXME: Shouldn't be needed
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
 {
@@ -202,6 +198,8 @@ Method(intParameter, value);";
             context.Validate(context.Block("Method(intParameter, value);"), new LiveIn("value", "intParameter"));
             context.Validate(context.Cfg.ExitBlock);
         }
+
+        //FIXME: VB version of this
 
         [TestMethod]
         public void BranchedPropagationChain_LiveIn_LiveOut()
@@ -660,9 +658,8 @@ public class Sample
     private bool IsMethod(params bool[] args) => true;
     private void Capturing(System.Func<int, int> f) {{ }}
 }}";
-                var method = SonarControlFlowGraphTest.CompileWithMethodBody(code, "Main", out var semanticModel);
+                var (method, semanticModel) = TestHelper.Compile(code).GetMethod("Main");
                 Cfg = ControlFlowGraph.Create(method, semanticModel);
-                var symbol = semanticModel.GetDeclaredSymbol(method);
                 if (localFunctionName != null)
                 {
                     TmpNotImplemented();
@@ -672,7 +669,7 @@ public class Sample
                     //body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
                 }
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
-                Lva = new RoslynLiveVariableAnalysis(Cfg, symbol, semanticModel);
+                Lva = new RoslynLiveVariableAnalysis(Cfg);
             }
 
             public BasicBlock Block(string withSyntax = null) =>

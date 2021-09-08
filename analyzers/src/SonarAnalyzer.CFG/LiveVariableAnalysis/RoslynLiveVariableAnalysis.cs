@@ -23,31 +23,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-//FIXME: using Microsoft.CodeAnalysis.CSharp;
-//FIXME: using Microsoft.CodeAnalysis.CSharp.Syntax;
-//FIXME:
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
-//FIXME: using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 {
     public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
     {
-        private readonly ISymbol declaration;
-        private readonly SemanticModel semanticModel;
-
         protected override BasicBlock ExitBlock => cfg.ExitBlock;
 
-        //FIXME: What about LocalLifetime regions? Can we improve based on them?
-
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel) : base(cfg)
-        {
-            this.declaration = declaration;
-            this.semanticModel = semanticModel;
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg) : base(cfg) =>
             Analyze();
-        }
 
         protected override IEnumerable<BasicBlock> ReversedBlocks() =>
             cfg.Blocks.Reverse();
@@ -63,31 +50,11 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
             && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
 
-        //internal static bool IsLocalScoped(ISymbol symbol, ISymbol declaration)
-        //{
-        //    return IsLocalOrParameterSymbol()
-        //        && symbol.ContainingSymbol != null
-        //        && symbol.ContainingSymbol.Equals(declaration);
-
-        //    bool IsLocalOrParameterSymbol() =>
-        //        (symbol is ILocalSymbol local && local.RefKind() == RefKind.None)
-        //        || (symbol is IParameterSymbol parameter && parameter.RefKind == RefKind.None);
-        //}
-
         protected override State ProcessBlock(BasicBlock block)
         {
             //FIXME: Ugly
             var ret = new State();
             ProcessBlockInternal(block, ret);
-
-            // FIXME: Remove debug
-            Console.WriteLine();
-            Console.WriteLine($"Processing {block.Kind} #{block.Ordinal}");
-            Console.WriteLine($"Assigned: " + string.Join(", ", ret.Assigned.Select(x => x.Name)));
-            Console.WriteLine($"UsedBeforeAssigned: " + string.Join(", ", ret.UsedBeforeAssigned.Select(x => x.Name)));
-            Console.WriteLine($"ProcessedLocalFunctions: " + string.Join(", ", ret.ProcessedLocalFunctions.Select(x => x.Name)));
-            Console.WriteLine($"Captured: " + string.Join(", ", ret.Captured.Select(x => x.Name)));
-
             return ret;
         }
 
@@ -147,12 +114,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                         //                ProcessGenericName((GenericNameSyntax)instruction, state);
                         //                break;
 
-                        //            case SyntaxKind.AnonymousMethodExpression:
-                        //            case SyntaxKind.ParenthesizedLambdaExpression:
-                        //            case SyntaxKind.SimpleLambdaExpression:
-                        //            case SyntaxKind.QueryExpression:
-                        //                CollectAllCapturedLocal(instruction, state);
-                        //                break;
                 }
             }
             //FIXME: Something is still missing around here
@@ -277,9 +238,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                 _ => null
             };
-
-        //private bool IsLocalScoped(ISymbol symbol) =>
-        //    IsLocalScoped(symbol, declaration);
 
         private sealed class StackItem : IDisposable
         {
