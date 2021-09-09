@@ -43,6 +43,11 @@ Namespace Tests.TestCases
             Throw New ArgumentException("argument and arg1") ' Noncompliant
             Throw New ArgumentException("argument and arg1", NameOf(arg1))
 
+            Throw New aRGUMENTeXCEPTION("This is ARGUMENT.") ' Noncompliant
+            Throw New aRGUMENTeXCEPTION("This is ARGUMENT.", NameOf(argument))
+            Throw New aRGUMENTeXCEPTION("ARGUMENT and ARG1") ' Noncompliant
+            Throw New aRGUMENTeXCEPTION("ARGUMENT and ARG1", NameOf(arg1))
+
             Throw New ArgumentNullException("arg1") ' Noncompliant
             Throw New ArgumentNullException(NameOf(arg1))
             Throw New ArgumentNullException(NameOf(argument), "argument")

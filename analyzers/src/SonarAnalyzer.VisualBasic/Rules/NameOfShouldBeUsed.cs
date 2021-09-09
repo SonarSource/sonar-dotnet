@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -32,39 +31,31 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class NameOfShouldBeUsed : NameOfShouldBeUsedBase<MethodBlockBaseSyntax>
+    public sealed class NameOfShouldBeUsed : NameOfShouldBeUsedBase<MethodBlockBaseSyntax, SyntaxKind, ThrowStatementSyntax>
     {
-        private static readonly HashSet<SyntaxKind> StringTokenTypes
-            = new HashSet<SyntaxKind>
+        private static readonly HashSet<SyntaxKind> StringTokenTypes = new HashSet<SyntaxKind>
             {
                 SyntaxKind.InterpolatedStringTextToken,
                 SyntaxKind.StringLiteralToken
             };
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override DiagnosticDescriptor Rule { get; } = rule;
-
-        protected override bool IsCaseSensitive => false;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override bool IsStringLiteral(SyntaxToken t) => t.IsAnyKind(StringTokenTypes);
 
         protected override IEnumerable<string> GetParameterNames(MethodBlockBaseSyntax method)
         {
-            var paramGroups = method.BlockStatement.ParameterList?.Parameters
-                .GroupBy(p => p.Identifier.Identifier.ValueText);
-
-            if (paramGroups == null ||
-                paramGroups.Any(g => g.Count() != 1))
+            var paramGroups = method.BlockStatement.ParameterList?.Parameters.GroupBy(p => p.Identifier.Identifier.ValueText);
+            if (paramGroups == null || paramGroups.Any(g => g.Count() != 1))
             {
                 return Enumerable.Empty<string>();
             }
 
             return paramGroups.Select(g => g.First().Identifier.Identifier.ValueText);
         }
+
+        protected override bool LeastLanguageVersionMatches(SyntaxNodeAnalysisContext context) =>
+            context.Compilation.IsAtLeastLanguageVersion(LanguageVersion.VisualBasic14);
 
         protected override bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments)
         {
@@ -79,23 +70,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             return false;
         }
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    if (!c.Compilation.IsAtLeastLanguageVersion(LanguageVersion.VisualBasic14))
-                    {
-                        return;
-                    }
-
-                    ReportIssues<ThrowStatementSyntax>(c);
-                },
-                SyntaxKind.SubBlock,
-                SyntaxKind.FunctionBlock,
-                SyntaxKind.ConstructorBlock);
-        }
     }
 }
-

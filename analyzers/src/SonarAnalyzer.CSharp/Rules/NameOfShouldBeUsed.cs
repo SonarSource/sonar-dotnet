@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -33,38 +32,30 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class NameOfShouldBeUsed : NameOfShouldBeUsedBase<BaseMethodDeclarationSyntax>
+    public sealed class NameOfShouldBeUsed : NameOfShouldBeUsedBase<BaseMethodDeclarationSyntax, SyntaxKind, ThrowStatementSyntax>
     {
-        private static readonly HashSet<SyntaxKind> StringTokenTypes
-            = new HashSet<SyntaxKind>
+        private static readonly HashSet<SyntaxKind> StringTokenTypes = new HashSet<SyntaxKind>
             {
                 SyntaxKind.InterpolatedStringTextToken,
                 SyntaxKind.StringLiteralToken
             };
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override DiagnosticDescriptor Rule { get; } = rule;
-
-        protected override bool IsCaseSensitive => true;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override bool IsStringLiteral(SyntaxToken t) => t.IsAnyKind(StringTokenTypes);
 
         protected override IEnumerable<string> GetParameterNames(BaseMethodDeclarationSyntax method)
         {
-            var paramGroups = method.ParameterList?.Parameters
-                .GroupBy(p => p.Identifier.ValueText);
-
-            if (paramGroups != null &&
-                paramGroups.Any(g => g.Count() != 1))
+            var paramGroups = method.ParameterList?.Parameters.GroupBy(p => p.Identifier.ValueText);
+            if (paramGroups != null && paramGroups.Any(g => g.Count() != 1))
             {
                 return Enumerable.Empty<string>();
             }
-
             return paramGroups.Select(g => g.First().Identifier.ValueText);
         }
+
+        protected override bool LeastLanguageVersionMatches(SyntaxNodeAnalysisContext context) =>
+            context.Compilation.IsAtLeastLanguageVersion(LanguageVersion.CSharp6);
 
         protected override bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments)
         {
@@ -80,22 +71,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return false;
-        }
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    if (!c.Compilation.IsAtLeastLanguageVersion(LanguageVersion.CSharp6))
-                    {
-                        return;
-                    }
-
-                    ReportIssues<ThrowStatementSyntax>(c);
-                },
-                SyntaxKind.MethodDeclaration,
-                SyntaxKind.ConstructorDeclaration);
         }
     }
 }
