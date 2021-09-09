@@ -48,6 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         "property's recursion",
                         isSetAccessor: false);
                     walker.CheckPaths();
+                    // cannot meet goto s here, check for unreachable exit node is not needed here
                     return;
                 }
 
@@ -61,7 +62,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             new RecursionAnalysisContext<ControlFlowGraph>(cfg, propertySymbol, accessor.Keyword.GetLocation(), c),
                             "property accessor's recursion",
                             isSetAccessor: accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
-                        walker.CheckPaths();
+                        if (!walker.CheckPaths() && !cfg.ExitBlock.IsReachable)
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, accessor.Keyword.GetLocation(), "property accessor's recursion"));
+                        }
                     }
                 }
             }
@@ -100,7 +104,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var walker = new CfgWalkerForMethod(new RecursionAnalysisContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c));
-                walker.CheckPaths();
+                if (!walker.CheckPaths() && !cfg.ExitBlock.IsReachable)
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), "method's recursion"));
+                }
             }
 
             private class CfgWalkerForMethod : CfgRecursionSearcher
@@ -177,12 +184,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     this.reportIssue = reportIssue;
                 }
 
-                public void CheckPaths()
+                public bool CheckPaths()
                 {
                     if (CheckAllPaths())
                     {
                         reportIssue();
+                        return true;
                     }
+
+                    return false;
                 }
 
                 protected override bool IsValid(BasicBlock block) =>
