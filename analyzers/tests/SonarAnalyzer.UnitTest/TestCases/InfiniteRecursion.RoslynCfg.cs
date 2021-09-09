@@ -35,15 +35,15 @@ namespace Tests.Diagnostics
             }
         }
 
-        void Test2()
+        void Test2()  // Noncompliant
         {
             var i = 10;
             switch (i)
             {
                 case 1:
-                    goto default;
+                    goto default;  // Missing secondary location
                 default:
-                    goto case 1; // FN
+                    goto case 1;   // Missing secondary location
             }
         }
 
@@ -136,12 +136,38 @@ namespace Tests.Diagnostics
             }
         }
 
-        void InternalRecursion(int i)
+        int RecursiveProp1
+        {
+            get  // Noncompliant
+            {
+                start:
+                    goto end;
+                end:
+                    goto start;
+                return 42;
+            }
+        }
+
+        private int backing;
+
+        int RecursiveProp2
+        {
+            set  // Noncompliant
+            {
+                start:
+                    goto end;
+                end:
+                    goto start;
+                backing = value;
+            }
+        }
+
+        void InternalRecursion(int i)  // Noncompliant
         {
         start:
-            goto end;
+            goto end;    // Missing secondary location
         end:
-            goto start; // Compliant FN
+            goto start;  // Missing secondary location
 
             switch (i)
             {
