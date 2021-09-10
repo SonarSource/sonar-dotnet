@@ -40,8 +40,6 @@ namespace SonarAnalyzer.SymbolicExecution
     {
         private const string isNullOrEmpty = "IsNullOrEmpty";
         private const string isNullOrWhiteSpace = "IsNullOrWhiteSpace";
-        private const int SyntaxKindRelationalPattern = 9029;
-        private const int SyntaxKindTypePattern = 9030;
 
         public CSharpExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, AbstractLiveVariableAnalysis lva)
             : base(cfg, declaration, semanticModel, lva)
@@ -562,13 +560,28 @@ namespace SonarAnalyzer.SymbolicExecution
                     // Do nothing
                     break;
 
-                case (SyntaxKind)SyntaxKindTypePattern:
+                case SyntaxKindEx.TypePattern:
                     // TypePattern is not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/4104
                     // Do nothing
                     break;
 
-                case (SyntaxKind)SyntaxKindRelationalPattern:
+                case SyntaxKindEx.RelationalPattern:
                     // RelationalPattern is not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/4104
+                    // Do nothing
+                    break;
+
+                case SyntaxKindEx.AndPattern:
+                    // AndPattern is not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/4880
+                    // Do nothing
+                    break;
+
+                case SyntaxKindEx.OrPattern:
+                    // OrPattern is not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/4880
+                    // Do nothing
+                    break;
+
+                case SyntaxKindEx.NotPattern:
+                    // NotPattern is not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/4880
                     // Do nothing
                     break;
 

@@ -123,7 +123,10 @@ namespace Tests.Diagnostics
     }
 }
 
-namespace Repro4104 // See: https://github.com/SonarSource/sonar-dotnet/issues/4104
+
+// See: https://github.com/SonarSource/sonar-dotnet/issues/4880
+// See: https://github.com/SonarSource/sonar-dotnet/issues/4104
+namespace Repros
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -144,6 +147,36 @@ namespace Repro4104 // See: https://github.com/SonarSource/sonar-dotnet/issues/4
             switch (i)
             {
                 case > 0: // RelationalPattern is not supported
+                    break;
+            }
+        }
+
+        public void AndPattern()
+        {
+            var value = true;
+            switch (value)
+            {
+                case true and true: // AndPattern is not supported
+                    break;
+            }
+        }
+
+        public void OrPattern()
+        {
+            var value = true;
+            switch (value)
+            {
+                case true or true: // OrPattern is not supported
+                    break;
+            }
+        }
+
+        public void NotPattern()
+        {
+            var value = true;
+            switch (value)
+            {
+                case not false: // NotPattern is not supported
                     break;
             }
         }
