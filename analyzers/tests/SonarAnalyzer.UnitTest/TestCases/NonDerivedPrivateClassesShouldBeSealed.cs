@@ -66,7 +66,7 @@ namespace Tests.Diagnostics
     public partial class Bar
     {
         private class SomeOtherClass : SomeClass //Noncompliant
-        {
+    {
 
         }
     }
