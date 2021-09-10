@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -30,19 +29,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class MarkWindowsFormsMainWithStaThread : MarkWindowsFormsMainWithStaThreadBase<MethodBlockSyntax>
+    public sealed class MarkWindowsFormsMainWithStaThread : MarkWindowsFormsMainWithStaThreadBase<SyntaxKind, MethodBlockSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+        protected override SyntaxKind[] SyntaxKinds { get; } =
+        {
+            SyntaxKind.FunctionBlock,
+            SyntaxKind.SubBlock
+        };
 
         protected override Location GetLocation(MethodBlockSyntax method) =>
             method.SubOrFunctionStatement.Identifier.GetLocation();
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Action,
-                SyntaxKind.FunctionBlock,
-                SyntaxKind.SubBlock);
     }
 }
