@@ -38,24 +38,36 @@ Namespace Tests.TestCases
             Throw New ArgumentException("argument123")
             Throw New ArgumentException("arg123")
 
-            ' See https://github.com/SonarSource/sonar-dotnet/issues/4454
             Throw New ArgumentException("This is argument.") ' Noncompliant
-            Throw New ArgumentException("This is argument.", NameOf(argument)) ' Noncompliant FP
+            Throw New ArgumentException("This is argument.", NameOf(argument))
             Throw New ArgumentException("argument and arg1") ' Noncompliant
-            Throw New ArgumentException("argument and arg1", NameOf(arg1)) ' Noncompliant FP
+            Throw New ArgumentException("argument and arg1", NameOf(arg1))
+
+            Throw New aRGUMENTeXCEPTION("This is ARGUMENT.") ' Noncompliant
+            Throw New aRGUMENTeXCEPTION("This is ARGUMENT.", NameOf(argument))
+            Throw New aRGUMENTeXCEPTION("ARGUMENT and ARG1") ' Noncompliant
+            Throw New aRGUMENTeXCEPTION("ARGUMENT and ARG1", NameOf(arg1))
 
             Throw New ArgumentNullException("arg1") ' Noncompliant
             Throw New ArgumentNullException(NameOf(arg1))
-            Throw New ArgumentNullException(NameOf(argument), "argument") ' Noncompliant
-            Throw New ArgumentNullException(NameOf(argument), "Incorrect argument value") ' Noncompliant FP
+            Throw New ArgumentNullException(NameOf(argument), "argument")
+            Throw New ArgumentNullException(NameOf(argument), "Incorrect argument value")
 
             Throw New ArgumentOutOfRangeException("arg1") ' Noncompliant
             Throw New ArgumentOutOfRangeException(NameOf(arg1))
-            Throw New ArgumentOutOfRangeException(NameOf(argument), "argument") ' Noncompliant
-            Throw New ArgumentOutOfRangeException(NameOf(argument), "Incorrect argument value") ' Noncompliant FP
-            Throw New ArgumentOutOfRangeException(NameOf(argument), argument, "argument") ' Noncompliant
-            Throw New ArgumentOutOfRangeException(NameOf(argument), argument, "Incorrect argument value") ' Noncompliant FP
+            Throw New ArgumentOutOfRangeException(NameOf(argument), "argument")
+            Throw New ArgumentOutOfRangeException(NameOf(argument), "Incorrect argument value")
+            Throw New ArgumentOutOfRangeException(NameOf(argument), argument, "argument")
+            Throw New ArgumentOutOfRangeException(NameOf(argument), argument, "Incorrect argument value")
 
+            Dim ex1 as ArgumentException
+            ex1 = New ArgumentException("This is argument.") ' FN
+            Throw ex1
+            Dim ex2 as ArgumentException
+            ex2 = New ArgumentException("This is argument.", NameOf(argument))
+            Throw ex2
+
+            Throw New ArgumentException(NameOf(argument), NameOf(arg1), New ArgumentException("argument", NameOf(arg1)))
         End Sub
 
         Private Sub ValidateArgument(v As Integer, name As String)
@@ -102,4 +114,12 @@ Namespace Tests.TestCases
             Throw New Exception("argumentName") ' Noncompliant
         End Function
     End Class
+
+    Public Interface EmberTVScraperModule
+
+        Sub SubWithNoBody()
+
+        Function FunctionWithNoBody() As Boolean
+
+    End Interface
 End Namespace

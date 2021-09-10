@@ -28,32 +28,6 @@
 },
 {
 "id":  "S2302",
-"message":  "Replace the string 'singletonIdentificationInterval' with 'nameof(singletonIdentificationInterval)'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxySettings.cs",
-"region":  {
-"startLine":  101,
-"startColumn":  45,
-"endLine":  101,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'bufferSize' with 'nameof(bufferSize)'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxySettings.cs",
-"region":  {
-"startLine":  103,
-"startColumn":  45,
-"endLine":  103,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S2302",
 "message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\Serialization\ClusterSingletonMessageSerializer.cs",

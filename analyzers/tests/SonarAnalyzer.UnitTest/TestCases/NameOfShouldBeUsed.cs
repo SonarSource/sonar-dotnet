@@ -37,23 +37,29 @@ namespace Tests.Diagnostics
             throw new ArgumentException("arg "); // too short name
             throw new ArgumentException("arg!"); // too short name
 
-            // See https://github.com/SonarSource/sonar-dotnet/issues/4454
             throw new ArgumentException("This is argument."); // Noncompliant
-            throw new ArgumentException("This is argument.", nameof(argument)); // Noncompliant FP
+            throw new ArgumentException("This is argument.", nameof(argument));
             throw new ArgumentException("argument and arg1"); // Noncompliant
-            throw new ArgumentException("argument and arg1", nameof(arg1)); // Noncompliant FP
+            throw new ArgumentException("argument and arg1", nameof(arg1));
 
             throw new ArgumentNullException("arg1"); // Noncompliant
             throw new ArgumentNullException(nameof(arg1));
-            throw new ArgumentNullException(nameof(argument), "argument"); // Noncompliant
-            throw new ArgumentNullException(nameof(argument), "Incorrect argument value"); // Noncompliant FP
+            throw new ArgumentNullException(nameof(argument), "argument");
+            throw new ArgumentNullException(nameof(argument), "Incorrect argument value");
 
             throw new ArgumentOutOfRangeException("arg1"); // Noncompliant
             throw new ArgumentOutOfRangeException(nameof(arg1));
-            throw new ArgumentOutOfRangeException(nameof(argument), "argument"); // Noncompliant
-            throw new ArgumentOutOfRangeException(nameof(argument), "Incorrect argument value"); // Noncompliant FP
-            throw new ArgumentOutOfRangeException(nameof(argument), argument, "argument"); // Noncompliant
-            throw new ArgumentOutOfRangeException(nameof(argument), argument, "Incorrect argument value"); // Noncompliant FP
+            throw new ArgumentOutOfRangeException(nameof(argument), "argument");
+            throw new ArgumentOutOfRangeException(nameof(argument), "Incorrect argument value");
+            throw new ArgumentOutOfRangeException(nameof(argument), argument, "argument");
+            throw new ArgumentOutOfRangeException(nameof(argument), argument, "Incorrect argument value");
+
+            var ex1 = new ArgumentException("This is argument."); // FN
+            throw ex1;
+            var ex2 = new ArgumentException("This is argument.", nameof(argument));
+            throw ex2;
+
+            throw new ArgumentException(nameof(argument), nameof(arg1), new ArgumentException("argument", nameof(arg1)));
         }
 
         private void ValidateArgument(int v, string longName)

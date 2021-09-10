@@ -15,45 +15,6 @@
 },
 {
 "id":  "S2302",
-"message":  "Replace the string 'maxSampleSize' with 'nameof(maxSampleSize)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
-"region":  {
-"startLine":  334,
-"startColumn":  80,
-"endLine":  334,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'intervalSum' with 'nameof(intervalSum)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
-"region":  {
-"startLine":  336,
-"startColumn":  78,
-"endLine":  336,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'squaredIntervalSum' with 'nameof(squaredIntervalSum)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
-"region":  {
-"startLine":  338,
-"startColumn":  85,
-"endLine":  338,
-"endColumn":  122
-}
-}
-},
-{
-"id":  "S2302",
 "message":  "Replace the string 'message' with 'nameof(message)'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
@@ -88,19 +49,6 @@
 "startColumn":  21,
 "endLine":  397,
 "endColumn":  123
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'capacity' with 'nameof(capacity)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
-"region":  {
-"startLine":  127,
-"startColumn":  21,
-"endLine":  127,
-"endColumn":  63
 }
 }
 },

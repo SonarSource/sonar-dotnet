@@ -15,32 +15,6 @@
 },
 {
 "id":  "S2302",
-"message":  "Replace the string 'subscription' with 'nameof(subscription)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
-"region":  {
-"startLine":  338,
-"startColumn":  93,
-"endLine":  338,
-"endColumn":  142
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'element' with 'nameof(element)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
-"region":  {
-"startLine":  357,
-"startColumn":  83,
-"endLine":  357,
-"endColumn":  132
-}
-}
-},
-{
-"id":  "S2302",
 "message":  "Replace the string 'junction' with 'nameof(junction)'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
@@ -62,71 +36,6 @@
 "startColumn":  41,
 "endLine":  409,
 "endColumn":  69
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'junction' with 'nameof(junction)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
-"region":  {
-"startLine":  527,
-"startColumn":  41,
-"endLine":  527,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'junction' with 'nameof(junction)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
-"region":  {
-"startLine":  733,
-"startColumn":  41,
-"endLine":  733,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'elements' with 'nameof(elements)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
-"region":  {
-"startLine":  1770,
-"startColumn":  60,
-"endLine":  1770,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'maximumBurst' with 'nameof(maximumBurst)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
-"region":  {
-"startLine":  1773,
-"startColumn":  45,
-"endLine":  1773,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'maximumBurst' with 'nameof(maximumBurst)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
-"region":  {
-"startLine":  1830,
-"startColumn":  45,
-"endLine":  1830,
-"endColumn":  98
 }
 }
 },
@@ -184,19 +93,6 @@
 },
 {
 "id":  "S2302",
-"message":  "Replace the string 'subscription' with 'nameof(subscription)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  262,
-"startColumn":  93,
-"endLine":  262,
-"endColumn":  142
-}
-}
-},
-{
-"id":  "S2302",
 "message":  "Replace the string 'message' with 'nameof(message)'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
@@ -236,110 +132,6 @@
 },
 {
 "id":  "S2302",
-"message":  "Replace the string 'chunkSize' with 'nameof(chunkSize)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  47,
-"endLine":  52,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'startPosition' with 'nameof(startPosition)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  47,
-"endLine":  54,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'initialBuffer' with 'nameof(initialBuffer)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
-"region":  {
-"startLine":  56,
-"startColumn":  47,
-"endLine":  56,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'initialBuffer' with 'nameof(initialBuffer)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
-"region":  {
-"startLine":  58,
-"startColumn":  47,
-"endLine":  58,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'bufferSize' with 'nameof(bufferSize)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  47,
-"endLine":  47,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'startPosition' with 'nameof(startPosition)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
-"region":  {
-"startLine":  49,
-"startColumn":  47,
-"endLine":  49,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'chunkSize' with 'nameof(chunkSize)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamPublisher.cs",
-"region":  {
-"startLine":  38,
-"startColumn":  47,
-"endLine":  38,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'offset' with 'nameof(offset)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
-"region":  {
-"startLine":  417,
-"startColumn":  57,
-"endLine":  417,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S2302",
 "message":  "Replace the string 'offset' with 'nameof(offset)'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
@@ -361,32 +153,6 @@
 "startColumn":  53,
 "endLine":  483,
 "endColumn":  94
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'chunkSize' with 'nameof(chunkSize)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\IOSources.cs",
-"region":  {
-"startLine":  42,
-"startColumn":  47,
-"endLine":  42,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'startPosition' with 'nameof(startPosition)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\IOSources.cs",
-"region":  {
-"startLine":  44,
-"startColumn":  47,
-"endLine":  44,
-"endColumn":  79
 }
 }
 },
@@ -457,123 +223,6 @@
 },
 {
 "id":  "S2302",
-"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\StreamRefSerializer.cs",
-"region":  {
-"startLine":  84,
-"startColumn":  56,
-"endLine":  84,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'inlets' with 'nameof(inlets)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  277,
-"startColumn":  45,
-"endLine":  277,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'outlets' with 'nameof(outlets)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  279,
-"startColumn":  45,
-"endLine":  279,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'inlets' with 'nameof(inlets)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  382,
-"startColumn":  45,
-"endLine":  382,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'outlets' with 'nameof(outlets)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  384,
-"startColumn":  45,
-"endLine":  384,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'inlets' with 'nameof(inlets)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  490,
-"startColumn":  45,
-"endLine":  490,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'outlets' with 'nameof(outlets)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  492,
-"startColumn":  45,
-"endLine":  492,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'outlets' with 'nameof(outlets)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  551,
-"startColumn":  45,
-"endLine":  551,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'inlets' with 'nameof(inlets)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  553,
-"startColumn":  45,
-"endLine":  553,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S2302",
 "message":  "Replace the string 'inlets' with 'nameof(inlets)'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
@@ -595,32 +244,6 @@
 "startColumn":  68,
 "endLine":  669,
 "endColumn":  86
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'onPush' with 'nameof(onPush)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
-"region":  {
-"startLine":  925,
-"startColumn":  65,
-"endLine":  925,
-"endColumn":  114
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'onPull' with 'nameof(onPull)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
-"region":  {
-"startLine":  967,
-"startColumn":  65,
-"endLine":  967,
-"endColumn":  114
 }
 }
 },

@@ -27,6 +27,7 @@ namespace SonarAnalyzer.Helpers.Facade
     {
         public SyntaxKind Attribute => SyntaxKind.Attribute;
         public SyntaxKind[] ClassAndRecordDeclaration => new[] {SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration};
+        public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorDeclaration;
         public SyntaxKind EnumDeclaration => SyntaxKind.EnumDeclaration;
         public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
         public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;

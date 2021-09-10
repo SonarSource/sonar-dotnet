@@ -18,38 +18,31 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class NameOfShouldBeUsedBase : SonarDiagnosticAnalyzer
+    public abstract class NameOfShouldBeUsedBase<TMethodSyntax, TSyntaxKind, TThrowSyntax> : SonarDiagnosticAnalyzer
+        where TMethodSyntax : SyntaxNode
+        where TSyntaxKind : struct
+        where TThrowSyntax : SyntaxNode
     {
         internal const string DiagnosticId = "S2302";
-        protected const string MessageFormat = "Replace the string '{0}' with 'nameof({0})'.";
-
-        protected static readonly char[] Separators = { ' ', '.', ',', ';', '!', '?' };
-
+        private const string MessageFormat = "Replace the string '{0}' with 'nameof({0})'.";
         // when the parameter name is inside a bigger string, we want to avoid common English words like
         // "a", "then", "he", "of", "have" etc, to avoid false positives
-        protected const int MIN_STRING_LENGTH = 5;
-    }
+        private const int MinStringLength = 5;
+        private readonly char[] separators = { ' ', '.', ',', ';', '!', '?' };
 
-    public abstract class NameOfShouldBeUsedBase<TMethodSyntax> : NameOfShouldBeUsedBase
-            where TMethodSyntax : SyntaxNode
-    {
-        protected abstract DiagnosticDescriptor Rule { get; }
+        private readonly DiagnosticDescriptor rule;
 
-        protected abstract bool IsCaseSensitive { get; }
-
-        protected StringComparison CaseSensitivity
-        {
-            get => IsCaseSensitive ? StringComparison.InvariantCulture : StringComparison.InvariantCultureIgnoreCase;
-        }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         // Is string literal or interpolated string
         protected abstract bool IsStringLiteral(SyntaxToken t);
@@ -57,10 +50,44 @@ namespace SonarAnalyzer.Rules
         // handle parameters with the same name (in the IDE it can happen) - get groups of parameters
         protected abstract IEnumerable<string> GetParameterNames(TMethodSyntax method);
 
-        protected void ReportIssues<TThrowSyntax>(SyntaxNodeAnalysisContext context)
-            where TThrowSyntax : SyntaxNode
+        protected abstract bool LeastLanguageVersionMatches(SyntaxNodeAnalysisContext context);
+
+        protected abstract bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected NameOfShouldBeUsedBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+
+        protected override void Initialize(SonarAnalysisContext context)
         {
-            var methodSyntax = (TMethodSyntax)context.Node;
+            var kinds = Language.SyntaxKind.MethodDeclarations.ToList();
+            kinds.Add(Language.SyntaxKind.ConstructorDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, ReportIssues, kinds.ToArray());
+        }
+
+        protected int ArgumentExceptionNameOfPosition(string name)
+        {
+            if (name.Equals("ArgumentNullException", Language.NameComparison) || name.Equals("ArgumentOutOfRangeException", Language.NameComparison))
+            {
+                return 0;
+            }
+            else if (name.Equals("ArgumentException", Language.NameComparison))
+            {
+                return 1;
+            }
+
+            return int.MaxValue - 1;
+        }
+
+        private void ReportIssues(SyntaxNodeAnalysisContext context)
+        {
+            if (!LeastLanguageVersionMatches(context))
+            {
+                return;
+            }
+
+            var methodSyntax = context.Node is TMethodSyntax node ? node : context.Node.AncestorsAndSelf().OfType<TMethodSyntax>().FirstOrDefault();
             var parameterNames = GetParameterNames(methodSyntax);
             // either no parameters, or duplicated parameters
             if (!parameterNames.Any())
@@ -71,6 +98,7 @@ namespace SonarAnalyzer.Rules
             var stringTokensInsideThrowExpressions = methodSyntax
                 .DescendantNodes()
                 .OfType<TThrowSyntax>()
+                .Where(x => !IsArgumentExceptionCallingNameOf(x, parameterNames))
                 .SelectMany(th => th.DescendantTokens())
                 .Where(IsStringLiteral);
 
@@ -78,15 +106,12 @@ namespace SonarAnalyzer.Rules
 
             foreach (var stringTokenAndParam in stringTokenAndParameterPairs)
             {
-                ReportIssue(stringTokenAndParam.Key, stringTokenAndParam.Value, context);
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(
+                    descriptor: rule,
+                    location: stringTokenAndParam.Key.GetLocation(),
+                    messageArgs: stringTokenAndParam.Value));
             }
         }
-
-        protected void ReportIssue(SyntaxToken stringLiteralToken, string parameterName, SyntaxNodeAnalysisContext context) =>
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(
-                    descriptor: Rule,
-                    location: stringLiteralToken.GetLocation(),
-                    messageArgs: parameterName));
 
         /// <summary>
         /// Iterates over the string tokens (either from simple strings or from interpolated strings)
@@ -102,18 +127,18 @@ namespace SonarAnalyzer.Rules
                 var stringTokenText = stringToken.ValueText;
                 foreach (var parameterName in parameterNames)
                 {
-                    if (parameterName.Equals(stringTokenText, CaseSensitivity))
+                    if (parameterName.Equals(stringTokenText, Language.NameComparison))
                     {
                         // given it's exact equality, there can be only one stringToken key in the dictionary
                         result.Add(stringToken, parameterName);
                     }
-                    else if (parameterName.Length > MIN_STRING_LENGTH &&
+                    else if (parameterName.Length > MinStringLength
                         // we are looking at the words inside the string, so there can be multiple parameters matching inside the token
                         // stop after the first one is found
-                            !result.ContainsKey(stringToken) &&
-                            stringTokenText
-                                .Split(Separators, StringSplitOptions.RemoveEmptyEntries)
-                                .Any(word => word.Equals(parameterName, CaseSensitivity)))
+                        && !result.ContainsKey(stringToken)
+                        && stringTokenText
+                            .Split(separators, StringSplitOptions.RemoveEmptyEntries)
+                            .Any(word => word.Equals(parameterName, Language.NameComparison)))
                     {
                         result.Add(stringToken, parameterName);
                     }
@@ -123,4 +148,3 @@ namespace SonarAnalyzer.Rules
         }
     }
 }
-
