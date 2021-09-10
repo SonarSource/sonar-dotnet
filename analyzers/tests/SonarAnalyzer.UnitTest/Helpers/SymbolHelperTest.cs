@@ -28,6 +28,7 @@ using Moq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CodeAnalysisAccessibility = Microsoft.CodeAnalysis.Accessibility; // This is needed because there is an Accessibility namespace in the windows forms binaries.
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -280,6 +281,6 @@ namespace NS
 
         [TestMethod]
         public void GetEffectiveAccessibility_WhenSymbolIsNull_ReturnsNotApplicable() =>
-            ((ISymbol)null).GetEffectiveAccessibility().Should().Be(Accessibility.NotApplicable);
+            ((ISymbol)null).GetEffectiveAccessibility().Should().Be(CodeAnalysisAccessibility.NotApplicable);
     }
 }

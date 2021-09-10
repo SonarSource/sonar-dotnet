@@ -247,7 +247,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemWindowsForms;
 #else
-            Enumerable.Empty<MetadataReference>();
+            WindowsFormsMetadataReference.SystemWindowsForms;
 #endif
 
         internal static References SystemComponentModelComposition =>

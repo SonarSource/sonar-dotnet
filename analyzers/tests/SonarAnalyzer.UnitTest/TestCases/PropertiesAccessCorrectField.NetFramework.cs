@@ -1,5 +1,5 @@
 ﻿// https://github.com/SonarSource/sonar-dotnet/issues/3442
-// Also see "Add WinForms support in unit tests when targeting .Net Core" https://github.com/SonarSource/sonar-dotnet/issues/3426
+// Also see "Add WPF support in unit tests when targeting .Net Core" https://github.com/SonarSource/sonar-dotnet/issues/4883
 namespace TestCases
 {
     using System.Windows;

@@ -26,6 +26,8 @@
   <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
     <!-- Class AspNetCoreMetadataReference needs this FrameworkReference to generate metadata references for ASP.NET Core related test cases. -->
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <!-- Class WindowsFormsMetadataReference needs this FrameworkReference to generate metadata references for Windows Forms related test cases. -->
+    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
   </ItemGroup>
 
   <ItemGroup>

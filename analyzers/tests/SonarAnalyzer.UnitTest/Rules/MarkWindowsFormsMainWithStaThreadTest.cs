@@ -29,21 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MarkWindowsFormsMainWithStaThreadTest
     {
-// ToDo: Add support for windows forms on .Net Core
-// https://github.com/SonarSource/sonar-dotnet/issues/3426
-#if NETFRAMEWORK
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
                                     new CS.MarkWindowsFormsMainWithStaThread(),
-                                    FrameworkMetadataReference.SystemWindowsForms);
+                                    MetadataReferenceFacade.SystemWindowsForms);
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.vb",
                                     new VB.MarkWindowsFormsMainWithStaThread(),
-                                    FrameworkMetadataReference.SystemWindowsForms);
-#endif
+                                    MetadataReferenceFacade.SystemWindowsForms);
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms() =>

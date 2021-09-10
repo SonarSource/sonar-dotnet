@@ -18,26 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.MetadataReferences;
-using SonarAnalyzer.UnitTest.TestFramework;
-
-namespace SonarAnalyzer.UnitTest.Rules
-{
-    [TestClass]
-    public class DoNotCallExitMethodsTest
-    {
-        [TestMethod]
-        public void DoNotCallExitMethods() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
-                new DoNotCallExitMethods(),
-                MetadataReferenceFacade.SystemWindowsForms);
-
 #if NET
-        [TestMethod]
-        public void DoNotCallExitMethods_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs", new DoNotCallExitMethods());
-#endif
+
+using static SonarAnalyzer.UnitTest.MetadataReferences.MetadataReferenceFactory;
+using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
+
+namespace SonarAnalyzer.UnitTest.MetadataReferences
+{
+    internal static class WindowsFormsMetadataReference
+    {
+        internal static References SystemWindowsForms { get; } = Create(typeof(System.Windows.Forms.Application));
     }
 }
+#endif
