@@ -112,4 +112,12 @@ Namespace Tests.TestCases
             Throw New Exception("argumentName") ' Noncompliant
         End Function
     End Class
+
+    Public Interface EmberTVScraperModule
+
+        Sub SubWithNoBody()
+
+        Function FunctionWithNoBody() As Boolean
+
+    End Interface
 End Namespace

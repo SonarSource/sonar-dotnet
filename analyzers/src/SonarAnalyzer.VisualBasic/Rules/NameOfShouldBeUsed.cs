@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override IEnumerable<string> GetParameterNames(MethodBlockBaseSyntax method)
         {
-            var paramGroups = method.BlockStatement.ParameterList?.Parameters.GroupBy(p => p.Identifier.Identifier.ValueText);
+            var paramGroups = method?.BlockStatement.ParameterList?.Parameters.GroupBy(p => p.Identifier.Identifier.ValueText);
             if (paramGroups == null || paramGroups.Any(g => g.Count() != 1))
             {
                 return Enumerable.Empty<string>();

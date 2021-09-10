@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var methodSyntax = context.Node is TMethodSyntax node ? node : context.Node.AncestorsAndSelf().OfType<TMethodSyntax>().First();
+            var methodSyntax = context.Node is TMethodSyntax node ? node : context.Node.AncestorsAndSelf().OfType<TMethodSyntax>().FirstOrDefault();
             var parameterNames = GetParameterNames(methodSyntax);
             // either no parameters, or duplicated parameters
             if (!parameterNames.Any())
