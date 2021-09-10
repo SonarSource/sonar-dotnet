@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 var a = 1;
 var b = 2;
 Method();";
-            var sut = Compile(code);
+            var sut = Compile(code, false);
             var list = new List<string>();
             foreach (var operation in sut)   // Act
             {
@@ -64,13 +64,45 @@ Method();";
         }
 
         [TestMethod]
+        public void LinearExecutionOrder_Reversed()
+        {
+            const string code = @"
+var a = 1;
+var b = 2;
+Method();";
+            var sut = Compile(code, true);
+            var list = new List<string>();
+            foreach (var operation in sut)   // Act
+            {
+                if (!operation.IsImplicit)
+                {
+                    list.Add(operation.Instance.Kind + ": " + operation.Instance.Syntax);
+                }
+            }
+
+            list.Should().OnlyContainInOrder(
+                "Invocation: Method()",
+                "ExpressionStatement: Method();",
+                "Literal: 2",
+                "VariableInitializer: = 2",
+                "VariableDeclarator: b = 2",
+                "VariableDeclaration: var b = 2",
+                "VariableDeclarationGroup: var b = 2;",
+                "Literal: 1",
+                "VariableInitializer: = 1",
+                "VariableDeclarator: a = 1",
+                "VariableDeclaration: var a = 1",
+                "VariableDeclarationGroup: var a = 1;");
+        }
+
+        [TestMethod]
         public void NestedExecutionOrder()
         {
             const string code = @"
 Method(0);
 Method(1, Nested(40 + 2), 3);
 Method(4);";
-            var sut = Compile(code);
+            var sut = Compile(code, false);
             var list = new List<string>();
             foreach (var operation in sut)   // Act
             {
@@ -97,9 +129,42 @@ Method(4);";
         }
 
         [TestMethod]
+        public void NestedExecutionOrder_Reversed()
+        {
+            const string code = @"
+Method(0);
+Method(1, Nested(40 + 2), 3);
+Method(4);";
+            var sut = Compile(code, true);
+            var list = new List<string>();
+            foreach (var operation in sut)   // Act
+            {
+                if (!operation.IsImplicit)
+                {
+                    list.Add(operation.Instance.Kind + ": " + operation.Instance.Syntax);
+                }
+            }
+            list.Should().OnlyContainInOrder(
+                "Literal: 4",
+                "Invocation: Method(4)",
+                "ExpressionStatement: Method(4);",
+                "Literal: 3",
+                "Literal: 2",
+                "Literal: 40",
+                "BinaryOperator: 40 + 2",
+                "Invocation: Nested(40 + 2)",
+                "Literal: 1",
+                "Invocation: Method(1, Nested(40 + 2), 3)",
+                "ExpressionStatement: Method(1, Nested(40 + 2), 3);",
+                "Literal: 0",
+                "Invocation: Method(0)",
+                "ExpressionStatement: Method(0);");
+        }
+
+        [TestMethod]
         public void InterruptedEvaluation()
         {
-            var enumerator = Compile("Method(0);").GetEnumerator();
+            var enumerator = Compile("Method(0);", false).GetEnumerator();
             enumerator.MoveNext().Should().BeTrue();
             enumerator.Current.Should().NotBeNull();
 
@@ -115,12 +180,12 @@ Method(4);";
         [TestMethod]
         public void AsIEnumerable()
         {
-            var enumerator = ((IEnumerable)Compile("Method(0);")).GetEnumerator();
+            var enumerator = ((IEnumerable)Compile("Method(0);", false)).GetEnumerator();
             enumerator.MoveNext().Should().BeTrue();
             enumerator.Current.Should().NotBeNull();
         }
 
-        private OperationExecutionOrder Compile(string methodBody)
+        private OperationExecutionOrder Compile(string methodBody, bool reverseOrder)
         {
             var code = @$"
 public class Sample
@@ -136,7 +201,7 @@ public class Sample
             var (tree, semanticModel) = TestHelper.Compile(code);
             var body = tree.GetRoot().DescendantNodes().OfType<BlockSyntax>().First();
             var rootOperation = new IOperationWrapperSonar(semanticModel.GetOperation(body));
-            return new OperationExecutionOrder(rootOperation.Children);
+            return new OperationExecutionOrder(rootOperation.Children, reverseOrder);
         }
     }
 }

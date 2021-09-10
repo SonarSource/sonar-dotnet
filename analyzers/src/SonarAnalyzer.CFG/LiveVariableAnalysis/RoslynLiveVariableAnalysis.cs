@@ -59,7 +59,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         private void ProcessBlockInternal(BasicBlock block, State state)
         {
-            foreach (var operation in block.OperationsAndBranchValue.Reverse().ToExecutionOrder())
+            foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
             {
                 switch (operation.Instance.Kind)
                 {

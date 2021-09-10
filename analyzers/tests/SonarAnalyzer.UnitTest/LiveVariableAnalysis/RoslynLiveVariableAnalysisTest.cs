@@ -318,7 +318,6 @@ Method(variable, variable = 42);";
             context.Validate(context.Block("Method(variable, variable = 42);"), new LiveIn("variable"));
         }
 
-        //FIXME: This is now broken
         [TestMethod]
         public void ProcessBlockInternal_EvaluationOrder_UsedBeforeAssignedInSubexpression_LiveIn()
         {
@@ -332,7 +331,6 @@ Method(1 + 1 + Method(variable), variable = 42);";
             context.Validate(context.Block("Method(1 + 1 + Method(variable), variable = 42);"), new LiveIn("variable"));
         }
 
-        //FIXME: This is now broken
         [TestMethod]
         public void ProcessBlockInternal_EvaluationOrder_AssignedBeforeUsed_NotLiveIn()
         {
@@ -346,7 +344,6 @@ Method(variable = 42, variable);";
             context.Validate(context.Block("Method(variable = 42, variable);"));
         }
 
-        //FIXME: This is now broken
         [TestMethod]
         public void ProcessBlockInternal_EvaluationOrder_AssignedBeforeUsedInSubexpression_NotLiveIn()
         {

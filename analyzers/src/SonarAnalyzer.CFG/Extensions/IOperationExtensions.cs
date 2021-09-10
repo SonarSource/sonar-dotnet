@@ -29,7 +29,10 @@ namespace SonarAnalyzer.Extensions
     public static partial class IOperationExtensions
     {
         public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
-            new OperationExecutionOrder(operations);
+            new OperationExecutionOrder(operations, false);
+
+        public static OperationExecutionOrder ToReversedExecutionOrder(this IEnumerable<IOperation> operations) =>
+            new OperationExecutionOrder(operations, true);
 
         // This method is taken from Roslyn implementation
         public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation operation) =>

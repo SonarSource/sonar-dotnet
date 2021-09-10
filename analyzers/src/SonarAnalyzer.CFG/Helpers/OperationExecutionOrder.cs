@@ -30,9 +30,13 @@ namespace SonarAnalyzer.Helpers
     public class OperationExecutionOrder : IEnumerable<IOperationWrapperSonar>
     {
         private readonly IEnumerable<IOperation> operations;
+        private readonly bool reverseOrder;
 
-        public OperationExecutionOrder(IEnumerable<IOperation> operations) =>
+        public OperationExecutionOrder(IEnumerable<IOperation> operations, bool reverseOrder)
+        {
             this.operations = operations;
+            this.reverseOrder = reverseOrder;
+        }
 
         public IEnumerator<IOperationWrapperSonar> GetEnumerator() =>
             new Enumerator(this);
@@ -56,10 +60,10 @@ namespace SonarAnalyzer.Helpers
 
             private void Init()
             {
-                //FIXME: Validate this pro LVA, there's Reverse/Reverse logic
-                foreach (var operation in owner.operations.Reverse())
+                // We need to push them to the stack in reversed order compared to reverseOrder argument
+                foreach (var operation in owner.reverseOrder ? owner.operations : owner.operations.Reverse())
                 {
-                    stack.Push(new StackItem(operation));
+                    stack.Push(new StackItem(operation, owner.reverseOrder));
                 }
             }
 
@@ -67,11 +71,9 @@ namespace SonarAnalyzer.Helpers
             {
                 while (stack.Any())
                 {
-                    //FIXME: Prev pro LVA
-                    //FIXME: Next pro SE
                     if (stack.Peek().NextChild() is { } child)
                     {
-                        stack.Push(new StackItem(child));
+                        stack.Push(new StackItem(child, owner.reverseOrder));
                     }
                     else
                     {
@@ -103,10 +105,12 @@ namespace SonarAnalyzer.Helpers
             private readonly IOperationWrapperSonar operation;
             private readonly IEnumerator<IOperation> children;
 
-            public StackItem(IOperation operation)
+            public StackItem(IOperation operation, bool reversedOrder)
             {
                 this.operation = new IOperationWrapperSonar(operation);
-                children = this.operation.Children.GetEnumerator();
+                children = reversedOrder
+                    ? this.operation.Children.Reverse().GetEnumerator()
+                    : this.operation.Children.GetEnumerator();
             }
 
             public IOperation NextChild() =>
