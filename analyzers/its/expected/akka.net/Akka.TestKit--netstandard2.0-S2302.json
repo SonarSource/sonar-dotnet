@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S2302",
-"message":  "Replace the string 'assertions' with 'nameof(assertions)'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
-"region":  {
-"startLine":  114,
-"startColumn":  88,
-"endLine":  114,
-"endColumn":  131
-}
-}
-},
-{
-"id":  "S2302",
 "message":  "Replace the string 'duration' with 'nameof(duration)'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
