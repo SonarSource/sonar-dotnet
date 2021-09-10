@@ -37,8 +37,8 @@ namespace SonarAnalyzer.Rules
         private const string MessageFormat = "Replace the string '{0}' with 'nameof({0})'.";
         // when the parameter name is inside a bigger string, we want to avoid common English words like
         // "a", "then", "he", "of", "have" etc, to avoid false positives
-        private const int MIN_STRING_LENGTH = 5;
-        private readonly char[] Separators = { ' ', '.', ',', ';', '!', '?' };
+        private const int MinStringLength = 5;
+        private readonly char[] separators = { ' ', '.', ',', ';', '!', '?' };
 
         private readonly DiagnosticDescriptor rule;
 
@@ -135,12 +135,12 @@ namespace SonarAnalyzer.Rules
                         // given it's exact equality, there can be only one stringToken key in the dictionary
                         result.Add(stringToken, parameterName);
                     }
-                    else if (parameterName.Length > MIN_STRING_LENGTH
+                    else if (parameterName.Length > MinStringLength
                         // we are looking at the words inside the string, so there can be multiple parameters matching inside the token
                         // stop after the first one is found
                         && !result.ContainsKey(stringToken)
                         && stringTokenText
-                            .Split(Separators, StringSplitOptions.RemoveEmptyEntries)
+                            .Split(separators, StringSplitOptions.RemoveEmptyEntries)
                             .Any(word => word.Equals(parameterName, Language.NameComparison)))
                     {
                         result.Add(stringToken, parameterName);
