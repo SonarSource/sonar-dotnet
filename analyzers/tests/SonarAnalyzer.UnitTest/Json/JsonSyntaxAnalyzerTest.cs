@@ -209,7 +209,7 @@ namespace SonarAnalyzer.UnitTest.Common
             AssertLocation(() => root[5], 5, 0, 5, 1);
         }
 
-        private void AssertLocation(Expression<Func<JsonNode>> expression, int startLine, int startCharacter, int endLine, int endCharacter)
+        private static void AssertLocation(Expression<Func<JsonNode>> expression, int startLine, int startCharacter, int endLine, int endCharacter)
         {
             var node = expression.Compile()();
             node.Start.Line.Should().Be(startLine, expression.ToString());
