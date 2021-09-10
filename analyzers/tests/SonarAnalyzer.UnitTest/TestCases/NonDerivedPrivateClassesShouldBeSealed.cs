@@ -2,7 +2,17 @@
 
 namespace Tests.Diagnostics
 {
-    class Program
+    private class Foo //Noncompliant
     {
+    }
+
+    private class Bar
+    {
+
+    }
+
+    private class BatExt : Bar
+    {
+
     }
 }
