@@ -63,10 +63,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (throwNode.Expression is ObjectCreationExpressionSyntax objectCreation)
             {
                 var exceptionType = objectCreation.Type.ToString();
-                return Enumerable.Range(0, objectCreation.ArgumentList.Arguments.Count).Any(idx =>
-                    ArgumentExceptionCouldBeSkipped(exceptionType, idx)
+                return ArgumentExceptionNameOfPosition(exceptionType) is var idx
+                    && objectCreation.ArgumentList.Arguments.Count >= idx + 1
                     && objectCreation.ArgumentList.Arguments[idx].GetExpression() is NameOfExpressionSyntax nameOfExpression
-                    && arguments.Contains(nameOfExpression.Argument.ToString()));
+                    && arguments.Contains(nameOfExpression.Argument.ToString());
             }
 
             return false;

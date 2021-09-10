@@ -66,18 +66,18 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, ReportIssues, kinds.ToArray());
         }
 
-        protected bool ArgumentExceptionCouldBeSkipped(string name, int nameOfIdx)
+        protected int ArgumentExceptionNameOfPosition(string name)
         {
             if (name.Equals("ArgumentNullException", Language.NameComparison) || name.Equals("ArgumentOutOfRangeException", Language.NameComparison))
             {
-                return nameOfIdx == 0;
+                return 0;
             }
             else if (name.Equals("ArgumentException", Language.NameComparison))
             {
-                return nameOfIdx == 1;
+                return 1;
             }
 
-            return false;
+            return int.MaxValue - 1;
         }
 
         private void ReportIssues(SyntaxNodeAnalysisContext context)

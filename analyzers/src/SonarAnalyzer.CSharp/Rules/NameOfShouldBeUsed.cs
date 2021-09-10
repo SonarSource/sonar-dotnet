@@ -63,12 +63,12 @@ namespace SonarAnalyzer.Rules.CSharp
             if (throwNode.Expression is ObjectCreationExpressionSyntax objectCreation)
             {
                 var exceptionType = objectCreation.Type.ToString();
-                return Enumerable.Range(0, objectCreation.ArgumentList.Arguments.Count).Any(idx =>
-                    ArgumentExceptionCouldBeSkipped(exceptionType, idx)
+                return ArgumentExceptionNameOfPosition(exceptionType) is var idx
+                    && objectCreation.ArgumentList.Arguments.Count >= idx + 1
                     && objectCreation.ArgumentList.Arguments[idx].Expression is InvocationExpressionSyntax invocation
                     && invocation.Expression.ToString() == "nameof"
                     && invocation.ArgumentList.Arguments.Count == 1
-                    && arguments.Contains(invocation.ArgumentList.Arguments[0].Expression.ToString()));
+                    && arguments.Contains(invocation.ArgumentList.Arguments[0].Expression.ToString());
             }
 
             return false;
