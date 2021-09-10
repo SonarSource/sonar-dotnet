@@ -65,7 +65,6 @@ namespace SonarAnalyzer.Json.Parsing
         {
             Value = null;
             NextPosition(false);
-            // FIXME: This should be SkipWhitespaceAndComments(), current implementation will throw on comments
             SkipWhiteSpace();
             if (ReachedEndOfInput)
             {
