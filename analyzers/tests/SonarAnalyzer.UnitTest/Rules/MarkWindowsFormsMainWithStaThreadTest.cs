@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -31,25 +32,60 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
-                                    new CS.MarkWindowsFormsMainWithStaThread(),
-                                    MetadataReferenceFacade.SystemWindowsForms);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\MarkWindowsFormsMainWithStaThread.cs",
+                new CS.MarkWindowsFormsMainWithStaThread(),
+                null,
+                CompilationErrorBehavior.Ignore,
+                OutputKind.WindowsApplication,
+                MetadataReferenceFacade.SystemWindowsForms);
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.vb",
-                                    new VB.MarkWindowsFormsMainWithStaThread(),
-                                    MetadataReferenceFacade.SystemWindowsForms);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\MarkWindowsFormsMainWithStaThread.vb",
+                new VB.MarkWindowsFormsMainWithStaThread(),
+                null,
+                CompilationErrorBehavior.Ignore,
+                OutputKind.WindowsApplication,
+                MetadataReferenceFacade.SystemWindowsForms);
+
+        [TestMethod]
+        public void MarkWindowsFormsMainWithStaThread_ClassLibrary_CS() =>
+            Verifier.VerifyNoIssueReported(
+                @"TestCases\MarkWindowsFormsMainWithStaThread.cs",
+                new CS.MarkWindowsFormsMainWithStaThread(),
+                null,
+                CompilationErrorBehavior.Ignore,
+                OutputKind.DynamicallyLinkedLibrary,
+                MetadataReferenceFacade.SystemWindowsForms);
+
+        [TestMethod]
+        public void MarkWindowsFormsMainWithStaThread_ClassLibrary_VB() =>
+            Verifier.VerifyNoIssueReported(
+                @"TestCases\MarkWindowsFormsMainWithStaThread.vb",
+                new VB.MarkWindowsFormsMainWithStaThread(),
+                null,
+                CompilationErrorBehavior.Ignore,
+                OutputKind.DynamicallyLinkedLibrary,
+                MetadataReferenceFacade.SystemWindowsForms);
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
-                                    new CS.MarkWindowsFormsMainWithStaThread());
+            Verifier.VerifyAnalyzer(
+                @"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
+                new CS.MarkWindowsFormsMainWithStaThread(),
+                null,
+                CompilationErrorBehavior.Ignore,
+                OutputKind.WindowsApplication);
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
-                                    new VB.MarkWindowsFormsMainWithStaThread(),
-                                    CompilationErrorBehavior.Ignore);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
+                new VB.MarkWindowsFormsMainWithStaThread(),
+                null,
+                CompilationErrorBehavior.Ignore,
+                OutputKind.WindowsApplication);
     }
 }

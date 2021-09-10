@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -30,17 +29,15 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class MarkWindowsFormsMainWithStaThread : MarkWindowsFormsMainWithStaThreadBase<MethodDeclarationSyntax>
+    public sealed class MarkWindowsFormsMainWithStaThread : MarkWindowsFormsMainWithStaThreadBase<SyntaxKind, MethodDeclarationSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override SyntaxKind[] SyntaxKinds { get; } =
+        {
+            SyntaxKind.MethodDeclaration
+        };
 
         protected override Location GetLocation(MethodDeclarationSyntax method) =>
             method.FindIdentifierLocation();
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Action, SyntaxKind.MethodDeclaration);
     }
 }
