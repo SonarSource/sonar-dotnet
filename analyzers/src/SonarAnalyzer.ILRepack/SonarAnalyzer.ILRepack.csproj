@@ -20,6 +20,7 @@
     </PackageReference>
   </ItemGroup>
 
+  <!-- this needs to run after RuleDescriptorGenerator and before the VSIX project -->
   <ItemGroup>
     <ProjectReference Include="..\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.csproj" />
   </ItemGroup>

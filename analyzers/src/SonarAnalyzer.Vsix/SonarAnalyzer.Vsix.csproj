@@ -83,6 +83,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SonarAnalyzer.ILRepack\SonarAnalyzer.ILRepack.csproj">
+      <Project>{c74616e8-d816-4dc2-86f4-3a5a585314d3}</Project>
+      <Name>SonarAnalyzer.ILRepack</Name>
+      <AdditionalProperties>TargetFramework=net46</AdditionalProperties>
+    </ProjectReference>
     <ProjectReference Include="..\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
       <Project>{01df3cb0-2213-42f3-bb8e-0c3bc330de7a}</Project>
       <Name>SonarAnalyzer.VisualBasic</Name>
@@ -148,7 +153,6 @@
       <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.CSharp.dll" />
       <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.VisualBasic.dll" />
       <BinariesToCopy Include="$(OutputPath)\Google.Protobuf.dll" />
-      <BinariesToCopy Include="$(OutputPath)\Newtonsoft.Json.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>

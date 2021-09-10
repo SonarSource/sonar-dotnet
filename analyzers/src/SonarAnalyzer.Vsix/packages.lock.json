@@ -401,6 +401,28 @@
           "System.Collections.Immutable": "1.1.37"
         }
       },
+      "sonaranalyzer.ilrepack": {
+        "type": "Project",
+        "dependencies": {
+          "SonarAnalyzer.RuleDescriptorGenerator": "1.0.0"
+        }
+      },
+      "sonaranalyzer.ruledescriptorgenerator": {
+        "type": "Project",
+        "dependencies": {
+          "SonarAnalyzer": "1.0.0",
+          "SonarAnalyzer.Utilities": "1.0.0",
+          "System.Collections.Immutable": "1.1.37"
+        }
+      },
+      "sonaranalyzer.utilities": {
+        "type": "Project",
+        "dependencies": {
+          "SonarAnalyzer": "1.0.0",
+          "SonarAnalyzer.CSharp": "1.0.0",
+          "SonarAnalyzer.VisualBasic": "1.0.0"
+        }
+      },
       "sonaranalyzer.visualbasic": {
         "type": "Project",
         "dependencies": {
