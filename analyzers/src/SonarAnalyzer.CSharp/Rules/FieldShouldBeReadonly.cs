@@ -235,10 +235,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var assignment in assignments)
                     {
-                        var identifierNames = IdentifierNames(assignment.Left);
-                        foreach (var identifierName in identifierNames)
+                        var leftSideExpressions = TupleExpressionsOrSelf(assignment.Left);
+                        foreach (var leftSideExpression in leftSideExpressions)
                         {
-                            ProcessExpression(identifierName);
+                            ProcessExpression(leftSideExpression);
                         }
                     }
                 }
@@ -330,7 +330,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 private static bool IsFieldRelevant(IFieldSymbol fieldSymbol) =>
                     fieldSymbol is { IsStatic: false, IsConst: false, IsReadOnly: false, DeclaredAccessibility: Accessibility.Private };
 
-                private static IEnumerable<ExpressionSyntax> IdentifierNames(ExpressionSyntax expression)
+                private static IEnumerable<ExpressionSyntax> TupleExpressionsOrSelf(ExpressionSyntax expression)
                 {
                     if (TupleExpressionSyntaxWrapper.IsInstance(expression))
                     {
