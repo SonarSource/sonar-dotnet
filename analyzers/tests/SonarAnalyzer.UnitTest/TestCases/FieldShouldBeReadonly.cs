@@ -25,6 +25,8 @@ namespace Tests.Diagnostics
         int _birthDay4 = 31;  // Compliant, it is passed as out outside the ctor
         int _legSize = 3;
         int _legSize2 = 3;
+        int _handSize = 3;
+        int _handSize2 = 3;
         int _neverUsed;
 
         private readonly Action<int> setter;
@@ -58,6 +60,16 @@ namespace Tests.Diagnostics
             }
             set { _legSize = value; }
         }
+
+        public int HandSize
+        {
+            get
+            {
+                --_handSize2;
+                return _handSize;
+            }
+            set { _handSize = value; }
+        }
     }
 
     partial class Partial
@@ -78,6 +90,8 @@ namespace Tests.Diagnostics
         private int y; // Compliant
         private int z = 10; // Noncompliant
         private int w = 10; // Noncompliant
+        private int a, b; // Noncompliant
+//                           Noncompliant@-1
         public X()
         {
             new X().x = 12;
@@ -86,6 +100,8 @@ namespace Tests.Diagnostics
 
             Modif(ref (z));
             this.w = 42;
+            a = 42;
+            b = 42;
         }
 
         private void Modif(ref int i) { }
@@ -204,5 +220,29 @@ namespace Tests.Diagnostics
         {
             value ??= "Empty";
         }
+    }
+
+    public class TupleExpressionAssignment
+    {
+        private string a; // Compliant - set in tuple expression
+        private string b; // Compliant - set in tuple expression
+        private X1Struct x1; // Compliant - set in tuple expression
+        private X1Struct x2; // Compliant - set in tuple expression
+
+        public TupleExpressionAssignment()
+        {
+            a = string.Empty;
+            b = string.Empty;
+            x1 = new X1Struct();
+            x2 = new X1Struct();
+        }
+
+        public void SomeMethod()
+        {
+            (a, b) = NewValues();
+            ((this.x1.y).z, (this.x2.y).z) = NewValues();
+        }
+
+        private (string, string) NewValues() => ("FOO", "Bar");
     }
 }
