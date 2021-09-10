@@ -34,10 +34,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class NameOfShouldBeUsed : NameOfShouldBeUsedBase<MethodBlockBaseSyntax, SyntaxKind, ThrowStatementSyntax>
     {
         private static readonly HashSet<SyntaxKind> StringTokenTypes = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.InterpolatedStringTextToken,
-                SyntaxKind.StringLiteralToken
-            };
+        {
+            SyntaxKind.InterpolatedStringTextToken,
+            SyntaxKind.StringLiteralToken
+        };
 
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
@@ -62,10 +62,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var throwNode = (ThrowStatementSyntax)node;
             if (throwNode.Expression is ObjectCreationExpressionSyntax objectCreation)
             {
-                var nameOfCallIdx = objectCreation.ArgumentList.Arguments.IndexOf(x =>
-                    x.GetExpression() is NameOfExpressionSyntax nameOfExpression
+                var exceptionType = objectCreation.Type.ToString();
+                return Enumerable.Range(0, objectCreation.ArgumentList.Arguments.Count).Any(idx =>
+                    ArgumentExceptionCouldBeSkipped(exceptionType, idx)
+                    && objectCreation.ArgumentList.Arguments[idx].GetExpression() is NameOfExpressionSyntax nameOfExpression
                     && arguments.Contains(nameOfExpression.Argument.ToString()));
-                return ArgumentExceptionCouldBeSkipped(objectCreation.Type.ToString(), nameOfCallIdx);
             }
 
             return false;

@@ -35,10 +35,10 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class NameOfShouldBeUsed : NameOfShouldBeUsedBase<BaseMethodDeclarationSyntax, SyntaxKind, ThrowStatementSyntax>
     {
         private static readonly HashSet<SyntaxKind> StringTokenTypes = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.InterpolatedStringTextToken,
-                SyntaxKind.StringLiteralToken
-            };
+        {
+            SyntaxKind.InterpolatedStringTextToken,
+            SyntaxKind.StringLiteralToken
+        };
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override IEnumerable<string> GetParameterNames(BaseMethodDeclarationSyntax method)
         {
             var paramGroups = method.ParameterList?.Parameters.GroupBy(p => p.Identifier.ValueText);
-            if (paramGroups != null && paramGroups.Any(g => g.Count() != 1))
+            if (paramGroups == null || paramGroups.Any(g => g.Count() != 1))
             {
                 return Enumerable.Empty<string>();
             }
@@ -62,12 +62,13 @@ namespace SonarAnalyzer.Rules.CSharp
             var throwNode = (ThrowStatementSyntax)node;
             if (throwNode.Expression is ObjectCreationExpressionSyntax objectCreation)
             {
-                var nameOfCallIdx = objectCreation.ArgumentList.Arguments.IndexOf(x =>
-                    x.Expression is InvocationExpressionSyntax invocation
+                var exceptionType = objectCreation.Type.ToString();
+                return Enumerable.Range(0, objectCreation.ArgumentList.Arguments.Count).Any(idx =>
+                    ArgumentExceptionCouldBeSkipped(exceptionType, idx)
+                    && objectCreation.ArgumentList.Arguments[idx].Expression is InvocationExpressionSyntax invocation
                     && invocation.Expression.ToString() == "nameof"
                     && invocation.ArgumentList.Arguments.Count == 1
                     && arguments.Contains(invocation.ArgumentList.Arguments[0].Expression.ToString()));
-                return ArgumentExceptionCouldBeSkipped(objectCreation.Type.ToString(), nameOfCallIdx);
             }
 
             return false;

@@ -54,10 +54,12 @@ namespace Tests.Diagnostics
             throw new ArgumentOutOfRangeException(nameof(argument), argument, "argument");
             throw new ArgumentOutOfRangeException(nameof(argument), argument, "Incorrect argument value");
 
-            var ex1 = new ArgumentException("This is argument."); // Compliant FN
+            var ex1 = new ArgumentException("This is argument."); // FN
             throw ex1;
             var ex2 = new ArgumentException("This is argument.", nameof(argument));
             throw ex2;
+
+            throw new ArgumentException(nameof(argument), nameof(arg1), new ArgumentException("argument", nameof(arg1)));
         }
 
         private void ValidateArgument(int v, string longName)

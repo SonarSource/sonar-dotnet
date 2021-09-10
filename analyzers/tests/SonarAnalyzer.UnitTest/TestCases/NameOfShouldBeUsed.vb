@@ -61,11 +61,13 @@ Namespace Tests.TestCases
             Throw New ArgumentOutOfRangeException(NameOf(argument), argument, "Incorrect argument value")
 
             Dim ex1 as ArgumentException
-            ex1 = New ArgumentException("This is argument.") ' Compliant FN
+            ex1 = New ArgumentException("This is argument.") ' FN
             Throw ex1
             Dim ex2 as ArgumentException
             ex2 = New ArgumentException("This is argument.", NameOf(argument))
             Throw ex2
+
+            Throw New ArgumentException(NameOf(argument), NameOf(arg1), New ArgumentException("argument", NameOf(arg1)))
         End Sub
 
         Private Sub ValidateArgument(v As Integer, name As String)

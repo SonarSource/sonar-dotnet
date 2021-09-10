@@ -29,9 +29,9 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules
 {
     public abstract class NameOfShouldBeUsedBase<TMethodSyntax, TSyntaxKind, TThrowSyntax> : SonarDiagnosticAnalyzer
-            where TMethodSyntax : SyntaxNode
-            where TSyntaxKind : struct
-            where TThrowSyntax : SyntaxNode
+        where TMethodSyntax : SyntaxNode
+        where TSyntaxKind : struct
+        where TThrowSyntax : SyntaxNode
     {
         internal const string DiagnosticId = "S2302";
         private const string MessageFormat = "Replace the string '{0}' with 'nameof({0})'.";
@@ -44,8 +44,6 @@ namespace SonarAnalyzer.Rules
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
         // Is string literal or interpolated string
         protected abstract bool IsStringLiteral(SyntaxToken t);
 
@@ -55,6 +53,8 @@ namespace SonarAnalyzer.Rules
         protected abstract bool LeastLanguageVersionMatches(SyntaxNodeAnalysisContext context);
 
         protected abstract bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected NameOfShouldBeUsedBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
@@ -106,15 +106,12 @@ namespace SonarAnalyzer.Rules
 
             foreach (var stringTokenAndParam in stringTokenAndParameterPairs)
             {
-                ReportIssue(stringTokenAndParam.Key, stringTokenAndParam.Value, context);
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(
+                    descriptor: rule,
+                    location: stringTokenAndParam.Key.GetLocation(),
+                    messageArgs: stringTokenAndParam.Value));
             }
         }
-
-        private void ReportIssue(SyntaxToken stringLiteralToken, string parameterName, SyntaxNodeAnalysisContext context) =>
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(
-                    descriptor: rule,
-                    location: stringLiteralToken.GetLocation(),
-                    messageArgs: parameterName));
 
         /// <summary>
         /// Iterates over the string tokens (either from simple strings or from interpolated strings)
@@ -151,4 +148,3 @@ namespace SonarAnalyzer.Rules
         }
     }
 }
-
