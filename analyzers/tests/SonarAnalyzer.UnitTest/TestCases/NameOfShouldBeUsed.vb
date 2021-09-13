@@ -27,6 +27,8 @@ Namespace Tests.TestCases
                 Return
             End If
 
+            Throw New ArgumentException
+
             Throw New ArgumentException("argument ") ' Noncompliant
             Throw New ArgumentException("argument,") ' Noncompliant
 

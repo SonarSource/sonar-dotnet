@@ -64,8 +64,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var exceptionType = objectCreation.Type.ToString();
                 return ArgumentExceptionNameOfPosition(exceptionType) is var idx
-                    && objectCreation.ArgumentList.Arguments.Count >= idx + 1
-                    && objectCreation.ArgumentList.Arguments[idx].Expression is InvocationExpressionSyntax invocation
+                    && objectCreation.ArgumentList?.Arguments is { } creationArguments
+                    && creationArguments.Count >= idx + 1
+                    && creationArguments[idx].Expression is InvocationExpressionSyntax invocation
                     && invocation.Expression.ToString() == "nameof"
                     && invocation.ArgumentList.Arguments.Count == 1
                     && arguments.Contains(invocation.ArgumentList.Arguments[0].Expression.ToString());
