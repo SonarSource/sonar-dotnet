@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Tests.Diagnostics
@@ -14,7 +15,7 @@ namespace Tests.Diagnostics
 
         public bool WithRefArg(string p1, ref string p2) => true;
 
-        public void ForEachWithBlockWithIfSuggestWhere(ICollection<string> collection, Predicate<string> condition, Predicate<string> secondCondition)
+        public void ForEachWithBlockWithIfSuggestWhere(ICollection<string> collection, Predicate<string> condition, Predicate<int> intCondition)
         {
             var result = new List<string>();
 
@@ -46,8 +47,15 @@ namespace Tests.Diagnostics
             {
                 if (condition(element))
                 {
-                    if (secondCondition(element))
+                    if (intCondition(element.Length))
                         result.Add(element);
+                }
+            }
+
+            foreach (var element in collection.Select(e => e.Length).Where(l => l > 0)) // Noncompliant
+            {
+                if (intCondition(element))
+                {
                 }
             }
         }
@@ -169,6 +177,15 @@ namespace Tests.Diagnostics
                 }
             }
 
+            foreach (var element in collection) // Noncompliant
+            {
+                var someValue = element.Length;
+                if (someValue != null)
+                {
+                    result.Add(someValue);
+                }
+            }
+
             foreach (var element in collection) // Compliant: `element` is used
             {
                 var someValue = element.Length;
@@ -189,6 +206,16 @@ namespace Tests.Diagnostics
             {
                 var x = point.X;
                 var y = point.Y;
+            }
+
+
+            foreach (var point in points) // Compliant: we ignore method invocations.
+            {
+                var someValue = point.GetX();
+                if (someValue > 0)
+                {
+                    result.Add(someValue);
+                }
             }
 
             var sum = 0;
@@ -217,12 +244,28 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void ForEachWithEarlyExitIsNotCompliant(ICollection<string> collection, Predicate<string> condition)
+        {
+            var result = new List<string>();
+
+            foreach (var element in collection) // Noncompliant
+            {
+                if (condition(element))
+                {
+                    result.Add(element);
+                    return;
+                }
+            }
+        }
+
         private void Foo(int s) { }
 
         public class Point
         {
             public int X { get; set; }
             public int? Y { get; set; }
+
+            public int GetX() => X;
         }
     }
 }

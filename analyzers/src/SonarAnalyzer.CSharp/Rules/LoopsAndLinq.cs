@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -80,28 +81,25 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckIfCanBeSimplifiedUsingSelect(ForEachStatementSyntax forEachStatementSyntax, SyntaxNodeAnalysisContext c)
         {
             // There are multiple scenarios where the code can be simplified using LINQ.
-            // For simplicity, in the first version of the rule, we consider that Select() can be used
+            // For simplicity, we consider that Select() can be used
             // only when a single property from the foreach variable is used.
+            // We skip checking method invocations since depending on the method being called, moving it can make the code harder to read.
             // The issue is raised if:
             //  - the property is used more than once
             //  - the property is the right side of a variable declaration
-            var declaredSymbol = c.SemanticModel.GetDeclaredSymbol(forEachStatementSyntax);
+            var declaredSymbol = new Lazy<ILocalSymbol>(() => c.SemanticModel.GetDeclaredSymbol(forEachStatementSyntax));
             var accessedProperties = new Dictionary<ISymbol, UsageStats>();
 
-            foreach (var identifierSyntax in GetIdentifiers(forEachStatementSyntax))
+            foreach (var identifierSyntax in GetStatementIdentifiers(forEachStatementSyntax))
             {
                 if (identifierSyntax.Parent is MemberAccessExpressionSyntax { Parent: not InvocationExpressionSyntax } memberAccessExpressionSyntax
-                    && !(identifierSyntax.Parent.Parent is AssignmentExpressionSyntax assignment && assignment.Left == identifierSyntax.Parent)
-                    && c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol))
+                    && IsNotLeftSideOfAssignment(identifierSyntax)
+                    && c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value))
                 {
                     var symbol = c.SemanticModel.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol;
                     var usageStats = accessedProperties.GetOrAdd(symbol, _ => new UsageStats());
 
-                    if (identifierSyntax.Parent.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax })
-                    {
-                        usageStats.IsInVarDeclarator = true;
-                    }
-
+                    usageStats.IsInVarDeclarator = memberAccessExpressionSyntax.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax };
                     usageStats.Count++;
                 }
                 else
@@ -120,11 +118,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 c.ReportDiagnosticWhenActive(diagnostic);
             }
 
-            static IEnumerable<IdentifierNameSyntax> GetIdentifiers(ForEachStatementSyntax forEachStatementSyntax) =>
+            static IEnumerable<IdentifierNameSyntax> GetStatementIdentifiers(ForEachStatementSyntax forEachStatementSyntax) =>
                 forEachStatementSyntax.Statement
                                       .DescendantNodes()
                                       .OfType<IdentifierNameSyntax>()
                                       .Where(identifierNameSyntax => identifierNameSyntax.Identifier.ValueText == forEachStatementSyntax.Identifier.ValueText);
+
+            static bool IsNotLeftSideOfAssignment(IdentifierNameSyntax identifierSyntax) =>
+                !(identifierSyntax.Parent.Parent is AssignmentExpressionSyntax assignment && assignment.Left == identifierSyntax.Parent);
         }
 
         private class UsageStats

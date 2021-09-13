@@ -8,7 +8,7 @@ namespace Tests.Diagnostics
     {
         public void ForEach_PropertySet_Compliant(ICollection<Point> collection)
         {
-            foreach (var point in collection) // Compliant - Selecting `X` and setting it's value will not work in this case.
+            foreach (var point in collection) // Compliant - Selecting `Y` and setting it's value will not work in this case.
             {
                 point.Y ??= 3;
                 Console.WriteLine(point.Y);
