@@ -1243,7 +1243,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S1168_Description" xml:space="preserve">
-    <value>Returning null instead of an actual array or collection forces callers of the method to explicitly test for nullity, making them more complex and less readable.</value>
+    <value>Returning null instead of an actual array, collection or map forces callers of the method to explicitly test for nullity, making them more complex and less readable.</value>
   </data>
   <data name="S1168_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
