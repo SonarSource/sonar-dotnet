@@ -560,6 +560,58 @@ if (boolParameter)
             context.Validate(context.Block<ExitBlock>());
         }
 
+        [TestMethod]
+        public void LocalFunctionInvocation_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction();
+
+int LocalFunction() => variable;";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("variable"));
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("boolParameter"), new LiveOut("variable")); // "variable" should also LiveIn
+            context.Validate(context.Block<SimpleBlock>(), new LiveIn("variable"));
+        }
+
+        [TestMethod]
+        public void LocalFunctionInvocation_Generic_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction<int>();
+
+T LocalFunction<T>() => variable;";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("variable"));
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("boolParameter"), new LiveOut("variable"));
+            context.Validate(context.Block<SimpleBlock>(), new LiveIn("variable"));
+        }
+
+        [TestMethod]
+        public void LocalFunctionInvocation_NotLiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction();
+Method(variable);
+
+void LocalFunction()
+{
+    variable = 0;
+}";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"));
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("boolParameter"));
+            context.Validate(context.Block<SimpleBlock>());
+        }
+
         private class Context
         {
             public readonly SonarCSharpLiveVariableAnalysis Lva;

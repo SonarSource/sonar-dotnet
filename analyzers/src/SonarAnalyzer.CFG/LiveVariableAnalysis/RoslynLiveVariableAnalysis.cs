@@ -75,13 +75,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     case OperationKindEx.FlowAnonymousFunction:
                         ProcessFlowAnonymousFunction(state, cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance));
                         break;
-
-                        //FIXME: Something is still missing around here
-
-                        //            case SyntaxKind.GenericName:
-                        //                ProcessGenericName((GenericNameSyntax)instruction, state);
-                        //                break;
-
                 }
             }
         }
@@ -134,56 +127,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 }
             }
         }
-
-        //private void ProcessIdentifier(IdentifierNameSyntax identifier, State state)
-        //{
-        //    if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
-        //        && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol)
-        //    {
-        //        if (IsLocalScoped(symbol))
-        //        {
-        //            if (IsOutArgument(identifier))
-        //            {
-        //                state.Assigned.Add(symbol);
-        //                state.UsedBeforeAssigned.Remove(symbol);
-        //            }
-        //            else if (!state.AssignmentLhs.Contains(identifier))
-        //            {
-        //                state.UsedBeforeAssigned.Add(symbol);
-        //            }
-        //        }
-
-        //        if (symbol is IMethodSymbol { MethodKind: MethodKindEx.LocalFunction } method)
-        //        {
-        //            ProcessLocalFunction(symbol, state);
-        //        }
-        //    }
-        //}
-
-        //private void ProcessGenericName(GenericNameSyntax genericName, State state)
-        //{
-        //    if (!genericName.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
-        //        && semanticModel.GetSymbolInfo(genericName).Symbol is IMethodSymbol {MethodKind: MethodKindEx.LocalFunction } method)
-        //    {
-        //        ProcessLocalFunction(method, state);
-        //    }
-        //}
-
-        //private void ProcessLocalFunction(ISymbol symbol, State state)
-        //{
-        //    if (!state.ProcessedLocalFunctions.Contains(symbol)
-        //        && symbol.DeclaringSyntaxReferences.Length == 1
-        //        && symbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } node
-        //        && (LocalFunctionStatementSyntaxWrapper)node is LocalFunctionStatementSyntaxWrapper function
-        //        && CSharpControlFlowGraph.TryGet(function.Body ?? function.ExpressionBody as CSharpSyntaxNode, semanticModel, out var cfg))
-        //    {
-        //        state.ProcessedLocalFunctions.Add(symbol);
-        //        foreach (var block in cfg.Blocks.Reverse())
-        //        {
-        //            ProcessBlockInternal(block, state);
-        //        }
-        //    }
-        //}
 
         private static ISymbol ParameterOrLocalSymbol(IOperation operation) =>
             operation switch
