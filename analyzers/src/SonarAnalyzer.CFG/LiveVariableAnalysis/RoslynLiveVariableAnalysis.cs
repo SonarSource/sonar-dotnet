@@ -52,12 +52,12 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         protected override State ProcessBlock(BasicBlock block)
         {
             //FIXME: Ugly
-            var ret = new State();
+            var ret = new RoslynState();
             ProcessBlockInternal(block, ret);
             return ret;
         }
 
-        private void ProcessBlockInternal(BasicBlock block, State state)
+        private void ProcessBlockInternal(BasicBlock block, RoslynState state)
         {
             foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
             {
@@ -135,5 +135,10 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                 _ => null
             };
+
+        private class RoslynState : State
+        {
+//FIXME: Move Logic here
+        }
     }
 }

@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.UnitTest.CFG.Sonar;
 using StyleCop.Analyzers.Lightup;

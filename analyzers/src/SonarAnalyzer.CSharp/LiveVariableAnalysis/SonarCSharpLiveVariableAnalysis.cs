@@ -40,17 +40,14 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
         public SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel) : base(controlFlowGraph)
         {
-            //FIXME: Move to base?
             this.declaration = declaration;
             this.semanticModel = semanticModel;
             Analyze();
         }
 
-        //FIXME: Move to base
         internal static bool IsOutArgument(IdentifierNameSyntax identifier) =>
             identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
 
-        //FIXME: Move to base
         internal static bool IsLocalScoped(ISymbol symbol, ISymbol declaration)
         {
             return IsLocalOrParameterSymbol()
@@ -73,12 +70,12 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
         protected override State ProcessBlock(Block block)
         {
-            var ret = new State();
+            var ret = new SonarState();
             ProcessBlockInternal(block, ret);
             return ret;
         }
 
-        private void ProcessBlockInternal(Block block, State state)
+        private void ProcessBlockInternal(Block block, SonarState state)
         {
             foreach (var instruction in block.Instructions.Reverse())
             {
@@ -152,7 +149,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             }
         }
 
-        private void ProcessSimpleAssignment(AssignmentExpressionSyntax assignment, State state)
+        private void ProcessSimpleAssignment(AssignmentExpressionSyntax assignment, SonarState state)
         {
             var left = assignment.Left.RemoveParentheses();
             if (left.IsKind(SyntaxKind.IdentifierName)
@@ -165,7 +162,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             }
         }
 
-        private void ProcessIdentifier(IdentifierNameSyntax identifier, State state)
+        private void ProcessIdentifier(IdentifierNameSyntax identifier, SonarState state)
         {
             if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
                 && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol)
@@ -190,7 +187,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             }
         }
 
-        private void ProcessGenericName(GenericNameSyntax genericName, State state)
+        private void ProcessGenericName(GenericNameSyntax genericName, SonarState state)
         {
             if (!genericName.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
                 && semanticModel.GetSymbolInfo(genericName).Symbol is IMethodSymbol {MethodKind: MethodKindEx.LocalFunction } method)
@@ -199,7 +196,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             }
         }
 
-        private void ProcessLocalFunction(ISymbol symbol, State state)
+        private void ProcessLocalFunction(ISymbol symbol, SonarState state)
         {
             if (!state.ProcessedLocalFunctions.Contains(symbol)
                 && symbol.DeclaringSyntaxReferences.Length == 1
@@ -227,8 +224,12 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             state.Captured.UnionWith(allCapturedSymbols);
         }
 
-        //FIXME: Move to base
         private bool IsLocalScoped(ISymbol symbol) =>
             IsLocalScoped(symbol, declaration);
+
+        private class SonarState : State
+        {
+            public ISet<SyntaxNode> AssignmentLhs { get; } = new HashSet<SyntaxNode>();
+        }
     }
 }
