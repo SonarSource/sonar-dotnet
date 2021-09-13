@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var identifierSyntax in GetStatementIdentifiers(forEachStatementSyntax))
             {
                 if (identifierSyntax.Parent is MemberAccessExpressionSyntax { Parent: not InvocationExpressionSyntax } memberAccessExpressionSyntax
-                    && IsNotLeftSideOfAssignment(identifierSyntax)
+                    && IsNotLeftSideOfAssignment(memberAccessExpressionSyntax)
                     && c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value))
                 {
                     var symbol = c.SemanticModel.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol;
@@ -124,8 +124,8 @@ namespace SonarAnalyzer.Rules.CSharp
                                       .OfType<IdentifierNameSyntax>()
                                       .Where(identifierNameSyntax => identifierNameSyntax.Identifier.ValueText == forEachStatementSyntax.Identifier.ValueText);
 
-            static bool IsNotLeftSideOfAssignment(IdentifierNameSyntax identifierSyntax) =>
-                !(identifierSyntax.Parent.Parent is AssignmentExpressionSyntax assignment && assignment.Left == identifierSyntax.Parent);
+            static bool IsNotLeftSideOfAssignment(MemberAccessExpressionSyntax memberAccess) =>
+                !(memberAccess.Parent is AssignmentExpressionSyntax assignment && assignment.Left == memberAccess);
         }
 
         private class UsageStats
