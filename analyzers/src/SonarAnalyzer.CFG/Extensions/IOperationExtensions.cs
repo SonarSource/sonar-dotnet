@@ -26,7 +26,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
-    public static partial class IOperationExtensions
+    public static class IOperationExtensions
     {
         public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
             new OperationExecutionOrder(operations, false);

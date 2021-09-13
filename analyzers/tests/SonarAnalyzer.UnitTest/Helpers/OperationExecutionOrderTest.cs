@@ -185,7 +185,7 @@ Method(4);";
             enumerator.Current.Should().NotBeNull();
         }
 
-        private OperationExecutionOrder Compile(string methodBody, bool reverseOrder)
+        private static OperationExecutionOrder Compile(string methodBody, bool reverseOrder)
         {
             var code = @$"
 public class Sample
