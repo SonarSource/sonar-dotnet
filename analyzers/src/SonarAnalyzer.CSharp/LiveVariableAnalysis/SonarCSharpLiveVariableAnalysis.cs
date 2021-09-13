@@ -70,166 +70,175 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
         protected override State ProcessBlock(Block block)
         {
-            var ret = new SonarState();
-            ProcessBlockInternal(block, ret);
+            var ret = new SonarState(declaration, semanticModel);
+            ret.ProcessBlock(block);
             return ret;
         }
 
-        private void ProcessBlockInternal(Block block, SonarState state)
-        {
-            foreach (var instruction in block.Instructions.Reverse())
-            {
-                switch (instruction.Kind())
-                {
-                    case SyntaxKind.IdentifierName:
-                        ProcessIdentifier((IdentifierNameSyntax)instruction, state);
-                        break;
-
-                    case SyntaxKind.GenericName:
-                        ProcessGenericName((GenericNameSyntax)instruction, state);
-                        break;
-
-                    case SyntaxKind.SimpleAssignmentExpression:
-                        ProcessSimpleAssignment((AssignmentExpressionSyntax)instruction, state);
-                        break;
-
-                    case SyntaxKind.VariableDeclarator:
-                        ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction, state);
-                        break;
-
-                    case SyntaxKind.AnonymousMethodExpression:
-                    case SyntaxKind.ParenthesizedLambdaExpression:
-                    case SyntaxKind.SimpleLambdaExpression:
-                    case SyntaxKind.QueryExpression:
-                        CollectAllCapturedLocal(instruction, state);
-                        break;
-                }
-            }
-
-            if (block.Instructions.Any())
-            {
-                return;
-            }
-
-            // Variable declaration in a foreach statement is not a VariableDeclarator, so handling it separately:
-            if (block is BinaryBranchBlock foreachBlock && foreachBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement))
-            {
-                var foreachNode = (ForEachStatementSyntax)foreachBlock.BranchingNode;
-                ProcessVariableInForeach(foreachNode, state);
-            }
-
-            // Keep alive the variables declared and used in the using statement until the UsingFinalizerBlock
-            if (block is UsingEndBlock usingFinalizerBlock)
-            {
-                var disposableSymbols = usingFinalizerBlock.Identifiers
-                    .Select(x => semanticModel.GetDeclaredSymbol(x.Parent) ?? semanticModel.GetSymbolInfo(x.Parent).Symbol)
-                    .WhereNotNull();
-                foreach (var disposableSymbol in disposableSymbols)
-                {
-                    state.UsedBeforeAssigned.Add(disposableSymbol);
-                }
-            }
-        }
-
-        private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode, State state)
-        {
-            if (semanticModel.GetDeclaredSymbol(foreachNode) is { } symbol)
-            {
-                state.Assigned.Add(symbol);
-                state.UsedBeforeAssigned.Remove(symbol);
-            }
-        }
-
-        private void ProcessVariableDeclarator(VariableDeclaratorSyntax instruction, State state)
-        {
-            if (semanticModel.GetDeclaredSymbol(instruction) is { } symbol)
-            {
-                state.Assigned.Add(symbol);
-                state.UsedBeforeAssigned.Remove(symbol);
-            }
-        }
-
-        private void ProcessSimpleAssignment(AssignmentExpressionSyntax assignment, SonarState state)
-        {
-            var left = assignment.Left.RemoveParentheses();
-            if (left.IsKind(SyntaxKind.IdentifierName)
-                && semanticModel.GetSymbolInfo(left).Symbol is { } symbol
-                && IsLocalScoped(symbol))
-            {
-                state.AssignmentLhs.Add(left);
-                state.Assigned.Add(symbol);
-                state.UsedBeforeAssigned.Remove(symbol);
-            }
-        }
-
-        private void ProcessIdentifier(IdentifierNameSyntax identifier, SonarState state)
-        {
-            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
-                && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol)
-            {
-                if (IsLocalScoped(symbol))
-                {
-                    if (IsOutArgument(identifier))
-                    {
-                        state.Assigned.Add(symbol);
-                        state.UsedBeforeAssigned.Remove(symbol);
-                    }
-                    else if (!state.AssignmentLhs.Contains(identifier))
-                    {
-                        state.UsedBeforeAssigned.Add(symbol);
-                    }
-                }
-
-                if (symbol is IMethodSymbol { MethodKind: MethodKindEx.LocalFunction } method)
-                {
-                    ProcessLocalFunction(symbol, state);
-                }
-            }
-        }
-
-        private void ProcessGenericName(GenericNameSyntax genericName, SonarState state)
-        {
-            if (!genericName.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
-                && semanticModel.GetSymbolInfo(genericName).Symbol is IMethodSymbol {MethodKind: MethodKindEx.LocalFunction } method)
-            {
-                ProcessLocalFunction(method, state);
-            }
-        }
-
-        private void ProcessLocalFunction(ISymbol symbol, SonarState state)
-        {
-            if (!state.ProcessedLocalFunctions.Contains(symbol)
-                && symbol.DeclaringSyntaxReferences.Length == 1
-                && symbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } node
-                && (LocalFunctionStatementSyntaxWrapper)node is LocalFunctionStatementSyntaxWrapper function
-                && CSharpControlFlowGraph.TryGet(function.Body ?? function.ExpressionBody as CSharpSyntaxNode, semanticModel, out var cfg))
-            {
-                state.ProcessedLocalFunctions.Add(symbol);
-                foreach (var block in cfg.Blocks.Reverse())
-                {
-                    ProcessBlockInternal(block, state);
-                }
-            }
-        }
-
-        private void CollectAllCapturedLocal(SyntaxNode instruction, State state)
-        {
-            var allCapturedSymbols = instruction.DescendantNodes()
-                .OfType<IdentifierNameSyntax>()
-                .Select(i => semanticModel.GetSymbolInfo(i).Symbol)
-                .Where(s => s != null && IsLocalScoped(s));
-
-            // Collect captured locals
-            // Read and write both affects liveness
-            state.Captured.UnionWith(allCapturedSymbols);
-        }
-
-        private bool IsLocalScoped(ISymbol symbol) =>
-            IsLocalScoped(symbol, declaration);
-
         private class SonarState : State
         {
+            private readonly ISymbol declaration;
+            private readonly SemanticModel semanticModel;
+
             public ISet<SyntaxNode> AssignmentLhs { get; } = new HashSet<SyntaxNode>();
+
+            public SonarState(ISymbol declaration, SemanticModel semanticModel)
+            {
+                this.declaration = declaration;
+                this.semanticModel = semanticModel;
+            }
+
+            public void ProcessBlock(Block block)
+            {
+                foreach (var instruction in block.Instructions.Reverse())
+                {
+                    switch (instruction.Kind())
+                    {
+                        case SyntaxKind.IdentifierName:
+                            ProcessIdentifier((IdentifierNameSyntax)instruction);
+                            break;
+
+                        case SyntaxKind.GenericName:
+                            ProcessGenericName((GenericNameSyntax)instruction);
+                            break;
+
+                        case SyntaxKind.SimpleAssignmentExpression:
+                            ProcessSimpleAssignment((AssignmentExpressionSyntax)instruction);
+                            break;
+
+                        case SyntaxKind.VariableDeclarator:
+                            ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction);
+                            break;
+
+                        case SyntaxKind.AnonymousMethodExpression:
+                        case SyntaxKind.ParenthesizedLambdaExpression:
+                        case SyntaxKind.SimpleLambdaExpression:
+                        case SyntaxKind.QueryExpression:
+                            CollectAllCapturedLocal(instruction);
+                            break;
+                    }
+                }
+
+                if (block.Instructions.Any())
+                {
+                    return;
+                }
+
+                // Variable declaration in a foreach statement is not a VariableDeclarator, so handling it separately:
+                if (block is BinaryBranchBlock foreachBlock && foreachBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement))
+                {
+                    var foreachNode = (ForEachStatementSyntax)foreachBlock.BranchingNode;
+                    ProcessVariableInForeach(foreachNode);
+                }
+
+                // Keep alive the variables declared and used in the using statement until the UsingFinalizerBlock
+                if (block is UsingEndBlock usingFinalizerBlock)
+                {
+                    var disposableSymbols = usingFinalizerBlock.Identifiers
+                        .Select(x => semanticModel.GetDeclaredSymbol(x.Parent) ?? semanticModel.GetSymbolInfo(x.Parent).Symbol)
+                        .WhereNotNull();
+                    foreach (var disposableSymbol in disposableSymbols)
+                    {
+                        UsedBeforeAssigned.Add(disposableSymbol);
+                    }
+                }
+            }
+
+            private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode)
+            {
+                if (semanticModel.GetDeclaredSymbol(foreachNode) is { } symbol)
+                {
+                    Assigned.Add(symbol);
+                    UsedBeforeAssigned.Remove(symbol);
+                }
+            }
+
+            private void ProcessVariableDeclarator(VariableDeclaratorSyntax instruction)
+            {
+                if (semanticModel.GetDeclaredSymbol(instruction) is { } symbol)
+                {
+                    Assigned.Add(symbol);
+                    UsedBeforeAssigned.Remove(symbol);
+                }
+            }
+
+            private void ProcessSimpleAssignment(AssignmentExpressionSyntax assignment)
+            {
+                var left = assignment.Left.RemoveParentheses();
+                if (left.IsKind(SyntaxKind.IdentifierName)
+                    && semanticModel.GetSymbolInfo(left).Symbol is { } symbol
+                    && IsLocal(symbol))
+                {
+                    AssignmentLhs.Add(left);
+                    Assigned.Add(symbol);
+                    UsedBeforeAssigned.Remove(symbol);
+                }
+            }
+
+            private void ProcessIdentifier(IdentifierNameSyntax identifier)
+            {
+                if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
+                    && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol)
+                {
+                    if (IsLocal(symbol))
+                    {
+                        if (IsOutArgument(identifier))
+                        {
+                            Assigned.Add(symbol);
+                            UsedBeforeAssigned.Remove(symbol);
+                        }
+                        else if (!AssignmentLhs.Contains(identifier))
+                        {
+                            UsedBeforeAssigned.Add(symbol);
+                        }
+                    }
+
+                    if (symbol is IMethodSymbol { MethodKind: MethodKindEx.LocalFunction } method)
+                    {
+                        ProcessLocalFunction(symbol);
+                    }
+                }
+            }
+
+            private void ProcessGenericName(GenericNameSyntax genericName)
+            {
+                if (!genericName.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
+                    && semanticModel.GetSymbolInfo(genericName).Symbol is IMethodSymbol { MethodKind: MethodKindEx.LocalFunction } method)
+                {
+                    ProcessLocalFunction(method);
+                }
+            }
+
+            private void ProcessLocalFunction(ISymbol symbol)
+            {
+                if (!ProcessedLocalFunctions.Contains(symbol)
+                    && symbol.DeclaringSyntaxReferences.Length == 1
+                    && symbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } node
+                    && (LocalFunctionStatementSyntaxWrapper)node is LocalFunctionStatementSyntaxWrapper function
+                    && CSharpControlFlowGraph.TryGet(function.Body ?? function.ExpressionBody as CSharpSyntaxNode, semanticModel, out var cfg))
+                {
+                    ProcessedLocalFunctions.Add(symbol);
+                    foreach (var block in cfg.Blocks.Reverse())
+                    {
+                        ProcessBlock(block);
+                    }
+                }
+            }
+
+            private void CollectAllCapturedLocal(SyntaxNode instruction)
+            {
+                var allCapturedSymbols = instruction.DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Select(i => semanticModel.GetSymbolInfo(i).Symbol)
+                    .Where(s => s != null && IsLocal(s));
+
+                // Collect captured locals
+                // Read and write both affects liveness
+                Captured.UnionWith(allCapturedSymbols);
+            }
+
+            private bool IsLocal(ISymbol symbol) =>
+                IsLocalScoped(symbol, declaration);
         }
     }
 }

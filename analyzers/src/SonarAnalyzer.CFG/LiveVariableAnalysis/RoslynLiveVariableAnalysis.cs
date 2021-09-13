@@ -51,94 +51,91 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         protected override State ProcessBlock(BasicBlock block)
         {
-            //FIXME: Ugly
             var ret = new RoslynState();
-            ProcessBlockInternal(block, ret);
+            ret.ProcessBlock(cfg, block);
             return ret;
         }
 
-        private void ProcessBlockInternal(BasicBlock block, RoslynState state)
-        {
-            foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
-            {
-                switch (operation.Instance.Kind)
-                {
-                    case OperationKindEx.LocalReference:
-                        ProcessParameterOrLocalReference(state, ILocalReferenceOperationWrapper.FromOperation(operation.Instance));
-                        break;
-                    case OperationKindEx.ParameterReference:
-                        ProcessParameterOrLocalReference(state, IParameterReferenceOperationWrapper.FromOperation(operation.Instance));
-                        break;
-                    case OperationKindEx.SimpleAssignment:
-                        ProcessSimpleAssignment(state, ISimpleAssignmentOperationWrapper.FromOperation(operation.Instance));
-                        break;
-                    case OperationKindEx.FlowAnonymousFunction:
-                        ProcessFlowAnonymousFunction(state, cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance));
-                        break;
-                }
-            }
-        }
-
-        private void ProcessParameterOrLocalReference(State state, IOperationWrapper reference)
-        {
-            var symbol = ParameterOrLocalSymbol(reference.WrappedOperation);
-            Debug.Assert(symbol != null, "Only supported types should be passed to ParameterOrLocalSymbol");
-            if (IsOutArgument(reference.WrappedOperation))
-            {
-                state.Assigned.Add(symbol);
-                state.UsedBeforeAssigned.Remove(symbol);
-            }
-            else if (!IsAssignmentTarget())
-            {
-                state.UsedBeforeAssigned.Add(symbol);
-            }
-
-            bool IsAssignmentTarget() =>
-                new IOperationWrapperSonar(reference.WrappedOperation).Parent is { } parent
-                && parent.Kind == OperationKindEx.SimpleAssignment
-                && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == reference.WrappedOperation;
-        }
-
-        private void ProcessSimpleAssignment(State state, ISimpleAssignmentOperationWrapper assignment)
-        {
-            if (ParameterOrLocalSymbol(assignment.Target) is { } localTarget)
-            {
-                state.Assigned.Add(localTarget);
-                state.UsedBeforeAssigned.Remove(localTarget);
-            }
-        }
-
-        private void ProcessFlowAnonymousFunction(State state, ControlFlowGraph cfg, IFlowAnonymousFunctionOperationWrapper anonymousFunction)
-        {
-            var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
-            foreach (var operation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
-            {
-                switch (operation.Kind)
-                {
-                    case OperationKindEx.LocalReference:
-                        state.Captured.Add(ILocalReferenceOperationWrapper.FromOperation(operation).Local);
-                        break;
-                    case OperationKindEx.ParameterReference:
-                        state.Captured.Add(IParameterReferenceOperationWrapper.FromOperation(operation).Parameter);
-                        break;
-                    case OperationKindEx.FlowAnonymousFunction:
-                        ProcessFlowAnonymousFunction(state, anonymousFunctionCfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
-                        break;
-                }
-            }
-        }
-
-        private static ISymbol ParameterOrLocalSymbol(IOperation operation) =>
-            operation switch
-            {
-                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
-                _ => null
-            };
-
         private class RoslynState : State
         {
-//FIXME: Move Logic here
+            public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block)
+            {
+                foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
+                {
+                    switch (operation.Instance.Kind)
+                    {
+                        case OperationKindEx.LocalReference:
+                            ProcessParameterOrLocalReference(ILocalReferenceOperationWrapper.FromOperation(operation.Instance));
+                            break;
+                        case OperationKindEx.ParameterReference:
+                            ProcessParameterOrLocalReference(IParameterReferenceOperationWrapper.FromOperation(operation.Instance));
+                            break;
+                        case OperationKindEx.SimpleAssignment:
+                            ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper.FromOperation(operation.Instance));
+                            break;
+                        case OperationKindEx.FlowAnonymousFunction:
+                            ProcessFlowAnonymousFunction(cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance));
+                            break;
+                    }
+                }
+            }
+
+            private void ProcessParameterOrLocalReference(IOperationWrapper reference)
+            {
+                var symbol = ParameterOrLocalSymbol(reference.WrappedOperation);
+                Debug.Assert(symbol != null, "Only supported types should be passed to ParameterOrLocalSymbol");
+                if (IsOutArgument(reference.WrappedOperation))
+                {
+                    Assigned.Add(symbol);
+                    UsedBeforeAssigned.Remove(symbol);
+                }
+                else if (!IsAssignmentTarget())
+                {
+                    UsedBeforeAssigned.Add(symbol);
+                }
+
+                bool IsAssignmentTarget() =>
+                    new IOperationWrapperSonar(reference.WrappedOperation).Parent is { } parent
+                    && parent.Kind == OperationKindEx.SimpleAssignment
+                    && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == reference.WrappedOperation;
+            }
+
+            private void ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper assignment)
+            {
+                if (ParameterOrLocalSymbol(assignment.Target) is { } localTarget)
+                {
+                    Assigned.Add(localTarget);
+                    UsedBeforeAssigned.Remove(localTarget);
+                }
+            }
+
+            private void ProcessFlowAnonymousFunction(ControlFlowGraph cfg, IFlowAnonymousFunctionOperationWrapper anonymousFunction)
+            {
+                var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
+                foreach (var operation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
+                {
+                    switch (operation.Kind)
+                    {
+                        case OperationKindEx.LocalReference:
+                            Captured.Add(ILocalReferenceOperationWrapper.FromOperation(operation).Local);
+                            break;
+                        case OperationKindEx.ParameterReference:
+                            Captured.Add(IParameterReferenceOperationWrapper.FromOperation(operation).Parameter);
+                            break;
+                        case OperationKindEx.FlowAnonymousFunction:
+                            ProcessFlowAnonymousFunction(anonymousFunctionCfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
+                            break;
+                    }
+                }
+            }
+
+            private static ISymbol ParameterOrLocalSymbol(IOperation operation) =>
+                operation switch
+                {
+                    var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
+                    var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                    _ => null
+                };
         }
     }
 }
