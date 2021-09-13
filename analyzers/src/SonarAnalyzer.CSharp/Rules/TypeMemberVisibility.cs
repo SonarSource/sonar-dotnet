@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class TypeMemberVisibility : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3059";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Types should not have members with visibility set higher than the type's visibility";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
