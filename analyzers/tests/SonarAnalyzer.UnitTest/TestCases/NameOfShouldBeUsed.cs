@@ -27,6 +27,11 @@ namespace Tests.Diagnostics
             if ("arg1" == foo)
                 return;
 
+            throw new ArgumentException
+            {
+                Source = "arg1"                       // Noncompliant
+            };
+
             throw new ArgumentException("argument "); // Noncompliant
             throw new ArgumentException("argument,"); // Noncompliant
             throw new ArgumentException("argument!"); // Noncompliant
