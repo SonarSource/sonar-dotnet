@@ -120,7 +120,7 @@ namespace Tests.Diagnostics
 
         int Prop7
         {
-            get => Prop6; // Compliant - FP
+            get => Prop6;
         }
 
         private InfiniteRecursion infiniteRecursionField;
