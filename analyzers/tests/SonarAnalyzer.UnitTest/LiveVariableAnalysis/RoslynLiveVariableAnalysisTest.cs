@@ -22,10 +22,12 @@ using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using IIsNullOperation = Microsoft.CodeAnalysis.FlowAnalysis.IIsNullOperation;
 
 namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
 {
@@ -728,6 +730,42 @@ static int LocalFunction(int a)
             context.Validate(context.Cfg.ExitBlock);
         }
 
+        [DataTestMethod]
+        [DataRow("using (var ms = new System.IO.MemoryStream()) {", "}")]
+        [DataRow("using var ms = new System.IO.MemoryStream();", null)]
+        public void Using_LiveInUntilTheEnd(string usingStatement, string suffix)
+        {
+            /*       Block 1                    Finally region:
+             *       ms = new                   Block 4
+             *         |                        /    \
+             *         |                    Block5    \
+             *       Block 2                ms.Dispose |
+             *       Method(ms.Length)          \     /
+             *        /   \                     Block 6
+             *       /     \                      |
+             *   Block 3    |                   (null)
+             *   Method(0)  |
+             *       \     /
+             *        Exit
+             */
+            var code = @$"
+{usingStatement}
+    Method(ms.Length);
+    if (boolParameter)
+        Method(0);
+{suffix}";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate(context.Block<ISimpleAssignmentOperation>("ms = new System.IO.MemoryStream()"), new LiveIn("boolParameter"), new LiveOut("boolParameter", "ms"));
+            context.Validate(context.Block("Method(ms.Length);"), new LiveIn("boolParameter", "ms") /* ToDo: Try/Finally support should introduce new LiveOut("ms") */);
+            context.Validate(context.Block("Method(0);") /* ToDo: Try/Finally support should introduce new LiveIn("ms"), new LiveOut("ms") */);
+            context.Validate(context.Cfg.ExitBlock);
+            // Finally region
+            context.Validate(context.Block<IIsNullOperation>("ms = new System.IO.MemoryStream()"), new LiveIn("ms"), new LiveOut("ms"));    // Null check
+            context.Validate(context.Block<IInvocationOperation>("ms = new System.IO.MemoryStream()"), new LiveIn("ms"));                   // Actual Dispose
+            context.Validate(context.Cfg.Blocks[6]);
+        }
+
         private class Context
         {
             public readonly RoslynLiveVariableAnalysis Lva;
@@ -791,6 +829,9 @@ End Class";
 
             public BasicBlock Block(string withSyntax = null) =>
                 Cfg.Blocks.Single(x => x.Kind == BasicBlockKind.Block && (withSyntax == null || x.OperationsAndBranchValue.Any(operation => operation.Syntax.ToString() == withSyntax)));
+
+            public BasicBlock Block<TOperation>(string withSyntax) where TOperation : IOperation =>
+                Cfg.Blocks.Single(x => x.Kind == BasicBlockKind.Block && x.OperationsAndBranchValue.OfType<TOperation>().Any(operation => operation.Syntax.ToString() == withSyntax));
 
             public void ValidateAllEmpty()
             {

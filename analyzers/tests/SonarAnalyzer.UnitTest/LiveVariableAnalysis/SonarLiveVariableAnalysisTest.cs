@@ -504,6 +504,62 @@ static int LocalFunction(int a)
             context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
         }
 
+        [TestMethod]
+        public void UsingBlock_LiveInUntilTheEnd()
+        {
+            /*     Jump
+             *     new ms
+             *       |
+             *     Binary
+             *     Method(ms.Length)
+             *      /  \
+             * Simple   \
+             * Method(0) |
+             *      \   /
+             *     Using
+             *       |
+             *     Exit
+             */
+            var code = @"
+using (var ms = new System.IO.MemoryStream())
+{
+    Method(ms.Length);
+    if (boolParameter)
+        Method(0);
+}";
+            var context = new Context(code);
+            context.Validate(context.Block<JumpBlock>(), new LiveIn("boolParameter"), new LiveOut("boolParameter", "ms"));
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("boolParameter", "ms"), new LiveOut("ms"));
+            context.Validate(context.Block<SimpleBlock>(), new LiveIn("ms"), new LiveOut("ms"));
+            context.Validate(context.Block<UsingEndBlock>(), new LiveIn("ms"));
+            context.Validate(context.Block<ExitBlock>());
+        }
+
+        [TestMethod]
+        public void UsingVar_NotSupported()
+        {
+            /* Bad CFG Shape
+             *
+             *     Binary
+             *     ms = new
+             *     Method(ms.Length)
+             *      /  \
+             * Simple   \
+             * Method(0) |
+             *      \   /
+             *      Exit
+             */
+            var code = @"
+using var ms = new System.IO.MemoryStream();
+Method(ms.Length);
+if (boolParameter)
+    Method(0);";
+            var context = new Context(code);
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("boolParameter"));
+            context.Validate(context.Block<SimpleBlock>());
+            context.Validate(context.Block<ExitBlock>());
+        }
+
         private class Context
         {
             public readonly SonarCSharpLiveVariableAnalysis Lva;
@@ -556,9 +612,9 @@ public class Sample
                 var expectedLiveIn = expected.OfType<LiveIn>().SingleOrDefault() ?? new LiveIn();
                 var expectedLiveOut = expected.OfType<LiveOut>().SingleOrDefault() ?? new LiveOut();
                 var expectedCaptured = expected.OfType<Captured>().SingleOrDefault() ?? new Captured();
-                Lva.LiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names);
-                Lva.LiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names);
-                Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names);
+                Lva.LiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names, block.GetType().Name);
+                Lva.LiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names, block.GetType().Name);
+                Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names, block.GetType().Name);
             }
         }
 
