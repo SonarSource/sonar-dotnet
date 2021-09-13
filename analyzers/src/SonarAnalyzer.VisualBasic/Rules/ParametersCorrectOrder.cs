@@ -85,26 +85,34 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override Location GetMethodDeclarationIdentifierLocation(SyntaxNode syntaxNode) =>
             (syntaxNode as MethodBlockBaseSyntax)?.FindIdentifierLocation();
 
-        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument) => GetExpressionSyntaxIdentifier(argument?.GetExpression());
+        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument, SyntaxNodeAnalysisContext syntaxNodeAnalysisContext) => GetExpressionSyntaxIdentifier(argument?.GetExpression(), syntaxNodeAnalysisContext);
 
         protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
             (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
 
-        private static SyntaxToken? GetExpressionSyntaxIdentifier(ExpressionSyntax expression) =>
+        private static SyntaxToken? GetExpressionSyntaxIdentifier(ExpressionSyntax expression, SyntaxNodeAnalysisContext syntaxNodeAnalysisContext) =>
             expression switch
             {
                 IdentifierNameSyntax identifier => identifier.Identifier,
-                MemberAccessExpressionSyntax memberAccess => GetValueAccessIdentifier(memberAccess),
-                CastExpressionSyntax cast => GetExpressionSyntaxIdentifier(cast.Expression),
-                PredefinedCastExpressionSyntax predefinedCast => GetExpressionSyntaxIdentifier(predefinedCast.Expression),
-                ParenthesizedExpressionSyntax parentheses => GetExpressionSyntaxIdentifier(parentheses.Expression),
+                MemberAccessExpressionSyntax memberAccess => GetValueAccessIdentifier(memberAccess, syntaxNodeAnalysisContext),
+                CastExpressionSyntax cast => GetExpressionSyntaxIdentifier(cast.Expression, syntaxNodeAnalysisContext),
+                PredefinedCastExpressionSyntax predefinedCast => GetExpressionSyntaxIdentifier(predefinedCast.Expression, syntaxNodeAnalysisContext),
+                ParenthesizedExpressionSyntax parentheses => GetExpressionSyntaxIdentifier(parentheses.Expression, syntaxNodeAnalysisContext),
                 _ => null
             };
 
-        private static SyntaxToken? GetValueAccessIdentifier(MemberAccessExpressionSyntax expression) =>
-            expression.Name.ToString() == "Value"
-                ? GetExpressionSyntaxIdentifier(expression.Expression)
+        private static SyntaxToken? GetValueAccessIdentifier(MemberAccessExpressionSyntax expression, SyntaxNodeAnalysisContext syntaxNodeAnalysisContext) =>
+            expression.Name.ToString() == "Value" && IsNullableValueAccess(expression, syntaxNodeAnalysisContext)
+                ? GetExpressionSyntaxIdentifier(expression.Expression, syntaxNodeAnalysisContext)
                 : expression.Name.Identifier;
+
+        private static bool IsNullableValueAccess(MemberAccessExpressionSyntax expression, SyntaxNodeAnalysisContext syntaxNodeAnalysisContext)
+        {
+            var typeInfo = syntaxNodeAnalysisContext.SemanticModel.GetTypeInfo(expression.Expression);
+            var type = typeInfo.ConvertedType;
+            var nullableT = syntaxNodeAnalysisContext.Compilation.GetTypeByMetadataName(typeof(Nullable<>).FullName);
+            return type.OriginalDefinition.DerivesOrImplements(nullableT);
+        }
     }
 }
 

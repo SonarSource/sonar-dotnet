@@ -82,6 +82,10 @@ Namespace Tests.TestCases
             Public Property b as Integer
         End Class
 
+        Public Class B
+            Public Property Value as Integer
+        End Class
+
         Sub NotNullableParamVoid(ByVal a as Integer, ByVal b as Integer)
             ' Do nothing
         End Sub
@@ -95,7 +99,7 @@ Namespace Tests.TestCases
         End Sub
 
 
-        Sub NullableParamCastVoid(ByVal a as Integer, ByVal b as Nullable(Of Integer))
+        Sub NullableParamCastVoid(ByVal a as Integer, ByVal b as Integer?)
             if b.HasValue Then
                 NotNullableParamVoid(CInt(b), a) ' Noncompliant
                 NotNullableParamVoid(a, CInt(b)) ' Compliant
@@ -105,6 +109,11 @@ Namespace Tests.TestCases
         Sub InnerPropertyParamVoid(ByVal a as Integer, ByRef c as A)
             NotNullableParamVoid(c.Something.b, a) ' Noncompliant
             NotNullableParamVoid(a, c.Something.b) ' Compliant
+        End Sub
+
+        Sub InnerPropertyParamVoid(ByVal c as Integer, ByRef b as B)
+            NotNullableParamVoid(b.Value, c) ' Compliant
+            NotNullableParamVoid(c, b.Value) ' Compliant
         End Sub
 
        Sub ObjectParamCastVoid(ByVal a as Integer, ByVal b as Object)

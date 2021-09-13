@@ -63,7 +63,11 @@ namespace Tests.Diagnostics
             var x = a / b;
         }
 
-        public void m(int a, int b) // Secondary [5]
+        public void m(int a, int b) // Secondary [5,7]
+        {
+        }
+
+        public void n(int a, int b, int c)
         {
         }
 
@@ -88,9 +92,9 @@ namespace Tests.Diagnostics
 
             int a=5, b=6;
 
-            m(1, a); // Compliant
+            m(1, a); // Noncompliant [7] Argument "a" may be first
             m(1, b);
-            m(b, b);
+            m(a, a);
             m(divisor, dividend);
 
             m(a, b);
@@ -102,6 +106,11 @@ namespace Tests.Diagnostics
 
             "aaaaa".Ex(v1, v2);
             "aaaaa".Ex(v2, v1); // Noncompliant [6]
+
+            int c = 1;
+            n(a, a, a);
+            n(b, b, b);
+            n(c, c, c);
         }
     }
 
@@ -200,6 +209,8 @@ namespace Tests.Diagnostics
         internal class A
         {
             public C Something { get; set; }
+
+            public B b { get; set; }
         }
 
         internal class C
@@ -207,45 +218,61 @@ namespace Tests.Diagnostics
             public int b { get; set; }
         }
 
+        internal class B
+        {
+            public int Value { get; set; }
+        }
+
         void NotNullableParamVoid(int a, int b) // Secondary [D,E,F,G,H,I]
         {
             // Do nothing
         }
 
-        void NullableParamValueVoid(int a, Nullable<int> b)
+        void NullableParamValueVoid(int q, Nullable<int> b)
         {
             if (b.HasValue)
             {
-                NotNullableParamVoid(b.Value, a); // Noncompliant [D]
-                NotNullableParamVoid(a, b.Value); // Compliant
+                NotNullableParamVoid(b.Value, q); // Noncompliant [D]
+                NotNullableParamVoid(q, b.Value); // Compliant
             }
         }
 
-        void NullableParamCastVoid(int a, Nullable<int> b)
+        void NullableParamCastVoid(int q, int? b)
         {
             if (b.HasValue)
             {
-                NotNullableParamVoid((int)b, a); // Noncompliant [E]
-                NotNullableParamVoid(a, (int)b); // Compliant
+                NotNullableParamVoid((int)b, q); // Noncompliant [E]
+                NotNullableParamVoid(q, (int)b); // Compliant
             }
         }
 
-        void InnerPropertyParamVoid(int a, A c)
+        void InnerPropertyParamVoid(int q, A c)
         {
-            NotNullableParamVoid(c.Something.b, a); // Noncompliant [F]
-            NotNullableParamVoid(a, c.Something.b); // Compliant
+            NotNullableParamVoid(c.Something.b, q); // Noncompliant [F]
+            NotNullableParamVoid(q, c.Something.b); // Compliant
         }
 
-        void ObjectParamCastVoid(int a, object b)
+        void InnerPropertyValueParamVoid(int q, A c)
         {
-            NotNullableParamVoid((int)b, a); // Noncompliant [G]
-            NotNullableParamVoid(a, (int)b); // Compliant
+            NotNullableParamVoid(c.b.Value, q); // Compliant Value is real propery
         }
 
-        void ObjectParamNullableCastVoid(int a, object b)
+        void InnerPropertyValueParamVoid(int c, B b)
         {
-            NotNullableParamVoid(((int?)b).Value, a); // Noncompliant [H]
-            NotNullableParamVoid(a, ((int?)b).Value); // Compliant
+            NotNullableParamVoid(b.Value, c); // Compliant Value is real propery
+            NotNullableParamVoid(c, b.Value); // Compliant Value is real propery
+        }
+
+        void ObjectParamCastVoid(int q, object b)
+        {
+            NotNullableParamVoid((int)b, q); // Noncompliant [G]
+            NotNullableParamVoid(q, (int)b); // Compliant
+        }
+
+        void ObjectParamNullableCastVoid(int q, object b)
+        {
+            NotNullableParamVoid(((int?)b).Value, q); // Noncompliant [H]
+            NotNullableParamVoid(q, ((int?)b).Value); // Compliant
         }
 
         void DifferentCaseParamsVoid(int a, int B)
