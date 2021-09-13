@@ -23,8 +23,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Extensions;
-using CfgAllPathValidator = SonarAnalyzer.CFG.Sonar.CfgAllPathValidator;
-using SymbolWithInitializer = System.Collections.Generic.KeyValuePair<Microsoft.CodeAnalysis.ISymbol, Microsoft.CodeAnalysis.CSharp.Syntax.EqualsValueClauseSyntax>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly RedundancyChecker redundancyChecker;
 
             public MemberInitializerRedundancyCheckerSonar(IControlFlowGraph cfg, ISymbol memberToCheck, SemanticModel semanticModel) : base(cfg) =>
-                this.redundancyChecker = new RedundancyChecker(memberToCheck, semanticModel);
+                redundancyChecker = new RedundancyChecker(memberToCheck, semanticModel);
 
             // Returns true if the block contains assignment before access
             protected override bool IsBlockValid(Block block)
@@ -47,8 +45,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         case SyntaxKind.IdentifierName:
                         case SyntaxKind.SimpleMemberAccessExpression:
                             {
-                                var memberAccess = RedundancyChecker.GetPossibleMemberAccessParent(instruction);
-                                if (memberAccess != null && redundancyChecker.TryGetReadWriteFromMemberAccess(memberAccess, out var isRead))
+                                if (RedundancyChecker.PossibleMemberAccessParent(instruction) is { } memberAccess
+                                    && redundancyChecker.TryGetReadWriteFromMemberAccess(memberAccess, out var isRead))
                                 {
                                     return !isRead;
                                 }
@@ -62,9 +60,6 @@ namespace SonarAnalyzer.Rules.CSharp
                                     return true;
                                 }
                             }
-                            break;
-                        default:
-                            // do nothing
                             break;
                     }
                 }
@@ -82,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         case SyntaxKind.IdentifierName:
                         case SyntaxKind.SimpleMemberAccessExpression:
                             {
-                                var memberAccess = RedundancyChecker.GetPossibleMemberAccessParent(instruction);
+                                var memberAccess = RedundancyChecker.PossibleMemberAccessParent(instruction);
                                 if (memberAccess != null && redundancyChecker.TryGetReadWriteFromMemberAccess(memberAccess, out var isRead))
                                 {
                                     return isRead;
@@ -109,9 +104,6 @@ namespace SonarAnalyzer.Rules.CSharp
                                     return true;
                                 }
                             }
-                            break;
-                        default:
-                            // do nothing
                             break;
                     }
                 }

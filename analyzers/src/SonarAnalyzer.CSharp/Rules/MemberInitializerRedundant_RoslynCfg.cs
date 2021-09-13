@@ -25,7 +25,6 @@ using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
-using SymbolWithInitializer = System.Collections.Generic.KeyValuePair<Microsoft.CodeAnalysis.ISymbol, Microsoft.CodeAnalysis.CSharp.Syntax.EqualsValueClauseSyntax>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,8 +38,8 @@ namespace SonarAnalyzer.Rules.CSharp
             public MemberInitializerRedundancyCheckerRoslyn(ControlFlowGraph cfg, ISymbol memberToCheck, SemanticModel semanticModel) : base(cfg)
             {
                 var redundancyChecker = new RedundancyChecker(memberToCheck, semanticModel);
-                this.isValidMatcher = new IsValidMatcher(redundancyChecker);
-                this.isInvalidMatcher = new IsInvalidMatcher(redundancyChecker);
+                isValidMatcher = new IsValidMatcher(redundancyChecker);
+                isInvalidMatcher = new IsInvalidMatcher(redundancyChecker);
             }
 
             // Returns true if the block contains assignment before access
@@ -51,11 +50,11 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override bool IsInvalid(BasicBlock block) =>
                 isInvalidMatcher.Matches(block);
 
-            private abstract class RedundancyMatcherBase : OperationFinder<bool>
+            private abstract class FinderBase : OperationFinder<bool>
             {
                 protected readonly RedundancyChecker redundancyChecker;
 
-                protected RedundancyMatcherBase(RedundancyChecker redundancyChecker) =>
+                protected FinderBase(RedundancyChecker redundancyChecker) =>
                     this.redundancyChecker = redundancyChecker;
 
                 public bool Matches(BasicBlock block)
@@ -65,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private  class IsValidMatcher : RedundancyMatcherBase
+            private  class IsValidMatcher : FinderBase
             {
                 public IsValidMatcher(RedundancyChecker redundancyChecker) : base(redundancyChecker) { }
 
@@ -77,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         case SyntaxKind.IdentifierName:
                         case SyntaxKind.SimpleMemberAccessExpression:
                             {
-                                var memberAccess = RedundancyChecker.GetPossibleMemberAccessParent(instruction);
+                                var memberAccess = RedundancyChecker.PossibleMemberAccessParent(instruction);
                                 if (memberAccess != null && redundancyChecker.TryGetReadWriteFromMemberAccess(memberAccess, out var isRead))
                                 {
                                     result = !isRead;
@@ -95,9 +94,6 @@ namespace SonarAnalyzer.Rules.CSharp
                                 }
                                 break;
                             }
-                        default:
-                            // do nothing
-                            break;
                     }
 
                     result = default;
@@ -105,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private  class IsInvalidMatcher : RedundancyMatcherBase
+            private  class IsInvalidMatcher : FinderBase
             {
                 public IsInvalidMatcher(RedundancyChecker redundancyChecker) : base(redundancyChecker) { }
 
@@ -117,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         case SyntaxKind.IdentifierName:
                         case SyntaxKind.SimpleMemberAccessExpression:
                             {
-                                var memberAccess = RedundancyChecker.GetPossibleMemberAccessParent(instruction);
+                                var memberAccess = RedundancyChecker.PossibleMemberAccessParent(instruction);
                                 if (memberAccess != null && redundancyChecker.TryGetReadWriteFromMemberAccess(memberAccess, out result))
                                 {
                                     return true;
@@ -146,9 +142,6 @@ namespace SonarAnalyzer.Rules.CSharp
                                     return true;
                                 }
                             }
-                            break;
-                        default:
-                            // do nothing
                             break;
                     }
 

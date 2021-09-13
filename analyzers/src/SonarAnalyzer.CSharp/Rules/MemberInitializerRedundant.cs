@@ -70,15 +70,165 @@ namespace SonarAnalyzer.Rules.CSharp
                     // interfaces cannot have instance fields and instance properties cannot have initializers
                     if (declaration is ClassDeclarationSyntax)
                     {
-                        InitializationVerifierFactory.InstanceMemberInitializationVerifier.Report(c, declaration, members, forceSonarCfg);
+                        CheckInstanceMembers(c, declaration, members);
                     }
-                    InitializationVerifierFactory.StaticMemberInitializationVerifier.Report(c, declaration, members, forceSonarCfg);
+                    CheckStaticMembers(c, declaration, members);
                 },
                 // For record support, see details in https://github.com/SonarSource/sonar-dotnet/pull/4756
                 // it is difficult to work with instance record constructors w/o raising FPs
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration);
+
+        private void CheckInstanceMembers(SyntaxNodeAnalysisContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
+        {
+            var typeInitializers = typeMembers.OfType<IMethodSymbol>().Where(x => x is { MethodKind: MethodKind.Constructor, IsStatic: false, IsImplicitlyDeclared: false }).ToList();
+            if (typeInitializers.Count == 0)
+            {
+                return;
+            }
+
+            // only retrieve the member symbols (an expensive call) if there are explicit class initializers
+            var initializedMembers = GetInitializedMembers(c.SemanticModel, declaration, field => !field.Modifiers.Any(IsStaticOrConst), property => !property.Modifiers.Any(IsStaticOrConst));
+            if (initializedMembers.Count == 0)
+            {
+                return;
+            }
+
+            var initializerDeclarations = GetInitializerDeclarations<ConstructorDeclarationSyntax>(c, typeInitializers);
+            foreach (var memberSymbol in initializedMembers.Keys)
+            {
+                // the instance member should be initialized in ALL instance constructors
+                // otherwise, initializing it inline makes sense and the rule should not report
+                if (initializerDeclarations.All(constructor =>
+                    {
+                        if (constructor.Node.Initializer != null
+                            && constructor.Node.Initializer.ThisOrBaseKeyword.IsKind(SyntaxKind.ThisKeyword))
+                        {
+                            // Calls another ctor, which is also checked.
+                            return true;
+                        }
+
+                        return IsSymbolFirstSetInCfg(memberSymbol, constructor.Node, constructor.SemanticModel, forceSonarCfg);
+                    }))
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), InstanceMemberMessage));
+                }
+            }
+        }
+
+        private void CheckStaticMembers(SyntaxNodeAnalysisContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
+        {
+            var typeInitializers = typeMembers.OfType<IMethodSymbol>().Where(method => method.MethodKind == MethodKind.StaticConstructor || method.IsModuleInitializer()).ToList();
+            if (typeInitializers.Count == 0)
+            {
+                return;
+            }
+
+            // only retrieve the member symbols (an expensive call) if there are explicit class initializers
+            var initializedMembers = GetInitializedMembers(c.SemanticModel, declaration, field => field.Modifiers.Any(IsStatic), property => property.Modifiers.Any(IsStatic));
+            if (initializedMembers.Count == 0)
+            {
+                return;
+            }
+
+            var initializerDeclarations = GetInitializerDeclarations<BaseMethodDeclarationSyntax>(c, typeInitializers);
+            foreach (var memberSymbol in initializedMembers.Keys)
+            {
+                // there can be only one static constructor
+                // all module initializers are executed when the type is created, so it is enough if ANY initializes the member
+                if (initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(memberSymbol, x.Node, x.SemanticModel, forceSonarCfg)))
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), StaticMemberMessage));
+                }
+            }
+        }
+
+        // Retrieves the class members which are initialized - instance or static ones, depending on the given filter.
+        // The returned dictionary has as key the member symbol and as value the initialization syntax.
+        private Dictionary<ISymbol, EqualsValueClauseSyntax> GetInitializedMembers(SemanticModel semanticModel,
+                                                                                   TypeDeclarationSyntax declaration,
+                                                                                   Func<BaseFieldDeclarationSyntax, bool> fieldFilter,
+                                                                                   Func<PropertyDeclarationSyntax, bool> propertyFilter)
+        {
+            var candidateFields = GetInitializedFieldLikeDeclarations<FieldDeclarationSyntax, IFieldSymbol>(declaration, fieldFilter, semanticModel, f => f.Type);
+            var candidateProperties = GetInitializedPropertyDeclarations(declaration, propertyFilter, semanticModel);
+            var candidateEvents = GetInitializedFieldLikeDeclarations<EventFieldDeclarationSyntax, IEventSymbol>(declaration, fieldFilter, semanticModel, f => f.Type);
+            var allMembers = candidateFields.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer))
+                .Concat(candidateEvents.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
+                .Concat(candidateProperties.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
+                .ToDictionary(t => t.Key, t => t.Value);
+            return allMembers;
+        }
+
+        private static bool IsStaticOrConst(SyntaxToken token) =>
+            token.IsAnyKind(SyntaxKind.StaticKeyword, SyntaxKind.ConstKeyword);
+
+        private static bool IsStatic(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.StaticKeyword);
+
+        /// <summary>
+        /// Returns true if the member is overwritten without being read in the instance constructor.
+        /// Returns false if the member is not set in the constructor, or if it is read before being set.
+        /// </summary>
+        private static bool IsSymbolFirstSetInCfg(ISymbol classMember, BaseMethodDeclarationSyntax constructorOrInitializer, SemanticModel semanticModel, bool forceSonarCfg)
+        {
+            var body = (CSharpSyntaxNode)constructorOrInitializer.Body ?? constructorOrInitializer.ExpressionBody();
+            if (forceSonarCfg)
+            {
+                if (!CSharpControlFlowGraph.TryGet(body, semanticModel, out var cfg))
+                {
+                    return false;
+                }
+
+                var checker = new MemberInitializerRedundancyCheckerSonar(cfg, classMember, semanticModel);
+                return checker.CheckAllPaths();
+            }
+            else
+            {
+                var cfg = ControlFlowGraph.Create(body.Parent, semanticModel);
+                var checker = new MemberInitializerRedundancyCheckerRoslyn(cfg, classMember, semanticModel);
+                return checker.CheckAllPaths();
+            }
+        }
+
+        private static List<NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>> GetInitializerDeclarations<TSyntax>(SyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols)
+                where TSyntax : SyntaxNode =>
+                constructorSymbols
+                    .Select(x => new NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>(null, x.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as TSyntax, x))
+                    .Where(x => x.Node != null)
+                    .Select(x => new NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>(x.Node.EnsureCorrectSemanticModelOrDefault(context.SemanticModel), x.Node, x.Symbol))
+                    .Where(x => x.SemanticModel != null)
+                    .ToList();
+
+        private static IEnumerable<DeclarationTuple<IPropertySymbol>> GetInitializedPropertyDeclarations(TypeDeclarationSyntax declaration,
+                                                                                                         Func<PropertyDeclarationSyntax, bool> declarationFilter,
+                                                                                                         SemanticModel semanticModel) =>
+            declaration.Members
+                .OfType<PropertyDeclarationSyntax>()
+                .Where(p => declarationFilter(p)
+                            && p.Initializer != null
+                            && p.IsAutoProperty())
+                .Select(p => new DeclarationTuple<IPropertySymbol>(p.Initializer, semanticModel.GetDeclaredSymbol(p)))
+                .Where(t =>
+                    t.Symbol != null
+                    && !MemberInitializedToDefault.IsDefaultValueInitializer(t.Initializer, t.Symbol.Type));
+
+        private static IEnumerable<DeclarationTuple<TSymbol>> GetInitializedFieldLikeDeclarations<TDeclarationType, TSymbol>(TypeDeclarationSyntax declaration,
+                                                                                                                             Func<TDeclarationType, bool> declarationFilter,
+                                                                                                                             SemanticModel semanticModel,
+                                                                                                                             Func<TSymbol, ITypeSymbol> typeSelector)
+            where TDeclarationType : BaseFieldDeclarationSyntax
+            where TSymbol : class, ISymbol =>
+            declaration.Members
+                .OfType<TDeclarationType>()
+                .Where(declarationFilter)
+                .SelectMany(fd => fd.Declaration.Variables
+                    .Where(v => v.Initializer != null)
+                    .Select(v => new DeclarationTuple<TSymbol>(v.Initializer, semanticModel.GetDeclaredSymbol(v) as TSymbol)))
+                .Where(t =>
+                    t.Symbol != null
+                    && !MemberInitializedToDefault.IsDefaultValueInitializer(t.Initializer, typeSelector(t.Symbol)));
 
         private class RedundancyChecker
         {
@@ -94,50 +244,53 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool IsMemberUsedInsideLambda(SyntaxNode instruction) =>
                 instruction.DescendantNodes()
                     .OfType<IdentifierNameSyntax>()
-                    .Select(GetPossibleMemberAccessParent)
+                    .Select(PossibleMemberAccessParent)
                     .Any(IsMatchingMember);
-
-            public static ExpressionSyntax GetPossibleMemberAccessParent(SyntaxNode node)
-            {
-                if (node is MemberAccessExpressionSyntax memberAccess)
-                {
-                    return memberAccess;
-                }
-                else
-                {
-                    return GetPossibleMemberAccessParent(node as IdentifierNameSyntax);
-                }
-            }
 
             public bool IsMatchingMember(ExpressionSyntax expression)
             {
-                IdentifierNameSyntax identifier = null;
+                return ExtractIdentifier(expression) is { } identifier
+                       && semanticModel.GetSymbolInfo(identifier).Symbol is { } assignedSymbol
+                       && memberToCheck.Equals(assignedSymbol);
 
-                if (expression.IsKind(SyntaxKind.IdentifierName))
+                IdentifierNameSyntax ExtractIdentifier(ExpressionSyntax expressionSyntax)
                 {
-                    identifier = (IdentifierNameSyntax)expression;
+                    if (expressionSyntax.IsKind(SyntaxKind.IdentifierName))
+                    {
+                        return (IdentifierNameSyntax)expressionSyntax;
+                    }
+                    if (expressionSyntax is MemberAccessExpressionSyntax memberAccess
+                        && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+                    {
+                        return memberAccess.Name as IdentifierNameSyntax;
+                    }
+                    if (expressionSyntax is ConditionalAccessExpressionSyntax conditionalAccess
+                        && conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+                    {
+                        return (conditionalAccess.WhenNotNull as MemberBindingExpressionSyntax)?.Name as IdentifierNameSyntax;
+                    }
+                    return null;
+                }
+            }
+
+            public static ExpressionSyntax PossibleMemberAccessParent(SyntaxNode node) =>
+                node is MemberAccessExpressionSyntax memberAccess
+                    ? memberAccess
+                    : PossibleMemberAccessParent(node as IdentifierNameSyntax);
+
+            private static ExpressionSyntax PossibleMemberAccessParent(IdentifierNameSyntax identifier)
+            {
+                if (identifier.Parent is MemberAccessExpressionSyntax memberAccess)
+                {
+                    return memberAccess;
                 }
 
-                if (expression is MemberAccessExpressionSyntax memberAccess
-                    && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+                if (identifier.Parent is MemberBindingExpressionSyntax memberBinding)
                 {
-                    identifier = memberAccess.Name as IdentifierNameSyntax;
+                    return (ExpressionSyntax)memberBinding.Parent;
                 }
 
-                if (expression is ConditionalAccessExpressionSyntax conditionalAccess
-                    && conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
-                {
-                    identifier = (conditionalAccess.WhenNotNull as MemberBindingExpressionSyntax)?.Name as IdentifierNameSyntax;
-                }
-
-                if (identifier == null)
-                {
-                    return false;
-                }
-
-                var assignedSymbol = semanticModel.GetSymbolInfo(identifier).Symbol;
-
-                return memberToCheck.Equals(assignedSymbol);
+                return identifier;
             }
 
             public bool TryGetReadWriteFromMemberAccess(ExpressionSyntax expression, out bool isRead)
@@ -166,21 +319,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            private static ExpressionSyntax GetPossibleMemberAccessParent(IdentifierNameSyntax identifier)
-            {
-                if (identifier.Parent is MemberAccessExpressionSyntax memberAccess)
-                {
-                    return memberAccess;
-                }
-
-                if (identifier.Parent is MemberBindingExpressionSyntax memberBinding)
-                {
-                    return (ExpressionSyntax)memberBinding.Parent;
-                }
-
-                return identifier;
-            }
-
             private static bool IsBeingAssigned(ExpressionSyntax expression) =>
                 expression.Parent is AssignmentExpressionSyntax assignment
                 && assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
@@ -195,195 +333,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 && !parenthesized.IsInNameOfArgument(semanticModel);
         }
 
-        private static class InitializationVerifierFactory
-        {
-            // Verifies the initializations done in instance constructors.
-            public static readonly InitializationVerifier<ConstructorDeclarationSyntax> InstanceMemberInitializationVerifier =
-                new InitializationVerifier<ConstructorDeclarationSyntax>(
-                    // we are only interested in explicit constructors
-                    initializerFilter: method => method is { MethodKind: MethodKind.Constructor, IsStatic: false, IsImplicitlyDeclared: false },
-                    fieldFilter: field => !field.Modifiers.Any(IsStaticOrConst),
-                    propertyFilter: property => !property.Modifiers.Any(IsStaticOrConst),
-                    isSymbolFirstSetInInitializers: (fieldOrPropertySymbol, constructorDeclarations, forceSonarCfg) =>
-                        // the instance member should be initialized in ALL instance constructors
-                        // otherwise, initializing it inline makes sense and the rule should not report
-                        constructorDeclarations.All(constructor =>
-                        {
-                            if (constructor.Node.Initializer != null
-                                && constructor.Node.Initializer.ThisOrBaseKeyword.IsKind(SyntaxKind.ThisKeyword))
-                            {
-                                // Calls another ctor, which is also checked.
-                                return true;
-                            }
-
-                            return IsSymbolFirstSetInCfg(fieldOrPropertySymbol, constructor.Node, constructor.SemanticModel, forceSonarCfg);
-                        }),
-                    diagnosticMessage: InstanceMemberMessage);
-
-            // Verifies the initializations done in static constructors and module initializers (C# 9).
-            public static readonly InitializationVerifier<BaseMethodDeclarationSyntax> StaticMemberInitializationVerifier =
-                new InitializationVerifier<BaseMethodDeclarationSyntax>(
-                    initializerFilter: method => method.MethodKind == MethodKind.StaticConstructor
-                                                 || method.IsModuleInitializer(),
-                    // only static members are interesting (const ones can only be initialized once)
-                    fieldFilter: field => field.Modifiers.Any(IsStatic),
-                    propertyFilter: property => property.Modifiers.Any(IsStatic),
-                    isSymbolFirstSetInInitializers: (fieldOrPropertySymbol, initializerDeclarations, forceSonarCfg) =>
-                        // there can be only one static constructor
-                        // all module initializers are executed when the type is created, so it is enough if ANY initializes the member
-                        initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(fieldOrPropertySymbol, x.Node, x.SemanticModel, forceSonarCfg)),
-                    diagnosticMessage: StaticMemberMessage);
-
-            private static bool IsStaticOrConst(SyntaxToken token) =>
-                token.IsAnyKind(SyntaxKind.StaticKeyword, SyntaxKind.ConstKeyword);
-
-            private static bool IsStatic(SyntaxToken token) =>
-                token.IsKind(SyntaxKind.StaticKeyword);
-
-            /// <summary>
-            /// Returns true if the member is overwritten without being read in the instance constructor.
-            /// Returns false if the member is not set in the constructor, or if it is read before being set.
-            /// </summary>
-            private static bool IsSymbolFirstSetInCfg(ISymbol classMember, BaseMethodDeclarationSyntax constructorOrInitializer, SemanticModel semanticModel, bool forceSonarCfg)
-            {
-                var body = (CSharpSyntaxNode)constructorOrInitializer.Body ?? constructorOrInitializer.ExpressionBody();
-                if (forceSonarCfg)
-                {
-                    if (!CSharpControlFlowGraph.TryGet(body, semanticModel, out var cfg))
-                    {
-                        return false;
-                    }
-
-                    var checker = new MemberInitializerRedundancyCheckerSonar(cfg, classMember, semanticModel);
-                    return checker.CheckAllPaths();
-                }
-                else
-                {
-                    var cfg = ControlFlowGraph.Create(body.Parent, semanticModel);
-                    var checker = new MemberInitializerRedundancyCheckerRoslyn(cfg, classMember, semanticModel);
-                    return checker.CheckAllPaths();
-                }
-            }
-        }
-
-        private class InitializationVerifier<TInitializerDeclaration> where TInitializerDeclaration : SyntaxNode
-        {
-            private readonly Func<IMethodSymbol, bool> initializerFilter;
-            private readonly Func<BaseFieldDeclarationSyntax, bool> fieldFilter;
-            private readonly Func<PropertyDeclarationSyntax, bool> propertyFilter;
-            // The first parameter is the symbol of a member of the type.
-            // The second parameter is a list with the type initializers - the syntax node of the constructors/method, its symbol and its semantic model
-            //
-            // Read the implementations in InitializationVerifierFactory.
-            private readonly Func<ISymbol, List<NodeSymbolAndSemanticModel<TInitializerDeclaration, IMethodSymbol>>, bool, bool> isSymbolFirstSetInInitializers;
-            private readonly string diagnosticMessage;
-
-            public InitializationVerifier(Func<IMethodSymbol, bool> initializerFilter,
-                                   Func<BaseFieldDeclarationSyntax, bool> fieldFilter,
-                                   Func<PropertyDeclarationSyntax, bool> propertyFilter,
-                                   Func<ISymbol, List<NodeSymbolAndSemanticModel<TInitializerDeclaration, IMethodSymbol>>, bool, bool> isSymbolFirstSetInInitializers,
-                                   string diagnosticMessage)
-            {
-                this.initializerFilter = initializerFilter;
-                this.fieldFilter = fieldFilter;
-                this.propertyFilter = propertyFilter;
-                this.isSymbolFirstSetInInitializers = isSymbolFirstSetInInitializers;
-                this.diagnosticMessage = diagnosticMessage;
-            }
-
-            public void Report(SyntaxNodeAnalysisContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers, bool forceSonarCfg)
-            {
-                var typeInitializers = typeMembers.OfType<IMethodSymbol>().Where(initializerFilter).ToList();
-                if (typeInitializers.Count == 0)
-                {
-                    return;
-                }
-
-                // only retrieve the member symbols (an expensive call) if there are explicit class initializers
-                var initializedMembers = GetInitializedMembers(c.SemanticModel, declaration);
-                if (initializedMembers.Count == 0)
-                {
-                    return;
-                }
-
-                var initializerDeclarations = GetInitializerDeclarations<TInitializerDeclaration>(c, typeInitializers);
-                foreach (var memberSymbol in initializedMembers.Keys)
-                {
-                    if (isSymbolFirstSetInInitializers(memberSymbol, initializerDeclarations, forceSonarCfg))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), diagnosticMessage));
-                    }
-                }
-            }
-
-            // Retrieves the class members which are initialized - instance or static ones, depending on the given filter.
-            // The returned dictionary has as key the member symbol and as value the initialization syntax.
-            private Dictionary<ISymbol, EqualsValueClauseSyntax> GetInitializedMembers(SemanticModel semanticModel, TypeDeclarationSyntax declaration)
-            {
-                var candidateFields = GetInitializedFieldLikeDeclarations<FieldDeclarationSyntax, IFieldSymbol>(declaration, fieldFilter, semanticModel, f => f.Type);
-                var candidateProperties = GetInitializedPropertyDeclarations(declaration, propertyFilter, semanticModel);
-                var candidateEvents = GetInitializedFieldLikeDeclarations<EventFieldDeclarationSyntax, IEventSymbol>(declaration, fieldFilter, semanticModel, f => f.Type);
-                var allMembers = candidateFields.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer))
-                    .Concat(candidateEvents.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
-                    .Concat(candidateProperties.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
-                    .ToDictionary(t => t.Key, t => t.Value);
-                return allMembers;
-            }
-
-            private static List<NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>> GetInitializerDeclarations<TSyntax>(SyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols)
-                where TSyntax : SyntaxNode =>
-                constructorSymbols
-                    .Select(x => new NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>(null, x.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as TSyntax, x))
-                    .Where(x => x.Node != null)
-                    .Select(x => new NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>(x.Node.EnsureCorrectSemanticModelOrDefault(context.SemanticModel), x.Node, x.Symbol))
-                    .Where(x => x.SemanticModel != null)
-                    .ToList();
-
-            private static IEnumerable<DeclarationTuple<IPropertySymbol>> GetInitializedPropertyDeclarations(TypeDeclarationSyntax declaration,
-                                                                                                             Func<PropertyDeclarationSyntax, bool> declarationFilter,
-                                                                                                             SemanticModel semanticModel) =>
-                declaration.Members
-                    .OfType<PropertyDeclarationSyntax>()
-                    .Where(p => declarationFilter(p)
-                                && p.Initializer != null
-                                && p.IsAutoProperty())
-                    .Select(p =>
-                        new DeclarationTuple<IPropertySymbol>
-                        {
-                            Initializer = p.Initializer,
-                            Symbol = semanticModel.GetDeclaredSymbol(p)
-                        })
-                    .Where(t =>
-                        t.Symbol != null
-                        && !MemberInitializedToDefault.IsDefaultValueInitializer(t.Initializer, t.Symbol.Type));
-
-            private static IEnumerable<DeclarationTuple<TSymbol>> GetInitializedFieldLikeDeclarations<TDeclarationType, TSymbol>(TypeDeclarationSyntax declaration,
-                                                                                                                                 Func<TDeclarationType, bool> declarationFilter,
-                                                                                                                                 SemanticModel semanticModel,
-                                                                                                                                 Func<TSymbol, ITypeSymbol> typeSelector)
-                where TDeclarationType : BaseFieldDeclarationSyntax
-                where TSymbol : class, ISymbol =>
-                declaration.Members
-                    .OfType<TDeclarationType>()
-                    .Where(declarationFilter)
-                    .SelectMany(fd => fd.Declaration.Variables
-                        .Where(v => v.Initializer != null)
-                        .Select(v =>
-                            new DeclarationTuple<TSymbol>
-                            {
-                                Initializer = v.Initializer,
-                                Symbol = semanticModel.GetDeclaredSymbol(v) as TSymbol
-                            }))
-                    .Where(t =>
-                        t.Symbol != null
-                        && !MemberInitializedToDefault.IsDefaultValueInitializer(t.Initializer, typeSelector(t.Symbol)));
-        }
-
         private class DeclarationTuple<TSymbol>
             where TSymbol : ISymbol
         {
             public EqualsValueClauseSyntax Initializer { get; set; }
             public TSymbol Symbol { get; set; }
+
+            public DeclarationTuple(EqualsValueClauseSyntax initializer, TSymbol symbol)
+            {
+                Initializer = initializer;
+                Symbol = symbol;
+            }
         }
     }
 }

@@ -37,23 +37,18 @@ namespace SonarAnalyzer.Common
         /// - SonarLint only uses it to pass parameters to rules
         /// - SonarScanner uses it to pass parameters and to enable security hotspots (which should only run in batch mode)
         /// </summary>
-        public static IAnalyzerConfiguration Hotspot { get; } =
-            new HotspotConfiguration(new RuleLoader());
+        public static IAnalyzerConfiguration Hotspot => new HotspotConfiguration(new RuleLoader());
 
-        public static IAnalyzerConfiguration AlwaysEnabled { get; } =
-            new AlwaysEnabledConfiguration(false);
+        public static IAnalyzerConfiguration AlwaysEnabled => new AlwaysEnabledConfiguration(false);
 
-        public static IAnalyzerConfiguration AlwaysEnabledWithSonarCfg { get; } =
-            new AlwaysEnabledConfiguration(true);
+        public static IAnalyzerConfiguration AlwaysEnabledWithSonarCfg => new AlwaysEnabledConfiguration(true);
 
         private class AlwaysEnabledConfiguration : IAnalyzerConfiguration
         {
             public bool ForceSonarCfg { get; }
 
-            public AlwaysEnabledConfiguration(bool forceSonarCfg)
-            {
+            public AlwaysEnabledConfiguration(bool forceSonarCfg) =>
                 ForceSonarCfg = forceSonarCfg;
-            }
 
             public void Initialize(AnalyzerOptions options)
             {

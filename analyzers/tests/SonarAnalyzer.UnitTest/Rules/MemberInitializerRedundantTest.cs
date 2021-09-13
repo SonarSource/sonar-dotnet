@@ -38,20 +38,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void MemberInitializerRedundant_RoslynCfg_CodeFix() =>
+        public void MemberInitializerRedundant_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MemberInitializerRedundant.cs",
                 @"TestCases\MemberInitializerRedundant.Fixed.cs",
                 new MemberInitializerRedundant(),
-                new MemberInitializedToDefaultCodeFixProvider());
-
-        [TestMethod]
-        [TestCategory("CodeFix")]
-        public void MemberInitializerRedundant_SonarCfg_CodeFix() =>
-            Verifier.VerifyCodeFix(
-                @"TestCases\MemberInitializerRedundant.cs",
-                @"TestCases\MemberInitializerRedundant.Fixed.cs",
-                new MemberInitializerRedundant(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 new MemberInitializedToDefaultCodeFixProvider());
 
 #if NET
