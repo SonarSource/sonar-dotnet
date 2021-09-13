@@ -258,12 +258,30 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void ForEach_Compliant(ICollection<string> collection, ICollection<Point> collection2, Predicate<string> condition)
+        {
+            var result = new List<string>();
+
+            // We could improve the rule suggesting: result.AddRange(collection.Where(x => condition(x)));
+            foreach (var element in collection.Where(x => condition(x)))
+            {
+                result.Add(element);
+            }
+
+            // We could improve the rule suggesting: result.AddRange(collection2.Select(x => x.Property).Where(y => y != null));
+            foreach (var someValue in collection2.Select(x => x.Property).Where(y => y != null))
+            {
+                result.Add(someValue);
+            }
+        }
+
         private void Foo(int s) { }
 
         public class Point
         {
             public int X { get; set; }
             public int? Y { get; set; }
+            public string Property { get; set; }
 
             public int GetX() => X;
         }
