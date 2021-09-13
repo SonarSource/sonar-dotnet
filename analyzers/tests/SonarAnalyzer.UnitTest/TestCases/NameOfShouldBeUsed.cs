@@ -32,6 +32,11 @@ namespace Tests.Diagnostics
                 Source = "arg1"                       // Noncompliant
             };
 
+            throw new ArgumentException
+            {
+                Source = "argument123"
+            };
+
             throw new ArgumentException("argument "); // Noncompliant
             throw new ArgumentException("argument,"); // Noncompliant
             throw new ArgumentException("argument!"); // Noncompliant
