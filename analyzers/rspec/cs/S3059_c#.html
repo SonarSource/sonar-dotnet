@@ -1,0 +1,40 @@
+<p>There’s no point in having a <code>public</code> member in a non-<code>public</code> class because objects that can’t access the class will never
+have the chance to access the member.</p>
+<p>This rule raises an issue when classes has methods, fields, or inner classes with higher visibility than the class itself has.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class MyClass {
+
+  public static final float PI = 3.14;  // Noncompliant
+
+  public int getOne() {  // Noncompliant
+    return 1;
+  }
+
+  protected class InnerClass {  // Noncompliant; outer class is package-protected
+    public boolean flipCoin() {  // Noncompliant; owning class is protected
+      return false;
+    }
+    // ...
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class MyClass {  // Class visibility upgrade makes members compliant
+
+  public static final float PI = 3.14;
+
+  public int getOne() {
+    return 1;
+  }
+
+  protected class InnerClass {
+    protected boolean flipCoin() {  // visibility changed to match class
+      return false;
+    }
+    // ...
+  }
+}
+</pre>
+

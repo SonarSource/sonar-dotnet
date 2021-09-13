@@ -5926,6 +5926,39 @@
   <data name="S3052_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3059_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S3059_Description" xml:space="preserve">
+    <value>There’s no point in having a public member in a non-public class because objects that can’t access the class will never have the chance to access the member.</value>
+  </data>
+  <data name="S3059_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3059_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3059_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S3059_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S3059_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3059_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S3059_Tags" xml:space="preserve">
+    <value>confusing</value>
+  </data>
+  <data name="S3059_Title" xml:space="preserve">
+    <value>Classes should not have members with visibility set higher than the class' own visibility</value>
+  </data>
+  <data name="S3059_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3060_Category" xml:space="preserve">
     <value>Blocker Code Smell</value>
   </data>

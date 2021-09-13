@@ -1,0 +1,16 @@
+{
+  "title": "Classes should not have members with visibility set higher than the class\u0027 own visibility",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "confusing"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3059",
+  "sqKey": "S3059",
+  "scope": "Main"
+}
