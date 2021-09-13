@@ -64,8 +64,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 var exceptionType = objectCreation.Type.ToString();
                 return ArgumentExceptionNameOfPosition(exceptionType) is var idx
-                    && objectCreation.ArgumentList.Arguments.Count >= idx + 1
-                    && objectCreation.ArgumentList.Arguments[idx].GetExpression() is NameOfExpressionSyntax nameOfExpression
+                    && objectCreation.ArgumentList?.Arguments is { } creationArguments
+                    && creationArguments.Count >= idx + 1
+                    && creationArguments[idx].GetExpression() is NameOfExpressionSyntax nameOfExpression
                     && arguments.Contains(nameOfExpression.Argument.ToString());
             }
 
