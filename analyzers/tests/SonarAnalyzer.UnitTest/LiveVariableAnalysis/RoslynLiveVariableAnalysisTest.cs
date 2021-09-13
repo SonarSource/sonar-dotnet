@@ -22,6 +22,7 @@ using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
@@ -566,25 +567,27 @@ foreach(i in new int[] {1, 2, 3})
         }
 
         [TestMethod]
-        public void StaticLocalFunction_ExpressionLiveIn()
+        public void StaticLocalFunction_Expression_LiveIn()
         {
             var code = @"
 outParameter = LocalFunction(intParameter);
 static int LocalFunction(int a) => a + 1;";
             var context = new Context(code, "LocalFunction");
-            TmpNotImplemented();
-            //context.Validate(context.Cfg.EntryBlock, new LiveIn("a"));
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
+            context.Validate(context.Block("a + 1"), new LiveIn("a"));
+            context.Validate(context.Cfg.ExitBlock);
         }
 
         [TestMethod]
-        public void StaticLocalFunction_ExpressionNotLiveIn()
+        public void StaticLocalFunction_Expression_NotLiveIn_NotLiveOut()
         {
             var code = @"
 outParameter = LocalFunction(0);
 static int LocalFunction(int a) => 42;";
             var context = new Context(code, "LocalFunction");
-            TmpNotImplemented();
-            //context.Validate(context.Cfg.EntryBlock);
+            context.Validate(context.Cfg.EntryBlock);
+            context.Validate(context.Block("42"));
+            context.Validate(context.Cfg.ExitBlock);
         }
 
         [TestMethod]
@@ -597,12 +600,13 @@ static int LocalFunction(int a)
     return a + 1;
 }";
             var context = new Context(code, "LocalFunction");
-            TmpNotImplemented();
-            //context.Validate(context.Cfg.EntryBlock, new LiveIn("a"));
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
+            context.Validate(context.Block("a + 1"), new LiveIn("a"));
+            context.Validate(context.Cfg.ExitBlock);
         }
 
         [TestMethod]
-        public void StaticLocalFunction_NotLiveIn()
+        public void StaticLocalFunction_NotLiveIn_NotLivOut()
         {
             var code = @"
 outParameter = LocalFunction(0);
@@ -611,8 +615,9 @@ static int LocalFunction(int a)
     return 42;
 }";
             var context = new Context(code, "LocalFunction");
-            TmpNotImplemented();
-            //FIXME: context.Validate(context.Cfg.EntryBlock);
+            context.Validate(context.Cfg.EntryBlock);
+            context.Validate(context.Block("42"));
+            context.Validate(context.Cfg.ExitBlock);
         }
 
         [TestMethod]
@@ -628,8 +633,10 @@ static int LocalFunction(int a)
         return LocalFunction(a - 1);
 };";
             var context = new Context(code, "LocalFunction");
-            TmpNotImplemented();
-            //FIXME: context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
+            context.Validate(context.Block("0"));
+            context.Validate(context.Block("LocalFunction(a - 1)"), new LiveIn("a"));
+            context.Validate(context.Cfg.ExitBlock);
         }
 
         private class Context
@@ -662,11 +669,8 @@ public class Sample
                 Cfg = ControlFlowGraph.Create(method, semanticModel);
                 if (localFunctionName != null)
                 {
-                    TmpNotImplemented();
-                    //var function = (LocalFunctionStatementSyntaxWrapper)method.DescendantNodes()
-                    //    .Single(x => x.Kind() == SyntaxKindEx.LocalFunctionStatement && ((LocalFunctionStatementSyntaxWrapper)x).Identifier.Text == localFunctionName);
-                    //symbol = semanticModel.GetDeclaredSymbol(function) as IMethodSymbol;
-                    //body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
+                    var localFunction = method.DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single(x => x.Identifier.ValueText == localFunctionName);
+                    Cfg = Cfg.GetLocalFunctionControlFlowGraph((IMethodSymbol)semanticModel.GetDeclaredSymbol(localFunction));
                 }
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
                 Lva = new RoslynLiveVariableAnalysis(Cfg);
