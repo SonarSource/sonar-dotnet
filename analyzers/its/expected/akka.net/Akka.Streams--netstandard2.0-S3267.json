@@ -3,7 +3,8 @@
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
 "region":  {
 "startLine":  1518,
@@ -11,12 +12,23 @@
 "endLine":  1518,
 "endColumn":  45
 }
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  1520,
+"startColumn":  21,
+"endLine":  1520,
+"endColumn":  35
 }
+}
+]
 },
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
 "region":  {
 "startLine":  824,
@@ -24,7 +36,17 @@
 "endLine":  824,
 "endColumn":  47
 }
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  826,
+"startColumn":  25,
+"endLine":  826,
+"endColumn":  79
 }
+}
+]
 }
 ]
 }

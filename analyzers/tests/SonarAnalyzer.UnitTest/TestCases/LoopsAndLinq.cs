@@ -23,6 +23,7 @@ namespace Tests.Diagnostics
             //                      ^^^^^^^^^^
             {
                 if (condition(element))
+                //  ^^^^^^^^^^^^^^^^^^ Secondary
                 {
                     result.Add(element);
                 }
@@ -46,6 +47,7 @@ namespace Tests.Diagnostics
             foreach (var element in collection) // Noncompliant
             {
                 if (condition(element))
+                //  ^^^^^^^^^^^^^^^^^^ Secondary
                 {
                     if (intCondition(element.Length))
                         result.Add(element);
@@ -55,6 +57,7 @@ namespace Tests.Diagnostics
             foreach (var element in collection.Select(e => e.Length).Where(l => l > 0)) // Noncompliant
             {
                 if (intCondition(element))
+                //  ^^^^^^^^^^^^^^^^^^^^^ Secondary
                 {
                 }
             }
@@ -147,6 +150,7 @@ namespace Tests.Diagnostics
             foreach (var element in collection) // Noncompliant {{Loops should be simplified with "LINQ" expressions}}
             //                      ^^^^^^^^^^
                 if (condition(element))
+                //  ^^^^^^^^^^^^^^^^^^ Secondary
                 {
                     result.Add(element);
                 }
@@ -251,6 +255,7 @@ namespace Tests.Diagnostics
             foreach (var element in collection) // Noncompliant
             {
                 if (condition(element))
+                //  ^^^^^^^^^^^^^^^^^^ Secondary
                 {
                     result.Add(element);
                     return;

@@ -3,7 +3,8 @@
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
 "region":  {
 "startLine":  207,
@@ -11,7 +12,17 @@
 "endLine":  207,
 "endColumn":  41
 }
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  21,
+"endLine":  209,
+"endColumn":  61
 }
+}
+]
 }
 ]
 }

@@ -3,7 +3,8 @@
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
 "region":  {
 "startLine":  1389,
@@ -11,7 +12,17 @@
 "endLine":  1389,
 "endColumn":  55
 }
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1391,
+"startColumn":  29,
+"endLine":  1391,
+"endColumn":  62
 }
+}
+]
 }
 ]
 }

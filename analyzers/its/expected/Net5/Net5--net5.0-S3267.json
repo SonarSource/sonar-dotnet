@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
-"uri":  "sources\Net5\Net5\S3267.cs",
-"region":  {
-"startLine":  12,
-"startColumn":  37,
-"endLine":  12,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3267",
 "message":  "Loop should be simplified by calling Select(element => element.Length))",
 "location":  {
 "uri":  "sources\Net5\Net5\S3267.cs",
@@ -25,6 +12,30 @@
 "endColumn":  47
 }
 }
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\S3267.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  37,
+"endLine":  12,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Net5\Net5\S3267.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  21,
+"endLine":  14,
+"endColumn":  39
+}
+}
+]
 }
 ]
 }

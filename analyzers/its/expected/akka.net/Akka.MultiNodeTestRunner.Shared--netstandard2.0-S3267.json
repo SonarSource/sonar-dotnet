@@ -16,7 +16,8 @@
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
 "region":  {
 "startLine":  125,
@@ -24,7 +25,17 @@
 "endLine":  125,
 "endColumn":  121
 }
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  25,
+"endLine":  127,
+"endColumn":  108
 }
+}
+]
 }
 ]
 }

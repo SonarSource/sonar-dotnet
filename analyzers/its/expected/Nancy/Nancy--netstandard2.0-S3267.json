@@ -16,7 +16,8 @@
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\Nancy\src\Nancy\DependencyContextAssemblyCatalog.cs",
 "region":  {
 "startLine":  48,
@@ -24,12 +25,23 @@
 "endLine":  48,
 "endColumn":  76
 }
+},
+{
+"uri":  "sources\Nancy\src\Nancy\DependencyContextAssemblyCatalog.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  21,
+"endLine":  50,
+"endColumn":  48
 }
+}
+]
 },
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
 "region":  {
 "startLine":  79,
@@ -37,12 +49,23 @@
 "endLine":  79,
 "endColumn":  47
 }
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  21,
+"endLine":  81,
+"endColumn":  56
 }
+}
+]
 },
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  100,
@@ -50,12 +73,23 @@
 "endLine":  100,
 "endColumn":  56
 }
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  25,
+"endLine":  102,
+"endColumn":  45
 }
+}
+]
 },
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultModelBinderLocator.cs",
 "region":  {
 "startLine":  50,
@@ -63,7 +97,17 @@
 "endLine":  50,
 "endColumn":  53
 }
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultModelBinderLocator.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  21,
+"endLine":  52,
+"endColumn":  51
 }
+}
+]
 },
 {
 "id":  "S3267",
@@ -94,7 +138,8 @@
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
 "region":  {
 "startLine":  88,
@@ -102,12 +147,23 @@
 "endLine":  88,
 "endColumn":  56
 }
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  21,
+"endLine":  90,
+"endColumn":  65
 }
+}
+]
 },
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3365,
@@ -115,12 +171,23 @@
 "endLine":  3365,
 "endColumn":  47
 }
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3367,
+"startColumn":  21,
+"endLine":  3367,
+"endColumn":  36
 }
+}
+]
 },
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3393,
@@ -128,12 +195,23 @@
 "endLine":  3393,
 "endColumn":  47
 }
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3395,
+"startColumn":  21,
+"endLine":  3395,
+"endColumn":  32
 }
+}
+]
 },
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3825,
@@ -141,7 +219,17 @@
 "endLine":  3825,
 "endColumn":  39
 }
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3827,
+"startColumn":  21,
+"endLine":  3827,
+"endColumn":  65
 }
+}
+]
 }
 ]
 }

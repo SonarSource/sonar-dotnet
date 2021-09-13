@@ -42,7 +42,8 @@
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
 "region":  {
 "startLine":  217,
@@ -50,7 +51,17 @@
 "endLine":  217,
 "endColumn":  44
 }
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  21,
+"endLine":  219,
+"endColumn":  53
 }
+}
+]
 },
 {
 "id":  "S3267",
@@ -68,7 +79,8 @@
 {
 "id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
+"location":  [
+{
 "uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
 "region":  {
 "startLine":  965,
@@ -76,7 +88,17 @@
 "endLine":  965,
 "endColumn":  42
 }
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  968,
+"startColumn":  25,
+"endLine":  968,
+"endColumn":  56
 }
+}
+]
 },
 {
 "id":  "S3267",

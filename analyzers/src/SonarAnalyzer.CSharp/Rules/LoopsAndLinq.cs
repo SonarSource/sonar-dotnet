@@ -48,9 +48,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var forEachStatementSyntax = (ForEachStatementSyntax)c.Node;
-                    if (CanBeSimplifiedUsingWhere(forEachStatementSyntax.Statement))
+                    if (CanBeSimplifiedUsingWhere(forEachStatementSyntax.Statement, out var ifConditionLocation))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, forEachStatementSyntax.Expression.GetLocation(), WhereMessageFormat));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, forEachStatementSyntax.Expression.GetLocation(), new[] {ifConditionLocation}, WhereMessageFormat));
                     }
                     else
                     {
@@ -59,9 +59,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ForEachStatement);
 
-        private static bool CanBeSimplifiedUsingWhere(SyntaxNode statement) =>
-            GetIfStatement(statement) is { } ifStatementSyntax
-            && CanIfStatementBeMoved(ifStatementSyntax);
+        private static bool CanBeSimplifiedUsingWhere(SyntaxNode statement, out Location ifConditionLocation)
+        {
+            if (GetIfStatement(statement) is { } ifStatementSyntax && CanIfStatementBeMoved(ifStatementSyntax))
+            {
+                ifConditionLocation = ifStatementSyntax.Condition.GetLocation();
+                return true;
+            }
+
+            ifConditionLocation = null;
+            return false;
+        }
 
         private static IfStatementSyntax GetIfStatement(SyntaxNode node) =>
             node switch

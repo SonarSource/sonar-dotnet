@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
-"region":  {
-"startLine":  311,
-"startColumn":  44,
-"endLine":  311,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S3267",
 "message":  "Loop should be simplified by calling Select(entry => entry.Value))",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
@@ -25,6 +12,30 @@
 "endColumn":  44
 }
 }
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  311,
+"startColumn":  44,
+"endLine":  311,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  29,
+"endLine":  313,
+"endColumn":  58
+}
+}
+]
 }
 ]
 }
