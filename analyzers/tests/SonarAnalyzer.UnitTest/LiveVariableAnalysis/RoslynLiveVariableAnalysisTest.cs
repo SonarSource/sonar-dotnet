@@ -22,7 +22,6 @@ using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
@@ -33,9 +32,6 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
     [TestClass]
     public class RoslynLiveVariableAnalysisTest
     {
-        private static void TmpNotImplemented() =>  //FIXME: Remove this method
-            Assert.Inconclusive();
-
         [TestMethod]
         public void WriteOnly()
         {
@@ -200,10 +196,8 @@ Method(intParameter, value);";
             context.Validate(context.Cfg.ExitBlock);
         }
 
-        //FIXME: VB version of this
-
         [TestMethod]
-        public void BranchedPropagationChain_LiveIn_LiveOut()
+        public void BranchedPropagationChain_LiveIn_LiveOut_CS()
         {
             /*              Binary
              *              boolParameter
@@ -304,6 +298,101 @@ Method(everywhere, reassigned);";
                 new LiveOut("everywhere"));
             // Common end
             context.Validate(context.Block("Method(everywhere, reassigned);"), new LiveIn("everywhere"));
+        }
+
+        [TestMethod]
+        public void BranchedPropagationChain_LiveIn_LiveOut_VB()
+        {
+            /*              Binary
+             *              boolParameter
+             *              /           \
+             *             /             \
+             *            /               \
+             *       Binary             Binary
+             *       firstBranch        secondBranch
+             *       /      \              /      \
+             *      /        \            /        \
+             *  Simple     Simple      Simple      Simple
+             *  firstTrue  firstFalse  secondTrue  secondFalse
+             *      \        /            \        /
+             *       \      /              \      /
+             *        Simple                Simple
+             *        first                 second
+             *             \               /
+             *              \             /
+             *                  Simple
+             *                  reassigned
+             *                  everywhere
+             */
+            var code = @"
+Dim Everywhere As Integer = 42
+Dim Reassigned As Integer = 42
+Dim First As Integer = 42
+Dim FirstTrue As Integer = 42
+Dim FirstFalse As Integer = 42
+Dim Second As Integer = 42
+Dim SecondTrue As Integer = 42
+Dim SecondFalse As Integer = 42
+Dim FirstCondition As Boolean = BoolParameter
+Dim SecondCondition As Boolean = BoolParameter
+If BoolParameter Then
+    If (FirstCondition) Then
+        Method(FirstTrue)
+    Else
+        Method(FirstFalse)
+    End If
+    Method(First)
+Else
+    If SecondCondition Then
+        Method(SecondTrue)
+    Else
+        Method(SecondFalse)
+    End If
+    Method(Second)
+End If
+Reassigned = 0
+Method(Everywhere, Reassigned)";
+            var context = new Context(code, isCSharp: false);
+            context.Validate(
+                context.Block("Everywhere As Integer = 42"),
+                new LiveIn("BoolParameter"),
+                new LiveOut("Everywhere", "FirstCondition", "FirstTrue", "FirstFalse", "First", "SecondCondition", "SecondTrue", "SecondFalse", "Second"));
+            // First block
+            context.Validate(
+                context.Block("FirstCondition"),
+                new LiveIn("Everywhere", "FirstCondition", "FirstTrue", "FirstFalse", "First"),
+                new LiveOut("Everywhere", "FirstTrue", "FirstFalse", "First"));
+            context.Validate(
+                context.Block("Method(FirstTrue)"),
+                new LiveIn("Everywhere", "FirstTrue", "First"),
+                new LiveOut("Everywhere", "First"));
+            context.Validate(
+                context.Block("Method(FirstFalse)"),
+                new LiveIn("Everywhere", "FirstFalse", "First"),
+                new LiveOut("Everywhere", "First"));
+            context.Validate(
+                context.Block("Method(First)"),
+                new LiveIn("Everywhere", "First"),
+                new LiveOut("Everywhere"));
+            // Second block
+            context.Validate(
+                context.Block("SecondCondition"),
+                new LiveIn("Everywhere", "SecondCondition", "SecondTrue", "SecondFalse", "Second"),
+                new LiveOut("Everywhere", "SecondTrue", "SecondFalse", "Second"));
+            context.Validate(
+                context.Block("Method(SecondTrue)"),
+                new LiveIn("Everywhere", "SecondTrue", "Second"),
+                new LiveOut("Everywhere", "Second"));
+            context.Validate(
+                context.Block("Method(SecondFalse)"),
+                new LiveIn("Everywhere", "SecondFalse", "Second"),
+                new LiveOut("Everywhere", "Second"));
+            context.Validate(
+                context.Block("Method(Second)"),
+                new LiveIn("Everywhere", "Second"),
+                new LiveOut("Everywhere"));
+            // Common end
+            context.Validate(context.Block("Method(Everywhere, Reassigned)"), new LiveIn("Everywhere"));
         }
 
         [TestMethod]
@@ -644,9 +733,10 @@ static int LocalFunction(int a)
             public readonly RoslynLiveVariableAnalysis Lva;
             public readonly ControlFlowGraph Cfg;
 
-            public Context(string methodBody, string localFunctionName = null)
+            public Context(string methodBody, string localFunctionName = null, bool isCSharp = true)
             {
-                var code = @$"
+                var code = isCSharp
+                    ? @$"
 using System.Linq;
 public class Sample
 {{
@@ -664,13 +754,36 @@ public class Sample
     private string Method(params string[] args) => null;
     private bool IsMethod(params bool[] args) => true;
     private void Capturing(System.Func<int, int> f) {{ }}
-}}";
-                var (method, semanticModel) = TestHelper.Compile(code).GetMethod("Main");
-                Cfg = ControlFlowGraph.Create(method, semanticModel);
+}}"
+                    : @$"
+Public Class Sample
+
+    Public Delegate Sub VoidDelegate()
+
+    Private Field As Integer
+    Private Property Prop As Integer
+
+    Public Sub Main(BoolParameter As Boolean, IntParameter As Integer, ByRef RefParameter As Integer)
+        {methodBody}
+    End Sub
+
+    Private Function Method(ParamArray Args() As Integer) As Integer
+    End Function
+
+    Private Function Method(ParamArray Args() As String) As String
+    End Function
+
+    Private Function IsMethod(ParamArray Args() As Boolean) As Boolean
+    End Function
+
+    Private Sub Capturing(f As Func(Of Integer, Integer))
+    End Sub
+
+End Class";
+                Cfg = TestHelper.CompileCfg(code, isCSharp);
                 if (localFunctionName != null)
                 {
-                    var localFunction = method.DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single(x => x.Identifier.ValueText == localFunctionName);
-                    Cfg = Cfg.GetLocalFunctionControlFlowGraph((IMethodSymbol)semanticModel.GetDeclaredSymbol(localFunction));
+                    Cfg = Cfg.GetLocalFunctionControlFlowGraph(Cfg.LocalFunctions.Single(x => x.Name == localFunctionName));
                 }
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
                 Lva = new RoslynLiveVariableAnalysis(Cfg);

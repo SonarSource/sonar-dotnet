@@ -64,8 +64,13 @@ namespace SonarAnalyzer.UnitTest
         public static ControlFlowGraph CompileCfg(string snippet, bool isCSharp = true)
         {
             var (tree, semanticModel) = Compile(snippet, isCSharp);
-            var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (isCSharp ? (int)CS.SyntaxKind.MethodDeclaration : (int)VB.SyntaxKind.FunctionBlock));
+            var method = tree.GetRoot().DescendantNodes().First(IsMethod);
             return ControlFlowGraph.Create(method, semanticModel);
+
+            bool IsMethod(SyntaxNode node) =>
+                isCSharp
+                    ? node.RawKind == (int)CS.SyntaxKind.MethodDeclaration
+                    : node.RawKind == (int)VB.SyntaxKind.FunctionBlock || node.RawKind == (int)VB.SyntaxKind.SubBlock;
         }
 
         public static MethodDeclarationSyntax GetMethod(this SyntaxTree syntaxTree, string name, int skip = 0) =>
