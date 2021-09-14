@@ -18,13 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.UnitTest.CFG.Sonar;
 using StyleCop.Analyzers.Lightup;
@@ -154,7 +155,7 @@ Method(value);
 value = 42;
 if (boolParameter)
     return;
-value = 42
+value = 42;
 if (boolParameter)
     return;
 Method(intParameter, value);";
@@ -502,9 +503,117 @@ static int LocalFunction(int a)
             context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
         }
 
+        [TestMethod]
+        public void UsingBlock_LiveInUntilTheEnd()
+        {
+            /*     Jump
+             *     new ms
+             *       |
+             *     Binary
+             *     Method(ms.Length)
+             *      /  \
+             * Simple   \
+             * Method(0) |
+             *      \   /
+             *     Using
+             *       |
+             *     Exit
+             */
+            var code = @"
+using (var ms = new System.IO.MemoryStream())
+{
+    Method(ms.Length);
+    if (boolParameter)
+        Method(0);
+}";
+            var context = new Context(code);
+            context.Validate(context.Block<JumpBlock>(), new LiveIn("boolParameter"), new LiveOut("boolParameter", "ms"));
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("boolParameter", "ms"), new LiveOut("ms"));
+            context.Validate(context.Block<SimpleBlock>(), new LiveIn("ms"), new LiveOut("ms"));
+            context.Validate(context.Block<UsingEndBlock>(), new LiveIn("ms"));
+            context.Validate(context.Block<ExitBlock>());
+        }
+
+        [TestMethod]
+        public void UsingVar_NotSupported()
+        {
+            /* Bad CFG Shape
+             *
+             *     Binary
+             *     ms = new
+             *     Method(ms.Length)
+             *      /  \
+             * Simple   \
+             * Method(0) |
+             *      \   /
+             *      Exit
+             */
+            var code = @"
+using var ms = new System.IO.MemoryStream();
+Method(ms.Length);
+if (boolParameter)
+    Method(0);";
+            var context = new Context(code);
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("boolParameter"));
+            context.Validate(context.Block<SimpleBlock>());
+            context.Validate(context.Block<ExitBlock>());
+        }
+
+        [TestMethod]
+        public void LocalFunctionInvocation_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction();
+
+int LocalFunction() => variable;";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("variable"));
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("boolParameter"), new LiveOut("variable")); // "variable" should also LiveIn
+            context.Validate(context.Block<SimpleBlock>(), new LiveIn("variable"));
+        }
+
+        [TestMethod]
+        public void LocalFunctionInvocation_Generic_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction<int>();
+
+T LocalFunction<T>() => variable;";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("variable"));
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("boolParameter"), new LiveOut("variable"));
+            context.Validate(context.Block<SimpleBlock>(), new LiveIn("variable"));
+        }
+
+        [TestMethod]
+        public void LocalFunctionInvocation_NotLiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction();
+Method(variable);
+
+void LocalFunction()
+{
+    variable = 0;
+}";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"));
+            context.Validate(context.Block<BinaryBranchBlock>(), new LiveIn("boolParameter"));
+            context.Validate(context.Block<SimpleBlock>());
+        }
+
         private class Context
         {
-            public readonly AbstractLiveVariableAnalysis Lva;
+            public readonly SonarCSharpLiveVariableAnalysis Lva;
             public readonly IControlFlowGraph Cfg;
 
             public Context(string methodBody, string localFunctionName = null)
@@ -541,7 +650,8 @@ public class Sample
                     body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
                 }
                 Cfg = CSharpControlFlowGraph.Create(body, semanticModel);
-                Lva = CSharpLiveVariableAnalysis.Analyze(Cfg, symbol, semanticModel);
+                Console.WriteLine(CfgSerializer.Serialize(Cfg));
+                Lva = new SonarCSharpLiveVariableAnalysis(Cfg, symbol, semanticModel);
             }
 
             public Block Block<TBlock>(string withInstruction = null) where TBlock : Block =>
@@ -553,9 +663,9 @@ public class Sample
                 var expectedLiveIn = expected.OfType<LiveIn>().SingleOrDefault() ?? new LiveIn();
                 var expectedLiveOut = expected.OfType<LiveOut>().SingleOrDefault() ?? new LiveOut();
                 var expectedCaptured = expected.OfType<Captured>().SingleOrDefault() ?? new Captured();
-                Lva.GetLiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names);
-                Lva.GetLiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names);
-                Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names);
+                Lva.LiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names, block.GetType().Name);
+                Lva.LiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names, block.GetType().Name);
+                Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names, block.GetType().Name);
             }
         }
 

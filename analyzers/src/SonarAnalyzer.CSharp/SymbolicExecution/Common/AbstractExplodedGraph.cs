@@ -24,7 +24,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.LiveVariableAnalysis;
+using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.SymbolicExecution
         private readonly ISymbol declaration;
         private readonly IEnumerable<IParameterSymbol> declarationParameters;
         private readonly IEnumerable<IParameterSymbol> nonInDeclarationParameters;
-        private readonly AbstractLiveVariableAnalysis lva;
+        private readonly SonarCSharpLiveVariableAnalysis lva;
 
         protected readonly ICollection<ExplodedGraphCheck> explodedGraphChecks = new List<ExplodedGraphCheck>();
 
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         public event EventHandler<ConditionEvaluatedEventArgs> ConditionEvaluated;
 
-        protected AbstractExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, AbstractLiveVariableAnalysis lva)
+        protected AbstractExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, SonarCSharpLiveVariableAnalysis lva)
         {
             this.cfg = cfg;
             this.declaration = declaration;
@@ -275,8 +275,7 @@ namespace SonarAnalyzer.SymbolicExecution
                return programState;
             }
 
-            var liveVariables = this.lva.GetLiveOut(block)
-                .Union(this.nonInDeclarationParameters); // LVA excludes out and ref parameters
+            var liveVariables = lva.LiveOut(block).Union(nonInDeclarationParameters); // LVA excludes out and ref parameters
 
             // ToDo: Remove the IFieldSymbol check when SLVS-1136 is fixed
             return programState.RemoveSymbols(
