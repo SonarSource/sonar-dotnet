@@ -18,11 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -108,6 +110,109 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }
                 return false;
+            }
+
+            private class RedundancyChecker
+            {
+                private readonly ISymbol memberToCheck;
+                private readonly SemanticModel semanticModel;
+
+                public RedundancyChecker(ISymbol memberToCheck, SemanticModel semanticModel)
+                {
+                    this.memberToCheck = memberToCheck;
+                    this.semanticModel = semanticModel;
+                }
+
+                public bool IsMemberUsedInsideLambda(SyntaxNode instruction) =>
+                    instruction.DescendantNodes()
+                        .OfType<IdentifierNameSyntax>()
+                        .Select(PossibleMemberAccessParent)
+                        .Any(IsMatchingMember);
+
+                public bool IsMatchingMember(ExpressionSyntax expression)
+                {
+                    return ExtractIdentifier(expression) is { } identifier
+                           && semanticModel.GetSymbolInfo(identifier).Symbol is { } assignedSymbol
+                           && memberToCheck.Equals(assignedSymbol);
+
+                    IdentifierNameSyntax ExtractIdentifier(ExpressionSyntax expressionSyntax)
+                    {
+                        if (expressionSyntax.IsKind(SyntaxKind.IdentifierName))
+                        {
+                            return (IdentifierNameSyntax)expressionSyntax;
+                        }
+                        if (expressionSyntax is MemberAccessExpressionSyntax memberAccess
+                            && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+                        {
+                            return memberAccess.Name as IdentifierNameSyntax;
+                        }
+                        if (expressionSyntax is ConditionalAccessExpressionSyntax conditionalAccess
+                            && conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+                        {
+                            return (conditionalAccess.WhenNotNull as MemberBindingExpressionSyntax)?.Name as IdentifierNameSyntax;
+                        }
+                        return null;
+                    }
+                }
+
+                public static ExpressionSyntax PossibleMemberAccessParent(SyntaxNode node) =>
+                    node is MemberAccessExpressionSyntax memberAccess
+                        ? memberAccess
+                        : PossibleMemberAccessParent(node as IdentifierNameSyntax);
+
+                private static ExpressionSyntax PossibleMemberAccessParent(IdentifierNameSyntax identifier)
+                {
+                    if (identifier.Parent is MemberAccessExpressionSyntax memberAccess)
+                    {
+                        return memberAccess;
+                    }
+
+                    if (identifier.Parent is MemberBindingExpressionSyntax memberBinding)
+                    {
+                        return (ExpressionSyntax)memberBinding.Parent;
+                    }
+
+                    return identifier;
+                }
+
+                public bool TryGetReadWriteFromMemberAccess(ExpressionSyntax expression, out bool isRead)
+                {
+                    isRead = false;
+
+                    var parenthesized = expression.GetSelfOrTopParenthesizedExpression();
+
+                    if (!IsMatchingMember(expression))
+                    {
+                        return false;
+                    }
+
+                    if (IsOutArgument(parenthesized))
+                    {
+                        isRead = false;
+                        return true;
+                    }
+
+                    if (IsReadAccess(parenthesized, this.semanticModel))
+                    {
+                        isRead = true;
+                        return true;
+                    }
+
+                    return false;
+                }
+
+                private static bool IsBeingAssigned(ExpressionSyntax expression) =>
+                    expression.Parent is AssignmentExpressionSyntax assignment
+                    && assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
+                    && assignment.Left == expression;
+
+                private static bool IsOutArgument(ExpressionSyntax parenthesized) =>
+                    parenthesized.Parent is ArgumentSyntax argument
+                    && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
+
+                private static bool IsReadAccess(ExpressionSyntax parenthesized, SemanticModel semanticModel) =>
+                    !IsBeingAssigned(parenthesized)
+                    && !parenthesized.IsInNameOfArgument(semanticModel);
             }
         }
     }
