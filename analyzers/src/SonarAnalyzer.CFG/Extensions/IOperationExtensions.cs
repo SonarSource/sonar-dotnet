@@ -21,12 +21,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
     public static class IOperationExtensions
     {
+        public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
+            new OperationExecutionOrder(operations, false);
+
+        public static OperationExecutionOrder ToReversedExecutionOrder(this IEnumerable<IOperation> operations) =>
+            new OperationExecutionOrder(operations, true);
+
         // This method is taken from Roslyn implementation
         public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation operation) =>
             Descendants(operation, true);
