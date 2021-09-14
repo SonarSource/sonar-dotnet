@@ -10,7 +10,7 @@
 
   <groupId>org.sonarsource.dotnet</groupId>
   <artifactId>sonar-dotnet</artifactId>
-  <version>8.29-SNAPSHOT</version>
+  <version>8.30-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>.NET Analyzers parent</name>
