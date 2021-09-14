@@ -43,22 +43,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                // Case where private class is inside a partial class
+                var classDeclarationSyntax = (ClassDeclarationSyntax)c.Node;
+                if (IsPrivateButNotSealedClass(classDeclarationSyntax))
                 {
-                    // Cases to cover: Nested private classes inside nested private classes
-                    // Case where private class is inside a partial class
-                    var classDeclarationSyntax = (ClassDeclarationSyntax)c.Node;
-                    if (IsPrivateButNotSealedClass(classDeclarationSyntax))
+                    var nestedPrivateClassInfo = c.SemanticModel.GetDeclaredSymbol(c.Node);
+
+                    if (!PrivateClassIsInheritedByAnotherClass(nestedPrivateClassInfo))
                     {
-                        var nestedPrivateClassInfo = c.SemanticModel.GetDeclaredSymbol(c.Node);
-
-                        if (!PrivateClassIsInheritedByAnotherClass(nestedPrivateClassInfo))
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclarationSyntax.GetLocation()));
-                        }
-
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclarationSyntax.GetLocation()));
                     }
-                },
-                SyntaxKind.ClassDeclaration);
+                }
+            },
+            SyntaxKind.ClassDeclaration);
 
         private static bool IsPrivateButNotSealedClass(ClassDeclarationSyntax classDeclaration) =>
            classDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword) && !classDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword);
@@ -70,6 +68,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(x => (x as ITypeSymbol))
                 .Where(c => c.BaseType == privateClassInfo)
                 .Any();
-
     }
 }

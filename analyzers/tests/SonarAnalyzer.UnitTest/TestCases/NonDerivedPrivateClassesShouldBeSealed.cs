@@ -5,22 +5,27 @@ namespace Tests.Diagnostics
     public class Foo
     {
 
-        private class NotExtended //Noncompliant
+        private class ClassWontBeExtended //Noncompliant
         {
 
         }
 
-        private class IsExtended
+        private sealed class ClassWontBeExtendedButSealed
         {
 
         }
 
-        private class TheExtension : IsExtended //Noncompliant
+        private class Extended
         {
 
         }
 
-        private class TheSecondExtension : IsExtended
+        private class TheExtension : Extended //Noncompliant
+        {
+
+        }
+
+        private class TheSecondExtension : Extended
         {
 
         }
@@ -30,20 +35,40 @@ namespace Tests.Diagnostics
 
         }
 
-        public class Baro
+        private class PrivateClass //Noncompliant
         {
-            public class Nestception
+            private class NestedPrivateClass //Noncompliant
             {
 
             }
 
-        }
+            private class NestedPrivateClassWillBeExtended
+            {
 
-        internal class Bari
+            }
+
+            private class NestedExtension : NestedPrivateClassWillBeExtended //Noncompliant
+            {
+
+            }
+        }
+    }
+
+
+    public partial class Bar
+    {
+        private class SomeClass
         {
 
         }
+    }
 
+    public partial class Bar
+    {
+        private class SomeOtherClass : SomeClass //Noncompliant
+        {
+
+        }
     }
 
 }
