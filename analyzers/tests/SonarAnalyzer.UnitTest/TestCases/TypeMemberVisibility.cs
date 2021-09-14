@@ -1,4 +1,4 @@
-﻿namespace Tests.Diagnostics.V
+﻿namespace Tests.Diagnostics
 {
     internal class Noncompliant
     {

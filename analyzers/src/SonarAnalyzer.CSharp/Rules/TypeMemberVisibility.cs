@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -37,18 +38,59 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Types should not have members with visibility set higher than the type's visibility";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly SyntaxKind[] TypeKinds = { SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKind.EnumDeclaration, SyntaxKindEx.RecordDeclaration };
+        private static readonly SyntaxKind[] MemberDeclarationKinds =
+        {
+            SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.EventDeclaration,
+            SyntaxKind.FieldDeclaration,
+            SyntaxKind.IndexerDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.PropertyDeclaration,
+            SyntaxKind.EventFieldDeclaration
+        };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = c.Node;
-                    if (true)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
+                    var node = (BaseTypeDeclarationSyntax)c.Node;
+                    var parent = GetParentType(node);
+
+                    CheckNestedTypeVisibility(node, parent, c);
+                    CheckTypeMembersVisibility(node, parent, c);
                 },
-                SyntaxKind.InvocationExpression);
+                TypeKinds);
+
+        private static void CheckNestedTypeVisibility(BaseTypeDeclarationSyntax type, BaseTypeDeclarationSyntax parentType, SyntaxNodeAnalysisContext context)
+        {
+            if (parentType != null
+                && type.Modifiers.AnyOfKind(SyntaxKind.PublicKeyword)
+                && parentType.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, type.GetLocation()));
+            }
+        }
+
+        private static void CheckTypeMembersVisibility(BaseTypeDeclarationSyntax type, BaseTypeDeclarationSyntax parentType, SyntaxNodeAnalysisContext context)
+        {
+            if (parentType == null && type.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
+            {
+                var declarations = type.DescendantNodes()
+                                       .Where(node => node.IsAnyKind(MemberDeclarationKinds))
+                                       .OfType<MemberDeclarationSyntax>()
+                                       .Where(declaration => declaration.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword));
+
+                foreach (var declaration in declarations)
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, declaration.GetLocation()));
+                }
+            }
+        }
+
+        private static BaseTypeDeclarationSyntax GetParentType(SyntaxNode node) =>
+            (BaseTypeDeclarationSyntax)node.Ancestors().FirstOrDefault(x => x.IsAnyKind(TypeKinds));
     }
 }
