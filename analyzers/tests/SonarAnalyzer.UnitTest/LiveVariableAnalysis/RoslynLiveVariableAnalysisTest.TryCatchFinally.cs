@@ -53,8 +53,8 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
             var context = new Context(code);
             context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate(context.Block<ISimpleAssignmentOperation>("ms = new System.IO.MemoryStream()"), new LiveIn("boolParameter"), new LiveOut("boolParameter", "ms"));
-            context.Validate(context.Block("Method(ms.Length);"), new LiveIn("boolParameter", "ms") /* ToDo: Try/Finally support should introduce new LiveOut("ms") */);
-            context.Validate(context.Block("Method(0);") /* ToDo: Try/Finally support should introduce new LiveIn("ms"), new LiveOut("ms") */);
+            context.Validate(context.Block("Method(ms.Length);"), new LiveIn("boolParameter", "ms"), new LiveOut("ms"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("ms"), new LiveOut("ms"));
             context.Validate(context.Cfg.ExitBlock);
             // Finally region
             context.Validate(context.Block<IIsNullOperation>("ms = new System.IO.MemoryStream()"), new LiveIn("ms"), new LiveOut("ms"));    // Null check
@@ -62,27 +62,55 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
             context.Validate(context.Cfg.Blocks[6]);
         }
 
-        [DataTestMethod]
-        [DataRow("using (var ms{0} = new System.IO.MemoryStream()) {{", "}")]
-        [DataRow("using var ms{0} = new System.IO.MemoryStream();", null)]
-        public void Using_Nested_LiveInUntilTheEnd(string usingStatement, string suffix)
+        [TestMethod]
+        public void Using_Nested_Block_LiveInUntilTheEnd()
         {
             var code = @$"
-{string.Format(usingStatement, "Outer")}
+using (var msOuter = new System.IO.MemoryStream())
+{{
     if (boolParameter)
     {{
-        {string.Format(usingStatement, "Inner")}
+        using (var msInner = new System.IO.MemoryStream())
+        {{
             Method(0);
-        {suffix}
+        }}
         Method(1);
     }}
-{suffix}
+}}
 Method(2);";
             var context = new Context(code);
             context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("Method(0);") /* ToDo: Try/Finally support should introduce new LiveIn("msOuter", "msInner"), new LiveOut("msOuter", "msInner") */);
-            context.Validate(context.Block("Method(1);") /* ToDo: Try/Finally support should introduce new LiveIn("msOuter"), new LiveOut("msOuter") */);
+            context.Validate(context.Block("Method(0);"), new LiveIn("msOuter", "msInner"), new LiveOut("msOuter", "msInner"));
+            context.Validate(context.Block("Method(1);"), new LiveIn("msOuter"), new LiveOut("msOuter"));
             context.Validate(context.Block("Method(2);"));
+            context.Validate(context.Cfg.ExitBlock);
+            // Finally region
+            context.Validate(context.Block<IIsNullOperation>("msInner = new System.IO.MemoryStream()"), new LiveIn("msInner"/*FIXME: , "msOuter"*/), new LiveOut("msInner"/*FIXME: , "msOuter"*/));   // Null check
+            context.Validate(context.Block<IInvocationOperation>("msInner = new System.IO.MemoryStream()"), new LiveIn("msInner"/*FIXME: , "msOuter"), new LiveOut("msOuter"*/));          // Actual Dispose
+            context.Validate(context.Block<IIsNullOperation>("msOuter = new System.IO.MemoryStream()"), new LiveIn("msOuter"), new LiveOut("msOuter"));     // Null check
+            context.Validate(context.Block<IInvocationOperation>("msOuter = new System.IO.MemoryStream()"), new LiveIn("msOuter"));                         // Actual Dispose
+        }
+
+        [TestMethod]
+        public void Using_Nested_Declaration_LiveInUntilTheEnd()
+        {
+            var code = @$"
+using var msOuter = new System.IO.MemoryStream();
+if (boolParameter)
+{{
+    using var msInner = new System.IO.MemoryStream();
+    Method(0);
+    if (boolParameter)
+    {{
+        Method(1);
+    }}
+}}
+Method(2);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("boolParameter", "msOuter", "msInner"), new LiveOut("msOuter", "msInner"));
+            context.Validate(context.Block("Method(1);"), new LiveIn("msOuter", "msInner"), new LiveOut("msOuter", "msInner"));
+            context.Validate(context.Block("Method(2);"), new LiveIn("msOuter"), new LiveOut("msOuter"));
             context.Validate(context.Cfg.ExitBlock);
             // Finally region
             context.Validate(context.Block<IIsNullOperation>("msInner = new System.IO.MemoryStream()"), new LiveIn("msInner"/*FIXME: , "msOuter"*/), new LiveOut("msInner"/*FIXME: , "msOuter"*/));   // Null check
@@ -105,8 +133,8 @@ finally
 }
 Method(1);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock/*FIXME: , new LiveIn("intParameter"), new LiveOut("intParameter")*/);
-            context.Validate(context.Block("Method(0);")/*FIXME: , new LiveIn("intParameter"), new LiveOut("intParameter")*/);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
             context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
             context.Validate(context.Block("Method(1);"));
             context.Validate(context.Cfg.ExitBlock);
@@ -159,9 +187,9 @@ finally
 Method(2);";
             var context = new Context(code);
             context.Validate(context.Cfg.EntryBlock);
-            context.Validate(context.Block("Method(0);")/*FIXME: , new LiveIn("inner", "outer"), new LiveOut("inner", "outer")*/);
-            context.Validate(context.Block("Method(inner);"), new LiveIn("inner"/*FIXME: , "outer"), new LiveOut("outer"*/));
-            context.Validate(context.Block("Method(1);")/*FIXME: , new LiveIn("outer"), new LiveOut("outer")*/);
+            context.Validate(context.Block("Method(0);"), new LiveIn("inner", "outer"), new LiveOut("inner", "outer"));
+            context.Validate(context.Block("Method(inner);"), new LiveIn("inner" /*FIXME:, "outer"), new LiveOut("outer"*/));
+            context.Validate(context.Block("Method(1);"), new LiveIn("outer"), new LiveOut("outer"));
             context.Validate(context.Block("Method(outer);"), new LiveIn("outer"));
             context.Validate(context.Block("Method(2);"));
             context.Validate(context.Cfg.ExitBlock);

@@ -38,8 +38,17 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         protected override IEnumerable<BasicBlock> ReversedBlocks() =>
             cfg.Blocks.Reverse();
 
-        protected override IEnumerable<BasicBlock> Successors(BasicBlock block) =>
-            block.SuccessorBlocks;
+        protected override IEnumerable<BasicBlock> Successors(BasicBlock block)
+        {
+            foreach (var successor in block.Successors.Where(x => x.Destination != null))
+            {
+                yield return successor.Destination;
+                foreach (var finallyRegion in successor.FinallyRegions)
+                {
+                    yield return cfg.Blocks[finallyRegion.FirstBlockOrdinal];
+                }
+            }
+        }
 
         protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block) =>
             block.Predecessors.Select(x => x.Source);
