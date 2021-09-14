@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         // Retrieves the class members which are initialized - instance or static ones, depending on the given filter.
         // The returned dictionary has as key the member symbol and as value the initialization syntax.
-        private Dictionary<ISymbol, EqualsValueClauseSyntax> GetInitializedMembers(SemanticModel semanticModel,
+        private static Dictionary<ISymbol, EqualsValueClauseSyntax> GetInitializedMembers(SemanticModel semanticModel,
                                                                                    TypeDeclarationSyntax declaration,
                                                                                    Func<BaseFieldDeclarationSyntax, bool> fieldFilter,
                                                                                    Func<PropertyDeclarationSyntax, bool> propertyFilter)

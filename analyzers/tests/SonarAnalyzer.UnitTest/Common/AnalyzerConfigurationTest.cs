@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Common
         public void AlwaysEnabled_AnyValue_ReturnsTrue()
         {
             AlwaysEnabled.IsEnabled(null).Should().BeTrue();
-            AlwaysEnabled.IsEnabled("").Should().BeTrue();
+            AlwaysEnabled.IsEnabled(string.Empty).Should().BeTrue();
             AlwaysEnabled.IsEnabled("foo").Should().BeTrue();
         }
 
