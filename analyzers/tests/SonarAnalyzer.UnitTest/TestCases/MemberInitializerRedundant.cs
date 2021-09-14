@@ -223,6 +223,18 @@ namespace Tests.Diagnostics
         }
     }
 
+    class Person15
+    {
+        int age = 42;
+        public Person15()
+        {
+            Delegate d = new Action(() =>
+            {
+                Delegate c = new Action(() => { this.age = 40; });
+            });
+        }
+    }
+
     class CSharp8_PersonA
     {
         int age = 42;
