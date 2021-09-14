@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class NonDerivedPrivateClassesShouldBeSealed : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3260";
-        private const string MessageFormat = "Class {0} should be marked as 'sealed' as it's private and not derived in the current assembly.";
+        private const string MessageFormat = "Class should be marked as 'sealed' as it's private and not derived in the current assembly.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -43,15 +44,32 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    if (IsPrivateButNotSealedClass(classDeclaration))
+                    // Cases to cover: Nested private classes inside nested private classes
+                    // Case where private class is inside a partial class
+                    var classDeclarationSyntax = (ClassDeclarationSyntax)c.Node;
+                    if (IsPrivateButNotSealedClass(classDeclarationSyntax))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclaration.GetLocation()));
+                        var nestedPrivateClassInfo = c.SemanticModel.GetDeclaredSymbol(c.Node);
+
+                        if (!PrivateClassIsInheritedByAnotherClass(nestedPrivateClassInfo))
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclarationSyntax.GetLocation()));
+                        }
+
                     }
                 },
                 SyntaxKind.ClassDeclaration);
 
         private static bool IsPrivateButNotSealedClass(ClassDeclarationSyntax classDeclaration) =>
            classDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword) && !classDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword);
+
+        private static bool PrivateClassIsInheritedByAnotherClass(ISymbol privateClassInfo) =>
+            privateClassInfo.ContainingType
+                .GetMembers()
+                .Where(s => s.Kind == SymbolKind.NamedType && !s.Name.Equals(privateClassInfo.Name))
+                .Select(x => (x as ITypeSymbol))
+                .Where(c => c.BaseType == privateClassInfo)
+                .Any();
+
     }
 }

@@ -1,0 +1,17 @@
+<p><code>private</code> classes aren’t visible outside of their assemblies anyway, so if they’re not extended inside the assemblies, they should be
+made explicitly non-extensible with the addition of the <code>sealed</code> keyword.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+private class MyClass  // Noncompliant
+{
+  // ...
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+private sealed class MyClass
+{
+  // ...
+}
+</pre>
+
