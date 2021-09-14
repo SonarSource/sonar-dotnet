@@ -83,7 +83,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             private void ProcessParameterOrLocalReference(IOperationWrapper reference)
             {
                 var symbol = ParameterOrLocalSymbol(reference.WrappedOperation);
-                Debug.Assert(symbol != null, "Only supported types should be passed to ParameterOrLocalSymbol");
+                Debug.Assert(symbol != null, "ProcessParameterOrLocalReference should resolve parametr or local symbol.");
                 if (IsOutArgument(reference.WrappedOperation))
                 {
                     Assigned.Add(symbol);

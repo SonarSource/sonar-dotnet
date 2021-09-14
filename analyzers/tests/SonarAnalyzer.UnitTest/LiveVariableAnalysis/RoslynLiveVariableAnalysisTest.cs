@@ -788,6 +788,22 @@ int LocalFunction() => variable;";
         }
 
         [TestMethod]
+        public void LocalFunctionInvocation_FunctionDeclaredBeforeCode_LiveIn()
+        {
+            var code = @"
+int LocalFunction() => variable;
+
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction();";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate(context.Block("boolParameter"), new LiveIn("boolParameter") /* ToDo: "variable" should LiveIn and LiveOut("variable")*/);
+            context.Validate(context.Block("LocalFunction();") /* ToDo: Should be new LiveIn("variable") */);
+        }
+
+        [TestMethod]
         public void LocalFunctionInvocation_Generic_LiveIn()
         {
             var code = @"
