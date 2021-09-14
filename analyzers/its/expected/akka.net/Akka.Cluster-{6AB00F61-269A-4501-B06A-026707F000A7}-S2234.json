@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to 'Copy' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  43,
+"endLine":  137,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  40,
+"endLine":  147,
+"endColumn":  44
+}
+}
+]
+}
+]
+}

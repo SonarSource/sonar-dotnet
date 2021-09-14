@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to 'Copy' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\GossipSpec.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  25,
+"endLine":  111,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2234",
+"message":  "Parameters to 'Compare' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MemberOrderingSpec.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  42,
+"endLine":  86,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2234",
+"message":  "Parameters to 'Copy' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsGossipSpec.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  32,
+"endLine":  60,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2234",
+"message":  "Parameters to 'Copy' have the same names but not the same order as the method arguments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsGossipSpec.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  32,
+"endLine":  81,
+"endColumn":  36
+}
+}
+}
+]
+}

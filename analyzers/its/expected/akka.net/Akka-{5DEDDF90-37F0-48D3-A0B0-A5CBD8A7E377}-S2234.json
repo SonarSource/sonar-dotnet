@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"region":  {
+"startLine":  374,
+"startColumn":  41,
+"endLine":  374,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  16,
+"endLine":  397,
+"endColumn":  36
+}
+}
+]
+}
+]
+}

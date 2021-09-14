@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  24,
+"endLine":  157,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryBuilder.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  16,
+"endLine":  44,
+"endColumn":  29
+}
+}
+]
+}
+]
+}
