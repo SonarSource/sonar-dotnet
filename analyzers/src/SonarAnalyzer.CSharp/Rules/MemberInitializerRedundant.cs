@@ -187,7 +187,7 @@ namespace SonarAnalyzer.Rules.CSharp
             else
             {
                 var cfg = ControlFlowGraph.Create(body.Parent, semanticModel);
-                var checker = new MemberInitializerRedundancyCheckerRoslyn(cfg, classMember, semanticModel);
+                var checker = new MemberInitializerRedundancyCheckerRoslyn(cfg, classMember);
                 return checker.CheckAllPaths();
             }
         }

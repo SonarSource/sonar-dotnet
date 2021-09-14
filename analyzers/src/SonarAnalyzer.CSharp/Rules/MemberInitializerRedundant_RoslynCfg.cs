@@ -18,10 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
@@ -32,121 +30,86 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private class MemberInitializerRedundancyCheckerRoslyn : CfgAllPathValidator
         {
-            private readonly IsValidMatcher isValidMatcher;
-            private readonly IsInvalidMatcher isInvalidMatcher;
+            private readonly Matcher matcher;
 
-            public MemberInitializerRedundancyCheckerRoslyn(ControlFlowGraph cfg, ISymbol memberToCheck, SemanticModel semanticModel) : base(cfg)
-            {
-                var redundancyChecker = new RedundancyChecker(memberToCheck, semanticModel);
-                isValidMatcher = new IsValidMatcher(redundancyChecker);
-                isInvalidMatcher = new IsInvalidMatcher(redundancyChecker);
-            }
+            public MemberInitializerRedundancyCheckerRoslyn(ControlFlowGraph cfg, ISymbol memberToCheck) : base(cfg) =>
+                matcher = new Matcher(cfg, memberToCheck);
 
             // Returns true if the block contains assignment before access
             protected override bool IsValid(BasicBlock block) =>
-                isValidMatcher.Matches(block);
+                matcher.Match(block, isRead: false);
 
             // Returns true if the block contains access before assignment
             protected override bool IsInvalid(BasicBlock block) =>
-                isInvalidMatcher.Matches(block);
+                matcher.Match(block, isRead: true);
 
-            private abstract class FinderBase : OperationFinder<bool>
+            private  class Matcher
             {
-                protected readonly RedundancyChecker redundancyChecker;
+                private readonly ISymbol memberToCheck;
+                private readonly ControlFlowGraph cfg;
 
-                protected FinderBase(RedundancyChecker redundancyChecker) =>
-                    this.redundancyChecker = redundancyChecker;
-
-                public bool Matches(BasicBlock block)
+                public Matcher(ControlFlowGraph cfg, ISymbol memberToCheck)
                 {
-                    TryFind(block, out var result);
-                    return result;
+                    this.cfg = cfg;
+                    this.memberToCheck = memberToCheck;
                 }
-            }
 
-            private  class IsValidMatcher : FinderBase
-            {
-                public IsValidMatcher(RedundancyChecker redundancyChecker) : base(redundancyChecker) { }
-
-                protected override bool TryFindOperation(IOperationWrapperSonar operation, out bool result)
+                public bool Match(BasicBlock block, bool isRead)
                 {
-                    var instruction = operation.Instance.Syntax;
-                    switch (instruction.Kind())
+                    foreach (var operation in block.OperationsAndBranchValue)
                     {
-                        case SyntaxKind.IdentifierName:
-                        case SyntaxKind.SimpleMemberAccessExpression:
+                        if (ProcessOperation(operation, out var result))
+                        {
+                            return result;
+                        }
+                    }
+                    return false;
+
+                    bool ProcessOperation(IOperation operation, out bool result)
+                    {
+                        foreach (var child in operation.DescendantsAndSelf().ToReversedExecutionOrder())
+                        {
+                            if (isRead && child.Instance.Kind == OperationKindEx.FlowAnonymousFunction)
                             {
-                                var memberAccess = RedundancyChecker.PossibleMemberAccessParent(instruction);
-                                if (memberAccess != null && redundancyChecker.TryGetReadWriteFromMemberAccess(memberAccess, out var isRead))
+                                var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(child.Instance));
+                                foreach (var subOperation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
                                 {
-                                    result = !isRead;
-                                    return true;
+                                    if (ProcessOperation(subOperation, out result))
+                                    {
+                                        return true;
+                                    }
                                 }
-                                break;
                             }
-                        case SyntaxKind.SimpleAssignmentExpression:
+                            else if (memberToCheck.Equals(MemberSymbol(child.Instance)))
                             {
-                                var assignment = (AssignmentExpressionSyntax)instruction;
-                                if (redundancyChecker.IsMatchingMember(assignment.Left.RemoveParentheses()))
-                                {
-                                    result = true;
-                                    return true;
-                                }
-                                break;
+                                result = IsReadOrWrite(child);
+                                return true;
                             }
+                        }
+
+                        result = false;
+                        return false;
                     }
 
-                    result = default;
-                    return false;
-                }
-            }
-
-            private  class IsInvalidMatcher : FinderBase
-            {
-                public IsInvalidMatcher(RedundancyChecker redundancyChecker) : base(redundancyChecker) { }
-
-                protected override bool TryFindOperation(IOperationWrapperSonar operation, out bool result)
-                {
-                    var instruction = operation.Instance.Syntax;
-                    switch (instruction.Kind())
+                    bool IsReadOrWrite(IOperationWrapperSonar child)
                     {
-                        case SyntaxKind.IdentifierName:
-                        case SyntaxKind.SimpleMemberAccessExpression:
-                            {
-                                var memberAccess = RedundancyChecker.PossibleMemberAccessParent(instruction);
-                                if (memberAccess != null && redundancyChecker.TryGetReadWriteFromMemberAccess(memberAccess, out result))
-                                {
-                                    return true;
-                                }
-                            }
-                            break;
-                        case SyntaxKind.SimpleAssignmentExpression:
-                            {
-                                var assignment = (AssignmentExpressionSyntax)instruction;
-                                if (redundancyChecker.IsMatchingMember(assignment.Left))
-                                {
-                                    result = false;
-                                    return true;
-                                }
-                            }
-                            break;
-
-                        case SyntaxKind.AnonymousMethodExpression:
-                        case SyntaxKind.ParenthesizedLambdaExpression:
-                        case SyntaxKind.SimpleLambdaExpression:
-                        case SyntaxKind.QueryExpression:
-                            {
-                                if (redundancyChecker.IsMemberUsedInsideLambda(instruction))
-                                {
-                                    result = true;
-                                    return true;
-                                }
-                            }
-                            break;
+                        if (child.Instance.IsOutArgument())
+                        {
+                            // it is out argument - that means that this is write
+                            return !isRead;
+                        }
+                        var isWrite = child.Parent is {Kind: OperationKindEx.SimpleAssignment} parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == child.Instance;
+                        return isRead ^ isWrite;
                     }
 
-                    result = default;
-                    return false;
+                    static ISymbol MemberSymbol(IOperation operation) =>
+                        operation.Kind switch
+                        {
+                            OperationKindEx.FieldReference => IFieldReferenceOperationWrapper.FromOperation(operation).Field,
+                            OperationKindEx.PropertyReference => IPropertyReferenceOperationWrapper.FromOperation(operation).Property,
+                            OperationKindEx.EventReference => IEventReferenceOperationWrapper.FromOperation(operation).Member,
+                            _ => null
+                        };
                 }
             }
         }

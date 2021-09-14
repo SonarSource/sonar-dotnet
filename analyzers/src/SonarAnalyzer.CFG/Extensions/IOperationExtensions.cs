@@ -28,6 +28,11 @@ namespace SonarAnalyzer.Extensions
 {
     public static class IOperationExtensions
     {
+        public static bool IsOutArgument(this IOperation operation) =>
+            new IOperationWrapperSonar(operation) is var wrapped
+            && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
+            && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
+
         public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
             new OperationExecutionOrder(operations, false);
 
