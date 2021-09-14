@@ -6916,6 +6916,39 @@
   <data name="S3265_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3267_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S3267_Description" xml:space="preserve">
+    <value>When a loop is filtering, selecting or aggregating, those functions can be handled with a clearer, more concise LINQ expression instead.</value>
+  </data>
+  <data name="S3267_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3267_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3267_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3267_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S3267_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3267_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S3267_Tags" xml:space="preserve">
+    <value>clumsy</value>
+  </data>
+  <data name="S3267_Title" xml:space="preserve">
+    <value>Loops should be simplified with "LINQ" expressions</value>
+  </data>
+  <data name="S3267_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3329_Category" xml:space="preserve">
     <value>Critical Vulnerability</value>
   </data>

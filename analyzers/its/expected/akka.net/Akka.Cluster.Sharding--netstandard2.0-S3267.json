@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(entry => entry.ShardIds))",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  39,
+"endLine":  75,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(entry => entry.ShardIds))",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  43,
+"endLine":  104,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(entry => entry.Key))",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  35,
+"endLine":  162,
+"endColumn":  67
+}
+}
+}
+]
+}

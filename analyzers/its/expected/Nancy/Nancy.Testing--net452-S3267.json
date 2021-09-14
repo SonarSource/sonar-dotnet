@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(moduleRegistrationType => moduleRegistrationType.ModuleType))",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  52,
+"endLine":  540,
+"endColumn":  75
+}
+}
+}
+]
+}

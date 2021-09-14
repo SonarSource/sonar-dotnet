@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2514,
+"startColumn":  31,
+"endLine":  2514,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2516,
+"startColumn":  21,
+"endLine":  2516,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  41,
+"endLine":  107,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  25,
+"endLine":  108,
+"endColumn":  85
+}
+}
+]
+}
+]
+}

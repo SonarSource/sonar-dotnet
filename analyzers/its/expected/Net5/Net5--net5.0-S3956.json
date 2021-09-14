@@ -12,6 +12,32 @@
 "endColumn":  29
 }
 }
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3267.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  16,
+"endLine":  8,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3267.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  16,
+"endLine":  23,
+"endColumn":  25
+}
+}
 }
 ]
 }

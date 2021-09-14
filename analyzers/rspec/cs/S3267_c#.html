@@ -1,0 +1,35 @@
+<p>When a loop is filtering, selecting or aggregating, those functions can be handled with a clearer, more concise LINQ expression instead.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+var result = new List&lt;string&gt;();
+foreach (var element in collection)  // Noncompliant
+{
+  if (condition(element))
+  {
+    result.Add(element);
+  }
+}
+
+foreach (var element in collection2) // Noncompliant
+{
+  var someValue = element.Property;
+  if (someValue != null)
+  {
+    result.Add(someValue);
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+var result = new List&lt;string&gt;();
+foreach (var element in collection.Where(x=&gt;condition(x))
+{
+  result.Add(element);
+}
+
+foreach (var someValue in collection2.Select(x=&gt;x.Property).Where(y=&gt; y != null)
+{
+  result.Add(someValue);
+}
+</pre>
+

@@ -1,0 +1,41 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(node => node.Value))",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  34,
+"endLine":  43,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  46,
+"endLine":  125,
+"endColumn":  121
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  25,
+"endLine":  127,
+"endColumn":  108
+}
+}
+]
+}
+]
+}

@@ -379,6 +379,32 @@
 },
 {
 "id":  "S2325",
+"message":  "Make 'SuggestWhere' a static method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3267.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  29,
+"endLine":  8,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SuggestSelectAndWhere' a static method.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3267.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  26,
+"endLine":  23,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
 "message":  "Make 'Test' a static method.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3353.cs",

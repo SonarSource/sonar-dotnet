@@ -1,0 +1,117 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(stats => stats.Child))",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  39,
+"endLine":  281,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(stats => stats.Child))",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  39,
+"endLine":  289,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(stats => stats.Child))",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  35,
+"endLine":  303,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  36,
+"endLine":  217,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  21,
+"endLine":  219,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(crs => crs.Child))",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  635,
+"startColumn":  41,
+"endLine":  635,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  965,
+"startColumn":  37,
+"endLine":  965,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  968,
+"startColumn":  25,
+"endLine":  968,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(configurationProperty => configurationProperty.Name))",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\CDataConfigurationElement.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  69,
+"endLine":  48,
+"endColumn":  79
+}
+}
+}
+]
+}
