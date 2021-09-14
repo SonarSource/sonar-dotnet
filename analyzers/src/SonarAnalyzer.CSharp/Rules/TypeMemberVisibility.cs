@@ -42,6 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly SyntaxKind[] MemberDeclarationKinds =
         {
             SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.DelegateDeclaration,
             SyntaxKind.EventDeclaration,
             SyntaxKind.FieldDeclaration,
             SyntaxKind.IndexerDeclaration,

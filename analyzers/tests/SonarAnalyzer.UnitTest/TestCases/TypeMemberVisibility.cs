@@ -1,4 +1,6 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+
+namespace Tests.Diagnostics
 {
     internal class Noncompliant
     {
@@ -23,12 +25,29 @@
         private protected int GetE() => 1;
         private int GetF() => 1;
 
+        public event EventHandler ClickA; // Noncompliant
+        protected internal event EventHandler ClickB;
+        internal event EventHandler ClickC;
+        protected event EventHandler ClickD;
+        private protected event EventHandler ClickE;
+        private event EventHandler ClickF;
+
+        public delegate void DelegateA(string str);  // Noncompliant
+        protected internal delegate void DelegateB(string str);
+        internal delegate void DelegateC(string str);
+        protected delegate void DelegateD(string str);
+        private protected delegate void DelegateE(string str);
+        private delegate void DelegateF(string str);
+
         public Noncompliant(int a) {} // Noncompliant
         protected internal Noncompliant(int a, int b) {}
         internal Noncompliant(int a, int b, int c) {}
         protected Noncompliant(int a, int b, int c, int d) {}
         private protected Noncompliant(int a, int b, int c, int d, int e) {}
         private Noncompliant(int a, int b, int c, int d, int e, int f) {}
+
+        public int this[int index] => 1; // Noncompliant
+        protected internal int this[string index] => 1;
 
         public struct NestedStructA // Noncompliant
         {
@@ -58,6 +77,11 @@
         public record NestedRecordA // Noncompliant
         {
             public bool FlipCoin() => false; // Noncompliant
+        }
+
+        public enum Enum // Noncompliant
+        {
+            A
         }
 
         public static implicit operator byte(Noncompliant d) => 1; // Compliant: user defined operators need to be public
@@ -134,6 +158,10 @@
         public int GetA() => 1;
         protected internal int GetB() => 1;
         internal int GetC() => 1;
+
+        public event EventHandler ClickA;
+        public delegate void DelegateA(string str);
+        public int this[int index] => 1;
 
         public Compliant(int a) {}
         protected internal Compliant(int a, int b) {}
