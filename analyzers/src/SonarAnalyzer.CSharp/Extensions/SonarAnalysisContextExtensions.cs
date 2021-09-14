@@ -107,19 +107,14 @@ namespace SonarAnalyzer.Extensions
 
         private static void Analyze(CSharpSyntaxNode declarationBody, ISymbol symbol, Action<CSharpExplodedGraph, SyntaxNodeAnalysisContext> runAnalysis, SyntaxNodeAnalysisContext context)
         {
-            if (declarationBody == null ||
-                declarationBody.ContainsDiagnostics)
+            if (declarationBody == null
+                || declarationBody.ContainsDiagnostics
+                || !CSharpControlFlowGraph.TryGet(declarationBody, context.SemanticModel, out var cfg))
             {
                 return;
             }
 
-            if (!CSharpControlFlowGraph.TryGet(declarationBody, context.SemanticModel, out var cfg))
-            {
-                return;
-            }
-
-            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, symbol, context.SemanticModel);
-
+            var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
             try
             {
                 var explodedGraph = new CSharpExplodedGraph(cfg, symbol, context.SemanticModel, lva);
