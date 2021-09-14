@@ -86,15 +86,17 @@ namespace SonarAnalyzer.Rules.CSharp
                                           .OfType<ArgumentSyntax>()
                                           .Any(argument => argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
 
+        /// <remarks>
+        /// There are multiple scenarios where the code can be simplified using LINQ.
+        /// For simplicity, we consider that Select() can be used
+        /// only when a single property from the foreach variable is used.
+        /// We skip checking method invocations since depending on the method being called, moving it can make the code harder to read.
+        /// The issue is raised if:
+        ///  - the property is used more than once
+        ///  - the property is the right side of a variable declaration.
+        /// </remarks>
         private static void CheckIfCanBeSimplifiedUsingSelect(ForEachStatementSyntax forEachStatementSyntax, SyntaxNodeAnalysisContext c)
         {
-            // There are multiple scenarios where the code can be simplified using LINQ.
-            // For simplicity, we consider that Select() can be used
-            // only when a single property from the foreach variable is used.
-            // We skip checking method invocations since depending on the method being called, moving it can make the code harder to read.
-            // The issue is raised if:
-            //  - the property is used more than once
-            //  - the property is the right side of a variable declaration
             var declaredSymbol = new Lazy<ILocalSymbol>(() => c.SemanticModel.GetDeclaredSymbol(forEachStatementSyntax));
             var accessedProperties = new Dictionary<ISymbol, UsageStats>();
 
