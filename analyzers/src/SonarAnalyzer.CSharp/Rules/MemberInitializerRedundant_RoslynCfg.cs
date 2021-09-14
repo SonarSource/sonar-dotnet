@@ -58,23 +58,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     foreach (var operation in block.OperationsAndBranchValue)
                     {
-                        if (ProcessOperation(operation, out var result))
+                        if (ProcessOperation(operation, cfg, out var result))
                         {
                             return result;
                         }
                     }
                     return false;
 
-                    bool ProcessOperation(IOperation operation, out bool result)
+                    bool ProcessOperation(IOperation operation, ControlFlowGraph controlFlowGraph, out bool result)
                     {
                         foreach (var child in operation.DescendantsAndSelf().ToReversedExecutionOrder())
                         {
                             if (isRead && child.Instance.Kind == OperationKindEx.FlowAnonymousFunction)
                             {
-                                var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(child.Instance));
+                                var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(child.Instance));
                                 foreach (var subOperation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
                                 {
-                                    if (ProcessOperation(subOperation, out result))
+                                    if (ProcessOperation(subOperation, anonymousFunctionCfg, out result))
                                     {
                                         return true;
                                     }
