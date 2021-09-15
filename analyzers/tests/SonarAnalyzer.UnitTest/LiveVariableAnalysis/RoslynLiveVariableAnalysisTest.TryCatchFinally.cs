@@ -325,9 +325,9 @@ B:
 Method(2);";
             var context = new Context(code);
             context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("Method(intParameter);"), new LiveIn("boolParameter", "intParameter")/*FIXME:, new LiveOut("boolParameter", "intParameter")*/);
-            context.Validate(context.Block("Method(0);")/*FIXME: , new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter")*/);
-            context.Validate(context.Block("Method(1);")/*FIXME: , new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter")*/);
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("Method(1);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
             context.Validate(context.Block("Method(2);"));
         }
     }

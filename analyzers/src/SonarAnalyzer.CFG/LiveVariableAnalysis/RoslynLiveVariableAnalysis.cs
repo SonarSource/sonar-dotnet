@@ -55,7 +55,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     yield return successor.Destination;
                 }
             }
-            // Redirect exit from thorw and finally to following blocks.
+            // Redirect exit from throw and finally to following blocks.
             foreach (var successor in block.Successors.Where(x => x.Destination == null && x.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally))
             {
                 var tryRegion = block.EnclosingRegion.EnclosingRegion.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Try);
@@ -69,9 +69,42 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
         }
 
-        //FIXME: Do we need enqueue correct predecessors?
-        protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block) =>
-            block.Predecessors.Select(x => x.Source);
+        protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block)
+        {
+            if (block.Predecessors.Any())
+            {
+                foreach (var predecessor in block.Predecessors)
+                {
+                    // When exiting finally region, redirect predecessor to the source of StructuredEceptionHandling branches
+                    if (predecessor.FinallyRegions.Any())
+                    {
+                        foreach (var structuredExceptionHandling in predecessor.FinallyRegions
+                                                                               .SelectMany(x => cfg.Blocks.Where((_, i) => x.FirstBlockOrdinal <= i && i <= x.LastBlockOrdinal))
+                                                                               .SelectMany(x => x.Successors)
+                                                                               .Where(x => x.Semantics == ControlFlowBranchSemantics.StructuredExceptionHandling))
+                        {
+                            yield return structuredExceptionHandling.Source;
+                        }
+                    }
+                    else
+                    {
+                        yield return predecessor.Source;
+                    }
+                }
+            }
+            else if (block.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && block.Ordinal == block.EnclosingRegion.FirstBlockOrdinal)
+            {
+                // Link first block of FinallyRegion to the source of all branches exiting that FinallyRegion
+                var tryRegion = block.EnclosingRegion.EnclosingRegion.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Try); // FIXME: Reuse
+                foreach (var trySuccessor in cfg.Blocks // FIXME: Reuse
+                                           .Where((_, i) => tryRegion.FirstBlockOrdinal <= i && i <= tryRegion.LastBlockOrdinal)
+                                           .SelectMany(x => x.Successors)
+                                           .Where(x => x.FinallyRegions.Contains(block.EnclosingRegion)))
+                {
+                    yield return trySuccessor.Source;
+                }
+            }
+        }
 
         internal static bool IsOutArgument(IOperation operation) =>
             new IOperationWrapperSonar(operation) is var wrapped
