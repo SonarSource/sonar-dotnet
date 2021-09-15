@@ -265,10 +265,10 @@ namespace Tests.Diagnostics
             return Add(a, b);
         }
 
-        void MethodWithNestedLocalFunctions()  // Compliant FN
+        void MethodWithNestedLocalFunctions()  // FN
         {
             LocalFunction();
-            void LocalFunction()               // Compliant FN
+            void LocalFunction()               // FN
             {
                 NestedLocalFunction();
 
@@ -346,6 +346,11 @@ namespace Tests.Diagnostics
         {
             var x = new MoreCases();
             x.CallsOnObject();  // FN
+        }
+
+        public virtual void CallsOnObjectVirtual(MoreCases arg)
+        {
+            arg.CallsOnObjectVirtual(arg); // FN, even when it can be overriden
         }
     }
 

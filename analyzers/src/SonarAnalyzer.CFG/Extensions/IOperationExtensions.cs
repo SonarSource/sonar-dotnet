@@ -28,6 +28,16 @@ namespace SonarAnalyzer.Extensions
 {
     public static class IOperationExtensions
     {
+        public static IOperation RootOperation(this IOperation operation)
+        {
+            var wrapper = new IOperationWrapperSonar(operation);
+            while (wrapper.Parent != null)
+            {
+                wrapper = new IOperationWrapperSonar(wrapper.Parent);
+            }
+            return wrapper.Instance;
+        }
+
         public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
             new OperationExecutionOrder(operations, false);
 

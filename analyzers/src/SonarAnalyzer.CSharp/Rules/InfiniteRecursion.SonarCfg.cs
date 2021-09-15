@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     public partial class InfiniteRecursion
     {
-        public class InfiniteRecursion_SonarCfg : IInfiniteRecursion
+        public class SonarChecker : IChecker
         {
             public void CheckForNoExitProperty(SyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
             {
@@ -42,9 +42,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (CSharpControlFlowGraph.TryGet(property.ExpressionBody.Expression, c.SemanticModel, out cfg))
                     {
-                        var walker = new CfgWalkerForProperty(
-                            new RecursionAnalysisContext<IControlFlowGraph>(cfg, propertySymbol, property.Identifier.GetLocation(), c),
-                            "property's recursion",
+                        var walker = new RecursionSearcherForProperty(
+                            new RecursionContext<IControlFlowGraph>(cfg, propertySymbol, property.Identifier.GetLocation(), c, "property's recursion"),
                             isSetAccessor: false);
                         walker.CheckPaths();
                     }
@@ -60,9 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         var bodyNode = (CSharpSyntaxNode)accessor.Body ?? accessor.ExpressionBody();
                         if (CSharpControlFlowGraph.TryGet(bodyNode, c.SemanticModel, out cfg))
                         {
-                            var walker = new CfgWalkerForProperty(
-                                new RecursionAnalysisContext<IControlFlowGraph>(cfg, propertySymbol, accessor.Keyword.GetLocation(), c),
-                                "property accessor's recursion",
+                            var walker = new RecursionSearcherForProperty(
+                                new RecursionContext<IControlFlowGraph>(cfg, propertySymbol, accessor.Keyword.GetLocation(), c, "property accessor's recursion"),
                                 isSetAccessor: accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
                             walker.CheckPaths();
 
@@ -76,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (CSharpControlFlowGraph.TryGet(body, c.SemanticModel, out var cfg))
                 {
-                    var walker = new CfgWalkerForMethod(new RecursionAnalysisContext<IControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c));
+                    var walker = new RecursionSearcherForMethod(new RecursionContext<IControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion"));
                     walker.CheckPaths();
                     CheckInfiniteJumpLoop(body, cfg, "method", c);
                 }
@@ -124,70 +122,57 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private class CfgWalkerForMethod : CfgRecursionSearcher
+            private class RecursionSearcherForMethod : RecursionSearcher
             {
-                public CfgWalkerForMethod(RecursionAnalysisContext<IControlFlowGraph> context)
-                    : base(
-                        context.ControlFlowGraph,
-                        context.AnalyzedSymbol,
-                        context.SemanticModel,
-                        () => context.AnalysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.IssueLocation, "method's recursion")))
+                public RecursionSearcherForMethod(RecursionContext<IControlFlowGraph> context)
+                    : base(context)
                 {
                 }
 
-                protected override bool BlockHasReferenceToDeclaringSymbol(Block block) =>
-                    block.Instructions.Any(i =>
-                    {
-                        if (!(i is InvocationExpressionSyntax invocation))
-                        {
-                            return false;
-                        }
-
-                        return IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, declaringSymbol, semanticModel);
-                    });
+                protected override bool HasReferenceToDeclaringSymbol(Block block) =>
+                    block.Instructions.Any(x =>
+                        x is InvocationExpressionSyntax invocation
+                        && IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, declaringSymbol, semanticModel));
             }
 
-            private class CfgWalkerForProperty : CfgRecursionSearcher
+            private class RecursionSearcherForProperty : RecursionSearcher
             {
                 private readonly bool isSet;
 
-                public CfgWalkerForProperty(RecursionAnalysisContext<IControlFlowGraph> context, string reportOn, bool isSetAccessor)
-                    : base(
-                        context.ControlFlowGraph,
-                        context.AnalyzedSymbol,
-                        context.SemanticModel,
-                        () => context.AnalysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.IssueLocation, reportOn))) =>
+                public RecursionSearcherForProperty(RecursionContext<IControlFlowGraph> context, bool isSetAccessor)
+                    : base(context) =>
                     isSet = isSetAccessor;
 
                 private static readonly ISet<Type> TypesForReference = new HashSet<Type> { typeof(IdentifierNameSyntax), typeof(MemberAccessExpressionSyntax) };
 
-                protected override bool BlockHasReferenceToDeclaringSymbol(Block block) =>
-                    block.Instructions.Any(i =>
-                        TypesForReference.Contains(i.GetType())
-                        && MatchesAccessor(i)
-                        && IsInstructionOnThisAndMatchesDeclaringSymbol(i, declaringSymbol, semanticModel));
+                protected override bool HasReferenceToDeclaringSymbol(Block block) =>
+                    block.Instructions.Any(x =>
+                        TypesForReference.Contains(x.GetType())
+                        && MatchesAccessor(x)
+                        && IsInstructionOnThisAndMatchesDeclaringSymbol(x, declaringSymbol, semanticModel));
 
                 private bool MatchesAccessor(SyntaxNode node)
                 {
-                    var expr = (ExpressionSyntax)node;
-                    var propertyAccess = expr.GetSelfOrTopParenthesizedExpression();
+                    var propertyAccess = ((ExpressionSyntax)node).GetSelfOrTopParenthesizedExpression();
                     var isNodeASet = propertyAccess.Parent is AssignmentExpressionSyntax assignment && assignment.Left == propertyAccess;
                     return isNodeASet == isSet;
                 }
             }
 
-            private abstract class CfgRecursionSearcher : CfgAllPathValidator
+            private abstract class RecursionSearcher : CfgAllPathValidator
             {
                 protected readonly SemanticModel semanticModel;
                 protected readonly ISymbol declaringSymbol;
                 private readonly Action reportIssue;
 
-                protected CfgRecursionSearcher(IControlFlowGraph cfg, ISymbol declaringSymbol, SemanticModel semanticModel, Action reportIssue)
-                    : base(cfg)
+                protected abstract bool HasReferenceToDeclaringSymbol(Block block);
+
+                protected RecursionSearcher(RecursionContext<IControlFlowGraph> context)
+                    : base(context.ControlFlowGraph)
                 {
-                    this.declaringSymbol = declaringSymbol;
-                    this.semanticModel = semanticModel;
-                    this.reportIssue = reportIssue;
+                    declaringSymbol = context.AnalyzedSymbol;
+                    semanticModel = context.SemanticModel;
+                    reportIssue = context.ReportIssue;
                 }
 
                 public void CheckPaths()
@@ -199,9 +184,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 protected override bool IsBlockValid(Block block) =>
-                    BlockHasReferenceToDeclaringSymbol(block);
-
-                protected abstract bool BlockHasReferenceToDeclaringSymbol(Block block);
+                    HasReferenceToDeclaringSymbol(block);
             }
         }
     }

@@ -36,35 +36,29 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     public partial class InfiniteRecursion
     {
-        private class InfiniteRecursion_RoslynCfg : IInfiniteRecursion
+        private class RoslynChecker : IChecker
         {
             public void CheckForNoExitProperty(SyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
             {
                 if (property.ExpressionBody?.Expression != null)
                 {
                     var cfg = ControlFlowGraph.Create(property.ExpressionBody, c.SemanticModel);
-                    var walker = new CfgWalkerForProperty(
-                        new RecursionAnalysisContext<ControlFlowGraph>(cfg, propertySymbol, property.Identifier.GetLocation(), c),
-                        "property's recursion",
+                    var walker = new RecursionSearcherForProperty(
+                        new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, property.Identifier.GetLocation(), c, "property's recursion"),
                         isSetAccessor: false);
                     walker.CheckPaths();
                     // cannot meet goto s here, check for unreachable exit node is not needed here
-                    return;
                 }
-
-                var accessors = property.AccessorList?.Accessors.Where(a => a.HasBodyOrExpressionBody());
-                if (accessors != null)
+                else if (property.AccessorList != null)
                 {
-                    foreach (var accessor in accessors)
+                    foreach (var accessor in property.AccessorList.Accessors.Where(a => a.HasBodyOrExpressionBody()))
                     {
                         var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel);
-                        var walker = new CfgWalkerForProperty(
-                            new RecursionAnalysisContext<ControlFlowGraph>(cfg, propertySymbol, accessor.Keyword.GetLocation(), c),
-                            "property accessor's recursion",
-                            isSetAccessor: accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
+                        var context = new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, accessor.Keyword.GetLocation(), c, "property accessor's recursion");
+                        var walker = new RecursionSearcherForProperty(context, isSetAccessor: accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
                         if (!walker.CheckPaths() && !cfg.ExitBlock.IsReachable)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, accessor.Keyword.GetLocation(), "property accessor's recursion"));
+                            context.ReportIssue(accessor.Keyword.GetLocation());
                         }
                     }
                 }
@@ -73,13 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, ISymbol symbol)
             {
                 var operation = c.SemanticModel.GetOperation(body.Parent);
-                var wrapper = new IOperationWrapperSonar(operation);
-                while (wrapper.Parent != null)
-                {
-                    wrapper = new IOperationWrapperSonar(wrapper.Parent);
-                }
-
-                var cfg = ControlFlowGraph.Create(wrapper.Instance.Syntax, c.SemanticModel);
+                var cfg = ControlFlowGraph.Create(operation.RootOperation().Syntax, c.SemanticModel);
                 var enclosingKinds = new HashSet<SyntaxKind>
                 {
                     SyntaxKindEx.LocalFunctionStatement, SyntaxKind.SimpleLambdaExpression, SyntaxKind.AnonymousMethodExpression, SyntaxKind.ParenthesizedLambdaExpression
@@ -89,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     // we need to go up and track all possible enclosing local function statements
                     foreach (var enclosingFunction in c.Node.Ancestors().Where(x => enclosingKinds.Contains(x.Kind())).Reverse())
                     {
-                        if (enclosingFunction.IsAnyKind(SyntaxKindEx.LocalFunctionStatement))
+                        if (enclosingFunction.IsKind(SyntaxKindEx.LocalFunctionStatement))
                         {
                             cfg = cfg.GetLocalFunctionControlFlowGraph(c.SemanticModel.GetDeclaredSymbol(enclosingFunction) as IMethodSymbol);
                         }
@@ -103,85 +91,64 @@ namespace SonarAnalyzer.Rules.CSharp
                     cfg = cfg.GetLocalFunctionControlFlowGraph(symbol as IMethodSymbol);
                 }
 
-                var walker = new CfgWalkerForMethod(new RecursionAnalysisContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c));
+                var walker = new RecursionSearcherForMethod(new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion"));
                 if (!walker.CheckPaths() && !cfg.ExitBlock.IsReachable)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), "method's recursion"));
                 }
             }
 
-            private class CfgWalkerForMethod : CfgRecursionSearcher
+            private class RecursionSearcherForMethod : RecursionSearcher
             {
-                private readonly BooleanBlockMatcher existReferenceToDeclaringSymbolMatcher;
-
-                public CfgWalkerForMethod(RecursionAnalysisContext<ControlFlowGraph> context)
-                    : base(
-                        context.ControlFlowGraph,
-                        context.AnalyzedSymbol,
-                        context.SemanticModel,
-                        () => context.AnalysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.IssueLocation, "method's recursion")))
+                public RecursionSearcherForMethod(RecursionContext<ControlFlowGraph> context)
+                    : base(context)
                 {
-                    existReferenceToDeclaringSymbolMatcher = new BooleanBlockMatcher(operation =>
-                    {
-                        if (!(operation.Instance.Syntax is InvocationExpressionSyntax invocation))
-                        {
-                            return false;
-                        }
-
-                        return IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, declaringSymbol, semanticModel);
-                    });
+                    var finder = new BooleanBlockFinder(x =>
+                        x.Instance.Syntax is InvocationExpressionSyntax invocation
+                        && IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, declaringSymbol, semanticModel));
+                    referenceToDeclaringSymbolFinder = block => finder.Matches(block);
                 }
-
-                protected override bool BlockHasReferenceToDeclaringSymbol(BasicBlock block) =>
-                    existReferenceToDeclaringSymbolMatcher.Matches(block);
             }
 
-            private class CfgWalkerForProperty : CfgRecursionSearcher
+            private class RecursionSearcherForProperty : RecursionSearcher
             {
                 private readonly bool isSet;
-                private readonly BooleanBlockMatcher existReferenceToDeclaringSymbolMatcher;
-
-                public CfgWalkerForProperty(RecursionAnalysisContext<ControlFlowGraph> context, string reportOn, bool isSetAccessor)
-                    : base(
-                        context.ControlFlowGraph,
-                        context.AnalyzedSymbol,
-                        context.SemanticModel,
-                        () => context.AnalysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.IssueLocation, reportOn)))
-                {
-                    isSet = isSetAccessor;
-                    existReferenceToDeclaringSymbolMatcher = new BooleanBlockMatcher(operation =>
-                        operation.Instance.Syntax is var syntax
-                        && TypesForReference.Contains(syntax.GetType())
-                        && MatchesAccessor(syntax)
-                        && IsInstructionOnThisAndMatchesDeclaringSymbol(syntax, declaringSymbol, semanticModel));
-                }
 
                 private static readonly ISet<Type> TypesForReference = new HashSet<Type> { typeof(IdentifierNameSyntax), typeof(MemberAccessExpressionSyntax) };
 
-                protected override bool BlockHasReferenceToDeclaringSymbol(BasicBlock block) =>
-                    existReferenceToDeclaringSymbolMatcher.Matches(block);
+                public RecursionSearcherForProperty(RecursionContext<ControlFlowGraph> context, bool isSetAccessor)
+                    : base(context)
+                {
+                    isSet = isSetAccessor;
+                    var finder = new BooleanBlockFinder(x =>
+                        x.Instance.Syntax is var syntax
+                        && TypesForReference.Contains(syntax.GetType())
+                        && MatchesAccessor(syntax)
+                        && IsInstructionOnThisAndMatchesDeclaringSymbol(syntax, declaringSymbol, semanticModel));
+                    referenceToDeclaringSymbolFinder = block => finder.Matches(block);
+                }
 
                 private bool MatchesAccessor(SyntaxNode node)
                 {
-                    var expr = (ExpressionSyntax)node;
-                    var propertyAccess = expr.GetSelfOrTopParenthesizedExpression();
+                    var propertyAccess = ((ExpressionSyntax)node).GetSelfOrTopParenthesizedExpression();
                     var isNodeASet = propertyAccess.Parent is AssignmentExpressionSyntax assignment && assignment.Left == propertyAccess;
                     return isNodeASet == isSet;
                 }
             }
 
-            private abstract class CfgRecursionSearcher : CfgAllPathValidator
+            private class RecursionSearcher : CfgAllPathValidator
             {
                 protected readonly SemanticModel semanticModel;
                 protected readonly ISymbol declaringSymbol;
+                protected Func<BasicBlock, bool> referenceToDeclaringSymbolFinder;
                 private readonly Action reportIssue;
 
-                protected CfgRecursionSearcher(ControlFlowGraph cfg, ISymbol declaringSymbol, SemanticModel semanticModel, Action reportIssue)
-                    : base(cfg)
+                protected RecursionSearcher(RecursionContext<ControlFlowGraph> context)
+                    : base(context.ControlFlowGraph)
                 {
-                    this.declaringSymbol = declaringSymbol;
-                    this.semanticModel = semanticModel;
-                    this.reportIssue = reportIssue;
+                    declaringSymbol = context.AnalyzedSymbol;
+                    semanticModel = context.SemanticModel;
+                    reportIssue = context.ReportIssue;
                 }
 
                 public bool CheckPaths()
@@ -196,18 +163,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 protected override bool IsValid(BasicBlock block) =>
-                    BlockHasReferenceToDeclaringSymbol(block);
+                    referenceToDeclaringSymbolFinder(block);
 
                 protected override bool IsInvalid(BasicBlock block) => false;
-
-                protected abstract bool BlockHasReferenceToDeclaringSymbol(BasicBlock block);
             }
 
-            private class BooleanBlockMatcher : OperationFinder<bool>
+            private class BooleanBlockFinder : OperationFinder<bool>
             {
                 private readonly Func<IOperationWrapperSonar, bool> matcher;
 
-                public BooleanBlockMatcher(Func<IOperationWrapperSonar, bool> matcher) =>
+                public BooleanBlockFinder(Func<IOperationWrapperSonar, bool> matcher) =>
                     this.matcher = matcher;
 
                 public bool Matches(BasicBlock block) =>
