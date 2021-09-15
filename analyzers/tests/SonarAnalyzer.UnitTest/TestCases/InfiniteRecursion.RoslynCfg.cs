@@ -337,20 +337,20 @@ namespace Tests.Diagnostics
 
     class MoreCases
     {
-        void CallsOnThis()   // Noncompliant
+        void CallsOnThis()    // Noncompliant
         {
             this.CallsOnThis();
         }
 
-        void CallsOnObject()
+        void CallsOnObject()  // Noncompliant
         {
             var x = new MoreCases();
-            x.CallsOnObject();  // FN
+            x.CallsOnObject();
         }
 
-        public virtual void CallsOnObjectVirtual(MoreCases arg)
+        public virtual void CallsOnObjectVirtual(MoreCases arg)  // Noncompliant
         {
-            arg.CallsOnObjectVirtual(arg); // FN, even when it can be overriden
+            arg.CallsOnObjectVirtual(arg);
         }
     }
 
