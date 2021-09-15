@@ -40,27 +40,25 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         protected override IEnumerable<BasicBlock> Successors(BasicBlock block)
         {
-            foreach (var successor in block.Successors.Where(x => x.Destination != null))
+            foreach (var successor in block.Successors)
             {
-                // When exiting finally region, redirect to finally instead of the normal destination
-                if (successor.FinallyRegions.Any())
-                {
+                if (successor.Destination != null && successor.FinallyRegions.Any())
+                {   // When exiting finally region, redirect to finally instead of the normal destination
                     foreach (var finallyRegion in successor.FinallyRegions)
                     {
                         yield return cfg.Blocks[finallyRegion.FirstBlockOrdinal];
                     }
                 }
-                else
+                else if (successor.Destination != null)
                 {
                     yield return successor.Destination;
                 }
-            }
-            // Redirect exit from throw and finally to following blocks.
-            foreach (var successor in block.Successors.Where(x => x.Destination == null && x.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally))
-            {
-                foreach (var trySuccessor in TryRegionSuccessors(block.EnclosingRegion))
-                {
-                    yield return trySuccessor.Destination;
+                else if (successor.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)
+                {   // Redirect exit from throw and finally to following blocks.
+                    foreach (var trySuccessor in TryRegionSuccessors(block.EnclosingRegion))
+                    {
+                        yield return trySuccessor.Destination;
+                    }
                 }
             }
         }
