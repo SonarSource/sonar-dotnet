@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
@@ -43,9 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (property.ExpressionBody?.Expression != null)
                 {
                     var cfg = ControlFlowGraph.Create(property.ExpressionBody, c.SemanticModel);
-                    var walker = new RecursionSearcherForProperty(
-                        new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, property.Identifier.GetLocation(), c, "property's recursion"),
-                        isSetAccessor: false);
+                    var walker = new CommonRecursionSearcher(new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, property.Identifier.GetLocation(), c, "property's recursion"));
                     walker.CheckPaths();
                     // cannot meet goto s here, check for unreachable exit node is not needed here
                 }
@@ -55,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel);
                         var context = new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, accessor.Keyword.GetLocation(), c, "property accessor's recursion");
-                        var walker = new RecursionSearcherForProperty(context, isSetAccessor: accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
+                        var walker = new CommonRecursionSearcher(context, !accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
                         if (!walker.CheckPaths() && !cfg.ExitBlock.IsReachable)
                         {
                             context.ReportIssue(accessor.Keyword.GetLocation());
@@ -91,64 +88,27 @@ namespace SonarAnalyzer.Rules.CSharp
                     cfg = cfg.GetLocalFunctionControlFlowGraph(symbol as IMethodSymbol);
                 }
 
-                var walker = new RecursionSearcherForMethod(new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion"));
+                var walker = new CommonRecursionSearcher(new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion"));
                 if (!walker.CheckPaths() && !cfg.ExitBlock.IsReachable)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), "method's recursion"));
                 }
             }
 
-            private class RecursionSearcherForMethod : RecursionSearcher
+            private class CommonRecursionSearcher : CfgAllPathValidator
             {
-                public RecursionSearcherForMethod(RecursionContext<ControlFlowGraph> context)
-                    : base(context)
-                {
-                    var finder = new BooleanBlockFinder(x =>
-                        x.Instance.Syntax is InvocationExpressionSyntax invocation
-                        && IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, declaringSymbol, semanticModel));
-                    referenceToDeclaringSymbolFinder = block => finder.Matches(block);
-                }
-            }
-
-            private class RecursionSearcherForProperty : RecursionSearcher
-            {
-                private readonly bool isSet;
-
-                private static readonly ISet<Type> TypesForReference = new HashSet<Type> { typeof(IdentifierNameSyntax), typeof(MemberAccessExpressionSyntax) };
-
-                public RecursionSearcherForProperty(RecursionContext<ControlFlowGraph> context, bool isSetAccessor)
-                    : base(context)
-                {
-                    isSet = isSetAccessor;
-                    var finder = new BooleanBlockFinder(x =>
-                        x.Instance.Syntax is var syntax
-                        && TypesForReference.Contains(syntax.GetType())
-                        && MatchesAccessor(syntax)
-                        && IsInstructionOnThisAndMatchesDeclaringSymbol(syntax, declaringSymbol, semanticModel));
-                    referenceToDeclaringSymbolFinder = block => finder.Matches(block);
-                }
-
-                private bool MatchesAccessor(SyntaxNode node)
-                {
-                    var propertyAccess = ((ExpressionSyntax)node).GetSelfOrTopParenthesizedExpression();
-                    var isNodeASet = propertyAccess.Parent is AssignmentExpressionSyntax assignment && assignment.Left == propertyAccess;
-                    return isNodeASet == isSet;
-                }
-            }
-
-            private class RecursionSearcher : CfgAllPathValidator
-            {
-                protected readonly SemanticModel semanticModel;
-                protected readonly ISymbol declaringSymbol;
-                protected Func<BasicBlock, bool> referenceToDeclaringSymbolFinder;
+                private readonly ISymbol memberToCheck;
                 private readonly Action reportIssue;
+                private readonly ControlFlowGraph cfg;
+                private readonly bool isGetAccesor;
 
-                protected RecursionSearcher(RecursionContext<ControlFlowGraph> context)
+                public CommonRecursionSearcher(RecursionContext<ControlFlowGraph> context, bool isGet = true)
                     : base(context.ControlFlowGraph)
                 {
-                    declaringSymbol = context.AnalyzedSymbol;
-                    semanticModel = context.SemanticModel;
+                    memberToCheck = context.AnalyzedSymbol;
                     reportIssue = context.ReportIssue;
+                    cfg = context.ControlFlowGraph;
+                    isGetAccesor = isGet;
                 }
 
                 public bool CheckPaths()
@@ -163,25 +123,55 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 protected override bool IsValid(BasicBlock block) =>
-                    referenceToDeclaringSymbolFinder(block);
+                    FindReferenceToSelf(block);
 
                 protected override bool IsInvalid(BasicBlock block) => false;
-            }
 
-            private class BooleanBlockFinder : OperationFinder<bool>
-            {
-                private readonly Func<IOperationWrapperSonar, bool> matcher;
-
-                public BooleanBlockFinder(Func<IOperationWrapperSonar, bool> matcher) =>
-                    this.matcher = matcher;
-
-                public bool Matches(BasicBlock block) =>
-                    TryFind(block, out _);
-
-                protected override bool TryFindOperation(IOperationWrapperSonar operation, out bool result)
+                private bool FindReferenceToSelf(BasicBlock block)
                 {
-                    result = matcher(operation);
-                    return result;
+                    foreach (var operation in block.OperationsAndBranchValue)
+                    {
+                        if (ProcessOperation(operation, cfg, out var result))
+                        {
+                            return result;
+                        }
+                    }
+                    return false;
+
+                    bool ProcessOperation(IOperation operation, ControlFlowGraph controlFlowGraph, out bool result)
+                    {
+                        foreach (var child in operation.DescendantsAndSelf().ToReversedExecutionOrder())
+                        {
+                            if (child.Instance.Kind == OperationKindEx.FlowAnonymousFunction)
+                            {
+                                var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(child.Instance));
+                                foreach (var subOperation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
+                                {
+                                    if (ProcessOperation(subOperation, anonymousFunctionCfg, out result))
+                                    {
+                                        return true;
+                                    }
+                                }
+                            }
+                            else if (memberToCheck.Equals(MemberSymbol(child.Instance)))
+                            {
+                                var isWrite = child.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == child.Instance;
+                                result = isGetAccesor ^ isWrite;
+                                return true;
+                            }
+                        }
+
+                        result = false;
+                        return false;
+                    }
+
+                    static ISymbol MemberSymbol(IOperation operation) =>
+                        operation.Kind switch
+                        {
+                            OperationKindEx.PropertyReference => IPropertyReferenceOperationWrapper.FromOperation(operation).Property,
+                            OperationKindEx.Invocation => IInvocationOperationWrapper.FromOperation(operation).TargetMethod,
+                            _ => null
+                        };
                 }
             }
         }
