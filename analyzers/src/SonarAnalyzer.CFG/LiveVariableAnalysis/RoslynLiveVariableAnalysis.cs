@@ -55,8 +55,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     yield return successor.Destination;
                 }
             }
-            //FIXME: How does throw in finally looks like?
-            // Redirect exit from finally to following blocks.
+            // Redirect exit from thorw and finally to following blocks.
             foreach (var successor in block.Successors.Where(x => x.Destination == null && x.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally))
             {
                 //FIXME: How does finally alone with no try looks like?
