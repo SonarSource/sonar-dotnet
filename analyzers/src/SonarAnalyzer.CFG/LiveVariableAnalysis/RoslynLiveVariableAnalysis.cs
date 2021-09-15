@@ -58,7 +58,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             // Redirect exit from thorw and finally to following blocks.
             foreach (var successor in block.Successors.Where(x => x.Destination == null && x.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally))
             {
-                //FIXME: How does finally alone with no try looks like?
                 var tryRegion = block.EnclosingRegion.EnclosingRegion.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Try);
                 foreach (var trySuccessor in cfg.Blocks
                                            .Where((_, i) => tryRegion.FirstBlockOrdinal <= i && i <= tryRegion.LastBlockOrdinal)

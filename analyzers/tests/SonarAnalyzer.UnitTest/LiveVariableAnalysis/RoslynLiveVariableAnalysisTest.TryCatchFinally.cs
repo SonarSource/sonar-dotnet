@@ -268,5 +268,40 @@ Method(2);";
             context.Validate(context.Block("Method(2);"));
             context.Validate(context.Cfg.ExitBlock);
         }
+
+        [TestMethod]
+        public void Finally_InvalidSyntax_LiveIn()
+        {
+            /*    Entry 0
+             *      |
+             * +----|- TryAndFinallyRegion   ------------+
+             * |+---|- TryRegion -+ +-- FinallyRegion --+|
+             * ||  Block 1        | |  Block 3          ||
+             * ||  (empty)        | |  Method(0)        ||
+             * ||   |             | |   |               ||
+             * |+---|-------------+ |  (null)           ||
+             * |    |               +-------------------+|
+             * +----|------------------------------------+
+             *      |
+             *    Block 3
+             *    Method(intParameter)
+             *      |
+             *    Exit 4
+             */
+            var code = @"
+// Error CS1003 Syntax error, 'try' expected
+// Error CS1514 { expected
+// Error CS1513 } expected
+finally
+{
+    Method(0);
+}
+Method(intParameter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
     }
 }
