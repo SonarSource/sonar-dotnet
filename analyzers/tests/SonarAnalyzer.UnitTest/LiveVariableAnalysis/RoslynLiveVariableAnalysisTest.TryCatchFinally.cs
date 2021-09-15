@@ -85,8 +85,8 @@ Method(2);";
             context.Validate(context.Block("Method(2);"));
             context.Validate(context.Cfg.ExitBlock);
             // Finally region
-            context.Validate(context.Block<IIsNullOperation>("msInner = new System.IO.MemoryStream()"), new LiveIn("msInner"/*FIXME: , "msOuter"*/), new LiveOut("msInner"/*FIXME: , "msOuter"*/));   // Null check
-            context.Validate(context.Block<IInvocationOperation>("msInner = new System.IO.MemoryStream()"), new LiveIn("msInner"/*FIXME: , "msOuter"), new LiveOut("msOuter"*/));          // Actual Dispose
+            context.Validate(context.Block<IIsNullOperation>("msInner = new System.IO.MemoryStream()"), new LiveIn("msInner", "msOuter"), new LiveOut("msInner", "msOuter"));   // Null check
+            context.Validate(context.Block<IInvocationOperation>("msInner = new System.IO.MemoryStream()"), new LiveIn("msInner", "msOuter"), new LiveOut("msOuter"));          // Actual Dispose
             context.Validate(context.Block<IIsNullOperation>("msOuter = new System.IO.MemoryStream()"), new LiveIn("msOuter"), new LiveOut("msOuter"));     // Null check
             context.Validate(context.Block<IInvocationOperation>("msOuter = new System.IO.MemoryStream()"), new LiveIn("msOuter"));                         // Actual Dispose
         }
@@ -113,8 +113,8 @@ Method(2);";
             context.Validate(context.Block("Method(2);"), new LiveIn("msOuter"), new LiveOut("msOuter"));
             context.Validate(context.Cfg.ExitBlock);
             // Finally region
-            context.Validate(context.Block<IIsNullOperation>("msInner = new System.IO.MemoryStream()"), new LiveIn("msInner"/*FIXME: , "msOuter"*/), new LiveOut("msInner"/*FIXME: , "msOuter"*/));   // Null check
-            context.Validate(context.Block<IInvocationOperation>("msInner = new System.IO.MemoryStream()"), new LiveIn("msInner"/*FIXME: , "msOuter"), new LiveOut("msOuter"*/));          // Actual Dispose
+            context.Validate(context.Block<IIsNullOperation>("msInner = new System.IO.MemoryStream()"), new LiveIn("msInner", "msOuter"), new LiveOut("msInner", "msOuter"));   // Null check
+            context.Validate(context.Block<IInvocationOperation>("msInner = new System.IO.MemoryStream()"), new LiveIn("msInner", "msOuter"), new LiveOut("msOuter"));          // Actual Dispose
             context.Validate(context.Block<IIsNullOperation>("msOuter = new System.IO.MemoryStream()"), new LiveIn("msOuter"), new LiveOut("msOuter"));     // Null check
             context.Validate(context.Block<IInvocationOperation>("msOuter = new System.IO.MemoryStream()"), new LiveIn("msOuter"));                         // Actual Dispose
         }
@@ -137,6 +137,27 @@ Method(1);";
             context.Validate(context.Block("Method(0);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
             context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
             context.Validate(context.Block("Method(1);"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
+        public void Finally_VariableUsedAfter_LiveIn_LiveOut()
+        {
+            var code = @"
+try
+{
+    Method(0);
+}
+finally
+{
+    Method(1);
+}
+Method(intParameter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(1);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
             context.Validate(context.Cfg.ExitBlock);
         }
 
@@ -188,7 +209,7 @@ Method(2);";
             var context = new Context(code);
             context.Validate(context.Cfg.EntryBlock);
             context.Validate(context.Block("Method(0);"), new LiveIn("inner", "outer"), new LiveOut("inner", "outer"));
-            context.Validate(context.Block("Method(inner);"), new LiveIn("inner" /*FIXME:, "outer"), new LiveOut("outer"*/));
+            context.Validate(context.Block("Method(inner);"), new LiveIn("inner", "outer"), new LiveOut("outer"));
             context.Validate(context.Block("Method(1);"), new LiveIn("outer"), new LiveOut("outer"));
             context.Validate(context.Block("Method(outer);"), new LiveIn("outer"));
             context.Validate(context.Block("Method(2);"));

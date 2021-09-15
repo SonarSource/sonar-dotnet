@@ -42,14 +42,36 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         {
             foreach (var successor in block.Successors.Where(x => x.Destination != null))
             {
-                yield return successor.Destination;
-                foreach (var finallyRegion in successor.FinallyRegions)
+                // When exiting finally region, redirect to finally instead of the normal destination
+                if (successor.FinallyRegions.Any())
                 {
-                    yield return cfg.Blocks[finallyRegion.FirstBlockOrdinal];
+                    foreach (var finallyRegion in successor.FinallyRegions)
+                    {
+                        yield return cfg.Blocks[finallyRegion.FirstBlockOrdinal];
+                    }
+                }
+                else
+                {
+                    yield return successor.Destination;
+                }
+            }
+            //FIXME: How does throw in finally looks like?
+            // Redirect exit from finally to following blocks.
+            foreach (var successor in block.Successors.Where(x => x.Destination == null && x.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally))
+            {
+                //FIXME: How does finally alone with no try looks like?
+                var tryRegion = block.EnclosingRegion.EnclosingRegion.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Try);
+                foreach (var trySuccessor in cfg.Blocks
+                                           .Where((_, i) => tryRegion.FirstBlockOrdinal <= i && i <= tryRegion.LastBlockOrdinal)
+                                           .SelectMany(x => x.Successors)
+                                           .Where(x => x.FinallyRegions.Contains(block.EnclosingRegion)))
+                {
+                    yield return trySuccessor.Destination;
                 }
             }
         }
 
+        //FIXME: Do we need enqueue correct predecessors?
         protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block) =>
             block.Predecessors.Select(x => x.Source);
 
