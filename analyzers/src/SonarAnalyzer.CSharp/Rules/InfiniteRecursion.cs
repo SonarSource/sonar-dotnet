@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2190";
         private const string MessageFormat = "Add a way to break out of this {0}.";
 
-        private readonly IInfiniteRecursion analyzer;
+        private readonly IChecker checker;
 
         private static DiagnosticDescriptor Rule => DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -45,9 +45,9 @@ namespace SonarAnalyzer.Rules.CSharp
         public InfiniteRecursion() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
         internal /* for testing */ InfiniteRecursion(IAnalyzerConfiguration configuration) =>
-            analyzer = (CFG.Roslyn.ControlFlowGraph.IsAvailable && !configuration.ForceSonarCfg)
-                ? (IInfiniteRecursion)new InfiniteRecursion_RoslynCfg()
-                : new InfiniteRecursion_SonarCfg();
+            checker = (CFG.Roslyn.ControlFlowGraph.IsAvailable && !configuration.ForceSonarCfg)
+                ? (IChecker)new RoslynChecker()
+                : new SonarChecker();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -68,68 +68,67 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckForNoExitProperty,
+                c =>
+                {
+                    var property = (PropertyDeclarationSyntax)c.Node;
+                    if (c.SemanticModel.GetDeclaredSymbol(property) is { } propertySymbol)
+                    {
+                        checker.CheckForNoExitProperty(c, property, propertySymbol);
+                    }
+                },
                 SyntaxKind.PropertyDeclaration);
-        }
-
-        private void CheckForNoExitProperty(SyntaxNodeAnalysisContext c)
-        {
-            var property = (PropertyDeclarationSyntax)c.Node;
-            var propertySymbol = c.SemanticModel.GetDeclaredSymbol(property);
-            if (propertySymbol == null)
-            {
-                return;
-            }
-
-            analyzer.CheckForNoExitProperty(c, property, propertySymbol);
         }
 
         private void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier)
         {
-            var symbol = c.SemanticModel.GetDeclaredSymbol(c.Node);
-            if (symbol != null && body != null)
+            if (body != null && c.SemanticModel.GetDeclaredSymbol(c.Node) is { } symbol)
             {
-                analyzer.CheckForNoExitMethod(c, body, identifier, symbol);
+                checker.CheckForNoExitMethod(c, body, identifier, symbol);
             }
         }
 
         private static bool IsInstructionOnThisAndMatchesDeclaringSymbol(SyntaxNode node, ISymbol declaringSymbol, SemanticModel semanticModel)
         {
-            var name = node as NameSyntax;
-            if (node is MemberAccessExpressionSyntax memberAccess && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
-            {
-                name = memberAccess.Name as IdentifierNameSyntax;
-            }
+            var name = node is MemberAccessExpressionSyntax memberAccess && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression)
+                ? memberAccess.Name
+                : node as NameSyntax;
 
-            if (name == null)
-            {
-                return false;
-            }
-
-            var assignedSymbol = semanticModel.GetSymbolInfo(name).Symbol;
-            return declaringSymbol.Equals(assignedSymbol);
+            return name != null
+                   && semanticModel.GetSymbolInfo(name).Symbol is { } assignedSymbol
+                   && declaringSymbol.Equals(assignedSymbol);
         }
 
-        private class RecursionAnalysisContext<TControlFlowGraph>
+        private class RecursionContext<TControlFlowGraph>
         {
+            private readonly string messageArg;
             public TControlFlowGraph ControlFlowGraph { get; }
             public ISymbol AnalyzedSymbol { get; }
-            public SemanticModel SemanticModel { get; }
             public Location IssueLocation { get; }
-            public SyntaxNodeAnalysisContext AnalysisContext { get; }
+            public SemanticModel SemanticModel => AnalysisContext.SemanticModel;
+            private SyntaxNodeAnalysisContext AnalysisContext { get; }
 
-            public RecursionAnalysisContext(TControlFlowGraph controlFlowGraph, ISymbol analyzedSymbol, Location issueLocation, SyntaxNodeAnalysisContext analysisContext)
+            public RecursionContext(TControlFlowGraph controlFlowGraph,
+                                    ISymbol analyzedSymbol,
+                                    Location issueLocation,
+                                    SyntaxNodeAnalysisContext analysisContext,
+                                    string messageArg)
             {
+                this.messageArg = messageArg;
+
                 ControlFlowGraph = controlFlowGraph;
                 AnalyzedSymbol = analyzedSymbol;
                 IssueLocation = issueLocation;
                 AnalysisContext = analysisContext;
-
-                SemanticModel = analysisContext.SemanticModel;
             }
+
+            public void ReportIssue() =>
+                ReportIssue(IssueLocation);
+
+            public void ReportIssue(Location location) =>
+                AnalysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, messageArg));
         }
 
-        private interface IInfiniteRecursion
+        private interface IChecker
         {
             void CheckForNoExitProperty(SyntaxNodeAnalysisContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol);
             void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, ISymbol symbol);
