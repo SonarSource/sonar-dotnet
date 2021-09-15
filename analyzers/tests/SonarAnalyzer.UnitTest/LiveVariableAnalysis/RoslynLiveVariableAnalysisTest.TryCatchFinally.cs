@@ -230,7 +230,7 @@ Method(intParameter);";
             var context = new Context(code);
             context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
             context.Validate(context.Block("Method(0);"), new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
-            context.Validate(context.Block("Method(1);"), new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
+            context.Validate(context.Block("Method(1);"), new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter"));
             context.Validate(context.Block("boolParameter"), new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter"));
             context.Validate(context.Block("Method(2);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
             context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
