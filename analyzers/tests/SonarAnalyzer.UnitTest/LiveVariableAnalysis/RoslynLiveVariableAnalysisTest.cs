@@ -801,6 +801,25 @@ void LocalFunction()
             context.Validate(context.Block("LocalFunction();"), /* ToDo: Should not LiveIn, because it's overriden in LocalFunction*/ new LiveIn("variable"));
         }
 
+        [TestMethod]
+        public void Loop_Propagates_LiveIn_LiveOut()
+        {
+            var code = @"
+A:
+Method(intParameter);
+if (boolParameter)
+    goto B;
+Method(0);
+goto A;
+B:
+Method(1);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("boolParameter"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("Method(1);"));
+        }
+
         private class Context
         {
             public readonly RoslynLiveVariableAnalysis Lva;

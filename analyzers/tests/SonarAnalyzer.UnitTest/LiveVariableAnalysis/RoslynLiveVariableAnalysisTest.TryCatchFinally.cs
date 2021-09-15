@@ -303,5 +303,32 @@ Method(intParameter);";
             context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
             context.Validate(context.Cfg.ExitBlock);
         }
+
+        [TestMethod]
+        public void Finally_Loop_Propagates_LiveIn_LiveOut()
+        {
+            var code = @"
+A:
+Method(intParameter);
+if (boolParameter)
+    goto B;
+try
+{
+    Method(0);
+}
+finally
+{
+    Method(1);
+}
+goto A;
+B:
+Method(2);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("boolParameter", "intParameter")/*FIXME:, new LiveOut("boolParameter", "intParameter")*/);
+            context.Validate(context.Block("Method(0);")/*FIXME: , new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter")*/);
+            context.Validate(context.Block("Method(1);")/*FIXME: , new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter")*/);
+            context.Validate(context.Block("Method(2);"));
+        }
     }
 }
