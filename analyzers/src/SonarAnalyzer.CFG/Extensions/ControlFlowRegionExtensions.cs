@@ -21,7 +21,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using SonarAnalyzer.CFG.Roslyn;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
