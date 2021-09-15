@@ -74,9 +74,9 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     // When exiting finally region, redirect predecessor to the source of StructuredEceptionHandling branches
                     if (predecessor.FinallyRegions.Any())
                     {
-                        foreach (var finallyRegion in predecessor.FinallyRegions)
+                        foreach (var structuredExceptionHandling in StructuredExceptionHandlinBranches(predecessor.FinallyRegions))
                         {
-                            yield return cfg.Blocks[finallyRegion.LastBlockOrdinal].Successors.Single(x => x.Semantics == ControlFlowBranchSemantics.StructuredExceptionHandling).Source;
+                            yield return structuredExceptionHandling.Source;
                         }
                     }
                     else
@@ -93,6 +93,10 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     yield return trySuccessor.Source;
                 }
             }
+
+            IEnumerable<ControlFlowBranch> StructuredExceptionHandlinBranches(IEnumerable<ControlFlowRegion> finallyRegions) =>
+                finallyRegions.Select(x => cfg.Blocks[x.LastBlockOrdinal].Successors.SingleOrDefault(x => x.Semantics == ControlFlowBranchSemantics.StructuredExceptionHandling))
+                    .Where(x => x != null);
         }
 
         internal static bool IsOutArgument(IOperation operation) =>

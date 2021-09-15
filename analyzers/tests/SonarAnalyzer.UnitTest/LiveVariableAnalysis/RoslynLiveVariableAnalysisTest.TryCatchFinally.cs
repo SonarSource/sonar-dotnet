@@ -187,6 +187,29 @@ Method(intParameter); // Unreachable";
         }
 
         [TestMethod]
+        public void Finally_WithThrowStatementAsSingleExit_LiveIn()
+        {
+            var code = @"
+try
+{
+    Method(0);
+}
+finally
+{
+    Method(1);
+    throw new System.Exception();
+}
+Method(intParameter); // Unreachable";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(1);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            // LVA doesn't care if it's reachable. Blocks still should have LiveIn and LiveOut
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
         public void Finally_WithThrowStatement_Conditional_LiveIn()
         {
             var code = @"
