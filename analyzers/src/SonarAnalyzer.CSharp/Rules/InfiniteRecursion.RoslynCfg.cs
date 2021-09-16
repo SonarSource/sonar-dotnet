@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -42,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (property.ExpressionBody?.Expression != null)
                 {
                     var cfg = ControlFlowGraph.Create(property.ExpressionBody, c.SemanticModel);
-                    var walker = new CommonRecursionSearcher(new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, property.Identifier.GetLocation(), c, "property's recursion"));
+                    var walker = new RecursionSearcher(new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, property.Identifier.GetLocation(), c, "property's recursion"));
                     walker.CheckPaths();
                     // cannot meet goto s here, check for unreachable exit node is not needed here
                 }
@@ -52,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel);
                         var context = new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, accessor.Keyword.GetLocation(), c, "property accessor's recursion");
-                        var walker = new CommonRecursionSearcher(context, !accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
+                        var walker = new RecursionSearcher(context, !accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
                         if (!walker.CheckPaths() && CfgHasUnescapableLoop(cfg))
                         {
                             context.ReportIssue(accessor.Keyword.GetLocation());
@@ -96,35 +95,34 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }
 
-                var walker = new CommonRecursionSearcher(new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion"));
+                var context = new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion");
+                var walker = new RecursionSearcher(context);
                 if (!walker.CheckPaths() && CfgHasUnescapableLoop(cfg))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), "method's recursion"));
+                    context.ReportIssue();
                 }
             }
 
             private static bool CfgHasUnescapableLoop(ControlFlowGraph cfg) =>
                 !cfg.ExitBlock.IsReachable && !cfg.Blocks.Any(x => x.FallThroughSuccessor?.Semantics == ControlFlowBranchSemantics.Throw && x.IsReachable);
 
-            private class CommonRecursionSearcher : CfgAllPathValidator
+            private class RecursionSearcher : CfgAllPathValidator
             {
-                private readonly ISymbol memberToCheck;
-                private readonly Action reportIssue;
+                private readonly RecursionContext<ControlFlowGraph> context;
                 private readonly bool isGetAccesor;
 
-                public CommonRecursionSearcher(RecursionContext<ControlFlowGraph> context, bool isGet = true)
+                public RecursionSearcher(RecursionContext<ControlFlowGraph> context, bool isGetAccesor = true)
                     : base(context.ControlFlowGraph)
                 {
-                    memberToCheck = context.AnalyzedSymbol;
-                    reportIssue = context.ReportIssue;
-                    isGetAccesor = isGet;
+                    this.context = context;
+                    this.isGetAccesor = isGetAccesor;
                 }
 
                 public bool CheckPaths()
                 {
                     if (CheckAllPaths())
                     {
-                        reportIssue();
+                        context.ReportIssue();
                         return true;
                     }
 
@@ -135,9 +133,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     foreach (var operation in block.OperationsAndBranchValue)
                     {
-                        foreach (var child in operation.DescendantsAndSelf().ToReversedExecutionOrder())
+                        foreach (var child in operation.ToReversedExecutionOrder())
                         {
-                            if (memberToCheck.Equals(MemberSymbol(child.Instance)))
+                            if (context.AnalyzedSymbol.Equals(MemberSymbol(child.Instance)))
                             {
                                 var isWrite = child.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == child.Instance;
                                 return isGetAccesor ^ isWrite;
