@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel);
                         var context = new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, accessor.Keyword.GetLocation(), c, "property accessor's recursion");
                         var walker = new CommonRecursionSearcher(context, !accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
-                        if (!walker.CheckPaths() && !cfg.ExitBlock.IsReachable)
+                        if (!walker.CheckPaths() && CfgHasUnescapableLoop(cfg))
                         {
                             context.ReportIssue(accessor.Keyword.GetLocation());
                         }
@@ -83,17 +83,28 @@ namespace SonarAnalyzer.Rules.CSharp
                             var operationWrapper = cfg.FlowAnonymousFunctionOperations().Single(x => x.WrappedOperation.Syntax == enclosingFunction);
                             cfg = cfg.GetAnonymousFunctionControlFlowGraph(operationWrapper);
                         }
+                        if (cfg == null)
+                        {
+                            return;
+                        }
                     }
 
                     cfg = cfg.GetLocalFunctionControlFlowGraph(symbol as IMethodSymbol);
+                    if (cfg == null)
+                    {
+                        return;
+                    }
                 }
 
                 var walker = new CommonRecursionSearcher(new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion"));
-                if (!walker.CheckPaths() && !cfg.ExitBlock.IsReachable)
+                if (!walker.CheckPaths() && CfgHasUnescapableLoop(cfg))
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), "method's recursion"));
                 }
             }
+
+            private static bool CfgHasUnescapableLoop(ControlFlowGraph cfg) =>
+                !cfg.ExitBlock.IsReachable && !cfg.Blocks.Any(x => x.FallThroughSuccessor?.Semantics == ControlFlowBranchSemantics.Throw && x.IsReachable);
 
             private class CommonRecursionSearcher : CfgAllPathValidator
             {
