@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Tests.Diagnostics
 {
@@ -172,5 +173,10 @@ namespace Tests.Diagnostics
         public struct MyStruct { }
 
         public enum MyEnum { }
+    }
+
+    internal sealed class UnsafeBinder : SerializationBinder
+    {
+        public override Type BindToType(string assemblyName, string typeName) => null; // Compliant - the overriden method is public
     }
 }

@@ -79,7 +79,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return type.DescendantNodes()
                            .Where(node => node.IsAnyKind(MemberDeclarationKinds))
                            .OfType<MemberDeclarationSyntax>()
-                           .Where(declaration => declaration.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword))
+                           // We skip overridden methods since they need to keep the public visibility (if present)
+                           .Where(declaration => declaration.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword) && !declaration.Modifiers().AnyOfKind(SyntaxKind.OverrideKeyword))
                            .Select(declaration => declaration.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).GetLocation())
                            .ToList();
             }
