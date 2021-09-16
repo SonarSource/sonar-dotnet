@@ -132,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 protected override bool HasReferenceToDeclaringSymbol(Block block) =>
                     block.Instructions.Any(x =>
                         x is InvocationExpressionSyntax invocation
-                        && IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, declaringSymbol, semanticModel));
+                        && IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, context.AnalyzedSymbol, context.SemanticModel));
             }
 
             private class RecursionSearcherForProperty : RecursionSearcher
@@ -149,7 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     block.Instructions.Any(x =>
                         TypesForReference.Contains(x.GetType())
                         && MatchesAccessor(x)
-                        && IsInstructionOnThisAndMatchesDeclaringSymbol(x, declaringSymbol, semanticModel));
+                        && IsInstructionOnThisAndMatchesDeclaringSymbol(x, context.AnalyzedSymbol, context.SemanticModel));
 
                 private bool MatchesAccessor(SyntaxNode node)
                 {
@@ -161,25 +161,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private abstract class RecursionSearcher : CfgAllPathValidator
             {
-                protected readonly SemanticModel semanticModel;
-                protected readonly ISymbol declaringSymbol;
-                private readonly Action reportIssue;
+                protected readonly RecursionContext<IControlFlowGraph> context;
 
                 protected abstract bool HasReferenceToDeclaringSymbol(Block block);
 
                 protected RecursionSearcher(RecursionContext<IControlFlowGraph> context)
-                    : base(context.ControlFlowGraph)
-                {
-                    declaringSymbol = context.AnalyzedSymbol;
-                    semanticModel = context.SemanticModel;
-                    reportIssue = context.ReportIssue;
-                }
+                    : base(context.ControlFlowGraph) =>
+                    this.context = context;
 
                 public void CheckPaths()
                 {
                     if (CheckAllPaths())
                     {
-                        reportIssue();
+                        context.ReportIssue();
                     }
                 }
 
