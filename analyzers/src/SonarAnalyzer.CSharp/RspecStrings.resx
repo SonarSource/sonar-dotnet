@@ -5933,7 +5933,7 @@
     <value>There’s no point in having a public member in a non-public type because objects that can’t access the type will never have the chance to access the member.</value>
   </data>
   <data name="S3059_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S3059_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
