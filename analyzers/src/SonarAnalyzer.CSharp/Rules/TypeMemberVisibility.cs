@@ -68,10 +68,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckNestedTypeVisibility(BaseTypeDeclarationSyntax type, BaseTypeDeclarationSyntax parentType, SyntaxNodeAnalysisContext context)
         {
             if (parentType != null
-                && type.Modifiers.AnyOfKind(SyntaxKind.PublicKeyword)
+                && type.Modifiers.FirstOrDefault(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)) is var publicModifier
+                && publicModifier != default
                 && parentType.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, type.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, publicModifier.GetLocation()));
             }
         }
 
@@ -86,7 +87,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var declaration in declarations)
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, declaration.GetLocation()));
+                    var location = declaration.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).GetLocation();
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
                 }
             }
         }
