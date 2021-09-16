@@ -43,7 +43,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     var cfg = ControlFlowGraph.Create(property.ExpressionBody, c.SemanticModel);
                     var walker = new RecursionSearcher(new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, property.Identifier.GetLocation(), c, "property's recursion"));
                     walker.CheckPaths();
-                    // cannot meet goto s here, check for unreachable exit node is not needed here
                 }
                 else if (property.AccessorList != null)
                 {
@@ -52,10 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel);
                         var context = new RecursionContext<ControlFlowGraph>(cfg, propertySymbol, accessor.Keyword.GetLocation(), c, "property accessor's recursion");
                         var walker = new RecursionSearcher(context, !accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
-                        if (!walker.CheckPaths() && CfgHasUnescapableLoop(cfg))
-                        {
-                            context.ReportIssue(accessor.Keyword.GetLocation());
-                        }
+                        walker.CheckPaths();
                     }
                 }
             }
@@ -97,14 +93,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var context = new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion");
                 var walker = new RecursionSearcher(context);
-                if (!walker.CheckPaths() && CfgHasUnescapableLoop(cfg))
-                {
-                    context.ReportIssue();
-                }
+                walker.CheckPaths();
             }
-
-            private static bool CfgHasUnescapableLoop(ControlFlowGraph cfg) =>
-                !cfg.ExitBlock.IsReachable && !cfg.Blocks.Any(x => x.FallThroughSuccessor?.Semantics == ControlFlowBranchSemantics.Throw && x.IsReachable);
 
             private class RecursionSearcher : CfgAllPathValidator
             {
@@ -118,15 +108,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     this.isGetAccesor = isGetAccesor;
                 }
 
-                public bool CheckPaths()
+                public void CheckPaths()
                 {
-                    if (CheckAllPaths())
+                    if (CheckAllPaths() || CfgHasUnescapableLoop())
                     {
                         context.ReportIssue();
-                        return true;
                     }
-
-                    return false;
                 }
 
                 protected override bool IsValid(BasicBlock block)
@@ -154,6 +141,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 protected override bool IsInvalid(BasicBlock block) => false;
+
+                private bool CfgHasUnescapableLoop() =>
+                    !context.ControlFlowGraph.ExitBlock.IsReachable
+                    && !context.ControlFlowGraph.Blocks.Any(x => x.FallThroughSuccessor?.Semantics == ControlFlowBranchSemantics.Throw && x.IsReachable);
             }
         }
     }
