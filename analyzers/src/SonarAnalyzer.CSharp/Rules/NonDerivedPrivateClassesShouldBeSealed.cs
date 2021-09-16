@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
+            {
                 // Case where private class is inside a partial class
                 var classDeclarationSyntax = (ClassDeclarationSyntax)c.Node;
                 if (IsPrivateButNotSealedClass(classDeclarationSyntax))
@@ -54,8 +54,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclarationSyntax.GetLocation()));
                     }
-                    }
-                },
+                }
+            },
             SyntaxKind.ClassDeclaration);
 
         private static bool IsPrivateButNotSealedClass(ClassDeclarationSyntax classDeclaration) =>
