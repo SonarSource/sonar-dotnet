@@ -5930,7 +5930,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3059_Description" xml:space="preserve">
-    <value>There’s no point in having a public member in a non-public class because objects that can’t access the class will never have the chance to access the member.</value>
+    <value>There’s no point in having a public member in a non-public type because objects that can’t access the type will never have the chance to access the member.</value>
   </data>
   <data name="S3059_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5954,7 +5954,7 @@
     <value>confusing</value>
   </data>
   <data name="S3059_Title" xml:space="preserve">
-    <value>Classes should not have members with visibility set higher than the class' own visibility</value>
+    <value>Types should not have members with visibility set higher than the type's visibility</value>
   </data>
   <data name="S3059_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
