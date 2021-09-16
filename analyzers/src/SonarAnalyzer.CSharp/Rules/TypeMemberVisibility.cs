@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -41,15 +42,19 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly SyntaxKind[] TypeKinds = { SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKind.EnumDeclaration, SyntaxKindEx.RecordDeclaration };
         private static readonly SyntaxKind[] MemberDeclarationKinds =
         {
+            SyntaxKind.ClassDeclaration,
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.DelegateDeclaration,
             SyntaxKind.EventDeclaration,
+            SyntaxKind.EventFieldDeclaration,
+            SyntaxKind.EnumDeclaration,
             SyntaxKind.FieldDeclaration,
             SyntaxKind.IndexerDeclaration,
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.MethodDeclaration,
             SyntaxKind.PropertyDeclaration,
-            SyntaxKind.EventFieldDeclaration
+            SyntaxKindEx.RecordDeclaration,
+            SyntaxKind.StructDeclaration
         };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -57,40 +62,29 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = (BaseTypeDeclarationSyntax)c.Node;
-                    var parent = GetParentType(node);
-
-                    CheckNestedTypeVisibility(node, parent, c);
-                    CheckTypeMembersVisibility(node, parent, c);
+                    var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
+                    var secondaryLocations = GetInvalidMemberLocations(typeDeclaration);
+                    if (secondaryLocations.Any())
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), secondaryLocations));
+                    }
                 },
                 TypeKinds);
 
-        private static void CheckNestedTypeVisibility(BaseTypeDeclarationSyntax type, BaseTypeDeclarationSyntax parentType, SyntaxNodeAnalysisContext context)
+        private static List<Location> GetInvalidMemberLocations(BaseTypeDeclarationSyntax type)
         {
-            if (parentType != null
-                && type.Modifiers.FirstOrDefault(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)) is var publicModifier
-                && publicModifier != default
-                && parentType.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, publicModifier.GetLocation()));
-            }
-        }
-
-        private static void CheckTypeMembersVisibility(BaseTypeDeclarationSyntax type, BaseTypeDeclarationSyntax parentType, SyntaxNodeAnalysisContext context)
-        {
+            var parentType = GetParentType(type);
             if (parentType == null && type.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
             {
-                var declarations = type.DescendantNodes()
-                                       .Where(node => node.IsAnyKind(MemberDeclarationKinds))
-                                       .OfType<MemberDeclarationSyntax>()
-                                       .Where(declaration => declaration.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword));
-
-                foreach (var declaration in declarations)
-                {
-                    var location = declaration.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).GetLocation();
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
-                }
+                return type.DescendantNodes()
+                           .Where(node => node.IsAnyKind(MemberDeclarationKinds))
+                           .OfType<MemberDeclarationSyntax>()
+                           .Where(declaration => declaration.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword))
+                           .Select(declaration => declaration.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).GetLocation())
+                           .ToList();
             }
+
+            return new List<Location>();
         }
 
         private static BaseTypeDeclarationSyntax GetParentType(SyntaxNode node) =>

@@ -2,32 +2,38 @@
 
 namespace Tests.Diagnostics
 {
-    internal record Noncompliant
+    internal record Noncompliant // Noncompliant {{Types should not have members with visibility set higher than the type's visibility}}
     {
-        public static decimal A = 3.14m; // Noncompliant {{Types should not have members with visibility set higher than the type's visibility}}
-//      ^^^^^^
+        public static decimal A = 3.14m;
+//      ^^^^^^ Secondary
         private protected decimal E = 1m;
 
-        public int PropertyA { get; } // Noncompliant
-//      ^^^^^^
+        public int PropertyA { get; }
+//      ^^^^^^ Secondary
         private protected int PropertyE { get; }
 
-        public int GetA() => 1; // Noncompliant
+        public int GetA() => 1;
+//      ^^^^^^ Secondary
         private protected int GetE() => 1;
 
-        public event EventHandler ClickA; // Noncompliant
+        public event EventHandler ClickA;
+//      ^^^^^^ Secondary
         private protected event EventHandler ClickE;
 
-        public delegate void DelegateA(string str);  // Noncompliant
+        public delegate void DelegateA(string str);
+//      ^^^^^^ Secondary
         private protected delegate void DelegateE(string str);
 
-        public Noncompliant(int a) {} // Noncompliant
+        public Noncompliant(int a) {}
+//      ^^^^^^ Secondary
         private protected Noncompliant(int a, int b, int c, int d, int e) {}
 
-        public int this[int index] => 1; // Noncompliant
+        public int this[int index] => 1;
+//      ^^^^^^ Secondary
         protected internal int this[string index] => 1;
 
-        public struct NestedStructA { } // Noncompliant
+        public struct NestedStructA { }
+//      ^^^^^^ Secondary
 
         private protected struct NestedStructE  { }
 
@@ -35,19 +41,22 @@ namespace Tests.Diagnostics
         public static explicit operator Noncompliant(byte b) => new Noncompliant(b); // Compliant: user defined operators need to be public
     }
 
-    internal class Class
+    internal class Class // Noncompliant
     {
-        public record MyRecord { } // Noncompliant
+        public record MyRecord { }
+//      ^^^^^^ Secondary
     }
 
-    internal record Record
+    internal record Record // Noncompliant
     {
-        public record MyRecord { } // Noncompliant
+        public record MyRecord { }
+//      ^^^^^^ Secondary
     }
 
-    internal struct Struct
+    internal struct Struct // Noncompliant
     {
-        public record MyRecord { } // Noncompliant
+        public record MyRecord { }
+//      ^^^^^^ Secondary
     }
 
     public record Compliant // Class visibility upgrade makes members compliant
@@ -77,7 +86,7 @@ namespace Tests.Diagnostics
 
         protected internal struct NestedStructB
         {
-            internal bool FlipCoin() => false; // struct cannot have protected members
+            internal bool FlipCoin() => false;
         }
 
         internal struct NestedStructC
