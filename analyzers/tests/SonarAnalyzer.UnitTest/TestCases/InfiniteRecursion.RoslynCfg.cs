@@ -329,9 +329,8 @@ namespace Tests.Diagnostics
                                 return Foo();
                                 bool Foo() { return Foo(); }  // Noncompliant
                             }).SingleOrDefault() != null)
-                            {
-
-                            }
+            {
+            }
         }
     }
 
@@ -351,6 +350,17 @@ namespace Tests.Diagnostics
         public virtual void CallsOnObjectVirtual(MoreCases arg)  // Noncompliant
         {
             arg.CallsOnObjectVirtual(arg);
+        }
+
+        static int PassItself(int a)
+        {
+            Receiver(PassItself);
+            return 42;
+        }
+
+        static void Receiver(Func<int, int> func)
+        {
+
         }
     }
 

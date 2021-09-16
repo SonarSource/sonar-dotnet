@@ -110,7 +110,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 private readonly ISymbol memberToCheck;
                 private readonly Action reportIssue;
-                private readonly ControlFlowGraph cfg;
                 private readonly bool isGetAccesor;
 
                 public CommonRecursionSearcher(RecursionContext<ControlFlowGraph> context, bool isGet = true)
@@ -118,7 +117,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     memberToCheck = context.AnalyzedSymbol;
                     reportIssue = context.ReportIssue;
-                    cfg = context.ControlFlowGraph;
                     isGetAccesor = isGet;
                 }
 
@@ -133,48 +131,20 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
                 }
 
-                protected override bool IsValid(BasicBlock block) =>
-                    FindReferenceToSelf(block);
-
-                protected override bool IsInvalid(BasicBlock block) => false;
-
-                private bool FindReferenceToSelf(BasicBlock block)
+                protected override bool IsValid(BasicBlock block)
                 {
                     foreach (var operation in block.OperationsAndBranchValue)
                     {
-                        if (ProcessOperation(operation, cfg, out var result))
+                        foreach (var child in operation.DescendantsAndSelf().ToReversedExecutionOrder())
                         {
-                            return result;
+                            if (memberToCheck.Equals(MemberSymbol(child.Instance)))
+                            {
+                                var isWrite = child.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == child.Instance;
+                                return isGetAccesor ^ isWrite;
+                            }
                         }
                     }
                     return false;
-
-                    bool ProcessOperation(IOperation operation, ControlFlowGraph controlFlowGraph, out bool result)
-                    {
-                        foreach (var child in operation.DescendantsAndSelf().ToReversedExecutionOrder())
-                        {
-                            if (child.Instance.Kind == OperationKindEx.FlowAnonymousFunction)
-                            {
-                                var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(child.Instance));
-                                foreach (var subOperation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
-                                {
-                                    if (ProcessOperation(subOperation, anonymousFunctionCfg, out result))
-                                    {
-                                        return true;
-                                    }
-                                }
-                            }
-                            else if (memberToCheck.Equals(MemberSymbol(child.Instance)))
-                            {
-                                var isWrite = child.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == child.Instance;
-                                result = isGetAccesor ^ isWrite;
-                                return true;
-                            }
-                        }
-
-                        result = false;
-                        return false;
-                    }
 
                     static ISymbol MemberSymbol(IOperation operation) =>
                         operation.Kind switch
@@ -184,6 +154,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             _ => null
                         };
                 }
+
+                protected override bool IsInvalid(BasicBlock block) => false;
             }
         }
     }
