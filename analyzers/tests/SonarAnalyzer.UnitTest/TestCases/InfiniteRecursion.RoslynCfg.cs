@@ -354,6 +354,97 @@ namespace Tests.Diagnostics
         }
     }
 
+    class Exceptions
+    {
+        public int Property1 => throw new NotImplementedException();
+
+        public int Property2
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public int Property3
+        {
+            get  // Noncompliant
+            {
+                var a = Property3;
+                throw new NotImplementedException();
+            }
+            set  // Noncompliant
+            {
+                Property3 = 42;
+                throw new NotImplementedException();
+            }
+        }
+
+        void ThrowsException() => throw new AggregateException();
+
+        void ThrowsExceptionInIf()
+        {
+            var a = 5;
+            if (a > 1)
+            {
+                throw new AggregateException();
+            }
+            else
+            {
+                throw new AggregateException();
+            }
+        }
+
+        void CallsItselfAndThrows()            // Noncompliant
+        {
+            CallsItselfAndThrows();
+            throw new AggregateException();
+        }
+
+        void ThrowsExceptionInIfAfterGoto()    // Noncompliant
+        {
+            A:
+            goto A;
+            var a = 5;
+            if (a > 1)
+            {
+                throw new AggregateException();
+            }
+        }
+
+        int ThrowsInIf(int a)
+        {
+            if (a > 1)
+            {
+                throw new ArgumentException();
+            }
+            A:
+            goto A;
+
+            return 42;
+        }
+
+        int ThrowsInTry(int a)
+        {
+            try
+            {
+                throw new ArgumentException();
+            }
+            catch (Exception e)
+            {
+                ThrowsInTry(a); // FN
+                return 42;
+            }
+
+            return 42;
+        }
+    }
+
     public interface IWithDefaultImplementation
     {
         decimal Count { get; set; }
