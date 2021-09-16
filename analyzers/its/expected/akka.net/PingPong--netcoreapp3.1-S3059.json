@@ -1,0 +1,73 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  20,
+"endLine":  29,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  9,
+"endLine":  31,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  9,
+"endLine":  151,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  9,
+"endLine":  248,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  9,
+"endLine":  259,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  13,
+"endLine":  263,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  9,
+"endLine":  276,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\ExceptionHelpers.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  23,
+"endLine":  11,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\ExceptionHelpers.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  5,
+"endLine":  18,
+"endColumn":  11
+}
+}
+]
+}
+]
+}

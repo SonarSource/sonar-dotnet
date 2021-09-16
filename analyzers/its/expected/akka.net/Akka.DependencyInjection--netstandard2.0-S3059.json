@@ -1,0 +1,55 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  27,
+"endLine":  92,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  9,
+"endLine":  97,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  9,
+"endLine":  104,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  9,
+"endLine":  109,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  9,
+"endLine":  111,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

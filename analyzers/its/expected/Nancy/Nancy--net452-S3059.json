@@ -1,0 +1,286 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleBuilder.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  20,
+"endLine":  7,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleBuilder.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  9,
+"endLine":  14,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleBuilder.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  20,
+"endLine":  13,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  9,
+"endLine":  17,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  9,
+"endLine":  27,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  9,
+"endLine":  38,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSerializerFactory.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  20,
+"endLine":  7,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSerializerFactory.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  11,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSerializerFactory.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  9,
+"endLine":  21,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ProxyNancyReferenceProber.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  20,
+"endLine":  14,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ProxyNancyReferenceProber.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  9,
+"endLine":  22,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  27,
+"endLine":  34,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  9,
+"endLine":  36,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  9,
+"endLine":  53,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  9,
+"endLine":  66,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  9,
+"endLine":  86,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  9,
+"endLine":  120,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  9,
+"endLine":  138,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  9,
+"endLine":  163,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  9,
+"endLine":  185,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  9,
+"endLine":  213,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  9,
+"endLine":  239,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  9,
+"endLine":  255,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  9,
+"endLine":  281,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  9,
+"endLine":  303,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  323,
+"startColumn":  9,
+"endLine":  323,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  336,
+"startColumn":  9,
+"endLine":  336,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

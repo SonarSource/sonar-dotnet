@@ -1,0 +1,1072 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  29,
+"endLine":  19,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  9,
+"endLine":  26,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  9,
+"endLine":  33,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  9,
+"endLine":  35,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  9,
+"endLine":  45,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  9,
+"endLine":  53,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  9,
+"endLine":  56,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  9,
+"endLine":  140,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  9,
+"endLine":  151,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  9,
+"endLine":  170,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  27,
+"endLine":  159,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  9,
+"endLine":  168,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  27,
+"endLine":  182,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  9,
+"endLine":  195,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  27,
+"endLine":  351,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  9,
+"endLine":  356,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  27,
+"endLine":  42,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  9,
+"endLine":  47,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  27,
+"endLine":  261,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  266,
+"startColumn":  9,
+"endLine":  266,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  9,
+"endLine":  272,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  9,
+"endLine":  278,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  27,
+"endLine":  218,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  9,
+"endLine":  223,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  9,
+"endLine":  228,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  9,
+"endLine":  235,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  9,
+"endLine":  242,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  27,
+"endLine":  300,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  305,
+"startColumn":  9,
+"endLine":  305,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  9,
+"endLine":  309,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  316,
+"startColumn":  9,
+"endLine":  316,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  323,
+"startColumn":  9,
+"endLine":  323,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  636,
+"startColumn":  27,
+"endLine":  636,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  638,
+"startColumn":  9,
+"endLine":  638,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  643,
+"startColumn":  9,
+"endLine":  643,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  646,
+"startColumn":  9,
+"endLine":  646,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  648,
+"startColumn":  9,
+"endLine":  648,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  27,
+"endLine":  102,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  9,
+"endLine":  107,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  9,
+"endLine":  111,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  9,
+"endLine":  115,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  9,
+"endLine":  123,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  9,
+"endLine":  131,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  751,
+"startColumn":  27,
+"endLine":  751,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  756,
+"startColumn":  9,
+"endLine":  756,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  760,
+"startColumn":  9,
+"endLine":  760,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  764,
+"startColumn":  9,
+"endLine":  764,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  768,
+"startColumn":  9,
+"endLine":  768,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  777,
+"startColumn":  9,
+"endLine":  777,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  786,
+"startColumn":  9,
+"endLine":  786,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  664,
+"startColumn":  27,
+"endLine":  664,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  669,
+"startColumn":  9,
+"endLine":  669,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  673,
+"startColumn":  9,
+"endLine":  673,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  677,
+"startColumn":  9,
+"endLine":  677,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  681,
+"startColumn":  9,
+"endLine":  681,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  685,
+"startColumn":  9,
+"endLine":  685,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  695,
+"startColumn":  9,
+"endLine":  695,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  705,
+"startColumn":  9,
+"endLine":  705,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  27,
+"endLine":  77,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  9,
+"endLine":  79,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  9,
+"endLine":  84,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  9,
+"endLine":  86,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  9,
+"endLine":  87,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  9,
+"endLine":  89,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  9,
+"endLine":  99,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  27,
+"endLine":  15,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  9,
+"endLine":  17,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  9,
+"endLine":  18,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  9,
+"endLine":  20,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  9,
+"endLine":  23,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  9,
+"endLine":  29,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  9,
+"endLine":  35,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  9,
+"endLine":  45,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  20,
+"endLine":  16,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  9,
+"endLine":  29,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadWriteAggregator.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  29,
+"endLine":  17,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadWriteAggregator.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  13,
+"endLine":  21,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadWriteAggregator.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  9,
+"endLine":  74,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  27,
+"endLine":  264,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  266,
+"startColumn":  9,
+"endLine":  266,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  9,
+"endLine":  360,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1487,
+"startColumn":  13,
+"endLine":  1487,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1532,
+"startColumn":  9,
+"endLine":  1532,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  27,
+"endLine":  30,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  9,
+"endLine":  32,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  9,
+"endLine":  39,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  9,
+"endLine":  43,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  9,
+"endLine":  58,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  9,
+"endLine":  70,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  9,
+"endLine":  84,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  9,
+"endLine":  97,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  9,
+"endLine":  124,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  9,
+"endLine":  133,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  9,
+"endLine":  138,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  9,
+"endLine":  143,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  9,
+"endLine":  148,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  9,
+"endLine":  168,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  9,
+"endLine":  180,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  9,
+"endLine":  185,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  9,
+"endLine":  190,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  9,
+"endLine":  222,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\SerializationSupport.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  9,
+"endLine":  227,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  20,
+"endLine":  17,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  9,
+"endLine":  19,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  9,
+"endLine":  35,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

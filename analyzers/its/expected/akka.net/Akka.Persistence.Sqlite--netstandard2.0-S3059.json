@@ -1,0 +1,61 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\ConnectionContext.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  27,
+"endLine":  18,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\ConnectionContext.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  9,
+"endLine":  30,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\ConnectionContext.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  9,
+"endLine":  46,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteQueryExecutor.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  20,
+"endLine":  17,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteQueryExecutor.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  9,
+"endLine":  25,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

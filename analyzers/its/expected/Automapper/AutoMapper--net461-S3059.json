@@ -1,0 +1,85 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\MapperRegistry.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  27,
+"endLine":  4,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\MapperRegistry.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  9,
+"endLine":  6,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\NullableSourceProjectionMapper.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  20,
+"endLine":  6,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\NullableSourceProjectionMapper.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  9,
+"endLine":  8,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\NullableSourceProjectionMapper.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  9,
+"endLine":  10,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\NullsafeQueryRewriter.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  20,
+"endLine":  41,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\NullsafeQueryRewriter.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  9,
+"endLine":  45,
+"endColumn":  15
+}
+}
+]
+}
+]
+}
