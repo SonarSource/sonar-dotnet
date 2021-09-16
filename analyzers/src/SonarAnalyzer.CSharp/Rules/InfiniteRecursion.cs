@@ -116,7 +116,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 this.messageArg = messageArg;
                 this.analysisContext = analysisContext;
-
                 ControlFlowGraph = controlFlowGraph;
                 AnalyzedSymbol = analyzedSymbol;
                 IssueLocation = issueLocation;
