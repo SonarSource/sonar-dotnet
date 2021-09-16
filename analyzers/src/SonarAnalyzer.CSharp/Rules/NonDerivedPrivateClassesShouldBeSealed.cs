@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class NonDerivedPrivateClassesShouldBeSealed : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3260";
-        private const string MessageFormat = "Class should be marked as 'sealed' as it's private and not derived in the current assembly.";
+        private const string MessageFormat = "Private classes which are not derived in the current assembly should be marked as 'sealed'.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -44,7 +44,6 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                // Case where private class is inside a partial class
                 var classDeclarationSyntax = (ClassDeclarationSyntax)c.Node;
                 if (IsPrivateButNotSealedClass(classDeclarationSyntax))
                     {
@@ -52,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!PrivateClassIsInheritedByAnotherClass(nestedPrivateClassInfo))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclarationSyntax.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclarationSyntax.Identifier.GetLocation()));
                     }
                 }
             },

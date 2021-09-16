@@ -5,7 +5,8 @@ namespace Tests.Diagnostics
     public class Foo
     {
 
-        private class ClassWontBeExtended //Noncompliant
+        private class ClassWontBeExtended //Noncompliant {{Private classes which are not derived in the current assembly should be marked as 'sealed'.}}
+//                    ^^^^^^^^^^^^^^^^^^^
         {
 
         }
@@ -15,22 +16,22 @@ namespace Tests.Diagnostics
 
         }
 
-        private class Extended
+        private class PrivateDerivedClass
         {
 
         }
 
-        private class TheExtension : Extended //Noncompliant
+        private class PrivateDerivedClassExtension : PrivateDerivedClass //Noncompliant
         {
 
         }
 
-        private class TheSecondExtension : Extended
+        private class PrivateDerivedClassSecondExtension : PrivateDerivedClass
         {
 
         }
 
-        private class TheThirdExtension : TheSecondExtension //Noncompliant
+        private class TheThirdExtension : PrivateDerivedClassSecondExtension //Noncompliant
         {
 
         }
@@ -67,6 +68,14 @@ namespace Tests.Diagnostics
     {
         private class SomeOtherClass : SomeClass //Noncompliant
     {
+
+        }
+    }
+
+    public partial class ClassImplementedInTwoFiles
+    {
+        private class InnerPrivateClass
+        {
 
         }
     }
