@@ -20,8 +20,11 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+
+#if NET
+using SonarAnalyzer.UnitTest.MetadataReferences;
+#endif
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,7 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
             Verifier.VerifyAnalyzer(@"TestCases\TypeMemberVisibility.cs", new TypeMemberVisibility());
 #endif
-
 
 #if NET
         [TestMethod]
