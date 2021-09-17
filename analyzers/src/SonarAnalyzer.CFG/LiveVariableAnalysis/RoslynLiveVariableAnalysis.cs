@@ -38,11 +38,64 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         protected override IEnumerable<BasicBlock> ReversedBlocks() =>
             cfg.Blocks.Reverse();
 
-        protected override IEnumerable<BasicBlock> Successors(BasicBlock block) =>
-            block.SuccessorBlocks;
+        protected override IEnumerable<BasicBlock> Successors(BasicBlock block)
+        {
+            foreach (var successor in block.Successors)
+            {
+                if (successor.Destination != null && successor.FinallyRegions.Any())
+                {   // When exiting finally region, redirect to finally instead of the normal destination
+                    foreach (var finallyRegion in successor.FinallyRegions)
+                    {
+                        yield return cfg.Blocks[finallyRegion.FirstBlockOrdinal];
+                    }
+                }
+                else if (successor.Destination != null)
+                {
+                    yield return successor.Destination;
+                }
+                else if (successor.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)
+                {   // Redirect exit from throw and finally to following blocks.
+                    foreach (var trySuccessor in TryRegionSuccessors(block.EnclosingRegion))
+                    {
+                        yield return trySuccessor.Destination;
+                    }
+                }
+            }
+        }
 
-        protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block) =>
-            block.Predecessors.Select(x => x.Source);
+        protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block)
+        {
+            if (block.Predecessors.Any())
+            {
+                foreach (var predecessor in block.Predecessors)
+                {
+                    // When exiting finally region, redirect predecessor to the source of StructuredEceptionHandling branches
+                    if (predecessor.FinallyRegions.Any())
+                    {
+                        foreach (var structuredExceptionHandling in StructuredExceptionHandlinBranches(predecessor.FinallyRegions))
+                        {
+                            yield return structuredExceptionHandling.Source;
+                        }
+                    }
+                    else
+                    {
+                        yield return predecessor.Source;
+                    }
+                }
+            }
+            else if (block.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && block.Ordinal == block.EnclosingRegion.FirstBlockOrdinal)
+            {
+                // Link first block of FinallyRegion to the source of all branches exiting that FinallyRegion
+                foreach (var trySuccessor in TryRegionSuccessors(block.EnclosingRegion))
+                {
+                    yield return trySuccessor.Source;
+                }
+            }
+
+            IEnumerable<ControlFlowBranch> StructuredExceptionHandlinBranches(IEnumerable<ControlFlowRegion> finallyRegions) =>
+                finallyRegions.Select(x => cfg.Blocks[x.LastBlockOrdinal].Successors.SingleOrDefault(x => x.Semantics == ControlFlowBranchSemantics.StructuredExceptionHandling))
+                    .Where(x => x != null);
+        }
 
         internal static bool IsOutArgument(IOperation operation) =>
             new IOperationWrapperSonar(operation) is var wrapped
@@ -54,6 +107,12 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             var ret = new RoslynState();
             ret.ProcessBlock(cfg, block);
             return ret;
+        }
+
+        private IEnumerable<ControlFlowBranch> TryRegionSuccessors(ControlFlowRegion finallyRegion)
+        {
+            var tryRegion = finallyRegion.EnclosingRegion.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Try);
+            return tryRegion.Blocks(cfg).SelectMany(x => x.Successors).Where(x => x.FinallyRegions.Contains(finallyRegion));
         }
 
         private class RoslynState : State
