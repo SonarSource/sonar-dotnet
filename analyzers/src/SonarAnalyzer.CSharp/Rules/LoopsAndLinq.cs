@@ -104,9 +104,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (identifierSyntax.Parent is MemberAccessExpressionSyntax { Parent: not InvocationExpressionSyntax } memberAccessExpressionSyntax
                     && IsNotLeftSideOfAssignment(memberAccessExpressionSyntax)
-                    && c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value))
+                    && c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value)
+                    && c.SemanticModel.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { } symbol)
                 {
-                    var symbol = c.SemanticModel.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol;
                     var usageStats = accessedProperties.GetOrAdd(symbol, _ => new UsageStats());
 
                     usageStats.IsInVarDeclarator = memberAccessExpressionSyntax.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax };
