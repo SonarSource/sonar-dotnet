@@ -119,6 +119,11 @@ Method(2);";
             context.Validate<IInvocationOperation>("msOuter = new System.IO.MemoryStream()", new LiveIn("msOuter"));                         // Actual Dispose
         }
 
+        //FIXME: Catch specific exception type
+        //FIXME: Catch specific exception type when condition
+        //FIXME: Catch different exception types
+        //FIXME: Catch same exception type with different when condition
+
         [TestMethod]
         public void Catch_LiveIn()
         {
