@@ -17,7 +17,6 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -59,12 +58,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsPrivateButNotSealedClass(ClassDeclarationSyntax classDeclaration) =>
            classDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword) && !classDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword);
 
-        private static bool PrivateClassIsInheritedByAnotherClass(ISymbol privateClassInfo) =>
+        private static bool PrivateClassIsInheritedByAnotherClass(ITypeSymbol privateClassInfo) =>
             privateClassInfo.ContainingType
                 .GetMembers()
                 .Where(s => s.Kind == SymbolKind.NamedType && !s.Name.Equals(privateClassInfo.Name))
                 .Select(x => (x as ITypeSymbol))
-                .Where(c => c.BaseType == privateClassInfo)
-                .Any();
+                .Any(c => c.BaseType.Equals(privateClassInfo));
     }
 }
