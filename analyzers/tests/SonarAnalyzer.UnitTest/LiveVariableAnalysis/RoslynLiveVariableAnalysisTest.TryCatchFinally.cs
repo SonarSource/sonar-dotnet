@@ -120,6 +120,221 @@ Method(2);";
         }
 
         [TestMethod]
+        public void Catch_LiveIn()
+        {
+            var code = @"
+try
+{
+    Method(0);
+}
+catch
+{
+    Method(intParameter);
+}
+Method(1);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
+            context.Validate(context.Block("Method(1);"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
+        public void Catch_VariableUsedAfter_LiveIn_LiveOut()
+        {
+            var code = @"
+try
+{
+    Method(0);
+}
+catch
+{
+    Method(1);
+}
+Method(intParameter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(1);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
+        public void Catch_WithThrowStatement_LiveIn()
+        {
+            var code = @"
+try
+{
+    Method(0);
+}
+catch
+{
+    Method(1);
+    throw new System.Exception();
+    Method(2);  // Unreachable
+}
+Method(intParameter); // Unreachable";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(1);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            // LVA doesn't care if it's reachable. Blocks still should have LiveIn and LiveOut
+            context.Validate(context.Block("Method(2);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
+        public void Catch_WithThrowStatement_Conditional_LiveIn()
+        {
+            var code = @"
+try
+{
+    Method(0);
+}
+catch
+{
+    Method(1);
+    if (boolParameter)
+    {
+        throw new System.Exception();
+    }
+    Method(2);
+}
+Method(intParameter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
+            context.Validate(context.Block("Method(1);"), new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("boolParameter"), new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(2);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
+        public void Catch_NotLiveIn_NotLiveOut()
+        {
+            var code = @"
+try
+{
+    Method(0);
+}
+catch
+{
+    intParameter = 42;
+    Method(intParameter);
+}
+Method(1);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock);
+            context.Validate(context.Block("Method(0);"));
+            context.Validate(context.Block("Method(intParameter);"));
+            context.Validate(context.Block("Method(1);"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
+        public void Catch_Nested_LiveIn()
+        {
+            var code = @"
+var outer = 42;
+var inner = 42;
+try
+{
+    try
+    {
+        Method(0);
+    }
+    catch
+    {
+        Method(inner);
+    }
+    Method(1);
+}
+catch
+{
+    Method(outer);
+}
+Method(2);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock);
+            context.Validate(context.Block("Method(0);"), new LiveIn("inner", "outer"), new LiveOut("inner", "outer"));
+            context.Validate(context.Block("Method(inner);"), new LiveIn("inner", "outer"), new LiveOut("outer"));
+            context.Validate(context.Block("Method(1);"), new LiveIn("outer"), new LiveOut("outer"));
+            context.Validate(context.Block("Method(outer);"), new LiveIn("outer"));
+            context.Validate(context.Block("Method(2);"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
+        public void Catch_InvalidSyntax_LiveIn()
+        {
+            // FIXME: Redraw
+
+
+            /*    Entry 0
+             *      |
+             * +----|- TryAndFinallyRegion   ------------+
+             * |+---|- TryRegion -+ +-- FinallyRegion --+|
+             * ||  Block 1        | |  Block 3          ||
+             * ||  (empty)        | |  Method(0)        ||
+             * ||   |             | |   |               ||
+             * |+---|-------------+ |  (null)           ||
+             * |    |               +-------------------+|
+             * +----|------------------------------------+
+             *      |
+             *    Block 3
+             *    Method(intParameter)
+             *      |
+             *    Exit 4
+             */
+            var code = @"
+// Error CS1003 Syntax error, 'try' expected
+// Error CS1514 { expected
+// Error CS1513 } expected
+catch
+{
+    Method(0);
+}
+Method(intParameter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
+        public void Catch_Loop_Propagates_LiveIn_LiveOut()
+        {
+            var code = @"
+A:
+Method(intParameter);
+if (boolParameter)
+    goto B;
+try
+{
+    Method(0);
+}
+catch
+{
+    Method(1);
+}
+goto A;
+B:
+Method(2);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("Method(0);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("Method(1);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Block("Method(2);"));
+        }
+
+        [TestMethod]
         public void Finally_LiveIn()
         {
             var code = @"
