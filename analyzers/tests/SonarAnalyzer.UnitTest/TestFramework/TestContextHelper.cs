@@ -24,10 +24,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
 {
     internal static class TestContextHelper
     {
+        public const string BuildReason = "BUILD_REASON";
+
         public static bool IsAzureDevOpsContext =>
-            Environment.GetEnvironmentVariable("BUILD_REASON") != null;
+            Environment.GetEnvironmentVariable(BuildReason) != null;
 
         public static bool IsPullRequestBuild =>
-            Environment.GetEnvironmentVariable("BUILD_REASON") == "PullRequest";
+            Environment.GetEnvironmentVariable(BuildReason) == "PullRequest";
     }
 }

@@ -15,7 +15,7 @@ namespace SonarAnalyzer.UnitTest
         public static void AssemblyInit(TestContext context)
         {
             Console.WriteLine(@"Running tests initialization...");
-            Console.WriteLine(@$"Build reason: {Environment.GetEnvironmentVariable("BUILD_REASON") ?? "Local build"}");
+            Console.WriteLine(@$"Build reason: {Environment.GetEnvironmentVariable(TestContextHelper.BuildReason) ?? "Local build"}");
 
             var parseOptions = ParseOptionsHelper.GetParseOptionsOrDefault(null).ToList();
 
