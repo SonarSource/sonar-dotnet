@@ -53,6 +53,7 @@ namespace SonarAnalyzer.CFG.Roslyn
         private readonly Lazy<ImmutableArray<IOperation>> operations;
         private readonly Lazy<int> ordinal;
         private readonly Lazy<ImmutableArray<ControlFlowBranch>> predecessors;
+        private readonly Lazy<ImmutableArray<ControlFlowBranch>> successors;
         private readonly Lazy<ImmutableArray<BasicBlock>> successorBlocks;
         private readonly Lazy<ImmutableArray<IOperation>> operationsAndBranchValue;
 
@@ -66,6 +67,7 @@ namespace SonarAnalyzer.CFG.Roslyn
         public ImmutableArray<IOperation> Operations => operations.Value;
         public int Ordinal => ordinal.Value;
         public ImmutableArray<ControlFlowBranch> Predecessors => predecessors.Value;
+        public ImmutableArray<ControlFlowBranch> Successors => successors.Value;
         public ImmutableArray<BasicBlock> SuccessorBlocks => successorBlocks.Value;
         public ImmutableArray<IOperation> OperationsAndBranchValue => operationsAndBranchValue.Value;
 
@@ -99,20 +101,20 @@ namespace SonarAnalyzer.CFG.Roslyn
             operations = OperationsProperty.ReadImmutableArray<IOperation>(instance);
             ordinal = OrdinalProperty.ReadValue<int>(instance);
             predecessors = PredecessorsProperty.ReadImmutableArray(instance, ControlFlowBranch.Wrap);
-            successorBlocks = new Lazy<ImmutableArray<BasicBlock>>(() =>
+            successors = new Lazy<ImmutableArray<ControlFlowBranch>>(() =>
             {
                 // since Roslyn does not differentiate between pattern types in CFG, it builds unreachable block for missing
                 // pattern match even when discard pattern option is presented. In this case we explicitly exclude this branch
-                if (SwitchExpressionArmSyntaxWrapper.IsInstance(this.BranchValue?.Syntax)
-                    && DiscardPatternSyntaxWrapper.IsInstance(((SwitchExpressionArmSyntaxWrapper)this.BranchValue.Syntax).Pattern))
+                if (SwitchExpressionArmSyntaxWrapper.IsInstance(BranchValue?.Syntax) && DiscardPatternSyntaxWrapper.IsInstance(((SwitchExpressionArmSyntaxWrapper)BranchValue.Syntax).Pattern))
                 {
-                    return FallThroughSuccessor?.Destination is { } destination ? ImmutableArray.Create(destination) : ImmutableArray<BasicBlock>.Empty;
+                    return FallThroughSuccessor != null ? ImmutableArray.Create(FallThroughSuccessor) : ImmutableArray<ControlFlowBranch>.Empty;
                 }
                 else
                 {
-                    return ImmutableArray.CreateRange(new[] { FallThroughSuccessor?.Destination, ConditionalSuccessor?.Destination }.Where(x => x != null));
+                    return ImmutableArray.CreateRange(new[] { FallThroughSuccessor, ConditionalSuccessor }.Where(x => x != null));
                 }
             });
+            successorBlocks = new Lazy<ImmutableArray<BasicBlock>>(() => Successors.Select(x => x.Destination).Where(x => x != null).ToImmutableArray());
             operationsAndBranchValue = new Lazy<ImmutableArray<IOperation>>(() =>
             {
                 if (BranchValue == null)
