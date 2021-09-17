@@ -5,7 +5,7 @@ namespace Tests.Diagnostics
     public class Foo
     {
 
-        private class ClassWontBeExtended //Noncompliant {{Private classes which are not derived in the current assembly should be marked as 'sealed'.}}
+        private class ClassWontBeExtended // Noncompliant {{Private classes or records which are not derived in the current assembly should be marked as 'sealed'.}}
 //                    ^^^^^^^^^^^^^^^^^^^
         {
 
@@ -21,7 +21,7 @@ namespace Tests.Diagnostics
 
         }
 
-        private class PrivateDerivedClassExtension : PrivateDerivedClass //Noncompliant
+        private class PrivateDerivedClassExtension : PrivateDerivedClass // Noncompliant
         {
 
         }
@@ -31,14 +31,14 @@ namespace Tests.Diagnostics
 
         }
 
-        private class TheThirdExtension : PrivateDerivedClassSecondExtension //Noncompliant
+        private class TheThirdExtension : PrivateDerivedClassSecondExtension // Noncompliant
         {
 
         }
 
-        private class PrivateClass //Noncompliant
+        private class PrivateClass // Noncompliant
         {
-            private class NestedPrivateClass //Noncompliant
+            private class NestedPrivateClass // Noncompliant
             {
 
             }
@@ -48,11 +48,17 @@ namespace Tests.Diagnostics
 
             }
 
-            private class NestedExtension : NestedPrivateClassWillBeExtended //Noncompliant
+            private class NestedExtension : NestedPrivateClassWillBeExtended // Noncompliant
             {
 
             }
         }
+
+        private struct AStruct // Compliant, structs cannot be inherited.
+        {
+
+        }
+
     }
 
 
@@ -66,8 +72,8 @@ namespace Tests.Diagnostics
 
     public partial class Bar
     {
-        private class SomeOtherClass : SomeClass //Noncompliant
-    {
+        private class SomeOtherClass : SomeClass // Noncompliant
+        {
 
         }
     }
