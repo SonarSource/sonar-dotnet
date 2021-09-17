@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest
@@ -14,6 +15,8 @@ namespace SonarAnalyzer.UnitTest
         public static void AssemblyInit(TestContext context)
         {
             Console.WriteLine(@"Running tests initialization...");
+            Console.WriteLine(@$"Build reason: {Environment.GetEnvironmentVariable(TestContextHelper.BuildReason) ?? "Not set / Local build"}");
+
             var parseOptions = ParseOptionsHelper.GetParseOptionsOrDefault(null).ToList();
 
             var csVersions = parseOptions.OfType<CSharpParseOptions>().Select(GetVersion);
