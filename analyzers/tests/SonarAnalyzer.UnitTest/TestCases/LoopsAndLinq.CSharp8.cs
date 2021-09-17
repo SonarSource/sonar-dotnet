@@ -15,6 +15,15 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void ForEach_UsingDynamic_Compliant(ICollection<Point> collection)
+        {
+            var sum = 0;
+            foreach (dynamic point in collection) // Compliant - with dynamic we cannot know for sure
+            {
+                sum = point.X + point.X + 3;
+            }
+        }
+
         public class Point
         {
             public int X { get; set; }
