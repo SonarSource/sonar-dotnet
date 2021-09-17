@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2330.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  23,
+"endLine":  6,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Net5\Net5\S2330.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  23,
+"endLine":  7,
+"endColumn":  29
+}
+}
+}
+]
+}

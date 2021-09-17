@@ -27,15 +27,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NonDerivedPrivateClassesShouldBeSealedTest
     {
-        private readonly List<string> testFiles = new List<string>
-        {
-            @"TestCases\NonDerivedPrivateClassesShouldBeSealed.cs",
-            @"TestCases\NonDerivedPrivateClassesShouldBeSealed_PartialClass.cs"
-        };
-
         [TestMethod]
         [TestCategory("Rule")]
         public void NonDerivedPrivateClassesShouldBeSealed_CS() =>
-            Verifier.VerifyAnalyzer(testFiles, new NonDerivedPrivateClassesShouldBeSealed());
+            Verifier.VerifyAnalyzer(new[]
+                                    {
+                                        @"TestCases\NonDerivedPrivateClassesShouldBeSealed.cs",
+                                        @"TestCases\NonDerivedPrivateClassesShouldBeSealed_PartialClass.cs"
+                                    },
+                                    new NonDerivedPrivateClassesShouldBeSealed());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NonDerivedPrivateClassesShouldBeSealed_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\NonDerivedPrivateClassesShouldBeSealed.Csharp9.cs",
+                                    new NonDerivedPrivateClassesShouldBeSealed(),
+                                    ParseOptionsHelper.FromCSharp9);
     }
 }

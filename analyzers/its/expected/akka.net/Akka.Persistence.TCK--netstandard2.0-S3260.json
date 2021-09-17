@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  23,
+"endLine":  332,
+"endColumn":  43
+}
+}
+}
+]
+}

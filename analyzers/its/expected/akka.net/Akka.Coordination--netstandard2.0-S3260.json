@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseProvider.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  23,
+"endLine":  38,
+"endColumn":  31
+}
+}
+}
+]
+}

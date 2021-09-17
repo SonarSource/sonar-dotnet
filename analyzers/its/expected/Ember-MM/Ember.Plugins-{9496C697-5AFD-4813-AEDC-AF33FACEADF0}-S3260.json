@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  23,
+"endLine":  113,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  23,
+"endLine":  114,
+"endColumn":  44
+}
+}
+}
+]
+}

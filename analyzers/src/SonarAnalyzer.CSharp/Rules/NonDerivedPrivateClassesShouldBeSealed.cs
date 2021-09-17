@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class NonDerivedPrivateClassesShouldBeSealed : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3260";
-        private const string MessageFormat = "Private classes which are not derived in the current assembly should be marked as 'sealed'.";
+        private const string MessageFormat = "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -42,27 +43,31 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var classDeclarationSyntax = (ClassDeclarationSyntax)c.Node;
-                if (IsPrivateButNotSealedClass(classDeclarationSyntax))
-                    {
-                    var nestedPrivateClassInfo = c.SemanticModel.GetDeclaredSymbol(c.Node);
+                var baseTypeDeclarationSyntax = (BaseTypeDeclarationSyntax)c.Node;
+                if (IsPrivateButNotSealedType(baseTypeDeclarationSyntax))
+                {
+                    var nestedPrivateTypeInfo = c.SemanticModel.GetDeclaredSymbol(c.Node) as ITypeSymbol;
 
-                    if (!PrivateClassIsInheritedByAnotherClass(nestedPrivateClassInfo))
+                    if (!IsPrivateTypeInherited(nestedPrivateTypeInfo))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, classDeclarationSyntax.Identifier.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, baseTypeDeclarationSyntax.Identifier.GetLocation()));
                     }
                 }
             },
-            SyntaxKind.ClassDeclaration);
+            new SyntaxKind[]
+            {
+                SyntaxKind.ClassDeclaration,
+                SyntaxKindEx.RecordDeclaration
+            });
 
-        private static bool IsPrivateButNotSealedClass(ClassDeclarationSyntax classDeclaration) =>
-           classDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword) && !classDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword);
+        private static bool IsPrivateButNotSealedType(BaseTypeDeclarationSyntax typeDeclaration) =>
+           typeDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword) && !typeDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword);
 
-        private static bool PrivateClassIsInheritedByAnotherClass(ITypeSymbol privateClassInfo) =>
-            privateClassInfo.ContainingType
-                .GetMembers()
-                .Where(s => s.Kind == SymbolKind.NamedType && !s.Name.Equals(privateClassInfo.Name))
-                .Select(x => (x as ITypeSymbol))
-                .Any(c => c.BaseType.Equals(privateClassInfo));
+        private static bool IsPrivateTypeInherited(ITypeSymbol privateTypeInfo) =>
+            privateTypeInfo.ContainingType
+                           .GetMembers()
+                           .Where(symbol => symbol.Kind == SymbolKind.NamedType && !symbol.Name.Equals(privateTypeInfo.Name))
+                           .Select(symbol => (ITypeSymbol)symbol)
+                           .Any(symbol => symbol.BaseType.Equals(privateTypeInfo));
     }
 }

@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  23,
+"endLine":  102,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  23,
+"endLine":  219,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  23,
+"endLine":  88,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  23,
+"endLine":  110,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  23,
+"endLine":  113,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  765,
+"startColumn":  23,
+"endLine":  765,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  526,
+"startColumn":  27,
+"endLine":  526,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  2527,
+"startColumn":  27,
+"endLine":  2527,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  23,
+"endLine":  295,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"region":  {
+"startLine":  956,
+"startColumn":  23,
+"endLine":  956,
+"endColumn":  31
+}
+}
+}
+]
+}

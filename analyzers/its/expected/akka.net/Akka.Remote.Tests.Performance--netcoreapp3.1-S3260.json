@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\InboundMessageDispatcherSpec.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  23,
+"endLine":  39,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  23,
+"endLine":  52,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  23,
+"endLine":  41,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  23,
+"endLine":  71,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  23,
+"endLine":  79,
+"endColumn":  37
+}
+}
+}
+]
+}

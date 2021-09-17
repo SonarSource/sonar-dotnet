@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  23,
+"endLine":  142,
+"endColumn":  35
+}
+}
+}
+]
+}

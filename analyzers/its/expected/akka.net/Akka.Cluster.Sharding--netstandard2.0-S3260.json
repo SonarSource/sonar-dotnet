@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"region":  {
+"startLine":  986,
+"startColumn":  23,
+"endLine":  986,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  27,
+"endLine":  201,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  27,
+"endLine":  210,
+"endColumn":  45
+}
+}
+}
+]
+}
