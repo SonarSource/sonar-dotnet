@@ -67,7 +67,6 @@ namespace Tests.Diagnostics
         {
 
         }
-
     }
 
     public partial class Bar
