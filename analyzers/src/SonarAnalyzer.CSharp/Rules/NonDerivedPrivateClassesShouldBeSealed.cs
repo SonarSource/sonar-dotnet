@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
             privateTypeInfo.ContainingType
                            .GetMembers()
                            .OfType<INamedTypeSymbol>()
-                           .Where(symbol => symbol.Kind == SymbolKind.NamedType && !symbol.Name.Equals(privateTypeInfo.Name))
+                           .Where(symbol => !symbol.Name.Equals(privateTypeInfo.Name))
                            .Any(symbol => symbol.BaseType != null && symbol.BaseType.Equals(privateTypeInfo));
     }
 }
