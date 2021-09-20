@@ -837,7 +837,7 @@ public class Sample
     delegate void VoidDelegate();
 
     private int field;
-    public int Property {{ get; set; }};
+    public int Property {{ get; set; }}
 
     public void Main(bool boolParameter, int intParameter, out int outParameter, ref int refParameter)
     {{
