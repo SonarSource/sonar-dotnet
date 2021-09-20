@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public MemberInitializerRedundant() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
         internal /* for testing */ MemberInitializerRedundant(IAnalyzerConfiguration configuration) =>
-            useSonarCfg = configuration.FallBackToSonarCfg();
+            useSonarCfg = configuration.UseSonarCfg();
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(

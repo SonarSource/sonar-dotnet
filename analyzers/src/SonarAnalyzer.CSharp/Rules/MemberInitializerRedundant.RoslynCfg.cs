@@ -60,16 +60,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            private bool ProcessOperation(IOperation operation, ControlFlowGraph controlFlowGraph, bool isRead, out bool result)
+            private bool ProcessOperation(IOperation operation, ControlFlowGraph controlFlowGraph, bool checkReadBeforeWrite, out bool result)
             {
-                foreach (var child in operation.DescendantsAndSelf().ToReversedExecutionOrder())
+                foreach (var child in new[] { operation }.ToReversedExecutionOrder())
                 {
-                    if (isRead && child.Instance.Kind == OperationKindEx.FlowAnonymousFunction)
+                    if (checkReadBeforeWrite && child.Instance.Kind == OperationKindEx.FlowAnonymousFunction)
                     {
                         var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(child.Instance));
-                        foreach (var subOperation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
+                        foreach (var subOperation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue))
                         {
-                            if (ProcessOperation(subOperation, anonymousFunctionCfg, isRead, out result))
+                            if (ProcessOperation(subOperation, anonymousFunctionCfg, checkReadBeforeWrite, out result))
                             {
                                 return true;
                             }
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else if (memberToCheck.Equals(MemberSymbol(child.Instance)))
                     {
-                        result = IsReadOrWrite(child, isRead);
+                        result = IsReadOrWrite(child, checkReadBeforeWrite);
                         return true;
                     }
                 }
@@ -86,16 +86,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            private bool IsReadOrWrite(IOperationWrapperSonar child, bool isRead)
+            private bool IsReadOrWrite(IOperationWrapperSonar child, bool checkReadBeforeWrite)
             {
                 if (child.Instance.IsOutArgumentReference())
                 {
                     // it is out argument - that means that this is write
-                    return !isRead;
+                    return !checkReadBeforeWrite;
                 }
 
                 var isWrite = child.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == child.Instance;
-                return isRead ^ isWrite;
+                return checkReadBeforeWrite ^ isWrite;
             }
 
             private static ISymbol MemberSymbol(IOperation operation) =>

@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Extensions
 {
     public static class IAnalyzerConfigurationExtensions
     {
-        public static bool FallBackToSonarCfg(this IAnalyzerConfiguration configuration) =>
-            !CFG.Roslyn.ControlFlowGraph.IsAvailable || configuration.ForceSonarCfg;
+        public static bool UseSonarCfg(this IAnalyzerConfiguration configuration) =>
+            configuration.ForceSonarCfg || !CFG.Roslyn.ControlFlowGraph.IsAvailable;
     }
 }
