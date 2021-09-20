@@ -2,6 +2,11 @@
 
 namespace Tests.Diagnostics
 {
+    public interface PrivateInterface
+    {
+
+    }
+
     public class Foo
     {
 
@@ -85,6 +90,7 @@ namespace Tests.Diagnostics
 
     public partial class ClassImplementedInTwoFiles
     {
+        // The class is extended \TestCases\NonDerivedPrivateClassesShouldBeSealed_PartialClass.cs
         private class InnerPrivateClass
         {
 
@@ -94,7 +100,7 @@ namespace Tests.Diagnostics
     public class AClassWithAbstractInnerClass
     {
 
-        private abstract class ObjectFactoryBase
+        private abstract class PrivateAbstractClass
         {
 
             public abstract void AFunction();
@@ -102,11 +108,16 @@ namespace Tests.Diagnostics
 
         }
 
-        private class AClass : ObjectFactoryBase // Noncompliant
+        private class AClass : PrivateAbstractClass // Noncompliant
         {
             public override void AFunction()
             {
             }
+
+        }
+
+        private sealed class ClassWithInterface : PrivateInterface 
+        {
 
         }
     }

@@ -46,19 +46,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 var baseTypeDeclarationSyntax = (BaseTypeDeclarationSyntax)c.Node;
                 if (IsPrivateButNotSealedType(baseTypeDeclarationSyntax))
                 {
-                    var nestedPrivateTypeInfo = c.SemanticModel.GetDeclaredSymbol(c.Node) as INamedTypeSymbol;
+                    var nestedPrivateTypeInfo = (INamedTypeSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node);
 
-                    if (nestedPrivateTypeInfo != null && !IsPrivateTypeInherited(nestedPrivateTypeInfo))
+                    if (!IsPrivateTypeInherited(nestedPrivateTypeInfo))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, baseTypeDeclarationSyntax.Identifier.GetLocation()));
                     }
                 }
-            },
-            new SyntaxKind[]
-            {
-                SyntaxKind.ClassDeclaration,
-                SyntaxKindEx.RecordDeclaration
-            });
+            }, SyntaxKind.ClassDeclaration,
+               SyntaxKindEx.RecordDeclaration);
 
         private static bool IsPrivateButNotSealedType(BaseTypeDeclarationSyntax typeDeclaration) =>
            typeDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword)
@@ -68,8 +64,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsPrivateTypeInherited(INamedTypeSymbol privateTypeInfo) =>
             privateTypeInfo.ContainingType
                            .GetMembers()
+                           .OfType<INamedTypeSymbol>()
                            .Where(symbol => symbol.Kind == SymbolKind.NamedType && !symbol.Name.Equals(privateTypeInfo.Name))
-                           .Select(symbol => symbol as INamedTypeSymbol)
                            .Any(symbol => symbol != null && symbol.BaseType != null && symbol.BaseType.Equals(privateTypeInfo));
     }
 }
