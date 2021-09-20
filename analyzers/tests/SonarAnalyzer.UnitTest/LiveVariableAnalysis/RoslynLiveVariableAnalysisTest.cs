@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -49,8 +50,8 @@ var c = 2 + 3;";
 Method(intParameter);
 IsMethod(boolParameter);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
-            context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter", "boolParameter"));
+            context.ValidateEntry(new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
+            context.Validate("Method(intParameter);", new LiveIn("intParameter", "boolParameter"));
         }
 
         [TestMethod]
@@ -58,8 +59,8 @@ IsMethod(boolParameter);";
         {
             var code = @"Main(true, 0, out outParameter, ref refParameter);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("refParameter"), new LiveOut("refParameter"));
-            context.Validate(context.Block(code), new LiveIn("refParameter"));
+            context.ValidateEntry(new LiveIn("refParameter"), new LiveOut("refParameter"));
+            context.Validate(code, new LiveIn("refParameter"));
         }
 
         [TestMethod]
@@ -78,8 +79,8 @@ if (boolParameter)
     return;
 Method(intParameter);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
         }
 
         [TestMethod]
@@ -97,10 +98,10 @@ if (boolParameter)
     return;
 Method(intParameter);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("boolParameter"), new LiveIn("boolParameter", "intParameter"), new LiveOut("intParameter"));
-            context.Validate(context.Block("Method(intParameter);"), new LiveIn("intParameter"));
-            context.Validate(context.Cfg.ExitBlock);
+            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter", "intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateExit();
         }
 
         [DataTestMethod]
@@ -131,10 +132,10 @@ Method(field, variable, intParameter);";
             var expectedCaptured = capturingStatement.Contains("xxx")
                 ? new Captured("variable", "intParameter", "xxx")
                 : new Captured("variable", "intParameter");
-            context.Validate(context.Cfg.EntryBlock, expectedCaptured, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("boolParameter"), expectedCaptured, new LiveIn("boolParameter"));
-            context.Validate(context.Block("Method(field, variable, intParameter);"), expectedCaptured);
-            context.Validate(context.Cfg.ExitBlock, expectedCaptured);
+            context.ValidateEntry(expectedCaptured, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", expectedCaptured, new LiveIn("boolParameter"));
+            context.Validate("Method(field, variable, intParameter);", expectedCaptured);
+            context.ValidateExit(expectedCaptured);
         }
 
         [TestMethod]
@@ -155,10 +156,10 @@ if (boolParameter)
     return;
 intParameter = 0;";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("boolParameter"), new LiveIn("boolParameter"));
-            context.Validate(context.Block("intParameter = 0;"));
-            context.Validate(context.Cfg.ExitBlock);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"));
+            context.Validate("intParameter = 0;");
+            context.ValidateExit();
         }
 
         [TestMethod]
@@ -191,12 +192,12 @@ if (boolParameter)
     return;
 Method(intParameter, value);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("value = 0"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter", "value"));
-            context.Validate(context.Block("Method(value);"), new LiveIn("boolParameter", "intParameter", "value"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("value = 42;"), new LiveIn("boolParameter", "intParameter"), new LiveOut("value", "intParameter"));
-            context.Validate(context.Block("Method(intParameter, value);"), new LiveIn("value", "intParameter"));
-            context.Validate(context.Cfg.ExitBlock);
+            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("value = 0", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter", "value"));
+            context.Validate("Method(value);", new LiveIn("boolParameter", "intParameter", "value"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("value = 42;", new LiveIn("boolParameter", "intParameter"), new LiveOut("value", "intParameter"));
+            context.Validate("Method(intParameter, value);", new LiveIn("value", "intParameter"));
+            context.ValidateExit();
         }
 
         [TestMethod]
@@ -262,45 +263,45 @@ reassigned = 0;
 Method(everywhere, reassigned);";
             var context = new Context(code);
             context.Validate(
-                context.Block("everywhere = 42"),
+                "everywhere = 42",
                 new LiveIn("boolParameter"),
                 new LiveOut("everywhere", "firstCondition", "firstTrue", "firstFalse", "first", "secondCondition", "secondTrue", "secondFalse", "second"));
             // First block
             context.Validate(
-                context.Block("firstCondition"),
+                "firstCondition",
                 new LiveIn("everywhere", "firstCondition", "firstTrue", "firstFalse", "first"),
                 new LiveOut("everywhere", "firstTrue", "firstFalse", "first"));
             context.Validate(
-                context.Block("Method(firstTrue);"),
+                "Method(firstTrue);",
                 new LiveIn("everywhere", "firstTrue", "first"),
                 new LiveOut("everywhere", "first"));
             context.Validate(
-                context.Block("Method(firstFalse);"),
+                "Method(firstFalse);",
                 new LiveIn("everywhere", "firstFalse", "first"),
                 new LiveOut("everywhere", "first"));
             context.Validate(
-                context.Block("Method(first);"),
+                "Method(first);",
                 new LiveIn("everywhere", "first"),
                 new LiveOut("everywhere"));
             // Second block
             context.Validate(
-                context.Block("secondCondition"),
+                "secondCondition",
                 new LiveIn("everywhere", "secondCondition", "secondTrue", "secondFalse", "second"),
                 new LiveOut("everywhere", "secondTrue", "secondFalse", "second"));
             context.Validate(
-                context.Block("Method(secondTrue);"),
+                "Method(secondTrue);",
                 new LiveIn("everywhere", "secondTrue", "second"),
                 new LiveOut("everywhere", "second"));
             context.Validate(
-                context.Block("Method(secondFalse);"),
+                "Method(secondFalse);",
                 new LiveIn("everywhere", "secondFalse", "second"),
                 new LiveOut("everywhere", "second"));
             context.Validate(
-                context.Block("Method(second);"),
+                "Method(second);",
                 new LiveIn("everywhere", "second"),
                 new LiveOut("everywhere"));
             // Common end
-            context.Validate(context.Block("Method(everywhere, reassigned);"), new LiveIn("everywhere"));
+            context.Validate("Method(everywhere, reassigned);", new LiveIn("everywhere"));
         }
 
         [TestMethod]
@@ -357,45 +358,45 @@ Reassigned = 0
 Method(Everywhere, Reassigned)";
             var context = new Context(code, isCSharp: false);
             context.Validate(
-                context.Block("Everywhere As Integer = 42"),
+                "Everywhere As Integer = 42",
                 new LiveIn("BoolParameter"),
                 new LiveOut("Everywhere", "FirstCondition", "FirstTrue", "FirstFalse", "First", "SecondCondition", "SecondTrue", "SecondFalse", "Second"));
             // First block
             context.Validate(
-                context.Block("FirstCondition"),
+                "FirstCondition",
                 new LiveIn("Everywhere", "FirstCondition", "FirstTrue", "FirstFalse", "First"),
                 new LiveOut("Everywhere", "FirstTrue", "FirstFalse", "First"));
             context.Validate(
-                context.Block("Method(FirstTrue)"),
+                "Method(FirstTrue)",
                 new LiveIn("Everywhere", "FirstTrue", "First"),
                 new LiveOut("Everywhere", "First"));
             context.Validate(
-                context.Block("Method(FirstFalse)"),
+                "Method(FirstFalse)",
                 new LiveIn("Everywhere", "FirstFalse", "First"),
                 new LiveOut("Everywhere", "First"));
             context.Validate(
-                context.Block("Method(First)"),
+                "Method(First)",
                 new LiveIn("Everywhere", "First"),
                 new LiveOut("Everywhere"));
             // Second block
             context.Validate(
-                context.Block("SecondCondition"),
+                "SecondCondition",
                 new LiveIn("Everywhere", "SecondCondition", "SecondTrue", "SecondFalse", "Second"),
                 new LiveOut("Everywhere", "SecondTrue", "SecondFalse", "Second"));
             context.Validate(
-                context.Block("Method(SecondTrue)"),
+                "Method(SecondTrue)",
                 new LiveIn("Everywhere", "SecondTrue", "Second"),
                 new LiveOut("Everywhere", "Second"));
             context.Validate(
-                context.Block("Method(SecondFalse)"),
+                "Method(SecondFalse)",
                 new LiveIn("Everywhere", "SecondFalse", "Second"),
                 new LiveOut("Everywhere", "Second"));
             context.Validate(
-                context.Block("Method(Second)"),
+                "Method(Second)",
                 new LiveIn("Everywhere", "Second"),
                 new LiveOut("Everywhere"));
             // Common end
-            context.Validate(context.Block("Method(Everywhere, Reassigned)"), new LiveIn("Everywhere"));
+            context.Validate("Method(Everywhere, Reassigned)", new LiveIn("Everywhere"));
         }
 
         [TestMethod]
@@ -407,8 +408,8 @@ if (boolParameter)
     return;
 Method(variable, variable = 42);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("Method(variable, variable = 42);"), new LiveIn("variable"));
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("Method(variable, variable = 42);", new LiveIn("variable"));
         }
 
         [TestMethod]
@@ -420,8 +421,8 @@ if (boolParameter)
     return;
 Method(1 + 1 + Method(variable), variable = 42);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("Method(1 + 1 + Method(variable), variable = 42);"), new LiveIn("variable"));
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("Method(1 + 1 + Method(variable), variable = 42);", new LiveIn("variable"));
         }
 
         [TestMethod]
@@ -433,8 +434,8 @@ if (boolParameter)
     return;
 Method(variable = 42, variable);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("Method(variable = 42, variable);"));
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("Method(variable = 42, variable);");
         }
 
         [TestMethod]
@@ -446,8 +447,8 @@ if (boolParameter)
     return;
 Method(variable = 42, 1 + 1 + Method(variable));";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("Method(variable = 42, 1 + 1 + Method(variable));"));
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("Method(variable = 42, 1 + 1 + Method(variable));");
         }
 
         [TestMethod]
@@ -459,8 +460,8 @@ if (boolParameter)
     return;
 Method(nameof(variable));";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("Method(nameof(variable));"));
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("Method(nameof(variable));");
         }
 
         [TestMethod]
@@ -472,8 +473,8 @@ if (boolParameter)
     return;
 Method(intParameter, variable);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("Method(intParameter, variable);"), new LiveIn("intParameter", "variable"));
+            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(intParameter, variable);", new LiveIn("intParameter", "variable"));
         }
 
         [TestMethod]
@@ -486,8 +487,8 @@ if (boolParameter)
     return;
 Method(intParameter, variable);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("Method(intParameter, variable);"), new LiveIn("intParameter", "variable"));
+            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(intParameter, variable);", new LiveIn("intParameter", "variable"));
         }
 
         [TestMethod]
@@ -500,8 +501,8 @@ if (boolParameter)
 variable = 42;
 Method(intParameter, variable);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("Method(intParameter, variable);"), new LiveIn("intParameter"));
+            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(intParameter, variable);", new LiveIn("intParameter"));
         }
 
         [TestMethod]
@@ -530,8 +531,8 @@ if (boolParameter)
     return;
 Main(true, 0, out outVariable, ref refVariable);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("Main(true, 0, out outVariable, ref refVariable);"), new LiveIn("refVariable"));
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("Main(true, 0, out outVariable, ref refVariable);", new LiveIn("refVariable"));
         }
 
         [TestMethod]
@@ -543,9 +544,9 @@ if (boolParameter)
     return;
 Method(variable, intParameter);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("variable = intParameter"), new LiveIn("intParameter", "boolParameter"), new LiveOut("variable", "intParameter"));
-            context.Validate(context.Block("Method(variable, intParameter);"), new LiveIn("variable", "intParameter"));
+            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("variable = intParameter", new LiveIn("intParameter", "boolParameter"), new LiveOut("variable", "intParameter"));
+            context.Validate("Method(variable, intParameter);", new LiveIn("variable", "intParameter"));
         }
 
         [TestMethod]
@@ -557,9 +558,9 @@ var varValue = 42;
 if (intValue == 0)
     Method(intValue, varValue);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock);
-            context.Validate(context.Block("intValue = 42"), new LiveOut("intValue", "varValue"));
-            context.Validate(context.Block("Method(intValue, varValue);"), new LiveIn("intValue", "varValue"));
+            context.ValidateEntry();
+            context.Validate("intValue = 42", new LiveOut("intValue", "varValue"));
+            context.Validate("Method(intValue, varValue);", new LiveIn("intValue", "varValue"));
         }
 
         [TestMethod]
@@ -567,8 +568,8 @@ if (intValue == 0)
         {
             var code = @"_ = intParameter;";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate(context.Block("_ = intParameter;"), new LiveIn("intParameter"));
+            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("_ = intParameter;", new LiveIn("intParameter"));
         }
 
         [TestMethod]
@@ -579,8 +580,8 @@ undefined = intParameter;
 if (undefined == 0)
     Method(undefined);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate(context.Block("Method(undefined);"));
+            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(undefined);");
         }
 
         [TestMethod]
@@ -591,8 +592,8 @@ field = intParameter;
 if (field == 0)
     Method(field);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate(context.Block("Method(field);"));
+            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(field);");
         }
 
         [TestMethod]
@@ -604,9 +605,9 @@ value = 42;
 if (value == 0)
     Method(value);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock);
-            context.Validate(context.Block("value = 42;"), new LiveOut("value"));
-            context.Validate(context.Block("Method(value);"), new LiveIn("value"));
+            context.ValidateEntry();
+            context.Validate("value = 42;", new LiveOut("value"));
+            context.Validate("Method(value);", new LiveIn("value"));
         }
 
         [TestMethod]
@@ -637,11 +638,11 @@ foreach(var i in new int[] {1, 2, 3})
       Method(i);
 }";
             var context = new Context(code);
-            context.Validate(context.Cfg.Blocks[1], new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Cfg.Blocks[2], new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("Method(i, intParameter);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter", "i"));
-            context.Validate(context.Block("Method(i);"), new LiveIn("boolParameter", "intParameter", "i"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Cfg.ExitBlock);
+            context.Validate(context.Cfg.Blocks[1], null, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate(context.Cfg.Blocks[2], null, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(i, intParameter);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter", "i"));
+            context.Validate("Method(i);", new LiveIn("boolParameter", "intParameter", "i"), new LiveOut("boolParameter", "intParameter"));
+            context.ValidateExit();
         }
 
         [TestMethod]
@@ -654,10 +655,10 @@ foreach(i in new int[] {1, 2, 3})
     Method(i, intParameter);
 }";
             var context = new Context(code);
-            context.Validate(context.Cfg.Blocks[1], new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate(context.Cfg.Blocks[2], new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate(context.Block("Method(i, intParameter);"), new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate(context.Cfg.ExitBlock);
+            context.Validate(context.Cfg.Blocks[1], null, new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate(context.Cfg.Blocks[2], null, new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(i, intParameter);", new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.ValidateExit();
         }
 
         [TestMethod]
@@ -667,9 +668,9 @@ foreach(i in new int[] {1, 2, 3})
 outParameter = LocalFunction(intParameter);
 static int LocalFunction(int a) => a + 1;";
             var context = new Context(code, "LocalFunction");
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
-            context.Validate(context.Block("a + 1"), new LiveIn("a"));
-            context.Validate(context.Cfg.ExitBlock);
+            context.ValidateEntry(new LiveIn("a"), new LiveOut("a"));
+            context.Validate("a + 1", new LiveIn("a"));
+            context.ValidateExit();
         }
 
         [TestMethod]
@@ -679,9 +680,9 @@ static int LocalFunction(int a) => a + 1;";
 outParameter = LocalFunction(0);
 static int LocalFunction(int a) => 42;";
             var context = new Context(code, "LocalFunction");
-            context.Validate(context.Cfg.EntryBlock);
-            context.Validate(context.Block("42"));
-            context.Validate(context.Cfg.ExitBlock);
+            context.ValidateEntry();
+            context.Validate("42");
+            context.ValidateExit();
         }
 
         [TestMethod]
@@ -694,9 +695,9 @@ static int LocalFunction(int a)
     return a + 1;
 }";
             var context = new Context(code, "LocalFunction");
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
-            context.Validate(context.Block("a + 1"), new LiveIn("a"));
-            context.Validate(context.Cfg.ExitBlock);
+            context.ValidateEntry(new LiveIn("a"), new LiveOut("a"));
+            context.Validate("a + 1", new LiveIn("a"));
+            context.ValidateExit();
         }
 
         [TestMethod]
@@ -709,9 +710,9 @@ static int LocalFunction(int a)
     return 42;
 }";
             var context = new Context(code, "LocalFunction");
-            context.Validate(context.Cfg.EntryBlock);
-            context.Validate(context.Block("42"));
-            context.Validate(context.Cfg.ExitBlock);
+            context.ValidateEntry();
+            context.Validate("42");
+            context.ValidateExit();
         }
 
         [TestMethod]
@@ -727,10 +728,10 @@ static int LocalFunction(int a)
         return LocalFunction(a - 1);
 };";
             var context = new Context(code, "LocalFunction");
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("a"), new LiveOut("a"));
-            context.Validate(context.Block("0"));
-            context.Validate(context.Block("LocalFunction(a - 1)"), new LiveIn("a"));
-            context.Validate(context.Cfg.ExitBlock);
+            context.ValidateEntry(new LiveIn("a"), new LiveOut("a"));
+            context.Validate("0");
+            context.Validate("LocalFunction(a - 1)", new LiveIn("a"));
+            context.ValidateExit();
         }
 
         [TestMethod]
@@ -744,9 +745,9 @@ LocalFunction();
 
 int LocalFunction() => variable;";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("boolParameter"), new LiveIn("boolParameter") /* ToDo: "variable" should LiveIn and LiveOut("variable")*/);
-            context.Validate(context.Block("LocalFunction();") /* ToDo: Should be new LiveIn("variable") */);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter") /* ToDo: "variable" should LiveIn and LiveOut("variable")*/);
+            context.Validate("LocalFunction();" /* ToDo: Should be new LiveIn("variable") */);
         }
 
         [TestMethod]
@@ -760,9 +761,9 @@ if (boolParameter)
     return;
 LocalFunction();";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("boolParameter"), new LiveIn("boolParameter") /* ToDo: "variable" should LiveIn and LiveOut("variable")*/);
-            context.Validate(context.Block("LocalFunction();") /* ToDo: Should be new LiveIn("variable") */);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter") /* ToDo: "variable" should LiveIn and LiveOut("variable")*/);
+            context.Validate("LocalFunction();" /* ToDo: Should be new LiveIn("variable") */);
         }
 
         [TestMethod]
@@ -776,9 +777,9 @@ LocalFunction<int>();
 
 T LocalFunction<T>() => variable;";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("boolParameter"), new LiveIn("boolParameter") /* ToDo: "variable" should LiveIn and LiveOut("variable")*/);
-            context.Validate(context.Block("LocalFunction<int>();") /* ToDo: Should be new LiveIn("variable") */);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter") /* ToDo: "variable" should LiveIn and LiveOut("variable")*/);
+            context.Validate("LocalFunction<int>();" /* ToDo: Should be new LiveIn("variable") */);
         }
 
         [TestMethod]
@@ -796,9 +797,9 @@ void LocalFunction()
     variable = 0;
 }";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate(context.Block("boolParameter"), new LiveIn("boolParameter"), /*ToDo: Should not LiveOut, because it's overriden in LocalFunction */ new LiveOut("variable"));
-            context.Validate(context.Block("LocalFunction();"), /* ToDo: Should not LiveIn, because it's overriden in LocalFunction*/ new LiveIn("variable"));
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), /*ToDo: Should not LiveOut, because it's overriden in LocalFunction */ new LiveOut("variable"));
+            context.Validate("LocalFunction();", /* ToDo: Should not LiveIn, because it's overriden in LocalFunction*/ new LiveIn("variable"));
         }
 
         [TestMethod]
@@ -814,10 +815,10 @@ goto A;
 B:
 Method(1);";
             var context = new Context(code);
-            context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("boolParameter"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("Method(0);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("Method(1);"));
+            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(0);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(1);");
         }
 
         private class Context
@@ -881,29 +882,41 @@ End Class";
                 Lva = new RoslynLiveVariableAnalysis(Cfg);
             }
 
-            public BasicBlock Block(string withSyntax = null) =>
-                Cfg.Blocks.Single(x => x.Kind == BasicBlockKind.Block && (withSyntax == null || x.OperationsAndBranchValue.Any(operation => operation.Syntax.ToString() == withSyntax)));
-
-            public BasicBlock Block<TOperation>(string withSyntax) where TOperation : IOperation =>
-                Cfg.Blocks.Single(x => x.Kind == BasicBlockKind.Block && x.OperationsAndBranchValue.OfType<TOperation>().Any(operation => operation.Syntax.ToString() == withSyntax));
-
             public void ValidateAllEmpty()
             {
                 foreach (var block in Cfg.Blocks)
                 {
-                    Validate(block);
+                    Validate(block, null, new Expected[] { });
                 }
             }
 
-            public void Validate(BasicBlock block, params Expected[] expected)
+            public void ValidateEntry(params Expected[] expected) =>
+                Validate(Cfg.EntryBlock, null, expected);
+
+            public void ValidateExit(params Captured[] expected) =>
+                Validate(Cfg.ExitBlock, null, expected);
+
+            public void Validate(string withSyntax, params Expected[] expected)
+            {
+                var block = Cfg.Blocks.Single(x => x.Kind == BasicBlockKind.Block && (withSyntax == null || x.OperationsAndBranchValue.Any(operation => operation.Syntax.ToString() == withSyntax)));
+                Validate(block, withSyntax, expected);
+            }
+
+            public void Validate<TOperation>(string withSyntax, params Expected[] expected) where TOperation : IOperation
+            {
+                var block = Cfg.Blocks.Single(x => x.Kind == BasicBlockKind.Block && x.OperationsAndBranchValue.OfType<TOperation>().Any(operation => operation.Syntax.ToString() == withSyntax));
+                Validate(block, withSyntax, expected);
+            }
+
+            public void Validate(BasicBlock block, string blockSuffix, params Expected[] expected)
             {
                 // This is not very nice from OOP perspective, but it makes UTs above easy to read.
                 var expectedLiveIn = expected.OfType<LiveIn>().SingleOrDefault() ?? new LiveIn();
                 var expectedLiveOut = expected.OfType<LiveOut>().SingleOrDefault() ?? new LiveOut();
                 var expectedCaptured = expected.OfType<Captured>().SingleOrDefault() ?? new Captured();
-                Lva.LiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names, $"{block.Kind} #{block.Ordinal}");
-                Lva.LiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names, $"{block.Kind} #{block.Ordinal}");
-                Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names, $"{block.Kind} #{block.Ordinal}");
+                Lva.LiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names, $"{block.Kind} #{block.Ordinal} {blockSuffix}");
+                Lva.LiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names, $"{block.Kind} #{block.Ordinal} {blockSuffix}");
+                Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names, $"{block.Kind} #{block.Ordinal} {blockSuffix}");
             }
         }
 
