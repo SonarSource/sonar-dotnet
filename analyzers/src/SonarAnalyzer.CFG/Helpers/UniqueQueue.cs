@@ -23,7 +23,7 @@ using System.Collections.Generic;
 
 namespace SonarAnalyzer.CFG.Helpers
 {
-    public class UniqueQueue<T> : IEnumerable<T>
+    internal class UniqueQueue<T> : IEnumerable<T>
     {
         private readonly Queue<T> queue = new Queue<T>();
         private readonly ISet<T> unique = new HashSet<T>();
