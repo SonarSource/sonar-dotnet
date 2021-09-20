@@ -61,6 +61,16 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     }
                 }
             }
+            // Add link to each Catch region.
+            // FIXME: Add UT with unreachable path inside try
+            // FIXME: Is that enough for (null) destination when throwing?
+            if (block.EnclosingRegion.Kind == ControlFlowRegionKind.Try)
+            {
+                foreach (var catchOrFilterRegion in block.Successors.SelectMany(x => x.LeavingRegions.Where(x => x.Kind == ControlFlowRegionKind.TryAndCatch).SelectMany(CatchOrFilterRegions)))
+                {
+                    yield return cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal];
+                }
+            }
         }
 
         protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block)
@@ -113,6 +123,22 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         {
             var tryRegion = finallyRegion.EnclosingRegion.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Try);
             return tryRegion.Blocks(cfg).SelectMany(x => x.Successors).Where(x => x.FinallyRegions.Contains(finallyRegion));
+        }
+
+        private IEnumerable<ControlFlowRegion> CatchOrFilterRegions(ControlFlowRegion tryAndCatchRegion)
+        {
+            foreach (var region in tryAndCatchRegion.NestedRegions)
+            {
+                if (region.Kind == ControlFlowRegionKind.Catch)
+                {
+                    yield return region;
+                }
+                // FIXME: Add UT with LiveIn for "when"
+                //else if (region.Kind == ControlFlowRegionKind.FilterAndHandler)
+                //{
+                //    yield return region.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Filter);
+                //}
+            }
         }
 
         private class RoslynState : State
