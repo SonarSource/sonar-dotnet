@@ -66,8 +66,8 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void ForceSonarCfg_DisabledByDefault()
         {
-            AlwaysEnabled.UseSonarCfg.Should().BeFalse();
-            new HotspotConfiguration(ruleLoaderMock.Object).UseSonarCfg.Should().BeFalse();
+            AlwaysEnabled.ForceSonarCfg.Should().BeFalse();
+            new HotspotConfiguration(ruleLoaderMock.Object).ForceSonarCfg.Should().BeFalse();
         }
 
         [TestMethod]

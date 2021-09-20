@@ -45,10 +45,10 @@ namespace SonarAnalyzer.Common
 
         private class AlwaysEnabledConfiguration : IAnalyzerConfiguration
         {
-            public bool UseSonarCfg { get; }
+            public bool ForceSonarCfg { get; }
 
             public AlwaysEnabledConfiguration(bool forceSonarCfg) =>
-                UseSonarCfg = forceSonarCfg;
+                ForceSonarCfg = forceSonarCfg;
 
             public void Initialize(AnalyzerOptions options)
             {
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Common
             /// </summary>
             private static readonly object IsInitializedGate = new object();
 
-            public bool UseSonarCfg => false;
+            public bool ForceSonarCfg => false;
 
             public HotspotConfiguration(IRuleLoader ruleLoader) => this.ruleLoader = ruleLoader;
 
