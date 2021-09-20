@@ -381,6 +381,27 @@ Method(usedAfter);";
         }
 
         [TestMethod]
+        public void Catch_SingleTypeWhenConditionReferencingArgument_LiveIn()
+        {
+            var code = @"
+try
+{
+    Method(0);
+}
+catch (System.Exception ex) when (boolParameter)
+{
+    Method(intParameter);
+}
+Method(1);";
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(0);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.Validate("Method(1);");
+            context.ValidateExit();
+        }
+
+        [TestMethod]
         public void Catch_MultipleTypes_LiveIn()
         {
             var code = @"

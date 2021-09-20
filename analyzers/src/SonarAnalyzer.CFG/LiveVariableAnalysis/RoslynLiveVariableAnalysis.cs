@@ -133,11 +133,10 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 {
                     yield return region;
                 }
-                // FIXME: Add UT with LiveIn for "when"
-                //else if (region.Kind == ControlFlowRegionKind.FilterAndHandler)
-                //{
-                //    yield return region.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Filter);
-                //}
+                else if (region.Kind == ControlFlowRegionKind.FilterAndHandler)
+                {
+                    yield return region.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Filter);
+                }
             }
         }
 
