@@ -27,8 +27,8 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
     public partial class RoslynLiveVariableAnalysisTest
     {
         [DataTestMethod]
-        [DataRow("using (var ms = new System.IO.MemoryStream()) {", "}")]
-        [DataRow("using var ms = new System.IO.MemoryStream();", null)]
+        [DataRow("using (var ms = new MemoryStream()) {", "}")]
+        [DataRow("using var ms = new MemoryStream();", null)]
         public void Using_LiveInUntilTheEnd(string usingStatement, string suffix)
         {
             /*       Block 1                    Finally region:
@@ -52,13 +52,13 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
 {suffix}";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate<ISimpleAssignmentOperation>("ms = new System.IO.MemoryStream()", new LiveIn("boolParameter"), new LiveOut("boolParameter", "ms"));
+            context.Validate<ISimpleAssignmentOperation>("ms = new MemoryStream()", new LiveIn("boolParameter"), new LiveOut("boolParameter", "ms"));
             context.Validate("Method(ms.Length);", new LiveIn("boolParameter", "ms"), new LiveOut("ms"));
             context.Validate("Method(0);", new LiveIn("ms"), new LiveOut("ms"));
             context.ValidateExit();
             // Finally region
-            context.Validate<IIsNullOperation>("ms = new System.IO.MemoryStream()", new LiveIn("ms"), new LiveOut("ms"));    // Null check
-            context.Validate<IInvocationOperation>("ms = new System.IO.MemoryStream()", new LiveIn("ms"));                   // Actual Dispose
+            context.Validate<IIsNullOperation>("ms = new MemoryStream()", new LiveIn("ms"), new LiveOut("ms"));    // Null check
+            context.Validate<IInvocationOperation>("ms = new MemoryStream()", new LiveIn("ms"));                   // Actual Dispose
             context.Validate(context.Cfg.Blocks[6], null, new Expected[] { });
         }
 
@@ -66,11 +66,11 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
         public void Using_Nested_Block_LiveInUntilTheEnd()
         {
             var code = @$"
-using (var msOuter = new System.IO.MemoryStream())
+using (var msOuter = new MemoryStream())
 {{
     if (boolParameter)
     {{
-        using (var msInner = new System.IO.MemoryStream())
+        using (var msInner = new MemoryStream())
         {{
             Method(0);
         }}
@@ -85,20 +85,20 @@ Method(2);";
             context.Validate("Method(2);");
             context.ValidateExit();
             // Finally region
-            context.Validate<IIsNullOperation>("msInner = new System.IO.MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msInner", "msOuter"));   // Null check
-            context.Validate<IInvocationOperation>("msInner = new System.IO.MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msOuter"));          // Actual Dispose
-            context.Validate<IIsNullOperation>("msOuter = new System.IO.MemoryStream()", new LiveIn("msOuter"), new LiveOut("msOuter"));     // Null check
-            context.Validate<IInvocationOperation>("msOuter = new System.IO.MemoryStream()", new LiveIn("msOuter"));                         // Actual Dispose
+            context.Validate<IIsNullOperation>("msInner = new MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msInner", "msOuter"));   // Null check
+            context.Validate<IInvocationOperation>("msInner = new MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msOuter"));          // Actual Dispose
+            context.Validate<IIsNullOperation>("msOuter = new MemoryStream()", new LiveIn("msOuter"), new LiveOut("msOuter"));     // Null check
+            context.Validate<IInvocationOperation>("msOuter = new MemoryStream()", new LiveIn("msOuter"));                         // Actual Dispose
         }
 
         [TestMethod]
         public void Using_Nested_Declaration_LiveInUntilTheEnd()
         {
             var code = @$"
-using var msOuter = new System.IO.MemoryStream();
+using var msOuter = new MemoryStream();
 if (boolParameter)
 {{
-    using var msInner = new System.IO.MemoryStream();
+    using var msInner = new MemoryStream();
     Method(0);
     if (boolParameter)
     {{
@@ -113,10 +113,10 @@ Method(2);";
             context.Validate("Method(2);", new LiveIn("msOuter"), new LiveOut("msOuter"));
             context.ValidateExit();
             // Finally region
-            context.Validate<IIsNullOperation>("msInner = new System.IO.MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msInner", "msOuter"));   // Null check
-            context.Validate<IInvocationOperation>("msInner = new System.IO.MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msOuter"));          // Actual Dispose
-            context.Validate<IIsNullOperation>("msOuter = new System.IO.MemoryStream()", new LiveIn("msOuter"), new LiveOut("msOuter"));     // Null check
-            context.Validate<IInvocationOperation>("msOuter = new System.IO.MemoryStream()", new LiveIn("msOuter"));                         // Actual Dispose
+            context.Validate<IIsNullOperation>("msInner = new MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msInner", "msOuter"));   // Null check
+            context.Validate<IInvocationOperation>("msInner = new MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msOuter"));          // Actual Dispose
+            context.Validate<IIsNullOperation>("msOuter = new MemoryStream()", new LiveIn("msOuter"), new LiveOut("msOuter"));     // Null check
+            context.Validate<IInvocationOperation>("msOuter = new MemoryStream()", new LiveIn("msOuter"));                         // Actual Dispose
         }
 
         [TestMethod]
@@ -172,7 +172,7 @@ try
 catch
 {
     Method(1);
-    throw new System.Exception();
+    throw new Exception();
     Method(2);  // Unreachable
 }
 Method(intParameter); // Unreachable";
@@ -199,7 +199,7 @@ catch
     Method(1);
     if (boolParameter)
     {
-        throw new System.Exception();
+        throw new Exception();
     }
     Method(2);
 }
@@ -343,14 +343,14 @@ try
 {
     Method(usedInTry);
 }
-catch (System.Exception ex)
+catch (Exception ex)
 {
     Method(intParameter, usedInCatch, ex.HResult);
 }
 Method(usedAfter);";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(usedInTry);", new LiveIn("usedInTry", "usedAfter","usedInCatch", "intParameter"), new LiveOut("usedAfter", "usedInCatch", "intParameter"));
+            context.Validate("Method(usedInTry);", new LiveIn("usedInTry", "usedAfter", "usedInCatch", "intParameter"), new LiveOut("usedAfter", "usedInCatch", "intParameter"));
             context.Validate("Method(intParameter, usedInCatch, ex.HResult);", new LiveIn("intParameter", "usedInCatch", "usedAfter"/*FIXME:, "ex"*/), new LiveOut("usedAfter"));
             context.Validate("Method(usedAfter);", new LiveIn("usedAfter"));
             context.ValidateExit();
@@ -367,14 +367,14 @@ try
 {
     Method(usedInTry);
 }
-catch (System.Exception ex) when (ex.InnerException is null)
+catch (Exception ex) when (ex.InnerException == null)
 {
     Method(intParameter, usedInCatch, ex.HResult);
 }
 Method(usedAfter);";
             var context = new Context(code);
-            context.ValidateEntry(/*FIXME: new LiveIn("intParameter"), new LiveOut("intParameter")*/);
-            context.Validate("Method(usedInTry);", new LiveIn("usedInTry", "usedAfter"/*,"usedInCatch", "intParameter"*/), new LiveOut("usedAfter"/*FIXME:,"usedInCatch", "intParameter")*/));
+            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(usedInTry);", new LiveIn("usedInTry", "usedAfter", "usedInCatch", "intParameter"), new LiveOut("usedAfter", "usedInCatch", "intParameter"));
             context.Validate("Method(intParameter, usedInCatch, ex.HResult);", new LiveIn("intParameter", "usedInCatch", "usedAfter", "ex"), new LiveOut("usedAfter"));
             context.Validate("Method(usedAfter);", new LiveIn("usedAfter"));
             context.ValidateExit();
@@ -388,7 +388,7 @@ try
 {
     Method(0);
 }
-catch (System.Exception ex) when (boolParameter)
+catch (Exception ex) when (boolParameter)
 {
     Method(intParameter);
 }
@@ -413,11 +413,11 @@ try
 {
     Method(usedInTry);
 }
-catch (System.FormatException ex)
+catch (FormatException ex)
 {
     Method(intParameter, usedInCatchA, ex.HResult);
 }
-catch (System.Exception ex)
+catch (Exception ex)
 {
     Method(intParameter, usedInCatchB, ex.HResult);
 }
@@ -425,8 +425,8 @@ Method(usedAfter);";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
             context.Validate("Method(usedInTry);",
-                new LiveIn("usedInTry", "usedAfter","usedInCatchA", "usedInCatchB", "intParameter"),
-                new LiveOut("usedAfter","usedInCatchA", "usedInCatchB", "intParameter"));
+                new LiveIn("usedInTry", "usedAfter", "usedInCatchA", "usedInCatchB", "intParameter"),
+                new LiveOut("usedAfter", "usedInCatchA", "usedInCatchB", "intParameter"));
             context.Validate("Method(intParameter, usedInCatchA, ex.HResult);", new LiveIn("intParameter", "usedInCatchA", "usedAfter"/*FIXME: "ex"*/), new LiveOut("usedAfter"));
             context.Validate("Method(intParameter, usedInCatchB, ex.HResult);", new LiveIn("intParameter", "usedInCatchB", "usedAfter"/*FIXME: "ex"*/), new LiveOut("usedAfter"));
             context.Validate("Method(usedAfter);", new LiveIn("usedAfter"));
@@ -486,7 +486,7 @@ try
 finally
 {
     Method(1);
-    throw new System.Exception();
+    throw new Exception();
     Method(2);  // Unreachable
 }
 Method(intParameter); // Unreachable";
@@ -511,7 +511,7 @@ try
 finally
 {
     Method(1);
-    throw new System.Exception();
+    throw new Exception();
 }
 Method(intParameter); // Unreachable";
             var context = new Context(code);
@@ -536,7 +536,7 @@ finally
     Method(1);
     if (boolParameter)
     {
-        throw new System.Exception();
+        throw new Exception();
     }
     Method(2);
 }

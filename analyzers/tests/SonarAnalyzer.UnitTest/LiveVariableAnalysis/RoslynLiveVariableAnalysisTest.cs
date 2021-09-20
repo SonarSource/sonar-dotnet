@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -107,7 +106,7 @@ Method(intParameter);";
         [DataTestMethod]
         [DataRow("Capturing(x => field + variable + intParameter);", DisplayName = "SimpleLambda")]
         [DataRow("Capturing((x) => field + variable + intParameter);", DisplayName = "ParenthesizedLambda")]
-        [DataRow("Capturing(x => { System.Func<int> xxx = () => field + variable + intParameter; return xxx();});", DisplayName = "NestedLambda")]
+        [DataRow("Capturing(x => { Func<int> xxx = () => field + variable + intParameter; return xxx();});", DisplayName = "NestedLambda")]
         [DataRow("VoidDelegate d = delegate { return field + variable + intParameter;};", DisplayName = "AnonymousMethod")]
         [DataRow("var items = from xxx in new int[] { 42, 100 } where xxx > field + variable + intParameter select xxx;", DisplayName = "Query")]
         public void Captured_NotLiveIn_NotLiveOut(string capturingStatement)
@@ -830,6 +829,8 @@ Method(1);";
             {
                 var code = isCSharp
                     ? @$"
+using System;
+using System.IO;
 using System.Linq;
 public class Sample
 {{
@@ -846,7 +847,7 @@ public class Sample
     private int Method(params int[] args) => 42;
     private string Method(params string[] args) => null;
     private bool IsMethod(params bool[] args) => true;
-    private void Capturing(System.Func<int, int> f) {{ }}
+    private void Capturing(Func<int, int> f) {{ }}
 }}"
                     : @$"
 Public Class Sample
