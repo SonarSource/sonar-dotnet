@@ -119,11 +119,6 @@ Method(2);";
             context.Validate<IInvocationOperation>("msOuter = new System.IO.MemoryStream()", new LiveIn("msOuter"));                         // Actual Dispose
         }
 
-        //FIXME: Catch specific exception type
-        //FIXME: Catch specific exception type when condition
-        //FIXME: Catch different exception types
-        //FIXME: Catch same exception type with different when condition
-
         [TestMethod]
         public void Catch_LiveIn()
         {
@@ -310,9 +305,10 @@ Method(intParameter);";
         }
 
         [TestMethod]
-        public void Catch_Loop_Propagates_LiveIn_LiveOut()  //FIXME: Make variant that adds LiveIn inside the catch
+        public void Catch_Loop_Propagates_LiveIn_LiveOut()
         {
             var code = @"
+var variableUsedInCatch = 42;
 A:
 Method(intParameter);
 if (boolParameter)
@@ -323,17 +319,95 @@ try
 }
 catch
 {
-    Method(1);
+    Method(variableUsedInCatch);
 }
 goto A;
 B:
-Method(2);";
+Method(1);";
             var context = new Context(code);
             context.Validate(context.Cfg.EntryBlock, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("Method(intParameter);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("Method(0);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("Method(1);"), new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate(context.Block("Method(2);"));
+            context.Validate(context.Block("Method(intParameter);"), new LiveIn("boolParameter", "intParameter"/*FIXME:, "variableUsedInCatch"*/), new LiveOut("boolParameter", "intParameter"/*FIXME:, "variableUsedInCatch"*/));
+            context.Validate(context.Block("Method(0);"), new LiveIn("boolParameter", "intParameter"/*FIXME:, "variableUsedInCatch"*/), new LiveOut("boolParameter", "intParameter"/*FIXME:, "variableUsedInCatch"*/));
+            context.Validate(context.Block("Method(variableUsedInCatch);"), new LiveIn("boolParameter", "intParameter", "variableUsedInCatch"), new LiveOut("boolParameter", "intParameter"/*FIXME:, "variableUsedInCatch"*/));
+            context.Validate(context.Block("Method(1);"));
+        }
+
+        [TestMethod]
+        public void Catch_SingleType_LiveIn()
+        {
+            var code = @"
+var usedAfter = 42;
+var usedInTry = 42;
+var usedInCatch = 42;
+try
+{
+    Method(usedInTry);
+}
+catch (System.Exception ex)
+{
+    Method(intParameter, usedInCatch, ex.HResult);
+}
+Method(usedAfter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock/*FIXME:, new LiveIn("intParameter"), new LiveOut("intParameter")*/);
+            context.Validate(context.Block("Method(usedInTry);"), new LiveIn("usedInTry", "usedAfter"/*,"usedInCatch", "intParameter"*/), new LiveOut("usedAfter"/*FIXME:,"usedInCatch", "intParameter")*/));
+            context.Validate(context.Block("Method(intParameter, usedInCatch, ex.HResult);"), new LiveIn("intParameter", "usedInCatch", "usedAfter"/*FIXME:, "ex"*/), new LiveOut("usedAfter"));
+            context.Validate(context.Block("Method(usedAfter);"), new LiveIn("usedAfter"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
+        public void Catch_SingleTypeWhenCondition_LiveIn()
+        {
+            var code = @"
+var usedAfter = 42;
+var usedInTry = 42;
+var usedInCatch = 42;
+try
+{
+    Method(usedInTry);
+}
+catch (System.Exception ex) when (ex.InnerException is null)
+{
+    Method(intParameter, usedInCatch, ex.HResult);
+}
+Method(usedAfter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock/*FIXME:, new LiveIn("intParameter"), new LiveOut("intParameter")*/);
+            context.Validate(context.Block("Method(usedInTry);"), new LiveIn("usedInTry", "usedAfter"/*,"usedInCatch", "intParameter"*/), new LiveOut("usedAfter"/*FIXME:,"usedInCatch", "intParameter")*/));
+            context.Validate(context.Block("Method(intParameter, usedInCatch, ex.HResult);"), new LiveIn("intParameter", "usedInCatch", "usedAfter", "ex"), new LiveOut("usedAfter"));
+            context.Validate(context.Block("Method(usedAfter);"), new LiveIn("usedAfter"));
+            context.Validate(context.Cfg.ExitBlock);
+        }
+
+        [TestMethod]
+        public void Catch_MultipleTypes_LiveIn()
+        {
+            var code = @"
+var usedAfter = 42;
+var usedInTry = 42;
+var usedInCatchA = 42;
+var usedInCatchB = 42;
+try
+{
+    Method(usedInTry);
+}
+catch (System.FormatException ex)
+{
+    Method(intParameter, usedInCatchA, ex.HResult);
+}
+catch (System.Exception ex)
+{
+    Method(intParameter, usedInCatchB, ex.HResult);
+}
+Method(usedAfter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock/*FIXME:, new LiveIn("intParameter"), new LiveOut("intParameter")*/);
+            context.Validate(context.Block("Method(usedInTry);"), new LiveIn("usedInTry", "usedAfter"/*,"usedInCatchA", "usedInCatchB", "intParameter"*/), new LiveOut("usedAfter"/*FIXME:,"usedInCatchA", ,"usedInCatchB", "intParameter")*/));
+            context.Validate(context.Block("Method(intParameter, usedInCatchA, ex.HResult);"), new LiveIn("intParameter", "usedInCatchA", "usedAfter"/*FIXME: "ex"*/), new LiveOut("usedAfter"));
+            context.Validate(context.Block("Method(intParameter, usedInCatchB, ex.HResult);"), new LiveIn("intParameter", "usedInCatchB", "usedAfter"/*FIXME: "ex"*/), new LiveOut("usedAfter"));
+            context.Validate(context.Block("Method(usedAfter);"), new LiveIn("usedAfter"));
+            context.Validate(context.Cfg.ExitBlock);
         }
 
         [TestMethod]
@@ -569,6 +643,36 @@ Method(2);";
             context.Validate("Method(0);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
             context.Validate("Method(1);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
             context.Validate("Method(2);");
+        }
+
+        [TestMethod]
+        public void TryCatchFinally_LiveIn()
+        {
+            var code = @"
+var usedInTry = 42;
+var usedInCatch = 42;
+var usedInFinally = 42;
+var usedAfter = 42;
+try
+{
+    Method(usedInTry);
+}
+catch
+{
+    Method(usedInCatch);
+}
+finally
+{
+    Method(usedInFinally);
+}
+Method(usedAfter);";
+            var context = new Context(code);
+            context.Validate(context.Cfg.EntryBlock);
+            context.Validate(context.Block("Method(usedInTry);"), new LiveIn("usedInTry", /*FIXME: "usedInCatch", */"usedInFinally", "usedAfter"), new LiveOut(/*FIXME: "usedInCatch", */"usedInFinally", "usedAfter"));
+            context.Validate(context.Block("Method(usedInCatch);"), new LiveIn("usedInCatch", "usedInFinally", "usedAfter"), new LiveOut("usedInFinally", "usedAfter"));
+            context.Validate(context.Block("Method(usedInFinally);"), new LiveIn("usedInFinally", "usedAfter"), new LiveOut("usedAfter"));
+            context.Validate(context.Block("Method(usedAfter);"), new LiveIn("usedAfter"));
+            context.Validate(context.Cfg.ExitBlock);
         }
     }
 }
