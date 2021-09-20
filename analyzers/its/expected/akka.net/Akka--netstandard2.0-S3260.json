@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\PatternMatch.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Util\StableListPriorityQueue.cs",
 "region":  {

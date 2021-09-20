@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
 "region":  {

@@ -46,9 +46,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 var baseTypeDeclarationSyntax = (BaseTypeDeclarationSyntax)c.Node;
                 if (IsPrivateButNotSealedType(baseTypeDeclarationSyntax))
                 {
-                    var nestedPrivateTypeInfo = c.SemanticModel.GetDeclaredSymbol(c.Node) as ITypeSymbol;
+                    var nestedPrivateTypeInfo = c.SemanticModel.GetDeclaredSymbol(c.Node) as INamedTypeSymbol;
 
-                    if (!IsPrivateTypeInherited(nestedPrivateTypeInfo))
+                    if (nestedPrivateTypeInfo != null && !IsPrivateTypeInherited(nestedPrivateTypeInfo))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, baseTypeDeclarationSyntax.Identifier.GetLocation()));
                     }
@@ -61,13 +61,15 @@ namespace SonarAnalyzer.Rules.CSharp
             });
 
         private static bool IsPrivateButNotSealedType(BaseTypeDeclarationSyntax typeDeclaration) =>
-           typeDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword) && !typeDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword);
+           typeDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword)
+           && !typeDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword)
+           && !typeDeclaration.Modifiers.Any(SyntaxKind.AbstractKeyword);
 
-        private static bool IsPrivateTypeInherited(ITypeSymbol privateTypeInfo) =>
+        private static bool IsPrivateTypeInherited(INamedTypeSymbol privateTypeInfo) =>
             privateTypeInfo.ContainingType
                            .GetMembers()
                            .Where(symbol => symbol.Kind == SymbolKind.NamedType && !symbol.Name.Equals(privateTypeInfo.Name))
-                           .Select(symbol => (ITypeSymbol)symbol)
-                           .Any(symbol => symbol.BaseType.Equals(privateTypeInfo));
+                           .Select(symbol => symbol as INamedTypeSymbol)
+                           .Any(symbol => symbol != null && symbol.BaseType != null && symbol.BaseType.Equals(privateTypeInfo));
     }
 }

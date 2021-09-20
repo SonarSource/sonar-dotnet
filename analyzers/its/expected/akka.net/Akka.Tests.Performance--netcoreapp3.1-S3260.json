@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSystemShutdownSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Internal\ChildrenContainerSpec.cs",
 "region":  {

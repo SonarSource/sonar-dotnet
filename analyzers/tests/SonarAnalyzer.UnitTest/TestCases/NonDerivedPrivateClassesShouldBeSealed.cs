@@ -54,6 +54,11 @@ namespace Tests.Diagnostics
             }
         }
 
+        private abstract class InnerPrivateClass // Compliant
+        {
+
+        }
+
         private struct AStruct // Compliant, structs cannot be inherited.
         {
 
@@ -86,4 +91,26 @@ namespace Tests.Diagnostics
         }
     }
 
-}
+    public class AClassWithAbstractInnerClass
+    {
+
+        private abstract class ObjectFactoryBase
+        {
+
+            public abstract void AFunction();
+
+
+        }
+
+        private class AClass : ObjectFactoryBase // Noncompliant
+        {
+            public override void AFunction()
+            {
+            }
+
+        }
+    }
+
+
+
+    }
