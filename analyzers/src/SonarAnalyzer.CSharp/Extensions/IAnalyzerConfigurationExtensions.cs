@@ -18,17 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Extensions
 {
-    public interface IAnalyzerConfiguration
+    public static class IAnalyzerConfigurationExtensions
     {
-        // Force the use of Sonar Cfg in rules that support both Roslyn and Sonar CFGs
-        bool UseSonarCfg { get; }
-
-        bool IsEnabled(string ruleKey);
-
-        void Initialize(AnalyzerOptions options);
-   }
+        public static bool FallBackToSonarCfg(this IAnalyzerConfiguration configuration) =>
+            !CFG.Roslyn.ControlFlowGraph.IsAvailable || configuration.UseSonarCfg;
+    }
 }

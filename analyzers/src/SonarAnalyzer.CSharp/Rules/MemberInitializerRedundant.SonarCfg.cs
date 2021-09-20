@@ -30,11 +30,11 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     public sealed partial class MemberInitializerRedundant
     {
-        private class MemberInitializerRedundancyCheckerSonar : CfgAllPathValidator
+        private class SonarChecker : CfgAllPathValidator
         {
             private readonly RedundancyChecker redundancyChecker;
 
-            public MemberInitializerRedundancyCheckerSonar(IControlFlowGraph cfg, ISymbol memberToCheck, SemanticModel semanticModel) : base(cfg) =>
+            public SonarChecker(IControlFlowGraph cfg, ISymbol memberToCheck, SemanticModel semanticModel) : base(cfg) =>
                 redundancyChecker = new RedundancyChecker(memberToCheck, semanticModel);
 
             // Returns true if the block contains assignment before access
@@ -141,17 +141,18 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             return (IdentifierNameSyntax)expressionSyntax;
                         }
-                        if (expressionSyntax is MemberAccessExpressionSyntax memberAccess
-                            && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+                        else if (expressionSyntax is MemberAccessExpressionSyntax memberAccess && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
                         {
                             return memberAccess.Name as IdentifierNameSyntax;
                         }
-                        if (expressionSyntax is ConditionalAccessExpressionSyntax conditionalAccess
-                            && conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+                        else if (expressionSyntax is ConditionalAccessExpressionSyntax conditionalAccess && conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
                         {
                             return (conditionalAccess.WhenNotNull as MemberBindingExpressionSyntax)?.Name as IdentifierNameSyntax;
                         }
-                        return null;
+                        else
+                        {
+                            return null;
+                        }
                     }
                 }
 

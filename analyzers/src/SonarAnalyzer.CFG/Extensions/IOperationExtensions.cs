@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Extensions
 {
     public static class IOperationExtensions
     {
-        public static bool IsOutArgument(this IOperation operation) =>
+        public static bool IsOutArgumentReference(this IOperation operation) =>
             new IOperationWrapperSonar(operation) is var wrapped
             && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
             && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
