@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             // only retrieve the member symbols (an expensive call) if there are explicit class initializers
-            var initializedMembers = GetInitializedMembers(c.SemanticModel, declaration, SyntaxKind.StaticKeyword, SyntaxKind.ConstKeyword);
+            var initializedMembers = GetInitializedMembers(c.SemanticModel, declaration, field => !field.Modifiers.Any(IsStaticOrConst), property => !property.Modifiers.Any(IsStaticOrConst));
             if (initializedMembers.Count == 0)
             {
                 return;
@@ -126,7 +126,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             // only retrieve the member symbols (an expensive call) if there are explicit class initializers
-            var initializedMembers = GetInitializedMembers(c.SemanticModel, declaration, SyntaxKind.StaticKeyword);
+            var initializedMembers = GetInitializedMembers(c.SemanticModel, declaration, field => field.Modifiers.Any(IsStatic), property => property.Modifiers.Any(IsStatic));
             if (initializedMembers.Count == 0)
             {
                 return;
@@ -169,14 +169,21 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
+        private static bool IsStaticOrConst(SyntaxToken token) =>
+            token.IsAnyKind(SyntaxKind.StaticKeyword, SyntaxKind.ConstKeyword);
+
+        private static bool IsStatic(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.StaticKeyword);
+
         // Retrieves the class members which are initialized - instance or static ones, depending on the given modifiers.
         private static Dictionary<ISymbol, EqualsValueClauseSyntax> GetInitializedMembers(SemanticModel semanticModel,
                                                                                           TypeDeclarationSyntax declaration,
-                                                                                          params SyntaxKind[] filteredModifiers)
+                                                                                          Func<BaseFieldDeclarationSyntax, bool> fieldFilter,
+                                                                                          Func<PropertyDeclarationSyntax, bool> propertyFilter)
         {
-            var candidateFields = GetInitializedFieldLikeDeclarations<FieldDeclarationSyntax, IFieldSymbol>(declaration, semanticModel, f => f.Type, filteredModifiers);
-            var candidateEvents = GetInitializedFieldLikeDeclarations<EventFieldDeclarationSyntax, IEventSymbol>(declaration, semanticModel, f => f.Type, filteredModifiers);
-            var candidateProperties = GetInitializedPropertyDeclarations(declaration, semanticModel, filteredModifiers);
+            var candidateFields = GetInitializedFieldLikeDeclarations<FieldDeclarationSyntax, IFieldSymbol>(declaration, fieldFilter, semanticModel, f => f.Type);
+            var candidateEvents = GetInitializedFieldLikeDeclarations<EventFieldDeclarationSyntax, IEventSymbol>(declaration, fieldFilter, semanticModel, f => f.Type);
+            var candidateProperties = GetInitializedPropertyDeclarations(declaration, propertyFilter, semanticModel);
             var allMembers = candidateFields.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer))
                 .Concat(candidateEvents.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
                 .Concat(candidateProperties.Select(t => new SymbolWithInitializer(t.Symbol, t.Initializer)))
@@ -194,23 +201,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ToList();
 
         private static IEnumerable<DeclarationTuple<IPropertySymbol>> GetInitializedPropertyDeclarations(TypeDeclarationSyntax declaration,
-                                                                                                         SemanticModel semanticModel,
-                                                                                                         params SyntaxKind[] filteredModifiers) =>
+                                                                                                         Func<PropertyDeclarationSyntax, bool> declarationFilter,
+                                                                                                         SemanticModel semanticModel) =>
             declaration.Members
                 .OfType<PropertyDeclarationSyntax>()
-                .Where(p => !p.IsAnyKind(filteredModifiers) && p.Initializer != null && p.IsAutoProperty())
+                .Where(p => declarationFilter(p) && p.Initializer != null && p.IsAutoProperty())
                 .Select(p => new DeclarationTuple<IPropertySymbol>(p.Initializer, semanticModel.GetDeclaredSymbol(p)))
                 .Where(t => t.Symbol != null && !MemberInitializedToDefault.IsDefaultValueInitializer(t.Initializer, t.Symbol.Type));
 
         private static IEnumerable<DeclarationTuple<TSymbol>> GetInitializedFieldLikeDeclarations<TDeclarationType, TSymbol>(TypeDeclarationSyntax declaration,
+                                                                                                                             Func<TDeclarationType, bool> declarationFilter,
                                                                                                                              SemanticModel semanticModel,
-                                                                                                                             Func<TSymbol, ITypeSymbol> typeSelector,
-                                                                                                                             params SyntaxKind[] filteredModifiers)
+                                                                                                                             Func<TSymbol, ITypeSymbol> typeSelector)
             where TDeclarationType : BaseFieldDeclarationSyntax
             where TSymbol : class, ISymbol =>
             declaration.Members
                 .OfType<TDeclarationType>()
-                .Where(x => !x.IsAnyKind(filteredModifiers))
+                .Where(declarationFilter)
                 .SelectMany(fd => fd.Declaration.Variables
                     .Where(v => v.Initializer != null)
                     .Select(v => new DeclarationTuple<TSymbol>(v.Initializer, semanticModel.GetDeclaredSymbol(v) as TSymbol)))
