@@ -9,7 +9,6 @@ namespace Tests.Diagnostics
 
     public class Foo
     {
-
         private class ClassWontBeExtended // Noncompliant {{Private classes or records which are not derived in the current assembly should be marked as 'sealed'.}}
 //                    ^^^^^^^^^^^^^^^^^^^
         {
@@ -71,7 +70,6 @@ namespace Tests.Diagnostics
 
     }
 
-
     public partial class Bar
     {
         private class SomeClass
@@ -97,31 +95,17 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class AClassWithAbstractInnerClass
+    public class AClassWithAnInnerInterface
     {
 
-        private abstract class PrivateAbstractClass
-        {
-
-            public abstract void AFunction();
-
+        private class APrivateClass // Noncompliant
+        { 
 
         }
 
-        private class AClass : PrivateAbstractClass // Noncompliant
-        {
-            public override void AFunction()
-            {
-            }
-
-        }
-
-        private sealed class ClassWithInterface : PrivateInterface 
+        public interface InnerInterface
         {
 
         }
     }
-
-
-
-    }
+}

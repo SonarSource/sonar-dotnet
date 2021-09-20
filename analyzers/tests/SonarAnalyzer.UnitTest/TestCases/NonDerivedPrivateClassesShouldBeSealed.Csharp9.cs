@@ -1,9 +1,7 @@
 ﻿using System;
 
-
 namespace Tests.Diagnostics
 {
-
     public class ClassWithRecord
     {
         private record RecordNotExtended // Noncompliant
@@ -22,14 +20,11 @@ namespace Tests.Diagnostics
         }
     }
 
-
     public partial class APartialClass
     {
         private record PrivateRecord
         {
-
         }
-
     }
 
     public partial class APartialClass
@@ -38,6 +33,5 @@ namespace Tests.Diagnostics
         {
 
         }
-
     }
 }
