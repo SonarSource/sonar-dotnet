@@ -340,6 +340,31 @@ Method(1);";
         }
 
         [TestMethod]
+        public void Catch_ExVariable_LiveIn()
+        {
+            var code = @"
+try
+{
+    Method(0);
+}
+catch (Exception ex)
+{
+    if (boolParameter)
+    {
+        Method(ex.HResult);
+    }
+}
+Method(1);";
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("Method(0);", new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("ex"));     // ex doesn't live in here, becase this blocks starts with SimpleAssignmentOperation: (Exception ex)
+            context.Validate("Method(ex.HResult);", new LiveIn("ex"));
+            context.Validate("Method(1);");
+            context.ValidateExit();
+        }
+
+        [TestMethod]
         public void Catch_SingleType_LiveIn()
         {
             var code = @"
@@ -358,7 +383,7 @@ Method(usedAfter);";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
             context.Validate("Method(usedInTry);", new LiveIn("usedInTry", "usedAfter", "usedInCatch", "intParameter"), new LiveOut("usedAfter", "usedInCatch", "intParameter"));
-            context.Validate("Method(intParameter, usedInCatch, ex.HResult);", new LiveIn("intParameter", "usedInCatch", "usedAfter"/*FIXME:, "ex"*/), new LiveOut("usedAfter"));
+            context.Validate("Method(intParameter, usedInCatch, ex.HResult);", new LiveIn("intParameter", "usedInCatch", "usedAfter"), new LiveOut("usedAfter"));
             context.Validate("Method(usedAfter);", new LiveIn("usedAfter"));
             context.ValidateExit();
         }
@@ -434,8 +459,9 @@ Method(usedAfter);";
             context.Validate("Method(usedInTry);",
                 new LiveIn("usedInTry", "usedAfter", "usedInCatchA", "usedInCatchB", "intParameter"),
                 new LiveOut("usedAfter", "usedInCatchA", "usedInCatchB", "intParameter"));
-            context.Validate("Method(intParameter, usedInCatchA, ex.HResult);", new LiveIn("intParameter", "usedInCatchA", "usedAfter"/*FIXME: "ex"*/), new LiveOut("usedAfter"));
-            context.Validate("Method(intParameter, usedInCatchB, ex.HResult);", new LiveIn("intParameter", "usedInCatchB", "usedAfter"/*FIXME: "ex"*/), new LiveOut("usedAfter"));
+            // ex doesn't live in here, because the blocks starts with SimpleAssignmentOperation: (Exception ex)
+            context.Validate("Method(intParameter, usedInCatchA, ex.HResult);", new LiveIn("intParameter", "usedInCatchA", "usedAfter"), new LiveOut("usedAfter"));
+            context.Validate("Method(intParameter, usedInCatchB, ex.HResult);", new LiveIn("intParameter", "usedInCatchB", "usedAfter"), new LiveOut("usedAfter"));
             context.Validate("Method(usedAfter);", new LiveIn("usedAfter"));
             context.ValidateExit();
         }
