@@ -453,6 +453,17 @@ namespace Tests.Diagnostics
 
             return 42;
         }
+
+        int ThrowsInFinally(int a)
+        {
+            try
+            {
+            }
+            finally
+            {
+                throw new ArgumentException();
+            }
+        }
     }
 
     public interface IWithDefaultImplementation

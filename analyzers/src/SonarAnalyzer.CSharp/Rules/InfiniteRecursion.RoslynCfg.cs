@@ -78,17 +78,9 @@ namespace SonarAnalyzer.Rules.CSharp
                             var operationWrapper = cfg.FlowAnonymousFunctionOperations().Single(x => x.WrappedOperation.Syntax == enclosingFunction);
                             cfg = cfg.GetAnonymousFunctionControlFlowGraph(operationWrapper);
                         }
-                        if (cfg == null)
-                        {
-                            return;
-                        }
                     }
 
                     cfg = cfg.GetLocalFunctionControlFlowGraph(symbol as IMethodSymbol);
-                    if (cfg == null)
-                    {
-                        return;
-                    }
                 }
 
                 var context = new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion");
@@ -110,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 public void CheckPaths()
                 {
-                    if (CheckAllPaths() || CfgHasUnescapableLoop())
+                    if (!CfgCanExit() || CheckAllPaths())
                     {
                         context.ReportIssue();
                     }
@@ -118,15 +110,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 protected override bool IsValid(BasicBlock block)
                 {
-                    foreach (var operation in block.OperationsAndBranchValue)
+                    foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
                     {
-                        foreach (var child in operation.ToReversedExecutionOrder())
+                        if (context.AnalyzedSymbol.Equals(MemberSymbol(operation.Instance)))
                         {
-                            if (context.AnalyzedSymbol.Equals(MemberSymbol(child.Instance)))
-                            {
-                                var isWrite = child.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == child.Instance;
-                                return isGetAccesor ^ isWrite;
-                            }
+                            var isWrite = operation.Parent is { Kind: OperationKindEx.SimpleAssignment } parent
+                                          && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation.Instance;
+                            return isGetAccesor ^ isWrite;
                         }
                     }
                     return false;
@@ -142,9 +132,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 protected override bool IsInvalid(BasicBlock block) => false;
 
-                private bool CfgHasUnescapableLoop() =>
-                    !context.ControlFlowGraph.ExitBlock.IsReachable
-                    && !context.ControlFlowGraph.Blocks.Any(x => x.FallThroughSuccessor?.Semantics == ControlFlowBranchSemantics.Throw && x.IsReachable);
+                private bool CfgCanExit() =>
+                    context.ControlFlowGraph.ExitBlock.IsReachable
+                    || context.ControlFlowGraph.Blocks.Any(x => x.FallThroughSuccessor?.Semantics == ControlFlowBranchSemantics.Throw && x.IsReachable);
             }
         }
     }
