@@ -222,6 +222,29 @@ Method(intParameter);";
         }
 
         [TestMethod]
+        public void Catch_Rethrow_LiveIn()
+        {
+            var code = @"
+try
+{
+    Method(0);
+}
+catch
+{
+    Method(1);
+    throw;
+}
+Method(intParameter);";
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(1);");
+            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateExit();
+        }
+
+
+        [TestMethod]
         public void Catch_NotLiveIn_NotLiveOut()
         {
             var code = @"
