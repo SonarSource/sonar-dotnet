@@ -60,7 +60,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         protected void Analyze()
         {
             var states = new Dictionary<TBlock, State>();
-            var queue = new Queue<TBlock>();
+            var queue = new UniqueQueue<TBlock>();
             foreach (var block in ReversedBlocks())
             {
                 var state = ProcessBlock(block);
