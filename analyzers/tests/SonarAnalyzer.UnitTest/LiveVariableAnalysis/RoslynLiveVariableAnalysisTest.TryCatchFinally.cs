@@ -185,9 +185,9 @@ Method(intParameter); // Unreachable";
             var context = new Context(code);
             // LVA doesn't care if it's reachable. Blocks still should have LiveIn and LiveOut
             context.ValidateEntry();    // intParameter is used only in unreachable path => not visible here
-            context.Validate("Method(usedInTry);", new LiveIn("usedInTry"/*, "usedInCatch"), new LiveOut("usedInCatch"*/));       // Doesn't see usedInTryUnreachable nor intParameter
+            context.Validate("Method(usedInTry);", new LiveIn("usedInTry", "usedInCatch"), new LiveOut("usedInCatch"));     // Doesn't see usedInTryUnreachable nor intParameter
             context.Validate("Method(usedInTryUnreachable);", new LiveIn("intParameter", "usedInTryUnreachable", "usedInCatch"), new LiveOut("intParameter", "usedInCatch"));
-            context.Validate("Method(usedInCatch);", new LiveIn("usedInCatch"));   // Doesn't see usedInCatchUnreachable nor intParameter
+            context.Validate("Method(usedInCatch);", new LiveIn("usedInCatch"));                                            // Doesn't see usedInCatchUnreachable nor intParameter
             context.Validate("Method(usedInCatchUnreachable);", new LiveIn("intParameter", "usedInCatchUnreachable"), new LiveOut("intParameter"));
             context.Validate("Method(intParameter);", new LiveIn("intParameter"));
             context.ValidateExit();
