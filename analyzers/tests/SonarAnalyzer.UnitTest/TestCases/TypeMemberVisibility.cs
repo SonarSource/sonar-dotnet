@@ -178,4 +178,28 @@ namespace Tests.Diagnostics
     {
         public override string ToString() => string.Empty;  // Compliant - the overriden method is public
     }
+
+    public interface IContract
+    {
+        void Do();
+    }
+
+    internal class SomeClass: IContract
+    {
+        public void Do()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    internal class SomeClass2: IContract // Noncompliant
+    {
+        public void Do()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DoSomethingElse() { }
+//      ^^^^^^ Secondary
+    }
 }

@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
-                    var secondaryLocations = GetInvalidMemberLocations(typeDeclaration);
+                    var secondaryLocations = GetInvalidMemberLocations(typeDeclaration, c.SemanticModel);
                     if (secondaryLocations.Any())
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), secondaryLocations));
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 TypeKinds);
 
-        private static List<Location> GetInvalidMemberLocations(BaseTypeDeclarationSyntax type)
+        private static List<Location> GetInvalidMemberLocations(BaseTypeDeclarationSyntax type, SemanticModel semanticModel)
         {
             var parentType = GetParentType(type);
             if (parentType == null && type.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
@@ -80,13 +80,18 @@ namespace SonarAnalyzer.Rules.CSharp
                            .Where(node => node.IsAnyKind(MemberDeclarationKinds))
                            .OfType<MemberDeclarationSyntax>()
                            // We skip overridden methods since they need to keep the public visibility (if present)
-                           .Where(declaration => declaration.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword) && !declaration.Modifiers().AnyOfKind(SyntaxKind.OverrideKeyword))
+                           .Where(declaration => declaration.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword)
+                                                 && !declaration.Modifiers().AnyOfKind(SyntaxKind.OverrideKeyword)
+                                                 && !IsInterfaceImplementation(declaration, semanticModel))
                            .Select(declaration => declaration.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).GetLocation())
                            .ToList();
             }
 
             return new List<Location>();
         }
+
+        private static bool IsInterfaceImplementation(MemberDeclarationSyntax declaration, SemanticModel semanticModel) =>
+            semanticModel.GetDeclaredSymbol(declaration)?.GetInterfaceMember() != null;
 
         private static BaseTypeDeclarationSyntax GetParentType(SyntaxNode node) =>
             (BaseTypeDeclarationSyntax)node.Ancestors().FirstOrDefault(x => x.IsAnyKind(TypeKinds));
