@@ -30,27 +30,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MethodParameterUnusedTest
     {
         [TestMethod]
-        public void MethodParameterUnused_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.cs", new CS.MethodParameterUnused());
+        public void MethodParameterUnused_CS_SonarCfg() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.SonarCfg.cs", new CS.MethodParameterUnused(true));
+
+        [TestMethod]
+        public void MethodParameterUnused_CS_RoslynCfg() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.RoslynCfg.cs", new CS.MethodParameterUnused(false));
 
         [TestMethod]
         public void MethodParameterUnused_CodeFix_CS() =>
-            Verifier.VerifyCodeFix(@"TestCases\MethodParameterUnused.cs",
-                                   @"TestCases\MethodParameterUnused.Fixed.cs",
-                                   new CS.MethodParameterUnused(),
+            Verifier.VerifyCodeFix(@"TestCases\MethodParameterUnused.RoslynCfg.cs",
+                                   @"TestCases\MethodParameterUnused.RoslynCfg.Fixed.cs",
+                                   new CS.MethodParameterUnused(true),
                                    new CS.MethodParameterUnusedCodeFixProvider());
 
         [TestMethod]
         public void MethodParameterUnused_CSharp7_CS() =>
             Verifier.VerifyNoIssueReported(@"TestCases\MethodParameterUnused.CSharp7.cs",
-                                           new CS.MethodParameterUnused(),
+                                           new CS.MethodParameterUnused(false),
                                            ParseOptionsHelper.FromCSharp7,
                                            NuGetMetadataReference.SystemValueTuple("4.5.0"));
 
         [TestMethod]
         public void MethodParameterUnused_CSharp8_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.CSharp8.cs",
-                                    new CS.MethodParameterUnused(),
+                                    new CS.MethodParameterUnused(false),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
                                     NuGetMetadataReference.NETStandardV2_1_0);

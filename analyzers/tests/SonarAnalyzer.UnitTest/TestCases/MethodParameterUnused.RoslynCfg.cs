@@ -427,20 +427,20 @@ namespace Tests.TestCases
     // https://github.com/SonarSource/sonar-dotnet/issues/3134
     public class Repro_3134
     {
-        private static Predicate<DateTime> LocalFunctionReturned(DateTime dateTime)
+        private static Predicate<DateTime> LocalFunctionReturned(DateTime dateTime) // Noncompliant FP from Roslyn LVA
         {
             bool Filter(DateTime time) => time.Year == dateTime.Year;
             return Filter;
         }
 
-        private void LocalFunctionReferencedArrow(bool condition)
+        private void LocalFunctionReferencedArrow(bool condition)        // Noncompliant FP from Roslyn LVA
         {
             Enumerable.Empty<object>().Where(IsTrue);
 
             bool IsTrue(object x) => condition;
         }
 
-        private void LocalFunctionReferencedBody(bool condition)
+        private void LocalFunctionReferencedBody(bool condition)         // Noncompliant FP from Roslyn LVA
         {
             Enumerable.Empty<object>().Where(IsTrue);
 
@@ -450,7 +450,7 @@ namespace Tests.TestCases
             };
         }
 
-        private void LocalFunctionCrossReferenced(bool condition)
+        private void LocalFunctionCrossReferenced(bool condition)        // Noncompliant FP from Roslyn LVA
         {
             Enumerable.Empty<object>().Where(IsTrueOuter);
 
@@ -459,7 +459,7 @@ namespace Tests.TestCases
             bool IsTrueInner() => condition;
         }
 
-        private void LocalFunctionRecursive(int arg)
+        private void LocalFunctionRecursive(int arg)                    // Noncompliant FP from Roslyn LVA
         {
             Enumerable.Empty<object>().Where(IsTrue);
 
@@ -486,7 +486,7 @@ namespace Tests.TestCases
     // https://github.com/SonarSource/sonar-dotnet/issues/4096
     public class Repro_4096
     {
-        private int TryCatchWithUsing(int errorCode) // Noncompliant FP
+        private int TryCatchWithUsing(int errorCode)
         {
             try
             {

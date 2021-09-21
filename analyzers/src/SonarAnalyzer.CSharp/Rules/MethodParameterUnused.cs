@@ -25,8 +25,11 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.CFG.LiveVariableAnalysis;
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using StyleCop.Analyzers.Lightup;
@@ -43,7 +46,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Remove this {0}.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private readonly bool useSonarCfg;
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        // FIXME: Rework after rebase
+        public MethodParameterUnused(bool useSonarCfg) =>
+            this.useSonarCfg = useSonarCfg;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
@@ -108,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Any(x => x != null && x.ContainingType.Is(KnownType.System_NotImplementedException));
         }
 
-        private static void ReportUnusedParametersOnMethod(MethodContext declaration)
+        private void ReportUnusedParametersOnMethod(MethodContext declaration)
         {
             if (!MethodCanBeSafelyChanged(declaration.Symbol))
             {
@@ -126,7 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ReportOnDeadParametersAtEntry(declaration, unusedParameters);
         }
 
-        private static void ReportOnDeadParametersAtEntry(MethodContext declaration, IImmutableList<IParameterSymbol> noReportOnParameters)
+        private void ReportOnDeadParametersAtEntry(MethodContext declaration, IImmutableList<IParameterSymbol> noReportOnParameters)
         {
             var bodyNode = (CSharpSyntaxNode)declaration.Body ?? declaration.ExpressionBody;
             if (bodyNode == null || declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration))
@@ -142,11 +151,58 @@ namespace SonarAnalyzer.Rules.CSharp
             excludedParameters = excludedParameters.AddRange(declaration.Symbol.Parameters.Where(p => p.RefKind != RefKind.None));
 
             var candidateParameters = declaration.Symbol.Parameters.Except(excludedParameters);
-            if (candidateParameters.Any() && CSharpControlFlowGraph.TryGet(bodyNode, declaration.Context.SemanticModel, out var cfg))
+            if (candidateParameters.Any() && ComputeLva(declaration, bodyNode) is { } lva)
             {
-                var lva = new SonarCSharpLiveVariableAnalysis(cfg, declaration.Symbol, declaration.Context.SemanticModel);
-                var liveParameters = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>();
-                ReportOnUnusedParameters(declaration, candidateParameters.Except(liveParameters).Except(lva.CapturedVariables), MessageDead, isRemovable: false);
+                ReportOnUnusedParameters(declaration, candidateParameters.Except(lva.LiveInEntryBlock).Except(lva.CapturedVariables), MessageDead, isRemovable: false);
+            }
+        }
+
+        private LvaResult ComputeLva(MethodContext declaration, CSharpSyntaxNode bodyNode)
+        {
+            if (useSonarCfg)
+            {
+                return CSharpControlFlowGraph.TryGet(bodyNode, declaration.Context.SemanticModel, out var cfg)
+                    ? new LvaResult(declaration, cfg)
+                    : null;
+            }
+            else
+            {
+                //FIXME: Rework after rebase
+                static IOperation RootOperation(IOperation operation)
+                {
+                    var wrapper = new IOperationWrapperSonar(operation);
+                    while (wrapper.Parent != null)
+                    {
+                        wrapper = new IOperationWrapperSonar(wrapper.Parent);
+                    }
+                    return wrapper.Instance;
+                }
+                var operation = declaration.Context.SemanticModel.GetOperation(bodyNode.Parent);
+                var cfg = ControlFlowGraph.Create(RootOperation(operation).Syntax, declaration.Context.SemanticModel);
+                var enclosingKinds = new HashSet<SyntaxKind>
+                {
+                    SyntaxKindEx.LocalFunctionStatement, SyntaxKind.SimpleLambdaExpression, SyntaxKind.AnonymousMethodExpression, SyntaxKind.ParenthesizedLambdaExpression
+                };
+                if (declaration.Context.Node.IsKind(SyntaxKindEx.LocalFunctionStatement))
+                {
+                    // we need to go up and track all possible enclosing local function statements
+                    foreach (var enclosingFunction in declaration.Context.Node.Ancestors().Where(x => enclosingKinds.Contains(x.Kind())).Reverse())
+                    {
+                        if (enclosingFunction.IsKind(SyntaxKindEx.LocalFunctionStatement))
+                        {
+                            cfg = cfg.GetLocalFunctionControlFlowGraph(declaration.Context.SemanticModel.GetDeclaredSymbol(enclosingFunction) as IMethodSymbol);
+                        }
+                        else
+                        {
+                            var operationWrapper = cfg.FlowAnonymousFunctionOperations().Single(x => x.WrappedOperation.Syntax == enclosingFunction);
+                            cfg = cfg.GetAnonymousFunctionControlFlowGraph(operationWrapper);
+                        }
+                    }
+
+                    cfg = cfg.GetLocalFunctionControlFlowGraph(declaration.Symbol);
+                }
+
+                return new LvaResult(cfg);
             }
         }
 
@@ -261,6 +317,26 @@ namespace SonarAnalyzer.Rules.CSharp
                 ParameterList = parameterList;
                 Body = body;
                 ExpressionBody = expressionBody;
+            }
+        }
+
+        private class LvaResult
+        {
+            public readonly IReadOnlyCollection<ISymbol> LiveInEntryBlock;
+            public readonly IReadOnlyCollection<ISymbol> CapturedVariables;
+
+            public LvaResult(MethodContext declaration, IControlFlowGraph cfg)
+            {
+                var lva = new SonarCSharpLiveVariableAnalysis(cfg, declaration.Symbol, declaration.Context.SemanticModel);
+                LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
+                CapturedVariables = lva.CapturedVariables;
+            }
+
+            public LvaResult(ControlFlowGraph cfg)
+            {
+                var lva = new RoslynLiveVariableAnalysis(cfg);
+                LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
+                CapturedVariables = lva.CapturedVariables;
             }
         }
     }
