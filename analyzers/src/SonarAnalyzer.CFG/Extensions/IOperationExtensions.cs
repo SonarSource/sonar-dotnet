@@ -33,6 +33,9 @@ namespace SonarAnalyzer.Extensions
             && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
             && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
 
+        public static bool IsAnyKind(this IOperation operation, params OperationKind[] kinds) =>
+            kinds.Contains(operation.Kind);
+
         public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
             new OperationExecutionOrder(operations, false);
 

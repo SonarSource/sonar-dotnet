@@ -82,11 +82,17 @@ namespace SonarAnalyzer.Rules.CSharp
             private static ISymbol MemberSymbol(IOperation operation) =>
                 operation.Kind switch
                 {
-                    OperationKindEx.FieldReference => IFieldReferenceOperationWrapper.FromOperation(operation).Field,
-                    OperationKindEx.PropertyReference => IPropertyReferenceOperationWrapper.FromOperation(operation).Property,
-                    OperationKindEx.EventReference => IEventReferenceOperationWrapper.FromOperation(operation).Member,
+                    OperationKindEx.FieldReference when IFieldReferenceOperationWrapper.FromOperation(operation) is var fieldReference && InstanceReferencesThis(fieldReference.Instance) =>
+                        fieldReference.Field,
+                    OperationKindEx.PropertyReference when IPropertyReferenceOperationWrapper.FromOperation(operation) is var propertyReference && InstanceReferencesThis(propertyReference.Instance) =>
+                        propertyReference.Property,
+                    OperationKindEx.EventReference when IEventReferenceOperationWrapper.FromOperation(operation) is var eventReference && InstanceReferencesThis(eventReference.Instance) =>
+                        eventReference.Member,
                     _ => null
                 };
+
+            private static bool InstanceReferencesThis(IOperation instance) =>
+                instance == null || instance.IsAnyKind(OperationKindEx.FlowCaptureReference, OperationKindEx.InstanceReference);
         }
     }
 }
