@@ -6755,7 +6755,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S3260_Description" xml:space="preserve">
-    <value>private classes and records aren’t visible outside of their assemblies anyway, so if they’re not extended inside the assemblies, they should be made explicitly non-extensible with the addition of the sealed keyword.</value>
+    <value>private classes aren’t visible outside of their assemblies anyway, so if they’re not extended inside the assemblies, they should be made explicitly non-extensible with the addition of the sealed keyword.</value>
   </data>
   <data name="S3260_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -6779,7 +6779,7 @@
     <value />
   </data>
   <data name="S3260_Title" xml:space="preserve">
-    <value>Non-derived "private" classes and records should be "sealed"</value>
+    <value>Non-derived "private" classes should be "sealed"</value>
   </data>
   <data name="S3260_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
