@@ -146,6 +146,27 @@ int LocalFunction<T>() => variable;";
         }
 
         [TestMethod]
+        public void LocalFunctionInvocation_NestedGeneric_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction<int>();
+
+int LocalFunction<T>()
+{
+    return Nested<string>();
+
+    int Nested<TT>() => variable;
+}";
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
+            context.Validate("LocalFunction<int>();", new LiveIn("variable"));
+        }
+
+        [TestMethod]
         public void LocalFunctionInvocation_NotLiveIn()
         {
             var code = @"
@@ -228,6 +249,43 @@ int LocalFunction()
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction();", new LiveIn("variable"));
+        }
+
+        [TestMethod]
+        public void LocalFunctionInvocation_TryCatchFinally_LiveIn()
+        {
+            var code = @"
+var usedInTry = 42;
+var usedInCatch = 42;
+var usedInFinally = 42;
+var usedInUnreachable = 42;
+if (boolParameter)
+    return;
+LocalFunction();
+
+int LocalFunction()
+{
+    try
+    {
+        Method(usedInTry);
+    }
+    catch
+    {
+        Method(usedInCatch);
+    }
+    finally
+    {
+        Method(usedInFinally);
+    }
+    return;
+    Method(usedInUnreachable);
+}";
+
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            // usedInUnreachable is here only because of simplified processing inside local functions
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("usedInTry", "usedInCatch", "usedInFinally", "usedInUnreachable"));
+            context.Validate("LocalFunction();", new LiveIn("usedInTry", "usedInCatch", "usedInFinally", "usedInUnreachable"));
         }
     }
 }
